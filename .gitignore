@@ -7,3 +7,6 @@ out
 *.tsbuildinfo
 .next-dev.log
 src/data/reviews-cache.json
+
+# Payload uploaded media (local dev)
+public/media

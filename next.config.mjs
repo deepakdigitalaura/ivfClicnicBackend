@@ -1,3 +1,5 @@
+import { withPayload } from "@payloadcms/next/withPayload";
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
@@ -19,4 +21,6 @@ const nextConfig = {
   images: { unoptimized: true },
 };
 
-export default nextConfig;
+// withPayload mounts the CMS (admin + api) into this Next app. devBundleServerPackages
+// is left default; the existing (frontend) build behaviour is unchanged.
+export default withPayload(nextConfig);
