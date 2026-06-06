@@ -1,0 +1,330 @@
+{
+  "route": "/services/3d-4d-sonography",
+  "title": "3D/4D Sonography in Ahmedabad — Bavishi Fertility & Birthing · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/services/3d-4d-sonography",
+  "meta": {
+    "description": "Advanced 3D & 4D pregnancy ultrasound at Bavishi Fertility & Birthing — lifelike images of your baby, safe radiation-free imaging and expert fetal assessment. Book your scan.",
+    "og:description": "Advanced 3D & 4D pregnancy ultrasound at Bavishi Fertility & Birthing — lifelike images of your baby, safe radiation-free imaging and expert fetal assessment. Book your scan.",
+    "og:image": "https://ivfclinic.com/assets/3d-4d%20sonography.png",
+    "og:title": "3D/4D Sonography in Ahmedabad — Bavishi Fertility & Birthing",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/services/3d-4d-sonography",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/services/3d-4d-sonography#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalTest",
+            "name": "3D/4D Sonography"
+          },
+          "description": "Advanced 3D & 4D pregnancy ultrasound at Bavishi Fertility & Birthing — lifelike images of your baby, safe radiation-free imaging and expert fetal assessment. Book your scan.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "3D/4D Sonography in Ahmedabad — Bavishi Fertility & Birthing",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+            "jobTitle": "Co-founder & Senior Fertility Specialist",
+            "name": "Dr. Falguni Bavishi",
+            "url": "https://ivfclinic.com/doctors/falguni-bavishi"
+          },
+          "url": "https://ivfclinic.com/services/3d-4d-sonography"
+        },
+        {
+          "@type": "MedicalTest",
+          "description": "Advanced 3D & 4D pregnancy ultrasound at Bavishi Fertility & Birthing — lifelike images of your baby, safe radiation-free imaging and expert fetal assessment. Book your scan.",
+          "name": "3D/4D Sonography",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Maternity Services",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/services/3d-4d-sonography",
+              "name": "3D/4D Sonography",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. It uses the same harmless sound-wave technology as a standard 2D scan, with no radiation involved, and is performed by trained professionals."
+              },
+              "name": "Is 3D/4D sonography safe for my baby?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No fasting is required. You can eat normally — a light meal beforehand is fine."
+              },
+              "name": "Do I need to fast before the scan?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Around 24–34 weeks usually gives the clearest views of your baby's face. Your doctor may also advise scans at other stages for medical assessment."
+              },
+              "name": "When is the best time for a 4D scan?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Absolutely. Partners and close family are welcome to share the experience and watch your baby on the screen."
+              },
+              "name": "Can my family come along?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The sonographer may ask you to change position or take a short walk, or suggest rescheduling — babies move, and we want the best possible images."
+              },
+              "name": "What if my baby isn't in a good position?"
+            }
+          ]
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MD — Obstetrics & Gynaecology"
+            }
+          ],
+          "award": [
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/falguni.webp",
+          "jobTitle": "Co-founder & Senior Fertility Specialist",
+          "knowsAbout": [
+            "Female Infertility",
+            "In Vitro Fertilization",
+            "Endometriosis",
+            "Reproductive Gynaecology",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            }
+          ],
+          "name": "Dr. Falguni Bavishi",
+          "url": "https://ivfclinic.com/doctors/falguni-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#blogs",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/parth-bavishi",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/ahmedabad/paldi",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

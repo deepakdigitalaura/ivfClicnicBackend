@@ -10,7 +10,7 @@ Migrating content management from TypeScript registries (src/lib/*.ts) into Payl
 **Critical architectural conflict:** the site is built for `output: "export"` static export (`images.unoptimized`, `generateStaticParams` everywhere, deploy = upload `out/`). Payload needs a live Node server + Postgres — it cannot run in a static export. Locally invisible (dev is a server); bites only at production build/deploy.
 
 **Locked decisions (2026-06-06):**
-- Production runtime = UNDECIDED; POC informs it. Do NOT remove `output: export` or change next.config.mjs deploy posture. POC conclusion is scoped "validated for local development only."
+- Production runtime = **DECIDED (2026-06-06): Node + Payload + Postgres** (resolved when approving Phase 2.5 — revalidation only works on Node). Static-export direction retired. `output: export` stays commented; prod will be a live Node server with on-demand revalidation. Phase 6 = deploy infra (Node host, managed PG, object storage, prod `migrate` not `push`).
 - Git first: project had NO git repo. Must `git init` + commit baseline before any Payload work (required for reversibility).
 - Phase 1 `pages` collection = minimal typed fields only: hero (eyebrow/heading/subtitle) + faqs[] + seo group. Centre directory (15 centres) and contact cards stay HARDCODED in contact-page.tsx (belong to future centres collection + contactInfo global). No block builder. contact-page.tsx refactored to accept props, not rebuilt.
 

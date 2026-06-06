@@ -1,0 +1,728 @@
+{
+  "route": "/locations/ahmedabad/paldi",
+  "title": "Best IVF Centre in Paldi, Ahmedabad — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/locations/ahmedabad/paldi",
+  "meta": {
+    "description": "Bavishi Fertility Institute — Paldi, Ahmedabad — IVF, ICSI & IUI with senior doctors since 1984. Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi, Ahmedabad – 380007. Book a free consultation.",
+    "og:description": "Bavishi Fertility Institute — Paldi, Ahmedabad — IVF, ICSI & IUI with senior doctors since 1984. Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi, Ahmedabad – 380007. Book a free consultation.",
+    "og:image": "https://ivfclinic.com/assets/centres/paldi-building.png",
+    "og:title": "Best IVF Centre in Paldi, Ahmedabad — Bavishi Fertility Institute",
+    "og:type": "website",
+    "og:url": "https://ivfclinic.com/locations/ahmedabad/paldi",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/locations/ahmedabad/paldi#webpage",
+          "@type": "MedicalWebPage",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "name": "Bavishi Fertility Institute — Paldi, Ahmedabad",
+          "url": "https://ivfclinic.com/locations/ahmedabad/paldi"
+        },
+        {
+          "@id": "https://ivfclinic.com/locations/ahmedabad/paldi#clinic-paldi",
+          "@type": [
+            "MedicalClinic",
+            "LocalBusiness"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi"
+          },
+          "areaServed": [
+            {
+              "@type": "Place",
+              "name": "Paldi, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Vasna, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Ambawadi, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Ellisbridge, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Vejalpur, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Maninagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Navrangpura, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Sarkhej, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jivraj Park, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Anandnagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Shreyas, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Bhatta, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Law Garden, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "C.G. Road, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Manekbaug, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Sabarmati, Ahmedabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalProcedure",
+              "name": "IVF"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "ICSI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "IUI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Male Infertility"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Female Infertility"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Fertility Preservation"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "PGT (Genetic Testing)"
+            }
+          ],
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 23.0130822,
+            "longitude": 72.5639069
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Bavishi%20Fertility%20Institute%20Paldi%20Ahmedabad",
+          "image": "https://ivfclinic.com/assets/centres/paldi-building.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute — Paldi, Ahmedabad",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "closes": "19:00",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "09:00"
+            }
+          ],
+          "parentOrganization": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com/locations/ahmedabad/paldi"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#locations",
+              "name": "Locations",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/locations/ahmedabad",
+              "name": "Ahmedabad",
+              "position": 3
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/locations/ahmedabad/paldi",
+              "name": "Paldi, Ahmedabad",
+              "position": 4
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It is at Paldi Cross Roads — opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi, Ahmedabad – 380007. This is Bavishi Fertility Institute's head office and flagship lab, established in 1984."
+              },
+              "name": "Where is the Bavishi Fertility Institute Paldi IVF centre?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Paldi centre is open Monday to Saturday, 9:00 am to 7:00 pm. Appointments are recommended; call +91 97126 22288 to book."
+              },
+              "name": "What are the timings at the Paldi centre?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Paldi conveniently serves patients from Paldi, Vasna, Ambawadi, Ellisbridge, Vejalpur and Maninagar, as well as families travelling from across Ahmedabad and Gujarat."
+              },
+              "name": "Which areas does the Paldi centre serve?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "A Class 1000 embryology & IVF lab, andrology lab, in-house diagnostics and sonography, a day-care operation theatre, counselling and nutrition suites, and an on-site pharmacy — everything under one roof."
+              },
+              "name": "What facilities are available at Paldi?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "As the flagship head office, Paldi offers the institute's most advanced lab, senior promoter doctors and four decades of experience — combined with transparent pricing, EMI options and the Suraksha Kavach package."
+              },
+              "name": "Why choose the Paldi centre for IVF?"
+            }
+          ]
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — B.J. Medical College, Ahmedabad (1983)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1986)"
+            }
+          ],
+          "award": [
+            "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/himanshu.webp",
+          "jobTitle": "Founder & Chief IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Ovarian Stimulation Protocols",
+            "Male Infertility",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President"
+            }
+          ],
+          "name": "Dr. Himanshu Bavishi",
+          "url": "https://ivfclinic.com/doctors/himanshu-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MD — Obstetrics & Gynaecology"
+            }
+          ],
+          "award": [
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/falguni.webp",
+          "jobTitle": "Co-founder & Senior Fertility Specialist",
+          "knowsAbout": [
+            "Female Infertility",
+            "In Vitro Fertilization",
+            "Endometriosis",
+            "Reproductive Gynaecology",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            }
+          ],
+          "name": "Dr. Falguni Bavishi",
+          "url": "https://ivfclinic.com/doctors/falguni-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — Pramukhswami Medical College, Karamsad (2009)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — Pramukhswami Medical College, Karamsad (2012)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Rose of Paracelsus Award — European Medical Association",
+            "Most Prominent IVF Specialist — presented by the Chief Minister of Gujarat"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/parth.webp",
+          "jobTitle": "Co-director & IVF Specialist",
+          "knowsAbout": [
+            "Male Infertility",
+            "Andrology",
+            "Intracytoplasmic Sperm Injection",
+            "Surgical Sperm Retrieval",
+            "Azoospermia"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Andrology"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR)"
+            }
+          ],
+          "name": "Dr. Parth Bavishi",
+          "url": "https://ivfclinic.com/doctors/parth-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/janki-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MS — Obstetrics & Gynaecology"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Gujarat Gaurav Icon — Midday Group",
+            "'Nari Tu Narayani' Award for leading gynaecologist — Bulletin India Group"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and reproductive surgeon specialising in hysteroscopy, laparoscopy and fertility-enhancing surgery.",
+          "hasCredential": "MBBS, MS (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/janki.webp",
+          "jobTitle": "Co-director & Reproductive Surgeon",
+          "knowsAbout": [
+            "Reproductive Surgery",
+            "Hysteroscopy",
+            "Laparoscopy",
+            "Endometriosis",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            }
+          ],
+          "name": "Dr. Janki Bavishi",
+          "url": "https://ivfclinic.com/doctors/janki-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/binal-shah#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Experienced obstetrician and IVF specialist managing normal and IVF pregnancies, and Chief Quality Control & NABH Nodal Officer at Bavishi Fertility Institute.",
+          "hasCredential": "MBBS, DGO",
+          "image": "https://ivfclinic.com/assets/doctors/binal-shah.png",
+          "jobTitle": "IVF Specialist · Chief Quality Control & NABH Nodal Officer",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "High-Risk Pregnancy",
+            "Twin Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Binal Shah",
+          "url": "https://ivfclinic.com/doctors/binal-shah",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/jaydeep-patel#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, experienced in infertility management and normal & IVF pregnancy care.",
+          "image": "https://ivfclinic.com/assets/doctors/jaydeep-patel.png",
+          "jobTitle": "IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "High-Risk Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Jaydeep Patel",
+          "url": "https://ivfclinic.com/doctors/jaydeep-patel",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#blogs",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/parth-bavishi",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

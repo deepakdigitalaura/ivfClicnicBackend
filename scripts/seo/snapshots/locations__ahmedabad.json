@@ -1,0 +1,666 @@
+{
+  "route": "/locations/ahmedabad",
+  "title": "Best IVF Centre in Ahmedabad — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/locations/ahmedabad",
+  "meta": {
+    "description": "Looking for the best IVF centre in Ahmedabad? Bavishi Fertility Institute offers IVF, ICSI & IUI across 3 centres with Class 1000 labs and senior doctors since 1984.",
+    "og:description": "Looking for the best IVF centre in Ahmedabad? Bavishi Fertility Institute offers IVF, ICSI & IUI across 3 centres with Class 1000 labs and senior doctors since 1984.",
+    "og:image": "https://ivfclinic.com/assets/centres/paldi-waiting.webp",
+    "og:title": "Best IVF Centre in Ahmedabad — Bavishi Fertility Institute",
+    "og:type": "website",
+    "og:url": "https://ivfclinic.com/locations/ahmedabad",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/locations/ahmedabad#webpage",
+          "@type": "MedicalWebPage",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "name": "Best IVF Centre in Ahmedabad — Bavishi Fertility Institute",
+          "url": "https://ivfclinic.com/locations/ahmedabad"
+        },
+        {
+          "@id": "https://ivfclinic.com/locations/ahmedabad/paldi#clinic-paldi",
+          "@type": [
+            "MedicalClinic",
+            "LocalBusiness"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi"
+          },
+          "areaServed": [
+            {
+              "@type": "Place",
+              "name": "Paldi, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Vasna, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Ambawadi, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Ellisbridge, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Vejalpur, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Maninagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Navrangpura, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Sarkhej, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jivraj Park, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Anandnagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Shreyas, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Bhatta, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Law Garden, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "C.G. Road, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Manekbaug, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Sabarmati, Ahmedabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalProcedure",
+              "name": "IVF"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "ICSI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "IUI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Male Infertility"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Female Infertility"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Fertility Preservation"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "PGT (Genetic Testing)"
+            }
+          ],
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 23.0130822,
+            "longitude": 72.5639069
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Bavishi%20Fertility%20Institute%20Paldi%20Ahmedabad",
+          "image": "https://ivfclinic.com/assets/centres/paldi-building.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute — Paldi, Ahmedabad",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "closes": "19:00",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "09:00"
+            }
+          ],
+          "parentOrganization": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com/locations/ahmedabad/paldi"
+        },
+        {
+          "@id": "https://ivfclinic.com/locations/ahmedabad/sindhu-bhavan-road#clinic-sindhu-bhavan-road",
+          "@type": [
+            "MedicalClinic",
+            "LocalBusiness"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380059",
+            "streetAddress": "SF-213, Stellar, Sindhu Bhavan Marg, near Pakvan Cross Roads, Bodakdev"
+          },
+          "areaServed": [
+            {
+              "@type": "Place",
+              "name": "Bodakdev, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Thaltej, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Sindhu Bhavan Road, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "S.G. Highway, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Science City, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Shilaj, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Satellite, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Vastrapur, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Bopal, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "South Bopal, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Jodhpur, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Prahlad Nagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Sola, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Ghuma, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Shela, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Gota, Ahmedabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalProcedure",
+              "name": "IVF"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "ICSI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "IUI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Female Infertility"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Fertility Preservation"
+            }
+          ],
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 23.039814,
+            "longitude": 72.5085954
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Bavishi%20Fertility%20Institute%20Sindhu%20Bhavan%20Road%20Bodakdev%20Ahmedabad",
+          "image": "https://ivfclinic.com/assets/Locations/sindhu-bhavan-road.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute — Sindhu Bhavan Road, Ahmedabad",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "closes": "19:00",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "10:30"
+            }
+          ],
+          "parentOrganization": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com/locations/ahmedabad/sindhu-bhavan-road"
+        },
+        {
+          "@id": "https://ivfclinic.com/locations/ahmedabad/nikol#clinic-nikol",
+          "@type": [
+            "MedicalClinic",
+            "LocalBusiness"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380049",
+            "streetAddress": "Hill Town Plaza, 501, near Amar Jawan Circle, Nikol"
+          },
+          "areaServed": [
+            {
+              "@type": "Place",
+              "name": "Nikol, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Naroda, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Vastral, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Odhav, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "New India Colony, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kathwada, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Bapunagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Thakkarbapanagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "CTM, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Ramol, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Hathijan, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Kubernagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Sardarnagar, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "India Colony, Ahmedabad"
+            },
+            {
+              "@type": "Place",
+              "name": "Viratnagar, Ahmedabad"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalProcedure",
+              "name": "IVF"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "IUI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Male Infertility"
+            }
+          ],
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 23.0589329,
+            "longitude": 72.6718737
+          },
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Bavishi%20Fertility%20Institute%20Nikol%20Ahmedabad",
+          "image": "https://ivfclinic.com/assets/Locations/Nikol.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute — Nikol, Ahmedabad",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "closes": "19:00",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "10:00"
+            }
+          ],
+          "parentOrganization": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "telephone": "+919227114040",
+          "url": "https://ivfclinic.com/locations/ahmedabad/nikol"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#locations",
+              "name": "Locations",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/locations/ahmedabad",
+              "name": "Ahmedabad",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Bavishi Fertility Institute is widely regarded as one of Ahmedabad's most trusted IVF centres — operating in the city since 1984, with Class 1000 labs, senior promoter doctors and 30,000+ successful pregnancies nationwide."
+              },
+              "name": "Which is the best IVF centre in Ahmedabad?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Three — at Paldi (head office), Sindhu Bhavan Road and Nikol — so expert fertility care is always close to home."
+              },
+              "name": "How many Bavishi Fertility Institute IVF centres are there in Ahmedabad?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi, Ahmedabad – 380007. It is the institute's head office and flagship lab."
+              },
+              "name": "Where is the Bavishi Fertility Institute Paldi IVF centre located?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Paldi is open Mon–Sat, 9:00 am–7:00 pm; Sindhu Bhavan Road Mon–Sat, 10:30 am–7:00 pm; and Nikol Mon–Sat, 10:00 am–7:00 pm. Appointments are recommended."
+              },
+              "name": "What are the consultation timings in Ahmedabad?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The full range — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation, maternity services and gynaecology — all under one roof."
+              },
+              "name": "What fertility treatments are available in Ahmedabad?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. All Ahmedabad centres offer transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+              },
+              "name": "Do you offer IVF cost EMI and Suraksha Kavach in Ahmedabad?"
+            }
+          ]
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#blogs",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/parth-bavishi",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/ahmedabad/nikol",
+    "/locations/ahmedabad/paldi",
+    "/locations/ahmedabad/sindhu-bhavan-road",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

@@ -14,7 +14,9 @@
     "generate:types": "payload generate:types",
     "generate:importmap": "payload generate:importmap",
     "seed:contact": "node scripts/seed-contact.mjs",
-    "seed:globals": "node scripts/seed-globals.mjs"
+    "seed:globals": "node scripts/seed-globals.mjs",
+    "seo:snapshot": "node scripts/seo/snapshot.mjs",
+    "seo:diff": "node scripts/seo/diff.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",
@@ -64,6 +66,7 @@
     "react-hook-form": "^7.71.2",
     "react-resizable-panels": "^4.6.5",
     "recharts": "^2.15.4",
+    "server-only": "^0.0.1",
     "sharp": "^0.34.5",
     "sonner": "^2.0.7",
     "tailwind-merge": "^3.5.0",

@@ -1,4 +1,5 @@
 import type { CollectionConfig } from "payload";
+import { revalidateCollection } from "@/lib/revalidate";
 
 /**
  * Generic Pages collection (Phase 1 POC scope = Contact page).
@@ -26,6 +27,7 @@ export const Pages: CollectionConfig = {
   versions: {
     drafts: true,
   },
+  hooks: revalidateCollection("pages"),
   access: {
     read: ({ req }) => {
       // Authenticated admins see everything (incl. drafts); the public only

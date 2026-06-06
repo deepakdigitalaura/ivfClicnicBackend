@@ -1,0 +1,360 @@
+{
+  "route": "/pcos",
+  "title": "PCOS (Polycystic Ovary Syndrome) Treatment & Fertility — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/pcos",
+  "meta": {
+    "description": "PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PCOS is one of the most treatable causes of infertility. Since 1984.",
+    "og:description": "PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PCOS is one of the most treatable causes of infertility. Since 1984.",
+    "og:image": "https://ivfclinic.com/assets/conditions/pcos.png",
+    "og:title": "PCOS (Polycystic Ovary Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/pcos",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/pcos#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "PCOS (Polycystic Ovary Syndrome) & Fertility"
+          },
+          "description": "PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PCOS is one of the most treatable causes of infertility. Since 1984.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "PCOS (Polycystic Ovary Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+            "jobTitle": "Co-founder & Senior Fertility Specialist",
+            "name": "Dr. Falguni Bavishi",
+            "url": "https://ivfclinic.com/doctors/falguni-bavishi"
+          },
+          "url": "https://ivfclinic.com/pcos"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "alternateName": "Polycystic Ovary Syndrome",
+          "bodyLocation": "Ovaries",
+          "followup": "Cycles are monitored by scan and hormone tests to confirm ovulation and guide treatment.",
+          "howPerformed": "PCOS is managed with weight and lifestyle support, insulin-sensitising and ovulation-inducing medication, and, where needed, IUI or IVF with careful protocols to avoid overstimulation.",
+          "name": "PCOS (Polycystic Ovary Syndrome) & Fertility",
+          "procedureType": "https://schema.org/TherapeuticProcedure",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Treatments",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/pcos",
+              "name": "PCOS",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. PCOS is one of the most treatable causes of infertility, and most women conceive with lifestyle changes, ovulation induction or, when needed, IUI or IVF."
+              },
+              "name": "Can I get pregnant with PCOS?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often significantly. Even a modest 5–10% weight loss can restore regular ovulation and improve the response to treatment."
+              },
+              "name": "Does losing weight help PCOS fertility?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Medication — usually tablets or gentle injections — that encourages the ovaries to release an egg, monitored by ultrasound to time conception."
+              },
+              "name": "What is ovulation induction?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, with care. PCOS ovaries can over-respond, so we use specific, OHSS-aware protocols and close monitoring to keep IVF safe."
+              },
+              "name": "Is IVF safe with PCOS?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "PCOS slightly raises some risks such as gestational diabetes, which is why pre-pregnancy health optimisation and good antenatal care matter."
+              },
+              "name": "Will PCOS affect my pregnancy?"
+            }
+          ]
+        },
+        {
+          "@type": "VideoObject",
+          "contentUrl": "https://www.youtube.com/watch?v=cGkVVs8I4ZU",
+          "description": "Our experts explain PCOS (polycystic ovary syndrome) and fertility — what causes it, how it affects conception and the treatment options, from lifestyle changes and ovulation induction to IUI and IVF.",
+          "embedUrl": "https://www.youtube-nocookie.com/embed/cGkVVs8I4ZU",
+          "name": "PCOS Treatment — Expert Fertility Care",
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "thumbnailUrl": "https://img.youtube.com/vi/cGkVVs8I4ZU/hqdefault.jpg",
+          "uploadDate": "2023-01-01"
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MD — Obstetrics & Gynaecology"
+            }
+          ],
+          "award": [
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/falguni.webp",
+          "jobTitle": "Co-founder & Senior Fertility Specialist",
+          "knowsAbout": [
+            "Female Infertility",
+            "In Vitro Fertilization",
+            "Endometriosis",
+            "Reproductive Gynaecology",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            }
+          ],
+          "name": "Dr. Falguni Bavishi",
+          "url": "https://ivfclinic.com/doctors/falguni-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#blogs",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/anand",
+    "/locations/bhavnagar",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

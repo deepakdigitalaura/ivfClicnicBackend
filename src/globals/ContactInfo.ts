@@ -1,4 +1,5 @@
 import type { GlobalConfig } from "payload";
+import { revalidateGlobal } from "@/lib/revalidate";
 
 /**
  * Contact display blocks → drives the contact cards on the Contact page
@@ -13,6 +14,7 @@ export const ContactInfo: GlobalConfig = {
   slug: "contact-info",
   access: { read: () => true },
   admin: { group: "Globals" },
+  hooks: revalidateGlobal("contact-info"),
   fields: [
     {
       name: "cards",
