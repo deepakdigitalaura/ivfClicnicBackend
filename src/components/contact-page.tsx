@@ -37,7 +37,20 @@ const directory: Centre[] = [
   { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", href: "/locations/varanasi/shivpur" },
 ];
 
-const faqs = [
+type Faq = { q: string; a: string };
+type Hero = { eyebrow?: string | null; lead?: string | null; em?: string | null; subtitle?: string | null };
+
+/* Defaults mirror the original hardcoded copy, so the component still renders
+ * correctly if used without props (e.g. before CMS data is available). */
+const DEFAULT_HERO: Hero = {
+  eyebrow: "We're here for you",
+  lead: "Contact",
+  em: "Bavishi Fertility Institute",
+  subtitle:
+    "Have a question or ready to begin? Reach out — confidentially and without obligation. Our fertility counsellors are here to guide your very first step.",
+};
+
+const DEFAULT_FAQS: Faq[] = [
   { q: "How do I book an appointment at Bavishi Fertility Institute?", a: "Fill in the enquiry form on this page, call us on +91 97126 22288, or message us on WhatsApp. Our team will help you choose the nearest centre and a convenient time." },
   { q: "Can I have an online (video) consultation?", a: "Yes. We offer video consultations for patients across India and abroad, so you can begin your fertility journey from the comfort of home before visiting a centre." },
   { q: "Which Bavishi Fertility Institute centre is nearest to me?", a: "We have 15 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
@@ -45,7 +58,9 @@ const faqs = [
   { q: "Do you treat international patients?", a: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including pre-arrival video consultations and treatment planning." },
 ];
 
-export function ContactPage() {
+export function ContactPage({ hero, faqs }: { hero?: Hero; faqs?: Faq[] } = {}) {
+  const h = { ...DEFAULT_HERO, ...(hero ?? {}) };
+  const faqList = faqs?.length ? faqs : DEFAULT_FAQS;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -66,16 +81,15 @@ export function ContactPage() {
           <div className="absolute -bottom-40 -left-24 h-[26rem] w-[26rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl" />
         </div>
         <div className="container-px mx-auto max-w-[1400px] py-16 text-center md:py-20">
-          <Reveal><div className="flex justify-center"><Eyebrow>We're here for you</Eyebrow></div></Reveal>
+          <Reveal><div className="flex justify-center"><Eyebrow>{h.eyebrow}</Eyebrow></div></Reveal>
           <Reveal delay={0.05}>
             <h1 className="mx-auto mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] lg:whitespace-nowrap xl:text-[3.5rem]">
-              Contact <em className="font-display italic text-[color:var(--rose)]">Bavishi Fertility Institute</em>
+              {h.lead} <em className="font-display italic text-[color:var(--rose)]">{h.em}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Have a question or ready to begin? Reach out — confidentially and without obligation. Our fertility counsellors
-              are here to guide your very first step.
+              {h.subtitle}
             </p>
           </Reveal>
         </div>
@@ -163,7 +177,7 @@ export function ContactPage() {
         <div className="container-px mx-auto max-w-3xl">
           <SectionHead center eyebrow="FAQ" title={<>Getting in touch — <em className="font-display italic text-[color:var(--rose)]">answered</em></>} />
           <div className="mt-9 space-y-3">
-            {faqs.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
+            {faqList.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
           </div>
         </div>
       </section>

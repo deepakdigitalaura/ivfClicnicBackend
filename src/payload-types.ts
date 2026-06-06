@@ -153,7 +153,15 @@ export interface Page {
     metaTitle?: string | null;
     metaDescription?: string | null;
     /**
-     * Open Graph / social share image.
+     * Open Graph title. Falls back to metaTitle if empty.
+     */
+    ogTitle?: string | null;
+    /**
+     * Open Graph description. Falls back to metaDescription if empty.
+     */
+    ogDescription?: string | null;
+    /**
+     * Open Graph / social share image. Falls back to the default hero image if empty.
      */
     ogImage?: (number | null) | Media;
   };
@@ -310,6 +318,8 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         metaTitle?: T;
         metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
         ogImage?: T;
       };
   updatedAt?: T;

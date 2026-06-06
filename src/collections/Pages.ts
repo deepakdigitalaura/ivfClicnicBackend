@@ -78,10 +78,20 @@ export const Pages: CollectionConfig = {
         { name: "metaTitle", type: "text" },
         { name: "metaDescription", type: "textarea" },
         {
+          name: "ogTitle",
+          type: "text",
+          admin: { description: "Open Graph title. Falls back to metaTitle if empty." },
+        },
+        {
+          name: "ogDescription",
+          type: "textarea",
+          admin: { description: "Open Graph description. Falls back to metaDescription if empty." },
+        },
+        {
           name: "ogImage",
           type: "upload",
           relationTo: "media",
-          admin: { description: "Open Graph / social share image." },
+          admin: { description: "Open Graph / social share image. Falls back to the default hero image if empty." },
         },
       ],
     },
