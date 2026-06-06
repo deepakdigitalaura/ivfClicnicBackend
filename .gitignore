@@ -1,0 +1,9 @@
+node_modules
+.next
+out
+.env.local
+
+# generated artifacts
+*.tsbuildinfo
+.next-dev.log
+src/data/reviews-cache.json

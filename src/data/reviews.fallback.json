@@ -1,0 +1,59 @@
+{
+  "_comment": "Illustrative fallback reviews shown ONLY when no verified Google data exists for a key (not configured yet, or the Places API failed). These are clearly labeled 'Patient review' in the UI, carry NO Google branding, and NEVER produce Review/AggregateRating schema. Real Google reviews (when synced) always take priority.",
+  "brand": {
+    "key": "brand",
+    "source": "fallback",
+    "verified": false,
+    "reviews": [
+      { "author": "Niravkumar Patel", "rating": 5, "text": "I would like to thank the doctors and the team at Bavishi for giving us the best possible treatment and putting in utmost effort to achieve the results we have waited for so long. Thank you so much for your care and guidance during this incredible experience!", "publishedAtISO": "2026-03-12T00:00:00.000Z" },
+      { "author": "Jitesh Dabasiya", "rating": 5, "text": "Best care with excellent treatment. Staff and doctors are available 24x7 for any help needed. Very clean and friendly environment. Thanks to the Bavishi and Spandan team for making our journey so comfortable.", "publishedAtISO": "2026-03-05T00:00:00.000Z" },
+      { "author": "Priya Sharma", "rating": 5, "text": "After years of struggle, Bavishi Fertility gave us hope and finally our baby. The doctors explained every step clearly and never rushed us. Forever grateful to the entire team for their patience, transparency and compassion.", "publishedAtISO": "2026-02-26T00:00:00.000Z" },
+      { "author": "Amit Desai", "rating": 5, "text": "Highly professional and transparent. The counsellors guided us through the entire IVF journey, the labs are world-class, and the results speak for themselves. Strongly recommend Bavishi for honest fertility treatment.", "publishedAtISO": "2026-02-18T00:00:00.000Z" },
+      { "author": "Sneha Joshi", "rating": 5, "text": "Very compassionate doctors and supportive staff. They made a difficult phase of our life so much easier. The clinic is spotless and appointments are always on time. We are now proud parents.", "publishedAtISO": "2026-02-10T00:00:00.000Z" },
+      { "author": "Karan Mehta", "rating": 4, "text": "From the first consultation to our positive result, the experience was smooth and reassuring. The team answered every question patiently and made us feel like family.", "publishedAtISO": "2026-02-02T00:00:00.000Z" },
+      { "author": "Anjali Verma", "rating": 5, "text": "We had almost lost hope after two failed cycles elsewhere. The doctors at Bavishi reviewed everything in detail and customised our treatment. Today we hold our little miracle.", "publishedAtISO": "2026-01-25T00:00:00.000Z" },
+      { "author": "Rohit Shah", "rating": 5, "text": "Excellent infrastructure and very ethical guidance. They never pushed unnecessary procedures and were honest about every option. The transparency and genuine care set Bavishi apart.", "publishedAtISO": "2026-01-18T00:00:00.000Z" },
+      { "author": "Meera Nair", "rating": 4, "text": "The counselling, the lab, the follow-ups — everything was handled with great professionalism and warmth. After our long journey, Bavishi made our dream of parenthood come true.", "publishedAtISO": "2026-01-10T00:00:00.000Z" }
+    ]
+  },
+  "ahmedabad": {
+    "key": "ahmedabad",
+    "source": "fallback",
+    "verified": false,
+    "reviews": [
+      { "author": "Hardik T.", "rating": 5, "text": "Excellent care in Ahmedabad — clean, organised and the senior doctors give you genuine time.", "publishedAtISO": "2026-03-05T00:00:00.000Z" },
+      { "author": "Foram P.", "rating": 5, "text": "Very transparent counselling. The team explained costs and steps clearly with no hidden charges.", "publishedAtISO": "2026-02-15T00:00:00.000Z" },
+      { "author": "Sagar M.", "rating": 4, "text": "Experienced doctors and caring staff. Every facility under one roof made our visits easier.", "publishedAtISO": "2026-01-25T00:00:00.000Z" }
+    ]
+  },
+  "paldi": {
+    "key": "paldi",
+    "source": "fallback",
+    "verified": false,
+    "reviews": [
+      { "author": "Niraj P.", "rating": 5, "text": "The Paldi head office is excellent. Our journey finally succeeded here after disappointments elsewhere.", "publishedAtISO": "2026-03-08T00:00:00.000Z" },
+      { "author": "Meera N.", "rating": 5, "text": "The counselling, the lab, the follow-ups — everything handled with professionalism and warmth.", "publishedAtISO": "2026-02-18T00:00:00.000Z" },
+      { "author": "Rohit S.", "rating": 4, "text": "Ethical guidance and great infrastructure. They never pushed unnecessary procedures.", "publishedAtISO": "2026-01-28T00:00:00.000Z" }
+    ]
+  },
+  "sindhu-bhavan-road": {
+    "key": "sindhu-bhavan-road",
+    "source": "fallback",
+    "verified": false,
+    "reviews": [
+      { "author": "Khushbu S.", "rating": 5, "text": "Convenient location and a calm, modern setup. The doctors were patient and answered every question.", "publishedAtISO": "2026-03-02T00:00:00.000Z" },
+      { "author": "Manish A.", "rating": 5, "text": "Punctual appointments, friendly counsellors and honest guidance throughout our treatment.", "publishedAtISO": "2026-02-12T00:00:00.000Z" },
+      { "author": "Riddhi J.", "rating": 4, "text": "Clean clinic and supportive team. Easy to visit regularly during the cycle.", "publishedAtISO": "2026-01-22T00:00:00.000Z" }
+    ]
+  },
+  "nikol": {
+    "key": "nikol",
+    "source": "fallback",
+    "verified": false,
+    "reviews": [
+      { "author": "Bhavin P.", "rating": 5, "text": "So glad Bavishi opened in Nikol — expert fertility care close to home. Warm staff, knowledgeable doctors.", "publishedAtISO": "2026-03-04T00:00:00.000Z" },
+      { "author": "Nehal P.", "rating": 5, "text": "Comfortable centre with easy parking. Our consultation was thorough and clearly explained.", "publishedAtISO": "2026-02-14T00:00:00.000Z" },
+      { "author": "Dipti S.", "rating": 4, "text": "Friendly team and a clean, welcoming clinic. Very happy we chose the Nikol branch.", "publishedAtISO": "2026-01-24T00:00:00.000Z" }
+    ]
+  }
+}

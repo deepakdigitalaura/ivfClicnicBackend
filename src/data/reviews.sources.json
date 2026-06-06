@@ -1,0 +1,13 @@
+{
+  "_comment": "Google Places review source. Put each Google Business Profile Place ID in `placeId` (find it at https://developers.google.com/maps/documentation/places/web-service/place-id, or paste the centre's Google MAPS listing URL and the assistant will derive it). API key comes from GOOGLE_PLACES_API_KEY (Places API enabled + billing). Empty placeId OR no key = that source is skipped (build stays safe; page shows the 'Read reviews on Google' CTA). NOTE: Google returns rating + total count + up to 5 reviews per place.",
+  "provider": "google-places",
+  "apiKeyEnv": "GOOGLE_PLACES_API_KEY",
+  "refreshDays": 10,
+  "minRating": 4,
+  "sources": {
+    "brand": { "placeId": "", "listingUrl": "https://www.google.com/maps/search/?api=1&query=Bavishi+Fertility+Institute" },
+    "paldi": { "placeId": "", "listingUrl": "" },
+    "sindhu-bhavan-road": { "placeId": "", "listingUrl": "" },
+    "nikol": { "placeId": "", "listingUrl": "" }
+  }
+}
