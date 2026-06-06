@@ -1,16 +1,23 @@
 "use client";
-import { Phone, Mail, MessageCircle, Clock, MapPin, Calendar, Navigation } from "lucide-react";
+import { Phone, Mail, MessageCircle, Clock, MapPin, Calendar, Navigation, type LucideIcon } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { InquiryForm, Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 
-const contactCards = [
-  { icon: Phone, t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 patient helpline" },
-  { icon: MessageCircle, t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712622288", note: "Quick replies, every day" },
-  { icon: Mail, t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
-  { icon: Clock, t: "Working Hours", v: "Mon – Sat · 9:00 am – 7:00 pm", href: undefined as string | undefined, note: "Sunday by appointment" },
+/* Icon-name -> component map. The CMS stores a name (string); the template
+ * resolves it to a Lucide component. This is the serialisable-icon pattern
+ * future collections (Treatments/Services) will reuse. */
+const ICONS: Record<string, LucideIcon> = { Phone, MessageCircle, Mail, Clock, MapPin, Calendar };
+
+type Card = { icon: string; t: string; v: string; href?: string | null; note?: string | null };
+
+const DEFAULT_CARDS: Card[] = [
+  { icon: "Phone", t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 patient helpline" },
+  { icon: "MessageCircle", t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712622288", note: "Quick replies, every day" },
+  { icon: "Mail", t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
+  { icon: "Clock", t: "Working Hours", v: "Mon – Sat · 9:00 am – 7:00 pm", href: undefined, note: "Sunday by appointment" },
 ];
 
 type Centre = { name: string; address: string; phone: string; phoneLabel: string; href?: string };
@@ -58,9 +65,10 @@ const DEFAULT_FAQS: Faq[] = [
   { q: "Do you treat international patients?", a: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including pre-arrival video consultations and treatment planning." },
 ];
 
-export function ContactPage({ hero, faqs }: { hero?: Hero; faqs?: Faq[] } = {}) {
+export function ContactPage({ hero, faqs, cards }: { hero?: Hero; faqs?: Faq[]; cards?: Card[] } = {}) {
   const h = { ...DEFAULT_HERO, ...(hero ?? {}) };
   const faqList = faqs?.length ? faqs : DEFAULT_FAQS;
+  const cardList = cards?.length ? cards : DEFAULT_CARDS;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -98,10 +106,11 @@ export function ContactPage({ hero, faqs }: { hero?: Hero; faqs?: Faq[] } = {}) 
       {/* Contact info cards */}
       <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
         <Stagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {contactCards.map((c) => {
+          {cardList.map((c) => {
+            const Icon = ICONS[c.icon] ?? Phone;
             const inner = (
               <div className="flex h-full flex-col items-start rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><c.icon className="h-5 w-5" /></div>
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><Icon className="h-5 w-5" /></div>
                 <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{c.t}</div>
                 <div className="mt-1 text-base font-semibold text-[color:var(--plum)]">{c.v}</div>
                 <div className="mt-1 text-sm text-muted-foreground">{c.note}</div>

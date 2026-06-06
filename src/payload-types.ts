@@ -89,8 +89,14 @@ export interface Config {
     defaultIDType: number;
   };
   fallbackLocale: null;
-  globals: {};
-  globalsSelect: {};
+  globals: {
+    'site-settings': SiteSetting;
+    'contact-info': ContactInfo;
+  };
+  globalsSelect: {
+    'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
+    'contact-info': ContactInfoSelect<false> | ContactInfoSelect<true>;
+  };
   locale: null;
   widgets: {
     collections: CollectionsWidget;
@@ -405,6 +411,155 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
   batch?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings".
+ */
+export interface SiteSetting {
+  id: number;
+  brandName: string;
+  alternateName?: string | null;
+  legalName?: string | null;
+  /**
+   * Absolute logo URL used in schema. A Media relation can replace this later.
+   */
+  logoUrl?: string | null;
+  /**
+   * Year, e.g. 1984.
+   */
+  foundingDate?: string | null;
+  telephone?: string | null;
+  email?: string | null;
+  address?: {
+    streetAddress?: string | null;
+    addressLocality?: string | null;
+    addressRegion?: string | null;
+    postalCode?: string | null;
+    /**
+     * ISO country code, e.g. IN.
+     */
+    addressCountry?: string | null;
+  };
+  awards?:
+    | {
+        award: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * schema.org knowsAbout — areas of expertise.
+   */
+  knowsAbout?:
+    | {
+        topic: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * schema.org sameAs — official profile URLs.
+   */
+  socialLinks?:
+    | {
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-info".
+ */
+export interface ContactInfo {
+  id: number;
+  cards?:
+    | {
+        icon: 'Phone' | 'MessageCircle' | 'Mail' | 'Clock' | 'MapPin' | 'Calendar';
+        /**
+         * Label, e.g. 'Call Us'.
+         */
+        title: string;
+        /**
+         * e.g. '+91 97126 22288'.
+         */
+        value: string;
+        /**
+         * Optional link, e.g. tel:+91…, mailto:…, https://wa.me/…
+         */
+        href?: string | null;
+        /**
+         * Sub-line, e.g. '24×7 patient helpline'.
+         */
+        note?: string | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "site-settings_select".
+ */
+export interface SiteSettingsSelect<T extends boolean = true> {
+  brandName?: T;
+  alternateName?: T;
+  legalName?: T;
+  logoUrl?: T;
+  foundingDate?: T;
+  telephone?: T;
+  email?: T;
+  address?:
+    | T
+    | {
+        streetAddress?: T;
+        addressLocality?: T;
+        addressRegion?: T;
+        postalCode?: T;
+        addressCountry?: T;
+      };
+  awards?:
+    | T
+    | {
+        award?: T;
+        id?: T;
+      };
+  knowsAbout?:
+    | T
+    | {
+        topic?: T;
+        id?: T;
+      };
+  socialLinks?:
+    | T
+    | {
+        url?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "contact-info_select".
+ */
+export interface ContactInfoSelect<T extends boolean = true> {
+  cards?:
+    | T
+    | {
+        icon?: T;
+        title?: T;
+        value?: T;
+        href?: T;
+        note?: T;
+        id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

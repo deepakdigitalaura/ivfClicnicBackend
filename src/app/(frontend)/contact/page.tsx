@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact-page";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID, SITE } from "@/lib/seo";
-import { getPageBySlug } from "@/lib/payload";
+import { getPageBySlug, getGlobalSafe } from "@/lib/payload";
 
 const PATH = "/contact";
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -58,7 +58,15 @@ async function loadContact() {
     page?.seo && typeof page.seo.ogImage === "object" && page.seo.ogImage?.url
       ? page.seo.ogImage.url
       : DEFAULT_OG_IMAGE;
-  return { hero, seo, faqs, ogImage };
+
+  // Contact cards from the contact-info global (undefined → component uses its
+  // own defaults, preserving the original cards).
+  const ci = await getGlobalSafe("contact-info");
+  const cards = ci?.cards?.length
+    ? ci.cards.map((c) => ({ icon: c.icon, t: c.title, v: c.value, href: c.href, note: c.note }))
+    : undefined;
+
+  return { hero, seo, faqs, ogImage, cards };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -78,7 +86,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { hero, faqs } = await loadContact();
+  const { hero, faqs, cards } = await loadContact();
 
   const graph = [
     {
@@ -108,7 +116,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
-      <ContactPage hero={hero} faqs={faqs} />
+      <ContactPage hero={hero} faqs={faqs} cards={cards} />
     </>
   );
 }

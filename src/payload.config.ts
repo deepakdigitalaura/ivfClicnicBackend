@@ -18,6 +18,8 @@ import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
+import { SiteSettings } from "./globals/SiteSettings";
+import { ContactInfo } from "./globals/ContactInfo";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -27,6 +29,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
   },
   collections: [Pages, Media, Users],
+  globals: [SiteSettings, ContactInfo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

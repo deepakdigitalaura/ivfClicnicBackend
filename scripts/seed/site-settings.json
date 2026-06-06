@@ -1,0 +1,39 @@
+{
+  "brandName": "Bavishi Fertility Institute",
+  "alternateName": "Bavishi Fertility Institute",
+  "legalName": "Bavishi Fertility Institute",
+  "logoUrl": "https://ivfclinic.com/logo.png",
+  "foundingDate": "1984",
+  "telephone": "+919712622288",
+  "email": "drbavishi@ivfclinic.com",
+  "address": {
+    "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden",
+    "addressLocality": "Ahmedabad",
+    "addressRegion": "Gujarat",
+    "postalCode": "380007",
+    "addressCountry": "IN"
+  },
+  "awards": [
+    { "award": "National Fertility Award 2021" },
+    { "award": "National Fertility Award 2022" },
+    { "award": "National Fertility Award 2023" },
+    { "award": "National Fertility Award 2024" },
+    { "award": "National Fertility Award 2025" },
+    { "award": "Economic Times IVF Chain of the Year — West" },
+    { "award": "Bharat Excellence Award for IVF and Infertility Care" }
+  ],
+  "knowsAbout": [
+    { "topic": "In Vitro Fertilization" },
+    { "topic": "Intracytoplasmic Sperm Injection" },
+    { "topic": "Intrauterine Insemination" },
+    { "topic": "Male Infertility" },
+    { "topic": "Female Infertility" },
+    { "topic": "Fertility Preservation" },
+    { "topic": "Preimplantation Genetic Testing" }
+  ],
+  "socialLinks": [
+    { "url": "https://www.instagram.com/bavishifertility/" },
+    { "url": "https://www.facebook.com/BavishiFertilityInstitute/" },
+    { "url": "https://www.youtube.com/@BavishiFertilityInstitute" }
+  ]
+}

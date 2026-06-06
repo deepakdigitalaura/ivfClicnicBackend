@@ -9,7 +9,8 @@
  * ===================================================================== */
 import { getPayload, type Payload } from "payload";
 import config from "@payload-config";
-import type { Page } from "@/payload-types";
+import type { Page, Config } from "@/payload-types";
+import type { SiteIdentity } from "@/lib/seo";
 
 let cached: Promise<Payload> | null = null;
 
@@ -32,4 +33,43 @@ export async function getPageBySlug(slug: string): Promise<Page | null> {
     depth: 1, // resolve ogImage upload relation
   });
   return res.docs[0] ?? null;
+}
+
+/**
+ * Fetch a global by slug. Returns null on any error (e.g. table not yet
+ * pushed) so callers fall back to their typed defaults — keeps the site
+ * rendering during the migration.
+ */
+export async function getGlobalSafe<S extends keyof Config["globals"]>(
+  slug: S,
+): Promise<Config["globals"][S] | null> {
+  try {
+    const payload = await payloadClient();
+    return (await payload.findGlobal({ slug })) as Config["globals"][S];
+  } catch {
+    return null;
+  }
+}
+
+/**
+ * Map the `site-settings` global to the pure SiteIdentity shape the schema
+ * builders consume. Returns undefined if the global is unavailable, so
+ * siteGraph() falls back to the SITE constant (byte-identical output).
+ */
+export async function getSiteIdentity(): Promise<SiteIdentity | undefined> {
+  const s = await getGlobalSafe("site-settings");
+  if (!s) return undefined;
+  return {
+    name: s.brandName,
+    alternateName: s.alternateName,
+    legalName: s.legalName,
+    logo: s.logoUrl,
+    foundingDate: s.foundingDate,
+    telephone: s.telephone,
+    email: s.email,
+    address: s.address ?? null,
+    awards: s.awards?.map((a) => a.award).filter(Boolean) ?? null,
+    knowsAbout: s.knowsAbout?.map((k) => k.topic).filter(Boolean) ?? null,
+    sameAs: s.socialLinks?.map((l) => l.url).filter(Boolean) ?? null,
+  };
 }

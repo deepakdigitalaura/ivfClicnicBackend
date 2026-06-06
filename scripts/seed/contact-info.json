@@ -1,0 +1,8 @@
+{
+  "cards": [
+    { "icon": "Phone", "title": "Call Us", "value": "+91 97126 22288", "href": "tel:+919712622288", "note": "24×7 patient helpline" },
+    { "icon": "MessageCircle", "title": "WhatsApp", "value": "Chat with our team", "href": "https://wa.me/919712622288", "note": "Quick replies, every day" },
+    { "icon": "Mail", "title": "Email", "value": "drbavishi@ivfclinic.com", "href": "mailto:drbavishi@ivfclinic.com", "note": "We reply within 24 hours" },
+    { "icon": "Clock", "title": "Working Hours", "value": "Mon – Sat · 9:00 am – 7:00 pm", "note": "Sunday by appointment" }
+  ]
+}

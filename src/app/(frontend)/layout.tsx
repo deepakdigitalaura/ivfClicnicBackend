@@ -3,6 +3,7 @@ import "@/styles.css";
 import { ScrollProgress } from "@/components/conversion";
 import { JsonLd } from "@/components/json-ld";
 import { siteGraph } from "@/lib/seo";
+import { getSiteIdentity } from "@/lib/payload";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
@@ -35,17 +36,20 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: {
   children: React.ReactNode;
 }) {
+  // Identity comes from the CMS `site-settings` global; falls back to the SITE
+  // constant when unavailable so the entity graph is never empty.
+  const identity = await getSiteIdentity();
   return (
     <html lang="en">
       <body>
         {/* Sitewide entity graph — #organization + #website are referenced by
             every page's per-page schema so all facts merge into one entity. */}
-        <JsonLd graph={siteGraph()} />
+        <JsonLd graph={siteGraph(identity)} />
         <ScrollProgress />
         {children}
       </body>
