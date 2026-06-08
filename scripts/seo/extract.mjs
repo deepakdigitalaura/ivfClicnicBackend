@@ -22,14 +22,31 @@ const decode = (s) =>
     .replace(/&lt;/g, "<")
     .replace(/&gt;/g, ">");
 
-/** Recursively sort object keys so JSON.stringify is order-independent. */
+/* JSON-LD keys whose VALUE is a data-driven timestamp (content freshness),
+ * NOT a code-defined SEO fact. `dateModified` is sourced from the row's
+ * `updatedAt`, which a harmless content re-save bumps — so its exact instant is
+ * meaningless for *code* regression testing and was the source of the
+ * seo:diff "dateModified flake". We do NOT drop the field: we canonicalise a
+ * VALID ISO-8601 instant to a stable token so harmless re-saves stop tripping
+ * the gate, while still asserting the field is PRESENT and well-formed. If the
+ * field disappears, or stops being a real ISO datetime, the token is not
+ * substituted and the change still surfaces as a diff — preserving real
+ * regression detection (e.g. a refactor that breaks date emission). */
+const VOLATILE_DATE_KEYS = new Set(["dateModified"]);
+const ISO_DATE_TOKEN = "<iso8601>";
+const isIsoDateTime = (v) =>
+  typeof v === "string" && /^\d{4}-\d{2}-\d{2}T/.test(v) && !Number.isNaN(Date.parse(v));
+
+/** Recursively sort object keys so JSON.stringify is order-independent, and
+ *  canonicalise volatile date values (see VOLATILE_DATE_KEYS) to a token. */
 function sortDeep(value) {
   if (Array.isArray(value)) return value.map(sortDeep);
   if (value && typeof value === "object") {
     return Object.keys(value)
       .sort()
       .reduce((acc, k) => {
-        acc[k] = sortDeep(value[k]);
+        const v = value[k];
+        acc[k] = VOLATILE_DATE_KEYS.has(k) && isIsoDateTime(v) ? ISO_DATE_TOKEN : sortDeep(v);
         return acc;
       }, {});
   }

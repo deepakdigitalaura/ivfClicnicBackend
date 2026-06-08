@@ -1,14 +1,14 @@
 {
-  "route": "/blog/what-is-ivf-a-simple-guide",
-  "title": "What Is IVF? A Simple Guide for Couples — Bavishi Fertility Institute · Bavishi Fertility Centre",
-  "canonical": "https://ivfclinic.com/blog/what-is-ivf-a-simple-guide",
+  "route": "/doctors/parth-bavishi",
+  "title": "Dr. Parth Bavishi — IVF & Andrology | Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/doctors/parth-bavishi",
   "meta": {
-    "description": "Understand IVF step by step — how it works, who it helps and what to expect. Reviewed by Bavishi Fertility Institute specialists.",
-    "og:description": "Understand IVF step by step — how it works, who it helps and what to expect. Reviewed by Bavishi Fertility Institute specialists.",
-    "og:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
-    "og:title": "What Is IVF? A Simple Guide for Couples — Bavishi Fertility Institute",
-    "og:type": "article",
-    "og:url": "https://ivfclinic.com/blog/what-is-ivf-a-simple-guide",
+    "description": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+    "og:description": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+    "og:image": "https://ivfclinic.com/assets/doctors/parth.webp",
+    "og:title": "Dr. Parth Bavishi — IVF & Andrology | Bavishi Fertility Institute",
+    "og:type": "profile",
+    "og:url": "https://ivfclinic.com/doctors/parth-bavishi",
     "twitter:card": "summary_large_image",
     "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
     "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
@@ -106,27 +106,79 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@id": "https://ivfclinic.com/blog/what-is-ivf-a-simple-guide#article",
-          "@type": "BlogPosting",
-          "author": {
-            "@type": "Person",
-            "jobTitle": "Medical Content Writer",
-            "name": "BFI Editorial Team"
+          "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — Pramukhswami Medical College, Karamsad (2009)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — Pramukhswami Medical College, Karamsad (2012)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Rose of Paracelsus Award — European Medical Association",
+            "Most Prominent IVF Specialist — presented by the Chief Minister of Gujarat"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/parth.webp",
+          "jobTitle": "Co-director & IVF Specialist",
+          "knowsAbout": [
+            "Male Infertility",
+            "Andrology",
+            "Intracytoplasmic Sperm Injection",
+            "Surgical Sperm Retrieval",
+            "Azoospermia"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Andrology"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR)"
+            }
+          ],
+          "name": "Dr. Parth Bavishi",
+          "url": "https://ivfclinic.com/doctors/parth-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
           },
-          "dateModified": "<iso8601>",
-          "datePublished": "2026-06-01T00:00:00.000Z",
-          "description": "A clear, compassionate introduction to IVF — how it works, who it helps, and what to expect.",
-          "headline": "What Is IVF? A Simple Guide for Couples",
-          "isPartOf": {
-            "@id": "https://ivfclinic.com/#website"
-          },
-          "mainEntityOfPage": "https://ivfclinic.com/blog/what-is-ivf-a-simple-guide",
-          "publisher": {
+          "worksFor": {
             "@id": "https://ivfclinic.com/#organization"
-          },
-          "reviewedBy": {
-            "@type": "Person",
-            "name": "Dr. Himanshu Bavishi"
           }
         },
         {
@@ -140,14 +192,14 @@
             },
             {
               "@type": "ListItem",
-              "item": "https://ivfclinic.com/blog",
-              "name": "Blog",
+              "item": "https://ivfclinic.com/doctors",
+              "name": "Doctors",
               "position": 2
             },
             {
               "@type": "ListItem",
-              "item": "https://ivfclinic.com/blog/what-is-ivf-a-simple-guide",
-              "name": "What Is IVF? A Simple Guide for Couples",
+              "item": "https://ivfclinic.com/doctors/parth-bavishi",
+              "name": "Dr. Parth Bavishi",
               "position": 3
             }
           ]
@@ -179,16 +231,22 @@
     "/doctors/janki-bavishi",
     "/doctors/parth-bavishi",
     "/egg-donation",
+    "/egg-freezing",
     "/embryo-donation",
+    "/embryo-freezing",
     "/endometriosis",
+    "/era-test",
     "/erectile-dysfunction",
     "/fibroids",
     "/icsi-treatment-intracytoplasmic-sperm-injection",
     "/intra-uterine-insemination-iui",
     "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-evaluation",
     "/ivf-failure",
     "/laser-assisted-hatching",
     "/locations/ahmedabad",
+    "/locations/ahmedabad/paldi",
+    "/locations/ahmedabad/sindhu-bhavan-road",
     "/locations/bhuj",
     "/locations/mumbai",
     "/locations/surat",
@@ -209,6 +267,7 @@
     "/services/painless-delivery",
     "/services/twin-pregnancy-care",
     "/sperm-donation",
+    "/sperm-freezing",
     "/spindle-view-icsi",
     "/surgical-sperm-retrieval",
     "/surrogacy",
