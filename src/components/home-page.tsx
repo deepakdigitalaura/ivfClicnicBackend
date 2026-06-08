@@ -32,6 +32,7 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import type { Review } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { destinationHref } from "@/lib/internal-links";
+import { useFooter } from "@/components/footer-provider";
 import { cityHref } from "@/lib/locations";
 
 /* ---------- Primitives ---------- */
@@ -1570,113 +1571,20 @@ function FinalCTA() {
 
 /* ---------- Footer ---------- */
 
-// Footer link. `href` omitted → not yet a page, rendered non-clickable.
-// `external` → opens in a new tab (WhatsApp / tel). Labels + destinations are
-// kept in sync with the header navigation (NAV in site-header.tsx).
-type FooterLink = { label: string; href?: string; external?: boolean };
-
+// Footer content is CMS-managed via the `footer` global (Phase 3.5B, Item 3):
+// the root layout resolves it (getFooter) and passes it through FooterProvider;
+// here we read it with useFooter(), which falls back to FOOTER_DEFAULTS so the
+// markup is byte-identical when the CMS is empty. Contact links resolve their
+// href from Site Settings (no duplicated numbers). Nothing about the HTML
+// structure / classes / hierarchy changed — only the data source.
 export function Footer() {
-  const cols: { h: string; l: FooterLink[] }[] = [
-    { h: "IVF Treatments", l: [
-      { label: "IVF", href: "/what-is-ivf" },
-      { label: "IVF Failure", href: "/ivf-failure" },
-      { label: "IUI", href: "/intra-uterine-insemination-iui" },
-      { label: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
-      { label: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
-      { label: "IMSI", href: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi" },
-      { label: "MACS", href: "/magnetic-activated-cell-sorting-macs" },
-      { label: "Spindle View ICSI", href: "/spindle-view-icsi" },
-      { label: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
-      { label: "Laser Hatching", href: "/laser-assisted-hatching" },
-      { label: "PGT-A / PGT-M", href: "/pgt" },
-    ]},
-    { h: "Male Infertility", l: [
-      { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
-      { label: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
-      { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
-      { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
-      { label: "Varicocele / Micro Surgery", href: "/varicocele" },
-      { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
-    ]},
-    { h: "Female Infertility", l: [
-      { label: "Conceive Naturally", href: "/conceive-naturally" },
-      { label: "PRP Infertility", href: "/prp-infertility" },
-      { label: "PCOS", href: "/pcos" },
-      { label: "Poor Ovarian Reserve / Low Egg Count / Low AMH", href: "/ovarian-reserve" },
-      { label: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
-      { label: "Fibroid", href: "/fibroids" },
-      { label: "Endometriosis", href: "/endometriosis" },
-    ]},
-    { h: "Donor Services", l: [
-      { label: "Egg Donation", href: "/egg-donation" },
-      { label: "Sperm Donation", href: "/sperm-donation" },
-      { label: "Embryo Donation", href: "/embryo-donation" },
-      { label: "Surrogacy", href: "/surrogacy" },
-    ]},
-    { h: "Fertility Preservation", l: [
-      { label: "Cryopreservation", href: "/cryopreservation" },
-    ]},
-    { h: "Maternity Services", l: [
-      { label: "3D/4D Sonography", href: "/services/3d-4d-sonography" },
-      { label: "Painless Delivery", href: "/services/painless-delivery" },
-      { label: "Normal Delivery", href: "/services/normal-delivery" },
-      { label: "Fetal Medicine", href: "/services/fetal-medicine" },
-      { label: "High Risk Pregnancy Care", href: "/services/high-risk-pregnancy-care" },
-      { label: "Twin Pregnancy Care", href: "/services/twin-pregnancy-care" },
-    ]},
-    { h: "Doctors", l: [
-      { label: "Dr. Himanshu Bavishi", href: "/doctors/himanshu-bavishi" },
-      { label: "Dr. Falguni Bavishi", href: "/doctors/falguni-bavishi" },
-      { label: "Dr. Parth Bavishi", href: "/doctors/parth-bavishi" },
-      { label: "Dr. Janki Bavishi", href: "/doctors/janki-bavishi" },
-      { label: "All Doctors", href: "/doctors" },
-      { label: "Book Consultation", href: "/#book" },
-    ]},
-    { h: "Locations", l: [
-      { label: "Ahmedabad", href: "/locations/ahmedabad" },
-      { label: "Mumbai", href: "/locations/mumbai" },
-      { label: "Surat", href: "/locations/surat" },
-      { label: "Vadodara", href: "/locations/vadodara" },
-      { label: "Bhuj", href: "/locations/bhuj" },
-      { label: "Varanasi", href: "/locations/varanasi" },
-      { label: "All 15 Centres", href: "/#locations" },
-    ]},
-    { h: "Calculators", l: [
-      { label: "IVF Success Rate", href: "/#tools" },
-      { label: "IVF Cost Estimate", href: "/#tools" },
-      { label: "AMH Interpreter", href: "/#tools" },
-      { label: "Ovulation Calculator", href: "/#tools" },
-      { label: "Fertile Period", href: "/#tools" },
-      { label: "Semen Analysis", href: "/#tools" },
-      { label: "Natural Pregnancy", href: "/#tools" },
-      { label: "Miscarriage Risk", href: "/#tools" },
-    ]},
-    { h: "Resources", l: [
-      { label: "Blog", href: destinationHref("blog") },
-      { label: "Success Stories", href: "/#stories" },
-      { label: "Patient Videos", href: "/#videos" },
-      { label: "Events & Webinars", href: "/#events" },
-    ]},
-    { h: "About", l: [
-      { label: "Our Story", href: "/about-bfi" },
-      { label: "Suraksha Kavach", href: destinationHref("suraksha-kavach") },
-      { label: "Why Bavishi Fertility Institute", href: "/#about" },
-    ]},
-    { h: "Contact", l: [
-      { label: "Book Appointment", href: "/#book" },
-      { label: "Video Consultation", href: "/#book" },
-      { label: "WhatsApp Chat", href: "https://wa.me/919712622288", external: true },
-      { label: "Call +91 97126 22288", href: "tel:+919712622288", external: true },
-      { label: "Find a Centre", href: "/#locations" },
-      { label: "Patient Support", href: "/contact" },
-    ]},
-  ];
+  const { groups, copyrightText, legal } = useFooter();
   return (
     <footer id="contact" className="border-t border-border bg-[color:var(--ivory)]">
       <div className="container-px mx-auto max-w-[1400px] pt-20 pb-24 md:pb-8">
         {/* Sitemap grid */}
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {cols.map((c) => (
+          {groups.map((c) => (
             <div key={c.h}>
               <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[color:var(--plum)]">{c.h}</h4>
               <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
@@ -1702,13 +1610,18 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} Bavishi Fertility Centre. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} {copyrightText}</div>
           <div className="flex flex-wrap items-center justify-center gap-5">
-            <a href="#" className="hover:text-[color:var(--rose)]">Privacy Policy</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Terms of Service</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Refund Policy</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Cookie Policy</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Sitemap</a>
+            {legal.map((x) => (
+              <a
+                key={x.label}
+                href={x.href ?? "#"}
+                {...(x.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="hover:text-[color:var(--rose)]"
+              >
+                {x.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>

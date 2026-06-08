@@ -18,6 +18,8 @@ import config from "@payload-config";
 import type { Page, Blog, Config } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
 import { cacheTags } from "@/lib/cache-tags";
+import { resolveContactValues } from "@/lib/contact";
+import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 
 let cached: Promise<Payload> | null = null;
 
@@ -184,4 +186,19 @@ export const getSiteIdentity = reactCache(async (): Promise<SiteIdentity | undef
     knowsAbout: s.knowsAbout?.map((k) => k.topic).filter(Boolean) ?? null,
     sameAs: s.socialLinks?.map((l) => l.url).filter(Boolean) ?? null,
   };
+});
+
+/**
+ * Resolve the sitewide footer: the `footer` global shaped into the plain
+ * `FooterData` the client <Footer> renders, with contact links resolved from
+ * `site-settings` (Item 1) so numbers live in one place. Both globals are read
+ * through getGlobalSafe (cached + tagged), so an empty/unavailable CMS falls
+ * back to FOOTER_DEFAULTS — byte-identical output. React-cached per render.
+ */
+export const getFooter = reactCache(async (): Promise<FooterData> => {
+  const [footer, settings] = await Promise.all([
+    getGlobalSafe("footer"),
+    getGlobalSafe("site-settings"),
+  ]);
+  return resolveFooter(footer as FooterSource, resolveContactValues(settings));
 });

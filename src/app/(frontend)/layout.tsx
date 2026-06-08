@@ -3,7 +3,8 @@ import "@/styles.css";
 import { ScrollProgress } from "@/components/conversion";
 import { JsonLd } from "@/components/json-ld";
 import { siteGraph } from "@/lib/seo";
-import { getSiteIdentity } from "@/lib/payload";
+import { getSiteIdentity, getFooter } from "@/lib/payload";
+import { FooterProvider } from "@/components/footer-provider";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
@@ -42,8 +43,10 @@ export default async function RootLayout({
   children: React.ReactNode;
 }) {
   // Identity comes from the CMS `site-settings` global; falls back to the SITE
-  // constant when unavailable so the entity graph is never empty.
-  const identity = await getSiteIdentity();
+  // constant when unavailable so the entity graph is never empty. The footer is
+  // resolved once here and carried to <Footer> (rendered inside the per-page
+  // client components) via context — both stay static (cached + tagged reads).
+  const [identity, footer] = await Promise.all([getSiteIdentity(), getFooter()]);
   return (
     <html lang="en">
       <body>
@@ -51,7 +54,7 @@ export default async function RootLayout({
             every page's per-page schema so all facts merge into one entity. */}
         <JsonLd graph={siteGraph(identity)} />
         <ScrollProgress />
-        {children}
+        <FooterProvider value={footer}>{children}</FooterProvider>
       </body>
     </html>
   );

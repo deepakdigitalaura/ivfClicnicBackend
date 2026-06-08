@@ -99,11 +99,13 @@ export interface Config {
     'site-settings': SiteSetting;
     'contact-info': ContactInfo;
     'blog-hub': BlogHub;
+    footer: Footer;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'contact-info': ContactInfoSelect<false> | ContactInfoSelect<true>;
     'blog-hub': BlogHubSelect<false> | BlogHubSelect<true>;
+    footer: FooterSelect<false> | FooterSelect<true>;
   };
   locale: null;
   widgets: {
@@ -784,6 +786,89 @@ export interface BlogHub {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer".
+ */
+export interface Footer {
+  id: number;
+  /**
+   * Optional logo + blurb. Left empty keeps the footer visually identical.
+   */
+  branding?: {
+    /**
+     * Absolute logo URL. Empty hides the branding block.
+     */
+    logoUrl?: string | null;
+    /**
+     * Short blurb shown under the logo.
+     */
+    description?: string | null;
+  };
+  /**
+   * Footer sitemap columns. Empty falls back to the built-in columns.
+   */
+  navGroups?:
+    | {
+        /**
+         * Column heading, e.g. 'IVF Treatments'.
+         */
+        title: string;
+        links?:
+          | {
+              label: string;
+              /**
+               * Resolve the link target from Site Settings (single source of truth). 'None' uses the URL below.
+               */
+              channel?: ('none' | 'phone' | 'email' | 'whatsapp') | null;
+              /**
+               * Link target when channel = None. Empty renders a non-clickable label.
+               */
+              url?: string | null;
+              /**
+               * Open in a new tab (rel=noopener).
+               */
+              external?: boolean | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional social profiles. Empty keeps the footer visually identical.
+   */
+  social?:
+    | {
+        platform: 'facebook' | 'instagram' | 'youtube' | 'linkedin' | 'twitter';
+        url: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Copyright owner line, rendered after '© <year> '. Empty uses the default.
+   */
+  copyrightText?: string | null;
+  /**
+   * Bottom row policy links. Empty falls back to the built-in links.
+   */
+  legalLinks?:
+    | {
+        label: string;
+        /**
+         * Empty renders a non-clickable label.
+         */
+        url?: string | null;
+        /**
+         * Open in a new tab (rel=noopener).
+         */
+        external?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -867,6 +952,52 @@ export interface BlogHubSelect<T extends boolean = true> {
         ogTitle?: T;
         ogDescription?: T;
         ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "footer_select".
+ */
+export interface FooterSelect<T extends boolean = true> {
+  branding?:
+    | T
+    | {
+        logoUrl?: T;
+        description?: T;
+      };
+  navGroups?:
+    | T
+    | {
+        title?: T;
+        links?:
+          | T
+          | {
+              label?: T;
+              channel?: T;
+              url?: T;
+              external?: T;
+              id?: T;
+            };
+        id?: T;
+      };
+  social?:
+    | T
+    | {
+        platform?: T;
+        url?: T;
+        id?: T;
+      };
+  copyrightText?: T;
+  legalLinks?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        external?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

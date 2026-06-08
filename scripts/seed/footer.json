@@ -1,0 +1,105 @@
+{
+  "copyrightText": "Bavishi Fertility Centre. All rights reserved.",
+  "navGroups": [
+    { "title": "IVF Treatments", "links": [
+      { "label": "IVF", "url": "/what-is-ivf" },
+      { "label": "IVF Failure", "url": "/ivf-failure" },
+      { "label": "IUI", "url": "/intra-uterine-insemination-iui" },
+      { "label": "ICSI", "url": "/icsi-treatment-intracytoplasmic-sperm-injection" },
+      { "label": "PICSI", "url": "/physiological-intracytoplasmic-sperm-injection-picsi" },
+      { "label": "IMSI", "url": "/intracytoplasmic-morphologically-selected-sperm-injection-imsi" },
+      { "label": "MACS", "url": "/magnetic-activated-cell-sorting-macs" },
+      { "label": "Spindle View ICSI", "url": "/spindle-view-icsi" },
+      { "label": "Blastocyst Transfer", "url": "/blastocyst-culture-blastocyst-transfer" },
+      { "label": "Laser Hatching", "url": "/laser-assisted-hatching" },
+      { "label": "PGT-A / PGT-M", "url": "/pgt" }
+    ]},
+    { "title": "Male Infertility", "links": [
+      { "label": "Low Sperm Count (Oligospermia)", "url": "/oligospermia" },
+      { "label": "Low Sperm Motility (Asthenospermia)", "url": "/asthenospermia" },
+      { "label": "Zero Sperm Count (Azoospermia)", "url": "/azoospermia" },
+      { "label": "PESA / TESA / TESE / Micro TESE", "url": "/surgical-sperm-retrieval" },
+      { "label": "Varicocele / Micro Surgery", "url": "/varicocele" },
+      { "label": "Erectile Dysfunction", "url": "/erectile-dysfunction" }
+    ]},
+    { "title": "Female Infertility", "links": [
+      { "label": "Conceive Naturally", "url": "/conceive-naturally" },
+      { "label": "PRP Infertility", "url": "/prp-infertility" },
+      { "label": "PCOS", "url": "/pcos" },
+      { "label": "Poor Ovarian Reserve / Low Egg Count / Low AMH", "url": "/ovarian-reserve" },
+      { "label": "Ovarian Rejuvenation", "url": "/ovarian-rejuvenation" },
+      { "label": "Fibroid", "url": "/fibroids" },
+      { "label": "Endometriosis", "url": "/endometriosis" }
+    ]},
+    { "title": "Donor Services", "links": [
+      { "label": "Egg Donation", "url": "/egg-donation" },
+      { "label": "Sperm Donation", "url": "/sperm-donation" },
+      { "label": "Embryo Donation", "url": "/embryo-donation" },
+      { "label": "Surrogacy", "url": "/surrogacy" }
+    ]},
+    { "title": "Fertility Preservation", "links": [
+      { "label": "Cryopreservation", "url": "/cryopreservation" }
+    ]},
+    { "title": "Maternity Services", "links": [
+      { "label": "3D/4D Sonography", "url": "/services/3d-4d-sonography" },
+      { "label": "Painless Delivery", "url": "/services/painless-delivery" },
+      { "label": "Normal Delivery", "url": "/services/normal-delivery" },
+      { "label": "Fetal Medicine", "url": "/services/fetal-medicine" },
+      { "label": "High Risk Pregnancy Care", "url": "/services/high-risk-pregnancy-care" },
+      { "label": "Twin Pregnancy Care", "url": "/services/twin-pregnancy-care" }
+    ]},
+    { "title": "Doctors", "links": [
+      { "label": "Dr. Himanshu Bavishi", "url": "/doctors/himanshu-bavishi" },
+      { "label": "Dr. Falguni Bavishi", "url": "/doctors/falguni-bavishi" },
+      { "label": "Dr. Parth Bavishi", "url": "/doctors/parth-bavishi" },
+      { "label": "Dr. Janki Bavishi", "url": "/doctors/janki-bavishi" },
+      { "label": "All Doctors", "url": "/doctors" },
+      { "label": "Book Consultation", "url": "/#book" }
+    ]},
+    { "title": "Locations", "links": [
+      { "label": "Ahmedabad", "url": "/locations/ahmedabad" },
+      { "label": "Mumbai", "url": "/locations/mumbai" },
+      { "label": "Surat", "url": "/locations/surat" },
+      { "label": "Vadodara", "url": "/locations/vadodara" },
+      { "label": "Bhuj", "url": "/locations/bhuj" },
+      { "label": "Varanasi", "url": "/locations/varanasi" },
+      { "label": "All 15 Centres", "url": "/#locations" }
+    ]},
+    { "title": "Calculators", "links": [
+      { "label": "IVF Success Rate", "url": "/#tools" },
+      { "label": "IVF Cost Estimate", "url": "/#tools" },
+      { "label": "AMH Interpreter", "url": "/#tools" },
+      { "label": "Ovulation Calculator", "url": "/#tools" },
+      { "label": "Fertile Period", "url": "/#tools" },
+      { "label": "Semen Analysis", "url": "/#tools" },
+      { "label": "Natural Pregnancy", "url": "/#tools" },
+      { "label": "Miscarriage Risk", "url": "/#tools" }
+    ]},
+    { "title": "Resources", "links": [
+      { "label": "Blog", "url": "/blog" },
+      { "label": "Success Stories", "url": "/#stories" },
+      { "label": "Patient Videos", "url": "/#videos" },
+      { "label": "Events & Webinars", "url": "/#events" }
+    ]},
+    { "title": "About", "links": [
+      { "label": "Our Story", "url": "/about-bfi" },
+      { "label": "Suraksha Kavach", "url": "/#suraksha" },
+      { "label": "Why Bavishi Fertility Institute", "url": "/#about" }
+    ]},
+    { "title": "Contact", "links": [
+      { "label": "Book Appointment", "url": "/#book" },
+      { "label": "Video Consultation", "url": "/#book" },
+      { "label": "WhatsApp Chat", "channel": "whatsapp", "external": true },
+      { "label": "Call +91 97126 22288", "channel": "phone", "external": true },
+      { "label": "Find a Centre", "url": "/#locations" },
+      { "label": "Patient Support", "url": "/contact" }
+    ]}
+  ],
+  "legalLinks": [
+    { "label": "Privacy Policy", "url": "#" },
+    { "label": "Terms of Service", "url": "#" },
+    { "label": "Refund Policy", "url": "#" },
+    { "label": "Cookie Policy", "url": "#" },
+    { "label": "Sitemap", "url": "#" }
+  ]
+}
