@@ -15,7 +15,7 @@ import { getPayload, type Payload } from "payload";
 import { unstable_cache } from "next/cache";
 import { cache as reactCache } from "react";
 import config from "@payload-config";
-import type { Page, Config } from "@/payload-types";
+import type { Page, Blog, Config } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
 import { cacheTags } from "@/lib/cache-tags";
 
@@ -61,6 +61,80 @@ export async function getPageBySlugDraft(slug: string): Promise<Page | null> {
     where: { slug: { equals: slug } },
     limit: 1,
     depth: 1,
+    draft: true,
+    overrideAccess: true,
+  });
+  return res.docs[0] ?? null;
+}
+
+/* ---------- Blogs (Phase 3) ---------- */
+
+/** Single published blog by slug. Cached + tagged `blogs`, `blogs:<slug>`.
+ *  depth 2 resolves author/reviewedBy/category + nested avatar + ogImage. */
+export const getBlogBySlug = reactCache(
+  (slug: string): Promise<Blog | null> =>
+    unstable_cache(
+      async () => {
+        const payload = await payloadClient();
+        const res = await payload.find({
+          collection: "blogs",
+          where: { slug: { equals: slug } },
+          limit: 1,
+          depth: 2,
+        });
+        return res.docs[0] ?? null;
+      },
+      ["blog-by-slug", slug],
+      { tags: [cacheTags.collectionList("blogs"), cacheTags.collectionItem("blogs", slug)] },
+    )(),
+);
+
+/** Published blogs for the hub (newest first). Cached + tagged `blogs`. */
+export const getBlogs = reactCache(
+  (limit = 24): Promise<Blog[]> =>
+    unstable_cache(
+      async () => {
+        const payload = await payloadClient();
+        const res = await payload.find({
+          collection: "blogs",
+          limit,
+          sort: "-publishedAt",
+          depth: 1,
+        });
+        return res.docs;
+      },
+      ["blogs-list", String(limit)],
+      { tags: [cacheTags.collectionList("blogs")] },
+    )(),
+);
+
+/** Published blog slugs for generateStaticParams. Cached + tagged `blogs`. */
+export const getPublishedBlogSlugs = reactCache(
+  (): Promise<string[]> =>
+    unstable_cache(
+      async () => {
+        const payload = await payloadClient();
+        const res = await payload.find({
+          collection: "blogs",
+          limit: 1000,
+          depth: 0,
+          select: { slug: true },
+        });
+        return res.docs.map((d) => d.slug).filter(Boolean) as string[];
+      },
+      ["blog-slugs"],
+      { tags: [cacheTags.collectionList("blogs")] },
+    )(),
+);
+
+/** Uncached, draft-aware single blog — Draft Mode preview only. */
+export async function getBlogBySlugDraft(slug: string): Promise<Blog | null> {
+  const payload = await payloadClient();
+  const res = await payload.find({
+    collection: "blogs",
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 2,
     draft: true,
     overrideAccess: true,
   });

@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     pages: Page;
+    blogs: Blog;
     authors: Author;
     categories: Category;
     media: Media;
@@ -80,6 +81,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     pages: PagesSelect<false> | PagesSelect<true>;
+    blogs: BlogsSelect<false> | BlogsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
@@ -200,6 +202,83 @@ export interface Media {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogs".
+ */
+export interface Blog {
+  id: number;
+  title: string;
+  /**
+   * URL path segment → /blog/<slug>.
+   */
+  slug: string;
+  /**
+   * Card summary + meta description fallback.
+   */
+  excerpt?: string | null;
+  heroImage?: (number | null) | Media;
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
+   * Who wrote the post.
+   */
+  author: number | Author;
+  /**
+   * Medical reviewer (optional). Phase 4: may point to a Doctor.
+   */
+  reviewedBy?: (number | null) | Author;
+  category?: (number | null) | Category;
+  /**
+   * Estimated read time (minutes).
+   */
+  readMins?: number | null;
+  /**
+   * Display + schema datePublished. dateModified uses updatedAt.
+   */
+  publishedAt?: string | null;
+  /**
+   * Treatment slugs this post relates to (drives Related Blogs). Becomes a relationship in Phase 5.
+   */
+  treatmentSlugs?:
+    | {
+        slug: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    /**
+     * Open Graph title. Falls back to metaTitle if empty.
+     */
+    ogTitle?: string | null;
+    /**
+     * Open Graph description. Falls back to metaDescription if empty.
+     */
+    ogDescription?: string | null;
+    /**
+     * Open Graph / social share image. Falls back to the default hero image if empty.
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "authors".
  */
 export interface Author {
@@ -300,6 +379,10 @@ export interface PayloadLockedDocument {
         value: number | Page;
       } | null)
     | ({
+        relationTo: 'blogs';
+        value: number | Blog;
+      } | null)
+    | ({
         relationTo: 'authors';
         value: number | Author;
       } | null)
@@ -377,6 +460,40 @@ export interface PagesSelect<T extends boolean = true> {
     | {
         question?: T;
         answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blogs_select".
+ */
+export interface BlogsSelect<T extends boolean = true> {
+  title?: T;
+  slug?: T;
+  excerpt?: T;
+  heroImage?: T;
+  content?: T;
+  author?: T;
+  reviewedBy?: T;
+  category?: T;
+  readMins?: T;
+  publishedAt?: T;
+  treatmentSlugs?:
+    | T
+    | {
+        slug?: T;
         id?: T;
       };
   seo?:
