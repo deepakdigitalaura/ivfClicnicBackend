@@ -50,6 +50,24 @@ export const getPageBySlug = reactCache(
 );
 
 /**
+ * Uncached, draft-aware page fetch — for Draft Mode preview ONLY. Reads the
+ * latest draft (overrideAccess) and is never cached, so editors see live edits.
+ * Not used on the public render path (which stays static + published-only).
+ */
+export async function getPageBySlugDraft(slug: string): Promise<Page | null> {
+  const payload = await payloadClient();
+  const res = await payload.find({
+    collection: "pages",
+    where: { slug: { equals: slug } },
+    limit: 1,
+    depth: 1,
+    draft: true,
+    overrideAccess: true,
+  });
+  return res.docs[0] ?? null;
+}
+
+/**
  * Fetch a global by slug. Cached + tagged `global:<slug>`. Returns null on any
  * error (e.g. table not yet pushed) so callers fall back to typed defaults —
  * keeps the site rendering during the migration.

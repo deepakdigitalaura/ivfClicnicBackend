@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
+import { seoField } from "@/fields/seo";
 
 /**
  * Generic Pages collection (Phase 1 POC scope = Contact page).
@@ -23,6 +24,14 @@ export const Pages: CollectionConfig = {
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "_status", "updatedAt"],
+    // "Preview" button → secret-guarded /preview endpoint that enables Draft
+    // Mode and opens the front-end path. Foundation only; the public render
+    // stays static until a page type opts into draftMode().
+    preview: (doc) => {
+      const slug = typeof doc?.slug === "string" ? doc.slug : "";
+      if (!slug) return null;
+      return `/preview?secret=${process.env.PREVIEW_SECRET ?? ""}&path=${encodeURIComponent(`/${slug}`)}`;
+    },
   },
   versions: {
     drafts: true,
@@ -73,29 +82,6 @@ export const Pages: CollectionConfig = {
         { name: "answer", type: "textarea", required: true },
       ],
     },
-    {
-      name: "seo",
-      type: "group",
-      fields: [
-        { name: "metaTitle", type: "text" },
-        { name: "metaDescription", type: "textarea" },
-        {
-          name: "ogTitle",
-          type: "text",
-          admin: { description: "Open Graph title. Falls back to metaTitle if empty." },
-        },
-        {
-          name: "ogDescription",
-          type: "textarea",
-          admin: { description: "Open Graph description. Falls back to metaDescription if empty." },
-        },
-        {
-          name: "ogImage",
-          type: "upload",
-          relationTo: "media",
-          admin: { description: "Open Graph / social share image. Falls back to the default hero image if empty." },
-        },
-      ],
-    },
+    seoField,
   ],
 };
