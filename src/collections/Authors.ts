@@ -1,5 +1,6 @@
 import type { CollectionConfig } from "payload";
 import { revalidateRelated } from "@/lib/revalidate";
+import { isAdmin, isEditor } from "@/access/roles";
 
 /**
  * Blog authors / medical reviewers (E-E-A-T entities). Authors and Medical
@@ -14,7 +15,7 @@ import { revalidateRelated } from "@/lib/revalidate";
 export const Authors: CollectionConfig = {
   slug: "authors",
   admin: { useAsTitle: "name", defaultColumns: ["name", "slug", "role"], group: "Blog" },
-  access: { read: () => true },
+  access: { read: () => true, create: isEditor, update: isEditor, delete: isAdmin },
   hooks: revalidateRelated(["blogs"]),
   fields: [
     { name: "name", type: "text", required: true },

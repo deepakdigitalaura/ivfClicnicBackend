@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
 import { seoField } from "@/fields/seo";
+import { isAdmin, isEditor } from "@/access/roles";
 
 /**
  * Generic Pages collection (Phase 1 POC scope = Contact page).
@@ -44,6 +45,9 @@ export const Pages: CollectionConfig = {
       if (req.user) return true;
       return { _status: { equals: "published" } };
     },
+    create: isAdmin, // creating a page = creating a route (admin only)
+    update: isEditor, // editing page content is routine (editor + admin)
+    delete: isAdmin, // removing a route (admin only)
   },
   fields: [
     { name: "title", type: "text", required: true },

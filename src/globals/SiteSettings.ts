@@ -1,5 +1,6 @@
 import type { GlobalConfig } from "payload";
 import { revalidateGlobal } from "@/lib/revalidate";
+import { isAdmin } from "@/access/roles";
 
 /**
  * Site-wide identity → drives the Organization + WebSite JSON-LD emitted once
@@ -12,7 +13,7 @@ import { revalidateGlobal } from "@/lib/revalidate";
  */
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
-  access: { read: () => true },
+  access: { read: () => true, update: isAdmin },
   admin: { group: "Globals" },
   hooks: revalidateGlobal("site-settings"),
   fields: [

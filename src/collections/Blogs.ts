@@ -1,6 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { seoField } from "@/fields/seo";
 import { revalidateCollection } from "@/lib/revalidate";
+import { isEditor } from "@/access/roles";
 
 /**
  * Blog posts. Net-new content type rendered at /blog/[slug] (additive routes).
@@ -35,6 +36,9 @@ export const Blogs: CollectionConfig = {
       if (req.user) return true;
       return { _status: { equals: "published" } };
     },
+    create: isEditor,
+    update: isEditor,
+    delete: isEditor,
   },
   fields: [
     { name: "title", type: "text", required: true },
