@@ -1,14 +1,14 @@
 {
-  "route": "/doctors/himanshu-bavishi",
-  "title": "Dr. Himanshu Bavishi — Reproductive Medicine & IVF | Bavishi Fertility Institute · Bavishi Fertility Centre",
-  "canonical": "https://ivfclinic.com/doctors/himanshu-bavishi",
+  "route": "/blog",
+  "title": "Fertility & IVF Blog — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/blog",
   "meta": {
-    "description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
-    "og:description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
-    "og:image": "https://ivfclinic.com/assets/doctors/himanshu.webp",
-    "og:title": "Dr. Himanshu Bavishi — Reproductive Medicine & IVF | Bavishi Fertility Institute",
-    "og:type": "profile",
-    "og:url": "https://ivfclinic.com/doctors/himanshu-bavishi",
+    "description": "Expert, compassionate guidance on fertility, IVF and your journey to parenthood — articles reviewed by Bavishi Fertility Institute specialists.",
+    "og:description": "Expert, compassionate guidance on fertility, IVF and parenthood — reviewed by our specialists.",
+    "og:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "og:title": "Fertility & IVF Blog — Bavishi Fertility Institute",
+    "og:type": "website",
+    "og:url": "https://ivfclinic.com/blog",
     "twitter:card": "summary_large_image",
     "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
     "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
@@ -106,72 +106,16 @@
       "@context": "https://schema.org",
       "@graph": [
         {
-          "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
-          "@type": [
-            "Physician",
-            "Person"
-          ],
-          "alumniOf": [
-            {
-              "@type": "EducationalOrganization",
-              "name": "MBBS — B.J. Medical College, Ahmedabad (1983)"
-            },
-            {
-              "@type": "EducationalOrganization",
-              "name": "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1986)"
-            }
-          ],
-          "award": [
-            "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
-            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
-          ],
-          "description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
-          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
-          "image": "https://ivfclinic.com/assets/doctors/himanshu.webp",
-          "jobTitle": "Founder & Chief IVF Specialist",
-          "knowsAbout": [
-            "In Vitro Fertilization",
-            "Intracytoplasmic Sperm Injection",
-            "Ovarian Stimulation Protocols",
-            "Male Infertility",
-            "Fertility Preservation"
-          ],
-          "knowsLanguage": [
-            "English",
-            "Hindi",
-            "Gujarati"
-          ],
-          "medicalSpecialty": [
-            "ReproductiveMedicine",
-            "Fertility"
-          ],
-          "memberOf": [
-            {
-              "@type": "Organization",
-              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
-            },
-            {
-              "@type": "Organization",
-              "name": "Indian Society for Assisted Reproduction (ISAR)"
-            },
-            {
-              "@type": "Organization",
-              "name": "Indian Fertility Society (IFS)"
-            },
-            {
-              "@type": "Organization",
-              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President"
-            }
-          ],
-          "name": "Dr. Himanshu Bavishi",
-          "url": "https://ivfclinic.com/doctors/himanshu-bavishi",
-          "workLocation": {
-            "@type": "Place",
-            "name": "Bavishi Fertility Institute, Ahmedabad"
-          },
-          "worksFor": {
+          "@id": "https://ivfclinic.com/blog#webpage",
+          "@type": "CollectionPage",
+          "about": {
             "@id": "https://ivfclinic.com/#organization"
-          }
+          },
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "name": "Fertility & IVF Blog",
+          "url": "https://ivfclinic.com/blog"
         },
         {
           "@type": "BreadcrumbList",
@@ -184,15 +128,9 @@
             },
             {
               "@type": "ListItem",
-              "item": "https://ivfclinic.com/doctors",
-              "name": "Doctors",
+              "item": "https://ivfclinic.com/blog",
+              "name": "Blog",
               "position": 2
-            },
-            {
-              "@type": "ListItem",
-              "item": "https://ivfclinic.com/doctors/himanshu-bavishi",
-              "name": "Dr. Himanshu Bavishi",
-              "position": 3
             }
           ]
         }
@@ -214,6 +152,7 @@
     "/azoospermia",
     "/blastocyst-culture-blastocyst-transfer",
     "/blog",
+    "/blog/what-is-ivf-a-simple-guide",
     "/conceive-naturally",
     "/contact",
     "/cryopreservation",
@@ -223,17 +162,13 @@
     "/doctors/janki-bavishi",
     "/doctors/parth-bavishi",
     "/egg-donation",
-    "/egg-freezing",
     "/embryo-donation",
-    "/embryo-freezing",
     "/endometriosis",
-    "/era-test",
     "/erectile-dysfunction",
     "/fibroids",
     "/icsi-treatment-intracytoplasmic-sperm-injection",
     "/intra-uterine-insemination-iui",
     "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
-    "/ivf-evaluation",
     "/ivf-failure",
     "/laser-assisted-hatching",
     "/locations/ahmedabad",
@@ -257,7 +192,6 @@
     "/services/painless-delivery",
     "/services/twin-pregnancy-care",
     "/sperm-donation",
-    "/sperm-freezing",
     "/spindle-view-icsi",
     "/surgical-sperm-retrieval",
     "/surrogacy",

@@ -145,7 +145,7 @@ const NAV: NavItem[] = [
     label: "Resources",
     mega: [
       { heading: "Learn", items: [
-        { label: "Blog", href: "/#blogs" },
+        { label: "Blog", href: destinationHref("blog") },
         { label: "Success Stories", href: "/#stories" },
         { label: "Videos", href: "/#videos" },
         { label: "Events & Webinars", href: "/#events" },

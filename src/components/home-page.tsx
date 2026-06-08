@@ -1652,7 +1652,7 @@ export function Footer() {
       { label: "Miscarriage Risk", href: "/#tools" },
     ]},
     { h: "Resources", l: [
-      { label: "Blog", href: "/#blogs" },
+      { label: "Blog", href: destinationHref("blog") },
       { label: "Success Stories", href: "/#stories" },
       { label: "Patient Videos", href: "/#videos" },
       { label: "Events & Webinars", href: "/#events" },
