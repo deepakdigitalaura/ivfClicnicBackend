@@ -642,8 +642,19 @@ export interface SiteSetting {
    * Year, e.g. 1984.
    */
   foundingDate?: string | null;
+  /**
+   * Canonical phone for tel: links + schema, e.g. +919712622288.
+   */
   telephone?: string | null;
+  /**
+   * Formatted phone for on-page display, e.g. +91 97126 22288.
+   */
+  telephoneDisplay?: string | null;
   email?: string | null;
+  /**
+   * WhatsApp number digits for wa.me links, e.g. 919712622288.
+   */
+  whatsapp?: string | null;
   address?: {
     streetAddress?: string | null;
     addressLocality?: string | null;
@@ -695,11 +706,15 @@ export interface ContactInfo {
          */
         title: string;
         /**
-         * e.g. '+91 97126 22288'.
+         * Resolve value + link from Site Settings (single source of truth). 'None' keeps the value/link below (e.g. Working Hours).
          */
-        value: string;
+        channel?: ('none' | 'phone' | 'email' | 'whatsapp') | null;
         /**
-         * Optional link, e.g. tel:+91…, mailto:…, https://wa.me/…
+         * Display value when channel = None (e.g. working hours), or display label for WhatsApp. Ignored for Phone/Email (resolved from Site Settings).
+         */
+        value?: string | null;
+        /**
+         * Link used when channel = None. Ignored for Phone/Email/WhatsApp (resolved from Site Settings).
          */
         href?: string | null;
         /**
@@ -723,7 +738,9 @@ export interface SiteSettingsSelect<T extends boolean = true> {
   logoUrl?: T;
   foundingDate?: T;
   telephone?: T;
+  telephoneDisplay?: T;
   email?: T;
+  whatsapp?: T;
   address?:
     | T
     | {
@@ -765,6 +782,7 @@ export interface ContactInfoSelect<T extends boolean = true> {
     | {
         icon?: T;
         title?: T;
+        channel?: T;
         value?: T;
         href?: T;
         note?: T;

@@ -22,7 +22,11 @@ export const SITE = {
   logo: "https://ivfclinic.com/logo.png",
   foundingDate: "1984",
   telephone: "+919712622288",
+  /** Formatted phone for on-page display (canonical `telephone` is for tel:/schema). */
+  telephoneDisplay: "+91 97126 22288",
   email: "drbavishi@ivfclinic.com",
+  /** WhatsApp digits for wa.me links. */
+  whatsapp: "919712622288",
   sameAs: [
     "https://www.instagram.com/bavishifertility/",
     "https://www.facebook.com/BavishiFertilityInstitute/",

@@ -26,8 +26,11 @@ export const SiteSettings: GlobalConfig = {
       admin: { description: "Absolute logo URL used in schema. A Media relation can replace this later." },
     },
     { name: "foundingDate", type: "text", admin: { description: "Year, e.g. 1984." } },
-    { name: "telephone", type: "text" },
+    // ---- Contact (single source of truth; see src/lib/contact.ts) ----
+    { name: "telephone", type: "text", admin: { description: "Canonical phone for tel: links + schema, e.g. +919712622288." } },
+    { name: "telephoneDisplay", type: "text", admin: { description: "Formatted phone for on-page display, e.g. +91 97126 22288." } },
     { name: "email", type: "email" },
+    { name: "whatsapp", type: "text", admin: { description: "WhatsApp number digits for wa.me links, e.g. 919712622288." } },
     {
       name: "address",
       type: "group",

@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact-page";
 import { JsonLd } from "@/components/json-ld";
-import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID, SITE } from "@/lib/seo";
+import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { getPageBySlug, getGlobalSafe } from "@/lib/payload";
+import { resolveContactValues, resolveCardChannel, type ContactChannel } from "@/lib/contact";
 
 const PATH = "/contact";
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -59,14 +60,22 @@ async function loadContact() {
       ? page.seo.ogImage.url
       : DEFAULT_OG_IMAGE;
 
+  // Canonical contact values — single source of truth (Site Settings, with
+  // SITE fallback). Drives BOTH the contact cards and the ContactPoint JSON-LD.
+  const contact = resolveContactValues(await getGlobalSafe("site-settings"));
+
   // Contact cards from the contact-info global (undefined → component uses its
-  // own defaults, preserving the original cards).
+  // own defaults, preserving the original cards). Each card's value/link is
+  // resolved from `contact` by its channel, so cards never duplicate numbers.
   const ci = await getGlobalSafe("contact-info");
   const cards = ci?.cards?.length
-    ? ci.cards.map((c) => ({ icon: c.icon, t: c.title, v: c.value, href: c.href, note: c.note }))
+    ? ci.cards.map((c) => {
+        const r = resolveCardChannel(c.channel as ContactChannel | null, contact);
+        return { icon: c.icon, t: c.title, v: r.value ?? c.value ?? "", href: r.href ?? c.href, note: c.note };
+      })
     : undefined;
 
-  return { hero, seo, faqs, ogImage, cards };
+  return { hero, seo, faqs, ogImage, cards, contact };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -86,7 +95,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { hero, faqs, cards } = await loadContact();
+  const { hero, faqs, cards, contact } = await loadContact();
 
   const graph = [
     {
@@ -99,8 +108,8 @@ export default async function Page() {
       // A page-level ContactPoint that references the sitewide organization.
       mainEntity: {
         "@type": "ContactPoint",
-        telephone: SITE.telephone,
-        email: SITE.email,
+        telephone: contact.telephone,
+        email: contact.email,
         contactType: "customer service",
         availableLanguage: ["English", "Hindi", "Gujarati"],
         areaServed: "IN",

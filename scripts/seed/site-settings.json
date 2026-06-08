@@ -5,7 +5,9 @@
   "logoUrl": "https://ivfclinic.com/logo.png",
   "foundingDate": "1984",
   "telephone": "+919712622288",
+  "telephoneDisplay": "+91 97126 22288",
   "email": "drbavishi@ivfclinic.com",
+  "whatsapp": "919712622288",
   "address": {
     "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden",
     "addressLocality": "Ahmedabad",
