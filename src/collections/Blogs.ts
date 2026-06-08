@@ -22,11 +22,11 @@ export const Blogs: CollectionConfig = {
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "author", "_status", "publishedAt"],
     group: "Blog",
-    preview: (doc) => {
-      const slug = typeof doc?.slug === "string" ? doc.slug : "";
-      if (!slug) return null;
-      return `/preview?secret=${process.env.PREVIEW_SECRET ?? ""}&path=${encodeURIComponent(`/blog/${slug}`)}`;
-    },
+    // No `admin.preview` (front-end draft preview) on purpose: the public
+    // /blog/[slug] is pure SSG and does not read draftMode(), so a front-end
+    // preview link would show the published version, not the draft. Editors
+    // preview drafts inside Payload's admin version view. The /preview infra
+    // and getBlogBySlugDraft remain available if blogs ever move to dynamic.
   },
   versions: { drafts: true },
   hooks: revalidateCollection("blogs"),
