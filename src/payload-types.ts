@@ -100,12 +100,14 @@ export interface Config {
     'contact-info': ContactInfo;
     'blog-hub': BlogHub;
     footer: Footer;
+    header: Header;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'contact-info': ContactInfoSelect<false> | ContactInfoSelect<true>;
     'blog-hub': BlogHubSelect<false> | BlogHubSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
+    header: HeaderSelect<false> | HeaderSelect<true>;
   };
   locale: null;
   widgets: {
@@ -869,6 +871,107 @@ export interface Footer {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header".
+ */
+export interface Header {
+  id: number;
+  /**
+   * Logo shown in the header bar + mobile drawer. Left empty keeps the built-in logo.
+   */
+  branding?: {
+    /**
+     * Logo image URL (e.g. /assets/logo.png). Empty uses the default.
+     */
+    logoUrl?: string | null;
+    /**
+     * Logo alt text. Empty uses the default.
+     */
+    logoAlt?: string | null;
+  };
+  /**
+   * Top-level navigation. Empty falls back to the built-in menu. A plain link uses 'Link URL'; a dropdown uses 'Mega columns'; tick 'Doctors panel' to render the auto-generated doctor menu.
+   */
+  navItems?:
+    | {
+        label: string;
+        /**
+         * Destination for a plain link. Leave empty when using mega columns or the Doctors panel.
+         */
+        url?: string | null;
+        /**
+         * Open this top-level link in a new tab (rel=noopener).
+         */
+        openInNewTab?: boolean | null;
+        /**
+         * Render the auto-generated, doctor-first mega panel (built from the Doctors list). Ignores the columns below.
+         */
+        doctors?: boolean | null;
+        /**
+         * Force the dropdown grid to N columns (optional — defaults to the number of columns).
+         */
+        megaCols?: number | null;
+        /**
+         * Dropdown columns. Leave empty for a plain link or the Doctors panel.
+         */
+        columns?:
+          | {
+              /**
+               * Column heading. Empty renders an unlabelled column.
+               */
+              heading?: string | null;
+              /**
+               * Optional link for the heading (e.g. a city hub).
+               */
+              headingHref?: string | null;
+              items?:
+                | {
+                    label: string;
+                    url?: string | null;
+                    /**
+                     * Optional secondary line shown under the label.
+                     */
+                    desc?: string | null;
+                    /**
+                     * Optional nested links revealed under this item.
+                     */
+                    children?:
+                      | {
+                          label: string;
+                          url?: string | null;
+                          id?: string | null;
+                        }[]
+                      | null;
+                    id?: string | null;
+                  }[]
+                | null;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Primary call-to-action button (desktop bar + mobile drawer).
+   */
+  cta?: {
+    /**
+     * Button label. Empty uses the default ('Book Appointment').
+     */
+    label?: string | null;
+    /**
+     * Button target. Empty uses the default ('/#book').
+     */
+    url?: string | null;
+    /**
+     * Visual style. Only the primary style exists today.
+     */
+    styleVariant?: 'primary' | null;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -998,6 +1101,60 @@ export interface FooterSelect<T extends boolean = true> {
         url?: T;
         external?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "header_select".
+ */
+export interface HeaderSelect<T extends boolean = true> {
+  branding?:
+    | T
+    | {
+        logoUrl?: T;
+        logoAlt?: T;
+      };
+  navItems?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        openInNewTab?: T;
+        doctors?: T;
+        megaCols?: T;
+        columns?:
+          | T
+          | {
+              heading?: T;
+              headingHref?: T;
+              items?:
+                | T
+                | {
+                    label?: T;
+                    url?: T;
+                    desc?: T;
+                    children?:
+                      | T
+                      | {
+                          label?: T;
+                          url?: T;
+                          id?: T;
+                        };
+                    id?: T;
+                  };
+              id?: T;
+            };
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        label?: T;
+        url?: T;
+        styleVariant?: T;
       };
   updatedAt?: T;
   createdAt?: T;

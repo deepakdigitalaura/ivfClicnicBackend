@@ -20,6 +20,7 @@ import type { SiteIdentity } from "@/lib/seo";
 import { cacheTags } from "@/lib/cache-tags";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
+import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header";
 
 let cached: Promise<Payload> | null = null;
 
@@ -201,4 +202,17 @@ export const getFooter = reactCache(async (): Promise<FooterData> => {
     getGlobalSafe("site-settings"),
   ]);
   return resolveFooter(footer as FooterSource, resolveContactValues(settings));
+});
+
+/**
+ * Resolve the sitewide header: the `header` global shaped into the plain
+ * `HeaderData` the client <SiteHeader> renders (logo, navigation, CTA). Read
+ * through getGlobalSafe (cached + tagged `global:header`), so an empty or
+ * unavailable CMS falls back to HEADER_DEFAULTS — byte-identical output. The
+ * Doctors mega panel stays data-driven from src/lib/doctors.ts (not the CMS).
+ * React-cached per render.
+ */
+export const getHeader = reactCache(async (): Promise<HeaderData> => {
+  const header = await getGlobalSafe("header");
+  return resolveHeader(header as HeaderSource);
 });

@@ -1,0 +1,122 @@
+{
+  "branding": { "logoUrl": "/assets/logo.png", "logoAlt": "Bavishi Fertility Institute" },
+  "navItems": [
+    { "label": "About", "columns": [
+      { "heading": "", "items": [
+        { "label": "About Bavishi Fertility Institute", "url": "/about-bfi" },
+        { "label": "Why Bavishi Fertility Institute", "url": "/#about" },
+        { "label": "Simple Treatment", "url": "/#about" },
+        { "label": "Safe Treatment", "url": "/#about" },
+        { "label": "Smart Treatment", "url": "/#about" },
+        { "label": "Success Benchmarks", "url": "/#about" }
+      ]},
+      { "heading": "", "items": [
+        { "label": "History", "url": "/#about" },
+        { "label": "Our Team", "url": "/#doctors" },
+        { "label": "Infrastructure", "url": "/#about" },
+        { "label": "Suraksha Kavach Package", "url": "/#suraksha" },
+        { "label": "Easy / Interest Free EMI", "url": "/#about" }
+      ]}
+    ]},
+    { "label": "Doctors", "doctors": true },
+    { "label": "IVF Treatments", "columns": [
+      { "heading": "Advanced IVF Treatment", "items": [
+        { "label": "IVF", "url": "/what-is-ivf" },
+        { "label": "IVF Failure", "url": "/ivf-failure" },
+        { "label": "IUI", "url": "/intra-uterine-insemination-iui" },
+        { "label": "ICSI", "url": "/icsi-treatment-intracytoplasmic-sperm-injection" },
+        { "label": "PICSI", "url": "/physiological-intracytoplasmic-sperm-injection-picsi" },
+        { "label": "IMSI", "url": "/intracytoplasmic-morphologically-selected-sperm-injection-imsi" },
+        { "label": "MACS", "url": "/magnetic-activated-cell-sorting-macs" },
+        { "label": "Spindle View ICSI", "url": "/spindle-view-icsi" },
+        { "label": "Blastocyst Transfer", "url": "/blastocyst-culture-blastocyst-transfer" },
+        { "label": "Laser Hatching", "url": "/laser-assisted-hatching" }
+      ]},
+      { "heading": "Donor Services", "items": [
+        { "label": "Egg Donation", "url": "/egg-donation" },
+        { "label": "Sperm Donation", "url": "/sperm-donation" },
+        { "label": "Embryo Donation", "url": "/embryo-donation" }
+      ]},
+      { "heading": "Male Infertility", "items": [
+        { "label": "Low Sperm Count (Oligospermia)", "url": "/oligospermia" },
+        { "label": "Low Sperm Motility (Asthenospermia)", "url": "/asthenospermia" },
+        { "label": "Zero Sperm Count (Azoospermia)", "url": "/azoospermia" },
+        { "label": "PESA / TESA / TESE / Micro TESE", "url": "/surgical-sperm-retrieval" },
+        { "label": "Varicocele / Micro Surgery", "url": "/varicocele" },
+        { "label": "Erectile Dysfunction", "url": "/erectile-dysfunction" }
+      ]},
+      { "heading": "Female Infertility", "items": [
+        { "label": "Conceive Naturally", "url": "/conceive-naturally" },
+        { "label": "PRP Infertility", "url": "/prp-infertility" },
+        { "label": "PCOS", "url": "/pcos" },
+        { "label": "Poor Ovarian Reserve / Low Egg Count / Low AMH", "url": "/ovarian-reserve" },
+        { "label": "Ovarian Rejuvenation", "url": "/ovarian-rejuvenation" },
+        { "label": "Fibroid", "url": "/fibroids" },
+        { "label": "Endometriosis", "url": "/endometriosis" }
+      ]},
+      { "heading": "Fertility Preservation", "items": [
+        { "label": "Cryopreservation", "url": "/cryopreservation" }
+      ]}
+    ]},
+    { "label": "Maternity Services", "columns": [
+      { "heading": "", "items": [
+        { "label": "3D/4D Sonography", "url": "/services/3d-4d-sonography" },
+        { "label": "Painless Delivery", "url": "/services/painless-delivery" },
+        { "label": "Normal Delivery", "url": "/services/normal-delivery" }
+      ]},
+      { "heading": "", "items": [
+        { "label": "Fetal Medicine", "url": "/services/fetal-medicine" },
+        { "label": "High Risk Pregnancy Care", "url": "/services/high-risk-pregnancy-care" },
+        { "label": "Twin Pregnancy Care", "url": "/services/twin-pregnancy-care" }
+      ]}
+    ]},
+    { "label": "Locations", "megaCols": 4, "columns": [
+      { "heading": "Ahmedabad", "headingHref": "/locations/ahmedabad", "items": [
+        { "label": "Paldi", "url": "/locations/ahmedabad/paldi" },
+        { "label": "Sindhu Bhavan Road", "url": "/locations/ahmedabad/sindhu-bhavan-road" },
+        { "label": "Nikol", "url": "/locations/ahmedabad/nikol" }
+      ]},
+      { "heading": "Mumbai", "headingHref": "/locations/mumbai", "items": [
+        { "label": "Ghatkopar", "url": "/locations/mumbai/ghatkopar" },
+        { "label": "Thane", "url": "/locations/mumbai/thane" },
+        { "label": "Vile Parle", "url": "/locations/mumbai/vile-parle" },
+        { "label": "Borivali", "url": "/locations/mumbai/borivali" },
+        { "label": "Vashi", "url": "/locations/mumbai/vashi" }
+      ]},
+      { "heading": "Vadodara", "items": [{ "label": "Vadodara Centre", "url": "/locations/vadodara" }] },
+      { "heading": "Surat", "items": [{ "label": "Surat Centre", "url": "/locations/surat" }] },
+      { "heading": "Bhuj", "items": [{ "label": "Bhuj Centre", "url": "/locations/bhuj" }] },
+      { "heading": "Bhavnagar", "items": [{ "label": "Bhavnagar Centre", "url": "/locations/bhavnagar" }] },
+      { "heading": "Anand", "items": [{ "label": "Anand Centre", "url": "/locations/anand" }] },
+      { "heading": "Varanasi", "items": [{ "label": "Varanasi Centre", "url": "/locations/varanasi" }] }
+    ]},
+    { "label": "Calculators", "columns": [
+      { "heading": "Fertility & IVF", "items": [
+        { "label": "IVF Success Rate Calculator", "url": "/#tools" },
+        { "label": "IVF Cost Calculator", "url": "/#tools" },
+        { "label": "AMH Level Interpreter", "url": "/#tools" },
+        { "label": "Sperm Analysis Calculator", "url": "/#tools" }
+      ]},
+      { "heading": "Conception & Pregnancy", "items": [
+        { "label": "Ovulation Calculator", "url": "/#tools" },
+        { "label": "Fertile Period Calculator", "url": "/#tools" },
+        { "label": "Natural Pregnancy Calculator", "url": "/#tools" },
+        { "label": "Miscarriage Risk Calculator", "url": "/#tools" }
+      ]}
+    ]},
+    { "label": "Resources", "columns": [
+      { "heading": "Learn", "items": [
+        { "label": "Blog", "url": "/blog" },
+        { "label": "Success Stories", "url": "/#stories" },
+        { "label": "Videos", "url": "/#videos" },
+        { "label": "Events & Webinars", "url": "/#events" }
+      ]},
+      { "heading": "Tools", "items": [
+        { "label": "Fertility Calculators", "url": "/#tools" },
+        { "label": "Check IVF Eligibility", "url": "/#book" }
+      ]}
+    ]},
+    { "label": "Contact", "url": "/contact" }
+  ],
+  "cta": { "label": "Book Appointment", "url": "/#book", "styleVariant": "primary" }
+}

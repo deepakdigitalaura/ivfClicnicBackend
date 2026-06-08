@@ -14,7 +14,7 @@ const BASE = process.env.PAYLOAD_URL ?? "http://localhost:3000";
 const EMAIL = process.env.SEED_ADMIN_EMAIL ?? "admin@bfi.local";
 const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "BfiPayload!2026";
 
-const GLOBALS = ["site-settings", "contact-info", "blog-hub", "footer"];
+const GLOBALS = ["site-settings", "contact-info", "blog-hub", "footer", "header"];
 
 const login = async () => {
   const res = await fetch(`${BASE}/api/users/login`, {
