@@ -6,12 +6,25 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { RichText } from "@/components/rich-text";
+import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 import type { Blog, Author, Category, Media } from "@/payload-types";
 
 const asObj = <T,>(v: T | number | null | undefined): T | null =>
   v && typeof v === "object" ? (v as T) : null;
 
-export function BlogHub({ posts }: { posts: Blog[] }) {
+/** Hero copy + optional intro, sourced from the Blog Hub global. Both are
+ *  optional — when absent the original hardcoded design is rendered, so the
+ *  page is visually unchanged until an editor fills the global. */
+type Hub = {
+  hero?: { title?: string | null; description?: string | null } | null;
+  intro?: DefaultTypedEditorState | null;
+};
+
+const DEFAULT_HERO_DESCRIPTION =
+  "Expert, compassionate guidance on fertility, IVF and your journey to parenthood — reviewed by our specialists.";
+
+export function BlogHub({ posts, hero, intro }: { posts: Blog[] } & Hub) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -31,16 +44,23 @@ export function BlogHub({ posts }: { posts: Blog[] }) {
           <Reveal><div className="flex justify-center"><Eyebrow>Knowledge & Resources</Eyebrow></div></Reveal>
           <Reveal delay={0.05}>
             <h1 className="mx-auto mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl">
-              The Bavishi Fertility <em className="font-display italic text-[color:var(--rose)]">Blog</em>
+              {hero?.title ? hero.title : <>The Bavishi Fertility <em className="font-display italic text-[color:var(--rose)]">Blog</em></>}
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Expert, compassionate guidance on fertility, IVF and your journey to parenthood — reviewed by our specialists.
+              {hero?.description ?? DEFAULT_HERO_DESCRIPTION}
             </p>
           </Reveal>
         </div>
       </section>
+
+      {/* Optional CMS intro prose (Blog Hub global) — only renders when set */}
+      {intro && (
+        <section className="container-px mx-auto max-w-3xl pt-10 md:pt-14">
+          <RichText data={intro} className="text-base" />
+        </section>
+      )}
 
       {/* Grid */}
       <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">

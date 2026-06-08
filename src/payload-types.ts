@@ -98,10 +98,12 @@ export interface Config {
   globals: {
     'site-settings': SiteSetting;
     'contact-info': ContactInfo;
+    'blog-hub': BlogHub;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
     'contact-info': ContactInfoSelect<false> | ContactInfoSelect<true>;
+    'blog-hub': BlogHubSelect<false> | BlogHubSelect<true>;
   };
   locale: null;
   widgets: {
@@ -729,6 +731,59 @@ export interface ContactInfo {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-hub".
+ */
+export interface BlogHub {
+  id: number;
+  hero?: {
+    /**
+     * Hero heading. Empty keeps the default styled heading.
+     */
+    title?: string | null;
+    /**
+     * Hero sub-paragraph.
+     */
+    description?: string | null;
+  };
+  /**
+   * Optional rich content shown beneath the hero, above the article grid.
+   */
+  intro?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    /**
+     * Open Graph title. Falls back to metaTitle if empty.
+     */
+    ogTitle?: string | null;
+    /**
+     * Open Graph description. Falls back to metaDescription if empty.
+     */
+    ogDescription?: string | null;
+    /**
+     * Open Graph / social share image. Falls back to the default hero image if empty.
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -787,6 +842,31 @@ export interface ContactInfoSelect<T extends boolean = true> {
         href?: T;
         note?: T;
         id?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "blog-hub_select".
+ */
+export interface BlogHubSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+      };
+  intro?: T;
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

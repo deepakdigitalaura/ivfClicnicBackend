@@ -23,6 +23,7 @@ import { Authors } from "./collections/Authors";
 import { Categories } from "./collections/Categories";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
+import { BlogHub } from "./globals/BlogHub";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -32,7 +33,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
   },
   collections: [Pages, Blogs, Authors, Categories, Media, Users],
-  globals: [SiteSettings, ContactInfo],
+  globals: [SiteSettings, ContactInfo, BlogHub],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
