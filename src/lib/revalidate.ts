@@ -56,3 +56,16 @@ export function revalidateGlobal(slug: string) {
   };
   return { afterChange: [afterChange] };
 }
+
+/**
+ * afterChange + afterDelete hooks that bust a fixed set of tags. For supporting
+ * collections (e.g. authors, categories) whose edits affect another
+ * collection's rendered pages but which have no page of their own.
+ */
+export function revalidateRelated(tags: string[]) {
+  const run: CollectionAfterChangeHook & CollectionAfterDeleteHook = ({ doc }) => {
+    safe(() => tags.forEach((t) => revalidateTag(t)));
+    return doc;
+  };
+  return { afterChange: [run], afterDelete: [run] };
+}

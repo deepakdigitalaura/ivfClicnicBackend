@@ -18,6 +18,8 @@ import sharp from "sharp";
 import { Users } from "./collections/Users";
 import { Media } from "./collections/Media";
 import { Pages } from "./collections/Pages";
+import { Authors } from "./collections/Authors";
+import { Categories } from "./collections/Categories";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
 
@@ -28,7 +30,7 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
   },
-  collections: [Pages, Media, Users],
+  collections: [Pages, Authors, Categories, Media, Users],
   globals: [SiteSettings, ContactInfo],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
