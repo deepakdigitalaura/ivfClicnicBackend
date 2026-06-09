@@ -1,0 +1,365 @@
+{
+  "route": "/fibroids",
+  "title": "Fibroids & Fertility — Uterine Fibroid Treatment — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/fibroids",
+  "meta": {
+    "description": "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1984.",
+    "og:description": "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1984.",
+    "og:image": "https://ivfclinic.com/assets/conditions/fibroids.png",
+    "og:title": "Fibroids & Fertility — Uterine Fibroid Treatment — Bavishi Fertility Institute",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/fibroids",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/fibroids#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "Fibroids & Fertility Treatment"
+          },
+          "description": "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1984.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "Fibroids & Fertility — Uterine Fibroid Treatment — Bavishi Fertility Institute",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/janki-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MS (Obstetrics & Gynaecology)",
+            "jobTitle": "Co-director & Reproductive Surgeon",
+            "name": "Dr. Janki Bavishi",
+            "url": "https://ivfclinic.com/doctors/janki-bavishi"
+          },
+          "url": "https://ivfclinic.com/fibroids"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "alternateName": "Uterine Fibroids",
+          "bodyLocation": "Uterus",
+          "followup": "The uterine cavity is reassessed before planning conception or IVF.",
+          "howPerformed": "Fibroids affecting fertility are assessed by ultrasound and hysteroscopy; those distorting the cavity are removed with fertility-preserving, minimally-invasive myomectomy (hysteroscopic or laparoscopic).",
+          "name": "Fibroids & Fertility Treatment",
+          "procedureType": "https://schema.org/SurgicalProcedure",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Treatments",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/fibroids",
+              "name": "Fibroids",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Many fibroids cause no fertility problems. It mainly depends on their position — those bulging into the uterine cavity are the most likely to affect conception."
+              },
+              "name": "Do fibroids always cause infertility?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Chiefly submucosal fibroids that distort the cavity, and sometimes large intramural fibroids, especially with infertility or recurrent miscarriage."
+              },
+              "name": "Which fibroids need removal before pregnancy?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Myomectomy removes the fibroids while preserving the uterus, using minimally-invasive hysteroscopic or laparoscopic techniques where possible."
+              },
+              "name": "Is fibroid surgery fertility-preserving?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It depends on the fibroid and the repair, but the uterus is usually given a few months to heal. Your surgeon will advise a safe window."
+              },
+              "name": "How long after surgery can I try to conceive?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Often yes, but cavity-distorting fibroids are usually treated first to give the embryo the best chance of implanting."
+              },
+              "name": "Can I do IVF with fibroids?"
+            }
+          ]
+        },
+        {
+          "@type": "VideoObject",
+          "contentUrl": "https://www.youtube.com/watch?v=CG-T8lGxMY8",
+          "description": "Dr. Surabhi Vegad explains fibroids — how they are diagnosed and managed, when they affect fertility and the treatment options available.",
+          "embedUrl": "https://www.youtube-nocookie.com/embed/CG-T8lGxMY8",
+          "name": "Fibroids: Diagnosis and Management — Dr. Surabhi Vegad",
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "thumbnailUrl": "https://img.youtube.com/vi/CG-T8lGxMY8/hqdefault.jpg",
+          "uploadDate": "2023-01-01"
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/janki-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MS — Obstetrics & Gynaecology"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Gujarat Gaurav Icon — Midday Group",
+            "'Nari Tu Narayani' Award for leading gynaecologist — Bulletin India Group"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and reproductive surgeon specialising in hysteroscopy, laparoscopy and fertility-enhancing surgery.",
+          "hasCredential": "MBBS, MS (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/janki.webp",
+          "jobTitle": "Co-director & Reproductive Surgeon",
+          "knowsAbout": [
+            "Reproductive Surgery",
+            "Hysteroscopy",
+            "Laparoscopy",
+            "Endometriosis",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            }
+          ],
+          "name": "Dr. Janki Bavishi",
+          "url": "https://ivfclinic.com/doctors/janki-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/anand",
+    "/locations/bhavnagar",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}
