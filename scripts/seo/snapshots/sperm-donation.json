@@ -1,0 +1,409 @@
+{
+  "route": "/sperm-donation",
+  "title": "Donor Sperm Treatment (Sperm Donation) — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/sperm-donation",
+  "meta": {
+    "description": "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. Large screened donor pool, no waiting, trusted since 1984.",
+    "og:description": "How donor sperm is used in IUI and IVF–ICSI, who needs it, and how donors are screened. Large screened donor pool, no waiting, trusted since 1984.",
+    "og:image": "https://ivfclinic.com/assets/donor%20services/Sperm-dontation.png",
+    "og:title": "Donor Sperm Treatment (Sperm Donation) at Bavishi Fertility Institute",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/sperm-donation",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/sperm-donation#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "Sperm Donation Treatment"
+          },
+          "description": "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. Large screened donor pool, no waiting, trusted since 1984.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "Donor Sperm Treatment (Sperm Donation) — Bavishi Fertility Institute",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+            "jobTitle": "Co-director & IVF Specialist",
+            "name": "Dr. Parth Bavishi",
+            "url": "https://ivfclinic.com/doctors/parth-bavishi"
+          },
+          "url": "https://ivfclinic.com/sperm-donation"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "alternateName": "Donor Sperm Treatment",
+          "bodyLocation": "Uterus",
+          "followup": "A pregnancy (Beta-HCG) test is performed about two weeks after insemination or embryo transfer.",
+          "howPerformed": "Screened donor sperm is used to fertilise the female partner's eggs — either by intrauterine insemination (IUI) or by IVF with ICSI in the laboratory — and the resulting pregnancy is carried by the female partner.",
+          "name": "Sperm Donation Treatment",
+          "procedureType": "https://schema.org/NoninvasiveProcedure",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Treatments",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/sperm-donation",
+              "name": "Sperm Donation",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It is the use of screened donor sperm to achieve pregnancy, either through intrauterine insemination (IUI) or through IVF with ICSI."
+              },
+              "name": "What is sperm donation?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "For azoospermia where sperm cannot be retrieved, severe male-factor infertility, a high risk of transmitting a genetic condition, or for single women choosing parenthood."
+              },
+              "name": "When is donor sperm needed?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Donors undergo medical, genetic and psychological evaluation along with semen analysis and infection screening before their sperm is used."
+              },
+              "name": "How are sperm donors screened?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "We match on characteristics such as height, build, complexion, eye colour, ethnicity and education wherever possible."
+              },
+              "name": "How are donors matched to us?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. Bavishi Fertility Institute maintains a large pool of frozen, screened donor sperm ready for use."
+              },
+              "name": "Is there a waiting time for a donor?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The baby will not inherit the male partner's genes, but the female partner contributes through her eggs and carries the pregnancy herself."
+              },
+              "name": "Will the baby be genetically related to us?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. It is regulated by the ART (Assisted Reproductive Technology) Act, which protects the rights of everyone involved."
+              },
+              "name": "Is sperm donation legal in India?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Success varies from case to case and is generally higher for younger women. It depends on the female partner's age and health, egg and embryo quality and the technique used. Outcomes cannot be guaranteed."
+              },
+              "name": "What are the success rates with donor sperm?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Where the partner's sperm is usable, techniques such as ICSI, IMSI or PICSI, or surgical retrieval (PESA/TESA/TESE), are considered before donor sperm."
+              },
+              "name": "Can we try with the partner's own sperm first?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Donor-sperm treatment is kept completely confidential."
+              },
+              "name": "Is the process confidential?"
+            }
+          ]
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — Pramukhswami Medical College, Karamsad (2009)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — Pramukhswami Medical College, Karamsad (2012)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Rose of Paracelsus Award — European Medical Association",
+            "Most Prominent IVF Specialist — presented by the Chief Minister of Gujarat"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/parth.webp",
+          "jobTitle": "Co-director & IVF Specialist",
+          "knowsAbout": [
+            "Male Infertility",
+            "Andrology",
+            "Intracytoplasmic Sperm Injection",
+            "Surgical Sperm Retrieval",
+            "Azoospermia"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Andrology"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR)"
+            }
+          ],
+          "name": "Dr. Parth Bavishi",
+          "url": "https://ivfclinic.com/doctors/parth-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/anand",
+    "/locations/bhavnagar",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

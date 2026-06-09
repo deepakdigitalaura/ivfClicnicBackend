@@ -1,27 +1,37 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
-import { ivf, treatmentGraph } from "@/lib/treatments";
+import { treatmentGraph } from "@/lib/treatments";
+import { getTreatment } from "@/lib/payload";
 
-export const metadata: Metadata = {
-  title: ivf.meta.title,
-  description: ivf.meta.description,
-  alternates: { canonical: ivf.href },
-  openGraph: {
-    title: "IVF Treatment — In Vitro Fertilization at Bavishi Fertility Institute",
-    description:
-      "How IVF works, step by step. India's trusted IVF specialists since 1984 — 30,000+ successful pregnancies, Class 1000 IVF labs, Suraksha Kavach assurance.",
-    url: ivf.href,
-    type: "article",
-    images: [ivf.meta.ogImage],
-  },
-};
+const SLUG = "ivf";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTreatment(SLUG);
+  if (!t) return {};
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: { canonical: t.href },
+    openGraph: {
+      title: "IVF Treatment — In Vitro Fertilization at Bavishi Fertility Institute",
+      description:
+        "How IVF works, step by step. India's trusted IVF specialists since 1984 — 30,000+ successful pregnancies, Class 1000 IVF labs, Suraksha Kavach assurance.",
+      url: t.href,
+      type: "article",
+      images: [t.meta.ogImage],
+    },
+  };
+}
+
+export default async function Page() {
+  const t = await getTreatment(SLUG);
+  if (!t) notFound();
   return (
     <>
-      <JsonLd graph={treatmentGraph(ivf)} />
-      <TreatmentPage slug={ivf.slug} />
+      <JsonLd graph={treatmentGraph(t)} />
+      <TreatmentPage content={t} />
     </>
   );
 }

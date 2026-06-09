@@ -1,0 +1,349 @@
+{
+  "route": "/egg-freezing",
+  "title": "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/egg-freezing",
+  "meta": {
+    "description": "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1984.",
+    "og:description": "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1984.",
+    "og:image": "https://ivfclinic.com/assets/about-clinic.jpg",
+    "og:title": "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/egg-freezing",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/egg-freezing#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "Egg Freezing (Oocyte Cryopreservation)"
+          },
+          "description": "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1984.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+            "jobTitle": "Co-founder & Senior Fertility Specialist",
+            "name": "Dr. Falguni Bavishi",
+            "url": "https://ivfclinic.com/doctors/falguni-bavishi"
+          },
+          "url": "https://ivfclinic.com/egg-freezing"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "alternateName": "Oocyte Cryopreservation",
+          "bodyLocation": "Oocytes (eggs)",
+          "followup": "Frozen eggs are thawed and used in a future IVF cycle when the woman is ready.",
+          "howPerformed": "After ovarian stimulation, mature eggs are collected and frozen by vitrification, then thawed, fertilised by ICSI and transferred as embryos in a future cycle.",
+          "name": "Egg Freezing (Oocyte Cryopreservation)",
+          "procedureType": "https://schema.org/MedicalProcedure",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Treatments",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/egg-freezing",
+              "name": "Egg Freezing",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Earlier is better — ideally in your late twenties to early thirties — because egg quality and quantity decline with age. Freezing younger eggs gives the best future chance."
+              },
+              "name": "What is the best age to freeze eggs?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It varies with age, but more eggs improve the odds. After assessing your reserve, your specialist will advise a target number, sometimes over more than one cycle."
+              },
+              "name": "How many eggs should I freeze?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The injections cause minimal discomfort and egg retrieval is done under sedation, so it is not painful. Mild bloating afterwards settles quickly."
+              },
+              "name": "Is egg freezing painful?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "They are thawed, fertilised with sperm by ICSI, and the resulting embryos are transferred to the uterus in an IVF cycle."
+              },
+              "name": "How are frozen eggs used later?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Vitrification gives high egg-survival rates, though not every egg survives or fertilises — which is why the number frozen matters."
+              },
+              "name": "Do frozen eggs survive well?"
+            }
+          ]
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MD — Obstetrics & Gynaecology"
+            }
+          ],
+          "award": [
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/falguni.webp",
+          "jobTitle": "Co-founder & Senior Fertility Specialist",
+          "knowsAbout": [
+            "Female Infertility",
+            "In Vitro Fertilization",
+            "Endometriosis",
+            "Reproductive Gynaecology",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            }
+          ],
+          "name": "Dr. Falguni Bavishi",
+          "url": "https://ivfclinic.com/doctors/falguni-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/embryo-freezing",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/anand",
+    "/locations/bhavnagar",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

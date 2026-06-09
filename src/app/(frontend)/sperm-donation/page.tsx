@@ -1,27 +1,37 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
-import { spermDonation, treatmentGraph } from "@/lib/treatments";
+import { treatmentGraph } from "@/lib/treatments";
+import { getTreatment } from "@/lib/payload";
 
-export const metadata: Metadata = {
-  title: spermDonation.meta.title,
-  description: spermDonation.meta.description,
-  alternates: { canonical: spermDonation.href },
-  openGraph: {
-    title: "Donor Sperm Treatment (Sperm Donation) at Bavishi Fertility Institute",
-    description:
-      "How donor sperm is used in IUI and IVF–ICSI, who needs it, and how donors are screened. Large screened donor pool, no waiting, trusted since 1984.",
-    url: spermDonation.href,
-    type: "article",
-    images: [spermDonation.meta.ogImage],
-  },
-};
+const SLUG = "sperm-donation";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTreatment(SLUG);
+  if (!t) return {};
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: { canonical: t.href },
+    openGraph: {
+      title: "Donor Sperm Treatment (Sperm Donation) at Bavishi Fertility Institute",
+      description:
+        "How donor sperm is used in IUI and IVF–ICSI, who needs it, and how donors are screened. Large screened donor pool, no waiting, trusted since 1984.",
+      url: t.href,
+      type: "article",
+      images: [t.meta.ogImage],
+    },
+  };
+}
+
+export default async function Page() {
+  const t = await getTreatment(SLUG);
+  if (!t) notFound();
   return (
     <>
-      <JsonLd graph={treatmentGraph(spermDonation)} />
-      <TreatmentPage slug={spermDonation.slug} />
+      <JsonLd graph={treatmentGraph(t)} />
+      <TreatmentPage content={t} />
     </>
   );
 }
