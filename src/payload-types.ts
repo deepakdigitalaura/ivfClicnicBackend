@@ -103,6 +103,7 @@ export interface Config {
     'blog-hub': BlogHub;
     footer: Footer;
     header: Header;
+    homepage: Homepage;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
@@ -110,6 +111,7 @@ export interface Config {
     'blog-hub': BlogHubSelect<false> | BlogHubSelect<true>;
     footer: FooterSelect<false> | FooterSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
+    homepage: HomepageSelect<false> | HomepageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -1419,6 +1421,470 @@ export interface Header {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage".
+ */
+export interface Homepage {
+  id: number;
+  /**
+   * Top hero — copy only. The hero image stays code-owned (LCP-optimised).
+   */
+  hero?: {
+    /**
+     * Small label above the headline. Empty uses the default.
+     */
+    eyebrow?: string | null;
+    /**
+     * Full headline text. Empty keeps the default hero.
+     */
+    headline?: string | null;
+    /**
+     * The single word inside the headline rendered in the accent italic style.
+     */
+    headlineItalic?: string | null;
+    /**
+     * Sub-headline paragraph.
+     */
+    paragraph?: string | null;
+    /**
+     * Trust badges under the paragraph.
+     */
+    badges?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Up to three button labels (first is the primary button). Icons/order stay code-owned.
+     */
+    ctas?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Floating award chip text on the hero image.
+     */
+    floatingBadge?: string | null;
+  };
+  /**
+   * Scrolling stats strip. Empty falls back to the built-in stats.
+   */
+  stats?:
+    | {
+        /**
+         * Headline figure, e.g. '30,000+'.
+         */
+        value: string;
+        /**
+         * Caption under the figure.
+         */
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * 'Why Bavishi Fertility Center' — the four icon cards.
+   */
+  whyBavishi?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Empty keeps the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       */
+      lead?: string | null;
+      /**
+       * The highlighted (italic) word(s) at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * Empty falls back to the built-in cards.
+     */
+    cards?:
+      | {
+          /**
+           * Lucide icon name.
+           */
+          icon?:
+            | (
+                | 'ScanLine'
+                | 'Feather'
+                | 'Baby'
+                | 'Stethoscope'
+                | 'ShieldCheck'
+                | 'Users'
+                | 'HeartPulse'
+                | 'Activity'
+                | 'ClipboardList'
+                | 'CalendarCheck'
+                | 'Eye'
+                | 'Clock'
+                | 'Microscope'
+                | 'Sparkles'
+                | 'Hand'
+              )
+            | null;
+          /**
+           * Card title.
+           */
+          t: string;
+          /**
+           * Card description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * 'Why Choose Bavishi Fertility Institute?' — the Simple / Safe / Smart / Successful pillars.
+   */
+  whyChoose?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Empty keeps the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       */
+      lead?: string | null;
+      /**
+       * The highlighted (italic) word(s) at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * Empty falls back to the built-in pillars.
+     */
+    blocks?:
+      | {
+          /**
+           * Pillar icon image URL, e.g. /assets/Simple-1.png.
+           */
+          icon?: string | null;
+          /**
+           * Icon alt text.
+           */
+          alt?: string | null;
+          title: string;
+          subtitle?: string | null;
+          points?:
+            | {
+                /**
+                 * Point heading.
+                 */
+                h: string;
+                /**
+                 * Point detail.
+                 */
+                d: string;
+                id?: string | null;
+              }[]
+            | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Suraksha Kavach section.
+   */
+  suraksha?: {
+    /**
+     * Pill label above the heading.
+     */
+    badge?: string | null;
+    /**
+     * Section heading. Empty keeps the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       */
+      lead?: string | null;
+      /**
+       * The highlighted (italic) word(s) at the end of the heading.
+       */
+      em?: string | null;
+    };
+    paragraph?: string | null;
+    features?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Primary button.
+     */
+    primaryCta?: {
+      label?: string | null;
+      href?: string | null;
+    };
+    /**
+     * Secondary button.
+     */
+    secondaryCta?: {
+      label?: string | null;
+      href?: string | null;
+    };
+    /**
+     * Section image URL. Empty uses the default.
+     */
+    image?: string | null;
+    imageAlt?: string | null;
+  };
+  /**
+   * Awards & Recognition carousel.
+   */
+  awards?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Empty keeps the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       */
+      lead?: string | null;
+      /**
+       * The highlighted (italic) word(s) at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * Empty falls back to the built-in awards.
+     */
+    items?:
+      | {
+          /**
+           * Award image URL.
+           */
+          img: string;
+          title: string;
+          /**
+           * Sub-line under the award title.
+           */
+          desc?: string | null;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Upcoming Events posters.
+   */
+  events?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Empty keeps the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       */
+      lead?: string | null;
+      /**
+       * The highlighted (italic) word(s) at the end of the heading.
+       */
+      em?: string | null;
+    };
+    /**
+     * Empty falls back to the built-in posters.
+     */
+    posters?:
+      | {
+          /**
+           * Poster image URL.
+           */
+          src: string;
+          alt: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * YouTube video IDs for the three video grids. Titles/headings stay code-owned.
+   */
+  videos?: {
+    /**
+     * Success-story videos. Empty falls back to the built-in set.
+     */
+    stories?:
+      | {
+          /**
+           * YouTube video ID.
+           */
+          id: string;
+          /**
+           * Patient name.
+           */
+          n: string;
+          /**
+           * Quote.
+           */
+          q: string;
+          /**
+           * Star rating (1–5).
+           */
+          r?: number | null;
+        }[]
+      | null;
+    /**
+     * Educational videos. Empty falls back to the built-in set.
+     */
+    edu?:
+      | {
+          /**
+           * YouTube video ID.
+           */
+          id: string;
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+        }[]
+      | null;
+    /**
+     * Resource videos. Empty falls back to the built-in set.
+     */
+    resources?:
+      | {
+          /**
+           * YouTube video ID.
+           */
+          id: string;
+          /**
+           * Category tag.
+           */
+          c: string;
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Byline / author.
+           */
+          date: string;
+        }[]
+      | null;
+  };
+  /**
+   * Homepage FAQ accordion.
+   */
+  faq?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Empty keeps the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       */
+      lead?: string | null;
+      /**
+       * The highlighted (italic) word(s) at the end of the heading.
+       */
+      em?: string | null;
+    };
+    /**
+     * Empty falls back to the built-in FAQs.
+     */
+    items?:
+      | {
+          /**
+           * Question.
+           */
+          q: string;
+          /**
+           * Answer.
+           */
+          a: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Closing call-to-action band.
+   */
+  finalCta?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Empty keeps the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       */
+      lead?: string | null;
+      /**
+       * The highlighted (italic) word(s) at the end of the heading.
+       */
+      em?: string | null;
+    };
+    paragraph?: string | null;
+    /**
+     * Animated counters. Empty falls back to the built-in counters.
+     */
+    stats?:
+      | {
+          /**
+           * Target value (counts up to this).
+           */
+          v: number;
+          /**
+           * Suffix, e.g. '+'.
+           */
+          s?: string | null;
+          /**
+           * Label.
+           */
+          l: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Up to three button labels. Icons/order stay code-owned.
+     */
+    ctas?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    /**
+     * Open Graph title. Falls back to metaTitle if empty.
+     */
+    ogTitle?: string | null;
+    /**
+     * Open Graph description. Falls back to metaDescription if empty.
+     */
+    ogDescription?: string | null;
+    /**
+     * Open Graph / social share image. Falls back to the default hero image if empty.
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "site-settings_select".
  */
 export interface SiteSettingsSelect<T extends boolean = true> {
@@ -1602,6 +2068,241 @@ export interface HeaderSelect<T extends boolean = true> {
         label?: T;
         url?: T;
         styleVariant?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "homepage_select".
+ */
+export interface HomepageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        headline?: T;
+        headlineItalic?: T;
+        paragraph?: T;
+        badges?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        ctas?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        floatingBadge?: T;
+      };
+  stats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  whyBavishi?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        cards?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+      };
+  whyChoose?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        blocks?:
+          | T
+          | {
+              icon?: T;
+              alt?: T;
+              title?: T;
+              subtitle?: T;
+              points?:
+                | T
+                | {
+                    h?: T;
+                    d?: T;
+                    id?: T;
+                  };
+              id?: T;
+            };
+      };
+  suraksha?:
+    | T
+    | {
+        badge?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        paragraph?: T;
+        features?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        primaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        secondaryCta?:
+          | T
+          | {
+              label?: T;
+              href?: T;
+            };
+        image?: T;
+        imageAlt?: T;
+      };
+  awards?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              img?: T;
+              title?: T;
+              desc?: T;
+              id?: T;
+            };
+      };
+  events?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        posters?:
+          | T
+          | {
+              src?: T;
+              alt?: T;
+              id?: T;
+            };
+      };
+  videos?:
+    | T
+    | {
+        stories?:
+          | T
+          | {
+              id?: T;
+              n?: T;
+              q?: T;
+              r?: T;
+            };
+        edu?:
+          | T
+          | {
+              id?: T;
+              t?: T;
+              d?: T;
+            };
+        resources?:
+          | T
+          | {
+              id?: T;
+              c?: T;
+              t?: T;
+              date?: T;
+            };
+      };
+  faq?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        items?:
+          | T
+          | {
+              q?: T;
+              a?: T;
+              id?: T;
+            };
+      };
+  finalCta?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        paragraph?: T;
+        stats?:
+          | T
+          | {
+              v?: T;
+              s?: T;
+              l?: T;
+              id?: T;
+            };
+        ctas?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
       };
   updatedAt?: T;
   createdAt?: T;

@@ -21,6 +21,7 @@ import { cacheTags } from "@/lib/cache-tags";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header";
+import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { resolveService, type ResolvedService, type ServiceSource } from "@/lib/services";
 
 let cached: Promise<Payload> | null = null;
@@ -250,4 +251,18 @@ export const getFooter = reactCache(async (): Promise<FooterData> => {
 export const getHeader = reactCache(async (): Promise<HeaderData> => {
   const header = await getGlobalSafe("header");
   return resolveHeader(header as HeaderSource);
+});
+
+/**
+ * Resolve the homepage's editorial content: the `homepage` global shaped into
+ * the plain, serialisable `HomepageData` the client <HomePage> sections render
+ * (hero, stats, both "Why" blocks, Suraksha, awards, events, video IDs, FAQs,
+ * final CTA). Read through getGlobalSafe (cached + tagged `global:homepage`), so
+ * an empty or unavailable CMS falls back to HOMEPAGE_DEFAULTS — byte-identical
+ * output. Calculators, dynamic Doctors/Treatments, review aggregation and the
+ * blog listing stay code-owned. React-cached per render.
+ */
+export const getHomepage = reactCache(async (): Promise<HomepageData> => {
+  const homepage = await getGlobalSafe("homepage");
+  return resolveHomepage(homepage as HomepageSource);
 });

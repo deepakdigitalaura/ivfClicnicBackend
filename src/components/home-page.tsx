@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useEffect, useRef, useMemo, memo } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -11,17 +11,10 @@ import type { LucideIcon } from "lucide-react";
 
 const heroImg = "/assets/hero-mother-baby1.png";
 const aboutImg = "/assets/about-clinic.jpg";
-const surakshaImg = "/assets/suraksha-parenthood.png";
 const drFalguni = "/assets/doctors/falguni.webp";
 const drHimanshu = "/assets/doctors/himanshu.webp";
 const drJanki = "/assets/doctors/janki.webp";
 const drParth = "/assets/doctors/parth.webp";
-const whyIcons = {
-  simple: "/assets/Simple-1.png",
-  safe: "/assets/Safe-1.png",
-  smart: "/assets/Smart-1.png",
-  successful: "/assets/success-1.png",
-};
 
 import {
   Reveal, Stagger, StaggerItem, WordReveal, ParallaxImage, Magnetic,
@@ -31,9 +24,19 @@ import { SiteHeader } from "@/components/site-header";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import type { Review } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
-import { destinationHref } from "@/lib/internal-links";
 import { useFooter } from "@/components/footer-provider";
 import { cityHref } from "@/lib/locations";
+import { resolveIcon } from "@/lib/icon-map";
+import {
+  HOMEPAGE_DEFAULTS,
+  type HomepageData,
+  type HeroContent,
+  type SurakshaContent,
+  type FinalCtaContent,
+  type EduVideo,
+  type ResourceVideo,
+  type AwardItem,
+} from "@/lib/homepage";
 
 /* ---------- Primitives ---------- */
 
@@ -92,30 +95,30 @@ function GhostBtn({ children, icon: Icon, href, target }: { children: React.Reac
 /* ---------- Scroll progress bar ---------- */
 /* ---------- Page ---------- */
 
-export function HomePage() {
+export function HomePage({ data = HOMEPAGE_DEFAULTS }: { data?: HomepageData } = {}) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <Hero />
-      <StatsStrip />
-      <WhyBavishiFertilityInstitute />
-      <Suraksha />
+      <Hero hero={data.hero} />
+      <StatsStrip stats={data.stats} />
+      <WhyBavishiFertilityInstitute content={data.whyBavishi} />
+      <Suraksha content={data.suraksha} />
       <Treatments />
-      <SuccessStories />
-      <VideoHub />
+      <SuccessStories stories={data.videos.stories} />
+      <VideoHub videos={data.videos.edu} />
       <About />
       <Doctors />
-      <WhyChooseBavishiFertilityInstitute />
-      <AwardsCarousel />
+      <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />
+      <AwardsCarousel content={data.awards} />
       <Media />
       <Testimonials />
-      <Events />
-      <Blogs />
+      <Events content={data.events} />
+      <Blogs videos={data.videos.resources} />
       <Locations />
-      <FAQ />
+      <FAQ content={data.faq} />
       <Calculators />
       <InquiryForm />
-      <FinalCTA />
+      <FinalCTA content={data.finalCta} />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />
@@ -126,19 +129,19 @@ export function HomePage() {
 
 /* ---------- Hero ---------- */
 
-function Hero() {
+function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
   return (
     <section className="gradient-warm noise relative overflow-hidden">
       <GradientField />
       <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 py-8 md:py-14 lg:grid-cols-12 lg:gap-10 lg:py-28">
         <div className="relative z-10 lg:col-span-7">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <Eyebrow>Trusted Since 1983</Eyebrow>
+            <Eyebrow>{hero.eyebrow}</Eyebrow>
           </motion.div>
 
           <WordReveal
-            text="India's Trusted Fertility Center for 40+ Years"
-            italicWord="Fertility"
+            text={hero.headline}
+            italicWord={hero.headlineItalic}
             accentClass="italic text-[color:var(--rose)]"
             className="mt-6 text-[2.75rem] font-medium leading-[1.02] text-[color:var(--plum)] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance"
           />
@@ -148,17 +151,11 @@ function Hero() {
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl text-pretty"
           >
-            Helping families achieve parenthood through advanced fertility treatments,
-            compassionate care, and personalised IVF programs.
+            {hero.paragraph}
           </motion.p>
 
           <Stagger className="mt-8 grid max-w-xl grid-cols-2 gap-3" delay={0.8} stagger={0.07}>
-            {[
-              "30,000+ Successful Pregnancies",
-              "40+ Years Experience",
-              "14 Fertility Centres",
-              "Leading IVF Specialists",
-            ].map((t) => (
+            {hero.badges.map((t) => (
               <StaggerItem key={t}>
                 <div className="flex items-start gap-2 text-sm font-medium text-[color:var(--plum)]">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
@@ -173,9 +170,9 @@ function Hero() {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <PrimaryBtn icon={Calendar}>Book Consultation</PrimaryBtn>
-            <GhostBtn icon={Sparkles}>Check IVF Eligibility</GhostBtn>
-            <GhostBtn icon={Video}>Video Consultation</GhostBtn>
+            <PrimaryBtn icon={Calendar}>{hero.ctas[0]}</PrimaryBtn>
+            <GhostBtn icon={Sparkles}>{hero.ctas[1]}</GhostBtn>
+            <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
           </motion.div>
         </div>
 
@@ -193,7 +190,7 @@ function Hero() {
             <div className="glass rounded-2xl px-4 py-3 shadow-soft">
               <div className="flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)]">
                 <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" />
-                National Fertility Award · 5× Winner
+                {hero.floatingBadge}
               </div>
             </div>
           </Float>
@@ -204,16 +201,7 @@ function Hero() {
 }
 
 /* ---------- Stats strip with counters ---------- */
-const defaultStats: { value: string; l: string }[] = [
-  { value: "30,000+", l: "Successful Pregnancies" },
-  { value: "40+", l: "Years Legacy" },
-  { value: "15+", l: "Locations" },
-  { value: "100+", l: "Experts" },
-  { value: "5× Winner", l: "National Fertility Award" },
-  { value: "Rank #1", l: "Best IVF Center in India" },
-  { value: "300+", l: "International Patients" },
-];
-export function StatsStrip({ stats = defaultStats }: { stats?: { value: string; l: string }[] } = {}) {
+export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats }: { stats?: { value: string; l: string }[] } = {}) {
   return (
     <section className="border-y border-border/60 bg-white py-7 md:py-9">
       <Marquee speed={45}>
@@ -230,22 +218,18 @@ export function StatsStrip({ stats = defaultStats }: { stats?: { value: string; 
 
 /* ---------- Why Bavishi Fertility Institute ---------- */
 
-function WhyBavishiFertilityInstitute() {
-  const items = [
-    { icon: Sparkles, t: "Transparent Treatment Plans", d: "Clear pricing, honest timelines and no hidden costs across every step of your journey." },
-    { icon: Microscope, t: "Advanced Fertility Technology", d: "State-of-the-art embryology labs, time-lapse imaging and PGT for the highest success rates." },
-    { icon: Stethoscope, t: "Experienced IVF Specialists", d: "Led by world-renowned doctors with decades of clinical experience and global training." },
-    { icon: HeartPulse, t: "Personalised Care Journey", d: "Every plan is tailored — emotionally and clinically — to your unique fertility story." },
-  ];
+function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }: { content?: HomepageData["whyBavishi"] } = {}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Why Bavishi Fertility Center"
-        title={<>A different kind of <em className="text-[color:var(--rose)] not-italic font-display italic">fertility experience.</em></>}
-        subtitle="Premium, transparent and deeply personal. We've redefined what fertility care should feel like."
+        eyebrow={content.eyebrow}
+        title={<>{content.heading.lead} <em className="text-[color:var(--rose)] not-italic font-display italic">{content.heading.em}</em></>}
+        subtitle={content.subtitle}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-        {items.map(({ icon: Icon, t, d }) => (
+        {content.cards.map(({ icon, t, d }) => {
+          const Icon = resolveIcon(icon);
+          return (
           <StaggerItem key={t}>
             <LiftCard className="group h-full rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-shadow duration-500 hover:shadow-lift">
               <Float amplitude={4} duration={6} className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
@@ -258,7 +242,8 @@ function WhyBavishiFertilityInstitute() {
               </div>
             </LiftCard>
           </StaggerItem>
-        ))}
+          );
+        })}
       </Stagger>
     </section>
   );
@@ -266,7 +251,7 @@ function WhyBavishiFertilityInstitute() {
 
 /* ---------- Suraksha ---------- */
 
-function Suraksha() {
+function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: SurakshaContent } = {}) {
   return (
     <section id="suraksha" className="relative overflow-hidden bg-[color:var(--plum)] text-white noise scroll-mt-24">
       <div className="pointer-events-none absolute inset-0">
@@ -285,22 +270,21 @@ function Suraksha() {
         <div>
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-              <Shield className="h-3.5 w-3.5" /> Exclusive Program
+              <Shield className="h-3.5 w-3.5" /> {content.badge}
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-5 text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.25rem] text-balance">
-              Suraksha Kavach — <em className="font-display italic text-[color:var(--rose-soft)]">peace of mind, guaranteed.</em>
+              {content.heading.lead} <em className="font-display italic text-[color:var(--rose-soft)]">{content.heading.em}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 text-pretty">
-              India's most trusted IVF refund & protection program. Reduce financial risk,
-              increase confidence, and focus on what truly matters — your journey to parenthood.
+              {content.paragraph}
             </p>
           </Reveal>
           <Stagger className="mt-8 grid gap-3 sm:grid-cols-2" delay={0.25}>
-            {["Refund Guarantee", "Risk Reduction", "Multiple IVF Cycles", "Priority Care"].map((t) => (
+            {content.features.map((t) => (
               <StaggerItem key={t}>
                 <div className="flex items-center gap-2 text-sm text-white/90">
                   <CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> {t}
@@ -310,11 +294,11 @@ function Suraksha() {
           </Stagger>
           <Reveal delay={0.4}>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Magnetic as="a" href={destinationHref("suraksha-kavach")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                Explore Suraksha Kavach <ArrowRight className="h-4 w-4" />
+              <Magnetic as="a" href={content.primaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                {content.primaryCta.label} <ArrowRight className="h-4 w-4" />
               </Magnetic>
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                Learn More
+              <Magnetic as="a" href={content.secondaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
+                {content.secondaryCta.label}
               </Magnetic>
             </div>
           </Reveal>
@@ -335,7 +319,7 @@ function Suraksha() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="relative overflow-hidden rounded-[2rem] bg-[color:var(--ivory)] shadow-lift"
               >
-                <ParallaxImage src={surakshaImg} alt="Expecting parents — the journey to parenthood, protected" ratio="aspect-[5/4]" />
+                <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[5/4]" />
               </motion.div>
             </Float>
           </Reveal>
@@ -420,26 +404,6 @@ export function Treatments() {
 
 /* ---------- YouTube (lazy facade) ---------- */
 
-// Real videos from Bavishi Fertility Institute's YouTube channel (@BavishiFertilityInstitute)
-const patientVideos = [
-  { id: "6bH_RnV-_2Y", n: "Anita Thakkar", q: "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", r: 5 },
-  { id: "KKf6tNrlvoc", n: "Rekha's Journey", q: "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", r: 5 },
-  { id: "SbkV-1fSonM", n: "Jigesh & Jinal", q: "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", r: 5 },
-];
-
-const eduVideos = [
-  { id: "22xqpk3-z2I", t: "How to Increase Sperm Count", d: "Practical, science-backed advice from our specialists." },
-  { id: "eON_mr8bz-A", t: "Egg Freezing vs Embryo Freezing", d: "Dr. Parth Bavishi explains which option suits you." },
-  { id: "Pzbwv2EZlrM", t: "Ovarian Cyst Before IVF — What to Do", d: "Do you need to remove a cyst before starting IVF?" },
-  { id: "bNZiMbg4Wkw", t: "Natural Pregnancy After 40?", d: "Understanding your real chances and options." },
-];
-
-const resourceVideos = [
-  { id: "AO_J6jKeCck", c: "IVF Guide", t: "How Many Eggs Are Actually Needed for IVF?", date: "Dr. Parth Bavishi" },
-  { id: "5oKbplu1Qzs", c: "After Transfer", t: "Which Medicines Are Necessary After Embryo Transfer?", date: "Dr. Parth Bavishi" },
-  { id: "f3N5WJtGwmk", c: "Fertility Preservation", t: "5 Things to Know Before Egg Freezing", date: "Dr. Parth Bavishi" },
-];
-
 export function LiteYouTube({ id, title, className = "" }: { id: string; title: string; className?: string }) {
   const [play, setPlay] = useState(false);
   return (
@@ -473,7 +437,7 @@ export function LiteYouTube({ id, title, className = "" }: { id: string; title: 
 /* ---------- Success Stories (real patient videos) ---------- */
 
 export function SuccessStories({
-  stories = patientVideos,
+  stories = HOMEPAGE_DEFAULTS.videos.stories,
   eyebrow = "Success Stories",
   title = <>30,000+ journeys. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
   subtitle = "Real stories from real families who began their parenthood journey with us.",
@@ -530,7 +494,7 @@ export function SuccessStories({
 
 /* ---------- Video Hub ---------- */
 
-export function VideoHub() {
+export function VideoHub({ videos = HOMEPAGE_DEFAULTS.videos.edu }: { videos?: EduVideo[] } = {}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
@@ -544,7 +508,7 @@ export function VideoHub() {
         </Reveal>
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {eduVideos.map((v) => (
+        {videos.map((v) => (
           <StaggerItem key={v.id}>
             <motion.a
               href={`https://www.youtube.com/watch?v=${v.id}`}
@@ -718,60 +682,18 @@ export function Doctors({
 
 /* ---------- Why Choose Bavishi Fertility Institute (icon-led pillars) ---------- */
 
-function WhyChooseBavishiFertilityInstitute() {
-  const blocks = [
-    {
-      icon: whyIcons.simple, alt: "Simple IVF care",
-      title: "Simple", subtitle: "Making IVF Easy",
-      points: [
-        { h: "Personalized Plans", d: "Tailored treatment for your needs." },
-        { h: "Minimal Discomfort", d: "Fewer injections, fewer visits." },
-        { h: "Quick Recovery", d: "Light anesthesia, early discharge." },
-        { h: "Painless Transfer", d: "Stress-free embryo transfer." },
-      ],
-    },
-    {
-      icon: whyIcons.safe, alt: "Safe IVF treatment",
-      title: "Safe", subtitle: "IVF with Maximum Safety",
-      points: [
-        { h: "Zero Error Protocols", d: "Double-check system for accuracy." },
-        { h: "OHSS-Free Treatment", d: "Safe stimulation protocols." },
-        { h: "Advanced IVF Labs", d: "Pure air quality & contamination control." },
-        { h: "Strict Confidentiality", d: "Privacy ensured at every step." },
-      ],
-    },
-    {
-      icon: whyIcons.smart, alt: "Smart IVF technology",
-      title: "Smart", subtitle: "Intelligent IVF for Better Outcomes",
-      points: [
-        { h: "Smart Monitoring", d: "Real-time tracking for best outcomes." },
-        { h: "Optimized Lab Techniques", d: "Cutting-edge embryo selection." },
-        { h: "AI Monitoring", d: "Smart embryo tracking." },
-        { h: "Time-Saving", d: "Fewer visits, remote options." },
-      ],
-    },
-    {
-      icon: whyIcons.successful, alt: "Successful IVF outcomes",
-      title: "Successful", subtitle: "Proven IVF Excellence",
-      points: [
-        { h: "20,000+ IVF Success Stories", d: "Families who trusted us with parenthood." },
-        { h: "100+ Years of Combined Expertise", d: "A family of seasoned fertility specialists." },
-        { h: "Safe & Healthy Pregnancy Focus", d: "Care that extends beyond conception." },
-        { h: "Unique IVF Packages", d: "Suraksha Kavach benefits & refund protection." },
-      ],
-    },
-  ];
+function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyChoose }: { content?: HomepageData["whyChoose"] } = {}) {
   return (
     <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
       <SectionHeader
-        eyebrow="The Bavishi Fertility Institute Difference"
-        title={<>Why Choose <em className="font-display italic text-[color:var(--rose)]">Bavishi Fertility Institute?</em></>}
-        subtitle="Four pillars that define our approach to fertility care — Simple, Safe, Smart and Successful."
+        eyebrow={content.eyebrow}
+        title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
+        subtitle={content.subtitle}
         align="center"
       />
       <Stagger className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2" stagger={0.08}>
-        {blocks.map((b) => (
+        {content.blocks.map((b) => (
           <StaggerItem key={b.title} className="h-full">
             <motion.article
               whileHover={{ y: -6 }}
@@ -808,24 +730,9 @@ function WhyChooseBavishiFertilityInstitute() {
 
 /* ---------- Awards & Achievements (carousel) ---------- */
 
-const awardItems = [
-  { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "Economic Times Healthworld · 2025" },
-  { img: "/assets/awards/patient-centric-award.png", title: "Patient Centric Hospital Award", desc: "IHW Patient First Awards" },
-  { img: "/assets/awards/bharat-excellence-award.png", title: "Bharat Excellence Award", desc: "For IVF & Infertility Care" },
-  { img: "/assets/awards/times-healthcare-award.png", title: "Times Healthcare Leaders Award", desc: "Times Healthcare · 2025" },
-];
-
-// Repeat the awards so there are always enough off-stage "buffer" cards for a
-// seamless infinite loop (a 3-item loop would otherwise teleport across centre).
-const awardDotCount = awardItems.length;
-const awardSlides = awardDotCount < 5
-  ? Array.from({ length: Math.ceil(6 / awardDotCount) }, () => awardItems).flat()
-  : awardItems;
-const AWARD_L = awardSlides.length;
-
 // A single award card. Memoized + keyed so its <img> never reloads between
 // slide changes — only the cheap transform values (x/scale/opacity) update.
-const AwardCard = memo(function AwardCard({ a }: { a: (typeof awardItems)[number] }) {
+const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
   return (
     <div className="group overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
       {/* Full rectangular award image — fills the card edge-to-edge */}
@@ -842,12 +749,24 @@ const AwardCard = memo(function AwardCard({ a }: { a: (typeof awardItems)[number
 
 // Only this inner component holds the rotating state, so slide changes never
 // re-render the section header or CTA — just the transform-animated cards.
-function AwardsStage() {
+function AwardsStage({ items }: { items: AwardItem[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [shift, setShift] = useState(300);
   const startX = useRef(0);
+
+  // Repeat the awards so there are always enough off-stage "buffer" cards for a
+  // seamless infinite loop (a 3-item loop would otherwise teleport across centre).
+  const dotCount = items.length;
+  const slides = useMemo(
+    () =>
+      dotCount < 5
+        ? Array.from({ length: Math.ceil(6 / dotCount) }, () => items).flat()
+        : items,
+    [items, dotCount],
+  );
+  const L = slides.length;
 
   useEffect(() => {
     const measure = () => {
@@ -861,21 +780,21 @@ function AwardsStage() {
 
   useEffect(() => {
     if (paused) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % AWARD_L), 3800);
+    const id = window.setInterval(() => setActive((a) => (a + 1) % L), 3800);
     return () => window.clearInterval(id);
-  }, [paused]);
+  }, [paused, L]);
 
-  const go = (dir: number) => setActive((a) => (a + dir + AWARD_L) % AWARD_L);
+  const go = (dir: number) => setActive((a) => (a + dir + L) % L);
   const relPos = (i: number) => {
     let d = i - active;
-    if (d > AWARD_L / 2) d -= AWARD_L;
-    if (d < -AWARD_L / 2) d += AWARD_L;
+    if (d > L / 2) d -= L;
+    if (d < -L / 2) d += L;
     return d;
   };
 
-  const activeDot = ((active % awardDotCount) + awardDotCount) % awardDotCount;
+  const activeDot = ((active % dotCount) + dotCount) % dotCount;
   const goToDot = (i: number) =>
-    setActive((a) => a - (((a % awardDotCount) + awardDotCount) % awardDotCount) + i);
+    setActive((a) => a - (((a % dotCount) + dotCount) % dotCount) + i);
 
   return (
     <>
@@ -891,7 +810,7 @@ function AwardsStage() {
           setPaused(false);
         }}
       >
-        {awardSlides.map((a, i) => {
+        {slides.map((a, i) => {
           const p = relPos(i);
           const visible = Math.abs(p) <= 1;
           return (
@@ -919,7 +838,7 @@ function AwardsStage() {
 
       {/* Dots */}
       <div className="mt-8 flex justify-center gap-2">
-        {awardItems.map((_, i) => (
+        {items.map((_, i) => (
           <button
             key={i}
             type="button"
@@ -933,18 +852,18 @@ function AwardsStage() {
   );
 }
 
-export function AwardsCarousel() {
+export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content?: HomepageData["awards"] } = {}) {
   return (
     <section className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader
-          eyebrow="Awards & Recognition"
-          title={<>Our Awards & <em className="font-display italic text-[color:var(--rose)]">Achievements.</em></>}
-          subtitle="Awarded for Excellence in IVF & Fertility Care."
+          eyebrow={content.eyebrow}
+          title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
+          subtitle={content.subtitle}
           align="center"
         />
 
-        <AwardsStage />
+        <AwardsStage items={content.items} />
 
         {/* CTA */}
         <div className="mt-10 text-center">
@@ -1120,21 +1039,16 @@ export function Testimonials({
 
 /* ---------- Events ---------- */
 
-const eventPosters = [
-  { src: "/assets/events/event-1.webp", alt: "Special Consultation with Dr. Himanshu Bavishi — upcoming visit schedule" },
-  { src: "/assets/events/event-2.webp", alt: "Bavishi Fertility — upcoming events & visit plan" },
-];
-
-function Events() {
+function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData["events"] } = {}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Upcoming Events"
-        title={<>Learn directly from <em className="font-display italic text-[color:var(--rose)]">our specialists.</em></>}
+        eyebrow={content.eyebrow}
+        title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
         align="center"
       />
       <Stagger className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
-        {eventPosters.map((e) => (
+        {content.posters.map((e) => (
           <StaggerItem key={e.src}>
             <motion.div
               whileHover={{ y: -6 }}
@@ -1159,7 +1073,7 @@ function Events() {
 
 /* ---------- Blogs ---------- */
 
-function Blogs() {
+function Blogs({ videos = HOMEPAGE_DEFAULTS.videos.resources }: { videos?: ResourceVideo[] } = {}) {
   return (
     <section id="resources" className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
@@ -1173,7 +1087,7 @@ function Blogs() {
           </Reveal>
         </div>
         <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {resourceVideos.map((p) => (
+          {videos.map((p) => (
             <StaggerItem key={p.id}>
               <motion.a
                 href={`https://www.youtube.com/watch?v=${p.id}`}
@@ -1254,16 +1168,8 @@ export function Locations() {
 
 /* ---------- FAQ ---------- */
 
-function FAQ() {
-  const faqs = [
-    { q: "What is IVF and how does it work?", a: "IVF (In-Vitro Fertilisation) is a process where an egg is fertilised by sperm outside the body. The resulting embryo is then transferred to the uterus. The process involves ovarian stimulation, egg retrieval, fertilisation, embryo culture and transfer." },
-    { q: "What are the success rates at Bavishi Fertility Centre?", a: "Our success rates are among the highest in India — typically 55–70% per cycle for women under 35, with rates personalised based on age, diagnosis and treatment plan." },
-    { q: "How much does IVF cost?", a: "IVF costs vary based on the protocol, medication and additional procedures required. Use our IVF Cost Calculator for a transparent estimate or speak to our team for a personalised quote." },
-    { q: "Is fertility treatment painful?", a: "Most fertility treatments cause minimal discomfort. Egg retrieval is performed under sedation. Our team prioritises your comfort at every step." },
-    { q: "How do I get started?", a: "Begin with a consultation — in-person or by video. Our specialists will review your history and design a personalised plan." },
-    { q: "Do you offer video consultations?", a: "Yes. Secure video consultations are available with all our senior specialists, across India and internationally." },
-    { q: "What is the Suraksha Kavach refund program?", a: "Suraksha Kavach is our pioneering refund-and-protection program: eligible patients pay only for success, with a refund guarantee if treatment outcomes are not achieved." },
-  ];
+function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"] } = {}) {
+  const faqs = content.items;
   const [open, setOpen] = useState<Set<number>>(new Set([0]));
   const toggle = (i: number) => {
     setOpen((prev) => {
@@ -1276,8 +1182,8 @@ function FAQ() {
     <section id="faq" className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-3xl">
         <SectionHeader
-          eyebrow="FAQ"
-          title={<>Answers to your <em className="font-display italic text-[color:var(--rose)]">first questions.</em></>}
+          eyebrow={content.eyebrow}
+          title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
           align="center"
         />
         <div className="mt-10 divide-y divide-border rounded-3xl border border-border/70 bg-card shadow-soft">
@@ -1508,7 +1414,8 @@ export function InquiryForm() {
   );
 }
 
-function FinalCTA() {
+function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCtaContent } = {}) {
+  const ctaIcons = [Calendar, MessageCircle, Phone];
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-20 text-center text-white noise md:px-16 md:py-28">
@@ -1523,24 +1430,20 @@ function FinalCTA() {
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <div className="relative">
-          <Reveal><Eyebrow>Begin Today</Eyebrow></Reveal>
+          <Reveal><Eyebrow>{content.eyebrow}</Eyebrow></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mx-auto mt-5 max-w-3xl text-4xl font-medium leading-[1.05] md:text-5xl lg:text-6xl text-balance">
-              Ready to begin your <em className="font-display italic text-[color:var(--rose-soft)]">parenthood journey?</em>
+              {content.heading.lead} <em className="font-display italic text-[color:var(--rose-soft)]">{content.heading.em}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/75">
-              Speak with our fertility experts today — confidential, compassionate and complimentary.
+              {content.paragraph}
             </p>
           </Reveal>
 
           <Stagger className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-6" delay={0.3}>
-            {[
-              { v: 30000, s: "+", l: "Pregnancies" },
-              { v: 40, s: "+", l: "Years" },
-              { v: 15, s: "+", l: "Centres" },
-            ].map((x) => (
+            {content.stats.map((x) => (
               <StaggerItem key={x.l} className="text-center">
                 <div className="font-display text-3xl font-medium md:text-4xl">
                   <Counter to={x.v} suffix={x.s} />
@@ -1552,15 +1455,18 @@ function FinalCTA() {
 
           <Reveal delay={0.5}>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Magnetic className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Consultation
-              </Magnetic>
-              <Magnetic className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Now
-              </Magnetic>
-              <Magnetic className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                <Phone className="h-4 w-4" /> Call Now
-              </Magnetic>
+              {content.ctas.map((label, i) => {
+                const Icon = ctaIcons[i] ?? Calendar;
+                const cls =
+                  i === 0
+                    ? "btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"
+                    : "btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white";
+                return (
+                  <Magnetic key={label} className={cls}>
+                    <Icon className="h-4 w-4" /> {label}
+                  </Magnetic>
+                );
+              })}
             </div>
           </Reveal>
         </div>

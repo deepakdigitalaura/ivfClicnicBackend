@@ -27,6 +27,7 @@ import { ContactInfo } from "./globals/ContactInfo";
 import { BlogHub } from "./globals/BlogHub";
 import { Footer } from "./globals/Footer";
 import { Header } from "./globals/Header";
+import { Homepage } from "./globals/Homepage";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -36,7 +37,7 @@ export default buildConfig({
     importMap: { baseDir: path.resolve(dirname) },
   },
   collections: [Pages, Blogs, Authors, Categories, Services, Media, Users],
-  globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header],
+  globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

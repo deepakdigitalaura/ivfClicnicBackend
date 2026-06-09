@@ -1,0 +1,173 @@
+{
+  "hero": {
+    "eyebrow": "Trusted Since 1983",
+    "headline": "India's Trusted Fertility Center for 40+ Years",
+    "headlineItalic": "Fertility",
+    "paragraph": "Helping families achieve parenthood through advanced fertility treatments, compassionate care, and personalised IVF programs.",
+    "badges": [
+      { "text": "30,000+ Successful Pregnancies" },
+      { "text": "40+ Years Experience" },
+      { "text": "14 Fertility Centres" },
+      { "text": "Leading IVF Specialists" }
+    ],
+    "ctas": [
+      { "text": "Book Consultation" },
+      { "text": "Check IVF Eligibility" },
+      { "text": "Video Consultation" }
+    ],
+    "floatingBadge": "National Fertility Award · 5× Winner"
+  },
+  "stats": [
+    { "value": "30,000+", "label": "Successful Pregnancies" },
+    { "value": "40+", "label": "Years Legacy" },
+    { "value": "15+", "label": "Locations" },
+    { "value": "100+", "label": "Experts" },
+    { "value": "5× Winner", "label": "National Fertility Award" },
+    { "value": "Rank #1", "label": "Best IVF Center in India" },
+    { "value": "300+", "label": "International Patients" }
+  ],
+  "whyBavishi": {
+    "eyebrow": "Why Bavishi Fertility Center",
+    "heading": { "lead": "A different kind of", "em": "fertility experience." },
+    "subtitle": "Premium, transparent and deeply personal. We've redefined what fertility care should feel like.",
+    "cards": [
+      { "icon": "Sparkles", "t": "Transparent Treatment Plans", "d": "Clear pricing, honest timelines and no hidden costs across every step of your journey." },
+      { "icon": "Microscope", "t": "Advanced Fertility Technology", "d": "State-of-the-art embryology labs, time-lapse imaging and PGT for the highest success rates." },
+      { "icon": "Stethoscope", "t": "Experienced IVF Specialists", "d": "Led by world-renowned doctors with decades of clinical experience and global training." },
+      { "icon": "HeartPulse", "t": "Personalised Care Journey", "d": "Every plan is tailored — emotionally and clinically — to your unique fertility story." }
+    ]
+  },
+  "whyChoose": {
+    "eyebrow": "The Bavishi Fertility Institute Difference",
+    "heading": { "lead": "Why Choose", "em": "Bavishi Fertility Institute?" },
+    "subtitle": "Four pillars that define our approach to fertility care — Simple, Safe, Smart and Successful.",
+    "blocks": [
+      {
+        "icon": "/assets/Simple-1.png", "alt": "Simple IVF care",
+        "title": "Simple", "subtitle": "Making IVF Easy",
+        "points": [
+          { "h": "Personalized Plans", "d": "Tailored treatment for your needs." },
+          { "h": "Minimal Discomfort", "d": "Fewer injections, fewer visits." },
+          { "h": "Quick Recovery", "d": "Light anesthesia, early discharge." },
+          { "h": "Painless Transfer", "d": "Stress-free embryo transfer." }
+        ]
+      },
+      {
+        "icon": "/assets/Safe-1.png", "alt": "Safe IVF treatment",
+        "title": "Safe", "subtitle": "IVF with Maximum Safety",
+        "points": [
+          { "h": "Zero Error Protocols", "d": "Double-check system for accuracy." },
+          { "h": "OHSS-Free Treatment", "d": "Safe stimulation protocols." },
+          { "h": "Advanced IVF Labs", "d": "Pure air quality & contamination control." },
+          { "h": "Strict Confidentiality", "d": "Privacy ensured at every step." }
+        ]
+      },
+      {
+        "icon": "/assets/Smart-1.png", "alt": "Smart IVF technology",
+        "title": "Smart", "subtitle": "Intelligent IVF for Better Outcomes",
+        "points": [
+          { "h": "Smart Monitoring", "d": "Real-time tracking for best outcomes." },
+          { "h": "Optimized Lab Techniques", "d": "Cutting-edge embryo selection." },
+          { "h": "AI Monitoring", "d": "Smart embryo tracking." },
+          { "h": "Time-Saving", "d": "Fewer visits, remote options." }
+        ]
+      },
+      {
+        "icon": "/assets/success-1.png", "alt": "Successful IVF outcomes",
+        "title": "Successful", "subtitle": "Proven IVF Excellence",
+        "points": [
+          { "h": "20,000+ IVF Success Stories", "d": "Families who trusted us with parenthood." },
+          { "h": "100+ Years of Combined Expertise", "d": "A family of seasoned fertility specialists." },
+          { "h": "Safe & Healthy Pregnancy Focus", "d": "Care that extends beyond conception." },
+          { "h": "Unique IVF Packages", "d": "Suraksha Kavach benefits & refund protection." }
+        ]
+      }
+    ]
+  },
+  "suraksha": {
+    "badge": "Exclusive Program",
+    "heading": { "lead": "Suraksha Kavach —", "em": "peace of mind, guaranteed." },
+    "paragraph": "India's most trusted IVF refund & protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
+    "features": [
+      { "text": "Refund Guarantee" },
+      { "text": "Risk Reduction" },
+      { "text": "Multiple IVF Cycles" },
+      { "text": "Priority Care" }
+    ],
+    "primaryCta": { "label": "Explore Suraksha Kavach", "href": "/#suraksha" },
+    "secondaryCta": { "label": "Learn More", "href": "/#book" },
+    "image": "/assets/suraksha-parenthood.png",
+    "imageAlt": "Expecting parents — the journey to parenthood, protected"
+  },
+  "awards": {
+    "eyebrow": "Awards & Recognition",
+    "heading": { "lead": "Our Awards &", "em": "Achievements." },
+    "subtitle": "Awarded for Excellence in IVF & Fertility Care.",
+    "items": [
+      { "img": "/assets/awards/ivf-chain-of-the-year.png", "title": "IVF Chain of the Year – West", "desc": "Economic Times Healthworld · 2025" },
+      { "img": "/assets/awards/patient-centric-award.png", "title": "Patient Centric Hospital Award", "desc": "IHW Patient First Awards" },
+      { "img": "/assets/awards/bharat-excellence-award.png", "title": "Bharat Excellence Award", "desc": "For IVF & Infertility Care" },
+      { "img": "/assets/awards/times-healthcare-award.png", "title": "Times Healthcare Leaders Award", "desc": "Times Healthcare · 2025" }
+    ]
+  },
+  "events": {
+    "eyebrow": "Upcoming Events",
+    "heading": { "lead": "Learn directly from", "em": "our specialists." },
+    "posters": [
+      { "src": "/assets/events/event-1.webp", "alt": "Special Consultation with Dr. Himanshu Bavishi — upcoming visit schedule" },
+      { "src": "/assets/events/event-2.webp", "alt": "Bavishi Fertility — upcoming events & visit plan" }
+    ]
+  },
+  "videos": {
+    "stories": [
+      { "id": "6bH_RnV-_2Y", "n": "Anita Thakkar", "q": "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", "r": 5 },
+      { "id": "KKf6tNrlvoc", "n": "Rekha's Journey", "q": "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", "r": 5 },
+      { "id": "SbkV-1fSonM", "n": "Jigesh & Jinal", "q": "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", "r": 5 }
+    ],
+    "edu": [
+      { "id": "22xqpk3-z2I", "t": "How to Increase Sperm Count", "d": "Practical, science-backed advice from our specialists." },
+      { "id": "eON_mr8bz-A", "t": "Egg Freezing vs Embryo Freezing", "d": "Dr. Parth Bavishi explains which option suits you." },
+      { "id": "Pzbwv2EZlrM", "t": "Ovarian Cyst Before IVF — What to Do", "d": "Do you need to remove a cyst before starting IVF?" },
+      { "id": "bNZiMbg4Wkw", "t": "Natural Pregnancy After 40?", "d": "Understanding your real chances and options." }
+    ],
+    "resources": [
+      { "id": "AO_J6jKeCck", "c": "IVF Guide", "t": "How Many Eggs Are Actually Needed for IVF?", "date": "Dr. Parth Bavishi" },
+      { "id": "5oKbplu1Qzs", "c": "After Transfer", "t": "Which Medicines Are Necessary After Embryo Transfer?", "date": "Dr. Parth Bavishi" },
+      { "id": "f3N5WJtGwmk", "c": "Fertility Preservation", "t": "5 Things to Know Before Egg Freezing", "date": "Dr. Parth Bavishi" }
+    ]
+  },
+  "faq": {
+    "eyebrow": "FAQ",
+    "heading": { "lead": "Answers to your", "em": "first questions." },
+    "items": [
+      { "q": "What is IVF and how does it work?", "a": "IVF (In-Vitro Fertilisation) is a process where an egg is fertilised by sperm outside the body. The resulting embryo is then transferred to the uterus. The process involves ovarian stimulation, egg retrieval, fertilisation, embryo culture and transfer." },
+      { "q": "What are the success rates at Bavishi Fertility Centre?", "a": "Our success rates are among the highest in India — typically 55–70% per cycle for women under 35, with rates personalised based on age, diagnosis and treatment plan." },
+      { "q": "How much does IVF cost?", "a": "IVF costs vary based on the protocol, medication and additional procedures required. Use our IVF Cost Calculator for a transparent estimate or speak to our team for a personalised quote." },
+      { "q": "Is fertility treatment painful?", "a": "Most fertility treatments cause minimal discomfort. Egg retrieval is performed under sedation. Our team prioritises your comfort at every step." },
+      { "q": "How do I get started?", "a": "Begin with a consultation — in-person or by video. Our specialists will review your history and design a personalised plan." },
+      { "q": "Do you offer video consultations?", "a": "Yes. Secure video consultations are available with all our senior specialists, across India and internationally." },
+      { "q": "What is the Suraksha Kavach refund program?", "a": "Suraksha Kavach is our pioneering refund-and-protection program: eligible patients pay only for success, with a refund guarantee if treatment outcomes are not achieved." }
+    ]
+  },
+  "finalCta": {
+    "eyebrow": "Begin Today",
+    "heading": { "lead": "Ready to begin your", "em": "parenthood journey?" },
+    "paragraph": "Speak with our fertility experts today — confidential, compassionate and complimentary.",
+    "stats": [
+      { "v": 30000, "s": "+", "l": "Pregnancies" },
+      { "v": 40, "s": "+", "l": "Years" },
+      { "v": 15, "s": "+", "l": "Centres" }
+    ],
+    "ctas": [
+      { "text": "Book Consultation" },
+      { "text": "WhatsApp Now" },
+      { "text": "Call Now" }
+    ]
+  },
+  "seo": {
+    "metaTitle": "Bavishi Fertility Centre — India's Trusted IVF Experts for 40+ Years",
+    "metaDescription": "Premium fertility care across 15 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
+    "ogTitle": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "ogDescription": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care."
+  }
+}
