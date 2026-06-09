@@ -23,6 +23,7 @@ import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer"
 import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { resolveService, type ResolvedService, type ServiceSource } from "@/lib/services";
+import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
 
 let cached: Promise<Payload> | null = null;
 
@@ -177,6 +178,69 @@ export const getService = reactCache(
       },
       ["service-by-slug", slug],
       { tags: [cacheTags.collectionList("services"), cacheTags.collectionItem("services", slug)] },
+    )(),
+);
+
+/* ---------- Doctors (Wave 4.3) ---------- */
+
+/**
+ * Resolve a single doctor for `/doctors/[slug]`: the `doctors` doc shaped into
+ * the typed `Doctor` model the <DoctorProfile> renders and physicianSchema turns
+ * into JSON-LD. Cached + tagged `doctors`, `doctors:<slug>`. Falls back PER FIELD
+ * to the code default (src/lib/doctors.ts `DOCTORS`) — so an empty, partial, or
+ * unavailable CMS (e.g. table not yet pushed) renders byte-identically. React-
+ * cached per render. Returns undefined for a slug with no code entry (→ notFound).
+ */
+export const getDoctor = reactCache(
+  (slug: string): Promise<Doctor | undefined> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "doctors",
+            where: { slug: { equals: slug } },
+            limit: 1,
+            depth: 0,
+          });
+          return resolveDoctor(slug, res.docs[0] as DoctorSource);
+        } catch {
+          // Table not pushed yet / read error → typed code fallback.
+          return resolveDoctor(slug, null);
+        }
+      },
+      ["doctor-by-slug", slug],
+      { tags: [cacheTags.collectionList("doctors"), cacheTags.collectionItem("doctors", slug)] },
+    )(),
+);
+
+/**
+ * All doctors for the `/doctors` index, in the INTENTIONAL code order (founders/
+ * core first). Order is owned by the `DOCTORS` array — never Payload's query
+ * order: we fetch every doc, key it by slug, then map over `DOCTORS` overlaying
+ * each one via resolveDoctor (per-field fallback). An unavailable CMS degrades to
+ * the code defaults (byte-identical). Cached + tagged `doctors`. React-cached.
+ */
+export const getDoctors = reactCache(
+  (): Promise<Doctor[]> =>
+    unstable_cache(
+      async () => {
+        let bySlug = new Map<string, DoctorSource>();
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "doctors",
+            limit: DOCTORS.length + 50,
+            depth: 0,
+          });
+          bySlug = new Map(res.docs.map((d) => [(d as { slug: string }).slug, d as DoctorSource]));
+        } catch {
+          // Table not pushed yet / read error → all code defaults.
+        }
+        return DOCTORS.map((d) => resolveDoctor(d.slug, bySlug.get(d.slug) ?? null)!);
+      },
+      ["doctors-list"],
+      { tags: [cacheTags.collectionList("doctors")] },
     )(),
 );
 

@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { DoctorsIndex } from "@/components/doctor-page";
 import { JsonLd } from "@/components/json-ld";
-import { DOCTORS, physicianSchema } from "@/lib/doctors";
+import { physicianSchema } from "@/lib/doctors";
+import { getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 
 const URL = "/doctors";
@@ -19,26 +20,27 @@ export const metadata: Metadata = {
   },
 };
 
-const graph = [
-  {
-    "@type": "CollectionPage",
-    "@id": `${abs(URL)}#webpage`,
-    url: abs(URL),
-    name: "Our Fertility Specialists",
-    hasPart: DOCTORS.map((d) => ({ "@id": `${abs(`/doctors/${d.slug}`)}#physician` })),
-  },
-  breadcrumbSchema([
-    { name: "Home", url: "/" },
-    { name: "Doctors", url: URL },
-  ]),
-  ...DOCTORS.map((d) => physicianSchema(d)),
-];
+export default async function Page() {
+  const doctors = await getDoctors();
+  const graph = [
+    {
+      "@type": "CollectionPage",
+      "@id": `${abs(URL)}#webpage`,
+      url: abs(URL),
+      name: "Our Fertility Specialists",
+      hasPart: doctors.map((d) => ({ "@id": `${abs(`/doctors/${d.slug}`)}#physician` })),
+    },
+    breadcrumbSchema([
+      { name: "Home", url: "/" },
+      { name: "Doctors", url: URL },
+    ]),
+    ...doctors.map((d) => physicianSchema(d)),
+  ];
 
-export default function Page() {
   return (
     <>
       <JsonLd graph={graph} />
-      <DoctorsIndex />
+      <DoctorsIndex doctors={doctors} />
     </>
   );
 }

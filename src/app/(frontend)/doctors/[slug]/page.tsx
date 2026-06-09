@@ -2,10 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DoctorProfile } from "@/components/doctor-page";
 import { JsonLd } from "@/components/json-ld";
-import { DOCTORS, doctorBySlug, physicianSchema } from "@/lib/doctors";
+import { DOCTORS, physicianSchema } from "@/lib/doctors";
+import { getDoctor } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 
-/** Required for `output: "export"` — pre-render every doctor profile. */
+/* Pre-render every doctor profile. The slug registry stays code-driven (DOCTORS),
+ * so the static route set is identical regardless of CMS/DB state — only the
+ * per-doctor CONTENT resolves from the CMS (with a per-field fallback to the
+ * typed defaults). */
 export function generateStaticParams() {
   return DOCTORS.map((d) => ({ slug: d.slug }));
 }
@@ -14,7 +18,7 @@ export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await params;
-  const d = doctorBySlug(slug);
+  const d = await getDoctor(slug);
   if (!d) return {};
   const title = `${d.name} — ${d.specialty} | Bavishi Fertility Institute`;
   return {
@@ -33,7 +37,7 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const d = doctorBySlug(slug);
+  const d = await getDoctor(slug);
   if (!d) notFound();
 
   const graph = [

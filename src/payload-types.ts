@@ -72,6 +72,7 @@ export interface Config {
     authors: Author;
     categories: Category;
     services: Service;
+    doctors: Doctor;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -86,6 +87,7 @@ export interface Config {
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
+    doctors: DoctorsSelect<false> | DoctorsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -609,6 +611,174 @@ export interface Service {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctors".
+ */
+export interface Doctor {
+  id: number;
+  /**
+   * URL segment → /doctors/<slug>. Also the registry key.
+   */
+  slug: string;
+  name: string;
+  /**
+   * Post-nominal degrees, e.g. 'MBBS, MD'. Required once verified.
+   */
+  credentials?: string | null;
+  /**
+   * Human-readable specialty line shown on cards.
+   */
+  specialty: string;
+  /**
+   * Job title, e.g. 'Founder & Chief IVF Specialist'.
+   */
+  role: string;
+  /**
+   * Portrait image path, e.g. /assets/doctors/parth.webp (upload relation deferred).
+   */
+  image: string;
+  /**
+   * Display experience, e.g. '35+ yrs'.
+   */
+  experienceLabel?: string | null;
+  /**
+   * Numeric years (sorting/schema).
+   */
+  experienceYears?: number | null;
+  /**
+   * schema.org medicalSpecialty values, e.g. ReproductiveMedicine.
+   */
+  medicalSpecialty?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * City labels the doctor consults in (display).
+   */
+  cities?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Location slugs (city/area) for internal links + areaServed.
+   */
+  locations?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Treatment slugs the doctor practises.
+   */
+  treatments?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * One-line summary used on cards + schema description.
+   */
+  shortBio: string;
+  /**
+   * Full bio, one entry per paragraph (RichText deferred).
+   */
+  bio?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * schema.org knowsAbout expertise areas.
+   */
+  knowsAbout?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Education / degrees. Required (≥1) once verified.
+   */
+  alumniOf?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Professional society memberships.
+   */
+  memberOf?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Awards & recognition.
+   */
+  awards?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Advanced training / fellowships at named institutes.
+   */
+  training?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Books / notable publications authored.
+   */
+  publications?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Languages spoken (knowsLanguage).
+   */
+  languages?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * External profile/authority URLs (sameAs).
+   */
+  sameAs?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * ADMIN ONLY. Confirms degrees/experience are verified — gates YMYL reviewer use + schema claims. Requires non-empty credentials and ≥1 alumniOf entry.
+   */
+  verified?: boolean | null;
+  /**
+   * Visiting senior specialist who rotates across all centres (shows a single 'visits across cities' card).
+   */
+  visitsAllCentres?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -679,6 +849,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'services';
         value: number | Service;
+      } | null)
+    | ({
+        relationTo: 'doctors';
+        value: number | Doctor;
       } | null)
     | ({
         relationTo: 'media';
@@ -995,6 +1169,104 @@ export interface ServicesSelect<T extends boolean = true> {
         ogDescription?: T;
         ogImage?: T;
       };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "doctors_select".
+ */
+export interface DoctorsSelect<T extends boolean = true> {
+  slug?: T;
+  name?: T;
+  credentials?: T;
+  specialty?: T;
+  role?: T;
+  image?: T;
+  experienceLabel?: T;
+  experienceYears?: T;
+  medicalSpecialty?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  cities?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  locations?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  treatments?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  shortBio?: T;
+  bio?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  knowsAbout?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  alumniOf?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  memberOf?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  awards?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  training?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  publications?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  languages?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  sameAs?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  verified?: T;
+  visitsAllCentres?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

@@ -358,7 +358,9 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
 }
 
 /* ---------- /doctors — index ---------- */
-export function DoctorsIndex() {
+/* `doctors` is supplied by the server route (CMS-resolved, in code order); the
+ * DOCTORS default keeps the component reusable/standalone. */
+export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -379,7 +381,7 @@ export function DoctorsIndex() {
           subtitle="A family of fertility experts trusted by generations — credentialed, experienced and committed to honest, compassionate care."
         />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {DOCTORS.map((d) => (
+          {doctors.map((d) => (
             <StaggerItem key={d.slug}>
               <a href={doctorUrl(d.slug)} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                 <div className="relative aspect-[3/4] overflow-hidden bg-[color:var(--rose-soft)]/40">

@@ -668,3 +668,91 @@ export function reviewerNode(d: Doctor): Record<string, unknown> {
     ...(d.credentials ? { hasCredential: d.credentials } : {}),
   };
 }
+
+/* =====================================================================
+ * CMS resolver (Wave 4.3) — map a `doctors` collection doc onto the typed
+ * Doctor model the profile page + physicianSchema already consume, falling
+ * back PER FIELD to the code default (doctorBySlug) so a missing/partial CMS
+ * doc renders byte-identically (same convention as src/lib/services.ts and
+ * src/lib/homepage.ts). Kept here because this module is already client-safe
+ * (no payload / server-only import) and owns the Doctor type + DOCTORS
+ * defaults. ONLY the two /doctors* routes use this; the header menu, location/
+ * treatment/service consumers stay code-driven from DOCTORS.
+ *
+ * String-array fields are stored in the collection as arrays of `{ value }`
+ * rows (uniform subfield name), so the source carries them wrapped.
+ * ===================================================================== */
+type ValueRow = { value?: string | null };
+
+/** Loose source shape (decoupled from generated payload-types, like ServiceSource). */
+export type DoctorSource =
+  | {
+      name?: string | null;
+      credentials?: string | null;
+      specialty?: string | null;
+      medicalSpecialty?: ValueRow[] | null;
+      role?: string | null;
+      image?: string | null;
+      experienceLabel?: string | null;
+      experienceYears?: number | null;
+      cities?: ValueRow[] | null;
+      locations?: ValueRow[] | null;
+      treatments?: ValueRow[] | null;
+      shortBio?: string | null;
+      bio?: ValueRow[] | null;
+      knowsAbout?: ValueRow[] | null;
+      alumniOf?: ValueRow[] | null;
+      memberOf?: ValueRow[] | null;
+      awards?: ValueRow[] | null;
+      training?: ValueRow[] | null;
+      publications?: ValueRow[] | null;
+      languages?: ValueRow[] | null;
+      sameAs?: ValueRow[] | null;
+      verified?: boolean | null;
+      visitsAllCentres?: boolean | null;
+    }
+  | null
+  | undefined;
+
+/** Unwrap a `{ value }[]` CMS array to a string[]; `undefined` when empty. */
+const rows = (a: ValueRow[] | null | undefined): string[] | undefined =>
+  a && a.length ? a.map((x) => x.value ?? "") : undefined;
+
+/**
+ * Resolve a doctor: overlay the CMS `src` onto the typed code default for `slug`,
+ * field-by-field. Returns `undefined` for an unknown slug (caller → notFound).
+ * Required fields fall back to the code default; the optional `training` /
+ * `publications` / `visitsAllCentres` keep their `undefined` when absent so the
+ * JSON-LD/profile branches stay byte-identical.
+ */
+export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefined {
+  const def = doctorBySlug(slug);
+  if (!def) return undefined;
+  if (!src) return def;
+  return {
+    slug: def.slug,
+    name: src.name || def.name,
+    credentials: src.credentials ?? def.credentials,
+    specialty: src.specialty || def.specialty,
+    medicalSpecialty: rows(src.medicalSpecialty) ?? def.medicalSpecialty,
+    role: src.role || def.role,
+    image: src.image || def.image,
+    experienceLabel: src.experienceLabel ?? def.experienceLabel,
+    experienceYears: src.experienceYears ?? def.experienceYears,
+    cities: rows(src.cities) ?? def.cities,
+    locations: rows(src.locations) ?? def.locations,
+    treatments: rows(src.treatments) ?? def.treatments,
+    shortBio: src.shortBio || def.shortBio,
+    bio: rows(src.bio) ?? def.bio,
+    knowsAbout: rows(src.knowsAbout) ?? def.knowsAbout,
+    alumniOf: rows(src.alumniOf) ?? def.alumniOf,
+    memberOf: rows(src.memberOf) ?? def.memberOf,
+    awards: rows(src.awards) ?? def.awards,
+    training: rows(src.training) ?? def.training,
+    publications: rows(src.publications) ?? def.publications,
+    languages: rows(src.languages) ?? def.languages,
+    sameAs: rows(src.sameAs) ?? def.sameAs,
+    verified: src.verified ?? def.verified,
+    ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
+  };
+}
