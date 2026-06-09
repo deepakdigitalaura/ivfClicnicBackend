@@ -15,6 +15,8 @@
     "generate:importmap": "payload generate:importmap",
     "seed:contact": "node scripts/seed-contact.mjs",
     "seed:globals": "node scripts/seed-globals.mjs",
+    "seed:services:gen": "tsx --tsconfig tsconfig.json scripts/seed/gen-services.mts",
+    "seed:services": "node scripts/seed-services.mjs",
     "seo:snapshot": "node scripts/seo/snapshot.mjs",
     "seo:diff": "node scripts/seo/diff.mjs"
   },

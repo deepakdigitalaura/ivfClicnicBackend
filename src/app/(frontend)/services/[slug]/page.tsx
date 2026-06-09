@@ -2,15 +2,14 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { ServicePage } from "@/components/service-page";
 import { JsonLd } from "@/components/json-ld";
-import {
-  serviceContentBySlug,
-  serviceRegistryBySlug,
-  builtServiceParams,
-  serviceGraph,
-} from "@/lib/womens-health";
+import { serviceRegistryBySlug, builtServiceParams, serviceGraph } from "@/lib/womens-health";
+import { getService } from "@/lib/payload";
 import { abs } from "@/lib/seo";
 
-/** Pre-render every published maternity service (static export). */
+/* Pre-render every published maternity service. The published gate stays
+ * code-driven in 4.1 (registry), so the static route set is identical regardless
+ * of CMS/DB state — the per-page CONTENT is what resolves from the CMS (with a
+ * per-section fallback to the typed defaults). */
 export function generateStaticParams() {
   return builtServiceParams();
 }
@@ -19,31 +18,31 @@ export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await params;
-  const s = serviceContentBySlug(slug);
+  const content = await getService(slug);
   const reg = serviceRegistryBySlug(slug);
-  if (!s || !reg) return {};
+  if (!content || !reg) return {};
   return {
-    title: s.meta.title,
-    description: s.meta.description,
+    title: content.meta.title,
+    description: content.meta.description,
     alternates: { canonical: reg.href },
     openGraph: {
-      title: s.meta.title,
-      description: s.meta.description,
+      title: content.meta.title,
+      description: content.meta.description,
       url: abs(reg.href),
       type: "article",
-      images: [s.hero.image],
+      images: [content.hero.image],
     },
   };
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const s = serviceContentBySlug(slug);
-  if (!s) notFound();
+  const content = await getService(slug);
+  if (!content) notFound();
   return (
     <>
-      <JsonLd graph={serviceGraph(s)} />
-      <ServicePage slug={s.slug} />
+      <JsonLd graph={serviceGraph(content)} />
+      <ServicePage slug={slug} content={content} />
     </>
   );
 }

@@ -723,8 +723,24 @@ export const builtServiceParams = (): { slug: string }[] =>
 /* =====================================================================
  * Schema builder — mirrors treatmentGraph (MedicalWebPage +
  * MedicalProcedure/MedicalTest + Breadcrumb + FAQ + reviewedBy).
+ * ---------------------------------------------------------------------
+ * Takes the minimal, icon-free subset both the typed code default
+ * (ServiceContent) and the CMS-resolved model (ResolvedService, src/lib/
+ * services.ts) satisfy — so the route can feed it either, unchanged. Stays a
+ * pure builder with no Payload import (client bundles stay clean).
  * ===================================================================== */
-export function serviceGraph(s: ServiceContent): Record<string, unknown>[] {
+export type ServiceGraphInput = {
+  key: string;
+  slug: string;
+  breadcrumbName: string;
+  reviewerSlug: string;
+  lastReviewed: string;
+  schemaType: "MedicalProcedure" | "MedicalTest" | "MedicalTherapy";
+  meta: { title: string; description: string };
+  faqs: { q: string; a: string }[];
+};
+
+export function serviceGraph(s: ServiceGraphInput): Record<string, unknown>[] {
   const reg = WOMENS_HEALTH_SERVICES[s.key];
   const serviceName = reg?.name ?? s.breadcrumbName;
   const url = abs(reg?.href ?? `/services/${s.slug}`);

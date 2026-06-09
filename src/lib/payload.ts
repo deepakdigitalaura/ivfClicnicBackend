@@ -21,6 +21,7 @@ import { cacheTags } from "@/lib/cache-tags";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header";
+import { resolveService, type ResolvedService, type ServiceSource } from "@/lib/services";
 
 let cached: Promise<Payload> | null = null;
 
@@ -143,6 +144,40 @@ export async function getBlogBySlugDraft(slug: string): Promise<Blog | null> {
   });
   return res.docs[0] ?? null;
 }
+
+/* ---------- Services (Phase 4.1) ---------- */
+
+/**
+ * Resolve a maternity service for `/services/[slug]`: the `services` doc shaped
+ * into the plain, serialisable `ResolvedService` the <ServicePage> renders and
+ * serviceGraph() turns into JSON-LD. Cached + tagged `services`, `services:<slug>`.
+ * Falls back PER-SECTION to the code defaults (src/lib/services.ts) — so an
+ * empty, partial, or unavailable CMS (e.g. table not yet pushed) renders
+ * byte-identically. React-cached per render. Returns undefined for a slug with
+ * no template/registry behind it (caller → notFound).
+ */
+export const getService = reactCache(
+  (slug: string): Promise<ResolvedService | undefined> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "services",
+            where: { slug: { equals: slug } },
+            limit: 1,
+            depth: 1, // resolve seo.ogImage upload relation
+          });
+          return resolveService(slug, res.docs[0] as ServiceSource);
+        } catch {
+          // Table not pushed yet / read error → typed code fallback.
+          return resolveService(slug, null);
+        }
+      },
+      ["service-by-slug", slug],
+      { tags: [cacheTags.collectionList("services"), cacheTags.collectionItem("services", slug)] },
+    )(),
+);
 
 /**
  * Fetch a global by slug. Cached + tagged `global:<slug>`. Returns null on any

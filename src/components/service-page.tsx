@@ -13,12 +13,9 @@ import { SectionHead, Faq } from "@/components/ivf-page";
 import { MedicalReviewer } from "@/components/medical-reviewer";
 import { Linkify } from "@/components/linkify";
 import { doctorBySlug, doctorUrl } from "@/lib/doctors";
-import {
-  type ServiceHeading,
-  serviceContentBySlug,
-  relatedServices,
-  serviceHref,
-} from "@/lib/womens-health";
+import { type ServiceHeading } from "@/lib/womens-health";
+import { resolveServiceFromCode, type ResolvedService } from "@/lib/services";
+import { resolveIcon } from "@/lib/icon-map";
 
 /* ---------- heading renderer (data → SectionHead title) ---------- */
 function H({ h }: { h: ServiceHeading }) {
@@ -31,15 +28,17 @@ function H({ h }: { h: ServiceHeading }) {
 }
 
 /* ---------- reusable maternity service page ----------
- * Receives only the `slug` (a serializable string) and resolves the content
- * here, client-side, so the lucide icon *components* in the data never cross
- * the Server→Client boundary. The route builds JSON-LD server-side from the
- * same data via serviceGraph(). */
-export function ServicePage({ slug }: { slug: string }) {
-  const s = serviceContentBySlug(slug);
+ * Receives the CMS-resolved `content` as a fully-serializable prop (icons are
+ * NAMES, mapped back to Lucide components here via resolveIcon) — so the lucide
+ * *components* never cross the Server→Client boundary. When no prop is supplied
+ * it falls back to the typed code defaults for `slug` (coexistence), so the page
+ * still renders if a doc is missing. The route builds JSON-LD server-side from
+ * the same resolved data via serviceGraph(). */
+export function ServicePage({ slug, content }: { slug: string; content?: ResolvedService }) {
+  const s = content ?? resolveServiceFromCode(slug);
   if (!s) return null;
   const reviewer = doctorBySlug(s.reviewerSlug);
-  const related = relatedServices(s.related);
+  const related = s.related;
   // These maternity services are offered only in Ahmedabad — show the head-office
   // contact card instead of the all-India network section.
   const ahmedabadCentre = centresForLocationSlugs(["paldi"])[0];
@@ -213,18 +212,21 @@ export function ServicePage({ slug }: { slug: string }) {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow="What to Expect" title={<H h={s.process.heading} />} subtitle={s.process.subtitle} />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {s.process.steps.map((step, i) => (
+            {s.process.steps.map((step, i) => {
+              const StepIcon = resolveIcon(step.icon);
+              return (
               <StaggerItem key={step.t}>
                 <div className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                   <div className="flex items-center justify-between">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><step.icon className="h-6 w-6" /></div>
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><StepIcon className="h-6 w-6" /></div>
                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-semibold text-white shadow-sm shadow-[color:var(--rose)]/30 ring-4 ring-[color:var(--rose)]/10">{i + 1}</span>
                   </div>
                   <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">{step.t}</h3>
                   <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{step.d}</p>
                 </div>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
           {s.process.note && (
             <Reveal delay={0.1}>
@@ -241,15 +243,18 @@ export function ServicePage({ slug }: { slug: string }) {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow="Why Bavishi Fertility & Birthing" title={<><H h={s.whyUs.heading} /> in Ahmedabad</>} />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {s.whyUs.items.map((w) => (
+            {s.whyUs.items.map((w) => {
+              const WhyIcon = resolveIcon(w.icon);
+              return (
               <StaggerItem key={w.t}>
                 <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-shadow duration-500 hover:shadow-lift">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><w.icon className="h-6 w-6" /></div>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><WhyIcon className="h-6 w-6" /></div>
                   <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{w.t}</h3>
                   <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{w.d}</p>
                 </div>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -291,7 +296,7 @@ export function ServicePage({ slug }: { slug: string }) {
             <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
               {related.map((r) => (
                 <StaggerItem key={r.key}>
-                  <TreatmentCard icon={r.icon} title={r.name} desc={r.desc} href={serviceHref(r)} />
+                  <TreatmentCard icon={resolveIcon(r.icon)} title={r.name} desc={r.desc} href={r.href} />
                 </StaggerItem>
               ))}
             </Stagger>

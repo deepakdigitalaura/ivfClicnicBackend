@@ -71,6 +71,7 @@ export interface Config {
     blogs: Blog;
     authors: Author;
     categories: Category;
+    services: Service;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -84,6 +85,7 @@ export interface Config {
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
+    services: ServicesSelect<false> | ServicesSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -333,6 +335,278 @@ export interface Category {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services".
+ */
+export interface Service {
+  id: number;
+  /**
+   * URL segment → /services/<slug>. Also the registry key.
+   */
+  slug: string;
+  /**
+   * Service card title.
+   */
+  name: string;
+  /**
+   * One-line card description (registry).
+   */
+  desc?: string | null;
+  /**
+   * Registry card icon.
+   */
+  icon?:
+    | (
+        | 'ScanLine'
+        | 'Feather'
+        | 'Baby'
+        | 'Stethoscope'
+        | 'ShieldCheck'
+        | 'Users'
+        | 'HeartPulse'
+        | 'Activity'
+        | 'ClipboardList'
+        | 'CalendarCheck'
+        | 'Eye'
+        | 'Clock'
+        | 'Microscope'
+        | 'Sparkles'
+        | 'Hand'
+      )
+    | null;
+  /**
+   * Canonical page URL, e.g. /services/3d-4d-sonography.
+   */
+  href?: string | null;
+  /**
+   * Gates the live, crawlable location→service link.
+   */
+  published?: boolean | null;
+  /**
+   * Where the card points until published.
+   */
+  fallback?: string | null;
+  schemaType: 'MedicalProcedure' | 'MedicalTest' | 'MedicalTherapy';
+  /**
+   * Plain label used inside copy ("the scan").
+   */
+  shortName?: string | null;
+  breadcrumbName?: string | null;
+  /**
+   * Doctor slug for the medical reviewer (becomes a relationship once Doctors migrate).
+   */
+  reviewerSlug?: string | null;
+  /**
+   * Review date, e.g. 2026-06-01.
+   */
+  lastReviewed?: string | null;
+  hero?: {
+    eyebrow?: string | null;
+    h1?: string | null;
+    /**
+     * Italic emphasis word.
+     */
+    h1Em?: string | null;
+    tagline?: string | null;
+    badges?:
+      | {
+          badge: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Hero image path (an upload relation can replace this later).
+     */
+    image?: string | null;
+    imageAlt?: string | null;
+  };
+  overview: {
+    heading: {
+      lead: string;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Optional callout box.
+     */
+    aside?: {
+      title?: string | null;
+      body?: string | null;
+    };
+  };
+  benefits: {
+    heading: {
+      lead: string;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          item: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whoFor: {
+    heading: {
+      lead: string;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          item: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  process: {
+    heading: {
+      lead: string;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    steps?:
+      | {
+          icon:
+            | 'ScanLine'
+            | 'Feather'
+            | 'Baby'
+            | 'Stethoscope'
+            | 'ShieldCheck'
+            | 'Users'
+            | 'HeartPulse'
+            | 'Activity'
+            | 'ClipboardList'
+            | 'CalendarCheck'
+            | 'Eye'
+            | 'Clock'
+            | 'Microscope'
+            | 'Sparkles'
+            | 'Hand';
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+    note?: string | null;
+  };
+  whyUs: {
+    heading: {
+      lead: string;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    items?:
+      | {
+          icon:
+            | 'ScanLine'
+            | 'Feather'
+            | 'Baby'
+            | 'Stethoscope'
+            | 'ShieldCheck'
+            | 'Users'
+            | 'HeartPulse'
+            | 'Activity'
+            | 'ClipboardList'
+            | 'CalendarCheck'
+            | 'Eye'
+            | 'Clock'
+            | 'Microscope'
+            | 'Sparkles'
+            | 'Hand';
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Optional explainer block — leave empty to hide.
+   */
+  infoNote?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  faqs?:
+    | {
+        q: string;
+        a: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Other service slugs/keys to cross-link.
+   */
+  related?:
+    | {
+        key: string;
+        id?: string | null;
+      }[]
+    | null;
+  seo?: {
+    metaTitle?: string | null;
+    metaDescription?: string | null;
+    /**
+     * Open Graph title. Falls back to metaTitle if empty.
+     */
+    ogTitle?: string | null;
+    /**
+     * Open Graph description. Falls back to metaDescription if empty.
+     */
+    ogDescription?: string | null;
+    /**
+     * Open Graph / social share image. Falls back to the default hero image if empty.
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -399,6 +673,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'categories';
         value: number | Category;
+      } | null)
+    | ({
+        relationTo: 'services';
+        value: number | Service;
       } | null)
     | ({
         relationTo: 'media';
@@ -549,6 +827,175 @@ export interface CategoriesSelect<T extends boolean = true> {
   description?: T;
   updatedAt?: T;
   createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "services_select".
+ */
+export interface ServicesSelect<T extends boolean = true> {
+  slug?: T;
+  name?: T;
+  desc?: T;
+  icon?: T;
+  href?: T;
+  published?: T;
+  fallback?: T;
+  schemaType?: T;
+  shortName?: T;
+  breadcrumbName?: T;
+  reviewerSlug?: T;
+  lastReviewed?: T;
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        h1?: T;
+        h1Em?: T;
+        tagline?: T;
+        badges?:
+          | T
+          | {
+              badge?: T;
+              id?: T;
+            };
+        image?: T;
+        imageAlt?: T;
+      };
+  overview?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        aside?:
+          | T
+          | {
+              title?: T;
+              body?: T;
+            };
+      };
+  benefits?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+      };
+  whoFor?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              item?: T;
+              id?: T;
+            };
+      };
+  process?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        steps?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+        note?: T;
+      };
+  whyUs?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        items?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+      };
+  infoNote?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  faqs?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  related?:
+    | T
+    | {
+        key?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

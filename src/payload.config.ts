@@ -21,6 +21,7 @@ import { Pages } from "./collections/Pages";
 import { Blogs } from "./collections/Blogs";
 import { Authors } from "./collections/Authors";
 import { Categories } from "./collections/Categories";
+import { Services } from "./collections/Services";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
 import { BlogHub } from "./globals/BlogHub";
@@ -34,7 +35,7 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
   },
-  collections: [Pages, Blogs, Authors, Categories, Media, Users],
+  collections: [Pages, Blogs, Authors, Categories, Services, Media, Users],
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
