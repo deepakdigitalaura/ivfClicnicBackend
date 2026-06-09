@@ -11,14 +11,18 @@
  * empty-CMS path renders byte-identically.
  *
  * Pure module (lucide-react only) — safe in both server and client bundles.
- * Scoped to the icons used by the Services/Women's-Health surface today;
- * extend the set (and ICON_NAMES) as later waves (Treatments) adopt it.
+ * Scoped to the icons used by the Services/Women's-Health surface plus the
+ * Treatments surface (Wave 4.4); extend the set (and ICON_NAMES) as later
+ * waves adopt it.
  * ===================================================================== */
 import type { LucideIcon } from "lucide-react";
 import {
   ScanLine, Feather, Baby, Stethoscope, ShieldCheck, Users,
   HeartPulse, Activity, ClipboardList, CalendarCheck, Eye, Clock,
   Microscope, Sparkles, Hand,
+  // ---- Treatments surface (Wave 4.4) ----
+  FlaskConical, Filter, Magnet, Layers, Zap, Egg, Droplets, Snowflake,
+  Dna, Beaker, Target, Leaf, ListChecks, ClipboardCheck, Syringe, Award,
 } from "lucide-react";
 
 /** Name → Lucide component. Keys are the curated `select` options stored in
@@ -28,6 +32,9 @@ export const ICON_MAP = {
   ScanLine, Feather, Baby, Stethoscope, ShieldCheck, Users,
   HeartPulse, Activity, ClipboardList, CalendarCheck, Eye, Clock,
   Microscope, Sparkles, Hand,
+  // ---- Treatments surface (Wave 4.4) ----
+  FlaskConical, Filter, Magnet, Layers, Zap, Egg, Droplets, Snowflake,
+  Dna, Beaker, Target, Leaf, ListChecks, ClipboardCheck, Syringe, Award,
 } as const satisfies Record<string, LucideIcon>;
 
 export type IconName = keyof typeof ICON_MAP;

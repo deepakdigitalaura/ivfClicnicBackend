@@ -24,6 +24,8 @@ import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header"
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { resolveService, type ResolvedService, type ServiceSource } from "@/lib/services";
 import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
+import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
+import { TREATMENTS } from "@/lib/treatments";
 
 let cached: Promise<Payload> | null = null;
 
@@ -241,6 +243,71 @@ export const getDoctors = reactCache(
       },
       ["doctors-list"],
       { tags: [cacheTags.collectionList("doctors")] },
+    )(),
+);
+
+/* ---------- Treatments (Wave 4.4) ---------- */
+
+/**
+ * Resolve a single treatment for a `/treatment` route: the `treatments` doc
+ * shaped into the plain, serialisable `ResolvedTreatment` the <TreatmentPage>
+ * renders and treatmentGraph() turns into JSON-LD. Cached + tagged `treatments`,
+ * `treatments:<slug>`. Falls back PER-SECTION to the code defaults
+ * (src/lib/treatment-content.ts → treatmentBySlug) — so an empty, partial, or
+ * unavailable CMS (e.g. table not yet pushed) renders byte-identically. React-
+ * cached per render. Returns undefined for a slug with no template/registry
+ * behind it (caller → notFound).
+ */
+export const getTreatment = reactCache(
+  (slug: string): Promise<ResolvedTreatment | undefined> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "treatments",
+            where: { slug: { equals: slug } },
+            limit: 1,
+            depth: 0,
+          });
+          return resolveTreatment(slug, res.docs[0] as TreatmentSource);
+        } catch {
+          // Table not pushed yet / read error → typed code fallback.
+          return resolveTreatment(slug, null);
+        }
+      },
+      ["treatment-by-slug", slug],
+      { tags: [cacheTags.collectionList("treatments"), cacheTags.collectionItem("treatments", slug)] },
+    )(),
+);
+
+/**
+ * All treatments in the INTENTIONAL code order (the `TREATMENTS` array order —
+ * never Payload's query order): we fetch every doc, key it by slug, then map
+ * over `TREATMENTS` overlaying each one via resolveTreatment (per-section
+ * fallback). An unavailable CMS degrades to the code defaults (byte-identical).
+ * Cached + tagged `treatments`. React-cached.
+ */
+export const getTreatments = reactCache(
+  (): Promise<ResolvedTreatment[]> =>
+    unstable_cache(
+      async () => {
+        let bySlug = new Map<string, TreatmentSource>();
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "treatments",
+            limit: TREATMENTS.length + 50,
+            depth: 0,
+          });
+          bySlug = new Map(res.docs.map((d) => [(d as { slug: string }).slug, d as TreatmentSource]));
+        } catch {
+          // Table not pushed yet / read error → all code defaults.
+        }
+        return TREATMENTS.map((t) => resolveTreatment(t.slug, bySlug.get(t.slug) ?? null)!);
+      },
+      ["treatments-list"],
+      { tags: [cacheTags.collectionList("treatments")] },
     )(),
 );
 

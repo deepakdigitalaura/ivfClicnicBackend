@@ -4453,7 +4453,15 @@ export const treatmentBySlug = (slug: string) => TREATMENTS.find((t) => t.slug =
  *   MedicalWebPage ─reviewedBy→ Physician ─worksFor→ #organization
  *   MedicalProcedure ─provider→ #organization
  *   FAQPage / VideoObject / BreadcrumbList                                   */
-export function treatmentGraph(t: Treatment): Record<string, unknown>[] {
+/** The plain-data subset treatmentGraph() reads — no icon-bearing fields — so a
+ *  CMS-resolved `ResolvedTreatment` (Wave 4.4) can be passed here as well as a
+ *  code `Treatment`. Both are structurally assignable. */
+export type TreatmentGraphInput = Pick<
+  Treatment,
+  "href" | "name" | "alternateName" | "meta" | "procedure" | "breadcrumbName" | "lastReviewed" | "reviewerSlug" | "faqs" | "video"
+>;
+
+export function treatmentGraph(t: TreatmentGraphInput): Record<string, unknown>[] {
   const url = abs(t.href);
   const reviewer = doctorBySlug(t.reviewerSlug);
 

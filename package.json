@@ -19,6 +19,9 @@
     "seed:services": "node scripts/seed-services.mjs",
     "seed:doctors:gen": "tsx --tsconfig tsconfig.json scripts/seed/gen-doctors.mts",
     "seed:doctors": "node scripts/seed-doctors.mjs",
+    "seed:treatments:gen": "tsx --tsconfig tsconfig.json scripts/seed/gen-treatments.mts",
+    "seed:treatments": "node scripts/seed-treatments.mjs",
+    "seed:treatments:roundtrip": "tsx --tsconfig tsconfig.json scripts/seed/roundtrip-treatments.mts",
     "seo:snapshot": "node scripts/seo/snapshot.mjs",
     "seo:diff": "node scripts/seo/diff.mjs"
   },

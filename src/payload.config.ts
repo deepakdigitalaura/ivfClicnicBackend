@@ -23,6 +23,7 @@ import { Authors } from "./collections/Authors";
 import { Categories } from "./collections/Categories";
 import { Services } from "./collections/Services";
 import { Doctors } from "./collections/Doctors";
+import { Treatments } from "./collections/Treatments";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
 import { BlogHub } from "./globals/BlogHub";
@@ -37,7 +38,7 @@ export default buildConfig({
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
   },
-  collections: [Pages, Blogs, Authors, Categories, Services, Doctors, Media, Users],
+  collections: [Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Media, Users],
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",

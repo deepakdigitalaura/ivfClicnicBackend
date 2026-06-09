@@ -13,8 +13,10 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { SectionHead, Faq } from "@/components/ivf-page";
 import { MedicalReviewer } from "@/components/medical-reviewer";
 import { Linkify } from "@/components/linkify";
-import type { Heading } from "@/lib/treatments";
+import type { Heading, Treatment } from "@/lib/treatments";
 import { treatmentCardData, treatmentBySlug } from "@/lib/treatments";
+import { resolveIcon } from "@/lib/icon-map";
+import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
 import { doctorsForTreatment, doctorUrl, doctorBySlug } from "@/lib/doctors";
 import { blogsForTreatment } from "@/lib/blogs";
@@ -303,13 +305,31 @@ function DoctorCarousel({ docs, label }: { docs: Doctor[]; label: string }) {
   );
 }
 
+/* ---------- CMS content → render-ready Treatment ----------
+ * A `ResolvedTreatment` (Wave 4.4) carries icons as serialisable NAMES so it can
+ * cross the Server→Client boundary as a prop. Map those names back to the Lucide
+ * components the JSX renders — yielding an object structurally identical to a
+ * code `Treatment`, so the rest of the template is untouched. */
+function toView(c: ResolvedTreatment): Treatment {
+  return {
+    ...c,
+    ...(c.types ? { types: { ...c.types, items: c.types.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
+    process: { ...c.process, steps: c.process.steps.map((s) => ({ icon: resolveIcon(s.icon), n: s.n, t: s.t, d: s.d })) },
+    ...(c.technology ? { technology: { ...c.technology, items: c.technology.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
+    ...(c.whyUs ? { whyUs: { ...c.whyUs, items: c.whyUs.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
+  } as Treatment;
+}
+
 /* ---------- reusable treatment page ----------
- * Receives only the `slug` (a serializable string) and resolves the Treatment
- * data here, client-side. This keeps the lucide icon *components* in the data
- * from being passed across the Server→Client boundary (functions aren't
- * serializable). The route still builds JSON-LD server-side from the same data. */
-export function TreatmentPage({ slug }: { slug: string }) {
-  const t = treatmentBySlug(slug);
+ * Two data sources, byte-identical output:
+ *  - `content` (Wave 4.4): a CMS-resolved `ResolvedTreatment` (icons as names) —
+ *    used by migrated routes that read through getTreatment().
+ *  - `slug` (legacy/code path): resolves the code `Treatment` here, client-side.
+ * Keeping lucide icon *components* out of the props (functions aren't
+ * serializable) is why the CMS path passes names and re-resolves them in toView.
+ * The route still builds JSON-LD + metadata server-side from the same data. */
+export function TreatmentPage({ slug, content }: { slug?: string; content?: ResolvedTreatment }) {
+  const t = content ? toView(content) : slug ? treatmentBySlug(slug) : undefined;
   if (!t) return null;
   const reviewer = doctorBySlug(t.reviewerSlug);
   const docs = doctorsForTreatment(t.slug);

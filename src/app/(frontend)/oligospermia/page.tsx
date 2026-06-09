@@ -1,26 +1,41 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
-import { oligospermia, treatmentGraph } from "@/lib/treatments";
+import { treatmentGraph } from "@/lib/treatments";
+import { getTreatment } from "@/lib/payload";
 
-export const metadata: Metadata = {
-  title: oligospermia.meta.title,
-  description: oligospermia.meta.description,
-  alternates: { canonical: oligospermia.href },
-  openGraph: {
-    title: oligospermia.meta.title,
-    description: oligospermia.meta.description,
-    url: oligospermia.href,
-    type: "article",
-    images: [oligospermia.meta.ogImage],
-  },
-};
+/* Wave 4.4 D1 — pilot CMS migration. Content now reads from the `treatments`
+ * collection via getTreatment() through the resolver/fallback pipeline; an
+ * empty/unavailable CMS degrades to the code default (byte-identical). The
+ * route URL, canonical, metadata, JSON-LD and static generation are unchanged;
+ * the slug/registry source of truth stays code-owned (src/lib/treatments.ts). */
+const SLUG = "oligospermia";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTreatment(SLUG);
+  if (!t) return {};
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: { canonical: t.href },
+    openGraph: {
+      title: t.meta.title,
+      description: t.meta.description,
+      url: t.href,
+      type: "article",
+      images: [t.meta.ogImage],
+    },
+  };
+}
+
+export default async function Page() {
+  const t = await getTreatment(SLUG);
+  if (!t) notFound();
   return (
     <>
-      <JsonLd graph={treatmentGraph(oligospermia)} />
-      <TreatmentPage slug={oligospermia.slug} />
+      <JsonLd graph={treatmentGraph(t)} />
+      <TreatmentPage content={t} />
     </>
   );
 }

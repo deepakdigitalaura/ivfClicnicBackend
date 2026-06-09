@@ -73,6 +73,7 @@ export interface Config {
     categories: Category;
     services: Service;
     doctors: Doctor;
+    treatments: Treatment;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -88,6 +89,7 @@ export interface Config {
     categories: CategoriesSelect<false> | CategoriesSelect<true>;
     services: ServicesSelect<false> | ServicesSelect<true>;
     doctors: DoctorsSelect<false> | DoctorsSelect<true>;
+    treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -375,6 +377,22 @@ export interface Service {
         | 'Microscope'
         | 'Sparkles'
         | 'Hand'
+        | 'FlaskConical'
+        | 'Filter'
+        | 'Magnet'
+        | 'Layers'
+        | 'Zap'
+        | 'Egg'
+        | 'Droplets'
+        | 'Snowflake'
+        | 'Dna'
+        | 'Beaker'
+        | 'Target'
+        | 'Leaf'
+        | 'ListChecks'
+        | 'ClipboardCheck'
+        | 'Syringe'
+        | 'Award'
       )
     | null;
   /**
@@ -503,7 +521,23 @@ export interface Service {
             | 'Clock'
             | 'Microscope'
             | 'Sparkles'
-            | 'Hand';
+            | 'Hand'
+            | 'FlaskConical'
+            | 'Filter'
+            | 'Magnet'
+            | 'Layers'
+            | 'Zap'
+            | 'Egg'
+            | 'Droplets'
+            | 'Snowflake'
+            | 'Dna'
+            | 'Beaker'
+            | 'Target'
+            | 'Leaf'
+            | 'ListChecks'
+            | 'ClipboardCheck'
+            | 'Syringe'
+            | 'Award';
           /**
            * Title.
            */
@@ -542,7 +576,23 @@ export interface Service {
             | 'Clock'
             | 'Microscope'
             | 'Sparkles'
-            | 'Hand';
+            | 'Hand'
+            | 'FlaskConical'
+            | 'Filter'
+            | 'Magnet'
+            | 'Layers'
+            | 'Zap'
+            | 'Egg'
+            | 'Droplets'
+            | 'Snowflake'
+            | 'Dna'
+            | 'Beaker'
+            | 'Target'
+            | 'Leaf'
+            | 'ListChecks'
+            | 'ClipboardCheck'
+            | 'Syringe'
+            | 'Award';
           /**
            * Title.
            */
@@ -779,6 +829,516 @@ export interface Doctor {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "treatments".
+ */
+export interface Treatment {
+  id: number;
+  /**
+   * Treatment key (matches the code registry slug).
+   */
+  slug: string;
+  /**
+   * Canonical page URL, e.g. /what-is-ivf. The route/registry stays code-owned.
+   */
+  href?: string | null;
+  /**
+   * Full treatment name (schema.org MedicalProcedure name).
+   */
+  name: string;
+  /**
+   * Plain label used inside copy ("IVF").
+   */
+  shortName?: string | null;
+  /**
+   * Optional alternate name (schema.org alternateName).
+   */
+  alternateName?: string | null;
+  breadcrumbName?: string | null;
+  /**
+   * Doctor slug for the medical reviewer (becomes a relationship once entity graph migrates).
+   */
+  reviewerSlug?: string | null;
+  /**
+   * Review date, e.g. 2026-06-01.
+   */
+  lastReviewed?: string | null;
+  /**
+   * Page metadata (title/description/OG image).
+   */
+  meta?: {
+    title?: string | null;
+    description?: string | null;
+    /**
+     * OG image path (an upload relation can replace this later).
+     */
+    ogImage?: string | null;
+  };
+  /**
+   * schema.org MedicalProcedure fields.
+   */
+  procedure?: {
+    /**
+     * e.g. https://schema.org/NoninvasiveProcedure
+     */
+    procedureType?: string | null;
+    bodyLocation?: string | null;
+    howPerformed?: string | null;
+    followup?: string | null;
+  };
+  hero?: {
+    eyebrow?: string | null;
+    h1?: string | null;
+    /**
+     * Italic emphasis fragment.
+     */
+    h1Em?: string | null;
+    tagline?: string | null;
+    badges?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Hero image path.
+     */
+    image?: string | null;
+    imageAlt?: string | null;
+  };
+  whatIs?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    paragraphs?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+    /**
+     * Optional callout box — leave the title empty to hide.
+     */
+    aside?: {
+      title?: string | null;
+      body?: string | null;
+    };
+  };
+  benefits?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Optional 'types of …' icon-card grid — leave empty to hide.
+   */
+  types?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          icon:
+            | 'ScanLine'
+            | 'Feather'
+            | 'Baby'
+            | 'Stethoscope'
+            | 'ShieldCheck'
+            | 'Users'
+            | 'HeartPulse'
+            | 'Activity'
+            | 'ClipboardList'
+            | 'CalendarCheck'
+            | 'Eye'
+            | 'Clock'
+            | 'Microscope'
+            | 'Sparkles'
+            | 'Hand'
+            | 'FlaskConical'
+            | 'Filter'
+            | 'Magnet'
+            | 'Layers'
+            | 'Zap'
+            | 'Egg'
+            | 'Droplets'
+            | 'Snowflake'
+            | 'Dna'
+            | 'Beaker'
+            | 'Target'
+            | 'Leaf'
+            | 'ListChecks'
+            | 'ClipboardCheck'
+            | 'Syringe'
+            | 'Award';
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  whoNeedsIt?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  process?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    steps?:
+      | {
+          icon:
+            | 'ScanLine'
+            | 'Feather'
+            | 'Baby'
+            | 'Stethoscope'
+            | 'ShieldCheck'
+            | 'Users'
+            | 'HeartPulse'
+            | 'Activity'
+            | 'ClipboardList'
+            | 'CalendarCheck'
+            | 'Eye'
+            | 'Clock'
+            | 'Microscope'
+            | 'Sparkles'
+            | 'Hand'
+            | 'FlaskConical'
+            | 'Filter'
+            | 'Magnet'
+            | 'Layers'
+            | 'Zap'
+            | 'Egg'
+            | 'Droplets'
+            | 'Snowflake'
+            | 'Dna'
+            | 'Beaker'
+            | 'Target'
+            | 'Leaf'
+            | 'ListChecks'
+            | 'ClipboardCheck'
+            | 'Syringe'
+            | 'Award';
+          /**
+           * Step number, e.g. "01".
+           */
+          n: string;
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+    note?: string | null;
+  };
+  /**
+   * Optional day-by-day timeline — leave items empty to hide.
+   */
+  timeline?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          day: string;
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+    chips?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    chipsNote?: string | null;
+  };
+  /**
+   * Optional explainer video — leave the YouTube id empty to hide.
+   */
+  video?: {
+    /**
+     * YouTube video id.
+     */
+    id?: string | null;
+    eyebrow?: string | null;
+    title?: string | null;
+    description?: string | null;
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+  };
+  /**
+   * Optional technology/laboratory icon-card grid — leave items empty to hide.
+   */
+  technology?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    eyebrow?: string | null;
+    subtitle?: string | null;
+    items?:
+      | {
+          icon:
+            | 'ScanLine'
+            | 'Feather'
+            | 'Baby'
+            | 'Stethoscope'
+            | 'ShieldCheck'
+            | 'Users'
+            | 'HeartPulse'
+            | 'Activity'
+            | 'ClipboardList'
+            | 'CalendarCheck'
+            | 'Eye'
+            | 'Clock'
+            | 'Microscope'
+            | 'Sparkles'
+            | 'Hand'
+            | 'FlaskConical'
+            | 'Filter'
+            | 'Magnet'
+            | 'Layers'
+            | 'Zap'
+            | 'Egg'
+            | 'Droplets'
+            | 'Snowflake'
+            | 'Dna'
+            | 'Beaker'
+            | 'Target'
+            | 'Leaf'
+            | 'ListChecks'
+            | 'ClipboardCheck'
+            | 'Syringe'
+            | 'Award';
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Optional 'why Bavishi Fertility Institute' icon-card grid — leave items empty to hide.
+   */
+  whyUs?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    items?:
+      | {
+          icon:
+            | 'ScanLine'
+            | 'Feather'
+            | 'Baby'
+            | 'Stethoscope'
+            | 'ShieldCheck'
+            | 'Users'
+            | 'HeartPulse'
+            | 'Activity'
+            | 'ClipboardList'
+            | 'CalendarCheck'
+            | 'Eye'
+            | 'Clock'
+            | 'Microscope'
+            | 'Sparkles'
+            | 'Hand'
+            | 'FlaskConical'
+            | 'Filter'
+            | 'Magnet'
+            | 'Layers'
+            | 'Zap'
+            | 'Egg'
+            | 'Droplets'
+            | 'Snowflake'
+            | 'Dna'
+            | 'Beaker'
+            | 'Target'
+            | 'Leaf'
+            | 'ListChecks'
+            | 'ClipboardCheck'
+            | 'Syringe'
+            | 'Award';
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  success?: {
+    factors?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+    note?: string | null;
+  };
+  cost?: {
+    includes?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  risks?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          /**
+           * Title.
+           */
+          t: string;
+          /**
+           * Description.
+           */
+          d: string;
+          /**
+           * How we help.
+           */
+          help: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Optional preparation tips — leave items empty to hide.
+   */
+  preparation?: {
+    heading?: {
+      lead?: string | null;
+      /**
+       * Italic emphasis fragment (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    items?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  faqs?:
+    | {
+        q: string;
+        a: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Other treatment slugs to cross-link (resolved via the code-owned registry).
+   */
+  related?:
+    | {
+        slug: string;
+        id?: string | null;
+      }[]
+    | null;
+  cta?: {
+    heading?: string | null;
+    /**
+     * Italic emphasis fragment.
+     */
+    headingEm?: string | null;
+    subtitle?: string | null;
+  };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
 export interface User {
@@ -853,6 +1413,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'doctors';
         value: number | Doctor;
+      } | null)
+    | ({
+        relationTo: 'treatments';
+        value: number | Treatment;
       } | null)
     | ({
         relationTo: 'media';
@@ -1267,6 +1831,305 @@ export interface DoctorsSelect<T extends boolean = true> {
       };
   verified?: T;
   visitsAllCentres?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "treatments_select".
+ */
+export interface TreatmentsSelect<T extends boolean = true> {
+  slug?: T;
+  href?: T;
+  name?: T;
+  shortName?: T;
+  alternateName?: T;
+  breadcrumbName?: T;
+  reviewerSlug?: T;
+  lastReviewed?: T;
+  meta?:
+    | T
+    | {
+        title?: T;
+        description?: T;
+        ogImage?: T;
+      };
+  procedure?:
+    | T
+    | {
+        procedureType?: T;
+        bodyLocation?: T;
+        howPerformed?: T;
+        followup?: T;
+      };
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        h1?: T;
+        h1Em?: T;
+        tagline?: T;
+        badges?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        image?: T;
+        imageAlt?: T;
+      };
+  whatIs?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        paragraphs?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+        aside?:
+          | T
+          | {
+              title?: T;
+              body?: T;
+            };
+      };
+  benefits?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  types?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+      };
+  whoNeedsIt?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  process?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        steps?:
+          | T
+          | {
+              icon?: T;
+              n?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+        note?: T;
+      };
+  timeline?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              day?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+        chips?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        chipsNote?: T;
+      };
+  video?:
+    | T
+    | {
+        id?: T;
+        eyebrow?: T;
+        title?: T;
+        description?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+      };
+  technology?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        eyebrow?: T;
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+      };
+  whyUs?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        items?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
+      };
+  success?:
+    | T
+    | {
+        factors?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+        note?: T;
+      };
+  cost?:
+    | T
+    | {
+        includes?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  risks?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              t?: T;
+              d?: T;
+              help?: T;
+              id?: T;
+            };
+      };
+  preparation?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  faqs?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  related?:
+    | T
+    | {
+        slug?: T;
+        id?: T;
+      };
+  cta?:
+    | T
+    | {
+        heading?: T;
+        headingEm?: T;
+        subtitle?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -1800,6 +2663,22 @@ export interface Homepage {
                 | 'Microscope'
                 | 'Sparkles'
                 | 'Hand'
+                | 'FlaskConical'
+                | 'Filter'
+                | 'Magnet'
+                | 'Layers'
+                | 'Zap'
+                | 'Egg'
+                | 'Droplets'
+                | 'Snowflake'
+                | 'Dna'
+                | 'Beaker'
+                | 'Target'
+                | 'Leaf'
+                | 'ListChecks'
+                | 'ClipboardCheck'
+                | 'Syringe'
+                | 'Award'
               )
             | null;
           /**
