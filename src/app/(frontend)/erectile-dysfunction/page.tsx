@@ -1,26 +1,36 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
-import { erectileDysfunction, treatmentGraph } from "@/lib/treatments";
+import { treatmentGraph } from "@/lib/treatments";
+import { getTreatment } from "@/lib/payload";
 
-export const metadata: Metadata = {
-  title: erectileDysfunction.meta.title,
-  description: erectileDysfunction.meta.description,
-  alternates: { canonical: erectileDysfunction.href },
-  openGraph: {
-    title: erectileDysfunction.meta.title,
-    description: erectileDysfunction.meta.description,
-    url: erectileDysfunction.href,
-    type: "article",
-    images: [erectileDysfunction.meta.ogImage],
-  },
-};
+const SLUG = "erectile-dysfunction";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTreatment(SLUG);
+  if (!t) return {};
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: { canonical: t.href },
+    openGraph: {
+      title: t.meta.title,
+      description: t.meta.description,
+      url: t.href,
+      type: "article",
+      images: [t.meta.ogImage],
+    },
+  };
+}
+
+export default async function Page() {
+  const t = await getTreatment(SLUG);
+  if (!t) notFound();
   return (
     <>
-      <JsonLd graph={treatmentGraph(erectileDysfunction)} />
-      <TreatmentPage slug={erectileDysfunction.slug} />
+      <JsonLd graph={treatmentGraph(t)} />
+      <TreatmentPage content={t} />
     </>
   );
 }

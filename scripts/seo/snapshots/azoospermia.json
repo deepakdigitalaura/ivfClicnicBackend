@@ -1,0 +1,381 @@
+{
+  "route": "/azoospermia",
+  "title": "Azoospermia (Zero Sperm Count) Treatment — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/azoospermia",
+  "meta": {
+    "description": "Azoospermia — no sperm in the ejaculate — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1984.",
+    "og:description": "Azoospermia — no sperm in the ejaculate — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1984.",
+    "og:image": "https://ivfclinic.com/assets/conditions/azoospermia.png",
+    "og:title": "Azoospermia (Zero Sperm Count) Treatment — Bavishi Fertility Institute",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/azoospermia",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/azoospermia#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "Zero Sperm Count (Azoospermia) Treatment"
+          },
+          "description": "Azoospermia — no sperm in the ejaculate — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1984.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "Azoospermia (Zero Sperm Count) Treatment — Bavishi Fertility Institute",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+            "jobTitle": "Co-director & IVF Specialist",
+            "name": "Dr. Parth Bavishi",
+            "url": "https://ivfclinic.com/doctors/parth-bavishi"
+          },
+          "url": "https://ivfclinic.com/azoospermia"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "alternateName": "Zero Sperm Count",
+          "bodyLocation": "Testes / Epididymis",
+          "followup": "Recovered sperm can be used fresh or frozen for ICSI; a pregnancy test follows embryo transfer.",
+          "howPerformed": "Azoospermia is classified as obstructive or non-obstructive after evaluation; sperm are recovered surgically (PESA, TESA or Micro-TESE) where possible and used to fertilise eggs by ICSI.",
+          "name": "Zero Sperm Count (Azoospermia) Treatment",
+          "procedureType": "https://schema.org/MedicalProcedure",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Treatments",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/azoospermia",
+              "name": "Azoospermia",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. In many men sperm can be retrieved directly from the testes or epididymis and used with ICSI. Where it cannot, donor sperm is an option."
+              },
+              "name": "Does azoospermia mean I can never have a child?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Obstructive means sperm are made normally but blocked from getting out; non-obstructive means production itself is very low. The treatment differs accordingly."
+              },
+              "name": "What is the difference between obstructive and non-obstructive azoospermia?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Microsurgical testicular sperm extraction — using an operating microscope to locate and retrieve the small pockets of sperm production in non-obstructive azoospermia."
+              },
+              "name": "What is Micro-TESE?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It is done under anaesthesia, so it is not painful during the procedure. Mild soreness afterwards settles quickly."
+              },
+              "name": "Is sperm retrieval painful?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. Surplus sperm are frozen so they can be used for future ICSI cycles without repeating surgery."
+              },
+              "name": "Can retrieved sperm be frozen?"
+            }
+          ]
+        },
+        {
+          "@type": "VideoObject",
+          "contentUrl": "https://www.youtube.com/watch?v=qdT9bMuYqfE",
+          "description": "Dr. Himanshu Bavishi explains what azoospermia (zero sperm count / NIL count) is, why it happens and how it can be treated — so you understand your options clearly.",
+          "embedUrl": "https://www.youtube-nocookie.com/embed/qdT9bMuYqfE",
+          "name": "Azoospermia क्या है? — Dr. Himanshu Bavishi",
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "thumbnailUrl": "https://img.youtube.com/vi/qdT9bMuYqfE/hqdefault.jpg",
+          "uploadDate": "2023-01-01"
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — Pramukhswami Medical College, Karamsad (2009)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — Pramukhswami Medical College, Karamsad (2012)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Rose of Paracelsus Award — European Medical Association",
+            "Most Prominent IVF Specialist — presented by the Chief Minister of Gujarat"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/parth.webp",
+          "jobTitle": "Co-director & IVF Specialist",
+          "knowsAbout": [
+            "Male Infertility",
+            "Andrology",
+            "Intracytoplasmic Sperm Injection",
+            "Surgical Sperm Retrieval",
+            "Azoospermia"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Andrology"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR)"
+            }
+          ],
+          "name": "Dr. Parth Bavishi",
+          "url": "https://ivfclinic.com/doctors/parth-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/anand",
+    "/locations/bhavnagar",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}
