@@ -1,0 +1,389 @@
+{
+  "route": "/laser-assisted-hatching",
+  "title": "Laser-Assisted Hatching (LAH) — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/laser-assisted-hatching",
+  "meta": {
+    "description": "What is laser-assisted hatching? An FDA-approved laser creates a small opening in the embryo's outer shell to support implantation, in selected IVF cases at Bavishi Fertility Institute.",
+    "og:description": "What is laser-assisted hatching? An FDA-approved laser creates a small opening in the embryo's outer shell to support implantation, in selected IVF cases at Bavishi Fertility Institute.",
+    "og:image": "https://ivfclinic.com/assets/ivf-icsi.png",
+    "og:title": "Laser-Assisted Hatching (LAH) — Bavishi Fertility Institute",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/laser-assisted-hatching",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/laser-assisted-hatching#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "Laser-Assisted Hatching"
+          },
+          "description": "What is laser-assisted hatching? An FDA-approved laser creates a small opening in the embryo's outer shell to support implantation, in selected IVF cases at Bavishi Fertility Institute.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "Laser-Assisted Hatching (LAH) — Bavishi Fertility Institute",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+            "jobTitle": "Founder & Chief IVF Specialist",
+            "name": "Dr. Himanshu Bavishi",
+            "url": "https://ivfclinic.com/doctors/himanshu-bavishi"
+          },
+          "url": "https://ivfclinic.com/laser-assisted-hatching"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "alternateName": "Assisted Hatching",
+          "bodyLocation": "Embryo (zona pellucida)",
+          "followup": "The embryo is then transferred by the standard procedure; a pregnancy test follows about two weeks later.",
+          "howPerformed": "On the day of embryo transfer, a dedicated FDA-approved laser makes a small, precise opening in the zona pellucida — the embryo's outer shell — away from the genetic material, to assist hatching and implantation.",
+          "name": "Laser-Assisted Hatching",
+          "procedureType": "https://schema.org/MedicalProcedure",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Treatments",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/laser-assisted-hatching",
+              "name": "Laser Assisted Hatching",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "LAH is generally safe for all embryo types, including donor embryos, as long as they are of good quality and suitable for implantation."
+              },
+              "name": "Is LAH safe for all embryo types?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Current research and clinical experience suggest that LAH does not increase the risk of birth defects or congenital abnormalities."
+              },
+              "name": "Does LAH increase the risk of birth defects?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It typically takes only a few minutes per embryo and is done on the same day as the embryo transfer."
+              },
+              "name": "How long does the procedure take?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. LAH can be performed on both day-3 and day-5 (blastocyst) embryos, depending on the clinical indication."
+              },
+              "name": "Can LAH be performed on day-5 blastocysts?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No special preparation is needed by the patient, as the procedure is performed entirely in the lab on the embryos."
+              },
+              "name": "Do I need any special preparation?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes. LAH is often used alongside advanced techniques such as ICSI and PGT-A to support implantation."
+              },
+              "name": "Can LAH be combined with other techniques?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "No. While LAH can improve implantation chances, it does not guarantee pregnancy. Success also depends on embryo quality and uterine receptivity."
+              },
+              "name": "Does LAH guarantee pregnancy?"
+            }
+          ]
+        },
+        {
+          "@type": "VideoObject",
+          "contentUrl": "https://www.youtube.com/watch?v=XBKvNWan2HU",
+          "description": "Fertility expert Dr. Suman Singh explains laser-assisted hatching — what it is, who it is for, and its benefits and considerations.",
+          "embedUrl": "https://www.youtube-nocookie.com/embed/XBKvNWan2HU",
+          "name": "What is Laser-Assisted Hatching? — Dr. Suman Singh",
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "thumbnailUrl": "https://img.youtube.com/vi/XBKvNWan2HU/hqdefault.jpg",
+          "uploadDate": "2023-01-01"
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — B.J. Medical College, Ahmedabad (1983)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1986)"
+            }
+          ],
+          "award": [
+            "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/himanshu.webp",
+          "jobTitle": "Founder & Chief IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Ovarian Stimulation Protocols",
+            "Male Infertility",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President"
+            }
+          ],
+          "name": "Dr. Himanshu Bavishi",
+          "url": "https://ivfclinic.com/doctors/himanshu-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/anand",
+    "/locations/bhavnagar",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

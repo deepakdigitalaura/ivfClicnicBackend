@@ -1,26 +1,36 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
-import { blastocystTransfer, treatmentGraph } from "@/lib/treatments";
+import { treatmentGraph } from "@/lib/treatments";
+import { getTreatment } from "@/lib/payload";
 
-export const metadata: Metadata = {
-  title: blastocystTransfer.meta.title,
-  description: blastocystTransfer.meta.description,
-  alternates: { canonical: blastocystTransfer.href },
-  openGraph: {
-    title: blastocystTransfer.meta.title,
-    description: blastocystTransfer.meta.description,
-    url: blastocystTransfer.href,
-    type: "article",
-    images: [blastocystTransfer.meta.ogImage],
-  },
-};
+const SLUG = "blastocyst-transfer";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTreatment(SLUG);
+  if (!t) return {};
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: { canonical: t.href },
+    openGraph: {
+      title: t.meta.title,
+      description: t.meta.description,
+      url: t.href,
+      type: "article",
+      images: [t.meta.ogImage],
+    },
+  };
+}
+
+export default async function Page() {
+  const t = await getTreatment(SLUG);
+  if (!t) notFound();
   return (
     <>
-      <JsonLd graph={treatmentGraph(blastocystTransfer)} />
-      <TreatmentPage slug={blastocystTransfer.slug} />
+      <JsonLd graph={treatmentGraph(t)} />
+      <TreatmentPage content={t} />
     </>
   );
 }

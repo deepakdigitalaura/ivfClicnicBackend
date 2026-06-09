@@ -1,26 +1,36 @@
 import type { Metadata } from "next";
+import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
-import { spindleViewIcsi, treatmentGraph } from "@/lib/treatments";
+import { treatmentGraph } from "@/lib/treatments";
+import { getTreatment } from "@/lib/payload";
 
-export const metadata: Metadata = {
-  title: spindleViewIcsi.meta.title,
-  description: spindleViewIcsi.meta.description,
-  alternates: { canonical: spindleViewIcsi.href },
-  openGraph: {
-    title: spindleViewIcsi.meta.title,
-    description: spindleViewIcsi.meta.description,
-    url: spindleViewIcsi.href,
-    type: "article",
-    images: [spindleViewIcsi.meta.ogImage],
-  },
-};
+const SLUG = "spindle-view-icsi";
 
-export default function Page() {
+export async function generateMetadata(): Promise<Metadata> {
+  const t = await getTreatment(SLUG);
+  if (!t) return {};
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: { canonical: t.href },
+    openGraph: {
+      title: t.meta.title,
+      description: t.meta.description,
+      url: t.href,
+      type: "article",
+      images: [t.meta.ogImage],
+    },
+  };
+}
+
+export default async function Page() {
+  const t = await getTreatment(SLUG);
+  if (!t) notFound();
   return (
     <>
-      <JsonLd graph={treatmentGraph(spindleViewIcsi)} />
-      <TreatmentPage slug={spindleViewIcsi.slug} />
+      <JsonLd graph={treatmentGraph(t)} />
+      <TreatmentPage content={t} />
     </>
   );
 }

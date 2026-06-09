@@ -1,0 +1,381 @@
+{
+  "route": "/blastocyst-culture-blastocyst-transfer",
+  "title": "Blastocyst Culture & Transfer — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/blastocyst-culture-blastocyst-transfer",
+  "meta": {
+    "description": "What is blastocyst culture? Growing embryos to day 5–6 helps select the strongest for transfer and supports single-embryo transfer. Performed in Class 1000 labs at Bavishi Fertility Institute.",
+    "og:description": "What is blastocyst culture? Growing embryos to day 5–6 helps select the strongest for transfer and supports single-embryo transfer. Performed in Class 1000 labs at Bavishi Fertility Institute.",
+    "og:image": "https://ivfclinic.com/assets/ivf-icsi.png",
+    "og:title": "Blastocyst Culture & Transfer — Bavishi Fertility Institute",
+    "og:type": "article",
+    "og:url": "https://ivfclinic.com/blastocyst-culture-blastocyst-transfer",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/blastocyst-culture-blastocyst-transfer#webpage",
+          "@type": "MedicalWebPage",
+          "about": {
+            "@type": "MedicalProcedure",
+            "name": "Blastocyst Culture & Transfer"
+          },
+          "description": "What is blastocyst culture? Growing embryos to day 5–6 helps select the strongest for transfer and supports single-embryo transfer. Performed in Class 1000 labs at Bavishi Fertility Institute.",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "lastReviewed": "2026-06-01",
+          "name": "Blastocyst Culture & Transfer — Bavishi Fertility Institute",
+          "reviewedBy": {
+            "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
+            "@type": [
+              "Physician",
+              "Person"
+            ],
+            "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+            "jobTitle": "Founder & Chief IVF Specialist",
+            "name": "Dr. Himanshu Bavishi",
+            "url": "https://ivfclinic.com/doctors/himanshu-bavishi"
+          },
+          "url": "https://ivfclinic.com/blastocyst-culture-blastocyst-transfer"
+        },
+        {
+          "@type": "MedicalProcedure",
+          "alternateName": "Blastocyst Culture",
+          "bodyLocation": "Uterus",
+          "followup": "A pregnancy test is performed about 10–14 days after blastocyst transfer.",
+          "howPerformed": "Embryos are cultured in the laboratory to the blastocyst stage (day 5–6); the strongest are then selected and transferred into the uterus, often as a single embryo.",
+          "name": "Blastocyst Culture & Transfer",
+          "procedureType": "https://schema.org/MedicalProcedure",
+          "provider": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#treatments",
+              "name": "Treatments",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/blastocyst-culture-blastocyst-transfer",
+              "name": "Blastocyst Transfer",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "In general, about 30–60% of embryos develop into blastocysts, depending on age and other individual factors."
+              },
+              "name": "How many embryos reach the blastocyst stage?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Success rates vary with individual factors, but blastocyst transfer is generally associated with higher implantation than earlier-stage embryo transfer in suitable patients."
+              },
+              "name": "Is blastocyst transfer more successful?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Yes, there is usually an additional cost, because culturing embryos to the blastocyst stage is a more complex procedure."
+              },
+              "name": "Is there an extra cost for blastocyst culture?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "It usually takes about 10–14 days after blastocyst transfer to get a definitive answer, as the embryo needs time to implant and produce detectable pregnancy hormones."
+              },
+              "name": "How long until I know if I am pregnant?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Options include repeating IVF with adjustments, transferring earlier-stage (day 3) embryos, using advanced fertilisation techniques, genetic testing, or considering donor eggs or embryos."
+              },
+              "name": "What if my embryos do not reach the blastocyst stage?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Alternatives include transferring cleavage-stage (day 3) embryos, using frozen blastocysts from previous cycles, advanced fertilisation techniques such as PICSI or Spindle View ICSI, or donor eggs or embryos."
+              },
+              "name": "What are the alternatives to blastocyst transfer?"
+            }
+          ]
+        },
+        {
+          "@type": "VideoObject",
+          "contentUrl": "https://www.youtube.com/watch?v=J96ic-QUZxU",
+          "description": "Fertility expert Dr. Lekshmy Rana explains blastocyst culture — how growing embryos to day 5–6 helps select the strongest embryo for transfer.",
+          "embedUrl": "https://www.youtube-nocookie.com/embed/J96ic-QUZxU",
+          "name": "Blastocyst Culture — Dr. Lekshmy Rana",
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "thumbnailUrl": "https://img.youtube.com/vi/J96ic-QUZxU/hqdefault.jpg",
+          "uploadDate": "2023-01-01"
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — B.J. Medical College, Ahmedabad (1983)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1986)"
+            }
+          ],
+          "award": [
+            "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/himanshu.webp",
+          "jobTitle": "Founder & Chief IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Ovarian Stimulation Protocols",
+            "Male Infertility",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President"
+            }
+          ],
+          "name": "Dr. Himanshu Bavishi",
+          "url": "https://ivfclinic.com/doctors/himanshu-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/anand",
+    "/locations/bhavnagar",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}
