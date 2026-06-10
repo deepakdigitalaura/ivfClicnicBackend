@@ -1,4 +1,4 @@
-import type { GlobalConfig } from "payload";
+import type { Field, GlobalConfig } from "payload";
 import { seoField } from "@/fields/seo";
 import { revalidateGlobal } from "@/lib/revalidate";
 import { isEditor } from "@/access/roles";
@@ -13,13 +13,9 @@ import { isEditor } from "@/access/roles";
  * route reads through (keeps the page static + on-demand ISR, like every other
  * CMS surface). RBAC: editors update content; admins inherit via isEditor.
  */
-export const BlogHub: GlobalConfig = {
-  slug: "blog-hub",
-  label: "Blog Landing Page",
-  access: { read: () => true, update: isEditor },
-  admin: { group: "Website Pages" },
-  hooks: revalidateGlobal("blog-hub"),
-  fields: [
+/* Blog-hub fields, defined once and grouped into admin Tabs below (UNNAMED tabs
+ * → stored data shape unchanged). Cleaner editing only. */
+const BLOG_HUB_FIELDS: Field[] = [
     {
       name: "hero",
       type: "group",
@@ -36,5 +32,22 @@ export const BlogHub: GlobalConfig = {
       admin: { description: "Optional extra content shown beneath the top section, above the list of articles." },
     },
     seoField,
+];
+
+export const BlogHub: GlobalConfig = {
+  slug: "blog-hub",
+  label: "Blog Landing Page",
+  access: { read: () => true, update: isEditor },
+  admin: { group: "Website Pages" },
+  hooks: revalidateGlobal("blog-hub"),
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Content", fields: BLOG_HUB_FIELDS.slice(0, 2) },
+        { label: "Search & Social", fields: BLOG_HUB_FIELDS.slice(2) },
+      ],
+    },
   ],
 };

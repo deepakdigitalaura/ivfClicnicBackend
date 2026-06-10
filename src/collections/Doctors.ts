@@ -51,25 +51,9 @@ const validateVerified: Validate<boolean | undefined | null> = (value, { data })
   return true;
 };
 
-export const Doctors: CollectionConfig = {
-  slug: "doctors",
-  admin: {
-    useAsTitle: "name",
-    defaultColumns: ["name", "slug", "specialty", "verified", "_status"],
-    group: "Doctors",
-  },
-  versions: { drafts: true },
-  hooks: revalidateCollection("doctors"),
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return { _status: { equals: "published" } };
-    },
-    create: isEditor,
-    update: isEditor,
-    delete: isEditor,
-  },
-  fields: [
+/* Every doctor field, defined once and grouped into admin Tabs below (UNNAMED
+ * tabs → stored data shape unchanged). Cleaner editing only. */
+const DOCTOR_FIELDS: Field[] = [
     // ---- Identity ----
     {
       type: "row",
@@ -139,6 +123,38 @@ export const Doctors: CollectionConfig = {
       defaultValue: false,
       label: "Visiting Specialist (all centres)",
       admin: { description: "Visiting senior specialist who rotates across all centres (shows a single 'visits across cities' card)." },
+    },
+];
+
+export const Doctors: CollectionConfig = {
+  slug: "doctors",
+  admin: {
+    useAsTitle: "name",
+    defaultColumns: ["name", "slug", "specialty", "verified", "_status"],
+    group: "Doctors",
+  },
+  versions: { drafts: true },
+  hooks: revalidateCollection("doctors"),
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
+    create: isEditor,
+    update: isEditor,
+    delete: isEditor,
+  },
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Profile", fields: DOCTOR_FIELDS.slice(0, 4) },
+        { label: "Reach", fields: DOCTOR_FIELDS.slice(4, 8) },
+        { label: "Bio", fields: DOCTOR_FIELDS.slice(8, 10) },
+        { label: "Credentials", fields: DOCTOR_FIELDS.slice(10, 18) },
+        { label: "Settings", fields: DOCTOR_FIELDS.slice(18) },
+      ],
     },
   ],
 };

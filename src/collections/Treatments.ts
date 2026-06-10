@@ -74,25 +74,10 @@ const stepArray = (name: string): Field => ({
   ],
 });
 
-export const Treatments: CollectionConfig = {
-  slug: "treatments",
-  admin: {
-    useAsTitle: "name",
-    defaultColumns: ["name", "slug", "shortName", "_status"],
-    group: "Treatments & Services",
-  },
-  versions: { drafts: true },
-  hooks: revalidateCollection("treatments"),
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return { _status: { equals: "published" } };
-    },
-    create: isEditor,
-    update: isEditor,
-    delete: isEditor,
-  },
-  fields: [
+/* Every treatment field, defined once and grouped into admin Tabs below
+ * (UNNAMED tabs → stored data shape is unchanged; no migration / type / resolver
+ * / seed change). Purely a cleaner editing experience. */
+const TREATMENT_FIELDS: Field[] = [
     // ---- Identity ----
     {
       type: "row",
@@ -379,6 +364,41 @@ export const Treatments: CollectionConfig = {
           ],
         },
         { name: "subtitle", type: "textarea", label: "Sub-heading" },
+      ],
+    },
+];
+
+export const Treatments: CollectionConfig = {
+  slug: "treatments",
+  admin: {
+    useAsTitle: "name",
+    defaultColumns: ["name", "slug", "shortName", "_status"],
+    group: "Treatments & Services",
+  },
+  versions: { drafts: true },
+  hooks: revalidateCollection("treatments"),
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
+    create: isEditor,
+    update: isEditor,
+    delete: isEditor,
+  },
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Basics & SEO", fields: TREATMENT_FIELDS.slice(0, 6) },
+        { label: "Top Section", fields: TREATMENT_FIELDS.slice(6, 7) },
+        { label: "Overview", fields: TREATMENT_FIELDS.slice(7, 11) },
+        { label: "Process & Timeline", fields: TREATMENT_FIELDS.slice(11, 14) },
+        { label: "Technology & Why Us", fields: TREATMENT_FIELDS.slice(14, 17) },
+        { label: "Cost & Risks", fields: TREATMENT_FIELDS.slice(17, 20) },
+        { label: "FAQs & Related", fields: TREATMENT_FIELDS.slice(20, 22) },
+        { label: "Closing CTA", fields: TREATMENT_FIELDS.slice(22) },
       ],
     },
   ],

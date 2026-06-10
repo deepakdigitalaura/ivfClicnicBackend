@@ -43,25 +43,9 @@ const faqArray: Field = {
   ],
 };
 
-export const Cities: CollectionConfig = {
-  slug: "cities",
-  admin: {
-    useAsTitle: "name",
-    defaultColumns: ["name", "slug", "region", "built", "_status"],
-    group: "Locations",
-  },
-  versions: { drafts: true },
-  hooks: revalidateCollection("cities"),
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return { _status: { equals: "published" } };
-    },
-    create: isEditor,
-    update: isEditor,
-    delete: isEditor,
-  },
-  fields: [
+/* Every city field, defined once and grouped into admin Tabs below (UNNAMED
+ * tabs → stored data shape unchanged). Cleaner editing only. */
+const CITY_FIELDS: Field[] = [
     // ---- Identity ----
     {
       type: "row",
@@ -104,5 +88,36 @@ export const Cities: CollectionConfig = {
     // ---- Class A (stored for visibility/roundtrip; resolver ignores) ----
     valueArray("womensHealth", "Linked Service ID (website team)", { readOnly: true, description: "Service IDs linked to this city. Managed by the website team." }),
     { name: "built", type: "checkbox", label: "Live on Site (website team)", access: { update: isAdminField }, admin: { description: "Whether this city has its own page. Managed by the website team." } },
+];
+
+export const Cities: CollectionConfig = {
+  slug: "cities",
+  admin: {
+    useAsTitle: "name",
+    defaultColumns: ["name", "slug", "region", "built", "_status"],
+    group: "Locations",
+  },
+  versions: { drafts: true },
+  hooks: revalidateCollection("cities"),
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
+    create: isEditor,
+    update: isEditor,
+    delete: isEditor,
+  },
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Basics", fields: CITY_FIELDS.slice(0, 2) },
+        { label: "Contact & Hero", fields: CITY_FIELDS.slice(2, 4) },
+        { label: "Content", fields: CITY_FIELDS.slice(4, 6) },
+        { label: "Advanced (website team)", fields: CITY_FIELDS.slice(6) },
+      ],
+    },
   ],
 };

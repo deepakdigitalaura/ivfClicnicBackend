@@ -50,13 +50,9 @@ const statArray = (name: string, description: string): Field => ({
   ],
 });
 
-export const About: GlobalConfig = {
-  slug: "about-page",
-  label: "About BFI",
-  access: { read: () => true, update: isEditor },
-  admin: { group: "Website Pages" },
-  hooks: revalidateGlobal("about-page"),
-  fields: [
+/* Every About-page field, defined once and grouped into admin Tabs below
+ * (UNNAMED tabs → stored data shape unchanged). Cleaner editing only. */
+const ABOUT_FIELDS: Field[] = [
     {
       name: "hero",
       type: "group",
@@ -124,5 +120,25 @@ export const About: GlobalConfig = {
       ],
     },
     seoField,
+];
+
+export const About: GlobalConfig = {
+  slug: "about-page",
+  label: "About BFI",
+  access: { read: () => true, update: isEditor },
+  admin: { group: "Website Pages" },
+  hooks: revalidateGlobal("about-page"),
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Top Section", fields: ABOUT_FIELDS.slice(0, 1) },
+        { label: "Story & Stats", fields: ABOUT_FIELDS.slice(1, 5) },
+        { label: "Network", fields: ABOUT_FIELDS.slice(5, 6) },
+        { label: "Closing CTA", fields: ABOUT_FIELDS.slice(6, 7) },
+        { label: "Search & Social", fields: ABOUT_FIELDS.slice(7) },
+      ],
+    },
   ],
 };

@@ -1,4 +1,4 @@
-import type { GlobalConfig } from "payload";
+import type { Field, GlobalConfig } from "payload";
 import { revalidateGlobal } from "@/lib/revalidate";
 import { isEditor, isAdminField } from "@/access/roles";
 
@@ -17,13 +17,9 @@ import { isEditor, isAdminField } from "@/access/roles";
  * on edit (the tag every route reads the header through), keeping pages static
  * + on-demand ISR. RBAC: editors update content; admins inherit via isEditor.
  */
-export const Header: GlobalConfig = {
-  slug: "header",
-  label: "Header & Navigation",
-  access: { read: () => true, update: isEditor },
-  admin: { group: "Website Settings" },
-  hooks: revalidateGlobal("header"),
-  fields: [
+/* Header fields, defined once and grouped into admin Tabs below (UNNAMED tabs →
+ * stored data shape unchanged). Cleaner editing only. */
+const HEADER_FIELDS: Field[] = [
     {
       name: "branding",
       type: "group",
@@ -106,6 +102,24 @@ export const Header: GlobalConfig = {
           options: [{ label: "Primary", value: "primary" }],
           admin: { hidden: true, description: "Reserved for future button styles." },
         },
+      ],
+    },
+];
+
+export const Header: GlobalConfig = {
+  slug: "header",
+  label: "Header & Navigation",
+  access: { read: () => true, update: isEditor },
+  admin: { group: "Website Settings" },
+  hooks: revalidateGlobal("header"),
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Logo", fields: HEADER_FIELDS.slice(0, 1) },
+        { label: "Navigation", fields: HEADER_FIELDS.slice(1, 2) },
+        { label: "Main Button", fields: HEADER_FIELDS.slice(2) },
       ],
     },
   ],

@@ -59,25 +59,9 @@ const galleryArray: Field = {
   ],
 };
 
-export const Centres: CollectionConfig = {
-  slug: "centres",
-  admin: {
-    useAsTitle: "fullName",
-    defaultColumns: ["fullName", "slug", "citySlug", "built", "_status"],
-    group: "Locations",
-  },
-  versions: { drafts: true },
-  hooks: revalidateCollection("centres"),
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return { _status: { equals: "published" } };
-    },
-    create: isEditor,
-    update: isEditor,
-    delete: isEditor,
-  },
-  fields: [
+/* Every centre field, defined once and grouped into admin Tabs below (UNNAMED
+ * tabs → stored data shape unchanged). Cleaner editing only. */
+const CENTRE_FIELDS: Field[] = [
     // ---- Identity + parent link (slug string, NOT a relationship) ----
     {
       type: "row",
@@ -180,5 +164,39 @@ export const Centres: CollectionConfig = {
     // ---- Class A scalars (stored for parity; resolver ignores) ----
     { name: "reviewsKey", type: "text", label: "Reviews Feed Key (website team)", access: { update: isAdminField }, admin: { description: "Key for the reviews feed. Managed by the website team." } },
     { name: "built", type: "checkbox", label: "Live on Site (website team)", access: { update: isAdminField }, admin: { description: "Whether this centre has its own page. Managed by the website team." } },
+];
+
+export const Centres: CollectionConfig = {
+  slug: "centres",
+  admin: {
+    useAsTitle: "fullName",
+    defaultColumns: ["fullName", "slug", "citySlug", "built", "_status"],
+    group: "Locations",
+  },
+  versions: { drafts: true },
+  hooks: revalidateCollection("centres"),
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
+    create: isEditor,
+    update: isEditor,
+    delete: isEditor,
+  },
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Basics", fields: CENTRE_FIELDS.slice(0, 3) },
+        { label: "Address & Contact", fields: CENTRE_FIELDS.slice(3, 6) },
+        { label: "Hours & Map (website team)", fields: CENTRE_FIELDS.slice(6, 10) },
+        { label: "Local SEO", fields: CENTRE_FIELDS.slice(10, 14) },
+        { label: "Linked (website team)", fields: CENTRE_FIELDS.slice(14, 17) },
+        { label: "Content", fields: CENTRE_FIELDS.slice(17, 21) },
+        { label: "Advanced (website team)", fields: CENTRE_FIELDS.slice(21) },
+      ],
+    },
   ],
 };

@@ -1,4 +1,4 @@
-import type { GlobalConfig } from "payload";
+import type { Field, GlobalConfig } from "payload";
 import { revalidateGlobal } from "@/lib/revalidate";
 import { isAdmin } from "@/access/roles";
 
@@ -11,13 +11,9 @@ import { isAdmin } from "@/access/roles";
  *
  * Covers Phase 2: Site Settings + Social Links.
  */
-export const SiteSettings: GlobalConfig = {
-  slug: "site-settings",
-  label: "Brand & Identity",
-  access: { read: () => true, update: isAdmin },
-  admin: { group: "Website Settings" },
-  hooks: revalidateGlobal("site-settings"),
-  fields: [
+/* Site-settings fields, defined once and grouped into admin Tabs below (UNNAMED
+ * tabs → stored data shape unchanged). Cleaner editing only. */
+const SITE_SETTINGS_FIELDS: Field[] = [
     { name: "brandName", type: "text", required: true, label: "Brand Name", admin: { description: "The clinic's public brand name." } },
     { name: "alternateName", type: "text", label: "Alternate Name" },
     { name: "legalName", type: "text", label: "Legal Name" },
@@ -62,6 +58,25 @@ export const SiteSettings: GlobalConfig = {
       labels: { singular: "Social link", plural: "Social links" },
       admin: { description: "Official profile links (Facebook, Instagram, YouTube, LinkedIn, …)." },
       fields: [{ name: "url", type: "text", required: true, label: "Profile URL" }],
+    },
+];
+
+export const SiteSettings: GlobalConfig = {
+  slug: "site-settings",
+  label: "Brand & Identity",
+  access: { read: () => true, update: isAdmin },
+  admin: { group: "Website Settings" },
+  hooks: revalidateGlobal("site-settings"),
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Brand", fields: SITE_SETTINGS_FIELDS.slice(0, 5) },
+        { label: "Contact", fields: SITE_SETTINGS_FIELDS.slice(5, 10) },
+        { label: "Awards & Expertise", fields: SITE_SETTINGS_FIELDS.slice(10, 12) },
+        { label: "Social Links", fields: SITE_SETTINGS_FIELDS.slice(12) },
+      ],
     },
   ],
 };

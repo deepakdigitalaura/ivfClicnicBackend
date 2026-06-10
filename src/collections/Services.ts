@@ -48,25 +48,9 @@ const stepArray = (name: string): Field => ({
   ],
 });
 
-export const Services: CollectionConfig = {
-  slug: "services",
-  admin: {
-    useAsTitle: "name",
-    defaultColumns: ["name", "slug", "schemaType", "published", "_status"],
-    group: "Treatments & Services",
-  },
-  versions: { drafts: true },
-  hooks: revalidateCollection("services"),
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return { _status: { equals: "published" } };
-    },
-    create: isEditor,
-    update: isEditor,
-    delete: isEditor,
-  },
-  fields: [
+/* Every service field, defined once and grouped into admin Tabs below (UNNAMED
+ * tabs → stored data shape unchanged). Cleaner editing only. */
+const SERVICE_FIELDS: Field[] = [
     // ---- Identity + registry (the light card shown on location pages) ----
     {
       type: "row",
@@ -216,5 +200,37 @@ export const Services: CollectionConfig = {
     },
 
     seoField,
+];
+
+export const Services: CollectionConfig = {
+  slug: "services",
+  admin: {
+    useAsTitle: "name",
+    defaultColumns: ["name", "slug", "schemaType", "published", "_status"],
+    group: "Treatments & Services",
+  },
+  versions: { drafts: true },
+  hooks: revalidateCollection("services"),
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
+    create: isEditor,
+    update: isEditor,
+    delete: isEditor,
+  },
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Basics", fields: SERVICE_FIELDS.slice(0, 6) },
+        { label: "Top Section", fields: SERVICE_FIELDS.slice(6, 7) },
+        { label: "Content", fields: SERVICE_FIELDS.slice(7, 13) },
+        { label: "FAQs & Related", fields: SERVICE_FIELDS.slice(13, 15) },
+        { label: "Search & Social", fields: SERVICE_FIELDS.slice(15) },
+      ],
+    },
   ],
 };

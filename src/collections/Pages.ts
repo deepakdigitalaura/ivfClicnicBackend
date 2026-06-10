@@ -1,4 +1,4 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, Field } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
 import { seoField } from "@/fields/seo";
 import { isAdmin, isEditor, isAdminField } from "@/access/roles";
@@ -20,38 +20,9 @@ import { isAdmin, isEditor, isAdminField } from "@/access/roles";
  * Drafts are enabled so editors can stage changes; unauthenticated reads are
  * constrained to published docs (the public site never sees drafts).
  */
-export const Pages: CollectionConfig = {
-  slug: "pages",
-  labels: { singular: "Contact Page", plural: "Contact Page" },
-  admin: {
-    group: "Website Pages",
-    useAsTitle: "title",
-    defaultColumns: ["title", "slug", "_status", "updatedAt"],
-    // "Preview" button → secret-guarded /preview endpoint that enables Draft
-    // Mode and opens the front-end path. Foundation only; the public render
-    // stays static until a page type opts into draftMode().
-    preview: (doc) => {
-      const slug = typeof doc?.slug === "string" ? doc.slug : "";
-      if (!slug) return null;
-      return `/preview?secret=${process.env.PREVIEW_SECRET ?? ""}&path=${encodeURIComponent(`/${slug}`)}`;
-    },
-  },
-  versions: {
-    drafts: true,
-  },
-  hooks: revalidateCollection("pages"),
-  access: {
-    read: ({ req }) => {
-      // Authenticated admins see everything (incl. drafts); the public only
-      // sees published documents.
-      if (req.user) return true;
-      return { _status: { equals: "published" } };
-    },
-    create: isAdmin, // creating a page = creating a route (admin only)
-    update: isEditor, // editing page content is routine (editor + admin)
-    delete: isAdmin, // removing a route (admin only)
-  },
-  fields: [
+/* Page fields, defined once and grouped into admin Tabs below (UNNAMED tabs →
+ * stored data shape unchanged). Cleaner editing only. */
+const PAGE_FIELDS: Field[] = [
     { name: "title", type: "text", required: true, label: "Page Title", admin: { description: "Internal name for this page in the list." } },
     {
       name: "slug",
@@ -96,5 +67,48 @@ export const Pages: CollectionConfig = {
       ],
     },
     seoField,
+];
+
+export const Pages: CollectionConfig = {
+  slug: "pages",
+  labels: { singular: "Contact Page", plural: "Contact Page" },
+  admin: {
+    group: "Website Pages",
+    useAsTitle: "title",
+    defaultColumns: ["title", "slug", "_status", "updatedAt"],
+    // "Preview" button → secret-guarded /preview endpoint that enables Draft
+    // Mode and opens the front-end path. Foundation only; the public render
+    // stays static until a page type opts into draftMode().
+    preview: (doc) => {
+      const slug = typeof doc?.slug === "string" ? doc.slug : "";
+      if (!slug) return null;
+      return `/preview?secret=${process.env.PREVIEW_SECRET ?? ""}&path=${encodeURIComponent(`/${slug}`)}`;
+    },
+  },
+  versions: {
+    drafts: true,
+  },
+  hooks: revalidateCollection("pages"),
+  access: {
+    read: ({ req }) => {
+      // Authenticated admins see everything (incl. drafts); the public only
+      // sees published documents.
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
+    create: isAdmin, // creating a page = creating a route (admin only)
+    update: isEditor, // editing page content is routine (editor + admin)
+    delete: isAdmin, // removing a route (admin only)
+  },
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Page", fields: PAGE_FIELDS.slice(0, 3) },
+        { label: "FAQs", fields: PAGE_FIELDS.slice(3, 4) },
+        { label: "Search & Social", fields: PAGE_FIELDS.slice(4) },
+      ],
+    },
   ],
 };

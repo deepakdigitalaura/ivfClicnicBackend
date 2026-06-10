@@ -1,4 +1,4 @@
-import type { GlobalConfig } from "payload";
+import type { Field, GlobalConfig } from "payload";
 import { revalidateGlobal } from "@/lib/revalidate";
 import { isEditor } from "@/access/roles";
 
@@ -17,13 +17,9 @@ import { isEditor } from "@/access/roles";
  * tag every route reads the footer through), keeping pages static + on-demand
  * ISR. RBAC: editors update content; admins inherit via isEditor.
  */
-export const Footer: GlobalConfig = {
-  slug: "footer",
-  label: "Footer",
-  access: { read: () => true, update: isEditor },
-  admin: { group: "Website Settings" },
-  hooks: revalidateGlobal("footer"),
-  fields: [
+/* Footer fields, defined once and grouped into admin Tabs below (UNNAMED tabs →
+ * stored data shape unchanged). Cleaner editing only. */
+const FOOTER_FIELDS: Field[] = [
     {
       name: "branding",
       type: "group",
@@ -103,6 +99,24 @@ export const Footer: GlobalConfig = {
         { name: "label", type: "text", required: true, label: "Link Text" },
         { name: "url", type: "text", label: "Link URL", admin: { description: "Leave empty to show plain (non-clickable) text." } },
         { name: "external", type: "checkbox", label: "Open in New Tab", admin: { description: "Open this link in a new browser tab." } },
+      ],
+    },
+];
+
+export const Footer: GlobalConfig = {
+  slug: "footer",
+  label: "Footer",
+  access: { read: () => true, update: isEditor },
+  admin: { group: "Website Settings" },
+  hooks: revalidateGlobal("footer"),
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Logo & Blurb", fields: FOOTER_FIELDS.slice(0, 1) },
+        { label: "Link Columns", fields: FOOTER_FIELDS.slice(1, 2) },
+        { label: "Social & Legal", fields: FOOTER_FIELDS.slice(2) },
       ],
     },
   ],

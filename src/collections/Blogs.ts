@@ -1,4 +1,4 @@
-import type { CollectionConfig } from "payload";
+import type { CollectionConfig, Field } from "payload";
 import { seoField } from "@/fields/seo";
 import { revalidateCollection } from "@/lib/revalidate";
 import { isEditor } from "@/access/roles";
@@ -17,31 +17,9 @@ import { isEditor } from "@/access/roles";
  *
  * Drafts on; public reads published-only; edits bust `blogs` + `blogs:<slug>`.
  */
-export const Blogs: CollectionConfig = {
-  slug: "blogs",
-  labels: { singular: "Article", plural: "Articles" },
-  admin: {
-    useAsTitle: "title",
-    defaultColumns: ["title", "slug", "author", "_status", "publishedAt"],
-    group: "Blog",
-    // No `admin.preview` (front-end draft preview) on purpose: the public
-    // /blog/[slug] is pure SSG and does not read draftMode(), so a front-end
-    // preview link would show the published version, not the draft. Editors
-    // preview drafts inside Payload's admin version view. The /preview infra
-    // and getBlogBySlugDraft remain available if blogs ever move to dynamic.
-  },
-  versions: { drafts: true },
-  hooks: revalidateCollection("blogs"),
-  access: {
-    read: ({ req }) => {
-      if (req.user) return true;
-      return { _status: { equals: "published" } };
-    },
-    create: isEditor,
-    update: isEditor,
-    delete: isEditor,
-  },
-  fields: [
+/* Blog fields, defined once and grouped into admin Tabs below (UNNAMED tabs →
+ * stored data shape unchanged). Cleaner editing only. */
+const BLOG_FIELDS: Field[] = [
     { name: "title", type: "text", required: true, label: "Title" },
     {
       name: "slug",
@@ -96,5 +74,41 @@ export const Blogs: CollectionConfig = {
       fields: [{ name: "slug", type: "text", required: true, label: "Treatment ID" }],
     },
     seoField,
+];
+
+export const Blogs: CollectionConfig = {
+  slug: "blogs",
+  labels: { singular: "Article", plural: "Articles" },
+  admin: {
+    useAsTitle: "title",
+    defaultColumns: ["title", "slug", "author", "_status", "publishedAt"],
+    group: "Blog",
+    // No `admin.preview` (front-end draft preview) on purpose: the public
+    // /blog/[slug] is pure SSG and does not read draftMode(), so a front-end
+    // preview link would show the published version, not the draft. Editors
+    // preview drafts inside Payload's admin version view. The /preview infra
+    // and getBlogBySlugDraft remain available if blogs ever move to dynamic.
+  },
+  versions: { drafts: true },
+  hooks: revalidateCollection("blogs"),
+  access: {
+    read: ({ req }) => {
+      if (req.user) return true;
+      return { _status: { equals: "published" } };
+    },
+    create: isEditor,
+    update: isEditor,
+    delete: isEditor,
+  },
+  // Grouped into Tabs (unnamed) so editors see one short section at a time.
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        { label: "Article", fields: BLOG_FIELDS.slice(0, 5) },
+        { label: "Details", fields: BLOG_FIELDS.slice(5, 9) },
+        { label: "Search & Social", fields: BLOG_FIELDS.slice(9) },
+      ],
+    },
   ],
 };
