@@ -10,15 +10,16 @@ export const Categories: CollectionConfig = {
   access: { read: () => true, create: isEditor, update: isEditor, delete: isAdmin },
   hooks: revalidateRelated(["blogs"]),
   fields: [
-    { name: "title", type: "text", required: true },
+    { name: "title", type: "text", required: true, label: "Title" },
     {
       name: "slug",
       type: "text",
       required: true,
       unique: true,
       index: true,
-      admin: { description: "URL-safe id, e.g. 'fertility-basics'." },
+      label: "Page URL",
+      admin: { description: "The web address for this category. Changing it breaks existing links, so set it once and leave it." },
     },
-    { name: "description", type: "textarea" },
+    { name: "description", type: "textarea", label: "Description" },
   ],
 };

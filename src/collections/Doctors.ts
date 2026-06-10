@@ -25,13 +25,15 @@ import { isEditor, isAdminField } from "@/access/roles";
  */
 
 /** Uniform array-of-strings field (single `value` subfield) — the shape the
- *  resolver's `rows()` helper unwraps. */
-const strArr = (name: string, label: string, description?: string): Field => ({
+ *  resolver's `rows()` helper unwraps. `readOnly` locks website-team-managed
+ *  lists in the panel (UI only; seeds run as admin and are unaffected). */
+const strArr = (name: string, label: string, description?: string, readOnly = false): Field => ({
   name,
   type: "array",
   labels: { singular: label, plural: `${label}s` },
+  ...(readOnly ? { access: { update: isAdminField } } : {}),
   admin: description ? { description } : undefined,
-  fields: [{ name: "value", type: "text", required: true }],
+  fields: [{ name: "value", type: "text", required: true, label }],
 });
 
 /** When `verified` is checked, the doctor must carry real credentials — a
@@ -54,7 +56,7 @@ export const Doctors: CollectionConfig = {
   admin: {
     useAsTitle: "name",
     defaultColumns: ["name", "slug", "specialty", "verified", "_status"],
-    group: "Content",
+    group: "Doctors",
   },
   versions: { drafts: true },
   hooks: revalidateCollection("doctors"),
@@ -72,51 +74,51 @@ export const Doctors: CollectionConfig = {
     {
       type: "row",
       fields: [
-        { name: "slug", type: "text", required: true, unique: true, index: true, admin: { width: "50%", description: "URL segment → /doctors/<slug>. Also the registry key." } },
-        { name: "name", type: "text", required: true, admin: { width: "50%" } },
+        { name: "slug", type: "text", required: true, unique: true, index: true, label: "Page URL", access: { update: isAdminField }, admin: { width: "50%", description: "The profile's web address (→ /doctors/<this>). Set when creating — ask the website team to change it later." } },
+        { name: "name", type: "text", required: true, label: "Name", admin: { width: "50%" } },
       ],
     },
     {
       type: "row",
       fields: [
-        { name: "credentials", type: "text", admin: { width: "50%", description: "Post-nominal degrees, e.g. 'MBBS, MD'. Required once verified." } },
-        { name: "specialty", type: "text", required: true, admin: { width: "50%", description: "Human-readable specialty line shown on cards." } },
+        { name: "credentials", type: "text", label: "Credentials", admin: { width: "50%", description: "Post-nominal degrees, e.g. 'MBBS, MD'. Required once verified." } },
+        { name: "specialty", type: "text", required: true, label: "Specialty", admin: { width: "50%", description: "Specialty line shown on cards, e.g. 'Fertility & IVF Specialist'." } },
       ],
     },
     {
       type: "row",
       fields: [
-        { name: "role", type: "text", required: true, admin: { width: "50%", description: "Job title, e.g. 'Founder & Chief IVF Specialist'." } },
-        { name: "image", type: "text", required: true, admin: { width: "50%", description: "Portrait image path, e.g. /assets/doctors/parth.webp (upload relation deferred)." } },
+        { name: "role", type: "text", required: true, label: "Role / Title", admin: { width: "50%", description: "Job title, e.g. 'Founder & Chief IVF Specialist'." } },
+        { name: "image", type: "text", required: true, label: "Portrait Photo Path", admin: { width: "50%", description: "Path to the doctor's photo, e.g. /assets/doctors/parth.webp. Ask the website team to add new photos." } },
       ],
     },
     {
       type: "row",
       fields: [
-        { name: "experienceLabel", type: "text", admin: { width: "50%", description: "Display experience, e.g. '35+ yrs'." } },
-        { name: "experienceYears", type: "number", admin: { width: "50%", description: "Numeric years (sorting/schema)." } },
+        { name: "experienceLabel", type: "text", label: "Experience (shown on site)", admin: { width: "50%", description: "Experience as shown on the site, e.g. '35+ yrs'." } },
+        { name: "experienceYears", type: "number", label: "Years of Experience", admin: { width: "50%", description: "Number of years (used for sorting)." } },
       ],
     },
-    strArr("medicalSpecialty", "Specialty", "schema.org medicalSpecialty values, e.g. ReproductiveMedicine."),
+    strArr("medicalSpecialty", "Search Engine Specialty Tag (website team)", "Search-engine specialty tags. Managed by the website team.", true),
 
     // ---- Reach (text slugs — relationships deferred) ----
-    strArr("cities", "City", "City labels the doctor consults in (display)."),
-    strArr("locations", "Location", "Location slugs (city/area) for internal links + areaServed."),
-    strArr("treatments", "Treatment", "Treatment slugs the doctor practises."),
+    strArr("cities", "City (display)", "City names the doctor consults in (shown on the profile)."),
+    strArr("locations", "Linked Location ID (website team)", "Location IDs used for internal links. Managed by the website team.", true),
+    strArr("treatments", "Linked Treatment ID (website team)", "Treatment IDs the doctor practises. Managed by the website team.", true),
 
     // ---- Bio ----
-    { name: "shortBio", type: "textarea", required: true, admin: { description: "One-line summary used on cards + schema description." } },
-    strArr("bio", "Paragraph", "Full bio, one entry per paragraph (RichText deferred)."),
+    { name: "shortBio", type: "textarea", required: true, label: "Short Bio", admin: { description: "One-line summary used on cards and in search results." } },
+    strArr("bio", "Bio Paragraph", "Full bio — one entry per paragraph."),
 
     // ---- Credentials / E-E-A-T ----
-    strArr("knowsAbout", "Topic", "schema.org knowsAbout expertise areas."),
-    strArr("alumniOf", "Degree", "Education / degrees. Required (≥1) once verified."),
+    strArr("knowsAbout", "Area of Expertise", "Areas of expertise (helps search engines understand the doctor)."),
+    strArr("alumniOf", "Degree", "Education / degrees. Required (at least one) once verified."),
     strArr("memberOf", "Membership", "Professional society memberships."),
     strArr("awards", "Award", "Awards & recognition."),
     strArr("training", "Training", "Advanced training / fellowships at named institutes."),
     strArr("publications", "Publication", "Books / notable publications authored."),
-    strArr("languages", "Language", "Languages spoken (knowsLanguage)."),
-    strArr("sameAs", "Profile URL", "External profile/authority URLs (sameAs)."),
+    strArr("languages", "Language", "Languages spoken."),
+    strArr("sameAs", "Profile Link", "Official profile links (e.g. LinkedIn, professional society pages)."),
 
     // ---- Flags ----
     {
@@ -125,15 +127,17 @@ export const Doctors: CollectionConfig = {
       defaultValue: false,
       access: { create: isAdminField, update: isAdminField },
       validate: validateVerified,
+      label: "Verified Credentials (admin only)",
       admin: {
         description:
-          "ADMIN ONLY. Confirms degrees/experience are verified — gates YMYL reviewer use + schema claims. Requires non-empty credentials and ≥1 alumniOf entry.",
+          "Admin only. Confirms the degrees and experience have been verified — needed before this doctor can be shown as a medical reviewer. Requires non-empty credentials and at least one degree.",
       },
     },
     {
       name: "visitsAllCentres",
       type: "checkbox",
       defaultValue: false,
+      label: "Visiting Specialist (all centres)",
       admin: { description: "Visiting senior specialist who rotates across all centres (shows a single 'visits across cities' card)." },
     },
   ],

@@ -42,6 +42,47 @@ export type IconName = keyof typeof ICON_MAP;
 /** The curated option list for a Payload `select` icon field. */
 export const ICON_NAMES = Object.keys(ICON_MAP) as IconName[];
 
+/** Human-readable label for each icon — shown in the admin panel select. */
+const ICON_LABEL_MAP: Record<IconName, string> = {
+  ScanLine:      "Scan / Laser",
+  Feather:       "Feather / Gentle",
+  Baby:          "Baby",
+  Stethoscope:   "Stethoscope",
+  ShieldCheck:   "Shield / Protection",
+  Users:         "Team / People",
+  HeartPulse:    "Heart Rate",
+  Activity:      "Activity / Stats",
+  ClipboardList: "Checklist",
+  CalendarCheck: "Calendar / Appointment",
+  Eye:           "Eye / Vision",
+  Clock:         "Clock / Time",
+  Microscope:    "Microscope / Lab",
+  Sparkles:      "Sparkles",
+  Hand:          "Hand / Care",
+  FlaskConical:  "Flask / Test Tube",
+  Filter:        "Filter",
+  Magnet:        "Magnet",
+  Layers:        "Layers / Stack",
+  Zap:           "Zap / Energy",
+  Egg:           "Egg",
+  Droplets:      "Droplets / Fluid",
+  Snowflake:     "Snowflake / Freeze",
+  Dna:           "DNA",
+  Beaker:        "Beaker / Lab",
+  Target:        "Target / Goal",
+  Leaf:          "Leaf / Natural",
+  ListChecks:    "List / Multi-check",
+  ClipboardCheck:"Clipboard / Done",
+  Syringe:       "Syringe / Injection",
+  Award:         "Award / Trophy",
+};
+
+/** Human-labeled `{label, value}` pairs for Payload `select` icon fields.
+ *  Values are the raw component names (resolver round-trip safe); labels are
+ *  plain English for clinic staff. */
+export const ICON_OPTIONS: { label: string; value: IconName }[] =
+  ICON_NAMES.map((n) => ({ label: ICON_LABEL_MAP[n] ?? n, value: n }));
+
 /** Default when a stored name is unknown/empty — never throws, never renders
  *  a missing-component. `Sparkles` matches the existing fallback used by the
  *  treatment card helper. */

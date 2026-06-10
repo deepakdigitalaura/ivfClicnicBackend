@@ -1,6 +1,6 @@
 import type { GlobalConfig } from "payload";
 import { revalidateGlobal } from "@/lib/revalidate";
-import { isEditor } from "@/access/roles";
+import { isEditor, isAdminField } from "@/access/roles";
 
 /**
  * Header → CMS source of truth for the sitewide header / navigation
@@ -19,65 +19,70 @@ import { isEditor } from "@/access/roles";
  */
 export const Header: GlobalConfig = {
   slug: "header",
+  label: "Header & Navigation",
   access: { read: () => true, update: isEditor },
-  admin: { group: "Globals" },
+  admin: { group: "Website Settings" },
   hooks: revalidateGlobal("header"),
   fields: [
     {
       name: "branding",
       type: "group",
-      admin: { description: "Logo shown in the header bar + mobile drawer. Left empty keeps the built-in logo." },
+      label: "Logo",
+      admin: { description: "Logo shown in the top bar + mobile menu. Leave empty to keep the built-in logo." },
       fields: [
-        { name: "logoUrl", type: "text", admin: { description: "Logo image URL (e.g. /assets/logo.png). Empty uses the default." } },
-        { name: "logoAlt", type: "text", admin: { description: "Logo alt text. Empty uses the default." } },
+        { name: "logoUrl", type: "text", label: "Logo Image URL", admin: { description: "Web address of the logo image (e.g. /assets/logo.png). Leave empty to use the default." } },
+        { name: "logoAlt", type: "text", label: "Logo Alt Text", admin: { description: "Describes the logo for accessibility. Leave empty to use the default." } },
       ],
     },
     {
       name: "navItems",
       type: "array",
-      labels: { singular: "Nav item", plural: "Nav items" },
+      labels: { singular: "Menu item", plural: "Menu items" },
       admin: {
         description:
           "Top-level navigation. Empty falls back to the built-in menu. A plain link uses 'Link URL'; a dropdown uses 'Mega columns'; tick 'Doctors panel' to render the auto-generated doctor menu.",
       },
       fields: [
-        { name: "label", type: "text", required: true },
-        { name: "url", type: "text", admin: { description: "Destination for a plain link. Leave empty when using mega columns or the Doctors panel." } },
-        { name: "openInNewTab", type: "checkbox", admin: { description: "Open this top-level link in a new tab (rel=noopener)." } },
+        { name: "label", type: "text", required: true, label: "Menu Label" },
+        { name: "url", type: "text", label: "Link URL", admin: { description: "Where this menu item links to. Leave empty if it opens a dropdown or the Doctors panel instead." } },
+        { name: "openInNewTab", type: "checkbox", label: "Open in New Tab", admin: { description: "Open this menu link in a new browser tab." } },
         {
           name: "doctors",
           type: "checkbox",
-          admin: { description: "Render the auto-generated, doctor-first mega panel (built from the Doctors list). Ignores the columns below." },
+          label: "Show Doctors Panel",
+          admin: { description: "Show the auto-built doctors dropdown (made from the Doctors list). When ticked, the dropdown columns below are ignored." },
         },
         {
           name: "megaCols",
           type: "number",
-          admin: { description: "Force the dropdown grid to N columns (optional — defaults to the number of columns)." },
+          label: "Force column count (website team)",
+          access: { update: isAdminField },
+          admin: { description: "Advanced layout control. Managed by the website team." },
         },
         {
           name: "columns",
           type: "array",
-          labels: { singular: "Mega column", plural: "Mega columns" },
-          admin: { description: "Dropdown columns. Leave empty for a plain link or the Doctors panel." },
+          labels: { singular: "Dropdown column", plural: "Dropdown columns" },
+          admin: { description: "Columns shown in this item's dropdown menu. Leave empty for a plain link or the Doctors panel." },
           fields: [
-            { name: "heading", type: "text", admin: { description: "Column heading. Empty renders an unlabelled column." } },
-            { name: "headingHref", type: "text", admin: { description: "Optional link for the heading (e.g. a city hub)." } },
+            { name: "heading", type: "text", label: "Column Heading", admin: { description: "Heading at the top of the column. Leave empty for an unlabelled column." } },
+            { name: "headingHref", type: "text", label: "Heading Link", admin: { description: "Optional link for the heading (e.g. a city page)." } },
             {
               name: "items",
               type: "array",
               labels: { singular: "Link", plural: "Links" },
               fields: [
-                { name: "label", type: "text", required: true },
-                { name: "url", type: "text" },
-                { name: "desc", type: "text", admin: { description: "Optional secondary line shown under the label." } },
+                { name: "label", type: "text", required: true, label: "Link Text" },
+                { name: "url", type: "text", label: "Link URL" },
+                { name: "desc", type: "text", label: "Sub-line", admin: { description: "Optional small line shown under the link." } },
                 {
                   name: "children",
                   type: "array",
                   labels: { singular: "Sub-link", plural: "Sub-links" },
-                  admin: { description: "Optional nested links revealed under this item." },
+                  admin: { description: "Optional nested links shown under this link." },
                   fields: [
-                    { name: "label", type: "text", required: true },
-                    { name: "url", type: "text" },
+                    { name: "label", type: "text", required: true, label: "Link Text" },
+                    { name: "url", type: "text", label: "Link URL" },
                   ],
                 },
               ],
@@ -89,16 +94,17 @@ export const Header: GlobalConfig = {
     {
       name: "cta",
       type: "group",
-      admin: { description: "Primary call-to-action button (desktop bar + mobile drawer)." },
+      label: "Main Button",
+      admin: { description: "The main call-to-action button (top bar + mobile menu)." },
       fields: [
-        { name: "label", type: "text", admin: { description: "Button label. Empty uses the default ('Book Appointment')." } },
-        { name: "url", type: "text", admin: { description: "Button target. Empty uses the default ('/#book')." } },
+        { name: "label", type: "text", label: "Button Text", admin: { description: "Button text. Leave empty to use the default ('Book Appointment')." } },
+        { name: "url", type: "text", label: "Button Link", admin: { description: "Where the button goes. Leave empty to use the default ('/#book')." } },
         {
           name: "styleVariant",
           type: "select",
           defaultValue: "primary",
           options: [{ label: "Primary", value: "primary" }],
-          admin: { description: "Visual style. Only the primary style exists today." },
+          admin: { hidden: true, description: "Reserved for future button styles." },
         },
       ],
     },

@@ -1,8 +1,8 @@
 import type { CollectionConfig, Field } from "payload";
 import { seoField } from "@/fields/seo";
 import { revalidateCollection } from "@/lib/revalidate";
-import { isEditor } from "@/access/roles";
-import { ICON_NAMES } from "@/lib/icon-map";
+import { isEditor, isAdminField } from "@/access/roles";
+import { ICON_OPTIONS } from "@/lib/icon-map";
 
 /**
  * Maternity / Women's-Health services. Mirrors `ServiceContent` +
@@ -21,9 +21,10 @@ import { ICON_NAMES } from "@/lib/icon-map";
 const headingField = (name = "heading", required = true): Field => ({
   name,
   type: "group",
+  label: "Heading",
   fields: [
-    { name: "lead", type: "text", required },
-    { name: "em", type: "text", admin: { description: "Italic emphasis fragment (optional)." } },
+    { name: "lead", type: "text", required, label: "Heading Text", admin: { description: "Plain heading text before the highlighted word(s)." } },
+    { name: "em", type: "text", label: "Highlighted Word(s)", admin: { description: "The word(s) shown in the cursive accent style (optional)." } },
   ],
 });
 
@@ -32,7 +33,7 @@ const stringArray = (name: string, field: string, label: string): Field => ({
   name,
   type: "array",
   labels: { singular: label, plural: `${label}s` },
-  fields: [{ name: field, type: "text", required: true }],
+  fields: [{ name: field, type: "text", required: true, label }],
 });
 
 /** Icon-card step array (icon name + title + description). */
@@ -41,9 +42,9 @@ const stepArray = (name: string): Field => ({
   type: "array",
   labels: { singular: "Step", plural: "Steps" },
   fields: [
-    { name: "icon", type: "select", options: ICON_NAMES as string[], required: true },
-    { name: "t", type: "text", required: true, admin: { description: "Title." } },
-    { name: "d", type: "textarea", required: true, admin: { description: "Description." } },
+    { name: "icon", type: "select", options: ICON_OPTIONS, required: true, label: "Icon", admin: { description: "Pick the icon shown on this card." } },
+    { name: "t", type: "text", required: true, label: "Title" },
+    { name: "d", type: "textarea", required: true, label: "Description" },
   ],
 });
 
@@ -52,7 +53,7 @@ export const Services: CollectionConfig = {
   admin: {
     useAsTitle: "name",
     defaultColumns: ["name", "slug", "schemaType", "published", "_status"],
-    group: "Content",
+    group: "Treatments & Services",
   },
   versions: { drafts: true },
   hooks: revalidateCollection("services"),
@@ -70,38 +71,38 @@ export const Services: CollectionConfig = {
     {
       type: "row",
       fields: [
-        { name: "slug", type: "text", required: true, unique: true, index: true, admin: { width: "50%", description: "URL segment → /services/<slug>. Also the registry key." } },
-        { name: "name", type: "text", required: true, admin: { width: "50%", description: "Service card title." } },
+        { name: "slug", type: "text", required: true, unique: true, index: true, label: "Page ID", access: { update: isAdminField }, admin: { width: "50%", description: "The page's web address ID. Set when creating — ask the website team to change it later." } },
+        { name: "name", type: "text", required: true, label: "Service Name", admin: { width: "50%", description: "Service title shown on the card and page." } },
       ],
     },
-    { name: "desc", type: "textarea", admin: { description: "One-line card description (registry)." } },
+    { name: "desc", type: "textarea", label: "Short Description", admin: { description: "One-line description shown on the service card." } },
     {
       type: "row",
       fields: [
-        { name: "icon", type: "select", options: ICON_NAMES as string[], admin: { width: "50%", description: "Registry card icon." } },
-        { name: "href", type: "text", admin: { width: "50%", description: "Canonical page URL, e.g. /services/3d-4d-sonography." } },
-      ],
-    },
-    {
-      type: "row",
-      fields: [
-        { name: "published", type: "checkbox", admin: { width: "33%", description: "Gates the live, crawlable location→service link." } },
-        { name: "fallback", type: "text", admin: { width: "33%", description: "Where the card points until published." } },
-        { name: "schemaType", type: "select", required: true, defaultValue: "MedicalProcedure", options: ["MedicalProcedure", "MedicalTest", "MedicalTherapy"], admin: { width: "33%" } },
+        { name: "icon", type: "select", options: ICON_OPTIONS, label: "Card Icon", admin: { width: "50%", description: "Pick the icon shown on the service card." } },
+        { name: "href", type: "text", label: "Page URL", access: { update: isAdminField }, admin: { width: "50%", description: "The full web address for this page. Managed by the website team." } },
       ],
     },
     {
       type: "row",
       fields: [
-        { name: "shortName", type: "text", admin: { width: "50%", description: 'Plain label used inside copy ("the scan").' } },
-        { name: "breadcrumbName", type: "text", admin: { width: "50%" } },
+        { name: "published", type: "checkbox", label: "Show on Location Pages", admin: { width: "33%", description: "Show this service's link on location pages. (Separate from the draft/publish state.)" } },
+        { name: "fallback", type: "text", label: "Temporary Link (website team)", access: { update: isAdminField }, admin: { width: "33%", description: "Where the card points until published. Managed by the website team." } },
+        { name: "schemaType", type: "select", required: true, defaultValue: "MedicalProcedure", options: ["MedicalProcedure", "MedicalTest", "MedicalTherapy"], label: "Search Engine Category (website team)", access: { update: isAdminField }, admin: { width: "33%", description: "Search-engine category. Managed by the website team." } },
       ],
     },
     {
       type: "row",
       fields: [
-        { name: "reviewerSlug", type: "text", admin: { width: "50%", description: "Doctor slug for the medical reviewer (becomes a relationship once Doctors migrate)." } },
-        { name: "lastReviewed", type: "text", admin: { width: "50%", description: "Review date, e.g. 2026-06-01." } },
+        { name: "shortName", type: "text", label: "Short Name", admin: { width: "50%", description: 'Plain label used inside copy ("the scan").' } },
+        { name: "breadcrumbName", type: "text", label: "Breadcrumb Name", admin: { width: "50%", description: "Short name shown in the breadcrumb trail." } },
+      ],
+    },
+    {
+      type: "row",
+      fields: [
+        { name: "reviewerSlug", type: "text", label: "Medical Reviewer (doctor ID)", access: { update: isAdminField }, admin: { width: "50%", description: "Doctor ID of the medical reviewer. Managed by the website team." } },
+        { name: "lastReviewed", type: "text", label: "Last Medically Reviewed (date)", admin: { width: "50%", description: "Date this page was last checked by a doctor, e.g. 2026-06-01." } },
       ],
     },
 
@@ -109,22 +110,24 @@ export const Services: CollectionConfig = {
     {
       name: "hero",
       type: "group",
+      label: "Top Section",
+      admin: { description: "The banner at the top of the page." },
       fields: [
-        { name: "eyebrow", type: "text" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         {
           type: "row",
           fields: [
-            { name: "h1", type: "text", admin: { width: "50%" } },
-            { name: "h1Em", type: "text", admin: { width: "50%", description: "Italic emphasis word." } },
+            { name: "h1", type: "text", label: "Page Heading", admin: { width: "50%" } },
+            { name: "h1Em", type: "text", label: "Highlighted Word(s)", admin: { width: "50%", description: "The word(s) shown in the cursive accent style." } },
           ],
         },
-        { name: "tagline", type: "textarea" },
+        { name: "tagline", type: "textarea", label: "Sub-heading" },
         stringArray("badges", "badge", "Badge"),
         {
           type: "row",
           fields: [
-            { name: "image", type: "text", admin: { width: "50%", description: "Hero image path (an upload relation can replace this later)." } },
-            { name: "imageAlt", type: "text", admin: { width: "50%" } },
+            { name: "image", type: "text", label: "Hero Image Path", admin: { width: "50%", description: "Image path, e.g. /assets/.... Ask the website team to add new images." } },
+            { name: "imageAlt", type: "text", label: "Image Alt Text", admin: { width: "50%", description: "Describes the image for accessibility." } },
           ],
         },
       ],
@@ -134,16 +137,18 @@ export const Services: CollectionConfig = {
     {
       name: "overview",
       type: "group",
+      label: "Overview",
       fields: [
         headingField(),
         stringArray("paragraphs", "text", "Paragraph"),
         {
           name: "aside",
           type: "group",
+          label: "Callout Box",
           admin: { description: "Optional callout box." },
           fields: [
-            { name: "title", type: "text" },
-            { name: "body", type: "textarea" },
+            { name: "title", type: "text", label: "Title" },
+            { name: "body", type: "textarea", label: "Body" },
           ],
         },
       ],
@@ -153,27 +158,31 @@ export const Services: CollectionConfig = {
     {
       name: "benefits",
       type: "group",
-      fields: [headingField(), { name: "subtitle", type: "textarea" }, stringArray("items", "item", "Benefit")],
+      label: "Benefits",
+      fields: [headingField(), { name: "subtitle", type: "textarea", label: "Sub-heading" }, stringArray("items", "item", "Benefit")],
     },
 
     // ---- Who it's for ----
     {
       name: "whoFor",
       type: "group",
-      fields: [headingField(), { name: "subtitle", type: "textarea" }, stringArray("items", "item", "Item")],
+      label: "Who It's For",
+      fields: [headingField(), { name: "subtitle", type: "textarea", label: "Sub-heading" }, stringArray("items", "item", "Item")],
     },
 
     // ---- Process ----
     {
       name: "process",
       type: "group",
-      fields: [headingField(), { name: "subtitle", type: "textarea" }, stepArray("steps"), { name: "note", type: "textarea" }],
+      label: "Process",
+      fields: [headingField(), { name: "subtitle", type: "textarea", label: "Sub-heading" }, stepArray("steps"), { name: "note", type: "textarea", label: "Note" }],
     },
 
     // ---- Why us ----
     {
       name: "whyUs",
       type: "group",
+      label: "Why Choose Us",
       fields: [headingField(), stepArray("items")],
     },
 
@@ -181,6 +190,7 @@ export const Services: CollectionConfig = {
     {
       name: "infoNote",
       type: "group",
+      label: "Optional Info Note",
       admin: { description: "Optional explainer block — leave empty to hide." },
       fields: [headingField("heading", false), stringArray("paragraphs", "text", "Paragraph")],
     },
@@ -191,8 +201,8 @@ export const Services: CollectionConfig = {
       type: "array",
       labels: { singular: "FAQ", plural: "FAQs" },
       fields: [
-        { name: "q", type: "text", required: true },
-        { name: "a", type: "textarea", required: true },
+        { name: "q", type: "text", required: true, label: "Question" },
+        { name: "a", type: "textarea", required: true, label: "Answer" },
       ],
     },
 
@@ -200,9 +210,9 @@ export const Services: CollectionConfig = {
     {
       name: "related",
       type: "array",
-      labels: { singular: "Related service", plural: "Related services" },
-      admin: { description: "Other service slugs/keys to cross-link." },
-      fields: [{ name: "key", type: "text", required: true }],
+      labels: { singular: "Related Service", plural: "Related Services" },
+      admin: { description: "Other service IDs to cross-link." },
+      fields: [{ name: "key", type: "text", required: true, label: "Service ID" }],
     },
 
     seoField,

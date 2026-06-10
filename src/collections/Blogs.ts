@@ -19,6 +19,7 @@ import { isEditor } from "@/access/roles";
  */
 export const Blogs: CollectionConfig = {
   slug: "blogs",
+  labels: { singular: "Article", plural: "Articles" },
   admin: {
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "author", "_status", "publishedAt"],
@@ -41,18 +42,19 @@ export const Blogs: CollectionConfig = {
     delete: isEditor,
   },
   fields: [
-    { name: "title", type: "text", required: true },
+    { name: "title", type: "text", required: true, label: "Title" },
     {
       name: "slug",
       type: "text",
       required: true,
       unique: true,
       index: true,
-      admin: { description: "URL path segment → /blog/<slug>." },
+      label: "Page URL",
+      admin: { description: "The web address for this article (→ /blog/<this>). Changing it breaks existing links and Google rankings, so set it once and leave it." },
     },
-    { name: "excerpt", type: "textarea", admin: { description: "Card summary + meta description fallback." } },
-    { name: "heroImage", type: "upload", relationTo: "media" },
-    { name: "content", type: "richText" },
+    { name: "excerpt", type: "textarea", label: "Short Summary", admin: { description: "Short summary shown on cards and used as the Google search description if none is set." } },
+    { name: "heroImage", type: "upload", relationTo: "media", label: "Cover Image" },
+    { name: "content", type: "richText", label: "Article Body" },
     {
       type: "row",
       fields: [
@@ -61,34 +63,37 @@ export const Blogs: CollectionConfig = {
           type: "relationship",
           relationTo: "authors",
           required: true,
-          admin: { width: "50%", description: "Who wrote the post." },
+          label: "Author",
+          admin: { width: "50%", description: "Who wrote the article." },
         },
         {
           name: "reviewedBy",
           type: "relationship",
           relationTo: "authors",
-          admin: { width: "50%", description: "Medical reviewer (optional). Phase 4: may point to a Doctor." },
+          label: "Medically Reviewed By",
+          admin: { width: "50%", description: "Optional medical reviewer who checked the article." },
         },
       ],
     },
     {
       type: "row",
       fields: [
-        { name: "category", type: "relationship", relationTo: "categories", admin: { width: "50%" } },
-        { name: "readMins", type: "number", admin: { width: "50%", description: "Estimated read time (minutes)." } },
+        { name: "category", type: "relationship", relationTo: "categories", label: "Category", admin: { width: "50%" } },
+        { name: "readMins", type: "number", label: "Read Time (minutes)", admin: { width: "50%", description: "Estimated read time in minutes." } },
       ],
     },
     {
       name: "publishedAt",
       type: "date",
-      admin: { description: "Display + schema datePublished. dateModified uses updatedAt." },
+      label: "Published Date",
+      admin: { description: "The date shown on the article. Leave blank to use today." },
     },
     {
       name: "treatmentSlugs",
       type: "array",
-      labels: { singular: "Treatment slug", plural: "Treatment slugs" },
-      admin: { description: "Treatment slugs this post relates to (drives Related Blogs). Becomes a relationship in Phase 5." },
-      fields: [{ name: "slug", type: "text", required: true }],
+      labels: { singular: "Related Treatment ID", plural: "Related Treatment IDs" },
+      admin: { description: "Treatment page IDs this article links to (drives the Related Articles list). Ask the website team if unsure of the exact IDs." },
+      fields: [{ name: "slug", type: "text", required: true, label: "Treatment ID" }],
     },
     seoField,
   ],

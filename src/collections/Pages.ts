@@ -1,7 +1,7 @@
 import type { CollectionConfig } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
 import { seoField } from "@/fields/seo";
-import { isAdmin, isEditor } from "@/access/roles";
+import { isAdmin, isEditor, isAdminField } from "@/access/roles";
 
 /**
  * Generic Pages collection (Phase 1 POC scope = Contact page).
@@ -22,7 +22,9 @@ import { isAdmin, isEditor } from "@/access/roles";
  */
 export const Pages: CollectionConfig = {
   slug: "pages",
+  labels: { singular: "Contact Page", plural: "Contact Page" },
   admin: {
+    group: "Website Pages",
     useAsTitle: "title",
     defaultColumns: ["title", "slug", "_status", "updatedAt"],
     // "Preview" button → secret-guarded /preview endpoint that enables Draft
@@ -50,40 +52,47 @@ export const Pages: CollectionConfig = {
     delete: isAdmin, // removing a route (admin only)
   },
   fields: [
-    { name: "title", type: "text", required: true },
+    { name: "title", type: "text", required: true, label: "Page Title", admin: { description: "Internal name for this page in the list." } },
     {
       name: "slug",
       type: "text",
       required: true,
       unique: true,
       index: true,
-      admin: { description: "URL path segment, e.g. 'contact' for /contact." },
+      label: "Page URL",
+      access: { update: isAdminField },
+      admin: { description: "The web address for this page. Set when creating — ask the website team to change it later." },
     },
     {
       name: "hero",
       type: "group",
+      label: "Top Section",
+      admin: { description: "The banner at the top of the page." },
       fields: [
-        { name: "eyebrow", type: "text" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         {
           name: "lead",
           type: "text",
-          admin: { description: "Heading text shown upright, e.g. 'Contact'." },
+          label: "Heading Text",
+          admin: { description: "Plain heading text before the highlighted word(s), e.g. 'Contact'." },
         },
         {
           name: "em",
           type: "text",
-          admin: { description: "Heading text shown in italic emphasis, e.g. the brand name." },
+          label: "Highlighted Word(s)",
+          admin: { description: "The word(s) shown in the cursive accent style, e.g. the brand name." },
         },
-        { name: "subtitle", type: "textarea" },
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
       ],
     },
     {
       name: "faqs",
       type: "array",
       labels: { singular: "FAQ", plural: "FAQs" },
+      admin: { description: "Questions and answers shown on the page." },
       fields: [
-        { name: "question", type: "text", required: true },
-        { name: "answer", type: "textarea", required: true },
+        { name: "question", type: "text", required: true, label: "Question" },
+        { name: "answer", type: "textarea", required: true, label: "Answer" },
       ],
     },
     seoField,

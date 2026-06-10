@@ -13,13 +13,14 @@ import { isAdmin } from "@/access/roles";
  */
 export const SiteSettings: GlobalConfig = {
   slug: "site-settings",
+  label: "Brand & Identity",
   access: { read: () => true, update: isAdmin },
-  admin: { group: "Globals" },
+  admin: { group: "Website Settings" },
   hooks: revalidateGlobal("site-settings"),
   fields: [
-    { name: "brandName", type: "text", required: true },
-    { name: "alternateName", type: "text" },
-    { name: "legalName", type: "text" },
+    { name: "brandName", type: "text", required: true, label: "Brand Name", admin: { description: "The clinic's public brand name." } },
+    { name: "alternateName", type: "text", label: "Alternate Name" },
+    { name: "legalName", type: "text", label: "Legal Name" },
     {
       name: "logoUrl",
       type: "text",
@@ -51,16 +52,16 @@ export const SiteSettings: GlobalConfig = {
     {
       name: "knowsAbout",
       type: "array",
-      labels: { singular: "Topic", plural: "Topics" },
-      admin: { description: "schema.org knowsAbout — areas of expertise." },
-      fields: [{ name: "topic", type: "text", required: true }],
+      labels: { singular: "Area of expertise", plural: "Areas of expertise" },
+      admin: { description: "Areas of expertise (helps search engines understand the clinic)." },
+      fields: [{ name: "topic", type: "text", required: true, label: "Topic" }],
     },
     {
       name: "socialLinks",
       type: "array",
       labels: { singular: "Social link", plural: "Social links" },
-      admin: { description: "schema.org sameAs — official profile URLs." },
-      fields: [{ name: "url", type: "text", required: true }],
+      admin: { description: "Official profile links (Facebook, Instagram, YouTube, LinkedIn, …)." },
+      fields: [{ name: "url", type: "text", required: true, label: "Profile URL" }],
     },
   ],
 };

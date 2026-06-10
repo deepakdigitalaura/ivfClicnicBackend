@@ -15,22 +15,25 @@ import { isEditor } from "@/access/roles";
  */
 export const BlogHub: GlobalConfig = {
   slug: "blog-hub",
+  label: "Blog Landing Page",
   access: { read: () => true, update: isEditor },
-  admin: { group: "Blog" },
+  admin: { group: "Website Pages" },
   hooks: revalidateGlobal("blog-hub"),
   fields: [
     {
       name: "hero",
       type: "group",
+      label: "Top Section",
       fields: [
-        { name: "title", type: "text", admin: { description: "Hero heading. Empty keeps the default styled heading." } },
-        { name: "description", type: "textarea", admin: { description: "Hero sub-paragraph." } },
+        { name: "title", type: "text", label: "Page Heading", admin: { description: "Heading at the top of the blog page. Leave empty to keep the built-in default." } },
+        { name: "description", type: "textarea", label: "Intro Paragraph", admin: { description: "Short paragraph under the heading." } },
       ],
     },
     {
       name: "intro",
       type: "richText",
-      admin: { description: "Optional rich content shown beneath the hero, above the article grid." },
+      label: "Introduction",
+      admin: { description: "Optional extra content shown beneath the top section, above the list of articles." },
     },
     seoField,
   ],

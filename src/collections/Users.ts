@@ -4,7 +4,7 @@ import { isAdmin, isAdminField, canAccessPanel } from "@/access/roles";
 /** Admin users — the panel's auth collection. RBAC via the `roles` field. */
 export const Users: CollectionConfig = {
   slug: "users",
-  admin: { useAsTitle: "email", group: "Admin" },
+  admin: { useAsTitle: "email", group: "User Management" },
   auth: true,
   access: {
     // Who may use the admin panel at all (admin OR editor).
