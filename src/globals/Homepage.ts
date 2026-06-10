@@ -40,12 +40,11 @@ const headingGroup = (description: string): Field => ({
   ],
 });
 
-export const Homepage: GlobalConfig = {
-  slug: "homepage",
-  access: { read: () => true, update: isEditor },
-  admin: { group: "Website Pages" },
-  hooks: revalidateGlobal("homepage"),
-  fields: [
+/* All homepage section fields, defined once. They are grouped into admin Tabs
+ * below (see `Homepage.fields`) purely for a cleaner editing experience — these
+ * are UNNAMED tabs, so the stored data shape is unchanged (hero, stats, …, seo
+ * all stay top-level). No migration, no resolver/seed/type changes. */
+const SECTION_FIELDS: Field[] = [
     {
       name: "layout",
       type: "array",
@@ -316,5 +315,68 @@ export const Homepage: GlobalConfig = {
       ],
     },
     seoField,
+];
+
+/** Look up a defined section field by name (so the tabs below stay readable). */
+const pickField = (name: string): Field => {
+  const found = SECTION_FIELDS.find((x) => "name" in x && x.name === name);
+  if (!found) throw new Error(`Homepage: section field not found: ${name}`);
+  return found;
+};
+
+export const Homepage: GlobalConfig = {
+  slug: "homepage",
+  access: { read: () => true, update: isEditor },
+  admin: { group: "Website Pages" },
+  hooks: revalidateGlobal("homepage"),
+  // Fields are split into Tabs so a non-technical editor sees one short section
+  // at a time instead of one long scrolling form. Tabs are UNNAMED → the saved
+  // data shape is identical to a flat field list (no schema/type/seed change).
+  fields: [
+    {
+      type: "tabs",
+      tabs: [
+        {
+          label: "Section Order",
+          description: "Reorder or show/hide the homepage's sections.",
+          fields: [pickField("layout")],
+        },
+        {
+          label: "Top Banner",
+          description: "The hero banner at the very top of the homepage.",
+          fields: [pickField("hero")],
+        },
+        {
+          label: "Why Choose Us",
+          description: "Stats strip and the two 'Why' sections.",
+          fields: [pickField("stats"), pickField("whyBavishi"), pickField("whyChoose")],
+        },
+        {
+          label: "Highlights",
+          description: "Suraksha Kavach, Awards and Events.",
+          fields: [pickField("suraksha"), pickField("awards"), pickField("events")],
+        },
+        {
+          label: "Videos",
+          description: "Patient stories, education and resource videos.",
+          fields: [pickField("videos")],
+        },
+        {
+          label: "FAQs",
+          description: "The homepage FAQ accordion.",
+          fields: [pickField("faq")],
+        },
+        {
+          label: "Closing CTA",
+          description: "The closing call-to-action band at the bottom.",
+          fields: [pickField("finalCta")],
+        },
+        {
+          label: "Search & Social",
+          description: "How the page looks in Google and when shared.",
+          fields: [pickField("seo")],
+        },
+      ],
+    },
   ],
 };
