@@ -101,8 +101,55 @@ export type HomepageSeo = {
   ogImage: string;
 };
 
+/* ---------- Section layout (page builder) ----------
+ * The homepage is assembled from a fixed catalogue of section components. The
+ * CMS `layout` lets a non-technical editor REORDER and SHOW/HIDE these known
+ * sections — it never introduces new HTML. HOME_SECTIONS is the canonical order
+ * (identical to the original fixed JSX sequence) so an empty/absent layout
+ * renders byte-identically. Adding a section to the page = unhiding it; removing
+ * = hiding it; dragging a row = reordering. */
+export const HOME_SECTIONS = [
+  "hero", "stats", "whyBavishi", "suraksha", "treatments", "successStories",
+  "videoHub", "about", "doctors", "whyChoose", "awards", "media", "testimonials",
+  "events", "blogs", "locations", "faq", "calculators", "inquiry", "finalCta",
+] as const;
+export type HomeSection = (typeof HOME_SECTIONS)[number];
+export type HomeSectionLayout = { section: HomeSection; visible: boolean };
+
+/** Human-friendly labels for the layout select (admin + reference). */
+export const HOME_SECTION_LABELS: Record<HomeSection, string> = {
+  hero: "Top Banner",
+  stats: "Stats Strip",
+  whyBavishi: "Why Bavishi Cards",
+  suraksha: "Suraksha Kavach",
+  treatments: "Treatments Grid",
+  successStories: "Patient Success Stories",
+  videoHub: "Education Videos",
+  about: "About the Institute",
+  doctors: "Our Doctors",
+  whyChoose: "Why Choose Pillars",
+  awards: "Awards Carousel",
+  media: "Media Coverage",
+  testimonials: "Google Reviews",
+  events: "Upcoming Events",
+  blogs: "Knowledge & Resources",
+  locations: "Our Locations",
+  faq: "FAQs",
+  calculators: "Fertility Calculators",
+  inquiry: "Inquiry Form",
+  finalCta: "Closing Call-to-Action",
+};
+
+/** The canonical layout — every section, in order, visible. Used as the
+ *  byte-identical fallback whenever the CMS layout is empty. */
+export const DEFAULT_HOME_LAYOUT: HomeSectionLayout[] = HOME_SECTIONS.map(
+  (section) => ({ section, visible: true }),
+);
+
 /** Client-ready, fully-resolved homepage content. */
 export type HomepageData = {
+  /** Section render order + visibility. Absent/empty → DEFAULT_HOME_LAYOUT. */
+  layout?: HomeSectionLayout[];
   hero: HeroContent;
   stats: StatItem[];
   whyBavishi: { eyebrow: string; heading: Heading; subtitle: string; cards: WhyCard[] };
@@ -310,6 +357,7 @@ type PointSource = { h?: string | null; d?: string | null };
 
 export type HomepageSource =
   | {
+      layout?: { section?: string | null; visible?: boolean | null }[] | null;
       hero?: {
         eyebrow?: string | null;
         headline?: string | null;
@@ -400,6 +448,22 @@ const texts = (a: TextItem[] | null | undefined): string[] =>
 export function resolveHomepage(src: HomepageSource): HomepageData {
   const d = HOMEPAGE_DEFAULTS;
   if (!src) return d;
+
+  // Resolve the section layout: take the editor's order/visibility for known
+  // sections, then append any section the editor never touched (so nothing
+  // silently disappears). Empty/absent CMS layout → exact canonical order.
+  const known = new Set<string>(HOME_SECTIONS);
+  const seen = new Set<string>();
+  const layout: HomeSectionLayout[] = [];
+  for (const row of src.layout ?? []) {
+    const section = row?.section;
+    if (!section || !known.has(section) || seen.has(section)) continue;
+    seen.add(section);
+    layout.push({ section: section as HomeSection, visible: row?.visible !== false });
+  }
+  for (const section of HOME_SECTIONS) {
+    if (!seen.has(section)) layout.push({ section, visible: true });
+  }
 
   const hero: HeroContent = src.hero?.headline
     ? {
@@ -523,5 +587,5 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { hero, stats, whyBavishi, whyChoose, suraksha, awards, events, videos, faq, finalCta, seo };
+  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, awards, events, videos, faq, finalCta, seo };
 }

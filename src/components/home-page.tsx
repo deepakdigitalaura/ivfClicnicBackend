@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, useMemo, memo } from "react";
+import { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -29,7 +29,9 @@ import { cityHref } from "@/lib/locations";
 import { resolveIcon } from "@/lib/icon-map";
 import {
   HOMEPAGE_DEFAULTS,
+  DEFAULT_HOME_LAYOUT,
   type HomepageData,
+  type HomeSection,
   type HeroContent,
   type SurakshaContent,
   type FinalCtaContent,
@@ -96,29 +98,39 @@ function GhostBtn({ children, icon: Icon, href, target }: { children: React.Reac
 /* ---------- Page ---------- */
 
 export function HomePage({ data = HOMEPAGE_DEFAULTS }: { data?: HomepageData } = {}) {
+  // Each homepage section, keyed so the CMS `layout` can reorder / hide it. The
+  // map holds the exact same element calls as the original fixed sequence, so
+  // the default layout renders byte-identically (a Fragment adds no DOM and the
+  // key is never serialised to HTML).
+  const sections: Record<HomeSection, React.ReactNode> = {
+    hero: <Hero hero={data.hero} />,
+    stats: <StatsStrip stats={data.stats} />,
+    whyBavishi: <WhyBavishiFertilityInstitute content={data.whyBavishi} />,
+    suraksha: <Suraksha content={data.suraksha} />,
+    treatments: <Treatments />,
+    successStories: <SuccessStories stories={data.videos.stories} />,
+    videoHub: <VideoHub videos={data.videos.edu} />,
+    about: <About />,
+    doctors: <Doctors />,
+    whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
+    awards: <AwardsCarousel content={data.awards} />,
+    media: <Media />,
+    testimonials: <Testimonials />,
+    events: <Events content={data.events} />,
+    blogs: <Blogs videos={data.videos.resources} />,
+    locations: <Locations />,
+    faq: <FAQ content={data.faq} />,
+    calculators: <Calculators />,
+    inquiry: <InquiryForm />,
+    finalCta: <FinalCTA content={data.finalCta} />,
+  };
+  const layout = data.layout?.length ? data.layout : DEFAULT_HOME_LAYOUT;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <Hero hero={data.hero} />
-      <StatsStrip stats={data.stats} />
-      <WhyBavishiFertilityInstitute content={data.whyBavishi} />
-      <Suraksha content={data.suraksha} />
-      <Treatments />
-      <SuccessStories stories={data.videos.stories} />
-      <VideoHub videos={data.videos.edu} />
-      <About />
-      <Doctors />
-      <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />
-      <AwardsCarousel content={data.awards} />
-      <Media />
-      <Testimonials />
-      <Events content={data.events} />
-      <Blogs videos={data.videos.resources} />
-      <Locations />
-      <FAQ content={data.faq} />
-      <Calculators />
-      <InquiryForm />
-      <FinalCTA content={data.finalCta} />
+      {layout.map(({ section, visible }) =>
+        visible && sections[section] ? <Fragment key={section}>{sections[section]}</Fragment> : null,
+      )}
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

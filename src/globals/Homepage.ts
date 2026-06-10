@@ -3,6 +3,10 @@ import { seoField } from "@/fields/seo";
 import { revalidateGlobal } from "@/lib/revalidate";
 import { isEditor } from "@/access/roles";
 import { ICON_OPTIONS } from "@/lib/icon-map";
+import { HOME_SECTIONS, HOME_SECTION_LABELS } from "@/lib/homepage";
+
+/** Section options for the page-section-order builder (value = section key). */
+const SECTION_OPTIONS = HOME_SECTIONS.map((s) => ({ label: HOME_SECTION_LABELS[s], value: s }));
 
 /**
  * Homepage → CMS source of truth for the homepage's EDITORIAL content
@@ -42,6 +46,34 @@ export const Homepage: GlobalConfig = {
   admin: { group: "Website Pages" },
   hooks: revalidateGlobal("homepage"),
   fields: [
+    {
+      name: "layout",
+      type: "array",
+      label: "Page Section Order",
+      labels: { singular: "Section", plural: "Sections" },
+      admin: {
+        initCollapsed: true,
+        description:
+          "Controls the order of the homepage's sections and whether each one shows. Drag a row by its handle to reorder. Untick 'Show on page' to hide a section without deleting its content. Leave this list empty to use the standard order.",
+      },
+      fields: [
+        {
+          name: "section",
+          type: "select",
+          required: true,
+          label: "Section",
+          options: SECTION_OPTIONS,
+          admin: { description: "Which homepage section this row controls." },
+        },
+        {
+          name: "visible",
+          type: "checkbox",
+          label: "Show on page",
+          defaultValue: true,
+          admin: { description: "Untick to hide this section from the live homepage." },
+        },
+      ],
+    },
     {
       name: "hero",
       type: "group",
