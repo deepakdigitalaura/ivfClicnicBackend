@@ -1,0 +1,168 @@
+{
+  "hero": {
+    "eyebrow": "About Bavishi Fertility Institute",
+    "headline": "Four decades of fertility excellence — built on hope",
+    "headlineItalic": "fertility excellence",
+    "paragraph": "Since 1984, Bavishi Fertility Institute has helped over 30,000 families experience the joy of parenthood — pioneering IVF in India and growing into one of the country's most trusted fertility networks, with 15 centres across 8 cities."
+  },
+  "atAGlance": [
+    {
+      "value": "1984",
+      "label": "Founded in Ahmedabad"
+    },
+    {
+      "value": "30,000+",
+      "label": "Successful pregnancies"
+    },
+    {
+      "value": "3,000+",
+      "label": "IVF cycles every year"
+    },
+    {
+      "value": "15",
+      "label": "Centres across 8 cities"
+    },
+    {
+      "value": "5×",
+      "label": "National Fertility Award (2021–25)"
+    }
+  ],
+  "milestones": [
+    {
+      "y": "1984",
+      "t": "The journey begins",
+      "d": "Dr. Himanshu & Dr. Falguni Bavishi found Bavishi Fertility Institute in Ahmedabad with one promise — fertility care above international standards, with an Indian heart."
+    },
+    {
+      "y": "1998",
+      "t": "Pioneering IVF in India",
+      "d": "Bavishi Fertility Institute helps bring modern IVF and assisted reproduction to thousands of Indian families."
+    },
+    {
+      "y": "Firsts",
+      "t": "Two national firsts",
+      "d": "India's first live birth from a vitrified (frozen) egg, and India's first surrogacy for an international couple — milestones that shaped Indian reproductive medicine."
+    },
+    {
+      "y": "2021–25",
+      "t": "National Fertility Award",
+      "d": "Honoured for excellence in IVF & fertility care for five consecutive years — a record of consistency, not chance."
+    },
+    {
+      "y": "Today",
+      "t": "15 centres, one family",
+      "d": "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities."
+    }
+  ],
+  "trustPillars": [
+    {
+      "icon": "Award",
+      "t": "Four Decades of Experience",
+      "d": "Since 1984, a family-led institute that pioneered IVF in India and has guided 30,000+ families to parenthood."
+    },
+    {
+      "icon": "HeartPulse",
+      "t": "Outcomes That Matter",
+      "d": "3,000+ IVF cycles a year with a focus on safe stimulation, best-quality embryos and healthy single pregnancies."
+    },
+    {
+      "icon": "Users",
+      "t": "A Family of Specialists",
+      "d": "Reproductive endocrinologists, embryologists, andrologists, fetal-medicine experts, counsellors and nutritionists under one roof."
+    },
+    {
+      "icon": "Microscope",
+      "t": "World-Class Technology",
+      "d": "Class 1000 IVF labs — 10× cleaner than the international standard — with time-lapse imaging, vitrification and PGT."
+    },
+    {
+      "icon": "ShieldCheck",
+      "t": "Transparency & Ethics",
+      "d": "Honest counselling, no hidden costs, double-witnessing of every sample, and the Suraksha Kavach assurance."
+    },
+    {
+      "icon": "Sparkles",
+      "t": "Simple · Safe · Smart · Successful",
+      "d": "Our four values shape every plan — personalised, compassionate and judicious use of advanced reproductive technology."
+    }
+  ],
+  "patientStats": [
+    {
+      "value": "30,000+",
+      "label": "Happy families"
+    },
+    {
+      "value": "40+",
+      "label": "Years of fertility expertise"
+    },
+    {
+      "value": "300+",
+      "label": "International patients a year"
+    },
+    {
+      "value": "8",
+      "label": "Cities, one standard of care"
+    }
+  ],
+  "network": {
+    "heading": {
+      "lead": "15 centres across",
+      "em": "8 Indian cities"
+    },
+    "subtitle": "World-class fertility care, close to home — wherever you are.",
+    "cities": [
+      {
+        "c": "Ahmedabad",
+        "n": "3 centres"
+      },
+      {
+        "c": "Mumbai",
+        "n": "6 centres"
+      },
+      {
+        "c": "Vadodara",
+        "n": "1 centre"
+      },
+      {
+        "c": "Surat",
+        "n": "1 centre"
+      },
+      {
+        "c": "Bhuj",
+        "n": "1 centre"
+      },
+      {
+        "c": "Bhavnagar",
+        "n": "1 centre"
+      },
+      {
+        "c": "Anand",
+        "n": "1 centre"
+      },
+      {
+        "c": "Varanasi",
+        "n": "1 centre"
+      }
+    ]
+  },
+  "finalCta": {
+    "heading": {
+      "lead": "Begin your journey with",
+      "em": "people who care."
+    },
+    "ctas": [
+      {
+        "text": "Book Free Consultation"
+      },
+      {
+        "text": "WhatsApp Us"
+      }
+    ]
+  },
+  "seo": {
+    "metaTitle": "About Bavishi Fertility Institute — 40 Years of IVF Excellence in India",
+    "metaDescription": "Founded in 1984 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 15 centres. Discover our story, legacy and values.",
+    "ogTitle": "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1984",
+    "ogDescription": "30,000+ pregnancies. 15 centres across 8 cities. National Fertility Award 5 years running. The story of India's pioneering fertility institute."
+  }
+}

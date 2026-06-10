@@ -1,0 +1,2393 @@
+[
+  {
+    "slug": "paldi",
+    "citySlug": "ahmedabad",
+    "name": "Paldi",
+    "fullName": "Bavishi Fertility Institute — Paldi, Ahmedabad",
+    "isHeadOffice": true,
+    "area": "Paldi",
+    "address": "Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi, Ahmedabad – 380007",
+    "pin": "380007",
+    "phone": "919712622288",
+    "phoneLabel": "+91 97126 22288",
+    "hours": "Mon–Sat · 9:00 am – 7:00 pm",
+    "opening": {
+      "opens": "09:00",
+      "closes": "19:00"
+    },
+    "geo": {
+      "lat": 23.0130822,
+      "lng": 72.5639069
+    },
+    "mapQuery": "Bavishi Fertility Institute Paldi Ahmedabad",
+    "image": "/assets/centres/paldi-building.png",
+    "hero360Url": "https://www.google.com/maps/embed?pb=!4v1780725289034!6m8!1m7!1sCAoSHENJQUJJaEFEeWM1VXZ6ZGI4R2U4cTNVQUFmWWI.!2m2!1d23.01327543356341!2d72.56405585909516!3f43.197350683590116!4f-11.407427687968791!5f0.4000000000000002",
+    "nearby": [
+      {
+        "value": "Paldi"
+      },
+      {
+        "value": "Vasna"
+      },
+      {
+        "value": "Ambawadi"
+      },
+      {
+        "value": "Ellisbridge"
+      },
+      {
+        "value": "Vejalpur"
+      },
+      {
+        "value": "Maninagar"
+      },
+      {
+        "value": "Navrangpura"
+      },
+      {
+        "value": "Sarkhej"
+      },
+      {
+        "value": "Jivraj Park"
+      },
+      {
+        "value": "Anandnagar"
+      },
+      {
+        "value": "Shreyas"
+      },
+      {
+        "value": "Bhatta"
+      },
+      {
+        "value": "Law Garden"
+      },
+      {
+        "value": "C.G. Road"
+      },
+      {
+        "value": "Manekbaug"
+      },
+      {
+        "value": "Sabarmati"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "Opposite Manjulal Municipal Garden"
+      },
+      {
+        "value": "Next to Adani CNG pump & Orion Complex"
+      },
+      {
+        "value": "At Paldi Cross Roads (Paldi Char Rasta)"
+      },
+      {
+        "value": "Near Bhatta and Ellisbridge"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located right at Paldi Cross Roads in west Ahmedabad, easily reached from Ellisbridge, Vasna and Ambawadi."
+      },
+      {
+        "value": "About 8 km from Ahmedabad Junction (Kalupur) railway station and roughly 12 km from Sardar Vallabhbhai Patel International Airport."
+      },
+      {
+        "value": "Well served by AMTS/BRTS bus routes along Paldi; on-street and complex parking available nearby."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "Class 1000 embryology & IVF lab"
+      },
+      {
+        "value": "Andrology & semen-analysis lab"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Day-care operation theatre"
+      },
+      {
+        "value": "Counselling & nutrition suites"
+      },
+      {
+        "value": "Pharmacy & sample collection"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "himanshu-bavishi"
+      },
+      {
+        "value": "falguni-bavishi"
+      },
+      {
+        "value": "parth-bavishi"
+      },
+      {
+        "value": "janki-bavishi"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      },
+      {
+        "value": "pgt"
+      }
+    ],
+    "intro": "Paldi is where Bavishi Fertility Institute began in 1984 — and remains our flagship head office. This centre houses our most advanced Class 1000 embryology lab, senior promoter doctors and the full spectrum of fertility services under one roof, in the heart of west Ahmedabad.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Paldi IVF centre?",
+        "a": "It is at Paldi Cross Roads — opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi, Ahmedabad – 380007. This is Bavishi Fertility Institute's head office and flagship lab, established in 1984."
+      },
+      {
+        "q": "What are the timings at the Paldi centre?",
+        "a": "The Paldi centre is open Monday to Saturday, 9:00 am to 7:00 pm. Appointments are recommended; call +91 97126 22288 to book."
+      },
+      {
+        "q": "Which areas does the Paldi centre serve?",
+        "a": "Paldi conveniently serves patients from Paldi, Vasna, Ambawadi, Ellisbridge, Vejalpur and Maninagar, as well as families travelling from across Ahmedabad and Gujarat."
+      },
+      {
+        "q": "What facilities are available at Paldi?",
+        "a": "A Class 1000 embryology & IVF lab, andrology lab, in-house diagnostics and sonography, a day-care operation theatre, counselling and nutrition suites, and an on-site pharmacy — everything under one roof."
+      },
+      {
+        "q": "Why choose the Paldi centre for IVF?",
+        "a": "As the flagship head office, Paldi offers the institute's most advanced lab, senior promoter doctors and four decades of experience — combined with transparent pricing, EMI options and the Suraksha Kavach package."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/centres/paldi-ot.webp",
+        "alt": "Bavishi Fertility Institute Paldi — operation theatre & advanced equipment"
+      },
+      {
+        "src": "/assets/centres/paldi-reception.webp",
+        "alt": "Bavishi Fertility Institute Paldi — reception & front desk"
+      },
+      {
+        "src": "/assets/centres/paldi-nicu.webp",
+        "alt": "Bavishi Fertility Institute Paldi — neonatal / newborn care room"
+      },
+      {
+        "src": "/assets/centres/paldi-waiting.webp",
+        "alt": "Bavishi Fertility Institute Paldi — patient waiting lounge"
+      },
+      {
+        "src": "/assets/centres/paldi-building.png",
+        "alt": "Bavishi Fertility Institute Paldi — main building, Ahmedabad"
+      }
+    ],
+    "sameAs": [],
+    "womensHealth": [
+      {
+        "value": "3d-4d-sonography"
+      },
+      {
+        "value": "painless-delivery"
+      },
+      {
+        "value": "normal-delivery"
+      },
+      {
+        "value": "fetal-medicine"
+      },
+      {
+        "value": "high-risk-pregnancy-care"
+      },
+      {
+        "value": "twin-pregnancy-care"
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "sindhu-bhavan-road",
+    "citySlug": "ahmedabad",
+    "name": "Sindhu Bhavan Road",
+    "fullName": "Bavishi Fertility Institute — Sindhu Bhavan Road, Ahmedabad",
+    "area": "Sindhu Bhavan Road",
+    "address": "SF-213, Stellar, Sindhu Bhavan Marg, near Pakvan Cross Roads, Bodakdev, Ahmedabad – 380059",
+    "pin": "380059",
+    "phone": "919712622288",
+    "phoneLabel": "+91 97126 22288",
+    "hours": "Mon–Sat · 10:30 am – 7:00 pm",
+    "opening": {
+      "opens": "10:30",
+      "closes": "19:00"
+    },
+    "geo": {
+      "lat": 23.039814,
+      "lng": 72.5085954
+    },
+    "mapQuery": "Bavishi Fertility Institute Sindhu Bhavan Road Bodakdev Ahmedabad",
+    "image": "/assets/Locations/sindhu-bhavan-road.png",
+    "hero360Url": "https://www.google.com/maps/embed?pb=!4v1780725567586!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJQ3gwOUxSdndF!2m2!1d23.0400269079204!2d72.50749736340882!3f5.556150793257643!4f-2.3088572008204125!5f0.4000000000000002",
+    "nearby": [
+      {
+        "value": "Bodakdev"
+      },
+      {
+        "value": "Thaltej"
+      },
+      {
+        "value": "Sindhu Bhavan Road"
+      },
+      {
+        "value": "S.G. Highway"
+      },
+      {
+        "value": "Science City"
+      },
+      {
+        "value": "Shilaj"
+      },
+      {
+        "value": "Satellite"
+      },
+      {
+        "value": "Vastrapur"
+      },
+      {
+        "value": "Bopal"
+      },
+      {
+        "value": "South Bopal"
+      },
+      {
+        "value": "Jodhpur"
+      },
+      {
+        "value": "Prahlad Nagar"
+      },
+      {
+        "value": "Sola"
+      },
+      {
+        "value": "Ghuma"
+      },
+      {
+        "value": "Shela"
+      },
+      {
+        "value": "Gota"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "On Sindhu Bhavan Marg (SF-213, Stellar)"
+      },
+      {
+        "value": "Near Pakvan Cross Roads, Bodakdev"
+      },
+      {
+        "value": "Close to S.G. Highway and the Science City corridor"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Set on the fast-growing Sindhu Bhavan Road corridor in west Ahmedabad, minutes from S.G. Highway and Thaltej."
+      },
+      {
+        "value": "Roughly 12 km from Sardar Vallabhbhai Patel International Airport and well connected by BRTS along S.G. Highway."
+      },
+      {
+        "value": "Ample parking at Stellar; easy access from Bodakdev, Thaltej and Shilaj."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "Modern IVF & embryology lab"
+      },
+      {
+        "value": "Consultation & counselling rooms"
+      },
+      {
+        "value": "Sonography & diagnostics"
+      },
+      {
+        "value": "Minor procedure room"
+      },
+      {
+        "value": "Comfortable patient lounge"
+      },
+      {
+        "value": "On-site pharmacy"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "himanshu-bavishi"
+      },
+      {
+        "value": "falguni-bavishi"
+      },
+      {
+        "value": "parth-bavishi"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Sindhu Bhavan Road centre brings Bavishi Fertility Institute's world-class fertility care to west Ahmedabad's fast-growing SG Highway corridor. Conveniently located in Bodakdev near Pakvan Cross Roads, it offers complete IVF, IUI and infertility services with the same senior-doctor expertise as our flagship.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Sindhu Bhavan Road centre?",
+        "a": "At SF-213, Stellar, Sindhu Bhavan Marg, near Pakvan Cross Roads, Bodakdev, Ahmedabad – 380059 — minutes from S.G. Highway."
+      },
+      {
+        "q": "What are the timings at the Sindhu Bhavan Road centre?",
+        "a": "Monday to Saturday, 10:30 am to 7:00 pm. Appointments are recommended."
+      },
+      {
+        "q": "Which areas does this centre serve?",
+        "a": "Bodakdev, Thaltej, Sindhu Bhavan Road, the S.G. Highway corridor, Science City and Shilaj."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Sindhu Bhavan Road — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Sindhu Bhavan Road — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Sindhu Bhavan Road — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "womensHealth": [
+      {
+        "value": "3d-4d-sonography"
+      },
+      {
+        "value": "painless-delivery"
+      },
+      {
+        "value": "normal-delivery"
+      },
+      {
+        "value": "fetal-medicine"
+      },
+      {
+        "value": "high-risk-pregnancy-care"
+      },
+      {
+        "value": "twin-pregnancy-care"
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "nikol",
+    "citySlug": "ahmedabad",
+    "name": "Nikol",
+    "fullName": "Bavishi Fertility Institute — Nikol, Ahmedabad",
+    "area": "Nikol",
+    "address": "Hill Town Plaza, 501, near Amar Jawan Circle, Nikol, Ahmedabad – 380049",
+    "pin": "380049",
+    "phone": "919227114040",
+    "phoneLabel": "+91 92271 14040",
+    "hours": "Mon–Sat · 10:00 am – 7:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    "geo": {
+      "lat": 23.0589329,
+      "lng": 72.6718737
+    },
+    "mapQuery": "Bavishi Fertility Institute Nikol Ahmedabad",
+    "image": "/assets/Locations/Nikol.png",
+    "hero360Url": "https://www.google.com/maps/embed?pb=!4v1780725518611!6m8!1m7!1sCAoSHENJQUJJaEFEeWRFUjVDMW5mbWZ3cl9jQUN2LWQ.!2m2!1d23.03844289770396!2d72.67736438105196!3f314.70074497333246!4f-4.973502490379573!5f0.4000000000000002",
+    "nearby": [
+      {
+        "value": "Nikol"
+      },
+      {
+        "value": "Naroda"
+      },
+      {
+        "value": "Vastral"
+      },
+      {
+        "value": "Odhav"
+      },
+      {
+        "value": "New India Colony"
+      },
+      {
+        "value": "Kathwada"
+      },
+      {
+        "value": "Bapunagar"
+      },
+      {
+        "value": "Thakkarbapanagar"
+      },
+      {
+        "value": "CTM"
+      },
+      {
+        "value": "Ramol"
+      },
+      {
+        "value": "Hathijan"
+      },
+      {
+        "value": "Kubernagar"
+      },
+      {
+        "value": "Sardarnagar"
+      },
+      {
+        "value": "India Colony"
+      },
+      {
+        "value": "Viratnagar"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At Hill Town Plaza, 501"
+      },
+      {
+        "value": "Near Amar Jawan Circle, Nikol"
+      },
+      {
+        "value": "Close to Nikol–Naroda Road"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located at Hill Town Plaza near Amar Jawan Circle, serving east Ahmedabad — Nikol, Naroda, Vastral and Odhav."
+      },
+      {
+        "value": "Easily reached via the Nikol–Naroda road and nearby BRTS connections."
+      },
+      {
+        "value": "On-site parking available at Hill Town Plaza."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & fertility consultation"
+      },
+      {
+        "value": "Diagnostics & sonography"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "Sample collection"
+      },
+      {
+        "value": "Comfortable waiting area"
+      },
+      {
+        "value": "Easy parking access"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "parth-bavishi"
+      },
+      {
+        "value": "janki-bavishi"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      }
+    ],
+    "intro": "The Nikol centre extends Bavishi Fertility Institute's trusted fertility care to east Ahmedabad. Located at Hill Town Plaza near Amar Jawan Circle, it makes expert IVF, IUI and infertility evaluation easily accessible for families across Nikol, Naroda and the surrounding neighbourhoods.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Nikol centre?",
+        "a": "At Hill Town Plaza, 501, near Amar Jawan Circle, Nikol, Ahmedabad – 380049, serving east Ahmedabad."
+      },
+      {
+        "q": "What are the timings at the Nikol centre?",
+        "a": "Monday to Saturday, 10:00 am to 7:00 pm. Call +91 92271 14040 to book."
+      },
+      {
+        "q": "Which areas does the Nikol centre serve?",
+        "a": "Nikol, Naroda, Vastral, Odhav, New India Colony and Kathwada in east Ahmedabad."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Nikol — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Nikol — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Nikol — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "womensHealth": [
+      {
+        "value": "3d-4d-sonography"
+      },
+      {
+        "value": "painless-delivery"
+      },
+      {
+        "value": "normal-delivery"
+      },
+      {
+        "value": "fetal-medicine"
+      },
+      {
+        "value": "high-risk-pregnancy-care"
+      },
+      {
+        "value": "twin-pregnancy-care"
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "ghatkopar",
+    "citySlug": "mumbai",
+    "name": "Ghatkopar",
+    "fullName": "Bavishi Fertility Institute — Ghatkopar, Mumbai",
+    "area": "Ghatkopar",
+    "address": "2nd Floor, Vallabh Vihar CHS, Mahatma Gandhi Rd, opp. Kotak Mahindra Bank, Ghatkopar East, Mumbai – 400077",
+    "pin": "400077",
+    "phone": "919328190146",
+    "phoneLabel": "+91 93281 90146",
+    "hours": "Mon–Sat · 9:00 am – 9:00 pm",
+    "opening": {
+      "opens": "09:00",
+      "closes": "21:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Ghatkopar Mumbai",
+    "image": "/assets/Locations/Ghatkopar.png",
+    "hero360Url": "https://www.google.com/maps/embed?pb=!4v1780725760082!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRHlrdE9iX2dF!2m2!1d19.07851750759122!2d72.90374191572629!3f331.0839116483176!4f-6.84920058783446!5f0.4000000000000002",
+    "nearby": [
+      {
+        "value": "Ghatkopar East"
+      },
+      {
+        "value": "Ghatkopar West"
+      },
+      {
+        "value": "Vikhroli"
+      },
+      {
+        "value": "Kurla"
+      },
+      {
+        "value": "Chembur"
+      },
+      {
+        "value": "Mulund"
+      },
+      {
+        "value": "Bhandup"
+      },
+      {
+        "value": "Powai"
+      },
+      {
+        "value": "Vidyavihar"
+      },
+      {
+        "value": "Sion"
+      },
+      {
+        "value": "Kanjurmarg"
+      },
+      {
+        "value": "Tilak Nagar"
+      },
+      {
+        "value": "Pant Nagar"
+      },
+      {
+        "value": "Asalpha"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "Opposite Kotak Mahindra Bank"
+      },
+      {
+        "value": "On Mahatma Gandhi Road, Ghatkopar East"
+      },
+      {
+        "value": "Near Ghatkopar railway & metro station"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located on M.G. Road in Ghatkopar East, just minutes from Ghatkopar station — an interchange for the Central Line and Metro Line 1."
+      },
+      {
+        "value": "Well connected via LBS Marg and the Eastern Express Highway, with easy access from Kurla, Vikhroli and Powai."
+      },
+      {
+        "value": "Paid parking is available nearby in Ghatkopar East."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "Class 1000 embryology & IVF lab"
+      },
+      {
+        "value": "Andrology & semen-analysis lab"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Day-care operation theatre"
+      },
+      {
+        "value": "Counselling & nutrition suites"
+      },
+      {
+        "value": "Pharmacy & sample collection"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "suman-singh"
+      },
+      {
+        "value": "nilesh-jain"
+      },
+      {
+        "value": "priyanka-sinha"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      },
+      {
+        "value": "pgt"
+      }
+    ],
+    "intro": "Our Ghatkopar centre is Bavishi Fertility Institute's flagship facility in Mumbai, bringing four decades of fertility expertise to the city's central and eastern suburbs. Conveniently located on M.G. Road opposite Kotak Mahindra Bank — minutes from Ghatkopar station — it offers the full spectrum of IVF, ICSI, IUI and infertility care under one roof.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Ghatkopar IVF centre?",
+        "a": "It is on the 2nd floor of Vallabh Vihar CHS, Mahatma Gandhi Road, opposite Kotak Mahindra Bank, Ghatkopar East, Mumbai – 400077 — minutes from Ghatkopar station."
+      },
+      {
+        "q": "What are the timings at the Ghatkopar centre?",
+        "a": "The Ghatkopar centre is open Monday to Saturday, 9:00 am to 9:00 pm. Appointments are recommended; call +91 93281 90146 to book."
+      },
+      {
+        "q": "Which areas does the Ghatkopar centre serve?",
+        "a": "Ghatkopar, Vikhroli, Kurla, Chembur, Mulund, Bhandup, Powai and the surrounding central and eastern Mumbai suburbs."
+      },
+      {
+        "q": "What facilities are available at Ghatkopar?",
+        "a": "A Class 1000 embryology & IVF lab, andrology lab, in-house diagnostics and sonography, a day-care operation theatre, counselling suites and an on-site pharmacy — complete fertility care under one roof."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Ghatkopar — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Ghatkopar — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Ghatkopar — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "thane",
+    "citySlug": "mumbai",
+    "name": "Thane",
+    "fullName": "Bavishi Fertility Institute — Thane, Mumbai",
+    "area": "Thane",
+    "address": "Bapat Urology Center, A.K. Vaidya Marg, near Paramarth Niketan Bus Stop & Prashant Corner, Panch Pakhdi, Thane West – 400602",
+    "pin": "400602",
+    "phone": "919167204018",
+    "phoneLabel": "+91 91672 04018",
+    "hours": "Mon–Sat · 10:00 am – 1:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "13:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Thane West",
+    "image": "/assets/Locations/Thane.png",
+    "nearby": [
+      {
+        "value": "Thane West"
+      },
+      {
+        "value": "Thane East"
+      },
+      {
+        "value": "Panch Pakhdi"
+      },
+      {
+        "value": "Naupada"
+      },
+      {
+        "value": "Ghodbunder Road"
+      },
+      {
+        "value": "Wagle Estate"
+      },
+      {
+        "value": "Kopri"
+      },
+      {
+        "value": "Majiwada"
+      },
+      {
+        "value": "Vartak Nagar"
+      },
+      {
+        "value": "Mulund"
+      },
+      {
+        "value": "Kalwa"
+      },
+      {
+        "value": "Mumbra"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At Bapat Urology Center, A.K. Vaidya Marg"
+      },
+      {
+        "value": "Near Paramarth Niketan Bus Stop & Prashant Corner"
+      },
+      {
+        "value": "In Panch Pakhdi, Thane West"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Set in Panch Pakhdi, the heart of Thane West, easily reached from Thane station and the Ghodbunder Road corridor."
+      },
+      {
+        "value": "Well connected to Mulund, Wagle Estate and Naupada via A.K. Vaidya Marg and Eastern Express Highway."
+      },
+      {
+        "value": "Auto-rickshaws and buses stop nearby at Paramarth Niketan; parking available close by."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & fertility consultation"
+      },
+      {
+        "value": "Diagnostics & sonography"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "Sample collection"
+      },
+      {
+        "value": "Comfortable patient lounge"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "suman-singh"
+      },
+      {
+        "value": "nilesh-jain"
+      },
+      {
+        "value": "priyanka-sinha"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Thane centre makes Bavishi Fertility Institute's trusted fertility care accessible to families across Thane and the Ghodbunder Road corridor. Located at Bapat Urology Center in Panch Pakhdi, it offers expert IVF, IUI and infertility consultation backed by our Mumbai team and advanced laboratories.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Thane centre?",
+        "a": "At Bapat Urology Center, A.K. Vaidya Marg, near Paramarth Niketan Bus Stop, Panch Pakhdi, Thane West – 400602 — close to Thane station."
+      },
+      {
+        "q": "What are the timings at the Thane centre?",
+        "a": "The Thane centre runs consultations Monday to Saturday, 10:00 am to 1:00 pm. Please call +91 91672 04018 to book your slot."
+      },
+      {
+        "q": "Which areas does the Thane centre serve?",
+        "a": "Thane West, Thane East, Panch Pakhdi, Naupada, the Ghodbunder Road corridor, Wagle Estate, Mulund and Kalwa."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Thane — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Thane — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Thane — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "vile-parle",
+    "citySlug": "mumbai",
+    "name": "Vile Parle",
+    "fullName": "Bavishi Fertility Institute — Vile Parle, Mumbai",
+    "area": "Vile Parle",
+    "address": "Swami Vivekananda Rd, Navpada, Irla, Vile Parle West, Mumbai – 400056",
+    "pin": "400056",
+    "phone": "919167204019",
+    "phoneLabel": "+91 91672 04019",
+    "hours": "Mon–Sat · 2:00 pm – 5:00 pm",
+    "opening": {
+      "opens": "14:00",
+      "closes": "17:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Vile Parle West Mumbai",
+    "image": "/assets/about-clinic.jpg",
+    "nearby": [
+      {
+        "value": "Vile Parle West"
+      },
+      {
+        "value": "Vile Parle East"
+      },
+      {
+        "value": "Andheri"
+      },
+      {
+        "value": "Santacruz"
+      },
+      {
+        "value": "Juhu"
+      },
+      {
+        "value": "Khar"
+      },
+      {
+        "value": "Jogeshwari"
+      },
+      {
+        "value": "Goregaon"
+      },
+      {
+        "value": "Vidyanagari"
+      },
+      {
+        "value": "Bandra"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "On Swami Vivekananda (S.V.) Road, Irla"
+      },
+      {
+        "value": "In Navpada, Vile Parle West"
+      },
+      {
+        "value": "Near Vile Parle railway & metro station"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located on S.V. Road in Irla, Vile Parle West — minutes from Vile Parle station on the Western Line and Metro Line 1."
+      },
+      {
+        "value": "Easily reached from Andheri, Santacruz, Juhu and Khar along S.V. Road and the Western Express Highway."
+      },
+      {
+        "value": "Close to Mumbai's domestic & international airports for out-station patients."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & fertility consultation"
+      },
+      {
+        "value": "Diagnostics & sonography"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "Sample collection"
+      },
+      {
+        "value": "Comfortable patient lounge"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "suman-singh"
+      },
+      {
+        "value": "nilesh-jain"
+      },
+      {
+        "value": "priyanka-sinha"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Vile Parle centre brings Bavishi Fertility Institute's fertility expertise to Mumbai's western suburbs. Conveniently located on S.V. Road in Irla — close to Vile Parle station and the airport — it offers expert IVF, IUI and infertility consultation for families across Andheri, Santacruz and Juhu.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Vile Parle centre?",
+        "a": "On Swami Vivekananda Road, Navpada, Irla, Vile Parle West, Mumbai – 400056 — minutes from Vile Parle station and close to the airport."
+      },
+      {
+        "q": "What are the timings at the Vile Parle centre?",
+        "a": "The Vile Parle centre runs consultations Monday to Saturday, 2:00 pm to 5:00 pm. Call +91 91672 04019 to book."
+      },
+      {
+        "q": "Which areas does the Vile Parle centre serve?",
+        "a": "Vile Parle, Andheri, Santacruz, Juhu, Khar, Jogeshwari and the western Mumbai suburbs."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Vile Parle — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Vile Parle — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Vile Parle — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "borivali",
+    "citySlug": "mumbai",
+    "name": "Borivali",
+    "fullName": "Bavishi Fertility Institute — Borivali, Mumbai",
+    "area": "Borivali",
+    "address": "M.M. Medical Center Ankur, near Mary Immaculate School, L.M. Road, Shivaji Nagar, Borivali West, Mumbai – 400092",
+    "pin": "400092",
+    "phone": "919167204019",
+    "phoneLabel": "+91 91672 04019",
+    "hours": "Mon–Sat · 10:00 am – 1:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "13:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Borivali West Mumbai",
+    "image": "/assets/Locations/Borivali.png",
+    "nearby": [
+      {
+        "value": "Borivali West"
+      },
+      {
+        "value": "Borivali East"
+      },
+      {
+        "value": "Dahisar"
+      },
+      {
+        "value": "Kandivali"
+      },
+      {
+        "value": "Mandapeshwar"
+      },
+      {
+        "value": "Shimpoli"
+      },
+      {
+        "value": "IC Colony"
+      },
+      {
+        "value": "Gorai"
+      },
+      {
+        "value": "Charkop"
+      },
+      {
+        "value": "Malad"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At M.M. Medical Center Ankur, L.M. Road"
+      },
+      {
+        "value": "Near Mary Immaculate School, Shivaji Nagar"
+      },
+      {
+        "value": "In Borivali West"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located on L.M. Road in Shivaji Nagar, Borivali West — easily reached from Borivali station on the Western Line."
+      },
+      {
+        "value": "Well connected to Dahisar, Kandivali and Malad via the Western Express Highway and Link Road."
+      },
+      {
+        "value": "Auto-rickshaws available from Borivali station; parking nearby."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & fertility consultation"
+      },
+      {
+        "value": "Diagnostics & sonography"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "Sample collection"
+      },
+      {
+        "value": "Comfortable patient lounge"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "suman-singh"
+      },
+      {
+        "value": "nilesh-jain"
+      },
+      {
+        "value": "priyanka-sinha"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Borivali centre extends Bavishi Fertility Institute's trusted fertility care to Mumbai's north-western suburbs. Located at M.M. Medical Center Ankur on L.M. Road, Shivaji Nagar, it offers expert IVF, IUI and infertility consultation for families across Borivali, Dahisar and Kandivali.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Borivali centre?",
+        "a": "At M.M. Medical Center Ankur, near Mary Immaculate School, L.M. Road, Shivaji Nagar, Borivali West, Mumbai – 400092 — close to Borivali station."
+      },
+      {
+        "q": "What are the timings at the Borivali centre?",
+        "a": "The Borivali centre runs consultations Monday to Saturday, 10:00 am to 1:00 pm. Call +91 91672 04019 to book."
+      },
+      {
+        "q": "Which areas does the Borivali centre serve?",
+        "a": "Borivali, Dahisar, Kandivali, Mandapeshwar, Gorai, Charkop and the north-western Mumbai suburbs."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Borivali — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Borivali — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Borivali — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "vashi",
+    "citySlug": "mumbai",
+    "name": "Vashi",
+    "fullName": "Bavishi Fertility Institute — Vashi, Navi Mumbai",
+    "area": "Vashi",
+    "address": "Precision Super Speciality Clinic & Diagnostics, 52/53, 3rd Floor, Mahavir Centre, above Hotel Golden Punjab, Sector 17, Vashi, Navi Mumbai – 400703",
+    "pin": "400703",
+    "phone": "919687004268",
+    "phoneLabel": "+91 96870 04268",
+    "hours": "Tue, Thu & Sat · 3:00 pm – 5:00 pm",
+    "opening": {
+      "opens": "15:00",
+      "closes": "17:00",
+      "days": [
+        {
+          "value": "Tuesday"
+        },
+        {
+          "value": "Thursday"
+        },
+        {
+          "value": "Saturday"
+        }
+      ]
+    },
+    "mapQuery": "Bavishi Fertility Institute Vashi Navi Mumbai",
+    "image": "/assets/Locations/Vashi.png",
+    "nearby": [
+      {
+        "value": "Vashi"
+      },
+      {
+        "value": "Nerul"
+      },
+      {
+        "value": "Belapur"
+      },
+      {
+        "value": "Kharghar"
+      },
+      {
+        "value": "Sanpada"
+      },
+      {
+        "value": "Turbhe"
+      },
+      {
+        "value": "Koparkhairane"
+      },
+      {
+        "value": "Airoli"
+      },
+      {
+        "value": "Ghansoli"
+      },
+      {
+        "value": "Panvel"
+      },
+      {
+        "value": "Seawoods"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At Precision Super Speciality Clinic, Mahavir Centre"
+      },
+      {
+        "value": "Above Hotel Golden Punjab, Sector 17"
+      },
+      {
+        "value": "In Vashi, Navi Mumbai"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located at Mahavir Centre, Sector 17, Vashi — minutes from Vashi station on the Harbour Line."
+      },
+      {
+        "value": "Easily reached from Nerul, Belapur, Kharghar and Sanpada via Palm Beach Road and the Sion–Panvel Highway."
+      },
+      {
+        "value": "Ample parking available around Sector 17."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & fertility consultation"
+      },
+      {
+        "value": "Diagnostics & sonography"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "Sample collection"
+      },
+      {
+        "value": "Comfortable patient lounge"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "suman-singh"
+      },
+      {
+        "value": "nilesh-jain"
+      },
+      {
+        "value": "priyanka-sinha"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Vashi centre brings Bavishi Fertility Institute's advanced fertility care to Navi Mumbai. Located at Mahavir Centre in Sector 17 — minutes from Vashi station — it offers expert IVF, IUI and infertility consultation for families across Vashi, Nerul, Belapur and Kharghar.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Vashi centre?",
+        "a": "At Precision Super Speciality Clinic, 3rd Floor, Mahavir Centre, above Hotel Golden Punjab, Sector 17, Vashi, Navi Mumbai – 400703."
+      },
+      {
+        "q": "What are the timings at the Vashi centre?",
+        "a": "The Vashi centre runs consultations on Tuesday, Thursday and Saturday, 3:00 pm to 5:00 pm. Call +91 96870 04268 to book."
+      },
+      {
+        "q": "Which areas does the Vashi centre serve?",
+        "a": "Vashi, Nerul, Belapur, Kharghar, Sanpada, Turbhe, Airoli and the wider Navi Mumbai region."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Vashi — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Vashi — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Vashi — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "jetalpur-road",
+    "citySlug": "vadodara",
+    "name": "Vadodara",
+    "fullName": "Bavishi Fertility Institute — Jetalpur Road, Vadodara",
+    "area": "Jetalpur Road",
+    "address": "4th Floor, Trisha Square, 2, Jetalpur Rd, Sampatrao Colony, Vadodara – 390007",
+    "pin": "390007",
+    "phone": "917575099898",
+    "phoneLabel": "+91 75750 99898",
+    "hours": "Mon–Sat · 10:00 am – 7:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Jetalpur Road Vadodara",
+    "image": "/assets/Locations/Vadodra.png",
+    "nearby": [
+      {
+        "value": "Sampatrao Colony"
+      },
+      {
+        "value": "Alkapuri"
+      },
+      {
+        "value": "Sayajigunj"
+      },
+      {
+        "value": "Fatehgunj"
+      },
+      {
+        "value": "Akota"
+      },
+      {
+        "value": "Productivity Road"
+      },
+      {
+        "value": "Race Course"
+      },
+      {
+        "value": "Manjalpur"
+      },
+      {
+        "value": "Gotri"
+      },
+      {
+        "value": "Vasna"
+      },
+      {
+        "value": "Karelibaug"
+      },
+      {
+        "value": "Subhanpura"
+      },
+      {
+        "value": "Waghodia Road"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "On Jetalpur Road, Sampatrao Colony"
+      },
+      {
+        "value": "At 4th Floor, Trisha Square"
+      },
+      {
+        "value": "Near Alkapuri and the Race Course area"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Centrally located on Jetalpur Road in Sampatrao Colony, easily reached from Alkapuri, Sayajigunj and Akota."
+      },
+      {
+        "value": "About 3 km from Vadodara railway station and roughly 6 km from Vadodara Airport (Harni)."
+      },
+      {
+        "value": "Well connected by city bus routes; on-site and street parking available at Trisha Square."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "Class 1000 embryology & IVF lab"
+      },
+      {
+        "value": "Andrology & semen-analysis lab"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Day-care operation theatre"
+      },
+      {
+        "value": "Counselling & nutrition suites"
+      },
+      {
+        "value": "Pharmacy & sample collection"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "mita-shah"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      },
+      {
+        "value": "pgt"
+      }
+    ],
+    "intro": "Our Vadodara centre on Jetalpur Road is a trusted IVF destination in central Gujarat, offering advanced fertility treatment with cutting-edge technology and compassionate care. Conveniently located in Sampatrao Colony near Alkapuri, it provides IVF, IUI, donor programmes, fertility preservation and complete gynaecology services under one roof.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Vadodara IVF centre?",
+        "a": "On the 4th floor of Trisha Square, 2, Jetalpur Road, Sampatrao Colony, Vadodara – 390007 — centrally located near Alkapuri."
+      },
+      {
+        "q": "What are the timings at the Vadodara centre?",
+        "a": "The Vadodara centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 75750 99898 to book an appointment."
+      },
+      {
+        "q": "Which areas does the Vadodara centre serve?",
+        "a": "Sampatrao Colony, Alkapuri, Sayajigunj, Fatehgunj, Akota, Manjalpur and families travelling from across central Gujarat."
+      },
+      {
+        "q": "What treatments are available in Vadodara?",
+        "a": "The full range — IVF, ICSI, IUI, male and female infertility care, fertility preservation and PGT — with the same senior-doctor expertise as our flagship."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Vadodara — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Vadodara — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Vadodara — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "lal-darwaja",
+    "citySlug": "surat",
+    "name": "Surat",
+    "fullName": "Bavishi Fertility Institute — Lal Darwaja, Surat",
+    "area": "Lal Darwaja",
+    "address": "9th Floor, Param Doctor House, Lal Darwaja Station Rd, Lal Darwaja, Surat – 395003",
+    "pin": "395003",
+    "phone": "919879572247",
+    "phoneLabel": "+91 98795 72247",
+    "hours": "Mon–Sat · 10:00 am – 7:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Lal Darwaja Surat",
+    "image": "/assets/Locations/Surat.png",
+    "nearby": [
+      {
+        "value": "Lal Darwaja"
+      },
+      {
+        "value": "Station Road"
+      },
+      {
+        "value": "Athwa"
+      },
+      {
+        "value": "Adajan"
+      },
+      {
+        "value": "Vesu"
+      },
+      {
+        "value": "Piplod"
+      },
+      {
+        "value": "Citylight"
+      },
+      {
+        "value": "Ghod Dod Road"
+      },
+      {
+        "value": "Varachha"
+      },
+      {
+        "value": "Katargam"
+      },
+      {
+        "value": "Udhna"
+      },
+      {
+        "value": "Rander"
+      },
+      {
+        "value": "Pal"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At Param Doctor House, Lal Darwaja Station Road"
+      },
+      {
+        "value": "Near Surat railway station"
+      },
+      {
+        "value": "In the central Lal Darwaja area"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Centrally located at Param Doctor House on Lal Darwaja Station Road, right beside Surat railway station."
+      },
+      {
+        "value": "Easily reached from Athwa, Adajan, Vesu and Ghod Dod Road via the city's main arterial roads."
+      },
+      {
+        "value": "Excellent rail and bus connectivity; parking available near the station."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "Class 1000 embryology & IVF lab"
+      },
+      {
+        "value": "Andrology & semen-analysis lab"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Day-care operation theatre"
+      },
+      {
+        "value": "Counselling & nutrition suites"
+      },
+      {
+        "value": "Pharmacy & sample collection"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "deep-gajiwala"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      },
+      {
+        "value": "pgt"
+      }
+    ],
+    "intro": "Our Surat centre is a leading IVF destination in South Gujarat, offering trusted fertility treatments with a focus on patient-centric, compassionate care. Centrally located at Param Doctor House on Lal Darwaja Station Road, it provides advanced IVF, IUI and infertility solutions with state-of-the-art technology and high success rates.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Surat IVF centre?",
+        "a": "On the 9th floor of Param Doctor House, Lal Darwaja Station Road, Lal Darwaja, Surat – 395003 — beside Surat railway station."
+      },
+      {
+        "q": "What are the timings at the Surat centre?",
+        "a": "The Surat centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 98795 72247 to book."
+      },
+      {
+        "q": "Which areas does the Surat centre serve?",
+        "a": "Lal Darwaja, Athwa, Adajan, Vesu, Piplod, Citylight, Ghod Dod Road, Varachha and families across South Gujarat."
+      },
+      {
+        "q": "What treatments are available in Surat?",
+        "a": "The full range — IVF, ICSI, IUI, male and female infertility care, fertility preservation and PGT — backed by advanced laboratories and experienced specialists."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Surat — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Surat — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Surat — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "mirjapar",
+    "citySlug": "bhuj",
+    "name": "Bhuj",
+    "fullName": "Bavishi Fertility Institute — Bhuj, Kutch",
+    "area": "Bhuj",
+    "address": "13–28 Shivam Nagar, near Uma Nagar, Highway, near Kutch Orthopaedic Hospital, Mirjapar, Bhuj – 370040",
+    "pin": "370040",
+    "phone": "919687188550",
+    "phoneLabel": "+91 96871 88550",
+    "hours": "Mon–Fri · 8:00 am – 7:00 pm · Sat till 1:00 pm",
+    "opening": {
+      "opens": "08:00",
+      "closes": "19:00",
+      "days": [
+        {
+          "value": "Monday"
+        },
+        {
+          "value": "Tuesday"
+        },
+        {
+          "value": "Wednesday"
+        },
+        {
+          "value": "Thursday"
+        },
+        {
+          "value": "Friday"
+        }
+      ]
+    },
+    "mapQuery": "Bavishi Fertility Institute Bhuj Kutch",
+    "image": "/assets/Locations/Bhuj.png",
+    "nearby": [
+      {
+        "value": "Bhuj"
+      },
+      {
+        "value": "Mirjapar"
+      },
+      {
+        "value": "Uma Nagar"
+      },
+      {
+        "value": "Mundra Road"
+      },
+      {
+        "value": "Bhujodi"
+      },
+      {
+        "value": "Madhapar"
+      },
+      {
+        "value": "Anjar"
+      },
+      {
+        "value": "Gandhidham"
+      },
+      {
+        "value": "Mandvi"
+      },
+      {
+        "value": "Nakhatrana"
+      },
+      {
+        "value": "Kutch"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At Shivam Nagar, near Uma Nagar"
+      },
+      {
+        "value": "On the highway, near Kutch Orthopaedic Hospital"
+      },
+      {
+        "value": "In Mirjapar, Bhuj"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located at Shivam Nagar near Uma Nagar, on the Bhuj highway beside Kutch Orthopaedic Hospital in Mirjapar."
+      },
+      {
+        "value": "Easily reached from across Kutch — Anjar, Gandhidham, Mandvi and Madhapar — via the main highway."
+      },
+      {
+        "value": "About 5 km from Bhuj railway station; on-site parking available."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & embryology lab"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Minor procedure room"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "On-site pharmacy"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "surbhi-vegad"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Bhuj centre is the best fertility hospital in Kutch, combining state-of-the-art technology with compassionate support for a truly personalised experience. Located at Shivam Nagar near Kutch Orthopaedic Hospital in Mirjapar, it brings advanced IVF, infertility treatment and maternity care within reach of families across the region.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Bhuj IVF centre?",
+        "a": "At 13–28 Shivam Nagar, near Uma Nagar, on the highway beside Kutch Orthopaedic Hospital, Mirjapar, Bhuj – 370040."
+      },
+      {
+        "q": "What are the timings at the Bhuj centre?",
+        "a": "Monday to Friday, 8:00 am to 7:00 pm, and Saturday until 1:00 pm. Call +91 96871 88550 to book."
+      },
+      {
+        "q": "Which areas does the Bhuj centre serve?",
+        "a": "Bhuj, Mirjapar, Mundra Road, Anjar, Gandhidham, Mandvi, Madhapar and families across the Kutch region."
+      },
+      {
+        "q": "What treatments are available in Bhuj?",
+        "a": "Advanced reproductive care — IVF, ICSI, IUI, male and female infertility solutions and fertility preservation — all under one roof in Kutch."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Bhuj — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Bhuj — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Bhuj — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "kalubha-road",
+    "citySlug": "bhavnagar",
+    "name": "Bhavnagar",
+    "fullName": "Bavishi Fertility Institute — Kalubha Road, Bhavnagar",
+    "area": "Kalubha Road",
+    "address": "203–205 Sai Ganga, beside Hema Women's Hospital, Kalubha Rd, Bhavnagar – 364001",
+    "pin": "364001",
+    "phone": "917069314040",
+    "phoneLabel": "+91 70693 14040",
+    "hours": "Mon–Sat · 10:00 am – 2:00 pm & 4:00 pm – 8:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "20:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Kalubha Road Bhavnagar",
+    "image": "/assets/Locations/Bhavnagar.png",
+    "nearby": [
+      {
+        "value": "Kalubha Road"
+      },
+      {
+        "value": "Waghawadi Road"
+      },
+      {
+        "value": "Subhash Nagar"
+      },
+      {
+        "value": "Ghogha Circle"
+      },
+      {
+        "value": "Vidyanagar"
+      },
+      {
+        "value": "Krishnanagar"
+      },
+      {
+        "value": "Rammantra Mandir"
+      },
+      {
+        "value": "Atabhai"
+      },
+      {
+        "value": "Sardarnagar"
+      },
+      {
+        "value": "Nilambag"
+      },
+      {
+        "value": "Bhavnagar"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At 203–205 Sai Ganga, Kalubha Road"
+      },
+      {
+        "value": "Beside Hema Women's Hospital"
+      },
+      {
+        "value": "Near the central Bhavnagar area"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Centrally located on Kalubha Road beside Hema Women's Hospital, easily reached from across Bhavnagar."
+      },
+      {
+        "value": "Close to Waghawadi Road and Ghogha Circle, with good city bus and auto connectivity."
+      },
+      {
+        "value": "About 3 km from Bhavnagar railway station; parking available nearby."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & embryology lab"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Minor procedure room"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "On-site pharmacy"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "deepali-pandya"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Bhavnagar centre is a leading IVF hospital in Saurashtra, combining cutting-edge technology with compassionate, personalised care. Centrally located on Kalubha Road beside Hema Women's Hospital, it offers advanced IVF, IUI and infertility treatment supported by experienced specialists and a state-of-the-art laboratory.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Bhavnagar IVF centre?",
+        "a": "At 203–205 Sai Ganga, beside Hema Women's Hospital, Kalubha Road, Bhavnagar – 364001."
+      },
+      {
+        "q": "What are the timings at the Bhavnagar centre?",
+        "a": "Monday to Saturday, 10:00 am to 2:00 pm and 4:00 pm to 8:00 pm. Call +91 70693 14040 to book."
+      },
+      {
+        "q": "Which areas does the Bhavnagar centre serve?",
+        "a": "Kalubha Road, Waghawadi Road, Subhash Nagar, Ghogha Circle, Vidyanagar and families across the Saurashtra region."
+      },
+      {
+        "q": "What treatments are available in Bhavnagar?",
+        "a": "Comprehensive fertility care — IVF, ICSI, IUI, male and female infertility management, fertility preservation and donor services."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Bhavnagar — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Bhavnagar — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Bhavnagar — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "nanikhodiyar",
+    "citySlug": "anand",
+    "name": "Anand",
+    "fullName": "Bavishi Fertility Institute — Anand",
+    "area": "Anand",
+    "address": "Unit-2, IRIS Hospital, Nanikhodiyar, Anand – 388001",
+    "pin": "388001",
+    "phone": "917069034565",
+    "phoneLabel": "+91 70690 34565",
+    "hours": "Mon–Sat · 10:00 am – 7:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Anand IRIS Hospital",
+    "image": "/assets/Locations/Anand.png",
+    "nearby": [
+      {
+        "value": "Anand"
+      },
+      {
+        "value": "Vidyanagar"
+      },
+      {
+        "value": "Vallabh Vidyanagar"
+      },
+      {
+        "value": "Karamsad"
+      },
+      {
+        "value": "Bakrol"
+      },
+      {
+        "value": "Mogri"
+      },
+      {
+        "value": "Gamdi"
+      },
+      {
+        "value": "Nadiad"
+      },
+      {
+        "value": "Petlad"
+      },
+      {
+        "value": "Borsad"
+      },
+      {
+        "value": "Khambhat"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At Unit-2, IRIS Hospital"
+      },
+      {
+        "value": "In the Nanikhodiyar area"
+      },
+      {
+        "value": "Central Anand, near Vidyanagar"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located at IRIS Hospital in Anand, easily reached from Vallabh Vidyanagar, Karamsad and Nadiad."
+      },
+      {
+        "value": "Well connected by road from across the Charotar region via NH-48 and local routes."
+      },
+      {
+        "value": "About 2 km from Anand railway station; parking available at the hospital."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & embryology lab"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Minor procedure room"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "On-site pharmacy"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "chetna-vyas"
+      },
+      {
+        "value": "rakhee-patel"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Anand centre is a trusted IVF destination in the Charotar region, offering advanced fertility treatments with modern technology and compassionate care. Located at IRIS Hospital near Vidyanagar, it provides personalised IVF, IUI and infertility solutions with transparent costs and complete support throughout your parenthood journey.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Anand IVF centre?",
+        "a": "At Unit-2, IRIS Hospital, Nanikhodiyar, Anand – 388001 — centrally located near Vidyanagar."
+      },
+      {
+        "q": "What are the timings at the Anand centre?",
+        "a": "The Anand centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 70690 34565 to book."
+      },
+      {
+        "q": "Which areas does the Anand centre serve?",
+        "a": "Anand, Vidyanagar, Vallabh Vidyanagar, Karamsad, Nadiad, Petlad and families across the Charotar region."
+      },
+      {
+        "q": "What treatments are available in Anand?",
+        "a": "Comprehensive reproductive care — IVF, ICSI, IUI, male and female infertility management, fertility preservation and maternity services — under one roof."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Anand — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Anand — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Anand — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "shivpur",
+    "citySlug": "varanasi",
+    "name": "Varanasi",
+    "fullName": "Bavishi Fertility Institute — Shivpur, Varanasi",
+    "area": "Shivpur",
+    "address": "S-15/47, Jamuna Sewa Sadan Hospital, Panchkoshi Road, Shivpur, Varanasi – 221003",
+    "pin": "221003",
+    "phone": "919506081979",
+    "phoneLabel": "+91 95060 81979",
+    "hours": "Mon–Sat · 10:00 am – 7:00 pm",
+    "opening": {
+      "opens": "10:00",
+      "closes": "19:00"
+    },
+    "mapQuery": "Bavishi Fertility Institute Shivpur Varanasi",
+    "image": "/assets/Locations/Varanasi.png",
+    "nearby": [
+      {
+        "value": "Shivpur"
+      },
+      {
+        "value": "Panchkoshi Road"
+      },
+      {
+        "value": "Cantonment"
+      },
+      {
+        "value": "Sigra"
+      },
+      {
+        "value": "Maldahiya"
+      },
+      {
+        "value": "Bhojubeer"
+      },
+      {
+        "value": "Pandeypur"
+      },
+      {
+        "value": "Lahartara"
+      },
+      {
+        "value": "Sarnath"
+      },
+      {
+        "value": "Chandua"
+      },
+      {
+        "value": "Varanasi"
+      }
+    ],
+    "landmarks": [
+      {
+        "value": "At Jamuna Sewa Sadan Hospital, Panchkoshi Road"
+      },
+      {
+        "value": "In the Shivpur area"
+      },
+      {
+        "value": "Near the Cantonment and Sarnath corridor"
+      }
+    ],
+    "howToReach": [
+      {
+        "value": "Located at Jamuna Sewa Sadan Hospital on Panchkoshi Road, Shivpur, easily reached from the Cantonment and Sigra."
+      },
+      {
+        "value": "Well connected from Varanasi Junction (about 6 km) and Lal Bahadur Shastri International Airport (about 18 km)."
+      },
+      {
+        "value": "Good road connectivity to Sarnath and the wider Purvanchal region; parking available."
+      }
+    ],
+    "facilities": [
+      {
+        "value": "IVF & embryology lab"
+      },
+      {
+        "value": "Andrology & semen analysis"
+      },
+      {
+        "value": "In-house diagnostics & sonography"
+      },
+      {
+        "value": "Minor procedure room"
+      },
+      {
+        "value": "Counselling rooms"
+      },
+      {
+        "value": "On-site pharmacy"
+      }
+    ],
+    "doctors": [
+      {
+        "value": "parnnika-agarwal"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "male-infertility"
+      },
+      {
+        "value": "female-infertility"
+      },
+      {
+        "value": "fertility-preservation"
+      }
+    ],
+    "intro": "Our Varanasi centre brings Bavishi Fertility Institute's trusted fertility expertise to eastern Uttar Pradesh. Located at Jamuna Sewa Sadan Hospital on Panchkoshi Road in Shivpur, it offers advanced IVF treatments, expert guidance, personalised plans and end-to-end support to help families across the Purvanchal region achieve parenthood.",
+    "faqs": [
+      {
+        "q": "Where is the Bavishi Fertility Institute Varanasi IVF centre?",
+        "a": "At S-15/47, Jamuna Sewa Sadan Hospital, Panchkoshi Road, Shivpur, Varanasi – 221003."
+      },
+      {
+        "q": "What are the timings at the Varanasi centre?",
+        "a": "The Varanasi centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 95060 81979 to book."
+      },
+      {
+        "q": "Which areas does the Varanasi centre serve?",
+        "a": "Shivpur, the Cantonment, Sigra, Maldahiya, Pandeypur, Sarnath and families across the Purvanchal region of Uttar Pradesh."
+      },
+      {
+        "q": "What treatments are available in Varanasi?",
+        "a": "Advanced fertility care — IVF, ICSI, IUI, male and female infertility solutions and fertility preservation — with expert guidance and end-to-end support."
+      }
+    ],
+    "gallery": [
+      {
+        "src": "/assets/about-clinic.jpg",
+        "alt": "Bavishi Fertility Institute Varanasi — treatment room"
+      },
+      {
+        "src": "/assets/hero-mother-baby.jpg",
+        "alt": "Bavishi Fertility Institute Varanasi — parenthood journey"
+      },
+      {
+        "src": "/assets/suraksha-parenthood.png",
+        "alt": "Bavishi Fertility Institute Varanasi — Suraksha Kavach care"
+      }
+    ],
+    "sameAs": [],
+    "built": true,
+    "_status": "published"
+  }
+]

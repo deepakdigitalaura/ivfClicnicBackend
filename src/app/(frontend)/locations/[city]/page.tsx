@@ -4,8 +4,9 @@ import { CityPage } from "@/components/city-page";
 import { CenterPage } from "@/components/center-page";
 import { JsonLd } from "@/components/json-ld";
 import {
-  cityBySlug, cityGraph, centerGraph, builtCityParams, centresForCity, cityHasOwnPage,
+  cityGraph, centerGraph, builtCityParams, centresForCity, cityHasOwnPage,
 } from "@/lib/locations";
+import { getCity, getCentre } from "@/lib/payload";
 import { abs } from "@/lib/seo";
 
 /** Pre-render every built city. Multi-centre cities render the hub (CityPage);
@@ -22,12 +23,14 @@ export async function generateMetadata(
   { params }: { params: Promise<{ city: string }> },
 ): Promise<Metadata> {
   const { city } = await params;
-  const c = cityBySlug(city);
+  const c = await getCity(city);
   if (!c || !c.built) return {};
 
   // Single-centre city → centre-level metadata (canonical = /locations/[city]).
   if (!cityHasOwnPage(city)) {
-    const centre = soleCentre(city);
+    const def = soleCentre(city);
+    if (!def) return {};
+    const centre = await getCentre(city, def.slug);
     if (!centre) return {};
     const place = c.name && c.name !== centre.area ? `${centre.area}, ${c.name}` : centre.area;
     const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
@@ -53,12 +56,14 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Promise<{ city: string }> }) {
   const { city } = await params;
-  const c = cityBySlug(city);
+  const c = await getCity(city);
   if (!c || !c.built) notFound();
 
   // Single-centre city → render the centre directly at the city path.
   if (!cityHasOwnPage(city)) {
-    const centre = soleCentre(city);
+    const def = soleCentre(city);
+    if (!def) notFound();
+    const centre = await getCentre(city, def.slug);
     if (!centre) notFound();
     return (
       <>

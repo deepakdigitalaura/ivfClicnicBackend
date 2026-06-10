@@ -22,10 +22,19 @@ import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
+import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveService, type ResolvedService, type ServiceSource } from "@/lib/services";
 import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
 import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
 import { TREATMENTS } from "@/lib/treatments";
+import {
+  resolveCity,
+  resolveCentre,
+  type ResolvedCity,
+  type ResolvedCentre,
+  type CitySource,
+  type CentreSource,
+} from "@/lib/location-content";
 
 let cached: Promise<Payload> | null = null;
 
@@ -311,6 +320,81 @@ export const getTreatments = reactCache(
     )(),
 );
 
+/* ---------- Locations (Wave 4.5) ---------- */
+
+/**
+ * Resolve a single city for `/locations/[city]`: the `cities` doc shaped into the
+ * plain, serialisable `ResolvedCity` the <CityPage> renders and cityGraph() turns
+ * into JSON-LD. Cached + tagged `cities`, `cities:<slug>`. Falls back PER-SECTION
+ * to the code defaults (src/lib/location-content.ts → cityBySlug) — so an empty,
+ * partial, or unavailable CMS (e.g. table not yet pushed) renders byte-identically.
+ * React-cached per render. Returns undefined for a slug with no code default
+ * behind it (caller → notFound). Class-A structural fields (slug, built,
+ * womensHealth) stay code-authoritative in the resolver (ADR-0001 Option A).
+ */
+export const getCity = reactCache(
+  (slug: string): Promise<ResolvedCity | undefined> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "cities",
+            where: { slug: { equals: slug } },
+            limit: 1,
+            depth: 0,
+          });
+          return resolveCity(slug, res.docs[0] as CitySource);
+        } catch {
+          // Table not pushed yet / read error → typed code fallback.
+          return resolveCity(slug, null);
+        }
+      },
+      ["city-by-slug", slug],
+      { tags: [cacheTags.collectionList("cities"), cacheTags.collectionItem("cities", slug)] },
+    )(),
+);
+
+/**
+ * Resolve a single centre for `/locations/[city]/[center]`: the `centres` doc
+ * shaped into the plain, serialisable `ResolvedCentre` the <CenterPage> renders
+ * and centerGraph() turns into JSON-LD. Cached + tagged `centres`, `centres:<slug>`.
+ * Falls back PER-SECTION to the code defaults (src/lib/location-content.ts →
+ * centreBySlug) — so an empty, partial, or unavailable CMS renders byte-identically.
+ * React-cached per render. Returns undefined for an unknown centre with no code
+ * default (caller → notFound).
+ *
+ * Centre slugs are unique only WITHIN a city (ADR-0001 Option A slug-string
+ * `citySlug` parent link, not a Payload relationship), so the query keys on the
+ * COMPOUND (citySlug, slug) and the cache key carries both. The item cache TAG is
+ * the bare `centres:<slug>` to match the revalidateCollection hook (which only
+ * sees doc.slug); with no cross-city slug collisions today this is exact — if a
+ * slug is ever reused across cities, that tag would over-bust (same trade-off the
+ * index-only DB uniqueness accepts, WAVE-4.5-PLAN §13).
+ */
+export const getCentre = reactCache(
+  (citySlug: string, slug: string): Promise<ResolvedCentre | undefined> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "centres",
+            where: { and: [{ citySlug: { equals: citySlug } }, { slug: { equals: slug } }] },
+            limit: 1,
+            depth: 0,
+          });
+          return resolveCentre(citySlug, slug, res.docs[0] as CentreSource);
+        } catch {
+          // Table not pushed yet / read error → typed code fallback.
+          return resolveCentre(citySlug, slug, null);
+        }
+      },
+      ["centre-by-city-slug", citySlug, slug],
+      { tags: [cacheTags.collectionList("centres"), cacheTags.collectionItem("centres", slug)] },
+    )(),
+);
+
 /**
  * Fetch a global by slug. Cached + tagged `global:<slug>`. Returns null on any
  * error (e.g. table not yet pushed) so callers fall back to typed defaults —
@@ -396,4 +480,19 @@ export const getHeader = reactCache(async (): Promise<HeaderData> => {
 export const getHomepage = reactCache(async (): Promise<HomepageData> => {
   const homepage = await getGlobalSafe("homepage");
   return resolveHomepage(homepage as HomepageSource);
+});
+
+/**
+ * Resolve the /about-bfi page's structured editorial content: the `about-page`
+ * global shaped into the plain, serialisable `AboutData` the client <AboutPage>
+ * renders (hero copy, stat grids, legacy timeline, trust pillars, city network,
+ * network/final-CTA headings + CTA labels). Read through getGlobalSafe (cached +
+ * tagged `global:about-page`), so an empty or unavailable CMS falls back to
+ * ABOUT_DEFAULTS — byte-identical output. The inline-<strong> prose, decorative
+ * <em> titles, JSON-LD graph and reused Doctors/AwardsCarousel sections stay
+ * code-owned. React-cached per render.
+ */
+export const getAbout = reactCache(async (): Promise<AboutData> => {
+  const about = await getGlobalSafe("about-page");
+  return resolveAbout(about as AboutSource);
 });

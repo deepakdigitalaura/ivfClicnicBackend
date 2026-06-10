@@ -2,23 +2,35 @@ import type { Metadata } from "next";
 import { AboutPage } from "@/components/about-page";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { getAbout, getGlobalSafe } from "@/lib/payload";
+import { ABOUT_DEFAULTS } from "@/lib/about";
 
 const PATH = "/about-bfi";
 
-export const metadata: Metadata = {
-  title: "About Bavishi Fertility Institute — 40 Years of IVF Excellence in India",
-  description:
-    "Founded in 1984 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 15 centres. Discover our story, legacy and values.",
-  alternates: { canonical: PATH },
-  openGraph: {
-    title: "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1984",
-    description:
-      "30,000+ pregnancies. 15 centres across 8 cities. National Fertility Award 5 years running. The story of India's pioneering fertility institute.",
-    url: abs(PATH),
-    type: "website",
-    images: ["/assets/about-clinic.jpg"],
-  },
-};
+/* The page's <head> metadata is CMS-managed via the `about-page` global's SEO
+ * group (Wave 4.5, Phase E). Falls back to the original hardcoded copy so the
+ * route is byte-identical when the global is empty (same pattern as the homepage
+ * and Blog Hub). The static AboutPage JSON-LD graph below stays code-owned. */
+export async function generateMetadata(): Promise<Metadata> {
+  const about = await getGlobalSafe("about-page");
+  const d = ABOUT_DEFAULTS.seo;
+  const ogImage =
+    about?.seo && typeof about.seo.ogImage === "object" && about.seo.ogImage?.url
+      ? about.seo.ogImage.url
+      : d.ogImage;
+  return {
+    title: about?.seo?.metaTitle || d.metaTitle,
+    description: about?.seo?.metaDescription || d.metaDescription,
+    alternates: { canonical: PATH },
+    openGraph: {
+      title: about?.seo?.ogTitle || d.ogTitle,
+      description: about?.seo?.ogDescription || d.ogDescription,
+      url: abs(PATH),
+      type: "website",
+      images: [ogImage],
+    },
+  };
+}
 
 // The full MedicalOrganization entity lives sitewide (layout). Here we only
 // reference it via @id, and mark this page as the org's primary About page.
@@ -38,11 +50,12 @@ const graph = [
   ]),
 ];
 
-export default function Page() {
+export default async function Page() {
+  const data = await getAbout();
   return (
     <>
       <JsonLd graph={graph} />
-      <AboutPage />
+      <AboutPage data={data} />
     </>
   );
 }

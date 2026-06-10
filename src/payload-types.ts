@@ -74,6 +74,8 @@ export interface Config {
     services: Service;
     doctors: Doctor;
     treatments: Treatment;
+    cities: City;
+    centres: Centre;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -90,6 +92,8 @@ export interface Config {
     services: ServicesSelect<false> | ServicesSelect<true>;
     doctors: DoctorsSelect<false> | DoctorsSelect<true>;
     treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
+    cities: CitiesSelect<false> | CitiesSelect<true>;
+    centres: CentresSelect<false> | CentresSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -108,6 +112,7 @@ export interface Config {
     footer: Footer;
     header: Header;
     homepage: Homepage;
+    'about-page': AboutPage;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
@@ -116,6 +121,7 @@ export interface Config {
     footer: FooterSelect<false> | FooterSelect<true>;
     header: HeaderSelect<false> | HeaderSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
+    'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
   };
   locale: null;
   widgets: {
@@ -151,23 +157,32 @@ export interface UserAuthOperations {
  */
 export interface Page {
   id: number;
+  /**
+   * Internal name for this page in the list.
+   */
   title: string;
   /**
-   * URL path segment, e.g. 'contact' for /contact.
+   * The web address for this page. Set when creating — ask the website team to change it later.
    */
   slug: string;
+  /**
+   * The banner at the top of the page.
+   */
   hero?: {
     eyebrow?: string | null;
     /**
-     * Heading text shown upright, e.g. 'Contact'.
+     * Plain heading text before the highlighted word(s), e.g. 'Contact'.
      */
     lead?: string | null;
     /**
-     * Heading text shown in italic emphasis, e.g. the brand name.
+     * The word(s) shown in the cursive accent style, e.g. the brand name.
      */
     em?: string | null;
     subtitle?: string | null;
   };
+  /**
+   * Questions and answers shown on the page.
+   */
   faqs?:
     | {
         question: string;
@@ -175,19 +190,28 @@ export interface Page {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
+   */
   seo?: {
+    /**
+     * The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off.
+     */
     metaTitle?: string | null;
+    /**
+     * The grey summary under the title in Google. Aim for ~150–160 characters.
+     */
     metaDescription?: string | null;
     /**
-     * Open Graph title. Falls back to metaTitle if empty.
+     * Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title.
      */
     ogTitle?: string | null;
     /**
-     * Open Graph description. Falls back to metaDescription if empty.
+     * Description used when shared on social media. Leave empty to reuse the Google Search Description.
      */
     ogDescription?: string | null;
     /**
-     * Open Graph / social share image. Falls back to the default hero image if empty.
+     * Image shown when this page is shared on social media. Leave empty to use the default page image.
      */
     ogImage?: (number | null) | Media;
   };
@@ -201,6 +225,9 @@ export interface Page {
  */
 export interface Media {
   id: number;
+  /**
+   * Describe the image for accessibility and SEO, e.g. 'IVF lab technician at work'.
+   */
   alt: string;
   updatedAt: string;
   createdAt: string;
@@ -222,11 +249,11 @@ export interface Blog {
   id: number;
   title: string;
   /**
-   * URL path segment → /blog/<slug>.
+   * The web address for this article (→ /blog/<this>). Changing it breaks existing links and Google rankings, so set it once and leave it.
    */
   slug: string;
   /**
-   * Card summary + meta description fallback.
+   * Short summary shown on cards and used as the Google search description if none is set.
    */
   excerpt?: string | null;
   heroImage?: (number | null) | Media;
@@ -246,24 +273,24 @@ export interface Blog {
     [k: string]: unknown;
   } | null;
   /**
-   * Who wrote the post.
+   * Who wrote the article.
    */
   author: number | Author;
   /**
-   * Medical reviewer (optional). Phase 4: may point to a Doctor.
+   * Optional medical reviewer who checked the article.
    */
   reviewedBy?: (number | null) | Author;
   category?: (number | null) | Category;
   /**
-   * Estimated read time (minutes).
+   * Estimated read time in minutes.
    */
   readMins?: number | null;
   /**
-   * Display + schema datePublished. dateModified uses updatedAt.
+   * The date shown on the article. Leave blank to use today.
    */
   publishedAt?: string | null;
   /**
-   * Treatment slugs this post relates to (drives Related Blogs). Becomes a relationship in Phase 5.
+   * Treatment page IDs this article links to (drives the Related Articles list). Ask the website team if unsure of the exact IDs.
    */
   treatmentSlugs?:
     | {
@@ -271,19 +298,28 @@ export interface Blog {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
+   */
   seo?: {
+    /**
+     * The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off.
+     */
     metaTitle?: string | null;
+    /**
+     * The grey summary under the title in Google. Aim for ~150–160 characters.
+     */
     metaDescription?: string | null;
     /**
-     * Open Graph title. Falls back to metaTitle if empty.
+     * Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title.
      */
     ogTitle?: string | null;
     /**
-     * Open Graph description. Falls back to metaDescription if empty.
+     * Description used when shared on social media. Leave empty to reuse the Google Search Description.
      */
     ogDescription?: string | null;
     /**
-     * Open Graph / social share image. Falls back to the default hero image if empty.
+     * Image shown when this page is shared on social media. Leave empty to use the default page image.
      */
     ogImage?: (number | null) | Media;
   };
@@ -299,7 +335,7 @@ export interface Author {
   id: number;
   name: string;
   /**
-   * URL-safe id, e.g. 'dr-himanshu-bavishi'.
+   * The web address for this profile. Changing it breaks existing links, so set it once and leave it.
    */
   slug: string;
   /**
@@ -307,13 +343,13 @@ export interface Author {
    */
   role?: string | null;
   /**
-   * e.g. 'MD, FRCOG'.
+   * Post-nominal degrees, e.g. 'MD, FRCOG'.
    */
   credentials?: string | null;
   avatar?: (number | null) | Media;
   bio?: string | null;
   /**
-   * schema.org sameAs — official/professional profile URLs.
+   * Official profile links (e.g. LinkedIn, professional society pages).
    */
   sameAs?:
     | {
@@ -332,7 +368,7 @@ export interface Category {
   id: number;
   title: string;
   /**
-   * URL-safe id, e.g. 'fertility-basics'.
+   * The web address for this category. Changing it breaks existing links, so set it once and leave it.
    */
   slug: string;
   description?: string | null;
@@ -346,19 +382,19 @@ export interface Category {
 export interface Service {
   id: number;
   /**
-   * URL segment → /services/<slug>. Also the registry key.
+   * The page's web address ID. Set when creating — ask the website team to change it later.
    */
   slug: string;
   /**
-   * Service card title.
+   * Service title shown on the card and page.
    */
   name: string;
   /**
-   * One-line card description (registry).
+   * One-line description shown on the service card.
    */
   desc?: string | null;
   /**
-   * Registry card icon.
+   * Pick the icon shown on the service card.
    */
   icon?:
     | (
@@ -396,36 +432,45 @@ export interface Service {
       )
     | null;
   /**
-   * Canonical page URL, e.g. /services/3d-4d-sonography.
+   * The full web address for this page. Managed by the website team.
    */
   href?: string | null;
   /**
-   * Gates the live, crawlable location→service link.
+   * Show this service's link on location pages. (Separate from the draft/publish state.)
    */
   published?: boolean | null;
   /**
-   * Where the card points until published.
+   * Where the card points until published. Managed by the website team.
    */
   fallback?: string | null;
+  /**
+   * Search-engine category. Managed by the website team.
+   */
   schemaType: 'MedicalProcedure' | 'MedicalTest' | 'MedicalTherapy';
   /**
    * Plain label used inside copy ("the scan").
    */
   shortName?: string | null;
+  /**
+   * Short name shown in the breadcrumb trail.
+   */
   breadcrumbName?: string | null;
   /**
-   * Doctor slug for the medical reviewer (becomes a relationship once Doctors migrate).
+   * Doctor ID of the medical reviewer. Managed by the website team.
    */
   reviewerSlug?: string | null;
   /**
-   * Review date, e.g. 2026-06-01.
+   * Date this page was last checked by a doctor, e.g. 2026-06-01.
    */
   lastReviewed?: string | null;
+  /**
+   * The banner at the top of the page.
+   */
   hero?: {
     eyebrow?: string | null;
     h1?: string | null;
     /**
-     * Italic emphasis word.
+     * The word(s) shown in the cursive accent style.
      */
     h1Em?: string | null;
     tagline?: string | null;
@@ -436,16 +481,22 @@ export interface Service {
         }[]
       | null;
     /**
-     * Hero image path (an upload relation can replace this later).
+     * Image path, e.g. /assets/.... Ask the website team to add new images.
      */
     image?: string | null;
+    /**
+     * Describes the image for accessibility.
+     */
     imageAlt?: string | null;
   };
   overview: {
     heading: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead: string;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -465,9 +516,12 @@ export interface Service {
   };
   benefits: {
     heading: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead: string;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -481,9 +535,12 @@ export interface Service {
   };
   whoFor: {
     heading: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead: string;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -497,15 +554,21 @@ export interface Service {
   };
   process: {
     heading: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead: string;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
     subtitle?: string | null;
     steps?:
       | {
+          /**
+           * Pick the icon shown on this card.
+           */
           icon:
             | 'ScanLine'
             | 'Feather'
@@ -538,13 +601,7 @@ export interface Service {
             | 'ClipboardCheck'
             | 'Syringe'
             | 'Award';
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
           id?: string | null;
         }[]
@@ -553,14 +610,20 @@ export interface Service {
   };
   whyUs: {
     heading: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead: string;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
     items?:
       | {
+          /**
+           * Pick the icon shown on this card.
+           */
           icon:
             | 'ScanLine'
             | 'Feather'
@@ -593,13 +656,7 @@ export interface Service {
             | 'ClipboardCheck'
             | 'Syringe'
             | 'Award';
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
           id?: string | null;
         }[]
@@ -610,9 +667,12 @@ export interface Service {
    */
   infoNote?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -631,7 +691,7 @@ export interface Service {
       }[]
     | null;
   /**
-   * Other service slugs/keys to cross-link.
+   * Other service IDs to cross-link.
    */
   related?:
     | {
@@ -639,19 +699,28 @@ export interface Service {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
+   */
   seo?: {
+    /**
+     * The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off.
+     */
     metaTitle?: string | null;
+    /**
+     * The grey summary under the title in Google. Aim for ~150–160 characters.
+     */
     metaDescription?: string | null;
     /**
-     * Open Graph title. Falls back to metaTitle if empty.
+     * Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title.
      */
     ogTitle?: string | null;
     /**
-     * Open Graph description. Falls back to metaDescription if empty.
+     * Description used when shared on social media. Leave empty to reuse the Google Search Description.
      */
     ogDescription?: string | null;
     /**
-     * Open Graph / social share image. Falls back to the default hero image if empty.
+     * Image shown when this page is shared on social media. Leave empty to use the default page image.
      */
     ogImage?: (number | null) | Media;
   };
@@ -666,7 +735,7 @@ export interface Service {
 export interface Doctor {
   id: number;
   /**
-   * URL segment → /doctors/<slug>. Also the registry key.
+   * The profile's web address (→ /doctors/<this>). Set when creating — ask the website team to change it later.
    */
   slug: string;
   name: string;
@@ -675,7 +744,7 @@ export interface Doctor {
    */
   credentials?: string | null;
   /**
-   * Human-readable specialty line shown on cards.
+   * Specialty line shown on cards, e.g. 'Fertility & IVF Specialist'.
    */
   specialty: string;
   /**
@@ -683,19 +752,19 @@ export interface Doctor {
    */
   role: string;
   /**
-   * Portrait image path, e.g. /assets/doctors/parth.webp (upload relation deferred).
+   * Path to the doctor's photo, e.g. /assets/doctors/parth.webp. Ask the website team to add new photos.
    */
   image: string;
   /**
-   * Display experience, e.g. '35+ yrs'.
+   * Experience as shown on the site, e.g. '35+ yrs'.
    */
   experienceLabel?: string | null;
   /**
-   * Numeric years (sorting/schema).
+   * Number of years (used for sorting).
    */
   experienceYears?: number | null;
   /**
-   * schema.org medicalSpecialty values, e.g. ReproductiveMedicine.
+   * Search-engine specialty tags. Managed by the website team.
    */
   medicalSpecialty?:
     | {
@@ -704,7 +773,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * City labels the doctor consults in (display).
+   * City names the doctor consults in (shown on the profile).
    */
   cities?:
     | {
@@ -713,7 +782,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * Location slugs (city/area) for internal links + areaServed.
+   * Location IDs used for internal links. Managed by the website team.
    */
   locations?:
     | {
@@ -722,7 +791,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * Treatment slugs the doctor practises.
+   * Treatment IDs the doctor practises. Managed by the website team.
    */
   treatments?:
     | {
@@ -731,11 +800,11 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * One-line summary used on cards + schema description.
+   * One-line summary used on cards and in search results.
    */
   shortBio: string;
   /**
-   * Full bio, one entry per paragraph (RichText deferred).
+   * Full bio — one entry per paragraph.
    */
   bio?:
     | {
@@ -744,7 +813,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * schema.org knowsAbout expertise areas.
+   * Areas of expertise (helps search engines understand the doctor).
    */
   knowsAbout?:
     | {
@@ -753,7 +822,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * Education / degrees. Required (≥1) once verified.
+   * Education / degrees. Required (at least one) once verified.
    */
   alumniOf?:
     | {
@@ -798,7 +867,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * Languages spoken (knowsLanguage).
+   * Languages spoken.
    */
   languages?:
     | {
@@ -807,7 +876,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * External profile/authority URLs (sameAs).
+   * Official profile links (e.g. LinkedIn, professional society pages).
    */
   sameAs?:
     | {
@@ -816,7 +885,7 @@ export interface Doctor {
       }[]
     | null;
   /**
-   * ADMIN ONLY. Confirms degrees/experience are verified — gates YMYL reviewer use + schema claims. Requires non-empty credentials and ≥1 alumniOf entry.
+   * Admin only. Confirms the degrees and experience have been verified — needed before this doctor can be shown as a medical reviewer. Requires non-empty credentials and at least one degree.
    */
   verified?: boolean | null;
   /**
@@ -834,15 +903,15 @@ export interface Doctor {
 export interface Treatment {
   id: number;
   /**
-   * Treatment key (matches the code registry slug).
+   * The page's web address ID. Set when creating — ask the website team to change it later.
    */
   slug: string;
   /**
-   * Canonical page URL, e.g. /what-is-ivf. The route/registry stays code-owned.
+   * The full web address for this page. Managed by the website team.
    */
   href?: string | null;
   /**
-   * Full treatment name (schema.org MedicalProcedure name).
+   * Full treatment name.
    */
   name: string;
   /**
@@ -850,46 +919,67 @@ export interface Treatment {
    */
   shortName?: string | null;
   /**
-   * Optional alternate name (schema.org alternateName).
+   * Optional alternate name for the treatment.
    */
   alternateName?: string | null;
+  /**
+   * Short name shown in the breadcrumb trail.
+   */
   breadcrumbName?: string | null;
   /**
-   * Doctor slug for the medical reviewer (becomes a relationship once entity graph migrates).
+   * Doctor ID of the medical reviewer. Managed by the website team.
    */
   reviewerSlug?: string | null;
   /**
-   * Review date, e.g. 2026-06-01.
+   * Date this page was last checked by a doctor, e.g. 2026-06-01.
    */
   lastReviewed?: string | null;
   /**
-   * Page metadata (title/description/OG image).
+   * Controls how this page looks in Google results and when shared. Leave empty to use the built-in defaults.
    */
   meta?: {
+    /**
+     * The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off.
+     */
     title?: string | null;
+    /**
+     * The grey summary under the title in Google. Aim for ~150–160 characters.
+     */
     description?: string | null;
     /**
-     * OG image path (an upload relation can replace this later).
+     * Image path used when shared on social media. Ask the website team to add new images.
      */
     ogImage?: string | null;
   };
   /**
-   * schema.org MedicalProcedure fields.
+   * Search-engine procedure details. Managed by the website team.
    */
   procedure?: {
     /**
-     * e.g. https://schema.org/NoninvasiveProcedure
+     * Managed by the website team.
      */
     procedureType?: string | null;
+    /**
+     * Managed by the website team.
+     */
     bodyLocation?: string | null;
+    /**
+     * Managed by the website team.
+     */
     howPerformed?: string | null;
+    /**
+     * Managed by the website team.
+     */
     followup?: string | null;
   };
+  /**
+   * The banner at the top of the page.
+   */
   hero?: {
     eyebrow?: string | null;
     h1?: string | null;
     /**
-     * Italic emphasis fragment.
+     * The word(s) shown in the cursive accent style.
      */
     h1Em?: string | null;
     tagline?: string | null;
@@ -900,16 +990,22 @@ export interface Treatment {
         }[]
       | null;
     /**
-     * Hero image path.
+     * Image path, e.g. /assets/.... Ask the website team to add new images.
      */
     image?: string | null;
+    /**
+     * Describes the image for accessibility.
+     */
     imageAlt?: string | null;
   };
   whatIs?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -929,9 +1025,12 @@ export interface Treatment {
   };
   benefits?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -948,15 +1047,21 @@ export interface Treatment {
    */
   types?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
     subtitle?: string | null;
     items?:
       | {
+          /**
+           * Pick the icon shown on this card.
+           */
           icon:
             | 'ScanLine'
             | 'Feather'
@@ -989,13 +1094,7 @@ export interface Treatment {
             | 'ClipboardCheck'
             | 'Syringe'
             | 'Award';
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
           id?: string | null;
         }[]
@@ -1003,9 +1102,12 @@ export interface Treatment {
   };
   whoNeedsIt?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -1019,15 +1121,21 @@ export interface Treatment {
   };
   process?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
     subtitle?: string | null;
     steps?:
       | {
+          /**
+           * Pick the icon shown on this step.
+           */
           icon:
             | 'ScanLine'
             | 'Feather'
@@ -1064,13 +1172,7 @@ export interface Treatment {
            * Step number, e.g. "01".
            */
           n: string;
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
           id?: string | null;
         }[]
@@ -1082,9 +1184,12 @@ export interface Treatment {
    */
   timeline?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -1092,13 +1197,7 @@ export interface Treatment {
     items?:
       | {
           day: string;
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
           id?: string | null;
         }[]
@@ -1116,16 +1215,19 @@ export interface Treatment {
    */
   video?: {
     /**
-     * YouTube video id.
+     * The ID from the YouTube link (the part after watch?v=).
      */
     id?: string | null;
     eyebrow?: string | null;
     title?: string | null;
     description?: string | null;
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -1135,9 +1237,12 @@ export interface Treatment {
    */
   technology?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -1145,6 +1250,9 @@ export interface Treatment {
     subtitle?: string | null;
     items?:
       | {
+          /**
+           * Pick the icon shown on this card.
+           */
           icon:
             | 'ScanLine'
             | 'Feather'
@@ -1177,13 +1285,7 @@ export interface Treatment {
             | 'ClipboardCheck'
             | 'Syringe'
             | 'Award';
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
           id?: string | null;
         }[]
@@ -1194,14 +1296,20 @@ export interface Treatment {
    */
   whyUs?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
     items?:
       | {
+          /**
+           * Pick the icon shown on this card.
+           */
           icon:
             | 'ScanLine'
             | 'Feather'
@@ -1234,13 +1342,7 @@ export interface Treatment {
             | 'ClipboardCheck'
             | 'Syringe'
             | 'Award';
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
           id?: string | null;
         }[]
@@ -1265,26 +1367,20 @@ export interface Treatment {
   };
   risks?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
     subtitle?: string | null;
     items?:
       | {
-          /**
-           * Title.
-           */
           t: string;
-          /**
-           * Description.
-           */
           d: string;
-          /**
-           * How we help.
-           */
           help: string;
           id?: string | null;
         }[]
@@ -1295,9 +1391,12 @@ export interface Treatment {
    */
   preparation?: {
     heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
       lead?: string | null;
       /**
-       * Italic emphasis fragment (optional).
+       * The word(s) shown in the cursive accent style (optional).
        */
       em?: string | null;
     };
@@ -1317,7 +1416,7 @@ export interface Treatment {
       }[]
     | null;
   /**
-   * Other treatment slugs to cross-link (resolved via the code-owned registry).
+   * Other treatment IDs to cross-link.
    */
   related?:
     | {
@@ -1328,11 +1427,264 @@ export interface Treatment {
   cta?: {
     heading?: string | null;
     /**
-     * Italic emphasis fragment.
+     * The word(s) shown in the cursive accent style.
      */
     headingEm?: string | null;
     subtitle?: string | null;
   };
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities".
+ */
+export interface City {
+  id: number;
+  /**
+   * The city's web address ID (→ /locations/<this>). Set when creating — ask the website team to change it later.
+   */
+  slug: string;
+  /**
+   * City name shown on the page.
+   */
+  name: string;
+  /**
+   * State or region, e.g. 'Gujarat'.
+   */
+  region?: string | null;
+  /**
+   * ISO country code, e.g. IN.
+   */
+  country?: string | null;
+  /**
+   * Phone number, digits only (used for the call link).
+   */
+  helpline?: string | null;
+  /**
+   * Phone number as shown on the page.
+   */
+  helplineLabel?: string | null;
+  /**
+   * WhatsApp number, digits only.
+   */
+  whatsapp?: string | null;
+  /**
+   * Image path, e.g. /assets/.... Ask the website team to add new images.
+   */
+  heroImage?: string | null;
+  /**
+   * Optional Google Maps 360° embed link.
+   */
+  hero360Url?: string | null;
+  intro?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  faqs?:
+    | {
+        q: string;
+        a: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Service IDs linked to this city. Managed by the website team.
+   */
+  womensHealth?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Whether this city has its own page. Managed by the website team.
+   */
+  built?: boolean | null;
+  updatedAt: string;
+  createdAt: string;
+  _status?: ('draft' | 'published') | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "centres".
+ */
+export interface Centre {
+  id: number;
+  /**
+   * The centre's web address ID (→ /locations/<city>/<this>). Set when creating — ask the website team to change it later.
+   */
+  slug: string;
+  /**
+   * ID of the city this centre belongs to. Set when creating — ask the website team to change it later.
+   */
+  citySlug: string;
+  /**
+   * Short name, e.g. "Paldi".
+   */
+  name: string;
+  /**
+   * Full clinic name shown on the page.
+   */
+  fullName: string;
+  /**
+   * Whether this is the head office. Managed by the website team.
+   */
+  isHeadOffice?: boolean | null;
+  area?: string | null;
+  /**
+   * Postal code.
+   */
+  pin?: string | null;
+  address?: string | null;
+  /**
+   * Phone number, digits only (used for the call link).
+   */
+  phone?: string | null;
+  /**
+   * Phone number as shown on the page.
+   */
+  phoneLabel?: string | null;
+  /**
+   * Opening hours as plain text, e.g. 'Mon–Sat, 9am–7pm'.
+   */
+  hours?: string | null;
+  /**
+   * Machine-readable opening hours. Managed by the website team (the plain-text hours above is what shows on the page).
+   */
+  opening?: {
+    /**
+     * e.g. "09:00". Managed by the website team.
+     */
+    opens?: string | null;
+    /**
+     * e.g. "19:00". Managed by the website team.
+     */
+    closes?: string | null;
+    /**
+     * Open days. Managed by the website team.
+     */
+    days?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Latitude / longitude. Managed by the website team.
+   */
+  geo?: {
+    /**
+     * Managed by the website team.
+     */
+    lat?: number | null;
+    /**
+     * Managed by the website team.
+     */
+    lng?: number | null;
+  };
+  /**
+   * Search text used for the embedded map.
+   */
+  mapQuery?: string | null;
+  /**
+   * Image path. Ask the website team to add new images.
+   */
+  image?: string | null;
+  /**
+   * Optional Google Maps 360° embed link.
+   */
+  hero360Url?: string | null;
+  nearby?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  landmarks?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  howToReach?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  facilities?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Doctor IDs linked to this centre. Managed by the website team.
+   */
+  doctors?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Treatment IDs linked to this centre. Managed by the website team.
+   */
+  treatments?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Service IDs linked to this centre. Managed by the website team.
+   */
+  womensHealth?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  intro?: string | null;
+  faqs?:
+    | {
+        q: string;
+        a: string;
+        id?: string | null;
+      }[]
+    | null;
+  gallery?:
+    | {
+        /**
+         * Image path. Ask the website team to add new images.
+         */
+        src: string;
+        /**
+         * Describes the image for accessibility.
+         */
+        alt: string;
+        id?: string | null;
+      }[]
+    | null;
+  sameAs?:
+    | {
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Key for the reviews feed. Managed by the website team.
+   */
+  reviewsKey?: string | null;
+  /**
+   * Whether this centre has its own page. Managed by the website team.
+   */
+  built?: boolean | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -1417,6 +1769,14 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'treatments';
         value: number | Treatment;
+      } | null)
+    | ({
+        relationTo: 'cities';
+        value: number | City;
+      } | null)
+    | ({
+        relationTo: 'centres';
+        value: number | Centre;
       } | null)
     | ({
         relationTo: 'media';
@@ -2136,6 +2496,150 @@ export interface TreatmentsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "cities_select".
+ */
+export interface CitiesSelect<T extends boolean = true> {
+  slug?: T;
+  name?: T;
+  region?: T;
+  country?: T;
+  helpline?: T;
+  helplineLabel?: T;
+  whatsapp?: T;
+  heroImage?: T;
+  hero360Url?: T;
+  intro?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  faqs?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  womensHealth?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  built?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "centres_select".
+ */
+export interface CentresSelect<T extends boolean = true> {
+  slug?: T;
+  citySlug?: T;
+  name?: T;
+  fullName?: T;
+  isHeadOffice?: T;
+  area?: T;
+  pin?: T;
+  address?: T;
+  phone?: T;
+  phoneLabel?: T;
+  hours?: T;
+  opening?:
+    | T
+    | {
+        opens?: T;
+        closes?: T;
+        days?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
+      };
+  geo?:
+    | T
+    | {
+        lat?: T;
+        lng?: T;
+      };
+  mapQuery?: T;
+  image?: T;
+  hero360Url?: T;
+  nearby?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  landmarks?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  howToReach?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  facilities?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  doctors?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  treatments?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  womensHealth?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  intro?: T;
+  faqs?:
+    | T
+    | {
+        q?: T;
+        a?: T;
+        id?: T;
+      };
+  gallery?:
+    | T
+    | {
+        src?: T;
+        alt?: T;
+        id?: T;
+      };
+  sameAs?:
+    | T
+    | {
+        value?: T;
+        id?: T;
+      };
+  reviewsKey?: T;
+  built?: T;
+  updatedAt?: T;
+  createdAt?: T;
+  _status?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -2221,6 +2725,9 @@ export interface PayloadMigrationsSelect<T extends boolean = true> {
  */
 export interface SiteSetting {
   id: number;
+  /**
+   * The clinic's public brand name.
+   */
   brandName: string;
   alternateName?: string | null;
   legalName?: string | null;
@@ -2262,7 +2769,7 @@ export interface SiteSetting {
       }[]
     | null;
   /**
-   * schema.org knowsAbout — areas of expertise.
+   * Areas of expertise (helps search engines understand the clinic).
    */
   knowsAbout?:
     | {
@@ -2271,7 +2778,7 @@ export interface SiteSetting {
       }[]
     | null;
   /**
-   * schema.org sameAs — official profile URLs.
+   * Official profile links (Facebook, Instagram, YouTube, LinkedIn, …).
    */
   socialLinks?:
     | {
@@ -2292,23 +2799,23 @@ export interface ContactInfo {
     | {
         icon: 'Phone' | 'MessageCircle' | 'Mail' | 'Clock' | 'MapPin' | 'Calendar';
         /**
-         * Label, e.g. 'Call Us'.
+         * Card label, e.g. 'Call Us'.
          */
         title: string;
         /**
-         * Resolve value + link from Site Settings (single source of truth). 'None' keeps the value/link below (e.g. Working Hours).
+         * Pick Phone/Email/WhatsApp to auto-fill from Brand & Identity (one place to update). Choose Custom for anything else (e.g. Working Hours).
          */
         channel?: ('none' | 'phone' | 'email' | 'whatsapp') | null;
         /**
-         * Display value when channel = None (e.g. working hours), or display label for WhatsApp. Ignored for Phone/Email (resolved from Site Settings).
+         * Text shown on the card when 'Contact type' is Custom (e.g. working hours), or the WhatsApp display label. Ignored for Phone/Email (filled from Brand & Identity).
          */
         value?: string | null;
         /**
-         * Link used when channel = None. Ignored for Phone/Email/WhatsApp (resolved from Site Settings).
+         * Link used when 'Contact type' is Custom. Ignored for Phone/Email/WhatsApp (filled from Brand & Identity).
          */
         href?: string | null;
         /**
-         * Sub-line, e.g. '24×7 patient helpline'.
+         * Small line under the value, e.g. '24×7 patient helpline'.
          */
         note?: string | null;
         id?: string | null;
@@ -2325,16 +2832,16 @@ export interface BlogHub {
   id: number;
   hero?: {
     /**
-     * Hero heading. Empty keeps the default styled heading.
+     * Heading at the top of the blog page. Leave empty to keep the built-in default.
      */
     title?: string | null;
     /**
-     * Hero sub-paragraph.
+     * Short paragraph under the heading.
      */
     description?: string | null;
   };
   /**
-   * Optional rich content shown beneath the hero, above the article grid.
+   * Optional extra content shown beneath the top section, above the list of articles.
    */
   intro?: {
     root: {
@@ -2351,19 +2858,28 @@ export interface BlogHub {
     };
     [k: string]: unknown;
   } | null;
+  /**
+   * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
+   */
   seo?: {
+    /**
+     * The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off.
+     */
     metaTitle?: string | null;
+    /**
+     * The grey summary under the title in Google. Aim for ~150–160 characters.
+     */
     metaDescription?: string | null;
     /**
-     * Open Graph title. Falls back to metaTitle if empty.
+     * Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title.
      */
     ogTitle?: string | null;
     /**
-     * Open Graph description. Falls back to metaDescription if empty.
+     * Description used when shared on social media. Leave empty to reuse the Google Search Description.
      */
     ogDescription?: string | null;
     /**
-     * Open Graph / social share image. Falls back to the default hero image if empty.
+     * Image shown when this page is shared on social media. Leave empty to use the default page image.
      */
     ogImage?: (number | null) | Media;
   };
@@ -2377,11 +2893,11 @@ export interface BlogHub {
 export interface Footer {
   id: number;
   /**
-   * Optional logo + blurb. Left empty keeps the footer visually identical.
+   * Optional logo + short blurb. Leave empty to keep the footer exactly as it is.
    */
   branding?: {
     /**
-     * Absolute logo URL. Empty hides the branding block.
+     * Web address of the logo image. Leave empty to hide this block.
      */
     logoUrl?: string | null;
     /**
@@ -2390,27 +2906,27 @@ export interface Footer {
     description?: string | null;
   };
   /**
-   * Footer sitemap columns. Empty falls back to the built-in columns.
+   * The link columns in the footer. Leave empty to keep the built-in columns.
    */
   navGroups?:
     | {
         /**
-         * Column heading, e.g. 'IVF Treatments'.
+         * Heading for this column, e.g. 'IVF Treatments'.
          */
         title: string;
         links?:
           | {
               label: string;
               /**
-               * Resolve the link target from Site Settings (single source of truth). 'None' uses the URL below.
+               * Pick Phone/Email/WhatsApp to auto-fill the link from Brand & Identity, or choose Custom URL and type your own below.
                */
               channel?: ('none' | 'phone' | 'email' | 'whatsapp') | null;
               /**
-               * Link target when channel = None. Empty renders a non-clickable label.
+               * Link target when Link Type is Custom URL. Leave empty to show plain (non-clickable) text.
                */
               url?: string | null;
               /**
-               * Open in a new tab (rel=noopener).
+               * Open this link in a new browser tab.
                */
               external?: boolean | null;
               id?: string | null;
@@ -2420,7 +2936,7 @@ export interface Footer {
       }[]
     | null;
   /**
-   * Optional social profiles. Empty keeps the footer visually identical.
+   * Optional social media profiles. Leave empty to keep the footer exactly as it is.
    */
   social?:
     | {
@@ -2430,21 +2946,21 @@ export interface Footer {
       }[]
     | null;
   /**
-   * Copyright owner line, rendered after '© <year> '. Empty uses the default.
+   * Text shown after '© <year> '. Leave empty to use the built-in default.
    */
   copyrightText?: string | null;
   /**
-   * Bottom row policy links. Empty falls back to the built-in links.
+   * Bottom-row policy links (Privacy, Terms, …). Leave empty to keep the built-in links.
    */
   legalLinks?:
     | {
         label: string;
         /**
-         * Empty renders a non-clickable label.
+         * Leave empty to show plain (non-clickable) text.
          */
         url?: string | null;
         /**
-         * Open in a new tab (rel=noopener).
+         * Open this link in a new browser tab.
          */
         external?: boolean | null;
         id?: string | null;
@@ -2460,15 +2976,15 @@ export interface Footer {
 export interface Header {
   id: number;
   /**
-   * Logo shown in the header bar + mobile drawer. Left empty keeps the built-in logo.
+   * Logo shown in the top bar + mobile menu. Leave empty to keep the built-in logo.
    */
   branding?: {
     /**
-     * Logo image URL (e.g. /assets/logo.png). Empty uses the default.
+     * Web address of the logo image (e.g. /assets/logo.png). Leave empty to use the default.
      */
     logoUrl?: string | null;
     /**
-     * Logo alt text. Empty uses the default.
+     * Describes the logo for accessibility. Leave empty to use the default.
      */
     logoAlt?: string | null;
   };
@@ -2479,32 +2995,32 @@ export interface Header {
     | {
         label: string;
         /**
-         * Destination for a plain link. Leave empty when using mega columns or the Doctors panel.
+         * Where this menu item links to. Leave empty if it opens a dropdown or the Doctors panel instead.
          */
         url?: string | null;
         /**
-         * Open this top-level link in a new tab (rel=noopener).
+         * Open this menu link in a new browser tab.
          */
         openInNewTab?: boolean | null;
         /**
-         * Render the auto-generated, doctor-first mega panel (built from the Doctors list). Ignores the columns below.
+         * Show the auto-built doctors dropdown (made from the Doctors list). When ticked, the dropdown columns below are ignored.
          */
         doctors?: boolean | null;
         /**
-         * Force the dropdown grid to N columns (optional — defaults to the number of columns).
+         * Advanced layout control. Managed by the website team.
          */
         megaCols?: number | null;
         /**
-         * Dropdown columns. Leave empty for a plain link or the Doctors panel.
+         * Columns shown in this item's dropdown menu. Leave empty for a plain link or the Doctors panel.
          */
         columns?:
           | {
               /**
-               * Column heading. Empty renders an unlabelled column.
+               * Heading at the top of the column. Leave empty for an unlabelled column.
                */
               heading?: string | null;
               /**
-               * Optional link for the heading (e.g. a city hub).
+               * Optional link for the heading (e.g. a city page).
                */
               headingHref?: string | null;
               items?:
@@ -2512,11 +3028,11 @@ export interface Header {
                     label: string;
                     url?: string | null;
                     /**
-                     * Optional secondary line shown under the label.
+                     * Optional small line shown under the link.
                      */
                     desc?: string | null;
                     /**
-                     * Optional nested links revealed under this item.
+                     * Optional nested links shown under this link.
                      */
                     children?:
                       | {
@@ -2535,19 +3051,19 @@ export interface Header {
       }[]
     | null;
   /**
-   * Primary call-to-action button (desktop bar + mobile drawer).
+   * The main call-to-action button (top bar + mobile menu).
    */
   cta?: {
     /**
-     * Button label. Empty uses the default ('Book Appointment').
+     * Button text. Leave empty to use the default ('Book Appointment').
      */
     label?: string | null;
     /**
-     * Button target. Empty uses the default ('/#book').
+     * Where the button goes. Leave empty to use the default ('/#book').
      */
     url?: string | null;
     /**
-     * Visual style. Only the primary style exists today.
+     * Reserved for future button styles.
      */
     styleVariant?: 'primary' | null;
   };
@@ -2561,27 +3077,63 @@ export interface Header {
 export interface Homepage {
   id: number;
   /**
-   * Top hero — copy only. The hero image stays code-owned (LCP-optimised).
+   * Controls the order of the homepage's sections and whether each one shows. Drag a row by its handle to reorder. Untick 'Show on page' to hide a section without deleting its content. Leave this list empty to use the standard order.
+   */
+  layout?:
+    | {
+        /**
+         * Which homepage section this row controls.
+         */
+        section:
+          | 'hero'
+          | 'stats'
+          | 'whyBavishi'
+          | 'suraksha'
+          | 'treatments'
+          | 'successStories'
+          | 'videoHub'
+          | 'about'
+          | 'doctors'
+          | 'whyChoose'
+          | 'awards'
+          | 'media'
+          | 'testimonials'
+          | 'events'
+          | 'blogs'
+          | 'locations'
+          | 'faq'
+          | 'calculators'
+          | 'inquiry'
+          | 'finalCta';
+        /**
+         * Untick to hide this section from the live homepage.
+         */
+        visible?: boolean | null;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The banner at the very top of the homepage — text only. The hero image is managed by the website team.
    */
   hero?: {
     /**
-     * Small label above the headline. Empty uses the default.
+     * Small label above the headline. Leave empty to use the default.
      */
     eyebrow?: string | null;
     /**
-     * Full headline text. Empty keeps the default hero.
+     * The main headline. Leave empty to keep the built-in hero.
      */
     headline?: string | null;
     /**
-     * The single word inside the headline rendered in the accent italic style.
+     * The one word in the headline shown in the cursive accent style.
      */
     headlineItalic?: string | null;
     /**
-     * Sub-headline paragraph.
+     * The sub-heading paragraph under the headline.
      */
     paragraph?: string | null;
     /**
-     * Trust badges under the paragraph.
+     * Trust badges shown under the paragraph.
      */
     badges?:
       | {
@@ -2590,7 +3142,7 @@ export interface Homepage {
         }[]
       | null;
     /**
-     * Up to three button labels (first is the primary button). Icons/order stay code-owned.
+     * Up to three button labels (the first is the main button). Icons and order are managed by the website team.
      */
     ctas?:
       | {
@@ -2599,12 +3151,12 @@ export interface Homepage {
         }[]
       | null;
     /**
-     * Floating award chip text on the hero image.
+     * Text on the small floating award chip over the hero image.
      */
     floatingBadge?: string | null;
   };
   /**
-   * Scrolling stats strip. Empty falls back to the built-in stats.
+   * The scrolling stats strip. Leave empty to use the built-in stats.
    */
   stats?:
     | {
@@ -2625,26 +3177,26 @@ export interface Homepage {
   whyBavishi?: {
     eyebrow?: string | null;
     /**
-     * Section heading. Empty keeps the default.
+     * Section heading. Leave empty to keep the default.
      */
     heading?: {
       /**
-       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
        */
       lead?: string | null;
       /**
-       * The highlighted (italic) word(s) at the end of the heading.
+       * The word(s) shown in the cursive accent style at the end of the heading.
        */
       em?: string | null;
     };
     subtitle?: string | null;
     /**
-     * Empty falls back to the built-in cards.
+     * Leave empty to use the built-in cards.
      */
     cards?:
       | {
           /**
-           * Lucide icon name.
+           * Pick the icon shown on the card.
            */
           icon?:
             | (
@@ -2699,30 +3251,30 @@ export interface Homepage {
   whyChoose?: {
     eyebrow?: string | null;
     /**
-     * Section heading. Empty keeps the default.
+     * Section heading. Leave empty to keep the default.
      */
     heading?: {
       /**
-       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
        */
       lead?: string | null;
       /**
-       * The highlighted (italic) word(s) at the end of the heading.
+       * The word(s) shown in the cursive accent style at the end of the heading.
        */
       em?: string | null;
     };
     subtitle?: string | null;
     /**
-     * Empty falls back to the built-in pillars.
+     * Leave empty to use the built-in pillars.
      */
     blocks?:
       | {
           /**
-           * Pillar icon image URL, e.g. /assets/Simple-1.png.
+           * Web address of the pillar icon image, e.g. /assets/Simple-1.png. Ask the website team if unsure.
            */
           icon?: string | null;
           /**
-           * Icon alt text.
+           * Describes the icon for accessibility.
            */
           alt?: string | null;
           title: string;
@@ -2745,23 +3297,23 @@ export interface Homepage {
       | null;
   };
   /**
-   * Suraksha Kavach section.
+   * The Suraksha Kavach section.
    */
   suraksha?: {
     /**
-     * Pill label above the heading.
+     * Small pill label above the heading.
      */
     badge?: string | null;
     /**
-     * Section heading. Empty keeps the default.
+     * Section heading. Leave empty to keep the default.
      */
     heading?: {
       /**
-       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
        */
       lead?: string | null;
       /**
-       * The highlighted (italic) word(s) at the end of the heading.
+       * The word(s) shown in the cursive accent style at the end of the heading.
        */
       em?: string | null;
     };
@@ -2773,56 +3325,56 @@ export interface Homepage {
         }[]
       | null;
     /**
-     * Primary button.
+     * The main button.
      */
     primaryCta?: {
       label?: string | null;
       href?: string | null;
     };
     /**
-     * Secondary button.
+     * The secondary button.
      */
     secondaryCta?: {
       label?: string | null;
       href?: string | null;
     };
     /**
-     * Section image URL. Empty uses the default.
+     * Web address of the section image. Leave empty to use the default.
      */
     image?: string | null;
     imageAlt?: string | null;
   };
   /**
-   * Awards & Recognition carousel.
+   * The Awards & Recognition carousel.
    */
   awards?: {
     eyebrow?: string | null;
     /**
-     * Section heading. Empty keeps the default.
+     * Section heading. Leave empty to keep the default.
      */
     heading?: {
       /**
-       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
        */
       lead?: string | null;
       /**
-       * The highlighted (italic) word(s) at the end of the heading.
+       * The word(s) shown in the cursive accent style at the end of the heading.
        */
       em?: string | null;
     };
     subtitle?: string | null;
     /**
-     * Empty falls back to the built-in awards.
+     * Leave empty to use the built-in awards.
      */
     items?:
       | {
           /**
-           * Award image URL.
+           * Web address of the award image.
            */
           img: string;
           title: string;
           /**
-           * Sub-line under the award title.
+           * Small line under the award title.
            */
           desc?: string | null;
           id?: string | null;
@@ -2830,30 +3382,30 @@ export interface Homepage {
       | null;
   };
   /**
-   * Upcoming Events posters.
+   * The Upcoming Events posters.
    */
   events?: {
     eyebrow?: string | null;
     /**
-     * Section heading. Empty keeps the default.
+     * Section heading. Leave empty to keep the default.
      */
     heading?: {
       /**
-       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
        */
       lead?: string | null;
       /**
-       * The highlighted (italic) word(s) at the end of the heading.
+       * The word(s) shown in the cursive accent style at the end of the heading.
        */
       em?: string | null;
     };
     /**
-     * Empty falls back to the built-in posters.
+     * Leave empty to use the built-in posters.
      */
     posters?:
       | {
           /**
-           * Poster image URL.
+           * Web address of the poster image.
            */
           src: string;
           alt: string;
@@ -2862,16 +3414,16 @@ export interface Homepage {
       | null;
   };
   /**
-   * YouTube video IDs for the three video grids. Titles/headings stay code-owned.
+   * YouTube video IDs for the three video grids. Section titles are managed by the website team.
    */
   videos?: {
     /**
-     * Success-story videos. Empty falls back to the built-in set.
+     * Success-story videos. Leave empty to use the built-in set.
      */
     stories?:
       | {
           /**
-           * YouTube video ID.
+           * The ID from the YouTube link (the part after watch?v=).
            */
           id: string;
           /**
@@ -2879,49 +3431,49 @@ export interface Homepage {
            */
           n: string;
           /**
-           * Quote.
+           * Quote from the patient.
            */
           q: string;
           /**
-           * Star rating (1–5).
+           * Star rating from 1 to 5.
            */
           r?: number | null;
         }[]
       | null;
     /**
-     * Educational videos. Empty falls back to the built-in set.
+     * Educational videos. Leave empty to use the built-in set.
      */
     edu?:
       | {
           /**
-           * YouTube video ID.
+           * The ID from the YouTube link (the part after watch?v=).
            */
           id: string;
           /**
-           * Title.
+           * Video title.
            */
           t: string;
           /**
-           * Description.
+           * Video description.
            */
           d: string;
         }[]
       | null;
     /**
-     * Resource videos. Empty falls back to the built-in set.
+     * Resource videos. Leave empty to use the built-in set.
      */
     resources?:
       | {
           /**
-           * YouTube video ID.
+           * The ID from the YouTube link (the part after watch?v=).
            */
           id: string;
           /**
-           * Category tag.
+           * Short category tag.
            */
           c: string;
           /**
-           * Title.
+           * Video title.
            */
           t: string;
           /**
@@ -2932,34 +3484,34 @@ export interface Homepage {
       | null;
   };
   /**
-   * Homepage FAQ accordion.
+   * The homepage FAQ accordion.
    */
   faq?: {
     eyebrow?: string | null;
     /**
-     * Section heading. Empty keeps the default.
+     * Section heading. Leave empty to keep the default.
      */
     heading?: {
       /**
-       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
        */
       lead?: string | null;
       /**
-       * The highlighted (italic) word(s) at the end of the heading.
+       * The word(s) shown in the cursive accent style at the end of the heading.
        */
       em?: string | null;
     };
     /**
-     * Empty falls back to the built-in FAQs.
+     * Leave empty to use the built-in FAQs.
      */
     items?:
       | {
           /**
-           * Question.
+           * The question visitors read before expanding the answer.
            */
           q: string;
           /**
-           * Answer.
+           * The answer shown when expanded.
            */
           a: string;
           id?: string | null;
@@ -2967,46 +3519,46 @@ export interface Homepage {
       | null;
   };
   /**
-   * Closing call-to-action band.
+   * The closing call-to-action band at the bottom of the homepage.
    */
   finalCta?: {
     eyebrow?: string | null;
     /**
-     * Section heading. Empty keeps the default.
+     * Section heading. Leave empty to keep the default.
      */
     heading?: {
       /**
-       * Plain heading text before the highlighted word(s). Empty keeps the default heading.
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
        */
       lead?: string | null;
       /**
-       * The highlighted (italic) word(s) at the end of the heading.
+       * The word(s) shown in the cursive accent style at the end of the heading.
        */
       em?: string | null;
     };
     paragraph?: string | null;
     /**
-     * Animated counters. Empty falls back to the built-in counters.
+     * Animated counters. Leave empty to use the built-in counters.
      */
     stats?:
       | {
           /**
-           * Target value (counts up to this).
+           * The number it counts up to.
            */
           v: number;
           /**
-           * Suffix, e.g. '+'.
+           * Suffix after the number, e.g. '+'.
            */
           s?: string | null;
           /**
-           * Label.
+           * Caption under the number.
            */
           l: string;
           id?: string | null;
         }[]
       | null;
     /**
-     * Up to three button labels. Icons/order stay code-owned.
+     * Up to three button labels. Icons and order are managed by the website team.
      */
     ctas?:
       | {
@@ -3015,19 +3567,251 @@ export interface Homepage {
         }[]
       | null;
   };
+  /**
+   * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
+   */
   seo?: {
+    /**
+     * The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off.
+     */
     metaTitle?: string | null;
+    /**
+     * The grey summary under the title in Google. Aim for ~150–160 characters.
+     */
     metaDescription?: string | null;
     /**
-     * Open Graph title. Falls back to metaTitle if empty.
+     * Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title.
      */
     ogTitle?: string | null;
     /**
-     * Open Graph description. Falls back to metaDescription if empty.
+     * Description used when shared on social media. Leave empty to reuse the Google Search Description.
      */
     ogDescription?: string | null;
     /**
-     * Open Graph / social share image. Falls back to the default hero image if empty.
+     * Image shown when this page is shared on social media. Leave empty to use the default page image.
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page".
+ */
+export interface AboutPage {
+  id: number;
+  /**
+   * The banner at the top of the About page — text only. The hero image and buttons are managed by the website team.
+   */
+  hero?: {
+    /**
+     * Small label above the headline. Leave empty to use the default.
+     */
+    eyebrow?: string | null;
+    /**
+     * The main headline. Leave empty to keep the built-in hero.
+     */
+    headline?: string | null;
+    /**
+     * The word(s) in the headline shown in the cursive accent style.
+     */
+    headlineItalic?: string | null;
+    /**
+     * The sub-heading paragraph under the headline.
+     */
+    paragraph?: string | null;
+  };
+  /**
+   * 'At a glance' figures in the Our Story panel. Leave empty to use the built-in figures.
+   */
+  atAGlance?:
+    | {
+        /**
+         * Headline figure, e.g. '30,000+'.
+         */
+        value: string;
+        /**
+         * Caption under the figure.
+         */
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The history timeline. Leave empty to use the built-in milestones.
+   */
+  milestones?:
+    | {
+        /**
+         * Year or label, e.g. '1984' or 'Today'.
+         */
+        y: string;
+        /**
+         * Milestone title.
+         */
+        t: string;
+        /**
+         * Milestone description.
+         */
+        d: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The 'Why families trust' cards. Leave empty to use the built-in pillars.
+   */
+  trustPillars?:
+    | {
+        /**
+         * Pick the icon shown on the card.
+         */
+        icon?:
+          | (
+              | 'ScanLine'
+              | 'Feather'
+              | 'Baby'
+              | 'Stethoscope'
+              | 'ShieldCheck'
+              | 'Users'
+              | 'HeartPulse'
+              | 'Activity'
+              | 'ClipboardList'
+              | 'CalendarCheck'
+              | 'Eye'
+              | 'Clock'
+              | 'Microscope'
+              | 'Sparkles'
+              | 'Hand'
+              | 'FlaskConical'
+              | 'Filter'
+              | 'Magnet'
+              | 'Layers'
+              | 'Zap'
+              | 'Egg'
+              | 'Droplets'
+              | 'Snowflake'
+              | 'Dna'
+              | 'Beaker'
+              | 'Target'
+              | 'Leaf'
+              | 'ListChecks'
+              | 'ClipboardCheck'
+              | 'Syringe'
+              | 'Award'
+            )
+          | null;
+        /**
+         * Pillar title.
+         */
+        t: string;
+        /**
+         * Pillar description.
+         */
+        d: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * The 'Patient First' stat grid. Leave empty to use the built-in figures.
+   */
+  patientStats?:
+    | {
+        /**
+         * Headline figure, e.g. '30,000+'.
+         */
+        value: string;
+        /**
+         * Caption under the figure.
+         */
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * 'Our Network' — centres across India.
+   */
+  network?: {
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * City cards. These are hand-written marketing counts (not pulled from the Locations data). Leave empty to use the built-in list.
+     */
+    cities?:
+      | {
+          /**
+           * City name.
+           */
+          c: string;
+          /**
+           * Count label, e.g. '3 centres'.
+           */
+          n: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * The closing call-to-action band — heading + button labels. Icons and links are managed by the website team.
+   */
+  finalCta?: {
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    /**
+     * Button labels in order (the first is the main button).
+     */
+    ctas?:
+      | {
+          text: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
+   */
+  seo?: {
+    /**
+     * The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off.
+     */
+    metaTitle?: string | null;
+    /**
+     * The grey summary under the title in Google. Aim for ~150–160 characters.
+     */
+    metaDescription?: string | null;
+    /**
+     * Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title.
+     */
+    ogTitle?: string | null;
+    /**
+     * Description used when shared on social media. Leave empty to reuse the Google Search Description.
+     */
+    ogDescription?: string | null;
+    /**
+     * Image shown when this page is shared on social media. Leave empty to use the default page image.
      */
     ogImage?: (number | null) | Media;
   };
@@ -3229,6 +4013,13 @@ export interface HeaderSelect<T extends boolean = true> {
  * via the `definition` "homepage_select".
  */
 export interface HomepageSelect<T extends boolean = true> {
+  layout?:
+    | T
+    | {
+        section?: T;
+        visible?: T;
+        id?: T;
+      };
   hero?:
     | T
     | {
@@ -3438,6 +4229,96 @@ export interface HomepageSelect<T extends boolean = true> {
               s?: T;
               l?: T;
               id?: T;
+            };
+        ctas?:
+          | T
+          | {
+              text?: T;
+              id?: T;
+            };
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "about-page_select".
+ */
+export interface AboutPageSelect<T extends boolean = true> {
+  hero?:
+    | T
+    | {
+        eyebrow?: T;
+        headline?: T;
+        headlineItalic?: T;
+        paragraph?: T;
+      };
+  atAGlance?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  milestones?:
+    | T
+    | {
+        y?: T;
+        t?: T;
+        d?: T;
+        id?: T;
+      };
+  trustPillars?:
+    | T
+    | {
+        icon?: T;
+        t?: T;
+        d?: T;
+        id?: T;
+      };
+  patientStats?:
+    | T
+    | {
+        value?: T;
+        label?: T;
+        id?: T;
+      };
+  network?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        cities?:
+          | T
+          | {
+              c?: T;
+              n?: T;
+              id?: T;
+            };
+      };
+  finalCta?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
             };
         ctas?:
           | T

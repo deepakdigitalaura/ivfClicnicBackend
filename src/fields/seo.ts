@@ -17,24 +17,39 @@ import type { Field } from "payload";
 export const seoField: Field = {
   name: "seo",
   type: "group",
+  label: "Search Engine & Social Preview",
+  admin: { description: "Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults." },
   fields: [
-    { name: "metaTitle", type: "text" },
-    { name: "metaDescription", type: "textarea" },
+    {
+      name: "metaTitle",
+      type: "text",
+      label: "Google Page Title",
+      admin: { description: "The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off." },
+    },
+    {
+      name: "metaDescription",
+      type: "textarea",
+      label: "Google Search Description",
+      admin: { description: "The grey summary under the title in Google. Aim for ~150–160 characters." },
+    },
     {
       name: "ogTitle",
       type: "text",
-      admin: { description: "Open Graph title. Falls back to metaTitle if empty." },
+      label: "Social Share Title",
+      admin: { description: "Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title." },
     },
     {
       name: "ogDescription",
       type: "textarea",
-      admin: { description: "Open Graph description. Falls back to metaDescription if empty." },
+      label: "Social Share Description",
+      admin: { description: "Description used when shared on social media. Leave empty to reuse the Google Search Description." },
     },
     {
       name: "ogImage",
       type: "upload",
       relationTo: "media",
-      admin: { description: "Open Graph / social share image. Falls back to the default hero image if empty." },
+      label: "Social Share Image",
+      admin: { description: "Image shown when this page is shared on social media. Leave empty to use the default page image." },
     },
   ],
 };

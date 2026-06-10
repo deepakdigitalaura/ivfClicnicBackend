@@ -1,0 +1,369 @@
+[
+  {
+    "slug": "ahmedabad",
+    "name": "Ahmedabad",
+    "region": "Gujarat",
+    "country": "IN",
+    "helpline": "919712622288",
+    "helplineLabel": "+91 97126 22288",
+    "whatsapp": "919712622288",
+    "heroImage": "/assets/centres/paldi-waiting.webp",
+    "hero360Url": "https://www.google.com/maps/embed?pb=!4v1780725289034!6m8!1m7!1sCAoSHENJQUJJaEFEeWM1VXZ6ZGI4R2U4cTNVQUFmWWI.!2m2!1d23.01327543356341!2d72.56405585909516!3f43.197350683590116!4f-11.407427687968791!5f0.4000000000000002",
+    "intro": [
+      {
+        "value": "For four decades, couples across Gujarat have turned to Bavishi Fertility Institute for honest counselling, advanced IVF technology and a genuinely caring team. From your first consultation to the moment you hold your baby, our Ahmedabad centres combine clinical excellence with the warmth of a family-led institute."
+      },
+      {
+        "value": "Whether you are exploring IVF, ICSI, IUI, fertility preservation or treatment for male or female infertility, you will find every service — diagnostics, embryology lab, surgery and maternity care — under one roof, at a location convenient to you."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Ahmedabad?",
+        "a": "Bavishi Fertility Institute is widely regarded as one of Ahmedabad's most trusted IVF centres — operating in the city since 1984, with Class 1000 labs, senior promoter doctors and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "How many Bavishi Fertility Institute IVF centres are there in Ahmedabad?",
+        "a": "Three — at Paldi (head office), Sindhu Bhavan Road and Nikol — so expert fertility care is always close to home."
+      },
+      {
+        "q": "Where is the Bavishi Fertility Institute Paldi IVF centre located?",
+        "a": "Opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi, Ahmedabad – 380007. It is the institute's head office and flagship lab."
+      },
+      {
+        "q": "What are the consultation timings in Ahmedabad?",
+        "a": "Paldi is open Mon–Sat, 9:00 am–7:00 pm; Sindhu Bhavan Road Mon–Sat, 10:30 am–7:00 pm; and Nikol Mon–Sat, 10:00 am–7:00 pm. Appointments are recommended."
+      },
+      {
+        "q": "What fertility treatments are available in Ahmedabad?",
+        "a": "The full range — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation, maternity services and gynaecology — all under one roof."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Ahmedabad?",
+        "a": "Yes. All Ahmedabad centres offer transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "womensHealth": [
+      {
+        "value": "3d-4d-sonography"
+      },
+      {
+        "value": "painless-delivery"
+      },
+      {
+        "value": "normal-delivery"
+      },
+      {
+        "value": "fetal-medicine"
+      },
+      {
+        "value": "high-risk-pregnancy-care"
+      },
+      {
+        "value": "twin-pregnancy-care"
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "mumbai",
+    "name": "Mumbai",
+    "region": "Maharashtra",
+    "country": "IN",
+    "helpline": "919328190146",
+    "helplineLabel": "+91 93281 90146",
+    "whatsapp": "919328190146",
+    "heroImage": "/assets/Locations/Mumbai.png",
+    "hero360Url": "https://www.google.com/maps/embed?pb=!4v1780725760082!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRHlrdE9iX2dF!2m2!1d19.07851750759122!2d72.90374191572629!3f331.0839116483176!4f-6.84920058783446!5f0.4000000000000002",
+    "intro": [
+      {
+        "value": "For couples across Mumbai and Navi Mumbai, Bavishi Fertility Institute brings four decades of pioneering IVF experience together with genuinely compassionate care. From your first consultation to the moment you hold your baby, our Mumbai centres combine clinical excellence with the warmth of a family-led institute."
+      },
+      {
+        "value": "With centres in Ghatkopar, Thane, Vile Parle, Borivali and Vashi, expert fertility care is always close to home. Whether you are exploring IVF, ICSI, IUI, fertility preservation or treatment for male or female infertility, you will find advanced diagnostics, embryology and counselling at a location convenient to you."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Mumbai?",
+        "a": "Bavishi Fertility Institute is among Mumbai's most trusted IVF centres, with a family-led legacy since 1984, Class 1000 labs, experienced specialists and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "How many Bavishi Fertility Institute centres are there in Mumbai?",
+        "a": "Five — at Ghatkopar, Thane, Vile Parle, Borivali and Vashi (Navi Mumbai) — so expert fertility care is always close to home."
+      },
+      {
+        "q": "Do you offer IVF treatment in Navi Mumbai?",
+        "a": "Yes. Our Vashi centre at Mahavir Centre, Sector 17, serves Navi Mumbai — including Nerul, Belapur, Kharghar and Sanpada."
+      },
+      {
+        "q": "What are the consultation timings in Mumbai?",
+        "a": "Ghatkopar is open Mon–Sat, 9:00 am–9:00 pm. Thane, Vile Parle, Borivali and Vashi run dedicated consultation slots — please call the centre to confirm your time and book."
+      },
+      {
+        "q": "What fertility treatments are available in Mumbai?",
+        "a": "The full range — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation and PGT — supported by advanced laboratories."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Mumbai?",
+        "a": "Yes. Our Mumbai centres offer transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "vadodara",
+    "name": "Vadodara",
+    "region": "Gujarat",
+    "country": "IN",
+    "helpline": "917575099898",
+    "helplineLabel": "+91 75750 99898",
+    "whatsapp": "917575099898",
+    "heroImage": "/assets/Locations/Vadodra.png",
+    "intro": [
+      {
+        "value": "Bavishi Fertility Institute is a trusted name for IVF in Vadodara, offering advanced fertility treatment with cutting-edge technology and the compassion of a family-led institute. Our centre on Jetalpur Road is a one-stop destination for every kind of reproductive care."
+      },
+      {
+        "value": "Whether you are exploring IVF, ICSI, IUI, donor programmes, fertility preservation or gynaecology services, you will find advanced diagnostics, an embryology lab and experienced specialists under one roof — conveniently located in the heart of the city."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Vadodara?",
+        "a": "Bavishi Fertility Institute is widely regarded as one of Vadodara's most trusted IVF centres — part of a FOGSI-certified network with a Class 1000 lab, experienced specialists and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "Where is the Bavishi Fertility Institute Vadodara centre located?",
+        "a": "On the 4th floor of Trisha Square, 2, Jetalpur Road, Sampatrao Colony, Vadodara – 390007, near Alkapuri."
+      },
+      {
+        "q": "What are the consultation timings in Vadodara?",
+        "a": "The Vadodara centre is open Monday to Saturday, 10:00 am to 7:00 pm. Appointments are recommended; call +91 75750 99898 to book."
+      },
+      {
+        "q": "What fertility treatments are available in Vadodara?",
+        "a": "The full range — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation, PGT and gynaecology — all under one roof."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Vadodara?",
+        "a": "Yes. The Vadodara centre offers transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "surat",
+    "name": "Surat",
+    "region": "Gujarat",
+    "country": "IN",
+    "helpline": "919879572247",
+    "helplineLabel": "+91 98795 72247",
+    "whatsapp": "919879572247",
+    "heroImage": "/assets/Locations/Surat.png",
+    "intro": [
+      {
+        "value": "Bavishi Fertility Institute is a leading IVF centre in Surat, offering trusted fertility treatments with a focus on patient-centric, compassionate care. Centrally located at Lal Darwaja, our team guides you through every step of your parenthood journey."
+      },
+      {
+        "value": "From understanding treatment costs to advanced solutions for a high success rate, you will find state-of-the-art technology, an embryology lab and experienced specialists under one roof — supporting families across South Gujarat."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Surat?",
+        "a": "Bavishi Fertility Institute is among Surat's most trusted IVF centres — part of a FOGSI-certified network with advanced labs, experienced specialists and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "Where is the Bavishi Fertility Institute Surat centre located?",
+        "a": "On the 9th floor of Param Doctor House, Lal Darwaja Station Road, Lal Darwaja, Surat – 395003, beside Surat railway station."
+      },
+      {
+        "q": "What are the consultation timings in Surat?",
+        "a": "The Surat centre is open Monday to Saturday, 10:00 am to 7:00 pm. Appointments are recommended; call +91 98795 72247 to book."
+      },
+      {
+        "q": "What fertility treatments are available in Surat?",
+        "a": "The full range — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation and PGT — all under one roof."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Surat?",
+        "a": "Yes. The Surat centre offers transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "bhuj",
+    "name": "Bhuj",
+    "region": "Gujarat",
+    "country": "IN",
+    "helpline": "919687188550",
+    "helplineLabel": "+91 96871 88550",
+    "whatsapp": "919687188550",
+    "heroImage": "/assets/Locations/Bhuj.png",
+    "hero360Url": "https://www.google.com/maps/embed?pb=!4v1780725683755!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJQ3lqZVBYdXdF!2m2!1d23.23267684665612!2d69.639458833696!3f2.4330175692374496!4f-12.54755060589163!5f0.4000000000000002",
+    "intro": [
+      {
+        "value": "Bavishi Fertility Institute is the best fertility hospital in Bhuj, combining state-of-the-art technology with compassionate support to ensure a personalised experience and the best possible outcomes for couples across Kutch."
+      },
+      {
+        "value": "Our centre in Mirjapar offers advanced reproductive treatments — IVF, male and female infertility solutions and maternity services — under one roof, bringing expert fertility care within easy reach of the region."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Bhuj?",
+        "a": "Bavishi Fertility Institute is regarded as the best fertility hospital in Bhuj — part of a FOGSI-certified network with advanced labs, experienced specialists and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "Where is the Bavishi Fertility Institute Bhuj centre located?",
+        "a": "At 13–28 Shivam Nagar, near Uma Nagar, on the highway beside Kutch Orthopaedic Hospital, Mirjapar, Bhuj – 370040."
+      },
+      {
+        "q": "What are the consultation timings in Bhuj?",
+        "a": "Monday to Friday, 8:00 am to 7:00 pm, and Saturday until 1:00 pm. Call +91 96871 88550 to book."
+      },
+      {
+        "q": "What fertility treatments are available in Bhuj?",
+        "a": "Advanced reproductive care — IVF, ICSI, IUI, male and female infertility solutions, fertility preservation and maternity services — all under one roof in Kutch."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Bhuj?",
+        "a": "Yes. The Bhuj centre offers transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "bhavnagar",
+    "name": "Bhavnagar",
+    "region": "Gujarat",
+    "country": "IN",
+    "helpline": "917069314040",
+    "helplineLabel": "+91 70693 14040",
+    "whatsapp": "917069314040",
+    "heroImage": "/assets/Locations/Bhavnagar.png",
+    "intro": [
+      {
+        "value": "Bavishi Fertility Institute is a leading IVF centre in Bhavnagar, recognised for advanced IVF treatment delivered with cutting-edge technology and compassionate care. Our centre on Kalubha Road is one of the Saurashtra region's premier fertility destinations."
+      },
+      {
+        "value": "From IVF and infertility management to fertility preservation and donor services, you will find personalised solutions backed by experienced specialists and a state-of-the-art laboratory — all under one roof."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Bhavnagar?",
+        "a": "Bavishi Fertility Institute is recognised as one of the best IVF hospitals in Bhavnagar — part of a FOGSI-certified network with advanced labs, experienced specialists and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "Where is the Bavishi Fertility Institute Bhavnagar centre located?",
+        "a": "At 203–205 Sai Ganga, beside Hema Women's Hospital, Kalubha Road, Bhavnagar – 364001."
+      },
+      {
+        "q": "What are the consultation timings in Bhavnagar?",
+        "a": "Monday to Saturday, 10:00 am to 2:00 pm and 4:00 pm to 8:00 pm. Call +91 70693 14040 to book."
+      },
+      {
+        "q": "What fertility treatments are available in Bhavnagar?",
+        "a": "Comprehensive fertility care — IVF, ICSI, IUI, male and female infertility management, fertility preservation and donor services — all under one roof."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Bhavnagar?",
+        "a": "Yes. The Bhavnagar centre offers transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "anand",
+    "name": "Anand",
+    "region": "Gujarat",
+    "country": "IN",
+    "helpline": "917069034565",
+    "helplineLabel": "+91 70690 34565",
+    "whatsapp": "917069034565",
+    "heroImage": "/assets/Locations/Anand.png",
+    "intro": [
+      {
+        "value": "Bavishi Fertility Institute is a trusted IVF centre in Anand, offering advanced fertility treatments with modern technology and compassionate care. Our centre at IRIS Hospital serves couples across the Charotar region."
+      },
+      {
+        "value": "From IVF and infertility management to fertility preservation and maternity services, you will find personalised solutions with transparent costs and complete support throughout your parenthood journey — all under one roof."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Anand?",
+        "a": "Bavishi Fertility Institute is among Anand's most trusted IVF centres — part of a FOGSI-certified network with advanced labs, experienced specialists and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "Where is the Bavishi Fertility Institute Anand centre located?",
+        "a": "At Unit-2, IRIS Hospital, Nanikhodiyar, Anand – 388001, near Vidyanagar."
+      },
+      {
+        "q": "What are the consultation timings in Anand?",
+        "a": "The Anand centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 70690 34565 to book."
+      },
+      {
+        "q": "What fertility treatments are available in Anand?",
+        "a": "Comprehensive reproductive care — IVF, ICSI, IUI, male and female infertility management, fertility preservation and maternity services — all under one roof."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Anand?",
+        "a": "Yes. The Anand centre offers transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  },
+  {
+    "slug": "varanasi",
+    "name": "Varanasi",
+    "region": "Uttar Pradesh",
+    "country": "IN",
+    "helpline": "919506081979",
+    "helplineLabel": "+91 95060 81979",
+    "whatsapp": "919506081979",
+    "heroImage": "/assets/Locations/Varanasi.png",
+    "intro": [
+      {
+        "value": "Bavishi Fertility Institute is a trusted name in fertility care in Varanasi, offering advanced IVF treatments, expert guidance and personalised plans for couples across eastern Uttar Pradesh. Our centre at Shivpur brings end-to-end support to your parenthood journey."
+      },
+      {
+        "value": "From IVF and IUI to male and female infertility solutions and fertility preservation, you will find state-of-the-art reproductive facilities and experienced specialists supporting families across the Purvanchal region."
+      }
+    ],
+    "faqs": [
+      {
+        "q": "Which is the best IVF centre in Varanasi?",
+        "a": "Bavishi Fertility Institute is among Varanasi's most trusted fertility centres — part of a FOGSI-certified network with advanced labs, experienced specialists and 30,000+ successful pregnancies nationwide."
+      },
+      {
+        "q": "Where is the Bavishi Fertility Institute Varanasi centre located?",
+        "a": "At S-15/47, Jamuna Sewa Sadan Hospital, Panchkoshi Road, Shivpur, Varanasi – 221003."
+      },
+      {
+        "q": "What are the consultation timings in Varanasi?",
+        "a": "The Varanasi centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 95060 81979 to book."
+      },
+      {
+        "q": "What fertility treatments are available in Varanasi?",
+        "a": "Advanced fertility care — IVF, ICSI, IUI, male and female infertility solutions and fertility preservation — with expert guidance and end-to-end support."
+      },
+      {
+        "q": "Do you offer IVF cost EMI and Suraksha Kavach in Varanasi?",
+        "a": "Yes. The Varanasi centre offers transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package."
+      }
+    ],
+    "built": true,
+    "_status": "published"
+  }
+]
