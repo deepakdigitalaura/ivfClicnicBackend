@@ -40,6 +40,12 @@ export default buildConfig({
   admin: {
     user: Users.slug,
     importMap: { baseDir: path.resolve(dirname) },
+    // Friendly welcome panel at the top of the Dashboard for non-technical staff
+    // (stat cards + quick actions + a "where to find things" guide). Payload's
+    // own grouped collection/global cards still render below it.
+    components: {
+      beforeDashboard: ["/components/admin/WelcomeDashboard#WelcomeDashboard"],
+    },
   },
   collections: [Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Media, Users],
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About],
