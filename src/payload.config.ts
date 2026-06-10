@@ -49,6 +49,9 @@ export default buildConfig({
     // own grouped collection/global cards still render below it.
     components: {
       beforeDashboard: ["/components/admin/WelcomeDashboard#WelcomeDashboard"],
+      // Forces the sidebar open on desktop (a closed Payload nav is `inert` =
+      // unclickable), so staff always see every section and links stay clickable.
+      beforeNavLinks: ["/components/admin/ForceNavOpen#ForceNavOpen"],
     },
   },
   collections: [Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Media, Users],
