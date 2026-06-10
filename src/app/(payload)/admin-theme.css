@@ -1,0 +1,133 @@
+/* =====================================================================
+ * Brand theme for the Payload admin — matches the clinic website
+ * (ivory background, plum text, rose accent). Loaded after Payload's own
+ * stylesheet in (payload)/layout.tsx so these rules win. The admin is forced
+ * to light mode via admin.theme = "light", so we only style the light theme.
+ *
+ * Colour tokens mirror src/styles.css (oklch):
+ *   ivory  oklch(0.985 0.005 60)   plum   oklch(0.27 0.09 305)
+ *   rose   oklch(0.65 0.21 0)      rose-soft oklch(0.93 0.05 0)
+ * ===================================================================== */
+
+:root {
+  --brand-ivory: oklch(0.985 0.005 60);
+  --brand-plum: oklch(0.27 0.09 305);
+  --brand-plum-deep: oklch(0.2 0.075 305);
+  --brand-rose: oklch(0.62 0.21 5);
+  --brand-rose-strong: oklch(0.55 0.21 5);
+  --brand-rose-soft: oklch(0.95 0.03 5);
+  --brand-border: oklch(0.9 0.012 50);
+}
+
+/* ---- Base surfaces / text (warm the whole panel) ---- */
+html[data-theme="light"] {
+  --theme-bg: var(--brand-ivory);
+  --theme-text: var(--brand-plum-deep);
+  --theme-elevation-0: #fff;
+  --theme-elevation-50: oklch(0.985 0.005 60);
+  --theme-elevation-100: oklch(0.965 0.008 55);
+  --theme-elevation-150: var(--brand-border);
+  --theme-elevation-200: oklch(0.9 0.013 50);
+  --theme-elevation-1000: var(--brand-plum-deep);
+  color-scheme: light;
+}
+
+body,
+.template-default,
+.dashboard {
+  background: var(--brand-ivory);
+}
+
+/* ---- Left navigation sidebar ---- */
+.nav {
+  background: linear-gradient(180deg, #fff, var(--brand-ivory));
+  border-right: 1px solid var(--brand-border);
+}
+.nav__link {
+  color: oklch(0.4 0.05 305);
+  border-radius: 8px;
+}
+.nav__link:hover {
+  background: var(--brand-rose-soft);
+  color: var(--brand-plum);
+}
+/* active item (cover the class variants Payload has used) */
+.nav__link--active,
+.nav__link.active,
+.nav__link[aria-current="page"] {
+  background: var(--brand-rose-soft) !important;
+  color: var(--brand-rose-strong) !important;
+  font-weight: 600;
+}
+.nav-group__label,
+.nav-group__toggle {
+  color: oklch(0.5 0.03 305);
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  font-size: 0.72rem;
+}
+
+/* ---- Primary buttons / Save / Create new ---- */
+.btn--style-primary {
+  background-color: var(--brand-rose);
+  border-color: var(--brand-rose);
+  color: #fff;
+}
+.btn--style-primary:hover,
+.btn--style-primary:focus {
+  background-color: var(--brand-rose-strong);
+  border-color: var(--brand-rose-strong);
+}
+.btn--style-primary .btn__content,
+.btn--style-primary svg {
+  color: #fff;
+  fill: #fff;
+}
+
+/* secondary / pill buttons get a rose outline accent */
+.btn--style-secondary {
+  border-color: var(--brand-rose);
+  color: var(--brand-rose-strong);
+}
+
+/* ---- Links, focus rings, checked controls ---- */
+a:not(.nav__link):not(.btn) {
+  color: var(--brand-rose-strong);
+}
+.field-type input:focus,
+.field-type textarea:focus,
+.field-type .rs__control--is-focused {
+  border-color: var(--brand-rose) !important;
+  box-shadow: 0 0 0 2px color-mix(in oklab, var(--brand-rose) 22%, transparent) !important;
+}
+.checkbox-input__input--checked,
+input[type="checkbox"]:checked {
+  background-color: var(--brand-rose) !important;
+  border-color: var(--brand-rose) !important;
+}
+
+/* ---- Header / breadcrumb ---- */
+.app-header,
+.step-nav {
+  background: transparent;
+}
+
+/* ---- Document/list cards ---- */
+.collection-list__wrap .table,
+.dashboard__card,
+.card {
+  border-color: var(--brand-border);
+}
+
+/* =====================================================================
+ * Keep the sidebar OPEN on desktop so non-technical users always see every
+ * section. Hides the desktop nav-collapse control; the mobile hamburger and
+ * default open-on-desktop behaviour are untouched.
+ * ===================================================================== */
+@media (min-width: 1024px) {
+  .nav-toggler--desktop,
+  .nav__controls,
+  button.nav-toggler[aria-label*="close" i] {
+    display: none !important;
+  }
+}

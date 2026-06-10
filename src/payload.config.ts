@@ -39,6 +39,10 @@ const dirname = path.dirname(fileURLToPath(import.meta.url));
 export default buildConfig({
   admin: {
     user: Users.slug,
+    // Force the brand light theme — the admin never renders the default dark
+    // (black) mode, and the light/dark toggle is removed. Brand colours are
+    // layered on top via src/app/(payload)/admin-theme.css.
+    theme: "light",
     importMap: { baseDir: path.resolve(dirname) },
     // Friendly welcome panel at the top of the Dashboard for non-technical staff
     // (stat cards + quick actions + a "where to find things" guide). Payload's
