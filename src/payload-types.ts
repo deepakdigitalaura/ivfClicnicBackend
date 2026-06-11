@@ -3937,6 +3937,72 @@ export interface Homepage {
       | null;
   };
   /**
+   * The homepage 'Our Locations' city cards.
+   */
+  locations?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * City cards. Leave empty to use the built-in set.
+     */
+    cities?:
+      | {
+          c: string;
+          /**
+           * Number of centres.
+           */
+          n: number;
+          /**
+           * URL slug, e.g. 'ahmedabad'. Changing this changes the card's link.
+           */
+          s: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * The 'Free calculators' tools grid.
+   */
+  calculators?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * Calculator names. Leave empty to use the built-in set.
+     */
+    items?:
+      | {
+          name: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
    * The 'Book an Appointment' band with the callback form. The form fields themselves are fixed; only the copy and contact rows are editable here.
    */
   inquiry?: {
@@ -4815,6 +4881,44 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               src?: T;
               alt?: T;
+              id?: T;
+            };
+      };
+  locations?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        cities?:
+          | T
+          | {
+              c?: T;
+              n?: T;
+              s?: T;
+              id?: T;
+            };
+      };
+  calculators?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        items?:
+          | T
+          | {
+              name?: T;
               id?: T;
             };
       };

@@ -442,6 +442,53 @@ const SECTION_FIELDS: Field[] = [
         },
       ],
     },
+    {
+      name: "locations",
+      type: "group",
+      label: "Locations Grid",
+      admin: { description: "The homepage 'Our Locations' city cards." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        {
+          name: "cities",
+          type: "array",
+          labels: { singular: "City", plural: "Cities" },
+          admin: { description: "City cards. Leave empty to use the built-in set." },
+          fields: [
+            {
+              type: "row",
+              fields: [
+                { name: "c", type: "text", required: true, label: "City Name", admin: { width: "50%" } },
+                { name: "n", type: "number", required: true, defaultValue: 1, label: "Centre Count", admin: { width: "25%", description: "Number of centres." } },
+                { name: "s", type: "text", required: true, label: "Link Slug", admin: { width: "25%", description: "URL slug, e.g. 'ahmedabad'. Changing this changes the card's link." } },
+              ],
+            },
+          ],
+        },
+      ],
+    },
+    {
+      name: "calculators",
+      type: "group",
+      label: "Fertility Tools",
+      admin: { description: "The 'Free calculators' tools grid." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        {
+          name: "items",
+          type: "array",
+          labels: { singular: "Tool", plural: "Tools" },
+          admin: { description: "Calculator names. Leave empty to use the built-in set." },
+          fields: [
+            { name: "name", type: "text", required: true, label: "Tool Name" },
+          ],
+        },
+      ],
+    },
     seoField,
 ];
 
@@ -497,6 +544,8 @@ export const Homepage: GlobalConfig = {
     section("Videos", "Patient stories, education and resource videos.", ["videos"]),
     section("Section Headings", "Headings for the Success Stories, Education, Doctors, Resources and Reviews sections.", ["successStories", "videoHub", "doctors", "blogs", "testimonials"]),
     section("Media Coverage", "The press-logos strip.", ["media"]),
+    section("Locations Grid", "The homepage city cards.", ["locations"]),
+    section("Fertility Tools", "The calculators grid.", ["calculators"]),
     section("Inquiry / Appointment", "The appointment band copy + contact rows.", ["inquiry"]),
     section("FAQs", "The homepage FAQ accordion.", ["faq"]),
     section("Closing Call-to-Action", "The closing band at the bottom.", ["finalCta"]),

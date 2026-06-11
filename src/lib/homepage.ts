@@ -188,6 +188,9 @@ export type HomepageData = {
   blogs: { eyebrow: string; heading: Heading; ctaLabel: string };
   testimonials: { eyebrow: string; heading: Heading };
   media: { eyebrow: string; heading: Heading; logos: { src: string; alt: string }[] };
+  /** City cards: name (c), centre count (n), slug (s, the link target). */
+  locations: { eyebrow: string; heading: Heading; subtitle: string; cities: { c: string; n: number; s: string }[] };
+  calculators: { eyebrow: string; heading: Heading; subtitle: string; items: string[] };
   /** Contact rows carry editable text only — the icon stays code-owned (it maps
    *  to the contact method, by index). */
   inquiry: { eyebrow: string; heading: Heading; subtitle: string; contacts: { h: string; d: string }[] };
@@ -456,6 +459,36 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       { h: "Response time", d: "We typically respond within 30 minutes" },
     ],
   },
+  locations: {
+    eyebrow: "Our Locations",
+    heading: { lead: "Find a Bavishi Fertility Institute Centre", em: "near you." },
+    subtitle: "15 centres across 8 cities — premium fertility care, close to home wherever you are.",
+    cities: [
+      { c: "Ahmedabad", n: 3, s: "ahmedabad" },
+      { c: "Mumbai", n: 5, s: "mumbai" },
+      { c: "Vadodara", n: 1, s: "vadodara" },
+      { c: "Surat", n: 1, s: "surat" },
+      { c: "Bhuj", n: 1, s: "bhuj" },
+      { c: "Bhavnagar", n: 1, s: "bhavnagar" },
+      { c: "Anand", n: 1, s: "anand" },
+      { c: "Varanasi", n: 1, s: "varanasi" },
+    ],
+  },
+  calculators: {
+    eyebrow: "Fertility Tools",
+    heading: { lead: "Free calculators by", em: "our experts." },
+    subtitle: "Practical, science-backed tools to help you understand your fertility — privately and instantly.",
+    items: [
+      "IVF Success Rate Calculator",
+      "Fertile Period Calculator",
+      "Risk of Repeat Miscarriage Calculator",
+      "Natural Pregnancy Calculator",
+      "IVF Cost Calculator",
+      "AMH Level Interpreter",
+      "Ovulation Calculator",
+      "Semen Analysis Calculator",
+    ],
+  },
   seo: {
     metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 40+ Years",
     metaDescription:
@@ -575,6 +608,18 @@ export type HomepageSource =
         heading?: HeadingSource;
         subtitle?: string | null;
         contacts?: { h?: string | null; d?: string | null }[] | null;
+      } | null;
+      locations?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+        cities?: { c?: string | null; n?: number | null; s?: string | null }[] | null;
+      } | null;
+      calculators?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+        items?: { name?: string | null }[] | null;
       } | null;
       seo?: {
         metaTitle?: string | null;
@@ -806,6 +851,22 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
       ? src.inquiry.contacts.map((c) => ({ h: c.h ?? "", d: c.d ?? "" }))
       : d.inquiry.contacts,
   };
+  const locations = {
+    eyebrow: src.locations?.eyebrow ?? d.locations.eyebrow,
+    heading: heading(src.locations?.heading, d.locations.heading),
+    subtitle: src.locations?.subtitle ?? d.locations.subtitle,
+    cities: src.locations?.cities?.length
+      ? src.locations.cities.map((x) => ({ c: x.c ?? "", n: x.n ?? 1, s: x.s ?? "" }))
+      : d.locations.cities,
+  };
+  const calculators = {
+    eyebrow: src.calculators?.eyebrow ?? d.calculators.eyebrow,
+    heading: heading(src.calculators?.heading, d.calculators.heading),
+    subtitle: src.calculators?.subtitle ?? d.calculators.subtitle,
+    items: src.calculators?.items?.length
+      ? src.calculators.items.map((x) => x.name ?? "").filter(Boolean)
+      : d.calculators.items,
+  };
 
   // SEO meta is consumed by generateMetadata() (a server context); the ogImage
   // upload relation is resolved there, so it is intentionally NOT shaped here.
@@ -817,5 +878,5 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, seo };
+  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, locations, calculators, seo };
 }

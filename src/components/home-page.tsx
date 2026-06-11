@@ -166,9 +166,9 @@ export function HomePage({
     ),
     events: <Events content={data.events} />,
     blogs: <Blogs videos={data.videos.resources} content={data.blogs} />,
-    locations: <Locations />,
+    locations: <Locations content={data.locations} />,
     faq: <FAQ content={data.faq} />,
-    calculators: <Calculators />,
+    calculators: <Calculators content={data.calculators} />,
     inquiry: <InquiryForm content={data.inquiry} />,
     finalCta: <FinalCTA content={data.finalCta} />,
   };
@@ -1227,21 +1227,17 @@ function Blogs({
 
 /* ---------- Locations ---------- */
 
-export function Locations() {
-  const cities = [
-    { c: "Ahmedabad", n: 3, s: "ahmedabad" }, { c: "Mumbai", n: 5, s: "mumbai" }, { c: "Vadodara", n: 1, s: "vadodara" },
-    { c: "Surat", n: 1, s: "surat" }, { c: "Bhuj", n: 1, s: "bhuj" }, { c: "Bhavnagar", n: 1, s: "bhavnagar" },
-    { c: "Anand", n: 1, s: "anand" }, { c: "Varanasi", n: 1, s: "varanasi" },
-  ];
+export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?: HomepageData["locations"] } = {}) {
+  const cities = content.cities;
   return (
     <section id="locations" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Our Locations"
-        title={<>Find a Bavishi Fertility Institute Centre <em className="font-display italic text-[color:var(--rose)]">near you.</em></>}
-        subtitle="15 centres across 8 cities — premium fertility care, close to home wherever you are."
+        eyebrow={ed("locations.eyebrow", content.eyebrow)}
+        title={edTitle("locations", content.heading)}
+        subtitle={ed("locations.subtitle", content.subtitle)}
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
-        {cities.map((c) => (
+        {cities.map((c, i) => (
           <StaggerItem key={c.c}>
             <motion.a
               href={cityHref(c.s) ?? `/locations/${c.s}`}
@@ -1250,7 +1246,7 @@ export function Locations() {
               className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
               <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
-              <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]">{c.c}</h3>
+              <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`locations.cities.${i}.c`}>{c.c}</Editable></h3>
               <p className="text-sm text-muted-foreground">{c.n} {c.n > 1 ? "centres" : "centre"}</p>
               <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                 View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
@@ -1316,26 +1312,17 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
 
 /* ---------- Calculators ---------- */
 
-export function Calculators() {
-  const calcs = [
-    "IVF Success Rate Calculator",
-    "Fertile Period Calculator",
-    "Risk of Repeat Miscarriage Calculator",
-    "Natural Pregnancy Calculator",
-    "IVF Cost Calculator",
-    "AMH Level Interpreter",
-    "Ovulation Calculator",
-    "Semen Analysis Calculator",
-  ];
+export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
+  const calcs = content.items;
   return (
     <section id="tools" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Fertility Tools"
-        title={<>Free calculators by <em className="font-display italic text-[color:var(--rose)]">our experts.</em></>}
-        subtitle="Practical, science-backed tools to help you understand your fertility — privately and instantly."
+        eyebrow={ed("calculators.eyebrow", content.eyebrow)}
+        title={edTitle("calculators", content.heading)}
+        subtitle={ed("calculators.subtitle", content.subtitle)}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
-        {calcs.map((c) => (
+        {calcs.map((c, i) => (
           <StaggerItem key={c}>
             <motion.div
               whileHover={{ y: -6 }}
@@ -1345,7 +1332,7 @@ export function Calculators() {
               <Float amplitude={4} className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
                 <Calculator className="h-5 w-5" />
               </Float>
-              <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty">{c}</h3>
+              <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
               <a className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                 Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </a>
