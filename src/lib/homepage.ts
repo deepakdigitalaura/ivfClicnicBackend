@@ -181,6 +181,7 @@ export type HomepageData = {
   finalCta: FinalCtaContent;
   /** Header-only copy for sections whose item data is sourced elsewhere
    *  (videos collection / doctors). The cards themselves stay code/entity-owned. */
+  treatments: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string; items: { icon: IconName; t: string; d: string }[] };
   successStories: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string };
   videoHub: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string };
   doctors: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string };
@@ -382,6 +383,29 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     ],
     ctas: ["Book Consultation", "WhatsApp Now", "Call Now"],
   },
+  treatments: {
+    eyebrow: "Treatments",
+    heading: { lead: "Fertility care,", em: "complete and considered." },
+    subtitle: "Every treatment we offer is delivered with the same standard of clinical excellence and emotional care.",
+    ctaLabel: "View All Treatments",
+    items: [
+      { icon: "Stethoscope", t: "Male Infertility", d: "Comprehensive evaluation and treatment for male factors." },
+      { icon: "HeartPulse", t: "Female Infertility", d: "Personalised pathways for every female fertility concern." },
+      { icon: "Sparkles", t: "Advanced Fertility Techniques", d: "Latest assisted reproduction protocols." },
+      { icon: "Dna", t: "PGT — Genetic Testing", d: "Pre-implantation testing for healthier embryos." },
+      { icon: "Activity", t: "IUI", d: "Intrauterine insemination for select fertility profiles." },
+      { icon: "FlaskConical", t: "IVF / ICSI / ART", d: "Advanced in-vitro fertilisation with ICSI." },
+      { icon: "Microscope", t: "Fertility Preservation", d: "Egg, sperm and embryo freezing for the future." },
+      { icon: "Baby", t: "Sperm Donation", d: "Screened, ethical donor sperm programs." },
+      { icon: "Baby", t: "Egg Donation", d: "Carefully matched egg donor programs." },
+      { icon: "Baby", t: "Embryo Donation", d: "A compassionate path to parenthood." },
+      { icon: "HeartPulse", t: "Fibroids", d: "Diagnosis and fertility-preserving treatment." },
+      { icon: "HeartPulse", t: "Endometriosis", d: "Specialised endometriosis fertility care." },
+      { icon: "Sparkles", t: "Ovarian Rejuvenation", d: "Advanced therapy for diminished ovarian reserve." },
+      { icon: "Activity", t: "High Risk Obstetrics", d: "Expert care for complex pregnancies." },
+      { icon: "Baby", t: "Maternity Services", d: "End-to-end maternity and newborn care." },
+    ],
+  },
   successStories: {
     eyebrow: "Success Stories",
     heading: { lead: "30,000+ journeys.", em: "One promise kept." },
@@ -505,6 +529,13 @@ export type HomepageSource =
         heading?: HeadingSource;
         paragraph?: string | null;
         stats?: { v?: number | null; s?: string | null; l?: string | null }[] | null;
+      } | null;
+      treatments?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+        ctaLabel?: string | null;
+        items?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
       } | null;
       successStories?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
       videoHub?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
@@ -687,6 +718,16 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
       }
     : d.finalCta;
 
+  const treatments = {
+    eyebrow: src.treatments?.eyebrow ?? d.treatments.eyebrow,
+    heading: heading(src.treatments?.heading, d.treatments.heading),
+    subtitle: src.treatments?.subtitle ?? d.treatments.subtitle,
+    ctaLabel: src.treatments?.ctaLabel || d.treatments.ctaLabel,
+    items: src.treatments?.items?.length
+      ? src.treatments.items.map((x) => ({ icon: (x.icon ?? "Sparkles") as IconName, t: x.t ?? "", d: x.d ?? "" }))
+      : d.treatments.items,
+  };
+
   // Header-only sections: resolve each field against the default (no "is present"
   // gate — the header text is independent of any item array).
   const successStories = {
@@ -727,5 +768,5 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, seo };
+  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, seo };
 }

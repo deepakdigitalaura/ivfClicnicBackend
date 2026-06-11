@@ -3586,6 +3586,81 @@ export interface Homepage {
     imageAlt?: string | null;
   };
   /**
+   * The homepage 'Treatments' teaser grid (its own short copy — the full treatment pages are managed under Treatments & Services).
+   */
+  treatments?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    ctaLabel?: string | null;
+    /**
+     * Leave empty to use the built-in treatment teasers.
+     */
+    items?:
+      | {
+          /**
+           * Pick the icon shown on the card.
+           */
+          icon?:
+            | (
+                | 'ScanLine'
+                | 'Feather'
+                | 'Baby'
+                | 'Stethoscope'
+                | 'ShieldCheck'
+                | 'Users'
+                | 'HeartPulse'
+                | 'Activity'
+                | 'ClipboardList'
+                | 'CalendarCheck'
+                | 'Eye'
+                | 'Clock'
+                | 'Microscope'
+                | 'Sparkles'
+                | 'Hand'
+                | 'FlaskConical'
+                | 'Filter'
+                | 'Magnet'
+                | 'Layers'
+                | 'Zap'
+                | 'Egg'
+                | 'Droplets'
+                | 'Snowflake'
+                | 'Dna'
+                | 'Beaker'
+                | 'Target'
+                | 'Leaf'
+                | 'ListChecks'
+                | 'ClipboardCheck'
+                | 'Syringe'
+                | 'Award'
+              )
+            | null;
+          /**
+           * Treatment name.
+           */
+          t: string;
+          /**
+           * One-line teaser.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
    * The Awards & Recognition carousel.
    */
   awards?: {
@@ -4505,6 +4580,27 @@ export interface HomepageSelect<T extends boolean = true> {
         sinceLabel?: T;
         image?: T;
         imageAlt?: T;
+      };
+  treatments?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        ctaLabel?: T;
+        items?:
+          | T
+          | {
+              icon?: T;
+              t?: T;
+              d?: T;
+              id?: T;
+            };
       };
   awards?:
     | T

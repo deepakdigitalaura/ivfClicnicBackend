@@ -126,7 +126,7 @@ export function HomePage({
     stats: <StatsStrip stats={data.stats} />,
     whyBavishi: <WhyBavishiFertilityInstitute content={data.whyBavishi} />,
     suraksha: <Suraksha content={data.suraksha} />,
-    treatments: <Treatments />,
+    treatments: <Treatments content={data.treatments} />,
     successStories: (
       <SuccessStories
         stories={data.videos.stories}
@@ -424,8 +424,8 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
  * card becomes a link (and "Learn more" stays a span to keep valid HTML);
  * without `href` it renders exactly as the original homepage card. */
 export function TreatmentCard({
-  icon: Icon, title, desc, href,
-}: { icon: LucideIcon; title: string; desc: string; href?: string }) {
+  icon: Icon, title, desc, href, titleNode, descNode,
+}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode }) {
   const body = (
     <motion.div
       whileHover={{ y: -6 }}
@@ -438,8 +438,8 @@ export function TreatmentCard({
           <Icon className="h-5 w-5" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-[color:var(--plum)]">{title}</h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+          <h3 className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{descNode ?? desc}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--rose)]">
             Learn more <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
           </span>
@@ -454,38 +454,27 @@ export function TreatmentCard({
 
 /* ---------- Treatments ---------- */
 
-export function Treatments() {
-  const list = [
-    { i: Stethoscope, t: "Male Infertility", d: "Comprehensive evaluation and treatment for male factors." },
-    { i: HeartPulse, t: "Female Infertility", d: "Personalised pathways for every female fertility concern." },
-    { i: Sparkles, t: "Advanced Fertility Techniques", d: "Latest assisted reproduction protocols." },
-    { i: Dna, t: "PGT — Genetic Testing", d: "Pre-implantation testing for healthier embryos." },
-    { i: Activity, t: "IUI", d: "Intrauterine insemination for select fertility profiles." },
-    { i: FlaskConical, t: "IVF / ICSI / ART", d: "Advanced in-vitro fertilisation with ICSI." },
-    { i: Microscope, t: "Fertility Preservation", d: "Egg, sperm and embryo freezing for the future." },
-    { i: Baby, t: "Sperm Donation", d: "Screened, ethical donor sperm programs." },
-    { i: Baby, t: "Egg Donation", d: "Carefully matched egg donor programs." },
-    { i: Baby, t: "Embryo Donation", d: "A compassionate path to parenthood." },
-    { i: HeartPulse, t: "Fibroids", d: "Diagnosis and fertility-preserving treatment." },
-    { i: HeartPulse, t: "Endometriosis", d: "Specialised endometriosis fertility care." },
-    { i: Sparkles, t: "Ovarian Rejuvenation", d: "Advanced therapy for diminished ovarian reserve." },
-    { i: Activity, t: "High Risk Obstetrics", d: "Expert care for complex pregnancies." },
-    { i: Baby, t: "Maternity Services", d: "End-to-end maternity and newborn care." },
-  ];
+export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <SectionHeader
-          eyebrow="Treatments"
-          title={<>Fertility care, <em className="font-display italic text-[color:var(--rose)]">complete and considered.</em></>}
-          subtitle="Every treatment we offer is delivered with the same standard of clinical excellence and emotional care."
+          eyebrow={ed("treatments.eyebrow", content.eyebrow)}
+          title={edTitle("treatments", content.heading)}
+          subtitle={ed("treatments.subtitle", content.subtitle)}
         />
-        <Reveal delay={0.1}><GhostBtn icon={ArrowRight}>View All Treatments</GhostBtn></Reveal>
+        <Reveal delay={0.1}><GhostBtn icon={ArrowRight}>{ed("treatments.ctaLabel", content.ctaLabel)}</GhostBtn></Reveal>
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-        {list.map(({ i: Icon, t, d }) => (
+        {content.items.map(({ icon, t, d }, i) => (
           <StaggerItem key={t}>
-            <TreatmentCard icon={Icon} title={t} desc={d} />
+            <TreatmentCard
+              icon={resolveIcon(icon)}
+              title={t}
+              desc={d}
+              titleNode={ed(`treatments.items.${i}.t`, t)}
+              descNode={ed(`treatments.items.${i}.d`, d)}
+            />
           </StaggerItem>
         ))}
       </Stagger>

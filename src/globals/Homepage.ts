@@ -247,6 +247,29 @@ const SECTION_FIELDS: Field[] = [
       ],
     },
     {
+      name: "treatments",
+      type: "group",
+      label: "Treatments Grid",
+      admin: { description: "The homepage 'Treatments' teaser grid (its own short copy — the full treatment pages are managed under Treatments & Services)." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "ctaLabel", type: "text", label: "Button Text" },
+        {
+          name: "items",
+          type: "array",
+          labels: { singular: "Treatment", plural: "Treatments" },
+          admin: { description: "Leave empty to use the built-in treatment teasers." },
+          fields: [
+            { name: "icon", type: "select", options: ICON_OPTIONS, label: "Card Icon", admin: { description: "Pick the icon shown on the card." } },
+            { name: "t", type: "text", required: true, label: "Title", admin: { description: "Treatment name." } },
+            { name: "d", type: "textarea", required: true, label: "Short Description", admin: { description: "One-line teaser." } },
+          ],
+        },
+      ],
+    },
+    {
       name: "awards",
       type: "group",
       label: "Awards & Recognition",
@@ -427,6 +450,7 @@ export const Homepage: GlobalConfig = {
     section("Why Choose Us Pillars", "The Simple / Safe / Smart / Successful pillars.", ["whyChoose"]),
     section("Suraksha Kavach", "The Suraksha Kavach section.", ["suraksha"]),
     section("About the Institute", "The homepage's About summary section.", ["about"]),
+    section("Treatments Grid", "The homepage treatments teaser grid.", ["treatments"]),
     section("Awards & Recognition", "The awards carousel.", ["awards"]),
     section("Upcoming Events", "The upcoming-events posters.", ["events"]),
     section("Videos", "Patient stories, education and resource videos.", ["videos"]),
