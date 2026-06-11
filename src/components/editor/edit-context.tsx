@@ -42,16 +42,52 @@ export const useEdit = (): EditCtx | null => useContext(Ctx);
  *  spine so React sees a new object and re-renders. */
 function setByPath<T extends Json>(obj: T, path: string, value: unknown): T {
   const keys = path.split(".");
-  const root: Json = Array.isArray(obj) ? [...(obj as unknown[])] as unknown as Json : { ...obj };
+  const isIndex = (k: string) => /^\d+$/.test(k);
+  // Clone a container, creating an ARRAY when the child key is numeric (so an
+  // absent "items" branch becomes [] not {}), and DENSELY filling array gaps
+  // with {} up to the target index. A sparse array would serialise to JSON with
+  // `null` holes, and Payload's beforeValidate (getExistingRowDoc) throws
+  // "Cannot read properties of null (reading 'id')" on the first null row → the
+  // whole Save 500s. Empty {} rows are valid and round-trip cleanly.
+  const ensure = (container: unknown, childKey: string): Json => {
+    let c: Json;
+    if (Array.isArray(container)) c = [...(container as unknown[])] as unknown as Json;
+    else if (container && typeof container === "object") c = { ...(container as Json) };
+    else c = (isIndex(childKey) ? [] : {}) as unknown as Json;
+    if (isIndex(childKey) && Array.isArray(c)) {
+      const idx = Number(childKey);
+      for (let i = 0; i <= idx; i++) if ((c as unknown[])[i] == null) (c as unknown[])[i] = {};
+    }
+    return c;
+  };
+  const root: Json = ensure(obj, keys[0]);
   let cur: Json = root;
   for (let i = 0; i < keys.length - 1; i++) {
-    const k = keys[i];
-    const next = cur[k];
-    cur[k] = Array.isArray(next) ? [...(next as unknown[])] as unknown as Json : { ...((next as Json) ?? {}) };
-    cur = cur[k] as Json;
+    cur[keys[i]] = ensure(cur[keys[i]], keys[i + 1]);
+    cur = cur[keys[i]] as Json;
   }
   cur[keys[keys.length - 1]] = value;
   return root as T;
+}
+
+/** Normalise the draft for saving:
+ *  - Replace null/undefined array holes with {} (Payload's row-matching crashes
+ *    on a null array element → 500).
+ *  - Flatten a POPULATED upload/relationship doc back to its `id`. The source is
+ *    read at depth ≥1 so e.g. `seo.ogImage` arrives as a full Media object, which
+ *    Payload rejects on write (it wants the id) → 400. Detected by upload-doc
+ *    shape (has `id` + url/filename/mimeType) so array rows — which also carry an
+ *    `id` but none of those — are left untouched. */
+function denseClean(v: unknown): unknown {
+  if (Array.isArray(v)) return v.map((x) => (x == null ? {} : denseClean(x)));
+  if (v && typeof v === "object") {
+    const o = v as Json;
+    if ("id" in o && ("url" in o || "filename" in o || "mimeType" in o)) return o.id;
+    const out: Json = {};
+    for (const [k, val] of Object.entries(o)) out[k] = denseClean(val);
+    return out;
+  }
+  return v;
 }
 
 export function EditProvider<T extends Json>({
@@ -131,7 +167,7 @@ export function EditProvider<T extends Json>({
         method: "POST",
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(draft),
+        body: JSON.stringify(denseClean(draft)),
       });
       if (!res.ok) throw new Error(`Save failed (${res.status})`);
       setDirty(false);

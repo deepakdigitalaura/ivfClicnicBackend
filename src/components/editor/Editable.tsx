@@ -49,17 +49,31 @@ export function Editable({
   }
 
   const commonProps = {
-    className: `${className ?? ""} bfi-editable`.trim(),
+    className: `${className ?? ""} bfi-editable notranslate`.trim(),
     "data-edit-path": path,
     "data-bfi-rich": rich ? "true" : undefined,
     "data-bfi-selected": ctx.selected === path ? "true" : undefined,
     contentEditable: true,
     suppressContentEditableWarning: true,
     spellCheck: false,
+    // Keep browser writing-assistants / translators OUT of these contentEditable
+    // fields: Grammarly (and friends) inject overlay nodes into the editable and
+    // Chrome Translate rewraps its text, both of which mutate the DOM out from
+    // under React — on the next re-render React reconciles against the foreign
+    // nodes and the field's text disappears. These opt-outs make every major tool
+    // skip the field.
+    translate: "no" as const,
+    "data-gramm": "false",
+    "data-gramm_editor": "false",
+    "data-enable-grammarly": "false",
     role: "textbox",
     tabIndex: 0,
     onClick: (e: React.MouseEvent) => {
       e.stopPropagation();
+      // Cancel any ancestor's default action (e.g. an enclosing <a> navigating)
+      // so selecting text never leaves the page. Caret placement happens on
+      // mousedown, so this does not affect putting the cursor in the field.
+      e.preventDefault();
       ctx.select(path, "text");
     },
     onFocus: () => ctx.select(path, "text"),
@@ -115,6 +129,7 @@ export function EditableImage({
       data-bfi-selected={ctx.selected === path ? "true" : undefined}
       onClick={(e) => {
         e.stopPropagation();
+        e.preventDefault();
         ctx.select(path, "image");
       }}
     />

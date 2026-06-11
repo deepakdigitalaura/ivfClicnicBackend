@@ -633,10 +633,49 @@ export type HomepageSource =
   | undefined;
 
 /* ---------- Small helpers (mirror src/lib/services.ts) ---------- */
-const heading = (h: HeadingSource, def: Heading): Heading =>
-  h?.lead ? { lead: h.lead, em: h.em ?? "" } : def;
+// Resolve the two heading parts INDEPENDENTLY, each falling back to its default.
+// The editor commits one field at a time (e.g. blurring the lead writes only
+// `heading.lead`), so the other part is absent from the draft. The old
+// `h?.lead ? {lead, em: h.em ?? ""} : def` form turned that absent part into ""
+// — editing the lead silently wiped the <em> on screen (and vice-versa lost an
+// em-only edit). Per-field fallback keeps the untouched part intact. `??` only
+// substitutes null/undefined, so an explicitly-cleared "" is still respected.
+const heading = (h: HeadingSource, def: Heading): Heading => ({
+  lead: h?.lead ?? def.lead,
+  em: h?.em ?? def.em,
+});
 const texts = (a: TextItem[] | null | undefined): string[] =>
-  (a ?? []).map((x) => x.text ?? "").filter(Boolean);
+  (a ?? []).filter((x) => x != null).map((x) => x.text ?? "").filter(Boolean);
+
+/** Merge a CMS list over its typed default list BY INDEX.
+ *
+ *  The inline editor commits ONE row at a time onto an otherwise-absent section,
+ *  so a half-edited draft holds e.g. just `treatments.items[2]`. The old
+ *  "use the whole CMS array, else the whole default" rule then either rendered
+ *  only that single row (dropping every other card) or threw on a hole (reading
+ *  `.icon` of undefined → the editor subtree unmounts → content "vanishes").
+ *
+ *  Index-merging fixes both: each row is resolved from the CMS override when
+ *  present, otherwise from the default at that index, so editing one row keeps
+ *  the rest intact and a hole simply uses its default. When the CMS list has no
+ *  usable rows at all we return the default list unchanged (so an empty CMS is
+ *  byte-identical, and a fully-populated CMS that matches the defaults resolves
+ *  to the same values — the SEO parity surface is unaffected). */
+function mergeList<S, R>(
+  srcArr: readonly (S | null | undefined)[] | null | undefined,
+  def: readonly R[],
+  map: (src: S | undefined, def: R | undefined, i: number) => R | null,
+): R[] {
+  const s = Array.isArray(srcArr) ? srcArr : [];
+  if (!s.some((x) => x != null)) return def as R[];
+  const len = Math.max(s.length, def.length);
+  const out: R[] = [];
+  for (let i = 0; i < len; i++) {
+    const row = map(s[i] ?? undefined, def[i], i);
+    if (row != null) out.push(row);
+  }
+  return out;
+}
 
 /**
  * Map the `homepage` global → HomepageData, falling back PER-SECTION to
@@ -679,19 +718,20 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
       }
     : d.hero;
 
-  const stats: StatItem[] = src.stats?.length
-    ? src.stats.map((s) => ({ value: s.value ?? "", l: s.label ?? "" }))
-    : d.stats;
+  const stats: StatItem[] = mergeList(src.stats, d.stats, (s, def) => ({
+    value: s?.value ?? def?.value ?? "",
+    l: s?.label ?? def?.l ?? "",
+  }));
 
   const whyBavishi = src.whyBavishi?.cards?.length
     ? {
         eyebrow: src.whyBavishi.eyebrow ?? d.whyBavishi.eyebrow,
         heading: heading(src.whyBavishi.heading, d.whyBavishi.heading),
         subtitle: src.whyBavishi.subtitle ?? d.whyBavishi.subtitle,
-        cards: src.whyBavishi.cards.map((c) => ({
-          icon: (c.icon ?? "Sparkles") as IconName,
-          t: c.t ?? "",
-          d: c.d ?? "",
+        cards: mergeList(src.whyBavishi.cards, d.whyBavishi.cards, (c, def) => ({
+          icon: (c?.icon ?? def?.icon ?? "Sparkles") as IconName,
+          t: c?.t ?? def?.t ?? "",
+          d: c?.d ?? def?.d ?? "",
         })),
       }
     : d.whyBavishi;
@@ -701,12 +741,15 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
         eyebrow: src.whyChoose.eyebrow ?? d.whyChoose.eyebrow,
         heading: heading(src.whyChoose.heading, d.whyChoose.heading),
         subtitle: src.whyChoose.subtitle ?? d.whyChoose.subtitle,
-        blocks: src.whyChoose.blocks.map((b) => ({
-          icon: b.icon ?? "",
-          alt: b.alt ?? "",
-          title: b.title ?? "",
-          subtitle: b.subtitle ?? "",
-          points: (b.points ?? []).map((p) => ({ h: p.h ?? "", d: p.d ?? "" })),
+        blocks: mergeList(src.whyChoose.blocks, d.whyChoose.blocks, (b, def) => ({
+          icon: b?.icon ?? def?.icon ?? "",
+          alt: b?.alt ?? def?.alt ?? "",
+          title: b?.title ?? def?.title ?? "",
+          subtitle: b?.subtitle ?? def?.subtitle ?? "",
+          points: mergeList(b?.points, def?.points ?? [], (p, dp) => ({
+            h: p?.h ?? dp?.h ?? "",
+            d: p?.d ?? dp?.d ?? "",
+          })),
         })),
       }
     : d.whyChoose;
@@ -735,9 +778,10 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
         eyebrow: src.about.eyebrow ?? d.about.eyebrow,
         heading: heading(src.about.heading, d.about.heading),
         subtitle: src.about.subtitle ?? d.about.subtitle,
-        stats: src.about.stats?.length
-          ? src.about.stats.map((s) => ({ k: s.k ?? "", v: s.v ?? "" }))
-          : d.about.stats,
+        stats: mergeList(src.about.stats, d.about.stats, (s, def) => ({
+          k: s?.k ?? def?.k ?? "",
+          v: s?.v ?? def?.v ?? "",
+        })),
         primaryCta: src.about.primaryCta || d.about.primaryCta,
         secondaryCta: src.about.secondaryCta || d.about.secondaryCta,
         sinceValue: src.about.sinceValue ?? d.about.sinceValue,
@@ -752,7 +796,11 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
         eyebrow: src.awards.eyebrow ?? d.awards.eyebrow,
         heading: heading(src.awards.heading, d.awards.heading),
         subtitle: src.awards.subtitle ?? d.awards.subtitle,
-        items: src.awards.items.map((a) => ({ img: a.img ?? "", title: a.title ?? "", desc: a.desc ?? "" })),
+        items: mergeList(src.awards.items, d.awards.items, (a, def) => ({
+          img: a?.img ?? def?.img ?? "",
+          title: a?.title ?? def?.title ?? "",
+          desc: a?.desc ?? def?.desc ?? "",
+        })),
       }
     : d.awards;
 
@@ -760,27 +808,41 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ? {
         eyebrow: src.events.eyebrow ?? d.events.eyebrow,
         heading: heading(src.events.heading, d.events.heading),
-        posters: src.events.posters.map((p) => ({ src: p.src ?? "", alt: p.alt ?? "" })),
+        posters: mergeList(src.events.posters, d.events.posters, (p, def) => ({
+          src: p?.src ?? def?.src ?? "",
+          alt: p?.alt ?? def?.alt ?? "",
+        })),
       }
     : d.events;
 
   const videos = {
-    stories: src.videos?.stories?.length
-      ? src.videos.stories.map((s) => ({ id: s.id ?? "", n: s.n ?? "", q: s.q ?? "", r: s.r ?? 5 }))
-      : d.videos.stories,
-    edu: src.videos?.edu?.length
-      ? src.videos.edu.map((v) => ({ id: v.id ?? "", t: v.t ?? "", d: v.d ?? "" }))
-      : d.videos.edu,
-    resources: src.videos?.resources?.length
-      ? src.videos.resources.map((v) => ({ id: v.id ?? "", c: v.c ?? "", t: v.t ?? "", date: v.date ?? "" }))
-      : d.videos.resources,
+    stories: mergeList(src.videos?.stories, d.videos.stories, (s, def) => ({
+      id: s?.id ?? def?.id ?? "",
+      n: s?.n ?? def?.n ?? "",
+      q: s?.q ?? def?.q ?? "",
+      r: s?.r ?? def?.r ?? 5,
+    })),
+    edu: mergeList(src.videos?.edu, d.videos.edu, (v, def) => ({
+      id: v?.id ?? def?.id ?? "",
+      t: v?.t ?? def?.t ?? "",
+      d: v?.d ?? def?.d ?? "",
+    })),
+    resources: mergeList(src.videos?.resources, d.videos.resources, (v, def) => ({
+      id: v?.id ?? def?.id ?? "",
+      c: v?.c ?? def?.c ?? "",
+      t: v?.t ?? def?.t ?? "",
+      date: v?.date ?? def?.date ?? "",
+    })),
   };
 
   const faq = src.faq?.items?.length
     ? {
         eyebrow: src.faq.eyebrow ?? d.faq.eyebrow,
         heading: heading(src.faq.heading, d.faq.heading),
-        items: src.faq.items.map((f) => ({ q: f.q ?? "", a: f.a ?? "" })),
+        items: mergeList(src.faq.items, d.faq.items, (f, def) => ({
+          q: f?.q ?? def?.q ?? "",
+          a: f?.a ?? def?.a ?? "",
+        })),
       }
     : d.faq;
 
@@ -789,9 +851,11 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
         eyebrow: src.finalCta.eyebrow ?? d.finalCta.eyebrow,
         heading: heading(src.finalCta.heading, d.finalCta.heading),
         paragraph: src.finalCta.paragraph ?? d.finalCta.paragraph,
-        stats: src.finalCta.stats?.length
-          ? src.finalCta.stats.map((s) => ({ v: s.v ?? 0, s: s.s ?? "", l: s.l ?? "" }))
-          : d.finalCta.stats,
+        stats: mergeList(src.finalCta.stats, d.finalCta.stats, (s, def) => ({
+          v: s?.v ?? def?.v ?? 0,
+          s: s?.s ?? def?.s ?? "",
+          l: s?.l ?? def?.l ?? "",
+        })),
         // Button labels are code-owned — always from defaults, not admin-editable.
         ctas: d.finalCta.ctas,
       }
@@ -802,9 +866,11 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     heading: heading(src.treatments?.heading, d.treatments.heading),
     subtitle: src.treatments?.subtitle ?? d.treatments.subtitle,
     ctaLabel: src.treatments?.ctaLabel || d.treatments.ctaLabel,
-    items: src.treatments?.items?.length
-      ? src.treatments.items.map((x) => ({ icon: (x.icon ?? "Sparkles") as IconName, t: x.t ?? "", d: x.d ?? "" }))
-      : d.treatments.items,
+    items: mergeList(src.treatments?.items, d.treatments.items, (x, def) => ({
+      icon: (x?.icon ?? def?.icon ?? "Sparkles") as IconName,
+      t: x?.t ?? def?.t ?? "",
+      d: x?.d ?? def?.d ?? "",
+    })),
   };
 
   // Header-only sections: resolve each field against the default (no "is present"
@@ -839,33 +905,35 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
   const media = {
     eyebrow: src.media?.eyebrow ?? d.media.eyebrow,
     heading: heading(src.media?.heading, d.media.heading),
-    logos: src.media?.logos?.length
-      ? src.media.logos.map((l) => ({ src: l.src ?? "", alt: l.alt ?? "" }))
-      : d.media.logos,
+    logos: mergeList(src.media?.logos, d.media.logos, (l, def) => ({
+      src: l?.src ?? def?.src ?? "",
+      alt: l?.alt ?? def?.alt ?? "",
+    })),
   };
   const inquiry = {
     eyebrow: src.inquiry?.eyebrow ?? d.inquiry.eyebrow,
     heading: heading(src.inquiry?.heading, d.inquiry.heading),
     subtitle: src.inquiry?.subtitle ?? d.inquiry.subtitle,
-    contacts: src.inquiry?.contacts?.length
-      ? src.inquiry.contacts.map((c) => ({ h: c.h ?? "", d: c.d ?? "" }))
-      : d.inquiry.contacts,
+    contacts: mergeList(src.inquiry?.contacts, d.inquiry.contacts, (c, def) => ({
+      h: c?.h ?? def?.h ?? "",
+      d: c?.d ?? def?.d ?? "",
+    })),
   };
   const locations = {
     eyebrow: src.locations?.eyebrow ?? d.locations.eyebrow,
     heading: heading(src.locations?.heading, d.locations.heading),
     subtitle: src.locations?.subtitle ?? d.locations.subtitle,
-    cities: src.locations?.cities?.length
-      ? src.locations.cities.map((x) => ({ c: x.c ?? "", n: x.n ?? 1, s: x.s ?? "" }))
-      : d.locations.cities,
+    cities: mergeList(src.locations?.cities, d.locations.cities, (x, def) => ({
+      c: x?.c ?? def?.c ?? "",
+      n: x?.n ?? def?.n ?? 1,
+      s: x?.s ?? def?.s ?? "",
+    })),
   };
   const calculators = {
     eyebrow: src.calculators?.eyebrow ?? d.calculators.eyebrow,
     heading: heading(src.calculators?.heading, d.calculators.heading),
     subtitle: src.calculators?.subtitle ?? d.calculators.subtitle,
-    items: src.calculators?.items?.length
-      ? src.calculators.items.map((x) => x.name ?? "").filter(Boolean)
-      : d.calculators.items,
+    items: mergeList(src.calculators?.items, d.calculators.items, (x, def) => (x?.name ?? def ?? "") || null),
   };
 
   // SEO meta is consumed by generateMetadata() (a server context); the ogImage
@@ -879,4 +947,59 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
   };
 
   return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, locations, calculators, seo };
+}
+
+/**
+ * Build a FULLY-POPULATED homepage source for the inline editor's draft.
+ *
+ * The editor edits a SOURCE draft, and the CMS source is mostly empty (sections
+ * render from HOMEPAGE_DEFAULTS). Editing one field then committed a sparse
+ * array (e.g. `treatments.items = [{},{},{t}]`), and Saving 400'd because the
+ * empty rows fail Payload's required-field validation. Seeding the draft with
+ * every section/row/field already present (in SOURCE shape, filled from the
+ * resolved defaults) fixes that: editing one field leaves all the others intact
+ * and complete, so the POST always carries valid rows.
+ *
+ * Editor-only. The PUBLIC site never calls this — it resolves the raw CMS source
+ * directly, so output stays byte-identical. And resolveHomepage(materialized)
+ * === the same resolved data, so the live preview is unchanged.
+ */
+export function materializeHomepageSource(src: HomepageSource): NonNullable<HomepageSource> {
+  const r = resolveHomepage(src);
+  const s = (src ?? {}) as NonNullable<HomepageSource>;
+  // Helpers for the few fields whose SOURCE shape differs from the resolved one.
+  const t = (text: string) => ({ text });
+  return {
+    ...s,
+    hero: {
+      ...(s.hero ?? {}),
+      eyebrow: r.hero.eyebrow,
+      headline: r.hero.headline,
+      headlineItalic: r.hero.headlineItalic,
+      paragraph: r.hero.paragraph,
+      badges: r.hero.badges.map(t),
+      floatingBadge: r.hero.floatingBadge,
+      image: r.hero.image,
+    },
+    stats: r.stats.map((x) => ({ value: x.value, label: x.l })),
+    whyBavishi: { ...(s.whyBavishi ?? {}), eyebrow: r.whyBavishi.eyebrow, heading: r.whyBavishi.heading, subtitle: r.whyBavishi.subtitle, cards: r.whyBavishi.cards },
+    whyChoose: { ...(s.whyChoose ?? {}), eyebrow: r.whyChoose.eyebrow, heading: r.whyChoose.heading, subtitle: r.whyChoose.subtitle, blocks: r.whyChoose.blocks },
+    suraksha: { ...(s.suraksha ?? {}), badge: r.suraksha.badge, heading: r.suraksha.heading, paragraph: r.suraksha.paragraph, features: r.suraksha.features.map(t), primaryCta: r.suraksha.primaryCta, secondaryCta: r.suraksha.secondaryCta, image: r.suraksha.image, imageAlt: r.suraksha.imageAlt },
+    about: { ...(s.about ?? {}), eyebrow: r.about.eyebrow, heading: r.about.heading, subtitle: r.about.subtitle, stats: r.about.stats, primaryCta: r.about.primaryCta, secondaryCta: r.about.secondaryCta, sinceValue: r.about.sinceValue, sinceLabel: r.about.sinceLabel, image: r.about.image, imageAlt: r.about.imageAlt },
+    treatments: { ...(s.treatments ?? {}), eyebrow: r.treatments.eyebrow, heading: r.treatments.heading, subtitle: r.treatments.subtitle, ctaLabel: r.treatments.ctaLabel, items: r.treatments.items },
+    awards: { ...(s.awards ?? {}), eyebrow: r.awards.eyebrow, heading: r.awards.heading, subtitle: r.awards.subtitle, items: r.awards.items },
+    events: { ...(s.events ?? {}), eyebrow: r.events.eyebrow, heading: r.events.heading, posters: r.events.posters },
+    videos: { ...(s.videos ?? {}), stories: r.videos.stories, edu: r.videos.edu, resources: r.videos.resources },
+    successStories: { ...(s.successStories ?? {}), eyebrow: r.successStories.eyebrow, heading: r.successStories.heading, subtitle: r.successStories.subtitle, ctaLabel: r.successStories.ctaLabel },
+    videoHub: { ...(s.videoHub ?? {}), eyebrow: r.videoHub.eyebrow, heading: r.videoHub.heading, subtitle: r.videoHub.subtitle, ctaLabel: r.videoHub.ctaLabel },
+    doctors: { ...(s.doctors ?? {}), eyebrow: r.doctors.eyebrow, heading: r.doctors.heading, subtitle: r.doctors.subtitle, ctaLabel: r.doctors.ctaLabel },
+    blogs: { ...(s.blogs ?? {}), eyebrow: r.blogs.eyebrow, heading: r.blogs.heading, ctaLabel: r.blogs.ctaLabel },
+    testimonials: { ...(s.testimonials ?? {}), eyebrow: r.testimonials.eyebrow, heading: r.testimonials.heading },
+    media: { ...(s.media ?? {}), eyebrow: r.media.eyebrow, heading: r.media.heading, logos: r.media.logos },
+    locations: { ...(s.locations ?? {}), eyebrow: r.locations.eyebrow, heading: r.locations.heading, subtitle: r.locations.subtitle, cities: r.locations.cities },
+    calculators: { ...(s.calculators ?? {}), eyebrow: r.calculators.eyebrow, heading: r.calculators.heading, subtitle: r.calculators.subtitle, items: r.calculators.items.map((name) => ({ name })) },
+    inquiry: { ...(s.inquiry ?? {}), eyebrow: r.inquiry.eyebrow, heading: r.inquiry.heading, subtitle: r.inquiry.subtitle, contacts: r.inquiry.contacts },
+    faq: { ...(s.faq ?? {}), eyebrow: r.faq.eyebrow, heading: r.faq.heading, items: r.faq.items },
+    finalCta: { ...(s.finalCta ?? {}), eyebrow: r.finalCta.eyebrow, heading: r.finalCta.heading, paragraph: r.finalCta.paragraph, stats: r.finalCta.stats },
+  } as NonNullable<HomepageSource>;
 }

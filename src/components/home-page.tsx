@@ -1229,6 +1229,11 @@ function Blogs({
 
 export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?: HomepageData["locations"] } = {}) {
   const cities = content.cities;
+  // In the editor the whole card must NOT be a link — clicking the editable city
+  // name would otherwise navigate away mid-edit. So while editing we render the
+  // card as a <div> and make only "View Centre" the actual link. The public site
+  // keeps the original full-card <motion.a> (byte-identical, SEO-safe).
+  const editing = !!useEdit()?.editMode;
   return (
     <section id="locations" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
@@ -1237,23 +1242,43 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
         subtitle={ed("locations.subtitle", content.subtitle)}
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
-        {cities.map((c, i) => (
-          <StaggerItem key={c.c}>
-            <motion.a
-              href={cityHref(c.s) ?? `/locations/${c.s}`}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.4 }}
-              className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
-            >
+        {cities.map((c, i) => {
+          const href = cityHref(c.s) ?? `/locations/${c.s}`;
+          const inner = (
+            <>
               <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
               <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`locations.cities.${i}.c`}>{c.c}</Editable></h3>
               <p className="text-sm text-muted-foreground">{c.n} {c.n > 1 ? "centres" : "centre"}</p>
-              <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-              </div>
-            </motion.a>
-          </StaggerItem>
-        ))}
+              {editing ? (
+                <a href={href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                </a>
+              ) : (
+                <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                </div>
+              )}
+            </>
+          );
+          return (
+            <StaggerItem key={c.c}>
+              {editing ? (
+                <div className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift">
+                  {inner}
+                </div>
+              ) : (
+                <motion.a
+                  href={href}
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.4 }}
+                  className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
+                >
+                  {inner}
+                </motion.a>
+              )}
+            </StaggerItem>
+          );
+        })}
       </Stagger>
     </section>
   );

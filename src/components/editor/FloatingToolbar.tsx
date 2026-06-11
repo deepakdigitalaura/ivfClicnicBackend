@@ -10,7 +10,7 @@
  * the contentEditable so a button press formats the current selection.
  * ===================================================================== */
 
-import { useCallback, useEffect, useState } from "react";
+import { useCallback, useEffect, useMemo, useState } from "react";
 import { useEdit } from "./edit-context";
 
 function escapeAttr(v: string): string {
@@ -18,10 +18,47 @@ function escapeAttr(v: string): string {
   return v.replace(/["\\]/g, "\\$&");
 }
 
-const SWATCHES: { label: string; color: string }[] = [
-  { label: "Brand pink", color: "#d6336c" },
-  { label: "Plum", color: "#3d2a4f" },
-  { label: "Black", color: "#111111" },
+/** Resolve any CSS colour (incl. `var(--rose)`) to a LEGACY hex/rgb string that
+ *  execCommand("foreColor") accepts. Modern Chrome computes oklch tokens to
+ *  `lab(...)`/`color(...)`, which execCommand rejects (→ no colour applied), so
+ *  we round-trip through a canvas to normalise to `#rrggbb`. Resolving the theme
+ *  token this way keeps the applied pink byte-identical to the website's. */
+function resolveColor(css: string): string {
+  if (typeof document === "undefined") return css;
+  // 1) Resolve CSS vars to their computed value (may be lab()/oklch()).
+  const probe = document.createElement("span");
+  probe.style.color = css;
+  probe.style.display = "none";
+  document.body.appendChild(probe);
+  const computed = getComputedStyle(probe).color || css;
+  probe.remove();
+  // 2) Render it to a 1×1 canvas and read the actual sRGB bytes. Canvas's
+  //    fillStyle GETTER may echo back `lab()`/`color()` unchanged (which
+  //    execCommand rejects), but the drawn PIXEL is always plain 8-bit sRGB —
+  //    the same value the browser paints on screen for the website.
+  try {
+    const canvas = document.createElement("canvas");
+    canvas.width = canvas.height = 1;
+    const cx = canvas.getContext("2d", { willReadFrequently: true });
+    if (cx) {
+      cx.fillStyle = computed;
+      cx.fillRect(0, 0, 1, 1);
+      const [r, g, b] = cx.getImageData(0, 0, 1, 1).data;
+      return `rgb(${r}, ${g}, ${b})`;
+    }
+  } catch {
+    /* fall through */
+  }
+  return computed;
+}
+
+// Quick-pick swatches sourced from the SAME theme tokens as the site, so they
+// apply the exact brand colours (resolved to rgb once, then applied on click).
+const SWATCHES: { label: string; css: string }[] = [
+  { label: "Brand pink", css: "var(--rose)" },
+  { label: "Plum", css: "var(--plum)" },
+  { label: "Gold", css: "var(--gold)" },
+  { label: "Black", css: "#111111" },
 ];
 
 export function FloatingToolbar() {
@@ -30,6 +67,11 @@ export function FloatingToolbar() {
   const kind = ctx?.selectedKind ?? null;
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
   const [isRich, setIsRich] = useState(false);
+  // Pre-resolve swatch colours ONCE. resolveColor() appends/removes a probe node
+  // from <body>, which collapses the live text selection if done inside the click
+  // handler — so the colour wouldn't apply. Memoising keeps the click a no-DOM
+  // op (like Bold/Italic), preserving the selection.
+  const swatches = useMemo(() => SWATCHES.map((s) => ({ ...s, rgb: resolveColor(s.css) })), []);
 
   const findEl = useCallback(
     () => (selected ? (document.querySelector(`[data-edit-path="${escapeAttr(selected)}"]`) as HTMLElement | null) : null),
@@ -119,14 +161,14 @@ export function FloatingToolbar() {
                 <u>U</u>
               </button>
               <span className="bfi-floattool__sep" />
-              {SWATCHES.map((s) => (
+              {swatches.map((s) => (
                 <button
-                  key={s.color}
+                  key={s.label}
                   type="button"
                   className="bfi-floattool__swatch"
                   title={`Colour: ${s.label}`}
-                  style={{ background: s.color }}
-                  onClick={() => exec("foreColor", s.color)}
+                  style={{ background: s.css }}
+                  onClick={() => exec("foreColor", s.rgb)}
                 />
               ))}
               <span className="bfi-floattool__sep" />
