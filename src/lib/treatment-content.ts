@@ -26,6 +26,7 @@
  * ===================================================================== */
 import { iconKey, type IconName } from "@/lib/icon-map";
 import { treatmentBySlug, type Treatment, type Heading } from "@/lib/treatments";
+import { mediaUrl, type UploadValue } from "@/fields/image";
 
 /* ---------- Resolved (serialisable) model — mirrors Treatment 1:1, with the
  * Lucide component fields replaced by icon NAMES. ---------- */
@@ -183,7 +184,7 @@ export type TreatmentSource =
       hero?: {
         eyebrow?: string | null; h1?: string | null; h1Em?: string | null;
         tagline?: string | null; badges?: { value?: string | null }[] | null;
-        image?: string | null; imageAlt?: string | null;
+        image?: string | null; imageAlt?: string | null; heroPhoto?: UploadValue;
       } | null;
       whatIs?: {
         heading?: HeadingSource; paragraphs?: TextItem[] | null;
@@ -265,7 +266,7 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
           h1Em: src.hero.h1Em ?? base.hero.h1Em,
           tagline: src.hero.tagline ?? base.hero.tagline,
           badges: src.hero.badges?.length ? values(src.hero.badges) : base.hero.badges,
-          image: src.hero.image || base.hero.image,
+          image: mediaUrl(src.hero.heroPhoto) ?? (src.hero.image || base.hero.image),
           imageAlt: src.hero.imageAlt ?? base.hero.imageAlt,
         }
       : base.hero,

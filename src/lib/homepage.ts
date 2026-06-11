@@ -44,6 +44,8 @@ export type HeroContent = {
   ctas: string[];
   /** Floating award chip text on the hero image. */
   floatingBadge: string;
+  /** Hero image URL (replaceable in the inline editor). */
+  image: string;
 };
 
 export type StatItem = { value: string; l: string };
@@ -193,6 +195,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     ],
     ctas: ["Book Consultation", "Check IVF Eligibility", "Video Consultation"],
     floatingBadge: "National Fertility Award · 5× Winner",
+    image: heroImg,
   },
   stats: [
     { value: "30,000+", l: "Successful Pregnancies" },
@@ -364,8 +367,8 @@ export type HomepageSource =
         headlineItalic?: string | null;
         paragraph?: string | null;
         badges?: TextItem[] | null;
-        ctas?: TextItem[] | null;
         floatingBadge?: string | null;
+        image?: string | null;
       } | null;
       stats?: { value?: string | null; label?: string | null }[] | null;
       whyBavishi?: {
@@ -420,7 +423,6 @@ export type HomepageSource =
         heading?: HeadingSource;
         paragraph?: string | null;
         stats?: { v?: number | null; s?: string | null; l?: string | null }[] | null;
-        ctas?: TextItem[] | null;
       } | null;
       seo?: {
         metaTitle?: string | null;
@@ -472,8 +474,11 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
         headlineItalic: src.hero.headlineItalic ?? d.hero.headlineItalic,
         paragraph: src.hero.paragraph ?? d.hero.paragraph,
         badges: src.hero.badges?.length ? texts(src.hero.badges) : d.hero.badges,
-        ctas: src.hero.ctas?.length ? texts(src.hero.ctas) : d.hero.ctas,
+        // Button labels are code-owned (their links + icons live in the
+        // component), so they always come from defaults — not admin-editable.
+        ctas: d.hero.ctas,
         floatingBadge: src.hero.floatingBadge ?? d.hero.floatingBadge,
+        image: src.hero.image || d.hero.image,
       }
     : d.hero;
 
@@ -573,7 +578,8 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
         stats: src.finalCta.stats?.length
           ? src.finalCta.stats.map((s) => ({ v: s.v ?? 0, s: s.s ?? "", l: s.l ?? "" }))
           : d.finalCta.stats,
-        ctas: src.finalCta.ctas?.length ? texts(src.finalCta.ctas) : d.finalCta.ctas,
+        // Button labels are code-owned — always from defaults, not admin-editable.
+        ctas: d.finalCta.ctas,
       }
     : d.finalCta;
 

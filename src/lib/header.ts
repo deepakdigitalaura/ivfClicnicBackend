@@ -205,11 +205,13 @@ type MegaItemSource = {
   label?: string | null;
   url?: string | null;
   desc?: string | null;
+  hidden?: boolean | null;
   children?: { label?: string | null; url?: string | null }[] | null;
 };
 type MegaColSource = {
   heading?: string | null;
   headingHref?: string | null;
+  hidden?: boolean | null;
   items?: MegaItemSource[] | null;
 };
 type NavItemSource = {
@@ -218,6 +220,7 @@ type NavItemSource = {
   openInNewTab?: boolean | null;
   doctors?: boolean | null;
   megaCols?: number | null;
+  hidden?: boolean | null;
   columns?: MegaColSource[] | null;
 };
 export type HeaderSource =
@@ -249,11 +252,14 @@ function resolveNavItem(n: NavItemSource): HeaderNavItem {
     // Doctors panel is data-driven (src/lib/doctors.ts); only the flag travels.
     return { label: n.label ?? "Doctors", doctors: true };
   }
-  const mega = (n.columns ?? []).map((col) => ({
-    heading: col.heading ?? "",
-    ...(col.headingHref ? { headingHref: col.headingHref } : {}),
-    items: (col.items ?? []).map(resolveMegaItem),
-  }));
+  // Hidden columns / links are dropped (editor toggled them off, not deleted).
+  const mega = (n.columns ?? [])
+    .filter((col) => !col.hidden)
+    .map((col) => ({
+      heading: col.heading ?? "",
+      ...(col.headingHref ? { headingHref: col.headingHref } : {}),
+      items: (col.items ?? []).filter((it) => !it.hidden).map(resolveMegaItem),
+    }));
   return {
     label: n.label ?? "",
     ...(n.url ? { href: n.url } : {}),
@@ -273,7 +279,10 @@ export function resolveHeader(g: HeaderSource): HeaderData {
     logoAlt: g?.branding?.logoAlt || HEADER_DEFAULTS.branding.logoAlt,
   };
 
-  const nav = g?.navItems?.length ? g.navItems.map(resolveNavItem) : HEADER_DEFAULTS.nav;
+  // Top-level items toggled "Hide from menu" are dropped before mapping.
+  const nav = g?.navItems?.length
+    ? g.navItems.filter((n) => !n.hidden).map(resolveNavItem)
+    : HEADER_DEFAULTS.nav;
 
   const cta: HeaderCta = {
     label: g?.cta?.label || HEADER_DEFAULTS.cta.label,

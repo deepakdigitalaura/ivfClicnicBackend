@@ -100,17 +100,6 @@
         "text": "Leading IVF Specialists"
       }
     ],
-    "ctas": [
-      {
-        "text": "Book Consultation"
-      },
-      {
-        "text": "Check IVF Eligibility"
-      },
-      {
-        "text": "Video Consultation"
-      }
-    ],
     "floatingBadge": "National Fertility Award · 5× Winner"
   },
   "stats": [
@@ -481,17 +470,6 @@
         "v": 15,
         "s": "+",
         "l": "Centres"
-      }
-    ],
-    "ctas": [
-      {
-        "text": "Book Consultation"
-      },
-      {
-        "text": "WhatsApp Now"
-      },
-      {
-        "text": "Call Now"
       }
     ]
   },

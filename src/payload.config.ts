@@ -26,6 +26,8 @@ import { Doctors } from "./collections/Doctors";
 import { Treatments } from "./collections/Treatments";
 import { Cities } from "./collections/Cities";
 import { Centres } from "./collections/Centres";
+import { Inquiries } from "./collections/Inquiries";
+import { Redirects } from "./collections/Redirects";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
 import { BlogHub } from "./globals/BlogHub";
@@ -33,6 +35,7 @@ import { Footer } from "./globals/Footer";
 import { Header } from "./globals/Header";
 import { Homepage } from "./globals/Homepage";
 import { About } from "./globals/About";
+import { SeoSettings } from "./globals/SeoSettings";
 
 const dirname = path.dirname(fileURLToPath(import.meta.url));
 
@@ -51,11 +54,21 @@ export default buildConfig({
       beforeDashboard: ["/components/admin/WelcomeDashboard#WelcomeDashboard"],
       // Forces the sidebar open on desktop (a closed Payload nav is `inert` =
       // unclickable), so staff always see every section and links stay clickable.
-      beforeNavLinks: ["/components/admin/ForceNavOpen#ForceNavOpen"],
+      // Plus a pinned "Pages & Builder" link at the top → the inline-editor launchpad.
+      beforeNavLinks: [
+        "/components/admin/ForceNavOpen#ForceNavOpen",
+        "/components/admin/PagesBuilderNavLink#PagesBuilderNavLink",
+      ],
+      // Clinic branding on the login screen + sidebar header (replaces the
+      // default Payload mark). Plain <img> of /public/assets/logo.png.
+      graphics: {
+        Logo: "/components/admin/BrandLogo#BrandLogo",
+        Icon: "/components/admin/BrandLogo#BrandIcon",
+      },
     },
   },
-  collections: [Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Media, Users],
-  globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About],
+  collections: [Inquiries, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Redirects, Media, Users],
+  globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About, SeoSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

@@ -2,6 +2,7 @@ import type { CollectionConfig, Field } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
 import { isEditor, isAdminField } from "@/access/roles";
 import { ICON_OPTIONS } from "@/lib/icon-map";
+import { imageUploadField } from "@/fields/image";
 
 /**
  * Treatment pages (Wave 4.4). Mirrors the `Treatment` type in
@@ -161,10 +162,11 @@ const TREATMENT_FIELDS: Field[] = [
         {
           type: "row",
           fields: [
-            { name: "image", type: "text", label: "Hero Image Path", admin: { width: "50%", description: "Image path, e.g. /assets/.... Ask the website team to add new images." } },
+            { name: "image", type: "text", label: "Current Hero Image (default)", admin: { width: "50%", description: "The built-in hero image path. To change it just upload a new image in 'Replace Hero Image' below." } },
             { name: "imageAlt", type: "text", label: "Image Alt Text", admin: { width: "50%", description: "Describes the image for accessibility." } },
           ],
         },
+        imageUploadField("heroPhoto", "Replace Hero Image", "Upload or pick a new hero image to replace the current one. Leave empty to keep the current image."),
       ],
     },
 

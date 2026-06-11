@@ -39,7 +39,6 @@ const doc = {
   },
   finalCta: {
     heading: { lead: d.finalCta.heading.lead, em: d.finalCta.heading.em },
-    ctas: d.finalCta.ctas.map((text) => ({ text })),
   },
   seo: {
     metaTitle: d.seo.metaTitle,

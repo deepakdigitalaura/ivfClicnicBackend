@@ -15,7 +15,10 @@ import { isAdmin, isEditor } from "@/access/roles";
 export const Authors: CollectionConfig = {
   slug: "authors",
   labels: { singular: "Author / Reviewer", plural: "Authors & Reviewers" },
-  admin: { useAsTitle: "name", defaultColumns: ["name", "slug", "role"], group: "Blog" },
+  // Hidden from the nav to declutter the panel — authors are created/picked
+  // inline from a Blog's "Author" / "Reviewed by" relationship field, so a
+  // separate sidebar entry only confused non-technical staff. Still fully usable.
+  admin: { useAsTitle: "name", defaultColumns: ["name", "slug", "role"], group: "Blog", hidden: true },
   access: { read: () => true, create: isEditor, update: isEditor, delete: isAdmin },
   hooks: revalidateRelated(["blogs"]),
   fields: [

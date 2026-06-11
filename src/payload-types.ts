@@ -67,6 +67,7 @@ export interface Config {
   };
   blocks: {};
   collections: {
+    inquiries: Inquiry;
     pages: Page;
     blogs: Blog;
     authors: Author;
@@ -76,6 +77,7 @@ export interface Config {
     treatments: Treatment;
     cities: City;
     centres: Centre;
+    redirects: Redirect;
     media: Media;
     users: User;
     'payload-kv': PayloadKv;
@@ -85,6 +87,7 @@ export interface Config {
   };
   collectionsJoins: {};
   collectionsSelect: {
+    inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
@@ -94,6 +97,7 @@ export interface Config {
     treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
     cities: CitiesSelect<false> | CitiesSelect<true>;
     centres: CentresSelect<false> | CentresSelect<true>;
+    redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
     'payload-kv': PayloadKvSelect<false> | PayloadKvSelect<true>;
@@ -113,6 +117,7 @@ export interface Config {
     header: Header;
     homepage: Homepage;
     'about-page': AboutPage;
+    'seo-settings': SeoSetting;
   };
   globalsSelect: {
     'site-settings': SiteSettingsSelect<false> | SiteSettingsSelect<true>;
@@ -122,6 +127,7 @@ export interface Config {
     header: HeaderSelect<false> | HeaderSelect<true>;
     homepage: HomepageSelect<false> | HomepageSelect<true>;
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
+    'seo-settings': SeoSettingsSelect<false> | SeoSettingsSelect<true>;
   };
   locale: null;
   widgets: {
@@ -150,6 +156,32 @@ export interface UserAuthOperations {
     email: string;
     password: string;
   };
+}
+/**
+ * Callback requests and contact-form messages from the website. Open one to call the patient back, then update its status.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inquiries".
+ */
+export interface Inquiry {
+  id: number;
+  name?: string | null;
+  phone?: string | null;
+  email?: string | null;
+  treatment?: string | null;
+  location?: string | null;
+  message?: string | null;
+  /**
+   * Where this lead is in your follow-up. Defaults to New.
+   */
+  status: 'new' | 'contacted' | 'in-progress' | 'closed';
+  /**
+   * Private staff notes (call outcome, next step). Never shown on the website.
+   */
+  notes?: string | null;
+  source?: string | null;
+  updatedAt: string;
+  createdAt: string;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -481,13 +513,17 @@ export interface Service {
         }[]
       | null;
     /**
-     * Image path, e.g. /assets/.... Ask the website team to add new images.
+     * The built-in hero image path. To change it just upload a new image in 'Replace Hero Image' below.
      */
     image?: string | null;
     /**
      * Describes the image for accessibility.
      */
     imageAlt?: string | null;
+    /**
+     * Upload or pick a new hero image to replace the current one. Leave empty to keep the current image.
+     */
+    heroPhoto?: (number | null) | Media;
   };
   overview: {
     heading: {
@@ -752,9 +788,13 @@ export interface Doctor {
    */
   role: string;
   /**
-   * Path to the doctor's photo, e.g. /assets/doctors/parth.webp. Ask the website team to add new photos.
+   * The built-in photo path. To change the photo just upload a new image in 'Replace Photo' below — no need to edit this.
    */
   image: string;
+  /**
+   * Upload or pick a new portrait photo to replace the current one. Leave empty to keep the current photo.
+   */
+  photo?: (number | null) | Media;
   /**
    * Experience as shown on the site, e.g. '35+ yrs'.
    */
@@ -990,13 +1030,17 @@ export interface Treatment {
         }[]
       | null;
     /**
-     * Image path, e.g. /assets/.... Ask the website team to add new images.
+     * The built-in hero image path. To change it just upload a new image in 'Replace Hero Image' below.
      */
     image?: string | null;
     /**
      * Describes the image for accessibility.
      */
     imageAlt?: string | null;
+    /**
+     * Upload or pick a new hero image to replace the current one. Leave empty to keep the current image.
+     */
+    heroPhoto?: (number | null) | Media;
   };
   whatIs?: {
     heading?: {
@@ -1690,6 +1734,37 @@ export interface Centre {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Send an old or changed web address to a new one (e.g. after renaming a page) so visitors and search engines never hit a dead link.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects".
+ */
+export interface Redirect {
+  id: number;
+  /**
+   * The path to redirect FROM, e.g. /old-page. Must start with /.
+   */
+  from: string;
+  /**
+   * Where to send visitors — a path like /new-page, or a full https:// address.
+   */
+  to: string;
+  /**
+   * Permanent (301) for renamed/moved pages. Temporary (302) only for short-term diversions.
+   */
+  type: '301' | '302';
+  /**
+   * Untick to switch this redirect off without deleting it.
+   */
+  enabled?: boolean | null;
+  /**
+   * A reminder of why this redirect exists, for your team.
+   */
+  note?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "users".
  */
@@ -1743,6 +1818,10 @@ export interface PayloadLockedDocument {
   id: number;
   document?:
     | ({
+        relationTo: 'inquiries';
+        value: number | Inquiry;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -1777,6 +1856,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'centres';
         value: number | Centre;
+      } | null)
+    | ({
+        relationTo: 'redirects';
+        value: number | Redirect;
       } | null)
     | ({
         relationTo: 'media';
@@ -1827,6 +1910,23 @@ export interface PayloadMigration {
   batch?: number | null;
   updatedAt: string;
   createdAt: string;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "inquiries_select".
+ */
+export interface InquiriesSelect<T extends boolean = true> {
+  name?: T;
+  phone?: T;
+  email?: T;
+  treatment?: T;
+  location?: T;
+  message?: T;
+  status?: T;
+  notes?: T;
+  source?: T;
+  updatedAt?: T;
+  createdAt?: T;
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
@@ -1960,6 +2060,7 @@ export interface ServicesSelect<T extends boolean = true> {
             };
         image?: T;
         imageAlt?: T;
+        heroPhoto?: T;
       };
   overview?:
     | T
@@ -2108,6 +2209,7 @@ export interface DoctorsSelect<T extends boolean = true> {
   specialty?: T;
   role?: T;
   image?: T;
+  photo?: T;
   experienceLabel?: T;
   experienceYears?: T;
   medicalSpecialty?:
@@ -2238,6 +2340,7 @@ export interface TreatmentsSelect<T extends boolean = true> {
             };
         image?: T;
         imageAlt?: T;
+        heroPhoto?: T;
       };
   whatIs?:
     | T
@@ -2640,6 +2743,19 @@ export interface CentresSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "redirects_select".
+ */
+export interface RedirectsSelect<T extends boolean = true> {
+  from?: T;
+  to?: T;
+  type?: T;
+  enabled?: T;
+  note?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "media_select".
  */
 export interface MediaSelect<T extends boolean = true> {
@@ -2914,9 +3030,17 @@ export interface Footer {
          * Heading for this column, e.g. 'IVF Treatments'.
          */
         title: string;
+        /**
+         * Tick to hide this whole footer column (and its links) without deleting it.
+         */
+        hidden?: boolean | null;
         links?:
           | {
               label: string;
+              /**
+               * Tick to temporarily hide this link without deleting it.
+               */
+              hidden?: boolean | null;
               /**
                * Pick Phone/Email/WhatsApp to auto-fill the link from Brand & Identity, or choose Custom URL and type your own below.
                */
@@ -2960,6 +3084,10 @@ export interface Footer {
          */
         url?: string | null;
         /**
+         * Tick to temporarily hide this link without deleting it.
+         */
+        hidden?: boolean | null;
+        /**
          * Open this link in a new browser tab.
          */
         external?: boolean | null;
@@ -2999,6 +3127,10 @@ export interface Header {
          */
         url?: string | null;
         /**
+         * Tick to temporarily hide this whole item from the menu without deleting it. Untick to show it again.
+         */
+        hidden?: boolean | null;
+        /**
          * Open this menu link in a new browser tab.
          */
         openInNewTab?: boolean | null;
@@ -3023,10 +3155,18 @@ export interface Header {
                * Optional link for the heading (e.g. a city page).
                */
               headingHref?: string | null;
+              /**
+               * Tick to hide this whole dropdown column (and its links) without deleting it.
+               */
+              hidden?: boolean | null;
               items?:
                 | {
                     label: string;
                     url?: string | null;
+                    /**
+                     * Tick to temporarily hide this link from the dropdown without deleting it.
+                     */
+                    hidden?: boolean | null;
                     /**
                      * Optional small line shown under the link.
                      */
@@ -3113,7 +3253,7 @@ export interface Homepage {
       }[]
     | null;
   /**
-   * The banner at the very top of the homepage — text only. The hero image is managed by the website team.
+   * The banner at the very top of the homepage — headline, paragraph, badges and the hero image.
    */
   hero?: {
     /**
@@ -3142,18 +3282,13 @@ export interface Homepage {
         }[]
       | null;
     /**
-     * Up to three button labels (the first is the main button). Icons and order are managed by the website team.
-     */
-    ctas?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
-    /**
      * Text on the small floating award chip over the hero image.
      */
     floatingBadge?: string | null;
+    /**
+     * Hero banner image. Easiest to change via the inline editor (Pages & Builder → Home) — click the image → Replace. Or paste an image URL here.
+     */
+    image?: string | null;
   };
   /**
    * The scrolling stats strip. Leave empty to use the built-in stats.
@@ -3557,15 +3692,6 @@ export interface Homepage {
           id?: string | null;
         }[]
       | null;
-    /**
-     * Up to three button labels. Icons and order are managed by the website team.
-     */
-    ctas?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
   };
   /**
    * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
@@ -3764,7 +3890,7 @@ export interface AboutPage {
       | null;
   };
   /**
-   * The closing call-to-action band — heading + button labels. Icons and links are managed by the website team.
+   * The closing call-to-action band heading. The buttons and links are managed by the website team.
    */
   finalCta?: {
     /**
@@ -3780,15 +3906,6 @@ export interface AboutPage {
        */
       em?: string | null;
     };
-    /**
-     * Button labels in order (the first is the main button).
-     */
-    ctas?:
-      | {
-          text: string;
-          id?: string | null;
-        }[]
-      | null;
   };
   /**
    * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
@@ -3815,6 +3932,33 @@ export interface AboutPage {
      */
     ogImage?: (number | null) | Media;
   };
+  updatedAt?: string | null;
+  createdAt?: string | null;
+}
+/**
+ * Controls robots.txt — what search engines are allowed to crawl. The sitemap link is added for you automatically.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo-settings".
+ */
+export interface SeoSetting {
+  id: number;
+  /**
+   * ⚠️ When ON, robots.txt blocks ALL crawling (Disallow: /) — use this only on a staging/test site. Keep it OFF for the live website.
+   */
+  discourageSearchEngines?: boolean | null;
+  /**
+   * Specific paths search engines should NOT crawl (e.g. /thank-you). One per row. The admin panel and internal pages are always blocked automatically.
+   */
+  disallowPaths?:
+    | {
+        /**
+         * Starts with / — e.g. /thank-you
+         */
+        path: string;
+        id?: string | null;
+      }[]
+    | null;
   updatedAt?: string | null;
   createdAt?: string | null;
 }
@@ -3923,10 +4067,12 @@ export interface FooterSelect<T extends boolean = true> {
     | T
     | {
         title?: T;
+        hidden?: T;
         links?:
           | T
           | {
               label?: T;
+              hidden?: T;
               channel?: T;
               url?: T;
               external?: T;
@@ -3947,6 +4093,7 @@ export interface FooterSelect<T extends boolean = true> {
     | {
         label?: T;
         url?: T;
+        hidden?: T;
         external?: T;
         id?: T;
       };
@@ -3970,6 +4117,7 @@ export interface HeaderSelect<T extends boolean = true> {
     | {
         label?: T;
         url?: T;
+        hidden?: T;
         openInNewTab?: T;
         doctors?: T;
         megaCols?: T;
@@ -3978,11 +4126,13 @@ export interface HeaderSelect<T extends boolean = true> {
           | {
               heading?: T;
               headingHref?: T;
+              hidden?: T;
               items?:
                 | T
                 | {
                     label?: T;
                     url?: T;
+                    hidden?: T;
                     desc?: T;
                     children?:
                       | T
@@ -4033,13 +4183,8 @@ export interface HomepageSelect<T extends boolean = true> {
               text?: T;
               id?: T;
             };
-        ctas?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
         floatingBadge?: T;
+        image?: T;
       };
   stats?:
     | T
@@ -4230,12 +4375,6 @@ export interface HomepageSelect<T extends boolean = true> {
               l?: T;
               id?: T;
             };
-        ctas?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
       };
   seo?:
     | T
@@ -4320,12 +4459,6 @@ export interface AboutPageSelect<T extends boolean = true> {
               lead?: T;
               em?: T;
             };
-        ctas?:
-          | T
-          | {
-              text?: T;
-              id?: T;
-            };
       };
   seo?:
     | T
@@ -4335,6 +4468,22 @@ export interface AboutPageSelect<T extends boolean = true> {
         ogTitle?: T;
         ogDescription?: T;
         ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+  globalType?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "seo-settings_select".
+ */
+export interface SeoSettingsSelect<T extends boolean = true> {
+  discourageSearchEngines?: T;
+  disallowPaths?:
+    | T
+    | {
+        path?: T;
+        id?: T;
       };
   updatedAt?: T;
   createdAt?: T;

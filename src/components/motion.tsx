@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
+import { useEdit } from "@/components/editor/edit-context";
 import {
   motion,
   useScroll,
@@ -139,6 +140,7 @@ export function ParallaxImage({
   ratio = "aspect-[4/5]",
   priority = false,
   sizes = "(max-width: 1024px) 100vw, 45vw",
+  editPath,
 }: {
   src: string;
   alt: string;
@@ -148,16 +150,34 @@ export function ParallaxImage({
   /** Set on above-the-fold LCP images so Next preloads them (no lazy). */
   priority?: boolean;
   sizes?: string;
+  /** In the inline editor, makes this image click-to-replace (the CMS dot-path
+   *  the upload writes to). Ignored on the public site. */
+  editPath?: string;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.08, 1, 1.04]);
+  const ctx = useEdit();
+  const editing = !!ctx?.editMode && !!editPath;
   // Box is statically sized (ratio) → reserves layout space (no CLS). The
   // parallax transform animates an inner layer only; next/image with `fill`
   // + explicit `sizes` gives a srcset and, when priority, a preload for LCP.
   return (
-    <div ref={ref} className={`relative overflow-hidden ${ratio} ${className ?? ""}`}>
+    <div
+      ref={ref}
+      className={`relative overflow-hidden ${ratio} ${className ?? ""}${editing ? " bfi-editable bfi-editable-img" : ""}`}
+      {...(editing
+        ? {
+            "data-edit-path": editPath,
+            "data-bfi-selected": ctx!.selected === editPath ? "true" : undefined,
+            onClick: (e: React.MouseEvent) => {
+              e.stopPropagation();
+              ctx!.select(editPath!, "image");
+            },
+          }
+        : {})}
+    >
       <motion.div style={{ y, scale }} className="absolute inset-0">
         <Image
           src={src}

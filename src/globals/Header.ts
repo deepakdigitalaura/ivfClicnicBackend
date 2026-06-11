@@ -41,6 +41,7 @@ const HEADER_FIELDS: Field[] = [
       fields: [
         { name: "label", type: "text", required: true, label: "Menu Label" },
         { name: "url", type: "text", label: "Link URL", admin: { description: "Where this menu item links to. Leave empty if it opens a dropdown or the Doctors panel instead." } },
+        { name: "hidden", type: "checkbox", label: "Hide from menu", admin: { description: "Tick to temporarily hide this whole item from the menu without deleting it. Untick to show it again." } },
         { name: "openInNewTab", type: "checkbox", label: "Open in New Tab", admin: { description: "Open this menu link in a new browser tab." } },
         {
           name: "doctors",
@@ -63,6 +64,7 @@ const HEADER_FIELDS: Field[] = [
           fields: [
             { name: "heading", type: "text", label: "Column Heading", admin: { description: "Heading at the top of the column. Leave empty for an unlabelled column." } },
             { name: "headingHref", type: "text", label: "Heading Link", admin: { description: "Optional link for the heading (e.g. a city page)." } },
+            { name: "hidden", type: "checkbox", label: "Hide column", admin: { description: "Tick to hide this whole dropdown column (and its links) without deleting it." } },
             {
               name: "items",
               type: "array",
@@ -70,6 +72,7 @@ const HEADER_FIELDS: Field[] = [
               fields: [
                 { name: "label", type: "text", required: true, label: "Link Text" },
                 { name: "url", type: "text", label: "Link URL" },
+                { name: "hidden", type: "checkbox", label: "Hide from menu", admin: { description: "Tick to temporarily hide this link from the dropdown without deleting it." } },
                 { name: "desc", type: "text", label: "Sub-line", admin: { description: "Optional small line shown under the link." } },
                 {
                   name: "children",

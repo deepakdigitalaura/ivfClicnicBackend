@@ -1,6 +1,7 @@
 import type { CollectionConfig, Field, Validate } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
 import { isEditor, isAdminField } from "@/access/roles";
+import { imageUploadField } from "@/fields/image";
 
 /**
  * Doctors — CMS source of truth for each doctor's EDITORIAL PROFILE content
@@ -73,9 +74,10 @@ const DOCTOR_FIELDS: Field[] = [
       type: "row",
       fields: [
         { name: "role", type: "text", required: true, label: "Role / Title", admin: { width: "50%", description: "Job title, e.g. 'Founder & Chief IVF Specialist'." } },
-        { name: "image", type: "text", required: true, label: "Portrait Photo Path", admin: { width: "50%", description: "Path to the doctor's photo, e.g. /assets/doctors/parth.webp. Ask the website team to add new photos." } },
+        { name: "image", type: "text", required: true, label: "Current Photo Path (default)", admin: { width: "50%", description: "The built-in photo path. To change the photo just upload a new image in 'Replace Photo' below — no need to edit this." } },
       ],
     },
+    imageUploadField("photo", "Replace Photo", "Upload or pick a new portrait photo to replace the current one. Leave empty to keep the current photo."),
     {
       type: "row",
       fields: [
@@ -149,11 +151,11 @@ export const Doctors: CollectionConfig = {
     {
       type: "tabs",
       tabs: [
-        { label: "Profile", fields: DOCTOR_FIELDS.slice(0, 4) },
-        { label: "Reach", fields: DOCTOR_FIELDS.slice(4, 8) },
-        { label: "Bio", fields: DOCTOR_FIELDS.slice(8, 10) },
-        { label: "Credentials", fields: DOCTOR_FIELDS.slice(10, 18) },
-        { label: "Settings", fields: DOCTOR_FIELDS.slice(18) },
+        { label: "Profile", fields: DOCTOR_FIELDS.slice(0, 5) },
+        { label: "Reach", fields: DOCTOR_FIELDS.slice(5, 9) },
+        { label: "Bio", fields: DOCTOR_FIELDS.slice(9, 11) },
+        { label: "Credentials", fields: DOCTOR_FIELDS.slice(11, 19) },
+        { label: "Settings", fields: DOCTOR_FIELDS.slice(19) },
       ],
     },
   ],

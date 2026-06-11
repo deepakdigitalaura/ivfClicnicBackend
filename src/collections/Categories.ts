@@ -6,7 +6,9 @@ import { isAdmin, isEditor } from "@/access/roles";
  *  bust the `blogs` cache tag. */
 export const Categories: CollectionConfig = {
   slug: "categories",
-  admin: { useAsTitle: "title", defaultColumns: ["title", "slug"], group: "Blog" },
+  // Hidden from the nav to declutter the panel — categories are created/picked
+  // inline from a Blog's "Category" relationship field. Still fully usable.
+  admin: { useAsTitle: "title", defaultColumns: ["title", "slug"], group: "Blog", hidden: true },
   access: { read: () => true, create: isEditor, update: isEditor, delete: isAdmin },
   hooks: revalidateRelated(["blogs"]),
   fields: [

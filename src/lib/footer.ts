@@ -155,11 +155,12 @@ type FooterLinkSource = {
   url?: string | null;
   external?: boolean | null;
   channel?: string | null;
+  hidden?: boolean | null;
 };
 export type FooterSource =
   | {
       branding?: { logoUrl?: string | null; description?: string | null } | null;
-      navGroups?: { title?: string | null; links?: FooterLinkSource[] | null }[] | null;
+      navGroups?: { title?: string | null; hidden?: boolean | null; links?: FooterLinkSource[] | null }[] | null;
       social?: { platform?: string | null; url?: string | null }[] | null;
       copyrightText?: string | null;
       legalLinks?: FooterLinkSource[] | null;
@@ -193,11 +194,14 @@ export function resolveFooter(g: FooterSource, contact: ContactValues): FooterDa
         }
       : undefined;
 
+  // Columns / links toggled "Hide" are dropped (kept in the CMS, not rendered).
   const groups = g?.navGroups?.length
-    ? g.navGroups.map((grp) => ({
-        h: grp.title ?? "",
-        l: (grp.links ?? []).map((link) => resolveLink(link, contact)),
-      }))
+    ? g.navGroups
+        .filter((grp) => !grp.hidden)
+        .map((grp) => ({
+          h: grp.title ?? "",
+          l: (grp.links ?? []).filter((link) => !link.hidden).map((link) => resolveLink(link, contact)),
+        }))
     : FOOTER_DEFAULTS.groups;
 
   const social = g?.social?.length
@@ -207,7 +211,7 @@ export function resolveFooter(g: FooterSource, contact: ContactValues): FooterDa
     : FOOTER_DEFAULTS.social;
 
   const legal = g?.legalLinks?.length
-    ? g.legalLinks.map((link) => resolveLink(link, contact))
+    ? g.legalLinks.filter((link) => !link.hidden).map((link) => resolveLink(link, contact))
     : FOOTER_DEFAULTS.legal;
 
   return {

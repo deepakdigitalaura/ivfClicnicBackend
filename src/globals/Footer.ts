@@ -37,12 +37,14 @@ const FOOTER_FIELDS: Field[] = [
       admin: { description: "The link columns in the footer. Leave empty to keep the built-in columns." },
       fields: [
         { name: "title", type: "text", required: true, label: "Column Heading", admin: { description: "Heading for this column, e.g. 'IVF Treatments'." } },
+        { name: "hidden", type: "checkbox", label: "Hide column", admin: { description: "Tick to hide this whole footer column (and its links) without deleting it." } },
         {
           name: "links",
           type: "array",
           labels: { singular: "Link", plural: "Links" },
           fields: [
             { name: "label", type: "text", required: true, label: "Link Text" },
+            { name: "hidden", type: "checkbox", label: "Hide link", admin: { description: "Tick to temporarily hide this link without deleting it." } },
             {
               name: "channel",
               type: "select",
@@ -98,6 +100,7 @@ const FOOTER_FIELDS: Field[] = [
       fields: [
         { name: "label", type: "text", required: true, label: "Link Text" },
         { name: "url", type: "text", label: "Link URL", admin: { description: "Leave empty to show plain (non-clickable) text." } },
+        { name: "hidden", type: "checkbox", label: "Hide link", admin: { description: "Tick to temporarily hide this link without deleting it." } },
         { name: "external", type: "checkbox", label: "Open in New Tab", admin: { description: "Open this link in a new browser tab." } },
       ],
     },

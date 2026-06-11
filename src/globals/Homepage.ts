@@ -77,15 +77,15 @@ const SECTION_FIELDS: Field[] = [
       name: "hero",
       type: "group",
       label: "Top Section",
-      admin: { description: "The banner at the very top of the homepage — text only. The hero image is managed by the website team." },
+      admin: { description: "The banner at the very top of the homepage — headline, paragraph, badges and the hero image." },
       fields: [
         { name: "eyebrow", type: "text", label: "Small Label Above Heading", admin: { description: "Small label above the headline. Leave empty to use the default." } },
         { name: "headline", type: "text", label: "Page Heading", admin: { description: "The main headline. Leave empty to keep the built-in hero." } },
         { name: "headlineItalic", type: "text", label: "Highlighted Word in Heading", admin: { description: "The one word in the headline shown in the cursive accent style." } },
         { name: "paragraph", type: "textarea", label: "Intro Paragraph", admin: { description: "The sub-heading paragraph under the headline." } },
         { name: "badges", type: "array", labels: { singular: "Badge", plural: "Badges" }, admin: { description: "Trust badges shown under the paragraph." }, fields: [{ name: "text", type: "text", required: true, label: "Badge Text" }] },
-        { name: "ctas", type: "array", labels: { singular: "Button", plural: "Buttons" }, admin: { description: "Up to three button labels (the first is the main button). Icons and order are managed by the website team." }, fields: [{ name: "text", type: "text", required: true, label: "Button Text" }] },
         { name: "floatingBadge", type: "text", label: "Floating Award Chip", admin: { description: "Text on the small floating award chip over the hero image." } },
+        { name: "image", type: "text", label: "Hero Image", admin: { description: "Hero banner image. Easiest to change via the inline editor (Pages & Builder → Home) — click the image → Replace. Or paste an image URL here." } },
       ],
     },
     {
@@ -311,72 +311,61 @@ const SECTION_FIELDS: Field[] = [
             { name: "l", type: "text", required: true, label: "Label", admin: { description: "Caption under the number." } },
           ],
         },
-        { name: "ctas", type: "array", labels: { singular: "Button", plural: "Buttons" }, admin: { description: "Up to three button labels. Icons and order are managed by the website team." }, fields: [{ name: "text", type: "text", required: true, label: "Button Text" }] },
       ],
     },
     seoField,
 ];
 
-/** Look up a defined section field by name (so the tabs below stay readable). */
+/** Look up a defined section field by name (so the accordion below stays readable). */
 const pickField = (name: string): Field => {
   const found = SECTION_FIELDS.find((x) => "name" in x && x.name === name);
   if (!found) throw new Error(`Homepage: section field not found: ${name}`);
   return found;
 };
 
+/** One collapsible accordion row wrapping the named section field(s). */
+const section = (label: string, description: string, names: string[]): Field => ({
+  type: "collapsible",
+  label,
+  admin: { initCollapsed: true, description },
+  fields: names.map(pickField),
+});
+
 export const Homepage: GlobalConfig = {
   slug: "homepage",
   access: { read: () => true, update: isEditor },
-  admin: { group: "Website Pages" },
-  hooks: revalidateGlobal("homepage"),
-  // Fields are split into Tabs so a non-technical editor sees one short section
-  // at a time instead of one long scrolling form. Tabs are UNNAMED → the saved
-  // data shape is identical to a flat field list (no schema/type/seed change).
-  fields: [
-    {
-      type: "tabs",
-      tabs: [
-        {
-          label: "Section Order",
-          description: "Reorder or show/hide the homepage's sections.",
-          fields: [pickField("layout")],
-        },
-        {
-          label: "Top Banner",
-          description: "The hero banner at the very top of the homepage.",
-          fields: [pickField("hero")],
-        },
-        {
-          label: "Why Choose Us",
-          description: "Stats strip and the two 'Why' sections.",
-          fields: [pickField("stats"), pickField("whyBavishi"), pickField("whyChoose")],
-        },
-        {
-          label: "Highlights",
-          description: "Suraksha Kavach, Awards and Events.",
-          fields: [pickField("suraksha"), pickField("awards"), pickField("events")],
-        },
-        {
-          label: "Videos",
-          description: "Patient stories, education and resource videos.",
-          fields: [pickField("videos")],
-        },
-        {
-          label: "FAQs",
-          description: "The homepage FAQ accordion.",
-          fields: [pickField("faq")],
-        },
-        {
-          label: "Closing CTA",
-          description: "The closing call-to-action band at the bottom.",
-          fields: [pickField("finalCta")],
-        },
-        {
-          label: "Search & Social",
-          description: "How the page looks in Google and when shared.",
-          fields: [pickField("seo")],
-        },
+  admin: {
+    group: "Website Pages",
+    // Side-by-side Live Preview: the admin renders /live-preview/homepage in an
+    // iframe and streams the in-progress form data to it (postMessage), so the
+    // editor sees changes instantly without saving. That route is force-dynamic
+    // and used ONLY here — the public `/` stays static/ISR (no draftMode on it).
+    livePreview: {
+      url: () => "/live-preview/homepage",
+      breakpoints: [
+        { name: "desktop", label: "Desktop", width: 1440, height: 900 },
+        { name: "tablet", label: "Tablet", width: 768, height: 1024 },
+        { name: "mobile", label: "Mobile", width: 390, height: 844 },
       ],
     },
+  },
+  hooks: revalidateGlobal("homepage"),
+  // Fields are a vertical ACCORDION (collapsible sections) — one section open at
+  // a time, the rest collapsed — so the editor scans the whole page at a glance
+  // and the form fits the narrow Live Preview pane. Collapsibles are presentational
+  // (UNNAMED) → the saved data shape is identical to a flat list (no schema change).
+  fields: [
+    section("Section Order", "Reorder or show/hide the homepage's sections.", ["layout"]),
+    section("Top Banner", "The hero banner at the very top of the homepage.", ["hero"]),
+    section("Stats Strip", "The scrolling stats strip.", ["stats"]),
+    section("Why Bavishi Cards", "The four 'Why Bavishi' icon cards.", ["whyBavishi"]),
+    section("Why Choose Us Pillars", "The Simple / Safe / Smart / Successful pillars.", ["whyChoose"]),
+    section("Suraksha Kavach", "The Suraksha Kavach section.", ["suraksha"]),
+    section("Awards & Recognition", "The awards carousel.", ["awards"]),
+    section("Upcoming Events", "The upcoming-events posters.", ["events"]),
+    section("Videos", "Patient stories, education and resource videos.", ["videos"]),
+    section("FAQs", "The homepage FAQ accordion.", ["faq"]),
+    section("Closing Call-to-Action", "The closing band at the bottom.", ["finalCta"]),
+    section("Search & Social", "How the page looks in Google and when shared.", ["seo"]),
   ],
 };

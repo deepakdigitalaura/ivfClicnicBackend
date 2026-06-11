@@ -23,6 +23,7 @@
  * ===================================================================== */
 
 import { SITE, ORG_ID, abs } from "@/lib/seo";
+import { mediaUrl, type UploadValue } from "@/fields/image";
 
 export type Doctor = {
   slug: string;
@@ -693,6 +694,7 @@ export type DoctorSource =
       medicalSpecialty?: ValueRow[] | null;
       role?: string | null;
       image?: string | null;
+      photo?: UploadValue;
       experienceLabel?: string | null;
       experienceYears?: number | null;
       cities?: ValueRow[] | null;
@@ -736,7 +738,9 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     specialty: src.specialty || def.specialty,
     medicalSpecialty: rows(src.medicalSpecialty) ?? def.medicalSpecialty,
     role: src.role || def.role,
-    image: src.image || def.image,
+    // An uploaded photo (Media picker) overrides the default path; else the
+    // text path; else the code default. Lets staff swap the photo from admin.
+    image: mediaUrl(src.photo) ?? (src.image || def.image),
     experienceLabel: src.experienceLabel ?? def.experienceLabel,
     experienceYears: src.experienceYears ?? def.experienceYears,
     cities: rows(src.cities) ?? def.cities,

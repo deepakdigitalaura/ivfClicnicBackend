@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const heroImg = "/assets/hero-mother-baby1.png";
 const aboutImg = "/assets/about-clinic.jpg";
 const drFalguni = "/assets/doctors/falguni.webp";
 const drHimanshu = "/assets/doctors/himanshu.webp";
@@ -27,6 +26,8 @@ import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
 import { cityHref } from "@/lib/locations";
 import { resolveIcon } from "@/lib/icon-map";
+import { Editable } from "@/components/editor/Editable";
+import { useEdit } from "@/components/editor/edit-context";
 import {
   HOMEPAGE_DEFAULTS,
   DEFAULT_HOME_LAYOUT,
@@ -97,7 +98,10 @@ function GhostBtn({ children, icon: Icon, href, target }: { children: React.Reac
 /* ---------- Scroll progress bar ---------- */
 /* ---------- Page ---------- */
 
-export function HomePage({ data = HOMEPAGE_DEFAULTS }: { data?: HomepageData } = {}) {
+export function HomePage({
+  data = HOMEPAGE_DEFAULTS,
+  previewAnchors = false,
+}: { data?: HomepageData; previewAnchors?: boolean } = {}) {
   // Each homepage section, keyed so the CMS `layout` can reorder / hide it. The
   // map holds the exact same element calls as the original fixed sequence, so
   // the default layout renders byte-identically (a Fragment adds no DOM and the
@@ -128,9 +132,19 @@ export function HomePage({ data = HOMEPAGE_DEFAULTS }: { data?: HomepageData } =
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      {layout.map(({ section, visible }) =>
-        visible && sections[section] ? <Fragment key={section}>{sections[section]}</Fragment> : null,
-      )}
+      {layout.map(({ section, visible }) => {
+        if (!visible || !sections[section]) return null;
+        // In the admin Live Preview ONLY, wrap each section in an id'd anchor so
+        // the editor can scroll-to / flash the section being edited. The public
+        // render keeps the bare Fragment → byte-identical DOM (SEO baseline safe).
+        return previewAnchors ? (
+          <div key={section} id={`lp-${section}`} data-lp-section={section} style={{ scrollMarginTop: 90 }}>
+            {sections[section]}
+          </div>
+        ) : (
+          <Fragment key={section}>{sections[section]}</Fragment>
+        );
+      })}
       <Footer />
       <FloatingCTA />
       <ScrollToTop />
@@ -142,36 +156,57 @@ export function HomePage({ data = HOMEPAGE_DEFAULTS }: { data?: HomepageData } =
 /* ---------- Hero ---------- */
 
 function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
+  const editing = !!useEdit()?.editMode;
   return (
     <section className="gradient-warm noise relative overflow-hidden">
       <GradientField />
       <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 py-8 md:py-14 lg:grid-cols-12 lg:gap-10 lg:py-28">
         <div className="relative z-10 lg:col-span-7">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <Eyebrow>{hero.eyebrow}</Eyebrow>
+            <Eyebrow><Editable path="hero.eyebrow">{hero.eyebrow}</Editable></Eyebrow>
           </motion.div>
 
-          <WordReveal
-            text={hero.headline}
-            italicWord={hero.headlineItalic}
-            accentClass="italic text-[color:var(--rose)]"
-            className="mt-6 text-[2.75rem] font-medium leading-[1.02] text-[color:var(--plum)] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance"
-          />
+          {(() => {
+            const headlineCls =
+              "mt-6 text-[2.75rem] font-medium leading-[1.02] text-[color:var(--plum)] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance";
+            // Edit mode: rich, click-to-edit + B/I/U/colour toolbar.
+            if (editing) {
+              return (
+                <h1 className={headlineCls}>
+                  <Editable path="hero.headline" rich>{hero.headline}</Editable>
+                </h1>
+              );
+            }
+            // Public: if the editor added formatting (HTML tags), render the
+            // stored HTML (the per-word reveal animation is dropped for a
+            // formatted headline). Otherwise keep the byte-identical WordReveal.
+            if (/<[a-z][\s\S]*>/i.test(hero.headline)) {
+              return <h1 className={headlineCls} dangerouslySetInnerHTML={{ __html: hero.headline }} />;
+            }
+            return (
+              <WordReveal
+                text={hero.headline}
+                italicWord={hero.headlineItalic}
+                accentClass="italic text-[color:var(--rose)]"
+                className={headlineCls}
+              />
+            );
+          })()}
 
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl text-pretty"
           >
-            {hero.paragraph}
+            <Editable path="hero.paragraph" rich>{hero.paragraph}</Editable>
           </motion.p>
 
           <Stagger className="mt-8 grid max-w-xl grid-cols-2 gap-3" delay={0.8} stagger={0.07}>
-            {hero.badges.map((t) => (
-              <StaggerItem key={t}>
+            {hero.badges.map((t, i) => (
+              <StaggerItem key={i}>
                 <div className="flex items-start gap-2 text-sm font-medium text-[color:var(--plum)]">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                  {t}
+                  <Editable path={`hero.badges.${i}.text`}>{t}</Editable>
                 </div>
               </StaggerItem>
             ))}
@@ -194,7 +229,7 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
           <div className="relative">
             <div className="absolute -inset-8 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[color:var(--rose)]/20 via-transparent to-[color:var(--plum)]/15 blur-2xl" />
             <div className="overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
-              <ParallaxImage src={heroImg} alt="Mother holding her newborn baby" ratio="aspect-[4/5]" priority />
+              <ParallaxImage src={hero.image} alt="Mother holding her newborn baby" ratio="aspect-[4/5]" priority editPath="hero.image" />
             </div>
           </div>
 
@@ -202,7 +237,7 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             <div className="glass rounded-2xl px-4 py-3 shadow-soft">
               <div className="flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)]">
                 <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" />
-                {hero.floatingBadge}
+                <Editable path="hero.floatingBadge">{hero.floatingBadge}</Editable>
               </div>
             </div>
           </Float>
@@ -331,7 +366,7 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="relative overflow-hidden rounded-[2rem] bg-[color:var(--ivory)] shadow-lift"
               >
-                <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[5/4]" />
+                <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[5/4]" editPath="suraksha.image" />
               </motion.div>
             </Float>
           </Reveal>
@@ -1288,22 +1323,49 @@ export function InquiryForm() {
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState("");
+  // Honeypot — kept off-screen; real users never fill it, bots usually do.
+  const [company, setCompany] = useState("");
 
   const set = (k: string, v: string) => {
     setForm((f) => ({ ...f, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: "" }));
+    if (serverError) setServerError("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     const next: Record<string, string> = {};
     if (!form.name.trim()) next.name = "Please enter your name";
     if (!/^[+\d][\d\s-]{7,}$/.test(form.phone.trim())) next.phone = "Enter a valid phone number";
     if (form.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) next.email = "Enter a valid email";
     setErrors(next);
-    if (Object.keys(next).length === 0) {
-      // No backend wired yet — surface success; replace with an API/WhatsApp post when available.
+    if (Object.keys(next).length > 0) return;
+
+    setSending(true);
+    setServerError("");
+    try {
+      const res = await fetch("/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          company,
+          source: typeof window !== "undefined" ? window.location.pathname : "",
+        }),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        setServerError(data?.error || "Something went wrong. Please call us on +91 97126 22288.");
+        return;
+      }
       setSubmitted(true);
+    } catch {
+      setServerError("Network error. Please check your connection or call us on +91 97126 22288.");
+    } finally {
+      setSending(false);
     }
   };
 
@@ -1353,7 +1415,7 @@ export function InquiryForm() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", email: "", treatment: "", location: "", message: "" }); }}
+                  onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "", message: "" }); }}
                   className="mt-6 text-sm font-semibold text-[color:var(--rose)] hover:underline"
                 >
                   Submit another inquiry
@@ -1411,8 +1473,20 @@ export function InquiryForm() {
                   <textarea id="if-message" rows={3} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Tell us briefly how we can help…" className={`${fieldCls("message")} resize-none`} />
                 </div>
 
-                <button type="submit" className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                  <Send className="h-4 w-4" /> Request a Callback
+                {/* Honeypot — visually hidden, off the tab order; bots fill it, humans don't. */}
+                <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
+                  <label htmlFor="if-company">Company</label>
+                  <input id="if-company" type="text" tabIndex={-1} autoComplete="off" value={company} onChange={(e) => setCompany(e.target.value)} />
+                </div>
+
+                {serverError && (
+                  <p role="alert" className="rounded-xl bg-[color:var(--rose)]/10 px-4 py-3 text-center text-sm text-[color:var(--rose)]">
+                    {serverError}
+                  </p>
+                )}
+
+                <button type="submit" disabled={sending} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70">
+                  <Send className="h-4 w-4" /> {sending ? "Sending…" : "Request a Callback"}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Your details are kept strictly confidential. We never share your information.

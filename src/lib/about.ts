@@ -135,7 +135,6 @@ export const ABOUT_DEFAULTS: AboutData = {
  * payload-types, same convention as HomepageSource / ServiceSource).
  * ===================================================================== */
 type HeadingSource = { lead?: string | null; em?: string | null } | null | undefined;
-type TextItem = { text?: string | null };
 type StatSource = { value?: string | null; label?: string | null };
 
 export type AboutSource =
@@ -157,7 +156,6 @@ export type AboutSource =
       } | null;
       finalCta?: {
         heading?: HeadingSource;
-        ctas?: TextItem[] | null;
       } | null;
       seo?: {
         metaTitle?: string | null;
@@ -173,8 +171,6 @@ export type AboutSource =
 /* ---------- Small helpers (mirror src/lib/homepage.ts) ---------- */
 const heading = (h: HeadingSource, def: AboutHeading): AboutHeading =>
   h?.lead ? { lead: h.lead, em: h.em ?? "" } : def;
-const texts = (a: TextItem[] | null | undefined): string[] =>
-  (a ?? []).map((x) => x.text ?? "").filter(Boolean);
 const stats = (a: StatSource[] | null | undefined): StatTuple[] =>
   (a ?? []).map((s) => ({ n: s.value ?? "", l: s.label ?? "" }));
 
@@ -219,7 +215,8 @@ export function resolveAbout(src: AboutSource): AboutData {
   const finalCta = src.finalCta?.heading?.lead
     ? {
         heading: heading(src.finalCta.heading, d.finalCta.heading),
-        ctas: src.finalCta.ctas?.length ? texts(src.finalCta.ctas) : d.finalCta.ctas,
+        // Button labels are code-owned — always from defaults, not admin-editable.
+        ctas: d.finalCta.ctas,
       }
     : d.finalCta;
 

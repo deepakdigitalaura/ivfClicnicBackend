@@ -212,7 +212,7 @@ export const getDoctor = reactCache(
             collection: "doctors",
             where: { slug: { equals: slug } },
             limit: 1,
-            depth: 0,
+            depth: 1, // resolve the optional `photo` upload override
           });
           return resolveDoctor(slug, res.docs[0] as DoctorSource);
         } catch {
@@ -242,7 +242,7 @@ export const getDoctors = reactCache(
           const res = await payload.find({
             collection: "doctors",
             limit: DOCTORS.length + 50,
-            depth: 0,
+            depth: 1, // resolve the optional `photo` upload override
           });
           bySlug = new Map(res.docs.map((d) => [(d as { slug: string }).slug, d as DoctorSource]));
         } catch {
@@ -277,7 +277,7 @@ export const getTreatment = reactCache(
             collection: "treatments",
             where: { slug: { equals: slug } },
             limit: 1,
-            depth: 0,
+            depth: 1, // resolve the optional hero `heroPhoto` upload override
           });
           return resolveTreatment(slug, res.docs[0] as TreatmentSource);
         } catch {
@@ -307,7 +307,7 @@ export const getTreatments = reactCache(
           const res = await payload.find({
             collection: "treatments",
             limit: TREATMENTS.length + 50,
-            depth: 0,
+            depth: 1, // resolve the optional hero `heroPhoto` upload override
           });
           bySlug = new Map(res.docs.map((d) => [(d as { slug: string }).slug, d as TreatmentSource]));
         } catch {

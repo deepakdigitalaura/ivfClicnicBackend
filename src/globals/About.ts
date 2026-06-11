@@ -113,10 +113,9 @@ const ABOUT_FIELDS: Field[] = [
       name: "finalCta",
       type: "group",
       label: "Closing Call-to-Action",
-      admin: { description: "The closing call-to-action band — heading + button labels. Icons and links are managed by the website team." },
+      admin: { description: "The closing call-to-action band heading. The buttons and links are managed by the website team." },
       fields: [
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "ctas", type: "array", labels: { singular: "Button", plural: "Buttons" }, admin: { description: "Button labels in order (the first is the main button)." }, fields: [{ name: "text", type: "text", required: true, label: "Button Text" }] },
       ],
     },
     seoField,
