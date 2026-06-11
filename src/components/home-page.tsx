@@ -26,7 +26,7 @@ import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
 import { cityHref } from "@/lib/locations";
 import { resolveIcon } from "@/lib/icon-map";
-import { Editable } from "@/components/editor/Editable";
+import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import {
   HOMEPAGE_DEFAULTS,
@@ -749,7 +749,7 @@ function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyCho
             >
               <div className="flex items-center gap-4">
                 <div className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[color:var(--rose)]/[0.08]">
-                  <img src={b.icon} alt={b.alt} loading="lazy" className="h-9 w-9 object-contain" />
+                  <EditableImage path={`whyChoose.blocks.${bi}.icon`} src={b.icon} alt={b.alt} loading="lazy" className="h-9 w-9 object-contain" />
                 </div>
                 <h3 className="text-xl font-semibold leading-tight text-[color:var(--plum)]">
                   <span className="font-display italic text-[color:var(--rose)]"><Editable path={`whyChoose.blocks.${bi}.title`}>{b.title}</Editable></span>
@@ -1095,14 +1095,14 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
         align="center"
       />
       <Stagger className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
-        {content.posters.map((e) => (
+        {content.posters.map((e, i) => (
           <StaggerItem key={e.src}>
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.5 }}
               className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
-              <img src={e.src} alt={e.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+              <EditableImage path={`events.posters.${i}.src`} src={e.src} alt={e.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
             </motion.div>
           </StaggerItem>
         ))}

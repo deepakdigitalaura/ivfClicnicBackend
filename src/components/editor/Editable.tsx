@@ -77,28 +77,33 @@ export function Editable({
 }
 
 /** A click-to-replace image. In the editor a click selects it (→ toolbar shows
- *  "Replace image"); on the public site it renders a plain <img>. */
+ *  "Replace image"); on the public site it renders a plain <img>. `loading` is
+ *  passed straight through so a section that shipped a `loading="lazy"` <img>
+ *  stays byte-identical (and keeps its perf hint) when swapped to <EditableImage>. */
 export function EditableImage({
   path,
   src,
   alt,
   className,
+  loading,
 }: {
   path: string;
   src: string;
   alt: string;
   className?: string;
+  loading?: "lazy" | "eager";
 }) {
   const ctx = useEdit();
   if (!ctx?.editMode) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} className={className} />;
+    return <img src={src} alt={alt} loading={loading} className={className} />;
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element
     <img
       src={src}
       alt={alt}
+      loading={loading}
       className={`${className ?? ""} bfi-editable bfi-editable-img`.trim()}
       data-edit-path={path}
       data-bfi-selected={ctx.selected === path ? "true" : undefined}
