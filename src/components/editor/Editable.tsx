@@ -11,8 +11,14 @@
  *     images become click-to-replace. Selecting an element drives the floating
  *     toolbar (see EditorToolbar / FloatingToolbar).
  * `path` is the dot-path into the page's CMS SOURCE draft (e.g. "hero.paragraph"
- * or "hero.badges.0.text"). `rich` opts a field into inline formatting
- * (bold/italic/underline/colour) — its value is stored + rendered as HTML.
+ * or "hero.badges.0.text"). `rich` (DEFAULT true) gives a field inline
+ * formatting (bold/italic/underline/colour) — its value is stored + rendered as
+ * HTML, so EVERY text field shows the same full floating toolbar across the whole
+ * site. The public render then wraps the text in a bare inline <span>; the SEO
+ * parity surface (title/meta/canonical/JSON-LD/links — see scripts/seo/extract.mjs)
+ * ignores body spans, so this stays byte-identical to the SEO gate. Pass
+ * `rich={false}` only for a field that must render as a raw text node with no
+ * wrapper at all.
  * ===================================================================== */
 
 import { useEdit } from "./edit-context";
@@ -23,7 +29,7 @@ export function Editable({
   path,
   as = "span",
   className,
-  rich = false,
+  rich = true,
   children,
 }: {
   path: string;
