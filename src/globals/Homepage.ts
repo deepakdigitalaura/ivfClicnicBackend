@@ -187,6 +187,43 @@ const SECTION_FIELDS: Field[] = [
       ],
     },
     {
+      name: "about",
+      type: "group",
+      label: "About the Institute",
+      admin: { description: "The homepage's 'About the Institute' summary section (its own copy — separate from the full About BFI page)." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        {
+          name: "stats",
+          type: "array",
+          labels: { singular: "Highlight", plural: "Highlights" },
+          admin: { description: "The four small highlights (label + value). Leave empty to use the built-in set." },
+          fields: [
+            { name: "k", type: "text", required: true, label: "Label", admin: { description: "Small caption, e.g. 'Legacy'." } },
+            { name: "v", type: "text", required: true, label: "Value", admin: { description: "Value, e.g. '40+ Years'." } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "primaryCta", type: "text", label: "Main Button Text", admin: { width: "50%" } },
+            { name: "secondaryCta", type: "text", label: "Secondary Button Text", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "sinceValue", type: "text", label: "Floating Chip — Title", admin: { width: "50%", description: "e.g. 'Since 1983'." } },
+            { name: "sinceLabel", type: "text", label: "Floating Chip — Caption", admin: { width: "50%", description: "e.g. 'Pioneering fertility care'." } },
+          ],
+        },
+        { name: "image", type: "text", label: "Section Image", admin: { description: "Web address of the section image. Easiest to change via the inline editor — click the image → Replace." } },
+        { name: "imageAlt", type: "text", label: "Image Alt Text" },
+      ],
+    },
+    {
       name: "awards",
       type: "group",
       label: "Awards & Recognition",
@@ -361,6 +398,7 @@ export const Homepage: GlobalConfig = {
     section("Why Bavishi Cards", "The four 'Why Bavishi' icon cards.", ["whyBavishi"]),
     section("Why Choose Us Pillars", "The Simple / Safe / Smart / Successful pillars.", ["whyChoose"]),
     section("Suraksha Kavach", "The Suraksha Kavach section.", ["suraksha"]),
+    section("About the Institute", "The homepage's About summary section.", ["about"]),
     section("Awards & Recognition", "The awards carousel.", ["awards"]),
     section("Upcoming Events", "The upcoming-events posters.", ["events"]),
     section("Videos", "Patient stories, education and resource videos.", ["videos"]),

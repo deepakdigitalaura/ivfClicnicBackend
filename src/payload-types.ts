@@ -3535,6 +3535,57 @@ export interface Homepage {
     imageAlt?: string | null;
   };
   /**
+   * The homepage's 'About the Institute' summary section (its own copy — separate from the full About BFI page).
+   */
+  about?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * The four small highlights (label + value). Leave empty to use the built-in set.
+     */
+    stats?:
+      | {
+          /**
+           * Small caption, e.g. 'Legacy'.
+           */
+          k: string;
+          /**
+           * Value, e.g. '40+ Years'.
+           */
+          v: string;
+          id?: string | null;
+        }[]
+      | null;
+    primaryCta?: string | null;
+    secondaryCta?: string | null;
+    /**
+     * e.g. 'Since 1983'.
+     */
+    sinceValue?: string | null;
+    /**
+     * e.g. 'Pioneering fertility care'.
+     */
+    sinceLabel?: string | null;
+    /**
+     * Web address of the section image. Easiest to change via the inline editor — click the image → Replace.
+     */
+    image?: string | null;
+    imageAlt?: string | null;
+  };
+  /**
    * The Awards & Recognition carousel.
    */
   awards?: {
@@ -4325,6 +4376,31 @@ export interface HomepageSelect<T extends boolean = true> {
               label?: T;
               href?: T;
             };
+        image?: T;
+        imageAlt?: T;
+      };
+  about?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        stats?:
+          | T
+          | {
+              k?: T;
+              v?: T;
+              id?: T;
+            };
+        primaryCta?: T;
+        secondaryCta?: T;
+        sinceValue?: T;
+        sinceLabel?: T;
         image?: T;
         imageAlt?: T;
       };

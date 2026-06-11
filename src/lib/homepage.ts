@@ -95,6 +95,22 @@ export type FinalCtaContent = {
   ctas: string[];
 };
 
+/** The homepage's "About the Institute" summary section (its own copy — distinct
+ *  from the /about-bfi page). Editorial text + the {k,v} stat grid + the floating
+ *  "Since 1983" chip + the section image. CTA links stay code-owned. */
+export type HomeAboutContent = {
+  eyebrow: string;
+  heading: Heading;
+  subtitle: string;
+  stats: { k: string; v: string }[];
+  primaryCta: string;
+  secondaryCta: string;
+  sinceValue: string;
+  sinceLabel: string;
+  image: string;
+  imageAlt: string;
+};
+
 export type HomepageSeo = {
   metaTitle: string;
   metaDescription: string;
@@ -157,6 +173,7 @@ export type HomepageData = {
   whyBavishi: { eyebrow: string; heading: Heading; subtitle: string; cards: WhyCard[] };
   whyChoose: { eyebrow: string; heading: Heading; subtitle: string; blocks: WhyChooseBlock[] };
   suraksha: SurakshaContent;
+  about: HomeAboutContent;
   awards: { eyebrow: string; heading: Heading; subtitle: string; items: AwardItem[] };
   events: { eyebrow: string; heading: Heading; posters: EventPoster[] };
   videos: { stories: VideoStory[]; edu: EduVideo[]; resources: ResourceVideo[] };
@@ -168,6 +185,7 @@ export type HomepageData = {
 /* ---------- Asset paths (mirror the component's module consts) ---------- */
 const heroImg = "/assets/hero-mother-baby1.png";
 const surakshaImg = "/assets/suraksha-parenthood.png";
+const aboutImg = "/assets/about-clinic.jpg";
 const whyIcons = {
   simple: "/assets/Simple-1.png",
   safe: "/assets/Safe-1.png",
@@ -276,6 +294,24 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     secondaryCta: { label: "Learn More", href: "/#book" },
     image: surakshaImg,
     imageAlt: "Expecting parents — the journey to parenthood, protected",
+  },
+  about: {
+    eyebrow: "About the Institute",
+    heading: { lead: "A legacy of", em: "life-changing care." },
+    subtitle:
+      "For over four decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
+    stats: [
+      { k: "Legacy", v: "40+ Years" },
+      { k: "Recognition", v: "Award-Winning" },
+      { k: "Patient Care", v: "Personalised" },
+      { k: "IVF Leadership", v: "India's First" },
+    ],
+    primaryCta: "Read More",
+    secondaryCta: "Our Story",
+    sinceValue: "Since 1983",
+    sinceLabel: "Pioneering fertility care",
+    image: aboutImg,
+    imageAlt: "Bavishi Fertility Institute",
   },
   awards: {
     eyebrow: "Awards & Recognition",
@@ -394,6 +430,18 @@ export type HomepageSource =
         features?: TextItem[] | null;
         primaryCta?: { label?: string | null; href?: string | null } | null;
         secondaryCta?: { label?: string | null; href?: string | null } | null;
+        image?: string | null;
+        imageAlt?: string | null;
+      } | null;
+      about?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+        stats?: { k?: string | null; v?: string | null }[] | null;
+        primaryCta?: string | null;
+        secondaryCta?: string | null;
+        sinceValue?: string | null;
+        sinceLabel?: string | null;
         image?: string | null;
         imageAlt?: string | null;
       } | null;
@@ -533,6 +581,23 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
       }
     : d.suraksha;
 
+  const about: HomeAboutContent = src.about?.heading?.lead
+    ? {
+        eyebrow: src.about.eyebrow ?? d.about.eyebrow,
+        heading: heading(src.about.heading, d.about.heading),
+        subtitle: src.about.subtitle ?? d.about.subtitle,
+        stats: src.about.stats?.length
+          ? src.about.stats.map((s) => ({ k: s.k ?? "", v: s.v ?? "" }))
+          : d.about.stats,
+        primaryCta: src.about.primaryCta || d.about.primaryCta,
+        secondaryCta: src.about.secondaryCta || d.about.secondaryCta,
+        sinceValue: src.about.sinceValue ?? d.about.sinceValue,
+        sinceLabel: src.about.sinceLabel ?? d.about.sinceLabel,
+        image: src.about.image || d.about.image,
+        imageAlt: src.about.imageAlt ?? d.about.imageAlt,
+      }
+    : d.about;
+
   const awards = src.awards?.items?.length
     ? {
         eyebrow: src.awards.eyebrow ?? d.awards.eyebrow,
@@ -593,5 +658,5 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, awards, events, videos, faq, finalCta, seo };
+  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, awards, events, videos, faq, finalCta, seo };
 }

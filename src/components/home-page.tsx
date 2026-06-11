@@ -9,7 +9,6 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const aboutImg = "/assets/about-clinic.jpg";
 const drFalguni = "/assets/doctors/falguni.webp";
 const drHimanshu = "/assets/doctors/himanshu.webp";
 const drJanki = "/assets/doctors/janki.webp";
@@ -39,6 +38,7 @@ import {
   type EduVideo,
   type ResourceVideo,
   type AwardItem,
+  type HomeAboutContent,
 } from "@/lib/homepage";
 
 /* ---------- Primitives ---------- */
@@ -115,7 +115,7 @@ export function HomePage({
     treatments: <Treatments />,
     successStories: <SuccessStories stories={data.videos.stories} />,
     videoHub: <VideoHub videos={data.videos.edu} />,
-    about: <About />,
+    about: <About content={data.about} />,
     doctors: <Doctors />,
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
@@ -590,48 +590,43 @@ export function VideoHub({ videos = HOMEPAGE_DEFAULTS.videos.edu }: { videos?: E
 
 /* ---------- About ---------- */
 
-function About() {
+function About({ content = HOMEPAGE_DEFAULTS.about }: { content?: HomeAboutContent } = {}) {
   return (
     <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
       <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
         <div className="relative">
           <Reveal>
             <div className="overflow-hidden rounded-[2rem] shadow-lift">
-              <ParallaxImage src={aboutImg} alt="Bavishi Fertility Institute" ratio="aspect-[4/5]" />
+              <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[4/5]" editPath="about.image" />
             </div>
           </Reveal>
           <Float className="absolute -right-6 bottom-10 hidden md:block" amplitude={6}>
             <div className="glass rounded-2xl p-5 shadow-lift">
-              <div className="font-display text-3xl font-medium text-[color:var(--plum)]">Since 1983</div>
-              <div className="text-xs text-muted-foreground">Pioneering fertility care</div>
+              <div className="font-display text-3xl font-medium text-[color:var(--plum)]"><Editable path="about.sinceValue">{content.sinceValue}</Editable></div>
+              <div className="text-xs text-muted-foreground"><Editable path="about.sinceLabel">{content.sinceLabel}</Editable></div>
             </div>
           </Float>
         </div>
         <div>
           <SectionHeader
-            eyebrow="About the Institute"
-            title={<>A legacy of <em className="font-display italic text-[color:var(--rose)]">life-changing care.</em></>}
-            subtitle="For over four decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks."
+            eyebrow={<Editable path="about.eyebrow">{content.eyebrow}</Editable>}
+            title={<><Editable path="about.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="about.heading.em">{content.heading.em}</Editable></em></>}
+            subtitle={<Editable path="about.subtitle">{content.subtitle}</Editable>}
           />
           <Stagger className="mt-8 grid grid-cols-2 gap-6" stagger={0.08}>
-            {[
-              { k: "Legacy", v: "40+ Years" },
-              { k: "Recognition", v: "Award-Winning" },
-              { k: "Patient Care", v: "Personalised" },
-              { k: "IVF Leadership", v: "India's First" },
-            ].map((x) => (
+            {content.stats.map((x, i) => (
               <StaggerItem key={x.k}>
                 <div className="border-l-2 border-[color:var(--rose)]/40 pl-4">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{x.k}</div>
-                  <div className="mt-1 font-display text-xl text-[color:var(--plum)]">{x.v}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground"><Editable path={`about.stats.${i}.k`}>{x.k}</Editable></div>
+                  <div className="mt-1 font-display text-xl text-[color:var(--plum)]"><Editable path={`about.stats.${i}.v`}>{x.v}</Editable></div>
                 </div>
               </StaggerItem>
             ))}
           </Stagger>
           <Reveal delay={0.3}>
             <div className="mt-10 flex flex-wrap gap-3">
-              <PrimaryBtn>Read More</PrimaryBtn>
-              <GhostBtn>Our Story</GhostBtn>
+              <PrimaryBtn><Editable path="about.primaryCta">{content.primaryCta}</Editable></PrimaryBtn>
+              <GhostBtn><Editable path="about.secondaryCta">{content.secondaryCta}</Editable></GhostBtn>
             </div>
           </Reveal>
         </div>
