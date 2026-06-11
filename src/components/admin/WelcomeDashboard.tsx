@@ -27,6 +27,7 @@ const STAT_CARDS: Stat[] = [
   { label: 'Services', slug: 'services', href: '/admin/collections/services' },
   { label: 'Centres', slug: 'centres', href: '/admin/collections/centres' },
   { label: 'Blog Posts', slug: 'blogs', href: '/admin/collections/blogs' },
+  { label: 'Testimonials', slug: 'testimonials', href: '/admin/collections/testimonials' },
   { label: 'Images', slug: 'media', href: '/admin/collections/media' },
 ];
 
@@ -36,6 +37,7 @@ const QUICK_ACTIONS: { label: string; href: string; primary?: boolean }[] = [
   { label: '+ Add Doctor', href: '/admin/collections/doctors/create' },
   { label: '+ Add Treatment', href: '/admin/collections/treatments/create' },
   { label: 'Manage Locations', href: '/admin/collections/centres' },
+  { label: '+ Add Testimonial', href: '/admin/collections/testimonials/create' },
   { label: 'Edit Menus', href: '/admin/globals/header' },
   { label: 'Redirects', href: '/admin/collections/redirects' },
   { label: '+ New Blog Post', href: '/admin/collections/blogs/create' },
@@ -47,6 +49,7 @@ const GETTING_STARTED: { what: string; where: string }[] = [
   { what: 'Edit the homepage (text, sections, order)', where: 'Website Pages → Homepage' },
   { what: 'Change a treatment page', where: 'Treatments & Services → Treatments' },
   { what: 'Add or edit a doctor', where: 'Doctors → Create New' },
+  { what: 'Add a patient testimonial (shows with Google reviews)', where: 'Testimonials → Create New' },
   { what: 'Reorder / show / hide menu links', where: 'Website Settings → Header & Navigation / Footer' },
   { what: 'Update a clinic / city page', where: 'Locations → Cities or Centres' },
   { what: 'Upload photos to use anywhere', where: 'Media Library' },

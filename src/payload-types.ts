@@ -68,6 +68,7 @@ export interface Config {
   blocks: {};
   collections: {
     inquiries: Inquiry;
+    testimonials: Testimonial;
     pages: Page;
     blogs: Blog;
     authors: Author;
@@ -88,6 +89,7 @@ export interface Config {
   collectionsJoins: {};
   collectionsSelect: {
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
+    testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
@@ -180,6 +182,41 @@ export interface Inquiry {
    */
   notes?: string | null;
   source?: string | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Patient testimonials shown on the homepage, alongside your live Google reviews. Add a few of your best stories here — they appear as 'Patient review'.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials".
+ */
+export interface Testimonial {
+  id: number;
+  /**
+   * Name shown on the testimonial card.
+   */
+  author: string;
+  /**
+   * How many stars to show, from 1 to 5.
+   */
+  rating: number;
+  /**
+   * The patient's words, in their voice. Keep it genuine.
+   */
+  quote: string;
+  /**
+   * Optional small line under the name, e.g. 'IVF · 2024' or a city. Leave blank to show 'Patient review'.
+   */
+  role?: string | null;
+  /**
+   * Untick to hide this testimonial without deleting it.
+   */
+  published?: boolean | null;
+  /**
+   * Lower numbers show first. Leave at 0 to sort by newest.
+   */
+  order?: number | null;
   updatedAt: string;
   createdAt: string;
 }
@@ -1822,6 +1859,10 @@ export interface PayloadLockedDocument {
         value: number | Inquiry;
       } | null)
     | ({
+        relationTo: 'testimonials';
+        value: number | Testimonial;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -1925,6 +1966,20 @@ export interface InquiriesSelect<T extends boolean = true> {
   status?: T;
   notes?: T;
   source?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonials_select".
+ */
+export interface TestimonialsSelect<T extends boolean = true> {
+  author?: T;
+  rating?: T;
+  quote?: T;
+  role?: T;
+  published?: T;
+  order?: T;
   updatedAt?: T;
   createdAt?: T;
 }

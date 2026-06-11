@@ -101,7 +101,8 @@ function GhostBtn({ children, icon: Icon, href, target }: { children: React.Reac
 export function HomePage({
   data = HOMEPAGE_DEFAULTS,
   previewAnchors = false,
-}: { data?: HomepageData; previewAnchors?: boolean } = {}) {
+  testimonials = [],
+}: { data?: HomepageData; previewAnchors?: boolean; testimonials?: Review[] } = {}) {
   // Each homepage section, keyed so the CMS `layout` can reorder / hide it. The
   // map holds the exact same element calls as the original fixed sequence, so
   // the default layout renders byte-identically (a Fragment adds no DOM and the
@@ -119,7 +120,7 @@ export function HomePage({
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
     media: <Media />,
-    testimonials: <Testimonials />,
+    testimonials: <Testimonials cms={testimonials} />,
     events: <Events content={data.events} />,
     blogs: <Blogs videos={data.videos.resources} />,
     locations: <Locations />,
@@ -986,31 +987,43 @@ function ReviewTestimonialCard({ r, verified }: { r: Review; verified: boolean }
 }
 
 export function Testimonials({
+  cms = [],
   eyebrow = "Testimonials",
   title = <>Words from <em className="font-display italic text-[color:var(--rose)]">our families.</em></>,
-}: { eyebrow?: string; title?: React.ReactNode } = {}) {
+}: { cms?: Review[]; eyebrow?: string; title?: React.ReactNode } = {}) {
   const data = getBrandReviews();
-  const reviews: Review[] = data?.reviews ?? [];
-  const verified = !!data?.verified;
-  const aggregate = verified ? data?.aggregate : undefined; // rating badge only for real data
+  const googleReviews: Review[] = data?.reviews ?? [];
+  const googleVerified = !!data?.verified;
+  const aggregate = googleVerified ? data?.aggregate : undefined; // rating badge only for real Google data
   const listingUrl = data?.mapsUrl ?? BRAND_LISTING_URL;
 
+  // Supplement the live Google reviews with staff-curated CMS testimonials.
+  // Google entries keep their verified flag (so only REAL Google data is labelled
+  // "Google review"); CMS entries are always "Patient review" and never touch the
+  // aggregate badge or schema. When `cms` is empty this is byte-identical to the
+  // Google-only render that shipped before the Testimonials collection existed.
+  const cards: { r: Review; verified: boolean }[] = [
+    ...googleReviews.map((r) => ({ r, verified: googleVerified })),
+    ...cms.map((r) => ({ r, verified: false })),
+  ];
+
   const reviewPages = Array.from(
-    { length: Math.max(1, Math.ceil(reviews.length / 3)) },
-    (_, p) => reviews.slice(p * 3, p * 3 + 3),
+    { length: Math.max(1, Math.ceil(cards.length / 3)) },
+    (_, p) => cards.slice(p * 3, p * 3 + 3),
   );
   const pages = reviewPages.length;
   const [page, setPage] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (paused || reviews.length === 0) return;
+    if (paused || cards.length === 0) return;
     const id = window.setInterval(() => setPage((p) => (p + 1) % pages), 5500);
     return () => window.clearInterval(id);
-  }, [paused, pages, reviews.length]);
+  }, [paused, pages, cards.length]);
 
-  // No verified reviews yet → honest CTA, never fabricated testimonial cards.
-  if (reviews.length === 0) {
+  // Nothing to show (no Google reviews AND no CMS testimonials) → honest CTA,
+  // never fabricated testimonial cards.
+  if (cards.length === 0) {
     return (
       <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
         <div className="container-px mx-auto max-w-[1400px] text-center">
@@ -1058,8 +1071,8 @@ export function Testimonials({
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
               >
-                {reviewPages[page].map((r, i) => (
-                  <ReviewTestimonialCard key={`${r.author}-${i}`} r={r} verified={verified} />
+                {reviewPages[page].map((c, i) => (
+                  <ReviewTestimonialCard key={`${c.r.author}-${i}`} r={c.r} verified={c.verified} />
                 ))}
               </motion.div>
             </AnimatePresence>

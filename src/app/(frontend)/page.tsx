@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/home-page";
-import { getHomepage, getGlobalSafe } from "@/lib/payload";
+import { getHomepage, getGlobalSafe, getTestimonials } from "@/lib/payload";
 import { HOMEPAGE_DEFAULTS } from "@/lib/homepage";
 
 const HERO_IMG = "/assets/hero-mother-baby1.png";
@@ -30,6 +30,6 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const data = await getHomepage();
-  return <HomePage data={data} />;
+  const [data, testimonials] = await Promise.all([getHomepage(), getTestimonials()]);
+  return <HomePage data={data} testimonials={testimonials} />;
 }

@@ -23,6 +23,8 @@ import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer"
 import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
+import { resolveTestimonials, type TestimonialSource } from "@/lib/testimonials";
+import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService, type ServiceSource } from "@/lib/services";
 import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
 import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
@@ -496,3 +498,36 @@ export const getAbout = reactCache(async (): Promise<AboutData> => {
   const about = await getGlobalSafe("about-page");
   return resolveAbout(about as AboutSource);
 });
+
+/**
+ * Published patient testimonials (Phase B.4) for the homepage's Testimonials
+ * section, mapped to the display `Review` shape. SUPPLEMENTS the live Google
+ * reviews — these render as "Patient review" alongside Google data and never
+ * feed review schema. Cached + tagged `testimonials` (busted by the collection's
+ * revalidateRelated hook). On any error (e.g. table not pushed yet) returns [] so
+ * the homepage shows Google-only — byte-identical to before this collection
+ * existed. React-cached per render.
+ */
+export const getTestimonials = reactCache(
+  (): Promise<Review[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "testimonials",
+            where: { published: { equals: true } },
+            sort: "order",
+            limit: 50,
+            depth: 0,
+          });
+          return resolveTestimonials(res.docs as TestimonialSource[]);
+        } catch {
+          // Table not pushed yet / read error → no supplement (Google-only).
+          return [];
+        }
+      },
+      ["testimonials-list"],
+      { tags: [cacheTags.collectionList("testimonials")] },
+    )(),
+);

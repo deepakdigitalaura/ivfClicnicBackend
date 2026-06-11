@@ -27,6 +27,7 @@ import { Treatments } from "./collections/Treatments";
 import { Cities } from "./collections/Cities";
 import { Centres } from "./collections/Centres";
 import { Inquiries } from "./collections/Inquiries";
+import { Testimonials } from "./collections/Testimonials";
 import { Redirects } from "./collections/Redirects";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
@@ -67,7 +68,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Inquiries, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Redirects, Media, Users],
+  collections: [Inquiries, Testimonials, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Redirects, Media, Users],
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About, SeoSettings],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
