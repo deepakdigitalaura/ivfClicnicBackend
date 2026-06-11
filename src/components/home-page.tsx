@@ -39,7 +39,21 @@ import {
   type ResourceVideo,
   type AwardItem,
   type HomeAboutContent,
+  type Heading,
 } from "@/lib/homepage";
+
+/* ---------- Inline-edit header helpers ----------
+ * Build an inline-editable eyebrow / {lead,em} heading / subtitle / CTA for a
+ * homepage section, sourced from the resolved homepage data at `base`. Each
+ * piece is a plain <Editable> (byte-identical on the public site), so the same
+ * section component can be reused on other pages with their own plain props. */
+const ed = (path: string, value: string) => <Editable path={path}>{value}</Editable>;
+const edTitle = (base: string, h: Heading) => (
+  <>
+    {ed(`${base}.heading.lead`, h.lead)}{" "}
+    <em className="font-display italic text-[color:var(--rose)]">{ed(`${base}.heading.em`, h.em)}</em>
+  </>
+);
 
 /* ---------- Primitives ---------- */
 
@@ -113,16 +127,45 @@ export function HomePage({
     whyBavishi: <WhyBavishiFertilityInstitute content={data.whyBavishi} />,
     suraksha: <Suraksha content={data.suraksha} />,
     treatments: <Treatments />,
-    successStories: <SuccessStories stories={data.videos.stories} />,
-    videoHub: <VideoHub videos={data.videos.edu} />,
+    successStories: (
+      <SuccessStories
+        stories={data.videos.stories}
+        eyebrow={ed("successStories.eyebrow", data.successStories.eyebrow)}
+        title={edTitle("successStories", data.successStories.heading)}
+        subtitle={ed("successStories.subtitle", data.successStories.subtitle)}
+        ctaLabel={ed("successStories.ctaLabel", data.successStories.ctaLabel)}
+      />
+    ),
+    videoHub: (
+      <VideoHub
+        videos={data.videos.edu}
+        eyebrow={ed("videoHub.eyebrow", data.videoHub.eyebrow)}
+        title={edTitle("videoHub", data.videoHub.heading)}
+        subtitle={ed("videoHub.subtitle", data.videoHub.subtitle)}
+        ctaLabel={ed("videoHub.ctaLabel", data.videoHub.ctaLabel)}
+      />
+    ),
     about: <About content={data.about} />,
-    doctors: <Doctors />,
+    doctors: (
+      <Doctors
+        eyebrow={ed("doctors.eyebrow", data.doctors.eyebrow)}
+        title={edTitle("doctors", data.doctors.heading)}
+        subtitle={ed("doctors.subtitle", data.doctors.subtitle)}
+        ctaLabel={ed("doctors.ctaLabel", data.doctors.ctaLabel)}
+      />
+    ),
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
     media: <Media />,
-    testimonials: <Testimonials cms={testimonials} />,
+    testimonials: (
+      <Testimonials
+        cms={testimonials}
+        eyebrow={ed("testimonials.eyebrow", data.testimonials.eyebrow)}
+        title={edTitle("testimonials", data.testimonials.heading)}
+      />
+    ),
     events: <Events content={data.events} />,
-    blogs: <Blogs videos={data.videos.resources} />,
+    blogs: <Blogs videos={data.videos.resources} content={data.blogs} />,
     locations: <Locations />,
     faq: <FAQ content={data.faq} />,
     calculators: <Calculators />,
@@ -489,13 +532,15 @@ export function SuccessStories({
   eyebrow = "Success Stories",
   title = <>30,000+ journeys. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
   subtitle = "Real stories from real families who began their parenthood journey with us.",
+  ctaLabel = "View More Success Stories",
   tone = "white",
   showCta = true,
 }: {
   stories?: { id: string; n: string; q: string; r: number }[];
-  eyebrow?: string;
+  eyebrow?: React.ReactNode;
   title?: React.ReactNode;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
+  ctaLabel?: React.ReactNode;
   tone?: "white" | "tint";
   showCta?: boolean;
 } = {}) {
@@ -531,7 +576,7 @@ export function SuccessStories({
         {showCta && (
           <Reveal delay={0.2}>
             <div className="mt-9 text-center">
-              <GhostBtn icon={ArrowRight}>View More Success Stories</GhostBtn>
+              <GhostBtn icon={ArrowRight}>{ctaLabel}</GhostBtn>
             </div>
           </Reveal>
         )}
@@ -542,17 +587,25 @@ export function SuccessStories({
 
 /* ---------- Video Hub ---------- */
 
-export function VideoHub({ videos = HOMEPAGE_DEFAULTS.videos.edu }: { videos?: EduVideo[] } = {}) {
+export function VideoHub({
+  videos = HOMEPAGE_DEFAULTS.videos.edu,
+  eyebrow = "Education",
+  title = <>Learn from the <em className="font-display italic text-[color:var(--rose)]">experts.</em></>,
+  subtitle = "Clear, trustworthy fertility education from our specialists.",
+  ctaLabel = "Watch All Videos",
+}: {
+  videos?: EduVideo[];
+  eyebrow?: React.ReactNode;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  ctaLabel?: React.ReactNode;
+} = {}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-        <SectionHeader
-          eyebrow="Education"
-          title={<>Learn from the <em className="font-display italic text-[color:var(--rose)]">experts.</em></>}
-          subtitle="Clear, trustworthy fertility education from our specialists."
-        />
+        <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
         <Reveal delay={0.1}>
-          <GhostBtn icon={Video} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">Watch All Videos</GhostBtn>
+          <GhostBtn icon={Video} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ctaLabel}</GhostBtn>
         </Reveal>
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
@@ -649,7 +702,8 @@ export function Doctors({
   eyebrow = "Meet the Specialists",
   title = <>Meet Our <em className="font-display italic text-[color:var(--rose)]">Promoter Doctors.</em></>,
   subtitle = "A family of fertility experts trusted by generations.",
-}: { docs?: Doc[]; eyebrow?: string; title?: React.ReactNode; subtitle?: string } = {}) {
+  ctaLabel = "View All Doctors",
+}: { docs?: Doc[]; eyebrow?: React.ReactNode; title?: React.ReactNode; subtitle?: React.ReactNode; ctaLabel?: React.ReactNode } = {}) {
   return (
     <section id="doctors" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
@@ -715,7 +769,7 @@ export function Doctors({
       <Reveal delay={0.2}>
         <div className="mt-9 text-center">
           <Magnetic as="a" href="/doctors" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-            View All Doctors <ArrowRight className="h-4 w-4" />
+            {ctaLabel} <ArrowRight className="h-4 w-4" />
           </Magnetic>
         </div>
       </Reveal>
@@ -985,7 +1039,7 @@ export function Testimonials({
   cms = [],
   eyebrow = "Testimonials",
   title = <>Words from <em className="font-display italic text-[color:var(--rose)]">our families.</em></>,
-}: { cms?: Review[]; eyebrow?: string; title?: React.ReactNode } = {}) {
+}: { cms?: Review[]; eyebrow?: React.ReactNode; title?: React.ReactNode } = {}) {
   const data = getBrandReviews();
   const googleReviews: Review[] = data?.reviews ?? [];
   const googleVerified = !!data?.verified;
@@ -1128,17 +1182,20 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
 
 /* ---------- Blogs ---------- */
 
-function Blogs({ videos = HOMEPAGE_DEFAULTS.videos.resources }: { videos?: ResourceVideo[] } = {}) {
+function Blogs({
+  videos = HOMEPAGE_DEFAULTS.videos.resources,
+  content = HOMEPAGE_DEFAULTS.blogs,
+}: { videos?: ResourceVideo[]; content?: HomepageData["blogs"] } = {}) {
   return (
     <section id="resources" className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionHeader
-            eyebrow="Knowledge & Resources"
-            title={<>Knowledge, <em className="font-display italic text-[color:var(--rose)]">beautifully explained.</em></>}
+            eyebrow={ed("blogs.eyebrow", content.eyebrow)}
+            title={edTitle("blogs", content.heading)}
           />
           <Reveal delay={0.1}>
-            <GhostBtn icon={BookOpen} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">Explore Resources</GhostBtn>
+            <GhostBtn icon={BookOpen} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ed("blogs.ctaLabel", content.ctaLabel)}</GhostBtn>
           </Reveal>
         </div>
         <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">

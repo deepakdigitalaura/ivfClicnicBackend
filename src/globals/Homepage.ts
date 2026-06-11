@@ -40,6 +40,29 @@ const headingGroup = (description: string): Field => ({
   ],
 });
 
+/** A header-only section group: eyebrow + {lead,em} heading, with optional
+ *  sub-heading and CTA-button text. Used for the display sections whose item
+ *  data is sourced elsewhere (videos collection, doctors) — only the heading
+ *  copy is editable here. */
+const headerGroup = (
+  name: string,
+  label: string,
+  description: string,
+  hasSubtitle = true,
+  hasCta = true,
+): Field => ({
+  name,
+  type: "group",
+  label,
+  admin: { description },
+  fields: [
+    { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+    headingGroup("Section heading. Leave empty to keep the default."),
+    ...(hasSubtitle ? [{ name: "subtitle", type: "textarea", label: "Sub-heading" } as Field] : []),
+    ...(hasCta ? [{ name: "ctaLabel", type: "text", label: "Button Text" } as Field] : []),
+  ],
+});
+
 /* All homepage section fields, defined once. They are grouped into admin Tabs
  * below (see `Homepage.fields`) purely for a cleaner editing experience — these
  * are UNNAMED tabs, so the stored data shape is unchanged (hero, stats, …, seo
@@ -350,6 +373,11 @@ const SECTION_FIELDS: Field[] = [
         },
       ],
     },
+    headerGroup("successStories", "Patient Success Stories — Heading", "The heading above the patient-story videos. The videos themselves are set under 'Videos'.", true),
+    headerGroup("videoHub", "Education Videos — Heading", "The heading above the education videos. The videos themselves are set under 'Videos'.", true),
+    headerGroup("doctors", "Our Doctors — Heading", "The heading above the doctors grid. The doctors themselves are managed under the Doctors section.", true),
+    headerGroup("blogs", "Knowledge & Resources — Heading", "The heading above the resources videos.", false, true),
+    headerGroup("testimonials", "Reviews — Heading", "The heading above the reviews/testimonials section.", false, false),
     seoField,
 ];
 
@@ -402,6 +430,7 @@ export const Homepage: GlobalConfig = {
     section("Awards & Recognition", "The awards carousel.", ["awards"]),
     section("Upcoming Events", "The upcoming-events posters.", ["events"]),
     section("Videos", "Patient stories, education and resource videos.", ["videos"]),
+    section("Section Headings", "Headings for the Success Stories, Education, Doctors, Resources and Reviews sections.", ["successStories", "videoHub", "doctors", "blogs", "testimonials"]),
     section("FAQs", "The homepage FAQ accordion.", ["faq"]),
     section("Closing Call-to-Action", "The closing band at the bottom.", ["finalCta"]),
     section("Search & Social", "How the page looks in Google and when shared.", ["seo"]),

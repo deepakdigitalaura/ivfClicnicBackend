@@ -179,6 +179,13 @@ export type HomepageData = {
   videos: { stories: VideoStory[]; edu: EduVideo[]; resources: ResourceVideo[] };
   faq: { eyebrow: string; heading: Heading; items: FaqItem[] };
   finalCta: FinalCtaContent;
+  /** Header-only copy for sections whose item data is sourced elsewhere
+   *  (videos collection / doctors). The cards themselves stay code/entity-owned. */
+  successStories: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string };
+  videoHub: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string };
+  doctors: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string };
+  blogs: { eyebrow: string; heading: Heading; ctaLabel: string };
+  testimonials: { eyebrow: string; heading: Heading };
   seo: HomepageSeo;
 };
 
@@ -375,6 +382,33 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     ],
     ctas: ["Book Consultation", "WhatsApp Now", "Call Now"],
   },
+  successStories: {
+    eyebrow: "Success Stories",
+    heading: { lead: "30,000+ journeys.", em: "One promise kept." },
+    subtitle: "Real stories from real families who began their parenthood journey with us.",
+    ctaLabel: "View More Success Stories",
+  },
+  videoHub: {
+    eyebrow: "Education",
+    heading: { lead: "Learn from the", em: "experts." },
+    subtitle: "Clear, trustworthy fertility education from our specialists.",
+    ctaLabel: "Watch All Videos",
+  },
+  doctors: {
+    eyebrow: "Meet the Specialists",
+    heading: { lead: "Meet Our", em: "Promoter Doctors." },
+    subtitle: "A family of fertility experts trusted by generations.",
+    ctaLabel: "View All Doctors",
+  },
+  blogs: {
+    eyebrow: "Knowledge & Resources",
+    heading: { lead: "Knowledge,", em: "beautifully explained." },
+    ctaLabel: "Explore Resources",
+  },
+  testimonials: {
+    eyebrow: "Testimonials",
+    heading: { lead: "Words from", em: "our families." },
+  },
   seo: {
     metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 40+ Years",
     metaDescription:
@@ -472,6 +506,11 @@ export type HomepageSource =
         paragraph?: string | null;
         stats?: { v?: number | null; s?: string | null; l?: string | null }[] | null;
       } | null;
+      successStories?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
+      videoHub?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
+      doctors?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
+      blogs?: { eyebrow?: string | null; heading?: HeadingSource; ctaLabel?: string | null } | null;
+      testimonials?: { eyebrow?: string | null; heading?: HeadingSource } | null;
       seo?: {
         metaTitle?: string | null;
         metaDescription?: string | null;
@@ -648,6 +687,36 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
       }
     : d.finalCta;
 
+  // Header-only sections: resolve each field against the default (no "is present"
+  // gate — the header text is independent of any item array).
+  const successStories = {
+    eyebrow: src.successStories?.eyebrow ?? d.successStories.eyebrow,
+    heading: heading(src.successStories?.heading, d.successStories.heading),
+    subtitle: src.successStories?.subtitle ?? d.successStories.subtitle,
+    ctaLabel: src.successStories?.ctaLabel || d.successStories.ctaLabel,
+  };
+  const videoHub = {
+    eyebrow: src.videoHub?.eyebrow ?? d.videoHub.eyebrow,
+    heading: heading(src.videoHub?.heading, d.videoHub.heading),
+    subtitle: src.videoHub?.subtitle ?? d.videoHub.subtitle,
+    ctaLabel: src.videoHub?.ctaLabel || d.videoHub.ctaLabel,
+  };
+  const doctors = {
+    eyebrow: src.doctors?.eyebrow ?? d.doctors.eyebrow,
+    heading: heading(src.doctors?.heading, d.doctors.heading),
+    subtitle: src.doctors?.subtitle ?? d.doctors.subtitle,
+    ctaLabel: src.doctors?.ctaLabel || d.doctors.ctaLabel,
+  };
+  const blogs = {
+    eyebrow: src.blogs?.eyebrow ?? d.blogs.eyebrow,
+    heading: heading(src.blogs?.heading, d.blogs.heading),
+    ctaLabel: src.blogs?.ctaLabel || d.blogs.ctaLabel,
+  };
+  const testimonials = {
+    eyebrow: src.testimonials?.eyebrow ?? d.testimonials.eyebrow,
+    heading: heading(src.testimonials?.heading, d.testimonials.heading),
+  };
+
   // SEO meta is consumed by generateMetadata() (a server context); the ogImage
   // upload relation is resolved there, so it is intentionally NOT shaped here.
   const seo: HomepageSeo = {
@@ -658,5 +727,5 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, awards, events, videos, faq, finalCta, seo };
+  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, seo };
 }

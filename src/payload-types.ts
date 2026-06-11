@@ -3725,6 +3725,108 @@ export interface Homepage {
       | null;
   };
   /**
+   * The heading above the patient-story videos. The videos themselves are set under 'Videos'.
+   */
+  successStories?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    ctaLabel?: string | null;
+  };
+  /**
+   * The heading above the education videos. The videos themselves are set under 'Videos'.
+   */
+  videoHub?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    ctaLabel?: string | null;
+  };
+  /**
+   * The heading above the doctors grid. The doctors themselves are managed under the Doctors section.
+   */
+  doctors?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    ctaLabel?: string | null;
+  };
+  /**
+   * The heading above the resources videos.
+   */
+  blogs?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    ctaLabel?: string | null;
+  };
+  /**
+   * The heading above the reviews/testimonials section.
+   */
+  testimonials?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+  };
+  /**
    * The homepage FAQ accordion.
    */
   faq?: {
@@ -4467,6 +4569,68 @@ export interface HomepageSelect<T extends boolean = true> {
               c?: T;
               t?: T;
               date?: T;
+            };
+      };
+  successStories?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        ctaLabel?: T;
+      };
+  videoHub?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        ctaLabel?: T;
+      };
+  doctors?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        ctaLabel?: T;
+      };
+  blogs?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        ctaLabel?: T;
+      };
+  testimonials?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
             };
       };
   faq?:
