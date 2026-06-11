@@ -54,7 +54,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 
 function SectionHeader({
   eyebrow, title, subtitle, align = "left",
-}: { eyebrow?: string; title: React.ReactNode; subtitle?: string; align?: "left" | "center" }) {
+}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center" }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       {eyebrow && <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>}
@@ -252,10 +252,10 @@ export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats }: { stats?: { valu
   return (
     <section className="border-y border-border/60 bg-white py-7 md:py-9">
       <Marquee speed={45}>
-        {stats.map((s) => (
+        {stats.map((s, i) => (
           <div key={s.l} className="px-6 text-center">
-            <div className="whitespace-nowrap font-display text-3xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-4xl">{s.value}</div>
-            <div className="mt-1.5 whitespace-nowrap text-sm uppercase tracking-wider text-muted-foreground">{s.l}</div>
+            <div className="whitespace-nowrap font-display text-3xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-4xl"><Editable path={`stats.${i}.value`}>{s.value}</Editable></div>
+            <div className="mt-1.5 whitespace-nowrap text-sm uppercase tracking-wider text-muted-foreground"><Editable path={`stats.${i}.label`}>{s.l}</Editable></div>
           </div>
         ))}
       </Marquee>
@@ -269,12 +269,12 @@ function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow={content.eyebrow}
-        title={<>{content.heading.lead} <em className="text-[color:var(--rose)] not-italic font-display italic">{content.heading.em}</em></>}
-        subtitle={content.subtitle}
+        eyebrow={<Editable path="whyBavishi.eyebrow">{content.eyebrow}</Editable>}
+        title={<><Editable path="whyBavishi.heading.lead">{content.heading.lead}</Editable> <em className="text-[color:var(--rose)] not-italic font-display italic"><Editable path="whyBavishi.heading.em">{content.heading.em}</Editable></em></>}
+        subtitle={<Editable path="whyBavishi.subtitle">{content.subtitle}</Editable>}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-        {content.cards.map(({ icon, t, d }) => {
+        {content.cards.map(({ icon, t, d }, i) => {
           const Icon = resolveIcon(icon);
           return (
           <StaggerItem key={t}>
@@ -282,8 +282,8 @@ function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }
               <Float amplitude={4} duration={6} className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
                 <Icon className="h-6 w-6" />
               </Float>
-              <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]">{t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
+              <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`whyBavishi.cards.${i}.t`}>{t}</Editable></h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><Editable path={`whyBavishi.cards.${i}.d`}>{d}</Editable></p>
               <div className="mt-6 inline-flex translate-y-1 items-center gap-1 text-sm font-medium text-[color:var(--rose)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                 Learn more <ArrowRight className="h-4 w-4" />
               </div>
@@ -317,24 +317,24 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
         <div>
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-              <Shield className="h-3.5 w-3.5" /> {content.badge}
+              <Shield className="h-3.5 w-3.5" /> <Editable path="suraksha.badge">{content.badge}</Editable>
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-5 text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.25rem] text-balance">
-              {content.heading.lead} <em className="font-display italic text-[color:var(--rose-soft)]">{content.heading.em}</em>
+              <Editable path="suraksha.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose-soft)]"><Editable path="suraksha.heading.em">{content.heading.em}</Editable></em>
             </h2>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 text-pretty">
-              {content.paragraph}
+              <Editable path="suraksha.paragraph">{content.paragraph}</Editable>
             </p>
           </Reveal>
           <Stagger className="mt-8 grid gap-3 sm:grid-cols-2" delay={0.25}>
-            {content.features.map((t) => (
+            {content.features.map((t, i) => (
               <StaggerItem key={t}>
                 <div className="flex items-center gap-2 text-sm text-white/90">
-                  <CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> {t}
+                  <CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> <Editable path={`suraksha.features.${i}.text`}>{t}</Editable>
                 </div>
               </StaggerItem>
             ))}
@@ -734,13 +734,13 @@ function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyCho
     <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
       <SectionHeader
-        eyebrow={content.eyebrow}
-        title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
-        subtitle={content.subtitle}
+        eyebrow={<Editable path="whyChoose.eyebrow">{content.eyebrow}</Editable>}
+        title={<><Editable path="whyChoose.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="whyChoose.heading.em">{content.heading.em}</Editable></em></>}
+        subtitle={<Editable path="whyChoose.subtitle">{content.subtitle}</Editable>}
         align="center"
       />
       <Stagger className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2" stagger={0.08}>
-        {content.blocks.map((b) => (
+        {content.blocks.map((b, bi) => (
           <StaggerItem key={b.title} className="h-full">
             <motion.article
               whileHover={{ y: -6 }}
@@ -752,16 +752,16 @@ function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyCho
                   <img src={b.icon} alt={b.alt} loading="lazy" className="h-9 w-9 object-contain" />
                 </div>
                 <h3 className="text-xl font-semibold leading-tight text-[color:var(--plum)]">
-                  <span className="font-display italic text-[color:var(--rose)]">{b.title}</span>
-                  <span className="mt-0.5 block text-sm font-medium text-muted-foreground">{b.subtitle}</span>
+                  <span className="font-display italic text-[color:var(--rose)]"><Editable path={`whyChoose.blocks.${bi}.title`}>{b.title}</Editable></span>
+                  <span className="mt-0.5 block text-sm font-medium text-muted-foreground"><Editable path={`whyChoose.blocks.${bi}.subtitle`}>{b.subtitle}</Editable></span>
                 </h3>
               </div>
               <ul className="mt-6 space-y-3.5">
-                {b.points.map((p) => (
+                {b.points.map((p, pi) => (
                   <li key={p.h} className="flex gap-2.5">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
                     <p className="text-sm leading-relaxed text-muted-foreground">
-                      <span className="font-semibold text-[color:var(--plum)]">{p.h}</span> – {p.d}
+                      <span className="font-semibold text-[color:var(--plum)]"><Editable path={`whyChoose.blocks.${bi}.points.${pi}.h`}>{p.h}</Editable></span> – <Editable path={`whyChoose.blocks.${bi}.points.${pi}.d`}>{p.d}</Editable>
                     </p>
                   </li>
                 ))}
@@ -904,9 +904,9 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
     <section className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader
-          eyebrow={content.eyebrow}
-          title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
-          subtitle={content.subtitle}
+          eyebrow={<Editable path="awards.eyebrow">{content.eyebrow}</Editable>}
+          title={<><Editable path="awards.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="awards.heading.em">{content.heading.em}</Editable></em></>}
+          subtitle={<Editable path="awards.subtitle">{content.subtitle}</Editable>}
           align="center"
         />
 
@@ -1090,8 +1090,8 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow={content.eyebrow}
-        title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
+        eyebrow={<Editable path="events.eyebrow">{content.eyebrow}</Editable>}
+        title={<><Editable path="events.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="events.heading.em">{content.heading.em}</Editable></em></>}
         align="center"
       />
       <Stagger className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
@@ -1229,8 +1229,8 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
     <section id="faq" className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-3xl">
         <SectionHeader
-          eyebrow={content.eyebrow}
-          title={<>{content.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{content.heading.em}</em></>}
+          eyebrow={<Editable path="faq.eyebrow">{content.eyebrow}</Editable>}
+          title={<><Editable path="faq.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="faq.heading.em">{content.heading.em}</Editable></em></>}
           align="center"
         />
         <div className="mt-10 divide-y divide-border rounded-3xl border border-border/70 bg-card shadow-soft">
@@ -1244,7 +1244,7 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
                   aria-expanded={isOpen}
                   className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left"
                 >
-                  <span className="text-base font-semibold text-[color:var(--plum)] md:text-lg">{f.q}</span>
+                  <span className="text-base font-semibold text-[color:var(--plum)] md:text-lg"><Editable path={`faq.items.${i}.q`}>{f.q}</Editable></span>
                   <ChevronDown className={`h-5 w-5 shrink-0 text-[color:var(--rose)] transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
                 </button>
                 <div
@@ -1252,7 +1252,7 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
                   style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                 >
                   <div className="overflow-hidden">
-                    <p className="pb-5 text-sm leading-relaxed text-muted-foreground md:text-base">{f.a}</p>
+                    <p className="pb-5 text-sm leading-relaxed text-muted-foreground md:text-base"><Editable path={`faq.items.${i}.a`}>{f.a}</Editable></p>
                   </div>
                 </div>
               </div>
@@ -1516,25 +1516,25 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <div className="relative">
-          <Reveal><Eyebrow>{content.eyebrow}</Eyebrow></Reveal>
+          <Reveal><Eyebrow><Editable path="finalCta.eyebrow">{content.eyebrow}</Editable></Eyebrow></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mx-auto mt-5 max-w-3xl text-4xl font-medium leading-[1.05] md:text-5xl lg:text-6xl text-balance">
-              {content.heading.lead} <em className="font-display italic text-[color:var(--rose-soft)]">{content.heading.em}</em>
+              <Editable path="finalCta.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose-soft)]"><Editable path="finalCta.heading.em">{content.heading.em}</Editable></em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/75">
-              {content.paragraph}
+              <Editable path="finalCta.paragraph">{content.paragraph}</Editable>
             </p>
           </Reveal>
 
           <Stagger className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-6" delay={0.3}>
-            {content.stats.map((x) => (
+            {content.stats.map((x, i) => (
               <StaggerItem key={x.l} className="text-center">
                 <div className="font-display text-3xl font-medium md:text-4xl">
                   <Counter to={x.v} suffix={x.s} />
                 </div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-white/60">{x.l}</div>
+                <div className="mt-1 text-xs uppercase tracking-wider text-white/60"><Editable path={`finalCta.stats.${i}.l`}>{x.l}</Editable></div>
               </StaggerItem>
             ))}
           </Stagger>
