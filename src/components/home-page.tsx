@@ -156,7 +156,7 @@ export function HomePage({
     ),
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
-    media: <Media />,
+    media: <Media content={data.media} />,
     testimonials: (
       <Testimonials
         cms={testimonials}
@@ -169,7 +169,7 @@ export function HomePage({
     locations: <Locations />,
     faq: <FAQ content={data.faq} />,
     calculators: <Calculators />,
-    inquiry: <InquiryForm />,
+    inquiry: <InquiryForm content={data.inquiry} />,
     finalCta: <FinalCTA content={data.finalCta} />,
   };
   const layout = data.layout?.length ? data.layout : DEFAULT_HOME_LAYOUT;
@@ -964,18 +964,14 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
 
 /* ---------- Media ---------- */
 
-function Media() {
-  const logos = [
-    { src: "/assets/media/news-gujarati.png", alt: "News18 Gujarati" },
-    { src: "/assets/media/sandesh-tv.png", alt: "Sandesh News" },
-    { src: "/assets/media/my-fm.png", alt: "MY FM" },
-  ];
+function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["media"] } = {}) {
+  const logos = content.logos;
   const loop = [...logos, ...logos, ...logos, ...logos];
   return (
     <section className="container-px mx-auto max-w-[1400px] py-20">
       <SectionHeader
-        eyebrow="As Featured In"
-        title={<>Media coverage <em className="font-display italic text-[color:var(--rose)]">across India.</em></>}
+        eyebrow={ed("media.eyebrow", content.eyebrow)}
+        title={edTitle("media", content.heading)}
         align="center"
       />
       <Reveal delay={0.15}>
@@ -983,7 +979,7 @@ function Media() {
           <Marquee speed={28}>
             {loop.map((l, i) => (
               <div key={i} className="flex h-20 w-44 items-center justify-center rounded-xl border border-border/70 bg-card px-6 shadow-soft">
-                <img src={l.src} alt={l.alt} loading="lazy" className="max-h-12 w-auto object-contain transition-transform duration-300 hover:scale-105" />
+                <EditableImage path={`media.logos.${i % logos.length}.src`} src={l.src} alt={l.alt} loading="lazy" className="max-h-12 w-auto object-contain transition-transform duration-300 hover:scale-105" />
               </div>
             ))}
           </Marquee>
@@ -1373,7 +1369,8 @@ const inquiryLocations = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
 
-export function InquiryForm() {
+export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+  const contactIcons = [Phone, MessageCircle, Clock];
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -1432,26 +1429,25 @@ export function InquiryForm() {
         {/* Left — info */}
         <div>
           <SectionHeader
-            eyebrow="Book an Appointment"
-            title={<>Start your <em className="font-display italic text-[color:var(--rose)]">parenthood journey.</em></>}
-            subtitle="Share a few details and our fertility counsellor will call you back — confidential, compassionate and complimentary."
+            eyebrow={ed("inquiry.eyebrow", content.eyebrow)}
+            title={edTitle("inquiry", content.heading)}
+            subtitle={ed("inquiry.subtitle", content.subtitle)}
           />
           <div className="mt-8 space-y-4">
-            {[
-              { icon: Phone, h: "Call us", d: "+91 97126 22288" },
-              { icon: MessageCircle, h: "WhatsApp", d: "Chat with our team 24×7" },
-              { icon: Clock, h: "Response time", d: "We typically respond within 30 minutes" },
-            ].map((x) => (
+            {content.contacts.map((x, i) => {
+              const Icon = contactIcons[i] ?? Phone;
+              return (
               <div key={x.h} className="flex items-center gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
-                  <x.icon className="h-5 w-5" />
+                  <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-[color:var(--plum)]">{x.h}</div>
-                  <div className="text-sm text-muted-foreground">{x.d}</div>
+                  <div className="text-sm font-semibold text-[color:var(--plum)]"><Editable path={`inquiry.contacts.${i}.h`}>{x.h}</Editable></div>
+                  <div className="text-sm text-muted-foreground"><Editable path={`inquiry.contacts.${i}.d`}>{x.d}</Editable></div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 

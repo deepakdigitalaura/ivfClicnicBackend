@@ -3902,6 +3902,77 @@ export interface Homepage {
     };
   };
   /**
+   * The 'As Featured In' press-logos strip.
+   */
+  media?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    /**
+     * Press / media logos. Leave empty to use the built-in set.
+     */
+    logos?:
+      | {
+          /**
+           * Web address of the logo image.
+           */
+          src: string;
+          /**
+           * Publication name, for accessibility.
+           */
+          alt: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
+   * The 'Book an Appointment' band with the callback form. The form fields themselves are fixed; only the copy and contact rows are editable here.
+   */
+  inquiry?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+    /**
+     * The three contact rows beside the form (the icons are fixed). Leave empty to use the built-in rows.
+     */
+    contacts?:
+      | {
+          /**
+           * e.g. 'Call us'.
+           */
+          h: string;
+          /**
+           * e.g. '+91 97126 22288'.
+           */
+          d: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
+  /**
    * The homepage FAQ accordion.
    */
   faq?: {
@@ -4727,6 +4798,43 @@ export interface HomepageSelect<T extends boolean = true> {
           | {
               lead?: T;
               em?: T;
+            };
+      };
+  media?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        logos?:
+          | T
+          | {
+              src?: T;
+              alt?: T;
+              id?: T;
+            };
+      };
+  inquiry?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+        contacts?:
+          | T
+          | {
+              h?: T;
+              d?: T;
+              id?: T;
             };
       };
   faq?:

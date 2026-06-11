@@ -401,6 +401,47 @@ const SECTION_FIELDS: Field[] = [
     headerGroup("doctors", "Our Doctors — Heading", "The heading above the doctors grid. The doctors themselves are managed under the Doctors section.", true),
     headerGroup("blogs", "Knowledge & Resources — Heading", "The heading above the resources videos.", false, true),
     headerGroup("testimonials", "Reviews — Heading", "The heading above the reviews/testimonials section.", false, false),
+    {
+      name: "media",
+      type: "group",
+      label: "Media Coverage",
+      admin: { description: "The 'As Featured In' press-logos strip." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        {
+          name: "logos",
+          type: "array",
+          labels: { singular: "Logo", plural: "Logos" },
+          admin: { description: "Press / media logos. Leave empty to use the built-in set." },
+          fields: [
+            { name: "src", type: "text", required: true, label: "Logo Image", admin: { description: "Web address of the logo image." } },
+            { name: "alt", type: "text", required: true, label: "Image Alt Text", admin: { description: "Publication name, for accessibility." } },
+          ],
+        },
+      ],
+    },
+    {
+      name: "inquiry",
+      type: "group",
+      label: "Inquiry / Appointment Section",
+      admin: { description: "The 'Book an Appointment' band with the callback form. The form fields themselves are fixed; only the copy and contact rows are editable here." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        {
+          name: "contacts",
+          type: "array",
+          labels: { singular: "Contact Row", plural: "Contact Rows" },
+          admin: { description: "The three contact rows beside the form (the icons are fixed). Leave empty to use the built-in rows." },
+          fields: [
+            { name: "h", type: "text", required: true, label: "Title", admin: { description: "e.g. 'Call us'." } },
+            { name: "d", type: "text", required: true, label: "Detail", admin: { description: "e.g. '+91 97126 22288'." } },
+          ],
+        },
+      ],
+    },
     seoField,
 ];
 
@@ -455,6 +496,8 @@ export const Homepage: GlobalConfig = {
     section("Upcoming Events", "The upcoming-events posters.", ["events"]),
     section("Videos", "Patient stories, education and resource videos.", ["videos"]),
     section("Section Headings", "Headings for the Success Stories, Education, Doctors, Resources and Reviews sections.", ["successStories", "videoHub", "doctors", "blogs", "testimonials"]),
+    section("Media Coverage", "The press-logos strip.", ["media"]),
+    section("Inquiry / Appointment", "The appointment band copy + contact rows.", ["inquiry"]),
     section("FAQs", "The homepage FAQ accordion.", ["faq"]),
     section("Closing Call-to-Action", "The closing band at the bottom.", ["finalCta"]),
     section("Search & Social", "How the page looks in Google and when shared.", ["seo"]),

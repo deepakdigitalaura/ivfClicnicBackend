@@ -187,6 +187,10 @@ export type HomepageData = {
   doctors: { eyebrow: string; heading: Heading; subtitle: string; ctaLabel: string };
   blogs: { eyebrow: string; heading: Heading; ctaLabel: string };
   testimonials: { eyebrow: string; heading: Heading };
+  media: { eyebrow: string; heading: Heading; logos: { src: string; alt: string }[] };
+  /** Contact rows carry editable text only — the icon stays code-owned (it maps
+   *  to the contact method, by index). */
+  inquiry: { eyebrow: string; heading: Heading; subtitle: string; contacts: { h: string; d: string }[] };
   seo: HomepageSeo;
 };
 
@@ -433,6 +437,25 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     eyebrow: "Testimonials",
     heading: { lead: "Words from", em: "our families." },
   },
+  media: {
+    eyebrow: "As Featured In",
+    heading: { lead: "Media coverage", em: "across India." },
+    logos: [
+      { src: "/assets/media/news-gujarati.png", alt: "News18 Gujarati" },
+      { src: "/assets/media/sandesh-tv.png", alt: "Sandesh News" },
+      { src: "/assets/media/my-fm.png", alt: "MY FM" },
+    ],
+  },
+  inquiry: {
+    eyebrow: "Book an Appointment",
+    heading: { lead: "Start your", em: "parenthood journey." },
+    subtitle: "Share a few details and our fertility counsellor will call you back — confidential, compassionate and complimentary.",
+    contacts: [
+      { h: "Call us", d: "+91 97126 22288" },
+      { h: "WhatsApp", d: "Chat with our team 24×7" },
+      { h: "Response time", d: "We typically respond within 30 minutes" },
+    ],
+  },
   seo: {
     metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 40+ Years",
     metaDescription:
@@ -542,6 +565,17 @@ export type HomepageSource =
       doctors?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
       blogs?: { eyebrow?: string | null; heading?: HeadingSource; ctaLabel?: string | null } | null;
       testimonials?: { eyebrow?: string | null; heading?: HeadingSource } | null;
+      media?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        logos?: { src?: string | null; alt?: string | null }[] | null;
+      } | null;
+      inquiry?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+        contacts?: { h?: string | null; d?: string | null }[] | null;
+      } | null;
       seo?: {
         metaTitle?: string | null;
         metaDescription?: string | null;
@@ -757,6 +791,21 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     eyebrow: src.testimonials?.eyebrow ?? d.testimonials.eyebrow,
     heading: heading(src.testimonials?.heading, d.testimonials.heading),
   };
+  const media = {
+    eyebrow: src.media?.eyebrow ?? d.media.eyebrow,
+    heading: heading(src.media?.heading, d.media.heading),
+    logos: src.media?.logos?.length
+      ? src.media.logos.map((l) => ({ src: l.src ?? "", alt: l.alt ?? "" }))
+      : d.media.logos,
+  };
+  const inquiry = {
+    eyebrow: src.inquiry?.eyebrow ?? d.inquiry.eyebrow,
+    heading: heading(src.inquiry?.heading, d.inquiry.heading),
+    subtitle: src.inquiry?.subtitle ?? d.inquiry.subtitle,
+    contacts: src.inquiry?.contacts?.length
+      ? src.inquiry.contacts.map((c) => ({ h: c.h ?? "", d: c.d ?? "" }))
+      : d.inquiry.contacts,
+  };
 
   // SEO meta is consumed by generateMetadata() (a server context); the ogImage
   // upload relation is resolved there, so it is intentionally NOT shaped here.
@@ -768,5 +817,5 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, seo };
+  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, seo };
 }
