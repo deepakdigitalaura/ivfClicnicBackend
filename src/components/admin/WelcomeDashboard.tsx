@@ -63,12 +63,12 @@ const GETTING_STARTED: { what: string; where: string }[] = [
 // editor isn't wired yet (shown disabled so the list reflects the real roadmap).
 const PAGE_EDITORS: { label: string; href: string; ready: boolean }[] = [
   { label: 'Home', href: '/edit/home', ready: true },
-  { label: 'About BFI', href: '/edit/about', ready: false },
+  { label: 'About BFI', href: '/edit/about-bfi', ready: true },
   { label: 'Doctors', href: '/edit/doctors', ready: true },
   { label: 'Treatments', href: '/edit/treatments', ready: true },
-  { label: 'Services', href: '/edit/services', ready: false },
-  { label: 'Locations', href: '/edit/locations', ready: false },
-  { label: 'Contact', href: '/edit/contact', ready: false },
+  { label: 'Services', href: '/edit/services', ready: true },
+  { label: 'Locations', href: '/edit/locations', ready: true },
+  { label: 'Contact', href: '/edit/contact', ready: true },
 ];
 
 function useCounts() {
