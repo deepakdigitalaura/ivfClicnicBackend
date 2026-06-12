@@ -43,17 +43,10 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   "male-infertility": { slug: "male-infertility", name: "Male Infertility", href: "/#treatments" },
   "female-infertility": { slug: "female-infertility", name: "Female Infertility", href: "/#treatments" },
   "fertility-preservation": { slug: "fertility-preservation", name: "Fertility Preservation", href: "/#treatments" },
-  pgt: { slug: "pgt", name: "PGT (Genetic Testing)", href: "/pgt" },
   endometriosis: { slug: "endometriosis", name: "Endometriosis", href: "/endometriosis" },
   azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
-  surrogacy: { slug: "surrogacy", name: "Surrogacy", href: "/surrogacy" },
-  "ivf-evaluation": { slug: "ivf-evaluation", name: "IVF Evaluation", href: "/ivf-evaluation" },
-  "era-test": { slug: "era-test", name: "ERA Test", href: "/era-test" },
   cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/cryopreservation" },
   "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/#treatments" },
-  "embryo-freezing": { slug: "embryo-freezing", name: "Embryo Freezing", href: "/embryo-freezing" },
-  "sperm-freezing": { slug: "sperm-freezing", name: "Sperm Freezing", href: "/sperm-freezing" },
-  "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/egg-freezing" },
   // Male Infertility
   oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
   asthenospermia: { slug: "asthenospermia", name: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
@@ -109,12 +102,6 @@ const TREATMENT_CARD_META: Record<string, { icon: LucideIcon; desc: string }> = 
   "ovarian-reserve": { icon: Egg, desc: "Tailored protocols for low AMH / low egg count." },
   "ovarian-rejuvenation": { icon: Sparkles, desc: "Ovarian PRP to support a very low reserve." },
   fibroids: { icon: ShieldCheck, desc: "Fertility-preserving treatment of uterine fibroids." },
-  "embryo-freezing": { icon: Snowflake, desc: "Freeze surplus embryos for a future transfer." },
-  "sperm-freezing": { icon: Snowflake, desc: "Simple, secure sperm banking for the future." },
-  "egg-freezing": { icon: Egg, desc: "Preserve younger eggs with vitrification." },
-  "ivf-evaluation": { icon: ListChecks, desc: "Root-cause work-up after a failed IVF cycle." },
-  "era-test": { icon: ScanLine, desc: "Personalised embryo-transfer timing analysis." },
-  surrogacy: { icon: Baby, desc: "Ethical, fully-supported surrogacy programme." },
   cryopreservation: { icon: Snowflake, desc: "Safe long-term freezing of eggs, sperm and embryos." },
   "recurrent-miscarriage": { icon: ShieldCheck, desc: "Evaluation and care for repeated pregnancy loss." },
 };
@@ -4435,14 +4422,6 @@ export const TREATMENTS: Treatment[] = [
   endometriosis,
   // Fertility Preservation
   cryopreservation,
-  embryoFreezing,
-  spermFreezing,
-  eggFreezing,
-  // IVF Failure Solutions
-  ivfEvaluation,
-  eraTest,
-  pgt,
-  surrogacy,
 ];
 export const treatmentBySlug = (slug: string) => TREATMENTS.find((t) => t.slug === slug);
 

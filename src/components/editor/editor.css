@@ -154,6 +154,20 @@
   padding: 0;
 }
 .bfi-floattool__swatch:hover { transform: scale(1.12); }
+.bfi-floattool__input {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  outline: none;
+  width: 220px;
+}
+.bfi-floattool__input::placeholder { color: rgba(255, 255, 255, 0.45); }
+.bfi-floattool__input:focus { border-color: var(--bfi-rose); }
+.bfi-editable-video { cursor: pointer; }
+.bfi-editable-video:hover { outline-style: solid; }
 
 /* Pages & Builder launchpad (/studio/pages) */
 .bfi-launch {

@@ -27,6 +27,7 @@
 import { iconKey, type IconName } from "@/lib/icon-map";
 import { treatmentBySlug, type Treatment, type Heading } from "@/lib/treatments";
 import { mediaUrl, type UploadValue } from "@/fields/image";
+import { testimonialsForTreatment, type VideoTestimonial } from "@/lib/video-testimonials";
 
 /* ---------- Resolved (serialisable) model — mirrors Treatment 1:1, with the
  * Lucide component fields replaced by icon NAMES. ---------- */
@@ -54,8 +55,19 @@ export type ResolvedTreatment = {
   video?: { id: string; title: string; description: string; eyebrow: string; heading: Heading };
   technology?: { heading: Heading; eyebrow?: string; subtitle?: string; items: ResolvedIconCard[] };
   whyUs?: { heading: Heading; items: ResolvedIconCard[] };
-  success: { factors: string[]; note?: string };
-  cost: { includes: string[] };
+  success: { factors: string[]; note?: string; heading: string; description: string; callout: string };
+  cost: { includes: string[]; heading: string; description: string };
+  patientStories: { heading: Heading; subtitle: string };
+  specialists: { heading: Heading; subtitle: string };
+  faqsSection: Heading;
+  relatedSection: Heading;
+  blogSection: { heading: Heading; subtitle: string };
+  labels: {
+    whatIs: string; benefits: string; types: string; whoNeedsIt: string; process: string;
+    timeline: string; whyUs: string; successCard: string; costCard: string;
+    successFactors: string; risks: string; preparation: string; patientStories: string;
+    specialists: string; faq: string; exploreMore: string; blog: string;
+  };
   risks: { heading: Heading; subtitle?: string; items: { t: string; d: string; help: string }[] };
   preparation?: { heading: Heading; subtitle?: string; items: string[] };
   faqs: { q: string; a: string }[];
@@ -133,8 +145,18 @@ export function toResolved(t: Treatment): ResolvedTreatment {
     ...(t.whyUs
       ? { whyUs: { heading: t.whyUs.heading, items: t.whyUs.items.map((x) => ({ icon: iconKey(x.icon), t: x.t, d: x.d })) } }
       : {}),
-    success: { factors: [...t.success.factors], ...(t.success.note ? { note: t.success.note } : {}) },
-    cost: { includes: [...t.cost.includes] },
+    success: {
+      factors: [...t.success.factors],
+      ...(t.success.note ? { note: t.success.note } : {}),
+      heading: "Real chances, honestly explained",
+      description: `Every fertility journey is unique. ${t.shortName} success rates depend on several medical and lifestyle factors.`,
+      callout: "At Bavishi Fertility Institute, we focus on personalised treatment plans rather than one-size-fits-all success claims.",
+    },
+    cost: {
+      includes: [...t.cost.includes],
+      heading: "Transparent, with no hidden costs",
+      description: `Know exactly what your ${t.shortName} treatment cost includes before you begin.`,
+    },
     risks: {
       heading: t.risks.heading,
       ...(t.risks.subtitle ? { subtitle: t.risks.subtitle } : {}),
@@ -145,6 +167,39 @@ export function toResolved(t: Treatment): ResolvedTreatment {
       : {}),
     faqs: t.faqs.map((f) => ({ q: f.q, a: f.a })),
     related: [...t.related],
+    patientStories: {
+      heading: { lead: t.shortName, em: "success stories" },
+      subtitle: `Hear from couples who chose Bavishi Fertility Institute for their ${t.shortName} journey.`,
+    },
+    specialists: {
+      heading: { lead: `Our ${t.shortName}`, em: "Specialists" },
+      subtitle: `Meet the Bavishi Fertility Institute specialists who treat patients with ${t.shortName}.`,
+    },
+    faqsSection: { lead: `${t.shortName} —`, em: "your questions answered" },
+    relatedSection: { lead: "Related fertility", em: "treatments & conditions" },
+    blogSection: {
+      heading: { lead: "Articles related to", em: t.shortName },
+      subtitle: `Helpful reads on ${t.shortName} from the Bavishi Fertility Institute specialists.`,
+    },
+    labels: {
+      whatIs: `What is ${t.shortName}`,
+      benefits: "Advantages",
+      types: `Types of ${t.shortName}`,
+      whoNeedsIt: "Indications",
+      process: "Step by Step",
+      timeline: "Treatment Timeline",
+      whyUs: "Why Bavishi Fertility Institute",
+      successCard: "Success & Safety",
+      costCard: "Cost & Assurance",
+      successFactors: "Factors affecting success",
+      risks: "Risks & Considerations",
+      preparation: "Preparing",
+      patientStories: "Patient Stories",
+      specialists: "Our Specialists",
+      faq: "FAQ",
+      exploreMore: "Explore More",
+      blog: "From Our Blog",
+    },
     cta: { heading: t.cta.heading, headingEm: t.cta.headingEm, ...(t.cta.subtitle ? { subtitle: t.cta.subtitle } : {}) },
   };
 }
@@ -202,19 +257,48 @@ export type TreatmentSource =
       video?: { id?: string | null; title?: string | null; description?: string | null; eyebrow?: string | null; heading?: HeadingSource } | null;
       technology?: { heading?: HeadingSource; eyebrow?: string | null; subtitle?: string | null; items?: IconCardSource[] | null } | null;
       whyUs?: { heading?: HeadingSource; items?: IconCardSource[] | null } | null;
-      success?: { factors?: ValueItem[] | null; note?: string | null } | null;
-      cost?: { includes?: ValueItem[] | null } | null;
+      success?: { factors?: ValueItem[] | null; note?: string | null; heading?: string | null; description?: string | null; callout?: string | null } | null;
+      cost?: { includes?: ValueItem[] | null; heading?: string | null; description?: string | null } | null;
+      patientStories?: { heading?: HeadingSource; subtitle?: string | null } | null;
+      specialists?: { heading?: HeadingSource; subtitle?: string | null } | null;
+      faqsSection?: HeadingSource;
+      relatedSection?: HeadingSource;
+      blogSection?: { heading?: HeadingSource; subtitle?: string | null } | null;
+      labels?: {
+        whatIs?: string | null; benefits?: string | null; types?: string | null; whoNeedsIt?: string | null; process?: string | null;
+        timeline?: string | null; whyUs?: string | null; successCard?: string | null; costCard?: string | null;
+        successFactors?: string | null; risks?: string | null; preparation?: string | null; patientStories?: string | null;
+        specialists?: string | null; faq?: string | null; exploreMore?: string | null; blog?: string | null;
+      } | null;
       risks?: { heading?: HeadingSource; subtitle?: string | null; items?: { t?: string | null; d?: string | null; help?: string | null }[] | null } | null;
       preparation?: { heading?: HeadingSource; subtitle?: string | null; items?: ValueItem[] | null } | null;
       faqs?: { q?: string | null; a?: string | null }[] | null;
       related?: { slug?: string | null }[] | null;
       cta?: { heading?: string | null; headingEm?: string | null; subtitle?: string | null } | null;
+      /** CMS override for patient video testimonials. When present, replaces the
+       *  code-owned defaults in TREATMENT_TESTIMONIALS so the editor can update
+       *  individual YouTube IDs without touching the source file. */
+      testimonials?: {
+        youTubeId?: string | null;
+        name?: string | null;
+        quote?: string | null;
+        location?: string | null;
+      }[] | null;
     }
   | null
   | undefined;
 
-const heading = (h: HeadingSource, def: Heading): Heading =>
-  h?.lead ? { lead: h.lead, ...(h.em ? { em: h.em } : {}) } : def;
+// Resolve each part of a heading INDEPENDENTLY (lead/em fall back separately).
+// The inline editor commits one field per blur, so editing a heading's `lead`
+// posts a draft whose `em` is whatever the materialised source seeded — the old
+// all-or-nothing `h?.lead ? {…} : def` reset the OTHER part to the default on
+// every single-field edit (the homepage "content vanishes on edit" bug). This
+// stays byte-identical on the public/seed path: a seeded heading carries both
+// parts, and an absent part resolves to the same default either way.
+const heading = (h: HeadingSource, def: Heading): Heading => ({
+  lead: h?.lead ?? def.lead,
+  em: h?.em ?? def.em,
+});
 const texts = (a: TextItem[] | null | undefined): string[] =>
   (a ?? []).map((x) => x.text ?? "").filter(Boolean);
 const values = (a: ValueItem[] | null | undefined): string[] =>
@@ -232,7 +316,9 @@ const procSteps = (a: StepSource[] | null | undefined): ResolvedStep[] =>
 export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTreatment | undefined {
   const def = treatmentBySlug(slug);
   if (!src) return def ? toResolved(def) : undefined;
-  if (!def) return undefined; // unknown slug — no template/registry behind it
+  if (!def) {
+    return resolvePureCMSTreatment(src);
+  }
   const base = toResolved(def);
 
   return {
@@ -295,10 +381,18 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
           ...(src.process.note ? { note: src.process.note } : {}),
         }
       : base.process,
-    success: src.success?.factors?.length
-      ? { factors: values(src.success.factors), ...(src.success.note ? { note: src.success.note } : {}) }
-      : base.success,
-    cost: src.cost?.includes?.length ? { includes: values(src.cost.includes) } : base.cost,
+    success: {
+      factors: src.success?.factors?.length ? values(src.success.factors) : base.success.factors,
+      ...(src.success?.note || base.success.note ? { note: src.success?.note || base.success.note } : {}),
+      heading: src.success?.heading || base.success.heading,
+      description: src.success?.description || base.success.description,
+      callout: src.success?.callout || base.success.callout,
+    },
+    cost: {
+      includes: src.cost?.includes?.length ? values(src.cost.includes) : base.cost.includes,
+      heading: src.cost?.heading || base.cost.heading,
+      description: src.cost?.description || base.cost.description,
+    },
     risks: src.risks?.items?.length
       ? {
           heading: heading(src.risks.heading, base.risks.heading),
@@ -311,6 +405,39 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
     cta: src.cta?.heading
       ? { heading: src.cta.heading, headingEm: src.cta.headingEm ?? base.cta.headingEm, ...(src.cta.subtitle ? { subtitle: src.cta.subtitle } : {}) }
       : base.cta,
+    patientStories: {
+      heading: heading(src.patientStories?.heading, base.patientStories.heading),
+      subtitle: src.patientStories?.subtitle || base.patientStories.subtitle,
+    },
+    specialists: {
+      heading: heading(src.specialists?.heading, base.specialists.heading),
+      subtitle: src.specialists?.subtitle || base.specialists.subtitle,
+    },
+    faqsSection: heading(src.faqsSection, base.faqsSection),
+    relatedSection: heading(src.relatedSection, base.relatedSection),
+    blogSection: {
+      heading: heading(src.blogSection?.heading, base.blogSection.heading),
+      subtitle: src.blogSection?.subtitle || base.blogSection.subtitle,
+    },
+    labels: {
+      whatIs: src.labels?.whatIs || base.labels.whatIs,
+      benefits: src.labels?.benefits || base.labels.benefits,
+      types: src.labels?.types || base.labels.types,
+      whoNeedsIt: src.labels?.whoNeedsIt || base.labels.whoNeedsIt,
+      process: src.labels?.process || base.labels.process,
+      timeline: src.labels?.timeline || base.labels.timeline,
+      whyUs: src.labels?.whyUs || base.labels.whyUs,
+      successCard: src.labels?.successCard || base.labels.successCard,
+      costCard: src.labels?.costCard || base.labels.costCard,
+      successFactors: src.labels?.successFactors || base.labels.successFactors,
+      risks: src.labels?.risks || base.labels.risks,
+      preparation: src.labels?.preparation || base.labels.preparation,
+      patientStories: src.labels?.patientStories || base.labels.patientStories,
+      specialists: src.labels?.specialists || base.labels.specialists,
+      faq: src.labels?.faq || base.labels.faq,
+      exploreMore: src.labels?.exploreMore || base.labels.exploreMore,
+      blog: src.labels?.blog || base.labels.blog,
+    },
 
     // ---- optional sections (conditional spread; base carries the default
     //      when the doc omits them) ----
@@ -362,4 +489,209 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
       ? { preparation: { heading: heading(src.preparation.heading, base.preparation?.heading ?? { lead: "" }), ...(src.preparation.subtitle ? { subtitle: src.preparation.subtitle } : {}), items: values(src.preparation.items) } }
       : {}),
   };
+}
+
+/**
+ * Resolve a treatment that was created PURELY from the CMS (no code-registry
+ * entry). Used by the dynamic `/treatments/[slug]` route. All defaults are
+ * derived from the CMS doc's name/shortName so the page renders meaningfully
+ * even when content sections are still empty.
+ */
+export function resolvePureCMSTreatment(src: NonNullable<TreatmentSource>): ResolvedTreatment {
+  const name = src.name ?? "Treatment";
+  const short = src.shortName || name;
+  const slug = src.slug ?? "";
+  const href = src.href || `/treatments/${slug}`;
+  const empty: Heading = { lead: "", em: "" };
+  return {
+    slug,
+    href,
+    name,
+    shortName: short,
+    breadcrumbName: src.breadcrumbName || short,
+    ...(src.alternateName ? { alternateName: src.alternateName } : {}),
+    meta: {
+      title: src.meta?.title || `${name} — Bavishi Fertility Institute`,
+      description: src.meta?.description || `Learn about ${name} treatment at Bavishi Fertility Institute.`,
+      ogImage: src.meta?.ogImage || "",
+    },
+    procedure: {
+      ...(src.procedure?.procedureType ? { procedureType: src.procedure.procedureType } : {}),
+      ...(src.procedure?.bodyLocation ? { bodyLocation: src.procedure.bodyLocation } : {}),
+      ...(src.procedure?.howPerformed ? { howPerformed: src.procedure.howPerformed } : {}),
+      ...(src.procedure?.followup ? { followup: src.procedure.followup } : {}),
+    },
+    lastReviewed: src.lastReviewed || "",
+    reviewerSlug: src.reviewerSlug || "",
+    hero: {
+      eyebrow: src.hero?.eyebrow || "Bavishi Fertility Institute",
+      h1: src.hero?.h1 || name,
+      h1Em: src.hero?.h1Em || "",
+      tagline: src.hero?.tagline || "",
+      badges: src.hero?.badges?.length ? values(src.hero.badges) : [],
+      image: mediaUrl(src.hero?.heroPhoto) ?? (src.hero?.image || ""),
+      imageAlt: src.hero?.imageAlt || name,
+    },
+    whatIs: src.whatIs?.paragraphs?.length
+      ? { heading: heading(src.whatIs.heading, empty), paragraphs: texts(src.whatIs.paragraphs), ...(src.whatIs.aside?.title ? { aside: { title: src.whatIs.aside.title, body: src.whatIs.aside.body ?? "" } } : {}) }
+      : { heading: { lead: `What is`, em: short }, paragraphs: [] },
+    benefits: src.benefits?.items?.length
+      ? { heading: heading(src.benefits.heading, empty), ...(src.benefits.subtitle ? { subtitle: src.benefits.subtitle } : {}), items: values(src.benefits.items) }
+      : { heading: { lead: "Benefits of", em: short }, items: [] },
+    whoNeedsIt: src.whoNeedsIt?.items?.length
+      ? { heading: heading(src.whoNeedsIt.heading, empty), ...(src.whoNeedsIt.subtitle ? { subtitle: src.whoNeedsIt.subtitle } : {}), items: values(src.whoNeedsIt.items) }
+      : { heading: { lead: "Who needs", em: short }, items: [] },
+    process: src.process?.steps?.length
+      ? { heading: heading(src.process.heading, empty), ...(src.process.subtitle ? { subtitle: src.process.subtitle } : {}), steps: procSteps(src.process.steps), ...(src.process.note ? { note: src.process.note } : {}) }
+      : { heading: { lead: "The", em: `${short} Process` }, steps: [] },
+    success: {
+      factors: src.success?.factors?.length ? values(src.success.factors) : [],
+      heading: src.success?.heading || "Real chances, honestly explained",
+      description: src.success?.description || `Every fertility journey is unique. ${short} success rates depend on several medical and lifestyle factors.`,
+      callout: src.success?.callout || "At Bavishi Fertility Institute, we focus on personalised treatment plans rather than one-size-fits-all success claims.",
+      ...(src.success?.note ? { note: src.success.note } : {}),
+    },
+    cost: {
+      includes: src.cost?.includes?.length ? values(src.cost.includes) : [],
+      heading: src.cost?.heading || "Transparent, with no hidden costs",
+      description: src.cost?.description || `Know exactly what your ${short} treatment cost includes before you begin.`,
+    },
+    risks: src.risks?.items?.length
+      ? { heading: heading(src.risks.heading, empty), ...(src.risks.subtitle ? { subtitle: src.risks.subtitle } : {}), items: src.risks.items.map((r) => ({ t: r.t ?? "", d: r.d ?? "", help: r.help ?? "" })) }
+      : { heading: { lead: "Risks &", em: "Considerations" }, items: [] },
+    ...(src.types?.items?.length ? { types: { heading: heading(src.types.heading, empty), ...(src.types.subtitle ? { subtitle: src.types.subtitle } : {}), items: iconCards(src.types.items) } } : {}),
+    ...(src.timeline?.items?.length ? { timeline: { heading: heading(src.timeline.heading, empty), ...(src.timeline.subtitle ? { subtitle: src.timeline.subtitle } : {}), items: src.timeline.items.map((i) => ({ day: i.day ?? "", t: i.t ?? "", d: i.d ?? "" })), ...(src.timeline.chips?.length ? { chips: values(src.timeline.chips) } : {}), ...(src.timeline.chipsNote ? { chipsNote: src.timeline.chipsNote } : {}) } } : {}),
+    ...(src.video?.id ? { video: { id: src.video.id, title: src.video.title ?? "", description: src.video.description ?? "", eyebrow: src.video.eyebrow ?? "", heading: heading(src.video.heading, empty) } } : {}),
+    ...(src.technology?.items?.length ? { technology: { heading: heading(src.technology.heading, empty), ...(src.technology.eyebrow ? { eyebrow: src.technology.eyebrow } : {}), ...(src.technology.subtitle ? { subtitle: src.technology.subtitle } : {}), items: iconCards(src.technology.items) } } : {}),
+    ...(src.whyUs?.items?.length ? { whyUs: { heading: heading(src.whyUs.heading, empty), items: iconCards(src.whyUs.items) } } : {}),
+    ...(src.preparation?.items?.length ? { preparation: { heading: heading(src.preparation.heading, empty), ...(src.preparation.subtitle ? { subtitle: src.preparation.subtitle } : {}), items: values(src.preparation.items) } } : {}),
+    faqs: src.faqs?.length ? src.faqs.map((f) => ({ q: f.q ?? "", a: f.a ?? "" })) : [],
+    related: src.related?.length ? src.related.map((r) => r.slug ?? "").filter(Boolean) : [],
+    cta: src.cta?.heading ? { heading: src.cta.heading, headingEm: src.cta.headingEm ?? "", ...(src.cta.subtitle ? { subtitle: src.cta.subtitle } : {}) } : { heading: "Start your", headingEm: "fertility journey" },
+    patientStories: { heading: heading(src.patientStories?.heading, { lead: short, em: "success stories" }), subtitle: src.patientStories?.subtitle || `Hear from couples who chose Bavishi Fertility Institute for their ${short} journey.` },
+    specialists: { heading: heading(src.specialists?.heading, { lead: `Our ${short}`, em: "Specialists" }), subtitle: src.specialists?.subtitle || `Meet the Bavishi Fertility Institute specialists who treat patients with ${short}.` },
+    faqsSection: heading(src.faqsSection, { lead: `${short} —`, em: "your questions answered" }),
+    relatedSection: heading(src.relatedSection, { lead: "Related fertility", em: "treatments & conditions" }),
+    blogSection: { heading: heading(src.blogSection?.heading, { lead: "Articles related to", em: short }), subtitle: src.blogSection?.subtitle || `Helpful reads on ${short} from the Bavishi Fertility Institute specialists.` },
+    labels: {
+      whatIs: src.labels?.whatIs || `What is ${short}`,
+      benefits: src.labels?.benefits || "Advantages",
+      types: src.labels?.types || `Types of ${short}`,
+      whoNeedsIt: src.labels?.whoNeedsIt || "Indications",
+      process: src.labels?.process || "Step by Step",
+      timeline: src.labels?.timeline || "Treatment Timeline",
+      whyUs: src.labels?.whyUs || "Why Bavishi Fertility Institute",
+      successCard: src.labels?.successCard || "Success & Safety",
+      costCard: src.labels?.costCard || "Cost & Assurance",
+      successFactors: src.labels?.successFactors || "Factors affecting success",
+      risks: src.labels?.risks || "Risks & Considerations",
+      preparation: src.labels?.preparation || "Preparing",
+      patientStories: src.labels?.patientStories || "Patient Stories",
+      specialists: src.labels?.specialists || "Our Specialists",
+      faq: src.labels?.faq || "FAQ",
+      exploreMore: src.labels?.exploreMore || "Explore More",
+      blog: src.labels?.blog || "From Our Blog",
+    },
+  };
+}
+
+/* =====================================================================
+ * materializeTreatmentSource — seed a FULLY-populated draft for the inline
+ * editor (mirrors materializeHomepageSource).
+ * ---------------------------------------------------------------------
+ * The editor edits a SOURCE draft and commits ONE field per blur. If the draft
+ * started mostly empty (the CMS doc only carries overrides; sections render from
+ * the code defaults), editing one field would POST a sparse array — Payload's
+ * required-field validation 400s on the empty rows, and a half-filled section
+ * would drop its sibling rows in the live preview. Seeding the draft with every
+ * section/row/field already present (in SOURCE shape, filled from the resolved
+ * defaults) fixes both: editing one field leaves all the others intact and
+ * complete, so the POST always carries valid rows and nothing vanishes.
+ *
+ * Editor-only. The PUBLIC site never calls this — it resolves the raw CMS doc
+ * directly, so output stays byte-identical, and resolveTreatment(materialized)
+ * === the same resolved data, so the live preview is unchanged.
+ */
+export function materializeTreatmentSource(slug: string, src: TreatmentSource): NonNullable<TreatmentSource> {
+  const r = resolveTreatment(slug, src);
+  const s = (src ?? {}) as NonNullable<TreatmentSource>;
+  if (!r) return s; // unknown slug — nothing to seed
+  // Helpers for the array fields whose SOURCE shape wraps each string.
+  const v = (value: string) => ({ value });
+  const tx = (text: string) => ({ text });
+  return {
+    ...s,
+    slug: r.slug,
+    href: r.href,
+    name: r.name,
+    shortName: r.shortName,
+    ...(r.alternateName ? { alternateName: r.alternateName } : {}),
+    breadcrumbName: r.breadcrumbName,
+    lastReviewed: r.lastReviewed,
+    reviewerSlug: r.reviewerSlug,
+    meta: { title: r.meta.title, description: r.meta.description, ogImage: r.meta.ogImage },
+    procedure: { ...r.procedure },
+    hero: {
+      ...(s.hero ?? {}),
+      eyebrow: r.hero.eyebrow,
+      h1: r.hero.h1,
+      h1Em: r.hero.h1Em,
+      tagline: r.hero.tagline,
+      badges: r.hero.badges.map(v),
+      image: r.hero.image,
+      imageAlt: r.hero.imageAlt,
+    },
+    whatIs: {
+      ...(s.whatIs ?? {}),
+      heading: r.whatIs.heading,
+      paragraphs: r.whatIs.paragraphs.map(tx),
+      ...(r.whatIs.aside ? { aside: { title: r.whatIs.aside.title, body: r.whatIs.aside.body } } : {}),
+    },
+    benefits: { ...(s.benefits ?? {}), heading: r.benefits.heading, ...(r.benefits.subtitle ? { subtitle: r.benefits.subtitle } : {}), items: r.benefits.items.map(v) },
+    whoNeedsIt: { ...(s.whoNeedsIt ?? {}), heading: r.whoNeedsIt.heading, ...(r.whoNeedsIt.subtitle ? { subtitle: r.whoNeedsIt.subtitle } : {}), items: r.whoNeedsIt.items.map(v) },
+    process: {
+      ...(s.process ?? {}),
+      heading: r.process.heading,
+      ...(r.process.subtitle ? { subtitle: r.process.subtitle } : {}),
+      steps: r.process.steps,
+      ...(r.process.note ? { note: r.process.note } : {}),
+    },
+    success: { ...(s.success ?? {}), factors: r.success.factors.map(v), ...(r.success.note ? { note: r.success.note } : {}), heading: r.success.heading, description: r.success.description, callout: r.success.callout },
+    cost: { ...(s.cost ?? {}), includes: r.cost.includes.map(v), heading: r.cost.heading, description: r.cost.description },
+    risks: { ...(s.risks ?? {}), heading: r.risks.heading, ...(r.risks.subtitle ? { subtitle: r.risks.subtitle } : {}), items: r.risks.items },
+    faqs: r.faqs,
+    related: r.related.map((slug) => ({ slug })),
+    cta: { ...(s.cta ?? {}), heading: r.cta.heading, headingEm: r.cta.headingEm, ...(r.cta.subtitle ? { subtitle: r.cta.subtitle } : {}) },
+    ...(r.types ? { types: { ...(s.types ?? {}), heading: r.types.heading, ...(r.types.subtitle ? { subtitle: r.types.subtitle } : {}), items: r.types.items } } : {}),
+    ...(r.timeline
+      ? {
+          timeline: {
+            ...(s.timeline ?? {}),
+            heading: r.timeline.heading,
+            ...(r.timeline.subtitle ? { subtitle: r.timeline.subtitle } : {}),
+            items: r.timeline.items,
+            ...(r.timeline.chips ? { chips: r.timeline.chips.map(v) } : {}),
+            ...(r.timeline.chipsNote ? { chipsNote: r.timeline.chipsNote } : {}),
+          },
+        }
+      : {}),
+    ...(r.video ? { video: { ...(s.video ?? {}), ...r.video } } : {}),
+    ...(r.technology
+      ? { technology: { ...(s.technology ?? {}), heading: r.technology.heading, ...(r.technology.eyebrow ? { eyebrow: r.technology.eyebrow } : {}), ...(r.technology.subtitle ? { subtitle: r.technology.subtitle } : {}), items: r.technology.items } }
+      : {}),
+    ...(r.whyUs ? { whyUs: { ...(s.whyUs ?? {}), heading: r.whyUs.heading, items: r.whyUs.items } } : {}),
+    ...(r.preparation ? { preparation: { ...(s.preparation ?? {}), heading: r.preparation.heading, ...(r.preparation.subtitle ? { subtitle: r.preparation.subtitle } : {}), items: r.preparation.items.map(v) } } : {}),
+    patientStories: { ...(s.patientStories ?? {}), heading: r.patientStories.heading, subtitle: r.patientStories.subtitle },
+    specialists: { ...(s.specialists ?? {}), heading: r.specialists.heading, subtitle: r.specialists.subtitle },
+    faqsSection: { lead: r.faqsSection.lead, em: r.faqsSection.em },
+    relatedSection: { lead: r.relatedSection.lead, em: r.relatedSection.em },
+    blogSection: { ...(s.blogSection ?? {}), heading: r.blogSection.heading, subtitle: r.blogSection.subtitle },
+    labels: { ...(s.labels ?? {}), ...r.labels },
+    // Seed testimonials from CMS doc if already set, else from code defaults.
+    // This gives the editor a fully-populated array to PATCH individual video IDs
+    // without touching the code source file.
+    testimonials: (s.testimonials?.length
+      ? s.testimonials
+      : testimonialsForTreatment(slug)) as NonNullable<TreatmentSource>["testimonials"],
+  } as NonNullable<TreatmentSource>;
 }

@@ -17,6 +17,49 @@ import {
   type ContactChannel,
   type ContactValues,
 } from "@/lib/contact";
+import type { NavTreatmentItem } from "@/lib/header";
+
+/** Footer heading for each navCategory value. */
+const FOOTER_CATEGORY_LABELS: Record<string, string> = {
+  "advanced-ivf": "IVF Treatments",
+  "donor-services": "Donor Services",
+  "male-infertility": "Male Infertility",
+  "female-infertility": "Female Infertility",
+  "fertility-preservation": "Fertility Preservation",
+  "maternity-services": "Maternity Services",
+};
+
+/** Canonical treatment group order in the footer. */
+const FOOTER_CATEGORY_ORDER = [
+  "advanced-ivf",
+  "donor-services",
+  "male-infertility",
+  "female-infertility",
+  "fertility-preservation",
+  "maternity-services",
+];
+
+/** Footer headings that correspond to treatment categories (replaced dynamically). */
+const TREATMENT_HEADINGS = new Set(Object.values(FOOTER_CATEGORY_LABELS));
+
+/** Build treatment FooterGroups from CMS nav treatments, in canonical category order. */
+function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] {
+  const byCat = new Map<string, NavTreatmentItem[]>();
+  for (const t of navTreatments) {
+    if (!FOOTER_CATEGORY_LABELS[t.navCategory]) continue;
+    const arr = byCat.get(t.navCategory) ?? [];
+    arr.push(t);
+    byCat.set(t.navCategory, arr);
+  }
+  return FOOTER_CATEGORY_ORDER
+    .filter((cat) => byCat.has(cat))
+    .map((cat) => ({
+      h: FOOTER_CATEGORY_LABELS[cat],
+      l: byCat.get(cat)!
+        .sort((a, b) => a.navOrder - b.navOrder)
+        .map((t) => ({ label: t.name, href: t.href })),
+    }));
+}
 
 export type FooterLink = { label: string; href?: string; external?: boolean };
 export type FooterGroup = { h: string; l: FooterLink[] };
@@ -184,8 +227,17 @@ function resolveLink(link: FooterLinkSource, contact: ContactValues): FooterLink
 /**
  * Map the `footer` global → FooterData, resolving contact channels against the
  * canonical `contact` values and falling back per-section to FOOTER_DEFAULTS.
+ *
+ * When `navTreatments` is provided (published Payload treatments with navCategory
+ * set), the treatment-category groups (IVF Treatments, Male Infertility, etc.)
+ * are replaced with dynamic ones — so adding a treatment in the admin
+ * automatically reflects in the footer without any hardcoded list change.
  */
-export function resolveFooter(g: FooterSource, contact: ContactValues): FooterData {
+export function resolveFooter(
+  g: FooterSource,
+  contact: ContactValues,
+  navTreatments: NavTreatmentItem[] = [],
+): FooterData {
   const branding =
     g?.branding && (g.branding.logoUrl || g.branding.description)
       ? {
@@ -194,8 +246,8 @@ export function resolveFooter(g: FooterSource, contact: ContactValues): FooterDa
         }
       : undefined;
 
-  // Columns / links toggled "Hide" are dropped (kept in the CMS, not rendered).
-  const groups = g?.navGroups?.length
+  // Base groups from CMS global or defaults (treatment groups included).
+  const rawGroups: FooterGroup[] = g?.navGroups?.length
     ? g.navGroups
         .filter((grp) => !grp.hidden)
         .map((grp) => ({
@@ -203,6 +255,30 @@ export function resolveFooter(g: FooterSource, contact: ContactValues): FooterDa
           l: (grp.links ?? []).filter((link) => !link.hidden).map((link) => resolveLink(link, contact)),
         }))
     : FOOTER_DEFAULTS.groups;
+
+  // If CMS has treatments with navCategory set, replace the treatment-category
+  // groups with dynamic ones. Non-treatment groups (Doctors, Locations, etc.)
+  // stay in their original position. Falls back to the hardcoded groups when
+  // no treatments have a category yet (safe during the initial migration).
+  let groups: FooterGroup[];
+  if (navTreatments.length > 0) {
+    const dynamicTreatmentGroups = buildTreatmentGroups(navTreatments);
+    const dynamicByHeading = new Map(dynamicTreatmentGroups.map((g) => [g.h, g]));
+    const presentHeadings = new Set(dynamicTreatmentGroups.map((g) => g.h));
+
+    // Replace existing treatment groups with dynamic ones; keep non-treatment groups.
+    const replaced = rawGroups.map((grp) =>
+      TREATMENT_HEADINGS.has(grp.h) && presentHeadings.has(grp.h)
+        ? dynamicByHeading.get(grp.h)!
+        : grp,
+    );
+    // Prepend any new treatment categories that weren't in the original groups.
+    const existingHeadings = new Set(rawGroups.map((g) => g.h));
+    const newGroups = dynamicTreatmentGroups.filter((g) => !existingHeadings.has(g.h));
+    groups = [...newGroups, ...replaced];
+  } else {
+    groups = rawGroups;
+  }
 
   const social = g?.social?.length
     ? g.social

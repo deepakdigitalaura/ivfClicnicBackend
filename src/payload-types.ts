@@ -1029,6 +1029,23 @@ export interface Treatment {
     ogImage?: string | null;
   };
   /**
+   * Which section of the website menu this treatment appears in. Leave empty to hide from menus.
+   */
+  navCategory?:
+    | (
+        | 'advanced-ivf'
+        | 'donor-services'
+        | 'male-infertility'
+        | 'female-infertility'
+        | 'fertility-preservation'
+        | 'maternity-services'
+      )
+    | null;
+  /**
+   * Controls the order within the category. Lower numbers appear first (e.g. 10, 20, 30).
+   */
+  navOrder?: number | null;
+  /**
    * Search-engine procedure details. Managed by the website team.
    */
   procedure?: {
@@ -1430,6 +1447,18 @@ export interface Treatment {
       | null;
   };
   success?: {
+    /**
+     * Default: 'Real chances, honestly explained'.
+     */
+    heading?: string | null;
+    /**
+     * The paragraph below the title. Leave empty to use the built-in default.
+     */
+    description?: string | null;
+    /**
+     * The pink callout box text. Default: 'At Bavishi Fertility Institute, we focus on personalised treatment plans…'
+     */
+    callout?: string | null;
     factors?:
       | {
           value: string;
@@ -1439,6 +1468,14 @@ export interface Treatment {
     note?: string | null;
   };
   cost?: {
+    /**
+     * Default: 'Transparent, with no hidden costs'.
+     */
+    heading?: string | null;
+    /**
+     * The paragraph below the title. Leave empty to use the built-in default.
+     */
+    description?: string | null;
     includes?:
       | {
           value: string;
@@ -1505,12 +1542,117 @@ export interface Treatment {
         id?: string | null;
       }[]
     | null;
+  /**
+   * YouTube patient testimonial videos for this treatment. Leave empty to use the built-in defaults.
+   */
+  testimonials?:
+    | {
+        /**
+         * The 11-character ID from the YouTube URL (the part after watch?v=).
+         */
+        youTubeId: string;
+        name: string;
+        quote: string;
+        location?: string | null;
+        id?: string | null;
+      }[]
+    | null;
   cta?: {
     heading?: string | null;
     /**
      * The word(s) shown in the cursive accent style.
      */
     headingEm?: string | null;
+    subtitle?: string | null;
+  };
+  /**
+   * Override the small eyebrow labels shown above each section heading. Leave any field empty to use the built-in default.
+   */
+  labels?: {
+    whatIs?: string | null;
+    benefits?: string | null;
+    types?: string | null;
+    whoNeedsIt?: string | null;
+    process?: string | null;
+    timeline?: string | null;
+    whyUs?: string | null;
+    successCard?: string | null;
+    costCard?: string | null;
+    successFactors?: string | null;
+    risks?: string | null;
+    preparation?: string | null;
+    patientStories?: string | null;
+    specialists?: string | null;
+    faq?: string | null;
+    exploreMore?: string | null;
+    blog?: string | null;
+  };
+  /**
+   * Override the heading and sub-heading for the patient testimonials section.
+   */
+  patientStories?: {
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+  };
+  /**
+   * Override the heading and sub-heading for the 'Our Specialists' section. Leave empty to use the built-in defaults derived from the treatment name.
+   */
+  specialists?: {
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style (optional).
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+  };
+  /**
+   * Override the heading for the FAQ section. Leave empty to use the built-in default.
+   */
+  faqsSection?: {
+    lead?: string | null;
+    /**
+     * The word(s) shown in the cursive accent style.
+     */
+    em?: string | null;
+  };
+  /**
+   * Override the heading for the 'Explore More / Related Treatments' section.
+   */
+  relatedSection?: {
+    lead?: string | null;
+    /**
+     * The word(s) shown in the cursive accent style.
+     */
+    em?: string | null;
+  };
+  /**
+   * Override the heading and sub-heading for the 'From Our Blog' section.
+   */
+  blogSection?: {
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s).
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style (optional).
+       */
+      em?: string | null;
+    };
     subtitle?: string | null;
   };
   updatedAt: string;
@@ -2372,6 +2514,8 @@ export interface TreatmentsSelect<T extends boolean = true> {
         description?: T;
         ogImage?: T;
       };
+  navCategory?: T;
+  navOrder?: T;
   procedure?:
     | T
     | {
@@ -2574,6 +2718,9 @@ export interface TreatmentsSelect<T extends boolean = true> {
   success?:
     | T
     | {
+        heading?: T;
+        description?: T;
+        callout?: T;
         factors?:
           | T
           | {
@@ -2585,6 +2732,8 @@ export interface TreatmentsSelect<T extends boolean = true> {
   cost?:
     | T
     | {
+        heading?: T;
+        description?: T;
         includes?:
           | T
           | {
@@ -2641,11 +2790,86 @@ export interface TreatmentsSelect<T extends boolean = true> {
         slug?: T;
         id?: T;
       };
+  testimonials?:
+    | T
+    | {
+        youTubeId?: T;
+        name?: T;
+        quote?: T;
+        location?: T;
+        id?: T;
+      };
   cta?:
     | T
     | {
         heading?: T;
         headingEm?: T;
+        subtitle?: T;
+      };
+  labels?:
+    | T
+    | {
+        whatIs?: T;
+        benefits?: T;
+        types?: T;
+        whoNeedsIt?: T;
+        process?: T;
+        timeline?: T;
+        whyUs?: T;
+        successCard?: T;
+        costCard?: T;
+        successFactors?: T;
+        risks?: T;
+        preparation?: T;
+        patientStories?: T;
+        specialists?: T;
+        faq?: T;
+        exploreMore?: T;
+        blog?: T;
+      };
+  patientStories?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+      };
+  specialists?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+      };
+  faqsSection?:
+    | T
+    | {
+        lead?: T;
+        em?: T;
+      };
+  relatedSection?:
+    | T
+    | {
+        lead?: T;
+        em?: T;
+      };
+  blogSection?:
+    | T
+    | {
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
         subtitle?: T;
       };
   updatedAt?: T;

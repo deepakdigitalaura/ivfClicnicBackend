@@ -18,8 +18,55 @@ const __dirname = dirname(fileURLToPath(import.meta.url));
 /** Wrap a string[] into a single-key array-of-object shape, e.g. { value }. */
 const wrap = (arr: string[], key: string) => arr.map((v) => ({ [key]: v }));
 
+const getNavMapping = (slug: string): { navCategory?: string; navOrder?: number } => {
+  switch (slug) {
+    // Advanced IVF
+    case "ivf": return { navCategory: "advanced-ivf", navOrder: 10 };
+    case "ivf-failure": return { navCategory: "advanced-ivf", navOrder: 20 };
+    case "iui": return { navCategory: "advanced-ivf", navOrder: 30 };
+    case "icsi": return { navCategory: "advanced-ivf", navOrder: 40 };
+    case "picsi": return { navCategory: "advanced-ivf", navOrder: 50 };
+    case "imsi": return { navCategory: "advanced-ivf", navOrder: 60 };
+    case "macs": return { navCategory: "advanced-ivf", navOrder: 70 };
+    case "spindle-view-icsi": return { navCategory: "advanced-ivf", navOrder: 80 };
+    case "blastocyst-transfer": return { navCategory: "advanced-ivf", navOrder: 90 };
+    case "laser-hatching": return { navCategory: "advanced-ivf", navOrder: 100 };
+
+
+    // Donor Services
+    case "egg-donation": return { navCategory: "donor-services", navOrder: 10 };
+    case "sperm-donation": return { navCategory: "donor-services", navOrder: 20 };
+    case "embryo-donation": return { navCategory: "donor-services", navOrder: 30 };
+
+
+    // Male Infertility
+    case "oligospermia": return { navCategory: "male-infertility", navOrder: 10 };
+    case "asthenospermia": return { navCategory: "male-infertility", navOrder: 20 };
+    case "azoospermia": return { navCategory: "male-infertility", navOrder: 30 };
+    case "surgical-sperm-retrieval": return { navCategory: "male-infertility", navOrder: 40 };
+    case "varicocele": return { navCategory: "male-infertility", navOrder: 50 };
+    case "erectile-dysfunction": return { navCategory: "male-infertility", navOrder: 60 };
+
+    // Female Infertility
+    case "conceive-naturally": return { navCategory: "female-infertility", navOrder: 10 };
+    case "prp-infertility": return { navCategory: "female-infertility", navOrder: 20 };
+    case "pcos": return { navCategory: "female-infertility", navOrder: 30 };
+    case "ovarian-reserve": return { navCategory: "female-infertility", navOrder: 40 };
+    case "ovarian-rejuvenation": return { navCategory: "female-infertility", navOrder: 50 };
+    case "fibroids": return { navCategory: "female-infertility", navOrder: 60 };
+    case "endometriosis": return { navCategory: "female-infertility", navOrder: 70 };
+
+    // Fertility Preservation
+    case "cryopreservation": return { navCategory: "fertility-preservation", navOrder: 10 };
+
+
+    default: return {};
+  }
+};
+
 const docs = TREATMENTS.map((src) => {
   const r = toResolved(src);
+  const nav = getNavMapping(r.slug);
   return {
     slug: r.slug,
     href: r.href,
@@ -29,6 +76,7 @@ const docs = TREATMENTS.map((src) => {
     breadcrumbName: r.breadcrumbName,
     reviewerSlug: r.reviewerSlug,
     lastReviewed: r.lastReviewed,
+    ...nav,
     meta: { title: r.meta.title, description: r.meta.description, ogImage: r.meta.ogImage },
     procedure: { ...r.procedure },
     hero: { ...r.hero, badges: wrap(r.hero.badges, "value") },

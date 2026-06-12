@@ -65,7 +65,7 @@ const PAGE_EDITORS: { label: string; href: string; ready: boolean }[] = [
   { label: 'Home', href: '/edit/home', ready: true },
   { label: 'About BFI', href: '/edit/about', ready: false },
   { label: 'Doctors', href: '/edit/doctors', ready: false },
-  { label: 'Treatments', href: '/edit/treatments', ready: false },
+  { label: 'Treatments', href: '/edit/treatments', ready: true },
   { label: 'Services', href: '/edit/services', ready: false },
   { label: 'Locations', href: '/edit/locations', ready: false },
   { label: 'Contact', href: '/edit/contact', ready: false },

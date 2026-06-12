@@ -13,6 +13,14 @@
 import { useCallback, useEffect, useMemo, useState } from "react";
 import { useEdit } from "./edit-context";
 
+/** Extract a YouTube video ID from a full URL or a bare 11-char ID. */
+function extractYouTubeId(urlOrId: string): string | null {
+  const clean = urlOrId.trim();
+  if (/^[\w-]{11}$/.test(clean)) return clean;
+  const m = clean.match(/(?:v=|youtu\.be\/|embed\/|shorts\/)([\w-]{11})/);
+  return m?.[1] ?? null;
+}
+
 function escapeAttr(v: string): string {
   if (typeof CSS !== "undefined" && CSS.escape) return CSS.escape(v);
   return v.replace(/["\\]/g, "\\$&");
@@ -67,6 +75,7 @@ export function FloatingToolbar() {
   const kind = ctx?.selectedKind ?? null;
   const [pos, setPos] = useState<{ top: number; left: number } | null>(null);
   const [isRich, setIsRich] = useState(false);
+  const [videoUrl, setVideoUrl] = useState("");
   // Pre-resolve swatch colours ONCE. resolveColor() appends/removes a probe node
   // from <body>, which collapses the live text selection if done inside the click
   // handler — so the colour wouldn't apply. Memoising keeps the click a no-DOM
@@ -95,6 +104,9 @@ export function FloatingToolbar() {
     }
     setPos({ top: Math.max(62, r.top - 46), left: Math.max(8, r.left) });
   }, [findEl]);
+
+  // Reset the video URL input whenever the selection changes to a new element.
+  useEffect(() => { setVideoUrl(""); }, [selected]);
 
   useEffect(() => {
     reposition();
@@ -136,12 +148,50 @@ export function FloatingToolbar() {
     if (el) ctx.update(selected, el.innerHTML); // keep draft in sync
   };
 
+  const submitVideo = () => {
+    const id = extractYouTubeId(videoUrl);
+    if (id && selected) {
+      ctx.update(selected, id);
+      ctx.select(null);
+    }
+  };
+
   return (
-    <div className="bfi-floattool" style={{ top: pos.top, left: pos.left }} onMouseDown={(e) => e.preventDefault()}>
+    <div
+      className="bfi-floattool"
+      style={{ top: pos.top, left: pos.left }}
+      onMouseDown={(e) => {
+        // Allow <input> elements inside the toolbar to receive focus normally.
+        if ((e.target as HTMLElement).tagName === "INPUT") return;
+        e.preventDefault();
+      }}
+    >
       {kind === "image" ? (
         <>
           <button type="button" className="bfi-floattool__btn bfi-floattool__btn--primary" disabled={ctx.uploading} onClick={() => ctx.replaceImage(selected)}>
             {ctx.uploading ? "Uploading…" : "🖼 Replace image"}
+          </button>
+          <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Close" onClick={() => ctx.select(null)}>
+            ✕
+          </button>
+        </>
+      ) : kind === "video" ? (
+        <>
+          <span className="bfi-floattool__label">🎬 YouTube URL</span>
+          <input
+            type="text"
+            className="bfi-floattool__input"
+            placeholder="Paste YouTube link or ID"
+            autoFocus
+            value={videoUrl}
+            onChange={(e) => setVideoUrl(e.target.value)}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") { e.preventDefault(); submitVideo(); }
+              if (e.key === "Escape") ctx.select(null);
+            }}
+          />
+          <button type="button" className="bfi-floattool__btn bfi-floattool__btn--primary" onClick={submitVideo}>
+            Update
           </button>
           <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Close" onClick={() => ctx.select(null)}>
             ✕

@@ -22,7 +22,7 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function SectionHead({ eyebrow, title, subtitle, center }: { eyebrow: string; title: React.ReactNode; subtitle?: string; center?: boolean }) {
+export function SectionHead({ eyebrow, title, subtitle, center }: { eyebrow: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; center?: boolean }) {
   return (
     <div className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>
@@ -191,7 +191,7 @@ const costIncludes = [
 ];
 
 /* ---------- FAQ accordion ---------- */
-export function Faq({ q, a }: { q: string; a: string }) {
+export function Faq({ q, a }: { q: React.ReactNode; a: React.ReactNode }) {
   const [open, setOpen] = useState(false);
   return (
     <div className="overflow-hidden rounded-2xl border border-border/70 bg-card">

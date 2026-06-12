@@ -17,6 +17,39 @@
  * ===================================================================== */
 import { destinationHref } from "@/lib/internal-links";
 
+/**
+ * Lightweight treatment descriptor used to build the header mega menu and footer
+ * treatment groups dynamically from Payload (no hardcoded nav lists needed).
+ * Defined here (pure module) so both header + footer resolvers can import it
+ * without pulling in server-only payload.ts.
+ */
+export type NavTreatmentItem = {
+  slug: string;
+  name: string;
+  href: string;
+  navCategory: string;
+  navOrder: number;
+};
+
+/** Display label for each navCategory value in the header mega menu. */
+const HEADER_CATEGORY_LABELS: Record<string, string> = {
+  "advanced-ivf": "Advanced IVF Treatment",
+  "donor-services": "Donor Services",
+  "male-infertility": "Male Infertility",
+  "female-infertility": "Female Infertility",
+  "fertility-preservation": "Fertility Preservation",
+};
+// Note: "maternity-services" is intentionally excluded from the IVF Treatments header column.
+
+/** Canonical column order in the "IVF Treatments" mega menu. */
+const HEADER_CATEGORY_ORDER = [
+  "advanced-ivf",
+  "donor-services",
+  "male-infertility",
+  "female-infertility",
+  "fertility-preservation",
+];
+
 /** A single link inside a mega-menu column (optionally with a nested list). */
 export type HeaderMegaItem = {
   label: string;
@@ -270,10 +303,40 @@ function resolveNavItem(n: NavItemSource): HeaderNavItem {
 }
 
 /**
+ * Build the "IVF Treatments" mega menu columns from CMS-published treatments.
+ * Groups by navCategory in the canonical column order. Returns undefined when
+ * no treatments have a navCategory set (caller falls back to defaults).
+ */
+function buildTreatmentMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] | undefined {
+  if (!navTreatments.length) return undefined;
+  const byCat = new Map<string, NavTreatmentItem[]>();
+  for (const t of navTreatments) {
+    if (!HEADER_CATEGORY_LABELS[t.navCategory]) continue;
+    const arr = byCat.get(t.navCategory) ?? [];
+    arr.push(t);
+    byCat.set(t.navCategory, arr);
+  }
+  if (!byCat.size) return undefined;
+  return HEADER_CATEGORY_ORDER
+    .filter((cat) => byCat.has(cat))
+    .map((cat) => ({
+      heading: HEADER_CATEGORY_LABELS[cat],
+      items: byCat.get(cat)!
+        .sort((a, b) => a.navOrder - b.navOrder)
+        .map((t) => ({ label: t.name, href: t.href })),
+    }));
+}
+
+/**
  * Map the `header` global → HeaderData, falling back per-section to
  * HEADER_DEFAULTS so an empty CMS renders byte-identically.
+ *
+ * When `navTreatments` is provided (published Payload treatments with navCategory
+ * set), the "IVF Treatments" mega menu columns are built dynamically — so adding
+ * a treatment in the admin automatically reflects in the header without any
+ * hardcoded list change.
  */
-export function resolveHeader(g: HeaderSource): HeaderData {
+export function resolveHeader(g: HeaderSource, navTreatments: NavTreatmentItem[] = []): HeaderData {
   const branding: HeaderBranding = {
     logoUrl: g?.branding?.logoUrl || HEADER_DEFAULTS.branding.logoUrl,
     logoAlt: g?.branding?.logoAlt || HEADER_DEFAULTS.branding.logoAlt,
@@ -290,5 +353,15 @@ export function resolveHeader(g: HeaderSource): HeaderData {
     styleVariant: g?.cta?.styleVariant || HEADER_DEFAULTS.cta.styleVariant,
   };
 
-  return { branding, nav, cta };
+  // If CMS has treatments with navCategory set, replace the "IVF Treatments"
+  // mega columns with dynamic ones built from Payload. Falls back to the
+  // hardcoded HEADER_DEFAULTS columns when no treatments have a category yet.
+  const treatmentMega = buildTreatmentMega(navTreatments);
+  const finalNav = treatmentMega
+    ? nav.map((item) =>
+        item.label === "IVF Treatments" ? { ...item, mega: treatmentMega } : item,
+      )
+    : nav;
+
+  return { branding, nav: finalNav, cta };
 }

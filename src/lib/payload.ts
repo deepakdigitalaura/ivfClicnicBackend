@@ -20,7 +20,8 @@ import type { SiteIdentity } from "@/lib/seo";
 import { cacheTags } from "@/lib/cache-tags";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
-import { resolveHeader, type HeaderData, type HeaderSource } from "@/lib/header";
+// NavTreatmentItem imported from header.ts (pure module shared by header + footer resolvers)
+import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials, type TestimonialSource } from "@/lib/testimonials";
@@ -443,31 +444,77 @@ export const getSiteIdentity = reactCache(async (): Promise<SiteIdentity | undef
 });
 
 /**
+ * Nav-only treatment data: name, href, navCategory, navOrder for published
+ * treatments that have a navCategory set. Powers the dynamic header mega menu
+ * and footer treatment groups. Cached + tagged `treatments` (busted on any
+ * treatment publish/update). Returns [] on any error (CMS unavailable / table
+ * not yet pushed) so header + footer fall back to their hardcoded defaults.
+ * Type is defined in src/lib/header.ts (pure module) to keep payload.ts free of
+ * type definitions that other pure modules also need.
+ */
+const getTreatmentsForNavInternal = reactCache(
+  (): Promise<NavTreatmentItem[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "treatments",
+            limit: 300,
+            depth: 0,
+            sort: "navOrder",
+            select: { slug: true, name: true, shortName: true, href: true, navCategory: true, navOrder: true },
+          });
+          return (res.docs as Array<Record<string, unknown>>)
+            .filter((d) => d.navCategory && d.slug && (d.shortName || d.name))
+            .map((d) => ({
+              slug: d.slug as string,
+              name: (d.shortName as string) || (d.name as string),
+              href: (d.href as string) || `/treatments/${d.slug as string}`,
+              navCategory: d.navCategory as string,
+              navOrder: typeof d.navOrder === "number" ? d.navOrder : 0,
+            }));
+        } catch {
+          return [];
+        }
+      },
+      ["treatments-nav"],
+      { tags: [cacheTags.collectionList("treatments")] },
+    )(),
+);
+
+/**
  * Resolve the sitewide footer: the `footer` global shaped into the plain
  * `FooterData` the client <Footer> renders, with contact links resolved from
- * `site-settings` (Item 1) so numbers live in one place. Both globals are read
- * through getGlobalSafe (cached + tagged), so an empty/unavailable CMS falls
- * back to FOOTER_DEFAULTS — byte-identical output. React-cached per render.
+ * `site-settings` (Item 1) so numbers live in one place. Treatment groups in
+ * the footer are now built dynamically from published Payload treatments that
+ * have a `navCategory` set — so adding a treatment in the admin automatically
+ * reflects in the footer. Falls back to FOOTER_DEFAULTS when no CMS data. React-
+ * cached per render.
  */
 export const getFooter = reactCache(async (): Promise<FooterData> => {
-  const [footer, settings] = await Promise.all([
+  const [footer, settings, navTreatments] = await Promise.all([
     getGlobalSafe("footer"),
     getGlobalSafe("site-settings"),
+    getTreatmentsForNavInternal(),
   ]);
-  return resolveFooter(footer as FooterSource, resolveContactValues(settings));
+  return resolveFooter(footer as FooterSource, resolveContactValues(settings), navTreatments);
 });
 
 /**
  * Resolve the sitewide header: the `header` global shaped into the plain
- * `HeaderData` the client <SiteHeader> renders (logo, navigation, CTA). Read
- * through getGlobalSafe (cached + tagged `global:header`), so an empty or
- * unavailable CMS falls back to HEADER_DEFAULTS — byte-identical output. The
- * Doctors mega panel stays data-driven from src/lib/doctors.ts (not the CMS).
- * React-cached per render.
+ * `HeaderData` the client <SiteHeader> renders (logo, navigation, CTA). The
+ * "IVF Treatments" mega menu columns are now built dynamically from published
+ * Payload treatments that have a `navCategory` set — so adding a treatment in
+ * the admin automatically reflects in the header. Falls back to HEADER_DEFAULTS
+ * when no CMS data. React-cached per render.
  */
 export const getHeader = reactCache(async (): Promise<HeaderData> => {
-  const header = await getGlobalSafe("header");
-  return resolveHeader(header as HeaderSource);
+  const [header, navTreatments] = await Promise.all([
+    getGlobalSafe("header"),
+    getTreatmentsForNavInternal(),
+  ]);
+  return resolveHeader(header as HeaderSource, navTreatments);
 });
 
 /**

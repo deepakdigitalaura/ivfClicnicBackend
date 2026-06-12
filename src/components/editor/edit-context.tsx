@@ -22,8 +22,8 @@ type EditCtx = {
   editMode: true;
   selected: string | null;
   /** Type of the selected element, drives the floating toolbar's controls. */
-  selectedKind: "text" | "image" | null;
-  select: (path: string | null, kind?: "text" | "image") => void;
+  selectedKind: "text" | "image" | "video" | null;
+  select: (path: string | null, kind?: "text" | "image" | "video") => void;
   update: (path: string, value: unknown) => void;
   /** Open a file picker and replace the image at `path` with the upload. */
   replaceImage: (path: string) => void;
@@ -92,17 +92,22 @@ function denseClean(v: unknown): unknown {
 
 export function EditProvider<T extends Json>({
   apiPath,
+  method = "POST",
   initial,
   children,
 }: {
-  /** Where to POST the draft, e.g. "/api/globals/homepage". */
+  /** Where to send the draft, e.g. "/api/globals/homepage" (global) or
+   *  "/api/treatments/<id>" (collection item). */
   apiPath: string;
+  /** HTTP method: globals update with POST (Payload merges); a collection item
+   *  updates with PATCH (`/api/<collection>/<id>`). Defaults to POST. */
+  method?: "POST" | "PATCH";
   initial: T;
   children: (draft: T) => ReactNode;
 }) {
   const [draft, setDraft] = useState<T>(initial);
   const [selected, setSelected] = useState<string | null>(null);
-  const [selectedKind, setSelectedKind] = useState<"text" | "image" | null>(null);
+  const [selectedKind, setSelectedKind] = useState<"text" | "image" | "video" | null>(null);
   const [dirty, setDirty] = useState(false);
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
@@ -112,7 +117,7 @@ export function EditProvider<T extends Json>({
   const fileRef = useRef<HTMLInputElement>(null);
   const pendingPath = useRef<string | null>(null);
 
-  const select = useCallback((path: string | null, kind: "text" | "image" = "text") => {
+  const select = useCallback((path: string | null, kind: "text" | "image" | "video" = "text") => {
     setSelected(path);
     setSelectedKind(path ? kind : null);
   }, []);
@@ -143,7 +148,7 @@ export function EditProvider<T extends Json>({
         const fd = new FormData();
         fd.append("file", file);
         fd.append("_payload", JSON.stringify({ alt: file.name.replace(/\.[^.]+$/, "") || "Image" }));
-        const res = await fetch("/api/media", { method: "POST", credentials: "include", body: fd });
+        const res = await fetch("/api/editor-upload", { method: "POST", credentials: "include", body: fd });
         if (!res.ok) throw new Error(`Upload failed (${res.status})`);
         const json = (await res.json()) as { doc?: { filename?: string } };
         const filename = json.doc?.filename;
@@ -164,7 +169,7 @@ export function EditProvider<T extends Json>({
     setSaving(true);
     try {
       const res = await fetch(apiPath, {
-        method: "POST",
+        method,
         credentials: "include",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(denseClean(draft)),
@@ -178,7 +183,7 @@ export function EditProvider<T extends Json>({
     } finally {
       setSaving(false);
     }
-  }, [apiPath, draft]);
+  }, [apiPath, method, draft]);
 
   return (
     <Ctx.Provider value={{ editMode: true, selected, selectedKind, select, update, replaceImage, uploading, dirty, saving, saved, save }}>

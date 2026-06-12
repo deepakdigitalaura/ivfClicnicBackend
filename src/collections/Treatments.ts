@@ -4,6 +4,16 @@ import { isEditor, isAdminField } from "@/access/roles";
 import { ICON_OPTIONS } from "@/lib/icon-map";
 import { imageUploadField } from "@/fields/image";
 
+/** Which section of the header/footer nav this treatment belongs to. */
+export const NAV_CATEGORY_OPTIONS = [
+  { label: "Advanced IVF Treatment", value: "advanced-ivf" },
+  { label: "Donor Services", value: "donor-services" },
+  { label: "Male Infertility", value: "male-infertility" },
+  { label: "Female Infertility", value: "female-infertility" },
+  { label: "Fertility Preservation", value: "fertility-preservation" },
+  { label: "Maternity Services", value: "maternity-services" },
+] as const;
+
 /**
  * Treatment pages (Wave 4.4). Mirrors the `Treatment` type in
  * src/lib/treatments.ts 1:1 (NOT a generic block builder) so the existing
@@ -119,6 +129,32 @@ const TREATMENT_FIELDS: Field[] = [
         { name: "title", type: "text", label: "Google Page Title", admin: { description: "The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off." } },
         { name: "description", type: "textarea", label: "Google Search Description", admin: { description: "The grey summary under the title in Google. Aim for ~150–160 characters." } },
         { name: "ogImage", type: "text", label: "Social Share Image Path", admin: { description: "Image path used when shared on social media. Ask the website team to add new images." } },
+      ],
+    },
+
+    // ---- Navigation placement (admin sets this; drives header + footer menus) ----
+    {
+      type: "row",
+      fields: [
+        {
+          name: "navCategory",
+          type: "select",
+          label: "Navigation Category",
+          options: NAV_CATEGORY_OPTIONS,
+          admin: {
+            width: "50%",
+            description: "Which section of the website menu this treatment appears in. Leave empty to hide from menus.",
+          },
+        },
+        {
+          name: "navOrder",
+          type: "number",
+          label: "Menu Order",
+          admin: {
+            width: "50%",
+            description: "Controls the order within the category. Lower numbers appear first (e.g. 10, 20, 30).",
+          },
+        },
       ],
     },
 
@@ -291,7 +327,13 @@ const TREATMENT_FIELDS: Field[] = [
       name: "success",
       type: "group",
       label: "Success Factors",
-      fields: [valueArray("factors", "Factor"), { name: "note", type: "textarea", label: "Note" }],
+      fields: [
+        { name: "heading", type: "text", label: "Card Title", admin: { description: "Default: 'Real chances, honestly explained'." } },
+        { name: "description", type: "textarea", label: "Card Description", admin: { description: "The paragraph below the title. Leave empty to use the built-in default." } },
+        { name: "callout", type: "textarea", label: "Callout Box Text", admin: { description: "The pink callout box text. Default: 'At Bavishi Fertility Institute, we focus on personalised treatment plans…'" } },
+        valueArray("factors", "Factor"),
+        { name: "note", type: "textarea", label: "Note" },
+      ],
     },
 
     // ---- Cost ----
@@ -299,7 +341,11 @@ const TREATMENT_FIELDS: Field[] = [
       name: "cost",
       type: "group",
       label: "Cost",
-      fields: [valueArray("includes", "Inclusion")],
+      fields: [
+        { name: "heading", type: "text", label: "Card Title", admin: { description: "Default: 'Transparent, with no hidden costs'." } },
+        { name: "description", type: "textarea", label: "Card Description", admin: { description: "The paragraph below the title. Leave empty to use the built-in default." } },
+        valueArray("includes", "Inclusion"),
+      ],
     },
 
     // ---- Risks ----
@@ -352,6 +398,20 @@ const TREATMENT_FIELDS: Field[] = [
       fields: [{ name: "slug", type: "text", required: true, label: "Treatment ID" }],
     },
 
+    // ---- Patient video testimonials ----
+    {
+      name: "testimonials",
+      type: "array",
+      labels: { singular: "Testimonial Video", plural: "Testimonial Videos" },
+      admin: { description: "YouTube patient testimonial videos for this treatment. Leave empty to use the built-in defaults." },
+      fields: [
+        { name: "youTubeId", type: "text", required: true, label: "YouTube Video ID", admin: { description: "The 11-character ID from the YouTube URL (the part after watch?v=)." } },
+        { name: "name", type: "text", required: true, label: "Patient Name" },
+        { name: "quote", type: "textarea", required: true, label: "Quote" },
+        { name: "location", type: "text", label: "City / Location (optional)" },
+      ],
+    },
+
     // ---- CTA ----
     {
       name: "cta",
@@ -368,6 +428,125 @@ const TREATMENT_FIELDS: Field[] = [
         { name: "subtitle", type: "textarea", label: "Sub-heading" },
       ],
     },
+
+    // ---- Section eyebrow label overrides ----
+    {
+      name: "labels",
+      type: "group",
+      label: "Section Labels",
+      admin: { description: "Override the small eyebrow labels shown above each section heading. Leave any field empty to use the built-in default." },
+      fields: [
+        {
+          type: "row",
+          fields: [
+            { name: "whatIs", type: "text", label: "What Is This (eyebrow)", admin: { width: "50%" } },
+            { name: "benefits", type: "text", label: "Benefits (eyebrow)", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "types", type: "text", label: "Types (eyebrow)", admin: { width: "50%" } },
+            { name: "whoNeedsIt", type: "text", label: "Who Needs It (eyebrow)", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "process", type: "text", label: "Process (eyebrow)", admin: { width: "50%" } },
+            { name: "timeline", type: "text", label: "Timeline (eyebrow)", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "whyUs", type: "text", label: "Why Bavishi (eyebrow)", admin: { width: "50%" } },
+            { name: "successCard", type: "text", label: "Success Card (eyebrow)", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "costCard", type: "text", label: "Cost Card (eyebrow)", admin: { width: "50%" } },
+            { name: "successFactors", type: "text", label: "Success Factors Sub-label", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "risks", type: "text", label: "Risks (eyebrow)", admin: { width: "50%" } },
+            { name: "preparation", type: "text", label: "Preparation (eyebrow)", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "patientStories", type: "text", label: "Patient Stories (eyebrow)", admin: { width: "50%" } },
+            { name: "specialists", type: "text", label: "Specialists (eyebrow)", admin: { width: "50%" } },
+          ],
+        },
+        {
+          type: "row",
+          fields: [
+            { name: "faq", type: "text", label: "FAQ (eyebrow)", admin: { width: "50%" } },
+            { name: "exploreMore", type: "text", label: "Explore More (eyebrow)", admin: { width: "50%" } },
+          ],
+        },
+        { name: "blog", type: "text", label: "Blog (eyebrow)" },
+      ],
+    },
+
+    // ---- Section heading overrides ----
+    {
+      name: "patientStories",
+      type: "group",
+      label: "Patient Stories Section",
+      admin: { description: "Override the heading and sub-heading for the patient testimonials section." },
+      fields: [
+        headingField(),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+      ],
+    },
+    {
+      name: "specialists",
+      type: "group",
+      label: "Specialists Section",
+      admin: { description: "Override the heading and sub-heading for the 'Our Specialists' section. Leave empty to use the built-in defaults derived from the treatment name." },
+      fields: [
+        headingField(),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+      ],
+    },
+    {
+      name: "faqsSection",
+      type: "group",
+      label: "FAQ Section",
+      admin: { description: "Override the heading for the FAQ section. Leave empty to use the built-in default." },
+      fields: [
+        { name: "lead", type: "text", label: "Heading Text" },
+        { name: "em", type: "text", label: "Highlighted Word(s)", admin: { description: "The word(s) shown in the cursive accent style." } },
+      ],
+    },
+    {
+      name: "relatedSection",
+      type: "group",
+      label: "Explore More Section",
+      admin: { description: "Override the heading for the 'Explore More / Related Treatments' section." },
+      fields: [
+        { name: "lead", type: "text", label: "Heading Text" },
+        { name: "em", type: "text", label: "Highlighted Word(s)", admin: { description: "The word(s) shown in the cursive accent style." } },
+      ],
+    },
+    {
+      name: "blogSection",
+      type: "group",
+      label: "Blog Section",
+      admin: { description: "Override the heading and sub-heading for the 'From Our Blog' section." },
+      fields: [
+        headingField(),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+      ],
+    },
 ];
 
 export const Treatments: CollectionConfig = {
@@ -378,7 +557,19 @@ export const Treatments: CollectionConfig = {
     group: "Treatments & Services",
   },
   versions: { drafts: true },
-  hooks: revalidateCollection("treatments"),
+  hooks: {
+    ...revalidateCollection("treatments"),
+    // Auto-fill the page URL for treatments created from the admin panel
+    // (no website-team involvement needed for new CMS-only treatments).
+    beforeChange: [
+      ({ data, operation }: { data: Record<string, unknown>; operation: string }) => {
+        if (operation === "create" && !data.href && data.slug) {
+          data.href = `/treatments/${data.slug}`;
+        }
+        return data;
+      },
+    ],
+  },
   access: {
     read: ({ req }) => {
       if (req.user) return true;
@@ -393,14 +584,15 @@ export const Treatments: CollectionConfig = {
     {
       type: "tabs",
       tabs: [
-        { label: "Basics & SEO", fields: TREATMENT_FIELDS.slice(0, 6) },
-        { label: "Top Section", fields: TREATMENT_FIELDS.slice(6, 7) },
-        { label: "Overview", fields: TREATMENT_FIELDS.slice(7, 11) },
-        { label: "Process & Timeline", fields: TREATMENT_FIELDS.slice(11, 14) },
-        { label: "Technology & Why Us", fields: TREATMENT_FIELDS.slice(14, 17) },
-        { label: "Cost & Risks", fields: TREATMENT_FIELDS.slice(17, 20) },
-        { label: "FAQs & Related", fields: TREATMENT_FIELDS.slice(20, 22) },
-        { label: "Closing CTA", fields: TREATMENT_FIELDS.slice(22) },
+        { label: "Basics & SEO", fields: TREATMENT_FIELDS.slice(0, 8) },
+        { label: "Top Section", fields: TREATMENT_FIELDS.slice(8, 9) },
+        { label: "Overview", fields: TREATMENT_FIELDS.slice(9, 13) },
+        { label: "Process & Timeline", fields: TREATMENT_FIELDS.slice(13, 16) },
+        { label: "Technology & Why Us", fields: TREATMENT_FIELDS.slice(16, 19) },
+        { label: "Cost & Risks", fields: TREATMENT_FIELDS.slice(19, 22) },
+        { label: "FAQs & Related", fields: TREATMENT_FIELDS.slice(22, 25) },
+        { label: "Closing CTA", fields: TREATMENT_FIELDS.slice(25, 26) },
+        { label: "Section Labels", fields: TREATMENT_FIELDS.slice(26) },
       ],
     },
   ],
