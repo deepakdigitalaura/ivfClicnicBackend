@@ -977,6 +977,20 @@ export interface Doctor {
    * Order within the group. Lower numbers appear first (e.g. 10, 20, 30).
    */
   navOrder?: number | null;
+  /**
+   * Labels shown on this doctor's profile page. Leave empty to use the defaults.
+   */
+  profileLabels?: {
+    aboutEyebrow?: string | null;
+    treatmentsEyebrow?: string | null;
+    consultsEyebrow?: string | null;
+    consultsSubtitle?: string | null;
+    visitsHeading?: string | null;
+    visitsParagraph?: string | null;
+    doctorSpeakEyebrow?: string | null;
+    doctorSpeakSubtitle?: string | null;
+    ctaHeading?: string | null;
+  };
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -2500,6 +2514,19 @@ export interface DoctorsSelect<T extends boolean = true> {
   visitsAllCentres?: T;
   navRole?: T;
   navOrder?: T;
+  profileLabels?:
+    | T
+    | {
+        aboutEyebrow?: T;
+        treatmentsEyebrow?: T;
+        consultsEyebrow?: T;
+        consultsSubtitle?: T;
+        visitsHeading?: T;
+        visitsParagraph?: T;
+        doctorSpeakEyebrow?: T;
+        doctorSpeakSubtitle?: T;
+        ctaHeading?: T;
+      };
   updatedAt?: T;
   createdAt?: T;
   _status?: T;
@@ -4607,9 +4634,30 @@ export interface AboutPage {
       }[]
     | null;
   /**
+   * The 'Meet our doctors' section heading. The doctor cards are managed in Doctors.
+   */
+  meetSpecialists?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    subtitle?: string | null;
+  };
+  /**
    * 'Our Network' — centres across India.
    */
   network?: {
+    eyebrow?: string | null;
     /**
      * Section heading. Leave empty to keep the default.
      */
@@ -5424,9 +5472,22 @@ export interface AboutPageSelect<T extends boolean = true> {
         label?: T;
         id?: T;
       };
+  meetSpecialists?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        subtitle?: T;
+      };
   network?:
     | T
     | {
+        eyebrow?: T;
         heading?:
           | T
           | {

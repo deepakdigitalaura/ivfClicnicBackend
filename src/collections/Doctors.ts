@@ -155,6 +155,25 @@ const DOCTOR_FIELDS: Field[] = [
         },
       ],
     },
+
+    // ---- Profile-page section labels (eyebrows/headings/subtitles) ----
+    {
+      name: "profileLabels",
+      type: "group",
+      label: "Page Section Labels",
+      admin: { description: "Labels shown on this doctor's profile page. Leave empty to use the defaults." },
+      fields: [
+        { name: "aboutEyebrow", type: "text", label: "'About' Section Label" },
+        { name: "treatmentsEyebrow", type: "text", label: "'Treatments' Section Label" },
+        { name: "consultsEyebrow", type: "text", label: "'Consults At' Section Label" },
+        { name: "consultsSubtitle", type: "textarea", label: "'Where to meet' Sub-heading" },
+        { name: "visitsHeading", type: "text", label: "'Visits across cities' Card Heading" },
+        { name: "visitsParagraph", type: "textarea", label: "'Visits across cities' Card Paragraph" },
+        { name: "doctorSpeakEyebrow", type: "text", label: "'Doctor Speak' Section Label" },
+        { name: "doctorSpeakSubtitle", type: "text", label: "'Doctor Speak' Sub-heading" },
+        { name: "ctaHeading", type: "text", label: "Closing CTA Heading (before name)" },
+      ],
+    },
 ];
 
 export const Doctors: CollectionConfig = {
@@ -194,7 +213,8 @@ export const Doctors: CollectionConfig = {
         { label: "Reach", fields: DOCTOR_FIELDS.slice(5, 9) },
         { label: "Bio", fields: DOCTOR_FIELDS.slice(9, 11) },
         { label: "Credentials", fields: DOCTOR_FIELDS.slice(11, 19) },
-        { label: "Settings", fields: DOCTOR_FIELDS.slice(19) },
+        { label: "Settings", fields: DOCTOR_FIELDS.slice(19, 22) },
+        { label: "Page Labels", fields: DOCTOR_FIELDS.slice(22) },
       ],
     },
   ],

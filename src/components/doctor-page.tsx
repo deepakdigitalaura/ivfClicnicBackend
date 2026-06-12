@@ -55,12 +55,37 @@ function expertiseHref(label: string): string {
   return slug ? treatmentRef(slug).href : "/#treatments";
 }
 
+/** Renders a comma-joined list of strings; in edit mode each item becomes an
+ *  individually-editable span so the public, non-editing DOM stays byte-identical
+ *  to a plain `items.join(", ")`. */
+function EditableList({ items, path, editing }: { items: string[]; path: string; editing: boolean }) {
+  if (!editing) return <>{items.join(", ")}</>;
+  return (
+    <>
+      {items.map((item, i) => (
+        <span key={i}>
+          <Editable path={`${path}.${i}.value`}>{item}</Editable>
+          {i < items.length - 1 ? ", " : ""}
+        </span>
+      ))}
+    </>
+  );
+}
+
+/* Inline-editable section label with a built-in fallback — `d.profileLabels.<key>`
+ *  overrides the default when set, otherwise the default renders (byte-identical
+ *  on the public site). */
+const lab = (path: string, value: string | undefined, fallback: string, rich = false) => (
+  <Editable path={path} rich={rich}>{value || fallback}</Editable>
+);
+
 /* ---------- /doctors/[slug] — single profile ---------- */
 export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
   const editing = !!useEdit()?.editMode;
   const stories = testimonialsForDoctor(d.slug); // only when a video explicitly names this doctor
   const videos = videosForDoctor(d.slug); // doctor's own explainer videos (real ids only)
   const centres = centresForLocationSlugs(d.locations); // full contact details for "Where to meet"
+  const pl = d.profileLabels ?? {};
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -115,8 +140,8 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
             <Reveal delay={0.2}>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[color:var(--plum)]">
                 {d.experienceLabel && <span className="inline-flex items-center gap-1.5"><Stethoscope className="h-4 w-4 text-[color:var(--rose)]" /> <Editable path="experienceLabel" rich={false}>{d.experienceLabel}</Editable> experience</span>}
-                <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4 text-[color:var(--rose)]" /> {d.cities.join(", ")}</span>
-                <span className="inline-flex items-center gap-1.5"><Languages className="h-4 w-4 text-[color:var(--rose)]" /> {d.languages.join(", ")}</span>
+                <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4 text-[color:var(--rose)]" /> <EditableList items={d.cities} path="cities" editing={editing} /></span>
+                <span className="inline-flex items-center gap-1.5"><Languages className="h-4 w-4 text-[color:var(--rose)]" /> <EditableList items={d.languages} path="languages" editing={editing} /></span>
               </div>
             </Reveal>
             <Reveal delay={0.25}>
@@ -133,7 +158,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
         <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
-            <SectionHead eyebrow="About" title={<>About <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>} />
+            <SectionHead eyebrow={lab("profileLabels.aboutEyebrow", pl.aboutEyebrow, "About")} title={<>About <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
               {d.bio.map((p, i) => (
                 <Reveal key={i} delay={i * 0.05}>
@@ -145,13 +170,13 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
               <div className="mt-8">
                 <p className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">Areas of expertise</p>
                 <div className="mt-3 flex flex-wrap gap-2">
-                  {d.knowsAbout.map((k) => (
+                  {d.knowsAbout.map((k, i) => (
                     <a
                       key={k}
                       href={expertiseHref(k)}
                       className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-3.5 py-1.5 text-[13px] font-medium text-[color:var(--plum)] shadow-soft transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]"
                     >
-                      <Sparkles className="h-3 w-3 text-[color:var(--rose)]" /> {k}
+                      <Sparkles className="h-3 w-3 text-[color:var(--rose)]" /> <Editable path={`knowsAbout.${i}.value`}>{k}</Editable>
                     </a>
                   ))}
                 </div>
@@ -165,10 +190,10 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
               <div>
                 <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><Stethoscope className="h-4 w-4" /> At a glance</div>
                 <dl className="mt-2 space-y-1.5 text-[14px] text-[color:var(--plum)]/80">
-                  <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Specialty:</dt><dd>{d.specialty}</dd></div>
-                  {d.experienceLabel && <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Experience:</dt><dd>{d.experienceLabel}</dd></div>}
-                  <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Consults in:</dt><dd>{d.cities.join(", ")}</dd></div>
-                  <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Languages:</dt><dd>{d.languages.join(", ")}</dd></div>
+                  <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Specialty:</dt><dd><Editable path="specialty" rich={false}>{d.specialty}</Editable></dd></div>
+                  {d.experienceLabel && <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Experience:</dt><dd><Editable path="experienceLabel" rich={false}>{d.experienceLabel}</Editable></dd></div>}
+                  <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Consults in:</dt><dd><EditableList items={d.cities} path="cities" editing={editing} /></dd></div>
+                  <div className="flex gap-2"><dt className="font-medium text-[color:var(--plum)]">Languages:</dt><dd><EditableList items={d.languages} path="languages" editing={editing} /></dd></div>
                 </dl>
               </div>
               {(d.credentials || d.alumniOf.length > 0) && (
@@ -177,7 +202,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                   {d.credentials && <p className="mt-2 text-[15px] font-medium text-[color:var(--plum)]">{d.credentials}</p>}
                   {d.alumniOf.length > 0 && (
                     <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                      {d.alumniOf.map((a, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`alumniOf.${i}.value`} rich={false}>{a}</Editable></li>)}
+                      {d.alumniOf.map((a, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`alumniOf.${i}.value`}>{a}</Editable></li>)}
                     </ul>
                   )}
                 </div>
@@ -186,7 +211,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><GraduationCap className="h-4 w-4" /> Advanced training</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.training.map((t, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`training.${i}.value`} rich={false}>{t}</Editable></li>)}
+                    {d.training.map((t, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`training.${i}.value`}>{t}</Editable></li>)}
                   </ul>
                 </div>
               )}
@@ -194,7 +219,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><Users className="h-4 w-4" /> Memberships</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.memberOf.map((m, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`memberOf.${i}.value`} rich={false}>{m}</Editable></li>)}
+                    {d.memberOf.map((m, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`memberOf.${i}.value`}>{m}</Editable></li>)}
                   </ul>
                 </div>
               )}
@@ -202,7 +227,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><Award className="h-4 w-4" /> Recognition</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.awards.map((a, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`awards.${i}.value`} rich={false}>{a}</Editable></li>)}
+                    {d.awards.map((a, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`awards.${i}.value`}>{a}</Editable></li>)}
                   </ul>
                 </div>
               )}
@@ -210,7 +235,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><BookOpen className="h-4 w-4" /> Publications</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.publications.map((p, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`publications.${i}.value`} rich={false}>{p}</Editable></li>)}
+                    {d.publications.map((p, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`publications.${i}.value`}>{p}</Editable></li>)}
                   </ul>
                 </div>
               )}
@@ -223,7 +248,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
       {d.treatments.length > 0 && (
         <section className="bg-white py-8 md:py-14">
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow="Treatments" title={<>Treatments <em className="font-display italic text-[color:var(--rose)]">{d.name} performs</em></>} />
+            <SectionHead center eyebrow={lab("profileLabels.treatmentsEyebrow", pl.treatmentsEyebrow, "Treatments")} title={<>Treatments <em className="font-display italic text-[color:var(--rose)]">{d.name} performs</em></>} />
             <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
               {d.treatments.map((slug) => {
                 const card = treatmentCardData(slug);
@@ -256,13 +281,15 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
           <SectionHead
             center
-            eyebrow="Consults at"
+            eyebrow={lab("profileLabels.consultsEyebrow", pl.consultsEyebrow, "Consults at")}
             title={<>Where to meet <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>}
-            subtitle={
+            subtitle={lab(
+              "profileLabels.consultsSubtitle",
+              pl.consultsSubtitle,
               d.visitsAllCentres
                 ? `${d.name} is a visiting senior specialist who consults across our centres. Call to confirm his current schedule at your nearest centre.`
-                : `Book an in-person consultation with ${d.name} at the ${centres.length > 1 ? "centres" : "centre"} below.`
-            }
+                : `Book an in-person consultation with ${d.name} at the ${centres.length > 1 ? "centres" : "centre"} below.`,
+            )}
           />
           {d.visitsAllCentres ? (
             <Reveal>
@@ -271,9 +298,13 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                   <MapPin className="h-6 w-6" />
                 </div>
                 <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Bavishi Fertility Institute</p>
-                <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">Visits across {d.cities.length} cities</h3>
+                <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{lab("profileLabels.visitsHeading", pl.visitsHeading, `Visits across ${d.cities.length} cities`)}</h3>
                 <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
-                  As the founder and senior IVF specialist, {d.name} consults at Bavishi Fertility Institute centres across India on a rotating schedule. Call to confirm when he is visiting your nearest centre.
+                  {lab(
+                    "profileLabels.visitsParagraph",
+                    pl.visitsParagraph,
+                    `As the founder and senior IVF specialist, ${d.name} consults at Bavishi Fertility Institute centres across India on a rotating schedule. Call to confirm when he is visiting your nearest centre.`,
+                  )}
                 </p>
                 <div className="mt-5 flex flex-wrap justify-center gap-2">
                   {d.cities.map((city) => (
@@ -329,7 +360,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
       {videos.length > 0 && (
         <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow="Doctor Speak" title={<>Watch <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>} subtitle={`Fertility insights and advice, explained by ${d.name}.`} />
+            <SectionHead center eyebrow={lab("profileLabels.doctorSpeakEyebrow", pl.doctorSpeakEyebrow, "Doctor Speak")} title={<>Watch <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>} subtitle={lab("profileLabels.doctorSpeakSubtitle", pl.doctorSpeakSubtitle, `Fertility insights and advice, explained by ${d.name}.`)} />
             <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
               {videos.map((v) => (
                 <StaggerItem key={v.youTubeId}>
@@ -352,7 +383,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-14 text-center text-white noise md:px-16">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl text-balance">
-              Book a consultation with <em className="font-display italic text-[color:var(--rose-soft)]">{d.name}</em>
+              {lab("profileLabels.ctaHeading", pl.ctaHeading, "Book a consultation with")} <em className="font-display italic text-[color:var(--rose-soft)]">{d.name}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>

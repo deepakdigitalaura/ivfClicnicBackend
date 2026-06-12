@@ -62,6 +62,19 @@ export type Doctor = {
    *  founder). The profile shows a single "visits across cities" card listing
    *  `cities` instead of a per-centre contact card for each branch. */
   visitsAllCentres?: boolean;
+  /** Editable overrides for the static section labels on this doctor's profile
+   *  page (eyebrows/headings/subtitles). Empty/missing → component defaults. */
+  profileLabels?: {
+    aboutEyebrow?: string;
+    treatmentsEyebrow?: string;
+    consultsEyebrow?: string;
+    consultsSubtitle?: string;
+    visitsHeading?: string;
+    visitsParagraph?: string;
+    doctorSpeakEyebrow?: string;
+    doctorSpeakSubtitle?: string;
+    ctaHeading?: string;
+  };
 };
 
 /* Master treatment list. Every doctor is shown as offering the full range
@@ -714,6 +727,17 @@ export type DoctorSource =
       visitsAllCentres?: boolean | null;
       navRole?: "senior-specialist" | "specialist" | null;
       navOrder?: number | null;
+      profileLabels?: {
+        aboutEyebrow?: string | null;
+        treatmentsEyebrow?: string | null;
+        consultsEyebrow?: string | null;
+        consultsSubtitle?: string | null;
+        visitsHeading?: string | null;
+        visitsParagraph?: string | null;
+        doctorSpeakEyebrow?: string | null;
+        doctorSpeakSubtitle?: string | null;
+        ctaHeading?: string | null;
+      } | null;
     }
   | null
   | undefined;
@@ -761,6 +785,7 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
       sameAs: rows(src.sameAs) ?? [],
       verified: src.verified ?? false,
       ...(src.visitsAllCentres ? { visitsAllCentres: true } : {}),
+      profileLabels: profileLabels(src.profileLabels),
     };
   }
   return {
@@ -790,8 +815,35 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     sameAs: rows(src.sameAs) ?? def.sameAs,
     verified: src.verified ?? def.verified,
     ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
+    profileLabels: profileLabels(src.profileLabels),
   };
 }
+
+type ProfileLabelsSource = {
+  aboutEyebrow?: string | null;
+  treatmentsEyebrow?: string | null;
+  consultsEyebrow?: string | null;
+  consultsSubtitle?: string | null;
+  visitsHeading?: string | null;
+  visitsParagraph?: string | null;
+  doctorSpeakEyebrow?: string | null;
+  doctorSpeakSubtitle?: string | null;
+  ctaHeading?: string | null;
+} | null | undefined;
+
+/** Build the `profileLabels` overrides object from CMS source — empty strings
+ *  fall back to the component's built-in defaults. */
+const profileLabels = (src: ProfileLabelsSource) => ({
+  aboutEyebrow: src?.aboutEyebrow ?? "",
+  treatmentsEyebrow: src?.treatmentsEyebrow ?? "",
+  consultsEyebrow: src?.consultsEyebrow ?? "",
+  consultsSubtitle: src?.consultsSubtitle ?? "",
+  visitsHeading: src?.visitsHeading ?? "",
+  visitsParagraph: src?.visitsParagraph ?? "",
+  doctorSpeakEyebrow: src?.doctorSpeakEyebrow ?? "",
+  doctorSpeakSubtitle: src?.doctorSpeakSubtitle ?? "",
+  ctaHeading: src?.ctaHeading ?? "",
+});
 
 /**
  * Produce a fully-populated DoctorSource by merging `src` with the code default
@@ -830,5 +882,16 @@ export function materializeDoctorSource(slug: string, src: DoctorSource): NonNul
     visitsAllCentres: src?.visitsAllCentres ?? def?.visitsAllCentres ?? false,
     navRole: src?.navRole ?? null,
     navOrder: src?.navOrder ?? null,
+    profileLabels: {
+      aboutEyebrow: src?.profileLabels?.aboutEyebrow ?? "",
+      treatmentsEyebrow: src?.profileLabels?.treatmentsEyebrow ?? "",
+      consultsEyebrow: src?.profileLabels?.consultsEyebrow ?? "",
+      consultsSubtitle: src?.profileLabels?.consultsSubtitle ?? "",
+      visitsHeading: src?.profileLabels?.visitsHeading ?? "",
+      visitsParagraph: src?.profileLabels?.visitsParagraph ?? "",
+      doctorSpeakEyebrow: src?.profileLabels?.doctorSpeakEyebrow ?? "",
+      doctorSpeakSubtitle: src?.profileLabels?.doctorSpeakSubtitle ?? "",
+      ctaHeading: src?.profileLabels?.ctaHeading ?? "",
+    },
   };
 }
