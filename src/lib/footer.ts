@@ -61,15 +61,19 @@ function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] 
     }));
 }
 
-/** Build the footer "Doctors" group dynamically from CMS-published nav doctors.
- * Returns undefined when no doctors have a navRole set (falls back to hardcoded). */
+/** Build the footer "Doctors" group — only senior-specialist doctors are listed
+ * (they are the featured promoter doctors). All other specialists are reachable
+ * via the "All Doctors" link. */
 function buildDoctorFooterGroup(navDoctors: NavDoctorItem[]): FooterGroup | undefined {
   if (!navDoctors.length) return undefined;
-  const sorted = [...navDoctors].sort((a, b) => a.navOrder - b.navOrder);
+  const senior = navDoctors
+    .filter((d) => d.navRole === "senior-specialist")
+    .sort((a, b) => a.navOrder - b.navOrder);
+  if (!senior.length) return undefined;
   return {
     h: "Doctors",
     l: [
-      ...sorted.map((d) => ({ label: d.name, href: d.href })),
+      ...senior.map((d) => ({ label: d.name, href: d.href })),
       { label: "All Doctors", href: "/doctors" },
       { label: "Book Consultation", href: "/#book" },
     ],
