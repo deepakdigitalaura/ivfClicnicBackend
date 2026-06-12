@@ -249,3 +249,75 @@ export function resolveCity(slug: string, src: CitySource): ResolvedCity | undef
     ...(src.hero360Url ? { hero360Url: src.hero360Url } : {}),
   };
 }
+
+/**
+ * Produce a fully-populated CitySource by merging `src` with the resolved
+ * (default-overlaid) content for `slug`. Used by the inline editor to seed the
+ * draft so every field/row is present before any edit — prevents sparse PATCH
+ * bodies that fail Payload validation (mirrors materializeServiceSource).
+ */
+export function materializeCitySource(slug: string, src: CitySource): NonNullable<CitySource> {
+  const r = resolveCity(slug, src);
+  const s = (src ?? {}) as NonNullable<CitySource>;
+  if (!r) return s;
+  const v = (value: string) => ({ value });
+  return {
+    ...s,
+    slug: r.slug,
+    name: r.name,
+    region: r.region,
+    country: r.country,
+    helpline: r.helpline,
+    helplineLabel: r.helplineLabel,
+    whatsapp: r.whatsapp,
+    heroImage: r.heroImage,
+    ...(r.hero360Url ? { hero360Url: r.hero360Url } : {}),
+    intro: r.intro.map(v),
+    faqs: r.faqs.map((f) => ({ q: f.q, a: f.a })),
+    ...(r.womensHealth ? { womensHealth: r.womensHealth.map(v) } : {}),
+    built: r.built,
+  };
+}
+
+/**
+ * Produce a fully-populated CentreSource by merging `src` with the resolved
+ * content for (citySlug, slug). Used by the inline Centre editor.
+ */
+export function materializeCentreSource(citySlug: string, slug: string, src: CentreSource): NonNullable<CentreSource> {
+  const r = resolveCentre(citySlug, slug, src);
+  const s = (src ?? {}) as NonNullable<CentreSource>;
+  if (!r) return s;
+  const v = (value: string) => ({ value });
+  return {
+    ...s,
+    slug: r.slug,
+    citySlug: r.citySlug,
+    name: r.name,
+    fullName: r.fullName,
+    ...(r.isHeadOffice ? { isHeadOffice: r.isHeadOffice } : {}),
+    area: r.area,
+    address: r.address,
+    pin: r.pin,
+    phone: r.phone,
+    phoneLabel: r.phoneLabel,
+    hours: r.hours,
+    opening: { opens: r.opening.opens, closes: r.opening.closes, ...(r.opening.days ? { days: r.opening.days.map(v) } : {}) },
+    ...(r.geo ? { geo: { lat: r.geo.lat, lng: r.geo.lng } } : {}),
+    mapQuery: r.mapQuery,
+    image: r.image,
+    ...(r.hero360Url ? { hero360Url: r.hero360Url } : {}),
+    nearby: r.nearby.map(v),
+    landmarks: r.landmarks.map(v),
+    howToReach: r.howToReach.map(v),
+    facilities: r.facilities.map(v),
+    doctors: r.doctors.map(v),
+    treatments: r.treatments.map(v),
+    faqs: r.faqs.map((f) => ({ q: f.q, a: f.a })),
+    ...(r.reviewsKey ? { reviewsKey: r.reviewsKey } : {}),
+    ...(r.sameAs ? { sameAs: r.sameAs.map(v) } : {}),
+    intro: r.intro,
+    gallery: r.gallery.map((g) => ({ src: g.src, alt: g.alt })),
+    ...(r.womensHealth ? { womensHealth: r.womensHealth.map(v) } : {}),
+    built: r.built,
+  };
+}

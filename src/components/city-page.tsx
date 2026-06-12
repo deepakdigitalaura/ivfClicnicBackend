@@ -7,6 +7,8 @@ import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer } from "@/compone
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
+import { Editable, EditableImage } from "@/components/editor/Editable";
+import { useEdit } from "@/components/editor/edit-context";
 import type { City } from "@/lib/locations";
 import { centresForCity, doctorSlugsForCity, treatmentSlugsForCity, centreUrl, centreMapUrl } from "@/lib/locations";
 import { womensHealthServices } from "@/lib/womens-health";
@@ -24,7 +26,15 @@ const trust = [
 /* CityPage — data-driven template for /locations/[city].
  * One City object renders the hub: overview, all centres (linked), city-wide
  * treatments + doctors, reviews, FAQs. Reused by every city. */
+/* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
+ * inside /edit/locations/<slug>. `path` is the dot-path into the cities-doc
+ * SOURCE draft (see materializeCitySource). */
+const ed = (path: string, value: string, rich = true) => (
+  <Editable path={path} rich={rich}>{value}</Editable>
+);
+
 export function CityPage({ city }: { city: City }) {
+  const editing = !!useEdit()?.editMode;
   const centres = centresForCity(city.slug);
   const docs = doctorSlugsForCity(city.slug)
     .map((slug) => doctorBySlug(slug))
@@ -65,7 +75,7 @@ export function CityPage({ city }: { city: City }) {
             </Reveal>
             {city.intro[0] && (
               <Reveal delay={0.12}>
-                <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">{city.intro[0]}</p>
+                <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">{ed("intro.0.value", city.intro[0])}</p>
               </Reveal>
             )}
             <Reveal delay={0.2}>
@@ -92,6 +102,8 @@ export function CityPage({ city }: { city: City }) {
                       <Rotate3d className="h-3.5 w-3.5" /> 360° View · Drag to explore
                     </span>
                   </>
+                ) : editing ? (
+                  <EditableImage path="heroImage" src={city.heroImage} alt={`Best IVF centre in ${city.name} — Bavishi Fertility Institute`} className="absolute inset-0 h-full w-full object-cover" />
                 ) : (
                   <Image src={city.heroImage} alt={`Best IVF centre in ${city.name} — Bavishi Fertility Institute`} fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
                 )}
@@ -108,7 +120,7 @@ export function CityPage({ city }: { city: City }) {
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
           <SectionHead eyebrow={`Fertility care in ${city.name}`} title={<>Your trusted fertility partner in <em className="font-display italic text-[color:var(--rose)]">{city.name}</em></>} />
           <div className="mt-6 max-w-3xl space-y-5 text-[17px] leading-relaxed text-muted-foreground">
-            {city.intro.map((p, i) => <Reveal key={i} delay={i * 0.05}><p>{p}</p></Reveal>)}
+            {city.intro.map((p, i) => <Reveal key={i} delay={i * 0.05}><p>{ed(`intro.${i}.value`, p)}</p></Reveal>)}
           </div>
         </section>
       )}
@@ -228,7 +240,7 @@ export function CityPage({ city }: { city: City }) {
           <div className="container-px">
             <SectionHead center eyebrow="FAQ" title={<>{city.name} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
             <div className="mt-9 space-y-3">
-              {city.faqs.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
+              {city.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
             </div>
           </div>
         </section>
