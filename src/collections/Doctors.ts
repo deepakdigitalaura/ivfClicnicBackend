@@ -74,7 +74,7 @@ const DOCTOR_FIELDS: Field[] = [
       type: "row",
       fields: [
         { name: "role", type: "text", required: true, label: "Role / Title", admin: { width: "50%", description: "Job title, e.g. 'Founder & Chief IVF Specialist'." } },
-        { name: "image", type: "text", required: true, label: "Current Photo Path (default)", admin: { width: "50%", description: "The built-in photo path. To change the photo just upload a new image in 'Replace Photo' below — no need to edit this." } },
+        { name: "image", type: "text", label: "Current Photo Path (default)", admin: { width: "50%", description: "Leave empty for new doctors — use 'Replace Photo' below to upload a portrait. This field stores the built-in code default for existing doctors." } },
       ],
     },
     imageUploadField("photo", "Replace Photo", "Upload or pick a new portrait photo to replace the current one. Leave empty to keep the current photo."),
