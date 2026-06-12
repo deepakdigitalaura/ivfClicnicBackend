@@ -4,9 +4,12 @@
  * Floating contextual toolbar — pops up next to the element you click, like
  * Word's mini-toolbar. Driven by the shared editor context's `selected` path:
  * finds that element, positions itself just above it, and shows actions for its
- * kind. For a `rich` text field it shows real formatting (Bold / Italic /
- * Underline / colour) via execCommand; for plain text just Clear / Done; for an
- * image, Replace. `onMouseDown preventDefault` keeps the caret/selection inside
+ * kind. EVERY text field shows the same full formatting toolbar (Bold / Italic /
+ * Underline / colour via execCommand + Clear / Done) — the user explicitly wants
+ * ONE consistent toolbar everywhere; never show a reduced "✎ Text" variant. On a
+ * non-rich field the formatting is visual-only (the stored value stays plain
+ * text). For an image, Replace. `onMouseDown preventDefault` keeps the caret/
+ * selection inside
  * the contentEditable so a button press formats the current selection.
  * ===================================================================== */
 
@@ -145,7 +148,9 @@ export function FloatingToolbar() {
   const exec = (cmd: string, value?: string) => {
     document.execCommand(cmd, false, value);
     const el = findEl();
-    if (el) ctx.update(selected, el.innerHTML); // keep draft in sync
+    // Keep the draft in sync — HTML for rich fields, plain text otherwise (a
+    // plain field stores raw text, so formatting there is visual-only).
+    if (el) ctx.update(selected, isRich ? el.innerHTML : el.textContent ?? "");
   };
 
   const submitVideo = () => {
@@ -199,32 +204,27 @@ export function FloatingToolbar() {
         </>
       ) : (
         <>
-          {isRich && (
-            <>
-              <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Bold" onClick={() => exec("bold")}>
-                <b>B</b>
-              </button>
-              <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Italic" onClick={() => exec("italic")}>
-                <i>I</i>
-              </button>
-              <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Underline" onClick={() => exec("underline")}>
-                <u>U</u>
-              </button>
-              <span className="bfi-floattool__sep" />
-              {swatches.map((s) => (
-                <button
-                  key={s.label}
-                  type="button"
-                  className="bfi-floattool__swatch"
-                  title={`Colour: ${s.label}`}
-                  style={{ background: s.css }}
-                  onClick={() => exec("foreColor", s.rgb)}
-                />
-              ))}
-              <span className="bfi-floattool__sep" />
-            </>
-          )}
-          {!isRich && <span className="bfi-floattool__label">✎ Text</span>}
+          <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Bold" onClick={() => exec("bold")}>
+            <b>B</b>
+          </button>
+          <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Italic" onClick={() => exec("italic")}>
+            <i>I</i>
+          </button>
+          <button type="button" className="bfi-floattool__btn bfi-floattool__btn--icon" title="Underline" onClick={() => exec("underline")}>
+            <u>U</u>
+          </button>
+          <span className="bfi-floattool__sep" />
+          {swatches.map((s) => (
+            <button
+              key={s.label}
+              type="button"
+              className="bfi-floattool__swatch"
+              title={`Colour: ${s.label}`}
+              style={{ background: s.css }}
+              onClick={() => exec("foreColor", s.rgb)}
+            />
+          ))}
+          <span className="bfi-floattool__sep" />
           <button
             type="button"
             className="bfi-floattool__btn"

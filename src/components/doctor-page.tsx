@@ -73,9 +73,10 @@ function EditableList({ items, path, editing }: { items: string[]; path: string;
 }
 
 /* Inline-editable section label with a built-in fallback — `d.profileLabels.<key>`
- *  overrides the default when set, otherwise the default renders (byte-identical
- *  on the public site). */
-const lab = (path: string, value: string | undefined, fallback: string, rich = false) => (
+ *  overrides the default when set, otherwise the default renders. Rich so the
+ *  full B/I/U/colour toolbar applies AND persists (labels are body text — the
+ *  SEO gate ignores body spans). */
+const lab = (path: string, value: string | undefined, fallback: string, rich = true) => (
   <Editable path={path} rich={rich}>{value || fallback}</Editable>
 );
 

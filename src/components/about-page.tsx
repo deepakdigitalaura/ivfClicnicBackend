@@ -100,8 +100,8 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
             <SectionHead
-              eyebrow={ed("story.eyebrow", data.story.eyebrow, false)}
-              title={<>{ed("story.heading.lead", data.story.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("story.heading.em", data.story.heading.em, false)}</em></>}
+              eyebrow={ed("story.eyebrow", data.story.eyebrow)}
+              title={<>{ed("story.heading.lead", data.story.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("story.heading.em", data.story.heading.em)}</em></>}
             />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
               {data.story.paragraphs.map((p, i) => (
@@ -115,8 +115,8 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               <dl className="mt-4 space-y-4">
                 {data.atAGlance.map(({ n, l }, i) => (
                   <div key={i} className="flex items-baseline gap-3 border-b border-border/50 pb-3 last:border-0 last:pb-0">
-                    <dt className="font-display text-2xl font-medium text-[color:var(--plum)]">{ed(`atAGlance.${i}.value`, n, false)}</dt>
-                    <dd className="text-sm text-muted-foreground">{ed(`atAGlance.${i}.label`, l, false)}</dd>
+                    <dt className="font-display text-2xl font-medium text-[color:var(--plum)]">{ed(`atAGlance.${i}.value`, n)}</dt>
+                    <dd className="text-sm text-muted-foreground">{ed(`atAGlance.${i}.label`, l)}</dd>
                   </div>
                 ))}
               </dl>
@@ -130,8 +130,8 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow={ed("legacy.eyebrow", data.legacy.eyebrow, false)}
-            title={<>{ed("legacy.heading.lead", data.legacy.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("legacy.heading.em", data.legacy.heading.em, false)}</em></>}
+            eyebrow={ed("legacy.eyebrow", data.legacy.eyebrow)}
+            title={<>{ed("legacy.heading.lead", data.legacy.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("legacy.heading.em", data.legacy.heading.em)}</em></>}
           />
           <div className="mx-auto mt-10 max-w-3xl">
             <Stagger className="relative space-y-8 border-l-2 border-[color:var(--rose)]/20 pl-8">
@@ -139,7 +139,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
                 <StaggerItem key={i}>
                   <div className="relative">
                     <span className="absolute -left-[2.6rem] top-1 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--rose)] text-[10px] font-bold text-white ring-4 ring-white">●</span>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ed(`milestones.${i}.y`, m.y, false)}</div>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ed(`milestones.${i}.y`, m.y)}</div>
                     <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{ed(`milestones.${i}.t`, m.t)}</h3>
                     <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`milestones.${i}.d`, m.d)}</p>
                   </div>
@@ -155,8 +155,8 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow={ed("trust.eyebrow", data.trust.eyebrow, false)}
-            title={<>{ed("trust.heading.lead", data.trust.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("trust.heading.em", data.trust.heading.em, false)}</em></>}
+            eyebrow={ed("trust.eyebrow", data.trust.eyebrow)}
+            title={<>{ed("trust.heading.lead", data.trust.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("trust.heading.em", data.trust.heading.em)}</em></>}
           />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.trustPillars.map((p, i) => {
@@ -179,8 +179,8 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
           its ivory (Why-trust) and white (Awards) neighbours */}
       <div className="bg-[color:var(--rose-soft)]/40">
         <Doctors
-          eyebrow={ed("meetSpecialists.eyebrow", data.meetSpecialists.eyebrow, false)}
-          title={<>{ed("meetSpecialists.heading.lead", data.meetSpecialists.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("meetSpecialists.heading.em", data.meetSpecialists.heading.em, false)}</em></>}
+          eyebrow={ed("meetSpecialists.eyebrow", data.meetSpecialists.eyebrow)}
+          title={<>{ed("meetSpecialists.heading.lead", data.meetSpecialists.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("meetSpecialists.heading.em", data.meetSpecialists.heading.em)}</em></>}
           subtitle={ed("meetSpecialists.subtitle", data.meetSpecialists.subtitle)}
         />
       </div>
@@ -193,8 +193,8 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <div className="container-px mx-auto max-w-[1400px] grid items-center gap-12 lg:grid-cols-2">
           <div>
             <SectionHead
-              eyebrow={ed("patientFirst.eyebrow", data.patientFirst.eyebrow, false)}
-              title={<>{ed("patientFirst.heading.lead", data.patientFirst.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("patientFirst.heading.em", data.patientFirst.heading.em, false)}</em></>}
+              eyebrow={ed("patientFirst.eyebrow", data.patientFirst.eyebrow)}
+              title={<>{ed("patientFirst.heading.lead", data.patientFirst.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("patientFirst.heading.em", data.patientFirst.heading.em)}</em></>}
             />
             <div className="mt-6 space-y-5 text-[16px] leading-relaxed text-muted-foreground">
               {data.patientFirst.paragraphs.map((p, i) => (
@@ -206,8 +206,8 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
             {data.patientStats.map(({ n, l }, i) => (
               <StaggerItem key={i}>
                 <div className="rounded-2xl border border-border/70 bg-card p-6 text-center shadow-soft">
-                  <div className="font-display text-3xl font-medium text-[color:var(--plum)]">{ed(`patientStats.${i}.value`, n, false)}</div>
-                  <div className="mt-1 text-sm text-muted-foreground">{ed(`patientStats.${i}.label`, l, false)}</div>
+                  <div className="font-display text-3xl font-medium text-[color:var(--plum)]">{ed(`patientStats.${i}.value`, n)}</div>
+                  <div className="mt-1 text-sm text-muted-foreground">{ed(`patientStats.${i}.label`, l)}</div>
                 </div>
               </StaggerItem>
             ))}
@@ -217,14 +217,14 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
 
       {/* Centres across India */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow={ed("network.eyebrow", data.network.eyebrow, false)} title={<>{ed("network.heading.lead", data.network.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("network.heading.em", data.network.heading.em)}</em></>} subtitle={ed("network.subtitle", data.network.subtitle)} />
+        <SectionHead center eyebrow={ed("network.eyebrow", data.network.eyebrow)} title={<>{ed("network.heading.lead", data.network.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("network.heading.em", data.network.heading.em)}</em></>} subtitle={ed("network.subtitle", data.network.subtitle)} />
         <Stagger className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {data.network.cities.map((c, i) => (
             <StaggerItem key={i}>
               <a href={c.c === "Ahmedabad" ? "/locations/ahmedabad" : "/#locations"} className="group flex items-center justify-between rounded-2xl border border-border/70 bg-card p-5 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
                 <div>
-                  <div className="flex items-center gap-2 font-semibold text-[color:var(--plum)]"><Building2 className="h-4 w-4 text-[color:var(--rose)]" /> {ed(`network.cities.${i}.c`, c.c, false)}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{ed(`network.cities.${i}.n`, c.n, false)}</div>
+                  <div className="flex items-center gap-2 font-semibold text-[color:var(--plum)]"><Building2 className="h-4 w-4 text-[color:var(--rose)]" /> {ed(`network.cities.${i}.c`, c.c)}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{ed(`network.cities.${i}.n`, c.n)}</div>
                 </div>
                 <ArrowRight className="h-4 w-4 text-[color:var(--rose)] transition-transform group-hover:translate-x-1" />
               </a>
