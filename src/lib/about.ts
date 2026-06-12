@@ -230,3 +230,43 @@ export function resolveAbout(src: AboutSource): AboutData {
 
   return { hero, atAGlance, milestones, trustPillars, patientStats, network, finalCta, seo };
 }
+
+/**
+ * Produce a fully-populated AboutSource by merging `src` with the resolved
+ * (default-overlaid) content. Used by the inline editor to seed the draft so
+ * every section/row/field is present before any edit — prevents sparse POST
+ * bodies (mirrors materializeHomepageSource / materializeServiceSource).
+ */
+export function materializeAboutSource(src: AboutSource): NonNullable<AboutSource> {
+  const r = resolveAbout(src);
+  const s = (src ?? {}) as NonNullable<AboutSource>;
+  const stat = (t: StatTuple) => ({ value: t.n, label: t.l });
+  return {
+    ...s,
+    hero: {
+      eyebrow: r.hero.eyebrow,
+      headline: r.hero.headline,
+      headlineItalic: r.hero.headlineItalic,
+      paragraph: r.hero.paragraph,
+    },
+    atAGlance: r.atAGlance.map(stat),
+    milestones: r.milestones.map((m) => ({ y: m.y, t: m.t, d: m.d })),
+    trustPillars: r.trustPillars.map((p) => ({ icon: p.icon, t: p.t, d: p.d })),
+    patientStats: r.patientStats.map(stat),
+    network: {
+      heading: { lead: r.network.heading.lead, em: r.network.heading.em },
+      subtitle: r.network.subtitle,
+      cities: r.network.cities.map((c) => ({ c: c.c, n: c.n })),
+    },
+    finalCta: {
+      heading: { lead: r.finalCta.heading.lead, em: r.finalCta.heading.em },
+    },
+    seo: {
+      metaTitle: r.seo.metaTitle,
+      metaDescription: r.seo.metaDescription,
+      ogTitle: r.seo.ogTitle,
+      ogDescription: r.seo.ogDescription,
+      ...(s.seo?.ogImage != null ? { ogImage: s.seo.ogImage } : {}),
+    },
+  };
+}
