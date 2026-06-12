@@ -50,6 +50,28 @@ const HEADER_CATEGORY_ORDER = [
   "fertility-preservation",
 ];
 
+/**
+ * Lightweight doctor descriptor for building the header mega panel and footer
+ * Doctors group dynamically from Payload (no hardcoded lists needed).
+ * Defined here (pure module) so header + footer resolvers can import it
+ * without pulling in server-only payload.ts.
+ */
+export type NavDoctorItem = {
+  slug: string;
+  name: string;
+  href: string;
+  navRole: "senior-specialist" | "specialist";
+  navOrder: number;
+  city: string;
+  experienceLabel?: string;
+};
+
+/** Shape consumed by <DoctorsMegaPanel> / <MobileDoctorsItem> in site-header.tsx. */
+export type DoctorMenuData = {
+  senior: Array<{ name: string; href: string; city: string; meta?: string }>;
+  specialists: Array<{ name: string; href: string; city: string }>;
+};
+
 /** A single link inside a mega-menu column (optionally with a nested list). */
 export type HeaderMegaItem = {
   label: string;
@@ -68,8 +90,10 @@ export type HeaderNavItem = {
   mega?: HeaderMegaCol[];
   /** Force the mega grid to N columns (defaults to the column count). */
   megaCols?: number;
-  /** Render the data-driven Doctors mega panel (see src/lib/doctors.ts). */
+  /** Render the data-driven Doctors mega panel. When doctorMenu is present it
+   *  overrides the hardcoded doctorMenuData() fallback in site-header.tsx. */
   doctors?: boolean;
+  doctorMenu?: DoctorMenuData;
 };
 /** Header branding — drives the logo shown in the bar + mobile drawer. */
 export type HeaderBranding = { logoUrl: string; logoAlt: string };
@@ -328,15 +352,38 @@ function buildTreatmentMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] 
 }
 
 /**
+ * Build DoctorMenuData from CMS-published doctors with navRole set.
+ * Returns undefined when no doctors have a navRole set (caller falls back to
+ * the hardcoded doctorMenuData() in site-header.tsx).
+ */
+function buildDoctorMenu(navDoctors: NavDoctorItem[]): DoctorMenuData | undefined {
+  if (!navDoctors.length) return undefined;
+  const senior = navDoctors
+    .filter((d) => d.navRole === "senior-specialist")
+    .sort((a, b) => a.navOrder - b.navOrder)
+    .map((d) => ({ name: d.name, href: d.href, city: d.city, meta: d.experienceLabel || undefined }));
+  const specialists = navDoctors
+    .filter((d) => d.navRole === "specialist")
+    .sort((a, b) => a.navOrder - b.navOrder)
+    .map((d) => ({ name: d.name, href: d.href, city: d.city }));
+  if (!senior.length && !specialists.length) return undefined;
+  return { senior, specialists };
+}
+
+/**
  * Map the `header` global → HeaderData, falling back per-section to
  * HEADER_DEFAULTS so an empty CMS renders byte-identically.
  *
- * When `navTreatments` is provided (published Payload treatments with navCategory
- * set), the "IVF Treatments" mega menu columns are built dynamically — so adding
- * a treatment in the admin automatically reflects in the header without any
- * hardcoded list change.
+ * When `navTreatments` is provided, the "IVF Treatments" mega menu columns are
+ * built dynamically. When `navDoctors` is provided, the Doctors panel data is
+ * built dynamically — both so adding items in admin automatically reflects in
+ * the header without any hardcoded list change.
  */
-export function resolveHeader(g: HeaderSource, navTreatments: NavTreatmentItem[] = []): HeaderData {
+export function resolveHeader(
+  g: HeaderSource,
+  navTreatments: NavTreatmentItem[] = [],
+  navDoctors: NavDoctorItem[] = [],
+): HeaderData {
   const branding: HeaderBranding = {
     logoUrl: g?.branding?.logoUrl || HEADER_DEFAULTS.branding.logoUrl,
     logoAlt: g?.branding?.logoAlt || HEADER_DEFAULTS.branding.logoAlt,
@@ -353,15 +400,16 @@ export function resolveHeader(g: HeaderSource, navTreatments: NavTreatmentItem[]
     styleVariant: g?.cta?.styleVariant || HEADER_DEFAULTS.cta.styleVariant,
   };
 
-  // If CMS has treatments with navCategory set, replace the "IVF Treatments"
-  // mega columns with dynamic ones built from Payload. Falls back to the
-  // hardcoded HEADER_DEFAULTS columns when no treatments have a category yet.
+  // Treatments mega — replace "IVF Treatments" columns with DB-driven ones.
   const treatmentMega = buildTreatmentMega(navTreatments);
-  const finalNav = treatmentMega
-    ? nav.map((item) =>
-        item.label === "IVF Treatments" ? { ...item, mega: treatmentMega } : item,
-      )
-    : nav;
+  // Doctors mega — replace hardcoded panel data with DB-driven one.
+  const doctorMenu = buildDoctorMenu(navDoctors);
+
+  const finalNav = nav.map((item) => {
+    if (item.label === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
+    if (item.doctors && doctorMenu) return { ...item, doctorMenu };
+    return item;
+  });
 
   return { branding, nav: finalNav, cta };
 }

@@ -969,6 +969,14 @@ export interface Doctor {
    * Visiting senior specialist who rotates across all centres (shows a single 'visits across cities' card).
    */
   visitsAllCentres?: boolean | null;
+  /**
+   * Controls where this doctor appears in the header Doctors panel and footer. Leave empty to hide from menus.
+   */
+  navRole?: ('senior-specialist' | 'specialist') | null;
+  /**
+   * Order within the group. Lower numbers appear first (e.g. 10, 20, 30).
+   */
+  navOrder?: number | null;
   updatedAt: string;
   createdAt: string;
   _status?: ('draft' | 'published') | null;
@@ -2490,6 +2498,8 @@ export interface DoctorsSelect<T extends boolean = true> {
       };
   verified?: T;
   visitsAllCentres?: T;
+  navRole?: T;
+  navOrder?: T;
   updatedAt?: T;
   createdAt?: T;
   _status?: T;

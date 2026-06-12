@@ -17,7 +17,7 @@ import {
   type ContactChannel,
   type ContactValues,
 } from "@/lib/contact";
-import type { NavTreatmentItem } from "@/lib/header";
+import type { NavTreatmentItem, NavDoctorItem } from "@/lib/header";
 
 /** Footer heading for each navCategory value. */
 const FOOTER_CATEGORY_LABELS: Record<string, string> = {
@@ -59,6 +59,21 @@ function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] 
         .sort((a, b) => a.navOrder - b.navOrder)
         .map((t) => ({ label: t.name, href: t.href })),
     }));
+}
+
+/** Build the footer "Doctors" group dynamically from CMS-published nav doctors.
+ * Returns undefined when no doctors have a navRole set (falls back to hardcoded). */
+function buildDoctorFooterGroup(navDoctors: NavDoctorItem[]): FooterGroup | undefined {
+  if (!navDoctors.length) return undefined;
+  const sorted = [...navDoctors].sort((a, b) => a.navOrder - b.navOrder);
+  return {
+    h: "Doctors",
+    l: [
+      ...sorted.map((d) => ({ label: d.name, href: d.href })),
+      { label: "All Doctors", href: "/doctors" },
+      { label: "Book Consultation", href: "/#book" },
+    ],
+  };
 }
 
 export type FooterLink = { label: string; href?: string; external?: boolean };
@@ -228,15 +243,15 @@ function resolveLink(link: FooterLinkSource, contact: ContactValues): FooterLink
  * Map the `footer` global → FooterData, resolving contact channels against the
  * canonical `contact` values and falling back per-section to FOOTER_DEFAULTS.
  *
- * When `navTreatments` is provided (published Payload treatments with navCategory
- * set), the treatment-category groups (IVF Treatments, Male Infertility, etc.)
- * are replaced with dynamic ones — so adding a treatment in the admin
- * automatically reflects in the footer without any hardcoded list change.
+ * When `navTreatments` is provided, treatment-category groups are replaced
+ * dynamically. When `navDoctors` is provided, the "Doctors" footer group is
+ * replaced with the CMS list — so adding a doctor in admin reflects automatically.
  */
 export function resolveFooter(
   g: FooterSource,
   contact: ContactValues,
   navTreatments: NavTreatmentItem[] = [],
+  navDoctors: NavDoctorItem[] = [],
 ): FooterData {
   const branding =
     g?.branding && (g.branding.logoUrl || g.branding.description)
@@ -278,6 +293,12 @@ export function resolveFooter(
     groups = [...newGroups, ...replaced];
   } else {
     groups = rawGroups;
+  }
+
+  // Replace the "Doctors" group with a dynamic one built from CMS nav doctors.
+  const dynamicDoctorGroup = buildDoctorFooterGroup(navDoctors);
+  if (dynamicDoctorGroup) {
+    groups = groups.map((grp) => grp.h === "Doctors" ? dynamicDoctorGroup : grp);
   }
 
   const social = g?.social?.length

@@ -712,6 +712,8 @@ export type DoctorSource =
       sameAs?: ValueRow[] | null;
       verified?: boolean | null;
       visitsAllCentres?: boolean | null;
+      navRole?: "senior-specialist" | "specialist" | null;
+      navOrder?: number | null;
     }
   | null
   | undefined;
@@ -722,15 +724,45 @@ const rows = (a: ValueRow[] | null | undefined): string[] | undefined =>
 
 /**
  * Resolve a doctor: overlay the CMS `src` onto the typed code default for `slug`,
- * field-by-field. Returns `undefined` for an unknown slug (caller → notFound).
- * Required fields fall back to the code default; the optional `training` /
- * `publications` / `visitsAllCentres` keep their `undefined` when absent so the
- * JSON-LD/profile branches stay byte-identical.
+ * field-by-field. Returns `undefined` only when both slug is unknown AND src is
+ * absent. Handles three cases:
+ *  1. Code + DB doc   → per-field overlay (original behaviour)
+ *  2. Code only       → return code default (DB not yet seeded)
+ *  3. DB only         → build from src (admin-created doctor, no code entry)
  */
 export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefined {
   const def = doctorBySlug(slug);
-  if (!def) return undefined;
-  if (!src) return def;
+  if (!def && !src) return undefined;
+  if (!src) return def!;
+  if (!def) {
+    // Admin-created doctor: no code entry, build entirely from the DB doc.
+    return {
+      slug,
+      name: src.name ?? "",
+      credentials: src.credentials ?? "",
+      specialty: src.specialty ?? "",
+      medicalSpecialty: rows(src.medicalSpecialty) ?? [],
+      role: src.role ?? "",
+      image: mediaUrl(src.photo) ?? src.image ?? "/assets/doctors/default.jpg",
+      experienceLabel: src.experienceLabel ?? "",
+      experienceYears: src.experienceYears ?? undefined,
+      cities: rows(src.cities) ?? [],
+      locations: rows(src.locations) ?? [],
+      treatments: rows(src.treatments) ?? [],
+      shortBio: src.shortBio ?? "",
+      bio: rows(src.bio) ?? [],
+      knowsAbout: rows(src.knowsAbout) ?? [],
+      alumniOf: rows(src.alumniOf) ?? [],
+      memberOf: rows(src.memberOf) ?? [],
+      awards: rows(src.awards) ?? [],
+      training: rows(src.training) ?? undefined,
+      publications: rows(src.publications) ?? undefined,
+      languages: rows(src.languages) ?? [],
+      sameAs: rows(src.sameAs) ?? [],
+      verified: src.verified ?? false,
+      ...(src.visitsAllCentres ? { visitsAllCentres: true } : {}),
+    };
+  }
   return {
     slug: def.slug,
     name: src.name || def.name,
@@ -758,5 +790,45 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     sameAs: rows(src.sameAs) ?? def.sameAs,
     verified: src.verified ?? def.verified,
     ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
+  };
+}
+
+/**
+ * Produce a fully-populated DoctorSource by merging `src` with the code default
+ * for `slug`. Used by the inline editor to seed the draft so every field is
+ * present before any edit — prevents sparse PATCH bodies that fail Payload
+ * required-field validation.
+ */
+export function materializeDoctorSource(slug: string, src: DoctorSource): NonNullable<DoctorSource> {
+  const def = doctorBySlug(slug);
+  const wrap = (arr: string[] | undefined): { value: string }[] =>
+    arr ? arr.map((v) => ({ value: v })) : [];
+  return {
+    name: src?.name ?? def?.name ?? "",
+    credentials: src?.credentials ?? def?.credentials ?? "",
+    specialty: src?.specialty ?? def?.specialty ?? "",
+    role: src?.role ?? def?.role ?? "",
+    image: src?.image ?? def?.image ?? "",
+    photo: src?.photo,
+    experienceLabel: src?.experienceLabel ?? def?.experienceLabel ?? "",
+    experienceYears: src?.experienceYears ?? def?.experienceYears ?? null,
+    medicalSpecialty: src?.medicalSpecialty ?? wrap(def?.medicalSpecialty),
+    cities: src?.cities ?? wrap(def?.cities),
+    locations: src?.locations ?? wrap(def?.locations),
+    treatments: src?.treatments ?? wrap(def?.treatments),
+    shortBio: src?.shortBio ?? def?.shortBio ?? "",
+    bio: src?.bio ?? wrap(def?.bio),
+    knowsAbout: src?.knowsAbout ?? wrap(def?.knowsAbout),
+    alumniOf: src?.alumniOf ?? wrap(def?.alumniOf),
+    memberOf: src?.memberOf ?? wrap(def?.memberOf),
+    awards: src?.awards ?? wrap(def?.awards),
+    training: src?.training ?? wrap(def?.training),
+    publications: src?.publications ?? wrap(def?.publications),
+    languages: src?.languages ?? wrap(def?.languages),
+    sameAs: src?.sameAs ?? wrap(def?.sameAs),
+    verified: src?.verified ?? def?.verified ?? false,
+    visitsAllCentres: src?.visitsAllCentres ?? def?.visitsAllCentres ?? false,
+    navRole: src?.navRole ?? null,
+    navOrder: src?.navOrder ?? null,
   };
 }

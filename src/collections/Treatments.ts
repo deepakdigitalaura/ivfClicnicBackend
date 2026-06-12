@@ -12,7 +12,7 @@ export const NAV_CATEGORY_OPTIONS = [
   { label: "Female Infertility", value: "female-infertility" },
   { label: "Fertility Preservation", value: "fertility-preservation" },
   { label: "Maternity Services", value: "maternity-services" },
-] as const;
+];
 
 /**
  * Treatment pages (Wave 4.4). Mirrors the `Treatment` type in

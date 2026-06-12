@@ -20,8 +20,8 @@ import type { SiteIdentity } from "@/lib/seo";
 import { cacheTags } from "@/lib/cache-tags";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
-// NavTreatmentItem imported from header.ts (pure module shared by header + footer resolvers)
-import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem } from "@/lib/header";
+// NavTreatmentItem / NavDoctorItem imported from header.ts (pure module shared by header + footer resolvers)
+import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials, type TestimonialSource } from "@/lib/testimonials";
@@ -235,25 +235,112 @@ export const getDoctor = reactCache(
  * each one via resolveDoctor (per-field fallback). An unavailable CMS degrades to
  * the code defaults (byte-identical). Cached + tagged `doctors`. React-cached.
  */
+/**
+ * All doctors for the `/doctors` index, DB-first.
+ *
+ * Strategy:
+ *  1. Fetch every published doctor from Payload DB.
+ *  2. Resolve each through resolveDoctor() — overlays DB data onto code defaults
+ *     per-field; handles DB-only doctors (no code entry) for admin-created ones.
+ *  3. Order: code-known doctors in DOCTORS array order first; DB-only doctors
+ *     (added from admin) appended, sorted by navOrder then name.
+ *  4. Falls back to DOCTORS code defaults when DB is unavailable.
+ */
 export const getDoctors = reactCache(
   (): Promise<Doctor[]> =>
     unstable_cache(
       async () => {
-        let bySlug = new Map<string, DoctorSource>();
+        let dbDocs: Array<{ slug: string; src: DoctorSource }> = [];
         try {
           const payload = await payloadClient();
           const res = await payload.find({
             collection: "doctors",
-            limit: DOCTORS.length + 50,
-            depth: 1, // resolve the optional `photo` upload override
+            limit: DOCTORS.length + 200,
+            depth: 1,
           });
-          bySlug = new Map(res.docs.map((d) => [(d as { slug: string }).slug, d as DoctorSource]));
+          dbDocs = res.docs.map((d) => ({
+            slug: (d as { slug: string }).slug,
+            src: d as DoctorSource,
+          }));
         } catch {
-          // Table not pushed yet / read error → all code defaults.
+          // DB unavailable → full code fallback below.
         }
-        return DOCTORS.map((d) => resolveDoctor(d.slug, bySlug.get(d.slug) ?? null)!);
+
+        if (!dbDocs.length) {
+          return DOCTORS.map((d) => resolveDoctor(d.slug, null)!);
+        }
+
+        const bySlug = new Map(dbDocs.map((d) => [d.slug, d.src]));
+        const codeSlugs = new Set(DOCTORS.map((d) => d.slug));
+
+        // Code-known doctors in canonical DOCTORS array order.
+        const resolved: Doctor[] = DOCTORS
+          .map((d) => resolveDoctor(d.slug, bySlug.get(d.slug) ?? null))
+          .filter((d): d is Doctor => !!d);
+
+        // DB-only doctors (admin-created, not in DOCTORS array).
+        const dbOnly = dbDocs
+          .filter((d) => !codeSlugs.has(d.slug))
+          .sort((a, b) => {
+            const aOrder = (a.src as { navOrder?: number | null })?.navOrder ?? 999;
+            const bOrder = (b.src as { navOrder?: number | null })?.navOrder ?? 999;
+            return aOrder !== bOrder ? aOrder - bOrder : (a.slug < b.slug ? -1 : 1);
+          });
+        for (const d of dbOnly) {
+          const doctor = resolveDoctor(d.slug, d.src);
+          if (doctor) resolved.push(doctor);
+        }
+
+        return resolved;
       },
       ["doctors-list"],
+      { tags: [cacheTags.collectionList("doctors")] },
+    )(),
+);
+
+/**
+ * Lightweight doctor nav data for building header/footer menus dynamically.
+ * Fetches only doctors with navRole set. React-cached + tagged `doctors`.
+ */
+const getNavDoctorsInternal = reactCache(
+  (): Promise<NavDoctorItem[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "doctors",
+            where: { navRole: { exists: true } },
+            limit: 200,
+            depth: 0,
+          });
+          return res.docs
+            .filter((d) => (d as { navRole?: string | null }).navRole)
+            .map((d) => {
+              const doc = d as {
+                slug: string;
+                name: string;
+                href?: string | null;
+                navRole: "senior-specialist" | "specialist";
+                navOrder?: number | null;
+                cities?: { value: string }[] | null;
+                experienceLabel?: string | null;
+              };
+              return {
+                slug: doc.slug,
+                name: doc.name,
+                href: doc.href || `/doctors/${doc.slug}`,
+                navRole: doc.navRole,
+                navOrder: typeof doc.navOrder === "number" ? doc.navOrder : 0,
+                city: doc.cities?.[0]?.value ?? "",
+                experienceLabel: doc.experienceLabel ?? undefined,
+              };
+            });
+        } catch {
+          return [];
+        }
+      },
+      ["doctors-nav"],
       { tags: [cacheTags.collectionList("doctors")] },
     )(),
 );
@@ -493,28 +580,29 @@ const getTreatmentsForNavInternal = reactCache(
  * cached per render.
  */
 export const getFooter = reactCache(async (): Promise<FooterData> => {
-  const [footer, settings, navTreatments] = await Promise.all([
+  const [footer, settings, navTreatments, navDoctors] = await Promise.all([
     getGlobalSafe("footer"),
     getGlobalSafe("site-settings"),
     getTreatmentsForNavInternal(),
+    getNavDoctorsInternal(),
   ]);
-  return resolveFooter(footer as FooterSource, resolveContactValues(settings), navTreatments);
+  return resolveFooter(footer as FooterSource, resolveContactValues(settings), navTreatments, navDoctors);
 });
 
 /**
  * Resolve the sitewide header: the `header` global shaped into the plain
- * `HeaderData` the client <SiteHeader> renders (logo, navigation, CTA). The
- * "IVF Treatments" mega menu columns are now built dynamically from published
- * Payload treatments that have a `navCategory` set — so adding a treatment in
- * the admin automatically reflects in the header. Falls back to HEADER_DEFAULTS
- * when no CMS data. React-cached per render.
+ * `HeaderData` the client <SiteHeader> renders (logo, navigation, CTA). Both
+ * the "IVF Treatments" mega menu columns and the Doctors panel are built
+ * dynamically from CMS data. Falls back to HEADER_DEFAULTS when no CMS data.
+ * React-cached per render.
  */
 export const getHeader = reactCache(async (): Promise<HeaderData> => {
-  const [header, navTreatments] = await Promise.all([
+  const [header, navTreatments, navDoctors] = await Promise.all([
     getGlobalSafe("header"),
     getTreatmentsForNavInternal(),
+    getNavDoctorsInternal(),
   ]);
-  return resolveHeader(header as HeaderSource, navTreatments);
+  return resolveHeader(header as HeaderSource, navTreatments, navDoctors);
 });
 
 /**

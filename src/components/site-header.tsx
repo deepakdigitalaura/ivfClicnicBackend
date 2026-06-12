@@ -5,13 +5,10 @@ import { Phone, MessageCircle, Calendar, Globe, ChevronDown, Menu, X, ArrowRight
 import { useBodyLock } from "./conversion";
 import { doctorMenuData } from "@/lib/doctors";
 import { useHeader } from "@/components/header-provider";
-import type { HeaderNavItem, HeaderMegaItem } from "@/lib/header";
+import type { HeaderNavItem, HeaderMegaItem, DoctorMenuData } from "@/lib/header";
 
-/* Compact, doctor-first "Doctors" mega menu data — see <DoctorsMegaPanel>.
- * Built from DOCTORS so it stays in sync as doctors are added. The nav STRUCTURE
- * is CMS-managed (the `header` global → useHeader); this panel's contents stay
- * data-driven from the DOCTORS entity list (Doctors-CMS is out of scope). */
-const DOCTOR_MENU = doctorMenuData();
+// Hardcoded fallback — used only when the CMS has no doctors with navRole set yet.
+const DOCTOR_MENU_FALLBACK = doctorMenuData();
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -160,7 +157,7 @@ export function SiteHeader({
             onMouseLeave={scheduleClose}
           >
             {activeItem.doctors ? (
-              <DoctorsMegaPanel />
+              <DoctorsMegaPanel menu={activeItem.doctorMenu} />
             ) : (
             <div className="container-px mx-auto max-w-[1400px] py-10">
               <div className="grid gap-x-8 gap-y-7" style={{ gridTemplateColumns: `repeat(${activeItem.megaCols ?? activeItem.mega!.length}, minmax(0, 1fr))` }}>
@@ -260,7 +257,7 @@ export function SiteHeader({
 
 function MobileNavItem({ item, onNavigate }: { item: HeaderNavItem; onNavigate: () => void }) {
   const [open, setOpen] = useState(false);
-  if (item.doctors) return <MobileDoctorsItem onNavigate={onNavigate} />;
+  if (item.doctors) return <MobileDoctorsItem onNavigate={onNavigate} menu={item.doctorMenu} />;
   if (!item.mega) {
     return (
       <a
@@ -335,8 +332,8 @@ function MobileSubItem({ item, onNavigate }: { item: HeaderMegaItem; onNavigate:
 /* ---------- Doctors mega — compact, doctor-first (desktop) ----------
  * Section 1 features the senior promoters; Section 2 lists every other
  * specialist doctor-first with their city as a muted secondary label. */
-function DoctorsMegaPanel() {
-  const { senior, specialists } = DOCTOR_MENU;
+function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
+  const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   return (
     <div className="container-px mx-auto max-w-[1400px] py-7">
       {/* Senior Specialists */}
@@ -378,9 +375,9 @@ function DoctorsMegaPanel() {
 }
 
 /* ---------- Doctors mega — compact, doctor-first (mobile) ---------- */
-function MobileDoctorsItem({ onNavigate }: { onNavigate: () => void }) {
+function MobileDoctorsItem({ onNavigate, menu }: { onNavigate: () => void; menu?: DoctorMenuData }) {
   const [open, setOpen] = useState(false);
-  const { senior, specialists } = DOCTOR_MENU;
+  const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   const row = (d: { name: string; href: string; city: string }) => (
     <li key={d.href}>
       <a href={d.href} onClick={onNavigate} className="flex items-baseline justify-between gap-3 py-1.5 text-sm text-[color:var(--plum)]/80 hover:text-[color:var(--rose)]">

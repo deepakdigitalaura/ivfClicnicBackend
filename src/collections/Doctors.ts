@@ -126,6 +126,35 @@ const DOCTOR_FIELDS: Field[] = [
       label: "Visiting Specialist (all centres)",
       admin: { description: "Visiting senior specialist who rotates across all centres (shows a single 'visits across cities' card)." },
     },
+
+    // ---- Navigation placement (drives header mega-menu + footer Doctors group) ----
+    {
+      type: "row",
+      fields: [
+        {
+          name: "navRole",
+          type: "select",
+          label: "Menu Role",
+          options: [
+            { label: "Senior Specialist (featured card in header)", value: "senior-specialist" },
+            { label: "Specialist (list in header)", value: "specialist" },
+          ],
+          admin: {
+            width: "50%",
+            description: "Controls where this doctor appears in the header Doctors panel and footer. Leave empty to hide from menus.",
+          },
+        },
+        {
+          name: "navOrder",
+          type: "number",
+          label: "Menu Order",
+          admin: {
+            width: "50%",
+            description: "Order within the group. Lower numbers appear first (e.g. 10, 20, 30).",
+          },
+        },
+      ],
+    },
 ];
 
 export const Doctors: CollectionConfig = {
@@ -136,7 +165,17 @@ export const Doctors: CollectionConfig = {
     group: "Doctors",
   },
   versions: { drafts: true },
-  hooks: revalidateCollection("doctors"),
+  hooks: {
+    ...revalidateCollection("doctors"),
+    beforeChange: [
+      ({ data, operation }: { data: Record<string, unknown>; operation: string }) => {
+        if (operation === "create" && !data.href && data.slug) {
+          data.href = `/doctors/${data.slug}`;
+        }
+        return data;
+      },
+    ],
+  },
   access: {
     read: ({ req }) => {
       if (req.user) return true;

@@ -64,7 +64,7 @@ const GETTING_STARTED: { what: string; where: string }[] = [
 const PAGE_EDITORS: { label: string; href: string; ready: boolean }[] = [
   { label: 'Home', href: '/edit/home', ready: true },
   { label: 'About BFI', href: '/edit/about', ready: false },
-  { label: 'Doctors', href: '/edit/doctors', ready: false },
+  { label: 'Doctors', href: '/edit/doctors', ready: true },
   { label: 'Treatments', href: '/edit/treatments', ready: true },
   { label: 'Services', href: '/edit/services', ready: false },
   { label: 'Locations', href: '/edit/locations', ready: false },

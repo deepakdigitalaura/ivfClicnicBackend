@@ -3,15 +3,26 @@ import { notFound } from "next/navigation";
 import { DoctorProfile } from "@/components/doctor-page";
 import { JsonLd } from "@/components/json-ld";
 import { DOCTORS, physicianSchema } from "@/lib/doctors";
-import { getDoctor } from "@/lib/payload";
+import { getDoctor, payloadClient } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 
-/* Pre-render every doctor profile. The slug registry stays code-driven (DOCTORS),
- * so the static route set is identical regardless of CMS/DB state — only the
- * per-doctor CONTENT resolves from the CMS (with a per-field fallback to the
- * typed defaults). */
-export function generateStaticParams() {
-  return DOCTORS.map((d) => ({ slug: d.slug }));
+/** DB-first: union of Payload-published slugs + code-known DOCTORS slugs. */
+export async function generateStaticParams() {
+  const codeSlugs = DOCTORS.map((d) => d.slug);
+  try {
+    const payload = await payloadClient();
+    const res = await payload.find({
+      collection: "doctors",
+      limit: codeSlugs.length + 200,
+      depth: 0,
+      select: { slug: true },
+    });
+    const dbSlugs = res.docs.map((d) => (d as { slug: string }).slug);
+    const all = [...new Set([...codeSlugs, ...dbSlugs])];
+    return all.map((slug) => ({ slug }));
+  } catch {
+    return codeSlugs.map((slug) => ({ slug }));
+  }
 }
 
 export async function generateMetadata(
