@@ -177,7 +177,15 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow="Advantages" title={<H h={s.benefits.heading} />} subtitle={s.benefits.subtitle} />
-          <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            className={`mt-9 grid grid-cols-1 gap-4 ${
+              s.benefits.items.length === 1
+                ? "max-w-sm mx-auto"
+                : s.benefits.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {s.benefits.items.map((item) => (
               <StaggerItem key={item}>
                 <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
@@ -194,7 +202,15 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead eyebrow="Is it for you" title={<H h={s.whoFor.heading} />} subtitle={s.whoFor.subtitle} />
-          <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            className={`mt-9 grid grid-cols-1 gap-4 ${
+              s.whoFor.items.length === 1
+                ? "max-w-sm mx-auto"
+                : s.whoFor.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {s.whoFor.items.map((item) => (
               <StaggerItem key={item}>
                 <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
@@ -211,7 +227,15 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow="What to Expect" title={<H h={s.process.heading} />} subtitle={s.process.subtitle} />
-          <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            className={`mt-10 grid grid-cols-1 gap-6 ${
+              s.process.steps.length === 1
+                ? "max-w-sm mx-auto"
+                : s.process.steps.length === 2
+                  ? "md:grid-cols-2 max-w-3xl mx-auto"
+                  : "md:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {s.process.steps.map((step, i) => {
               const StepIcon = resolveIcon(step.icon);
               return (
@@ -242,7 +266,15 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow="Why Bavishi Fertility & Birthing" title={<><H h={s.whyUs.heading} /> in Ahmedabad</>} />
-          <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          <Stagger
+            className={`mt-10 grid grid-cols-1 gap-6 ${
+              s.whyUs.items.length === 1
+                ? "max-w-sm mx-auto"
+                : s.whyUs.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
             {s.whyUs.items.map((w) => {
               const WhyIcon = resolveIcon(w.icon);
               return (
@@ -293,7 +325,16 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
             <SectionHead center eyebrow="Explore More" title={<>Related maternity <em className="font-display italic text-[color:var(--rose)]">services</em></>} />
-            <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
+            <Stagger
+              className={`mt-10 grid grid-cols-1 gap-5 ${
+                related.length === 1
+                  ? "max-w-sm mx-auto"
+                  : related.length === 2
+                    ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                    : "sm:grid-cols-2 lg:grid-cols-3"
+              }`}
+              stagger={0.05}
+            >
               {related.map((r) => (
                 <StaggerItem key={r.key}>
                   <TreatmentCard icon={resolveIcon(r.icon)} title={r.name} desc={r.desc} href={r.href} />

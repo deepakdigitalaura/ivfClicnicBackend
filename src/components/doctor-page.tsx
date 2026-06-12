@@ -10,6 +10,8 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer, SuccessStories, TreatmentCard, LiteYouTube } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { SectionHead } from "@/components/ivf-page";
+import { Editable, EditableImage } from "@/components/editor/Editable";
+import { useEdit } from "@/components/editor/edit-context";
 import type { Doctor } from "@/lib/doctors";
 import { DOCTORS, doctorUrl } from "@/lib/doctors";
 import { treatmentCardData, treatmentRef } from "@/lib/treatments";
@@ -55,6 +57,7 @@ function expertiseHref(label: string): string {
 
 /* ---------- /doctors/[slug] — single profile ---------- */
 export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
+  const editing = !!useEdit()?.editMode;
   const stories = testimonialsForDoctor(d.slug); // only when a video explicitly names this doctor
   const videos = videosForDoctor(d.slug); // doctor's own explainer videos (real ids only)
   const centres = centresForLocationSlugs(d.locations); // full contact details for "Where to meet"
@@ -79,31 +82,39 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
           <div className="lg:col-span-5">
             <Reveal>
               <div className="relative mx-auto aspect-[4/5] w-full max-w-sm overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
-                <Image src={d.image} alt={`${d.name} — ${d.specialty}, Bavishi Fertility Institute`} fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover object-top" />
+                {editing ? (
+                  <EditableImage path="image" src={d.image} alt={`${d.name} — ${d.specialty}, Bavishi Fertility Institute`} className="absolute inset-0 h-full w-full object-cover object-top" />
+                ) : (
+                  <Image src={d.image} alt={`${d.name} — ${d.specialty}, Bavishi Fertility Institute`} fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover object-top" />
+                )}
               </div>
             </Reveal>
           </div>
           <div className="lg:col-span-7">
             <Reveal>
               <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--rose)]">
-                <span className="h-px w-6 bg-[color:var(--rose)]/60" /> {d.role}
+                <span className="h-px w-6 bg-[color:var(--rose)]/60" /> <Editable path="role" rich={false}>{d.role}</Editable>
               </span>
             </Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-4 flex flex-wrap items-center gap-2 text-4xl font-medium leading-tight text-[color:var(--plum)] md:text-5xl">
-                {d.name}
+                <Editable path="name" rich={false}>{d.name}</Editable>
                 {d.verified && <BadgeCheck className="h-7 w-7 text-[color:var(--rose)]" />}
               </h1>
             </Reveal>
             <Reveal delay={0.1}>
-              <p className="mt-2 text-lg font-medium text-[color:var(--rose)]">{[d.credentials, d.specialty].filter(Boolean).join(" · ")}</p>
+              <p className="mt-2 text-lg font-medium text-[color:var(--rose)]">
+                <Editable path="credentials" rich={false}>{d.credentials}</Editable>
+                {d.credentials && d.specialty && " · "}
+                <Editable path="specialty" rich={false}>{d.specialty}</Editable>
+              </p>
             </Reveal>
             <Reveal delay={0.15}>
-              <p className="mt-5 max-w-xl text-[17px] leading-relaxed text-muted-foreground text-pretty">{d.shortBio}</p>
+              <Editable path="shortBio" as="p" className="mt-5 max-w-xl text-[17px] leading-relaxed text-muted-foreground text-pretty">{d.shortBio}</Editable>
             </Reveal>
             <Reveal delay={0.2}>
               <div className="mt-6 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[color:var(--plum)]">
-                {d.experienceLabel && <span className="inline-flex items-center gap-1.5"><Stethoscope className="h-4 w-4 text-[color:var(--rose)]" /> {d.experienceLabel} experience</span>}
+                {d.experienceLabel && <span className="inline-flex items-center gap-1.5"><Stethoscope className="h-4 w-4 text-[color:var(--rose)]" /> <Editable path="experienceLabel" rich={false}>{d.experienceLabel}</Editable> experience</span>}
                 <span className="inline-flex items-center gap-1.5"><MapPin className="h-4 w-4 text-[color:var(--rose)]" /> {d.cities.join(", ")}</span>
                 <span className="inline-flex items-center gap-1.5"><Languages className="h-4 w-4 text-[color:var(--rose)]" /> {d.languages.join(", ")}</span>
               </div>
@@ -124,7 +135,11 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
           <div>
             <SectionHead eyebrow="About" title={<>About <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
-              {d.bio.map((p, i) => <Reveal key={i} delay={i * 0.05}><p>{p}</p></Reveal>)}
+              {d.bio.map((p, i) => (
+                <Reveal key={i} delay={i * 0.05}>
+                  <Editable path={`bio.${i}.value`} as="p">{p}</Editable>
+                </Reveal>
+              ))}
             </div>
             {d.knowsAbout.length > 0 && (
               <div className="mt-8">
@@ -162,7 +177,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                   {d.credentials && <p className="mt-2 text-[15px] font-medium text-[color:var(--plum)]">{d.credentials}</p>}
                   {d.alumniOf.length > 0 && (
                     <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                      {d.alumniOf.map((a) => <li key={a} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> {a}</li>)}
+                      {d.alumniOf.map((a, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`alumniOf.${i}.value`} rich={false}>{a}</Editable></li>)}
                     </ul>
                   )}
                 </div>
@@ -171,7 +186,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><GraduationCap className="h-4 w-4" /> Advanced training</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.training.map((t) => <li key={t} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> {t}</li>)}
+                    {d.training.map((t, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`training.${i}.value`} rich={false}>{t}</Editable></li>)}
                   </ul>
                 </div>
               )}
@@ -179,7 +194,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><Users className="h-4 w-4" /> Memberships</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.memberOf.map((m) => <li key={m} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> {m}</li>)}
+                    {d.memberOf.map((m, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`memberOf.${i}.value`} rich={false}>{m}</Editable></li>)}
                   </ul>
                 </div>
               )}
@@ -187,7 +202,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><Award className="h-4 w-4" /> Recognition</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.awards.map((a) => <li key={a} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> {a}</li>)}
+                    {d.awards.map((a, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`awards.${i}.value`} rich={false}>{a}</Editable></li>)}
                   </ul>
                 </div>
               )}
@@ -195,7 +210,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                 <div>
                   <div className="flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]"><BookOpen className="h-4 w-4" /> Publications</div>
                   <ul className="mt-2 space-y-1 text-[14px] text-[color:var(--plum)]/80">
-                    {d.publications.map((p) => <li key={p} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> {p}</li>)}
+                    {d.publications.map((p, i) => <li key={i} className="flex items-start gap-2"><CheckCircle2 className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`publications.${i}.value`} rich={false}>{p}</Editable></li>)}
                   </ul>
                 </div>
               )}

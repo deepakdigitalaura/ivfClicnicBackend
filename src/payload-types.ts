@@ -825,9 +825,9 @@ export interface Doctor {
    */
   role: string;
   /**
-   * The built-in photo path. To change the photo just upload a new image in 'Replace Photo' below — no need to edit this.
+   * Leave empty for new doctors — use 'Replace Photo' below to upload a portrait. This field stores the built-in code default for existing doctors.
    */
-  image: string;
+  image?: string | null;
   /**
    * Upload or pick a new portrait photo to replace the current one. Leave empty to keep the current photo.
    */
