@@ -250,6 +250,8 @@
     "sameAs": [],
     "verified": true,
     "visitsAllCentres": true,
+    "navRole": "senior-specialist",
+    "navOrder": 10,
     "_status": "published"
   },
   {
@@ -446,6 +448,8 @@
     "sameAs": [],
     "verified": true,
     "visitsAllCentres": false,
+    "navRole": "senior-specialist",
+    "navOrder": 20,
     "_status": "published"
   },
   {
@@ -665,6 +669,8 @@
     "sameAs": [],
     "verified": true,
     "visitsAllCentres": false,
+    "navRole": "senior-specialist",
+    "navOrder": 30,
     "_status": "published"
   },
   {
@@ -869,6 +875,8 @@
     "sameAs": [],
     "verified": true,
     "visitsAllCentres": false,
+    "navRole": "senior-specialist",
+    "navOrder": 40,
     "_status": "published"
   },
   {
@@ -1044,6 +1052,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 10,
     "_status": "published"
   },
   {
@@ -1216,6 +1226,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 20,
     "_status": "published"
   },
   {
@@ -1391,6 +1403,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 30,
     "_status": "published"
   },
   {
@@ -1566,6 +1580,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 40,
     "_status": "published"
   },
   {
@@ -1754,6 +1770,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 50,
     "_status": "published"
   },
   {
@@ -1939,6 +1957,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 60,
     "_status": "published"
   },
   {
@@ -2111,6 +2131,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 70,
     "_status": "published"
   },
   {
@@ -2303,6 +2325,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 80,
     "_status": "published"
   },
   {
@@ -2478,6 +2502,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 90,
     "_status": "published"
   },
   {
@@ -2667,6 +2693,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 100,
     "_status": "published"
   },
   {
@@ -2863,6 +2891,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 110,
     "_status": "published"
   },
   {
@@ -3051,6 +3081,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 120,
     "_status": "published"
   },
   {
@@ -3244,6 +3276,8 @@
     "sameAs": [],
     "verified": false,
     "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 130,
     "_status": "published"
   }
 ]
