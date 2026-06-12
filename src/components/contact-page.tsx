@@ -5,6 +5,14 @@ import { SiteHeader } from "@/components/site-header";
 import { InquiryForm, Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { Editable } from "@/components/editor/Editable";
+
+/* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
+ * inside /edit/contact. `path` is the dot-path into the contact `pages` doc
+ * SOURCE draft (hero.* + faqs.*). */
+const ed = (path: string, value: string, rich = true) => (
+  <Editable path={path} rich={rich}>{value}</Editable>
+);
 
 /* Icon-name -> component map. The CMS stores a name (string); the template
  * resolves it to a Lucide component. This is the serialisable-icon pattern
@@ -49,7 +57,7 @@ type Hero = { eyebrow?: string | null; lead?: string | null; em?: string | null;
 
 /* Defaults mirror the original hardcoded copy, so the component still renders
  * correctly if used without props (e.g. before CMS data is available). */
-const DEFAULT_HERO: Hero = {
+export const DEFAULT_HERO: Hero = {
   eyebrow: "We're here for you",
   lead: "Contact",
   em: "Bavishi Fertility Institute",
@@ -57,7 +65,7 @@ const DEFAULT_HERO: Hero = {
     "Have a question or ready to begin? Reach out — confidentially and without obligation. Our fertility counsellors are here to guide your very first step.",
 };
 
-const DEFAULT_FAQS: Faq[] = [
+export const DEFAULT_FAQS: Faq[] = [
   { q: "How do I book an appointment at Bavishi Fertility Institute?", a: "Fill in the enquiry form on this page, call us on +91 97126 22288, or message us on WhatsApp. Our team will help you choose the nearest centre and a convenient time." },
   { q: "Can I have an online (video) consultation?", a: "Yes. We offer video consultations for patients across India and abroad, so you can begin your fertility journey from the comfort of home before visiting a centre." },
   { q: "Which Bavishi Fertility Institute centre is nearest to me?", a: "We have 15 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
@@ -89,15 +97,15 @@ export function ContactPage({ hero, faqs, cards }: { hero?: Hero; faqs?: Faq[]; 
           <div className="absolute -bottom-40 -left-24 h-[26rem] w-[26rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl" />
         </div>
         <div className="container-px mx-auto max-w-[1400px] py-16 text-center md:py-20">
-          <Reveal><div className="flex justify-center"><Eyebrow>{h.eyebrow}</Eyebrow></div></Reveal>
+          <Reveal><div className="flex justify-center"><Eyebrow>{ed("hero.eyebrow", h.eyebrow ?? "")}</Eyebrow></div></Reveal>
           <Reveal delay={0.05}>
             <h1 className="mx-auto mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] lg:whitespace-nowrap xl:text-[3.5rem]">
-              {h.lead} <em className="font-display italic text-[color:var(--rose)]">{h.em}</em>
+              {ed("hero.lead", h.lead ?? "")} <em className="font-display italic text-[color:var(--rose)]">{ed("hero.em", h.em ?? "")}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              {h.subtitle}
+              {ed("hero.subtitle", h.subtitle ?? "")}
             </p>
           </Reveal>
         </div>
@@ -186,7 +194,7 @@ export function ContactPage({ hero, faqs, cards }: { hero?: Hero; faqs?: Faq[]; 
         <div className="container-px mx-auto max-w-3xl">
           <SectionHead center eyebrow="FAQ" title={<>Getting in touch — <em className="font-display italic text-[color:var(--rose)]">answered</em></>} />
           <div className="mt-9 space-y-3">
-            {faqList.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
+            {faqList.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.question`, f.q, false)} a={ed(`faqs.${i}.answer`, f.a, false)} />)}
           </div>
         </div>
       </section>
