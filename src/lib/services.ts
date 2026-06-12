@@ -219,3 +219,75 @@ export function resolveService(slug: string, src: ServiceSource): ResolvedServic
     related: src.related?.length ? resolveRelated(src.related.map((r) => r.key ?? "").filter(Boolean)) : base.related,
   };
 }
+
+/**
+ * Produce a fully-populated ServiceSource by merging `src` with the resolved
+ * (default-overlaid) content for `slug`. Used by the inline editor to seed the
+ * draft so every section/row/field is present before any edit — prevents sparse
+ * PATCH bodies that fail Payload required-field validation (same convention as
+ * materializeTreatmentSource / materializeDoctorSource).
+ */
+export function materializeServiceSource(slug: string, src: ServiceSource): NonNullable<ServiceSource> {
+  const r = resolveService(slug, src);
+  const s = (src ?? {}) as NonNullable<ServiceSource>;
+  if (!r) return s; // unknown slug — nothing to seed
+  const badge = (b: string) => ({ badge: b });
+  const text = (t: string) => ({ text: t });
+  const item = (i: string) => ({ item: i });
+  const head = (h: ServiceHeading) => ({ lead: h.lead, ...(h.em ? { em: h.em } : {}) });
+  return {
+    ...s,
+    slug: r.slug,
+    schemaType: r.schemaType,
+    shortName: r.shortName,
+    breadcrumbName: r.breadcrumbName,
+    reviewerSlug: r.reviewerSlug,
+    lastReviewed: r.lastReviewed,
+    seo: { metaTitle: r.meta.title, metaDescription: r.meta.description },
+    hero: {
+      ...(s.hero ?? {}),
+      eyebrow: r.hero.eyebrow,
+      h1: r.hero.h1,
+      h1Em: r.hero.h1Em,
+      tagline: r.hero.tagline,
+      badges: r.hero.badges.map(badge),
+      image: r.hero.image,
+      imageAlt: r.hero.imageAlt,
+    },
+    overview: {
+      ...(s.overview ?? {}),
+      heading: head(r.overview.heading),
+      paragraphs: r.overview.paragraphs.map(text),
+      ...(r.overview.aside ? { aside: { title: r.overview.aside.title, body: r.overview.aside.body } } : {}),
+    },
+    benefits: {
+      ...(s.benefits ?? {}),
+      heading: head(r.benefits.heading),
+      ...(r.benefits.subtitle ? { subtitle: r.benefits.subtitle } : {}),
+      items: r.benefits.items.map(item),
+    },
+    whoFor: {
+      ...(s.whoFor ?? {}),
+      heading: head(r.whoFor.heading),
+      ...(r.whoFor.subtitle ? { subtitle: r.whoFor.subtitle } : {}),
+      items: r.whoFor.items.map(item),
+    },
+    process: {
+      ...(s.process ?? {}),
+      heading: head(r.process.heading),
+      ...(r.process.subtitle ? { subtitle: r.process.subtitle } : {}),
+      steps: r.process.steps.map((st) => ({ icon: st.icon, t: st.t, d: st.d })),
+      ...(r.process.note ? { note: r.process.note } : {}),
+    },
+    whyUs: {
+      ...(s.whyUs ?? {}),
+      heading: head(r.whyUs.heading),
+      items: r.whyUs.items.map((w) => ({ icon: w.icon, t: w.t, d: w.d })),
+    },
+    ...(r.infoNote
+      ? { infoNote: { ...(s.infoNote ?? {}), heading: head(r.infoNote.heading), paragraphs: r.infoNote.paragraphs.map(text) } }
+      : {}),
+    faqs: r.faqs.map((f) => ({ q: f.q, a: f.a })),
+    related: r.related.map((rel) => ({ key: rel.key })),
+  };
+}
