@@ -38,6 +38,15 @@ const headingGroup = (description: string): Field => ({
   ],
 });
 
+/** A paragraphs array — each row a single rich-text paragraph. */
+const paragraphsArray = (description: string): Field => ({
+  name: "paragraphs",
+  type: "array",
+  labels: { singular: "Paragraph", plural: "Paragraphs" },
+  admin: { description },
+  fields: [{ name: "value", type: "textarea", required: true, label: "Paragraph" }],
+});
+
 /** A { value, label } stat tuple (e.g. "30,000+" / "Happy families"). */
 const statArray = (name: string, description: string): Field => ({
   name,
@@ -63,9 +72,31 @@ const ABOUT_FIELDS: Field[] = [
         { name: "headline", type: "text", label: "Page Heading", admin: { description: "The main headline. Leave empty to keep the built-in hero." } },
         { name: "headlineItalic", type: "text", label: "Highlighted Word in Heading", admin: { description: "The word(s) in the headline shown in the cursive accent style." } },
         { name: "paragraph", type: "textarea", label: "Intro Paragraph", admin: { description: "The sub-heading paragraph under the headline." } },
+        { name: "image", type: "text", label: "Hero Image Path", admin: { description: "Set automatically when the hero photo is replaced from the live editor. Leave empty to keep the default photo." } },
+      ],
+    },
+    {
+      name: "story",
+      type: "group",
+      label: "Our Story",
+      admin: { description: "The 'Our Story' section heading and paragraphs. Leave empty to use the built-in copy." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        paragraphsArray("Story paragraphs. Leave empty to use the built-in copy."),
       ],
     },
     statArray("atAGlance", "'At a glance' figures in the Our Story panel. Leave empty to use the built-in figures."),
+    {
+      name: "legacy",
+      type: "group",
+      label: "Legacy Timeline Heading",
+      admin: { description: "The '40+ Years of Legacy' section heading. Leave empty to use the default." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+      ],
+    },
     {
       name: "milestones",
       type: "array",
@@ -78,6 +109,16 @@ const ABOUT_FIELDS: Field[] = [
       ],
     },
     {
+      name: "trust",
+      type: "group",
+      label: "Trust Section Heading",
+      admin: { description: "The 'Why families trust' section heading. Leave empty to use the default." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+      ],
+    },
+    {
       name: "trustPillars",
       type: "array",
       labels: { singular: "Pillar", plural: "Pillars" },
@@ -86,6 +127,17 @@ const ABOUT_FIELDS: Field[] = [
         { name: "icon", type: "select", options: ICON_OPTIONS, label: "Card Icon", admin: { description: "Pick the icon shown on the card." } },
         { name: "t", type: "text", required: true, label: "Title", admin: { description: "Pillar title." } },
         { name: "d", type: "textarea", required: true, label: "Description", admin: { description: "Pillar description." } },
+      ],
+    },
+    {
+      name: "patientFirst",
+      type: "group",
+      label: "Patient First",
+      admin: { description: "The 'Patient First' section heading and paragraphs. Leave empty to use the built-in copy." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        paragraphsArray("Paragraphs. Leave empty to use the built-in copy."),
       ],
     },
     statArray("patientStats", "The 'Patient First' stat grid. Leave empty to use the built-in figures."),
@@ -133,10 +185,10 @@ export const About: GlobalConfig = {
       type: "tabs",
       tabs: [
         { label: "Top Section", fields: ABOUT_FIELDS.slice(0, 1) },
-        { label: "Story & Stats", fields: ABOUT_FIELDS.slice(1, 5) },
-        { label: "Network", fields: ABOUT_FIELDS.slice(5, 6) },
-        { label: "Closing CTA", fields: ABOUT_FIELDS.slice(6, 7) },
-        { label: "Search & Social", fields: ABOUT_FIELDS.slice(7) },
+        { label: "Story & Stats", fields: ABOUT_FIELDS.slice(1, 9) },
+        { label: "Network", fields: ABOUT_FIELDS.slice(9, 10) },
+        { label: "Closing CTA", fields: ABOUT_FIELDS.slice(10, 11) },
+        { label: "Search & Social", fields: ABOUT_FIELDS.slice(11) },
       ],
     },
   ],

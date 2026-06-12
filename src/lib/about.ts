@@ -36,12 +36,15 @@ import type { IconName } from "@/lib/icon-map";
  *  component supplies the per-section <em> className, so markup is unchanged. */
 export type AboutHeading = { lead: string; em: string };
 
-export type AboutHero = { eyebrow: string; headline: string; headlineItalic: string; paragraph: string };
+export type AboutHero = { eyebrow: string; headline: string; headlineItalic: string; paragraph: string; image: string };
 export type StatTuple = { n: string; l: string };
 export type Milestone = { y: string; t: string; d: string };
 /** A trust pillar (icon carried as a curated NAME, mapped to a component in the view). */
 export type TrustPillar = { icon: IconName; t: string; d: string };
 export type CitySummary = { c: string; n: string };
+/** A small eyebrow label + two-part heading, used by the editable section headers. */
+export type AboutSectionHeading = { eyebrow: string; heading: AboutHeading };
+export type AboutTextSection = AboutSectionHeading & { paragraphs: string[] };
 
 export type AboutSeo = {
   metaTitle: string;
@@ -54,9 +57,13 @@ export type AboutSeo = {
 /** Client-ready, fully-resolved About-BFI content. */
 export type AboutData = {
   hero: AboutHero;
+  story: AboutTextSection;
   atAGlance: StatTuple[];
+  legacy: AboutSectionHeading;
   milestones: Milestone[];
+  trust: AboutSectionHeading;
   trustPillars: TrustPillar[];
+  patientFirst: AboutTextSection;
   patientStats: StatTuple[];
   network: { heading: AboutHeading; subtitle: string; cities: CitySummary[] };
   finalCta: { heading: AboutHeading; ctas: string[] };
@@ -76,6 +83,16 @@ export const ABOUT_DEFAULTS: AboutData = {
     headlineItalic: "fertility excellence",
     paragraph:
       "Since 1984, Bavishi Fertility Institute has helped over 30,000 families experience the joy of parenthood — pioneering IVF in India and growing into one of the country's most trusted fertility networks, with 15 centres across 8 cities.",
+    image: "/assets/about-bavishi-family.png",
+  },
+  story: {
+    eyebrow: "Our Story",
+    heading: { lead: "A family's vision, an", em: "institution's legacy" },
+    paragraphs: [
+      "Bavishi Fertility Institute was founded in 1984 by <strong style=\"color:var(--plum)\">Dr. Himanshu Bavishi</strong> and <strong style=\"color:var(--plum)\">Dr. Falguni Bavishi</strong> with a simple but powerful belief: that world-class fertility care should be within every family's reach — delivered with science, sincerity and a deeply human touch.",
+      "What began as a single clinic in Ahmedabad has grown into a multi-centre institute that pioneered IVF in India, achieved national firsts, and today welcomes the second generation of Bavishi doctors. Through every year, the mission has stayed the same — to achieve excellence through knowledge, innovation and research, and to offer customised, safe and effective treatment.",
+      "Our values guide everything we do: <strong style=\"color:var(--plum)\">Simple, Safe, Smart and Successful</strong>. We believe in being a pioneer and leader — the most preferred fertility institute, offering IVF & ART above international standards, with an Indian heart and at India-friendly cost.",
+    ],
   },
   atAGlance: [
     { n: "1984", l: "Founded in Ahmedabad" },
@@ -84,6 +101,10 @@ export const ABOUT_DEFAULTS: AboutData = {
     { n: "15", l: "Centres across 8 cities" },
     { n: "5×", l: "National Fertility Award (2021–25)" },
   ],
+  legacy: {
+    eyebrow: "40+ Years of Legacy",
+    heading: { lead: "Milestones that shaped", em: "Indian fertility care" },
+  },
   milestones: [
     { y: "1984", t: "The journey begins", d: "Dr. Himanshu & Dr. Falguni Bavishi found Bavishi Fertility Institute in Ahmedabad with one promise — fertility care above international standards, with an Indian heart." },
     { y: "1998", t: "Pioneering IVF in India", d: "Bavishi Fertility Institute helps bring modern IVF and assisted reproduction to thousands of Indian families." },
@@ -91,6 +112,10 @@ export const ABOUT_DEFAULTS: AboutData = {
     { y: "2021–25", t: "National Fertility Award", d: "Honoured for excellence in IVF & fertility care for five consecutive years — a record of consistency, not chance." },
     { y: "Today", t: "15 centres, one family", d: "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." },
   ],
+  trust: {
+    eyebrow: "Why Bavishi Fertility Center",
+    heading: { lead: "Why families across India", em: "trust Bavishi Fertility Institute" },
+  },
   trustPillars: [
     { icon: "Award", t: "Four Decades of Experience", d: "Since 1984, a family-led institute that pioneered IVF in India and has guided 30,000+ families to parenthood." },
     { icon: "HeartPulse", t: "Outcomes That Matter", d: "3,000+ IVF cycles a year with a focus on safe stimulation, best-quality embryos and healthy single pregnancies." },
@@ -99,6 +124,14 @@ export const ABOUT_DEFAULTS: AboutData = {
     { icon: "ShieldCheck", t: "Transparency & Ethics", d: "Honest counselling, no hidden costs, double-witnessing of every sample, and the Suraksha Kavach assurance." },
     { icon: "Sparkles", t: "Simple · Safe · Smart · Successful", d: "Our four values shape every plan — personalised, compassionate and judicious use of advanced reproductive technology." },
   ],
+  patientFirst: {
+    eyebrow: "Patient First",
+    heading: { lead: "More than treatment —", em: "a community of hope" },
+    paragraphs: [
+      "Fertility is a deeply personal journey, and no two stories are the same. Beyond advanced laboratories and protocols, what truly sets Bavishi Fertility Institute apart is how we walk beside you — with patience, transparency and genuine care at every step.",
+      "Through emotional counselling, nutrition guidance and our patient support community, families never feel alone. And with the <strong style=\"color:var(--plum)\">Suraksha Kavach</strong> assurance, you can focus on what matters most — your journey to your baby.",
+    ],
+  },
   patientStats: [
     { n: "30,000+", l: "Happy families" },
     { n: "40+", l: "Years of fertility expertise" },
@@ -144,10 +177,23 @@ export type AboutSource =
         headline?: string | null;
         headlineItalic?: string | null;
         paragraph?: string | null;
+        image?: string | null;
+      } | null;
+      story?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        paragraphs?: { value?: string | null }[] | null;
       } | null;
       atAGlance?: StatSource[] | null;
+      legacy?: { eyebrow?: string | null; heading?: HeadingSource } | null;
       milestones?: { y?: string | null; t?: string | null; d?: string | null }[] | null;
+      trust?: { eyebrow?: string | null; heading?: HeadingSource } | null;
       trustPillars?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+      patientFirst?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        paragraphs?: { value?: string | null }[] | null;
+      } | null;
       patientStats?: StatSource[] | null;
       network?: {
         heading?: HeadingSource;
@@ -192,16 +238,38 @@ export function resolveAbout(src: AboutSource): AboutData {
         headline: src.hero.headline,
         headlineItalic: src.hero.headlineItalic ?? d.hero.headlineItalic,
         paragraph: src.hero.paragraph ?? d.hero.paragraph,
+        image: src.hero.image || d.hero.image,
       }
-    : d.hero;
+    : { ...d.hero, image: src.hero?.image || d.hero.image };
+
+  const story: AboutTextSection = src.story?.heading?.lead
+    ? {
+        eyebrow: src.story.eyebrow ?? d.story.eyebrow,
+        heading: heading(src.story.heading, d.story.heading),
+        paragraphs: src.story.paragraphs?.length ? src.story.paragraphs.map((p) => p.value ?? "") : d.story.paragraphs,
+      }
+    : d.story;
 
   const atAGlance = src.atAGlance?.length ? stats(src.atAGlance) : d.atAGlance;
+  const legacy: AboutSectionHeading = src.legacy?.heading?.lead
+    ? { eyebrow: src.legacy.eyebrow ?? d.legacy.eyebrow, heading: heading(src.legacy.heading, d.legacy.heading) }
+    : d.legacy;
   const milestones = src.milestones?.length
     ? src.milestones.map((m) => ({ y: m.y ?? "", t: m.t ?? "", d: m.d ?? "" }))
     : d.milestones;
+  const trust: AboutSectionHeading = src.trust?.heading?.lead
+    ? { eyebrow: src.trust.eyebrow ?? d.trust.eyebrow, heading: heading(src.trust.heading, d.trust.heading) }
+    : d.trust;
   const trustPillars = src.trustPillars?.length
     ? src.trustPillars.map((p) => ({ icon: (p.icon ?? "Sparkles") as IconName, t: p.t ?? "", d: p.d ?? "" }))
     : d.trustPillars;
+  const patientFirst: AboutTextSection = src.patientFirst?.heading?.lead
+    ? {
+        eyebrow: src.patientFirst.eyebrow ?? d.patientFirst.eyebrow,
+        heading: heading(src.patientFirst.heading, d.patientFirst.heading),
+        paragraphs: src.patientFirst.paragraphs?.length ? src.patientFirst.paragraphs.map((p) => p.value ?? "") : d.patientFirst.paragraphs,
+      }
+    : d.patientFirst;
   const patientStats = src.patientStats?.length ? stats(src.patientStats) : d.patientStats;
 
   const network = src.network?.cities?.length
@@ -228,7 +296,7 @@ export function resolveAbout(src: AboutSource): AboutData {
     ogImage: d.seo.ogImage,
   };
 
-  return { hero, atAGlance, milestones, trustPillars, patientStats, network, finalCta, seo };
+  return { hero, story, atAGlance, legacy, milestones, trust, trustPillars, patientFirst, patientStats, network, finalCta, seo };
 }
 
 /**
@@ -248,10 +316,23 @@ export function materializeAboutSource(src: AboutSource): NonNullable<AboutSourc
       headline: r.hero.headline,
       headlineItalic: r.hero.headlineItalic,
       paragraph: r.hero.paragraph,
+      image: r.hero.image,
+    },
+    story: {
+      eyebrow: r.story.eyebrow,
+      heading: { lead: r.story.heading.lead, em: r.story.heading.em },
+      paragraphs: r.story.paragraphs.map((value) => ({ value })),
     },
     atAGlance: r.atAGlance.map(stat),
+    legacy: { eyebrow: r.legacy.eyebrow, heading: { lead: r.legacy.heading.lead, em: r.legacy.heading.em } },
     milestones: r.milestones.map((m) => ({ y: m.y, t: m.t, d: m.d })),
+    trust: { eyebrow: r.trust.eyebrow, heading: { lead: r.trust.heading.lead, em: r.trust.heading.em } },
     trustPillars: r.trustPillars.map((p) => ({ icon: p.icon, t: p.t, d: p.d })),
+    patientFirst: {
+      eyebrow: r.patientFirst.eyebrow,
+      heading: { lead: r.patientFirst.heading.lead, em: r.patientFirst.heading.em },
+      paragraphs: r.patientFirst.paragraphs.map((value) => ({ value })),
+    },
     patientStats: r.patientStats.map(stat),
     network: {
       heading: { lead: r.network.heading.lead, em: r.network.heading.em },

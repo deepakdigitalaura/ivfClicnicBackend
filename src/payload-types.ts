@@ -4401,6 +4401,38 @@ export interface AboutPage {
      * The sub-heading paragraph under the headline.
      */
     paragraph?: string | null;
+    /**
+     * Set automatically when the hero photo is replaced from the live editor. Leave empty to keep the default photo.
+     */
+    image?: string | null;
+  };
+  /**
+   * The 'Our Story' section heading and paragraphs. Leave empty to use the built-in copy.
+   */
+  story?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    /**
+     * Story paragraphs. Leave empty to use the built-in copy.
+     */
+    paragraphs?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
   };
   /**
    * 'At a glance' figures in the Our Story panel. Leave empty to use the built-in figures.
@@ -4418,6 +4450,25 @@ export interface AboutPage {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The '40+ Years of Legacy' section heading. Leave empty to use the default.
+   */
+  legacy?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+  };
   /**
    * The history timeline. Leave empty to use the built-in milestones.
    */
@@ -4438,6 +4489,25 @@ export interface AboutPage {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The 'Why families trust' section heading. Leave empty to use the default.
+   */
+  trust?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+  };
   /**
    * The 'Why families trust' cards. Leave empty to use the built-in pillars.
    */
@@ -4492,6 +4562,34 @@ export interface AboutPage {
         id?: string | null;
       }[]
     | null;
+  /**
+   * The 'Patient First' section heading and paragraphs. Leave empty to use the built-in copy.
+   */
+  patientFirst?: {
+    eyebrow?: string | null;
+    /**
+     * Section heading. Leave empty to keep the default.
+     */
+    heading?: {
+      /**
+       * Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading.
+       */
+      lead?: string | null;
+      /**
+       * The word(s) shown in the cursive accent style at the end of the heading.
+       */
+      em?: string | null;
+    };
+    /**
+     * Paragraphs. Leave empty to use the built-in copy.
+     */
+    paragraphs?:
+      | {
+          value: string;
+          id?: string | null;
+        }[]
+      | null;
+  };
   /**
    * The 'Patient First' stat grid. Leave empty to use the built-in figures.
    */
@@ -5238,6 +5336,24 @@ export interface AboutPageSelect<T extends boolean = true> {
         headline?: T;
         headlineItalic?: T;
         paragraph?: T;
+        image?: T;
+      };
+  story?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        paragraphs?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
       };
   atAGlance?:
     | T
@@ -5245,6 +5361,17 @@ export interface AboutPageSelect<T extends boolean = true> {
         value?: T;
         label?: T;
         id?: T;
+      };
+  legacy?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
       };
   milestones?:
     | T
@@ -5254,6 +5381,17 @@ export interface AboutPageSelect<T extends boolean = true> {
         d?: T;
         id?: T;
       };
+  trust?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+      };
   trustPillars?:
     | T
     | {
@@ -5261,6 +5399,23 @@ export interface AboutPageSelect<T extends boolean = true> {
         t?: T;
         d?: T;
         id?: T;
+      };
+  patientFirst?:
+    | T
+    | {
+        eyebrow?: T;
+        heading?:
+          | T
+          | {
+              lead?: T;
+              em?: T;
+            };
+        paragraphs?:
+          | T
+          | {
+              value?: T;
+              id?: T;
+            };
       };
   patientStats?:
     | T

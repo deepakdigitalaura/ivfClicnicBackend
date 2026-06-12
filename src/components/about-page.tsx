@@ -7,12 +7,10 @@ import { SiteHeader } from "@/components/site-header";
 import { Doctors, AwardsCarousel, Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import { Editable } from "@/components/editor/Editable";
+import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import { ABOUT_DEFAULTS, type AboutData } from "@/lib/about";
 import { resolveIcon } from "@/lib/icon-map";
-
-const aboutImg = "/assets/about-bavishi-family.png";
 
 /* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
  * inside /edit/about-bfi. `path` is the dot-path into the about-page global
@@ -85,7 +83,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
             <Reveal delay={0.15}>
               <Float amplitude={8}>
                 <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
-                  <img src={aboutImg} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
+                  {editing ? (
+                    <EditableImage path="hero.image" src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
+                  ) : (
+                    <img src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
+                  )}
                 </div>
               </Float>
             </Reveal>
@@ -97,11 +99,14 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
         <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
-            <SectionHead eyebrow="Our Story" title={<>A family's vision, an <em className="font-display italic text-[color:var(--rose)]">institution's legacy</em></>} />
+            <SectionHead
+              eyebrow={ed("story.eyebrow", data.story.eyebrow, false)}
+              title={<>{ed("story.heading.lead", data.story.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("story.heading.em", data.story.heading.em, false)}</em></>}
+            />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
-              <Reveal><p>Bavishi Fertility Institute was founded in 1984 by <strong className="text-[color:var(--plum)]">Dr. Himanshu Bavishi</strong> and <strong className="text-[color:var(--plum)]">Dr. Falguni Bavishi</strong> with a simple but powerful belief: that world-class fertility care should be within every family's reach — delivered with science, sincerity and a deeply human touch.</p></Reveal>
-              <Reveal delay={0.05}><p>What began as a single clinic in Ahmedabad has grown into a multi-centre institute that pioneered IVF in India, achieved national firsts, and today welcomes the second generation of Bavishi doctors. Through every year, the mission has stayed the same — to achieve excellence through knowledge, innovation and research, and to offer customised, safe and effective treatment.</p></Reveal>
-              <Reveal delay={0.1}><p>Our values guide everything we do: <strong className="text-[color:var(--plum)]">Simple, Safe, Smart and Successful</strong>. We believe in being a pioneer and leader — the most preferred fertility institute, offering IVF & ART above international standards, with an Indian heart and at India-friendly cost.</p></Reveal>
+              {data.story.paragraphs.map((p, i) => (
+                <Reveal key={i} delay={i * 0.05}><Editable path={`story.paragraphs.${i}.value`} as="p">{p}</Editable></Reveal>
+              ))}
             </div>
           </div>
           <Reveal delay={0.1}>
@@ -123,7 +128,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       {/* Legacy timeline */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="40+ Years of Legacy" title={<>Milestones that shaped <em className="font-display italic text-[color:var(--rose)]">Indian fertility care</em></>} />
+          <SectionHead
+            center
+            eyebrow={ed("legacy.eyebrow", data.legacy.eyebrow, false)}
+            title={<>{ed("legacy.heading.lead", data.legacy.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("legacy.heading.em", data.legacy.heading.em, false)}</em></>}
+          />
           <div className="mx-auto mt-10 max-w-3xl">
             <Stagger className="relative space-y-8 border-l-2 border-[color:var(--rose)]/20 pl-8">
               {data.milestones.map((m, i) => (
@@ -144,7 +153,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       {/* Why families trust */}
       <section className="bg-[color:var(--ivory)] py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="Why Bavishi Fertility Center" title={<>Why families across India <em className="font-display italic text-[color:var(--rose)]">trust Bavishi Fertility Institute</em></>} />
+          <SectionHead
+            center
+            eyebrow={ed("trust.eyebrow", data.trust.eyebrow, false)}
+            title={<>{ed("trust.heading.lead", data.trust.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("trust.heading.em", data.trust.heading.em, false)}</em></>}
+          />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {data.trustPillars.map((p, i) => {
               const Icon = resolveIcon(p.icon);
@@ -173,10 +186,14 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px] grid items-center gap-12 lg:grid-cols-2">
           <div>
-            <SectionHead eyebrow="Patient First" title={<>More than treatment — <em className="font-display italic text-[color:var(--rose)]">a community of hope</em></>} />
+            <SectionHead
+              eyebrow={ed("patientFirst.eyebrow", data.patientFirst.eyebrow, false)}
+              title={<>{ed("patientFirst.heading.lead", data.patientFirst.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("patientFirst.heading.em", data.patientFirst.heading.em, false)}</em></>}
+            />
             <div className="mt-6 space-y-5 text-[16px] leading-relaxed text-muted-foreground">
-              <Reveal><p>Fertility is a deeply personal journey, and no two stories are the same. Beyond advanced laboratories and protocols, what truly sets Bavishi Fertility Institute apart is how we walk beside you — with patience, transparency and genuine care at every step.</p></Reveal>
-              <Reveal delay={0.05}><p>Through emotional counselling, nutrition guidance and our patient support community, families never feel alone. And with the <strong className="text-[color:var(--plum)]">Suraksha Kavach</strong> assurance, you can focus on what matters most — your journey to your baby.</p></Reveal>
+              {data.patientFirst.paragraphs.map((p, i) => (
+                <Reveal key={i} delay={i * 0.05}><Editable path={`patientFirst.paragraphs.${i}.value`} as="p">{p}</Editable></Reveal>
+              ))}
             </div>
           </div>
           <Stagger className="grid grid-cols-2 gap-4">
