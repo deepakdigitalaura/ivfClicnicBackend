@@ -5,6 +5,7 @@ import { Star, MapPin, Phone, Clock, Calendar, MessageCircle, Navigation, CheckC
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { SectionHead } from "@/components/ivf-page";
 import { TreatmentCard } from "@/components/home-page";
+import { Editable } from "@/components/editor/Editable";
 import type { Centre } from "@/lib/locations";
 import { cityBySlug } from "@/lib/locations";
 import type { Review, ReviewData } from "@/lib/reviews";
@@ -510,9 +511,9 @@ export function LocalHighlights({ centre }: { centre: Centre }) {
         <div>
           <SectionHead eyebrow="Landmarks" title={<>How to <em className="font-display italic text-[color:var(--rose)]">spot us</em></>} />
           <ul className="mt-6 space-y-3">
-            {centre.landmarks.map((l) => (
-              <li key={l} className="flex items-start gap-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">
-                <Landmark className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--rose)]" /> {l}
+            {centre.landmarks.map((l, i) => (
+              <li key={i} className="flex items-start gap-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">
+                <Landmark className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--rose)]" /> <Editable path={`landmarks.${i}.value`} rich={false}>{l}</Editable>
               </li>
             ))}
           </ul>
@@ -520,9 +521,9 @@ export function LocalHighlights({ centre }: { centre: Centre }) {
         <div>
           <SectionHead eyebrow="Areas served" title={<>Patients we serve in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em> & nearby</>} />
           <div className="mt-6 flex flex-wrap gap-2">
-            {centre.nearby.map((n) => (
-              <span key={n} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-[color:var(--plum)] shadow-soft">
-                <MapPin className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {n}
+            {centre.nearby.map((n, i) => (
+              <span key={i} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-[color:var(--plum)] shadow-soft">
+                <MapPin className="h-3.5 w-3.5 text-[color:var(--rose)]" /> <Editable path={`nearby.${i}.value`} rich={false}>{n}</Editable>
               </span>
             ))}
           </div>
@@ -539,11 +540,11 @@ export function HowToReach({ centre }: { centre: Centre }) {
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHead center eyebrow="How to reach" title={<>Getting to our <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={centre.address} />
         <Stagger className="mt-9 grid grid-cols-1 gap-4 md:grid-cols-3">
-          {centre.howToReach.map((h) => (
-            <StaggerItem key={h}>
+          {centre.howToReach.map((h, i) => (
+            <StaggerItem key={i}>
               <div className="flex h-full items-start gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <Route className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{h}</span>
+                <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90"><Editable path={`howToReach.${i}.value`} rich={false}>{h}</Editable></span>
               </div>
             </StaggerItem>
           ))}
@@ -631,11 +632,11 @@ export function Facilities({ items, area }: { items: string[]; area: string }) {
         title={<>What's available at <em className="font-display italic text-[color:var(--rose)]">{area} center</em></>}
       />
       <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-        {items.map((f) => (
-          <StaggerItem key={f}>
+        {items.map((f, i) => (
+          <StaggerItem key={i}>
             <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
               <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-              <span className="text-[15px] font-medium text-[color:var(--plum)]">{f}</span>
+              <span className="text-[15px] font-medium text-[color:var(--plum)]"><Editable path={`facilities.${i}.value`} rich={false}>{f}</Editable></span>
             </div>
           </StaggerItem>
         ))}

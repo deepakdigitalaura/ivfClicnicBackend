@@ -10,17 +10,27 @@ import {
   GoogleReviews, CentreGallery, ContactInfo, CentreMap,
   LocalHighlights, HowToReach, Facilities, TreatmentsOffered, AvailableServicesSection,
 } from "@/components/location-sections";
+import { Editable, EditableImage } from "@/components/editor/Editable";
+import { useEdit } from "@/components/editor/edit-context";
 import type { Centre } from "@/lib/locations";
 import { cityBySlug, doctorSlugsForCity, cityHasOwnPage } from "@/lib/locations";
 import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
 
+/* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
+ * inside /edit/centres/<city>/<slug>. `path` is the dot-path into the centres-doc
+ * SOURCE draft (see materializeCentreSource). */
+const ed = (path: string, value: string, rich = true) => (
+  <Editable path={path} rich={rich}>{value}</Editable>
+);
+
 /* CenterPage — data-driven template for /locations/[city]/[center].
  * One Centre object renders the entire page: NAP, map, geo, hours,
  * facilities, treatments, doctors, areas served, landmarks, how-to-reach,
  * FAQs and verified reviews. Reused by every centre, every city. */
 export function CenterPage({ centre }: { centre: Centre }) {
+  const editing = !!useEdit()?.editMode;
   const city = cityBySlug(centre.citySlug);
   // City-based doctor team (not branch-based): every centre in a city shows
   // the same doctors, with Dr. Himanshu Bavishi always included.
@@ -75,15 +85,15 @@ export function CenterPage({ centre }: { centre: Centre }) {
               </h1>
             </Reveal>
             <Reveal delay={0.12}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">{centre.intro}</p>
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">{ed("intro", centre.intro)}</p>
             </Reveal>
             <Reveal delay={0.18}>
               <div className="mt-6 space-y-2.5">
                 <div className="flex items-start gap-2.5 text-[15px] leading-relaxed text-[color:var(--plum)]">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {centre.address}
+                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {ed("address", centre.address)}
                 </div>
                 <div className="flex items-center gap-2.5 text-[15px] text-[color:var(--plum)]">
-                  <Clock className="h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {centre.hours}
+                  <Clock className="h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {ed("hours", centre.hours)}
                 </div>
               </div>
             </Reveal>
@@ -111,6 +121,8 @@ export function CenterPage({ centre }: { centre: Centre }) {
                       <Rotate3d className="h-3.5 w-3.5" /> 360° View · Drag to explore
                     </span>
                   </>
+                ) : editing ? (
+                  <EditableImage path="image" src={centre.image} alt={`${centre.fullName} — IVF centre`} className="absolute inset-0 h-full w-full object-cover object-top" />
                 ) : (
                   <Image src={centre.image} alt={`${centre.fullName} — IVF centre`} fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover object-top" />
                 )}
@@ -127,7 +139,7 @@ export function CenterPage({ centre }: { centre: Centre }) {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead eyebrow={`About the ${centre.area} centre`} title={<>Fertility care in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em>{city?.name && !sameAsCity ? <>, {city.name}</> : null}</>} />
           <div className="mt-6 max-w-3xl space-y-5 text-[17px] leading-relaxed text-muted-foreground">
-            <Reveal><p>{centre.intro}</p></Reveal>
+            <Reveal><p>{ed("intro", centre.intro)}</p></Reveal>
           </div>
         </div>
       </section>
@@ -187,7 +199,7 @@ export function CenterPage({ centre }: { centre: Centre }) {
         <div className="container-px">
           <SectionHead center eyebrow="FAQ" title={<>{centre.area} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
           <div className="mt-9 space-y-3">
-            {centre.faqs.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
+            {centre.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
           </div>
         </div>
       </section>
