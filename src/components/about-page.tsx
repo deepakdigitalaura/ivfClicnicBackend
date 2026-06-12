@@ -177,7 +177,13 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
 
       {/* Meet experts (reused) — wrapped in a blush band so it alternates with
           its ivory (Why-trust) and white (Awards) neighbours */}
-      <div className="bg-[color:var(--rose-soft)]/40"><Doctors /></div>
+      <div className="bg-[color:var(--rose-soft)]/40">
+        <Doctors
+          eyebrow={ed("meetSpecialists.eyebrow", data.meetSpecialists.eyebrow, false)}
+          title={<>{ed("meetSpecialists.heading.lead", data.meetSpecialists.heading.lead, false)} <em className="font-display italic text-[color:var(--rose)]">{ed("meetSpecialists.heading.em", data.meetSpecialists.heading.em, false)}</em></>}
+          subtitle={ed("meetSpecialists.subtitle", data.meetSpecialists.subtitle)}
+        />
+      </div>
 
       {/* Awards (reused) */}
       <AwardsCarousel />
@@ -211,7 +217,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
 
       {/* Centres across India */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow="Our Network" title={<>{ed("network.heading.lead", data.network.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("network.heading.em", data.network.heading.em)}</em></>} subtitle={ed("network.subtitle", data.network.subtitle)} />
+        <SectionHead center eyebrow={ed("network.eyebrow", data.network.eyebrow, false)} title={<>{ed("network.heading.lead", data.network.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("network.heading.em", data.network.heading.em)}</em></>} subtitle={ed("network.subtitle", data.network.subtitle)} />
         <Stagger className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {data.network.cities.map((c, i) => (
             <StaggerItem key={i}>

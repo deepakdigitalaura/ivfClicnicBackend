@@ -142,11 +142,23 @@ const ABOUT_FIELDS: Field[] = [
     },
     statArray("patientStats", "The 'Patient First' stat grid. Leave empty to use the built-in figures."),
     {
+      name: "meetSpecialists",
+      type: "group",
+      label: "Meet the Specialists",
+      admin: { description: "The 'Meet our doctors' section heading. The doctor cards are managed in Doctors." },
+      fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        headingGroup("Section heading. Leave empty to keep the default."),
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+      ],
+    },
+    {
       name: "network",
       type: "group",
       label: "Our Network",
       admin: { description: "'Our Network' — centres across India." },
       fields: [
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
         { name: "subtitle", type: "textarea", label: "Sub-heading" },
         {
@@ -186,9 +198,9 @@ export const About: GlobalConfig = {
       tabs: [
         { label: "Top Section", fields: ABOUT_FIELDS.slice(0, 1) },
         { label: "Story & Stats", fields: ABOUT_FIELDS.slice(1, 9) },
-        { label: "Network", fields: ABOUT_FIELDS.slice(9, 10) },
-        { label: "Closing CTA", fields: ABOUT_FIELDS.slice(10, 11) },
-        { label: "Search & Social", fields: ABOUT_FIELDS.slice(11) },
+        { label: "Network", fields: ABOUT_FIELDS.slice(9, 11) },
+        { label: "Closing CTA", fields: ABOUT_FIELDS.slice(11, 12) },
+        { label: "Search & Social", fields: ABOUT_FIELDS.slice(12) },
       ],
     },
   ],

@@ -65,7 +65,8 @@ export type AboutData = {
   trustPillars: TrustPillar[];
   patientFirst: AboutTextSection;
   patientStats: StatTuple[];
-  network: { heading: AboutHeading; subtitle: string; cities: CitySummary[] };
+  meetSpecialists: AboutSectionHeading & { subtitle: string };
+  network: AboutSectionHeading & { subtitle: string; cities: CitySummary[] };
   finalCta: { heading: AboutHeading; ctas: string[] };
   seo: AboutSeo;
 };
@@ -138,7 +139,13 @@ export const ABOUT_DEFAULTS: AboutData = {
     { n: "300+", l: "International patients a year" },
     { n: "8", l: "Cities, one standard of care" },
   ],
+  meetSpecialists: {
+    eyebrow: "Meet the Specialists",
+    heading: { lead: "Meet Our", em: "Promoter Doctors." },
+    subtitle: "A family of fertility experts trusted by generations.",
+  },
   network: {
+    eyebrow: "Our Network",
     heading: { lead: "15 centres across", em: "8 Indian cities" },
     subtitle: "World-class fertility care, close to home — wherever you are.",
     cities: [
@@ -195,7 +202,13 @@ export type AboutSource =
         paragraphs?: { value?: string | null }[] | null;
       } | null;
       patientStats?: StatSource[] | null;
+      meetSpecialists?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+      } | null;
       network?: {
+        eyebrow?: string | null;
         heading?: HeadingSource;
         subtitle?: string | null;
         cities?: { c?: string | null; n?: string | null }[] | null;
@@ -272,13 +285,22 @@ export function resolveAbout(src: AboutSource): AboutData {
     : d.patientFirst;
   const patientStats = src.patientStats?.length ? stats(src.patientStats) : d.patientStats;
 
+  const meetSpecialists: AboutSectionHeading & { subtitle: string } = src.meetSpecialists?.heading?.lead
+    ? {
+        eyebrow: src.meetSpecialists.eyebrow ?? d.meetSpecialists.eyebrow,
+        heading: heading(src.meetSpecialists.heading, d.meetSpecialists.heading),
+        subtitle: src.meetSpecialists.subtitle ?? d.meetSpecialists.subtitle,
+      }
+    : d.meetSpecialists;
+
   const network = src.network?.cities?.length
     ? {
+        eyebrow: src.network.eyebrow ?? d.network.eyebrow,
         heading: heading(src.network.heading, d.network.heading),
         subtitle: src.network.subtitle ?? d.network.subtitle,
         cities: src.network.cities.map((c) => ({ c: c.c ?? "", n: c.n ?? "" })),
       }
-    : d.network;
+    : { ...d.network, eyebrow: src.network?.eyebrow ?? d.network.eyebrow };
 
   const finalCta = src.finalCta?.heading?.lead
     ? {
@@ -296,7 +318,7 @@ export function resolveAbout(src: AboutSource): AboutData {
     ogImage: d.seo.ogImage,
   };
 
-  return { hero, story, atAGlance, legacy, milestones, trust, trustPillars, patientFirst, patientStats, network, finalCta, seo };
+  return { hero, story, atAGlance, legacy, milestones, trust, trustPillars, patientFirst, patientStats, meetSpecialists, network, finalCta, seo };
 }
 
 /**
@@ -334,7 +356,13 @@ export function materializeAboutSource(src: AboutSource): NonNullable<AboutSourc
       paragraphs: r.patientFirst.paragraphs.map((value) => ({ value })),
     },
     patientStats: r.patientStats.map(stat),
+    meetSpecialists: {
+      eyebrow: r.meetSpecialists.eyebrow,
+      heading: { lead: r.meetSpecialists.heading.lead, em: r.meetSpecialists.heading.em },
+      subtitle: r.meetSpecialists.subtitle,
+    },
     network: {
+      eyebrow: r.network.eyebrow,
       heading: { lead: r.network.heading.lead, em: r.network.heading.em },
       subtitle: r.network.subtitle,
       cities: r.network.cities.map((c) => ({ c: c.c, n: c.n })),
