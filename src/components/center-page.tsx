@@ -14,6 +14,7 @@ import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Centre } from "@/lib/locations";
 import { cityBySlug, doctorSlugsForCity, cityHasOwnPage } from "@/lib/locations";
+import type { ResolvedCentre } from "@/lib/location-content";
 import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
@@ -29,8 +30,9 @@ const ed = (path: string, value: string, rich = true) => (
  * One Centre object renders the entire page: NAP, map, geo, hours,
  * facilities, treatments, doctors, areas served, landmarks, how-to-reach,
  * FAQs and verified reviews. Reused by every centre, every city. */
-export function CenterPage({ centre }: { centre: Centre }) {
+export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
   const editing = !!useEdit()?.editMode;
+  const sl = (centre as ResolvedCentre).sectionLabels ?? {};
   const city = cityBySlug(centre.citySlug);
   // City-based doctor team (not branch-based): every centre in a city shows
   // the same doctors, with Dr. Himanshu Bavishi always included.
@@ -137,7 +139,7 @@ export function CenterPage({ centre }: { centre: Centre }) {
       {/* Overview */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow={`About the ${centre.area} centre`} title={<>Fertility care in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em>{city?.name && !sameAsCity ? <>, {city.name}</> : null}</>} />
+          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `About the ${centre.area} centre`)} title={<>Fertility care in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em>{city?.name && !sameAsCity ? <>, {city.name}</> : null}</>} />
           <div className="mt-6 max-w-3xl space-y-5 text-[17px] leading-relaxed text-muted-foreground">
             <Reveal><p>{ed("intro", centre.intro)}</p></Reveal>
           </div>
@@ -146,8 +148,8 @@ export function CenterPage({ centre }: { centre: Centre }) {
 
       <LocalHighlights centre={centre} />
       <HowToReach centre={centre} />
-      <Facilities items={centre.facilities} area={centre.area} />
-      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={centre.area} /></div>
+      <Facilities items={centre.facilities} area={centre.area} labels={sl} />
+      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={centre.area} labels={sl} /></div>
 
       {/* Women's health & maternity services available at this centre (blush
           band: sits between the white Treatments section and ivory Doctors). */}
@@ -156,19 +158,20 @@ export function CenterPage({ centre }: { centre: Centre }) {
           location={centre.area}
           services={womensHealthServices(centre.womensHealth)}
           tone="tint"
+          labels={sl}
         />
       ) : null}
 
       {docs.length > 0 && (
         <Doctors
           docs={docs}
-          eyebrow={`Doctors at ${centre.area}`}
+          eyebrow={ed("sectionLabels.doctorsEyebrow", sl.doctorsEyebrow || `Doctors at ${centre.area}`)}
           title={<>Meet the doctors at <em className="font-display italic text-[color:var(--rose)]">{centre.area} center</em></>}
-          subtitle={`Our fertility specialists who consult at the ${centre.area} centre.`}
+          subtitle={ed("sectionLabels.doctorsSubtitle", sl.doctorsSubtitle || `Our fertility specialists who consult at the ${centre.area} centre.`)}
         />
       )}
 
-      <SuccessStories tone="tint" eyebrow="Testimonials" title={<><em className="font-display italic text-[color:var(--rose)]">{centre.area}</em> success stories</>} subtitle="Watch real families share their parenthood journeys with Bavishi Fertility Institute." showCta={false} />
+      <SuccessStories tone="tint" eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")} title={<><em className="font-display italic text-[color:var(--rose)]">{centre.area}</em> success stories</>} subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")} showCta={false} />
 
       {/* Verified reviews only — renders CTA / nothing until Places API supplies data */}
       <div className="bg-white">
@@ -182,22 +185,22 @@ export function CenterPage({ centre }: { centre: Centre }) {
 
       <VideoHub />
 
-      <CentreGallery images={centre.gallery} tone="white" title={<>Inside our <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle="A look at our facilities and lab." />
+      <CentreGallery images={centre.gallery} tone="white" title={<>Inside our <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A look at our facilities and lab.")} />
 
       {/* Map */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="How to reach" title={<>Find the <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={centre.address} />
+          <SectionHead center eyebrow={ed("sectionLabels.mapEyebrow", sl.mapEyebrow || "How to reach")} title={<>Find the <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={centre.address} />
           <div className="mt-10"><CentreMap query={centre.mapQuery} title={`${centre.fullName} — map`} /></div>
         </div>
       </section>
 
-      <ContactInfo centres={[centre]} title={<>Contact the <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle="Call, WhatsApp or visit — we're here to help." />
+      <ContactInfo centres={[centre]} title={<>Contact the <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
 
       {/* FAQ */}
       <section className="container-px mx-auto max-w-3xl px-0 py-8 md:py-14">
         <div className="container-px">
-          <SectionHead center eyebrow="FAQ" title={<>{centre.area} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>{centre.area} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
           <div className="mt-9 space-y-3">
             {centre.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
           </div>

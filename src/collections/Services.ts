@@ -201,6 +201,24 @@ const SERVICE_FIELDS: Field[] = [
       fields: [{ name: "key", type: "text", required: true, label: "Service ID" }],
     },
 
+    // ---- Template section labels (eyebrows) ----
+    {
+      name: "sectionLabels",
+      type: "group",
+      label: "Page Section Labels",
+      admin: { description: "Small labels above each section of this page. Leave empty to use the defaults." },
+      fields: [
+        { name: "benefitsEyebrow", type: "text", label: "'Advantages' Section Label" },
+        { name: "whoForEyebrow", type: "text", label: "'Is it for you' Section Label" },
+        { name: "processEyebrow", type: "text", label: "'What to Expect' Section Label" },
+        { name: "whyUsEyebrow", type: "text", label: "'Why us' Section Label" },
+        { name: "infoNoteEyebrow", type: "text", label: "'Good to know' Section Label" },
+        { name: "faqEyebrow", type: "text", label: "'FAQ' Section Label" },
+        { name: "relatedEyebrow", type: "text", label: "'Explore More' Section Label" },
+        { name: "visitEyebrow", type: "text", label: "'Visit us' Section Label" },
+      ],
+    },
+
     seoField,
 ];
 
@@ -231,7 +249,8 @@ export const Services: CollectionConfig = {
         { label: "Top Section", fields: SERVICE_FIELDS.slice(6, 7) },
         { label: "Content", fields: SERVICE_FIELDS.slice(7, 13) },
         { label: "FAQs & Related", fields: SERVICE_FIELDS.slice(13, 15) },
-        { label: "Search & Social", fields: SERVICE_FIELDS.slice(15) },
+        { label: "Section Labels", fields: SERVICE_FIELDS.slice(15, 16) },
+        { label: "Search & Social", fields: SERVICE_FIELDS.slice(16) },
       ],
     },
   ],

@@ -13,9 +13,11 @@ import { FloatingToolbar } from "./FloatingToolbar";
 import { ContactPage, DEFAULT_HERO, DEFAULT_FAQS } from "@/components/contact-page";
 
 type FaqSource = { question?: string | null; answer?: string | null };
+type LabelsSource = { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null } | null;
 type ContactSrc = {
   hero?: { eyebrow?: string | null; lead?: string | null; em?: string | null; subtitle?: string | null } | null;
   faqs?: FaqSource[] | null;
+  sectionLabels?: LabelsSource;
   [k: string]: unknown;
 };
 
@@ -31,7 +33,12 @@ function materialize(src: ContactSrc): ContactSrc {
   const faqs: FaqSource[] = src.faqs?.length
     ? src.faqs.map((f) => ({ question: f.question ?? "", answer: f.answer ?? "" }))
     : DEFAULT_FAQS.map((f) => ({ question: f.q, answer: f.a }));
-  return { ...src, hero, faqs };
+  const sectionLabels = {
+    networkEyebrow: src.sectionLabels?.networkEyebrow ?? "",
+    networkSubtitle: src.sectionLabels?.networkSubtitle ?? "",
+    faqEyebrow: src.sectionLabels?.faqEyebrow ?? "",
+  };
+  return { ...src, hero, faqs, sectionLabels };
 }
 
 export function ContactEditor({
@@ -58,7 +65,7 @@ export function ContactEditor({
             <EditorToolbar pageLabel="Contact Us" />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
-              <ContactPage hero={hero} faqs={faqs} />
+              <ContactPage hero={hero} faqs={faqs} sectionLabels={draft.sectionLabels ?? undefined} />
             </div>
           </div>
         );

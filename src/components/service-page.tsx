@@ -52,6 +52,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
   const editing = !!useEdit()?.editMode;
   const s = content ?? resolveServiceFromCode(slug);
   if (!s) return null;
+  const sl = s.sectionLabels ?? {};
   const reviewer = doctorBySlug(s.reviewerSlug);
   const related = s.related;
   // These maternity services are offered only in Ahmedabad — show the head-office
@@ -195,7 +196,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {/* 3. Benefits */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="Advantages" title={<H h={s.benefits.heading} base="benefits.heading" />} subtitle={s.benefits.subtitle ? ed("benefits.subtitle", s.benefits.subtitle) : undefined} />
+          <SectionHead center eyebrow={ed("sectionLabels.benefitsEyebrow", sl.benefitsEyebrow || "Advantages")} title={<H h={s.benefits.heading} base="benefits.heading" />} subtitle={s.benefits.subtitle ? ed("benefits.subtitle", s.benefits.subtitle) : undefined} />
           <Stagger
             className={`mt-9 grid grid-cols-1 gap-4 ${
               s.benefits.items.length === 1
@@ -220,7 +221,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {/* 4. Who it's for */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow="Is it for you" title={<H h={s.whoFor.heading} base="whoFor.heading" />} subtitle={s.whoFor.subtitle ? ed("whoFor.subtitle", s.whoFor.subtitle) : undefined} />
+          <SectionHead eyebrow={ed("sectionLabels.whoForEyebrow", sl.whoForEyebrow || "Is it for you")} title={<H h={s.whoFor.heading} base="whoFor.heading" />} subtitle={s.whoFor.subtitle ? ed("whoFor.subtitle", s.whoFor.subtitle) : undefined} />
           <Stagger
             className={`mt-9 grid grid-cols-1 gap-4 ${
               s.whoFor.items.length === 1
@@ -245,7 +246,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {/* 5. Process */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="What to Expect" title={<H h={s.process.heading} base="process.heading" />} subtitle={s.process.subtitle ? ed("process.subtitle", s.process.subtitle) : undefined} />
+          <SectionHead center eyebrow={ed("sectionLabels.processEyebrow", sl.processEyebrow || "What to Expect")} title={<H h={s.process.heading} base="process.heading" />} subtitle={s.process.subtitle ? ed("process.subtitle", s.process.subtitle) : undefined} />
           <Stagger
             className={`mt-10 grid grid-cols-1 gap-6 ${
               s.process.steps.length === 1
@@ -284,7 +285,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {/* 6. Why us */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="Why Bavishi Fertility & Birthing" title={<><H h={s.whyUs.heading} base="whyUs.heading" /> in Ahmedabad</>} />
+          <SectionHead center eyebrow={ed("sectionLabels.whyUsEyebrow", sl.whyUsEyebrow || "Why Bavishi Fertility & Birthing")} title={<><H h={s.whyUs.heading} base="whyUs.heading" /> in Ahmedabad</>} />
           <Stagger
             className={`mt-10 grid grid-cols-1 gap-6 ${
               s.whyUs.items.length === 1
@@ -314,7 +315,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {s.infoNote && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-3xl">
-            <SectionHead center eyebrow="Good to know" title={<H h={s.infoNote.heading} base="infoNote.heading" />} />
+            <SectionHead center eyebrow={ed("sectionLabels.infoNoteEyebrow", sl.infoNoteEyebrow || "Good to know")} title={<H h={s.infoNote.heading} base="infoNote.heading" />} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
               {s.infoNote.paragraphs.map((p, i) => (
                 <Reveal key={i} delay={i * 0.05}><p>{ed(`infoNote.paragraphs.${i}.text`, p)}</p></Reveal>
@@ -327,7 +328,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {/* 7. FAQ */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-3xl">
-          <SectionHead center eyebrow="FAQ" title={<>{s.breadcrumbName} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>{s.breadcrumbName} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
           <div className="mt-9 space-y-3">
             {s.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
           </div>
@@ -343,7 +344,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {related.length > 0 && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow="Explore More" title={<>Related maternity <em className="font-display italic text-[color:var(--rose)]">services</em></>} />
+            <SectionHead center eyebrow={ed("sectionLabels.relatedEyebrow", sl.relatedEyebrow || "Explore More")} title={<>Related maternity <em className="font-display italic text-[color:var(--rose)]">services</em></>} />
             <Stagger
               className={`mt-10 grid grid-cols-1 gap-5 ${
                 related.length === 1
@@ -370,7 +371,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
           <div className="container-px mx-auto max-w-[1400px]">
             <SectionHead
               center
-              eyebrow="Visit us"
+              eyebrow={ed("sectionLabels.visitEyebrow", sl.visitEyebrow || "Visit us")}
               title={<>Available at our <em className="font-display italic text-[color:var(--rose)]">Ahmedabad centre</em></>}
               subtitle={`${s.shortName.charAt(0).toUpperCase()}${s.shortName.slice(1)} is offered at Bavishi Fertility & Birthing in Ahmedabad. Call to book your appointment.`}
             />

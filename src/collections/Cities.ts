@@ -1,6 +1,7 @@
 import type { CollectionConfig, Field } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
 import { isEditor, isAdminField } from "@/access/roles";
+import { sectionLabelsField } from "@/fields/section-labels";
 
 /**
  * Cities (Wave 4.5, Phase B). Mirrors the `City` type in src/lib/locations.ts
@@ -84,6 +85,7 @@ const CITY_FIELDS: Field[] = [
     // ---- Editorial body ----
     valueArray("intro", "Paragraph"),
     faqArray,
+    sectionLabelsField,
 
     // ---- Class A (stored for visibility/roundtrip; resolver ignores) ----
     valueArray("womensHealth", "Linked Service ID (website team)", { readOnly: true, description: "Service IDs linked to this city. Managed by the website team." }),
@@ -116,7 +118,8 @@ export const Cities: CollectionConfig = {
         { label: "Basics", fields: CITY_FIELDS.slice(0, 2) },
         { label: "Contact & Hero", fields: CITY_FIELDS.slice(2, 4) },
         { label: "Content", fields: CITY_FIELDS.slice(4, 6) },
-        { label: "Advanced (website team)", fields: CITY_FIELDS.slice(6) },
+        { label: "Section Labels", fields: CITY_FIELDS.slice(6, 7) },
+        { label: "Advanced (website team)", fields: CITY_FIELDS.slice(7) },
       ],
     },
   ],

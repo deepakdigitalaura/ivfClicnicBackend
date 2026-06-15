@@ -268,9 +268,9 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
       {stories.length > 0 && (
         <SuccessStories
           tone="tint"
-          eyebrow="Patient Stories"
+          eyebrow={lab("profileLabels.storiesEyebrow", pl.storiesEyebrow, "Patient Stories")}
           title={<>Stories from <em className="font-display italic text-[color:var(--rose)]">{d.name.split(" ").slice(-1)}'s patients</em></>}
-          subtitle={`Watch families share their journey under the care of ${d.name}.`}
+          subtitle={lab("profileLabels.storiesSubtitle", pl.storiesSubtitle, `Watch families share their journey under the care of ${d.name}.`)}
           showCta={false}
           stories={stories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
         />

@@ -66,6 +66,17 @@ const PAGE_FIELDS: Field[] = [
         { name: "answer", type: "textarea", required: true, label: "Answer" },
       ],
     },
+    {
+      name: "sectionLabels",
+      type: "group",
+      label: "Page Section Labels",
+      admin: { description: "Small labels and sub-headings above each section. Leave empty to use the defaults." },
+      fields: [
+        { name: "networkEyebrow", type: "text", label: "'Our Network' Section Label" },
+        { name: "networkSubtitle", type: "textarea", label: "'Our Network' Sub-heading" },
+        { name: "faqEyebrow", type: "text", label: "'FAQ' Section Label" },
+      ],
+    },
     seoField,
 ];
 
@@ -107,7 +118,8 @@ export const Pages: CollectionConfig = {
       tabs: [
         { label: "Page", fields: PAGE_FIELDS.slice(0, 3) },
         { label: "FAQs", fields: PAGE_FIELDS.slice(3, 4) },
-        { label: "Search & Social", fields: PAGE_FIELDS.slice(4) },
+        { label: "Section Labels", fields: PAGE_FIELDS.slice(4, 5) },
+        { label: "Search & Social", fields: PAGE_FIELDS.slice(5) },
       ],
     },
   ],

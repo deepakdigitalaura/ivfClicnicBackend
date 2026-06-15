@@ -27,11 +27,34 @@
  * ===================================================================== */
 import { cityBySlug, centreBySlug, type City, type Centre } from "@/lib/locations";
 
-/* ---------- Resolved (serialisable) models — mirror City/Centre 1:1.
- * Aliased because the source types are already plain, serialisable data; a
- * hand-copied duplicate would only invite drift. ---------- */
-export type ResolvedCity = City;
-export type ResolvedCentre = Centre;
+/** Per-page overrides for the template section labels (eyebrows/subtitles) on
+ *  city/centre pages. Empty/missing → the component's built-in default renders
+ *  (byte-identical). Shared by both collections; each page uses the keys it has. */
+export type LocationSectionLabels = {
+  overviewEyebrow?: string;
+  centresEyebrow?: string;
+  landmarksEyebrow?: string;
+  areasEyebrow?: string;
+  reachEyebrow?: string;
+  treatmentsEyebrow?: string;
+  womensHealthEyebrow?: string;
+  facilitiesEyebrow?: string;
+  doctorsEyebrow?: string;
+  doctorsSubtitle?: string;
+  testimonialsEyebrow?: string;
+  testimonialsSubtitle?: string;
+  gallerySubtitle?: string;
+  whyEyebrow?: string;
+  mapEyebrow?: string;
+  contactSubtitle?: string;
+  faqEyebrow?: string;
+};
+
+/* ---------- Resolved (serialisable) models — mirror City/Centre 1:1 (plus the
+ * optional CMS-only sectionLabels overlay; absent on the pure-code path so the
+ * fallback render stays byte-identical). ---------- */
+export type ResolvedCity = City & { sectionLabels?: LocationSectionLabels };
+export type ResolvedCentre = Centre & { sectionLabels?: LocationSectionLabels };
 
 /** Serialise a typed code default into the resolved model. This is the
  *  byte-identical fallback path AND the canonical shape the (future) round-trip
@@ -113,6 +136,28 @@ export function resolveCityFromCode(slug: string): ResolvedCity | undefined {
 type FaqSource = { q?: string | null; a?: string | null };
 type ValueItem = { value?: string | null };
 type GalleryItemSource = { src?: string | null; alt?: string | null };
+type SectionLabelsSource = { [K in keyof LocationSectionLabels]?: string | null } | null | undefined;
+
+/** Shape a CMS sectionLabels group into the resolved overlay (null → ""). */
+const toSectionLabels = (s: SectionLabelsSource): LocationSectionLabels => ({
+  overviewEyebrow: s?.overviewEyebrow ?? "",
+  centresEyebrow: s?.centresEyebrow ?? "",
+  landmarksEyebrow: s?.landmarksEyebrow ?? "",
+  areasEyebrow: s?.areasEyebrow ?? "",
+  reachEyebrow: s?.reachEyebrow ?? "",
+  treatmentsEyebrow: s?.treatmentsEyebrow ?? "",
+  womensHealthEyebrow: s?.womensHealthEyebrow ?? "",
+  facilitiesEyebrow: s?.facilitiesEyebrow ?? "",
+  doctorsEyebrow: s?.doctorsEyebrow ?? "",
+  doctorsSubtitle: s?.doctorsSubtitle ?? "",
+  testimonialsEyebrow: s?.testimonialsEyebrow ?? "",
+  testimonialsSubtitle: s?.testimonialsSubtitle ?? "",
+  gallerySubtitle: s?.gallerySubtitle ?? "",
+  whyEyebrow: s?.whyEyebrow ?? "",
+  mapEyebrow: s?.mapEyebrow ?? "",
+  contactSubtitle: s?.contactSubtitle ?? "",
+  faqEyebrow: s?.faqEyebrow ?? "",
+});
 
 export type CentreSource =
   | {
@@ -145,6 +190,7 @@ export type CentreSource =
       gallery?: GalleryItemSource[] | null;
       womensHealth?: ValueItem[] | null;
       built?: boolean | null;
+      sectionLabels?: SectionLabelsSource;
     }
   | null
   | undefined;
@@ -164,6 +210,7 @@ export type CitySource =
       faqs?: FaqSource[] | null;
       womensHealth?: ValueItem[] | null;
       built?: boolean | null;
+      sectionLabels?: SectionLabelsSource;
     }
   | null
   | undefined;
@@ -219,6 +266,7 @@ export function resolveCentre(citySlug: string, slug: string, src: CentreSource)
     gallery: src.gallery?.length ? toGallery(src.gallery) : base.gallery,
     ...(src.hero360Url ? { hero360Url: src.hero360Url } : {}),
     ...(src.sameAs?.length ? { sameAs: values(src.sameAs) } : {}),
+    sectionLabels: toSectionLabels(src.sectionLabels),
   };
 }
 
@@ -247,6 +295,7 @@ export function resolveCity(slug: string, src: CitySource): ResolvedCity | undef
     intro: src.intro?.length ? values(src.intro) : base.intro,
     faqs: src.faqs?.length ? toFaqs(src.faqs) : base.faqs,
     ...(src.hero360Url ? { hero360Url: src.hero360Url } : {}),
+    sectionLabels: toSectionLabels(src.sectionLabels),
   };
 }
 
@@ -276,6 +325,7 @@ export function materializeCitySource(slug: string, src: CitySource): NonNullabl
     faqs: r.faqs.map((f) => ({ q: f.q, a: f.a })),
     ...(r.womensHealth ? { womensHealth: r.womensHealth.map(v) } : {}),
     built: r.built,
+    sectionLabels: toSectionLabels(s.sectionLabels),
   };
 }
 
@@ -319,5 +369,6 @@ export function materializeCentreSource(citySlug: string, slug: string, src: Cen
     gallery: r.gallery.map((g) => ({ src: g.src, alt: g.alt })),
     ...(r.womensHealth ? { womensHealth: r.womensHealth.map(v) } : {}),
     built: r.built,
+    sectionLabels: toSectionLabels(s.sectionLabels),
   };
 }

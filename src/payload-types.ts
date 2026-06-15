@@ -260,6 +260,14 @@ export interface Page {
       }[]
     | null;
   /**
+   * Small labels and sub-headings above each section. Leave empty to use the defaults.
+   */
+  sectionLabels?: {
+    networkEyebrow?: string | null;
+    networkSubtitle?: string | null;
+    faqEyebrow?: string | null;
+  };
+  /**
    * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
    */
   seo?: {
@@ -773,6 +781,19 @@ export interface Service {
       }[]
     | null;
   /**
+   * Small labels above each section of this page. Leave empty to use the defaults.
+   */
+  sectionLabels?: {
+    benefitsEyebrow?: string | null;
+    whoForEyebrow?: string | null;
+    processEyebrow?: string | null;
+    whyUsEyebrow?: string | null;
+    infoNoteEyebrow?: string | null;
+    faqEyebrow?: string | null;
+    relatedEyebrow?: string | null;
+    visitEyebrow?: string | null;
+  };
+  /**
    * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
    */
   seo?: {
@@ -989,6 +1010,8 @@ export interface Doctor {
     visitsParagraph?: string | null;
     doctorSpeakEyebrow?: string | null;
     doctorSpeakSubtitle?: string | null;
+    storiesEyebrow?: string | null;
+    storiesSubtitle?: string | null;
     ctaHeading?: string | null;
   };
   updatedAt: string;
@@ -1737,6 +1760,28 @@ export interface City {
       }[]
     | null;
   /**
+   * Small labels and sub-headings shown above each section of this page. Leave empty to use the defaults.
+   */
+  sectionLabels?: {
+    overviewEyebrow?: string | null;
+    centresEyebrow?: string | null;
+    landmarksEyebrow?: string | null;
+    areasEyebrow?: string | null;
+    reachEyebrow?: string | null;
+    treatmentsEyebrow?: string | null;
+    womensHealthEyebrow?: string | null;
+    facilitiesEyebrow?: string | null;
+    doctorsEyebrow?: string | null;
+    doctorsSubtitle?: string | null;
+    testimonialsEyebrow?: string | null;
+    testimonialsSubtitle?: string | null;
+    gallerySubtitle?: string | null;
+    whyEyebrow?: string | null;
+    mapEyebrow?: string | null;
+    contactSubtitle?: string | null;
+    faqEyebrow?: string | null;
+  };
+  /**
    * Service IDs linked to this city. Managed by the website team.
    */
   womensHealth?:
@@ -1922,6 +1967,28 @@ export interface Centre {
         id?: string | null;
       }[]
     | null;
+  /**
+   * Small labels and sub-headings shown above each section of this page. Leave empty to use the defaults.
+   */
+  sectionLabels?: {
+    overviewEyebrow?: string | null;
+    centresEyebrow?: string | null;
+    landmarksEyebrow?: string | null;
+    areasEyebrow?: string | null;
+    reachEyebrow?: string | null;
+    treatmentsEyebrow?: string | null;
+    womensHealthEyebrow?: string | null;
+    facilitiesEyebrow?: string | null;
+    doctorsEyebrow?: string | null;
+    doctorsSubtitle?: string | null;
+    testimonialsEyebrow?: string | null;
+    testimonialsSubtitle?: string | null;
+    gallerySubtitle?: string | null;
+    whyEyebrow?: string | null;
+    mapEyebrow?: string | null;
+    contactSubtitle?: string | null;
+    faqEyebrow?: string | null;
+  };
   /**
    * Key for the reviews feed. Managed by the website team.
    */
@@ -2169,6 +2236,13 @@ export interface PagesSelect<T extends boolean = true> {
         answer?: T;
         id?: T;
       };
+  sectionLabels?:
+    | T
+    | {
+        networkEyebrow?: T;
+        networkSubtitle?: T;
+        faqEyebrow?: T;
+      };
   seo?:
     | T
     | {
@@ -2404,6 +2478,18 @@ export interface ServicesSelect<T extends boolean = true> {
         key?: T;
         id?: T;
       };
+  sectionLabels?:
+    | T
+    | {
+        benefitsEyebrow?: T;
+        whoForEyebrow?: T;
+        processEyebrow?: T;
+        whyUsEyebrow?: T;
+        infoNoteEyebrow?: T;
+        faqEyebrow?: T;
+        relatedEyebrow?: T;
+        visitEyebrow?: T;
+      };
   seo?:
     | T
     | {
@@ -2525,6 +2611,8 @@ export interface DoctorsSelect<T extends boolean = true> {
         visitsParagraph?: T;
         doctorSpeakEyebrow?: T;
         doctorSpeakSubtitle?: T;
+        storiesEyebrow?: T;
+        storiesSubtitle?: T;
         ctaHeading?: T;
       };
   updatedAt?: T;
@@ -2940,6 +3028,27 @@ export interface CitiesSelect<T extends boolean = true> {
         a?: T;
         id?: T;
       };
+  sectionLabels?:
+    | T
+    | {
+        overviewEyebrow?: T;
+        centresEyebrow?: T;
+        landmarksEyebrow?: T;
+        areasEyebrow?: T;
+        reachEyebrow?: T;
+        treatmentsEyebrow?: T;
+        womensHealthEyebrow?: T;
+        facilitiesEyebrow?: T;
+        doctorsEyebrow?: T;
+        doctorsSubtitle?: T;
+        testimonialsEyebrow?: T;
+        testimonialsSubtitle?: T;
+        gallerySubtitle?: T;
+        whyEyebrow?: T;
+        mapEyebrow?: T;
+        contactSubtitle?: T;
+        faqEyebrow?: T;
+      };
   womensHealth?:
     | T
     | {
@@ -3050,6 +3159,27 @@ export interface CentresSelect<T extends boolean = true> {
     | {
         value?: T;
         id?: T;
+      };
+  sectionLabels?:
+    | T
+    | {
+        overviewEyebrow?: T;
+        centresEyebrow?: T;
+        landmarksEyebrow?: T;
+        areasEyebrow?: T;
+        reachEyebrow?: T;
+        treatmentsEyebrow?: T;
+        womensHealthEyebrow?: T;
+        facilitiesEyebrow?: T;
+        doctorsEyebrow?: T;
+        doctorsSubtitle?: T;
+        testimonialsEyebrow?: T;
+        testimonialsSubtitle?: T;
+        gallerySubtitle?: T;
+        whyEyebrow?: T;
+        mapEyebrow?: T;
+        contactSubtitle?: T;
+        faqEyebrow?: T;
       };
   reviewsKey?: T;
   built?: T;

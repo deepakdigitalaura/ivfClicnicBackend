@@ -73,10 +73,13 @@ export const DEFAULT_FAQS: Faq[] = [
   { q: "Do you treat international patients?", a: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including pre-arrival video consultations and treatment planning." },
 ];
 
-export function ContactPage({ hero, faqs, cards }: { hero?: Hero; faqs?: Faq[]; cards?: Card[] } = {}) {
+export type ContactSectionLabels = { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null };
+
+export function ContactPage({ hero, faqs, cards, sectionLabels }: { hero?: Hero; faqs?: Faq[]; cards?: Card[]; sectionLabels?: ContactSectionLabels } = {}) {
   const h = { ...DEFAULT_HERO, ...(hero ?? {}) };
   const faqList = faqs?.length ? faqs : DEFAULT_FAQS;
   const cardList = cards?.length ? cards : DEFAULT_CARDS;
+  const sl = sectionLabels ?? {};
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -138,7 +141,7 @@ export function ContactPage({ hero, faqs, cards }: { hero?: Hero; faqs?: Faq[]; 
 
       {/* Locations directory */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow="Our Network" title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle="15 fertility centres across 8 Indian cities — world-class care, close to home." />
+        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "15 fertility centres across 8 Indian cities — world-class care, close to home.")} />
 
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {directory.map((c) => (
@@ -192,7 +195,7 @@ export function ContactPage({ hero, faqs, cards }: { hero?: Hero; faqs?: Faq[]; 
       {/* FAQ */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-3xl">
-          <SectionHead center eyebrow="FAQ" title={<>Getting in touch — <em className="font-display italic text-[color:var(--rose)]">answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>Getting in touch — <em className="font-display italic text-[color:var(--rose)]">answered</em></>} />
           <div className="mt-9 space-y-3">
             {faqList.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.question`, f.q, false)} a={ed(`faqs.${i}.answer`, f.a, false)} />)}
           </div>

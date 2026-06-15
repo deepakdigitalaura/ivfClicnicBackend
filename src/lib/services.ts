@@ -48,6 +48,20 @@ export type ResolvedService = {
   infoNote?: { heading: ServiceHeading; paragraphs: string[] };
   faqs: { q: string; a: string }[];
   related: ResolvedRelated[];
+  /** Per-page overrides for the template section labels (eyebrows). Empty/
+   *  missing → the component's built-in default renders (byte-identical). */
+  sectionLabels?: ServiceSectionLabels;
+};
+
+export type ServiceSectionLabels = {
+  benefitsEyebrow?: string;
+  whoForEyebrow?: string;
+  processEyebrow?: string;
+  whyUsEyebrow?: string;
+  infoNoteEyebrow?: string;
+  faqEyebrow?: string;
+  relatedEyebrow?: string;
+  visitEyebrow?: string;
 };
 
 /** Resolve a service's related-service KEYS → serialisable cards (registry +
@@ -135,6 +149,7 @@ export type ServiceSource =
       infoNote?: { heading?: HeadingSource; paragraphs?: TextItem[] | null } | null;
       faqs?: { q?: string | null; a?: string | null }[] | null;
       related?: { key?: string | null }[] | null;
+      sectionLabels?: { [K in keyof ServiceSectionLabels]?: string | null } | null;
     }
   | null
   | undefined;
@@ -217,6 +232,16 @@ export function resolveService(slug: string, src: ServiceSource): ResolvedServic
       : {}),
     faqs: src.faqs?.length ? src.faqs.map((f) => ({ q: f.q ?? "", a: f.a ?? "" })) : base.faqs,
     related: src.related?.length ? resolveRelated(src.related.map((r) => r.key ?? "").filter(Boolean)) : base.related,
+    sectionLabels: {
+      benefitsEyebrow: src.sectionLabels?.benefitsEyebrow ?? "",
+      whoForEyebrow: src.sectionLabels?.whoForEyebrow ?? "",
+      processEyebrow: src.sectionLabels?.processEyebrow ?? "",
+      whyUsEyebrow: src.sectionLabels?.whyUsEyebrow ?? "",
+      infoNoteEyebrow: src.sectionLabels?.infoNoteEyebrow ?? "",
+      faqEyebrow: src.sectionLabels?.faqEyebrow ?? "",
+      relatedEyebrow: src.sectionLabels?.relatedEyebrow ?? "",
+      visitEyebrow: src.sectionLabels?.visitEyebrow ?? "",
+    },
   };
 }
 
@@ -289,5 +314,15 @@ export function materializeServiceSource(slug: string, src: ServiceSource): NonN
       : {}),
     faqs: r.faqs.map((f) => ({ q: f.q, a: f.a })),
     related: r.related.map((rel) => ({ key: rel.key })),
+    sectionLabels: {
+      benefitsEyebrow: s.sectionLabels?.benefitsEyebrow ?? "",
+      whoForEyebrow: s.sectionLabels?.whoForEyebrow ?? "",
+      processEyebrow: s.sectionLabels?.processEyebrow ?? "",
+      whyUsEyebrow: s.sectionLabels?.whyUsEyebrow ?? "",
+      infoNoteEyebrow: s.sectionLabels?.infoNoteEyebrow ?? "",
+      faqEyebrow: s.sectionLabels?.faqEyebrow ?? "",
+      relatedEyebrow: s.sectionLabels?.relatedEyebrow ?? "",
+      visitEyebrow: s.sectionLabels?.visitEyebrow ?? "",
+    },
   };
 }

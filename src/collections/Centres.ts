@@ -1,6 +1,7 @@
 import type { CollectionConfig, Field } from "payload";
 import { revalidateCollection } from "@/lib/revalidate";
 import { isEditor, isAdminField } from "@/access/roles";
+import { sectionLabelsField } from "@/fields/section-labels";
 
 /**
  * Centres (Wave 4.5, Phase B). Mirrors the `Centre` type in src/lib/locations.ts
@@ -160,6 +161,7 @@ const CENTRE_FIELDS: Field[] = [
     faqArray,
     galleryArray,
     valueArray("sameAs", "Profile Link"),
+    sectionLabelsField,
 
     // ---- Class A scalars (stored for parity; resolver ignores) ----
     { name: "reviewsKey", type: "text", label: "Reviews Feed Key (website team)", access: { update: isAdminField }, admin: { description: "Key for the reviews feed. Managed by the website team." } },
@@ -195,7 +197,8 @@ export const Centres: CollectionConfig = {
         { label: "Local SEO", fields: CENTRE_FIELDS.slice(10, 14) },
         { label: "Linked (website team)", fields: CENTRE_FIELDS.slice(14, 17) },
         { label: "Content", fields: CENTRE_FIELDS.slice(17, 21) },
-        { label: "Advanced (website team)", fields: CENTRE_FIELDS.slice(21) },
+        { label: "Section Labels", fields: CENTRE_FIELDS.slice(21, 22) },
+        { label: "Advanced (website team)", fields: CENTRE_FIELDS.slice(22) },
       ],
     },
   ],

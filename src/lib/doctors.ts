@@ -73,6 +73,8 @@ export type Doctor = {
     visitsParagraph?: string;
     doctorSpeakEyebrow?: string;
     doctorSpeakSubtitle?: string;
+    storiesEyebrow?: string;
+    storiesSubtitle?: string;
     ctaHeading?: string;
   };
 };
@@ -736,6 +738,8 @@ export type DoctorSource =
         visitsParagraph?: string | null;
         doctorSpeakEyebrow?: string | null;
         doctorSpeakSubtitle?: string | null;
+        storiesEyebrow?: string | null;
+        storiesSubtitle?: string | null;
         ctaHeading?: string | null;
       } | null;
     }
@@ -828,6 +832,8 @@ type ProfileLabelsSource = {
   visitsParagraph?: string | null;
   doctorSpeakEyebrow?: string | null;
   doctorSpeakSubtitle?: string | null;
+  storiesEyebrow?: string | null;
+  storiesSubtitle?: string | null;
   ctaHeading?: string | null;
 } | null | undefined;
 
@@ -842,6 +848,8 @@ const profileLabels = (src: ProfileLabelsSource) => ({
   visitsParagraph: src?.visitsParagraph ?? "",
   doctorSpeakEyebrow: src?.doctorSpeakEyebrow ?? "",
   doctorSpeakSubtitle: src?.doctorSpeakSubtitle ?? "",
+  storiesEyebrow: src?.storiesEyebrow ?? "",
+  storiesSubtitle: src?.storiesSubtitle ?? "",
   ctaHeading: src?.ctaHeading ?? "",
 });
 
@@ -891,6 +899,8 @@ export function materializeDoctorSource(slug: string, src: DoctorSource): NonNul
       visitsParagraph: src?.profileLabels?.visitsParagraph ?? "",
       doctorSpeakEyebrow: src?.profileLabels?.doctorSpeakEyebrow ?? "",
       doctorSpeakSubtitle: src?.profileLabels?.doctorSpeakSubtitle ?? "",
+      storiesEyebrow: src?.profileLabels?.storiesEyebrow ?? "",
+      storiesSubtitle: src?.profileLabels?.storiesSubtitle ?? "",
       ctaHeading: src?.profileLabels?.ctaHeading ?? "",
     },
   };

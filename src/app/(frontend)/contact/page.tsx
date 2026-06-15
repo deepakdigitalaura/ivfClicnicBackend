@@ -75,7 +75,11 @@ async function loadContact() {
       })
     : undefined;
 
-  return { hero, seo, faqs, ogImage, cards, contact };
+  // Section-label overrides (typed loosely — the generated payload-types may
+  // lag behind the schema until the next generate:types run).
+  const sectionLabels = (page as { sectionLabels?: { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null } | null } | null)?.sectionLabels ?? undefined;
+
+  return { hero, seo, faqs, ogImage, cards, contact, sectionLabels };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -95,7 +99,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { hero, faqs, cards, contact } = await loadContact();
+  const { hero, faqs, cards, contact, sectionLabels } = await loadContact();
 
   const graph = [
     {
@@ -125,7 +129,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
-      <ContactPage hero={hero} faqs={faqs} cards={cards} />
+      <ContactPage hero={hero} faqs={faqs} cards={cards} sectionLabels={sectionLabels} />
     </>
   );
 }

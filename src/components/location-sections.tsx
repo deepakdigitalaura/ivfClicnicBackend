@@ -8,6 +8,7 @@ import { TreatmentCard } from "@/components/home-page";
 import { Editable } from "@/components/editor/Editable";
 import type { Centre } from "@/lib/locations";
 import { cityBySlug } from "@/lib/locations";
+import type { LocationSectionLabels } from "@/lib/location-content";
 import type { Review, ReviewData } from "@/lib/reviews";
 import { treatmentCardData } from "@/lib/treatments";
 import { type WomensHealthService, serviceHref } from "@/lib/womens-health";
@@ -226,7 +227,7 @@ export function CentreGallery({
   images: { src: string; alt: string }[];
   eyebrow?: string;
   title?: React.ReactNode;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
   tone?: "tint" | "white";
 }) {
   const GAP = 16; // gap-4 in px — must match the track's gap class
@@ -451,7 +452,7 @@ export function ContactInfo({
   centres: Centre[];
   eyebrow?: string;
   title?: React.ReactNode;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
 }) {
   const single = centres.length === 1;
   return (
@@ -503,13 +504,21 @@ export function ContactInfo({
   );
 }
 
+/* Inline-editable section label with a built-in fallback — same pattern as the
+ * doctor-page `lab()`. Paths are doc-relative (`sectionLabels.<key>`), so the
+ * same shared section works inside both the City and Centre editors. */
+const lab = (path: string, value: string | undefined, fallback: string) => (
+  <Editable path={path}>{value || fallback}</Editable>
+);
+
 /* ---------- Local highlights: landmarks + areas served (local intent) ---------- */
-export function LocalHighlights({ centre }: { centre: Centre }) {
+export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?: LocationSectionLabels } }) {
+  const sl = centre.sectionLabels ?? {};
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <SectionHead eyebrow="Landmarks" title={<>How to <em className="font-display italic text-[color:var(--rose)]">spot us</em></>} />
+          <SectionHead eyebrow={lab("sectionLabels.landmarksEyebrow", sl.landmarksEyebrow, "Landmarks")} title={<>How to <em className="font-display italic text-[color:var(--rose)]">spot us</em></>} />
           <ul className="mt-6 space-y-3">
             {centre.landmarks.map((l, i) => (
               <li key={i} className="flex items-start gap-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">
@@ -519,7 +528,7 @@ export function LocalHighlights({ centre }: { centre: Centre }) {
           </ul>
         </div>
         <div>
-          <SectionHead eyebrow="Areas served" title={<>Patients we serve in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em> & nearby</>} />
+          <SectionHead eyebrow={lab("sectionLabels.areasEyebrow", sl.areasEyebrow, "Areas served")} title={<>Patients we serve in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em> & nearby</>} />
           <div className="mt-6 flex flex-wrap gap-2">
             {centre.nearby.map((n, i) => (
               <span key={i} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-[color:var(--plum)] shadow-soft">
@@ -534,11 +543,11 @@ export function LocalHighlights({ centre }: { centre: Centre }) {
 }
 
 /* ---------- How to reach (transit / directions — visible local content) ---------- */
-export function HowToReach({ centre }: { centre: Centre }) {
+export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: LocationSectionLabels } }) {
   return (
     <section className="bg-white py-8 md:py-14">
       <div className="container-px mx-auto max-w-[1400px]">
-        <SectionHead center eyebrow="How to reach" title={<>Getting to our <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={centre.address} />
+        <SectionHead center eyebrow={lab("sectionLabels.reachEyebrow", centre.sectionLabels?.reachEyebrow, "How to reach")} title={<>Getting to our <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={centre.address} />
         <Stagger className="mt-9 grid grid-cols-1 gap-4 md:grid-cols-3">
           {centre.howToReach.map((h, i) => (
             <StaggerItem key={i}>
@@ -557,10 +566,10 @@ export function HowToReach({ centre }: { centre: Centre }) {
 /* ---------- Treatments offered at this centre (real internal links) ----------
  * Reuses the homepage <TreatmentCard> so centre pages share the exact same
  * card design (icon, name, description, "Learn more" link). */
-export function TreatmentsOffered({ slugs, area }: { slugs: string[]; area: string }) {
+export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; area: string; labels?: LocationSectionLabels }) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-      <SectionHead center eyebrow="Treatments offered" title={<>Fertility treatments at <em className="font-display italic text-[color:var(--rose)]">{area} center</em></>} />
+      <SectionHead center eyebrow={lab("sectionLabels.treatmentsEyebrow", labels?.treatmentsEyebrow, "Treatments offered")} title={<>Fertility treatments at <em className="font-display italic text-[color:var(--rose)]">{area} center</em></>} />
       <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
         {slugs.map((slug) => {
           const c = treatmentCardData(slug);
@@ -590,11 +599,13 @@ export function AvailableServicesSection({
   services,
   tone = "tint",
   serviceLabel = "Women's health services",
+  labels,
 }: {
   location: string;
   services: WomensHealthService[];
   tone?: "plain" | "tint" | "white";
   serviceLabel?: string;
+  labels?: LocationSectionLabels;
 }) {
   if (!services.length) return null;
   const bg = tone === "tint" ? "bg-[color:var(--rose-soft)]/40 " : tone === "white" ? "bg-white " : "";
@@ -606,7 +617,7 @@ export function AvailableServicesSection({
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHead
           center
-          eyebrow="Women's Health & Maternity"
+          eyebrow={lab("sectionLabels.womensHealthEyebrow", labels?.womensHealthEyebrow, "Women's Health & Maternity")}
           title={<>{serviceLabel} available at <em className="font-display italic text-[color:var(--rose)]">{location}</em></>}
           subtitle={`Access advanced maternity, fetal medicine and pregnancy care services at our ${location} center.`}
         />
@@ -623,12 +634,12 @@ export function AvailableServicesSection({
 }
 
 /* ---------- Facilities list (sub-location pages) ---------- */
-export function Facilities({ items, area }: { items: string[]; area: string }) {
+export function Facilities({ items, area, labels }: { items: string[]; area: string; labels?: LocationSectionLabels }) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <SectionHead
         center
-        eyebrow="Facilities"
+        eyebrow={lab("sectionLabels.facilitiesEyebrow", labels?.facilitiesEyebrow, "Facilities")}
         title={<>What's available at <em className="font-display italic text-[color:var(--rose)]">{area} center</em></>}
       />
       <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">

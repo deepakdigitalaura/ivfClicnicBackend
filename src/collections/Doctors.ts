@@ -171,6 +171,8 @@ const DOCTOR_FIELDS: Field[] = [
         { name: "visitsParagraph", type: "textarea", label: "'Visits across cities' Card Paragraph" },
         { name: "doctorSpeakEyebrow", type: "text", label: "'Doctor Speak' Section Label" },
         { name: "doctorSpeakSubtitle", type: "text", label: "'Doctor Speak' Sub-heading" },
+        { name: "storiesEyebrow", type: "text", label: "'Patient Stories' Section Label" },
+        { name: "storiesSubtitle", type: "textarea", label: "'Patient Stories' Sub-heading" },
         { name: "ctaHeading", type: "text", label: "Closing CTA Heading (before name)" },
       ],
     },
