@@ -17,7 +17,7 @@ import {
   type ContactChannel,
   type ContactValues,
 } from "@/lib/contact";
-import type { NavTreatmentItem, NavDoctorItem } from "@/lib/header";
+import type { NavTreatmentItem, NavDoctorItem, NavLocationItem } from "@/lib/header";
 
 /** Footer heading for each navCategory value. */
 const FOOTER_CATEGORY_LABELS: Record<string, string> = {
@@ -59,6 +59,22 @@ function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] 
         .sort((a, b) => a.navOrder - b.navOrder)
         .map((t) => ({ label: t.name, href: t.href })),
     }));
+}
+
+/** Build the footer "Locations" group — one link per published city plus an "All Centres" link. */
+function buildLocationsFooterGroup(navLocations: NavLocationItem[]): FooterGroup | undefined {
+  if (!navLocations.length) return undefined;
+  const totalCentres = navLocations.reduce((sum, c) => sum + c.centres.length, 0);
+  return {
+    h: "Locations",
+    l: [
+      ...navLocations.map((city) => ({
+        label: city.cityName,
+        href: `/locations/${city.citySlug}`,
+      })),
+      { label: `All ${totalCentres} Centres`, href: "/#locations" },
+    ],
+  };
 }
 
 /** Build the footer "Doctors" group — only senior-specialist doctors are listed
@@ -256,6 +272,7 @@ export function resolveFooter(
   contact: ContactValues,
   navTreatments: NavTreatmentItem[] = [],
   navDoctors: NavDoctorItem[] = [],
+  navLocations: NavLocationItem[] = [],
 ): FooterData {
   const branding =
     g?.branding && (g.branding.logoUrl || g.branding.description)
@@ -303,6 +320,12 @@ export function resolveFooter(
   const dynamicDoctorGroup = buildDoctorFooterGroup(navDoctors);
   if (dynamicDoctorGroup) {
     groups = groups.map((grp) => grp.h === "Doctors" ? dynamicDoctorGroup : grp);
+  }
+
+  // Replace the "Locations" group with a dynamic one built from CMS cities/centres.
+  const dynamicLocationsGroup = buildLocationsFooterGroup(navLocations);
+  if (dynamicLocationsGroup) {
+    groups = groups.map((grp) => grp.h === "Locations" ? dynamicLocationsGroup : grp);
   }
 
   const social = g?.social?.length

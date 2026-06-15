@@ -176,7 +176,16 @@ export const Centres: CollectionConfig = {
     group: "Locations",
   },
   versions: { drafts: true },
-  hooks: revalidateCollection("centres"),
+  hooks: {
+    ...revalidateCollection("centres"),
+    beforeChange: [
+      ({ data }) => {
+        if (typeof data.slug === "string") data.slug = data.slug.toLowerCase().trim();
+        if (typeof data.citySlug === "string") data.citySlug = data.citySlug.toLowerCase().trim();
+        return data;
+      },
+    ],
+  },
   access: {
     read: ({ req }) => {
       if (req.user) return true;

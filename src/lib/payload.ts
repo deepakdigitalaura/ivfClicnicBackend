@@ -20,8 +20,8 @@ import type { SiteIdentity } from "@/lib/seo";
 import { cacheTags } from "@/lib/cache-tags";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
-// NavTreatmentItem / NavDoctorItem imported from header.ts (pure module shared by header + footer resolvers)
-import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem } from "@/lib/header";
+// NavTreatmentItem / NavDoctorItem / NavLocationItem imported from header.ts (pure module shared by header + footer resolvers)
+import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials, type TestimonialSource } from "@/lib/testimonials";
@@ -182,9 +182,10 @@ export const getService = reactCache(
             collection: "services",
             where: { slug: { equals: slug } },
             limit: 1,
-            depth: 1, // resolve seo.ogImage upload relation
+            depth: 1, // resolve seo.ogImage upload relation + heroPhoto
           });
-          return resolveService(slug, res.docs[0] as ServiceSource);
+          // Cast includes `name` so resolveService can build a page for DB-only services
+          return resolveService(slug, res.docs[0] as ServiceSource & { name?: string });
         } catch {
           // Table not pushed yet / read error → typed code fallback.
           return resolveService(slug, null);
@@ -192,6 +193,36 @@ export const getService = reactCache(
       },
       ["service-by-slug", slug],
       { tags: [cacheTags.collectionList("services"), cacheTags.collectionItem("services", slug)] },
+    )(),
+);
+
+/**
+ * Returns all published service slugs from the DB — used by the services route
+ * generateStaticParams so new services added in admin are pre-rendered at build
+ * time (the page still renders on-demand for any slug not in the static set).
+ */
+export const getPublishedServiceSlugs = reactCache(
+  (): Promise<string[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "services",
+            limit: 300,
+            depth: 0,
+            where: { _status: { equals: "published" } },
+            select: { slug: true },
+          });
+          return (res.docs as Array<Record<string, unknown>>)
+            .map((d) => d.slug as string)
+            .filter(Boolean);
+        } catch {
+          return [];
+        }
+      },
+      ["service-slugs"],
+      { tags: [cacheTags.collectionList("services")] },
     )(),
 );
 
@@ -486,6 +517,97 @@ export const getCentre = reactCache(
 );
 
 /**
+ * All published city slugs — used by the city route generateStaticParams so
+ * new cities added in admin are pre-rendered at build time.
+ */
+export const getPublishedCitySlugs = reactCache(
+  (): Promise<string[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "cities",
+            limit: 100,
+            depth: 0,
+            where: { _status: { equals: "published" } },
+            select: { slug: true },
+          });
+          return (res.docs as Array<Record<string, unknown>>)
+            .map((d) => d.slug as string)
+            .filter(Boolean);
+        } catch {
+          return [];
+        }
+      },
+      ["city-slugs"],
+      { tags: [cacheTags.collectionList("cities")] },
+    )(),
+);
+
+/**
+ * All published centre (city + center slug pairs) — used by the centre route
+ * generateStaticParams so new centres added in admin are pre-rendered.
+ */
+export const getPublishedCentreParams = reactCache(
+  (): Promise<{ city: string; center: string }[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "centres",
+            limit: 300,
+            depth: 0,
+            where: { _status: { equals: "published" } },
+            select: { slug: true, citySlug: true },
+          });
+          return (res.docs as Array<Record<string, unknown>>)
+            .filter((d) => d.slug && d.citySlug)
+            .map((d) => ({
+              city: (d.citySlug as string).toLowerCase().trim(),
+              center: d.slug as string,
+            }));
+        } catch {
+          return [];
+        }
+      },
+      ["centre-params"],
+      { tags: [cacheTags.collectionList("centres")] },
+    )(),
+);
+
+/**
+ * Published centres for a specific city — used by the city hub page to detect
+ * whether a DB-only city has multiple centres (determines hub vs. single-centre
+ * rendering) and to resolve the sole centre slug for single-centre cities.
+ */
+export const getPublishedCentresForCity = reactCache(
+  (citySlug: string): Promise<{ slug: string; name: string }[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "centres",
+            limit: 50,
+            depth: 0,
+            where: { and: [{ citySlug: { equals: citySlug } }, { _status: { equals: "published" } }] },
+            select: { slug: true, name: true },
+          });
+          return (res.docs as Array<Record<string, unknown>>)
+            .filter((d) => d.slug && d.name)
+            .map((d) => ({ slug: d.slug as string, name: d.name as string }));
+        } catch {
+          return [];
+        }
+      },
+      ["centres-for-city", citySlug],
+      { tags: [cacheTags.collectionList("centres")] },
+    )(),
+);
+
+/**
  * Fetch a global by slug. Cached + tagged `global:<slug>`. Returns null on any
  * error (e.g. table not yet pushed) so callers fall back to typed defaults —
  * keeps the site rendering during the migration.
@@ -571,6 +693,108 @@ const getTreatmentsForNavInternal = reactCache(
 );
 
 /**
+ * Nav-only service data: name, href for published maternity services from the
+ * `services` collection. Injected as navCategory "maternity-services" so the
+ * existing header/footer resolvers pick them up automatically. Cached + tagged
+ * `services` (busted on any service publish/update). Returns [] on any error.
+ */
+const getServicesForNavInternal = reactCache(
+  (): Promise<NavTreatmentItem[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const res = await payload.find({
+            collection: "services",
+            limit: 300,
+            depth: 0,
+            where: { _status: { equals: "published" } },
+            select: { slug: true, name: true, shortName: true, href: true },
+          });
+          return (res.docs as Array<Record<string, unknown>>)
+            .filter((d) => d.slug && (d.shortName || d.name))
+            .map((d, i) => ({
+              slug: d.slug as string,
+              name: (d.shortName as string) || (d.name as string),
+              href: (d.href as string) || `/services/${d.slug as string}`,
+              navCategory: "maternity-services",
+              navOrder: i,
+            }));
+        } catch {
+          return [];
+        }
+      },
+      ["services-nav"],
+      { tags: [cacheTags.collectionList("services")] },
+    )(),
+);
+
+/**
+ * Nav-only location data: published centres grouped by city for the dynamic
+ * Locations mega menu (header) and footer Locations group. Queries both the
+ * `centres` and `cities` collections. Cached + tagged so publishing a new
+ * centre or city auto-busts the nav cache. Returns [] on any error so
+ * header + footer fall back to their hardcoded defaults.
+ */
+const getLocationsForNavInternal = reactCache(
+  (): Promise<NavLocationItem[]> =>
+    unstable_cache(
+      async () => {
+        try {
+          const payload = await payloadClient();
+          const [centresRes, citiesRes] = await Promise.all([
+            payload.find({
+              collection: "centres",
+              limit: 300,
+              depth: 0,
+              where: { _status: { equals: "published" } },
+              select: { slug: true, name: true, citySlug: true },
+            }),
+            payload.find({
+              collection: "cities",
+              limit: 100,
+              depth: 0,
+              where: { _status: { equals: "published" } },
+              select: { slug: true, name: true },
+            }),
+          ]);
+
+          const cityNames = new Map<string, string>();
+          for (const c of citiesRes.docs as Array<Record<string, unknown>>) {
+            if (c.slug && c.name)
+              cityNames.set((c.slug as string).toLowerCase().trim(), c.name as string);
+          }
+
+          const byCitySlug = new Map<string, { slug: string; name: string }[]>();
+          for (const c of centresRes.docs as Array<Record<string, unknown>>) {
+            if (!c.slug || !c.citySlug || !c.name) continue;
+            const key = (c.citySlug as string).toLowerCase().trim();
+            const arr = byCitySlug.get(key) ?? [];
+            arr.push({ slug: c.slug as string, name: c.name as string });
+            byCitySlug.set(key, arr);
+          }
+
+          if (!byCitySlug.size) return [];
+
+          return Array.from(byCitySlug.entries()).map(([citySlug, centres]) => {
+            const rawName = cityNames.get(citySlug) || citySlug;
+            const cityName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
+            // Deduplicate centres by slug in case of any DB duplicates.
+            const unique = Array.from(
+              new Map(centres.map((c) => [c.slug, c])).values(),
+            );
+            return { citySlug, cityName, centres: unique };
+          });
+        } catch {
+          return [];
+        }
+      },
+      ["locations-nav"],
+      { tags: [cacheTags.collectionList("centres"), cacheTags.collectionList("cities")] },
+    )(),
+);
+
+/**
  * Resolve the sitewide footer: the `footer` global shaped into the plain
  * `FooterData` the client <Footer> renders, with contact links resolved from
  * `site-settings` (Item 1) so numbers live in one place. Treatment groups in
@@ -580,13 +804,15 @@ const getTreatmentsForNavInternal = reactCache(
  * cached per render.
  */
 export const getFooter = reactCache(async (): Promise<FooterData> => {
-  const [footer, settings, navTreatments, navDoctors] = await Promise.all([
+  const [footer, settings, navTreatments, navServices, navDoctors, navLocations] = await Promise.all([
     getGlobalSafe("footer"),
     getGlobalSafe("site-settings"),
     getTreatmentsForNavInternal(),
+    getServicesForNavInternal(),
     getNavDoctorsInternal(),
+    getLocationsForNavInternal(),
   ]);
-  return resolveFooter(footer as FooterSource, resolveContactValues(settings), navTreatments, navDoctors);
+  return resolveFooter(footer as FooterSource, resolveContactValues(settings), [...navTreatments, ...navServices], navDoctors, navLocations);
 });
 
 /**
@@ -597,12 +823,14 @@ export const getFooter = reactCache(async (): Promise<FooterData> => {
  * React-cached per render.
  */
 export const getHeader = reactCache(async (): Promise<HeaderData> => {
-  const [header, navTreatments, navDoctors] = await Promise.all([
+  const [header, navTreatments, navServices, navDoctors, navLocations] = await Promise.all([
     getGlobalSafe("header"),
     getTreatmentsForNavInternal(),
+    getServicesForNavInternal(),
     getNavDoctorsInternal(),
+    getLocationsForNavInternal(),
   ]);
-  return resolveHeader(header as HeaderSource, navTreatments, navDoctors);
+  return resolveHeader(header as HeaderSource, [...navTreatments, ...navServices], navDoctors, navLocations);
 });
 
 /**

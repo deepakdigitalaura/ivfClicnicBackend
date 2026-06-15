@@ -41,9 +41,12 @@ export async function POST(req: NextRequest) {
   const message = clean(body.message);
   const source = clean(body.source, 200);
 
-  if (!name || !phoneOk(phone) || (email && !emailOk(email))) {
-    return NextResponse.json({ error: "Please check your details and try again." }, { status: 422 });
-  }
+  if (!name)
+    return NextResponse.json({ error: "Please enter your name." }, { status: 422 });
+  if (!phoneOk(phone))
+    return NextResponse.json({ error: "Please enter a valid phone number." }, { status: 422 });
+  if (email && !emailOk(email))
+    return NextResponse.json({ error: "Please enter a valid email address." }, { status: 422 });
 
   try {
     const payload = await payloadClient();

@@ -792,6 +792,10 @@ export interface Service {
     faqEyebrow?: string | null;
     relatedEyebrow?: string | null;
     visitEyebrow?: string | null;
+    faqTitle?: string | null;
+    relatedTitle?: string | null;
+    visitTitle?: string | null;
+    ctaTitle?: string | null;
   };
   /**
    * Controls how this page looks in Google results and when shared on social media. Leave empty to use the built-in defaults.
@@ -1013,6 +1017,11 @@ export interface Doctor {
     storiesEyebrow?: string | null;
     storiesSubtitle?: string | null;
     ctaHeading?: string | null;
+    aboutTitle?: string | null;
+    treatmentsTitle?: string | null;
+    storiesTitle?: string | null;
+    consultsTitle?: string | null;
+    doctorSpeakTitle?: string | null;
   };
   updatedAt: string;
   createdAt: string;
@@ -1780,6 +1789,30 @@ export interface City {
     mapEyebrow?: string | null;
     contactSubtitle?: string | null;
     faqEyebrow?: string | null;
+    /**
+     * Main page heading. Leave blank to auto-generate. Use the visual editor to style the accent word in italic rose.
+     */
+    heroTitle?: string | null;
+    overviewTitle?: string | null;
+    centresTitle?: string | null;
+    landmarksTitle?: string | null;
+    areasTitle?: string | null;
+    reachTitle?: string | null;
+    treatmentsTitle?: string | null;
+    womensHealthTitle?: string | null;
+    facilitiesTitle?: string | null;
+    doctorsTitle?: string | null;
+    testimonialsTitle?: string | null;
+    reviewsTitle?: string | null;
+    galleryTitle?: string | null;
+    whyTitle?: string | null;
+    mapTitle?: string | null;
+    contactTitle?: string | null;
+    faqTitle?: string | null;
+    /**
+     * The large heading inside the dark closing CTA band.
+     */
+    ctaTitle?: string | null;
   };
   /**
    * Service IDs linked to this city. Managed by the website team.
@@ -1988,6 +2021,30 @@ export interface Centre {
     mapEyebrow?: string | null;
     contactSubtitle?: string | null;
     faqEyebrow?: string | null;
+    /**
+     * Main page heading. Leave blank to auto-generate. Use the visual editor to style the accent word in italic rose.
+     */
+    heroTitle?: string | null;
+    overviewTitle?: string | null;
+    centresTitle?: string | null;
+    landmarksTitle?: string | null;
+    areasTitle?: string | null;
+    reachTitle?: string | null;
+    treatmentsTitle?: string | null;
+    womensHealthTitle?: string | null;
+    facilitiesTitle?: string | null;
+    doctorsTitle?: string | null;
+    testimonialsTitle?: string | null;
+    reviewsTitle?: string | null;
+    galleryTitle?: string | null;
+    whyTitle?: string | null;
+    mapTitle?: string | null;
+    contactTitle?: string | null;
+    faqTitle?: string | null;
+    /**
+     * The large heading inside the dark closing CTA band.
+     */
+    ctaTitle?: string | null;
   };
   /**
    * Key for the reviews feed. Managed by the website team.
@@ -2489,6 +2546,10 @@ export interface ServicesSelect<T extends boolean = true> {
         faqEyebrow?: T;
         relatedEyebrow?: T;
         visitEyebrow?: T;
+        faqTitle?: T;
+        relatedTitle?: T;
+        visitTitle?: T;
+        ctaTitle?: T;
       };
   seo?:
     | T
@@ -2614,6 +2675,11 @@ export interface DoctorsSelect<T extends boolean = true> {
         storiesEyebrow?: T;
         storiesSubtitle?: T;
         ctaHeading?: T;
+        aboutTitle?: T;
+        treatmentsTitle?: T;
+        storiesTitle?: T;
+        consultsTitle?: T;
+        doctorSpeakTitle?: T;
       };
   updatedAt?: T;
   createdAt?: T;
@@ -3048,6 +3114,24 @@ export interface CitiesSelect<T extends boolean = true> {
         mapEyebrow?: T;
         contactSubtitle?: T;
         faqEyebrow?: T;
+        heroTitle?: T;
+        overviewTitle?: T;
+        centresTitle?: T;
+        landmarksTitle?: T;
+        areasTitle?: T;
+        reachTitle?: T;
+        treatmentsTitle?: T;
+        womensHealthTitle?: T;
+        facilitiesTitle?: T;
+        doctorsTitle?: T;
+        testimonialsTitle?: T;
+        reviewsTitle?: T;
+        galleryTitle?: T;
+        whyTitle?: T;
+        mapTitle?: T;
+        contactTitle?: T;
+        faqTitle?: T;
+        ctaTitle?: T;
       };
   womensHealth?:
     | T
@@ -3180,6 +3264,24 @@ export interface CentresSelect<T extends boolean = true> {
         mapEyebrow?: T;
         contactSubtitle?: T;
         faqEyebrow?: T;
+        heroTitle?: T;
+        overviewTitle?: T;
+        centresTitle?: T;
+        landmarksTitle?: T;
+        areasTitle?: T;
+        reachTitle?: T;
+        treatmentsTitle?: T;
+        womensHealthTitle?: T;
+        facilitiesTitle?: T;
+        doctorsTitle?: T;
+        testimonialsTitle?: T;
+        reviewsTitle?: T;
+        galleryTitle?: T;
+        whyTitle?: T;
+        mapTitle?: T;
+        contactTitle?: T;
+        faqTitle?: T;
+        ctaTitle?: T;
       };
   reviewsKey?: T;
   built?: T;

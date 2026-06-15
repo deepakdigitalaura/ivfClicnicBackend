@@ -80,6 +80,10 @@ const lab = (path: string, value: string | undefined, fallback: string, rich = t
   <Editable path={path} rich={rich}>{value || fallback}</Editable>
 );
 
+// HTML helper for the italic rose accent word used in section headings.
+const EM = 'class="font-display italic text-[color:var(--rose)]"';
+const em = (t: string) => `<em ${EM}>${t}</em>`;
+
 /* ---------- /doctors/[slug] — single profile ---------- */
 export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
   const editing = !!useEdit()?.editMode;
@@ -159,7 +163,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
         <div className="grid gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
-            <SectionHead eyebrow={lab("profileLabels.aboutEyebrow", pl.aboutEyebrow, "About")} title={<>About <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>} />
+            <SectionHead eyebrow={lab("profileLabels.aboutEyebrow", pl.aboutEyebrow, "About")} title={lab("profileLabels.aboutTitle", pl.aboutTitle, `About ${em(d.name)}`)} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
               {d.bio.map((p, i) => (
                 <Reveal key={i} delay={i * 0.05}>
@@ -249,7 +253,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
       {d.treatments.length > 0 && (
         <section className="bg-white py-8 md:py-14">
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow={lab("profileLabels.treatmentsEyebrow", pl.treatmentsEyebrow, "Treatments")} title={<>Treatments <em className="font-display italic text-[color:var(--rose)]">{d.name} performs</em></>} />
+            <SectionHead center eyebrow={lab("profileLabels.treatmentsEyebrow", pl.treatmentsEyebrow, "Treatments")} title={lab("profileLabels.treatmentsTitle", pl.treatmentsTitle, `Treatments ${em(d.name + " performs")}`)} />
             <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
               {d.treatments.map((slug) => {
                 const card = treatmentCardData(slug);
@@ -269,7 +273,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
         <SuccessStories
           tone="tint"
           eyebrow={lab("profileLabels.storiesEyebrow", pl.storiesEyebrow, "Patient Stories")}
-          title={<>Stories from <em className="font-display italic text-[color:var(--rose)]">{d.name.split(" ").slice(-1)}'s patients</em></>}
+          title={lab("profileLabels.storiesTitle", pl.storiesTitle, `Stories from ${em(d.name.split(" ").slice(-1) + "'s patients")}`)}
           subtitle={lab("profileLabels.storiesSubtitle", pl.storiesSubtitle, `Watch families share their journey under the care of ${d.name}.`)}
           showCta={false}
           stories={stories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
@@ -283,7 +287,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
           <SectionHead
             center
             eyebrow={lab("profileLabels.consultsEyebrow", pl.consultsEyebrow, "Consults at")}
-            title={<>Where to meet <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>}
+            title={lab("profileLabels.consultsTitle", pl.consultsTitle, `Where to meet ${em(d.name)}`)}
             subtitle={lab(
               "profileLabels.consultsSubtitle",
               pl.consultsSubtitle,
@@ -361,7 +365,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
       {videos.length > 0 && (
         <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow={lab("profileLabels.doctorSpeakEyebrow", pl.doctorSpeakEyebrow, "Doctor Speak")} title={<>Watch <em className="font-display italic text-[color:var(--rose)]">{d.name}</em></>} subtitle={lab("profileLabels.doctorSpeakSubtitle", pl.doctorSpeakSubtitle, `Fertility insights and advice, explained by ${d.name}.`)} />
+            <SectionHead center eyebrow={lab("profileLabels.doctorSpeakEyebrow", pl.doctorSpeakEyebrow, "Doctor Speak")} title={lab("profileLabels.doctorSpeakTitle", pl.doctorSpeakTitle, `Watch ${em(d.name)}`)} subtitle={lab("profileLabels.doctorSpeakSubtitle", pl.doctorSpeakSubtitle, `Fertility insights and advice, explained by ${d.name}.`)} />
             <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
               {videos.map((v) => (
                 <StaggerItem key={v.youTubeId}>

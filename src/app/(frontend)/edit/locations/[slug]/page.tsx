@@ -38,13 +38,14 @@ export default async function EditCityPage({
   const def = cityBySlug(slug);
 
   if (!doc) {
-    if (!def) notFound();
+    if (!def) notFound(); // No DB doc and no code default → city doesn't exist.
     doc = await payload.create({
       collection: "cities",
       data: { slug, name: def.name },
       draft: true,
     });
   }
+  // If doc exists (DB-only city added via admin), fall through to the editor below.
 
   return (
     <CityEditor

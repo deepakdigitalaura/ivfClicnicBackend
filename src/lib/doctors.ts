@@ -76,6 +76,11 @@ export type Doctor = {
     storiesEyebrow?: string;
     storiesSubtitle?: string;
     ctaHeading?: string;
+    aboutTitle?: string;
+    treatmentsTitle?: string;
+    storiesTitle?: string;
+    consultsTitle?: string;
+    doctorSpeakTitle?: string;
   };
 };
 
@@ -741,6 +746,11 @@ export type DoctorSource =
         storiesEyebrow?: string | null;
         storiesSubtitle?: string | null;
         ctaHeading?: string | null;
+        aboutTitle?: string | null;
+        treatmentsTitle?: string | null;
+        storiesTitle?: string | null;
+        consultsTitle?: string | null;
+        doctorSpeakTitle?: string | null;
       } | null;
     }
   | null
@@ -835,6 +845,11 @@ type ProfileLabelsSource = {
   storiesEyebrow?: string | null;
   storiesSubtitle?: string | null;
   ctaHeading?: string | null;
+  aboutTitle?: string | null;
+  treatmentsTitle?: string | null;
+  storiesTitle?: string | null;
+  consultsTitle?: string | null;
+  doctorSpeakTitle?: string | null;
 } | null | undefined;
 
 /** Build the `profileLabels` overrides object from CMS source — empty strings
@@ -851,6 +866,11 @@ const profileLabels = (src: ProfileLabelsSource) => ({
   storiesEyebrow: src?.storiesEyebrow ?? "",
   storiesSubtitle: src?.storiesSubtitle ?? "",
   ctaHeading: src?.ctaHeading ?? "",
+  aboutTitle: src?.aboutTitle ?? "",
+  treatmentsTitle: src?.treatmentsTitle ?? "",
+  storiesTitle: src?.storiesTitle ?? "",
+  consultsTitle: src?.consultsTitle ?? "",
+  doctorSpeakTitle: src?.doctorSpeakTitle ?? "",
 });
 
 /**
@@ -902,6 +922,11 @@ export function materializeDoctorSource(slug: string, src: DoctorSource): NonNul
       storiesEyebrow: src?.profileLabels?.storiesEyebrow ?? "",
       storiesSubtitle: src?.profileLabels?.storiesSubtitle ?? "",
       ctaHeading: src?.profileLabels?.ctaHeading ?? "",
+      aboutTitle: src?.profileLabels?.aboutTitle ?? "",
+      treatmentsTitle: src?.profileLabels?.treatmentsTitle ?? "",
+      storiesTitle: src?.profileLabels?.storiesTitle ?? "",
+      consultsTitle: src?.profileLabels?.consultsTitle ?? "",
+      doctorSpeakTitle: src?.profileLabels?.doctorSpeakTitle ?? "",
     },
   };
 }

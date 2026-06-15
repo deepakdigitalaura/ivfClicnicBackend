@@ -34,7 +34,7 @@ export function ServiceEditor({
         const resolved = resolveService(slug, draft);
         return (
           <div className="bfi-editing notranslate" translate="no">
-            <EditorToolbar pageLabel={`Service: ${draft.shortName || slug}`} />
+            <EditorToolbar pageLabel={`Service: ${draft.shortName || slug}`} backUrl={`/services/${slug}`} />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
               {resolved && <ServicePage slug={slug} content={resolved} />}

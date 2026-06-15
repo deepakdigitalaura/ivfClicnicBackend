@@ -29,6 +29,11 @@ const ed = (path: string, value: string, rich = true) => (
   <Editable path={path} rich={rich}>{value}</Editable>
 );
 
+// HTML helpers for the italic rose accent word used in section headings.
+const EM = 'class="font-display italic text-[color:var(--rose)]"';
+const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
+const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
+
 /* ---------- heading renderer (data → SectionHead title) ----------
  * `base` is the heading's source path (e.g. "benefits.heading"). When supplied,
  * the lead + accent become inline-editable; otherwise it renders plain. */
@@ -328,7 +333,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {/* 7. FAQ */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-3xl">
-          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>{s.breadcrumbName} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={ed("sectionLabels.faqTitle", sl.faqTitle || `${s.breadcrumbName} — ${em("your questions answered")}`)} />
           <div className="mt-9 space-y-3">
             {s.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
           </div>
@@ -344,7 +349,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
       {related.length > 0 && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow={ed("sectionLabels.relatedEyebrow", sl.relatedEyebrow || "Explore More")} title={<>Related maternity <em className="font-display italic text-[color:var(--rose)]">services</em></>} />
+            <SectionHead center eyebrow={ed("sectionLabels.relatedEyebrow", sl.relatedEyebrow || "Explore More")} title={ed("sectionLabels.relatedTitle", sl.relatedTitle || `Related maternity ${em("services")}`)} />
             <Stagger
               className={`mt-10 grid grid-cols-1 gap-5 ${
                 related.length === 1
@@ -372,7 +377,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
             <SectionHead
               center
               eyebrow={ed("sectionLabels.visitEyebrow", sl.visitEyebrow || "Visit us")}
-              title={<>Available at our <em className="font-display italic text-[color:var(--rose)]">Ahmedabad centre</em></>}
+              title={ed("sectionLabels.visitTitle", sl.visitTitle || `Available at our ${em("Ahmedabad centre")}`)}
               subtitle={`${s.shortName.charAt(0).toUpperCase()}${s.shortName.slice(1)} is offered at Bavishi Fertility & Birthing in Ahmedabad. Call to book your appointment.`}
             />
             <Reveal>
@@ -411,7 +416,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
           <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
             <Reveal>
               <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-                Caring for you and your baby, <em className="font-display italic text-[color:var(--rose-soft)]">every step of the way</em>
+                {ed("sectionLabels.ctaTitle", sl.ctaTitle || `Caring for you and your baby, ${em("every step of the way", true)}`)}
               </h2>
             </Reveal>
             <Reveal delay={0.1}>

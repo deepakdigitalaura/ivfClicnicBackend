@@ -6,18 +6,39 @@ import { JsonLd } from "@/components/json-ld";
 import {
   cityGraph, centerGraph, builtCityParams, centresForCity, cityHasOwnPage,
 } from "@/lib/locations";
-import { getCity, getCentre } from "@/lib/payload";
+import {
+  getCity, getCentre, getPublishedCitySlugs, getPublishedCentresForCity,
+} from "@/lib/payload";
 import { abs } from "@/lib/seo";
 
-/** Pre-render every built city. Multi-centre cities render the hub (CityPage);
- *  single-centre cities render their one centre (CenterPage) at this same path,
- *  so e.g. Bhuj is served at /locations/bhuj (no locality segment). */
-export function generateStaticParams() {
-  return builtCityParams();
+/** Pre-render every built city from both code defaults and DB. */
+export async function generateStaticParams() {
+  const codeParams = builtCityParams();
+  const dbSlugs = await getPublishedCitySlugs();
+  const seen = new Set(codeParams.map((p) => p.city));
+  return [...codeParams, ...dbSlugs.filter((s) => !seen.has(s)).map((s) => ({ city: s }))];
 }
 
-/** The single built centre that a single-centre city collapses onto. */
-const soleCentre = (citySlug: string) => centresForCity(citySlug).find((c) => c.built);
+/**
+ * For a given city slug, determine whether it should render a city hub (multiple
+ * centres) or a single-centre view, checking code array first then DB.
+ */
+async function isMultiCentreCity(city: string): Promise<boolean> {
+  if (cityHasOwnPage(city)) return true;
+  const dbCentres = await getPublishedCentresForCity(city);
+  return dbCentres.length > 1;
+}
+
+/**
+ * Resolve the sole centre slug for a single-centre city — code array first,
+ * then DB (for new admin-added cities).
+ */
+async function resolveSoleCentreSlug(city: string): Promise<string | undefined> {
+  const codeC = centresForCity(city).find((c) => c.built);
+  if (codeC) return codeC.slug;
+  const dbCentres = await getPublishedCentresForCity(city);
+  return dbCentres[0]?.slug;
+}
 
 export async function generateMetadata(
   { params }: { params: Promise<{ city: string }> },
@@ -26,11 +47,10 @@ export async function generateMetadata(
   const c = await getCity(city);
   if (!c || !c.built) return {};
 
-  // Single-centre city → centre-level metadata (canonical = /locations/[city]).
-  if (!cityHasOwnPage(city)) {
-    const def = soleCentre(city);
-    if (!def) return {};
-    const centre = await getCentre(city, def.slug);
+  if (!await isMultiCentreCity(city)) {
+    const soleCentreSlug = await resolveSoleCentreSlug(city);
+    if (!soleCentreSlug) return {};
+    const centre = await getCentre(city, soleCentreSlug);
     if (!centre) return {};
     const place = c.name && c.name !== centre.area ? `${centre.area}, ${c.name}` : centre.area;
     const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
@@ -43,7 +63,7 @@ export async function generateMetadata(
     };
   }
 
-  const count = centresForCity(c.slug).length;
+  const count = centresForCity(c.slug).length || (await getPublishedCentresForCity(c.slug)).length;
   const title = `Best IVF Centre in ${c.name} — Bavishi Fertility Institute`;
   const description = `Looking for the best IVF centre in ${c.name}? Bavishi Fertility Institute offers IVF, ICSI & IUI across ${count} ${count === 1 ? "centre" : "centres"} with Class 1000 labs and senior doctors since 1984.`;
   return {
@@ -59,11 +79,10 @@ export default async function Page({ params }: { params: Promise<{ city: string 
   const c = await getCity(city);
   if (!c || !c.built) notFound();
 
-  // Single-centre city → render the centre directly at the city path.
-  if (!cityHasOwnPage(city)) {
-    const def = soleCentre(city);
-    if (!def) notFound();
-    const centre = await getCentre(city, def.slug);
+  if (!await isMultiCentreCity(city)) {
+    const soleCentreSlug = await resolveSoleCentreSlug(city);
+    if (!soleCentreSlug) notFound();
+    const centre = await getCentre(city, soleCentreSlug!);
     if (!centre) notFound();
     return (
       <>

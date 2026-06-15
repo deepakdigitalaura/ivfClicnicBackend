@@ -62,6 +62,10 @@ export type ServiceSectionLabels = {
   faqEyebrow?: string;
   relatedEyebrow?: string;
   visitEyebrow?: string;
+  faqTitle?: string;
+  relatedTitle?: string;
+  visitTitle?: string;
+  ctaTitle?: string;
 };
 
 /** Resolve a service's related-service KEYS → serialisable cards (registry +
@@ -126,6 +130,7 @@ type TextItem = { text?: string | null };
 type StepSource = { icon?: string | null; t?: string | null; d?: string | null };
 export type ServiceSource =
   | {
+      name?: string | null;
       slug?: string | null;
       schemaType?: string | null;
       shortName?: string | null;
@@ -171,7 +176,76 @@ const steps = (a: StepSource[] | null | undefined): ResolvedStep[] =>
 export function resolveService(slug: string, src: ServiceSource): ResolvedService | undefined {
   const def = SERVICE_CONTENT[slug];
   if (!src) return def ? toResolved(def) : undefined;
-  if (!def) return undefined; // unknown slug — no template/registry behind it
+  if (!def) {
+    // DB-only service — build from CMS data alone (no code template fallback)
+    const name = src.name || src.shortName || src.breadcrumbName || slug;
+    return {
+      key: slug,
+      slug,
+      schemaType: (src.schemaType as ResolvedService["schemaType"]) || "MedicalProcedure",
+      shortName: src.shortName || name,
+      meta: {
+        title: src.seo?.metaTitle || `${name} — Bavishi Fertility Centre`,
+        description: src.seo?.metaDescription || `Learn about ${name} at Bavishi Fertility Centre.`,
+      },
+      breadcrumbName: src.breadcrumbName || name,
+      reviewerSlug: src.reviewerSlug || "",
+      lastReviewed: src.lastReviewed || "",
+      hero: {
+        eyebrow: src.hero?.eyebrow || "Maternity Services",
+        h1: src.hero?.h1 || name,
+        h1Em: src.hero?.h1Em || "",
+        tagline: src.hero?.tagline || "",
+        badges: src.hero?.badges?.map((b) => b.badge ?? "").filter(Boolean) || [],
+        image: (mediaUrl(src.hero?.heroPhoto) ?? src.hero?.image) || "",
+        imageAlt: src.hero?.imageAlt || name,
+      },
+      overview: {
+        heading: heading(src.overview?.heading, { lead: "About", em: name }),
+        paragraphs: texts(src.overview?.paragraphs),
+        ...(src.overview?.aside?.title ? { aside: { title: src.overview.aside.title, body: src.overview.aside.body ?? "" } } : {}),
+      },
+      benefits: {
+        heading: heading(src.benefits?.heading, { lead: "Benefits" }),
+        ...(src.benefits?.subtitle ? { subtitle: src.benefits.subtitle } : {}),
+        items: items(src.benefits?.items),
+      },
+      whoFor: {
+        heading: heading(src.whoFor?.heading, { lead: "Who It's For" }),
+        ...(src.whoFor?.subtitle ? { subtitle: src.whoFor.subtitle } : {}),
+        items: items(src.whoFor?.items),
+      },
+      process: {
+        heading: heading(src.process?.heading, { lead: "What to Expect" }),
+        ...(src.process?.subtitle ? { subtitle: src.process.subtitle } : {}),
+        steps: steps(src.process?.steps),
+        ...(src.process?.note ? { note: src.process.note } : {}),
+      },
+      whyUs: {
+        heading: heading(src.whyUs?.heading, { lead: "Why Choose", em: "Bavishi" }),
+        items: steps(src.whyUs?.items),
+      },
+      ...(src.infoNote?.paragraphs?.length
+        ? { infoNote: { heading: heading(src.infoNote.heading, { lead: "Good to Know" }), paragraphs: texts(src.infoNote.paragraphs) } }
+        : {}),
+      faqs: src.faqs?.length ? src.faqs.map((f) => ({ q: f.q ?? "", a: f.a ?? "" })) : [],
+      related: src.related?.length ? resolveRelated(src.related.map((r) => r.key ?? "").filter(Boolean)) : [],
+      sectionLabels: {
+        benefitsEyebrow: src.sectionLabels?.benefitsEyebrow ?? "",
+        whoForEyebrow: src.sectionLabels?.whoForEyebrow ?? "",
+        processEyebrow: src.sectionLabels?.processEyebrow ?? "",
+        whyUsEyebrow: src.sectionLabels?.whyUsEyebrow ?? "",
+        infoNoteEyebrow: src.sectionLabels?.infoNoteEyebrow ?? "",
+        faqEyebrow: src.sectionLabels?.faqEyebrow ?? "",
+        relatedEyebrow: src.sectionLabels?.relatedEyebrow ?? "",
+        visitEyebrow: src.sectionLabels?.visitEyebrow ?? "",
+        faqTitle: src.sectionLabels?.faqTitle ?? "",
+        relatedTitle: src.sectionLabels?.relatedTitle ?? "",
+        visitTitle: src.sectionLabels?.visitTitle ?? "",
+        ctaTitle: src.sectionLabels?.ctaTitle ?? "",
+      },
+    };
+  }
   const base = toResolved(def);
 
   return {
@@ -323,6 +397,10 @@ export function materializeServiceSource(slug: string, src: ServiceSource): NonN
       faqEyebrow: s.sectionLabels?.faqEyebrow ?? "",
       relatedEyebrow: s.sectionLabels?.relatedEyebrow ?? "",
       visitEyebrow: s.sectionLabels?.visitEyebrow ?? "",
+      faqTitle: s.sectionLabels?.faqTitle ?? "",
+      relatedTitle: s.sectionLabels?.relatedTitle ?? "",
+      visitTitle: s.sectionLabels?.visitTitle ?? "",
+      ctaTitle: s.sectionLabels?.ctaTitle ?? "",
     },
   };
 }

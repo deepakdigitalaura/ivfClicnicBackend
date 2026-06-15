@@ -14,7 +14,7 @@
  * <Editable> renders bare children there — the public DOM is byte-identical.
  * ===================================================================== */
 
-import { createContext, useCallback, useContext, useRef, useState, type ReactNode } from "react";
+import { createContext, useCallback, useContext, useEffect, useRef, useState, type ReactNode } from "react";
 
 type Json = Record<string, unknown>;
 
@@ -32,6 +32,9 @@ type EditCtx = {
   dirty: boolean;
   saving: boolean;
   saved: boolean;
+  /** Non-null when the last save or upload failed; displayed inline in the toolbar. */
+  error: string | null;
+  clearError: () => void;
   save: () => Promise<void>;
 };
 
@@ -112,10 +115,28 @@ export function EditProvider<T extends Json>({
   const [saving, setSaving] = useState(false);
   const [saved, setSaved] = useState(false);
   const [uploading, setUploading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  // BE-05: synchronous ref guard prevents rapid double-save from enqueueing two
+  // concurrent fetch calls before the first setState("saving") re-render fires.
+  const savingRef = useRef(false);
   // Hidden <input type=file> reused for every image replace; the path being
   // replaced is held in a ref so the change handler knows where to write.
   const fileRef = useRef<HTMLInputElement>(null);
   const pendingPath = useRef<string | null>(null);
+
+  // UI-04: warn the browser before the page unloads when there are unsaved edits.
+  // The standard `beforeunload` event works for both link clicks and tab/window close.
+  useEffect(() => {
+    if (!dirty) return;
+    const handle = (e: BeforeUnloadEvent) => {
+      e.preventDefault();
+      e.returnValue = "";
+    };
+    window.addEventListener("beforeunload", handle);
+    return () => window.removeEventListener("beforeunload", handle);
+  }, [dirty]);
+
+  const clearError = useCallback(() => setError(null), []);
 
   const select = useCallback((path: string | null, kind: "text" | "image" | "video" = "text") => {
     setSelected(path);
@@ -134,9 +155,9 @@ export function EditProvider<T extends Json>({
   }, []);
 
   // Upload the chosen file to Payload's Media collection (same-origin session),
-  // then point the field at the new file's stable static /media/ path. Payload's
-  // /api/media/file/ URL is flaky on first dev hit, so we use /media/<filename>
-  // (the same convention as src/lib/about/mediaUrl) which serves reliably.
+  // then point the field at the new file's URL. We use `doc.url` from the
+  // response (INT-02) — correct for any storage backend (local /media, S3, CDN)
+  // rather than constructing /media/<filename> which only works locally.
   const onFileChange = useCallback(
     async (e: React.ChangeEvent<HTMLInputElement>) => {
       const file = e.target.files?.[0];
@@ -144,19 +165,22 @@ export function EditProvider<T extends Json>({
       e.target.value = ""; // allow re-picking the same file later
       if (!file || !path) return;
       setUploading(true);
+      setError(null);
       try {
         const fd = new FormData();
         fd.append("file", file);
         fd.append("_payload", JSON.stringify({ alt: file.name.replace(/\.[^.]+$/, "") || "Image" }));
         const res = await fetch("/api/editor-upload", { method: "POST", credentials: "include", body: fd });
         if (!res.ok) throw new Error(`Upload failed (${res.status})`);
-        const json = (await res.json()) as { doc?: { filename?: string } };
-        const filename = json.doc?.filename;
-        if (!filename) throw new Error("Upload succeeded but no file name was returned.");
-        update(path, `/media/${filename}`);
+        const json = (await res.json()) as { doc?: { url?: string; filename?: string } };
+        // Prefer doc.url (authoritative for all storage backends); fall back to
+        // the /media/<filename> convention only if url is absent (local dev only).
+        const url = json.doc?.url ?? (json.doc?.filename ? `/media/${json.doc.filename}` : null);
+        if (!url) throw new Error("Upload succeeded but no URL was returned.");
+        update(path, url);
       } catch (err) {
-        // eslint-disable-next-line no-alert
-        alert("Could not upload the image. Please try a different file.\n" + (err as Error).message);
+        // UI-03: in-page error instead of blocking alert()
+        setError("Could not upload the image — " + (err as Error).message);
       } finally {
         setUploading(false);
         pendingPath.current = null;
@@ -166,27 +190,49 @@ export function EditProvider<T extends Json>({
   );
 
   const save = useCallback(async () => {
+    // BE-05: synchronous guard — skip if a save is already in flight
+    if (savingRef.current) return;
+    savingRef.current = true;
     setSaving(true);
+    setError(null);
     try {
+      // INT-01: for collection PATCH calls, always include _status: "published".
+      // Payload v3 keeps a draft-initialized doc in "draft" state on PATCH unless
+      // explicitly told to publish. The public routes read published-only, so
+      // without this flag inline-editor saves would be invisible on the live site
+      // until an admin published manually via /admin. Globals (POST) have no
+      // _status concept and the field is silently ignored.
+      const cleaned = denseClean(draft) as Record<string, unknown>;
+      const body = method === "PATCH" ? { ...cleaned, _status: "published" } : cleaned;
       const res = await fetch(apiPath, {
         method,
         credentials: "include",
         headers: { "Content-Type": "application/json" },
-        body: JSON.stringify(denseClean(draft)),
+        body: JSON.stringify(body),
       });
+      // INT-03: session expired → redirect to admin login (preserving the current
+      // editor path so the user returns here after re-authenticating). Do NOT show
+      // a generic error — "try again" would keep failing and the user has no path
+      // to recovery without a manual nav to /admin.
+      if (res.status === 401) {
+        window.location.href =
+          `/admin/login?redirect=${encodeURIComponent(location.pathname + location.search)}`;
+        return;
+      }
       if (!res.ok) throw new Error(`Save failed (${res.status})`);
       setDirty(false);
       setSaved(true);
     } catch (err) {
-      // eslint-disable-next-line no-alert
-      alert("Could not save changes. Please try again.\n" + (err as Error).message);
+      // UI-03: in-page error instead of blocking alert()
+      setError("Could not save changes — " + (err as Error).message);
     } finally {
       setSaving(false);
+      savingRef.current = false;
     }
   }, [apiPath, method, draft]);
 
   return (
-    <Ctx.Provider value={{ editMode: true, selected, selectedKind, select, update, replaceImage, uploading, dirty, saving, saved, save }}>
+    <Ctx.Provider value={{ editMode: true, selected, selectedKind, select, update, replaceImage, uploading, dirty, saving, saved, error, clearError, save }}>
       {children(draft)}
       <input ref={fileRef} type="file" accept="image/*" hidden onChange={onFileChange} />
     </Ctx.Provider>

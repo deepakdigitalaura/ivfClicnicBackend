@@ -26,7 +26,7 @@ export function DoctorEditor({
         const resolved = resolveDoctor(slug, draft);
         return (
           <div className="bfi-editing notranslate" translate="no">
-            <EditorToolbar pageLabel={`Doctor: ${draft.name || slug}`} />
+            <EditorToolbar pageLabel={`Doctor: ${draft.name || slug}`} backUrl={`/doctors/${slug}`} />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
               {resolved && <DoctorProfile doctor={resolved} />}

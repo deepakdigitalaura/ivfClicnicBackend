@@ -20,7 +20,7 @@ export function AboutEditor({ initialSource }: { initialSource: AboutSrc }) {
     <EditProvider<AboutSrc> apiPath="/api/globals/about-page" initial={seeded}>
       {(draft) => (
         <div className="bfi-editing notranslate" translate="no">
-          <EditorToolbar pageLabel="About Bavishi Fertility Institute" />
+          <EditorToolbar pageLabel="About Bavishi Fertility Institute" backUrl="/about-bfi" />
           <FloatingToolbar />
           <div className="bfi-edit-canvas">
             <AboutPage data={resolveAbout(draft)} />

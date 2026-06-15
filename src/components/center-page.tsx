@@ -19,12 +19,17 @@ import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
 
-/* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
- * inside /edit/centres/<city>/<slug>. `path` is the dot-path into the centres-doc
+/* `<Editable>` is inert on the public site and click-to-edit inside
+ * /edit/centres/<city>/<slug>. `path` is the dot-path into the centres-doc
  * SOURCE draft (see materializeCentreSource). */
 const ed = (path: string, value: string, rich = true) => (
   <Editable path={path} rich={rich}>{value}</Editable>
 );
+// HTML helpers for the italic rose accent word used in section headings.
+// The class strings match the JSX className equivalents so styled output is identical.
+const EM = 'class="font-display italic text-[color:var(--rose)]"';
+const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
+const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
 
 /* CenterPage — data-driven template for /locations/[city]/[center].
  * One Centre object renders the entire page: NAP, map, geo, hours,
@@ -83,7 +88,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
             <Reveal><Eyebrow>{sameAsCity ? centre.area : `${city?.name} · ${centre.area}`}{centre.isHeadOffice ? " · Head Office" : ""}</Eyebrow></Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                Best IVF Centre in <em className="font-display italic text-[color:var(--rose)]">{areaCity}</em>
+                {ed("sectionLabels.heroTitle", sl.heroTitle || `Best IVF Centre in ${em(areaCity)}`)}
               </h1>
             </Reveal>
             <Reveal delay={0.12}>
@@ -139,7 +144,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
       {/* Overview */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `About the ${centre.area} centre`)} title={<>Fertility care in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em>{city?.name && !sameAsCity ? <>, {city.name}</> : null}</>} />
+          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `About the ${centre.area} centre`)} title={ed("sectionLabels.overviewTitle", sl.overviewTitle || `Fertility care in ${em(centre.area)}${city?.name && !sameAsCity ? `, ${city.name}` : ""}`)} />
           <div className="mt-6 max-w-3xl space-y-5 text-[17px] leading-relaxed text-muted-foreground">
             <Reveal><p>{ed("intro", centre.intro)}</p></Reveal>
           </div>
@@ -166,41 +171,41 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
         <Doctors
           docs={docs}
           eyebrow={ed("sectionLabels.doctorsEyebrow", sl.doctorsEyebrow || `Doctors at ${centre.area}`)}
-          title={<>Meet the doctors at <em className="font-display italic text-[color:var(--rose)]">{centre.area} center</em></>}
+          title={ed("sectionLabels.doctorsTitle", sl.doctorsTitle || `Meet the doctors at ${em(centre.area + " center")}`)}
           subtitle={ed("sectionLabels.doctorsSubtitle", sl.doctorsSubtitle || `Our fertility specialists who consult at the ${centre.area} centre.`)}
         />
       )}
 
-      <SuccessStories tone="tint" eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")} title={<><em className="font-display italic text-[color:var(--rose)]">{centre.area}</em> success stories</>} subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")} showCta={false} />
+      <SuccessStories tone="tint" eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")} title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `${em(centre.area)} success stories`)} subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")} showCta={false} />
 
       {/* Verified reviews only — renders CTA / nothing until Places API supplies data */}
       <div className="bg-white">
         <GoogleReviews
           data={reviews}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(centre.mapQuery)}`}
-          title={<>{centre.area} patients <em className="font-display italic text-[color:var(--rose)]">on Google</em></>}
+          title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${centre.area} patients ${em("on Google")}`)}
           subtitle={`Read verified reviews from families treated at our ${centre.area} centre.`}
         />
       </div>
 
       <VideoHub />
 
-      <CentreGallery images={centre.gallery} tone="white" title={<>Inside our <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A look at our facilities and lab.")} />
+      <CentreGallery images={centre.gallery} tone="white" title={ed("sectionLabels.galleryTitle", sl.galleryTitle || `Inside our ${em(centre.area + " centre")}`)} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A look at our facilities and lab.")} />
 
       {/* Map */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow={ed("sectionLabels.mapEyebrow", sl.mapEyebrow || "How to reach")} title={<>Find the <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={centre.address} />
+          <SectionHead center eyebrow={ed("sectionLabels.mapEyebrow", sl.mapEyebrow || "How to reach")} title={ed("sectionLabels.mapTitle", sl.mapTitle || `Find the ${em(centre.area + " centre")}`)} subtitle={centre.address} />
           <div className="mt-10"><CentreMap query={centre.mapQuery} title={`${centre.fullName} — map`} /></div>
         </div>
       </section>
 
-      <ContactInfo centres={[centre]} title={<>Contact the <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
+      <ContactInfo centres={[centre]} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(centre.area + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
 
       {/* FAQ */}
       <section className="container-px mx-auto max-w-3xl px-0 py-8 md:py-14">
         <div className="container-px">
-          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>{centre.area} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={ed("sectionLabels.faqTitle", sl.faqTitle || `${centre.area} — ${em("your questions answered")}`)} />
           <div className="mt-9 space-y-3">
             {centre.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
           </div>
@@ -212,7 +217,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Start your journey at our <em className="font-display italic text-[color:var(--rose-soft)]">{centre.area}</em> centre.
+              {ed("sectionLabels.ctaTitle", sl.ctaTitle || `Start your journey at our ${em(centre.area, true)} centre.`)}
             </h2>
           </Reveal>
           <Reveal delay={0.15}>

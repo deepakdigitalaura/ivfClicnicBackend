@@ -28,6 +28,10 @@ export function TreatmentEditor({
   // one field never PATCHes a sparse array that fails Payload's required-field
   // validation.
   const seeded = materializeTreatmentSource(slug, initialSource);
+  // The seeded draft carries the treatment's canonical public URL (e.g. "/ivf" for
+  // the legacy route or "/treatments/oligospermia" for newer ones). Use it as the
+  // Exit destination so clicking Exit returns the editor to the right page.
+  const backUrl = (seeded as { href?: string | null }).href || `/treatments/${slug}`;
 
   return (
     <EditProvider<TreatmentSrc> apiPath={apiPath} method="PATCH" initial={seeded}>
@@ -46,7 +50,7 @@ export function TreatmentEditor({
           : testimonialsForTreatment(slug);
         return (
           <div className="bfi-editing notranslate" translate="no">
-            <EditorToolbar pageLabel={`Treatment: ${draft.name || slug}`} />
+            <EditorToolbar pageLabel={`Treatment: ${draft.name || slug}`} backUrl={backUrl} />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
               {resolved && <TreatmentPage slug={slug} content={resolved} editTestimonials={editTestimonials} />}

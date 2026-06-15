@@ -33,7 +33,7 @@ export function CenterEditor({
         const resolved = resolveCentre(citySlug, slug, draft);
         return (
           <div className="bfi-editing notranslate" translate="no">
-            <EditorToolbar pageLabel={`Centre: ${draft.name || slug}`} />
+            <EditorToolbar pageLabel={`Centre: ${draft.name || slug}`} backUrl={`/locations/${citySlug}/${slug}`} />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
               {resolved && <CenterPage centre={resolved} />}

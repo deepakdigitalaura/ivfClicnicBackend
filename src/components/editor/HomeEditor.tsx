@@ -31,7 +31,7 @@ export function HomeEditor({ initialSource }: { initialSource: HomepageSrc }) {
         // Excluding the whole editing surface is correct anyway: you edit the
         // real source copy here, not a translation.
         <div className="bfi-editing notranslate" translate="no">
-          <EditorToolbar pageLabel="Homepage" />
+          <EditorToolbar pageLabel="Homepage" backUrl="/" />
           <FloatingToolbar />
           <div className="bfi-edit-canvas">
             <HomePage data={resolveHomepage(draft)} />

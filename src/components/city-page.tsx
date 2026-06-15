@@ -33,6 +33,10 @@ const trust = [
 const ed = (path: string, value: string, rich = true) => (
   <Editable path={path} rich={rich}>{value}</Editable>
 );
+// HTML helpers for the italic rose accent word used in section headings.
+const EM = 'class="font-display italic text-[color:var(--rose)]"';
+const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
+const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
 
 export function CityPage({ city }: { city: City | ResolvedCity }) {
   const sl = (city as ResolvedCity).sectionLabels ?? {};
@@ -72,7 +76,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
             <Reveal><Eyebrow>{city.name} · {centres.length} {centres.length === 1 ? "Centre" : "Centres"}</Eyebrow></Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                Best IVF Centre in <em className="font-display italic text-[color:var(--rose)]">{city.name}</em>
+                {ed("sectionLabels.heroTitle", sl.heroTitle || `Best IVF Centre in ${em(city.name)}`)}
               </h1>
             </Reveal>
             {city.intro[0] && (
@@ -120,7 +124,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
       {/* Overview */}
       {city.intro.length > 0 && (
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `Fertility care in ${city.name}`)} title={<>Your trusted fertility partner in <em className="font-display italic text-[color:var(--rose)]">{city.name}</em></>} />
+          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `Fertility care in ${city.name}`)} title={ed("sectionLabels.overviewTitle", sl.overviewTitle || `Your trusted fertility partner in ${em(city.name)}`)} />
           <div className="mt-6 max-w-3xl space-y-5 text-[17px] leading-relaxed text-muted-foreground">
             {city.intro.map((p, i) => <Reveal key={i} delay={i * 0.05}><p>{ed(`intro.${i}.value`, p)}</p></Reveal>)}
           </div>
@@ -131,7 +135,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
       {centres.length > 0 && (
         <section className="bg-white py-8 md:py-14">
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow={ed("sectionLabels.centresEyebrow", sl.centresEyebrow || "Our Centres")} title={<>Our centres across <em className="font-display italic text-[color:var(--rose)]">{city.name}</em></>} />
+            <SectionHead center eyebrow={ed("sectionLabels.centresEyebrow", sl.centresEyebrow || "Our Centres")} title={ed("sectionLabels.centresTitle", sl.centresTitle || `Our centres across ${em(city.name)}`)} />
             <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
               {centres.map((c) => (
                 <StaggerItem key={c.slug}>
@@ -186,7 +190,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         <Doctors
           docs={docs}
           eyebrow={ed("sectionLabels.doctorsEyebrow", sl.doctorsEyebrow || `${city.name} Doctors`)}
-          title={<>Meet our <em className="font-display italic text-[color:var(--rose)]">{city.name} specialists</em></>}
+          title={ed("sectionLabels.doctorsTitle", sl.doctorsTitle || `Meet our ${em(city.name + " specialists")}`)}
           subtitle={ed("sectionLabels.doctorsSubtitle", sl.doctorsSubtitle || `Fertility specialists across our ${city.name} centres.`)}
         />
       )}
@@ -195,7 +199,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         <SuccessStories
           tone="tint"
           eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")}
-          title={<>Words from <em className="font-display italic text-[color:var(--rose)]">{city.name} families</em></>}
+          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `Words from ${em(city.name + " families")}`)}
           subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
           showCta={false}
           stories={cityStories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
@@ -206,7 +210,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         <GoogleReviews
           data={reviews}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Bavishi Fertility Institute " + city.name)}`}
-          title={<>{city.name} families <em className="font-display italic text-[color:var(--rose)]">on Google</em></>}
+          title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${city.name} families ${em("on Google")}`)}
           subtitle={`Read verified reviews from patients across our ${city.name} centres.`}
         />
       </div>
@@ -214,12 +218,12 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
       <VideoHub />
 
       {centres.length > 0 && (
-        <CentreGallery images={centres.flatMap((c) => c.gallery).slice(0, 6)} title={<>Inside our <em className="font-display italic text-[color:var(--rose)]">{city.name} centres</em></>} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A glimpse of our facilities.")} />
+        <CentreGallery images={centres.flatMap((c) => c.gallery).slice(0, 6)} title={ed("sectionLabels.galleryTitle", sl.galleryTitle || `Inside our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A glimpse of our facilities.")} />
       )}
 
       {/* Why choose */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow={ed("sectionLabels.whyEyebrow", sl.whyEyebrow || `Why Bavishi Fertility Institute ${city.name}`)} title={<>Why choose Bavishi Fertility Institute in <em className="font-display italic text-[color:var(--rose)]">{city.name}</em></>} />
+        <SectionHead center eyebrow={ed("sectionLabels.whyEyebrow", sl.whyEyebrow || `Why Bavishi Fertility Institute ${city.name}`)} title={ed("sectionLabels.whyTitle", sl.whyTitle || `Why choose Bavishi Fertility Institute in ${em(city.name)}`)} />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {trust.map((t) => (
             <StaggerItem key={t.t}>
@@ -234,14 +238,14 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
       </section>
 
       {centres.length > 0 && (
-        <ContactInfo centres={centres} title={<>Contact our <em className="font-display italic text-[color:var(--rose)]">{city.name} centres</em></>} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
+        <ContactInfo centres={centres} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
       )}
 
       {/* FAQ */}
       {city.faqs.length > 0 && (
         <section className="container-px mx-auto max-w-3xl px-0 py-8 md:py-14">
           <div className="container-px">
-            <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>{city.name} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
+            <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={ed("sectionLabels.faqTitle", sl.faqTitle || `${city.name} — ${em("your questions answered")}`)} />
             <div className="mt-9 space-y-3">
               {city.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
             </div>
@@ -254,7 +258,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Book your consultation in <em className="font-display italic text-[color:var(--rose-soft)]">{city.name}</em> today.
+              {ed("sectionLabels.ctaTitle", sl.ctaTitle || `Book your consultation in ${em(city.name, true)} today.`)}
             </h2>
           </Reveal>
           <Reveal delay={0.15}>

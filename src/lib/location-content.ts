@@ -27,10 +27,13 @@
  * ===================================================================== */
 import { cityBySlug, centreBySlug, type City, type Centre } from "@/lib/locations";
 
-/** Per-page overrides for the template section labels (eyebrows/subtitles) on
- *  city/centre pages. Empty/missing → the component's built-in default renders
- *  (byte-identical). Shared by both collections; each page uses the keys it has. */
+/** Per-page overrides for the template section labels (eyebrows/subtitles/titles)
+ *  on city/centre pages. Empty/missing → the component's built-in default renders.
+ *  Shared by both collections; each page uses the keys it has.
+ *  `*Title` fields store HTML strings (with optional <em> for the italic accent)
+ *  and are rendered via dangerouslySetInnerHTML on the public site. */
 export type LocationSectionLabels = {
+  // ---- Eyebrows / sub-headings (small labels, plain text) ----
   overviewEyebrow?: string;
   centresEyebrow?: string;
   landmarksEyebrow?: string;
@@ -48,6 +51,25 @@ export type LocationSectionLabels = {
   mapEyebrow?: string;
   contactSubtitle?: string;
   faqEyebrow?: string;
+  // ---- Section titles (large h1/h2 headings, may contain HTML) ----
+  heroTitle?: string;
+  overviewTitle?: string;
+  centresTitle?: string;
+  landmarksTitle?: string;
+  areasTitle?: string;
+  reachTitle?: string;
+  treatmentsTitle?: string;
+  womensHealthTitle?: string;
+  facilitiesTitle?: string;
+  doctorsTitle?: string;
+  testimonialsTitle?: string;
+  reviewsTitle?: string;
+  galleryTitle?: string;
+  whyTitle?: string;
+  mapTitle?: string;
+  contactTitle?: string;
+  faqTitle?: string;
+  ctaTitle?: string;
 };
 
 /* ---------- Resolved (serialisable) models — mirror City/Centre 1:1 (plus the
@@ -138,8 +160,11 @@ type ValueItem = { value?: string | null };
 type GalleryItemSource = { src?: string | null; alt?: string | null };
 type SectionLabelsSource = { [K in keyof LocationSectionLabels]?: string | null } | null | undefined;
 
-/** Shape a CMS sectionLabels group into the resolved overlay (null → ""). */
+/** Shape a CMS sectionLabels group into the resolved overlay (null/undefined → "").
+ *  Empty string is the correct fallback: falsy, so components use their built-in
+ *  HTML defaults via `sl.field || "<html default>"`. */
 const toSectionLabels = (s: SectionLabelsSource): LocationSectionLabels => ({
+  // Eyebrows / sub-headings
   overviewEyebrow: s?.overviewEyebrow ?? "",
   centresEyebrow: s?.centresEyebrow ?? "",
   landmarksEyebrow: s?.landmarksEyebrow ?? "",
@@ -157,6 +182,25 @@ const toSectionLabels = (s: SectionLabelsSource): LocationSectionLabels => ({
   mapEyebrow: s?.mapEyebrow ?? "",
   contactSubtitle: s?.contactSubtitle ?? "",
   faqEyebrow: s?.faqEyebrow ?? "",
+  // Section titles
+  heroTitle: s?.heroTitle ?? "",
+  overviewTitle: s?.overviewTitle ?? "",
+  centresTitle: s?.centresTitle ?? "",
+  landmarksTitle: s?.landmarksTitle ?? "",
+  areasTitle: s?.areasTitle ?? "",
+  reachTitle: s?.reachTitle ?? "",
+  treatmentsTitle: s?.treatmentsTitle ?? "",
+  womensHealthTitle: s?.womensHealthTitle ?? "",
+  facilitiesTitle: s?.facilitiesTitle ?? "",
+  doctorsTitle: s?.doctorsTitle ?? "",
+  testimonialsTitle: s?.testimonialsTitle ?? "",
+  reviewsTitle: s?.reviewsTitle ?? "",
+  galleryTitle: s?.galleryTitle ?? "",
+  whyTitle: s?.whyTitle ?? "",
+  mapTitle: s?.mapTitle ?? "",
+  contactTitle: s?.contactTitle ?? "",
+  faqTitle: s?.faqTitle ?? "",
+  ctaTitle: s?.ctaTitle ?? "",
 });
 
 export type CentreSource =
@@ -233,19 +277,53 @@ const toGallery = (a: GalleryItemSource[] | null | undefined): { src: string; al
 export function resolveCentre(citySlug: string, slug: string, src: CentreSource): ResolvedCentre | undefined {
   const def = centreBySlug(citySlug, slug);
   if (!src) return def ? centreToResolved(def) : undefined;
-  if (!def) return undefined; // unknown centre — no template behind it
+  if (!def) {
+    // DB-only centre — no code template behind it; build from CMS data alone.
+    return {
+      slug: src.slug ?? slug,
+      citySlug: src.citySlug ?? citySlug,
+      name: src.name ?? "",
+      fullName: src.fullName ?? src.name ?? "",
+      ...(src.isHeadOffice ? { isHeadOffice: src.isHeadOffice } : {}),
+      area: src.area ?? "",
+      address: src.address ?? "",
+      pin: src.pin ?? "",
+      phone: src.phone ?? "",
+      phoneLabel: src.phoneLabel ?? "",
+      hours: src.hours ?? "",
+      opening: {
+        opens: src.opening?.opens ?? "09:00",
+        closes: src.opening?.closes ?? "20:00",
+        ...(src.opening?.days?.length ? { days: values(src.opening.days) } : {}),
+      },
+      ...(src.geo?.lat != null && src.geo?.lng != null ? { geo: { lat: src.geo.lat, lng: src.geo.lng } } : {}),
+      mapQuery: src.mapQuery ?? "",
+      image: src.image ?? "",
+      ...(src.hero360Url ? { hero360Url: src.hero360Url } : {}),
+      nearby: values(src.nearby),
+      landmarks: values(src.landmarks),
+      howToReach: values(src.howToReach),
+      facilities: values(src.facilities),
+      doctors: values(src.doctors),
+      treatments: values(src.treatments),
+      faqs: toFaqs(src.faqs),
+      ...(src.reviewsKey ? { reviewsKey: src.reviewsKey } : {}),
+      ...(src.sameAs?.length ? { sameAs: values(src.sameAs) } : {}),
+      intro: src.intro ?? "",
+      gallery: toGallery(src.gallery),
+      ...(src.womensHealth?.length ? { womensHealth: values(src.womensHealth) } : {}),
+      // Published in admin = live, unless explicitly hidden via built: false
+      built: src.built !== false,
+      sectionLabels: toSectionLabels(src.sectionLabels),
+    };
+  }
   const base = centreToResolved(def);
 
   return {
-    // ---- Class A (structural / relational / gating) — CODE-AUTHORITATIVE ----
-    // Carried from `base` ONLY; the CMS copy is intentionally IGNORED at render
-    // so the route set, the schema graph (geo, openingHoursSpecification,
-    // areaServed, availableService) and the cross-app helpers cannot drift with
-    // CMS state (WAVE-4.5-PLAN §§1.2, 5.3; ADR-0001). The collection still
-    // STORES these (for seed/roundtrip + editor visibility) — they are just not
-    // read here. Class-A set: slug, citySlug, built, isHeadOffice, reviewsKey,
-    // geo, opening, doctors[], treatments[], womensHealth[].
+    // Structural/relational fields carried from base; editorial fields from CMS with per-section fallback.
     ...base,
+    // `built` is now DB-overridable: admin can toggle live/hidden without a code change.
+    built: src.built ?? base.built,
     // ---- Class B (editorial content) — CMS-overridable, per-section fallback ----
     name: src.name || base.name,
     fullName: src.fullName || base.fullName,
@@ -277,13 +355,31 @@ export function resolveCentre(citySlug: string, slug: string, src: CentreSource)
 export function resolveCity(slug: string, src: CitySource): ResolvedCity | undefined {
   const def = cityBySlug(slug);
   if (!src) return def ? cityToResolved(def) : undefined;
-  if (!def) return undefined;
+  if (!def) {
+    // DB-only city — no code template; build from CMS data alone.
+    return {
+      slug: src.slug ?? slug,
+      name: src.name ?? "",
+      region: src.region ?? "",
+      country: src.country ?? "IN",
+      helpline: src.helpline ?? "",
+      helplineLabel: src.helplineLabel ?? "",
+      whatsapp: src.whatsapp ?? "",
+      heroImage: src.heroImage ?? "",
+      ...(src.hero360Url ? { hero360Url: src.hero360Url } : {}),
+      intro: values(src.intro),
+      faqs: toFaqs(src.faqs),
+      ...(src.womensHealth?.length ? { womensHealth: values(src.womensHealth) } : {}),
+      built: src.built !== false,
+      sectionLabels: toSectionLabels(src.sectionLabels),
+    };
+  }
   const base = cityToResolved(def);
 
   return {
-    // ---- Class A — CODE-AUTHORITATIVE (base only; CMS ignored): slug, built,
-    //      womensHealth[]. See resolveCentre for the rationale. ----
     ...base,
+    // `built` is now DB-overridable.
+    built: src.built ?? base.built,
     // ---- Class B (editorial content) — CMS-overridable, per-section fallback ----
     name: src.name || base.name,
     region: src.region || base.region,

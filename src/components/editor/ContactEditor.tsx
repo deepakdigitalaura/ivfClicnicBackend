@@ -62,7 +62,7 @@ export function ContactEditor({
         const faqs = (draft.faqs ?? []).map((f) => ({ q: f.question ?? "", a: f.answer ?? "" }));
         return (
           <div className="bfi-editing notranslate" translate="no">
-            <EditorToolbar pageLabel="Contact Us" />
+            <EditorToolbar pageLabel="Contact Us" backUrl="/contact" />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
               <ContactPage hero={hero} faqs={faqs} sectionLabels={draft.sectionLabels ?? undefined} />

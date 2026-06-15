@@ -216,6 +216,11 @@ const SERVICE_FIELDS: Field[] = [
         { name: "faqEyebrow", type: "text", label: "'FAQ' Section Label" },
         { name: "relatedEyebrow", type: "text", label: "'Explore More' Section Label" },
         { name: "visitEyebrow", type: "text", label: "'Visit us' Section Label" },
+        // ---- Section titles (large h2 headings, may contain HTML) ----
+        { name: "faqTitle", type: "textarea", label: "FAQ Section Heading" },
+        { name: "relatedTitle", type: "textarea", label: "'Explore More' Section Heading" },
+        { name: "visitTitle", type: "textarea", label: "'Visit us' Section Heading" },
+        { name: "ctaTitle", type: "textarea", label: "Call-to-Action Heading (closing h2)" },
       ],
     },
 

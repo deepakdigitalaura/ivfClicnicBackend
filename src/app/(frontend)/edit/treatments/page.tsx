@@ -53,7 +53,6 @@ export default async function TreatmentsHubPage() {
       <div className="bfi-launch__grid">
         {list.map((t) => {
           const href = (t.href as string) || `/treatments/${t.slug as string}`;
-          const isExternal = href.startsWith("/treatments/");
           return (
             <a
               key={t.slug as string}

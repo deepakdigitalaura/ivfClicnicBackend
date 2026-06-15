@@ -31,5 +31,27 @@ export const sectionLabelsField: Field = {
     { name: "mapEyebrow", type: "text", label: "Map Section Label" },
     { name: "contactSubtitle", type: "textarea", label: "Contact Sub-heading" },
     { name: "faqEyebrow", type: "text", label: "'FAQ' Section Label" },
+    // ---- Section titles (the large h1 / h2 headings above each section) ----
+    // Leave blank to auto-generate from the page's area/city name.
+    // HTML is supported: use <em class="font-display italic text-[color:var(--rose)]">word</em>
+    // for the italic rose accent word. Easiest to set via the visual inline editor.
+    { name: "heroTitle", type: "textarea", label: "Hero Heading (h1)", admin: { description: "Main page heading. Leave blank to auto-generate. Use the visual editor to style the accent word in italic rose." } },
+    { name: "overviewTitle", type: "textarea", label: "Overview Section Heading" },
+    { name: "centresTitle", type: "textarea", label: "'Our Centres' Section Heading" },
+    { name: "landmarksTitle", type: "textarea", label: "'Landmarks' Section Heading" },
+    { name: "areasTitle", type: "textarea", label: "'Areas served' Section Heading" },
+    { name: "reachTitle", type: "textarea", label: "'How to reach' Section Heading" },
+    { name: "treatmentsTitle", type: "textarea", label: "'Treatments offered' Section Heading" },
+    { name: "womensHealthTitle", type: "textarea", label: "Women's Health Section Heading" },
+    { name: "facilitiesTitle", type: "textarea", label: "'Facilities' Section Heading" },
+    { name: "doctorsTitle", type: "textarea", label: "Doctors Section Heading" },
+    { name: "testimonialsTitle", type: "textarea", label: "Testimonials Section Heading" },
+    { name: "reviewsTitle", type: "textarea", label: "Reviews Section Heading" },
+    { name: "galleryTitle", type: "textarea", label: "Gallery Section Heading" },
+    { name: "whyTitle", type: "textarea", label: "'Why choose' Section Heading" },
+    { name: "mapTitle", type: "textarea", label: "Map Section Heading" },
+    { name: "contactTitle", type: "textarea", label: "Contact Section Heading" },
+    { name: "faqTitle", type: "textarea", label: "FAQ Section Heading" },
+    { name: "ctaTitle", type: "textarea", label: "Call-to-Action Heading (closing h2)", admin: { description: "The large heading inside the dark closing CTA band." } },
   ],
 };

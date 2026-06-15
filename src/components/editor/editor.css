@@ -75,6 +75,37 @@
 }
 .bfi-btn--ghost:hover { background: rgba(255, 255, 255, 0.1); }
 
+/* Inline error banner — shown below the toolbar when a save/upload fails.
+ * Uses role="alert" so screen readers announce it without focus change. */
+.bfi-editbar__error {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  background: oklch(0.42 0.18 25); /* dark red */
+  color: #fff;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.bfi-editbar__error-msg { flex: 1; white-space: pre-wrap; }
+.bfi-editbar__error-close {
+  border: 0;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.bfi-editbar__error-close:hover { background: rgba(255, 255, 255, 0.3); }
+
 /* Push the page down so the bar never covers the hero. */
 .bfi-edit-canvas { padding-top: 56px; }
 

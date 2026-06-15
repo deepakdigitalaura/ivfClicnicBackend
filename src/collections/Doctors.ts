@@ -174,6 +174,12 @@ const DOCTOR_FIELDS: Field[] = [
         { name: "storiesEyebrow", type: "text", label: "'Patient Stories' Section Label" },
         { name: "storiesSubtitle", type: "textarea", label: "'Patient Stories' Sub-heading" },
         { name: "ctaHeading", type: "text", label: "Closing CTA Heading (before name)" },
+        // ---- Section titles (large h2 headings) ----
+        { name: "aboutTitle", type: "textarea", label: "'About' Section Heading" },
+        { name: "treatmentsTitle", type: "textarea", label: "'Treatments' Section Heading" },
+        { name: "storiesTitle", type: "textarea", label: "'Patient Stories' Section Heading" },
+        { name: "consultsTitle", type: "textarea", label: "'Where to meet' Section Heading" },
+        { name: "doctorSpeakTitle", type: "textarea", label: "'Doctor Speak' Section Heading" },
       ],
     },
 ];

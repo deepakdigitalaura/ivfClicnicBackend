@@ -506,10 +506,16 @@ export function ContactInfo({
 
 /* Inline-editable section label with a built-in fallback — same pattern as the
  * doctor-page `lab()`. Paths are doc-relative (`sectionLabels.<key>`), so the
- * same shared section works inside both the City and Centre editors. */
+ * same shared section works inside both the City and Centre editors.
+ * When `value` is empty the `fallback` is used. Both are rendered as rich HTML
+ * (rich=true, the default on <Editable>) so HTML like <em class="..."> in the
+ * fallback string is rendered correctly on the public site via dangerouslySetInnerHTML. */
 const lab = (path: string, value: string | undefined, fallback: string) => (
   <Editable path={path}>{value || fallback}</Editable>
 );
+// Shared HTML class strings for the italic rose/rose-soft accent word in headings.
+const EM = 'class="font-display italic text-[color:var(--rose)]"';
+const em = (t: string) => `<em ${EM}>${t}</em>`;
 
 /* ---------- Local highlights: landmarks + areas served (local intent) ---------- */
 export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?: LocationSectionLabels } }) {
@@ -518,7 +524,7 @@ export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?:
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
         <div>
-          <SectionHead eyebrow={lab("sectionLabels.landmarksEyebrow", sl.landmarksEyebrow, "Landmarks")} title={<>How to <em className="font-display italic text-[color:var(--rose)]">spot us</em></>} />
+          <SectionHead eyebrow={lab("sectionLabels.landmarksEyebrow", sl.landmarksEyebrow, "Landmarks")} title={lab("sectionLabels.landmarksTitle", sl.landmarksTitle, `How to ${em("spot us")}`)} />
           <ul className="mt-6 space-y-3">
             {centre.landmarks.map((l, i) => (
               <li key={i} className="flex items-start gap-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">
@@ -528,7 +534,7 @@ export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?:
           </ul>
         </div>
         <div>
-          <SectionHead eyebrow={lab("sectionLabels.areasEyebrow", sl.areasEyebrow, "Areas served")} title={<>Patients we serve in <em className="font-display italic text-[color:var(--rose)]">{centre.area}</em> & nearby</>} />
+          <SectionHead eyebrow={lab("sectionLabels.areasEyebrow", sl.areasEyebrow, "Areas served")} title={lab("sectionLabels.areasTitle", sl.areasTitle, `Patients we serve in ${em(centre.area)} & nearby`)} />
           <div className="mt-6 flex flex-wrap gap-2">
             {centre.nearby.map((n, i) => (
               <span key={i} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-[color:var(--plum)] shadow-soft">
@@ -547,7 +553,7 @@ export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: Loca
   return (
     <section className="bg-white py-8 md:py-14">
       <div className="container-px mx-auto max-w-[1400px]">
-        <SectionHead center eyebrow={lab("sectionLabels.reachEyebrow", centre.sectionLabels?.reachEyebrow, "How to reach")} title={<>Getting to our <em className="font-display italic text-[color:var(--rose)]">{centre.area} centre</em></>} subtitle={centre.address} />
+        <SectionHead center eyebrow={lab("sectionLabels.reachEyebrow", centre.sectionLabels?.reachEyebrow, "How to reach")} title={lab("sectionLabels.reachTitle", centre.sectionLabels?.reachTitle, `Getting to our ${em(centre.area + " centre")}`)} subtitle={centre.address} />
         <Stagger className="mt-9 grid grid-cols-1 gap-4 md:grid-cols-3">
           {centre.howToReach.map((h, i) => (
             <StaggerItem key={i}>
@@ -569,7 +575,7 @@ export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: Loca
 export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; area: string; labels?: LocationSectionLabels }) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-      <SectionHead center eyebrow={lab("sectionLabels.treatmentsEyebrow", labels?.treatmentsEyebrow, "Treatments offered")} title={<>Fertility treatments at <em className="font-display italic text-[color:var(--rose)]">{area} center</em></>} />
+      <SectionHead center eyebrow={lab("sectionLabels.treatmentsEyebrow", labels?.treatmentsEyebrow, "Treatments offered")} title={lab("sectionLabels.treatmentsTitle", labels?.treatmentsTitle, `Fertility treatments at ${em(area + " centre")}`)} />
       <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
         {slugs.map((slug) => {
           const c = treatmentCardData(slug);
@@ -618,8 +624,8 @@ export function AvailableServicesSection({
         <SectionHead
           center
           eyebrow={lab("sectionLabels.womensHealthEyebrow", labels?.womensHealthEyebrow, "Women's Health & Maternity")}
-          title={<>{serviceLabel} available at <em className="font-display italic text-[color:var(--rose)]">{location}</em></>}
-          subtitle={`Access advanced maternity, fetal medicine and pregnancy care services at our ${location} center.`}
+          title={lab("sectionLabels.womensHealthTitle", labels?.womensHealthTitle, `${serviceLabel} available at ${em(location)}`)}
+          subtitle={`Access advanced maternity, fetal medicine and pregnancy care services at our ${location} centre.`}
         />
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
           {services.map((s) => (
@@ -640,7 +646,7 @@ export function Facilities({ items, area, labels }: { items: string[]; area: str
       <SectionHead
         center
         eyebrow={lab("sectionLabels.facilitiesEyebrow", labels?.facilitiesEyebrow, "Facilities")}
-        title={<>What's available at <em className="font-display italic text-[color:var(--rose)]">{area} center</em></>}
+        title={lab("sectionLabels.facilitiesTitle", labels?.facilitiesTitle, `What's available at ${em(area + " centre")}`)}
       />
       <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
         {items.map((f, i) => (

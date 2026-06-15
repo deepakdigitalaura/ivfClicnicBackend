@@ -51,6 +51,17 @@ const HEADER_CATEGORY_ORDER = [
 ];
 
 /**
+ * Lightweight location descriptor for building the Locations mega menu and footer
+ * group dynamically from Payload (no hardcoded lists needed).
+ * Each entry is one city with its list of published centres.
+ */
+export type NavLocationItem = {
+  citySlug: string;
+  cityName: string;
+  centres: { slug: string; name: string }[];
+};
+
+/**
  * Lightweight doctor descriptor for building the header mega panel and footer
  * Doctors group dynamically from Payload (no hardcoded lists needed).
  * Defined here (pure module) so header + footer resolvers can import it
@@ -327,6 +338,51 @@ function resolveNavItem(n: NavItemSource): HeaderNavItem {
 }
 
 /**
+ * Build the "Locations" mega menu from CMS-published cities and centres.
+ * Multi-centre cities get a linked heading + one item per centre;
+ * single-centre cities get a heading + one "City Centre" item pointing to the city page.
+ * Returns undefined when no locations exist (caller falls back to defaults).
+ */
+function buildLocationsMega(navLocations: NavLocationItem[]): HeaderMegaCol[] | undefined {
+  if (!navLocations.length) return undefined;
+  return navLocations.map((city) => {
+    const cityHref = `/locations/${city.citySlug}`;
+    if (city.centres.length > 1) {
+      return {
+        heading: city.cityName,
+        headingHref: cityHref,
+        items: city.centres.map((c) => ({
+          label: c.name,
+          href: `/locations/${city.citySlug}/${c.slug}`,
+        })),
+      };
+    }
+    return {
+      heading: city.cityName,
+      items: [{ label: `${city.cityName} Centre`, href: cityHref }],
+    };
+  });
+}
+
+/**
+ * Build the "Maternity Services" mega menu from CMS-published services.
+ * Items are split evenly across two columns.
+ * Returns undefined when no maternity services exist (caller falls back to defaults).
+ */
+function buildMaternityMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] | undefined {
+  const items = navTreatments
+    .filter((t) => t.navCategory === "maternity-services")
+    .sort((a, b) => a.navOrder - b.navOrder)
+    .map((t) => ({ label: t.name, href: t.href }));
+  if (!items.length) return undefined;
+  const mid = Math.ceil(items.length / 2);
+  return [
+    { heading: "", items: items.slice(0, mid) },
+    { heading: "", items: items.slice(mid) },
+  ];
+}
+
+/**
  * Build the "IVF Treatments" mega menu columns from CMS-published treatments.
  * Groups by navCategory in the canonical column order. Returns undefined when
  * no treatments have a navCategory set (caller falls back to defaults).
@@ -383,6 +439,7 @@ export function resolveHeader(
   g: HeaderSource,
   navTreatments: NavTreatmentItem[] = [],
   navDoctors: NavDoctorItem[] = [],
+  navLocations: NavLocationItem[] = [],
 ): HeaderData {
   const branding: HeaderBranding = {
     logoUrl: g?.branding?.logoUrl || HEADER_DEFAULTS.branding.logoUrl,
@@ -402,11 +459,17 @@ export function resolveHeader(
 
   // Treatments mega — replace "IVF Treatments" columns with DB-driven ones.
   const treatmentMega = buildTreatmentMega(navTreatments);
+  // Maternity mega — replace "Maternity Services" columns with DB-driven ones.
+  const maternityMega = buildMaternityMega(navTreatments);
   // Doctors mega — replace hardcoded panel data with DB-driven one.
   const doctorMenu = buildDoctorMenu(navDoctors);
+  // Locations mega — replace hardcoded city/centre list with DB-driven one.
+  const locationsMega = buildLocationsMega(navLocations);
 
   const finalNav = nav.map((item) => {
     if (item.label === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
+    if (item.label === "Maternity Services" && maternityMega) return { ...item, mega: maternityMega };
+    if (item.label === "Locations" && locationsMega) return { ...item, mega: locationsMega };
     if (item.doctors && doctorMenu) return { ...item, doctorMenu };
     return item;
   });

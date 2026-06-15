@@ -31,7 +31,7 @@ export function CityEditor({
         const resolved = resolveCity(slug, draft);
         return (
           <div className="bfi-editing notranslate" translate="no">
-            <EditorToolbar pageLabel={`City: ${draft.name || slug}`} />
+            <EditorToolbar pageLabel={`City: ${draft.name || slug}`} backUrl={`/locations/${slug}`} />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
               {resolved && <CityPage city={resolved} />}

@@ -42,8 +42,7 @@ export default async function EditServicePage({
   const def = resolveServiceFromCode(slug);
 
   if (!doc) {
-    if (!reg || !def) notFound();
-
+    if (!reg || !def) notFound(); // No DB doc and no code default → service doesn't exist.
     doc = await payload.create({
       collection: "services",
       data: {
@@ -58,6 +57,7 @@ export default async function EditServicePage({
       draft: true,
     });
   }
+  // If doc exists (DB-only service added via admin), fall through to the editor below.
 
   return (
     <ServiceEditor
