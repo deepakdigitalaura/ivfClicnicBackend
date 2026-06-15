@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "sync-reviews": "node scripts/sync-reviews.mjs",
-    "build": "next build",
+    "build": "payload migrate && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
