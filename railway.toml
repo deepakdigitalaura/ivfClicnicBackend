@@ -1,5 +1,4 @@
 [build]
-builder = "docker"
 dockerfilePath = "Dockerfile"
 
 [deploy]
@@ -7,10 +6,3 @@ healthcheckPath = "/"
 healthcheckTimeout = 300
 restartPolicyType = "on_failure"
 restartPolicyMaxRetries = 10
-
-[env]
-NODE_ENV = "production"
-# PAYLOAD_SECRET = ""  # Set in Railway dashboard
-# DATABASE_URI = ""    # Set in Railway dashboard (auto-provisioned Postgres)
-# PREVIEW_SECRET = ""  # Set in Railway dashboard
-# GOOGLE_PLACES_API_KEY = ""  # Set in Railway dashboard (optional)
