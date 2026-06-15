@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact-page";
 import { JsonLd } from "@/components/json-ld";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
-import { getPageBySlug, getGlobalSafe } from "@/lib/payload";
+import { getPageBySlug, getGlobalSafe, payloadClient } from "@/lib/payload";
 import { resolveContactValues, resolveCardChannel, type ContactChannel } from "@/lib/contact";
 
 const PATH = "/contact";
@@ -79,7 +79,26 @@ async function loadContact() {
   // lag behind the schema until the next generate:types run).
   const sectionLabels = (page as { sectionLabels?: { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null } | null } | null)?.sectionLabels ?? undefined;
 
-  return { hero, seo, faqs, ogImage, cards, contact, sectionLabels };
+  // Centres directory — pulled live from the CMS so edits in /admin/collections/centres
+  // are reflected immediately without any code change.
+  let directory: { name: string; address: string; phone: string; phoneLabel: string; href?: string }[] | undefined;
+  try {
+    const payload = await payloadClient();
+    const res = await payload.find({ collection: "centres", limit: 100, depth: 0, sort: "citySlug" });
+    if (res.docs.length > 0) {
+      directory = (res.docs as unknown as Array<Record<string, string | null | undefined>>).map((c) => ({
+        name: c.fullName ?? `${c.citySlug ?? ""} — ${c.name ?? ""}`,
+        address: c.address ?? "",
+        phone: c.phone ?? "",
+        phoneLabel: c.phoneLabel ?? "",
+        href: `/locations/${c.citySlug}/${c.slug}`,
+      }));
+    }
+  } catch {
+    // Fall back to hardcoded directory in ContactPage
+  }
+
+  return { hero, seo, faqs, ogImage, cards, contact, sectionLabels, directory };
 }
 
 export async function generateMetadata(): Promise<Metadata> {
@@ -99,7 +118,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { hero, faqs, cards, contact, sectionLabels } = await loadContact();
+  const { hero, faqs, cards, contact, sectionLabels, directory } = await loadContact();
 
   const graph = [
     {
@@ -129,7 +148,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
-      <ContactPage hero={hero} faqs={faqs} cards={cards} sectionLabels={sectionLabels} />
+      <ContactPage hero={hero} faqs={faqs} cards={cards} sectionLabels={sectionLabels} directory={directory} />
     </>
   );
 }

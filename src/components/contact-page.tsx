@@ -75,11 +75,12 @@ export const DEFAULT_FAQS: Faq[] = [
 
 export type ContactSectionLabels = { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null };
 
-export function ContactPage({ hero, faqs, cards, sectionLabels }: { hero?: Hero; faqs?: Faq[]; cards?: Card[]; sectionLabels?: ContactSectionLabels } = {}) {
+export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propDirectory }: { hero?: Hero; faqs?: Faq[]; cards?: Card[]; sectionLabels?: ContactSectionLabels; directory?: Centre[] } = {}) {
   const h = { ...DEFAULT_HERO, ...(hero ?? {}) };
   const faqList = faqs?.length ? faqs : DEFAULT_FAQS;
   const cardList = cards?.length ? cards : DEFAULT_CARDS;
   const sl = sectionLabels ?? {};
+  const centreList = propDirectory?.length ? propDirectory : directory;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -144,7 +145,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels }: { hero?: Hero;
         <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "15 fertility centres across 8 Indian cities — world-class care, close to home.")} />
 
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {directory.map((c) => (
+          {centreList.map((c) => (
             <StaggerItem key={c.name} className="h-full">
               <article className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:border-[color:var(--rose)]/40 hover:shadow-lift">
                 <div className="flex items-start gap-2.5">
