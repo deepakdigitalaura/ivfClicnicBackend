@@ -46,6 +46,16 @@ export function payloadClient(): Promise<Payload> {
   return cached;
 }
 
+/** Run a Payload query and return `fallback` on any error (missing table, no DB, etc.). */
+async function safeQuery<T>(fn: (p: Payload) => Promise<T>, fallback: T): Promise<T> {
+  try {
+    const payload = await payloadClient();
+    return await fn(payload);
+  } catch {
+    return fallback;
+  }
+}
+
 /**
  * Fetch a single Page by slug (published-only for the public, via collection
  * access control). Cached + tagged: `pages`, `pages:<slug>`. Returns null if
@@ -54,16 +64,18 @@ export function payloadClient(): Promise<Payload> {
 export const getPageBySlug = reactCache(
   (slug: string): Promise<Page | null> =>
     unstable_cache(
-      async () => {
-        const payload = await payloadClient();
-        const res = await payload.find({
-          collection: "pages",
-          where: { slug: { equals: slug } },
-          limit: 1,
-          depth: 1, // resolve ogImage upload relation
-        });
-        return res.docs[0] ?? null;
-      },
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "pages",
+            where: { slug: { equals: slug } },
+            limit: 1,
+            depth: 1,
+          });
+          return (res.docs[0] ?? null) as Page | null;
+        },
+        null,
+      ),
       ["page-by-slug", slug],
       { tags: [cacheTags.collectionList("pages"), cacheTags.collectionItem("pages", slug)] },
     )(),
@@ -75,16 +87,17 @@ export const getPageBySlug = reactCache(
  * Not used on the public render path (which stays static + published-only).
  */
 export async function getPageBySlugDraft(slug: string): Promise<Page | null> {
-  const payload = await payloadClient();
-  const res = await payload.find({
-    collection: "pages",
-    where: { slug: { equals: slug } },
-    limit: 1,
-    depth: 1,
-    draft: true,
-    overrideAccess: true,
-  });
-  return res.docs[0] ?? null;
+  return safeQuery(async (payload) => {
+    const res = await payload.find({
+      collection: "pages",
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 1,
+      draft: true,
+      overrideAccess: true,
+    });
+    return (res.docs[0] ?? null) as Page | null;
+  }, null);
 }
 
 /* ---------- Blogs (Phase 3) ---------- */
@@ -94,16 +107,18 @@ export async function getPageBySlugDraft(slug: string): Promise<Page | null> {
 export const getBlogBySlug = reactCache(
   (slug: string): Promise<Blog | null> =>
     unstable_cache(
-      async () => {
-        const payload = await payloadClient();
-        const res = await payload.find({
-          collection: "blogs",
-          where: { slug: { equals: slug } },
-          limit: 1,
-          depth: 2,
-        });
-        return res.docs[0] ?? null;
-      },
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "blogs",
+            where: { slug: { equals: slug } },
+            limit: 1,
+            depth: 2,
+          });
+          return (res.docs[0] ?? null) as Blog | null;
+        },
+        null,
+      ),
       ["blog-by-slug", slug],
       { tags: [cacheTags.collectionList("blogs"), cacheTags.collectionItem("blogs", slug)] },
     )(),
@@ -113,16 +128,18 @@ export const getBlogBySlug = reactCache(
 export const getBlogs = reactCache(
   (limit = 24): Promise<Blog[]> =>
     unstable_cache(
-      async () => {
-        const payload = await payloadClient();
-        const res = await payload.find({
-          collection: "blogs",
-          limit,
-          sort: "-publishedAt",
-          depth: 1,
-        });
-        return res.docs;
-      },
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "blogs",
+            limit,
+            sort: "-publishedAt",
+            depth: 1,
+          });
+          return res.docs as Blog[];
+        },
+        [],
+      ),
       ["blogs-list", String(limit)],
       { tags: [cacheTags.collectionList("blogs")] },
     )(),
@@ -132,16 +149,18 @@ export const getBlogs = reactCache(
 export const getPublishedBlogSlugs = reactCache(
   (): Promise<string[]> =>
     unstable_cache(
-      async () => {
-        const payload = await payloadClient();
-        const res = await payload.find({
-          collection: "blogs",
-          limit: 1000,
-          depth: 0,
-          select: { slug: true },
-        });
-        return res.docs.map((d) => d.slug).filter(Boolean) as string[];
-      },
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "blogs",
+            limit: 1000,
+            depth: 0,
+            select: { slug: true },
+          });
+          return res.docs.map((d) => d.slug).filter(Boolean) as string[];
+        },
+        [],
+      ),
       ["blog-slugs"],
       { tags: [cacheTags.collectionList("blogs")] },
     )(),
@@ -149,16 +168,17 @@ export const getPublishedBlogSlugs = reactCache(
 
 /** Uncached, draft-aware single blog — Draft Mode preview only. */
 export async function getBlogBySlugDraft(slug: string): Promise<Blog | null> {
-  const payload = await payloadClient();
-  const res = await payload.find({
-    collection: "blogs",
-    where: { slug: { equals: slug } },
-    limit: 1,
-    depth: 2,
-    draft: true,
-    overrideAccess: true,
-  });
-  return res.docs[0] ?? null;
+  return safeQuery(async (payload) => {
+    const res = await payload.find({
+      collection: "blogs",
+      where: { slug: { equals: slug } },
+      limit: 1,
+      depth: 2,
+      draft: true,
+      overrideAccess: true,
+    });
+    return (res.docs[0] ?? null) as Blog | null;
+  }, null);
 }
 
 /* ---------- Services (Phase 4.1) ---------- */
