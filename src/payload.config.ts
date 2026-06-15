@@ -77,6 +77,9 @@ export default buildConfig({
   },
   db: postgresAdapter({
     pool: { connectionString: process.env.DATABASE_URI || "" },
+    // Push schema on startup when no migrations exist (safe for initial deploy).
+    // Once migrations are generated locally, remove this flag.
+    push: !process.env.PAYLOAD_MIGRATIONS_DIR,
   }),
   sharp,
 });
