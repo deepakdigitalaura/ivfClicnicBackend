@@ -86,9 +86,12 @@ function SectionHeader({
   );
 }
 
-function PrimaryBtn({ children, icon: Icon }: { children: React.ReactNode; icon?: any }) {
+function PrimaryBtn({ children, icon: Icon, href }: { children: React.ReactNode; icon?: any; href?: string }) {
   return (
-    <Magnetic className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+    <Magnetic
+      {...(href ? { as: "a" as const, href } : {})}
+      className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"
+    >
       {Icon && <Icon className="h-4 w-4" />}
       {children}
       <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
@@ -261,7 +264,7 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <PrimaryBtn icon={Calendar}>{hero.ctas[0]}</PrimaryBtn>
+            <PrimaryBtn icon={Calendar} href="/#book">{hero.ctas[0]}</PrimaryBtn>
             <GhostBtn icon={Sparkles}>{hero.ctas[1]}</GhostBtn>
             <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
           </motion.div>
