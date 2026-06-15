@@ -13,8 +13,12 @@ const asObj = <T,>(v: T | number | null | undefined): T | null =>
 /** Pre-render every published blog at build (static). New slugs render on
  *  demand (dynamicParams default) and are cached + tag-revalidated. */
 export async function generateStaticParams() {
-  const slugs = await getPublishedBlogSlugs();
-  return slugs.map((slug) => ({ slug }));
+  try {
+    const slugs = await getPublishedBlogSlugs();
+    return slugs.map((slug) => ({ slug }));
+  } catch {
+    return [];
+  }
 }
 
 export async function generateMetadata(

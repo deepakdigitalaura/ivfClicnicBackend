@@ -10,10 +10,14 @@ import { abs } from "@/lib/seo";
  * published in the CMS. Unrecognised slugs still render on-demand via ISR. */
 export async function generateStaticParams() {
   const codeParams = builtServiceParams();
-  const dbSlugs = await getPublishedServiceSlugs();
-  const seen = new Set(codeParams.map((p) => p.slug));
-  const extra = dbSlugs.filter((s) => !seen.has(s)).map((s) => ({ slug: s }));
-  return [...codeParams, ...extra];
+  try {
+    const dbSlugs = await getPublishedServiceSlugs();
+    const seen = new Set(codeParams.map((p) => p.slug));
+    const extra = dbSlugs.filter((s) => !seen.has(s)).map((s) => ({ slug: s }));
+    return [...codeParams, ...extra];
+  } catch {
+    return codeParams;
+  }
 }
 
 export async function generateMetadata(

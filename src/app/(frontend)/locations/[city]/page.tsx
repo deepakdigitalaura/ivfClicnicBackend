@@ -14,9 +14,13 @@ import { abs } from "@/lib/seo";
 /** Pre-render every built city from both code defaults and DB. */
 export async function generateStaticParams() {
   const codeParams = builtCityParams();
-  const dbSlugs = await getPublishedCitySlugs();
-  const seen = new Set(codeParams.map((p) => p.city));
-  return [...codeParams, ...dbSlugs.filter((s) => !seen.has(s)).map((s) => ({ city: s }))];
+  try {
+    const dbSlugs = await getPublishedCitySlugs();
+    const seen = new Set(codeParams.map((p) => p.city));
+    return [...codeParams, ...dbSlugs.filter((s) => !seen.has(s)).map((s) => ({ city: s }))];
+  } catch {
+    return codeParams;
+  }
 }
 
 /**
