@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "sync-reviews": "node scripts/sync-reviews.mjs",
-    "build": "payload migrate:create --name initial; payload migrate; next build",
+    "build": "DATABASE_URI=${MIGRATE_DATABASE_URI:-$DATABASE_URI} payload migrate:create --name initial; DATABASE_URI=${MIGRATE_DATABASE_URI:-$DATABASE_URI} payload migrate; next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
