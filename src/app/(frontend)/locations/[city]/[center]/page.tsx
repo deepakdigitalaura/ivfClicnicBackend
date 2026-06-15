@@ -9,9 +9,13 @@ import { abs } from "@/lib/seo";
 /** Pre-render every built centre from both code defaults and DB. */
 export async function generateStaticParams() {
   const codeParams = builtCentreParams();
-  const dbParams = await getPublishedCentreParams();
-  const seen = new Set(codeParams.map((p) => `${p.city}/${p.center}`));
-  return [...codeParams, ...dbParams.filter((p) => !seen.has(`${p.city}/${p.center}`))];
+  try {
+    const dbParams = await getPublishedCentreParams();
+    const seen = new Set(codeParams.map((p) => `${p.city}/${p.center}`));
+    return [...codeParams, ...dbParams.filter((p) => !seen.has(`${p.city}/${p.center}`))];
+  } catch {
+    return codeParams;
+  }
 }
 
 /**
