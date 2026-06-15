@@ -1,6 +1,7 @@
 "use client";
 import * as React from "react";
 import Image from "next/image";
+import { useEdit } from "@/components/editor/edit-context";
 import {
   motion,
   useScroll,
@@ -30,6 +31,16 @@ export function Reveal({
   // Memoize so a parent re-render doesn't create a new component type
   // (which would remount this subtree and replay the entrance animation).
   const MotionAs = React.useMemo(() => motion.create(As as any), [As]);
+  // In the inline editor, selecting/editing re-renders the whole page tree, and
+  // framer's `whileInView`+`once` then reverts any now-off-screen section to its
+  // hidden initial state (opacity:0) without re-revealing it — content "vanishes".
+  // (Verified: editing leaves ~15 off-screen heading <em>s at opacity 0.) So we
+  // render statically visible while editing. The public site keeps the animation
+  // (no provider → editing false → byte-identical). Trade-off: the editor has no
+  // scroll-in animation, but the layout/design/content is identical to the live site.
+  if (useEdit()?.editMode) {
+    return <As className={className}>{children}</As>;
+  }
   return (
     <MotionAs
       initial={{ opacity: 0, y, filter: "blur(8px)" }}
@@ -55,6 +66,11 @@ export function Stagger({
   stagger?: number;
   delay?: number;
 }) {
+  // See Reveal: static in the editor so a re-render can't strand off-screen cards
+  // at opacity:0. Public unchanged (byte-identical).
+  if (useEdit()?.editMode) {
+    return <div className={className}>{children}</div>;
+  }
   return (
     <motion.div
       initial="hidden"
@@ -83,6 +99,10 @@ export function StaggerItem({
   children: React.ReactNode;
   className?: string;
 }) {
+  // See Reveal/Stagger: visible-by-default in the editor (no hidden variant).
+  if (useEdit()?.editMode) {
+    return <div className={className}>{children}</div>;
+  }
   return (
     <motion.div variants={childVariants} className={className}>
       {children}
@@ -139,6 +159,7 @@ export function ParallaxImage({
   ratio = "aspect-[4/5]",
   priority = false,
   sizes = "(max-width: 1024px) 100vw, 45vw",
+  editPath,
 }: {
   src: string;
   alt: string;
@@ -148,16 +169,34 @@ export function ParallaxImage({
   /** Set on above-the-fold LCP images so Next preloads them (no lazy). */
   priority?: boolean;
   sizes?: string;
+  /** In the inline editor, makes this image click-to-replace (the CMS dot-path
+   *  the upload writes to). Ignored on the public site. */
+  editPath?: string;
 }) {
   const ref = React.useRef<HTMLDivElement>(null);
   const { scrollYProgress } = useScroll({ target: ref, offset: ["start end", "end start"] });
   const y = useTransform(scrollYProgress, [0, 1], ["-6%", "6%"]);
   const scale = useTransform(scrollYProgress, [0, 0.5, 1], [1.08, 1, 1.04]);
+  const ctx = useEdit();
+  const editing = !!ctx?.editMode && !!editPath;
   // Box is statically sized (ratio) → reserves layout space (no CLS). The
   // parallax transform animates an inner layer only; next/image with `fill`
   // + explicit `sizes` gives a srcset and, when priority, a preload for LCP.
   return (
-    <div ref={ref} className={`relative overflow-hidden ${ratio} ${className ?? ""}`}>
+    <div
+      ref={ref}
+      className={`relative overflow-hidden ${ratio} ${className ?? ""}${editing ? " bfi-editable bfi-editable-img" : ""}`}
+      {...(editing
+        ? {
+            "data-edit-path": editPath,
+            "data-bfi-selected": ctx!.selected === editPath ? "true" : undefined,
+            onClick: (e: React.MouseEvent) => {
+              e.stopPropagation();
+              ctx!.select(editPath!, "image");
+            },
+          }
+        : {})}
+    >
       <motion.div style={{ y, scale }} className="absolute inset-0">
         <Image
           src={src}

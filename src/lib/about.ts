@@ -1,0 +1,381 @@
+/* =====================================================================
+ * About-BFI resolver — maps the `about-page` global to the plain,
+ * client-serialisable model the <AboutPage> sections render (Wave 4.5, Phase E).
+ * ---------------------------------------------------------------------
+ * The CMS `about-page` global is the source of truth for the page's STRUCTURED
+ * editorial data — the hero copy, the "At a glance" / "Patient First" stat
+ * grids, the legacy timeline, the trust pillars, the city network, and the
+ * network/final-CTA headings + CTA labels. This module shapes the global doc
+ * into `AboutData`, falling back PER-SECTION to the typed ABOUT_DEFAULTS so an
+ * empty/partial/unavailable CMS renders byte-identically (same convention as
+ * src/lib/homepage.ts → HOMEPAGE_DEFAULTS).
+ *
+ * SCOPE (Wave 4.5 Phase E, "structured-data only"): the inline-<strong> "Our
+ * Story" / "Patient First" prose, every decorative <SectionHead> <em> title,
+ * the hero/CTA button hrefs+icons, the JSON-LD graph, and the reused <Doctors>/
+ * <AwardsCarousel> sections all stay CODE-OWNED in the component — only the
+ * structured copy above becomes editable. The "15 centres / Mumbai · 6 centres"
+ * marketing copy is curated (independent of CENTRES) and is preserved verbatim
+ * here; do NOT reconcile it to src/lib/locations.ts.
+ *
+ * ICONS: trust pillars carry icon NAMES (strings), never Lucide components — so
+ * the model crosses the server→client boundary as props. <AboutPage> maps names
+ * → components via resolveIcon() (src/lib/icon-map). ABOUT_DEFAULTS stores names
+ * directly. HEADINGS are { lead, em } text only — the component keeps its own
+ * decorative <em className="…">, so markup stays byte-identical while the words
+ * become editable.
+ *
+ * Pure module (no payload / server-only imports) — safe to bundle into the
+ * client <AboutPage> (its in-browser default content).
+ * ===================================================================== */
+import type { IconName } from "@/lib/icon-map";
+
+/* ---------- Resolved (serialisable) model ---------- */
+
+/** A two-part heading: plain lead text + the decorative <em> word(s). The
+ *  component supplies the per-section <em> className, so markup is unchanged. */
+export type AboutHeading = { lead: string; em: string };
+
+export type AboutHero = { eyebrow: string; headline: string; headlineItalic: string; paragraph: string; image: string };
+export type StatTuple = { n: string; l: string };
+export type Milestone = { y: string; t: string; d: string };
+/** A trust pillar (icon carried as a curated NAME, mapped to a component in the view). */
+export type TrustPillar = { icon: IconName; t: string; d: string };
+export type CitySummary = { c: string; n: string };
+/** A small eyebrow label + two-part heading, used by the editable section headers. */
+export type AboutSectionHeading = { eyebrow: string; heading: AboutHeading };
+export type AboutTextSection = AboutSectionHeading & { paragraphs: string[] };
+
+export type AboutSeo = {
+  metaTitle: string;
+  metaDescription: string;
+  ogTitle: string;
+  ogDescription: string;
+  ogImage: string;
+};
+
+/** Client-ready, fully-resolved About-BFI content. */
+export type AboutData = {
+  hero: AboutHero;
+  story: AboutTextSection;
+  atAGlance: StatTuple[];
+  legacy: AboutSectionHeading;
+  milestones: Milestone[];
+  trust: AboutSectionHeading;
+  trustPillars: TrustPillar[];
+  patientFirst: AboutTextSection;
+  patientStats: StatTuple[];
+  meetSpecialists: AboutSectionHeading & { subtitle: string };
+  network: AboutSectionHeading & { subtitle: string; cities: CitySummary[] };
+  finalCta: { heading: AboutHeading; ctas: string[] };
+  seo: AboutSeo;
+};
+
+/**
+ * Typed fallback — the exact About-BFI structured content as it shipped before
+ * the CMS, so an empty `about-page` global renders byte-identically. The seeded
+ * global mirrors this. NOTE the verbatim marketing copy ("15", "6 centres") —
+ * curated, NOT derived from CENTRES; preserve as-is.
+ */
+export const ABOUT_DEFAULTS: AboutData = {
+  hero: {
+    eyebrow: "About Bavishi Fertility Institute",
+    headline: "Four decades of fertility excellence — built on hope",
+    headlineItalic: "fertility excellence",
+    paragraph:
+      "Since 1984, Bavishi Fertility Institute has helped over 30,000 families experience the joy of parenthood — pioneering IVF in India and growing into one of the country's most trusted fertility networks, with 15 centres across 8 cities.",
+    image: "/assets/about-bavishi-family.png",
+  },
+  story: {
+    eyebrow: "Our Story",
+    heading: { lead: "A family's vision, an", em: "institution's legacy" },
+    paragraphs: [
+      "Bavishi Fertility Institute was founded in 1984 by <strong style=\"color:var(--plum)\">Dr. Himanshu Bavishi</strong> and <strong style=\"color:var(--plum)\">Dr. Falguni Bavishi</strong> with a simple but powerful belief: that world-class fertility care should be within every family's reach — delivered with science, sincerity and a deeply human touch.",
+      "What began as a single clinic in Ahmedabad has grown into a multi-centre institute that pioneered IVF in India, achieved national firsts, and today welcomes the second generation of Bavishi doctors. Through every year, the mission has stayed the same — to achieve excellence through knowledge, innovation and research, and to offer customised, safe and effective treatment.",
+      "Our values guide everything we do: <strong style=\"color:var(--plum)\">Simple, Safe, Smart and Successful</strong>. We believe in being a pioneer and leader — the most preferred fertility institute, offering IVF & ART above international standards, with an Indian heart and at India-friendly cost.",
+    ],
+  },
+  atAGlance: [
+    { n: "1984", l: "Founded in Ahmedabad" },
+    { n: "30,000+", l: "Successful pregnancies" },
+    { n: "3,000+", l: "IVF cycles every year" },
+    { n: "15", l: "Centres across 8 cities" },
+    { n: "5×", l: "National Fertility Award (2021–25)" },
+  ],
+  legacy: {
+    eyebrow: "40+ Years of Legacy",
+    heading: { lead: "Milestones that shaped", em: "Indian fertility care" },
+  },
+  milestones: [
+    { y: "1984", t: "The journey begins", d: "Dr. Himanshu & Dr. Falguni Bavishi found Bavishi Fertility Institute in Ahmedabad with one promise — fertility care above international standards, with an Indian heart." },
+    { y: "1998", t: "Pioneering IVF in India", d: "Bavishi Fertility Institute helps bring modern IVF and assisted reproduction to thousands of Indian families." },
+    { y: "Firsts", t: "Two national firsts", d: "India's first live birth from a vitrified (frozen) egg, and India's first surrogacy for an international couple — milestones that shaped Indian reproductive medicine." },
+    { y: "2021–25", t: "National Fertility Award", d: "Honoured for excellence in IVF & fertility care for five consecutive years — a record of consistency, not chance." },
+    { y: "Today", t: "15 centres, one family", d: "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." },
+  ],
+  trust: {
+    eyebrow: "Why Bavishi Fertility Center",
+    heading: { lead: "Why families across India", em: "trust Bavishi Fertility Institute" },
+  },
+  trustPillars: [
+    { icon: "Award", t: "Four Decades of Experience", d: "Since 1984, a family-led institute that pioneered IVF in India and has guided 30,000+ families to parenthood." },
+    { icon: "HeartPulse", t: "Outcomes That Matter", d: "3,000+ IVF cycles a year with a focus on safe stimulation, best-quality embryos and healthy single pregnancies." },
+    { icon: "Users", t: "A Family of Specialists", d: "Reproductive endocrinologists, embryologists, andrologists, fetal-medicine experts, counsellors and nutritionists under one roof." },
+    { icon: "Microscope", t: "World-Class Technology", d: "Class 1000 IVF labs — 10× cleaner than the international standard — with time-lapse imaging, vitrification and PGT." },
+    { icon: "ShieldCheck", t: "Transparency & Ethics", d: "Honest counselling, no hidden costs, double-witnessing of every sample, and the Suraksha Kavach assurance." },
+    { icon: "Sparkles", t: "Simple · Safe · Smart · Successful", d: "Our four values shape every plan — personalised, compassionate and judicious use of advanced reproductive technology." },
+  ],
+  patientFirst: {
+    eyebrow: "Patient First",
+    heading: { lead: "More than treatment —", em: "a community of hope" },
+    paragraphs: [
+      "Fertility is a deeply personal journey, and no two stories are the same. Beyond advanced laboratories and protocols, what truly sets Bavishi Fertility Institute apart is how we walk beside you — with patience, transparency and genuine care at every step.",
+      "Through emotional counselling, nutrition guidance and our patient support community, families never feel alone. And with the <strong style=\"color:var(--plum)\">Suraksha Kavach</strong> assurance, you can focus on what matters most — your journey to your baby.",
+    ],
+  },
+  patientStats: [
+    { n: "30,000+", l: "Happy families" },
+    { n: "40+", l: "Years of fertility expertise" },
+    { n: "300+", l: "International patients a year" },
+    { n: "8", l: "Cities, one standard of care" },
+  ],
+  meetSpecialists: {
+    eyebrow: "Meet the Specialists",
+    heading: { lead: "Meet Our", em: "Promoter Doctors." },
+    subtitle: "A family of fertility experts trusted by generations.",
+  },
+  network: {
+    eyebrow: "Our Network",
+    heading: { lead: "15 centres across", em: "8 Indian cities" },
+    subtitle: "World-class fertility care, close to home — wherever you are.",
+    cities: [
+      { c: "Ahmedabad", n: "3 centres" }, { c: "Mumbai", n: "6 centres" },
+      { c: "Vadodara", n: "1 centre" }, { c: "Surat", n: "1 centre" },
+      { c: "Bhuj", n: "1 centre" }, { c: "Bhavnagar", n: "1 centre" },
+      { c: "Anand", n: "1 centre" }, { c: "Varanasi", n: "1 centre" },
+    ],
+  },
+  finalCta: {
+    heading: { lead: "Begin your journey with", em: "people who care." },
+    ctas: ["Book Free Consultation", "WhatsApp Us"],
+  },
+  seo: {
+    metaTitle: "About Bavishi Fertility Institute — 40 Years of IVF Excellence in India",
+    metaDescription:
+      "Founded in 1984 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 15 centres. Discover our story, legacy and values.",
+    ogTitle: "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1984",
+    ogDescription:
+      "30,000+ pregnancies. 15 centres across 8 cities. National Fertility Award 5 years running. The story of India's pioneering fertility institute.",
+    ogImage: "/assets/about-clinic.jpg",
+  },
+};
+
+/* =====================================================================
+ * CMS source shape (kept loose so it stays decoupled from the generated
+ * payload-types, same convention as HomepageSource / ServiceSource).
+ * ===================================================================== */
+type HeadingSource = { lead?: string | null; em?: string | null } | null | undefined;
+type StatSource = { value?: string | null; label?: string | null };
+
+export type AboutSource =
+  | {
+      hero?: {
+        eyebrow?: string | null;
+        headline?: string | null;
+        headlineItalic?: string | null;
+        paragraph?: string | null;
+        image?: string | null;
+      } | null;
+      story?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        paragraphs?: { value?: string | null }[] | null;
+      } | null;
+      atAGlance?: StatSource[] | null;
+      legacy?: { eyebrow?: string | null; heading?: HeadingSource } | null;
+      milestones?: { y?: string | null; t?: string | null; d?: string | null }[] | null;
+      trust?: { eyebrow?: string | null; heading?: HeadingSource } | null;
+      trustPillars?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+      patientFirst?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        paragraphs?: { value?: string | null }[] | null;
+      } | null;
+      patientStats?: StatSource[] | null;
+      meetSpecialists?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+      } | null;
+      network?: {
+        eyebrow?: string | null;
+        heading?: HeadingSource;
+        subtitle?: string | null;
+        cities?: { c?: string | null; n?: string | null }[] | null;
+      } | null;
+      finalCta?: {
+        heading?: HeadingSource;
+      } | null;
+      seo?: {
+        metaTitle?: string | null;
+        metaDescription?: string | null;
+        ogTitle?: string | null;
+        ogDescription?: string | null;
+        ogImage?: unknown;
+      } | null;
+    }
+  | null
+  | undefined;
+
+/* ---------- Small helpers (mirror src/lib/homepage.ts) ---------- */
+const heading = (h: HeadingSource, def: AboutHeading): AboutHeading =>
+  h?.lead ? { lead: h.lead, em: h.em ?? "" } : def;
+const stats = (a: StatSource[] | null | undefined): StatTuple[] =>
+  (a ?? []).map((s) => ({ n: s.value ?? "", l: s.label ?? "" }));
+
+/**
+ * Map the `about-page` global → AboutData, falling back PER-SECTION to
+ * ABOUT_DEFAULTS so an empty/partial CMS renders byte-identically. A section is
+ * taken from the CMS only when its content is actually present (non-empty array
+ * / set heading); otherwise the typed default is used verbatim. SEO meta is
+ * consumed by generateMetadata() (a server context) where the ogImage upload
+ * relation is resolved, so ogImage here always carries the default string.
+ */
+export function resolveAbout(src: AboutSource): AboutData {
+  const d = ABOUT_DEFAULTS;
+  if (!src) return d;
+
+  const hero: AboutHero = src.hero?.headline
+    ? {
+        eyebrow: src.hero.eyebrow ?? d.hero.eyebrow,
+        headline: src.hero.headline,
+        headlineItalic: src.hero.headlineItalic ?? d.hero.headlineItalic,
+        paragraph: src.hero.paragraph ?? d.hero.paragraph,
+        image: src.hero.image || d.hero.image,
+      }
+    : { ...d.hero, image: src.hero?.image || d.hero.image };
+
+  const story: AboutTextSection = src.story?.heading?.lead
+    ? {
+        eyebrow: src.story.eyebrow ?? d.story.eyebrow,
+        heading: heading(src.story.heading, d.story.heading),
+        paragraphs: src.story.paragraphs?.length ? src.story.paragraphs.map((p) => p.value ?? "") : d.story.paragraphs,
+      }
+    : d.story;
+
+  const atAGlance = src.atAGlance?.length ? stats(src.atAGlance) : d.atAGlance;
+  const legacy: AboutSectionHeading = src.legacy?.heading?.lead
+    ? { eyebrow: src.legacy.eyebrow ?? d.legacy.eyebrow, heading: heading(src.legacy.heading, d.legacy.heading) }
+    : d.legacy;
+  const milestones = src.milestones?.length
+    ? src.milestones.map((m) => ({ y: m.y ?? "", t: m.t ?? "", d: m.d ?? "" }))
+    : d.milestones;
+  const trust: AboutSectionHeading = src.trust?.heading?.lead
+    ? { eyebrow: src.trust.eyebrow ?? d.trust.eyebrow, heading: heading(src.trust.heading, d.trust.heading) }
+    : d.trust;
+  const trustPillars = src.trustPillars?.length
+    ? src.trustPillars.map((p) => ({ icon: (p.icon ?? "Sparkles") as IconName, t: p.t ?? "", d: p.d ?? "" }))
+    : d.trustPillars;
+  const patientFirst: AboutTextSection = src.patientFirst?.heading?.lead
+    ? {
+        eyebrow: src.patientFirst.eyebrow ?? d.patientFirst.eyebrow,
+        heading: heading(src.patientFirst.heading, d.patientFirst.heading),
+        paragraphs: src.patientFirst.paragraphs?.length ? src.patientFirst.paragraphs.map((p) => p.value ?? "") : d.patientFirst.paragraphs,
+      }
+    : d.patientFirst;
+  const patientStats = src.patientStats?.length ? stats(src.patientStats) : d.patientStats;
+
+  const meetSpecialists: AboutSectionHeading & { subtitle: string } = src.meetSpecialists?.heading?.lead
+    ? {
+        eyebrow: src.meetSpecialists.eyebrow ?? d.meetSpecialists.eyebrow,
+        heading: heading(src.meetSpecialists.heading, d.meetSpecialists.heading),
+        subtitle: src.meetSpecialists.subtitle ?? d.meetSpecialists.subtitle,
+      }
+    : d.meetSpecialists;
+
+  const network = src.network?.cities?.length
+    ? {
+        eyebrow: src.network.eyebrow ?? d.network.eyebrow,
+        heading: heading(src.network.heading, d.network.heading),
+        subtitle: src.network.subtitle ?? d.network.subtitle,
+        cities: src.network.cities.map((c) => ({ c: c.c ?? "", n: c.n ?? "" })),
+      }
+    : { ...d.network, eyebrow: src.network?.eyebrow ?? d.network.eyebrow };
+
+  const finalCta = src.finalCta?.heading?.lead
+    ? {
+        heading: heading(src.finalCta.heading, d.finalCta.heading),
+        // Button labels are code-owned — always from defaults, not admin-editable.
+        ctas: d.finalCta.ctas,
+      }
+    : d.finalCta;
+
+  const seo: AboutSeo = {
+    metaTitle: src.seo?.metaTitle || d.seo.metaTitle,
+    metaDescription: src.seo?.metaDescription || d.seo.metaDescription,
+    ogTitle: src.seo?.ogTitle || d.seo.ogTitle,
+    ogDescription: src.seo?.ogDescription || d.seo.ogDescription,
+    ogImage: d.seo.ogImage,
+  };
+
+  return { hero, story, atAGlance, legacy, milestones, trust, trustPillars, patientFirst, patientStats, meetSpecialists, network, finalCta, seo };
+}
+
+/**
+ * Produce a fully-populated AboutSource by merging `src` with the resolved
+ * (default-overlaid) content. Used by the inline editor to seed the draft so
+ * every section/row/field is present before any edit — prevents sparse POST
+ * bodies (mirrors materializeHomepageSource / materializeServiceSource).
+ */
+export function materializeAboutSource(src: AboutSource): NonNullable<AboutSource> {
+  const r = resolveAbout(src);
+  const s = (src ?? {}) as NonNullable<AboutSource>;
+  const stat = (t: StatTuple) => ({ value: t.n, label: t.l });
+  return {
+    ...s,
+    hero: {
+      eyebrow: r.hero.eyebrow,
+      headline: r.hero.headline,
+      headlineItalic: r.hero.headlineItalic,
+      paragraph: r.hero.paragraph,
+      image: r.hero.image,
+    },
+    story: {
+      eyebrow: r.story.eyebrow,
+      heading: { lead: r.story.heading.lead, em: r.story.heading.em },
+      paragraphs: r.story.paragraphs.map((value) => ({ value })),
+    },
+    atAGlance: r.atAGlance.map(stat),
+    legacy: { eyebrow: r.legacy.eyebrow, heading: { lead: r.legacy.heading.lead, em: r.legacy.heading.em } },
+    milestones: r.milestones.map((m) => ({ y: m.y, t: m.t, d: m.d })),
+    trust: { eyebrow: r.trust.eyebrow, heading: { lead: r.trust.heading.lead, em: r.trust.heading.em } },
+    trustPillars: r.trustPillars.map((p) => ({ icon: p.icon, t: p.t, d: p.d })),
+    patientFirst: {
+      eyebrow: r.patientFirst.eyebrow,
+      heading: { lead: r.patientFirst.heading.lead, em: r.patientFirst.heading.em },
+      paragraphs: r.patientFirst.paragraphs.map((value) => ({ value })),
+    },
+    patientStats: r.patientStats.map(stat),
+    meetSpecialists: {
+      eyebrow: r.meetSpecialists.eyebrow,
+      heading: { lead: r.meetSpecialists.heading.lead, em: r.meetSpecialists.heading.em },
+      subtitle: r.meetSpecialists.subtitle,
+    },
+    network: {
+      eyebrow: r.network.eyebrow,
+      heading: { lead: r.network.heading.lead, em: r.network.heading.em },
+      subtitle: r.network.subtitle,
+      cities: r.network.cities.map((c) => ({ c: c.c, n: c.n })),
+    },
+    finalCta: {
+      heading: { lead: r.finalCta.heading.lead, em: r.finalCta.heading.em },
+    },
+    seo: {
+      metaTitle: r.seo.metaTitle,
+      metaDescription: r.seo.metaDescription,
+      ogTitle: r.seo.ogTitle,
+      ogDescription: r.seo.ogDescription,
+      ...(s.seo?.ogImage != null ? { ogImage: s.seo.ogImage } : {}),
+    },
+  };
+}

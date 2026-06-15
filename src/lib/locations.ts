@@ -80,7 +80,7 @@ export type City = {
 /* ---------- URLs ---------- */
 export const cityUrl = (slug: string) => `/locations/${slug}`;
 export const centreUrl = (citySlug: string, slug: string) => `/locations/${citySlug}/${slug}`;
-export const centreMapUrl = (c: Centre) =>
+export const centreMapUrl = (c: Pick<Centre, "mapQuery">) =>
   `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`;
 
 /** Women's health & maternity services offered at all Ahmedabad centres.
@@ -1009,7 +1009,7 @@ export const cityHref = (citySlug: string): string | null =>
 /** Canonical URL of a CENTRE. Multi-centre cities keep the locality segment
  *  (`/locations/[city]/[center]`); single-centre cities collapse to the bare
  *  city path (`/locations/[city]`). Use this everywhere a centre is linked. */
-export const centreHref = (c: Centre): string =>
+export const centreHref = (c: Pick<Centre, "citySlug" | "slug">): string =>
   cityHasOwnPage(c.citySlug) ? centreUrl(c.citySlug, c.slug) : cityUrl(c.citySlug);
 
 /* =====================================================================
@@ -1108,10 +1108,25 @@ export const centresForLocationSlugs = (slugs: string[]): Centre[] => {
  * Schema builders
  * ===================================================================== */
 
+/** The plain-data subset the centre schema builders read — so a CMS-resolved
+ *  `ResolvedCentre` (Wave 4.5, src/lib/location-content.ts) can be passed here
+ *  as well as a code `Centre`. Both are structurally assignable. Mirrors Wave
+ *  4.4's `TreatmentGraphInput`. */
+export type CentreGraphInput = Pick<
+  Centre,
+  | "built" | "citySlug" | "slug" | "reviewsKey" | "fullName" | "image" | "phone"
+  | "address" | "pin" | "geo" | "mapQuery" | "opening" | "nearby" | "treatments"
+  | "sameAs" | "name" | "faqs"
+>;
+
+/** The plain-data subset cityGraph() reads — so a CMS-resolved `ResolvedCity`
+ *  can be passed here as well as a code `City`. */
+export type CityGraphInput = Pick<City, "slug" | "name" | "faqs">;
+
 /** Enriched MedicalClinic + LocalBusiness for one centre, bound to #organization.
  *  Includes geo, openingHoursSpecification, hasMap, image, telephone, areaServed,
  *  availableService, and verified review nodes (only when real data exists). */
-export function centerClinicSchema(c: Centre): Record<string, unknown> {
+export function centerClinicSchema(c: CentreGraphInput): Record<string, unknown> {
   const pageUrl = c.built ? centreHref(c) : cityUrl(c.citySlug);
   const cityName = cityBySlug(c.citySlug)?.name ?? "";
   const region = cityBySlug(c.citySlug)?.region ?? "Gujarat";
@@ -1155,7 +1170,7 @@ export function centerClinicSchema(c: Centre): Record<string, unknown> {
 }
 
 /** Full @graph for a centre page. */
-export function centerGraph(c: Centre): Record<string, unknown>[] {
+export function centerGraph(c: CentreGraphInput): Record<string, unknown>[] {
   const cityName = cityBySlug(c.citySlug)?.name ?? "";
   const url = abs(centreHref(c));
   return [
@@ -1184,7 +1199,7 @@ export function centerGraph(c: Centre): Record<string, unknown>[] {
 }
 
 /** Full @graph for a city hub page. */
-export function cityGraph(city: City): Record<string, unknown>[] {
+export function cityGraph(city: CityGraphInput): Record<string, unknown>[] {
   const url = abs(cityUrl(city.slug));
   return [
     {

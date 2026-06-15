@@ -1,5 +1,5 @@
 "use client";
-import { useState, useEffect, useRef, memo } from "react";
+import { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -9,19 +9,10 @@ import {
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
-const heroImg = "/assets/hero-mother-baby1.png";
-const aboutImg = "/assets/about-clinic.jpg";
-const surakshaImg = "/assets/suraksha-parenthood.png";
 const drFalguni = "/assets/doctors/falguni.webp";
 const drHimanshu = "/assets/doctors/himanshu.webp";
 const drJanki = "/assets/doctors/janki.webp";
 const drParth = "/assets/doctors/parth.webp";
-const whyIcons = {
-  simple: "/assets/Simple-1.png",
-  safe: "/assets/Safe-1.png",
-  smart: "/assets/Smart-1.png",
-  successful: "/assets/success-1.png",
-};
 
 import {
   Reveal, Stagger, StaggerItem, WordReveal, ParallaxImage, Magnetic,
@@ -31,8 +22,38 @@ import { SiteHeader } from "@/components/site-header";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import type { Review } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
-import { destinationHref } from "@/lib/internal-links";
+import { useFooter } from "@/components/footer-provider";
 import { cityHref } from "@/lib/locations";
+import { resolveIcon } from "@/lib/icon-map";
+import { Editable, EditableImage } from "@/components/editor/Editable";
+import { useEdit } from "@/components/editor/edit-context";
+import {
+  HOMEPAGE_DEFAULTS,
+  DEFAULT_HOME_LAYOUT,
+  type HomepageData,
+  type HomeSection,
+  type HeroContent,
+  type SurakshaContent,
+  type FinalCtaContent,
+  type EduVideo,
+  type ResourceVideo,
+  type AwardItem,
+  type HomeAboutContent,
+  type Heading,
+} from "@/lib/homepage";
+
+/* ---------- Inline-edit header helpers ----------
+ * Build an inline-editable eyebrow / {lead,em} heading / subtitle / CTA for a
+ * homepage section, sourced from the resolved homepage data at `base`. Each
+ * piece is a plain <Editable> (byte-identical on the public site), so the same
+ * section component can be reused on other pages with their own plain props. */
+const ed = (path: string, value: string) => <Editable path={path}>{value}</Editable>;
+const edTitle = (base: string, h: Heading) => (
+  <>
+    {ed(`${base}.heading.lead`, h.lead)}{" "}
+    <em className="font-display italic text-[color:var(--rose)]">{ed(`${base}.heading.em`, h.em)}</em>
+  </>
+);
 
 /* ---------- Primitives ---------- */
 
@@ -47,7 +68,7 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 
 function SectionHeader({
   eyebrow, title, subtitle, align = "left",
-}: { eyebrow?: string; title: React.ReactNode; subtitle?: string; align?: "left" | "center" }) {
+}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center" }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       {eyebrow && <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>}
@@ -91,30 +112,83 @@ function GhostBtn({ children, icon: Icon, href, target }: { children: React.Reac
 /* ---------- Scroll progress bar ---------- */
 /* ---------- Page ---------- */
 
-export function HomePage() {
+export function HomePage({
+  data = HOMEPAGE_DEFAULTS,
+  previewAnchors = false,
+  testimonials = [],
+}: { data?: HomepageData; previewAnchors?: boolean; testimonials?: Review[] } = {}) {
+  // Each homepage section, keyed so the CMS `layout` can reorder / hide it. The
+  // map holds the exact same element calls as the original fixed sequence, so
+  // the default layout renders byte-identically (a Fragment adds no DOM and the
+  // key is never serialised to HTML).
+  const sections: Record<HomeSection, React.ReactNode> = {
+    hero: <Hero hero={data.hero} />,
+    stats: <StatsStrip stats={data.stats} />,
+    whyBavishi: <WhyBavishiFertilityInstitute content={data.whyBavishi} />,
+    suraksha: <Suraksha content={data.suraksha} />,
+    treatments: <Treatments content={data.treatments} />,
+    successStories: (
+      <SuccessStories
+        stories={data.videos.stories}
+        eyebrow={ed("successStories.eyebrow", data.successStories.eyebrow)}
+        title={edTitle("successStories", data.successStories.heading)}
+        subtitle={ed("successStories.subtitle", data.successStories.subtitle)}
+        ctaLabel={ed("successStories.ctaLabel", data.successStories.ctaLabel)}
+      />
+    ),
+    videoHub: (
+      <VideoHub
+        videos={data.videos.edu}
+        eyebrow={ed("videoHub.eyebrow", data.videoHub.eyebrow)}
+        title={edTitle("videoHub", data.videoHub.heading)}
+        subtitle={ed("videoHub.subtitle", data.videoHub.subtitle)}
+        ctaLabel={ed("videoHub.ctaLabel", data.videoHub.ctaLabel)}
+      />
+    ),
+    about: <About content={data.about} />,
+    doctors: (
+      <Doctors
+        eyebrow={ed("doctors.eyebrow", data.doctors.eyebrow)}
+        title={edTitle("doctors", data.doctors.heading)}
+        subtitle={ed("doctors.subtitle", data.doctors.subtitle)}
+        ctaLabel={ed("doctors.ctaLabel", data.doctors.ctaLabel)}
+      />
+    ),
+    whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
+    awards: <AwardsCarousel content={data.awards} />,
+    media: <Media content={data.media} />,
+    testimonials: (
+      <Testimonials
+        cms={testimonials}
+        eyebrow={ed("testimonials.eyebrow", data.testimonials.eyebrow)}
+        title={edTitle("testimonials", data.testimonials.heading)}
+      />
+    ),
+    events: <Events content={data.events} />,
+    blogs: <Blogs videos={data.videos.resources} content={data.blogs} />,
+    locations: <Locations content={data.locations} />,
+    faq: <FAQ content={data.faq} />,
+    calculators: <Calculators content={data.calculators} />,
+    inquiry: <InquiryForm content={data.inquiry} />,
+    finalCta: <FinalCTA content={data.finalCta} />,
+  };
+  const layout = data.layout?.length ? data.layout : DEFAULT_HOME_LAYOUT;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
-      <Hero />
-      <StatsStrip />
-      <WhyBavishiFertilityInstitute />
-      <Suraksha />
-      <Treatments />
-      <SuccessStories />
-      <VideoHub />
-      <About />
-      <Doctors />
-      <WhyChooseBavishiFertilityInstitute />
-      <AwardsCarousel />
-      <Media />
-      <Testimonials />
-      <Events />
-      <Blogs />
-      <Locations />
-      <FAQ />
-      <Calculators />
-      <InquiryForm />
-      <FinalCTA />
+      {layout.map(({ section, visible }) => {
+        if (!visible || !sections[section]) return null;
+        // In the admin Live Preview ONLY, wrap each section in an id'd anchor so
+        // the editor can scroll-to / flash the section being edited. The public
+        // render keeps the bare Fragment → byte-identical DOM (SEO baseline safe).
+        return previewAnchors ? (
+          <div key={section} id={`lp-${section}`} data-lp-section={section} style={{ scrollMarginTop: 90 }}>
+            {sections[section]}
+          </div>
+        ) : (
+          <Fragment key={section}>{sections[section]}</Fragment>
+        );
+      })}
       <Footer />
       <FloatingCTA />
       <ScrollToTop />
@@ -125,43 +199,58 @@ export function HomePage() {
 
 /* ---------- Hero ---------- */
 
-function Hero() {
+function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
+  const editing = !!useEdit()?.editMode;
   return (
     <section className="gradient-warm noise relative overflow-hidden">
       <GradientField />
       <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 py-8 md:py-14 lg:grid-cols-12 lg:gap-10 lg:py-28">
         <div className="relative z-10 lg:col-span-7">
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.7 }}>
-            <Eyebrow>Trusted Since 1983</Eyebrow>
+            <Eyebrow><Editable path="hero.eyebrow">{hero.eyebrow}</Editable></Eyebrow>
           </motion.div>
 
-          <WordReveal
-            text="India's Trusted Fertility Center for 40+ Years"
-            italicWord="Fertility"
-            accentClass="italic text-[color:var(--rose)]"
-            className="mt-6 text-[2.75rem] font-medium leading-[1.02] text-[color:var(--plum)] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance"
-          />
+          {(() => {
+            const headlineCls =
+              "mt-6 text-[2.75rem] font-medium leading-[1.02] text-[color:var(--plum)] sm:text-5xl md:text-6xl lg:text-[4.25rem] text-balance";
+            // Edit mode: rich, click-to-edit + B/I/U/colour toolbar.
+            if (editing) {
+              return (
+                <h1 className={headlineCls}>
+                  <Editable path="hero.headline" rich>{hero.headline}</Editable>
+                </h1>
+              );
+            }
+            // Public: if the editor added formatting (HTML tags), render the
+            // stored HTML (the per-word reveal animation is dropped for a
+            // formatted headline). Otherwise keep the byte-identical WordReveal.
+            if (/<[a-z][\s\S]*>/i.test(hero.headline)) {
+              return <h1 className={headlineCls} dangerouslySetInnerHTML={{ __html: hero.headline }} />;
+            }
+            return (
+              <WordReveal
+                text={hero.headline}
+                italicWord={hero.headlineItalic}
+                accentClass="italic text-[color:var(--rose)]"
+                className={headlineCls}
+              />
+            );
+          })()}
 
           <motion.p
             initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.8, delay: 0.6 }}
             className="mt-7 max-w-xl text-lg leading-relaxed text-muted-foreground md:text-xl text-pretty"
           >
-            Helping families achieve parenthood through advanced fertility treatments,
-            compassionate care, and personalised IVF programs.
+            <Editable path="hero.paragraph" rich>{hero.paragraph}</Editable>
           </motion.p>
 
           <Stagger className="mt-8 grid max-w-xl grid-cols-2 gap-3" delay={0.8} stagger={0.07}>
-            {[
-              "30,000+ Successful Pregnancies",
-              "40+ Years Experience",
-              "14 Fertility Centres",
-              "Leading IVF Specialists",
-            ].map((t) => (
-              <StaggerItem key={t}>
+            {hero.badges.map((t, i) => (
+              <StaggerItem key={i}>
                 <div className="flex items-start gap-2 text-sm font-medium text-[color:var(--plum)]">
                   <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                  {t}
+                  <Editable path={`hero.badges.${i}.text`}>{t}</Editable>
                 </div>
               </StaggerItem>
             ))}
@@ -172,9 +261,9 @@ function Hero() {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <PrimaryBtn icon={Calendar}>Book Consultation</PrimaryBtn>
-            <GhostBtn icon={Sparkles}>Check IVF Eligibility</GhostBtn>
-            <GhostBtn icon={Video}>Video Consultation</GhostBtn>
+            <PrimaryBtn icon={Calendar}>{hero.ctas[0]}</PrimaryBtn>
+            <GhostBtn icon={Sparkles}>{hero.ctas[1]}</GhostBtn>
+            <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
           </motion.div>
         </div>
 
@@ -184,7 +273,7 @@ function Hero() {
           <div className="relative">
             <div className="absolute -inset-8 -z-10 rounded-[2.5rem] bg-gradient-to-br from-[color:var(--rose)]/20 via-transparent to-[color:var(--plum)]/15 blur-2xl" />
             <div className="overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
-              <ParallaxImage src={heroImg} alt="Mother holding her newborn baby" ratio="aspect-[4/5]" priority />
+              <ParallaxImage src={hero.image} alt="Mother holding her newborn baby" ratio="aspect-[4/5]" priority editPath="hero.image" />
             </div>
           </div>
 
@@ -192,7 +281,7 @@ function Hero() {
             <div className="glass rounded-2xl px-4 py-3 shadow-soft">
               <div className="flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)]">
                 <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" />
-                National Fertility Award · 5× Winner
+                <Editable path="hero.floatingBadge">{hero.floatingBadge}</Editable>
               </div>
             </div>
           </Float>
@@ -203,23 +292,14 @@ function Hero() {
 }
 
 /* ---------- Stats strip with counters ---------- */
-const defaultStats: { value: string; l: string }[] = [
-  { value: "30,000+", l: "Successful Pregnancies" },
-  { value: "40+", l: "Years Legacy" },
-  { value: "15+", l: "Locations" },
-  { value: "100+", l: "Experts" },
-  { value: "5× Winner", l: "National Fertility Award" },
-  { value: "Rank #1", l: "Best IVF Center in India" },
-  { value: "300+", l: "International Patients" },
-];
-export function StatsStrip({ stats = defaultStats }: { stats?: { value: string; l: string }[] } = {}) {
+export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats }: { stats?: { value: string; l: string }[] } = {}) {
   return (
     <section className="border-y border-border/60 bg-white py-7 md:py-9">
       <Marquee speed={45}>
-        {stats.map((s) => (
+        {stats.map((s, i) => (
           <div key={s.l} className="px-6 text-center">
-            <div className="whitespace-nowrap font-display text-3xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-4xl">{s.value}</div>
-            <div className="mt-1.5 whitespace-nowrap text-sm uppercase tracking-wider text-muted-foreground">{s.l}</div>
+            <div className="whitespace-nowrap font-display text-3xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-4xl"><Editable path={`stats.${i}.value`}>{s.value}</Editable></div>
+            <div className="mt-1.5 whitespace-nowrap text-sm uppercase tracking-wider text-muted-foreground"><Editable path={`stats.${i}.label`}>{s.l}</Editable></div>
           </div>
         ))}
       </Marquee>
@@ -229,35 +309,32 @@ export function StatsStrip({ stats = defaultStats }: { stats?: { value: string; 
 
 /* ---------- Why Bavishi Fertility Institute ---------- */
 
-function WhyBavishiFertilityInstitute() {
-  const items = [
-    { icon: Sparkles, t: "Transparent Treatment Plans", d: "Clear pricing, honest timelines and no hidden costs across every step of your journey." },
-    { icon: Microscope, t: "Advanced Fertility Technology", d: "State-of-the-art embryology labs, time-lapse imaging and PGT for the highest success rates." },
-    { icon: Stethoscope, t: "Experienced IVF Specialists", d: "Led by world-renowned doctors with decades of clinical experience and global training." },
-    { icon: HeartPulse, t: "Personalised Care Journey", d: "Every plan is tailored — emotionally and clinically — to your unique fertility story." },
-  ];
+function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }: { content?: HomepageData["whyBavishi"] } = {}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Why Bavishi Fertility Center"
-        title={<>A different kind of <em className="text-[color:var(--rose)] not-italic font-display italic">fertility experience.</em></>}
-        subtitle="Premium, transparent and deeply personal. We've redefined what fertility care should feel like."
+        eyebrow={<Editable path="whyBavishi.eyebrow">{content.eyebrow}</Editable>}
+        title={<><Editable path="whyBavishi.heading.lead">{content.heading.lead}</Editable> <em className="text-[color:var(--rose)] not-italic font-display italic"><Editable path="whyBavishi.heading.em">{content.heading.em}</Editable></em></>}
+        subtitle={<Editable path="whyBavishi.subtitle">{content.subtitle}</Editable>}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 md:grid-cols-2 lg:grid-cols-4" stagger={0.1}>
-        {items.map(({ icon: Icon, t, d }) => (
+        {content.cards.map(({ icon, t, d }, i) => {
+          const Icon = resolveIcon(icon);
+          return (
           <StaggerItem key={t}>
             <LiftCard className="group h-full rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-shadow duration-500 hover:shadow-lift">
               <Float amplitude={4} duration={6} className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
                 <Icon className="h-6 w-6" />
               </Float>
-              <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]">{t}</h3>
-              <p className="mt-3 text-sm leading-relaxed text-muted-foreground">{d}</p>
+              <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`whyBavishi.cards.${i}.t`}>{t}</Editable></h3>
+              <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><Editable path={`whyBavishi.cards.${i}.d`}>{d}</Editable></p>
               <div className="mt-6 inline-flex translate-y-1 items-center gap-1 text-sm font-medium text-[color:var(--rose)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
                 Learn more <ArrowRight className="h-4 w-4" />
               </div>
             </LiftCard>
           </StaggerItem>
-        ))}
+          );
+        })}
       </Stagger>
     </section>
   );
@@ -265,7 +342,7 @@ function WhyBavishiFertilityInstitute() {
 
 /* ---------- Suraksha ---------- */
 
-function Suraksha() {
+function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: SurakshaContent } = {}) {
   return (
     <section id="suraksha" className="relative overflow-hidden bg-[color:var(--plum)] text-white noise scroll-mt-24">
       <div className="pointer-events-none absolute inset-0">
@@ -284,36 +361,35 @@ function Suraksha() {
         <div>
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-3 py-1.5 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-              <Shield className="h-3.5 w-3.5" /> Exclusive Program
+              <Shield className="h-3.5 w-3.5" /> <Editable path="suraksha.badge">{content.badge}</Editable>
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h2 className="mt-5 text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.25rem] text-balance">
-              Suraksha Kavach — <em className="font-display italic text-[color:var(--rose-soft)]">peace of mind, guaranteed.</em>
+              <Editable path="suraksha.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose-soft)]"><Editable path="suraksha.heading.em">{content.heading.em}</Editable></em>
             </h2>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 text-pretty">
-              India's most trusted IVF refund & protection program. Reduce financial risk,
-              increase confidence, and focus on what truly matters — your journey to parenthood.
+              <Editable path="suraksha.paragraph">{content.paragraph}</Editable>
             </p>
           </Reveal>
           <Stagger className="mt-8 grid gap-3 sm:grid-cols-2" delay={0.25}>
-            {["Refund Guarantee", "Risk Reduction", "Multiple IVF Cycles", "Priority Care"].map((t) => (
+            {content.features.map((t, i) => (
               <StaggerItem key={t}>
                 <div className="flex items-center gap-2 text-sm text-white/90">
-                  <CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> {t}
+                  <CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> <Editable path={`suraksha.features.${i}.text`}>{t}</Editable>
                 </div>
               </StaggerItem>
             ))}
           </Stagger>
           <Reveal delay={0.4}>
             <div className="mt-10 flex flex-wrap gap-3">
-              <Magnetic as="a" href={destinationHref("suraksha-kavach")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                Explore Suraksha Kavach <ArrowRight className="h-4 w-4" />
+              <Magnetic as="a" href={content.primaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                {content.primaryCta.label} <ArrowRight className="h-4 w-4" />
               </Magnetic>
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                Learn More
+              <Magnetic as="a" href={content.secondaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
+                {content.secondaryCta.label}
               </Magnetic>
             </div>
           </Reveal>
@@ -334,7 +410,7 @@ function Suraksha() {
                 transition={{ duration: 0.6, ease: [0.22, 1, 0.36, 1] }}
                 className="relative overflow-hidden rounded-[2rem] bg-[color:var(--ivory)] shadow-lift"
               >
-                <ParallaxImage src={surakshaImg} alt="Expecting parents — the journey to parenthood, protected" ratio="aspect-[5/4]" />
+                <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[5/4]" editPath="suraksha.image" />
               </motion.div>
             </Float>
           </Reveal>
@@ -348,8 +424,8 @@ function Suraksha() {
  * card becomes a link (and "Learn more" stays a span to keep valid HTML);
  * without `href` it renders exactly as the original homepage card. */
 export function TreatmentCard({
-  icon: Icon, title, desc, href,
-}: { icon: LucideIcon; title: string; desc: string; href?: string }) {
+  icon: Icon, title, desc, href, titleNode, descNode,
+}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode }) {
   const body = (
     <motion.div
       whileHover={{ y: -6 }}
@@ -362,8 +438,8 @@ export function TreatmentCard({
           <Icon className="h-5 w-5" />
         </div>
         <div>
-          <h3 className="text-lg font-semibold text-[color:var(--plum)]">{title}</h3>
-          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{desc}</p>
+          <h3 className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</h3>
+          <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{descNode ?? desc}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--rose)]">
             Learn more <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
           </span>
@@ -378,38 +454,27 @@ export function TreatmentCard({
 
 /* ---------- Treatments ---------- */
 
-export function Treatments() {
-  const list = [
-    { i: Stethoscope, t: "Male Infertility", d: "Comprehensive evaluation and treatment for male factors." },
-    { i: HeartPulse, t: "Female Infertility", d: "Personalised pathways for every female fertility concern." },
-    { i: Sparkles, t: "Advanced Fertility Techniques", d: "Latest assisted reproduction protocols." },
-    { i: Dna, t: "PGT — Genetic Testing", d: "Pre-implantation testing for healthier embryos." },
-    { i: Activity, t: "IUI", d: "Intrauterine insemination for select fertility profiles." },
-    { i: FlaskConical, t: "IVF / ICSI / ART", d: "Advanced in-vitro fertilisation with ICSI." },
-    { i: Microscope, t: "Fertility Preservation", d: "Egg, sperm and embryo freezing for the future." },
-    { i: Baby, t: "Sperm Donation", d: "Screened, ethical donor sperm programs." },
-    { i: Baby, t: "Egg Donation", d: "Carefully matched egg donor programs." },
-    { i: Baby, t: "Embryo Donation", d: "A compassionate path to parenthood." },
-    { i: HeartPulse, t: "Fibroids", d: "Diagnosis and fertility-preserving treatment." },
-    { i: HeartPulse, t: "Endometriosis", d: "Specialised endometriosis fertility care." },
-    { i: Sparkles, t: "Ovarian Rejuvenation", d: "Advanced therapy for diminished ovarian reserve." },
-    { i: Activity, t: "High Risk Obstetrics", d: "Expert care for complex pregnancies." },
-    { i: Baby, t: "Maternity Services", d: "End-to-end maternity and newborn care." },
-  ];
+export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
         <SectionHeader
-          eyebrow="Treatments"
-          title={<>Fertility care, <em className="font-display italic text-[color:var(--rose)]">complete and considered.</em></>}
-          subtitle="Every treatment we offer is delivered with the same standard of clinical excellence and emotional care."
+          eyebrow={ed("treatments.eyebrow", content.eyebrow)}
+          title={edTitle("treatments", content.heading)}
+          subtitle={ed("treatments.subtitle", content.subtitle)}
         />
-        <Reveal delay={0.1}><GhostBtn icon={ArrowRight}>View All Treatments</GhostBtn></Reveal>
+        <Reveal delay={0.1}><GhostBtn icon={ArrowRight}>{ed("treatments.ctaLabel", content.ctaLabel)}</GhostBtn></Reveal>
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-        {list.map(({ i: Icon, t, d }) => (
+        {content.items.map(({ icon, t, d }, i) => (
           <StaggerItem key={t}>
-            <TreatmentCard icon={Icon} title={t} desc={d} />
+            <TreatmentCard
+              icon={resolveIcon(icon)}
+              title={t}
+              desc={d}
+              titleNode={ed(`treatments.items.${i}.t`, t)}
+              descNode={ed(`treatments.items.${i}.d`, d)}
+            />
           </StaggerItem>
         ))}
       </Stagger>
@@ -418,26 +483,6 @@ export function Treatments() {
 }
 
 /* ---------- YouTube (lazy facade) ---------- */
-
-// Real videos from Bavishi Fertility Institute's YouTube channel (@BavishiFertilityInstitute)
-const patientVideos = [
-  { id: "6bH_RnV-_2Y", n: "Anita Thakkar", q: "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", r: 5 },
-  { id: "KKf6tNrlvoc", n: "Rekha's Journey", q: "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", r: 5 },
-  { id: "SbkV-1fSonM", n: "Jigesh & Jinal", q: "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", r: 5 },
-];
-
-const eduVideos = [
-  { id: "22xqpk3-z2I", t: "How to Increase Sperm Count", d: "Practical, science-backed advice from our specialists." },
-  { id: "eON_mr8bz-A", t: "Egg Freezing vs Embryo Freezing", d: "Dr. Parth Bavishi explains which option suits you." },
-  { id: "Pzbwv2EZlrM", t: "Ovarian Cyst Before IVF — What to Do", d: "Do you need to remove a cyst before starting IVF?" },
-  { id: "bNZiMbg4Wkw", t: "Natural Pregnancy After 40?", d: "Understanding your real chances and options." },
-];
-
-const resourceVideos = [
-  { id: "AO_J6jKeCck", c: "IVF Guide", t: "How Many Eggs Are Actually Needed for IVF?", date: "Dr. Parth Bavishi" },
-  { id: "5oKbplu1Qzs", c: "After Transfer", t: "Which Medicines Are Necessary After Embryo Transfer?", date: "Dr. Parth Bavishi" },
-  { id: "f3N5WJtGwmk", c: "Fertility Preservation", t: "5 Things to Know Before Egg Freezing", date: "Dr. Parth Bavishi" },
-];
 
 export function LiteYouTube({ id, title, className = "" }: { id: string; title: string; className?: string }) {
   const [play, setPlay] = useState(false);
@@ -472,17 +517,19 @@ export function LiteYouTube({ id, title, className = "" }: { id: string; title: 
 /* ---------- Success Stories (real patient videos) ---------- */
 
 export function SuccessStories({
-  stories = patientVideos,
+  stories = HOMEPAGE_DEFAULTS.videos.stories,
   eyebrow = "Success Stories",
   title = <>30,000+ journeys. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
   subtitle = "Real stories from real families who began their parenthood journey with us.",
+  ctaLabel = "View More Success Stories",
   tone = "white",
   showCta = true,
 }: {
   stories?: { id: string; n: string; q: string; r: number }[];
-  eyebrow?: string;
+  eyebrow?: React.ReactNode;
   title?: React.ReactNode;
-  subtitle?: string;
+  subtitle?: React.ReactNode;
+  ctaLabel?: React.ReactNode;
   tone?: "white" | "tint";
   showCta?: boolean;
 } = {}) {
@@ -518,7 +565,7 @@ export function SuccessStories({
         {showCta && (
           <Reveal delay={0.2}>
             <div className="mt-9 text-center">
-              <GhostBtn icon={ArrowRight}>View More Success Stories</GhostBtn>
+              <GhostBtn icon={ArrowRight}>{ctaLabel}</GhostBtn>
             </div>
           </Reveal>
         )}
@@ -529,21 +576,29 @@ export function SuccessStories({
 
 /* ---------- Video Hub ---------- */
 
-export function VideoHub() {
+export function VideoHub({
+  videos = HOMEPAGE_DEFAULTS.videos.edu,
+  eyebrow = "Education",
+  title = <>Learn from the <em className="font-display italic text-[color:var(--rose)]">experts.</em></>,
+  subtitle = "Clear, trustworthy fertility education from our specialists.",
+  ctaLabel = "Watch All Videos",
+}: {
+  videos?: EduVideo[];
+  eyebrow?: React.ReactNode;
+  title?: React.ReactNode;
+  subtitle?: React.ReactNode;
+  ctaLabel?: React.ReactNode;
+} = {}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
-        <SectionHeader
-          eyebrow="Education"
-          title={<>Learn from the <em className="font-display italic text-[color:var(--rose)]">experts.</em></>}
-          subtitle="Clear, trustworthy fertility education from our specialists."
-        />
+        <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
         <Reveal delay={0.1}>
-          <GhostBtn icon={Video} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">Watch All Videos</GhostBtn>
+          <GhostBtn icon={Video} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ctaLabel}</GhostBtn>
         </Reveal>
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
-        {eduVideos.map((v) => (
+        {videos.map((v) => (
           <StaggerItem key={v.id}>
             <motion.a
               href={`https://www.youtube.com/watch?v=${v.id}`}
@@ -577,48 +632,43 @@ export function VideoHub() {
 
 /* ---------- About ---------- */
 
-function About() {
+function About({ content = HOMEPAGE_DEFAULTS.about }: { content?: HomeAboutContent } = {}) {
   return (
     <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
       <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
         <div className="relative">
           <Reveal>
             <div className="overflow-hidden rounded-[2rem] shadow-lift">
-              <ParallaxImage src={aboutImg} alt="Bavishi Fertility Institute" ratio="aspect-[4/5]" />
+              <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[4/5]" editPath="about.image" />
             </div>
           </Reveal>
           <Float className="absolute -right-6 bottom-10 hidden md:block" amplitude={6}>
             <div className="glass rounded-2xl p-5 shadow-lift">
-              <div className="font-display text-3xl font-medium text-[color:var(--plum)]">Since 1983</div>
-              <div className="text-xs text-muted-foreground">Pioneering fertility care</div>
+              <div className="font-display text-3xl font-medium text-[color:var(--plum)]"><Editable path="about.sinceValue">{content.sinceValue}</Editable></div>
+              <div className="text-xs text-muted-foreground"><Editable path="about.sinceLabel">{content.sinceLabel}</Editable></div>
             </div>
           </Float>
         </div>
         <div>
           <SectionHeader
-            eyebrow="About the Institute"
-            title={<>A legacy of <em className="font-display italic text-[color:var(--rose)]">life-changing care.</em></>}
-            subtitle="For over four decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks."
+            eyebrow={<Editable path="about.eyebrow">{content.eyebrow}</Editable>}
+            title={<><Editable path="about.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="about.heading.em">{content.heading.em}</Editable></em></>}
+            subtitle={<Editable path="about.subtitle">{content.subtitle}</Editable>}
           />
           <Stagger className="mt-8 grid grid-cols-2 gap-6" stagger={0.08}>
-            {[
-              { k: "Legacy", v: "40+ Years" },
-              { k: "Recognition", v: "Award-Winning" },
-              { k: "Patient Care", v: "Personalised" },
-              { k: "IVF Leadership", v: "India's First" },
-            ].map((x) => (
+            {content.stats.map((x, i) => (
               <StaggerItem key={x.k}>
                 <div className="border-l-2 border-[color:var(--rose)]/40 pl-4">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground">{x.k}</div>
-                  <div className="mt-1 font-display text-xl text-[color:var(--plum)]">{x.v}</div>
+                  <div className="text-xs uppercase tracking-wider text-muted-foreground"><Editable path={`about.stats.${i}.k`}>{x.k}</Editable></div>
+                  <div className="mt-1 font-display text-xl text-[color:var(--plum)]"><Editable path={`about.stats.${i}.v`}>{x.v}</Editable></div>
                 </div>
               </StaggerItem>
             ))}
           </Stagger>
           <Reveal delay={0.3}>
             <div className="mt-10 flex flex-wrap gap-3">
-              <PrimaryBtn>Read More</PrimaryBtn>
-              <GhostBtn>Our Story</GhostBtn>
+              <PrimaryBtn><Editable path="about.primaryCta">{content.primaryCta}</Editable></PrimaryBtn>
+              <GhostBtn><Editable path="about.secondaryCta">{content.secondaryCta}</Editable></GhostBtn>
             </div>
           </Reveal>
         </div>
@@ -641,7 +691,8 @@ export function Doctors({
   eyebrow = "Meet the Specialists",
   title = <>Meet Our <em className="font-display italic text-[color:var(--rose)]">Promoter Doctors.</em></>,
   subtitle = "A family of fertility experts trusted by generations.",
-}: { docs?: Doc[]; eyebrow?: string; title?: React.ReactNode; subtitle?: string } = {}) {
+  ctaLabel = "View All Doctors",
+}: { docs?: Doc[]; eyebrow?: React.ReactNode; title?: React.ReactNode; subtitle?: React.ReactNode; ctaLabel?: React.ReactNode } = {}) {
   return (
     <section id="doctors" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
@@ -707,7 +758,7 @@ export function Doctors({
       <Reveal delay={0.2}>
         <div className="mt-9 text-center">
           <Magnetic as="a" href="/doctors" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-            View All Doctors <ArrowRight className="h-4 w-4" />
+            {ctaLabel} <ArrowRight className="h-4 w-4" />
           </Magnetic>
         </div>
       </Reveal>
@@ -717,60 +768,18 @@ export function Doctors({
 
 /* ---------- Why Choose Bavishi Fertility Institute (icon-led pillars) ---------- */
 
-function WhyChooseBavishiFertilityInstitute() {
-  const blocks = [
-    {
-      icon: whyIcons.simple, alt: "Simple IVF care",
-      title: "Simple", subtitle: "Making IVF Easy",
-      points: [
-        { h: "Personalized Plans", d: "Tailored treatment for your needs." },
-        { h: "Minimal Discomfort", d: "Fewer injections, fewer visits." },
-        { h: "Quick Recovery", d: "Light anesthesia, early discharge." },
-        { h: "Painless Transfer", d: "Stress-free embryo transfer." },
-      ],
-    },
-    {
-      icon: whyIcons.safe, alt: "Safe IVF treatment",
-      title: "Safe", subtitle: "IVF with Maximum Safety",
-      points: [
-        { h: "Zero Error Protocols", d: "Double-check system for accuracy." },
-        { h: "OHSS-Free Treatment", d: "Safe stimulation protocols." },
-        { h: "Advanced IVF Labs", d: "Pure air quality & contamination control." },
-        { h: "Strict Confidentiality", d: "Privacy ensured at every step." },
-      ],
-    },
-    {
-      icon: whyIcons.smart, alt: "Smart IVF technology",
-      title: "Smart", subtitle: "Intelligent IVF for Better Outcomes",
-      points: [
-        { h: "Smart Monitoring", d: "Real-time tracking for best outcomes." },
-        { h: "Optimized Lab Techniques", d: "Cutting-edge embryo selection." },
-        { h: "AI Monitoring", d: "Smart embryo tracking." },
-        { h: "Time-Saving", d: "Fewer visits, remote options." },
-      ],
-    },
-    {
-      icon: whyIcons.successful, alt: "Successful IVF outcomes",
-      title: "Successful", subtitle: "Proven IVF Excellence",
-      points: [
-        { h: "20,000+ IVF Success Stories", d: "Families who trusted us with parenthood." },
-        { h: "100+ Years of Combined Expertise", d: "A family of seasoned fertility specialists." },
-        { h: "Safe & Healthy Pregnancy Focus", d: "Care that extends beyond conception." },
-        { h: "Unique IVF Packages", d: "Suraksha Kavach benefits & refund protection." },
-      ],
-    },
-  ];
+function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyChoose }: { content?: HomepageData["whyChoose"] } = {}) {
   return (
     <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
       <SectionHeader
-        eyebrow="The Bavishi Fertility Institute Difference"
-        title={<>Why Choose <em className="font-display italic text-[color:var(--rose)]">Bavishi Fertility Institute?</em></>}
-        subtitle="Four pillars that define our approach to fertility care — Simple, Safe, Smart and Successful."
+        eyebrow={<Editable path="whyChoose.eyebrow">{content.eyebrow}</Editable>}
+        title={<><Editable path="whyChoose.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="whyChoose.heading.em">{content.heading.em}</Editable></em></>}
+        subtitle={<Editable path="whyChoose.subtitle">{content.subtitle}</Editable>}
         align="center"
       />
       <Stagger className="mx-auto mt-10 grid max-w-6xl grid-cols-1 gap-6 md:grid-cols-2" stagger={0.08}>
-        {blocks.map((b) => (
+        {content.blocks.map((b, bi) => (
           <StaggerItem key={b.title} className="h-full">
             <motion.article
               whileHover={{ y: -6 }}
@@ -779,19 +788,19 @@ function WhyChooseBavishiFertilityInstitute() {
             >
               <div className="flex items-center gap-4">
                 <div className="inline-flex h-16 w-16 shrink-0 items-center justify-center rounded-2xl bg-[color:var(--rose)]/[0.08]">
-                  <img src={b.icon} alt={b.alt} loading="lazy" className="h-9 w-9 object-contain" />
+                  <EditableImage path={`whyChoose.blocks.${bi}.icon`} src={b.icon} alt={b.alt} loading="lazy" className="h-9 w-9 object-contain" />
                 </div>
                 <h3 className="text-xl font-semibold leading-tight text-[color:var(--plum)]">
-                  <span className="font-display italic text-[color:var(--rose)]">{b.title}</span>
-                  <span className="mt-0.5 block text-sm font-medium text-muted-foreground">{b.subtitle}</span>
+                  <span className="font-display italic text-[color:var(--rose)]"><Editable path={`whyChoose.blocks.${bi}.title`}>{b.title}</Editable></span>
+                  <span className="mt-0.5 block text-sm font-medium text-muted-foreground"><Editable path={`whyChoose.blocks.${bi}.subtitle`}>{b.subtitle}</Editable></span>
                 </h3>
               </div>
               <ul className="mt-6 space-y-3.5">
-                {b.points.map((p) => (
+                {b.points.map((p, pi) => (
                   <li key={p.h} className="flex gap-2.5">
                     <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
                     <p className="text-sm leading-relaxed text-muted-foreground">
-                      <span className="font-semibold text-[color:var(--plum)]">{p.h}</span> – {p.d}
+                      <span className="font-semibold text-[color:var(--plum)]"><Editable path={`whyChoose.blocks.${bi}.points.${pi}.h`}>{p.h}</Editable></span> – <Editable path={`whyChoose.blocks.${bi}.points.${pi}.d`}>{p.d}</Editable>
                     </p>
                   </li>
                 ))}
@@ -807,24 +816,9 @@ function WhyChooseBavishiFertilityInstitute() {
 
 /* ---------- Awards & Achievements (carousel) ---------- */
 
-const awardItems = [
-  { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "Economic Times Healthworld · 2025" },
-  { img: "/assets/awards/patient-centric-award.png", title: "Patient Centric Hospital Award", desc: "IHW Patient First Awards" },
-  { img: "/assets/awards/bharat-excellence-award.png", title: "Bharat Excellence Award", desc: "For IVF & Infertility Care" },
-  { img: "/assets/awards/times-healthcare-award.png", title: "Times Healthcare Leaders Award", desc: "Times Healthcare · 2025" },
-];
-
-// Repeat the awards so there are always enough off-stage "buffer" cards for a
-// seamless infinite loop (a 3-item loop would otherwise teleport across centre).
-const awardDotCount = awardItems.length;
-const awardSlides = awardDotCount < 5
-  ? Array.from({ length: Math.ceil(6 / awardDotCount) }, () => awardItems).flat()
-  : awardItems;
-const AWARD_L = awardSlides.length;
-
 // A single award card. Memoized + keyed so its <img> never reloads between
 // slide changes — only the cheap transform values (x/scale/opacity) update.
-const AwardCard = memo(function AwardCard({ a }: { a: (typeof awardItems)[number] }) {
+const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
   return (
     <div className="group overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
       {/* Full rectangular award image — fills the card edge-to-edge */}
@@ -841,12 +835,24 @@ const AwardCard = memo(function AwardCard({ a }: { a: (typeof awardItems)[number
 
 // Only this inner component holds the rotating state, so slide changes never
 // re-render the section header or CTA — just the transform-animated cards.
-function AwardsStage() {
+function AwardsStage({ items }: { items: AwardItem[] }) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [shift, setShift] = useState(300);
   const startX = useRef(0);
+
+  // Repeat the awards so there are always enough off-stage "buffer" cards for a
+  // seamless infinite loop (a 3-item loop would otherwise teleport across centre).
+  const dotCount = items.length;
+  const slides = useMemo(
+    () =>
+      dotCount < 5
+        ? Array.from({ length: Math.ceil(6 / dotCount) }, () => items).flat()
+        : items,
+    [items, dotCount],
+  );
+  const L = slides.length;
 
   useEffect(() => {
     const measure = () => {
@@ -860,21 +866,21 @@ function AwardsStage() {
 
   useEffect(() => {
     if (paused) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % AWARD_L), 3800);
+    const id = window.setInterval(() => setActive((a) => (a + 1) % L), 3800);
     return () => window.clearInterval(id);
-  }, [paused]);
+  }, [paused, L]);
 
-  const go = (dir: number) => setActive((a) => (a + dir + AWARD_L) % AWARD_L);
+  const go = (dir: number) => setActive((a) => (a + dir + L) % L);
   const relPos = (i: number) => {
     let d = i - active;
-    if (d > AWARD_L / 2) d -= AWARD_L;
-    if (d < -AWARD_L / 2) d += AWARD_L;
+    if (d > L / 2) d -= L;
+    if (d < -L / 2) d += L;
     return d;
   };
 
-  const activeDot = ((active % awardDotCount) + awardDotCount) % awardDotCount;
+  const activeDot = ((active % dotCount) + dotCount) % dotCount;
   const goToDot = (i: number) =>
-    setActive((a) => a - (((a % awardDotCount) + awardDotCount) % awardDotCount) + i);
+    setActive((a) => a - (((a % dotCount) + dotCount) % dotCount) + i);
 
   return (
     <>
@@ -890,7 +896,7 @@ function AwardsStage() {
           setPaused(false);
         }}
       >
-        {awardSlides.map((a, i) => {
+        {slides.map((a, i) => {
           const p = relPos(i);
           const visible = Math.abs(p) <= 1;
           return (
@@ -918,7 +924,7 @@ function AwardsStage() {
 
       {/* Dots */}
       <div className="mt-8 flex justify-center gap-2">
-        {awardItems.map((_, i) => (
+        {items.map((_, i) => (
           <button
             key={i}
             type="button"
@@ -932,18 +938,18 @@ function AwardsStage() {
   );
 }
 
-export function AwardsCarousel() {
+export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content?: HomepageData["awards"] } = {}) {
   return (
     <section className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader
-          eyebrow="Awards & Recognition"
-          title={<>Our Awards & <em className="font-display italic text-[color:var(--rose)]">Achievements.</em></>}
-          subtitle="Awarded for Excellence in IVF & Fertility Care."
+          eyebrow={<Editable path="awards.eyebrow">{content.eyebrow}</Editable>}
+          title={<><Editable path="awards.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="awards.heading.em">{content.heading.em}</Editable></em></>}
+          subtitle={<Editable path="awards.subtitle">{content.subtitle}</Editable>}
           align="center"
         />
 
-        <AwardsStage />
+        <AwardsStage items={content.items} />
 
         {/* CTA */}
         <div className="mt-10 text-center">
@@ -958,18 +964,14 @@ export function AwardsCarousel() {
 
 /* ---------- Media ---------- */
 
-function Media() {
-  const logos = [
-    { src: "/assets/media/news-gujarati.png", alt: "News18 Gujarati" },
-    { src: "/assets/media/sandesh-tv.png", alt: "Sandesh News" },
-    { src: "/assets/media/my-fm.png", alt: "MY FM" },
-  ];
+function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["media"] } = {}) {
+  const logos = content.logos;
   const loop = [...logos, ...logos, ...logos, ...logos];
   return (
     <section className="container-px mx-auto max-w-[1400px] py-20">
       <SectionHeader
-        eyebrow="As Featured In"
-        title={<>Media coverage <em className="font-display italic text-[color:var(--rose)]">across India.</em></>}
+        eyebrow={ed("media.eyebrow", content.eyebrow)}
+        title={edTitle("media", content.heading)}
         align="center"
       />
       <Reveal delay={0.15}>
@@ -977,7 +979,7 @@ function Media() {
           <Marquee speed={28}>
             {loop.map((l, i) => (
               <div key={i} className="flex h-20 w-44 items-center justify-center rounded-xl border border-border/70 bg-card px-6 shadow-soft">
-                <img src={l.src} alt={l.alt} loading="lazy" className="max-h-12 w-auto object-contain transition-transform duration-300 hover:scale-105" />
+                <EditableImage path={`media.logos.${i % logos.length}.src`} src={l.src} alt={l.alt} loading="lazy" className="max-h-12 w-auto object-contain transition-transform duration-300 hover:scale-105" />
               </div>
             ))}
           </Marquee>
@@ -1019,31 +1021,43 @@ function ReviewTestimonialCard({ r, verified }: { r: Review; verified: boolean }
 }
 
 export function Testimonials({
+  cms = [],
   eyebrow = "Testimonials",
   title = <>Words from <em className="font-display italic text-[color:var(--rose)]">our families.</em></>,
-}: { eyebrow?: string; title?: React.ReactNode } = {}) {
+}: { cms?: Review[]; eyebrow?: React.ReactNode; title?: React.ReactNode } = {}) {
   const data = getBrandReviews();
-  const reviews: Review[] = data?.reviews ?? [];
-  const verified = !!data?.verified;
-  const aggregate = verified ? data?.aggregate : undefined; // rating badge only for real data
+  const googleReviews: Review[] = data?.reviews ?? [];
+  const googleVerified = !!data?.verified;
+  const aggregate = googleVerified ? data?.aggregate : undefined; // rating badge only for real Google data
   const listingUrl = data?.mapsUrl ?? BRAND_LISTING_URL;
 
+  // Supplement the live Google reviews with staff-curated CMS testimonials.
+  // Google entries keep their verified flag (so only REAL Google data is labelled
+  // "Google review"); CMS entries are always "Patient review" and never touch the
+  // aggregate badge or schema. When `cms` is empty this is byte-identical to the
+  // Google-only render that shipped before the Testimonials collection existed.
+  const cards: { r: Review; verified: boolean }[] = [
+    ...googleReviews.map((r) => ({ r, verified: googleVerified })),
+    ...cms.map((r) => ({ r, verified: false })),
+  ];
+
   const reviewPages = Array.from(
-    { length: Math.max(1, Math.ceil(reviews.length / 3)) },
-    (_, p) => reviews.slice(p * 3, p * 3 + 3),
+    { length: Math.max(1, Math.ceil(cards.length / 3)) },
+    (_, p) => cards.slice(p * 3, p * 3 + 3),
   );
   const pages = reviewPages.length;
   const [page, setPage] = useState(0);
   const [paused, setPaused] = useState(false);
 
   useEffect(() => {
-    if (paused || reviews.length === 0) return;
+    if (paused || cards.length === 0) return;
     const id = window.setInterval(() => setPage((p) => (p + 1) % pages), 5500);
     return () => window.clearInterval(id);
-  }, [paused, pages, reviews.length]);
+  }, [paused, pages, cards.length]);
 
-  // No verified reviews yet → honest CTA, never fabricated testimonial cards.
-  if (reviews.length === 0) {
+  // Nothing to show (no Google reviews AND no CMS testimonials) → honest CTA,
+  // never fabricated testimonial cards.
+  if (cards.length === 0) {
     return (
       <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
         <div className="container-px mx-auto max-w-[1400px] text-center">
@@ -1091,8 +1105,8 @@ export function Testimonials({
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
               >
-                {reviewPages[page].map((r, i) => (
-                  <ReviewTestimonialCard key={`${r.author}-${i}`} r={r} verified={verified} />
+                {reviewPages[page].map((c, i) => (
+                  <ReviewTestimonialCard key={`${c.r.author}-${i}`} r={c.r} verified={c.verified} />
                 ))}
               </motion.div>
             </AnimatePresence>
@@ -1119,28 +1133,23 @@ export function Testimonials({
 
 /* ---------- Events ---------- */
 
-const eventPosters = [
-  { src: "/assets/events/event-1.webp", alt: "Special Consultation with Dr. Himanshu Bavishi — upcoming visit schedule" },
-  { src: "/assets/events/event-2.webp", alt: "Bavishi Fertility — upcoming events & visit plan" },
-];
-
-function Events() {
+function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData["events"] } = {}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Upcoming Events"
-        title={<>Learn directly from <em className="font-display italic text-[color:var(--rose)]">our specialists.</em></>}
+        eyebrow={<Editable path="events.eyebrow">{content.eyebrow}</Editable>}
+        title={<><Editable path="events.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="events.heading.em">{content.heading.em}</Editable></em></>}
         align="center"
       />
       <Stagger className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
-        {eventPosters.map((e) => (
+        {content.posters.map((e, i) => (
           <StaggerItem key={e.src}>
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.5 }}
               className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
-              <img src={e.src} alt={e.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+              <EditableImage path={`events.posters.${i}.src`} src={e.src} alt={e.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
             </motion.div>
           </StaggerItem>
         ))}
@@ -1158,21 +1167,24 @@ function Events() {
 
 /* ---------- Blogs ---------- */
 
-function Blogs() {
+function Blogs({
+  videos = HOMEPAGE_DEFAULTS.videos.resources,
+  content = HOMEPAGE_DEFAULTS.blogs,
+}: { videos?: ResourceVideo[]; content?: HomepageData["blogs"] } = {}) {
   return (
     <section id="resources" className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
         <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
           <SectionHeader
-            eyebrow="Knowledge & Resources"
-            title={<>Knowledge, <em className="font-display italic text-[color:var(--rose)]">beautifully explained.</em></>}
+            eyebrow={ed("blogs.eyebrow", content.eyebrow)}
+            title={edTitle("blogs", content.heading)}
           />
           <Reveal delay={0.1}>
-            <GhostBtn icon={BookOpen} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">Explore Resources</GhostBtn>
+            <GhostBtn icon={BookOpen} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ed("blogs.ctaLabel", content.ctaLabel)}</GhostBtn>
           </Reveal>
         </div>
         <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {resourceVideos.map((p) => (
+          {videos.map((p) => (
             <StaggerItem key={p.id}>
               <motion.a
                 href={`https://www.youtube.com/watch?v=${p.id}`}
@@ -1215,37 +1227,58 @@ function Blogs() {
 
 /* ---------- Locations ---------- */
 
-export function Locations() {
-  const cities = [
-    { c: "Ahmedabad", n: 3, s: "ahmedabad" }, { c: "Mumbai", n: 5, s: "mumbai" }, { c: "Vadodara", n: 1, s: "vadodara" },
-    { c: "Surat", n: 1, s: "surat" }, { c: "Bhuj", n: 1, s: "bhuj" }, { c: "Bhavnagar", n: 1, s: "bhavnagar" },
-    { c: "Anand", n: 1, s: "anand" }, { c: "Varanasi", n: 1, s: "varanasi" },
-  ];
+export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?: HomepageData["locations"] } = {}) {
+  const cities = content.cities;
+  // In the editor the whole card must NOT be a link — clicking the editable city
+  // name would otherwise navigate away mid-edit. So while editing we render the
+  // card as a <div> and make only "View Centre" the actual link. The public site
+  // keeps the original full-card <motion.a> (byte-identical, SEO-safe).
+  const editing = !!useEdit()?.editMode;
   return (
     <section id="locations" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Our Locations"
-        title={<>Find a Bavishi Fertility Institute Centre <em className="font-display italic text-[color:var(--rose)]">near you.</em></>}
-        subtitle="15 centres across 8 cities — premium fertility care, close to home wherever you are."
+        eyebrow={ed("locations.eyebrow", content.eyebrow)}
+        title={edTitle("locations", content.heading)}
+        subtitle={ed("locations.subtitle", content.subtitle)}
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
-        {cities.map((c) => (
-          <StaggerItem key={c.c}>
-            <motion.a
-              href={cityHref(c.s) ?? `/locations/${c.s}`}
-              whileHover={{ y: -6 }}
-              transition={{ duration: 0.4 }}
-              className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
-            >
+        {cities.map((c, i) => {
+          const href = cityHref(c.s) ?? `/locations/${c.s}`;
+          const inner = (
+            <>
               <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
-              <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]">{c.c}</h3>
+              <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`locations.cities.${i}.c`}>{c.c}</Editable></h3>
               <p className="text-sm text-muted-foreground">{c.n} {c.n > 1 ? "centres" : "centre"}</p>
-              <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-              </div>
-            </motion.a>
-          </StaggerItem>
-        ))}
+              {editing ? (
+                <a href={href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                </a>
+              ) : (
+                <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                </div>
+              )}
+            </>
+          );
+          return (
+            <StaggerItem key={c.c}>
+              {editing ? (
+                <div className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift">
+                  {inner}
+                </div>
+              ) : (
+                <motion.a
+                  href={href}
+                  whileHover={{ y: -6 }}
+                  transition={{ duration: 0.4 }}
+                  className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
+                >
+                  {inner}
+                </motion.a>
+              )}
+            </StaggerItem>
+          );
+        })}
       </Stagger>
     </section>
   );
@@ -1253,16 +1286,8 @@ export function Locations() {
 
 /* ---------- FAQ ---------- */
 
-function FAQ() {
-  const faqs = [
-    { q: "What is IVF and how does it work?", a: "IVF (In-Vitro Fertilisation) is a process where an egg is fertilised by sperm outside the body. The resulting embryo is then transferred to the uterus. The process involves ovarian stimulation, egg retrieval, fertilisation, embryo culture and transfer." },
-    { q: "What are the success rates at Bavishi Fertility Centre?", a: "Our success rates are among the highest in India — typically 55–70% per cycle for women under 35, with rates personalised based on age, diagnosis and treatment plan." },
-    { q: "How much does IVF cost?", a: "IVF costs vary based on the protocol, medication and additional procedures required. Use our IVF Cost Calculator for a transparent estimate or speak to our team for a personalised quote." },
-    { q: "Is fertility treatment painful?", a: "Most fertility treatments cause minimal discomfort. Egg retrieval is performed under sedation. Our team prioritises your comfort at every step." },
-    { q: "How do I get started?", a: "Begin with a consultation — in-person or by video. Our specialists will review your history and design a personalised plan." },
-    { q: "Do you offer video consultations?", a: "Yes. Secure video consultations are available with all our senior specialists, across India and internationally." },
-    { q: "What is the Suraksha Kavach refund program?", a: "Suraksha Kavach is our pioneering refund-and-protection program: eligible patients pay only for success, with a refund guarantee if treatment outcomes are not achieved." },
-  ];
+function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"] } = {}) {
+  const faqs = content.items;
   const [open, setOpen] = useState<Set<number>>(new Set([0]));
   const toggle = (i: number) => {
     setOpen((prev) => {
@@ -1275,8 +1300,8 @@ function FAQ() {
     <section id="faq" className="bg-white py-10 md:py-16">
       <div className="container-px mx-auto max-w-3xl">
         <SectionHeader
-          eyebrow="FAQ"
-          title={<>Answers to your <em className="font-display italic text-[color:var(--rose)]">first questions.</em></>}
+          eyebrow={<Editable path="faq.eyebrow">{content.eyebrow}</Editable>}
+          title={<><Editable path="faq.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="faq.heading.em">{content.heading.em}</Editable></em></>}
           align="center"
         />
         <div className="mt-10 divide-y divide-border rounded-3xl border border-border/70 bg-card shadow-soft">
@@ -1290,7 +1315,7 @@ function FAQ() {
                   aria-expanded={isOpen}
                   className="flex w-full cursor-pointer items-center justify-between gap-4 py-5 text-left"
                 >
-                  <span className="text-base font-semibold text-[color:var(--plum)] md:text-lg">{f.q}</span>
+                  <span className="text-base font-semibold text-[color:var(--plum)] md:text-lg"><Editable path={`faq.items.${i}.q`}>{f.q}</Editable></span>
                   <ChevronDown className={`h-5 w-5 shrink-0 text-[color:var(--rose)] transition-transform duration-200 ${isOpen ? "rotate-180" : ""}`} />
                 </button>
                 <div
@@ -1298,7 +1323,7 @@ function FAQ() {
                   style={{ gridTemplateRows: isOpen ? "1fr" : "0fr" }}
                 >
                   <div className="overflow-hidden">
-                    <p className="pb-5 text-sm leading-relaxed text-muted-foreground md:text-base">{f.a}</p>
+                    <p className="pb-5 text-sm leading-relaxed text-muted-foreground md:text-base"><Editable path={`faq.items.${i}.a`}>{f.a}</Editable></p>
                   </div>
                 </div>
               </div>
@@ -1312,26 +1337,17 @@ function FAQ() {
 
 /* ---------- Calculators ---------- */
 
-export function Calculators() {
-  const calcs = [
-    "IVF Success Rate Calculator",
-    "Fertile Period Calculator",
-    "Risk of Repeat Miscarriage Calculator",
-    "Natural Pregnancy Calculator",
-    "IVF Cost Calculator",
-    "AMH Level Interpreter",
-    "Ovulation Calculator",
-    "Semen Analysis Calculator",
-  ];
+export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
+  const calcs = content.items;
   return (
     <section id="tools" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
-        eyebrow="Fertility Tools"
-        title={<>Free calculators by <em className="font-display italic text-[color:var(--rose)]">our experts.</em></>}
-        subtitle="Practical, science-backed tools to help you understand your fertility — privately and instantly."
+        eyebrow={ed("calculators.eyebrow", content.eyebrow)}
+        title={edTitle("calculators", content.heading)}
+        subtitle={ed("calculators.subtitle", content.subtitle)}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
-        {calcs.map((c) => (
+        {calcs.map((c, i) => (
           <StaggerItem key={c}>
             <motion.div
               whileHover={{ y: -6 }}
@@ -1341,7 +1357,7 @@ export function Calculators() {
               <Float amplitude={4} className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
                 <Calculator className="h-5 w-5" />
               </Float>
-              <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty">{c}</h3>
+              <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
               <a className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                 Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </a>
@@ -1365,26 +1381,54 @@ const inquiryLocations = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
 
-export function InquiryForm() {
+export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+  const contactIcons = [Phone, MessageCircle, Clock];
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
+  const [sending, setSending] = useState(false);
+  const [serverError, setServerError] = useState("");
+  // Honeypot — kept off-screen; real users never fill it, bots usually do.
+  const [company, setCompany] = useState("");
 
   const set = (k: string, v: string) => {
     setForm((f) => ({ ...f, [k]: v }));
     if (errors[k]) setErrors((e) => ({ ...e, [k]: "" }));
+    if (serverError) setServerError("");
   };
 
-  const handleSubmit = (e: React.FormEvent) => {
+  const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (sending) return;
     const next: Record<string, string> = {};
     if (!form.name.trim()) next.name = "Please enter your name";
     if (!/^[+\d][\d\s-]{7,}$/.test(form.phone.trim())) next.phone = "Enter a valid phone number";
     if (form.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) next.email = "Enter a valid email";
     setErrors(next);
-    if (Object.keys(next).length === 0) {
-      // No backend wired yet — surface success; replace with an API/WhatsApp post when available.
+    if (Object.keys(next).length > 0) return;
+
+    setSending(true);
+    setServerError("");
+    try {
+      const res = await fetch("/inquiry", {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify({
+          ...form,
+          company,
+          source: typeof window !== "undefined" ? window.location.pathname : "",
+        }),
+      });
+      if (!res.ok) {
+        const data = (await res.json().catch(() => null)) as { error?: string } | null;
+        setServerError(data?.error || "Something went wrong. Please call us on +91 97126 22288.");
+        return;
+      }
       setSubmitted(true);
+    } catch {
+      setServerError("Network error. Please check your connection or call us on +91 97126 22288.");
+    } finally {
+      setSending(false);
     }
   };
 
@@ -1397,26 +1441,25 @@ export function InquiryForm() {
         {/* Left — info */}
         <div>
           <SectionHeader
-            eyebrow="Book an Appointment"
-            title={<>Start your <em className="font-display italic text-[color:var(--rose)]">parenthood journey.</em></>}
-            subtitle="Share a few details and our fertility counsellor will call you back — confidential, compassionate and complimentary."
+            eyebrow={ed("inquiry.eyebrow", content.eyebrow)}
+            title={edTitle("inquiry", content.heading)}
+            subtitle={ed("inquiry.subtitle", content.subtitle)}
           />
           <div className="mt-8 space-y-4">
-            {[
-              { icon: Phone, h: "Call us", d: "+91 97126 22288" },
-              { icon: MessageCircle, h: "WhatsApp", d: "Chat with our team 24×7" },
-              { icon: Clock, h: "Response time", d: "We typically respond within 30 minutes" },
-            ].map((x) => (
+            {content.contacts.map((x, i) => {
+              const Icon = contactIcons[i] ?? Phone;
+              return (
               <div key={x.h} className="flex items-center gap-4">
                 <div className="flex h-11 w-11 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
-                  <x.icon className="h-5 w-5" />
+                  <Icon className="h-5 w-5" />
                 </div>
                 <div>
-                  <div className="text-sm font-semibold text-[color:var(--plum)]">{x.h}</div>
-                  <div className="text-sm text-muted-foreground">{x.d}</div>
+                  <div className="text-sm font-semibold text-[color:var(--plum)]"><Editable path={`inquiry.contacts.${i}.h`}>{x.h}</Editable></div>
+                  <div className="text-sm text-muted-foreground"><Editable path={`inquiry.contacts.${i}.d`}>{x.d}</Editable></div>
                 </div>
               </div>
-            ))}
+              );
+            })}
           </div>
         </div>
 
@@ -1434,7 +1477,7 @@ export function InquiryForm() {
                 </p>
                 <button
                   type="button"
-                  onClick={() => { setSubmitted(false); setForm({ name: "", phone: "", email: "", treatment: "", location: "", message: "" }); }}
+                  onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "", message: "" }); }}
                   className="mt-6 text-sm font-semibold text-[color:var(--rose)] hover:underline"
                 >
                   Submit another inquiry
@@ -1492,8 +1535,20 @@ export function InquiryForm() {
                   <textarea id="if-message" rows={3} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Tell us briefly how we can help…" className={`${fieldCls("message")} resize-none`} />
                 </div>
 
-                <button type="submit" className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                  <Send className="h-4 w-4" /> Request a Callback
+                {/* Honeypot — visually hidden, off the tab order; bots fill it, humans don't. */}
+                <div aria-hidden="true" className="absolute -left-[9999px] top-0 h-0 w-0 overflow-hidden">
+                  <label htmlFor="if-company">Company</label>
+                  <input id="if-company" type="text" tabIndex={-1} autoComplete="off" value={company} onChange={(e) => setCompany(e.target.value)} />
+                </div>
+
+                {serverError && (
+                  <p role="alert" className="rounded-xl bg-[color:var(--rose)]/10 px-4 py-3 text-center text-sm text-[color:var(--rose)]">
+                    {serverError}
+                  </p>
+                )}
+
+                <button type="submit" disabled={sending} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70">
+                  <Send className="h-4 w-4" /> {sending ? "Sending…" : "Request a Callback"}
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Your details are kept strictly confidential. We never share your information.
@@ -1507,7 +1562,8 @@ export function InquiryForm() {
   );
 }
 
-function FinalCTA() {
+function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCtaContent } = {}) {
+  const ctaIcons = [Calendar, MessageCircle, Phone];
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-20 text-center text-white noise md:px-16 md:py-28">
@@ -1522,44 +1578,43 @@ function FinalCTA() {
           transition={{ duration: 14, repeat: Infinity, ease: "easeInOut" }}
         />
         <div className="relative">
-          <Reveal><Eyebrow>Begin Today</Eyebrow></Reveal>
+          <Reveal><Eyebrow><Editable path="finalCta.eyebrow">{content.eyebrow}</Editable></Eyebrow></Reveal>
           <Reveal delay={0.1}>
             <h2 className="mx-auto mt-5 max-w-3xl text-4xl font-medium leading-[1.05] md:text-5xl lg:text-6xl text-balance">
-              Ready to begin your <em className="font-display italic text-[color:var(--rose-soft)]">parenthood journey?</em>
+              <Editable path="finalCta.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose-soft)]"><Editable path="finalCta.heading.em">{content.heading.em}</Editable></em>
             </h2>
           </Reveal>
           <Reveal delay={0.2}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-white/75">
-              Speak with our fertility experts today — confidential, compassionate and complimentary.
+              <Editable path="finalCta.paragraph">{content.paragraph}</Editable>
             </p>
           </Reveal>
 
           <Stagger className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-6" delay={0.3}>
-            {[
-              { v: 30000, s: "+", l: "Pregnancies" },
-              { v: 40, s: "+", l: "Years" },
-              { v: 15, s: "+", l: "Centres" },
-            ].map((x) => (
+            {content.stats.map((x, i) => (
               <StaggerItem key={x.l} className="text-center">
                 <div className="font-display text-3xl font-medium md:text-4xl">
                   <Counter to={x.v} suffix={x.s} />
                 </div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-white/60">{x.l}</div>
+                <div className="mt-1 text-xs uppercase tracking-wider text-white/60"><Editable path={`finalCta.stats.${i}.l`}>{x.l}</Editable></div>
               </StaggerItem>
             ))}
           </Stagger>
 
           <Reveal delay={0.5}>
             <div className="mt-10 flex flex-wrap justify-center gap-3">
-              <Magnetic className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Consultation
-              </Magnetic>
-              <Magnetic className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Now
-              </Magnetic>
-              <Magnetic className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                <Phone className="h-4 w-4" /> Call Now
-              </Magnetic>
+              {content.ctas.map((label, i) => {
+                const Icon = ctaIcons[i] ?? Calendar;
+                const cls =
+                  i === 0
+                    ? "btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"
+                    : "btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white";
+                return (
+                  <Magnetic key={label} className={cls}>
+                    <Icon className="h-4 w-4" /> {label}
+                  </Magnetic>
+                );
+              })}
             </div>
           </Reveal>
         </div>
@@ -1570,113 +1625,20 @@ function FinalCTA() {
 
 /* ---------- Footer ---------- */
 
-// Footer link. `href` omitted → not yet a page, rendered non-clickable.
-// `external` → opens in a new tab (WhatsApp / tel). Labels + destinations are
-// kept in sync with the header navigation (NAV in site-header.tsx).
-type FooterLink = { label: string; href?: string; external?: boolean };
-
+// Footer content is CMS-managed via the `footer` global (Phase 3.5B, Item 3):
+// the root layout resolves it (getFooter) and passes it through FooterProvider;
+// here we read it with useFooter(), which falls back to FOOTER_DEFAULTS so the
+// markup is byte-identical when the CMS is empty. Contact links resolve their
+// href from Site Settings (no duplicated numbers). Nothing about the HTML
+// structure / classes / hierarchy changed — only the data source.
 export function Footer() {
-  const cols: { h: string; l: FooterLink[] }[] = [
-    { h: "IVF Treatments", l: [
-      { label: "IVF", href: "/what-is-ivf" },
-      { label: "IVF Failure", href: "/ivf-failure" },
-      { label: "IUI", href: "/intra-uterine-insemination-iui" },
-      { label: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
-      { label: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
-      { label: "IMSI", href: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi" },
-      { label: "MACS", href: "/magnetic-activated-cell-sorting-macs" },
-      { label: "Spindle View ICSI", href: "/spindle-view-icsi" },
-      { label: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
-      { label: "Laser Hatching", href: "/laser-assisted-hatching" },
-      { label: "PGT-A / PGT-M", href: "/pgt" },
-    ]},
-    { h: "Male Infertility", l: [
-      { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
-      { label: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
-      { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
-      { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
-      { label: "Varicocele / Micro Surgery", href: "/varicocele" },
-      { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
-    ]},
-    { h: "Female Infertility", l: [
-      { label: "Conceive Naturally", href: "/conceive-naturally" },
-      { label: "PRP Infertility", href: "/prp-infertility" },
-      { label: "PCOS", href: "/pcos" },
-      { label: "Poor Ovarian Reserve / Low Egg Count / Low AMH", href: "/ovarian-reserve" },
-      { label: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
-      { label: "Fibroid", href: "/fibroids" },
-      { label: "Endometriosis", href: "/endometriosis" },
-    ]},
-    { h: "Donor Services", l: [
-      { label: "Egg Donation", href: "/egg-donation" },
-      { label: "Sperm Donation", href: "/sperm-donation" },
-      { label: "Embryo Donation", href: "/embryo-donation" },
-      { label: "Surrogacy", href: "/surrogacy" },
-    ]},
-    { h: "Fertility Preservation", l: [
-      { label: "Cryopreservation", href: "/cryopreservation" },
-    ]},
-    { h: "Maternity Services", l: [
-      { label: "3D/4D Sonography", href: "/services/3d-4d-sonography" },
-      { label: "Painless Delivery", href: "/services/painless-delivery" },
-      { label: "Normal Delivery", href: "/services/normal-delivery" },
-      { label: "Fetal Medicine", href: "/services/fetal-medicine" },
-      { label: "High Risk Pregnancy Care", href: "/services/high-risk-pregnancy-care" },
-      { label: "Twin Pregnancy Care", href: "/services/twin-pregnancy-care" },
-    ]},
-    { h: "Doctors", l: [
-      { label: "Dr. Himanshu Bavishi", href: "/doctors/himanshu-bavishi" },
-      { label: "Dr. Falguni Bavishi", href: "/doctors/falguni-bavishi" },
-      { label: "Dr. Parth Bavishi", href: "/doctors/parth-bavishi" },
-      { label: "Dr. Janki Bavishi", href: "/doctors/janki-bavishi" },
-      { label: "All Doctors", href: "/doctors" },
-      { label: "Book Consultation", href: "/#book" },
-    ]},
-    { h: "Locations", l: [
-      { label: "Ahmedabad", href: "/locations/ahmedabad" },
-      { label: "Mumbai", href: "/locations/mumbai" },
-      { label: "Surat", href: "/locations/surat" },
-      { label: "Vadodara", href: "/locations/vadodara" },
-      { label: "Bhuj", href: "/locations/bhuj" },
-      { label: "Varanasi", href: "/locations/varanasi" },
-      { label: "All 15 Centres", href: "/#locations" },
-    ]},
-    { h: "Calculators", l: [
-      { label: "IVF Success Rate", href: "/#tools" },
-      { label: "IVF Cost Estimate", href: "/#tools" },
-      { label: "AMH Interpreter", href: "/#tools" },
-      { label: "Ovulation Calculator", href: "/#tools" },
-      { label: "Fertile Period", href: "/#tools" },
-      { label: "Semen Analysis", href: "/#tools" },
-      { label: "Natural Pregnancy", href: "/#tools" },
-      { label: "Miscarriage Risk", href: "/#tools" },
-    ]},
-    { h: "Resources", l: [
-      { label: "Blog", href: "/#blogs" },
-      { label: "Success Stories", href: "/#stories" },
-      { label: "Patient Videos", href: "/#videos" },
-      { label: "Events & Webinars", href: "/#events" },
-    ]},
-    { h: "About", l: [
-      { label: "Our Story", href: "/about-bfi" },
-      { label: "Suraksha Kavach", href: destinationHref("suraksha-kavach") },
-      { label: "Why Bavishi Fertility Institute", href: "/#about" },
-    ]},
-    { h: "Contact", l: [
-      { label: "Book Appointment", href: "/#book" },
-      { label: "Video Consultation", href: "/#book" },
-      { label: "WhatsApp Chat", href: "https://wa.me/919712622288", external: true },
-      { label: "Call +91 97126 22288", href: "tel:+919712622288", external: true },
-      { label: "Find a Centre", href: "/#locations" },
-      { label: "Patient Support", href: "/contact" },
-    ]},
-  ];
+  const { groups, copyrightText, legal } = useFooter();
   return (
     <footer id="contact" className="border-t border-border bg-[color:var(--ivory)]">
       <div className="container-px mx-auto max-w-[1400px] pt-20 pb-24 md:pb-8">
         {/* Sitemap grid */}
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
-          {cols.map((c) => (
+          {groups.map((c) => (
             <div key={c.h}>
               <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[color:var(--plum)]">{c.h}</h4>
               <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
@@ -1702,13 +1664,18 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} Bavishi Fertility Centre. All rights reserved.</div>
+          <div>© {new Date().getFullYear()} {copyrightText}</div>
           <div className="flex flex-wrap items-center justify-center gap-5">
-            <a href="#" className="hover:text-[color:var(--rose)]">Privacy Policy</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Terms of Service</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Refund Policy</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Cookie Policy</a>
-            <a href="#" className="hover:text-[color:var(--rose)]">Sitemap</a>
+            {legal.map((x) => (
+              <a
+                key={x.label}
+                href={x.href ?? "#"}
+                {...(x.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+                className="hover:text-[color:var(--rose)]"
+              >
+                {x.label}
+              </a>
+            ))}
           </div>
         </div>
       </div>

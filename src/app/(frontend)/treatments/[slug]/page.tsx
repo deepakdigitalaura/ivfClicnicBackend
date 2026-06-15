@@ -1,0 +1,55 @@
+import type { Metadata } from "next";
+import { notFound } from "next/navigation";
+import { TreatmentPage } from "@/components/treatment-page";
+import { JsonLd } from "@/components/json-ld";
+import { treatmentGraph } from "@/lib/treatments";
+import { getTreatment, payloadClient } from "@/lib/payload";
+
+type Props = {
+  params: Promise<{ slug: string }>;
+};
+
+export async function generateStaticParams() {
+  try {
+    const payload = await payloadClient();
+    const res = await payload.find({
+      collection: "treatments",
+      limit: 500,
+      depth: 0,
+      select: { slug: true },
+    });
+    return res.docs.map((d) => ({ slug: d.slug }));
+  } catch {
+    return [];
+  }
+}
+
+export async function generateMetadata({ params }: Props): Promise<Metadata> {
+  const { slug } = await params;
+  const t = await getTreatment(slug);
+  if (!t) return {};
+  return {
+    title: t.meta.title,
+    description: t.meta.description,
+    alternates: { canonical: t.href },
+    openGraph: {
+      title: t.meta.title,
+      description: t.meta.description,
+      url: t.href,
+      type: "article",
+      images: [t.meta.ogImage],
+    },
+  };
+}
+
+export default async function Page({ params }: Props) {
+  const { slug } = await params;
+  const t = await getTreatment(slug);
+  if (!t) notFound();
+  return (
+    <>
+      <JsonLd graph={treatmentGraph(t)} />
+      <TreatmentPage content={t} />
+    </>
+  );
+}

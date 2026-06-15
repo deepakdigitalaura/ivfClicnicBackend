@@ -1,16 +1,31 @@
 "use client";
-import { Phone, Mail, MessageCircle, Clock, MapPin, Calendar, Navigation } from "lucide-react";
+import { Phone, Mail, MessageCircle, Clock, MapPin, Calendar, Navigation, type LucideIcon } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { InquiryForm, Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { Editable } from "@/components/editor/Editable";
 
-const contactCards = [
-  { icon: Phone, t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 patient helpline" },
-  { icon: MessageCircle, t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712622288", note: "Quick replies, every day" },
-  { icon: Mail, t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
-  { icon: Clock, t: "Working Hours", v: "Mon – Sat · 9:00 am – 7:00 pm", href: undefined as string | undefined, note: "Sunday by appointment" },
+/* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
+ * inside /edit/contact. `path` is the dot-path into the contact `pages` doc
+ * SOURCE draft (hero.* + faqs.*). */
+const ed = (path: string, value: string, rich = true) => (
+  <Editable path={path} rich={rich}>{value}</Editable>
+);
+
+/* Icon-name -> component map. The CMS stores a name (string); the template
+ * resolves it to a Lucide component. This is the serialisable-icon pattern
+ * future collections (Treatments/Services) will reuse. */
+const ICONS: Record<string, LucideIcon> = { Phone, MessageCircle, Mail, Clock, MapPin, Calendar };
+
+type Card = { icon: string; t: string; v: string; href?: string | null; note?: string | null };
+
+const DEFAULT_CARDS: Card[] = [
+  { icon: "Phone", t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 patient helpline" },
+  { icon: "MessageCircle", t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712622288", note: "Quick replies, every day" },
+  { icon: "Mail", t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
+  { icon: "Clock", t: "Working Hours", v: "Mon – Sat · 9:00 am – 7:00 pm", href: undefined, note: "Sunday by appointment" },
 ];
 
 type Centre = { name: string; address: string; phone: string; phoneLabel: string; href?: string };
@@ -37,7 +52,20 @@ const directory: Centre[] = [
   { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", href: "/locations/varanasi/shivpur" },
 ];
 
-const faqs = [
+type Faq = { q: string; a: string };
+type Hero = { eyebrow?: string | null; lead?: string | null; em?: string | null; subtitle?: string | null };
+
+/* Defaults mirror the original hardcoded copy, so the component still renders
+ * correctly if used without props (e.g. before CMS data is available). */
+export const DEFAULT_HERO: Hero = {
+  eyebrow: "We're here for you",
+  lead: "Contact",
+  em: "Bavishi Fertility Institute",
+  subtitle:
+    "Have a question or ready to begin? Reach out — confidentially and without obligation. Our fertility counsellors are here to guide your very first step.",
+};
+
+export const DEFAULT_FAQS: Faq[] = [
   { q: "How do I book an appointment at Bavishi Fertility Institute?", a: "Fill in the enquiry form on this page, call us on +91 97126 22288, or message us on WhatsApp. Our team will help you choose the nearest centre and a convenient time." },
   { q: "Can I have an online (video) consultation?", a: "Yes. We offer video consultations for patients across India and abroad, so you can begin your fertility journey from the comfort of home before visiting a centre." },
   { q: "Which Bavishi Fertility Institute centre is nearest to me?", a: "We have 15 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
@@ -45,7 +73,13 @@ const faqs = [
   { q: "Do you treat international patients?", a: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including pre-arrival video consultations and treatment planning." },
 ];
 
-export function ContactPage() {
+export type ContactSectionLabels = { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null };
+
+export function ContactPage({ hero, faqs, cards, sectionLabels }: { hero?: Hero; faqs?: Faq[]; cards?: Card[]; sectionLabels?: ContactSectionLabels } = {}) {
+  const h = { ...DEFAULT_HERO, ...(hero ?? {}) };
+  const faqList = faqs?.length ? faqs : DEFAULT_FAQS;
+  const cardList = cards?.length ? cards : DEFAULT_CARDS;
+  const sl = sectionLabels ?? {};
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -66,16 +100,15 @@ export function ContactPage() {
           <div className="absolute -bottom-40 -left-24 h-[26rem] w-[26rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl" />
         </div>
         <div className="container-px mx-auto max-w-[1400px] py-16 text-center md:py-20">
-          <Reveal><div className="flex justify-center"><Eyebrow>We're here for you</Eyebrow></div></Reveal>
+          <Reveal><div className="flex justify-center"><Eyebrow>{ed("hero.eyebrow", h.eyebrow ?? "")}</Eyebrow></div></Reveal>
           <Reveal delay={0.05}>
             <h1 className="mx-auto mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] lg:whitespace-nowrap xl:text-[3.5rem]">
-              Contact <em className="font-display italic text-[color:var(--rose)]">Bavishi Fertility Institute</em>
+              {ed("hero.lead", h.lead ?? "")} <em className="font-display italic text-[color:var(--rose)]">{ed("hero.em", h.em ?? "")}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Have a question or ready to begin? Reach out — confidentially and without obligation. Our fertility counsellors
-              are here to guide your very first step.
+              {ed("hero.subtitle", h.subtitle ?? "")}
             </p>
           </Reveal>
         </div>
@@ -84,10 +117,11 @@ export function ContactPage() {
       {/* Contact info cards */}
       <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
         <Stagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
-          {contactCards.map((c) => {
+          {cardList.map((c) => {
+            const Icon = ICONS[c.icon] ?? Phone;
             const inner = (
               <div className="flex h-full flex-col items-start rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><c.icon className="h-5 w-5" /></div>
+                <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><Icon className="h-5 w-5" /></div>
                 <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{c.t}</div>
                 <div className="mt-1 text-base font-semibold text-[color:var(--plum)]">{c.v}</div>
                 <div className="mt-1 text-sm text-muted-foreground">{c.note}</div>
@@ -107,7 +141,7 @@ export function ContactPage() {
 
       {/* Locations directory */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow="Our Network" title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle="15 fertility centres across 8 Indian cities — world-class care, close to home." />
+        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "15 fertility centres across 8 Indian cities — world-class care, close to home.")} />
 
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {directory.map((c) => (
@@ -161,9 +195,9 @@ export function ContactPage() {
       {/* FAQ */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-3xl">
-          <SectionHead center eyebrow="FAQ" title={<>Getting in touch — <em className="font-display italic text-[color:var(--rose)]">answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>Getting in touch — <em className="font-display italic text-[color:var(--rose)]">answered</em></>} />
           <div className="mt-9 space-y-3">
-            {faqs.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
+            {faqList.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.question`, f.q, false)} a={ed(`faqs.${i}.answer`, f.a, false)} />)}
           </div>
         </div>
       </section>

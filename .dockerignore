@@ -1,0 +1,15 @@
+node_modules
+.next
+.git
+.gitignore
+*.log
+.env*
+!.env.local.example
+*.md
+docs
+scripts
+public/assets
+*.tsbuildinfo
+coverage
+.vercel
+.netlify

@@ -1,0 +1,1083 @@
+{
+  "route": "/doctors",
+  "title": "Our Fertility Specialists — Doctors at Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/doctors",
+  "meta": {
+    "description": "Meet the credentialed fertility specialists at Bavishi Fertility Institute — IVF, ICSI, andrology and reproductive surgery experts caring for families across India since 1984.",
+    "og:description": "Credentialed IVF and fertility doctors across India. Meet our promoter doctors and specialists.",
+    "og:title": "Our Fertility Specialists — Bavishi Fertility Institute",
+    "og:type": "website",
+    "og:url": "https://ivfclinic.com/doctors",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/doctors#webpage",
+          "@type": "CollectionPage",
+          "hasPart": [
+            {
+              "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/janki-bavishi#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/binal-shah#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/jaydeep-patel#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/suman-singh#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/nilesh-jain#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/priyanka-sinha#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/deep-gajiwala#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/mita-shah#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/jayna-unadkat#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/surbhi-vegad#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/chetna-vyas#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/rakhee-patel#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/deepali-pandya#physician"
+            },
+            {
+              "@id": "https://ivfclinic.com/doctors/parnnika-agarwal#physician"
+            }
+          ],
+          "name": "Our Fertility Specialists",
+          "url": "https://ivfclinic.com/doctors"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/doctors",
+              "name": "Doctors",
+              "position": 2
+            }
+          ]
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — B.J. Medical College, Ahmedabad (1983)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1986)"
+            }
+          ],
+          "award": [
+            "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/himanshu.webp",
+          "jobTitle": "Founder & Chief IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Ovarian Stimulation Protocols",
+            "Male Infertility",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President"
+            }
+          ],
+          "name": "Dr. Himanshu Bavishi",
+          "url": "https://ivfclinic.com/doctors/himanshu-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/falguni-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MD — Obstetrics & Gynaecology"
+            }
+          ],
+          "award": [
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/falguni.webp",
+          "jobTitle": "Co-founder & Senior Fertility Specialist",
+          "knowsAbout": [
+            "Female Infertility",
+            "In Vitro Fertilization",
+            "Endometriosis",
+            "Reproductive Gynaecology",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            }
+          ],
+          "name": "Dr. Falguni Bavishi",
+          "url": "https://ivfclinic.com/doctors/falguni-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/parth-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — Pramukhswami Medical College, Karamsad (2009)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — Pramukhswami Medical College, Karamsad (2012)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Rose of Paracelsus Award — European Medical Association",
+            "Most Prominent IVF Specialist — presented by the Chief Minister of Gujarat"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/parth.webp",
+          "jobTitle": "Co-director & IVF Specialist",
+          "knowsAbout": [
+            "Male Infertility",
+            "Andrology",
+            "Intracytoplasmic Sperm Injection",
+            "Surgical Sperm Retrieval",
+            "Azoospermia"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Andrology"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR)"
+            }
+          ],
+          "name": "Dr. Parth Bavishi",
+          "url": "https://ivfclinic.com/doctors/parth-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/janki-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS, MS — Obstetrics & Gynaecology"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced ART training — Diamond Institute, New Jersey, USA"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced reproductive techniques — HART Institute, Japan"
+            }
+          ],
+          "award": [
+            "Gujarat Gaurav Icon — Midday Group",
+            "'Nari Tu Narayani' Award for leading gynaecologist — Bulletin India Group"
+          ],
+          "description": "Co-director of Bavishi Fertility Institute and reproductive surgeon specialising in hysteroscopy, laparoscopy and fertility-enhancing surgery.",
+          "hasCredential": "MBBS, MS (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/janki.webp",
+          "jobTitle": "Co-director & Reproductive Surgeon",
+          "knowsAbout": [
+            "Reproductive Surgery",
+            "Hysteroscopy",
+            "Laparoscopy",
+            "Endometriosis",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            }
+          ],
+          "name": "Dr. Janki Bavishi",
+          "url": "https://ivfclinic.com/doctors/janki-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/binal-shah#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Experienced obstetrician and IVF specialist managing normal and IVF pregnancies, and Chief Quality Control & NABH Nodal Officer at Bavishi Fertility Institute.",
+          "hasCredential": "MBBS, DGO",
+          "image": "https://ivfclinic.com/assets/doctors/binal-shah.png",
+          "jobTitle": "IVF Specialist · Chief Quality Control & NABH Nodal Officer",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "High-Risk Pregnancy",
+            "Twin Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Binal Shah",
+          "url": "https://ivfclinic.com/doctors/binal-shah",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/jaydeep-patel#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, experienced in infertility management and normal & IVF pregnancy care.",
+          "image": "https://ivfclinic.com/assets/doctors/jaydeep-patel.png",
+          "jobTitle": "IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "High-Risk Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Jaydeep Patel",
+          "url": "https://ivfclinic.com/doctors/jaydeep-patel",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/suman-singh#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Fertility specialist with over 20 years of experience in Mumbai and abroad, helping couples conceive naturally, through planned relationships and through IVF.",
+          "hasCredential": "MBBS, DGO",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Suman-Singh.webp",
+          "jobTitle": "IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "IUI",
+            "Female Infertility",
+            "Fertility Treatment"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine"
+          ],
+          "name": "Dr. Suman Singh",
+          "url": "https://ivfclinic.com/doctors/suman-singh",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Mumbai"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/nilesh-jain#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Fertility consultant with more than 20 years of experience in infertility treatment, consulting at the Ghatkopar and Vashi centres in Mumbai.",
+          "hasCredential": "MBBS, DGO, DNB (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Nilesh-Jain-221x300.webp",
+          "jobTitle": "Fertility Consultant",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "IUI",
+            "Male Infertility",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine"
+          ],
+          "name": "Dr. Nilesh Jain",
+          "url": "https://ivfclinic.com/doctors/nilesh-jain",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Mumbai"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/priyanka-sinha#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Reproductive medicine physician with over 15 years of experience, offering IVF, ICSI, PGT and fertility preservation at the Borivali and Vile Parle centres.",
+          "hasCredential": "MBBS, MD, Fellowship in Reproductive Medicine (USA)",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Priyanka-Sinha-221x300.webp",
+          "jobTitle": "IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Fertility Preservation",
+            "Male Infertility",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Gynecology",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            }
+          ],
+          "name": "Dr. Priyanka Sinha",
+          "url": "https://ivfclinic.com/doctors/priyanka-sinha",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Mumbai"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/deep-gajiwala#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — Dr. D.Y. Patil Medical College, Kolhapur (2009)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "DGO — Krishna Institute of Medical Sciences (KIMSDU) (2013)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "DNB, Obstetrics & Gynaecology — National Board of Examinations (2016)"
+            }
+          ],
+          "description": "IVF specialist and laparoscopic surgeon in Surat with 5,000+ operations related to fertility care and childbirth.",
+          "hasCredential": "MBBS, DGO, DNB (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Deep-Gajiwala-221x300.webp",
+          "jobTitle": "IVF Specialist & Laparoscopic Surgeon",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Laparoscopy",
+            "High-Risk Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Deep Gajiwala",
+          "url": "https://ivfclinic.com/doctors/deep-gajiwala",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Surat"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/mita-shah#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Fertility and IVF consultant in Vadodara with over 20 years of experience, known for an empathetic, patient-centred approach.",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Mita-Shah-221x300.webp",
+          "jobTitle": "Fertility & IVF Consultant",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Fertility Preservation",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine"
+          ],
+          "name": "Dr. Mita Shah",
+          "url": "https://ivfclinic.com/doctors/mita-shah",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Vadodara"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/jayna-unadkat#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "Certificate Course in Ultrasound in Pregnancy — FOGSI in association with the Fetal Medicine Foundation, India"
+            }
+          ],
+          "description": "Reproductive medicine specialist in Vadodara with a patient-centred, scientifically-grounded approach to complex infertility cases.",
+          "hasCredential": "MBBS, DGO, FRM (Fellowship in Reproductive Medicine)",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Jayna-Unadkat-221x300.webp",
+          "jobTitle": "IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "PCOS",
+            "Endometriosis",
+            "Poor Ovarian Reserve",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Gynecology",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "European Society of Human Reproduction and Embryology (ESHRE)"
+            }
+          ],
+          "name": "Dr. Jayna Unadkat",
+          "url": "https://ivfclinic.com/doctors/jayna-unadkat",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Vadodara"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/surbhi-vegad#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Leading gynaecologist, IVF expert and 3D laparoscopic surgeon in Bhuj & Kutch, with special expertise in high-risk pregnancy care.",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Surbhi-Vegad-221x300.webp",
+          "jobTitle": "IVF Specialist & 3D Laparoscopic Surgeon",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Laparoscopy",
+            "High-Risk Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Surbhi Vegad",
+          "url": "https://ivfclinic.com/doctors/surbhi-vegad",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Bhuj"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/chetna-vyas#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "description": "Obstetrician and gynaecologist with over 22 years of experience and a special interest in infertility, IVF, laparoscopy and high-risk obstetrics.",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Chetna-Vyas-221x300.webp",
+          "jobTitle": "Co-founder, Bavishi Fertility Institute — IRIS Hospital",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Laparoscopy",
+            "High-Risk Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Anand Obstetrics & Gynaecological Society (AOGS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Medical Association (Anand branch)"
+            }
+          ],
+          "name": "Dr. Chetna Vyas",
+          "url": "https://ivfclinic.com/doctors/chetna-vyas",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Anand"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/rakhee-patel#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "award": [
+            "First Prize, poster presentation 'Lapro-Hysteroscopic Evaluation of Sub-Fertile Women' — World Congress on Practical Infertility Management & Human Reproduction, Mumbai (2004)"
+          ],
+          "description": "Obstetrician and gynaecologist with over 20 years of experience in infertility management and advanced minimal-access gynaecological surgery.",
+          "hasCredential": "MBBS, MD",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Rakhee-Patel-221x300.webp",
+          "jobTitle": "Co-founder, Bavishi Fertility Institute — IRIS Hospital · Minimal Access Surgeon",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Laparoscopy",
+            "Hysteroscopy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Anand Obstetrics & Gynaecological Society (AOGS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Association of Minimal Access Surgeons of India (AMASI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Medical Association (Anand branch)"
+            }
+          ],
+          "name": "Dr. Rakhee Patel",
+          "url": "https://ivfclinic.com/doctors/rakhee-patel",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Anand"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/deepali-pandya#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MS, Obstetrics & Gynaecology — Smt. N.H.L. Municipal Medical College & Sheth V.S. General Hospital, Ahmedabad"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "FIAMS — Jogal Women's Hospital"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "FRM (Fellowship in Reproductive Medicine) — 21st Century Hospital, Surat"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "Infertility & IVF training — Bavishi Fertility Institute, Ahmedabad"
+            }
+          ],
+          "description": "Fertility specialist and endoscopic surgeon with comprehensive training in reproductive medicine, consulting at the Bavishi Fertility Institute Bhavnagar centre.",
+          "hasCredential": "MS (Obstetrics & Gynaecology), FIAMS, FRM",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Deepali-Pandya-1-1.webp",
+          "jobTitle": "IVF Specialist & Endoscopic Surgeon",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Laparoscopy",
+            "Hysteroscopy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Deepali Pandya",
+          "url": "https://ivfclinic.com/doctors/deepali-pandya",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Bhavnagar"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/parnnika-agarwal#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "Advanced training in IVF & laparoscopic gynaecological surgery — reputed centres, New Delhi"
+            }
+          ],
+          "award": [
+            "Gold Medalist — medical studies"
+          ],
+          "description": "Fertility expert and gynaec laparoscopic surgeon in Varanasi with an evidence-based, patient-centric approach to male and female infertility.",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Parnnika-Agarwal-221x300.webp",
+          "jobTitle": "Fertility Expert & Laparoscopic Surgeon",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "IUI",
+            "PCOS",
+            "Endometriosis",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Gynecology",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            }
+          ],
+          "name": "Dr. Parnnika Agarwal",
+          "url": "https://ivfclinic.com/doctors/parnnika-agarwal",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Varanasi"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/binal-shah",
+    "/doctors/chetna-vyas",
+    "/doctors/deep-gajiwala",
+    "/doctors/deepali-pandya",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/jaydeep-patel",
+    "/doctors/jayna-unadkat",
+    "/doctors/mita-shah",
+    "/doctors/nilesh-jain",
+    "/doctors/parnnika-agarwal",
+    "/doctors/parth-bavishi",
+    "/doctors/priyanka-sinha",
+    "/doctors/rakhee-patel",
+    "/doctors/suman-singh",
+    "/doctors/surbhi-vegad",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

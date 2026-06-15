@@ -7,7 +7,10 @@ import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer } from "@/compone
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
+import { Editable, EditableImage } from "@/components/editor/Editable";
+import { useEdit } from "@/components/editor/edit-context";
 import type { City } from "@/lib/locations";
+import type { ResolvedCity } from "@/lib/location-content";
 import { centresForCity, doctorSlugsForCity, treatmentSlugsForCity, centreUrl, centreMapUrl } from "@/lib/locations";
 import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
@@ -24,7 +27,20 @@ const trust = [
 /* CityPage — data-driven template for /locations/[city].
  * One City object renders the hub: overview, all centres (linked), city-wide
  * treatments + doctors, reviews, FAQs. Reused by every city. */
-export function CityPage({ city }: { city: City }) {
+/* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
+ * inside /edit/locations/<slug>. `path` is the dot-path into the cities-doc
+ * SOURCE draft (see materializeCitySource). */
+const ed = (path: string, value: string, rich = true) => (
+  <Editable path={path} rich={rich}>{value}</Editable>
+);
+// HTML helpers for the italic rose accent word used in section headings.
+const EM = 'class="font-display italic text-[color:var(--rose)]"';
+const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
+const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
+
+export function CityPage({ city }: { city: City | ResolvedCity }) {
+  const sl = (city as ResolvedCity).sectionLabels ?? {};
+  const editing = !!useEdit()?.editMode;
   const centres = centresForCity(city.slug);
   const docs = doctorSlugsForCity(city.slug)
     .map((slug) => doctorBySlug(slug))
@@ -60,12 +76,12 @@ export function CityPage({ city }: { city: City }) {
             <Reveal><Eyebrow>{city.name} · {centres.length} {centres.length === 1 ? "Centre" : "Centres"}</Eyebrow></Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                Best IVF Centre in <em className="font-display italic text-[color:var(--rose)]">{city.name}</em>
+                {ed("sectionLabels.heroTitle", sl.heroTitle || `Best IVF Centre in ${em(city.name)}`)}
               </h1>
             </Reveal>
             {city.intro[0] && (
               <Reveal delay={0.12}>
-                <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">{city.intro[0]}</p>
+                <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">{ed("intro.0.value", city.intro[0])}</p>
               </Reveal>
             )}
             <Reveal delay={0.2}>
@@ -92,6 +108,8 @@ export function CityPage({ city }: { city: City }) {
                       <Rotate3d className="h-3.5 w-3.5" /> 360° View · Drag to explore
                     </span>
                   </>
+                ) : editing ? (
+                  <EditableImage path="heroImage" src={city.heroImage} alt={`Best IVF centre in ${city.name} — Bavishi Fertility Institute`} className="absolute inset-0 h-full w-full object-cover" />
                 ) : (
                   <Image src={city.heroImage} alt={`Best IVF centre in ${city.name} — Bavishi Fertility Institute`} fill priority sizes="(max-width: 1024px) 100vw, 40vw" className="object-cover" />
                 )}
@@ -106,9 +124,9 @@ export function CityPage({ city }: { city: City }) {
       {/* Overview */}
       {city.intro.length > 0 && (
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-          <SectionHead eyebrow={`Fertility care in ${city.name}`} title={<>Your trusted fertility partner in <em className="font-display italic text-[color:var(--rose)]">{city.name}</em></>} />
+          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `Fertility care in ${city.name}`)} title={ed("sectionLabels.overviewTitle", sl.overviewTitle || `Your trusted fertility partner in ${em(city.name)}`)} />
           <div className="mt-6 max-w-3xl space-y-5 text-[17px] leading-relaxed text-muted-foreground">
-            {city.intro.map((p, i) => <Reveal key={i} delay={i * 0.05}><p>{p}</p></Reveal>)}
+            {city.intro.map((p, i) => <Reveal key={i} delay={i * 0.05}><p>{ed(`intro.${i}.value`, p)}</p></Reveal>)}
           </div>
         </section>
       )}
@@ -117,7 +135,7 @@ export function CityPage({ city }: { city: City }) {
       {centres.length > 0 && (
         <section className="bg-white py-8 md:py-14">
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow="Our Centres" title={<>Our centres across <em className="font-display italic text-[color:var(--rose)]">{city.name}</em></>} />
+            <SectionHead center eyebrow={ed("sectionLabels.centresEyebrow", sl.centresEyebrow || "Our Centres")} title={ed("sectionLabels.centresTitle", sl.centresTitle || `Our centres across ${em(city.name)}`)} />
             <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
               {centres.map((c) => (
                 <StaggerItem key={c.slug}>
@@ -152,7 +170,7 @@ export function CityPage({ city }: { city: City }) {
       {/* City-wide treatments — real internal links (blush band so it separates
           the white Centres section above from the ivory Doctors section below) */}
       {treatments.length > 0 && (
-        <div className="bg-[color:var(--rose-soft)]/40"><TreatmentsOffered slugs={treatments} area={city.name} /></div>
+        <div className="bg-[color:var(--rose-soft)]/40"><TreatmentsOffered slugs={treatments} area={city.name} labels={sl} /></div>
       )}
 
       {/* Women's health & maternity services across the city's centres (white
@@ -163,6 +181,7 @@ export function CityPage({ city }: { city: City }) {
           services={womensHealthServices(city.womensHealth)}
           tone="white"
           serviceLabel={city.slug === "ahmedabad" ? "Maternity services" : undefined}
+          labels={sl}
         />
       ) : null}
 
@@ -170,18 +189,18 @@ export function CityPage({ city }: { city: City }) {
       {docs.length > 0 && (
         <Doctors
           docs={docs}
-          eyebrow={`${city.name} Doctors`}
-          title={<>Meet our <em className="font-display italic text-[color:var(--rose)]">{city.name} specialists</em></>}
-          subtitle={`Fertility specialists across our ${city.name} centres.`}
+          eyebrow={ed("sectionLabels.doctorsEyebrow", sl.doctorsEyebrow || `${city.name} Doctors`)}
+          title={ed("sectionLabels.doctorsTitle", sl.doctorsTitle || `Meet our ${em(city.name + " specialists")}`)}
+          subtitle={ed("sectionLabels.doctorsSubtitle", sl.doctorsSubtitle || `Fertility specialists across our ${city.name} centres.`)}
         />
       )}
 
       {cityStories.length > 0 && (
         <SuccessStories
           tone="tint"
-          eyebrow="Testimonials"
-          title={<>Words from <em className="font-display italic text-[color:var(--rose)]">{city.name} families</em></>}
-          subtitle="Watch real families share their parenthood journeys with Bavishi Fertility Institute."
+          eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")}
+          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `Words from ${em(city.name + " families")}`)}
+          subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
           showCta={false}
           stories={cityStories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
         />
@@ -191,7 +210,7 @@ export function CityPage({ city }: { city: City }) {
         <GoogleReviews
           data={reviews}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Bavishi Fertility Institute " + city.name)}`}
-          title={<>{city.name} families <em className="font-display italic text-[color:var(--rose)]">on Google</em></>}
+          title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${city.name} families ${em("on Google")}`)}
           subtitle={`Read verified reviews from patients across our ${city.name} centres.`}
         />
       </div>
@@ -199,12 +218,12 @@ export function CityPage({ city }: { city: City }) {
       <VideoHub />
 
       {centres.length > 0 && (
-        <CentreGallery images={centres.flatMap((c) => c.gallery).slice(0, 6)} title={<>Inside our <em className="font-display italic text-[color:var(--rose)]">{city.name} centres</em></>} subtitle="A glimpse of our facilities." />
+        <CentreGallery images={centres.flatMap((c) => c.gallery).slice(0, 6)} title={ed("sectionLabels.galleryTitle", sl.galleryTitle || `Inside our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A glimpse of our facilities.")} />
       )}
 
       {/* Why choose */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow={`Why Bavishi Fertility Institute ${city.name}`} title={<>Why choose Bavishi Fertility Institute in <em className="font-display italic text-[color:var(--rose)]">{city.name}</em></>} />
+        <SectionHead center eyebrow={ed("sectionLabels.whyEyebrow", sl.whyEyebrow || `Why Bavishi Fertility Institute ${city.name}`)} title={ed("sectionLabels.whyTitle", sl.whyTitle || `Why choose Bavishi Fertility Institute in ${em(city.name)}`)} />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-4">
           {trust.map((t) => (
             <StaggerItem key={t.t}>
@@ -219,16 +238,16 @@ export function CityPage({ city }: { city: City }) {
       </section>
 
       {centres.length > 0 && (
-        <ContactInfo centres={centres} title={<>Contact our <em className="font-display italic text-[color:var(--rose)]">{city.name} centres</em></>} subtitle="Call, WhatsApp or visit — whichever is easiest for you." />
+        <ContactInfo centres={centres} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
       )}
 
       {/* FAQ */}
       {city.faqs.length > 0 && (
         <section className="container-px mx-auto max-w-3xl px-0 py-8 md:py-14">
           <div className="container-px">
-            <SectionHead center eyebrow="FAQ" title={<>{city.name} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
+            <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={ed("sectionLabels.faqTitle", sl.faqTitle || `${city.name} — ${em("your questions answered")}`)} />
             <div className="mt-9 space-y-3">
-              {city.faqs.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
+              {city.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
             </div>
           </div>
         </section>
@@ -239,7 +258,7 @@ export function CityPage({ city }: { city: City }) {
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Book your consultation in <em className="font-display italic text-[color:var(--rose-soft)]">{city.name}</em> today.
+              {ed("sectionLabels.ctaTitle", sl.ctaTitle || `Book your consultation in ${em(city.name, true)} today.`)}
             </h2>
           </Reveal>
           <Reveal delay={0.15}>

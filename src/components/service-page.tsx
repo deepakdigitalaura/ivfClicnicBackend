@@ -12,34 +12,54 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { SectionHead, Faq } from "@/components/ivf-page";
 import { MedicalReviewer } from "@/components/medical-reviewer";
 import { Linkify } from "@/components/linkify";
+import { Editable, EditableImage } from "@/components/editor/Editable";
+import { useEdit } from "@/components/editor/edit-context";
 import { doctorBySlug, doctorUrl } from "@/lib/doctors";
-import {
-  type ServiceHeading,
-  serviceContentBySlug,
-  relatedServices,
-  serviceHref,
-} from "@/lib/womens-health";
+import { type ServiceHeading } from "@/lib/womens-health";
+import { resolveServiceFromCode, type ResolvedService } from "@/lib/services";
+import { resolveIcon } from "@/lib/icon-map";
 
-/* ---------- heading renderer (data → SectionHead title) ---------- */
-function H({ h }: { h: ServiceHeading }) {
+/* ---------- inline-edit helper ----------
+ * `<Editable>` is inert on the public site (renders bare children, byte-identical)
+ * and becomes click-to-edit only inside /edit/services/<slug>. `path` is the
+ * dot-path into the services-doc SOURCE draft (see materializeServiceSource).
+ * Fields feeding JSON-LD/meta (FAQ q/a) pass rich={false} → stored value stays
+ * plain text so the structured data is unchanged. */
+const ed = (path: string, value: string, rich = true) => (
+  <Editable path={path} rich={rich}>{value}</Editable>
+);
+
+// HTML helpers for the italic rose accent word used in section headings.
+const EM = 'class="font-display italic text-[color:var(--rose)]"';
+const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
+const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
+
+/* ---------- heading renderer (data → SectionHead title) ----------
+ * `base` is the heading's source path (e.g. "benefits.heading"). When supplied,
+ * the lead + accent become inline-editable; otherwise it renders plain. */
+function H({ h, base }: { h: ServiceHeading; base?: string }) {
   return (
     <>
-      {h.lead}
-      {h.em ? <> <em className="font-display italic text-[color:var(--rose)]">{h.em}</em></> : null}
+      {base ? ed(`${base}.lead`, h.lead) : h.lead}
+      {h.em ? <> <em className="font-display italic text-[color:var(--rose)]">{base ? ed(`${base}.em`, h.em) : h.em}</em></> : null}
     </>
   );
 }
 
 /* ---------- reusable maternity service page ----------
- * Receives only the `slug` (a serializable string) and resolves the content
- * here, client-side, so the lucide icon *components* in the data never cross
- * the Server→Client boundary. The route builds JSON-LD server-side from the
- * same data via serviceGraph(). */
-export function ServicePage({ slug }: { slug: string }) {
-  const s = serviceContentBySlug(slug);
+ * Receives the CMS-resolved `content` as a fully-serializable prop (icons are
+ * NAMES, mapped back to Lucide components here via resolveIcon) — so the lucide
+ * *components* never cross the Server→Client boundary. When no prop is supplied
+ * it falls back to the typed code defaults for `slug` (coexistence), so the page
+ * still renders if a doc is missing. The route builds JSON-LD server-side from
+ * the same resolved data via serviceGraph(). */
+export function ServicePage({ slug, content }: { slug: string; content?: ResolvedService }) {
+  const editing = !!useEdit()?.editMode;
+  const s = content ?? resolveServiceFromCode(slug);
   if (!s) return null;
+  const sl = s.sectionLabels ?? {};
   const reviewer = doctorBySlug(s.reviewerSlug);
-  const related = relatedServices(s.related);
+  const related = s.related;
   // These maternity services are offered only in Ahmedabad — show the head-office
   // contact card instead of the all-India network section.
   const ahmedabadCentre = centresForLocationSlugs(["paldi"])[0];
@@ -75,17 +95,17 @@ export function ServicePage({ slug }: { slug: string }) {
           <div className="lg:col-span-7">
             <Reveal>
               <span className="inline-flex items-center gap-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--rose)]">
-                <span className="h-px w-6 bg-[color:var(--rose)]/60" /> {s.hero.eyebrow}
+                <span className="h-px w-6 bg-[color:var(--rose)]/60" /> {ed("hero.eyebrow", s.hero.eyebrow)}
               </span>
             </Reveal>
             <Reveal delay={0.05}>
               <h1 className="mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                {s.hero.h1} <em className="font-display italic text-[color:var(--rose)]">{s.hero.h1Em}</em> in Ahmedabad
+                {ed("hero.h1", s.hero.h1)} <em className="font-display italic text-[color:var(--rose)]">{ed("hero.h1Em", s.hero.h1Em)}</em> in Ahmedabad
               </h1>
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-                <Linkify text={s.hero.tagline} />
+                {editing ? ed("hero.tagline", s.hero.tagline) : <Linkify text={s.hero.tagline} />}
               </p>
             </Reveal>
             {reviewer && (
@@ -124,8 +144,8 @@ export function ServicePage({ slug }: { slug: string }) {
             </Reveal>
             <Reveal delay={0.3}>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[color:var(--plum)]">
-                {s.hero.badges.map((c) => (
-                  <span key={c} className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> {c}</span>
+                {s.hero.badges.map((c, i) => (
+                  <span key={i} className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> {ed(`hero.badges.${i}.badge`, c)}</span>
                 ))}
               </div>
             </Reveal>
@@ -133,14 +153,18 @@ export function ServicePage({ slug }: { slug: string }) {
           <div className="lg:col-span-5">
             <Reveal delay={0.15}>
               <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
-                <Image
-                  src={s.hero.image}
-                  alt={s.hero.imageAlt}
-                  fill
-                  priority
-                  sizes="(max-width: 1024px) 100vw, 40vw"
-                  className="object-cover"
-                />
+                {editing ? (
+                  <EditableImage path="hero.image" src={s.hero.image} alt={s.hero.imageAlt} className="absolute inset-0 h-full w-full object-cover" />
+                ) : (
+                  <Image
+                    src={s.hero.image}
+                    alt={s.hero.imageAlt}
+                    fill
+                    priority
+                    sizes="(max-width: 1024px) 100vw, 40vw"
+                    className="object-cover"
+                  />
+                )}
               </div>
             </Reveal>
           </div>
@@ -151,10 +175,10 @@ export function ServicePage({ slug }: { slug: string }) {
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
-            <SectionHead eyebrow={`About ${s.shortName}`} title={<H h={s.overview.heading} />} />
+            <SectionHead eyebrow={`About ${s.shortName}`} title={<H h={s.overview.heading} base="overview.heading" />} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
               {s.overview.paragraphs.map((p, i) => (
-                <Reveal key={i} delay={i * 0.05}><p>{p}</p></Reveal>
+                <Reveal key={i} delay={i * 0.05}><p>{ed(`overview.paragraphs.${i}.text`, p)}</p></Reveal>
               ))}
             </div>
             {reviewer && (
@@ -166,8 +190,8 @@ export function ServicePage({ slug }: { slug: string }) {
           {s.overview.aside && (
             <Reveal delay={0.1}>
               <aside className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 p-6">
-                <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{s.overview.aside.title}</div>
-                <p className="mt-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">{s.overview.aside.body}</p>
+                <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{ed("overview.aside.title", s.overview.aside.title)}</div>
+                <p className="mt-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed("overview.aside.body", s.overview.aside.body)}</p>
               </aside>
             </Reveal>
           )}
@@ -177,13 +201,21 @@ export function ServicePage({ slug }: { slug: string }) {
       {/* 3. Benefits */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="Advantages" title={<H h={s.benefits.heading} />} subtitle={s.benefits.subtitle} />
-          <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {s.benefits.items.map((item) => (
-              <StaggerItem key={item}>
+          <SectionHead center eyebrow={ed("sectionLabels.benefitsEyebrow", sl.benefitsEyebrow || "Advantages")} title={<H h={s.benefits.heading} base="benefits.heading" />} subtitle={s.benefits.subtitle ? ed("benefits.subtitle", s.benefits.subtitle) : undefined} />
+          <Stagger
+            className={`mt-9 grid grid-cols-1 gap-4 ${
+              s.benefits.items.length === 1
+                ? "max-w-sm mx-auto"
+                : s.benefits.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {s.benefits.items.map((item, i) => (
+              <StaggerItem key={i}>
                 <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{item}</span>
+                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`benefits.items.${i}.item`, item)}</span>
                 </div>
               </StaggerItem>
             ))}
@@ -194,13 +226,21 @@ export function ServicePage({ slug }: { slug: string }) {
       {/* 4. Who it's for */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow="Is it for you" title={<H h={s.whoFor.heading} />} subtitle={s.whoFor.subtitle} />
-          <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
-            {s.whoFor.items.map((item) => (
-              <StaggerItem key={item}>
+          <SectionHead eyebrow={ed("sectionLabels.whoForEyebrow", sl.whoForEyebrow || "Is it for you")} title={<H h={s.whoFor.heading} base="whoFor.heading" />} subtitle={s.whoFor.subtitle ? ed("whoFor.subtitle", s.whoFor.subtitle) : undefined} />
+          <Stagger
+            className={`mt-9 grid grid-cols-1 gap-4 ${
+              s.whoFor.items.length === 1
+                ? "max-w-sm mx-auto"
+                : s.whoFor.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {s.whoFor.items.map((item, i) => (
+              <StaggerItem key={i}>
                 <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{item}</span>
+                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`whoFor.items.${i}.item`, item)}</span>
                 </div>
               </StaggerItem>
             ))}
@@ -211,25 +251,36 @@ export function ServicePage({ slug }: { slug: string }) {
       {/* 5. Process */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="What to Expect" title={<H h={s.process.heading} />} subtitle={s.process.subtitle} />
-          <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
-            {s.process.steps.map((step, i) => (
-              <StaggerItem key={step.t}>
+          <SectionHead center eyebrow={ed("sectionLabels.processEyebrow", sl.processEyebrow || "What to Expect")} title={<H h={s.process.heading} base="process.heading" />} subtitle={s.process.subtitle ? ed("process.subtitle", s.process.subtitle) : undefined} />
+          <Stagger
+            className={`mt-10 grid grid-cols-1 gap-6 ${
+              s.process.steps.length === 1
+                ? "max-w-sm mx-auto"
+                : s.process.steps.length === 2
+                  ? "md:grid-cols-2 max-w-3xl mx-auto"
+                  : "md:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {s.process.steps.map((step, i) => {
+              const StepIcon = resolveIcon(step.icon);
+              return (
+              <StaggerItem key={i}>
                 <div className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                   <div className="flex items-center justify-between">
-                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><step.icon className="h-6 w-6" /></div>
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><StepIcon className="h-6 w-6" /></div>
                     <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-semibold text-white shadow-sm shadow-[color:var(--rose)]/30 ring-4 ring-[color:var(--rose)]/10">{i + 1}</span>
                   </div>
-                  <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">{step.t}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{step.d}</p>
+                  <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">{ed(`process.steps.${i}.t`, step.t)}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{ed(`process.steps.${i}.d`, step.d)}</p>
                 </div>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
           {s.process.note && (
             <Reveal delay={0.1}>
               <div className="mt-8 flex items-start justify-center gap-2 text-center text-sm text-muted-foreground">
-                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {s.process.note}
+                <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {ed("process.note", s.process.note)}
               </div>
             </Reveal>
           )}
@@ -239,17 +290,28 @@ export function ServicePage({ slug }: { slug: string }) {
       {/* 6. Why us */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow="Why Bavishi Fertility & Birthing" title={<><H h={s.whyUs.heading} /> in Ahmedabad</>} />
-          <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {s.whyUs.items.map((w) => (
-              <StaggerItem key={w.t}>
+          <SectionHead center eyebrow={ed("sectionLabels.whyUsEyebrow", sl.whyUsEyebrow || "Why Bavishi Fertility & Birthing")} title={<><H h={s.whyUs.heading} base="whyUs.heading" /> in Ahmedabad</>} />
+          <Stagger
+            className={`mt-10 grid grid-cols-1 gap-6 ${
+              s.whyUs.items.length === 1
+                ? "max-w-sm mx-auto"
+                : s.whyUs.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {s.whyUs.items.map((w, i) => {
+              const WhyIcon = resolveIcon(w.icon);
+              return (
+              <StaggerItem key={i}>
                 <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-shadow duration-500 hover:shadow-lift">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><w.icon className="h-6 w-6" /></div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{w.t}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{w.d}</p>
+                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><WhyIcon className="h-6 w-6" /></div>
+                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{ed(`whyUs.items.${i}.t`, w.t)}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`whyUs.items.${i}.d`, w.d)}</p>
                 </div>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -258,10 +320,10 @@ export function ServicePage({ slug }: { slug: string }) {
       {s.infoNote && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-3xl">
-            <SectionHead center eyebrow="Good to know" title={<H h={s.infoNote.heading} />} />
+            <SectionHead center eyebrow={ed("sectionLabels.infoNoteEyebrow", sl.infoNoteEyebrow || "Good to know")} title={<H h={s.infoNote.heading} base="infoNote.heading" />} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
               {s.infoNote.paragraphs.map((p, i) => (
-                <Reveal key={i} delay={i * 0.05}><p>{p}</p></Reveal>
+                <Reveal key={i} delay={i * 0.05}><p>{ed(`infoNote.paragraphs.${i}.text`, p)}</p></Reveal>
               ))}
             </div>
           </div>
@@ -271,9 +333,9 @@ export function ServicePage({ slug }: { slug: string }) {
       {/* 7. FAQ */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-3xl">
-          <SectionHead center eyebrow="FAQ" title={<>{s.breadcrumbName} — <em className="font-display italic text-[color:var(--rose)]">your questions answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={ed("sectionLabels.faqTitle", sl.faqTitle || `${s.breadcrumbName} — ${em("your questions answered")}`)} />
           <div className="mt-9 space-y-3">
-            {s.faqs.map((f) => <Faq key={f.q} q={f.q} a={f.a} />)}
+            {s.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
           </div>
           {reviewer && (
             <p className="mt-8 text-center text-xs leading-relaxed text-muted-foreground/80">
@@ -287,11 +349,20 @@ export function ServicePage({ slug }: { slug: string }) {
       {related.length > 0 && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow="Explore More" title={<>Related maternity <em className="font-display italic text-[color:var(--rose)]">services</em></>} />
-            <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
+            <SectionHead center eyebrow={ed("sectionLabels.relatedEyebrow", sl.relatedEyebrow || "Explore More")} title={ed("sectionLabels.relatedTitle", sl.relatedTitle || `Related maternity ${em("services")}`)} />
+            <Stagger
+              className={`mt-10 grid grid-cols-1 gap-5 ${
+                related.length === 1
+                  ? "max-w-sm mx-auto"
+                  : related.length === 2
+                    ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                    : "sm:grid-cols-2 lg:grid-cols-3"
+              }`}
+              stagger={0.05}
+            >
               {related.map((r) => (
                 <StaggerItem key={r.key}>
-                  <TreatmentCard icon={r.icon} title={r.name} desc={r.desc} href={serviceHref(r)} />
+                  <TreatmentCard icon={resolveIcon(r.icon)} title={r.name} desc={r.desc} href={r.href} />
                 </StaggerItem>
               ))}
             </Stagger>
@@ -305,8 +376,8 @@ export function ServicePage({ slug }: { slug: string }) {
           <div className="container-px mx-auto max-w-[1400px]">
             <SectionHead
               center
-              eyebrow="Visit us"
-              title={<>Available at our <em className="font-display italic text-[color:var(--rose)]">Ahmedabad centre</em></>}
+              eyebrow={ed("sectionLabels.visitEyebrow", sl.visitEyebrow || "Visit us")}
+              title={ed("sectionLabels.visitTitle", sl.visitTitle || `Available at our ${em("Ahmedabad centre")}`)}
               subtitle={`${s.shortName.charAt(0).toUpperCase()}${s.shortName.slice(1)} is offered at Bavishi Fertility & Birthing in Ahmedabad. Call to book your appointment.`}
             />
             <Reveal>
@@ -345,7 +416,7 @@ export function ServicePage({ slug }: { slug: string }) {
           <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
             <Reveal>
               <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-                Caring for you and your baby, <em className="font-display italic text-[color:var(--rose-soft)]">every step of the way</em>
+                {ed("sectionLabels.ctaTitle", sl.ctaTitle || `Caring for you and your baby, ${em("every step of the way", true)}`)}
               </h2>
             </Reveal>
             <Reveal delay={0.1}>

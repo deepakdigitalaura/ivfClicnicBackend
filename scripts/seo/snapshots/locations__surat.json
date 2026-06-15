@@ -1,0 +1,486 @@
+{
+  "route": "/locations/surat",
+  "title": "Best IVF Centre in Lal Darwaja, Surat — Bavishi Fertility Institute · Bavishi Fertility Centre",
+  "canonical": "https://ivfclinic.com/locations/surat",
+  "meta": {
+    "description": "Bavishi Fertility Institute — Lal Darwaja, Surat — IVF, ICSI & IUI with senior doctors since 1984. 9th Floor, Param Doctor House, Lal Darwaja Station Rd, Lal Darwaja, Surat – 395003. Book a free consultation.",
+    "og:description": "Bavishi Fertility Institute — Lal Darwaja, Surat — IVF, ICSI & IUI with senior doctors since 1984. 9th Floor, Param Doctor House, Lal Darwaja Station Rd, Lal Darwaja, Surat – 395003. Book a free consultation.",
+    "og:image": "https://ivfclinic.com/assets/Locations/Surat.png",
+    "og:title": "Best IVF Centre in Lal Darwaja, Surat — Bavishi Fertility Institute",
+    "og:type": "website",
+    "og:url": "https://ivfclinic.com/locations/surat",
+    "twitter:card": "summary_large_image",
+    "twitter:description": "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+    "twitter:image": "https://ivfclinic.com/assets/hero-mother-baby1.png",
+    "twitter:title": "Bavishi Fertility Centre — India's Trusted IVF Experts",
+    "viewport": "width=device-width, initial-scale=1"
+  },
+  "jsonLd": [
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/#organization",
+          "@type": [
+            "MedicalOrganization",
+            "MedicalClinic"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Ahmedabad",
+            "addressRegion": "Gujarat",
+            "postalCode": "380007",
+            "streetAddress": "Paldi Cross Roads, Opp. Manjulal Municipal Garden"
+          },
+          "alternateName": "Bavishi Fertility Institute",
+          "award": [
+            "National Fertility Award 2021",
+            "National Fertility Award 2022",
+            "National Fertility Award 2023",
+            "National Fertility Award 2024",
+            "National Fertility Award 2025",
+            "Economic Times IVF Chain of the Year — West",
+            "Bharat Excellence Award for IVF and Infertility Care"
+          ],
+          "email": "drbavishi@ivfclinic.com",
+          "founders": [
+            {
+              "@type": "Person",
+              "name": "Dr. Himanshu Bavishi"
+            },
+            {
+              "@type": "Person",
+              "name": "Dr. Falguni Bavishi"
+            }
+          ],
+          "foundingDate": "1984",
+          "image": "https://ivfclinic.com/logo.png",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Intrauterine Insemination",
+            "Male Infertility",
+            "Female Infertility",
+            "Fertility Preservation",
+            "Preimplantation Genetic Testing"
+          ],
+          "legalName": "Bavishi Fertility Institute",
+          "logo": "https://ivfclinic.com/logo.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Obstetrics",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute",
+          "sameAs": [
+            "https://www.instagram.com/bavishifertility/",
+            "https://www.facebook.com/BavishiFertilityInstitute/",
+            "https://www.youtube.com/@BavishiFertilityInstitute"
+          ],
+          "telephone": "+919712622288",
+          "url": "https://ivfclinic.com"
+        },
+        {
+          "@id": "https://ivfclinic.com/#website",
+          "@type": "WebSite",
+          "inLanguage": "en-IN",
+          "name": "Bavishi Fertility Institute",
+          "potentialAction": {
+            "@type": "SearchAction",
+            "query-input": "required name=search_term_string",
+            "target": {
+              "@type": "EntryPoint",
+              "urlTemplate": "https://ivfclinic.com/search?q={search_term_string}"
+            }
+          },
+          "publisher": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "url": "https://ivfclinic.com"
+        }
+      ]
+    },
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@id": "https://ivfclinic.com/locations/surat#webpage",
+          "@type": "MedicalWebPage",
+          "isPartOf": {
+            "@id": "https://ivfclinic.com/#website"
+          },
+          "name": "Bavishi Fertility Institute — Lal Darwaja, Surat",
+          "url": "https://ivfclinic.com/locations/surat"
+        },
+        {
+          "@id": "https://ivfclinic.com/locations/surat#clinic-lal-darwaja",
+          "@type": [
+            "MedicalClinic",
+            "LocalBusiness"
+          ],
+          "address": {
+            "@type": "PostalAddress",
+            "addressCountry": "IN",
+            "addressLocality": "Surat",
+            "addressRegion": "Gujarat",
+            "postalCode": "395003",
+            "streetAddress": "9th Floor, Param Doctor House, Lal Darwaja Station Rd, Lal Darwaja"
+          },
+          "areaServed": [
+            {
+              "@type": "Place",
+              "name": "Lal Darwaja, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Station Road, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Athwa, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Adajan, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Vesu, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Piplod, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Citylight, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Ghod Dod Road, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Varachha, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Katargam, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Udhna, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Rander, Surat"
+            },
+            {
+              "@type": "Place",
+              "name": "Pal, Surat"
+            }
+          ],
+          "availableService": [
+            {
+              "@type": "MedicalProcedure",
+              "name": "IVF"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "ICSI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "IUI"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Male Infertility"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Female Infertility"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "Fertility Preservation"
+            },
+            {
+              "@type": "MedicalProcedure",
+              "name": "PGT (Genetic Testing)"
+            }
+          ],
+          "hasMap": "https://www.google.com/maps/search/?api=1&query=Bavishi%20Fertility%20Institute%20Lal%20Darwaja%20Surat",
+          "image": "https://ivfclinic.com/assets/Locations/Surat.png",
+          "medicalSpecialty": [
+            "Fertility",
+            "ReproductiveMedicine",
+            "Gynecology"
+          ],
+          "name": "Bavishi Fertility Institute — Lal Darwaja, Surat",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "closes": "19:00",
+              "dayOfWeek": [
+                "Monday",
+                "Tuesday",
+                "Wednesday",
+                "Thursday",
+                "Friday",
+                "Saturday"
+              ],
+              "opens": "10:00"
+            }
+          ],
+          "parentOrganization": {
+            "@id": "https://ivfclinic.com/#organization"
+          },
+          "telephone": "+919879572247",
+          "url": "https://ivfclinic.com/locations/surat"
+        },
+        {
+          "@type": "BreadcrumbList",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/",
+              "name": "Home",
+              "position": 1
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/#locations",
+              "name": "Locations",
+              "position": 2
+            },
+            {
+              "@type": "ListItem",
+              "item": "https://ivfclinic.com/locations/surat",
+              "name": "Surat, Surat",
+              "position": 3
+            }
+          ]
+        },
+        {
+          "@type": "FAQPage",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "On the 9th floor of Param Doctor House, Lal Darwaja Station Road, Lal Darwaja, Surat – 395003 — beside Surat railway station."
+              },
+              "name": "Where is the Bavishi Fertility Institute Surat IVF centre?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The Surat centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 98795 72247 to book."
+              },
+              "name": "What are the timings at the Surat centre?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "Lal Darwaja, Athwa, Adajan, Vesu, Piplod, Citylight, Ghod Dod Road, Varachha and families across South Gujarat."
+              },
+              "name": "Which areas does the Surat centre serve?"
+            },
+            {
+              "@type": "Question",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "The full range — IVF, ICSI, IUI, male and female infertility care, fertility preservation and PGT — backed by advanced laboratories and experienced specialists."
+              },
+              "name": "What treatments are available in Surat?"
+            }
+          ]
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/himanshu-bavishi#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — B.J. Medical College, Ahmedabad (1983)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1986)"
+            }
+          ],
+          "award": [
+            "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
+            "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+          ],
+          "description": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
+          "hasCredential": "MBBS, MD (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/himanshu.webp",
+          "jobTitle": "Founder & Chief IVF Specialist",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Intracytoplasmic Sperm Injection",
+            "Ovarian Stimulation Protocols",
+            "Male Infertility",
+            "Fertility Preservation"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi",
+            "Gujarati"
+          ],
+          "medicalSpecialty": [
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "memberOf": [
+            {
+              "@type": "Organization",
+              "name": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society for Assisted Reproduction (ISAR)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Fertility Society (IFS)"
+            },
+            {
+              "@type": "Organization",
+              "name": "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President"
+            }
+          ],
+          "name": "Dr. Himanshu Bavishi",
+          "url": "https://ivfclinic.com/doctors/himanshu-bavishi",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Ahmedabad"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        },
+        {
+          "@id": "https://ivfclinic.com/doctors/deep-gajiwala#physician",
+          "@type": [
+            "Physician",
+            "Person"
+          ],
+          "alumniOf": [
+            {
+              "@type": "EducationalOrganization",
+              "name": "MBBS — Dr. D.Y. Patil Medical College, Kolhapur (2009)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "DGO — Krishna Institute of Medical Sciences (KIMSDU) (2013)"
+            },
+            {
+              "@type": "EducationalOrganization",
+              "name": "DNB, Obstetrics & Gynaecology — National Board of Examinations (2016)"
+            }
+          ],
+          "description": "IVF specialist and laparoscopic surgeon in Surat with 5,000+ operations related to fertility care and childbirth.",
+          "hasCredential": "MBBS, DGO, DNB (Obstetrics & Gynaecology)",
+          "image": "https://ivfclinic.com/assets/doctors/Dr.-Deep-Gajiwala-221x300.webp",
+          "jobTitle": "IVF Specialist & Laparoscopic Surgeon",
+          "knowsAbout": [
+            "In Vitro Fertilization",
+            "Laparoscopy",
+            "High-Risk Pregnancy",
+            "Female Infertility"
+          ],
+          "knowsLanguage": [
+            "English",
+            "Hindi"
+          ],
+          "medicalSpecialty": [
+            "Gynecology",
+            "ReproductiveMedicine",
+            "Fertility"
+          ],
+          "name": "Dr. Deep Gajiwala",
+          "url": "https://ivfclinic.com/doctors/deep-gajiwala",
+          "workLocation": {
+            "@type": "Place",
+            "name": "Bavishi Fertility Institute, Surat"
+          },
+          "worksFor": {
+            "@id": "https://ivfclinic.com/#organization"
+          }
+        }
+      ]
+    }
+  ],
+  "internalLinks": [
+    "/",
+    "/#about",
+    "/#book",
+    "/#events",
+    "/#locations",
+    "/#stories",
+    "/#suraksha",
+    "/#tools",
+    "/#treatments",
+    "/#videos",
+    "/about-bfi",
+    "/asthenospermia",
+    "/azoospermia",
+    "/blastocyst-culture-blastocyst-transfer",
+    "/blog",
+    "/conceive-naturally",
+    "/contact",
+    "/cryopreservation",
+    "/doctors",
+    "/doctors/deep-gajiwala",
+    "/doctors/falguni-bavishi",
+    "/doctors/himanshu-bavishi",
+    "/doctors/janki-bavishi",
+    "/doctors/parth-bavishi",
+    "/egg-donation",
+    "/embryo-donation",
+    "/endometriosis",
+    "/erectile-dysfunction",
+    "/fibroids",
+    "/icsi-treatment-intracytoplasmic-sperm-injection",
+    "/intra-uterine-insemination-iui",
+    "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+    "/ivf-failure",
+    "/laser-assisted-hatching",
+    "/locations/ahmedabad",
+    "/locations/bhuj",
+    "/locations/mumbai",
+    "/locations/surat",
+    "/locations/vadodara",
+    "/locations/varanasi",
+    "/magnetic-activated-cell-sorting-macs",
+    "/oligospermia",
+    "/ovarian-rejuvenation",
+    "/ovarian-reserve",
+    "/pcos",
+    "/pgt",
+    "/physiological-intracytoplasmic-sperm-injection-picsi",
+    "/prp-infertility",
+    "/services/3d-4d-sonography",
+    "/services/fetal-medicine",
+    "/services/high-risk-pregnancy-care",
+    "/services/normal-delivery",
+    "/services/painless-delivery",
+    "/services/twin-pregnancy-care",
+    "/sperm-donation",
+    "/spindle-view-icsi",
+    "/surgical-sperm-retrieval",
+    "/surrogacy",
+    "/varicocele",
+    "/what-is-ivf"
+  ]
+}

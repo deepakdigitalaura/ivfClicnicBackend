@@ -1,0 +1,1218 @@
+[
+  {
+    "slug": "3d-4d-sonography",
+    "name": "3D/4D Sonography",
+    "desc": "Advanced 3D & 4D ultrasound imaging for clear, detailed views of your baby's growth and wellbeing.",
+    "icon": "ScanLine",
+    "href": "/services/3d-4d-sonography",
+    "published": true,
+    "fallback": "/contact",
+    "schemaType": "MedicalTest",
+    "shortName": "3D/4D sonography",
+    "breadcrumbName": "3D/4D Sonography",
+    "reviewerSlug": "falguni-bavishi",
+    "lastReviewed": "2026-06-01",
+    "hero": {
+      "eyebrow": "Maternity Services",
+      "h1": "3D / 4D",
+      "h1Em": "Sonography",
+      "tagline": "See your baby like never before. Our advanced 3D and 4D ultrasound gives you a clear, lifelike view of your little one — while our specialists carefully track healthy growth and development.",
+      "badges": [
+        {
+          "badge": "Radiation-free & painless"
+        },
+        {
+          "badge": "Expert sonographers"
+        },
+        {
+          "badge": "Keepsake images"
+        }
+      ],
+      "image": "/assets/3d-4d sonography.png",
+      "imageAlt": "Expecting mother during a 3D/4D pregnancy sonography at Bavishi Fertility & Birthing"
+    },
+    "overview": {
+      "heading": {
+        "lead": "A clear, lifelike window",
+        "em": "into your pregnancy"
+      },
+      "paragraphs": [
+        {
+          "text": "3D/4D sonography is an advanced ultrasound technology that turns ordinary 2D scans into detailed, lifelike images of your developing baby. 3D produces sharp still pictures of your baby's face and body, while 4D adds real-time motion — so you can watch your baby yawn, stretch and move."
+        },
+        {
+          "text": "Beyond the joyful bonding experience, these scans are a powerful clinical tool. Our fetal medicine specialists use them to assess facial structure, limbs, spine and overall development, and to pick up certain anomalies early — all with the same safe, radiation-free sound-wave technology as a routine scan."
+        }
+      ],
+      "aside": {
+        "title": "Best time for a 4D scan",
+        "body": "24–34 weeks usually gives the clearest facial views. Anomaly-focused scans are also performed around 11–14 and 19–22 weeks, with extra scans for IVF, twin and high-risk pregnancies."
+      }
+    },
+    "benefits": {
+      "heading": {
+        "lead": "Why 3D/4D imaging",
+        "em": "matters"
+      },
+      "subtitle": "More clarity for you, more clinical detail for your doctor.",
+      "items": [
+        {
+          "item": "Crystal-clear, three-dimensional views of facial features and body structure"
+        },
+        {
+          "item": "Real-time monitoring of fetal movements, stretches and expressions (4D)"
+        },
+        {
+          "item": "Early detection of certain congenital anomalies"
+        },
+        {
+          "item": "Detailed assessment of limbs, spine and organ development"
+        },
+        {
+          "item": "A deeper bonding experience for parents and family"
+        },
+        {
+          "item": "Completely non-invasive, radiation-free and painless"
+        }
+      ]
+    },
+    "whoFor": {
+      "heading": {
+        "lead": "Who should",
+        "em": "consider it"
+      },
+      "subtitle": "Recommended at key milestones — and especially valuable for closely-watched pregnancies.",
+      "items": [
+        {
+          "item": "Parents wanting a clear, detailed look at their baby"
+        },
+        {
+          "item": "Anomaly screening around 11–14 and 19–22 weeks"
+        },
+        {
+          "item": "IVF and assisted-conception pregnancies"
+        },
+        {
+          "item": "Twin and multiple pregnancies"
+        },
+        {
+          "item": "High-risk pregnancies needing growth and wellbeing checks"
+        },
+        {
+          "item": "When earlier scans suggest a closer structural look is needed"
+        }
+      ]
+    },
+    "process": {
+      "heading": {
+        "lead": "What to",
+        "em": "expect"
+      },
+      "subtitle": "A relaxed, family-friendly appointment that usually takes 20–30 minutes.",
+      "steps": [
+        {
+          "icon": "ClipboardList",
+          "t": "No special prep",
+          "d": "No fasting needed — a light meal beforehand is perfectly fine. Wear comfortable clothing."
+        },
+        {
+          "icon": "Hand",
+          "t": "Comfortable positioning",
+          "d": "You recline on the examination bed and warm gel is applied to the abdomen."
+        },
+        {
+          "icon": "ScanLine",
+          "t": "Live imaging",
+          "d": "Real-time 3D/4D images appear on a large screen for you and your family to watch together."
+        },
+        {
+          "icon": "Eye",
+          "t": "Specialist assessment",
+          "d": "The sonographer and fetal medicine specialist review growth, structure and wellbeing."
+        },
+        {
+          "icon": "Sparkles",
+          "t": "Keepsake images",
+          "d": "You take home high-quality printed pictures of your baby's first portrait."
+        }
+      ],
+      "note": "If your baby is not well-positioned, we may suggest a short walk, a position change or a quick reschedule for the best views."
+    },
+    "whyUs": {
+      "heading": {
+        "lead": "Why choose",
+        "em": "Bavishi Fertility & Birthing"
+      },
+      "items": [
+        {
+          "icon": "Microscope",
+          "t": "Advanced equipment",
+          "d": "State-of-the-art 3D/4D ultrasound systems for the sharpest, most detailed imaging."
+        },
+        {
+          "icon": "Stethoscope",
+          "t": "Fetal medicine expertise",
+          "d": "Experienced specialists and trained sonographers interpret every scan."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "Complete monitoring",
+          "d": "2D, 3D, 4D and Doppler under one roof — including IVF, twin and high-risk care."
+        }
+      ]
+    },
+    "infoNote": {
+      "heading": {
+        "lead": "What is",
+        "em": "5D or 7D ultrasound?"
+      },
+      "paragraphs": [
+        {
+          "text": "Medically, there are only 2D, 3D and 4D ultrasounds. The so-called \"5D\" or \"7D\" scans are simply 3D/4D ultrasounds with enhanced software filters, colour effects or smoother rendering — not a newer or superior technology."
+        },
+        {
+          "text": "They do not provide any additional medical information or diagnostic advantage. The labels are largely marketing terms meant to make the experience sound more advanced than it truly is. At Bavishi Fertility & Birthing we focus on accurate, high-quality 3D/4D imaging interpreted by fetal medicine specialists — not gimmicks."
+        }
+      ]
+    },
+    "faqs": [
+      {
+        "q": "Is 3D/4D sonography safe for my baby?",
+        "a": "Yes. It uses the same harmless sound-wave technology as a standard 2D scan, with no radiation involved, and is performed by trained professionals."
+      },
+      {
+        "q": "Do I need to fast before the scan?",
+        "a": "No fasting is required. You can eat normally — a light meal beforehand is fine."
+      },
+      {
+        "q": "When is the best time for a 4D scan?",
+        "a": "Around 24–34 weeks usually gives the clearest views of your baby's face. Your doctor may also advise scans at other stages for medical assessment."
+      },
+      {
+        "q": "Can my family come along?",
+        "a": "Absolutely. Partners and close family are welcome to share the experience and watch your baby on the screen."
+      },
+      {
+        "q": "What if my baby isn't in a good position?",
+        "a": "The sonographer may ask you to change position or take a short walk, or suggest rescheduling — babies move, and we want the best possible images."
+      }
+    ],
+    "related": [
+      {
+        "key": "fetal-medicine"
+      },
+      {
+        "key": "high-risk-pregnancy-care"
+      },
+      {
+        "key": "twin-pregnancy-care"
+      }
+    ],
+    "seo": {
+      "metaTitle": "3D/4D Sonography in Ahmedabad — Bavishi Fertility & Birthing",
+      "metaDescription": "Advanced 3D & 4D pregnancy ultrasound at Bavishi Fertility & Birthing — lifelike images of your baby, safe radiation-free imaging and expert fetal assessment. Book your scan."
+    },
+    "_status": "published"
+  },
+  {
+    "slug": "painless-delivery",
+    "name": "Painless Delivery",
+    "desc": "Epidural-supported labour for a calm, comfortable and well-managed birth experience.",
+    "icon": "Feather",
+    "href": "/services/painless-delivery",
+    "published": true,
+    "fallback": "/contact",
+    "schemaType": "MedicalProcedure",
+    "shortName": "painless delivery",
+    "breadcrumbName": "Painless Delivery",
+    "reviewerSlug": "falguni-bavishi",
+    "lastReviewed": "2026-06-01",
+    "hero": {
+      "eyebrow": "Maternity Services",
+      "h1": "Painless",
+      "h1Em": "Delivery",
+      "tagline": "Childbirth without the fear of pain. Epidural-supported labour lets you stay calm, awake and fully present — for a comfortable, positive and well-managed birth experience.",
+      "badges": [
+        {
+          "badge": "Expert anaesthetists"
+        },
+        {
+          "badge": "Stay awake & aware"
+        },
+        {
+          "badge": "Continuous monitoring"
+        }
+      ],
+      "image": "/assets/hero-mother-baby.jpg",
+      "imageAlt": "Mother holding her newborn after a calm, painless delivery at Bavishi Fertility & Birthing"
+    },
+    "overview": {
+      "heading": {
+        "lead": "Comfortable, well-managed",
+        "em": "childbirth"
+      },
+      "paragraphs": [
+        {
+          "text": "Painless delivery uses epidural analgesia — medicine delivered near the nerves of the lower spine — to greatly reduce the pain of labour while you stay awake, aware and in control. It does not cause complete numbness, so you can still feel pressure and push effectively."
+        },
+        {
+          "text": "By taking the edge off contractions, an epidural helps you rest during long labour, conserve energy for the pushing stage and experience birth more positively. Our obstetric and anaesthesia teams manage every step together for the safety of both mother and baby."
+        }
+      ],
+      "aside": {
+        "title": "Does it lead to a C-section?",
+        "body": "No — current evidence shows epidural analgesia does not increase the chance of a caesarean. In many cases the relaxation it brings supports a smoother normal delivery."
+      }
+    },
+    "benefits": {
+      "heading": {
+        "lead": "The benefits of",
+        "em": "epidural birth"
+      },
+      "subtitle": "Calmer for mother, steady for baby.",
+      "items": [
+        {
+          "item": "Significant relief from labour pain and stress"
+        },
+        {
+          "item": "Stay awake, alert and emotionally present at birth"
+        },
+        {
+          "item": "Better rest during long labour — energy saved for pushing"
+        },
+        {
+          "item": "Often supports better cervical dilation and effective pushing"
+        },
+        {
+          "item": "Calmer mother means steadier fetal heart rate and blood flow"
+        },
+        {
+          "item": "Positive, less frightening birth memories"
+        }
+      ]
+    },
+    "whoFor": {
+      "heading": {
+        "lead": "Is it",
+        "em": "right for you"
+      },
+      "subtitle": "Suitable for most healthy pregnancies — your team will confirm after assessment.",
+      "items": [
+        {
+          "item": "Most healthy women planning a vaginal birth"
+        },
+        {
+          "item": "First-time mothers anxious about labour pain"
+        },
+        {
+          "item": "Long or anticipated prolonged labour"
+        },
+        {
+          "item": "Medical situations where controlled pain relief is advised"
+        },
+        {
+          "item": "Not suitable with certain bleeding/clotting issues or specific spine conditions"
+        },
+        {
+          "item": "Decided together after reviewing your medical history"
+        }
+      ]
+    },
+    "process": {
+      "heading": {
+        "lead": "How painless",
+        "em": "delivery works"
+      },
+      "subtitle": "A coordinated plan from your first consultation to after birth.",
+      "steps": [
+        {
+          "icon": "ClipboardList",
+          "t": "Pre-delivery consultation",
+          "d": "We review your history and discuss pain-relief options so you know exactly what to expect."
+        },
+        {
+          "icon": "Feather",
+          "t": "Epidural placement",
+          "d": "When active labour is established (around 4–5 cm), an experienced anaesthetist places the epidural."
+        },
+        {
+          "icon": "Activity",
+          "t": "Continuous monitoring",
+          "d": "Your baby's heart rate, your blood pressure and contractions are watched closely throughout."
+        },
+        {
+          "icon": "HeartPulse",
+          "t": "Comfortable labour",
+          "d": "Doses are adjusted as labour progresses, keeping you comfortable yet able to push."
+        },
+        {
+          "icon": "Baby",
+          "t": "Supported birth & recovery",
+          "d": "Trained nurses guide your pushing and positioning; mother and newborn are monitored after delivery."
+        }
+      ]
+    },
+    "whyUs": {
+      "heading": {
+        "lead": "Why choose",
+        "em": "Bavishi Fertility & Birthing"
+      },
+      "items": [
+        {
+          "icon": "Stethoscope",
+          "t": "Experienced anaesthetists",
+          "d": "Skilled specialists administer and manage your epidural for safe, reliable relief."
+        },
+        {
+          "icon": "Activity",
+          "t": "Continuous safety monitoring",
+          "d": "Mother and baby are monitored at every stage in a sterile, fully-equipped setting."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "24×7 maternity support",
+          "d": "Round-the-clock obstetric and emergency cover for complete peace of mind."
+        }
+      ]
+    },
+    "faqs": [
+      {
+        "q": "When during labour is the epidural given?",
+        "a": "Usually once active labour is established (around 4–5 cm dilation), though the timing is tailored to your comfort and your doctor's assessment."
+      },
+      {
+        "q": "Will an epidural increase my chance of a C-section?",
+        "a": "No. Research shows epidurals do not raise caesarean rates; the relaxation they provide can actually help a normal delivery progress."
+      },
+      {
+        "q": "Will it affect my baby or breastfeeding?",
+        "a": "The medication stays mostly around the spinal nerves with minimal transfer to the baby, and it does not affect your ability to breastfeed."
+      },
+      {
+        "q": "What if the epidural doesn't work fully?",
+        "a": "Your anaesthetist can reposition the catheter or adjust the dose to achieve proper, even pain relief."
+      },
+      {
+        "q": "Will I be able to push?",
+        "a": "Yes. An epidural reduces pain without full numbness, so you can still feel pressure and push effectively with your team's guidance."
+      }
+    ],
+    "related": [
+      {
+        "key": "normal-delivery"
+      },
+      {
+        "key": "high-risk-pregnancy-care"
+      },
+      {
+        "key": "twin-pregnancy-care"
+      }
+    ],
+    "seo": {
+      "metaTitle": "Painless Delivery (Epidural) in Ahmedabad — Bavishi Fertility & Birthing",
+      "metaDescription": "Painless normal delivery with epidural analgesia at Bavishi Fertility & Birthing — expert anaesthetists, continuous monitoring and calm, comfortable births. Book a consultation."
+    },
+    "_status": "published"
+  },
+  {
+    "slug": "normal-delivery",
+    "name": "Normal Delivery",
+    "desc": "Safe, natural vaginal birth guided by experienced obstetricians and a caring, watchful team.",
+    "icon": "Baby",
+    "href": "/services/normal-delivery",
+    "published": true,
+    "fallback": "/contact",
+    "schemaType": "MedicalProcedure",
+    "shortName": "normal delivery",
+    "breadcrumbName": "Normal Delivery",
+    "reviewerSlug": "falguni-bavishi",
+    "lastReviewed": "2026-06-01",
+    "hero": {
+      "eyebrow": "Maternity Services",
+      "h1": "Normal",
+      "h1Em": "Delivery",
+      "tagline": "A safe, natural birth, gently guided. Our obstetric team supports spontaneous vaginal delivery wherever it is safe — with watchful monitoring and full backup if plans need to change.",
+      "badges": [
+        {
+          "badge": "Experienced obstetricians"
+        },
+        {
+          "badge": "Watchful monitoring"
+        },
+        {
+          "badge": "Faster recovery"
+        }
+      ],
+      "image": "/assets/hero-mother-baby1.png",
+      "imageAlt": "Happy family after a safe normal delivery at Bavishi Fertility & Birthing"
+    },
+    "overview": {
+      "heading": {
+        "lead": "Natural birth,",
+        "em": "expertly supported"
+      },
+      "paragraphs": [
+        {
+          "text": "A normal (vaginal) delivery is the birth of your baby through the birth canal, the way nature intends. For most healthy pregnancies it is the safest route, offering quicker recovery, a shorter hospital stay and an easier start to bonding and breastfeeding."
+        },
+        {
+          "text": "Our experienced obstetricians and midwifery team support you through every stage of labour — encouraging movement and comfort measures, monitoring you and your baby closely, and stepping in promptly with the full resources of a maternity unit should the situation change."
+        }
+      ],
+      "aside": {
+        "title": "Pain relief is your choice",
+        "body": "A normal delivery can be fully natural, or supported with epidural analgesia for a painless experience. We help you choose what feels right for you."
+      }
+    },
+    "benefits": {
+      "heading": {
+        "lead": "Why a normal",
+        "em": "delivery"
+      },
+      "subtitle": "When it's safe, vaginal birth offers real advantages for mother and baby.",
+      "items": [
+        {
+          "item": "Faster recovery and a shorter hospital stay"
+        },
+        {
+          "item": "No major surgery and fewer associated risks"
+        },
+        {
+          "item": "Early skin-to-skin contact and easier breastfeeding"
+        },
+        {
+          "item": "Beneficial for the baby's lungs and immunity"
+        },
+        {
+          "item": "Lower risk of complications in future pregnancies"
+        },
+        {
+          "item": "An empowering, actively-involved birth experience"
+        }
+      ]
+    },
+    "whoFor": {
+      "heading": {
+        "lead": "Who can plan",
+        "em": "a normal birth"
+      },
+      "subtitle": "Most uncomplicated pregnancies — confirmed by ongoing assessment.",
+      "items": [
+        {
+          "item": "Healthy, low-risk single pregnancies"
+        },
+        {
+          "item": "Baby in a head-down (vertex) position"
+        },
+        {
+          "item": "No major medical or obstetric complications"
+        },
+        {
+          "item": "Adequate progress through labour"
+        },
+        {
+          "item": "Many mothers after a previous vaginal birth"
+        },
+        {
+          "item": "Selected cases after careful review, even with prior caesarean"
+        }
+      ]
+    },
+    "process": {
+      "heading": {
+        "lead": "Your labour,",
+        "em": "stage by stage"
+      },
+      "subtitle": "Watchful, supportive care from early labour to holding your baby.",
+      "steps": [
+        {
+          "icon": "ClipboardList",
+          "t": "Birth planning",
+          "d": "We discuss your preferences, pain-relief options and what to expect during antenatal visits."
+        },
+        {
+          "icon": "Clock",
+          "t": "Early & active labour",
+          "d": "You're supported with movement, breathing and comfort measures as contractions build."
+        },
+        {
+          "icon": "Activity",
+          "t": "Close monitoring",
+          "d": "Your baby's heart rate and your progress are checked regularly for safety."
+        },
+        {
+          "icon": "Baby",
+          "t": "Birth",
+          "d": "Guided pushing brings your baby into the world, with the team supporting a gentle delivery."
+        },
+        {
+          "icon": "HeartPulse",
+          "t": "Golden hour & recovery",
+          "d": "Skin-to-skin contact, first feed and watchful postnatal care for you and your newborn."
+        }
+      ],
+      "note": "If labour does not progress safely, our team is fully prepared to move to assisted or caesarean delivery without delay."
+    },
+    "whyUs": {
+      "heading": {
+        "lead": "Why choose",
+        "em": "Bavishi Fertility & Birthing"
+      },
+      "items": [
+        {
+          "icon": "Stethoscope",
+          "t": "Experienced obstetric team",
+          "d": "Senior obstetricians and midwives committed to safe, natural birth wherever possible."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "Full emergency backup",
+          "d": "On-site operation theatre and newborn care, ready instantly if plans need to change."
+        },
+        {
+          "icon": "Feather",
+          "t": "Painless option available",
+          "d": "Choose a fully natural birth or add epidural analgesia for a painless delivery."
+        }
+      ]
+    },
+    "faqs": [
+      {
+        "q": "Is a normal delivery safer than a C-section?",
+        "a": "For most low-risk pregnancies, vaginal birth is the safest option, with faster recovery and fewer surgical risks. Your doctor will advise the safest route for your specific situation."
+      },
+      {
+        "q": "Can I have a painless normal delivery?",
+        "a": "Yes. A normal delivery can be supported with an epidural for effective pain relief while you remain awake and able to push."
+      },
+      {
+        "q": "How long does recovery take?",
+        "a": "Most mothers recover quickly after a vaginal birth and are usually discharged sooner than after a caesarean, though every recovery is individual."
+      },
+      {
+        "q": "Can I have a normal delivery after a previous C-section?",
+        "a": "In selected cases, yes (VBAC). It depends on the reason for your earlier caesarean and your current pregnancy — our team will assess your suitability carefully."
+      },
+      {
+        "q": "What happens if labour doesn't progress?",
+        "a": "Your safety comes first. If labour stalls or concerns arise, the team is fully prepared to support an assisted or caesarean delivery promptly."
+      }
+    ],
+    "related": [
+      {
+        "key": "painless-delivery"
+      },
+      {
+        "key": "high-risk-pregnancy-care"
+      },
+      {
+        "key": "3d-4d-sonography"
+      }
+    ],
+    "seo": {
+      "metaTitle": "Normal (Vaginal) Delivery in Ahmedabad — Bavishi Fertility & Birthing",
+      "metaDescription": "Safe, natural normal delivery at Bavishi Fertility & Birthing — experienced obstetricians, watchful labour care and a calm birth environment with full emergency backup. Book a consultation."
+    },
+    "_status": "published"
+  },
+  {
+    "slug": "fetal-medicine",
+    "name": "Fetal Medicine",
+    "desc": "Specialised assessment and care for your baby's health and development throughout pregnancy.",
+    "icon": "Stethoscope",
+    "href": "/services/fetal-medicine",
+    "published": true,
+    "fallback": "/contact",
+    "schemaType": "MedicalTest",
+    "shortName": "fetal medicine",
+    "breadcrumbName": "Fetal Medicine",
+    "reviewerSlug": "falguni-bavishi",
+    "lastReviewed": "2026-06-01",
+    "hero": {
+      "eyebrow": "Maternity Services",
+      "h1": "Fetal",
+      "h1Em": "Medicine",
+      "tagline": "Caring for your baby before birth. Our fetal medicine specialists assess your baby's growth, structure and wellbeing — catching concerns early and guiding the right plan with clarity and reassurance.",
+      "badges": [
+        {
+          "badge": "Specialist assessment"
+        },
+        {
+          "badge": "Advanced scanning"
+        },
+        {
+          "badge": "Early detection"
+        }
+      ],
+      "image": "/assets/Fatal medicine.png",
+      "imageAlt": "Fetal medicine specialist reviewing a detailed pregnancy scan at Bavishi Fertility & Birthing"
+    },
+    "overview": {
+      "heading": {
+        "lead": "Specialised care",
+        "em": "for your baby"
+      },
+      "paragraphs": [
+        {
+          "text": "Fetal medicine is the branch of maternity care focused on the health, growth and development of your baby during pregnancy. Using advanced ultrasound and screening, our specialists assess fetal anatomy, monitor growth and identify conditions that may need closer attention — often well before birth."
+        },
+        {
+          "text": "Early, accurate information means better planning. Whether it's reassurance after a routine scan or detailed evaluation of a suspected concern, our team explains findings clearly and guides you through the next steps with compassion and expertise."
+        }
+      ],
+      "aside": {
+        "title": "Especially important for",
+        "body": "IVF and assisted-conception pregnancies, advanced maternal age, twins, and any pregnancy where earlier screening suggests a closer look is needed."
+      }
+    },
+    "benefits": {
+      "heading": {
+        "lead": "What fetal medicine",
+        "em": "offers"
+      },
+      "subtitle": "A complete picture of your baby's wellbeing through pregnancy.",
+      "items": [
+        {
+          "item": "First-trimester screening and NT (nuchal translucency) scans"
+        },
+        {
+          "item": "Detailed anomaly (TIFFA) scans of fetal anatomy"
+        },
+        {
+          "item": "Fetal growth and wellbeing monitoring"
+        },
+        {
+          "item": "Doppler studies of blood flow to the baby"
+        },
+        {
+          "item": "Early detection of structural and chromosomal concerns"
+        },
+        {
+          "item": "Expert counselling and a clear management plan"
+        }
+      ]
+    },
+    "whoFor": {
+      "heading": {
+        "lead": "Who benefits",
+        "em": "most"
+      },
+      "subtitle": "Recommended routinely, and essential for closely-watched pregnancies.",
+      "items": [
+        {
+          "item": "All pregnancies, for routine screening milestones"
+        },
+        {
+          "item": "IVF and assisted-conception pregnancies"
+        },
+        {
+          "item": "Advanced maternal age or previous pregnancy concerns"
+        },
+        {
+          "item": "Twin and multiple pregnancies"
+        },
+        {
+          "item": "When a scan or blood test flags a possible issue"
+        },
+        {
+          "item": "Families with a history of genetic or inherited conditions"
+        }
+      ]
+    },
+    "process": {
+      "heading": {
+        "lead": "How the",
+        "em": "assessment works"
+      },
+      "subtitle": "Thorough evaluation, explained in plain language.",
+      "steps": [
+        {
+          "icon": "ClipboardList",
+          "t": "History & timing",
+          "d": "We review your pregnancy and plan scans at the right gestational milestones."
+        },
+        {
+          "icon": "ScanLine",
+          "t": "Detailed scanning",
+          "d": "Advanced ultrasound assesses anatomy, growth and blood flow in fine detail."
+        },
+        {
+          "icon": "Eye",
+          "t": "Specialist review",
+          "d": "A fetal medicine specialist interprets the findings and looks for any concerns."
+        },
+        {
+          "icon": "Stethoscope",
+          "t": "Counselling",
+          "d": "Results are explained clearly, with time for your questions and worries."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "Care plan",
+          "d": "Together we agree the right monitoring or management plan for your baby."
+        }
+      ]
+    },
+    "whyUs": {
+      "heading": {
+        "lead": "Why choose",
+        "em": "Bavishi Fertility & Birthing"
+      },
+      "items": [
+        {
+          "icon": "Microscope",
+          "t": "Advanced imaging",
+          "d": "High-resolution 2D/3D/4D and Doppler for precise fetal assessment."
+        },
+        {
+          "icon": "Stethoscope",
+          "t": "Specialist-led care",
+          "d": "Experienced fetal medicine expertise, integrated with your maternity team."
+        },
+        {
+          "icon": "HeartPulse",
+          "t": "Continuity of care",
+          "d": "Seamless link from IVF and pregnancy through to delivery, all under one roof."
+        }
+      ]
+    },
+    "faqs": [
+      {
+        "q": "What is a fetal medicine specialist?",
+        "a": "A doctor with focused expertise in the health, growth and development of the baby during pregnancy, including detailed scanning and management of complex cases."
+      },
+      {
+        "q": "Which scans are part of fetal medicine?",
+        "a": "These typically include the first-trimester/NT scan, the detailed anomaly (TIFFA) scan, growth scans and Doppler studies — chosen to suit your pregnancy."
+      },
+      {
+        "q": "Are these scans safe?",
+        "a": "Yes. Ultrasound uses safe sound waves with no radiation, and is a routine, well-established part of pregnancy care."
+      },
+      {
+        "q": "Why is fetal medicine important for IVF pregnancies?",
+        "a": "IVF and twin pregnancies benefit from closer monitoring, and our fetal medicine team provides the detailed assessment these pregnancies often need."
+      },
+      {
+        "q": "What happens if a problem is found?",
+        "a": "Our specialists explain the findings clearly and guide you through the options and a tailored care plan, with compassionate support at every step."
+      }
+    ],
+    "related": [
+      {
+        "key": "3d-4d-sonography"
+      },
+      {
+        "key": "high-risk-pregnancy-care"
+      },
+      {
+        "key": "twin-pregnancy-care"
+      }
+    ],
+    "seo": {
+      "metaTitle": "Fetal Medicine Services in Ahmedabad — Bavishi Fertility & Birthing",
+      "metaDescription": "Specialist fetal medicine at Bavishi Fertility & Birthing — anomaly scans, NT/Doppler, fetal growth monitoring and expert assessment of your baby's health before birth. Book a consultation."
+    },
+    "_status": "published"
+  },
+  {
+    "slug": "high-risk-pregnancy-care",
+    "name": "High Risk Pregnancy Care",
+    "desc": "Expert monitoring and management for complex and high-risk pregnancies, every step of the way.",
+    "icon": "ShieldCheck",
+    "href": "/services/high-risk-pregnancy-care",
+    "published": true,
+    "fallback": "/contact",
+    "schemaType": "MedicalProcedure",
+    "shortName": "high-risk pregnancy care",
+    "breadcrumbName": "High Risk Pregnancy Care",
+    "reviewerSlug": "falguni-bavishi",
+    "lastReviewed": "2026-06-01",
+    "hero": {
+      "eyebrow": "Maternity Services",
+      "h1": "High Risk",
+      "h1Em": "Pregnancy Care",
+      "tagline": "When your pregnancy needs extra watching, you deserve extra expertise. Our specialists provide close monitoring and skilled management of complex pregnancies — protecting both mother and baby, every step of the way.",
+      "badges": [
+        {
+          "badge": "Specialist-led"
+        },
+        {
+          "badge": "Close monitoring"
+        },
+        {
+          "badge": "24×7 emergency backup"
+        }
+      ],
+      "image": "/assets/suraksha-parenthood.png",
+      "imageAlt": "Specialist monitoring a high-risk pregnancy at Bavishi Fertility & Birthing"
+    },
+    "overview": {
+      "heading": {
+        "lead": "Extra care for",
+        "em": "complex pregnancies"
+      },
+      "paragraphs": [
+        {
+          "text": "A high-risk pregnancy is one where the mother, the baby, or both face a greater chance of complications. This can be due to existing health conditions, pregnancy-related problems, age, or factors such as twins or an IVF conception. With the right care, the large majority of high-risk pregnancies still reach a safe, healthy delivery."
+        },
+        {
+          "text": "Our specialists provide closer, more frequent monitoring and a proactive plan tailored to your situation — coordinating obstetrics, fetal medicine and, where needed, other specialists, with the full resources of a maternity unit ready at all times."
+        }
+      ],
+      "aside": {
+        "title": "Reassurance matters",
+        "body": "\"High risk\" does not mean something will go wrong — it means we watch more closely and act early, so most pregnancies still reach a safe, happy delivery."
+      }
+    },
+    "benefits": {
+      "heading": {
+        "lead": "Conditions we",
+        "em": "monitor & manage"
+      },
+      "subtitle": "A proactive plan for the situations that need it most.",
+      "items": [
+        {
+          "item": "Gestational diabetes and high blood pressure / pre-eclampsia"
+        },
+        {
+          "item": "Twin and multiple pregnancies"
+        },
+        {
+          "item": "Pregnancies after IVF or with previous loss"
+        },
+        {
+          "item": "Advanced maternal age or pre-existing medical conditions"
+        },
+        {
+          "item": "Concerns with fetal growth or amniotic fluid"
+        },
+        {
+          "item": "Placental issues and other obstetric complications"
+        }
+      ]
+    },
+    "whoFor": {
+      "heading": {
+        "lead": "Who needs",
+        "em": "high-risk care"
+      },
+      "subtitle": "If any of these apply, specialist supervision is recommended.",
+      "items": [
+        {
+          "item": "Diabetes, thyroid, hypertension or heart conditions"
+        },
+        {
+          "item": "Previous miscarriage, preterm birth or pregnancy loss"
+        },
+        {
+          "item": "Pregnancy at a younger or older maternal age"
+        },
+        {
+          "item": "Twin or multiple pregnancy"
+        },
+        {
+          "item": "Conception through IVF or other fertility treatment"
+        },
+        {
+          "item": "Complications detected during this pregnancy"
+        }
+      ]
+    },
+    "process": {
+      "heading": {
+        "lead": "Our approach to",
+        "em": "your care"
+      },
+      "subtitle": "Watchful, coordinated and tailored to you.",
+      "steps": [
+        {
+          "icon": "ClipboardList",
+          "t": "Risk assessment",
+          "d": "A thorough review of your history and pregnancy identifies the specific risks to plan for."
+        },
+        {
+          "icon": "CalendarCheck",
+          "t": "Tailored monitoring",
+          "d": "More frequent visits, scans and tests are scheduled to track mother and baby."
+        },
+        {
+          "icon": "Activity",
+          "t": "Active management",
+          "d": "Conditions like blood pressure or diabetes are managed promptly to keep them controlled."
+        },
+        {
+          "icon": "Users",
+          "t": "Coordinated specialists",
+          "d": "Obstetrics, fetal medicine and other experts work together on your plan."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "Safe delivery planning",
+          "d": "Your delivery is planned in advance with full emergency and newborn-care backup."
+        }
+      ]
+    },
+    "whyUs": {
+      "heading": {
+        "lead": "Why choose",
+        "em": "Bavishi Fertility & Birthing"
+      },
+      "items": [
+        {
+          "icon": "Stethoscope",
+          "t": "Specialist expertise",
+          "d": "Experienced obstetricians and fetal medicine specialists for complex pregnancies."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "Complete backup",
+          "d": "On-site operation theatre and newborn care, ready around the clock."
+        },
+        {
+          "icon": "HeartPulse",
+          "t": "Continuity from IVF",
+          "d": "Especially attuned to IVF and assisted-conception pregnancies that need extra care."
+        }
+      ]
+    },
+    "faqs": [
+      {
+        "q": "What makes a pregnancy 'high risk'?",
+        "a": "Factors include existing conditions (like diabetes or hypertension), pregnancy complications, maternal age, multiple pregnancy, or conception through IVF. Your doctor assesses your individual risk."
+      },
+      {
+        "q": "Does high risk mean my baby is in danger?",
+        "a": "No. It means closer monitoring is needed. With specialist care, the great majority of high-risk pregnancies reach a safe, healthy delivery."
+      },
+      {
+        "q": "Will I need more scans and visits?",
+        "a": "Usually yes — more frequent check-ups, scans and tests help us track your wellbeing and your baby's, and act early if anything changes."
+      },
+      {
+        "q": "Can I still have a normal delivery?",
+        "a": "Often, yes, depending on your situation. Your delivery plan is decided with your safety and your baby's as the priority."
+      },
+      {
+        "q": "Is high-risk care important after IVF?",
+        "a": "IVF and twin pregnancies frequently benefit from closer supervision, which is a core strength of our maternity and fetal medicine team."
+      }
+    ],
+    "related": [
+      {
+        "key": "twin-pregnancy-care"
+      },
+      {
+        "key": "fetal-medicine"
+      },
+      {
+        "key": "painless-delivery"
+      }
+    ],
+    "seo": {
+      "metaTitle": "High Risk Pregnancy Care in Ahmedabad — Bavishi Fertility & Birthing",
+      "metaDescription": "Expert high-risk pregnancy care at Bavishi Fertility & Birthing — close monitoring and management of complications for mother and baby, with full emergency and newborn backup. Book a consultation."
+    },
+    "_status": "published"
+  },
+  {
+    "slug": "twin-pregnancy-care",
+    "name": "Twin Pregnancy Care",
+    "desc": "Dedicated, closely-monitored care for twin and multiple pregnancies through to safe delivery.",
+    "icon": "Users",
+    "href": "/services/twin-pregnancy-care",
+    "published": true,
+    "fallback": "/contact",
+    "schemaType": "MedicalProcedure",
+    "shortName": "twin pregnancy care",
+    "breadcrumbName": "Twin Pregnancy Care",
+    "reviewerSlug": "falguni-bavishi",
+    "lastReviewed": "2026-06-01",
+    "hero": {
+      "eyebrow": "Maternity Services",
+      "h1": "Twin Pregnancy",
+      "h1Em": "Care",
+      "tagline": "Two babies, twice the care. Twin and multiple pregnancies need closer monitoring and specialist expertise — and our team provides exactly that, guiding you safely through to a happy delivery.",
+      "badges": [
+        {
+          "badge": "Specialist monitoring"
+        },
+        {
+          "badge": "Fetal medicine expertise"
+        },
+        {
+          "badge": "Safe delivery planning"
+        }
+      ],
+      "image": "/assets/Twin pregnancy.png",
+      "imageAlt": "Specialist twin pregnancy care at Bavishi Fertility & Birthing"
+    },
+    "overview": {
+      "heading": {
+        "lead": "Dedicated care for",
+        "em": "twins & multiples"
+      },
+      "paragraphs": [
+        {
+          "text": "Carrying twins or more is a joyful but more demanding pregnancy. It carries a higher chance of conditions such as preterm birth, growth differences between babies, gestational diabetes and high blood pressure — so it needs closer monitoring and specialist expertise from early on."
+        },
+        {
+          "text": "Twin pregnancies are also more common after IVF, where our care begins. Our obstetric and fetal medicine teams track both babies' growth carefully, manage any complications early, and plan a safe delivery — so you can focus on welcoming your little ones."
+        }
+      ],
+      "aside": {
+        "title": "Common after IVF",
+        "body": "Multiple pregnancies occur more often with fertility treatment. As an IVF institute, we are especially experienced in caring for twins from conception through delivery."
+      }
+    },
+    "benefits": {
+      "heading": {
+        "lead": "What twin care",
+        "em": "includes"
+      },
+      "subtitle": "Extra attention for two (or more) growing babies.",
+      "items": [
+        {
+          "item": "Close monitoring of both babies' growth and wellbeing"
+        },
+        {
+          "item": "Specialist fetal medicine assessment and detailed scans"
+        },
+        {
+          "item": "Early detection and management of complications"
+        },
+        {
+          "item": "Monitoring for gestational diabetes and blood pressure"
+        },
+        {
+          "item": "Nutrition and lifestyle guidance for a twin pregnancy"
+        },
+        {
+          "item": "Careful, individualised delivery planning"
+        }
+      ]
+    },
+    "whoFor": {
+      "heading": {
+        "lead": "Who this",
+        "em": "is for"
+      },
+      "subtitle": "Specialist supervision is recommended for every multiple pregnancy.",
+      "items": [
+        {
+          "item": "All twin and higher-order multiple pregnancies"
+        },
+        {
+          "item": "Twin pregnancies conceived through IVF or fertility treatment"
+        },
+        {
+          "item": "Mothers with additional risk factors carrying multiples"
+        },
+        {
+          "item": "When scans show growth differences between babies"
+        },
+        {
+          "item": "Pregnancies needing extra reassurance and monitoring"
+        },
+        {
+          "item": "Planning a safe, well-timed delivery for multiples"
+        }
+      ]
+    },
+    "process": {
+      "heading": {
+        "lead": "How we care for",
+        "em": "you and your babies"
+      },
+      "subtitle": "More frequent, more detailed, tailored to a multiple pregnancy.",
+      "steps": [
+        {
+          "icon": "ClipboardList",
+          "t": "Early specialist review",
+          "d": "We confirm the type of twin pregnancy, which shapes the right monitoring plan."
+        },
+        {
+          "icon": "CalendarCheck",
+          "t": "Frequent monitoring",
+          "d": "More regular visits and scans track both babies' growth and your wellbeing."
+        },
+        {
+          "icon": "ScanLine",
+          "t": "Detailed fetal scans",
+          "d": "Specialist scans check growth balance, fluid and blood flow for each baby."
+        },
+        {
+          "icon": "Activity",
+          "t": "Proactive management",
+          "d": "Any complications are picked up early and managed promptly to keep you well."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "Safe delivery plan",
+          "d": "We plan the safest mode and timing of delivery, with full backup ready."
+        }
+      ]
+    },
+    "whyUs": {
+      "heading": {
+        "lead": "Why choose",
+        "em": "Bavishi Fertility & Birthing"
+      },
+      "items": [
+        {
+          "icon": "HeartPulse",
+          "t": "IVF-to-delivery continuity",
+          "d": "As a fertility institute, we care for many twin pregnancies from conception onward."
+        },
+        {
+          "icon": "Microscope",
+          "t": "Advanced fetal imaging",
+          "d": "Detailed scanning to monitor each baby's growth and wellbeing precisely."
+        },
+        {
+          "icon": "ShieldCheck",
+          "t": "Safe, equipped delivery",
+          "d": "Experienced teams and full emergency and newborn-care backup for multiples."
+        }
+      ]
+    },
+    "faqs": [
+      {
+        "q": "Why do twin pregnancies need special care?",
+        "a": "Carrying more than one baby raises the chance of preterm birth, growth differences and conditions like high blood pressure, so closer monitoring and specialist input improve outcomes."
+      },
+      {
+        "q": "Are twins more common after IVF?",
+        "a": "Yes, multiple pregnancies are more common with fertility treatment. As an IVF institute, we are highly experienced in caring for twin pregnancies."
+      },
+      {
+        "q": "Will I need more scans?",
+        "a": "Yes. Twin pregnancies are monitored more frequently to track both babies' growth, fluid and wellbeing throughout."
+      },
+      {
+        "q": "Can I deliver twins normally?",
+        "a": "Sometimes, depending on the babies' positions and your pregnancy. Your delivery plan is individualised with safety as the priority, with full backup available."
+      },
+      {
+        "q": "What complications are watched for?",
+        "a": "These include preterm labour, growth differences between babies, gestational diabetes, high blood pressure and, in shared-placenta twins, specific conditions your specialist will monitor."
+      }
+    ],
+    "related": [
+      {
+        "key": "high-risk-pregnancy-care"
+      },
+      {
+        "key": "fetal-medicine"
+      },
+      {
+        "key": "3d-4d-sonography"
+      }
+    ],
+    "seo": {
+      "metaTitle": "Twin & Multiple Pregnancy Care in Ahmedabad — Bavishi Fertility & Birthing",
+      "metaDescription": "Specialist twin and multiple pregnancy care at Bavishi Fertility & Birthing — close monitoring, expert fetal assessment and safe delivery planning for mother and babies. Book a consultation."
+    },
+    "_status": "published"
+  }
+]

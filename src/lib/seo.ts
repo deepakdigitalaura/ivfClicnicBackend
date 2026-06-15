@@ -22,7 +22,11 @@ export const SITE = {
   logo: "https://ivfclinic.com/logo.png",
   foundingDate: "1984",
   telephone: "+919712622288",
+  /** Formatted phone for on-page display (canonical `telephone` is for tel:/schema). */
+  telephoneDisplay: "+91 97126 22288",
   email: "drbavishi@ivfclinic.com",
+  /** WhatsApp digits for wa.me links. */
+  whatsapp: "919712622288",
   sameAs: [
     "https://www.instagram.com/bavishifertility/",
     "https://www.facebook.com/BavishiFertilityInstitute/",
@@ -57,47 +61,76 @@ export const abs = (path: string) =>
 
 type Json = Record<string, unknown>;
 
-/* ---------- Sitewide entities (emitted once, in the root layout) ---------- */
+/* ---------- Sitewide entities (emitted once, in the root layout) ----------
+ * The editable identity fields can be supplied from the CMS `site-settings`
+ * global; when omitted, each field falls back to the SITE constant so output
+ * is byte-identical to the pre-CMS version. The stable @ids (ORG_ID /
+ * WEBSITE_ID) and canonical `url` are intentionally NOT overridable — they are
+ * the entity-grounding anchors and must never change. `founders` and
+ * `medicalSpecialty` stay code-defined for now (not yet in the global). */
 
-export function organizationSchema(): Json {
+const DEFAULT_KNOWS_ABOUT = [
+  "In Vitro Fertilization",
+  "Intracytoplasmic Sperm Injection",
+  "Intrauterine Insemination",
+  "Male Infertility",
+  "Female Infertility",
+  "Fertility Preservation",
+  "Preimplantation Genetic Testing",
+];
+
+export type SiteIdentity = {
+  name?: string | null;
+  alternateName?: string | null;
+  legalName?: string | null;
+  logo?: string | null;
+  foundingDate?: string | null;
+  telephone?: string | null;
+  email?: string | null;
+  address?: Partial<Record<keyof typeof SITE.address, string | null>> | null;
+  awards?: string[] | null;
+  knowsAbout?: string[] | null;
+  sameAs?: string[] | null;
+};
+
+export function organizationSchema(identity?: SiteIdentity): Json {
+  const addr = {
+    streetAddress: identity?.address?.streetAddress ?? SITE.address.streetAddress,
+    addressLocality: identity?.address?.addressLocality ?? SITE.address.addressLocality,
+    addressRegion: identity?.address?.addressRegion ?? SITE.address.addressRegion,
+    postalCode: identity?.address?.postalCode ?? SITE.address.postalCode,
+    addressCountry: identity?.address?.addressCountry ?? SITE.address.addressCountry,
+  };
   return {
     "@type": ["MedicalOrganization", "MedicalClinic"],
     "@id": ORG_ID,
-    name: SITE.name,
-    alternateName: SITE.alternateName,
-    legalName: SITE.legalName,
+    name: identity?.name ?? SITE.name,
+    alternateName: identity?.alternateName ?? SITE.alternateName,
+    legalName: identity?.legalName ?? SITE.legalName,
     url: SITE.url,
-    logo: SITE.logo,
-    image: SITE.logo,
-    telephone: SITE.telephone,
-    email: SITE.email,
-    foundingDate: SITE.foundingDate,
+    logo: identity?.logo ?? SITE.logo,
+    image: identity?.logo ?? SITE.logo,
+    telephone: identity?.telephone ?? SITE.telephone,
+    email: identity?.email ?? SITE.email,
+    foundingDate: identity?.foundingDate ?? SITE.foundingDate,
     founders: [
       { "@type": "Person", name: "Dr. Himanshu Bavishi" },
       { "@type": "Person", name: "Dr. Falguni Bavishi" },
     ],
-    address: { "@type": "PostalAddress", ...SITE.address },
+    address: { "@type": "PostalAddress", ...addr },
     medicalSpecialty: ["Fertility", "ReproductiveMedicine", "Obstetrics", "Gynecology"],
-    award: SITE.awards,
-    sameAs: SITE.sameAs,
-    knowsAbout: [
-      "In Vitro Fertilization",
-      "Intracytoplasmic Sperm Injection",
-      "Intrauterine Insemination",
-      "Male Infertility",
-      "Female Infertility",
-      "Fertility Preservation",
-      "Preimplantation Genetic Testing",
-    ],
+    award: identity?.awards?.length ? identity.awards : SITE.awards,
+    sameAs: identity?.sameAs?.length ? identity.sameAs : SITE.sameAs,
+    knowsAbout: identity?.knowsAbout?.length ? identity.knowsAbout : DEFAULT_KNOWS_ABOUT,
   };
 }
 
-export function websiteSchema(): Json {
+export function websiteSchema(identity?: SiteIdentity): Json {
   return {
     "@type": "WebSite",
     "@id": WEBSITE_ID,
     url: SITE.url,
-    name: SITE.name,
+    name: identity?.name ?? SITE.name,
     publisher: { "@id": ORG_ID },
     inLanguage: "en-IN",
     potentialAction: {
@@ -109,8 +142,8 @@ export function websiteSchema(): Json {
 }
 
 /** The two sitewide nodes, ready to drop into a root @graph. */
-export function siteGraph(): Json[] {
-  return [organizationSchema(), websiteSchema()];
+export function siteGraph(identity?: SiteIdentity): Json[] {
+  return [organizationSchema(identity), websiteSchema(identity)];
 }
 
 /* ---------- Per-page building blocks ---------- */

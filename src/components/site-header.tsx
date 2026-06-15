@@ -2,162 +2,13 @@
 import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
 import { Phone, MessageCircle, Calendar, Globe, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
-const logo = "/assets/logo.png";
 import { useBodyLock } from "./conversion";
-import { destinationHref } from "@/lib/internal-links";
 import { doctorMenuData } from "@/lib/doctors";
+import { useHeader } from "@/components/header-provider";
+import type { HeaderNavItem, HeaderMegaItem, DoctorMenuData } from "@/lib/header";
 
-type MegaItem = { label: string; href: string; desc?: string; children?: { label: string; href: string }[] };
-type MegaCol = { heading: string; headingHref?: string; items: MegaItem[] };
-type NavItem = { label: string; href?: string; mega?: MegaCol[]; megaCols?: number; featured?: { title: string; desc: string; href: string }[]; hideFeatured?: boolean; doctors?: boolean };
-
-/* Compact, doctor-first "Doctors" mega menu data — see <DoctorsMegaPanel>.
- * Built from DOCTORS so it stays in sync as doctors are added. */
-const DOCTOR_MENU = doctorMenuData();
-
-const NAV: NavItem[] = [
-  {
-    label: "About",
-    mega: [
-      { heading: "", items: [
-        { label: "About Bavishi Fertility Institute", href: "/about-bfi" },
-        { label: "Why Bavishi Fertility Institute", href: "/#about" },
-        { label: "Simple Treatment", href: "/#about" },
-        { label: "Safe Treatment", href: "/#about" },
-        { label: "Smart Treatment", href: "/#about" },
-        { label: "Success Benchmarks", href: "/#about" },
-      ]},
-      { heading: "", items: [
-        { label: "History", href: "/#about" },
-        { label: "Our Team", href: "/#doctors" },
-        { label: "Infrastructure", href: "/#about" },
-        { label: "Suraksha Kavach Package", href: destinationHref("suraksha-kavach") },
-        { label: "Easy / Interest Free EMI", href: "/#about" },
-      ]},
-    ],
-  },
-  {
-    label: "Doctors",
-    doctors: true,
-  },
-  {
-    label: "IVF Treatments",
-    mega: [
-      { heading: "Advanced IVF Treatment", items: [
-        { label: "IVF", href: "/what-is-ivf" },
-        { label: "IVF Failure", href: "/ivf-failure" },
-        { label: "IUI", href: "/intra-uterine-insemination-iui" },
-        { label: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
-        { label: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
-        { label: "IMSI", href: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi" },
-        { label: "MACS", href: "/magnetic-activated-cell-sorting-macs" },
-        { label: "Spindle View ICSI", href: "/spindle-view-icsi" },
-        { label: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
-        { label: "Laser Hatching", href: "/laser-assisted-hatching" },
-      ]},
-      { heading: "Donor Services", items: [
-        { label: "Egg Donation", href: "/egg-donation" },
-        { label: "Sperm Donation", href: "/sperm-donation" },
-        { label: "Embryo Donation", href: "/embryo-donation" },
-      ]},
-      { heading: "Male Infertility", items: [
-        { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
-        { label: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
-        { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
-        { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
-        { label: "Varicocele / Micro Surgery", href: "/varicocele" },
-        { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
-      ]},
-      { heading: "Female Infertility", items: [
-        { label: "Conceive Naturally", href: "/conceive-naturally" },
-        { label: "PRP Infertility", href: "/prp-infertility" },
-        { label: "PCOS", href: "/pcos" },
-        { label: "Poor Ovarian Reserve / Low Egg Count / Low AMH", href: "/ovarian-reserve" },
-        { label: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
-        { label: "Fibroid", href: "/fibroids" },
-        { label: "Endometriosis", href: "/endometriosis" },
-      ]},
-      { heading: "Fertility Preservation", items: [
-        { label: "Cryopreservation", href: "/cryopreservation" },
-      ]},
-    ],
-  },
-  {
-    label: "Maternity Services",
-    hideFeatured: true,
-    mega: [
-      { heading: "", items: [
-        { label: "3D/4D Sonography", href: "/services/3d-4d-sonography" },
-        { label: "Painless Delivery", href: "/services/painless-delivery" },
-        { label: "Normal Delivery", href: "/services/normal-delivery" },
-      ]},
-      { heading: "", items: [
-        { label: "Fetal Medicine", href: "/services/fetal-medicine" },
-        { label: "High Risk Pregnancy Care", href: "/services/high-risk-pregnancy-care" },
-        { label: "Twin Pregnancy Care", href: "/services/twin-pregnancy-care" },
-      ]},
-    ],
-  },
-  {
-    label: "Locations",
-    megaCols: 4,
-    mega: [
-      { heading: "Ahmedabad", headingHref: "/locations/ahmedabad", items: [
-        { label: "Paldi", href: "/locations/ahmedabad/paldi" },
-        { label: "Sindhu Bhavan Road", href: "/locations/ahmedabad/sindhu-bhavan-road" },
-        { label: "Nikol", href: "/locations/ahmedabad/nikol" },
-      ]},
-      { heading: "Mumbai", headingHref: "/locations/mumbai", items: [
-        { label: "Ghatkopar", href: "/locations/mumbai/ghatkopar" },
-        { label: "Thane", href: "/locations/mumbai/thane" },
-        { label: "Vile Parle", href: "/locations/mumbai/vile-parle" },
-        { label: "Borivali", href: "/locations/mumbai/borivali" },
-        { label: "Vashi", href: "/locations/mumbai/vashi" },
-      ]},
-      // Single-centre cities: heading is plain text (no separate hub) — the
-      // centre link below navigates straight to the bare city path.
-      { heading: "Vadodara", items: [{ label: "Vadodara Centre", href: "/locations/vadodara" }] },
-      { heading: "Surat", items: [{ label: "Surat Centre", href: "/locations/surat" }] },
-      { heading: "Bhuj", items: [{ label: "Bhuj Centre", href: "/locations/bhuj" }] },
-      { heading: "Bhavnagar", items: [{ label: "Bhavnagar Centre", href: "/locations/bhavnagar" }] },
-      { heading: "Anand", items: [{ label: "Anand Centre", href: "/locations/anand" }] },
-      { heading: "Varanasi", items: [{ label: "Varanasi Centre", href: "/locations/varanasi" }] },
-    ],
-  },
-  {
-    label: "Calculators",
-    mega: [
-      { heading: "Fertility & IVF", items: [
-        { label: "IVF Success Rate Calculator", href: "/#tools" },
-        { label: "IVF Cost Calculator", href: "/#tools" },
-        { label: "AMH Level Interpreter", href: "/#tools" },
-        { label: "Sperm Analysis Calculator", href: "/#tools" },
-      ]},
-      { heading: "Conception & Pregnancy", items: [
-        { label: "Ovulation Calculator", href: "/#tools" },
-        { label: "Fertile Period Calculator", href: "/#tools" },
-        { label: "Natural Pregnancy Calculator", href: "/#tools" },
-        { label: "Miscarriage Risk Calculator", href: "/#tools" },
-      ]},
-    ],
-  },
-  {
-    label: "Resources",
-    mega: [
-      { heading: "Learn", items: [
-        { label: "Blog", href: "/#blogs" },
-        { label: "Success Stories", href: "/#stories" },
-        { label: "Videos", href: "/#videos" },
-        { label: "Events & Webinars", href: "/#events" },
-      ]},
-      { heading: "Tools", items: [
-        { label: "Fertility Calculators", href: "/#tools" },
-        { label: "Check IVF Eligibility", href: "/#book" },
-      ]},
-    ],
-  },
-  { label: "Contact", href: "/contact" },
-];
+// Hardcoded fallback — used only when the CMS has no doctors with navRole set yet.
+const DOCTOR_MENU_FALLBACK = doctorMenuData();
 
 const LANGS = [
   { code: "en", label: "English" },
@@ -167,9 +18,17 @@ const LANGS = [
 ];
 
 export function SiteHeader({
-  logoSrc = logo,
-  logoAlt = "Bavishi Fertility Institute",
+  logoSrc,
+  logoAlt,
 }: { logoSrc?: string; logoAlt?: string } = {}) {
+  // Header content is CMS-managed via the `header` global (Phase 3.5B, Item 4):
+  // the root layout resolves it (getHeader) and passes it through HeaderProvider;
+  // here we read it with useHeader(), which falls back to HEADER_DEFAULTS so the
+  // markup is byte-identical when the CMS is empty. Per-page logo overrides still
+  // win (e.g. the maternity service page) — props take precedence over branding.
+  const { branding, nav: NAV, cta } = useHeader();
+  const finalLogoSrc = logoSrc ?? branding.logoUrl;
+  const finalLogoAlt = logoAlt ?? branding.logoAlt;
   const [hover, setHover] = useState<string | null>(null);
   const [lang, setLang] = useState("en");
   const [langOpen, setLangOpen] = useState(false);
@@ -249,7 +108,7 @@ export function SiteHeader({
       >
         <div className="container-px mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-6">
           <a href="/" className="flex shrink-0 items-center gap-3">
-            <img src={logoSrc} alt={logoAlt} className="h-12 w-auto" />
+            <img src={finalLogoSrc} alt={finalLogoAlt} className="h-12 w-auto" />
           </a>
 
           {/* Desktop nav */}
@@ -262,6 +121,7 @@ export function SiteHeader({
                 >
                   <a
                     href={item.href || (item.doctors ? "/doctors" : "#")}
+                    {...(item.openInNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                     className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 transition-colors hover:bg-white/60 hover:text-[color:var(--rose)] ${hover === item.label ? "text-[color:var(--rose)]" : ""}`}
                   >
                     {item.label}
@@ -274,8 +134,8 @@ export function SiteHeader({
 
           {/* Right cluster */}
           <div className="flex shrink-0 items-center gap-2">
-            <a href="/#book" className="hidden items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-semibold text-white shadow-soft hover:brightness-110 transition md:inline-flex">
-              <Calendar className="h-4 w-4" /> Book Appointment
+            <a href={cta.href} className="hidden items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-semibold text-white shadow-soft hover:brightness-110 transition md:inline-flex">
+              <Calendar className="h-4 w-4" /> {cta.label}
             </a>
 
             <button
@@ -297,7 +157,7 @@ export function SiteHeader({
             onMouseLeave={scheduleClose}
           >
             {activeItem.doctors ? (
-              <DoctorsMegaPanel />
+              <DoctorsMegaPanel menu={activeItem.doctorMenu} />
             ) : (
             <div className="container-px mx-auto max-w-[1400px] py-10">
               <div className="grid gap-x-8 gap-y-7" style={{ gridTemplateColumns: `repeat(${activeItem.megaCols ?? activeItem.mega!.length}, minmax(0, 1fr))` }}>
@@ -352,7 +212,7 @@ export function SiteHeader({
           <div className="absolute inset-0 bg-[color:var(--plum)]/40 backdrop-blur-sm" onClick={() => setMobile(false)} />
           <div className="absolute right-0 top-0 h-full w-[88%] max-w-sm overflow-y-auto bg-white shadow-lift">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <img src={logoSrc} alt={logoAlt} className="h-11 w-auto" />
+              <img src={finalLogoSrc} alt={finalLogoAlt} className="h-11 w-auto" />
               <button type="button" onClick={() => setMobile(false)} aria-label="Close menu" className="grid h-9 w-9 place-items-center rounded-full border border-border text-[color:var(--plum)]">
                 <X className="h-4 w-4" />
               </button>
@@ -380,8 +240,8 @@ export function SiteHeader({
             </nav>
 
             <div className="space-y-2 border-t border-border px-5 py-5">
-              <a href="/#book" className="flex items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
-                <Calendar className="h-4 w-4" /> Book Appointment
+              <a href={cta.href} className="flex items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
+                <Calendar className="h-4 w-4" /> {cta.label}
               </a>
               <div className="grid grid-cols-2 gap-2">
                 <a href="tel:+919712622288" className="flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-[color:var(--plum)]"><Phone className="h-4 w-4" /> Call</a>
@@ -395,12 +255,17 @@ export function SiteHeader({
   );
 }
 
-function MobileNavItem({ item, onNavigate }: { item: NavItem; onNavigate: () => void }) {
+function MobileNavItem({ item, onNavigate }: { item: HeaderNavItem; onNavigate: () => void }) {
   const [open, setOpen] = useState(false);
-  if (item.doctors) return <MobileDoctorsItem onNavigate={onNavigate} />;
+  if (item.doctors) return <MobileDoctorsItem onNavigate={onNavigate} menu={item.doctorMenu} />;
   if (!item.mega) {
     return (
-      <a href={item.href || "#"} onClick={onNavigate} className="block rounded-lg px-3 py-3 text-sm font-semibold text-[color:var(--plum)] hover:bg-[color:var(--ivory)]">
+      <a
+        href={item.href || "#"}
+        {...(item.openInNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
+        onClick={onNavigate}
+        className="block rounded-lg px-3 py-3 text-sm font-semibold text-[color:var(--plum)] hover:bg-[color:var(--ivory)]"
+      >
         {item.label}
       </a>
     );
@@ -441,7 +306,7 @@ function MobileNavItem({ item, onNavigate }: { item: NavItem; onNavigate: () => 
   );
 }
 
-function MobileSubItem({ item, onNavigate }: { item: MegaItem; onNavigate: () => void }) {
+function MobileSubItem({ item, onNavigate }: { item: HeaderMegaItem; onNavigate: () => void }) {
   const [open, setOpen] = useState(false);
   return (
     <li>
@@ -467,8 +332,8 @@ function MobileSubItem({ item, onNavigate }: { item: MegaItem; onNavigate: () =>
 /* ---------- Doctors mega — compact, doctor-first (desktop) ----------
  * Section 1 features the senior promoters; Section 2 lists every other
  * specialist doctor-first with their city as a muted secondary label. */
-function DoctorsMegaPanel() {
-  const { senior, specialists } = DOCTOR_MENU;
+function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
+  const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   return (
     <div className="container-px mx-auto max-w-[1400px] py-7">
       {/* Senior Specialists */}
@@ -510,9 +375,9 @@ function DoctorsMegaPanel() {
 }
 
 /* ---------- Doctors mega — compact, doctor-first (mobile) ---------- */
-function MobileDoctorsItem({ onNavigate }: { onNavigate: () => void }) {
+function MobileDoctorsItem({ onNavigate, menu }: { onNavigate: () => void; menu?: DoctorMenuData }) {
   const [open, setOpen] = useState(false);
-  const { senior, specialists } = DOCTOR_MENU;
+  const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   const row = (d: { name: string; href: string; city: string }) => (
     <li key={d.href}>
       <a href={d.href} onClick={onNavigate} className="flex items-baseline justify-between gap-3 py-1.5 text-sm text-[color:var(--plum)]/80 hover:text-[color:var(--rose)]">

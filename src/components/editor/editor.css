@@ -1,0 +1,237 @@
+/* Inline editor chrome + click-to-edit affordances. Scoped to .bfi-editing /
+ * .bfi-editbar / .bfi-editable so it has zero effect on the public site.
+ *
+ * Colours come from the SAME theme tokens as the website (var(--rose) etc.) so
+ * the editor's pink is byte-for-byte the brand pink — no more "editor pink looks
+ * different" shade drift. The fallback after each var is the literal token value
+ * (from src/styles.css) for the rare case the editor renders outside :root. */
+.bfi-editbar,
+.bfi-floattool,
+.bfi-editable,
+.bfi-launch {
+  --bfi-rose: var(--rose, oklch(0.65 0.21 0));
+  --bfi-rose-deep: color-mix(in oklab, var(--rose, oklch(0.65 0.21 0)), black 14%);
+  --bfi-plum: var(--plum, oklch(0.27 0.09 305));
+}
+
+.bfi-editbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 9999;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 18px;
+  background: oklch(0.2 0.075 305); /* brand plum-deep */
+  color: #fff;
+  box-shadow: 0 2px 14px rgba(0, 0, 0, 0.25);
+  font-family: var(--font-sans, system-ui, sans-serif);
+}
+.bfi-editbar__brand {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.9rem;
+}
+.bfi-editbar__brand strong { font-weight: 700; }
+.bfi-editbar__dot {
+  width: 9px;
+  height: 9px;
+  border-radius: 999px;
+  background: var(--bfi-rose);
+  box-shadow: 0 0 0 4px color-mix(in oklab, var(--bfi-rose) 25%, transparent);
+}
+.bfi-editbar__hint {
+  flex: 1;
+  text-align: center;
+  font-size: 0.82rem;
+  color: oklch(0.85 0.02 305);
+}
+.bfi-editbar__actions { display: flex; align-items: center; gap: 10px; }
+.bfi-btn {
+  border: 0;
+  border-radius: 9px;
+  padding: 9px 16px;
+  font-size: 0.85rem;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+}
+.bfi-btn--save {
+  background: var(--bfi-rose);
+  color: #fff;
+}
+.bfi-btn--save:hover:not(:disabled) { background: var(--bfi-rose-deep); }
+.bfi-btn--save:disabled { opacity: 0.5; cursor: default; }
+.bfi-btn--ghost {
+  background: transparent;
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.3);
+}
+.bfi-btn--ghost:hover { background: rgba(255, 255, 255, 0.1); }
+
+/* Inline error banner — shown below the toolbar when a save/upload fails.
+ * Uses role="alert" so screen readers announce it without focus change. */
+.bfi-editbar__error {
+  position: fixed;
+  top: 56px;
+  left: 0;
+  right: 0;
+  z-index: 9998;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 18px;
+  background: oklch(0.42 0.18 25); /* dark red */
+  color: #fff;
+  font-family: var(--font-sans, system-ui, sans-serif);
+  font-size: 0.85rem;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.2);
+}
+.bfi-editbar__error-msg { flex: 1; white-space: pre-wrap; }
+.bfi-editbar__error-close {
+  border: 0;
+  background: rgba(255, 255, 255, 0.18);
+  color: #fff;
+  border-radius: 6px;
+  padding: 3px 9px;
+  font-size: 0.85rem;
+  cursor: pointer;
+  flex-shrink: 0;
+}
+.bfi-editbar__error-close:hover { background: rgba(255, 255, 255, 0.3); }
+
+/* Push the page down so the bar never covers the hero. */
+.bfi-edit-canvas { padding-top: 56px; }
+
+/* Click-to-edit affordances on the live page. */
+.bfi-editable {
+  cursor: text;
+  outline: 1px dashed transparent;
+  outline-offset: 3px;
+  border-radius: 3px;
+  transition: outline-color 0.12s ease, background 0.12s ease;
+}
+.bfi-editable:hover {
+  outline-color: color-mix(in oklab, var(--bfi-rose) 60%, transparent);
+  background: color-mix(in oklab, var(--bfi-rose) 6%, transparent);
+}
+.bfi-editable:focus { outline: 2px solid var(--bfi-rose); background: color-mix(in oklab, var(--bfi-rose) 8%, transparent); }
+.bfi-editable[data-bfi-selected="true"] { outline: 2px solid var(--bfi-rose); }
+.bfi-editable-img { cursor: pointer; }
+.bfi-editable-img:hover { outline-style: solid; }
+
+/* Floating contextual mini-toolbar (Word-style) near the selected element. */
+.bfi-floattool {
+  position: fixed;
+  z-index: 10000;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 5px 7px;
+  background: oklch(0.2 0.075 305);
+  color: #fff;
+  border-radius: 10px;
+  box-shadow: 0 8px 22px rgba(0, 0, 0, 0.28);
+  font-size: 0.8rem;
+  white-space: nowrap;
+  animation: bfiPop 0.12s ease-out;
+}
+.bfi-floattool::after {
+  content: "";
+  position: absolute;
+  bottom: -5px;
+  left: 16px;
+  width: 10px;
+  height: 10px;
+  background: inherit;
+  transform: rotate(45deg);
+}
+@keyframes bfiPop {
+  from { opacity: 0; transform: translateY(4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.bfi-floattool__label {
+  padding: 0 4px;
+  color: oklch(0.85 0.02 305);
+  font-weight: 600;
+}
+.bfi-floattool__btn {
+  border: 0;
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+}
+.bfi-floattool__btn:hover { background: rgba(255, 255, 255, 0.22); }
+.bfi-floattool__btn--primary { background: var(--bfi-rose); }
+.bfi-floattool__btn--primary:hover { background: var(--bfi-rose-deep); }
+.bfi-floattool__btn--icon { min-width: 30px; padding: 5px 8px; font-size: 0.9rem; }
+.bfi-floattool__sep { width: 1px; align-self: stretch; background: rgba(255, 255, 255, 0.18); margin: 2px 2px; }
+.bfi-floattool__swatch {
+  width: 18px;
+  height: 18px;
+  border-radius: 5px;
+  border: 1px solid rgba(255, 255, 255, 0.35);
+  cursor: pointer;
+  padding: 0;
+}
+.bfi-floattool__swatch:hover { transform: scale(1.12); }
+.bfi-floattool__input {
+  background: rgba(255, 255, 255, 0.12);
+  color: #fff;
+  border: 1px solid rgba(255, 255, 255, 0.28);
+  border-radius: 7px;
+  padding: 5px 10px;
+  font-size: 0.78rem;
+  outline: none;
+  width: 220px;
+}
+.bfi-floattool__input::placeholder { color: rgba(255, 255, 255, 0.45); }
+.bfi-floattool__input:focus { border-color: var(--bfi-rose); }
+.bfi-editable-video { cursor: pointer; }
+.bfi-editable-video:hover { outline-style: solid; }
+
+/* Pages & Builder launchpad (/studio/pages) */
+.bfi-launch {
+  min-height: 100vh;
+  background: oklch(0.975 0.006 60);
+  padding: 28px clamp(16px, 5vw, 56px);
+  font-family: var(--font-sans, system-ui, sans-serif);
+  color: oklch(0.2 0.075 305);
+}
+.bfi-launch__head { display: flex; align-items: flex-start; justify-content: space-between; gap: 16px; margin-bottom: 24px; }
+.bfi-launch__title { margin: 0; font-size: 1.9rem; font-weight: 800; }
+.bfi-launch__sub { margin: 6px 0 0; color: oklch(0.5 0.04 305); max-width: 46rem; }
+.bfi-launch__back { background: #fff; color: oklch(0.2 0.075 305); border: 1px solid oklch(0.9 0.012 50); }
+.bfi-launch__grid { display: grid; gap: 14px; grid-template-columns: repeat(auto-fill, minmax(230px, 1fr)); }
+.bfi-launch__card {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 18px;
+  background: #fff;
+  border: 1px solid oklch(0.9 0.012 50);
+  border-radius: 14px;
+  text-decoration: none;
+  color: inherit;
+  transition: border-color 0.15s ease, transform 0.15s ease, box-shadow 0.15s ease;
+}
+.bfi-launch__card:hover { border-color: var(--bfi-rose); transform: translateY(-2px); box-shadow: 0 10px 26px oklch(0.2 0.06 305 / 0.1); }
+.bfi-launch__card--soon { opacity: 0.6; }
+.bfi-launch__name { font-size: 1.1rem; font-weight: 700; }
+.bfi-launch__desc { font-size: 0.82rem; color: oklch(0.5 0.04 305); }
+.bfi-launch__open { margin-top: 6px; font-size: 0.82rem; font-weight: 700; color: var(--bfi-rose-deep); }
+.bfi-launch__soon { margin-top: 6px; font-size: 0.75rem; font-weight: 700; color: oklch(0.55 0.03 305); }
+
+/* In edit mode, hide the public floating widgets so they don't fight the bar. */
+.bfi-editing [data-floating-cta],
+.bfi-editing [data-mobile-bar] { display: none !important; }

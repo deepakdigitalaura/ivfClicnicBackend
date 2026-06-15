@@ -23,6 +23,7 @@
  * ===================================================================== */
 
 import { SITE, ORG_ID, abs } from "@/lib/seo";
+import { mediaUrl, type UploadValue } from "@/fields/image";
 
 export type Doctor = {
   slug: string;
@@ -61,6 +62,26 @@ export type Doctor = {
    *  founder). The profile shows a single "visits across cities" card listing
    *  `cities` instead of a per-centre contact card for each branch. */
   visitsAllCentres?: boolean;
+  /** Editable overrides for the static section labels on this doctor's profile
+   *  page (eyebrows/headings/subtitles). Empty/missing → component defaults. */
+  profileLabels?: {
+    aboutEyebrow?: string;
+    treatmentsEyebrow?: string;
+    consultsEyebrow?: string;
+    consultsSubtitle?: string;
+    visitsHeading?: string;
+    visitsParagraph?: string;
+    doctorSpeakEyebrow?: string;
+    doctorSpeakSubtitle?: string;
+    storiesEyebrow?: string;
+    storiesSubtitle?: string;
+    ctaHeading?: string;
+    aboutTitle?: string;
+    treatmentsTitle?: string;
+    storiesTitle?: string;
+    consultsTitle?: string;
+    doctorSpeakTitle?: string;
+  };
 };
 
 /* Master treatment list. Every doctor is shown as offering the full range
@@ -666,5 +687,246 @@ export function reviewerNode(d: Doctor): Record<string, unknown> {
     url: abs(doctorUrl(d.slug)),
     jobTitle: d.role,
     ...(d.credentials ? { hasCredential: d.credentials } : {}),
+  };
+}
+
+/* =====================================================================
+ * CMS resolver (Wave 4.3) — map a `doctors` collection doc onto the typed
+ * Doctor model the profile page + physicianSchema already consume, falling
+ * back PER FIELD to the code default (doctorBySlug) so a missing/partial CMS
+ * doc renders byte-identically (same convention as src/lib/services.ts and
+ * src/lib/homepage.ts). Kept here because this module is already client-safe
+ * (no payload / server-only import) and owns the Doctor type + DOCTORS
+ * defaults. ONLY the two /doctors* routes use this; the header menu, location/
+ * treatment/service consumers stay code-driven from DOCTORS.
+ *
+ * String-array fields are stored in the collection as arrays of `{ value }`
+ * rows (uniform subfield name), so the source carries them wrapped.
+ * ===================================================================== */
+type ValueRow = { value?: string | null };
+
+/** Loose source shape (decoupled from generated payload-types, like ServiceSource). */
+export type DoctorSource =
+  | {
+      name?: string | null;
+      credentials?: string | null;
+      specialty?: string | null;
+      medicalSpecialty?: ValueRow[] | null;
+      role?: string | null;
+      image?: string | null;
+      photo?: UploadValue;
+      experienceLabel?: string | null;
+      experienceYears?: number | null;
+      cities?: ValueRow[] | null;
+      locations?: ValueRow[] | null;
+      treatments?: ValueRow[] | null;
+      shortBio?: string | null;
+      bio?: ValueRow[] | null;
+      knowsAbout?: ValueRow[] | null;
+      alumniOf?: ValueRow[] | null;
+      memberOf?: ValueRow[] | null;
+      awards?: ValueRow[] | null;
+      training?: ValueRow[] | null;
+      publications?: ValueRow[] | null;
+      languages?: ValueRow[] | null;
+      sameAs?: ValueRow[] | null;
+      verified?: boolean | null;
+      visitsAllCentres?: boolean | null;
+      navRole?: "senior-specialist" | "specialist" | null;
+      navOrder?: number | null;
+      profileLabels?: {
+        aboutEyebrow?: string | null;
+        treatmentsEyebrow?: string | null;
+        consultsEyebrow?: string | null;
+        consultsSubtitle?: string | null;
+        visitsHeading?: string | null;
+        visitsParagraph?: string | null;
+        doctorSpeakEyebrow?: string | null;
+        doctorSpeakSubtitle?: string | null;
+        storiesEyebrow?: string | null;
+        storiesSubtitle?: string | null;
+        ctaHeading?: string | null;
+        aboutTitle?: string | null;
+        treatmentsTitle?: string | null;
+        storiesTitle?: string | null;
+        consultsTitle?: string | null;
+        doctorSpeakTitle?: string | null;
+      } | null;
+    }
+  | null
+  | undefined;
+
+/** Unwrap a `{ value }[]` CMS array to a string[]; `undefined` when empty. */
+const rows = (a: ValueRow[] | null | undefined): string[] | undefined =>
+  a && a.length ? a.map((x) => x.value ?? "") : undefined;
+
+/**
+ * Resolve a doctor: overlay the CMS `src` onto the typed code default for `slug`,
+ * field-by-field. Returns `undefined` only when both slug is unknown AND src is
+ * absent. Handles three cases:
+ *  1. Code + DB doc   → per-field overlay (original behaviour)
+ *  2. Code only       → return code default (DB not yet seeded)
+ *  3. DB only         → build from src (admin-created doctor, no code entry)
+ */
+export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefined {
+  const def = doctorBySlug(slug);
+  if (!def && !src) return undefined;
+  if (!src) return def!;
+  if (!def) {
+    // Admin-created doctor: no code entry, build entirely from the DB doc.
+    return {
+      slug,
+      name: src.name ?? "",
+      credentials: src.credentials ?? "",
+      specialty: src.specialty ?? "",
+      medicalSpecialty: rows(src.medicalSpecialty) ?? [],
+      role: src.role ?? "",
+      image: mediaUrl(src.photo) ?? src.image ?? "/assets/doctors/default.jpg",
+      experienceLabel: src.experienceLabel ?? "",
+      experienceYears: src.experienceYears ?? undefined,
+      cities: rows(src.cities) ?? [],
+      locations: rows(src.locations) ?? [],
+      treatments: rows(src.treatments) ?? [],
+      shortBio: src.shortBio ?? "",
+      bio: rows(src.bio) ?? [],
+      knowsAbout: rows(src.knowsAbout) ?? [],
+      alumniOf: rows(src.alumniOf) ?? [],
+      memberOf: rows(src.memberOf) ?? [],
+      awards: rows(src.awards) ?? [],
+      training: rows(src.training) ?? undefined,
+      publications: rows(src.publications) ?? undefined,
+      languages: rows(src.languages) ?? [],
+      sameAs: rows(src.sameAs) ?? [],
+      verified: src.verified ?? false,
+      ...(src.visitsAllCentres ? { visitsAllCentres: true } : {}),
+      profileLabels: profileLabels(src.profileLabels),
+    };
+  }
+  return {
+    slug: def.slug,
+    name: src.name || def.name,
+    credentials: src.credentials ?? def.credentials,
+    specialty: src.specialty || def.specialty,
+    medicalSpecialty: rows(src.medicalSpecialty) ?? def.medicalSpecialty,
+    role: src.role || def.role,
+    // An uploaded photo (Media picker) overrides the default path; else the
+    // text path; else the code default. Lets staff swap the photo from admin.
+    image: mediaUrl(src.photo) ?? (src.image || def.image),
+    experienceLabel: src.experienceLabel ?? def.experienceLabel,
+    experienceYears: src.experienceYears ?? def.experienceYears,
+    cities: rows(src.cities) ?? def.cities,
+    locations: rows(src.locations) ?? def.locations,
+    treatments: rows(src.treatments) ?? def.treatments,
+    shortBio: src.shortBio || def.shortBio,
+    bio: rows(src.bio) ?? def.bio,
+    knowsAbout: rows(src.knowsAbout) ?? def.knowsAbout,
+    alumniOf: rows(src.alumniOf) ?? def.alumniOf,
+    memberOf: rows(src.memberOf) ?? def.memberOf,
+    awards: rows(src.awards) ?? def.awards,
+    training: rows(src.training) ?? def.training,
+    publications: rows(src.publications) ?? def.publications,
+    languages: rows(src.languages) ?? def.languages,
+    sameAs: rows(src.sameAs) ?? def.sameAs,
+    verified: src.verified ?? def.verified,
+    ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
+    profileLabels: profileLabels(src.profileLabels),
+  };
+}
+
+type ProfileLabelsSource = {
+  aboutEyebrow?: string | null;
+  treatmentsEyebrow?: string | null;
+  consultsEyebrow?: string | null;
+  consultsSubtitle?: string | null;
+  visitsHeading?: string | null;
+  visitsParagraph?: string | null;
+  doctorSpeakEyebrow?: string | null;
+  doctorSpeakSubtitle?: string | null;
+  storiesEyebrow?: string | null;
+  storiesSubtitle?: string | null;
+  ctaHeading?: string | null;
+  aboutTitle?: string | null;
+  treatmentsTitle?: string | null;
+  storiesTitle?: string | null;
+  consultsTitle?: string | null;
+  doctorSpeakTitle?: string | null;
+} | null | undefined;
+
+/** Build the `profileLabels` overrides object from CMS source — empty strings
+ *  fall back to the component's built-in defaults. */
+const profileLabels = (src: ProfileLabelsSource) => ({
+  aboutEyebrow: src?.aboutEyebrow ?? "",
+  treatmentsEyebrow: src?.treatmentsEyebrow ?? "",
+  consultsEyebrow: src?.consultsEyebrow ?? "",
+  consultsSubtitle: src?.consultsSubtitle ?? "",
+  visitsHeading: src?.visitsHeading ?? "",
+  visitsParagraph: src?.visitsParagraph ?? "",
+  doctorSpeakEyebrow: src?.doctorSpeakEyebrow ?? "",
+  doctorSpeakSubtitle: src?.doctorSpeakSubtitle ?? "",
+  storiesEyebrow: src?.storiesEyebrow ?? "",
+  storiesSubtitle: src?.storiesSubtitle ?? "",
+  ctaHeading: src?.ctaHeading ?? "",
+  aboutTitle: src?.aboutTitle ?? "",
+  treatmentsTitle: src?.treatmentsTitle ?? "",
+  storiesTitle: src?.storiesTitle ?? "",
+  consultsTitle: src?.consultsTitle ?? "",
+  doctorSpeakTitle: src?.doctorSpeakTitle ?? "",
+});
+
+/**
+ * Produce a fully-populated DoctorSource by merging `src` with the code default
+ * for `slug`. Used by the inline editor to seed the draft so every field is
+ * present before any edit — prevents sparse PATCH bodies that fail Payload
+ * required-field validation.
+ */
+export function materializeDoctorSource(slug: string, src: DoctorSource): NonNullable<DoctorSource> {
+  const def = doctorBySlug(slug);
+  const wrap = (arr: string[] | undefined): { value: string }[] =>
+    arr ? arr.map((v) => ({ value: v })) : [];
+  return {
+    name: src?.name ?? def?.name ?? "",
+    credentials: src?.credentials ?? def?.credentials ?? "",
+    specialty: src?.specialty ?? def?.specialty ?? "",
+    role: src?.role ?? def?.role ?? "",
+    image: src?.image ?? def?.image ?? "",
+    photo: src?.photo,
+    experienceLabel: src?.experienceLabel ?? def?.experienceLabel ?? "",
+    experienceYears: src?.experienceYears ?? def?.experienceYears ?? null,
+    medicalSpecialty: src?.medicalSpecialty ?? wrap(def?.medicalSpecialty),
+    cities: src?.cities ?? wrap(def?.cities),
+    locations: src?.locations ?? wrap(def?.locations),
+    treatments: src?.treatments ?? wrap(def?.treatments),
+    shortBio: src?.shortBio ?? def?.shortBio ?? "",
+    bio: src?.bio ?? wrap(def?.bio),
+    knowsAbout: src?.knowsAbout ?? wrap(def?.knowsAbout),
+    alumniOf: src?.alumniOf ?? wrap(def?.alumniOf),
+    memberOf: src?.memberOf ?? wrap(def?.memberOf),
+    awards: src?.awards ?? wrap(def?.awards),
+    training: src?.training ?? wrap(def?.training),
+    publications: src?.publications ?? wrap(def?.publications),
+    languages: src?.languages ?? wrap(def?.languages),
+    sameAs: src?.sameAs ?? wrap(def?.sameAs),
+    verified: src?.verified ?? def?.verified ?? false,
+    visitsAllCentres: src?.visitsAllCentres ?? def?.visitsAllCentres ?? false,
+    navRole: src?.navRole ?? null,
+    navOrder: src?.navOrder ?? null,
+    profileLabels: {
+      aboutEyebrow: src?.profileLabels?.aboutEyebrow ?? "",
+      treatmentsEyebrow: src?.profileLabels?.treatmentsEyebrow ?? "",
+      consultsEyebrow: src?.profileLabels?.consultsEyebrow ?? "",
+      consultsSubtitle: src?.profileLabels?.consultsSubtitle ?? "",
+      visitsHeading: src?.profileLabels?.visitsHeading ?? "",
+      visitsParagraph: src?.profileLabels?.visitsParagraph ?? "",
+      doctorSpeakEyebrow: src?.profileLabels?.doctorSpeakEyebrow ?? "",
+      doctorSpeakSubtitle: src?.profileLabels?.doctorSpeakSubtitle ?? "",
+      storiesEyebrow: src?.profileLabels?.storiesEyebrow ?? "",
+      storiesSubtitle: src?.profileLabels?.storiesSubtitle ?? "",
+      ctaHeading: src?.profileLabels?.ctaHeading ?? "",
+      aboutTitle: src?.profileLabels?.aboutTitle ?? "",
+      treatmentsTitle: src?.profileLabels?.treatmentsTitle ?? "",
+      storiesTitle: src?.profileLabels?.storiesTitle ?? "",
+      consultsTitle: src?.profileLabels?.consultsTitle ?? "",
+      doctorSpeakTitle: src?.profileLabels?.doctorSpeakTitle ?? "",
+    },
   };
 }

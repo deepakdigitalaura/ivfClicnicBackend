@@ -1,0 +1,3283 @@
+[
+  {
+    "slug": "himanshu-bavishi",
+    "name": "Dr. Himanshu Bavishi",
+    "credentials": "MBBS, MD (Obstetrics & Gynaecology)",
+    "specialty": "Reproductive Medicine & IVF",
+    "role": "Founder & Chief IVF Specialist",
+    "image": "/assets/doctors/himanshu.webp",
+    "experienceLabel": "35+ yrs",
+    "experienceYears": 35,
+    "medicalSpecialty": [
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Ahmedabad"
+      },
+      {
+        "value": "Mumbai"
+      },
+      {
+        "value": "Vadodara"
+      },
+      {
+        "value": "Surat"
+      },
+      {
+        "value": "Bhuj"
+      },
+      {
+        "value": "Bhavnagar"
+      },
+      {
+        "value": "Anand"
+      },
+      {
+        "value": "Varanasi"
+      }
+    ],
+    "locations": [
+      {
+        "value": "paldi"
+      },
+      {
+        "value": "nikol"
+      },
+      {
+        "value": "mumbai"
+      },
+      {
+        "value": "vadodara"
+      },
+      {
+        "value": "surat"
+      },
+      {
+        "value": "bhuj"
+      },
+      {
+        "value": "bhavnagar"
+      },
+      {
+        "value": "anand"
+      },
+      {
+        "value": "varanasi"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
+    "bio": [
+      {
+        "value": "Dr. Himanshu Bavishi founded Bavishi Fertility Institute in 1984 and has since helped pioneer assisted reproduction in India. He has led the institute's growth into a national network credited with 30,000+ pregnancies."
+      },
+      {
+        "value": "A pioneer and leader in infertility and IVF, he is widely respected for the reputation of a doctor with a 'golden hand' — bringing positive results in the most difficult cases — and treats couples from across India and overseas with excellent outcomes."
+      },
+      {
+        "value": "His clinical focus spans customised ovarian-stimulation protocols, ICSI, and safe-stimulation strategies designed to avoid severe OHSS. He is a frequent speaker, invited faculty at national and regional conferences, and an educator on responsible, transparent fertility care."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Intracytoplasmic Sperm Injection"
+      },
+      {
+        "value": "Ovarian Stimulation Protocols"
+      },
+      {
+        "value": "Male Infertility"
+      },
+      {
+        "value": "Fertility Preservation"
+      }
+    ],
+    "alumniOf": [
+      {
+        "value": "MBBS — B.J. Medical College, Ahmedabad (1983)"
+      },
+      {
+        "value": "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1986)"
+      }
+    ],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Indian Society for Assisted Reproduction (ISAR)"
+      },
+      {
+        "value": "Indian Fertility Society (IFS)"
+      },
+      {
+        "value": "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President"
+      }
+    ],
+    "awards": [
+      {
+        "value": "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it"
+      },
+      {
+        "value": "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+      }
+    ],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      },
+      {
+        "value": "Gujarati"
+      }
+    ],
+    "sameAs": [],
+    "verified": true,
+    "visitsAllCentres": true,
+    "navRole": "senior-specialist",
+    "navOrder": 10,
+    "_status": "published"
+  },
+  {
+    "slug": "falguni-bavishi",
+    "name": "Dr. Falguni Bavishi",
+    "credentials": "MBBS, MD (Obstetrics & Gynaecology)",
+    "specialty": "Infertility & Gynaecology",
+    "role": "Co-founder & Senior Fertility Specialist",
+    "image": "/assets/doctors/falguni.webp",
+    "experienceLabel": "34+ yrs",
+    "experienceYears": 34,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Ahmedabad"
+      }
+    ],
+    "locations": [
+      {
+        "value": "paldi"
+      },
+      {
+        "value": "sindhu-bhavan-road"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
+    "bio": [
+      {
+        "value": "Dr. Falguni Bavishi co-founded Bavishi Fertility Institute and has over three decades of experience in reproductive gynaecology and female infertility."
+      },
+      {
+        "value": "She is known for thorough diagnostic evaluation, individualised treatment planning and the warm, honest counselling that defines the institute's approach."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "Female Infertility"
+      },
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Endometriosis"
+      },
+      {
+        "value": "Reproductive Gynaecology"
+      },
+      {
+        "value": "Fertility Preservation"
+      }
+    ],
+    "alumniOf": [
+      {
+        "value": "MBBS, MD — Obstetrics & Gynaecology"
+      }
+    ],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Indian Society for Assisted Reproduction (ISAR)"
+      }
+    ],
+    "awards": [
+      {
+        "value": "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat"
+      }
+    ],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      },
+      {
+        "value": "Gujarati"
+      }
+    ],
+    "sameAs": [],
+    "verified": true,
+    "visitsAllCentres": false,
+    "navRole": "senior-specialist",
+    "navOrder": 20,
+    "_status": "published"
+  },
+  {
+    "slug": "parth-bavishi",
+    "name": "Dr. Parth Bavishi",
+    "credentials": "MBBS, MD (Obstetrics & Gynaecology)",
+    "specialty": "IVF & Andrology",
+    "role": "Co-director & IVF Specialist",
+    "image": "/assets/doctors/parth.webp",
+    "experienceLabel": "13+ yrs",
+    "experienceYears": 13,
+    "medicalSpecialty": [
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Andrology"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Ahmedabad"
+      }
+    ],
+    "locations": [
+      {
+        "value": "paldi"
+      },
+      {
+        "value": "sindhu-bhavan-road"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
+    "bio": [
+      {
+        "value": "Dr. Parth Bavishi is a co-director of the Bavishi Fertility Institute chain and an IVF specialist who has performed 10,000+ infertility procedures. He has a particular focus on male-factor infertility, surgical sperm retrieval (TESA/PESA/Micro-TESE), poor ovarian reserve (low AMH) and repeated IVF failure."
+      },
+      {
+        "value": "He completed his MBBS (2009) and MD in Obstetrics & Gynaecology (2012) at Pramukhswami Medical College, Karamsad, and trained further at the Diamond Institute (New Jersey, USA) and the HART Institute (Japan). He co-authored the patient guide 'Your Miracle in Making'."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "Male Infertility"
+      },
+      {
+        "value": "Andrology"
+      },
+      {
+        "value": "Intracytoplasmic Sperm Injection"
+      },
+      {
+        "value": "Surgical Sperm Retrieval"
+      },
+      {
+        "value": "Azoospermia"
+      }
+    ],
+    "alumniOf": [
+      {
+        "value": "MBBS — Pramukhswami Medical College, Karamsad (2009)"
+      },
+      {
+        "value": "MD, Obstetrics & Gynaecology — Pramukhswami Medical College, Karamsad (2012)"
+      }
+    ],
+    "memberOf": [
+      {
+        "value": "Indian Fertility Society (IFS)"
+      },
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Indian Society for Assisted Reproduction (ISAR)"
+      },
+      {
+        "value": "Indian Society of Third Party Assisted Reproduction (INSTAR)"
+      }
+    ],
+    "awards": [
+      {
+        "value": "Rose of Paracelsus Award — European Medical Association"
+      },
+      {
+        "value": "Most Prominent IVF Specialist — presented by the Chief Minister of Gujarat"
+      }
+    ],
+    "training": [
+      {
+        "value": "Advanced ART training — Diamond Institute, New Jersey, USA"
+      },
+      {
+        "value": "Advanced reproductive techniques — HART Institute, Japan"
+      }
+    ],
+    "publications": [
+      {
+        "value": "Author — 'Your Miracle in Making: A Couple's Guide to Pregnancy'"
+      }
+    ],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      },
+      {
+        "value": "Gujarati"
+      }
+    ],
+    "sameAs": [],
+    "verified": true,
+    "visitsAllCentres": false,
+    "navRole": "senior-specialist",
+    "navOrder": 30,
+    "_status": "published"
+  },
+  {
+    "slug": "janki-bavishi",
+    "name": "Dr. Janki Bavishi",
+    "credentials": "MBBS, MS (Obstetrics & Gynaecology)",
+    "specialty": "Reproductive Surgery & IVF",
+    "role": "Co-director & Reproductive Surgeon",
+    "image": "/assets/doctors/janki.webp",
+    "experienceLabel": "12+ yrs",
+    "experienceYears": 12,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Ahmedabad"
+      }
+    ],
+    "locations": [
+      {
+        "value": "paldi"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Co-director of Bavishi Fertility Institute and reproductive surgeon specialising in hysteroscopy, laparoscopy and fertility-enhancing surgery.",
+    "bio": [
+      {
+        "value": "Dr. Janki Bavishi is a co-director of the Bavishi Fertility Institute chain and a reproductive surgeon experienced in minimally invasive hysteroscopic and laparoscopic procedures that improve fertility outcomes. She has been part of 10,000+ infertility procedures and is known for thorough counselling and accurate results."
+      },
+      {
+        "value": "She trained further at the Diamond Institute (New Jersey, USA) and the HART Institute (Japan), and co-authored the patient guide 'Your Miracle in Making'. Her work supports the IVF programme by optimising the uterine and pelvic environment before treatment."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "Reproductive Surgery"
+      },
+      {
+        "value": "Hysteroscopy"
+      },
+      {
+        "value": "Laparoscopy"
+      },
+      {
+        "value": "Endometriosis"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [
+      {
+        "value": "MBBS, MS — Obstetrics & Gynaecology"
+      }
+    ],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      }
+    ],
+    "awards": [
+      {
+        "value": "Gujarat Gaurav Icon — Midday Group"
+      },
+      {
+        "value": "'Nari Tu Narayani' Award for leading gynaecologist — Bulletin India Group"
+      }
+    ],
+    "training": [
+      {
+        "value": "Advanced ART training — Diamond Institute, New Jersey, USA"
+      },
+      {
+        "value": "Advanced reproductive techniques — HART Institute, Japan"
+      }
+    ],
+    "publications": [
+      {
+        "value": "Co-author — 'Your Miracle in Making: A Couple's Guide to Pregnancy'"
+      }
+    ],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      },
+      {
+        "value": "Gujarati"
+      }
+    ],
+    "sameAs": [],
+    "verified": true,
+    "visitsAllCentres": false,
+    "navRole": "senior-specialist",
+    "navOrder": 40,
+    "_status": "published"
+  },
+  {
+    "slug": "binal-shah",
+    "name": "Dr. Binal Shah",
+    "credentials": "MBBS, DGO",
+    "specialty": "Obstetrics, Gynaecology & IVF",
+    "role": "IVF Specialist · Chief Quality Control & NABH Nodal Officer",
+    "image": "/assets/doctors/binal-shah.png",
+    "experienceLabel": "25+ yrs",
+    "experienceYears": 25,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Ahmedabad"
+      }
+    ],
+    "locations": [
+      {
+        "value": "paldi"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Experienced obstetrician and IVF specialist managing normal and IVF pregnancies, and Chief Quality Control & NABH Nodal Officer at Bavishi Fertility Institute.",
+    "bio": [
+      {
+        "value": "Dr. Binal Shah is an experienced obstetrician and IVF specialist with over two decades of practice in managing normal and IVF pregnancies, including complex cases such as twin pregnancies and high-risk deliveries."
+      },
+      {
+        "value": "She serves as the Chief Quality Control Officer and NABH Nodal Officer at Bavishi Fertility Institute, helping uphold the institute's clinical quality and accreditation standards."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "High-Risk Pregnancy"
+      },
+      {
+        "value": "Twin Pregnancy"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 10,
+    "_status": "published"
+  },
+  {
+    "slug": "jaydeep-patel",
+    "name": "Dr. Jaydeep Patel",
+    "credentials": "",
+    "specialty": "Obstetrics & IVF",
+    "role": "IVF Specialist",
+    "image": "/assets/doctors/jaydeep-patel.png",
+    "experienceLabel": "8+ yrs",
+    "experienceYears": 8,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Ahmedabad"
+      }
+    ],
+    "locations": [
+      {
+        "value": "nikol"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, experienced in infertility management and normal & IVF pregnancy care.",
+    "bio": [
+      {
+        "value": "Dr. Jaydeep Patel is an experienced obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, with vast experience in infertility management and normal & IVF pregnancy care and delivery."
+      },
+      {
+        "value": "He has treated thousands of patients successfully, including those with unexplained infertility and high-risk pregnancies."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "High-Risk Pregnancy"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 20,
+    "_status": "published"
+  },
+  {
+    "slug": "suman-singh",
+    "name": "Dr. Suman Singh",
+    "credentials": "MBBS, DGO",
+    "specialty": "Fertility & IVF",
+    "role": "IVF Specialist",
+    "image": "/assets/doctors/Dr.-Suman-Singh.webp",
+    "experienceLabel": "20+ yrs",
+    "experienceYears": 20,
+    "medicalSpecialty": [
+      {
+        "value": "Fertility"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Mumbai"
+      }
+    ],
+    "locations": [
+      {
+        "value": "thane"
+      },
+      {
+        "value": "ghatkopar"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Fertility specialist with over 20 years of experience in Mumbai and abroad, helping couples conceive naturally, through planned relationships and through IVF.",
+    "bio": [
+      {
+        "value": "Dr. Suman Singh is a fertility specialist with over 20 years of experience as a gynaecologist and IVF specialist in Mumbai and abroad."
+      },
+      {
+        "value": "She has helped thousands of couples achieve parenthood through natural conception, planned relationship and IVF, customising each treatment plan to the couple's needs and aspirations. She consults at the Thane and Ghatkopar centres."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "IUI"
+      },
+      {
+        "value": "Female Infertility"
+      },
+      {
+        "value": "Fertility Treatment"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 30,
+    "_status": "published"
+  },
+  {
+    "slug": "nilesh-jain",
+    "name": "Dr. Nilesh Jain",
+    "credentials": "MBBS, DGO, DNB (Obstetrics & Gynaecology)",
+    "specialty": "Infertility & IVF",
+    "role": "Fertility Consultant",
+    "image": "/assets/doctors/Dr.-Nilesh-Jain-221x300.webp",
+    "experienceLabel": "20+ yrs",
+    "experienceYears": 20,
+    "medicalSpecialty": [
+      {
+        "value": "Fertility"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Mumbai"
+      }
+    ],
+    "locations": [
+      {
+        "value": "ghatkopar"
+      },
+      {
+        "value": "vashi"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Fertility consultant with more than 20 years of experience in infertility treatment, consulting at the Ghatkopar and Vashi centres in Mumbai.",
+    "bio": [
+      {
+        "value": "Dr. Nilesh Jain is an experienced fertility consultant with more than 20 years of experience in the field of infertility."
+      },
+      {
+        "value": "He has effectively managed many infertility cases and is known for combining clinical efficiency with empathy in patient care. He consults at the Ghatkopar and Vashi centres."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "IUI"
+      },
+      {
+        "value": "Male Infertility"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 40,
+    "_status": "published"
+  },
+  {
+    "slug": "priyanka-sinha",
+    "name": "Dr. Priyanka Sinha",
+    "credentials": "MBBS, MD, Fellowship in Reproductive Medicine (USA)",
+    "specialty": "Reproductive Medicine & IVF",
+    "role": "IVF Specialist",
+    "image": "/assets/doctors/Dr.-Priyanka-Sinha-221x300.webp",
+    "experienceLabel": "15+ yrs",
+    "experienceYears": 15,
+    "medicalSpecialty": [
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Mumbai"
+      }
+    ],
+    "locations": [
+      {
+        "value": "borivali"
+      },
+      {
+        "value": "vile-parle"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Reproductive medicine physician with over 15 years of experience, offering IVF, ICSI, PGT and fertility preservation at the Borivali and Vile Parle centres.",
+    "bio": [
+      {
+        "value": "Dr. Priyanka Sinha is a reproductive medicine physician with over 15 years of clinical practice, holding an MD and a Fellowship in Reproductive Medicine from the USA."
+      },
+      {
+        "value": "She provides comprehensive infertility care including IVF, ICSI, PGT, egg and embryo freezing, and the management of both male and female infertility at the institute's Borivali and Vile Parle centres."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Intracytoplasmic Sperm Injection"
+      },
+      {
+        "value": "Fertility Preservation"
+      },
+      {
+        "value": "Male Infertility"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Indian Society for Assisted Reproduction (ISAR)"
+      }
+    ],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 50,
+    "_status": "published"
+  },
+  {
+    "slug": "deep-gajiwala",
+    "name": "Dr. Deep Gajiwala",
+    "credentials": "MBBS, DGO, DNB (Obstetrics & Gynaecology)",
+    "specialty": "IVF & Laparoscopic Surgery",
+    "role": "IVF Specialist & Laparoscopic Surgeon",
+    "image": "/assets/doctors/Dr.-Deep-Gajiwala-221x300.webp",
+    "experienceLabel": "12+ yrs",
+    "experienceYears": 12,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Surat"
+      }
+    ],
+    "locations": [
+      {
+        "value": "lal-darwaja"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "IVF specialist and laparoscopic surgeon in Surat with 5,000+ operations related to fertility care and childbirth.",
+    "bio": [
+      {
+        "value": "Dr. Deep Gajiwala is an IVF specialist and laparoscopic surgeon with over 12 years of experience and more than 5,000 operations related to IVF and childbirth."
+      },
+      {
+        "value": "He has wide experience in normal and IVF pregnancy care and delivery, and provides compassionate, efficient patient care at the Bavishi Fertility Institute Surat centre."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Laparoscopy"
+      },
+      {
+        "value": "High-Risk Pregnancy"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [
+      {
+        "value": "MBBS — Dr. D.Y. Patil Medical College, Kolhapur (2009)"
+      },
+      {
+        "value": "DGO — Krishna Institute of Medical Sciences (KIMSDU) (2013)"
+      },
+      {
+        "value": "DNB, Obstetrics & Gynaecology — National Board of Examinations (2016)"
+      }
+    ],
+    "memberOf": [],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 60,
+    "_status": "published"
+  },
+  {
+    "slug": "mita-shah",
+    "name": "Dr. Mita Shah",
+    "credentials": "",
+    "specialty": "Fertility & IVF",
+    "role": "Fertility & IVF Consultant",
+    "image": "/assets/doctors/Dr.-Mita-Shah-221x300.webp",
+    "experienceLabel": "20+ yrs",
+    "experienceYears": 20,
+    "medicalSpecialty": [
+      {
+        "value": "Fertility"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Vadodara"
+      }
+    ],
+    "locations": [
+      {
+        "value": "jetalpur-road"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Fertility and IVF consultant in Vadodara with over 20 years of experience, known for an empathetic, patient-centred approach.",
+    "bio": [
+      {
+        "value": "Dr. Mita Shah is a fertility and IVF consultant at the Bavishi Fertility Institute Vadodara centre, with more than 20 years of total experience in helping couples struggling with infertility."
+      },
+      {
+        "value": "Known for her empathetic attitude towards patients, she offers advanced treatments such as IVF, ICSI and egg freezing."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Intracytoplasmic Sperm Injection"
+      },
+      {
+        "value": "Fertility Preservation"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 70,
+    "_status": "published"
+  },
+  {
+    "slug": "jayna-unadkat",
+    "name": "Dr. Jayna Unadkat",
+    "credentials": "MBBS, DGO, FRM (Fellowship in Reproductive Medicine)",
+    "specialty": "Reproductive Medicine & IVF",
+    "role": "IVF Specialist",
+    "image": "/assets/doctors/Dr.-Jayna-Unadkat-221x300.webp",
+    "experienceLabel": "8+ yrs",
+    "experienceYears": 8,
+    "medicalSpecialty": [
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Vadodara"
+      }
+    ],
+    "locations": [
+      {
+        "value": "jetalpur-road"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Reproductive medicine specialist in Vadodara with a patient-centred, scientifically-grounded approach to complex infertility cases.",
+    "bio": [
+      {
+        "value": "Dr. Jayna Unadkat is a reproductive medicine specialist recognised for her patient-centred and scientifically-grounded approach to infertility management."
+      },
+      {
+        "value": "She has particular expertise in complex cases including PCOS, endometriosis, diminished ovarian reserve and unsuccessful IVF cycles, alongside advanced donor and fertility-preservation procedures."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "PCOS"
+      },
+      {
+        "value": "Endometriosis"
+      },
+      {
+        "value": "Poor Ovarian Reserve"
+      },
+      {
+        "value": "Fertility Preservation"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Indian Fertility Society (IFS)"
+      },
+      {
+        "value": "European Society of Human Reproduction and Embryology (ESHRE)"
+      }
+    ],
+    "awards": [],
+    "training": [
+      {
+        "value": "Certificate Course in Ultrasound in Pregnancy — FOGSI in association with the Fetal Medicine Foundation, India"
+      }
+    ],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 80,
+    "_status": "published"
+  },
+  {
+    "slug": "surbhi-vegad",
+    "name": "Dr. Surbhi Vegad",
+    "credentials": "",
+    "specialty": "Gynaecology, IVF & 3D Laparoscopy",
+    "role": "IVF Specialist & 3D Laparoscopic Surgeon",
+    "image": "/assets/doctors/Dr.-Surbhi-Vegad-221x300.webp",
+    "experienceLabel": "20+ yrs",
+    "experienceYears": 20,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Bhuj"
+      }
+    ],
+    "locations": [
+      {
+        "value": "mirjapar"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Leading gynaecologist, IVF expert and 3D laparoscopic surgeon in Bhuj & Kutch, with special expertise in high-risk pregnancy care.",
+    "bio": [
+      {
+        "value": "Dr. Surbhi Vegad is a leading obstetrician and gynaecologist in Bhuj and Kutch with more than 20 years of experience in state-of-the-art gynaecological treatment and specialised high-risk pregnancy care."
+      },
+      {
+        "value": "She combines advanced 3D laparoscopic surgical skills with comprehensive fertility expertise to deliver personalised treatment plans at the Bavishi Fertility Institute Bhuj centre."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Laparoscopy"
+      },
+      {
+        "value": "High-Risk Pregnancy"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [],
+    "awards": [],
+    "training": [],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 90,
+    "_status": "published"
+  },
+  {
+    "slug": "chetna-vyas",
+    "name": "Dr. Chetna Vyas",
+    "credentials": "",
+    "specialty": "Obstetrics, Gynaecology & IVF",
+    "role": "Co-founder, Bavishi Fertility Institute — IRIS Hospital",
+    "image": "/assets/doctors/Dr.-Chetna-Vyas-221x300.webp",
+    "experienceLabel": "22+ yrs",
+    "experienceYears": 22,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Anand"
+      }
+    ],
+    "locations": [
+      {
+        "value": "nanikhodiyar"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Obstetrician and gynaecologist with over 22 years of experience and a special interest in infertility, IVF, laparoscopy and high-risk obstetrics.",
+    "bio": [
+      {
+        "value": "Dr. Chetna Vyas is a highly experienced obstetrician and gynaecologist with a special interest in infertility, IVF, laparoscopy and high-risk obstetrics, and is one of the founders of Bavishi Fertility Institute at IRIS Hospital, Anand."
+      },
+      {
+        "value": "She has successfully treated thousands of patients over more than 22 years, managing complex infertility cases and high-risk pregnancies, and contributes to academic programmes as chairperson and moderator."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Laparoscopy"
+      },
+      {
+        "value": "High-Risk Pregnancy"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Anand Obstetrics & Gynaecological Society (AOGS)"
+      },
+      {
+        "value": "Indian Medical Association (Anand branch)"
+      }
+    ],
+    "awards": [],
+    "training": [],
+    "publications": [
+      {
+        "value": "Case report — 'Torsion of Gravid Uterus', Asian Journal of Obstetrics & Gynaecology (2010)"
+      }
+    ],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 100,
+    "_status": "published"
+  },
+  {
+    "slug": "rakhee-patel",
+    "name": "Dr. Rakhee Patel",
+    "credentials": "MBBS, MD",
+    "specialty": "Obstetrics, Gynaecology & IVF",
+    "role": "Co-founder, Bavishi Fertility Institute — IRIS Hospital · Minimal Access Surgeon",
+    "image": "/assets/doctors/Dr.-Rakhee-Patel-221x300.webp",
+    "experienceLabel": "20+ yrs",
+    "experienceYears": 20,
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Anand"
+      }
+    ],
+    "locations": [
+      {
+        "value": "nanikhodiyar"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Obstetrician and gynaecologist with over 20 years of experience in infertility management and advanced minimal-access gynaecological surgery.",
+    "bio": [
+      {
+        "value": "Dr. Rakhee Patel is a highly experienced obstetrician and gynaecologist and one of the founders of Bavishi Fertility Institute at IRIS Hospital, Anand, with specialised expertise in infertility management, laparoscopy, hysteroscopy and emergency obstetric care."
+      },
+      {
+        "value": "She has successfully managed numerous infertility cases and complex obstetric emergencies, and actively contributes to academic programmes as a chairperson and moderator."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Laparoscopy"
+      },
+      {
+        "value": "Hysteroscopy"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Anand Obstetrics & Gynaecological Society (AOGS)"
+      },
+      {
+        "value": "Association of Minimal Access Surgeons of India (AMASI)"
+      },
+      {
+        "value": "Indian Medical Association (Anand branch)"
+      }
+    ],
+    "awards": [
+      {
+        "value": "First Prize, poster presentation 'Lapro-Hysteroscopic Evaluation of Sub-Fertile Women' — World Congress on Practical Infertility Management & Human Reproduction, Mumbai (2004)"
+      }
+    ],
+    "training": [],
+    "publications": [
+      {
+        "value": "Case report — 'Torsion of Gravid Uterus', Asian Journal of Obstetrics & Gynaecology (2010)"
+      }
+    ],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 110,
+    "_status": "published"
+  },
+  {
+    "slug": "deepali-pandya",
+    "name": "Dr. Deepali Pandya",
+    "credentials": "MS (Obstetrics & Gynaecology), FIAMS, FRM",
+    "specialty": "Reproductive Medicine & Endoscopic Surgery",
+    "role": "IVF Specialist & Endoscopic Surgeon",
+    "image": "/assets/doctors/Dr.-Deepali-Pandya-1-1.webp",
+    "experienceLabel": "",
+    "medicalSpecialty": [
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Bhavnagar"
+      }
+    ],
+    "locations": [
+      {
+        "value": "kalubha-road"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Fertility specialist and endoscopic surgeon with comprehensive training in reproductive medicine, consulting at the Bavishi Fertility Institute Bhavnagar centre.",
+    "bio": [
+      {
+        "value": "Dr. Deepali Pandya is a fertility specialist and endoscopic surgeon with comprehensive training in reproductive medicine and minimally invasive gynaecological surgery."
+      },
+      {
+        "value": "She combines clinical expertise with personalised patient care to address infertility and gynaecological concerns at the Bavishi Fertility Institute Bhavnagar centre."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "Laparoscopy"
+      },
+      {
+        "value": "Hysteroscopy"
+      },
+      {
+        "value": "Female Infertility"
+      }
+    ],
+    "alumniOf": [
+      {
+        "value": "MS, Obstetrics & Gynaecology — Smt. N.H.L. Municipal Medical College & Sheth V.S. General Hospital, Ahmedabad"
+      },
+      {
+        "value": "FIAMS — Jogal Women's Hospital"
+      },
+      {
+        "value": "FRM (Fellowship in Reproductive Medicine) — 21st Century Hospital, Surat"
+      }
+    ],
+    "memberOf": [],
+    "awards": [],
+    "training": [
+      {
+        "value": "Infertility & IVF training — Bavishi Fertility Institute, Ahmedabad"
+      }
+    ],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 120,
+    "_status": "published"
+  },
+  {
+    "slug": "parnnika-agarwal",
+    "name": "Dr. Parnnika Agarwal",
+    "credentials": "",
+    "specialty": "Fertility & Gynaec Laparoscopy",
+    "role": "Fertility Expert & Laparoscopic Surgeon",
+    "image": "/assets/doctors/Dr.-Parnnika-Agarwal-221x300.webp",
+    "experienceLabel": "6+ yrs",
+    "experienceYears": 6,
+    "medicalSpecialty": [
+      {
+        "value": "ReproductiveMedicine"
+      },
+      {
+        "value": "Gynecology"
+      },
+      {
+        "value": "Fertility"
+      }
+    ],
+    "cities": [
+      {
+        "value": "Varanasi"
+      }
+    ],
+    "locations": [
+      {
+        "value": "shivpur"
+      }
+    ],
+    "treatments": [
+      {
+        "value": "ivf"
+      },
+      {
+        "value": "icsi"
+      },
+      {
+        "value": "iui"
+      },
+      {
+        "value": "ivf-evaluation"
+      },
+      {
+        "value": "ivf-failure"
+      },
+      {
+        "value": "picsi"
+      },
+      {
+        "value": "imsi"
+      },
+      {
+        "value": "macs"
+      },
+      {
+        "value": "spindle-view-icsi"
+      },
+      {
+        "value": "blastocyst-transfer"
+      },
+      {
+        "value": "laser-hatching"
+      },
+      {
+        "value": "pgt"
+      },
+      {
+        "value": "era-test"
+      },
+      {
+        "value": "azoospermia"
+      },
+      {
+        "value": "oligospermia"
+      },
+      {
+        "value": "asthenospermia"
+      },
+      {
+        "value": "surgical-sperm-retrieval"
+      },
+      {
+        "value": "varicocele"
+      },
+      {
+        "value": "erectile-dysfunction"
+      },
+      {
+        "value": "pcos"
+      },
+      {
+        "value": "endometriosis"
+      },
+      {
+        "value": "fibroids"
+      },
+      {
+        "value": "ovarian-reserve"
+      },
+      {
+        "value": "ovarian-rejuvenation"
+      },
+      {
+        "value": "conceive-naturally"
+      },
+      {
+        "value": "prp-infertility"
+      },
+      {
+        "value": "egg-freezing"
+      },
+      {
+        "value": "sperm-freezing"
+      },
+      {
+        "value": "embryo-freezing"
+      },
+      {
+        "value": "cryopreservation"
+      },
+      {
+        "value": "egg-donation"
+      },
+      {
+        "value": "sperm-donation"
+      },
+      {
+        "value": "embryo-donation"
+      },
+      {
+        "value": "surrogacy"
+      }
+    ],
+    "shortBio": "Fertility expert and gynaec laparoscopic surgeon in Varanasi with an evidence-based, patient-centric approach to male and female infertility.",
+    "bio": [
+      {
+        "value": "Dr. Parnnika Agarwal is a fertility expert and gynaec laparoscopic surgeon with over six years of experience treating male and female infertility through evidence-based, patient-centric care."
+      },
+      {
+        "value": "She combines advanced surgical training with expertise in IVF and reproductive medicine — including PCOS, endometriosis, poor ovarian reserve and recurrent IVF failure — and regularly presents research at national conferences."
+      }
+    ],
+    "knowsAbout": [
+      {
+        "value": "In Vitro Fertilization"
+      },
+      {
+        "value": "IUI"
+      },
+      {
+        "value": "PCOS"
+      },
+      {
+        "value": "Endometriosis"
+      },
+      {
+        "value": "Fertility Preservation"
+      }
+    ],
+    "alumniOf": [],
+    "memberOf": [
+      {
+        "value": "Federation of Obstetric and Gynaecological Societies of India (FOGSI)"
+      },
+      {
+        "value": "Indian Fertility Society (IFS)"
+      }
+    ],
+    "awards": [
+      {
+        "value": "Gold Medalist — medical studies"
+      }
+    ],
+    "training": [
+      {
+        "value": "Advanced training in IVF & laparoscopic gynaecological surgery — reputed centres, New Delhi"
+      }
+    ],
+    "publications": [],
+    "languages": [
+      {
+        "value": "English"
+      },
+      {
+        "value": "Hindi"
+      }
+    ],
+    "sameAs": [],
+    "verified": false,
+    "visitsAllCentres": false,
+    "navRole": "specialist",
+    "navOrder": 130,
+    "_status": "published"
+  }
+]
