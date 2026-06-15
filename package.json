@@ -5,7 +5,6 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "sync-reviews": "node scripts/sync-reviews.mjs",
-    "prebuild": "node scripts/sync-reviews.mjs",
     "build": "next build",
     "start": "next start",
     "lint": "next lint",
