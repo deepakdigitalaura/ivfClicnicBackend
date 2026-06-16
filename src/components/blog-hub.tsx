@@ -1,5 +1,5 @@
 "use client";
-import { Calendar, Clock, ArrowRight } from "lucide-react";
+import { Calendar, Clock, ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { format } from "date-fns";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
@@ -24,7 +24,91 @@ type Hub = {
 const DEFAULT_HERO_DESCRIPTION =
   "Expert, compassionate guidance on fertility, IVF and your journey to parenthood — reviewed by our specialists.";
 
-export function BlogHub({ posts, hero, intro }: { posts: Blog[] } & Hub) {
+const pageHref = (n: number) => (n <= 1 ? "/blog" : `/blog?page=${n}`);
+
+/** Windowed page-number pagination: first, last, current ±1, with "…" gaps. */
+function Pagination({
+  page,
+  totalPages,
+  hasPrevPage,
+  hasNextPage,
+}: {
+  page: number;
+  totalPages: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+}) {
+  if (totalPages <= 1) return null;
+
+  const pages = new Set<number>([1, totalPages, page, page - 1, page + 1].filter((n) => n >= 1 && n <= totalPages));
+  const sorted = Array.from(pages).sort((a, b) => a - b);
+
+  const items: (number | "ellipsis")[] = [];
+  let prev = 0;
+  for (const n of sorted) {
+    if (prev && n - prev > 1) items.push("ellipsis");
+    items.push(n);
+    prev = n;
+  }
+
+  const linkClass =
+    "inline-flex h-10 min-w-10 items-center justify-center rounded-full px-3 text-sm font-semibold transition-colors";
+
+  return (
+    <nav aria-label="Blog pagination" className="mt-4 flex items-center justify-center gap-2">
+      <a
+        href={hasPrevPage ? pageHref(page - 1) : undefined}
+        aria-disabled={!hasPrevPage}
+        className={`${linkClass} ${hasPrevPage ? "text-[color:var(--plum)] hover:bg-[color:var(--rose)]/10" : "pointer-events-none text-muted-foreground/40"}`}
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </a>
+
+      {items.map((it, i) =>
+        it === "ellipsis" ? (
+          <span key={`e${i}`} className="px-1 text-sm text-muted-foreground">…</span>
+        ) : (
+          <a
+            key={it}
+            href={pageHref(it)}
+            aria-current={it === page ? "page" : undefined}
+            className={`${linkClass} ${
+              it === page
+                ? "bg-[color:var(--rose)] text-white"
+                : "text-[color:var(--plum)] hover:bg-[color:var(--rose)]/10"
+            }`}
+          >
+            {it}
+          </a>
+        ),
+      )}
+
+      <a
+        href={hasNextPage ? pageHref(page + 1) : undefined}
+        aria-disabled={!hasNextPage}
+        className={`${linkClass} ${hasNextPage ? "text-[color:var(--plum)] hover:bg-[color:var(--rose)]/10" : "pointer-events-none text-muted-foreground/40"}`}
+      >
+        <ChevronRight className="h-4 w-4" />
+      </a>
+    </nav>
+  );
+}
+
+export function BlogHub({
+  posts,
+  hero,
+  intro,
+  page = 1,
+  totalPages = 1,
+  hasPrevPage = false,
+  hasNextPage = false,
+}: {
+  posts: Blog[];
+  page?: number;
+  totalPages?: number;
+  hasPrevPage?: boolean;
+  hasNextPage?: boolean;
+} & Hub) {
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -99,6 +183,8 @@ export function BlogHub({ posts, hero, intro }: { posts: Blog[] } & Hub) {
             })}
           </Stagger>
         )}
+
+        <Pagination page={page} totalPages={totalPages} hasPrevPage={hasPrevPage} hasNextPage={hasNextPage} />
       </section>
 
       <Footer />

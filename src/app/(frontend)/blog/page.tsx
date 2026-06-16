@@ -2,7 +2,9 @@ import type { Metadata } from "next";
 import { BlogHub } from "@/components/blog-hub";
 import { JsonLd } from "@/components/json-ld";
 import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema } from "@/lib/seo";
-import { getBlogs, getGlobalSafe } from "@/lib/payload";
+import { getBlogsPage, getGlobalSafe } from "@/lib/payload";
+
+const PAGE_SIZE = 24;
 
 const PATH = "/blog";
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -24,7 +26,11 @@ const FALLBACK = {
   },
 };
 
-export async function generateMetadata(): Promise<Metadata> {
+export async function generateMetadata(
+  { searchParams }: { searchParams: Promise<{ page?: string }> },
+): Promise<Metadata> {
+  const { page: pageParam } = await searchParams;
+  const page = Math.max(1, Number(pageParam) || 1);
   const hub = await getGlobalSafe("blog-hub");
   const metaTitle = hub?.seo?.metaTitle ?? FALLBACK.seo.metaTitle;
   const metaDescription = hub?.seo?.metaDescription ?? FALLBACK.seo.metaDescription;
@@ -32,22 +38,30 @@ export async function generateMetadata(): Promise<Metadata> {
     hub?.seo && typeof hub.seo.ogImage === "object" && hub.seo.ogImage?.url
       ? hub.seo.ogImage.url
       : DEFAULT_OG_IMAGE;
+  const canonicalPath = page > 1 ? `${PATH}?page=${page}` : PATH;
   return {
-    title: metaTitle,
+    title: page > 1 ? `${metaTitle} — Page ${page}` : metaTitle,
     description: metaDescription,
-    alternates: { canonical: PATH },
+    alternates: { canonical: canonicalPath },
     openGraph: {
       title: hub?.seo?.ogTitle || FALLBACK.seo.ogTitle,
       description: hub?.seo?.ogDescription || FALLBACK.seo.ogDescription,
-      url: abs(PATH),
+      url: abs(canonicalPath),
       type: "website",
       images: [ogImage],
     },
   };
 }
 
-export default async function Page() {
-  const [posts, hub] = await Promise.all([getBlogs(), getGlobalSafe("blog-hub")]);
+export default async function Page(
+  { searchParams }: { searchParams: Promise<{ page?: string }> },
+) {
+  const { page: pageParam } = await searchParams;
+  const page = Math.max(1, Number(pageParam) || 1);
+  const [blogsPage, hub] = await Promise.all([
+    getBlogsPage(page, PAGE_SIZE),
+    getGlobalSafe("blog-hub"),
+  ]);
   const url = abs(PATH);
 
   const hero = {
@@ -73,7 +87,15 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
-      <BlogHub posts={posts} hero={hero} intro={hub?.intro ?? undefined} />
+      <BlogHub
+        posts={blogsPage.docs}
+        hero={hero}
+        intro={hub?.intro ?? undefined}
+        page={blogsPage.page}
+        totalPages={blogsPage.totalPages}
+        hasPrevPage={blogsPage.hasPrevPage}
+        hasNextPage={blogsPage.hasNextPage}
+      />
     </>
   );
 }

@@ -145,6 +145,46 @@ export const getBlogs = reactCache(
     )(),
 );
 
+export type BlogsPage = {
+  docs: Blog[];
+  page: number;
+  totalPages: number;
+  totalDocs: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+};
+
+/** Paginated blog listing for the /blog hub — the catalogue is too large
+ *  (280+ posts) to render in one page. Cached + tagged per page number so
+ *  publishing a new post only busts pages, not the whole site. */
+export const getBlogsPage = reactCache(
+  (page = 1, limit = 24): Promise<BlogsPage> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "blogs",
+            limit,
+            page,
+            sort: "-publishedAt",
+            depth: 1,
+          });
+          return {
+            docs: res.docs as Blog[],
+            page: res.page ?? 1,
+            totalPages: res.totalPages,
+            totalDocs: res.totalDocs,
+            hasPrevPage: res.hasPrevPage,
+            hasNextPage: res.hasNextPage,
+          };
+        },
+        { docs: [], page: 1, totalPages: 1, totalDocs: 0, hasPrevPage: false, hasNextPage: false },
+      ),
+      ["blogs-page", String(page), String(limit)],
+      { tags: [cacheTags.collectionList("blogs")] },
+    )(),
+);
+
 /** Published blogs tagged to a treatment (drives the treatment-page "Related
  *  Articles" section). Cached + tagged `blogs`. Empty array on any error or
  *  if none are tagged yet — callers top up with placeholders. */
