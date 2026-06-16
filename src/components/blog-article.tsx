@@ -469,8 +469,8 @@ export function BlogArticle({
       {/* ════════════════════════════════════════
           POST-CONTENT SECTIONS (full width)
       ════════════════════════════════════════ */}
-      <BlogCta />
       <KeepReading posts={relatedBlogs} />
+      <BlogCta />
 
       <Footer />
       <FloatingCTA />

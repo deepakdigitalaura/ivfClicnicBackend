@@ -371,20 +371,51 @@ export interface Blog {
    */
   lastUpdatedAt?: string | null;
   /**
-   * Treatment page IDs this article links to (drives the Related Articles list). Ask the website team if unsure of the exact IDs.
+   * Treatment pages this article links to (drives the Related Articles list on those pages). Click 'Add Related Treatment' and pick from the list.
    */
   treatmentSlugs?:
     | {
-        slug: string;
+        slug:
+          | 'ivf'
+          | 'icsi'
+          | 'iui'
+          | 'picsi'
+          | 'imsi'
+          | 'macs'
+          | 'spindle-view-icsi'
+          | 'blastocyst-transfer'
+          | 'laser-hatching'
+          | 'ivf-failure'
+          | 'egg-donation'
+          | 'sperm-donation'
+          | 'embryo-donation'
+          | 'male-infertility'
+          | 'female-infertility'
+          | 'fertility-preservation'
+          | 'endometriosis'
+          | 'azoospermia'
+          | 'cryopreservation'
+          | 'recurrent-miscarriage'
+          | 'oligospermia'
+          | 'asthenospermia'
+          | 'surgical-sperm-retrieval'
+          | 'varicocele'
+          | 'erectile-dysfunction'
+          | 'conceive-naturally'
+          | 'prp-infertility'
+          | 'pcos'
+          | 'ovarian-reserve'
+          | 'ovarian-rejuvenation'
+          | 'fibroids';
         id?: string | null;
       }[]
     | null;
   /**
-   * City/centre page IDs this article links to (drives the Related Articles list on location pages). Ask the website team if unsure of the exact IDs.
+   * City pages this article links to (drives the Related Articles list on those pages). Click 'Add Related Location' and pick from the list.
    */
   locationSlugs?:
     | {
-        slug: string;
+        slug: 'ahmedabad' | 'mumbai' | 'vadodara' | 'surat' | 'bhuj' | 'bhavnagar' | 'anand' | 'varanasi';
         id?: string | null;
       }[]
     | null;
@@ -5820,6 +5851,110 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatStripBlock".
+ */
+export interface StatStripBlock {
+  items?:
+    | {
+        /**
+         * Short, e.g. '8 Types' or '15 min'.
+         */
+        value: string;
+        /**
+         * Caption under the value.
+         */
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statStrip';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ComparisonTableBlock".
+ */
+export interface ComparisonTableBlock {
+  /**
+   * Header for the left-most label column.
+   */
+  rowHeader?: string | null;
+  columns?:
+    | {
+        header: string;
+        id?: string | null;
+      }[]
+    | null;
+  rows?:
+    | {
+        rowLabel: string;
+        cells?:
+          | {
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparisonTable';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HighlightCardBlock".
+ */
+export interface HighlightCardBlock {
+  /**
+   * e.g. 'CONVENTIONAL IVF'
+   */
+  badge: string;
+  /**
+   * One line next to the badge.
+   */
+  tagline?: string | null;
+  color?: ('plum' | 'rose' | 'gold') | null;
+  /**
+   * Optional small facts row (label + value), e.g. 'Best for / Male factor infertility'.
+   */
+  facts?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Highlighted callout text — who this option fits.
+   */
+  bestSuitedFor: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'highlightCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DecisionListBlock".
+ */
+export interface DecisionListBlock {
+  heading?: string | null;
+  intro?: string | null;
+  items?:
+    | {
+        situation: string;
+        recommendation: string;
+        id?: string | null;
+      }[]
+    | null;
+  note?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'decisionList';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
