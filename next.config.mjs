@@ -1,8 +1,39 @@
+import path from "path";
+import { createRequire } from "module";
 import { withPayload } from "@payloadcms/next/withPayload";
+
+const require = createRequire(import.meta.url);
+// `exports` in plugin-cloud-storage's package.json only allows the "."/
+// "./utilities"/"./client" subpaths — even "./package.json" is blocked, so
+// we can't require.resolve() our way to the package root directly. Resolve
+// the "." entry (./dist/index.js, which *is* exported) and walk up two
+// dirs to the package root instead, then join the deep path by hand.
+const pluginCloudStorageRoot = path.dirname(
+  path.dirname(require.resolve("@payloadcms/plugin-cloud-storage")),
+);
 
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  // @payloadcms/storage-vercel-blob's client upload handler imports
+  // `getFileKey` from the `@payloadcms/plugin-cloud-storage/utilities`
+  // barrel — which *also* re-exports `resolveSignedURLKey`, a server-only
+  // util that transitively pulls in `undici` and several `node:`-prefixed
+  // built-ins (node:async_hooks, node:buffer, node:console). Webpack can
+  // polyfill bare `path`/`crypto` for the browser but refuses `node:`
+  // specifiers outright, so bundling the admin client fails. We never use
+  // signed URLs, so for the browser bundle only, redirect that barrel
+  // import straight to the one file we actually need (no `node:` deps).
+  webpack: (config, { isServer }) => {
+    if (!isServer) {
+      config.resolve.alias["@payloadcms/plugin-cloud-storage/utilities"] = path.join(
+        pluginCloudStorageRoot,
+        "dist/utilities/getFileKey.js",
+      );
+    }
+    return config;
+  },
 
   // IMAGE STRATEGY — decision: keep `unoptimized: true` *while* the deploy
   // target is a static export with no image server.
