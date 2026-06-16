@@ -29,6 +29,8 @@ import {
   CtaSidebarCard,
   TrustSidebarCard,
 } from "@/components/blog-sidebar";
+import { useEdit } from "@/components/editor/edit-context";
+import { Editable, EditableImage } from "@/components/editor/Editable";
 import { SITE } from "@/lib/seo";
 import type { BlogPost } from "@/lib/blogs";
 import type { Blog, Author, Category, Media } from "@/payload-types";
@@ -239,10 +241,15 @@ export function BlogArticle({
   /** h2/h3 headings extracted server-side for the sidebar ToC scrollspy. */
   headings?: TocHeading[];
 }) {
+  const editCtx = useEdit();
   const author = asObj<Author>(blog.author);
   const reviewedBy = asObj<Author>(blog.reviewedBy ?? undefined);
   const category = asObj<Category>(blog.category ?? undefined);
+  // After editor image-replace, heroImage may be a raw URL string rather than a
+  // populated Media object — handle both so the editor shows the replaced image.
+  const heroRaw: unknown = blog.heroImage;
   const hero = asObj<Media>(blog.heroImage ?? undefined);
+  const heroUrl = typeof heroRaw === "string" ? heroRaw : hero?.url;
   const faqs = (blog.faqs ?? []).filter(
     (f) => f.question && f.answer,
   ) as { question: string; answer: string }[];
@@ -285,18 +292,21 @@ export function BlogArticle({
           {/* Title */}
           <Reveal>
             <h1 className="mt-4 max-w-4xl text-balance text-3xl font-medium leading-[1.1] text-white md:text-4xl lg:text-5xl">
-              {blog.title}
+              <Editable path="title" rich={false}>{blog.title}</Editable>
             </h1>
           </Reveal>
 
           {/* Excerpt / lead */}
-          {blog.excerpt && (
-            <Reveal delay={0.1}>
-              <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-white/70 md:text-lg">
-                {blog.excerpt}
-              </p>
-            </Reveal>
-          )}
+          <Reveal delay={0.1}>
+            <Editable
+              path="excerpt"
+              rich={false}
+              as="p"
+              className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-white/70 md:text-lg"
+            >
+              {blog.excerpt ?? ""}
+            </Editable>
+          </Reveal>
 
           {/* Byline row */}
           <Reveal delay={0.15}>
@@ -366,12 +376,13 @@ export function BlogArticle({
           — No crop: let the image show at its natural aspect ratio so
             infographics / tall images are never cut off or dulled.
       ════════════════════════════════════════ */}
-      {hero?.url && (
+      {heroUrl && (
         <div className="container-px mx-auto -mt-6 max-w-5xl relative z-10">
           <div className="rounded-3xl shadow-lift border border-border/40 bg-white overflow-hidden">
-            <img
-              src={hero.url}
-              alt={hero.alt ?? blog.title}
+            <EditableImage
+              path="heroImage"
+              src={heroUrl}
+              alt={hero?.alt ?? blog.title}
               className="h-auto w-full"
               loading="eager"
             />
@@ -392,9 +403,26 @@ export function BlogArticle({
             {/* Medical disclaimer at top of article */}
             <MedicalDisclaimer />
 
-            {/* Article body (rich text) */}
+            {/* Article body — rich text in public; "Open in Admin" in the editor
+                (Lexical content editing lives in the Payload admin panel). */}
             <div className="mt-8">
-              {blog.content && <RichText data={blog.content} className="text-base" />}
+              {editCtx?.editMode ? (
+                <div className="rounded-2xl border-2 border-dashed border-[color:var(--rose)]/40 bg-[color:var(--rose)]/5 p-8 text-center">
+                  <p className="text-sm font-medium text-[color:var(--plum)]">
+                    Article body (rich text) is edited in the admin panel
+                  </p>
+                  <a
+                    href={`/admin/collections/blogs/${blog.id}`}
+                    target="_blank"
+                    rel="noreferrer"
+                    className="mt-3 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)] hover:underline"
+                  >
+                    Open in Admin →
+                  </a>
+                </div>
+              ) : (
+                blog.content && <RichText data={blog.content} className="text-base" />
+              )}
             </div>
 
             {/* Back to blog */}
