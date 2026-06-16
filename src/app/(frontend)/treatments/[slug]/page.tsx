@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
 import { treatmentGraph } from "@/lib/treatments";
-import { getTreatment, payloadClient } from "@/lib/payload";
+import { getTreatment, getBlogsByTreatmentSlug, payloadClient } from "@/lib/payload";
+import { toBlogPost } from "@/lib/blogs";
 
 type Props = {
   params: Promise<{ slug: string }>;
@@ -46,10 +47,11 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
   const t = await getTreatment(slug);
   if (!t) notFound();
+  const cmsBlogs = (await getBlogsByTreatmentSlug(slug)).map(toBlogPost);
   return (
     <>
       <JsonLd graph={treatmentGraph(t)} />
-      <TreatmentPage content={t} />
+      <TreatmentPage content={t} cmsBlogs={cmsBlogs} />
     </>
   );
 }

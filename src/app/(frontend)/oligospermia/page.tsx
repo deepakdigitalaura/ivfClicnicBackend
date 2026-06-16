@@ -3,7 +3,8 @@ import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
 import { treatmentGraph } from "@/lib/treatments";
-import { getTreatment } from "@/lib/payload";
+import { getTreatment, getBlogsByTreatmentSlug } from "@/lib/payload";
+import { toBlogPost } from "@/lib/blogs";
 
 /* Wave 4.4 D1 — pilot CMS migration. Content now reads from the `treatments`
  * collection via getTreatment() through the resolver/fallback pipeline; an
@@ -32,10 +33,11 @@ export async function generateMetadata(): Promise<Metadata> {
 export default async function Page() {
   const t = await getTreatment(SLUG);
   if (!t) notFound();
+  const cmsBlogs = (await getBlogsByTreatmentSlug(SLUG)).map(toBlogPost);
   return (
     <>
       <JsonLd graph={treatmentGraph(t)} />
-      <TreatmentPage content={t} />
+      <TreatmentPage content={t} cmsBlogs={cmsBlogs} />
     </>
   );
 }

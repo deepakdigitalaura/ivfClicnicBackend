@@ -1340,6 +1340,12 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
 
 /* ---------- Calculators ---------- */
 
+// Calculator name -> live page href. Cards without a matching entry stay
+// inert (no real tool built yet) so we never link to a 404.
+const CALCULATOR_HREFS: Record<string, string> = {
+  "Natural Pregnancy Calculator": "/natural-pregnancy-calculator",
+};
+
 export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
   const calcs = content.items;
   return (
@@ -1350,7 +1356,9 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
         subtitle={ed("calculators.subtitle", content.subtitle)}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
-        {calcs.map((c, i) => (
+        {calcs.map((c, i) => {
+          const href = CALCULATOR_HREFS[c];
+          return (
           <StaggerItem key={c}>
             <motion.div
               whileHover={{ y: -6 }}
@@ -1361,12 +1369,13 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
                 <Calculator className="h-5 w-5" />
               </Float>
               <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
-              <a className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+              <a href={href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                 Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </a>
             </motion.div>
           </StaggerItem>
-        ))}
+          );
+        })}
       </Stagger>
     </section>
   );

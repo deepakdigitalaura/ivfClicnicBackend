@@ -21,7 +21,7 @@ import { resolveIcon } from "@/lib/icon-map";
 import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
 import { doctorsForTreatment, doctorUrl, doctorBySlug } from "@/lib/doctors";
-import { blogsForTreatment } from "@/lib/blogs";
+import { blogsForTreatment, type BlogPost } from "@/lib/blogs";
 import { testimonialsForTreatment, type VideoTestimonial } from "@/lib/video-testimonials";
 import { destinationHref } from "@/lib/internal-links";
 
@@ -376,7 +376,7 @@ function toView(c: ResolvedTreatment): Treatment {
  * Keeping lucide icon *components* out of the props (functions aren't
  * serializable) is why the CMS path passes names and re-resolves them in toView.
  * The route still builds JSON-LD + metadata server-side from the same data. */
-export function TreatmentPage({ slug, content, editTestimonials }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[] }) {
+export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[]; cmsBlogs?: BlogPost[] }) {
   const t = content ? toView(content) : slug ? treatmentBySlug(slug) : undefined;
   if (!t) return null;
   const reviewer = doctorBySlug(t.reviewerSlug);
@@ -384,7 +384,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
   // editTestimonials is provided by TreatmentEditor (from the draft); the public
   // site always uses the code-owned defaults so it remains byte-identical.
   const testimonials = editTestimonials ?? testimonialsForTreatment(t.slug);
-  const blogs = blogsForTreatment(t.slug, t.shortName);
+  const blogs = blogsForTreatment(t.slug, t.shortName, 3, cmsBlogs);
   // Inline-editor flag: a few fields render through a transform on the public
   // site (e.g. <Linkify> auto-links the hero tagline, which emits the <a> links
   // the SEO gate checks). For those we keep the exact public render and only swap

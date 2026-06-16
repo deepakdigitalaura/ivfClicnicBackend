@@ -7,8 +7,9 @@ import {
   cityGraph, centerGraph, builtCityParams, centresForCity, cityHasOwnPage,
 } from "@/lib/locations";
 import {
-  getCity, getCentre, getPublishedCitySlugs, getPublishedCentresForCity,
+  getCity, getCentre, getPublishedCitySlugs, getPublishedCentresForCity, getBlogsByLocationSlug,
 } from "@/lib/payload";
+import { toBlogPost } from "@/lib/blogs";
 import { abs } from "@/lib/seo";
 
 /** Pre-render every built city from both code defaults and DB. */
@@ -96,10 +97,11 @@ export default async function Page({ params }: { params: Promise<{ city: string 
     );
   }
 
+  const cmsBlogs = (await getBlogsByLocationSlug(c.slug)).map(toBlogPost);
   return (
     <>
       <JsonLd graph={cityGraph(c)} />
-      <CityPage city={c} />
+      <CityPage city={c} cmsBlogs={cmsBlogs} />
     </>
   );
 }

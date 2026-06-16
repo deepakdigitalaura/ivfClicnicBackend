@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogArticle } from "@/components/blog-article";
 import { JsonLd } from "@/components/json-ld";
-import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema } from "@/lib/seo";
-import { getBlogBySlug, getPublishedBlogSlugs } from "@/lib/payload";
-import type { Author, Media } from "@/payload-types";
+import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema, faqSchema } from "@/lib/seo";
+import { getBlogBySlug, getPublishedBlogSlugs, getRelatedBlogs } from "@/lib/payload";
+import { toBlogPost } from "@/lib/blogs";
+import { extractHeadings } from "@/lib/headings";
+import type { Author, Category, Media } from "@/payload-types";
 
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
 const asObj = <T,>(v: T | number | null | undefined): T | null =>
@@ -57,6 +59,8 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const hero = asObj<Media>(blog.heroImage ?? undefined);
   const author = asObj<Author>(blog.author);
   const reviewedBy = asObj<Author>(blog.reviewedBy ?? undefined);
+  const category = asObj<Category>(blog.category ?? undefined);
+  const dateModified = blog.lastUpdatedAt || blog.updatedAt;
 
   const authorNode = author
     ? {
@@ -67,6 +71,12 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       }
     : undefined;
 
+  const treatmentSlugs = (blog.treatmentSlugs ?? []).map((t) => t.slug);
+  const [relatedBlogs, headings] = await Promise.all([
+    getRelatedBlogs(slug, treatmentSlugs, category?.id ?? null),
+    Promise.resolve(extractHeadings(blog.content)),
+  ]);
+
   const graph: Record<string, unknown>[] = [
     {
       "@type": "BlogPosting",
@@ -75,7 +85,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       ...(blog.excerpt ? { description: blog.excerpt } : {}),
       ...(hero?.url ? { image: abs(hero.url) } : {}),
       ...(blog.publishedAt ? { datePublished: blog.publishedAt } : {}),
-      ...(blog.updatedAt ? { dateModified: blog.updatedAt } : {}),
+      ...(dateModified ? { dateModified } : {}),
       ...(authorNode ? { author: authorNode } : {}),
       ...(reviewedBy ? { reviewedBy: { "@type": "Person", name: reviewedBy.name } } : {}),
       publisher: { "@id": ORG_ID },
@@ -87,12 +97,13 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
       { name: "Blog", url: "/blog" },
       { name: blog.title, url: path },
     ]),
+    ...(blog.faqs?.length ? [faqSchema(blog.faqs.map((f) => ({ q: f.question, a: f.answer })))] : []),
   ];
 
   return (
     <>
       <JsonLd graph={graph} />
-      <BlogArticle blog={blog} />
+      <BlogArticle blog={blog} relatedBlogs={relatedBlogs.map(toBlogPost)} headings={headings} />
     </>
   );
 }

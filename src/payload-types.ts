@@ -367,11 +367,34 @@ export interface Blog {
    */
   publishedAt?: string | null;
   /**
+   * Shown as 'Last updated' on the article and used for the search-engine dateModified signal. Leave blank to use the Published Date.
+   */
+  lastUpdatedAt?: string | null;
+  /**
    * Treatment page IDs this article links to (drives the Related Articles list). Ask the website team if unsure of the exact IDs.
    */
   treatmentSlugs?:
     | {
         slug: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * City/centre page IDs this article links to (drives the Related Articles list on location pages). Ask the website team if unsure of the exact IDs.
+   */
+  locationSlugs?:
+    | {
+        slug: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional. Adds an FAQ accordion to the article and FAQPage search-engine markup.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
         id?: string | null;
       }[]
     | null;
@@ -2328,10 +2351,24 @@ export interface BlogsSelect<T extends boolean = true> {
   category?: T;
   readMins?: T;
   publishedAt?: T;
+  lastUpdatedAt?: T;
   treatmentSlugs?:
     | T
     | {
         slug?: T;
+        id?: T;
+      };
+  locationSlugs?:
+    | T
+    | {
+        slug?: T;
+        id?: T;
+      };
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
         id?: T;
       };
   seo?:

@@ -67,11 +67,34 @@ const BLOG_FIELDS: Field[] = [
       admin: { description: "The date shown on the article. Leave blank to use today." },
     },
     {
+      name: "lastUpdatedAt",
+      type: "date",
+      label: "Last Updated Date",
+      admin: { description: "Shown as 'Last updated' on the article and used for the search-engine dateModified signal. Leave blank to use the Published Date." },
+    },
+    {
       name: "treatmentSlugs",
       type: "array",
       labels: { singular: "Related Treatment ID", plural: "Related Treatment IDs" },
       admin: { description: "Treatment page IDs this article links to (drives the Related Articles list). Ask the website team if unsure of the exact IDs." },
       fields: [{ name: "slug", type: "text", required: true, label: "Treatment ID" }],
+    },
+    {
+      name: "locationSlugs",
+      type: "array",
+      labels: { singular: "Related Location ID", plural: "Related Location IDs" },
+      admin: { description: "City/centre page IDs this article links to (drives the Related Articles list on location pages). Ask the website team if unsure of the exact IDs." },
+      fields: [{ name: "slug", type: "text", required: true, label: "Location ID" }],
+    },
+    {
+      name: "faqs",
+      type: "array",
+      labels: { singular: "FAQ", plural: "FAQs" },
+      admin: { description: "Optional. Adds an FAQ accordion to the article and FAQPage search-engine markup." },
+      fields: [
+        { name: "question", type: "text", required: true, label: "Question" },
+        { name: "answer", type: "textarea", required: true, label: "Answer" },
+      ],
     },
     seoField,
 ];
@@ -107,7 +130,8 @@ export const Blogs: CollectionConfig = {
       tabs: [
         { label: "Article", fields: BLOG_FIELDS.slice(0, 5) },
         { label: "Details", fields: BLOG_FIELDS.slice(5, 9) },
-        { label: "Search & Social", fields: BLOG_FIELDS.slice(9) },
+        { label: "Tagging", fields: BLOG_FIELDS.slice(9, 11) },
+        { label: "FAQs & SEO", fields: BLOG_FIELDS.slice(11) },
       ],
     },
   ],

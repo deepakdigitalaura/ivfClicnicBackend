@@ -11,7 +11,7 @@
  * generation is preserved. React `cache()` adds per-render dedup.
  * ===================================================================== */
 import "server-only";
-import { getPayload, type Payload } from "payload";
+import { getPayload, type Payload, type Where } from "payload";
 import { unstable_cache } from "next/cache";
 import { cache as reactCache } from "react";
 import config from "@payload-config";
@@ -141,6 +141,80 @@ export const getBlogs = reactCache(
         [],
       ),
       ["blogs-list", String(limit)],
+      { tags: [cacheTags.collectionList("blogs")] },
+    )(),
+);
+
+/** Published blogs tagged to a treatment (drives the treatment-page "Related
+ *  Articles" section). Cached + tagged `blogs`. Empty array on any error or
+ *  if none are tagged yet — callers top up with placeholders. */
+export const getBlogsByTreatmentSlug = reactCache(
+  (treatmentSlug: string, limit = 3): Promise<Blog[]> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "blogs",
+            where: { "treatmentSlugs.slug": { equals: treatmentSlug } },
+            limit,
+            sort: "-publishedAt",
+            depth: 1,
+          });
+          return res.docs as Blog[];
+        },
+        [],
+      ),
+      ["blogs-by-treatment", treatmentSlug, String(limit)],
+      { tags: [cacheTags.collectionList("blogs")] },
+    )(),
+);
+
+/** Published blogs tagged to a city/centre location (drives the location-page
+ *  "Related Articles" section). Cached + tagged `blogs`. */
+export const getBlogsByLocationSlug = reactCache(
+  (locationSlug: string, limit = 3): Promise<Blog[]> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "blogs",
+            where: { "locationSlugs.slug": { equals: locationSlug } },
+            limit,
+            sort: "-publishedAt",
+            depth: 1,
+          });
+          return res.docs as Blog[];
+        },
+        [],
+      ),
+      ["blogs-by-location", locationSlug, String(limit)],
+      { tags: [cacheTags.collectionList("blogs")] },
+    )(),
+);
+
+/** Published blogs related to a given post — shares a treatment tag or its
+ *  category, excluding itself. Powers the article's "Keep Reading" section. */
+export const getRelatedBlogs = reactCache(
+  (slug: string, treatmentSlugs: string[], categoryId: number | null, limit = 3): Promise<Blog[]> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const or: Where[] = [];
+          if (treatmentSlugs.length) or.push({ "treatmentSlugs.slug": { in: treatmentSlugs } });
+          if (categoryId) or.push({ category: { equals: categoryId } });
+          if (!or.length) return [];
+          const res = await payload.find({
+            collection: "blogs",
+            where: { and: [{ slug: { not_equals: slug } }, { or }] },
+            limit,
+            sort: "-publishedAt",
+            depth: 1,
+          });
+          return res.docs as Blog[];
+        },
+        [],
+      ),
+      ["related-blogs", slug, String(limit)],
       { tags: [cacheTags.collectionList("blogs")] },
     )(),
 );

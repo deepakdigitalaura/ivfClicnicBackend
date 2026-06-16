@@ -1,6 +1,6 @@
 "use client";
 import Image from "next/image";
-import { ArrowRight, Calendar, MessageCircle, Phone, MapPin, Clock, Navigation, Award, FlaskConical, HeartPulse, Building2, Rotate3d } from "lucide-react";
+import { ArrowRight, Calendar, MessageCircle, Phone, MapPin, Clock, Navigation, Award, FlaskConical, HeartPulse, Building2, Rotate3d, BookOpen } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer } from "@/components/home-page";
@@ -16,6 +16,7 @@ import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
 import { testimonialsForCity } from "@/lib/video-testimonials";
+import { blogsForLocation, type BlogPost } from "@/lib/blogs";
 
 const trust = [
   { icon: Award, t: "Trusted since 1984", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for four decades." },
@@ -38,8 +39,9 @@ const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
 const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
 
-export function CityPage({ city }: { city: City | ResolvedCity }) {
+export function CityPage({ city, cmsBlogs }: { city: City | ResolvedCity; cmsBlogs?: BlogPost[] }) {
   const sl = (city as ResolvedCity).sectionLabels ?? {};
+  const blogs = blogsForLocation(city.slug, city.name, 3, cmsBlogs);
   const editing = !!useEdit()?.editMode;
   const centres = centresForCity(city.slug);
   const docs = doctorSlugsForCity(city.slug)
@@ -250,6 +252,46 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
               {city.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
             </div>
           </div>
+        </section>
+      )}
+
+      {/* Related Articles — location-specific, data-driven (placeholders until published) */}
+      {blogs.length > 0 && (
+        <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
+          <SectionHead
+            center
+            eyebrow="Blog"
+            title={<>{city.name} <em className="font-display italic text-[color:var(--rose)]">Articles &amp; Guides</em></>}
+            subtitle={`Fertility guidance written for patients in ${city.name}.`}
+          />
+          <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {blogs.map((b) => (
+              <StaggerItem key={b.slug}>
+                <a
+                  href={b.href}
+                  className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift"
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">
+                      <BookOpen className="h-3 w-3" /> {b.category}
+                    </span>
+                    {!b.published && (
+                      <span className="rounded-full bg-[color:var(--plum)]/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--plum)]/50">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold leading-snug text-[color:var(--plum)] transition-colors group-hover:text-[color:var(--rose)]">
+                    {b.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted-foreground">{b.excerpt}</p>
+                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
+                    Read article
+                  </span>
+                </a>
+              </StaggerItem>
+            ))}
+          </Stagger>
         </section>
       )}
 
