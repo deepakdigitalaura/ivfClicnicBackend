@@ -211,7 +211,10 @@ function parseInline($: cheerio.CheerioAPI, el: AnyNode, format = 0): LexicalNod
       continue;
     }
     if (tag === "a") {
-      const href = $el.attr("href") || "";
+      // Some WP content has malformed hrefs with raw spaces (e.g. "tel: 079 4040
+      // 4646") which fail Payload's link-field URL validation outright — strip
+      // all whitespace; real URLs never contain literal spaces.
+      const href = ($el.attr("href") || "").replace(/\s+/g, "");
       const inner = parseInline($, node, format);
       if (!href || inner.length === 0) {
         out.push(...inner);
