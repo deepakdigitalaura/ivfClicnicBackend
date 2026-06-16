@@ -13,6 +13,7 @@ import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import sharp from "sharp";
 
 import { Users } from "./collections/Users";
@@ -70,6 +71,19 @@ export default buildConfig({
   },
   collections: [Inquiries, Testimonials, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Redirects, Media, Users],
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About, SeoSettings],
+  // Vercel's serverless functions have a read-only filesystem (only /tmp is
+  // writable) — writing uploads to Media's local `staticDir` 500s in production
+  // (ENOENT mkdir '/vercel'). When a Blob store is connected (BLOB_READ_WRITE_TOKEN
+  // present), route uploads there instead; local dev keeps writing to
+  // /public/media unchanged since the token won't be set.
+  plugins: process.env.BLOB_READ_WRITE_TOKEN
+    ? [
+        vercelBlobStorage({
+          collections: { media: true },
+          token: process.env.BLOB_READ_WRITE_TOKEN,
+        }),
+      ]
+    : [],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
