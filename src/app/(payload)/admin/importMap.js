@@ -26,6 +26,7 @@ import { BrandLogo as BrandLogo_9bb8ea9971948830b3de812baaa56aec } from '../../.
 import { WelcomeDashboard as WelcomeDashboard_1a68d16f6390dcabe453495a1f93438a } from '../../../components/admin/WelcomeDashboard'
 import { ForceNavOpen as ForceNavOpen_41e650a4f4313a423810e258ca22c828 } from '../../../components/admin/ForceNavOpen'
 import { PagesBuilderNavLink as PagesBuilderNavLink_630098d5dcf37edf82f88c9846d305ff } from '../../../components/admin/PagesBuilderNavLink'
+import { VercelBlobClientUploadHandler as VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e } from '@payloadcms/storage-vercel-blob/client'
 import { CollectionCards as CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1 } from '@payloadcms/next/rsc'
 
 /** @type import('payload').ImportMap */
@@ -58,5 +59,6 @@ export const importMap = {
   "/components/admin/WelcomeDashboard#WelcomeDashboard": WelcomeDashboard_1a68d16f6390dcabe453495a1f93438a,
   "/components/admin/ForceNavOpen#ForceNavOpen": ForceNavOpen_41e650a4f4313a423810e258ca22c828,
   "/components/admin/PagesBuilderNavLink#PagesBuilderNavLink": PagesBuilderNavLink_630098d5dcf37edf82f88c9846d305ff,
+  "@payloadcms/storage-vercel-blob/client#VercelBlobClientUploadHandler": VercelBlobClientUploadHandler_16c82c5e25f430251a3e3ba57219ff4e,
   "@payloadcms/next/rsc#CollectionCards": CollectionCards_f9c02e79a4aed9a3924487c0cd4cafb1
 }

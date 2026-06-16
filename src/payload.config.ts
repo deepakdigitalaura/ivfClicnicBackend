@@ -73,17 +73,24 @@ export default buildConfig({
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About, SeoSettings],
   // Vercel's serverless functions have a read-only filesystem (only /tmp is
   // writable) — writing uploads to Media's local `staticDir` 500s in production
-  // (ENOENT mkdir '/vercel'). When a Blob store is connected (BLOB_READ_WRITE_TOKEN
-  // present), route uploads there instead; local dev keeps writing to
-  // /public/media unchanged since the token won't be set.
-  plugins: process.env.BLOB_READ_WRITE_TOKEN
-    ? [
-        vercelBlobStorage({
-          collections: { media: true },
-          token: process.env.BLOB_READ_WRITE_TOKEN,
-        }),
-      ]
-    : [],
+  // (ENOENT mkdir '/vercel'). Route uploads to Vercel Blob instead when a store
+  // is connected (BLOB_READ_WRITE_TOKEN present).
+  //
+  // IMPORTANT: the plugin call itself must always run, even when the token is
+  // absent (e.g. local dev) — it self-disables via its own `!token` check, but
+  // still always registers its client component in the import map. Wrapping
+  // this call in an `if (token)` (as an earlier version of this file did)
+  // causes `payload generate:importmap` to omit that component when run
+  // without the token locally, producing a prod-only "PayloadComponent not
+  // found in importMap" admin-panel blank-screen — see the plugin's own
+  // initClientUploads comment ("always part of the import map, to avoid
+  // import map discrepancies between dev and prod").
+  plugins: [
+    vercelBlobStorage({
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN || "",
+    }),
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

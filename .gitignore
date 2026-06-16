@@ -10,3 +10,4 @@ out
 # Payload uploaded media (local dev)
 public/media
 supabase-schema.sql
+.vercel
