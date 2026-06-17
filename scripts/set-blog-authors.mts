@@ -17,8 +17,9 @@
 import { getPayload } from "payload";
 import config from "@payload-config";
 
-const DR_PARTH_ID    = 3; // Co-director, article author
-const DR_HIMANSHU_ID = 2; // Director, medical reviewer
+/* IDs resolved dynamically by name — works in both local and prod DB */
+const DR_PARTH_NAME    = "Dr. Parth Bavishi";
+const DR_HIMANSHU_NAME = "Dr. Himanshu Bavishi";
 
 /* ── Dr. Parth Bavishi — full detailed bio ───────────────────────────── */
 const PARTH_BIO = `Dr. Parth Bavishi holds an MD in Obstetrics and Gynaecology and brings over 12 years of specialist experience as Co-director and IVF Specialist at Bavishi Fertility Institute — a group of fertility centres across India committed to helping couples realise their dream of parenthood.
@@ -34,30 +35,58 @@ Under his leadership, Bavishi Fertility Institute is dedicated to treatments tha
 async function main() {
   const payload = await getPayload({ config });
 
+  /* ── List all authors to find IDs ─────────────────────────────────── */
+  const allAuthors = await payload.find({ collection: "authors", limit: 50, depth: 0 });
+  console.log("\n📋  Authors in this DB:");
+  allAuthors.docs.forEach(a => console.log(`    ID ${a.id}  →  ${a.name}`));
+
+  const parthDoc    = allAuthors.docs.find(a => a.name === DR_PARTH_NAME);
+  let himanshuDoc   = allAuthors.docs.find(a => a.name === DR_HIMANSHU_NAME);
+
+  if (!parthDoc) throw new Error(`Author not found: "${DR_PARTH_NAME}"`);
+
+  /* Create Dr. Himanshu if missing from this DB */
+  if (!himanshuDoc) {
+    console.log(`\n  ⚡ "${DR_HIMANSHU_NAME}" not found — creating…`);
+    himanshuDoc = await payload.create({
+      collection: "authors",
+      data: {
+        name: DR_HIMANSHU_NAME,
+        slug: "dr-himanshu-bavishi",
+        credentials: "MBBS, MD (Obstetrics & Gynaecology), DNB",
+        role: "Director & IVF Specialist",
+      },
+    });
+    console.log(`  ✅ Created "${DR_HIMANSHU_NAME}" with ID ${himanshuDoc.id}`);
+  }
+
+  const DR_PARTH_ID    = parthDoc.id;
+  const DR_HIMANSHU_ID = himanshuDoc.id;
+  console.log(`\n  Dr. Parth Bavishi    → ID ${DR_PARTH_ID}`);
+  console.log(`  Dr. Himanshu Bavishi → ID ${DR_HIMANSHU_ID}\n`);
+
   /* ── 1. Update Dr. Parth Bavishi ──────────────────────────────────── */
   await payload.update({
     collection: "authors",
     id: DR_PARTH_ID,
     data: {
-      name: "Dr. Parth Bavishi",
       credentials: "MBBS, MD (Obstetrics & Gynaecology)",
       role: "Co-director & IVF Specialist",
       bio: PARTH_BIO,
     },
   });
-  console.log("✅  Author #3 (Dr. Parth Bavishi) — bio + credentials updated.");
+  console.log(`✅  Author ID ${DR_PARTH_ID} (Dr. Parth Bavishi) — bio + credentials updated.`);
 
   /* ── 2. Update Dr. Himanshu Bavishi ───────────────────────────────── */
   await payload.update({
     collection: "authors",
     id: DR_HIMANSHU_ID,
     data: {
-      name: "Dr. Himanshu Bavishi",
       credentials: "MBBS, MD (Obstetrics & Gynaecology), DNB",
       role: "Director & IVF Specialist",
     },
   });
-  console.log("✅  Author #2 (Dr. Himanshu Bavishi) — credentials updated.");
+  console.log(`✅  Author ID ${DR_HIMANSHU_ID} (Dr. Himanshu Bavishi) — credentials updated.`);
 
   /* ── 3. Batch-update all blogs ─────────────────────────────────────── */
   let page = 1;

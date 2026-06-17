@@ -518,7 +518,7 @@ export function BlogArticle({
           <aside className="hidden lg:block">
             <div className="sticky top-24 flex flex-col gap-5">
               {headings.length > 0 && <TableOfContents headings={headings} />}
-              {featuredDoctor && <AuthorSidebarCard author={featuredDoctor} />}
+              {reviewedBy && <AuthorSidebarCard author={reviewedBy} />}
               <CtaSidebarCard />
               <TrustSidebarCard />
             </div>
