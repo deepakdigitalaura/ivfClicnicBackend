@@ -234,16 +234,16 @@ export const HEADER_DEFAULTS: HeaderData = {
       label: "Calculators",
       mega: [
         { heading: "Fertility & IVF", items: [
-          { label: "IVF Success Rate Calculator", href: "/#tools" },
-          { label: "IVF Cost Calculator", href: "/#tools" },
-          { label: "AMH Level Interpreter", href: "/#tools" },
-          { label: "Sperm Analysis Calculator", href: "/#tools" },
+          { label: "IVF Success Rate Calculator", href: "/ivf-success-rate-calculator", desc: "Estimate your personalised IVF success probability" },
+          { label: "IVF Cost Calculator", href: "/ivf-cost-calculator", desc: "Plan your treatment budget across cycle types" },
+          { label: "AMH Level Interpreter", href: "/amh-level-interpreter", desc: "Understand your ovarian reserve result" },
+          { label: "Sperm Analysis Calculator", href: "/semen-analysis-calculator", desc: "Interpret your semen analysis against WHO 2021" },
         ]},
         { heading: "Conception & Pregnancy", items: [
-          { label: "Ovulation Calculator", href: "/#tools" },
-          { label: "Fertile Period Calculator", href: "/#tools" },
-          { label: "Natural Pregnancy Calculator", href: "/#tools" },
-          { label: "Miscarriage Risk Calculator", href: "/#tools" },
+          { label: "Ovulation Calculator", href: "/ovulation-calculator", desc: "Find your fertile window and ovulation date" },
+          { label: "Fertile Period Calculator", href: "/fertile-period-calculator", desc: "Track your fertile days and next period" },
+          { label: "Natural Pregnancy Calculator", href: "/natural-pregnancy-calculator", desc: "Estimate your natural conception probability" },
+          { label: "Miscarriage Risk Calculator", href: "/risk-of-repeat-miscarriage-calculator", desc: "Assess your RPL risk profile" },
         ]},
       ],
     },
@@ -251,13 +251,13 @@ export const HEADER_DEFAULTS: HeaderData = {
       label: "Resources",
       mega: [
         { heading: "Learn", items: [
-          { label: "Blog", href: destinationHref("blog") },
+          { label: "Blogs", href: destinationHref("blog") },
           { label: "Success Stories", href: "/#stories" },
           { label: "Videos", href: "/#videos" },
           { label: "Events & Webinars", href: "/#events" },
         ]},
         { heading: "Tools", items: [
-          { label: "Fertility Calculators", href: "/#tools" },
+          { label: "Fertility Calculators", href: "/ivf-success-rate-calculator" },
           { label: "Check IVF Eligibility", href: "/#book" },
         ]},
       ],
@@ -345,7 +345,12 @@ function resolveNavItem(n: NavItemSource): HeaderNavItem {
  */
 function buildLocationsMega(navLocations: NavLocationItem[]): HeaderMegaCol[] | undefined {
   if (!navLocations.length) return undefined;
-  return navLocations.map((city) => {
+  const sorted = [...navLocations].sort((a, b) => {
+    if (a.citySlug === "ahmedabad") return -1;
+    if (b.citySlug === "ahmedabad") return 1;
+    return 0;
+  });
+  return sorted.map((city) => {
     const cityHref = `/locations/${city.citySlug}`;
     if (city.centres.length > 1) {
       return {

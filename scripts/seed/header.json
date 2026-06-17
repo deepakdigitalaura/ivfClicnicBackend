@@ -92,16 +92,16 @@
     ]},
     { "label": "Calculators", "columns": [
       { "heading": "Fertility & IVF", "items": [
-        { "label": "IVF Success Rate Calculator", "url": "/#tools" },
-        { "label": "IVF Cost Calculator", "url": "/#tools" },
-        { "label": "AMH Level Interpreter", "url": "/#tools" },
-        { "label": "Sperm Analysis Calculator", "url": "/#tools" }
+        { "label": "IVF Success Rate Calculator", "url": "/ivf-success-rate-calculator", "desc": "Estimate your personalised IVF success probability" },
+        { "label": "IVF Cost Calculator", "url": "/ivf-cost-calculator", "desc": "Plan your treatment budget across cycle types" },
+        { "label": "AMH Level Interpreter", "url": "/amh-level-interpreter", "desc": "Understand your ovarian reserve result" },
+        { "label": "Sperm Analysis Calculator", "url": "/semen-analysis-calculator", "desc": "Interpret your semen analysis against WHO 2021" }
       ]},
       { "heading": "Conception & Pregnancy", "items": [
-        { "label": "Ovulation Calculator", "url": "/#tools" },
-        { "label": "Fertile Period Calculator", "url": "/#tools" },
-        { "label": "Natural Pregnancy Calculator", "url": "/#tools" },
-        { "label": "Miscarriage Risk Calculator", "url": "/#tools" }
+        { "label": "Ovulation Calculator", "url": "/ovulation-calculator", "desc": "Find your fertile window and ovulation date" },
+        { "label": "Fertile Period Calculator", "url": "/fertile-period-calculator", "desc": "Track your fertile days and next period" },
+        { "label": "Natural Pregnancy Calculator", "url": "/natural-pregnancy-calculator", "desc": "Estimate your natural conception probability" },
+        { "label": "Miscarriage Risk Calculator", "url": "/risk-of-repeat-miscarriage-calculator", "desc": "Assess your RPL risk profile" }
       ]}
     ]},
     { "label": "Resources", "columns": [

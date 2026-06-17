@@ -1344,6 +1344,8 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
 // inert (no real tool built yet) so we never link to a 404.
 const CALCULATOR_HREFS: Record<string, string> = {
   "Natural Pregnancy Calculator": "/natural-pregnancy-calculator",
+  "Fertile Period Calculator": "/ovulation-calculator",
+  "Ovulation Calculator": "/ovulation-calculator",
 };
 
 export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {

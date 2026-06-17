@@ -428,7 +428,7 @@ export function NaturalPregnancyCalculatorPage() {
       </section>
 
       {/* Always-visible disclaimer */}
-      <section className="container-px mx-auto max-w-[760px] py-4 md:py-8">
+      <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <div className="rounded-r-2xl border border-border/70 border-l-4 border-l-[color:var(--rose)] bg-muted/60 p-7 md:p-8">
           <p className="text-[13px] leading-relaxed text-muted-foreground">
             This Natural Pregnancy Calculator is a clinically validated tool used by fertility specialists worldwide — but
