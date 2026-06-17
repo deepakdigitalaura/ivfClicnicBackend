@@ -300,6 +300,8 @@ export type HeaderSource =
   | null
   | undefined;
 
+const toTitleCase = (s: string) => s.replace(/\b\w/g, (c) => c.toUpperCase());
+
 /** Map a stored mega item → rendered item, dropping empty optional fields so
  *  the resolved object matches the hand-written defaults shape. */
 function resolveMegaItem(it: MegaItemSource): HeaderMegaItem {
@@ -378,7 +380,7 @@ function buildMaternityMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] 
   const items = navTreatments
     .filter((t) => t.navCategory === "maternity-services")
     .sort((a, b) => a.navOrder - b.navOrder)
-    .map((t) => ({ label: t.name, href: t.href }));
+    .map((t) => ({ label: toTitleCase(t.name), href: t.href }));
   if (!items.length) return undefined;
   const mid = Math.ceil(items.length / 2);
   return [
@@ -476,6 +478,15 @@ export function resolveHeader(
     if (item.label === "Maternity Services" && maternityMega) return { ...item, mega: maternityMega };
     if (item.label === "Locations" && locationsMega) return { ...item, mega: locationsMega };
     if (item.doctors && doctorMenu) return { ...item, doctorMenu };
+    if (item.label === "Resources" && item.mega) {
+      return {
+        ...item,
+        mega: item.mega.map((col) => ({
+          ...col,
+          items: col.items.map((it) => it.label === "Blog" ? { ...it, label: "Blogs" } : it),
+        })),
+      };
+    }
     return item;
   });
 

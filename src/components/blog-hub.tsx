@@ -128,7 +128,7 @@ export function BlogHub({
           <Reveal><div className="flex justify-center"><Eyebrow>Knowledge & Resources</Eyebrow></div></Reveal>
           <Reveal delay={0.05}>
             <h1 className="mx-auto mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl">
-              {hero?.title ? hero.title : <>The Bavishi Fertility <em className="font-display italic text-[color:var(--rose)]">Blog</em></>}
+              {hero?.title ? hero.title : <>The Bavishi Fertility <em className="font-display italic text-[color:var(--rose)]">Blogs</em></>}
             </h1>
           </Reveal>
           <Reveal delay={0.12}>

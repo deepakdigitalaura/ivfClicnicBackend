@@ -106,7 +106,7 @@
     ]},
     { "label": "Resources", "columns": [
       { "heading": "Learn", "items": [
-        { "label": "Blog", "url": "/blog" },
+        { "label": "Blogs", "url": "/blog" },
         { "label": "Success Stories", "url": "/#stories" },
         { "label": "Videos", "url": "/#videos" },
         { "label": "Events & Webinars", "url": "/#events" }
