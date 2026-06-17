@@ -6085,6 +6085,76 @@ export interface ConclusionPanelBlock {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InfographicBlock".
+ */
+export interface InfographicBlock {
+  /**
+   * Optional label shown above the graphic.
+   */
+  title?: string | null;
+  /**
+   * Raw inline SVG markup (must start with <svg). Set by the editorial team only.
+   */
+  svgContent: string;
+  /**
+   * Descriptive text for screen readers.
+   */
+  altText: string;
+  /**
+   * Optional caption displayed below the graphic.
+   */
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'infographic';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InlineCtaBlock".
+ */
+export interface InlineCtaBlock {
+  /**
+   * Short question or hook, e.g. 'Not sure which treatment is right for you?'
+   */
+  headline: string;
+  /**
+   * One supporting sentence.
+   */
+  subtext?: string | null;
+  buttons?:
+    | {
+        label: string;
+        url: string;
+        variant?: ('primary' | 'secondary') | null;
+        id?: string | null;
+      }[]
+    | null;
+  accent?: ('rose' | 'plum' | 'gold') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'inlineCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExternalImageBlock".
+ */
+export interface ExternalImageBlock {
+  /**
+   * Full CDN URL (Pexels/Unsplash). Set by editorial team only.
+   */
+  url: string;
+  alt: string;
+  caption?: string | null;
+  /**
+   * e.g. 'Photo: Pexels / Tima Miroshnichenko'
+   */
+  credit?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'externalImage';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "auth".
  */
 export interface Auth {

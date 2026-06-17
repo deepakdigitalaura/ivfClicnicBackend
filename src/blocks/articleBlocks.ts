@@ -164,10 +164,84 @@ export const ConclusionPanelBlock: Block = {
   ],
 };
 
+/** Mid-article inline SVG infographic or process diagram. SVG content is
+ *  set by the editorial team / enrichment scripts — not arbitrary user input. */
+export const InfographicBlock: Block = {
+  slug: "infographic",
+  labels: { singular: "Infographic / Diagram", plural: "Infographics / Diagrams" },
+  interfaceName: "InfographicBlock",
+  fields: [
+    { name: "title", type: "text", label: "Title", admin: { description: "Optional label shown above the graphic." } },
+    { name: "svgContent", type: "textarea", required: true, label: "SVG Content", admin: { description: "Raw inline SVG markup (must start with <svg). Set by the editorial team only." } },
+    { name: "altText", type: "text", required: true, label: "Alt Text", admin: { description: "Descriptive text for screen readers." } },
+    { name: "caption", type: "text", label: "Caption", admin: { description: "Optional caption displayed below the graphic." } },
+  ],
+};
+
+/** Mid-article lead-generation CTA card — breaks the content flow with a
+ *  clear action for readers who are already convinced. */
+export const InlineCtaBlock: Block = {
+  slug: "inlineCta",
+  labels: { singular: "Inline CTA", plural: "Inline CTAs" },
+  interfaceName: "InlineCtaBlock",
+  fields: [
+    { name: "headline", type: "text", required: true, label: "Headline", admin: { description: "Short question or hook, e.g. 'Not sure which treatment is right for you?'" } },
+    { name: "subtext", type: "text", label: "Subtext", admin: { description: "One supporting sentence." } },
+    {
+      name: "buttons",
+      type: "array",
+      maxRows: 2,
+      labels: { singular: "Button", plural: "Buttons" },
+      fields: [
+        { name: "label", type: "text", required: true, label: "Button Label" },
+        { name: "url", type: "text", required: true, label: "URL" },
+        {
+          name: "variant",
+          type: "select",
+          defaultValue: "primary",
+          label: "Style",
+          options: [
+            { label: "Primary (filled)", value: "primary" },
+            { label: "Secondary (outline)", value: "secondary" },
+          ],
+        },
+      ],
+    },
+    {
+      name: "accent",
+      type: "select",
+      defaultValue: "rose",
+      label: "Accent Colour",
+      options: [
+        { label: "Rose", value: "rose" },
+        { label: "Plum", value: "plum" },
+        { label: "Gold", value: "gold" },
+      ],
+    },
+  ],
+};
+
+/** External photo embed — renders a topic-relevant stock photo (Pexels / Unsplash)
+ *  by URL. URLs are set by the editorial team / enrichment scripts only. */
+export const ExternalImageBlock: Block = {
+  slug: "externalImage",
+  labels: { singular: "External Image", plural: "External Images" },
+  interfaceName: "ExternalImageBlock",
+  fields: [
+    { name: "url", type: "text", required: true, label: "Image URL", admin: { description: "Full CDN URL (Pexels/Unsplash). Set by editorial team only." } },
+    { name: "alt", type: "text", required: true, label: "Alt Text" },
+    { name: "caption", type: "text", label: "Caption" },
+    { name: "credit", type: "text", label: "Photo Credit", admin: { description: "e.g. 'Photo: Pexels / Tima Miroshnichenko'" } },
+  ],
+};
+
 export const ARTICLE_BLOCKS: Block[] = [
   StatStripBlock,
   ComparisonTableBlock,
   HighlightCardBlock,
   DecisionListBlock,
   ConclusionPanelBlock,
+  InfographicBlock,
+  InlineCtaBlock,
+  ExternalImageBlock,
 ];

@@ -13,6 +13,9 @@ import {
   AnimatedHighlightCard,
   AnimatedDecisionList,
   AnimatedConclusionPanel,
+  AnimatedInfographic,
+  AnimatedInlineCta,
+  AnimatedExternalImage,
 } from "@/components/article-blocks";
 
 /* =====================================================================
@@ -153,6 +156,9 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
     highlightCard: AnimatedHighlightCard,
     decisionList: AnimatedDecisionList,
     conclusionPanel: AnimatedConclusionPanel,
+    infographic: AnimatedInfographic,
+    inlineCta: AnimatedInlineCta,
+    externalImage: AnimatedExternalImage,
   },
 });
 

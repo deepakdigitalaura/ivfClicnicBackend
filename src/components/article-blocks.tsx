@@ -25,6 +25,9 @@ import type {
   HighlightCardBlock,
   DecisionListBlock,
   ConclusionPanelBlock,
+  InfographicBlock,
+  InlineCtaBlock,
+  ExternalImageBlock,
 } from "@/payload-types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -72,7 +75,14 @@ const blobPos: Record<"plum" | "rose" | "gold", string> = {
 
 /* ── Value parsing helpers for stat counter ────────────────────────── */
 function parseNumeric(value: string): number | null {
-  const cleaned = value.replace(/[^0-9.]/g, "");
+  const trimmed = value.trim();
+  // Multi-word values ("3 Cycles", "Up to 20%", "Day 3–5") display as plain text.
+  if (/\s/.test(trimmed)) return null;
+  // Must start with a digit — "~40%", "Over 90%", "₹1.2L" display as plain text.
+  if (!/^\d/.test(trimmed)) return null;
+  // Don't animate range values like "10–20%" — stripping dashes concatenates digits.
+  if (/\d[–\-]\d/.test(trimmed)) return null;
+  const cleaned = trimmed.replace(/[^0-9.]/g, "");
   if (!cleaned) return null;
   const n = parseFloat(cleaned);
   return isNaN(n) ? null : n;
@@ -369,6 +379,123 @@ export function AnimatedDecisionList({ node }: { node: { fields: unknown } }) {
           </div>
         )}
       </div>
+    </Reveal>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+ * Infographic — inline SVG process diagram / chart / visual.
+ *
+ * SVG is set by editors/scripts only (not user input). Rendered via
+ * dangerouslySetInnerHTML inside a role="img" container so screen readers
+ * use the altText; the SVG itself should omit aria-label to avoid duplication.
+ * ══════════════════════════════════════════════════════════════════════ */
+export function AnimatedInfographic({ node }: { node: { fields: unknown } }) {
+  const { title, svgContent, altText, caption } = node.fields as InfographicBlock;
+  if (!svgContent) return null;
+
+  return (
+    <Reveal className="my-8">
+      <figure className="overflow-hidden rounded-2xl border border-border/40 bg-white p-5 shadow-soft md:p-7">
+        {title && (
+          <p className="mb-4 text-center text-[10px] font-bold uppercase tracking-widest text-[color:var(--plum)]/50">
+            {title}
+          </p>
+        )}
+        <div
+          className="mx-auto max-w-full [&>svg]:mx-auto [&>svg]:h-auto [&>svg]:max-w-full"
+          role="img"
+          aria-label={altText}
+          /* SVG content authored by editorial team / enrichment scripts only */
+          /* eslint-disable-next-line react/no-danger */
+          dangerouslySetInnerHTML={{ __html: svgContent }}
+        />
+        {caption && (
+          <figcaption className="mt-3 text-center text-xs text-muted-foreground">
+            {caption}
+          </figcaption>
+        )}
+      </figure>
+    </Reveal>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+ * InlineCta — mid-article lead-generation card.
+ *
+ * Breaks the content flow at high-intent moments with a clear action —
+ * primary (filled rose) and optional secondary (outline) buttons.
+ * ══════════════════════════════════════════════════════════════════════ */
+export function AnimatedInlineCta({ node }: { node: { fields: unknown } }) {
+  const { headline, subtext, buttons: buttonsRaw, accent: rawAccent } = node.fields as InlineCtaBlock;
+  const buttons = buttonsRaw ?? [];
+  const color = (rawAccent ?? "rose") as "rose" | "plum" | "gold";
+  const a = accent[color];
+
+  return (
+    <Reveal className="my-8">
+      <div className={`relative overflow-hidden rounded-2xl border border-border/60 ${a.soft} p-6 md:p-8`}>
+        {/* Ambient blob */}
+        <div aria-hidden className={`pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full ${a.bg} opacity-10 blur-3xl`} />
+
+        <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+          <div className="min-w-0">
+            <p className={`text-lg font-semibold leading-snug ${a.text}`}>{headline}</p>
+            {subtext && (
+              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{subtext}</p>
+            )}
+          </div>
+
+          {buttons.length > 0 && (
+            <div className="flex shrink-0 flex-wrap gap-2">
+              {buttons.map((btn, i) => (
+                <a
+                  key={i}
+                  href={btn.url}
+                  className={
+                    btn.variant === "secondary"
+                      ? `inline-flex items-center gap-1.5 rounded-full border ${a.text} border-current px-5 py-2.5 text-sm font-semibold transition-colors hover:${a.bg} hover:text-white`
+                      : `inline-flex items-center gap-1.5 rounded-full ${a.bg} px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90`
+                  }
+                >
+                  {btn.label}
+                </a>
+              ))}
+            </div>
+          )}
+        </div>
+      </div>
+    </Reveal>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+ * ExternalImage — topic-relevant stock photo from Pexels / Unsplash.
+ *
+ * URL is set by the editorial team / enrichment scripts; never from
+ * arbitrary user input. Renders with credit attribution below.
+ * ══════════════════════════════════════════════════════════════════════ */
+export function AnimatedExternalImage({ node }: { node: { fields: unknown } }) {
+  const { url, alt, caption, credit } = node.fields as ExternalImageBlock;
+  if (!url) return null;
+
+  return (
+    <Reveal className="my-8">
+      <figure className="overflow-hidden rounded-2xl border border-border/40 bg-white shadow-soft">
+        <img
+          src={url}
+          alt={alt}
+          className="h-auto w-full object-cover max-h-[420px]"
+          loading="lazy"
+        />
+        {(caption || credit) && (
+          <figcaption className="px-4 py-2.5 text-center text-xs text-muted-foreground">
+            {caption}
+            {caption && credit && " · "}
+            {credit && <span className="opacity-60">{credit}</span>}
+          </figcaption>
+        )}
+      </figure>
     </Reveal>
   );
 }
