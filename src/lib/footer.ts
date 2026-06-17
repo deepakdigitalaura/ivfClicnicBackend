@@ -18,6 +18,7 @@ import {
   type ContactValues,
 } from "@/lib/contact";
 import type { NavTreatmentItem, NavDoctorItem, NavLocationItem } from "@/lib/header";
+import { sortNavLocations } from "@/lib/header";
 
 /** Footer heading for each navCategory value. */
 const FOOTER_CATEGORY_LABELS: Record<string, string> = {
@@ -64,11 +65,12 @@ function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] 
 /** Build the footer "Locations" group — one link per published city plus an "All Centres" link. */
 function buildLocationsFooterGroup(navLocations: NavLocationItem[]): FooterGroup | undefined {
   if (!navLocations.length) return undefined;
-  const totalCentres = navLocations.reduce((sum, c) => sum + c.centres.length, 0);
+  const ordered = sortNavLocations(navLocations);
+  const totalCentres = ordered.reduce((sum, c) => sum + c.centres.length, 0);
   return {
     h: "Locations",
     l: [
-      ...navLocations.map((city) => ({
+      ...ordered.map((city) => ({
         label: city.cityName,
         href: `/locations/${city.citySlug}`,
       })),

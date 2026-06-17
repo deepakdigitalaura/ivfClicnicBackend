@@ -61,6 +61,35 @@ export type NavLocationItem = {
   centres: { slug: string; name: string }[];
 };
 
+/** Cities in chronological opening order — drives nav + footer sort. */
+const CITY_NAV_ORDER = ["ahmedabad", "vadodara", "surat", "bhuj", "mumbai", "bhavnagar", "anand", "varanasi"];
+
+/** Centre slugs in opening order for multi-centre cities. */
+const CENTRE_NAV_ORDER: Record<string, string[]> = {
+  ahmedabad: ["paldi", "sindhu-bhavan-road", "nikol"],
+  mumbai: ["ghatkopar", "thane", "vile-parle", "borivali", "vashi"],
+};
+
+/** Sort cities by opening order and centres within each city by the same order. */
+export function sortNavLocations(items: NavLocationItem[]): NavLocationItem[] {
+  return [...items]
+    .sort((a, b) => {
+      const ai = CITY_NAV_ORDER.indexOf(a.citySlug);
+      const bi = CITY_NAV_ORDER.indexOf(b.citySlug);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    })
+    .map((city) => {
+      const order = CENTRE_NAV_ORDER[city.citySlug];
+      if (!order || city.centres.length <= 1) return city;
+      const sorted = [...city.centres].sort((a, b) => {
+        const ai = order.indexOf(a.slug);
+        const bi = order.indexOf(b.slug);
+        return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+      });
+      return { ...city, centres: sorted };
+    });
+}
+
 /**
  * Lightweight doctor descriptor for building the header mega panel and footer
  * Doctors group dynamically from Payload (no hardcoded lists needed).
@@ -347,11 +376,7 @@ function resolveNavItem(n: NavItemSource): HeaderNavItem {
  */
 function buildLocationsMega(navLocations: NavLocationItem[]): HeaderMegaCol[] | undefined {
   if (!navLocations.length) return undefined;
-  const sorted = [...navLocations].sort((a, b) => {
-    if (a.citySlug === "ahmedabad") return -1;
-    if (b.citySlug === "ahmedabad") return 1;
-    return 0;
-  });
+  const sorted = sortNavLocations(navLocations);
   return sorted.map((city) => {
     const cityHref = `/locations/${city.citySlug}`;
     if (city.centres.length > 1) {
