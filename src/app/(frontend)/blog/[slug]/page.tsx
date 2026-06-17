@@ -12,6 +12,10 @@ const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
 const asObj = <T,>(v: T | number | null | undefined): T | null =>
   v && typeof v === "object" ? (v as T) : null;
 
+/** ISR: re-fetch from DB every 6 hours so enrichment / CMS edits go live
+ *  without a full redeploy. Pages are still edge-cached between refreshes. */
+export const revalidate = 21600;
+
 /** Pre-render every published blog at build (static). New slugs render on
  *  demand (dynamicParams default) and are cached + tag-revalidated. */
 export async function generateStaticParams() {
