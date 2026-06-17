@@ -10,8 +10,6 @@
 const BASE = process.env.PAYLOAD_URL ?? "http://localhost:3000";
 const EMAIL = process.env.SEED_ADMIN_EMAIL ?? "admin@bfi.local";
 const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "BfiPayload!2026";
-const AUTHOR_ID = 3;   // Dr. Parth Bavishi
-const REVIEWER_ID = 2; // Dr. Himanshu Bavishi
 
 const SLUG = "azoospermia-can-you-have-a-baby-with-zero-sperm-count";
 
@@ -235,10 +233,10 @@ const content = {
       ),
 
       externalImage({
-        url: "https://images.pexels.com/photos/6149232/pexels-photo-6149232.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        alt: "Couple celebrating a positive pregnancy result — the achievable outcome for most men diagnosed with azoospermia who receive surgical sperm retrieval and IVF",
+        url: "https://images.pexels.com/photos/35441879/pexels-photo-35441879.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        alt: "Indian couple in traditional attire with mehndi celebrating pregnancy — the achievable outcome for most men diagnosed with azoospermia",
         caption: "For most men with azoospermia, this moment is genuinely within reach. The path is longer, but the destination is the same.",
-        credit: "Photo: Pexels",
+        credit: "Photo: Pexels (India)",
       }),
 
       statStrip([
@@ -495,11 +493,21 @@ const patchBlog = async (id, payload, auth) => {
   return data;
 };
 
+const lookupAuthors = async (auth) => {
+  const res = await fetch(`${BASE}/api/authors?limit=50&depth=0`, { headers: auth });
+  const data = await res.json();
+  const parth    = data.docs?.find(a => a.name === "Dr. Parth Bavishi");
+  const himanshu = data.docs?.find(a => a.name === "Dr. Himanshu Bavishi");
+  if (!parth || !himanshu) throw new Error("Author not found in DB");
+  return { AUTHOR_ID: parth.id, REVIEWER_ID: himanshu.id };
+};
+
 const run = async () => {
   console.log(`[enrich-05] Connecting to ${BASE}...`);
   const token = await login();
   const auth = { Authorization: `JWT ${token}` };
   console.log("[enrich-05] Login OK");
+  const { AUTHOR_ID, REVIEWER_ID } = await lookupAuthors(auth);
   const blog = await findBlog(SLUG, auth);
   if (!blog) { console.error(`[enrich-05] Not found: ${SLUG}`); process.exit(1); }
   console.log(`[enrich-05] Found id=${blog.id} — patching...`);

@@ -10,8 +10,6 @@
 const BASE = process.env.PAYLOAD_URL ?? "http://localhost:3000";
 const EMAIL = process.env.SEED_ADMIN_EMAIL ?? "admin@bfi.local";
 const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "BfiPayload!2026";
-const AUTHOR_ID = 3;   // Dr. Parth Bavishi
-const REVIEWER_ID = 2; // Dr. Himanshu Bavishi
 
 const SLUG = "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days";
 
@@ -524,11 +522,21 @@ const patchBlog = async (id, payload, auth) => {
   return data;
 };
 
+const lookupAuthors = async (auth) => {
+  const res = await fetch(`${BASE}/api/authors?limit=50&depth=0`, { headers: auth });
+  const data = await res.json();
+  const parth    = data.docs?.find(a => a.name === "Dr. Parth Bavishi");
+  const himanshu = data.docs?.find(a => a.name === "Dr. Himanshu Bavishi");
+  if (!parth || !himanshu) throw new Error("Author not found in DB");
+  return { AUTHOR_ID: parth.id, REVIEWER_ID: himanshu.id };
+};
+
 const run = async () => {
   console.log(`[enrich-04] Connecting to ${BASE}...`);
   const token = await login();
   const auth = { Authorization: `JWT ${token}` };
   console.log("[enrich-04] Login OK");
+  const { AUTHOR_ID, REVIEWER_ID } = await lookupAuthors(auth);
   const blog = await findBlog(SLUG, auth);
   if (!blog) { console.error(`[enrich-04] Not found: ${SLUG}`); process.exit(1); }
   console.log(`[enrich-04] Found id=${blog.id} — patching...`);

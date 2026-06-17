@@ -10,8 +10,6 @@
 const BASE = process.env.PAYLOAD_URL ?? "http://localhost:3000";
 const EMAIL = process.env.SEED_ADMIN_EMAIL ?? "admin@bfi.local";
 const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "BfiPayload!2026";
-const AUTHOR_ID = 3;   // Dr. Parth Bavishi
-const REVIEWER_ID = 2; // Dr. Himanshu Bavishi
 
 const SLUG = "ivf-treatment-cost-in-ahmedabad-across-india";
 
@@ -146,10 +144,10 @@ const content = {
       ),
 
       externalImage({
-        url: "https://images.pexels.com/photos/7163956/pexels-photo-7163956.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        alt: "Health insurance planning with a notepad and calculator — understanding IVF treatment costs in Ahmedabad",
+        url: "https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        alt: "Indian female doctor in a modern clinic in Delhi — expert fertility guidance to navigate IVF costs in Ahmedabad",
         caption: "Understanding what your IVF quote actually covers is the single most important step before committing.",
-        credit: "Photo: Pexels",
+        credit: "Photo: Dr Aparna Jaswal / Pexels (Delhi, India)",
       }),
 
       statStrip([
@@ -390,11 +388,21 @@ const patchBlog = async (id, payload, auth) => {
   return data;
 };
 
+const lookupAuthors = async (auth) => {
+  const res = await fetch(`${BASE}/api/authors?limit=50&depth=0`, { headers: auth });
+  const data = await res.json();
+  const parth    = data.docs?.find(a => a.name === "Dr. Parth Bavishi");
+  const himanshu = data.docs?.find(a => a.name === "Dr. Himanshu Bavishi");
+  if (!parth || !himanshu) throw new Error("Author not found in DB");
+  return { AUTHOR_ID: parth.id, REVIEWER_ID: himanshu.id };
+};
+
 const run = async () => {
   console.log(`[enrich-02] Connecting to ${BASE}...`);
   const token = await login();
   const auth = { Authorization: `JWT ${token}` };
   console.log("[enrich-02] Login OK");
+  const { AUTHOR_ID, REVIEWER_ID } = await lookupAuthors(auth);
   const blog = await findBlog(SLUG, auth);
   if (!blog) { console.error(`[enrich-02] Not found: ${SLUG}`); process.exit(1); }
   console.log(`[enrich-02] Found id=${blog.id} — patching...`);

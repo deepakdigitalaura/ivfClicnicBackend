@@ -20,9 +20,7 @@
 const BASE    = process.env.PAYLOAD_URL ?? "http://localhost:3000";
 const EMAIL   = process.env.SEED_ADMIN_EMAIL    ?? "admin@bfi.local";
 const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "BfiPayload!2026";
-const SLUG      = "iui-vs-ivf-which-fertility-treatment-is-right-for-you";
-const AUTHOR_ID = 3;   // Dr. Parth Bavishi
-const REVIEWER_ID = 2; // Dr. Himanshu Bavishi
+const SLUG = "iui-vs-ivf-which-fertility-treatment-is-right-for-you";
 
 const uid = () => Math.random().toString(36).slice(2, 10);
 
@@ -439,10 +437,10 @@ const content = {
       ),
 
       externalImage({
-        url: "https://images.pexels.com/photos/27936622/pexels-photo-27936622.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        alt: "Couple sharing a tender moment while holding their first ultrasound photo — the destination that IUI and IVF both work toward",
-        caption: null,
-        credit: "Photo: Pexels",
+        url: "https://images.pexels.com/photos/18277954/pexels-photo-18277954.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        alt: "Indian couple sharing a tender outdoor moment during pregnancy — the destination that both IUI and IVF work toward",
+        caption: "Every fertility journey — whether IUI or IVF — leads to this moment.",
+        credit: "Photo: Darshan Dave / Pexels (Dhari, Gujarat, India)",
       }),
 
       statStrip([
@@ -737,11 +735,22 @@ const patchBlog = async (id, payload, auth) => {
 /* ══════════════════════════════════════════════════════════════════
  * Run
  * ══════════════════════════════════════════════════════════════════ */
+const lookupAuthors = async (auth) => {
+  const res = await fetch(`${BASE}/api/authors?limit=50&depth=0`, { headers: auth });
+  const data = await res.json();
+  const parth    = data.docs?.find(a => a.name === "Dr. Parth Bavishi");
+  const himanshu = data.docs?.find(a => a.name === "Dr. Himanshu Bavishi");
+  if (!parth || !himanshu) throw new Error("Author not found in DB — check names");
+  return { AUTHOR_ID: parth.id, REVIEWER_ID: himanshu.id };
+};
+
 const run = async () => {
   console.log(`[enrich-01] Connecting to ${BASE} ...`);
   const token = await login();
   const auth  = { Authorization: `JWT ${token}` };
   console.log("[enrich-01] Login OK");
+
+  const { AUTHOR_ID, REVIEWER_ID } = await lookupAuthors(auth);
 
   const blog = await findBlog(SLUG, auth);
   if (!blog) {

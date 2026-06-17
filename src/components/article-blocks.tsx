@@ -430,32 +430,37 @@ export function AnimatedInlineCta({ node }: { node: { fields: unknown } }) {
   const { headline, subtext, buttons: buttonsRaw, accent: rawAccent } = node.fields as InlineCtaBlock;
   const buttons = buttonsRaw ?? [];
   const color = (rawAccent ?? "rose") as "rose" | "plum" | "gold";
-  const a = accent[color];
+
+  /* Fully-static gradient backgrounds keyed by colour — no dynamic Tailwind classes */
+  const gradients = {
+    rose: "from-[#CF3A6A] to-[#9B2A5E]",
+    plum: "from-[#3D1F56] to-[#5A2878]",
+    gold: "from-[#C5A130] to-[#9C7D1F]",
+  };
 
   return (
     <Reveal className="my-8">
-      <div className={`relative overflow-hidden rounded-2xl border border-border/60 ${a.soft} p-6 md:p-8`}>
-        {/* Ambient blob */}
-        <div aria-hidden className={`pointer-events-none absolute -top-10 -right-10 h-32 w-32 rounded-full ${a.bg} opacity-10 blur-3xl`} />
+      <div className={`relative overflow-hidden rounded-2xl bg-gradient-to-br ${gradients[color]} p-6 shadow-xl md:p-8`}>
+        {/* Ambient white blobs */}
+        <div aria-hidden className="pointer-events-none absolute -top-10 -right-10 h-40 w-40 rounded-full bg-white/10 blur-3xl" />
+        <div aria-hidden className="pointer-events-none absolute -bottom-8 -left-8 h-28 w-28 rounded-full bg-white/8 blur-2xl" />
 
-        <div className="relative flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-          <div className="min-w-0">
-            <p className={`text-lg font-semibold leading-snug ${a.text}`}>{headline}</p>
-            {subtext && (
-              <p className="mt-1 text-sm leading-relaxed text-muted-foreground">{subtext}</p>
-            )}
-          </div>
+        <div className="relative">
+          <p className="text-xl font-semibold leading-snug text-white">{headline}</p>
+          {subtext && (
+            <p className="mt-2 text-sm leading-relaxed text-white/75">{subtext}</p>
+          )}
 
           {buttons.length > 0 && (
-            <div className="flex shrink-0 flex-wrap gap-2">
+            <div className="mt-5 flex flex-wrap gap-3">
               {buttons.map((btn, i) => (
                 <a
                   key={i}
                   href={btn.url}
                   className={
                     btn.variant === "secondary"
-                      ? `inline-flex items-center gap-1.5 rounded-full border ${a.text} border-current px-5 py-2.5 text-sm font-semibold transition-colors hover:${a.bg} hover:text-white`
-                      : `inline-flex items-center gap-1.5 rounded-full ${a.bg} px-5 py-2.5 text-sm font-semibold text-white shadow-sm transition-opacity hover:opacity-90`
+                      ? "inline-flex items-center gap-1.5 rounded-full border-2 border-white/80 px-5 py-2.5 text-sm font-semibold text-white transition-colors hover:bg-white hover:text-[color:var(--plum)]"
+                      : "inline-flex items-center gap-1.5 rounded-full bg-white px-5 py-2.5 text-sm font-semibold text-[color:var(--plum)] shadow-sm transition-opacity hover:opacity-90"
                   }
                 >
                   {btn.label}

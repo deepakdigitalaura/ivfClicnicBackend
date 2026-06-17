@@ -10,8 +10,6 @@
 const BASE = process.env.PAYLOAD_URL ?? "http://localhost:3000";
 const EMAIL = process.env.SEED_ADMIN_EMAIL ?? "admin@bfi.local";
 const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "BfiPayload!2026";
-const AUTHOR_ID = 3;   // Dr. Parth Bavishi
-const REVIEWER_ID = 2; // Dr. Himanshu Bavishi
 
 const SLUG = "top-fertility-treatments-for-women-with-pcos";
 
@@ -246,10 +244,10 @@ const content = {
       ),
 
       externalImage({
-        url: "https://images.pexels.com/photos/7659861/pexels-photo-7659861.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
-        alt: "Doctor consulting with a female patient — personalised PCOS fertility treatment begins with a full hormone and ovulation assessment",
+        url: "https://images.pexels.com/photos/5738735/pexels-photo-5738735.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1",
+        alt: "Indian female fertility doctor at a modern clinic — personalised PCOS fertility treatment begins with a full hormone and ovulation assessment",
         caption: "Every PCOS case is different. Your treatment ladder starts with a thorough assessment, not a generic prescription.",
-        credit: "Photo: Pexels",
+        credit: "Photo: Dr Aparna Jaswal / Pexels (Delhi, India)",
       }),
 
       statStrip([
@@ -505,11 +503,21 @@ const patchBlog = async (id, payload, auth) => {
   return data;
 };
 
+const lookupAuthors = async (auth) => {
+  const res = await fetch(`${BASE}/api/authors?limit=50&depth=0`, { headers: auth });
+  const data = await res.json();
+  const parth    = data.docs?.find(a => a.name === "Dr. Parth Bavishi");
+  const himanshu = data.docs?.find(a => a.name === "Dr. Himanshu Bavishi");
+  if (!parth || !himanshu) throw new Error("Author not found in DB");
+  return { AUTHOR_ID: parth.id, REVIEWER_ID: himanshu.id };
+};
+
 const run = async () => {
   console.log(`[enrich-03] Connecting to ${BASE}...`);
   const token = await login();
   const auth = { Authorization: `JWT ${token}` };
   console.log("[enrich-03] Login OK");
+  const { AUTHOR_ID, REVIEWER_ID } = await lookupAuthors(auth);
   const blog = await findBlog(SLUG, auth);
   if (!blog) { console.error(`[enrich-03] Not found: ${SLUG}`); process.exit(1); }
   console.log(`[enrich-03] Found id=${blog.id} — patching...`);
