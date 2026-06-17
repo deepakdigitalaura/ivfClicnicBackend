@@ -5,7 +5,7 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "sync-reviews": "node scripts/sync-reviews.mjs",
-    "build": "DATABASE_URI=${MIGRATE_DATABASE_URI:-$DATABASE_URI} payload migrate; next build",
+    "build": "printf 'n\\n' | DATABASE_URI=${MIGRATE_DATABASE_URI:-$DATABASE_URI} payload migrate; next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
