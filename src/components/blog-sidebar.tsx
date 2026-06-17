@@ -176,11 +176,12 @@ export function CtaSidebarCard() {
 }
 
 /* ── Trust stats card ───────────────────────────────────────── */
+/* Stats sourced from ivfclinic.com homepage (verified June 2026). */
 const TRUST_STATS = [
-  { label: "Years of Excellence", value: "40+" },
-  { label: "Babies Born", value: "15,000+" },
-  { label: "IVF Success Rate", value: "75%" },
-  { label: "Centres Across India", value: "12+" },
+  { label: "Successful IVF Pregnancies", value: "25,000+" },
+  { label: "Fertility Centres", value: "14" },
+  { label: "5-Star Google Reviews", value: "1,800+" },
+  { label: "National Fertility Awards", value: "5 Years" },
 ] as const;
 
 export function TrustSidebarCard() {

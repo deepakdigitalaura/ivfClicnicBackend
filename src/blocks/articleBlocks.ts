@@ -1,4 +1,5 @@
 import type { Block } from "payload";
+import { ICON_OPTIONS } from "@/lib/icon-map";
 
 /* =====================================================================
  * Article rich-content blocks
@@ -79,6 +80,13 @@ export const HighlightCardBlock: Block = {
     { name: "badge", type: "text", required: true, label: "Badge / Name", admin: { description: "e.g. 'CONVENTIONAL IVF'" } },
     { name: "tagline", type: "text", label: "Tagline", admin: { description: "One line next to the badge." } },
     {
+      name: "icon",
+      type: "select",
+      label: "Icon",
+      options: ICON_OPTIONS,
+      admin: { description: "Shown in a medallion on the card — pick whatever best represents this option." },
+    },
+    {
       name: "color",
       type: "select",
       defaultValue: "plum",
@@ -125,6 +133,7 @@ export const DecisionListBlock: Block = {
       minRows: 1,
       labels: { singular: "Item", plural: "Items" },
       fields: [
+        { name: "icon", type: "select", label: "Icon", options: ICON_OPTIONS },
         { name: "situation", type: "text", required: true, label: "If this is your situation" },
         { name: "recommendation", type: "text", required: true, label: "Consider" },
       ],
@@ -133,9 +142,32 @@ export const DecisionListBlock: Block = {
   ],
 };
 
+/** Graphical conclusion panel — icon grid + headline above the final
+ *  text paragraphs, replacing a plain h2 → paragraph flow. */
+export const ConclusionPanelBlock: Block = {
+  slug: "conclusionPanel",
+  labels: { singular: "Conclusion Panel", plural: "Conclusion Panels" },
+  interfaceName: "ConclusionPanelBlock",
+  fields: [
+    { name: "headline", type: "text", label: "Headline", admin: { description: "e.g. 'Key Takeaways'" } },
+    {
+      name: "points",
+      type: "array",
+      minRows: 2,
+      maxRows: 6,
+      labels: { singular: "Point", plural: "Points" },
+      fields: [
+        { name: "icon", type: "select", label: "Icon", options: ICON_OPTIONS },
+        { name: "text", type: "text", required: true, label: "Point text" },
+      ],
+    },
+  ],
+};
+
 export const ARTICLE_BLOCKS: Block[] = [
   StatStripBlock,
   ComparisonTableBlock,
   HighlightCardBlock,
   DecisionListBlock,
+  ConclusionPanelBlock,
 ];

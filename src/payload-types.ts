@@ -5918,6 +5918,44 @@ export interface HighlightCardBlock {
    * One line next to the badge.
    */
   tagline?: string | null;
+  /**
+   * Shown in a medallion on the card — pick whatever best represents this option.
+   */
+  icon?:
+    | (
+        | 'ScanLine'
+        | 'Feather'
+        | 'Baby'
+        | 'Stethoscope'
+        | 'ShieldCheck'
+        | 'Users'
+        | 'HeartPulse'
+        | 'Activity'
+        | 'ClipboardList'
+        | 'CalendarCheck'
+        | 'Eye'
+        | 'Clock'
+        | 'Microscope'
+        | 'Sparkles'
+        | 'Hand'
+        | 'FlaskConical'
+        | 'Filter'
+        | 'Magnet'
+        | 'Layers'
+        | 'Zap'
+        | 'Egg'
+        | 'Droplets'
+        | 'Snowflake'
+        | 'Dna'
+        | 'Beaker'
+        | 'Target'
+        | 'Leaf'
+        | 'ListChecks'
+        | 'ClipboardCheck'
+        | 'Syringe'
+        | 'Award'
+      )
+    | null;
   color?: ('plum' | 'rose' | 'gold') | null;
   /**
    * Optional small facts row (label + value), e.g. 'Best for / Male factor infertility'.
@@ -5946,6 +5984,41 @@ export interface DecisionListBlock {
   intro?: string | null;
   items?:
     | {
+        icon?:
+          | (
+              | 'ScanLine'
+              | 'Feather'
+              | 'Baby'
+              | 'Stethoscope'
+              | 'ShieldCheck'
+              | 'Users'
+              | 'HeartPulse'
+              | 'Activity'
+              | 'ClipboardList'
+              | 'CalendarCheck'
+              | 'Eye'
+              | 'Clock'
+              | 'Microscope'
+              | 'Sparkles'
+              | 'Hand'
+              | 'FlaskConical'
+              | 'Filter'
+              | 'Magnet'
+              | 'Layers'
+              | 'Zap'
+              | 'Egg'
+              | 'Droplets'
+              | 'Snowflake'
+              | 'Dna'
+              | 'Beaker'
+              | 'Target'
+              | 'Leaf'
+              | 'ListChecks'
+              | 'ClipboardCheck'
+              | 'Syringe'
+              | 'Award'
+            )
+          | null;
         situation: string;
         recommendation: string;
         id?: string | null;
@@ -5955,6 +6028,60 @@ export interface DecisionListBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'decisionList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ConclusionPanelBlock".
+ */
+export interface ConclusionPanelBlock {
+  /**
+   * e.g. 'Key Takeaways'
+   */
+  headline?: string | null;
+  points?:
+    | {
+        icon?:
+          | (
+              | 'ScanLine'
+              | 'Feather'
+              | 'Baby'
+              | 'Stethoscope'
+              | 'ShieldCheck'
+              | 'Users'
+              | 'HeartPulse'
+              | 'Activity'
+              | 'ClipboardList'
+              | 'CalendarCheck'
+              | 'Eye'
+              | 'Clock'
+              | 'Microscope'
+              | 'Sparkles'
+              | 'Hand'
+              | 'FlaskConical'
+              | 'Filter'
+              | 'Magnet'
+              | 'Layers'
+              | 'Zap'
+              | 'Egg'
+              | 'Droplets'
+              | 'Snowflake'
+              | 'Dna'
+              | 'Beaker'
+              | 'Target'
+              | 'Leaf'
+              | 'ListChecks'
+              | 'ClipboardCheck'
+              | 'Syringe'
+              | 'Award'
+            )
+          | null;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'conclusionPanel';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

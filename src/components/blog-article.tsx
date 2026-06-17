@@ -101,12 +101,70 @@ function AboutAuthor({ author }: { author: Author }) {
         </div>
       </div>
       {author.bio && (
-        <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">{author.bio}</p>
+        /* Split on blank lines so a multi-paragraph bio renders correctly. */
+        <div className="mt-5 space-y-3">
+          {author.bio.split(/\n\n+/).map((para, i) => (
+            <p key={i} className="text-[15px] leading-relaxed text-muted-foreground">{para.trim()}</p>
+          ))}
+        </div>
       )}
       {profileUrl && (
         <a
           href={profileUrl}
           className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-[color:var(--rose)]/30 px-5 py-2 text-sm font-semibold text-[color:var(--rose)] transition-colors hover:bg-[color:var(--rose)] hover:text-white"
+        >
+          View Full Profile <ChevronRight className="h-3.5 w-3.5" />
+        </a>
+      )}
+    </div>
+  );
+}
+
+/* ── Medically Reviewed By ───────────────────────────────────── */
+function ReviewedByCard({ reviewer }: { reviewer: Author }) {
+  const avatar = asObj<Media>(reviewer.avatar ?? undefined);
+  const profileUrl = reviewer.sameAs?.[0]?.url
+    ? localizeUrl(reviewer.sameAs[0].url)
+    : null;
+
+  return (
+    <div className="rounded-3xl border border-[color:var(--plum)]/15 bg-[color:var(--plum)]/[0.03] p-6 shadow-soft md:p-8">
+      <p className="text-[10px] font-bold uppercase tracking-widest text-[color:var(--plum)]/50">
+        Medically Reviewed By
+      </p>
+      <div className="mt-4 flex items-center gap-4">
+        {avatar?.url ? (
+          <img
+            src={avatar.url}
+            alt={avatar.alt ?? reviewer.name}
+            className="h-16 w-16 shrink-0 rounded-full object-cover ring-4 ring-[color:var(--plum)]/15"
+          />
+        ) : (
+          <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[color:var(--plum)]/10">
+            <span className="font-display text-2xl text-[color:var(--plum)]">
+              {reviewer.name.replace(/^Dr\.\s*/, "")[0]}
+            </span>
+          </div>
+        )}
+        <div className="min-w-0">
+          <p className="text-lg font-semibold leading-tight text-[color:var(--plum)]">
+            {reviewer.name}
+          </p>
+          {reviewer.credentials && (
+            <p className="mt-0.5 text-sm text-muted-foreground">{reviewer.credentials}</p>
+          )}
+          {reviewer.role && (
+            <p className="mt-0.5 text-sm font-medium text-[color:var(--plum)]/70">{reviewer.role}</p>
+          )}
+        </div>
+      </div>
+      <p className="mt-4 text-[13px] leading-relaxed text-muted-foreground/80">
+        This article has been medically reviewed for clinical accuracy by {reviewer.name}, ensuring all information meets current evidence-based standards in reproductive medicine.
+      </p>
+      {profileUrl && (
+        <a
+          href={profileUrl}
+          className="mt-4 inline-flex items-center gap-1.5 rounded-full border border-[color:var(--plum)]/25 px-4 py-1.5 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:bg-[color:var(--plum)] hover:text-white"
         >
           View Full Profile <ChevronRight className="h-3.5 w-3.5" />
         </a>
@@ -254,9 +312,8 @@ export function BlogArticle({
     (f) => f.question && f.answer,
   ) as { question: string; answer: string }[];
 
-  // "Featured doctor" in sidebar + About section:
-  // prefer the medical reviewer (Dr. Parth Bavishi) over the writer.
-  const featuredDoctor = reviewedBy ?? author;
+  // Sidebar card always shows the article author; reviewer gets a separate card below.
+  const featuredDoctor = author;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -296,16 +353,15 @@ export function BlogArticle({
             </h1>
           </Reveal>
 
-          {/* Excerpt / lead */}
+          {/* Excerpt / lead — note: Editable with rich={false} returns a bare
+              fragment on the public site (no wrapper), so the <p> lives here
+              so the text-white/70 class is always rendered. */}
           <Reveal delay={0.1}>
-            <Editable
-              path="excerpt"
-              rich={false}
-              as="p"
-              className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-white/70 md:text-lg"
-            >
-              {blog.excerpt ?? ""}
-            </Editable>
+            <p className="mt-4 max-w-2xl text-pretty text-base leading-relaxed text-white/70 md:text-lg">
+              <Editable path="excerpt" rich={false}>
+                {blog.excerpt ?? ""}
+              </Editable>
+            </p>
           </Reveal>
 
           {/* Byline row */}
@@ -372,21 +428,24 @@ export function BlogArticle({
       </section>
 
       {/* ════════════════════════════════════════
-          FEATURED IMAGE (bridges hero → body)
-          — No crop: let the image show at its natural aspect ratio so
-            infographics / tall images are never cut off or dulled.
+          FEATURED IMAGE — full-bleed cinematic strip.
+          Spans the full viewport width; height is responsive
+          (clamp 300 → 520 px). Top gradient blends out of the
+          dark hero; bottom gradient fades into the page bg.
+          No card/border — the image is a visual scene transition.
       ════════════════════════════════════════ */}
       {heroUrl && (
-        <div className="container-px mx-auto -mt-6 max-w-5xl relative z-10">
-          <div className="rounded-3xl shadow-lift border border-border/40 bg-white overflow-hidden">
-            <EditableImage
-              path="heroImage"
-              src={heroUrl}
-              alt={hero?.alt ?? blog.title}
-              className="h-auto w-full"
-              loading="eager"
-            />
-          </div>
+        <div
+          className="w-full overflow-hidden"
+          style={{ height: "clamp(320px, 44vw, 540px)" }}
+        >
+          <EditableImage
+            path="heroImage"
+            src={heroUrl}
+            alt={hero?.alt ?? blog.title}
+            className="h-full w-full object-cover object-center"
+            loading="eager"
+          />
         </div>
       )}
 
@@ -394,7 +453,7 @@ export function BlogArticle({
           TWO-COLUMN LAYOUT
       ════════════════════════════════════════ */}
       <div
-        className={`container-px mx-auto max-w-[1400px] ${hero?.url ? "mt-10 md:mt-14" : "mt-8 md:mt-12"}`}
+        className={`container-px mx-auto max-w-[1400px] ${heroUrl ? "mt-10 md:mt-14" : "mt-8 md:mt-12"}`}
       >
         <div className="grid gap-10 lg:grid-cols-[1fr_340px] xl:gap-14 pb-14">
 
@@ -435,14 +494,15 @@ export function BlogArticle({
               </a>
             </div>
 
-            {/* About the Author — visually distinct section */}
-            {featuredDoctor && (
+            {/* About the Author — always shows the article author */}
+            {author && (
               <div className="mt-8">
                 <Reveal>
-                  <AboutAuthor author={featuredDoctor} />
+                  <AboutAuthor author={author} />
                 </Reveal>
               </div>
             )}
+
 
             {/* FAQ accordion */}
             {faqs.length > 0 && (

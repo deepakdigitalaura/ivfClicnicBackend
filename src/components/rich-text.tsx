@@ -1,19 +1,19 @@
 import {
   RichText as PayloadRichText,
   type JSXConvertersFunction,
-  LinkJSXConverter,
 } from "@payloadcms/richtext-lexical/react";
-import type { DefaultTypedEditorState, SerializedLinkNode } from "@payloadcms/richtext-lexical";
+import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 import type { ElementType } from "react";
-import { Lightbulb, ArrowRight, CheckCircle2 } from "lucide-react";
+import { Lightbulb } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { slugify } from "@/lib/headings";
-import type {
-  StatStripBlock,
-  ComparisonTableBlock,
-  HighlightCardBlock,
-  DecisionListBlock,
-} from "@/payload-types";
+import {
+  AnimatedStatStrip,
+  AnimatedComparisonTable,
+  AnimatedHighlightCard,
+  AnimatedDecisionList,
+  AnimatedConclusionPanel,
+} from "@/components/article-blocks";
 
 /* =====================================================================
  * Reusable rich-text renderer (Lexical -> JSX).
@@ -24,14 +24,12 @@ import type {
  * Blockquotes render as amber "Practical Tip" callout boxes — in the
  * WP-extracted content they are always editorial highlights, not
  * semantic quotations.
+ *
+ * Graphical content blocks (statStrip / comparisonTable / highlightCard
+ * / decisionList) are defined in src/blocks/articleBlocks.ts and
+ * rendered by the animated client components in src/components/article-
+ * blocks.tsx (imported as client components; hydrated by Next.js).
  * ===================================================================== */
-
-/** Resolve an internal document link to an href. */
-const internalDocToHref = ({ linkNode }: { linkNode: SerializedLinkNode }): string => {
-  const doc = linkNode.fields?.doc;
-  const value = doc && typeof doc.value === "object" ? (doc.value as { slug?: string }) : null;
-  return value?.slug ? `/${value.slug}` : "#";
-};
 
 const headingClass: Record<string, string> = {
   h1: "text-3xl font-medium leading-tight text-[color:var(--plum)] md:text-4xl",
@@ -44,7 +42,37 @@ const headingClass: Record<string, string> = {
 
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
-  ...LinkJSXConverter({ internalDocToHref }),
+
+  /* Rose-coloured underlined links — both internal (doc relationship) and
+   * custom (plain URL). LinkJSXConverter renders unstyled <a> so we override. */
+  link: ({ node, nodesToJSX }) => {
+    const fields = (node.fields ?? {}) as {
+      url?: string;
+      newTab?: boolean;
+      linkType?: string;
+      doc?: { value: unknown };
+    };
+    let href = "#";
+    if (fields.linkType === "internal") {
+      const value =
+        fields.doc && typeof fields.doc.value === "object"
+          ? (fields.doc.value as { slug?: string })
+          : null;
+      href = value?.slug ? `/${value.slug}` : "#";
+    } else {
+      href = fields.url ?? "#";
+    }
+    return (
+      <a
+        href={href}
+        target={fields.newTab ? "_blank" : undefined}
+        rel={fields.newTab ? "noopener noreferrer" : undefined}
+        className="font-medium text-[color:var(--rose)] underline underline-offset-2 decoration-[color:var(--rose)]/40 hover:decoration-[color:var(--rose)] transition-colors"
+      >
+        {nodesToJSX({ nodes: node.children })}
+      </a>
+    );
+  },
 
   paragraph: ({ node, nodesToJSX }) => (
     <p className="mt-4 leading-relaxed text-muted-foreground text-pretty first:mt-0">
@@ -114,148 +142,19 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
     </div>
   ),
 
+  /* ── Graphical content blocks ────────────────────────────────────────
+   * Animated client components from src/components/article-blocks.tsx.
+   * Blocks defined in src/blocks/articleBlocks.ts (field contract).
+   * These render as React Server Component → Client Component boundaries
+   * per the Next.js App Router RSC model. */
   blocks: {
-    statStrip: StatStrip,
-    comparisonTable: ComparisonTable,
-    highlightCard: HighlightCard,
-    decisionList: DecisionList,
+    statStrip: AnimatedStatStrip,
+    comparisonTable: AnimatedComparisonTable,
+    highlightCard: AnimatedHighlightCard,
+    decisionList: AnimatedDecisionList,
+    conclusionPanel: AnimatedConclusionPanel,
   },
 });
-
-/* ── Graphical content blocks ────────────────────────────────────────
- * Render the editor-insertable blocks defined in src/blocks/articleBlocks.ts.
- * See that file for the field contract. */
-
-const accent: Record<"plum" | "rose" | "gold", { bg: string; text: string; soft: string; border: string }> = {
-  plum: { bg: "bg-[color:var(--plum)]", text: "text-[color:var(--plum)]", soft: "bg-[color:var(--plum)]/[0.06]", border: "border-[color:var(--plum)]/15" },
-  rose: { bg: "bg-[color:var(--rose)]", text: "text-[color:var(--rose)]", soft: "bg-[color:var(--rose)]/[0.06]", border: "border-[color:var(--rose)]/15" },
-  gold: { bg: "bg-[color:var(--gold)]", text: "text-[color:var(--gold)]", soft: "bg-[color:var(--gold)]/[0.08]", border: "border-[color:var(--gold)]/20" },
-};
-
-function StatStrip({ node }: { node: { fields: unknown } }) {
-  const items = (node.fields as StatStripBlock).items ?? [];
-  if (!items.length) return null;
-  return (
-    <div
-      className={cn(
-        "my-8 grid gap-3 rounded-2xl border border-[color:var(--plum)]/10 bg-white p-2 shadow-soft",
-        items.length === 2 ? "grid-cols-2" : items.length === 3 ? "grid-cols-3" : "grid-cols-2 sm:grid-cols-4",
-      )}
-    >
-      {items.map((item, i) => (
-        <div key={i} className="rounded-xl px-4 py-5 text-center">
-          <p className="font-display text-2xl text-[color:var(--plum)] md:text-3xl">{item.value}</p>
-          <p className="mt-1 text-xs leading-snug text-muted-foreground">{item.label}</p>
-        </div>
-      ))}
-    </div>
-  );
-}
-
-function ComparisonTable({ node }: { node: { fields: unknown } }) {
-  const { rowHeader, columns = [], rows = [] } = node.fields as ComparisonTableBlock;
-  if (!columns?.length || !rows?.length) return null;
-  return (
-    <div className="my-8 overflow-x-auto rounded-2xl border border-border/60 shadow-soft">
-      <table className="w-full min-w-[480px] border-collapse text-left text-sm">
-        <thead>
-          <tr className="bg-[color:var(--plum)] text-white">
-            <th className="px-4 py-3 font-semibold">{rowHeader || "Type"}</th>
-            {columns.map((col, i) => (
-              <th key={i} className="px-4 py-3 font-semibold">{col.header}</th>
-            ))}
-          </tr>
-        </thead>
-        <tbody>
-          {rows.map((row, i) => (
-            <tr key={i} className={i % 2 === 0 ? "bg-white" : "bg-[color:var(--ivory)]"}>
-              <td className="px-4 py-3 font-semibold text-[color:var(--plum)]">{row.rowLabel}</td>
-              {(row.cells ?? []).map((cell, j) => (
-                <td key={j} className="px-4 py-3 text-muted-foreground">{cell.value}</td>
-              ))}
-            </tr>
-          ))}
-        </tbody>
-      </table>
-    </div>
-  );
-}
-
-const factsColsClass: Record<1 | 2 | 3 | 4, string> = {
-  1: "sm:grid-cols-1",
-  2: "sm:grid-cols-2",
-  3: "sm:grid-cols-3",
-  4: "sm:grid-cols-4",
-};
-
-function HighlightCard({ node }: { node: { fields: unknown } }) {
-  const { badge, tagline, color, facts: factsRaw, bestSuitedFor } = node.fields as HighlightCardBlock;
-  const facts = factsRaw ?? [];
-  const a = accent[color ?? "plum"];
-  return (
-    <div className="my-8 overflow-hidden rounded-2xl border border-border/60 shadow-soft">
-      <div className={cn("flex flex-wrap items-center gap-3 px-5 py-3.5", a.bg)}>
-        <span className="inline-flex items-center rounded-full bg-white/15 px-3 py-1 text-xs font-bold uppercase tracking-wider text-white">
-          {badge}
-        </span>
-        {tagline && <span className="text-sm text-white/85">{tagline}</span>}
-      </div>
-      {facts.length > 0 && (
-        <div
-          className={cn(
-            "grid gap-px border-b border-border/50 bg-border/50 grid-cols-2",
-            factsColsClass[Math.min(facts.length, 4) as 1 | 2 | 3 | 4],
-          )}
-        >
-          {facts.map((f, i) => (
-            <div key={i} className="bg-white px-4 py-3">
-              <p className="text-[10px] font-semibold uppercase tracking-wider text-muted-foreground/70">{f.label}</p>
-              <p className={cn("mt-0.5 text-sm font-semibold", a.text)}>{f.value}</p>
-            </div>
-          ))}
-        </div>
-      )}
-      <div className={cn("flex gap-2.5 px-5 py-4", a.soft)}>
-        <CheckCircle2 className={cn("mt-0.5 h-4 w-4 shrink-0", a.text)} />
-        <p className="text-[15px] leading-relaxed text-foreground/85">
-          <span className="font-semibold">Best suited for: </span>
-          {bestSuitedFor}
-        </p>
-      </div>
-    </div>
-  );
-}
-
-function DecisionList({ node }: { node: { fields: unknown } }) {
-  const { heading, intro, items: itemsRaw, note } = node.fields as DecisionListBlock;
-  const items = itemsRaw ?? [];
-  if (!items.length) return null;
-  return (
-    <div className="my-8 rounded-2xl border border-border/60 bg-card p-6 shadow-soft md:p-7">
-      {heading && <h3 className="text-lg font-semibold text-[color:var(--plum)]">{heading}</h3>}
-      {intro && <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{intro}</p>}
-      <div className="mt-5 space-y-2.5">
-        {items.map((item, i) => (
-          <div
-            key={i}
-            className="flex flex-wrap items-center justify-between gap-3 rounded-xl bg-[color:var(--ivory)] px-4 py-3"
-          >
-            <span className="text-sm text-foreground/85">{item.situation}</span>
-            <span className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--plum)] px-3 py-1.5 text-xs font-semibold text-white">
-              <ArrowRight className="h-3 w-3" /> {item.recommendation}
-            </span>
-          </div>
-        ))}
-      </div>
-      {note && (
-        <div className="mt-5 flex gap-3 rounded-xl border border-amber-200 bg-amber-50 p-3.5">
-          <Lightbulb className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" />
-          <p className="text-sm leading-relaxed text-amber-800">{note}</p>
-        </div>
-      )}
-    </div>
-  );
-}
 
 export function RichText({
   data,
