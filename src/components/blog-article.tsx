@@ -443,7 +443,7 @@ export function BlogArticle({
             path="heroImage"
             src={heroUrl}
             alt={hero?.alt ?? blog.title}
-            className="h-full w-full object-cover object-center brightness-105 saturate-[1.1]"
+            className="h-full w-full object-cover object-center brightness-125 contrast-105 saturate-[1.2]"
             loading="eager"
           />
         </div>

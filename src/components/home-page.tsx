@@ -1200,7 +1200,7 @@ function Blogs({
                   <img
                     src={`https://img.youtube.com/vi/${p.id}/hqdefault.jpg`}
                     alt={p.t} loading="lazy"
-                    className="h-full w-full object-cover brightness-[1.08] saturate-[1.1] transition-transform duration-700 group-hover:scale-105"
+                    className="h-full w-full object-cover brightness-125 contrast-105 saturate-[1.3] transition-transform duration-700 group-hover:scale-105"
                   />
                   <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[color:var(--rose)] shadow-lift transition-transform duration-300 group-hover:scale-110">
                     <PlayCircle className="h-7 w-7" />
