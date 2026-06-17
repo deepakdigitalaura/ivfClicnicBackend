@@ -81,7 +81,8 @@ async function main() {
     /* ── 2. Upload to Payload Media ─────────────────────────────── */
     const formData = new FormData();
     formData.append("file", imgBlob, hero.filename);
-    formData.append("alt", hero.alt);
+    /* Payload requires doc fields as JSON string in _payload field */
+    formData.append("_payload", JSON.stringify({ alt: hero.alt }));
 
     const uploadRes = await fetch(`${BASE}/api/media`, {
       method: "POST",
