@@ -159,9 +159,9 @@ export function BlogHub({
               return (
                 <StaggerItem key={p.id} className="h-full">
                   <a href={`/blog/${p.slug}`} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                    <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--plum)]/5">
+                    <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                       {hero?.url && (
-                        <img src={hero.url} alt={hero.alt ?? p.title} loading="lazy" className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105" />
+                        <img src={hero.url} alt={hero.alt ?? p.title} loading="lazy" className="h-full w-full object-cover brightness-[1.08] saturate-[1.12] transition-transform duration-700 group-hover:scale-105" />
                       )}
                     </div>
                     <div className="flex flex-1 flex-col p-6">
