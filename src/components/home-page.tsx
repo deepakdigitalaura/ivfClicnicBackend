@@ -23,7 +23,7 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import type { Review } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
-import { cityHref } from "@/lib/locations";
+import { cityHref, centresForCity, centreHref } from "@/lib/locations";
 import { resolveIcon } from "@/lib/icon-map";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
@@ -508,6 +508,24 @@ export function TreatmentCard({
 
 /* ---------- Treatments ---------- */
 
+const TREATMENT_TITLE_HREFS: Record<string, string> = {
+  "Male Infertility": "/oligospermia",
+  "Female Infertility": "/pcos",
+  "IVF / ICSI / ART": "/what-is-ivf",
+  "IUI": "/intra-uterine-insemination-iui",
+  "Advanced Fertility Techniques": "/what-is-ivf",
+  "PGT — Genetic Testing": "/pgt",
+  "Fertility Preservation": "/cryopreservation",
+  "Sperm Donation": "/sperm-donation",
+  "Egg Donation": "/egg-donation",
+  "Embryo Donation": "/embryo-donation",
+  "Fibroids": "/fibroids",
+  "Endometriosis": "/endometriosis",
+  "Ovarian Rejuvenation": "/ovarian-rejuvenation",
+  "High Risk Obstetrics": "/services/high-risk-pregnancy-care",
+  "Maternity Services": "/services/painless-delivery",
+};
+
 const MOBILE_TREATMENT_TITLES = new Set([
   "IVF / ICSI / ART",
   "IUI",
@@ -525,7 +543,6 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
           title={edTitle("treatments", content.heading)}
           subtitle={ed("treatments.subtitle", content.subtitle)}
         />
-        <Reveal delay={0.1}><GhostBtn icon={ArrowRight}>{ed("treatments.ctaLabel", content.ctaLabel)}</GhostBtn></Reveal>
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
         {content.items.map(({ icon, t, d }, i) => (
@@ -534,6 +551,7 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
               icon={resolveIcon(icon)}
               title={t}
               desc={d}
+              href={TREATMENT_TITLE_HREFS[t]}
               titleNode={ed(`treatments.items.${i}.t`, t)}
               descNode={ed(`treatments.items.${i}.d`, d)}
             />
@@ -629,7 +647,7 @@ export function SuccessStories({
         {showCta && (
           <Reveal delay={0.2}>
             <div className="mt-9 text-center">
-              <GhostBtn icon={ArrowRight}>{ctaLabel}</GhostBtn>
+              <GhostBtn icon={ArrowRight} href="https://www.youtube.com/watch?v=BSvvQfn4JlE&list=PLOzw9MwGVZn0KItOeJJUX0siXp2Itqs1k" target="_blank">{ctaLabel}</GhostBtn>
             </div>
           </Reveal>
         )}
@@ -733,8 +751,8 @@ function About({ content = HOMEPAGE_DEFAULTS.about }: { content?: HomeAboutConte
           </Stagger>
           <Reveal delay={0.3}>
             <div className="mt-10 flex flex-wrap gap-3">
-              <PrimaryBtn><Editable path="about.primaryCta">{content.primaryCta}</Editable></PrimaryBtn>
-              <GhostBtn><Editable path="about.secondaryCta">{content.secondaryCta}</Editable></GhostBtn>
+              <PrimaryBtn href="/about-bfi"><Editable path="about.primaryCta">{content.primaryCta}</Editable></PrimaryBtn>
+              <GhostBtn href="/about-bfi"><Editable path="about.secondaryCta">{content.secondaryCta}</Editable></GhostBtn>
             </div>
           </Reveal>
         </div>
@@ -1312,41 +1330,37 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
         {cities.map((c, i) => {
-          const href = cityHref(c.s) ?? `/locations/${c.s}`;
-          const inner = (
-            <>
-              <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
-              <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`locations.cities.${i}.c`}>{c.c}</Editable></h3>
-              {c.centres && c.centres.length > 0 && (
-                <p className="mt-1 text-xs text-muted-foreground">{c.centres.join(" · ")}</p>
-              )}
-              {editing ? (
-                <a href={href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-                </a>
-              ) : (
-                <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-                </div>
-              )}
-            </>
-          );
+          const cityUrl = cityHref(c.s) ?? `/locations/${c.s}`;
+          const builtCentres = centresForCity(c.s).filter((ct) => ct.built);
           return (
             <StaggerItem key={c.c}>
-              {editing ? (
-                <div className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift">
-                  {inner}
-                </div>
-              ) : (
-                <motion.a
-                  href={href}
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.4 }}
-                  className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
-                >
-                  {inner}
-                </motion.a>
-              )}
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.4 }}
+                className="group h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
+              >
+                <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
+                <a href={cityUrl} className="mt-4 block">
+                  <h3 className="text-xl font-semibold text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">
+                    <Editable path={`locations.cities.${i}.c`}>{c.c}</Editable>
+                  </h3>
+                </a>
+                {builtCentres.length > 1 ? (
+                  <p className="mt-1 flex flex-wrap gap-x-1 text-xs text-muted-foreground">
+                    {builtCentres.map((ct, ci) => (
+                      <span key={ct.slug}>
+                        <a href={centreHref(ct)} className="hover:text-[color:var(--rose)] hover:underline transition-colors">{ct.name}</a>
+                        {ci < builtCentres.length - 1 && <span className="mx-0.5">·</span>}
+                      </span>
+                    ))}
+                  </p>
+                ) : c.centres && c.centres.length > 0 ? (
+                  <p className="mt-1 text-xs text-muted-foreground">{c.centres.join(" · ")}</p>
+                ) : null}
+                <a href={cityUrl} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                </a>
+              </motion.div>
             </StaggerItem>
           );
         })}
@@ -1411,9 +1425,14 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
 // Calculator name -> live page href. Cards without a matching entry stay
 // inert (no real tool built yet) so we never link to a 404.
 const CALCULATOR_HREFS: Record<string, string> = {
+  "IVF Success Rate Calculator": "/ivf-success-rate-calculator",
+  "Fertile Period Calculator": "/fertile-period-calculator",
+  "Risk of Repeat Miscarriage Calculator": "/risk-of-repeat-miscarriage-calculator",
   "Natural Pregnancy Calculator": "/natural-pregnancy-calculator",
-  "Fertile Period Calculator": "/ovulation-calculator",
+  "IVF Cost Calculator": "/ivf-cost-calculator",
+  "AMH Level Interpreter": "/amh-level-interpreter",
   "Ovulation Calculator": "/ovulation-calculator",
+  "Semen Analysis Calculator": "/semen-analysis-calculator",
 };
 
 export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
@@ -1428,8 +1447,7 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
         {calcs.map((c, i) => {
           const href = CALCULATOR_HREFS[c];
-          return (
-          <StaggerItem key={c}>
+          const card = (
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.4 }}
@@ -1439,10 +1457,14 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
                 <Calculator className="h-5 w-5" />
               </Float>
               <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
-              <a href={href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                 Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-              </a>
+              </span>
             </motion.div>
+          );
+          return (
+          <StaggerItem key={c}>
+            {href ? <a href={href} className="block h-full">{card}</a> : card}
           </StaggerItem>
           );
         })}
@@ -1687,12 +1709,14 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               {content.ctas.map((label, i) => {
                 const Icon = ctaIcons[i] ?? Calendar;
+                const hrefs = ["/#book", "https://wa.me/919712622288", "tel:+919712622288"];
+                const isExternal = i === 1;
                 const cls =
                   i === 0
                     ? "btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"
                     : "btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white";
                 return (
-                  <Magnetic key={label} className={cls}>
+                  <Magnetic key={label} as="a" href={hrefs[i]} className={cls} {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                     <Icon className="h-4 w-4" /> {label}
                   </Magnetic>
                 );
