@@ -187,7 +187,7 @@ const ABOUT_FIELDS: Field[] = [
 
 export const About: GlobalConfig = {
   slug: "about-page",
-  label: "About BFI",
+  label: "About Bavishi Fertility Institute",
   access: { read: () => true, update: isEditor },
   admin: { group: "Website Pages" },
   hooks: revalidateGlobal("about-page"),

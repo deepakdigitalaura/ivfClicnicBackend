@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 /* ── cost data (ported from live ivfclinic.com inline JS) ── */
 const BASE_COSTS: Record<string, { base: [number, number]; label: string }> = {
@@ -76,6 +77,7 @@ export function IvfCostCalculatorPage() {
         </nav>
       </div>
 
+      {/* Hero */}
       <section className="gradient-warm noise relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -top-32 -right-20 h-[34rem] w-[34rem] rounded-full bg-[color:var(--rose)]/20 blur-3xl" />
@@ -84,7 +86,7 @@ export function IvfCostCalculatorPage() {
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Treatment Planning · Cost Estimation
+              <Sparkles className="h-3.5 w-3.5" /> Transparent Estimates · No Hidden Surprises
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -94,7 +96,7 @@ export function IvfCostCalculatorPage() {
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Estimate your IVF treatment investment — including cycle type, number of cycles, and selected add-ons — to plan your fertility journey with confidence.
+              Get a realistic estimate of your IVF treatment costs — broken down by cycle type, add-ons, and number of cycles — so you can plan with confidence.
             </p>
           </Reveal>
           <Reveal delay={0.18}>
@@ -106,9 +108,77 @@ export function IvfCostCalculatorPage() {
               ))}
             </div>
           </Reveal>
+          {/* Hero stats */}
+          <Reveal delay={0.22}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              {[
+                { stat: "₹1.25–2.5L", label: "Typical IVF cycle cost" },
+                { stat: "2–3", label: "Average cycles for success" },
+                { stat: "60%+", label: "Success rate with right protocol" },
+              ].map((s) => (
+                <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
+      {/* How This Calculator Works */}
+      <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
+        <Reveal>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Transparent cost estimates based on Bavishi Fertility Institute pricing ranges.
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { n: "1", title: "Choose Your IVF Type", desc: "Select from Standard IVF, ICSI, Frozen Embryo Transfer, or Donor Egg IVF — each with different base costs." },
+              { n: "2", title: "Select Add-Ons", desc: "Add optional procedures like PGT-A, embryo freezing, ERA, or laser hatching that apply to your situation." },
+              { n: "3", title: "Set Number of Cycles", desc: "Planning for 1 cycle, or budgeting for 2–3? Adjust and see how the total investment changes." },
+              { n: "4", title: "Get Your Estimate", desc: "See a transparent range for per-cycle and total cost, with a full line-item breakdown." },
+            ].map((step) => (
+              <div key={step.n} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
+                  {step.n}
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Why Know Your Costs Upfront */}
+      <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Know Your Costs Upfront?</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Financial clarity removes one major stressor from your fertility journey.</p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+              {[
+                { emoji: "📋", title: "No Unexpected Bills", desc: "Know what to expect before you commit. Our estimates include medication ranges and common add-ons." },
+                { emoji: "💰", title: "Plan Your Finances", desc: "Use the cost range to plan savings, explore EMI options, or check insurance coverage in advance." },
+                { emoji: "🔄", title: "Compare Options", desc: "See how cycle type and add-ons affect your investment before making any decisions." },
+                { emoji: "👨‍👩‍👧", title: "Family Discussion Ready", desc: "Share a clear cost breakdown with your partner to make decisions together with full information." },
+                { emoji: "⚖️", title: "Prioritise Your Add-Ons", desc: "Understand which add-ons are most cost-effective for your specific situation — ask your specialist." },
+                { emoji: "😌", title: "Reduce Financial Anxiety", desc: "Uncertainty about cost is one of the biggest barriers to seeking care. This calculator removes that barrier." },
+              ].map((c) => (
+                <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <div className="text-2xl">{c.emoji}</div>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Widget */}
       <section className="container-px mx-auto max-w-[760px] py-10 md:py-14">
         <AnimatePresence mode="wait">
           {!result ? (
@@ -177,7 +247,6 @@ export function IvfCostCalculatorPage() {
                 <RotateCcw className="h-3.5 w-3.5" /> Recalculate
               </button>
 
-              {/* Total banner */}
               <div className="rounded-[2rem] bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 p-8 text-center text-white md:p-10">
                 <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/70">Estimated Total Investment</div>
                 <div className="mt-4 text-5xl font-black">{fmt(result.totalLo)} – {fmt(result.totalHi)}</div>
@@ -186,7 +255,6 @@ export function IvfCostCalculatorPage() {
                 </div>
               </div>
 
-              {/* Breakdown */}
               <div className="mt-6 rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                 <h3 className="font-semibold text-[color:var(--plum)]">💊 Cost Breakdown (per cycle)</h3>
                 <div className="mt-4 space-y-2">
@@ -206,13 +274,12 @@ export function IvfCostCalculatorPage() {
                 </div>
               </div>
 
-              {/* Next steps */}
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {[
-                  { icon: "📞", title: "Get an Exact Quote", text: "Book a consultation at BFI for a precise, personalised cost plan based on your specific diagnosis." },
-                  { icon: "🏦", title: "Explore EMI Options", text: "Ask about BFI's flexible payment plans and medical finance options to spread your treatment costs." },
+                  { icon: "📞", title: "Get an Exact Quote", text: "Book a consultation at Bavishi Fertility Institute for a precise, personalised cost plan based on your specific diagnosis." },
+                  { icon: "🏦", title: "Explore EMI Options", text: "Ask about Bavishi Fertility Institute's flexible payment plans and medical finance options to spread your treatment costs." },
                   { icon: "📋", title: "Review What's Included", text: "Always ask for a full itemised quote — medications, scans, blood tests, and lab fees can add significantly." },
-                  { icon: "💡", title: "Consider a Package Deal", text: "Multi-cycle packages often offer better value. Ask BFI about bundled pricing for 2–3 cycle commitments." },
+                  { icon: "💡", title: "Consider a Package Deal", text: "Multi-cycle packages often offer better value. Ask Bavishi Fertility Institute about bundled pricing for 2–3 cycle commitments." },
                 ].map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
                     <div className="text-2xl">{c.icon}</div>
@@ -230,6 +297,47 @@ export function IvfCostCalculatorPage() {
         </AnimatePresence>
       </section>
 
+      {/* Patient Testimonial */}
+      <section className="container-px mx-auto max-w-3xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
+            <div className="text-4xl text-white/30">&ldquo;</div>
+            <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
+              Using the cost calculator helped us budget properly for two cycles from the start. We weren&apos;t blindsided by any numbers — and that made the whole process less stressful.
+            </p>
+            <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
+              — Patient at Bavishi Fertility Institute
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Who Should Use */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "🌱", title: "Planning your first IVF cycle", desc: "Get a realistic cost estimate before your first consultation so there are no surprises." },
+              { emoji: "🔄", title: "Budgeting for multiple cycles", desc: "See how total investment scales across 2–4 cycles and plan financially for the full journey." },
+              { emoji: "🏦", title: "Exploring financing options", desc: "Use the estimate to understand how much you need to save or borrow for EMI planning." },
+              { emoji: "🔬", title: "Comparing treatment types", desc: "Switch between Standard IVF, ICSI, FET, and Donor Egg to compare costs before deciding." },
+              { emoji: "📊", title: "Understanding add-on costs", desc: "See exactly how PGT-A, ERA, or other add-ons affect your total investment." },
+              { emoji: "👨‍👩‍👧", title: "Family financial planning", desc: "Share a clear, itemised estimate with your partner before making major treatment decisions." },
+            ].map((p) => (
+              <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                <span className="text-2xl">{p.emoji}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Explainer */}
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
@@ -251,14 +359,15 @@ export function IvfCostCalculatorPage() {
         </Reveal>
       </section>
 
+      {/* CTA */}
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal>
           <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark noise px-7 py-12 text-white md:px-12 md:py-14">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Ready for a personalised quote?</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Get an exact cost plan for your IVF treatment at BFI.</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Get a Precise Quote From Us</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Get an exact cost plan for your IVF treatment at Bavishi Fertility Institute.</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
                   Our team will provide a full itemised quote, discuss flexible payment options, and help you plan the most cost-effective path to your goal.
                 </p>
@@ -276,6 +385,30 @@ export function IvfCostCalculatorPage() {
         </Reveal>
       </section>
 
+      {/* About This Calculator */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+              <p>
+                The IVF Cost Calculator provides realistic cost estimates based on current pricing ranges at fertility clinics in India, including Bavishi Fertility Institute. Costs vary significantly between clinics, cities, and individual treatment protocols — the ranges shown are indicative estimates for planning purposes only.
+              </p>
+              <p>
+                IVF costs in India typically range from ₹1.25 lakh to ₹2.5 lakh per cycle for standard IVF or ICSI, before medication and add-ons. Medications (stimulation injections) typically add ₹30,000–₹80,000 per cycle depending on your protocol and response. Frozen embryo transfer (FET) cycles are significantly less expensive than full stimulation cycles. Donor egg IVF has a higher base cost that includes donor recruitment and evaluation.
+              </p>
+              <p>
+                Add-ons like PGT-A, ERA endometrial testing, and laser-assisted hatching can significantly improve outcomes in specific clinical situations — but they are not appropriate for everyone. Ask your specialist which add-ons are evidence-based for your specific diagnosis before selecting them.
+              </p>
+              <p className="text-xs">
+                All cost estimates are for planning purposes only. Actual costs depend on your individual protocol, response, clinic, and city. Request a full itemised written quote from your clinic before committing to treatment.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <CalculatorCrossLinks current="/ivf-cost-calculator" />
       <Locations />
       <Footer />
       <FloatingCTA />

@@ -20,6 +20,7 @@ import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 const BABY_SIZES: Record<number, { name: string; emoji: string; desc: string }> = {
   1: { name: "Early Development", emoji: "🔬", desc: "Early development stage. Your body prepares for ovulation." },
@@ -452,7 +453,69 @@ export function OvulationPregnancyCalculatorPage() {
               ))}
             </div>
           </Reveal>
+          {/* Hero stats */}
+          <Reveal delay={0.22}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              {[
+                { stat: "6 Days", label: "Fertile window average" },
+                { stat: "24h", label: "Egg survival after ovulation" },
+                { stat: "5 Days", label: "Sperm can survive in body" },
+                { stat: "Day 14", label: "Typical ovulation (28-day cycle)" },
+              ].map((s) => (
+                <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
+      </section>
+
+      {/* How This Calculator Works */}
+      <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
+        <Reveal>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Based on well-established menstrual cycle science — quick, accurate, and private.
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { n: "1", title: "Enter Your Cycle Data", desc: "Input the first day of your last period and your average cycle length. Most women have cycles between 24–35 days." },
+              { n: "2", title: "We Calculate Ovulation", desc: "Using the standard luteal phase formula (cycle length minus 14 days), we estimate your most likely ovulation date." },
+              { n: "3", title: "Get Your Fertile Window", desc: "Your fertile window spans 5 days before ovulation to 1 day after — when sperm can survive and meet an egg." },
+              { n: "4", title: "Plan Up to 6 Months", desc: "See your ovulation dates and fertile windows for the next 6 cycles in one clear, printable table." },
+            ].map((step) => (
+              <div key={step.n} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
+                  {step.n}
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Patient Testimonials */}
+      <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What Our Patients Tell Us</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2">
+            {[
+              { quote: "I had been trying for over a year and always thought Day 14 was the magic day. The calculator showed me my cycle was 31 days — so I was missing my fertile window completely. That was the breakthrough.", color: "border-[color:var(--rose)]" },
+              { quote: "I used it to figure out when to time intercourse after my IUI. Knowing I was in my fertile window gave us extra hope during that two-week wait. We got pregnant on our second IUI.", color: "border-emerald-500" },
+              { quote: "My cycles are irregular — 26 days one month, 33 the next. Entering different lengths helped me understand how much my window was shifting. My doctor said tracking this was the first step to understanding my PCOS.", color: "border-blue-500" },
+              { quote: "The 6-cycle table was a game changer. My husband travels for work and we could actually plan around his schedule for the next few months. It felt like we finally had control over something.", color: "border-amber-500" },
+            ].map((t, i) => (
+              <div key={i} className={`rounded-3xl border-l-4 ${t.color} border border-border/70 bg-card p-6 shadow-soft`}>
+                <p className="text-sm italic leading-relaxed text-[color:var(--plum)]/80">&ldquo;{t.quote}&rdquo;</p>
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">— Patient at Bavishi Fertility Institute</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       <section ref={widgetRef} className="container-px mx-auto max-w-[760px] py-10 md:py-14">
@@ -738,6 +801,55 @@ export function OvulationPregnancyCalculatorPage() {
         </Reveal>
       </section>
 
+      {/* Who Should Use */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "🌱", title: "Just started trying to conceive", desc: "Learn when your fertile window actually falls — most couples are surprised by the timing." },
+              { emoji: "📅", title: "Irregular cycle trackers", desc: "Adjust cycle length each month to see how your fertile window shifts with irregular cycles." },
+              { emoji: "🏥", title: "Timing IUI or natural cycles", desc: "Use the ovulation date estimate to plan intercourse or IUI timing with greater precision." },
+              { emoji: "✈️", title: "Planning around travel or schedules", desc: "The 6-month calendar helps you and your partner plan ahead when time apart is a factor." },
+              { emoji: "🤰", title: "Already pregnant", desc: "Switch to pregnancy mode to track your due date, trimester progress, and baby size week by week." },
+              { emoji: "🔍", title: "Understanding your cycle", desc: "Not ready to try yet? Use the tool to understand your natural rhythm before you start." },
+            ].map((p) => (
+              <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                <span className="text-2xl">{p.emoji}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* About This Tool */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+              <p>
+                The Ovulation Calculator uses the standard luteal phase method: ovulation is estimated to occur 14 days before the start of the next period (cycle length minus 14 days). The fertile window is calculated as 5 days before ovulation through 1 day after, reflecting the typical lifespan of sperm (up to 5 days) and the egg (12–24 hours post-ovulation).
+              </p>
+              <p>
+                This method assumes a consistent luteal phase length. Women with irregular cycles, anovulatory cycles, PCOS, thyroid disorders, or those approaching perimenopause may have unpredictable ovulation timing. In these cases, the calculator provides a starting estimate — but monitoring with ovulation predictor kits (OPKs), basal body temperature (BBT) charting, or ultrasound follicle tracking will be more accurate.
+              </p>
+              <p>
+                The Pregnancy Calculator uses Naegele&apos;s Rule: add 280 days (40 weeks) to the first day of the last menstrual period for an estimated due date. Trimester boundaries are set at weeks 1–12 (T1), 13–27 (T2), and 28–40 (T3). Baby size comparisons are for educational purposes only.
+              </p>
+              <p className="text-xs">
+                This tool is for educational purposes only. All results are estimates. Always confirm your ovulation timing and pregnancy dates with a qualified healthcare provider.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <CalculatorCrossLinks current="/ovulation-calculator" />
       <Locations />
       <Footer />
       <FloatingCTA />

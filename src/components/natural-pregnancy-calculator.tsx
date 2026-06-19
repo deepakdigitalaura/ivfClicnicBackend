@@ -10,6 +10,7 @@ import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 /* ────────────────────────────────────────────────────────────────────────
  * Hunault et al. (2004), Erasmus University Medical Centre, Rotterdam —
@@ -135,6 +136,21 @@ export function NaturalPregnancyCalculatorPage() {
                 <span key={b.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
                   <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {b.t}
                 </span>
+              ))}
+            </div>
+          </Reveal>
+          {/* Hero stats */}
+          <Reveal delay={0.22}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              {[
+                { stat: "≥ 40%", label: "Try naturally first" },
+                { stat: "20–39%", label: "Consider IUI treatment" },
+                { stat: "< 20%", label: "IVF recommended" },
+              ].map((s) => (
+                <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                </div>
               ))}
             </div>
           </Reveal>
@@ -457,7 +473,74 @@ export function NaturalPregnancyCalculatorPage() {
         </div>
       </section>
 
+      {/* Why Patients Use This Calculator */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Patients Use This Calculator</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Built for patients who need real numbers — not just hope.</p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+              {[
+                { emoji: "🎯", title: "Know Where You Stand — Right Now", desc: "Stop guessing. Your natural pregnancy probability is calculated instantly based on validated clinical data." },
+                { emoji: "😌", title: "Reduce Anxiety & Uncertainty", desc: "Knowing your actual probability — even if it's lower than hoped — is less distressing than not knowing at all." },
+                { emoji: "⚡", title: "Stop Waiting — Start Acting", desc: "A low score removes the temptation to 'just try a few more months' when time is your most valuable resource." },
+                { emoji: "🏥", title: "Walk Into Your Consultation Prepared", desc: "Share your probability score with your specialist to have a more focused, productive first appointment." },
+                { emoji: "💰", title: "Make Smarter Financial Decisions", desc: "Knowing whether IUI or IVF is appropriate first helps you avoid spending months on ineffective treatment." },
+                { emoji: "👨‍⚕️", title: "A Tool Loved by Your Own Doctor", desc: "The Hunault model is the same tool used by fertility specialists at Bavishi and leading clinics worldwide." },
+              ].map((c) => (
+                <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <div className="text-2xl">{c.emoji}</div>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Patient Testimonial */}
+      <section className="container-px mx-auto max-w-3xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
+            <div className="text-4xl text-white/30">&ldquo;</div>
+            <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
+              Before using this calculator, we had been trying for 2 years with no direction. Seeing our score was the push we needed to book a consultation. Three months later, we were pregnant through IUI.
+            </p>
+            <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
+              — Patient at Bavishi Fertility Institute
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Who Should Use */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "💑", title: "Couples trying 6+ months", desc: "If you've been trying for 6 months or more without success, it's time to understand your probability." },
+              { emoji: "📅", title: "Women aged 35–40 planning a pregnancy", desc: "Age is the strongest predictor — understanding your score motivates acting at the right time." },
+              { emoji: "🧬", title: "Couples with a known semen report", desc: "Sperm motility is a key input — use your semen analysis result to get a more accurate score." },
+              { emoji: "❓", title: "Unexplained infertility", desc: "When no cause is found, this model helps guide whether expectant management or treatment is better." },
+              { emoji: "🔄", title: "Considering IUI or IVF", desc: "Use your score to understand whether IUI is appropriate first or if IVF is the better path." },
+              { emoji: "🌱", title: "After initial fertility investigations", desc: "Integrate your test results into a probability score before deciding on your treatment pathway." },
+            ].map((p) => (
+              <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                <span className="text-2xl">{p.emoji}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
       {/* Our network — locations (reused) */}
+      <CalculatorCrossLinks current="/natural-pregnancy-calculator" />
       <Locations />
 
       <Footer />

@@ -295,7 +295,7 @@ export function IvfPage() {
             </Reveal>
             <Reveal delay={0.3}>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[color:var(--plum)]">
-                {["30,000+ Pregnancies", "Since 1998", "Class 1000 Labs", "National Fertility Award 5×"].map((c) => (
+                {["30,000+ Pregnancies", "Since 1998", "Class 1000 Labs", "National Fertility Award 6×"].map((c) => (
                   <span key={c} className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> {c}</span>
                 ))}
               </div>

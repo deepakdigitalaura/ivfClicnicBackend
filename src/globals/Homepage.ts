@@ -213,7 +213,7 @@ const SECTION_FIELDS: Field[] = [
       name: "about",
       type: "group",
       label: "About the Institute",
-      admin: { description: "The homepage's 'About the Institute' summary section (its own copy — separate from the full About BFI page)." },
+      admin: { description: "The homepage's 'About the Institute' summary section (its own copy — separate from the full About Bavishi Fertility Institute page)." },
       fields: [
         { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),

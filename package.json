@@ -5,6 +5,8 @@
   "scripts": {
     "dev": "next dev --turbopack",
     "sync-reviews": "node scripts/sync-reviews.mjs",
+    "audit:gmb-hours": "node scripts/audit-gmb-hours.mjs",
+    "audit:gmb-hours:fix": "node scripts/audit-gmb-hours.mjs --fix --save-ids",
     "build": "printf 'n\\n' | DATABASE_URI=${MIGRATE_DATABASE_URI:-$DATABASE_URI} payload migrate; next build",
     "start": "next start",
     "lint": "next lint",

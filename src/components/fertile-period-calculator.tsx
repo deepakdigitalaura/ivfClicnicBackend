@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 function addDays(date: Date, n: number): Date {
   const d = new Date(date);
@@ -91,7 +92,7 @@ export function FertilePeriodCalculatorPage() {
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Find your fertile window, peak ovulation day, and next period date — instantly, from your last period and cycle length.
+              Discover your most fertile days, ovulation date, and next period — so you can plan your pregnancy journey with confidence.
             </p>
           </Reveal>
           <Reveal delay={0.18}>
@@ -103,7 +104,74 @@ export function FertilePeriodCalculatorPage() {
               ))}
             </div>
           </Reveal>
+          {/* Hero stats */}
+          <Reveal delay={0.22}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              {[
+                { stat: "6 Days", label: "Fertile window average" },
+                { stat: "12–24h", label: "Egg availability after ovulation" },
+                { stat: "72 hrs", label: "Window sperm survive in body" },
+              ].map((s) => (
+                <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
+      </section>
+
+      {/* How This Calculator Works */}
+      <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
+        <Reveal>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Simple inputs — clinically informed cycle predictions.
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { n: "1", title: "Enter Last Period Date", desc: "Your last period's start date is the most important input for any cycle prediction." },
+              { n: "2", title: "Set Your Cycle Length", desc: "Adjust your average cycle length. Most women have cycles between 21 and 35 days." },
+              { n: "3", title: "Get Your Fertile Window", desc: "Your fertile window, peak ovulation day, and next period date are calculated instantly." },
+              { n: "4", title: "Follow Your Action Plan", desc: "Use your fertile window dates to time intercourse and plan your conception strategy." },
+            ].map((step) => (
+              <div key={step.n} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
+                  {step.n}
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Why Knowing Your Fertile Window Matters */}
+      <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Knowing Your Fertile Window Matters</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Timing is everything — understanding your cycle puts you in control.</p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+              {[
+                { emoji: "🎯", title: "Stop Guessing, Start Knowing", desc: "Many couples try at the wrong times. Knowing your fertile window removes the guesswork entirely." },
+                { emoji: "📅", title: "Plan Around Your Life", desc: "Understanding your fertile days helps you schedule time off, travel, and appointments around conception." },
+                { emoji: "❤️", title: "Reduce Relationship Stress", desc: "Tracking your cycle naturally reduces the pressure of 'trying' by giving clear, actionable days to focus on." },
+                { emoji: "📊", title: "Track Patterns Over Time", desc: "Observing your cycle over several months helps identify irregularities early and guides specialist discussions." },
+                { emoji: "⏳", title: "Save Months of Trying", desc: "Correctly timed intercourse can reduce the average time to conception significantly for many couples." },
+                { emoji: "🏥", title: "Prepare for Your Consultation", desc: "Sharing cycle data with your fertility specialist provides valuable context for your assessment." },
+              ].map((c) => (
+                <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <div className="text-2xl">{c.emoji}</div>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       {/* Widget */}
@@ -177,7 +245,6 @@ export function FertilePeriodCalculatorPage() {
                 <RotateCcw className="h-3.5 w-3.5" /> Recalculate
               </button>
 
-              {/* Key dates */}
               <div className="grid gap-4 sm:grid-cols-3">
                 {[
                   { icon: "🌸", label: "Fertile Window", value: `${fmtShort(result.fertileStart)} – ${fmtShort(result.fertileEnd)}`, sub: "Best days to try", color: "bg-rose-50 border-rose-200" },
@@ -193,7 +260,6 @@ export function FertilePeriodCalculatorPage() {
                 ))}
               </div>
 
-              {/* Fertility bar */}
               <div className="mt-6 rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                 <div className="text-sm font-semibold text-[color:var(--plum)]">Fertility Level Throughout Your Cycle</div>
                 <div className="mt-4 h-4 overflow-hidden rounded-full bg-[color:var(--ivory)]">
@@ -212,7 +278,6 @@ export function FertilePeriodCalculatorPage() {
                 </p>
               </div>
 
-              {/* Tips */}
               <div className="mt-6 grid gap-4 sm:grid-cols-3">
                 {[
                   { icon: "💑", title: "Time Intercourse Right", text: "Have intercourse every 1–2 days during your fertile window, especially the 2 days before ovulation." },
@@ -233,6 +298,46 @@ export function FertilePeriodCalculatorPage() {
             </motion.div>
           )}
         </AnimatePresence>
+      </section>
+
+      {/* Patient Testimonial */}
+      <section className="container-px mx-auto max-w-3xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
+            <div className="text-4xl text-white/30">&ldquo;</div>
+            <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
+              I had no idea I was trying on completely the wrong days. Once I understood my actual fertile window, I conceived within two cycles. This calculator changed everything for me.
+            </p>
+            <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
+              — Patient at Bavishi Fertility Institute
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Who Should Use */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "💑", title: "Couples trying to conceive naturally", desc: "Find your fertile window to time intercourse on the right days every cycle." },
+              { emoji: "📱", title: "Cycle tracking beginners", desc: "No apps or wearables needed — enter two numbers and get an instant prediction." },
+              { emoji: "🌀", title: "Women with irregular cycles", desc: "Adjust cycle length and get customised predictions based on your own pattern." },
+              { emoji: "💊", title: "Coming off contraception", desc: "Understand when your cycle is likely to return to normal and when fertility returns." },
+              { emoji: "🏥", title: "Before IUI or IVF treatment", desc: "Use natural cycle tracking alongside medical treatment to optimise timing." },
+              { emoji: "📋", title: "Preparing for your consultation", desc: "Share accurate cycle data with your specialist for a more informed assessment." },
+            ].map((p) => (
+              <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                <span className="text-2xl">{p.emoji}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
       </section>
 
       {/* Explainer */}
@@ -264,7 +369,7 @@ export function FertilePeriodCalculatorPage() {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Need expert guidance?</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Need More Than a Calculator?</p>
                 <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Get specialist support for cycle tracking and conception.</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
                   Book a consultation with our fertility team to validate your cycle tracking and receive a personalised conception plan.
@@ -283,6 +388,30 @@ export function FertilePeriodCalculatorPage() {
         </Reveal>
       </section>
 
+      {/* About This Calculator */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+              <p>
+                The Fertile Period Calculator uses your menstrual cycle data — specifically the first day of your last period and your average cycle length — to predict your fertile window, peak ovulation day, and next expected period. The calculation is based on the standard calendar method used by fertility specialists worldwide.
+              </p>
+              <p>
+                For a typical 28-day cycle, ovulation occurs around day 14. Your fertile window spans the 5 days before ovulation plus the day of ovulation itself — giving you a 6-day window each cycle when pregnancy is possible. Sperm can survive in the female reproductive tract for up to 72 hours, while an egg is viable for only 12–24 hours after ovulation, making the days leading up to ovulation the most important for timed intercourse.
+              </p>
+              <p>
+                This calculator is designed for women with relatively regular cycles. If your cycles are very irregular, you may benefit from ovulation predictor kits, basal body temperature tracking, or a specialist consultation for a more accurate assessment.
+              </p>
+              <p className="text-xs">
+                Results are estimates only and should not be used as a substitute for medical advice. Always consult a fertility specialist for personalised guidance.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <CalculatorCrossLinks current="/fertile-period-calculator" />
       <Locations />
       <Footer />
       <FloatingCTA />

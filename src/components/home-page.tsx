@@ -2,7 +2,7 @@
 import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
-  Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
+  Phone, MessageCircle, Calendar, PlayCircle, Shield, ShieldCheck, Sparkles, HeartPulse,
   Stethoscope, Microscope, Baby, Dna, FlaskConical, Activity, MapPin,
   Star, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Quote, Clock, CheckCircle2,
   Video, BookOpen, Calculator, Mail, User, Send,
@@ -1771,6 +1771,9 @@ export function Footer() {
         {/* Bottom */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
           <div>© {new Date().getFullYear()} {copyrightText}</div>
+          <div className="flex items-center gap-1.5 rounded-full border border-[color:var(--plum)]/20 bg-white px-3 py-1.5 text-xs font-semibold text-[color:var(--plum)]">
+            <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--rose)]" /> NABH Accredited
+          </div>
           <div className="flex flex-wrap items-center justify-center gap-5">
             {legal.map((x) => (
               <a

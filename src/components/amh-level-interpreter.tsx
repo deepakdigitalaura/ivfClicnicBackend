@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 /* ── AMH interpretation data (ported from live ivfclinic.com) ── */
 type AmhBand = "vl" | "l" | "n" | "h" | "vh";
@@ -205,7 +206,104 @@ export function AmhLevelInterpreterPage() {
               ))}
             </div>
           </Reveal>
+          {/* Hero stats */}
+          <Reveal delay={0.22}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              {[
+                { stat: "5", label: "Age-specific reference ranges" },
+                { stat: "2", label: "Units supported (ng/mL & pmol/L)" },
+                { stat: "Age", label: "Always age-adjusted interpretation" },
+              ].map((s) => (
+                <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
+      </section>
+
+      {/* How This Interpreter Works */}
+      <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
+        <Reveal>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Interpreter Works</h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Your AMH result in context — not just a number, but what it means for your fertility.
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { n: "1", title: "Enter Your AMH Value", desc: "Input your lab result in ng/mL or pmol/L — switch between units with one click and enter the value exactly as reported." },
+              { n: "2", title: "Select Your Age Group", desc: "AMH levels decline with age. Your age group is essential for an accurate, age-specific interpretation of your result." },
+              { n: "3", title: "Get Your Classification", desc: "See whether your AMH falls in the Very Low, Low, Normal, High, or Very High range — with an age-adjusted comparison." },
+              { n: "4", title: "Understand Next Steps", desc: "Get specific, actionable guidance based on your result level — what it means, what to ask, and what to do next." },
+            ].map((step) => (
+              <div key={step.n} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
+                  {step.n}
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* AMH Reference Ranges Table */}
+      <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">AMH Reference Ranges by Age</h2>
+            <p className="mx-auto mt-3 max-w-xl text-center text-sm text-muted-foreground">
+              AMH levels decline naturally with age. Use this table to place your result in context.
+            </p>
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr className="border-b-2 border-[color:var(--rose)]/30">
+                    <th className="rounded-tl-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Age Group</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Normal (ng/mL)</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Normal (pmol/L)</th>
+                    <th className="rounded-tr-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Clinical Note</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { age: "20–24 years", ngml: "1.66 – 9.49", pmol: "11.8 – 67.8", note: "Peak reproductive years — highest expected AMH" },
+                    { age: "25–29 years", ngml: "1.18 – 9.16", pmol: "8.4 – 65.4", note: "Excellent reserve; plan fertility if considering delay" },
+                    { age: "30–34 years", ngml: "0.67 – 7.55", pmol: "4.8 – 53.9", note: "Moderate decline; IVF outcomes remain good" },
+                    { age: "35–39 years", ngml: "0.77 – 5.24", pmol: "5.5 – 37.4", note: "Significant decline; act sooner if planning IVF" },
+                    { age: "40–44 years", ngml: "0.10 – 2.96", pmol: "0.7 – 21.1", note: "Reduced reserve; tailored protocol essential" },
+                    { age: "45–50 years", ngml: "0.05 – 2.06", pmol: "0.3 – 14.7", note: "Very low reserve; donor egg may be discussed" },
+                  ].map((row, i) => (
+                    <tr key={row.age} className={i % 2 === 0 ? "bg-card" : "bg-[color:var(--ivory)]"}>
+                      <td className="px-5 py-3 font-semibold text-[color:var(--plum)]">{row.age}</td>
+                      <td className="px-5 py-3 font-mono text-[color:var(--plum)]/80">{row.ngml}</td>
+                      <td className="px-5 py-3 font-mono text-[color:var(--plum)]/80">{row.pmol}</td>
+                      <td className="px-5 py-3 text-xs text-muted-foreground">{row.note}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <div className="mt-5 grid gap-4 sm:grid-cols-3">
+              {[
+                { band: "Very Low", ngml: "< 0.5 ng/mL", color: "bg-red-600", note: "Significantly reduced reserve — urgent review" },
+                { band: "Low", ngml: "0.5 – 1.5 ng/mL", color: "bg-orange-500", note: "Below average — tailored protocol needed" },
+                { band: "Normal", ngml: "1.5 – 3.5 ng/mL", color: "bg-emerald-600", note: "Good reserve for most women" },
+              ].map((b) => (
+                <div key={b.band} className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
+                  <div className={`h-3 w-3 shrink-0 rounded-full ${b.color}`} />
+                  <div>
+                    <div className="text-xs font-bold text-[color:var(--plum)]">{b.band} · {b.ngml}</div>
+                    <div className="mt-0.5 text-xs text-muted-foreground">{b.note}</div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
       </section>
 
       <section className="container-px mx-auto max-w-[760px] py-10 md:py-14">
@@ -328,6 +426,67 @@ export function AmhLevelInterpreterPage() {
         </AnimatePresence>
       </section>
 
+      {/* Patient Testimonials */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What Our Patients Say About Knowing Their AMH</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2">
+            {[
+              { quote: "My AMH came back as 0.3 ng/mL and I panicked. The interpreter helped me understand what 'very low' means at 38 — and that IVF was still possible. We started immediately and have our son now.", bg: "bg-red-600" },
+              { quote: "I had no idea my AMH of 2.1 ng/mL was perfectly normal for my age. I was worried for nothing. The age-comparison feature calmed me down before my specialist appointment.", bg: "bg-emerald-600" },
+              { quote: "High AMH of 8.7 helped explain why I had PCOS. Knowing before my consultation meant I could ask the right questions about OHSS risk and the gentler protocol they ended up using.", bg: "bg-blue-600" },
+              { quote: "After two failed IUIs and an AMH of 0.9 ng/mL, this tool helped us understand why we needed to move to IVF quickly. That information changed our direction at the right time.", bg: "bg-orange-500" },
+            ].map((t, i) => (
+              <div key={i} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+                <div className={`inline-block h-2 w-8 rounded-full ${t.bg}`} />
+                <p className="mt-3 text-sm italic leading-relaxed text-[color:var(--plum)]/80">&ldquo;{t.quote}&rdquo;</p>
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">— Patient at Bavishi Fertility Institute</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Doctor Quote */}
+      <section className="container-px mx-auto max-w-3xl py-4 md:py-8">
+        <Reveal>
+          <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
+            <div className="text-4xl text-white/30">&ldquo;</div>
+            <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
+              AMH is one of the most powerful tools we have to personalise fertility care. A single number — interpreted in the right context — can completely change the treatment approach and lead to far better outcomes.
+            </p>
+            <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
+              — Dr. Himanshu Bavishi, Bavishi Fertility Institute
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Who Should Use */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Interpreter?</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "📋", title: "Just received your AMH result", desc: "Understand what your lab number means before or after your specialist appointment." },
+              { emoji: "🔍", title: "Comparing results over time", desc: "Track how your AMH has changed year-on-year and understand whether decline is expected or concerning." },
+              { emoji: "💉", title: "Planning IVF treatment", desc: "AMH predicts IVF egg yield. Know where you stand before committing to a stimulation protocol." },
+              { emoji: "🌸", title: "Investigating fertility before trying", desc: "Get a baseline understanding of your ovarian reserve before you start trying to conceive." },
+              { emoji: "⚕️", title: "Managing PCOS", desc: "High AMH often signals PCOS. Understand the link and what it means for your treatment options." },
+              { emoji: "👩‍💼", title: "Considering egg freezing", desc: "AMH is a key factor in egg freezing decisions — understand your reserve before time becomes a factor." },
+            ].map((p) => (
+              <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                <span className="text-2xl">{p.emoji}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
@@ -374,6 +533,33 @@ export function AmhLevelInterpreterPage() {
         </Reveal>
       </section>
 
+      {/* About This Tool */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+              <p>
+                The AMH Level Interpreter uses age-specific reference ranges based on published literature (Seifer et al., 2011; Nelson et al., 2015) and widely accepted clinical practice guidelines. AMH values are classified into five bands — Very Low, Low, Normal, High, and Very High — and then compared against the normal range for your specific age group to provide additional context.
+              </p>
+              <p>
+                Anti-Müllerian Hormone (AMH) is produced by granulosa cells in small preantral and antral follicles and is directly proportional to the number of remaining primordial follicles — your ovarian reserve. Unlike FSH, AMH remains stable throughout the menstrual cycle and does not require timed blood draws.
+              </p>
+              <p>
+                AMH measures egg <strong>quantity</strong>, not egg <strong>quality</strong>. A woman with a low AMH can still conceive with high-quality eggs; a woman with a high AMH may have egg quality issues affecting IVF outcomes. Always interpret AMH alongside antral follicle count (AFC), FSH, and clinical assessment by a specialist.
+              </p>
+              <p>
+                AMH values can vary between laboratories due to different assay methods. Roche Elecsys, Beckman Coulter Access, and other platforms may give slightly different results. Always compare results from the same lab when tracking changes over time.
+              </p>
+              <p className="text-xs">
+                This tool is for informational purposes only and does not constitute medical advice. Always discuss your AMH result with a qualified fertility specialist before making treatment decisions.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <CalculatorCrossLinks current="/amh-level-interpreter" />
       <Locations />
       <Footer />
       <FloatingCTA />

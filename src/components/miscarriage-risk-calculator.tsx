@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 type Band = "low" | "moderate" | "high" | "very-high";
 
@@ -135,6 +136,7 @@ export function MiscarriageRiskCalculatorPage() {
         </nav>
       </div>
 
+      {/* Hero */}
       <section className="gradient-warm noise relative overflow-hidden">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <div className="absolute -top-32 -right-20 h-[34rem] w-[34rem] rounded-full bg-[color:var(--rose)]/20 blur-3xl" />
@@ -153,7 +155,7 @@ export function MiscarriageRiskCalculatorPage() {
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Understand your risk profile for recurrent pregnancy loss and discover what investigations and treatments can help you achieve a successful pregnancy.
+              Understand your personal risk profile for recurrent pregnancy loss and get a clearer picture of your path forward with expert guidance.
             </p>
           </Reveal>
           <Reveal delay={0.18}>
@@ -165,9 +167,77 @@ export function MiscarriageRiskCalculatorPage() {
               ))}
             </div>
           </Reveal>
+          {/* Hero stats */}
+          <Reveal delay={0.22}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              {[
+                { stat: "1 in 100", label: "Couples experience recurrent loss" },
+                { stat: "70–75%", label: "Cases with no identifiable cause" },
+                { stat: "40%+", label: "Cases with treatable causes found" },
+              ].map((s) => (
+                <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
       </section>
 
+      {/* How This Calculator Works */}
+      <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
+        <Reveal>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Based on clinically established risk factors for recurrent pregnancy loss (RPL).
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
+            {[
+              { n: "1", title: "Share Your History", desc: "Tell us about your number of miscarriages and whether you've had a previous live birth." },
+              { n: "2", title: "Add Known Risk Factors", desc: "Include any confirmed medical conditions such as APS, uterine abnormalities, or thyroid disorders." },
+              { n: "3", title: "Get Risk Assessment", desc: "Receive a risk profile categorisation — Low, Moderate, High, or Very High — with your score." },
+              { n: "4", title: "Plan Your Care", desc: "Get a personalised next-steps plan with the investigations and treatments most relevant to your profile." },
+            ].map((step) => (
+              <div key={step.n} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+                <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
+                  {step.n}
+                </div>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* What This Calculator Does For You */}
+      <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">What This Calculator Does for You</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Turning uncertainty into understanding — step by step toward answers.</p>
+            <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+              {[
+                { emoji: "💜", title: "Emotional Clarity", desc: "Replace fear and confusion with factual, compassionate information about your specific situation." },
+                { emoji: "🔍", title: "Know Which Facts Matter", desc: "Understand which risk factors are most significant in recurrent pregnancy loss — and which ones are modifiable." },
+                { emoji: "📊", title: "Understand Your Odds", desc: "See a realistic probability range for your next pregnancy based on your history and risk profile." },
+                { emoji: "🗺️", title: "Plan Your Next Steps", desc: "Get a clear, prioritised action plan specific to your risk level — from investigation to treatment." },
+                { emoji: "🏥", title: "Prepare for Your Doctor", desc: "Walk into your next appointment knowing exactly what questions to ask and what to push for." },
+                { emoji: "🌟", title: "Evidence-Based Hope", desc: "Most RPL risk factors are treatable. This calculator helps you identify those and find the right path forward." },
+              ].map((c) => (
+                <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <div className="text-2xl">{c.emoji}</div>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                </div>
+              ))}
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Widget */}
       <section className="container-px mx-auto max-w-[760px] py-10 md:py-14">
         <AnimatePresence mode="wait">
           {!result ? (
@@ -208,7 +278,7 @@ export function MiscarriageRiskCalculatorPage() {
                   <hr className="my-7 border-border/60" />
                   <h2 className="text-xl font-semibold text-[color:var(--plum)]">Age Factors</h2>
                   <div className="mt-5">
-                    <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Partner's age</label>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Partner&apos;s age</label>
                     <div className="grid grid-cols-3 gap-3">
                       {[["under40","Under 40"],["40plus","40 or older"],["na","Not applicable"]].map(([v,l]) => radioBtn("partnerAge",v,l,partnerAge,setPartnerAge))}
                     </div>
@@ -216,7 +286,7 @@ export function MiscarriageRiskCalculatorPage() {
 
                   <hr className="my-7 border-border/60" />
                   <h2 className="text-xl font-semibold text-[color:var(--plum)]">Known Medical Conditions</h2>
-                  <p className="mt-1 text-sm text-muted-foreground">Leave as "No / Not tested" if you haven't been investigated yet.</p>
+                  <p className="mt-1 text-sm text-muted-foreground">Leave as "No / Not tested" if you haven&apos;t been investigated yet.</p>
 
                   <div className="mt-5 space-y-5">
                     {[
@@ -239,7 +309,7 @@ export function MiscarriageRiskCalculatorPage() {
 
                   <div className="mt-8 flex justify-end border-t border-border/60 pt-7">
                     <button type="button" onClick={handleCalc} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                      Assess My Risk Profile <ArrowRight className="h-4 w-4" />
+                      Calculate My Risk Level <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -251,7 +321,6 @@ export function MiscarriageRiskCalculatorPage() {
                 <RotateCcw className="h-3.5 w-3.5" /> Recalculate
               </button>
 
-              {/* Score banner */}
               <div className={`rounded-[2rem] p-8 text-center text-white md:p-10 ${BAND_META[result.band].bg}`}>
                 <div className="text-4xl">{BAND_META[result.band].emoji}</div>
                 <div className="mt-3 text-2xl font-bold">{BAND_META[result.band].label}</div>
@@ -259,7 +328,6 @@ export function MiscarriageRiskCalculatorPage() {
                 <div className="mt-5 rounded-xl bg-white/15 px-4 py-2 text-sm font-semibold">{BAND_META[result.band].prognosis}</div>
               </div>
 
-              {/* Risk bar */}
               <div className="mt-6 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-muted-foreground">
                   <span>Risk score</span><span>{result.score} / 100</span>
@@ -278,7 +346,6 @@ export function MiscarriageRiskCalculatorPage() {
                 </div>
               </div>
 
-              {/* Next steps */}
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {NEXT_STEPS[result.band].map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
@@ -297,6 +364,47 @@ export function MiscarriageRiskCalculatorPage() {
         </AnimatePresence>
       </section>
 
+      {/* Patient Testimonial */}
+      <section className="container-px mx-auto max-w-3xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
+            <div className="text-4xl text-white/30">&ldquo;</div>
+            <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
+              After my third loss I felt completely lost. Understanding my risk factors gave me the strength to get help — and today I&apos;m holding my baby girl.
+            </p>
+            <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
+              — Patient at Bavishi Fertility Institute
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Who Should Use */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "💔", title: "Couples with 2+ miscarriages", desc: "If you've experienced recurrent pregnancy loss, this tool helps profile your risk and guide next steps." },
+              { emoji: "🔬", title: "Women diagnosed with APS", desc: "Antiphospholipid syndrome is one of the most common — and treatable — causes of RPL." },
+              { emoji: "🏥", title: "Women with uterine abnormalities", desc: "Septum, fibroids, polyps, or adhesions can be corrected — understand your risk profile first." },
+              { emoji: "🩺", title: "Women with thyroid disorders", desc: "Thyroid issues affect implantation and early pregnancy — know how much they contribute to your risk." },
+              { emoji: "👨‍👩‍👧", title: "Couples wanting to try again", desc: "Before your next pregnancy, understand what investigations to prioritise and what treatment to discuss." },
+              { emoji: "❓", title: "Unexplained recurrent losses", desc: "Even when no cause has been found, this tool helps guide what to investigate next." },
+            ].map((p) => (
+              <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                <span className="text-2xl">{p.emoji}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Explainer */}
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
@@ -318,13 +426,14 @@ export function MiscarriageRiskCalculatorPage() {
         </Reveal>
       </section>
 
+      {/* CTA */}
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal>
           <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark noise px-7 py-12 text-white md:px-12 md:py-14">
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">You deserve answers.</p>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Ready to Get Real Answers?</p>
                 <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Speak to our recurrent pregnancy loss specialists.</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
                   Our dedicated RPL team provides a thorough investigation, compassionate care, and a structured treatment plan to help you achieve a successful pregnancy.
@@ -343,6 +452,27 @@ export function MiscarriageRiskCalculatorPage() {
         </Reveal>
       </section>
 
+      {/* About This Calculator */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+              <p>
+                The Risk of Repeat Miscarriage Calculator is clinically informed by published research on recurrent pregnancy loss (RPL). It uses seven risk factors — number of previous losses, maternal and paternal age, prior live birth history, antiphospholipid syndrome, uterine abnormalities, and thyroid disorders — to generate a personalised risk profile score.
+              </p>
+              <p>
+                Recurrent pregnancy loss affects approximately 1 in 100 couples. In 70–75% of cases, no specific cause is identified even after investigation. However, in 40%+ of cases, at least one treatable contributing factor is found. The most commonly identified treatable causes include antiphospholipid syndrome (APS), uterine abnormalities (septum, fibroids, polyps), thyroid dysfunction, chromosomal abnormalities in one partner, and immune system dysregulation.
+              </p>
+              <p>
+                This calculator does not diagnose the cause of your losses. Its purpose is to help you understand your risk level and prioritise the investigations most likely to yield actionable answers. Please use these results as a starting point for a conversation with your fertility specialist, not as a substitute for medical evaluation.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <CalculatorCrossLinks current="/risk-of-repeat-miscarriage-calculator" />
       <Locations />
       <Footer />
       <FloatingCTA />

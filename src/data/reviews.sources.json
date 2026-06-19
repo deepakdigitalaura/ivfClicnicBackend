@@ -5,9 +5,20 @@
   "refreshDays": 10,
   "minRating": 4,
   "sources": {
-    "brand": { "placeId": "", "listingUrl": "https://www.google.com/maps/search/?api=1&query=Bavishi+Fertility+Institute" },
-    "paldi": { "placeId": "", "listingUrl": "" },
+    "brand":              { "placeId": "", "listingUrl": "https://www.google.com/maps/search/?api=1&query=Bavishi+Fertility+Institute" },
+    "paldi":              { "placeId": "", "listingUrl": "" },
     "sindhu-bhavan-road": { "placeId": "", "listingUrl": "" },
-    "nikol": { "placeId": "", "listingUrl": "" }
+    "nikol":              { "placeId": "", "listingUrl": "" },
+    "ghatkopar":          { "placeId": "", "listingUrl": "" },
+    "thane":              { "placeId": "", "listingUrl": "" },
+    "vile-parle":         { "placeId": "", "listingUrl": "" },
+    "borivali":           { "placeId": "", "listingUrl": "" },
+    "vashi":              { "placeId": "", "listingUrl": "" },
+    "jetalpur-road":      { "placeId": "", "listingUrl": "" },
+    "lal-darwaja":        { "placeId": "", "listingUrl": "" },
+    "mirjapar":           { "placeId": "", "listingUrl": "" },
+    "kalubha-road":       { "placeId": "", "listingUrl": "" },
+    "nanikhodiyar":       { "placeId": "", "listingUrl": "" },
+    "shivpur":            { "placeId": "", "listingUrl": "" }
   }
 }

@@ -6,6 +6,7 @@ import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 /* ── WHO 2021 reference values ── */
 const WHO_REF = {
@@ -174,7 +175,94 @@ export function SemenAnalysisCalculatorPage() {
               ))}
             </div>
           </Reveal>
+          {/* Hero stats */}
+          <Reveal delay={0.22}>
+            <div className="mt-8 flex flex-wrap justify-center gap-4">
+              {[
+                { stat: "6", label: "Parameters analysed" },
+                { stat: "WHO 2021", label: "Latest reference values" },
+                { stat: "TMSC", label: "Total motile count calculated" },
+                { stat: "50%", label: "Infertility cases involve male factor" },
+              ].map((s) => (
+                <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                </div>
+              ))}
+            </div>
+          </Reveal>
         </div>
+      </section>
+
+      {/* Understanding Your Semen Analysis */}
+      <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
+        <Reveal>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Understanding Your Semen Analysis</h2>
+          <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
+            Each parameter tells a different story about male fertility. Here&apos;s what each one means.
+          </p>
+          <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "💧", title: "Volume & pH", desc: "Normal volume is ≥ 1.4 mL. Low volume may indicate retrograde ejaculation or blocked ejaculatory ducts. pH (7.2–8.0) reflects secretion from seminal vesicles and prostate." },
+              { emoji: "🔢", title: "Count & Concentration", desc: "Concentration ≥ 16 million/mL and total count ≥ 39 million per ejaculate are normal. Oligozoospermia (low count) has many treatable causes including hormonal imbalance and varicocele." },
+              { emoji: "🏃", title: "Motility", desc: "At least 42% of sperm should be moving (total motility) and 30% should move progressively forward. Poor motility (asthenozoospermia) reduces the chance of natural fertilisation." },
+              { emoji: "🔬", title: "Morphology", desc: "At least 4% normal forms (Kruger strict criteria) are required. Morphology reflects sperm DNA packaging quality. Teratozoospermia can affect fertilisation even with ICSI." },
+              { emoji: "🧬", title: "DNA & WBC", desc: "WBCs > 1 million/mL (leukocytospermia) may indicate infection or inflammation. Sperm DNA fragmentation (not in this calculator) is a separate test for cases with normal parameters but poor outcomes." },
+              { emoji: "💊", title: "Treatment Path", desc: "Results guide treatment: Mild issues may improve with lifestyle and supplements. Moderate issues often respond to medication. Severe cases may need ICSI, surgical retrieval, or donor sperm." },
+            ].map((c) => (
+              <div key={c.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+                <div className="text-2xl">{c.emoji}</div>
+                <h3 className="mt-4 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* WHO Reference Table */}
+      <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">WHO 2021 Reference Values at a Glance</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">
+              The 5th centile values from the WHO 2021 manual — the lowest normal values from fertile men.
+            </p>
+            <div className="mt-8 overflow-x-auto">
+              <table className="w-full border-collapse text-sm">
+                <thead>
+                  <tr>
+                    <th className="rounded-tl-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Parameter</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Lower Reference Limit</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Clinical Condition if Below</th>
+                    <th className="rounded-tr-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Impact</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {[
+                    { param: "Volume", ref: "≥ 1.4 mL", cond: "Hypospermia", impact: "Fewer sperm delivered to cervix" },
+                    { param: "pH", ref: "7.2 – 8.0", cond: "Abnormal secretions", impact: "Reflects seminal vesicle / prostate function" },
+                    { param: "Sperm Concentration", ref: "≥ 16 M/mL", cond: "Oligozoospermia", impact: "Reduced chance of natural conception" },
+                    { param: "Total Sperm Count", ref: "≥ 39 M/ejaculate", cond: "Oligozoospermia", impact: "Low absolute number of sperm" },
+                    { param: "Total Motility (PR + NP)", ref: "≥ 42%", cond: "Asthenozoospermia", impact: "Fewer sperm capable of reaching egg" },
+                    { param: "Progressive Motility", ref: "≥ 30%", cond: "Asthenozoospermia", impact: "Reduced forward movement efficiency" },
+                    { param: "Morphology (Kruger)", ref: "≥ 4% normal", cond: "Teratozoospermia", impact: "Affects fertilisation ability" },
+                    { param: "WBC / Leucocytes", ref: "< 1 M/mL", cond: "Leukocytospermia", impact: "Suggests infection or inflammation" },
+                    { param: "TMSC", ref: "≥ 9 M (IUI)", cond: "Poor IUI candidate if lower", impact: "Key metric for IUI suitability" },
+                  ].map((row, i) => (
+                    <tr key={row.param} className={i % 2 === 0 ? "bg-card" : "bg-[color:var(--ivory)]"}>
+                      <td className="px-5 py-3 font-semibold text-[color:var(--plum)]">{row.param}</td>
+                      <td className="px-5 py-3 font-mono text-sm text-[color:var(--plum)]/80">{row.ref}</td>
+                      <td className="px-5 py-3 text-xs text-orange-700 font-medium">{row.cond}</td>
+                      <td className="px-5 py-3 text-xs text-muted-foreground">{row.impact}</td>
+                    </tr>
+                  ))}
+                </tbody>
+              </table>
+            </div>
+            <p className="mt-4 text-xs text-muted-foreground">Source: WHO Laboratory Manual for the Examination and Processing of Human Semen, 6th Edition (2021)</p>
+          </div>
+        </Reveal>
       </section>
 
       <section className="container-px mx-auto max-w-[760px] py-10 md:py-14">
@@ -330,6 +418,73 @@ export function SemenAnalysisCalculatorPage() {
         </Reveal>
       </section>
 
+      {/* Patient Testimonial */}
+      <section className="container-px mx-auto max-w-3xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
+            <div className="text-4xl text-white/30">&ldquo;</div>
+            <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
+              My semen report said &apos;abnormal&apos; and I didn&apos;t even know what OAT syndrome meant. Entering my numbers into this tool told me exactly which parameters were affected — and the next steps helped me ask the right questions at my andrologist appointment. We did ICSI and now have twins.
+            </p>
+            <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
+              — Patient at Bavishi Fertility Institute
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      {/* Who Should Use */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
+            {[
+              { emoji: "📋", title: "Just received your semen report", desc: "Make sense of your results before — or as preparation for — your specialist appointment." },
+              { emoji: "🔄", title: "Repeating after lifestyle changes", desc: "Track improvement across reports after making dietary or lifestyle changes over 3–6 months." },
+              { emoji: "💑", title: "Couples investigating infertility", desc: "Male factor affects 50% of cases. This gives both partners a clearer picture from day one." },
+              { emoji: "💊", title: "Before starting IVF/ICSI", desc: "Understand whether your TMSC supports IUI, standard IVF, or whether ICSI is the recommended path." },
+              { emoji: "🔬", title: "Monitoring a known condition", desc: "Men with varicocele, hormonal treatment, or prior infection can track parameter improvements." },
+              { emoji: "🌱", title: "Proactive male health check", desc: "No fertility concerns yet? Understanding your baseline before trying is always a positive step." },
+            ].map((p) => (
+              <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                <span className="text-2xl">{p.emoji}</span>
+                <div>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                </div>
+              </div>
+            ))}
+          </div>
+        </Reveal>
+      </section>
+
+      {/* About This Tool */}
+      <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
+        <Reveal>
+          <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
+            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
+              <p>
+                The Semen Analysis Calculator compares your reported parameters against the WHO 2021 lower reference limits — the 5th centile values from fertile men (men who had fathered a child within the past 12 months) as published in the WHO Laboratory Manual for the Examination and Processing of Human Semen, 6th Edition.
+              </p>
+              <p>
+                In addition to individual parameter comparison, the calculator derives two key composite metrics: <strong>Total Sperm Count</strong> (Volume × Concentration) and <strong>TMSC — Total Motile Sperm Count</strong> (Volume × Concentration × Progressive Motility / 100), which is the gold-standard measure for IUI candidacy (≥ 9 million is generally required).
+              </p>
+              <p>
+                Standard andrological conditions are automatically identified: Oligozoospermia (low count), Asthenozoospermia (poor motility), Teratozoospermia (abnormal morphology), Leukocytospermia (elevated WBCs), and OAT Syndrome (all three O+A+T together). Azoospermia (zero sperm) is not currently evaluated in this tool.
+              </p>
+              <p>
+                Results are classified into four bands: Normal, Mild, Moderate, and Severe — with band-specific clinical next steps. This classification is for educational guidance only.
+              </p>
+              <p className="text-xs">
+                This calculator is for informational purposes only. Semen analysis must be interpreted by a qualified andrologist or fertility specialist in the context of full clinical history, repeat testing, and partner evaluation.
+              </p>
+            </div>
+          </div>
+        </Reveal>
+      </section>
+
+      <CalculatorCrossLinks current="/semen-analysis-calculator" />
       <Locations />
       <Footer />
       <FloatingCTA />

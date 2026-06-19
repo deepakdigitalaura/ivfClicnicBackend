@@ -100,7 +100,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     { n: "30,000+", l: "Successful pregnancies" },
     { n: "3,000+", l: "IVF cycles every year" },
     { n: "14", l: "Centres across 8 cities" },
-    { n: "5×", l: "National Fertility Award (2021–25)" },
+    { n: "6×", l: "National Fertility Award (2019–26)" },
   ],
   legacy: {
     eyebrow: "25+ Years of Legacy",
@@ -108,8 +108,8 @@ export const ABOUT_DEFAULTS: AboutData = {
   },
   milestones: [
     { y: "1990", t: "The foundation", d: "Establishment of an infertility hospital in Ahmedabad — the seed of what would become one of India's most trusted fertility networks." },
-    { y: "1998", t: "Bavishi Fertility Institute begins", d: "Dr. Himanshu & Dr. Falguni Bavishi establish Bavishi Fertility Institute (Test Tube Baby Clinic) in Ahmedabad — completing families since 1998." },
-    { y: "2002", t: "PGD introduced", d: "Started Preimplantation Genetic Diagnosis (PGD) — bringing advanced genetic screening to Indian fertility care." },
+    { y: "1998", t: "Bavishi Fertility Institute begins", d: "Dr. Himanshu & Dr. Falguni Bavishi establish Bavishi Fertility Institute (Test Tube Baby Clinic) in Ahmedabad. Preimplantation Genetic Diagnosis (PGD) also launched the same year — bringing advanced genetic screening to Indian fertility care from the very start." },
+    { y: "2002", t: "Test Tube Baby Fair", d: "Organised 'Testtube Balakono Melavado 2004' — a landmark gathering celebrating test-tube baby families and spreading awareness about IVF across Gujarat." },
     { y: "2005", t: "Full-service fertility institute", d: "Established a comprehensive fertility institute with complete facilities in Ahmedabad." },
     { y: "2006", t: "Andrology & Endoscopy Institute", d: "Launched a dedicated Andrology and Endoscopy Institute, expanding male infertility and minimally invasive diagnostics." },
     { y: "2007", t: "Semen bank established", d: "Started Santan Semen Bank — one of the early organised semen-banking services in the region." },
@@ -120,8 +120,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     { y: "2013", t: "Public awareness campaigns", d: "Launched 'Jan Jagruti Abhiyan' and 'Parivar Milan' — special awareness campaigns to support infertile couples and remove social stigma." },
     { y: "2014", t: "INSTAR founded", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in donor and surrogacy programmes." },
     { y: "2015", t: "Power Brand Award", d: "Recognised as a 'Power Brand' by IVF India — a testament to the institute's growing national reputation." },
-    { y: "2016", t: "Kolkata centre opens", d: "Established Bavishi Pratiksha Fertility Institute in Kolkata, expanding the network to eastern India." },
-    { y: "2017", t: "International recognition & authorship", d: "Received the 'Excellence in IVF' award (My FM) and 'Rose of Paracelsus' award (European Medical Association). Published 'Aapnu Adbhut Sarjan' (Gujarati) and 'Your Miracle in Making' (English)." },
+    { y: "2017", t: "National & international recognition", d: "Received the 'Excellence in IVF' award (My FM / Divya Bhaskar Group — Ahmedabad Institute was the first to receive it), the 'Rose of Paracelsus' award (European Medical Association), the IMA Gujarat 'Excellence in the Field of Medicine' award (Dr. Himanshu Bavishi — first IVF graduate recipient), and the Gujarat Chief Minister's 'Shreshtha' award to Dr. Himanshu & Dr. Falguni Bavishi for contributions to infertility treatment. Also published 'Aapnu Adbhut Sarjan' (Gujarati) and 'Your Miracle in Making' (English)." },
     { y: "2018", t: "Surat centre & national awards", d: "Started the Surat centre. Received 'Best IVF Clinic Chain in India' (Mid-Day) and 'Times Health Icon' award. The book 'Devna Didhela Mangine Lidhela' was adapted into a TV serial on infertility awareness." },
     { y: "2019", t: "Best IVF Chain — West", d: "Awarded 'Best IVF Chain in India – West' by The Economic Times. Expanded to Vadodara." },
     { y: "2020", t: "India's No.1 Fertility Clinic", d: "Ranked No.1 in India by Times of India National Survey. No.1 in Western India for five consecutive years (2016–2020). Expanded to Bhuj." },
@@ -130,6 +129,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     { y: "2023", t: "25 years completed", d: "Celebrated 25 years of completing families — a quarter century of pioneering IVF, national firsts, and 30,000+ successful pregnancies." },
     { y: "2024", t: "IVF Chain of the Year — West", d: "Received the 'IVF / Fertility Chain of the Year – West' award for the fourth time." },
     { y: "2025", t: "Nikol, Ahmedabad", d: "Opened the Nikol centre in east Ahmedabad — making expert fertility care accessible across the city." },
+    { y: "2026", t: "National Fertility Award — 6th time", d: "Received the 'Best IVF Chain in India – West' award by The Economic Times for the sixth consecutive year — reinforcing Bavishi Fertility Institute's position as the nation's most trusted fertility network." },
     { y: "Today", t: "14 centres, one family", d: "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." },
   ],
   trust: {
@@ -184,7 +184,7 @@ export const ABOUT_DEFAULTS: AboutData = {
       "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 14 centres. Discover our story, legacy and values.",
     ogTitle: "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1998",
     ogDescription:
-      "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 5 years running. The story of India's pioneering fertility institute.",
+      "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 6 years running. The story of India's pioneering fertility institute.",
     ogImage: "/assets/about-clinic.jpg",
   },
 };

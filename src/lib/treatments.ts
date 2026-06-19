@@ -190,7 +190,7 @@ export const ivf: Treatment = {
     h1Em: "In Vitro Fertilization at Bavishi Fertility Institute",
     tagline:
       "India's trusted IVF specialists since 1998 — 30,000+ successful pregnancies, Class 1000 IVF labs, and the Suraksha Kavach promise. Personalised, transparent and compassionate fertility care, every step of the way.",
-    badges: ["30,000+ Pregnancies", "Since 1998", "Class 1000 Labs", "National Fertility Award 5×"],
+    badges: ["30,000+ Pregnancies", "Since 1998", "Class 1000 Labs", "National Fertility Award 6×"],
     image: "/assets/ivf-icsi.png",
     imageAlt:
       "IVF / ICSI — sperm microinjection into an egg under the microscope at Bavishi Fertility Institute",

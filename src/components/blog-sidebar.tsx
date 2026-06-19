@@ -188,7 +188,7 @@ export function TrustSidebarCard() {
   return (
     <div className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
       <p className="text-[10px] font-bold uppercase tracking-widest text-[color:var(--plum)]/50">
-        Why Choose BFI
+        Why Choose Bavishi Fertility Institute
       </p>
       <ul className="mt-4 space-y-3">
         {TRUST_STATS.map((s) => (
