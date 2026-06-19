@@ -1694,13 +1694,13 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
             </p>
           </Reveal>
 
-          <Stagger className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-6" delay={0.3}>
+          <Stagger className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-2 sm:gap-6" delay={0.3}>
             {content.stats.map((x, i) => (
-              <StaggerItem key={x.l} className="text-center">
-                <div className="font-display text-3xl font-medium md:text-4xl">
+              <StaggerItem key={x.l} className="text-center min-w-0">
+                <div className="font-display text-lg font-medium whitespace-nowrap sm:text-2xl md:text-3xl lg:text-4xl">
                   <Counter to={x.v} suffix={x.s} />
                 </div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-white/60"><Editable path={`finalCta.stats.${i}.l`}>{x.l}</Editable></div>
+                <div className="mt-1 text-[10px] uppercase tracking-wider text-white/60 sm:text-xs"><Editable path={`finalCta.stats.${i}.l`}>{x.l}</Editable></div>
               </StaggerItem>
             ))}
           </Stagger>

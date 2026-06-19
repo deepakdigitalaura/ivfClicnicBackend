@@ -213,7 +213,7 @@ export const DOCTORS: Doctor[] = [
       "Author — 'Devna Didhela, Mangine Lidhela...' (Gujarati, 2011)",
       "Author — 'Vismitlo' (Gujarati, 2012)",
     ],
-    languages: ["English", "Hindi", "Gujarati"],
+    languages: ["English", "Hindi", "Gujarati", "Marathi"],
     sameAs: [],
     verified: true,
     visitsAllCentres: true,

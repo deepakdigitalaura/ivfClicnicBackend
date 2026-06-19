@@ -279,7 +279,7 @@ export function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?
     return () => cancelAnimationFrame(raf);
   }, [inView, to, duration]);
   return (
-    <span ref={ref}>
+    <span ref={ref} className="whitespace-nowrap">
       {val.toLocaleString()}
       {suffix}
     </span>
