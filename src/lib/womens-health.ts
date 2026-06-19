@@ -168,7 +168,7 @@ export type ServiceContent = {
   related: string[];
 };
 
-const MATERNITY_REVIEWER = "falguni-bavishi";
+const MATERNITY_REVIEWER = "binal-shah";
 
 export const SERVICE_CONTENT: Record<string, ServiceContent> = {
   /* ---------------------------------------------------------------- */

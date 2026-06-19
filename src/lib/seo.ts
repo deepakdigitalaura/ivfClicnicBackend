@@ -20,7 +20,7 @@ export const SITE = {
   alternateName: "Bavishi Fertility Institute",
   legalName: "Bavishi Fertility Institute",
   logo: "https://ivfclinic.com/logo.png",
-  foundingDate: "1984",
+  foundingDate: "1998",
   telephone: "+919712622288",
   /** Formatted phone for on-page display (canonical `telephone` is for tel:/schema). */
   telephoneDisplay: "+91 97126 22288",
@@ -48,6 +48,16 @@ export const SITE = {
     "National Fertility Award 2025",
     "Economic Times IVF Chain of the Year — West",
     "Bharat Excellence Award for IVF and Infertility Care",
+    "Best Test Tube Baby Clinic — 2004",
+    "Power Brand Award — IVF India (2015)",
+    "Excellence in IVF — Divya Bhaskar Group / My FM (2017)",
+    "Rose of Paracelsus Award — European Medical Association (2017)",
+    "Best IVF Clinic Chain in India — Mid-Day (2018)",
+    "Times Health Icon Award — Times of India (2018)",
+    "Best IVF Chain in India – West — The Economic Times (2019)",
+    "India's No.1 Fertility Clinic — TOI National Survey (2020)",
+    "No.1 in Western India — 5 consecutive years (2016–2020)",
+    "IVF / Fertility Chain of the Year – West (2024)",
   ],
 } as const;
 

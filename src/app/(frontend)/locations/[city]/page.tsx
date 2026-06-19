@@ -59,7 +59,7 @@ export async function generateMetadata(
     if (!centre) return {};
     const place = c.name && c.name !== centre.area ? `${centre.area}, ${c.name}` : centre.area;
     const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-    const description = `${centre.fullName} — IVF, ICSI & IUI with senior doctors since 1984. ${centre.address}. Book a free consultation.`;
+    const description = `${centre.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${centre.address}. Book a free consultation.`;
     return {
       title,
       description,
@@ -70,7 +70,7 @@ export async function generateMetadata(
 
   const count = centresForCity(c.slug).length || (await getPublishedCentresForCity(c.slug)).length;
   const title = `Best IVF Centre in ${c.name} — Bavishi Fertility Institute`;
-  const description = `Looking for the best IVF centre in ${c.name}? Bavishi Fertility Institute offers IVF, ICSI & IUI across ${count} ${count === 1 ? "centre" : "centres"} with Class 1000 labs and senior doctors since 1984.`;
+  const description = `Looking for the best IVF centre in ${c.name}? Bavishi Fertility Institute offers IVF, ICSI & IUI across ${count} ${count === 1 ? "centre" : "centres"} with Class 1000 labs and senior doctors since 1998.`;
   return {
     title,
     description,

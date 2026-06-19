@@ -225,7 +225,7 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "The four small highlights (label + value). Leave empty to use the built-in set." },
           fields: [
             { name: "k", type: "text", required: true, label: "Label", admin: { description: "Small caption, e.g. 'Legacy'." } },
-            { name: "v", type: "text", required: true, label: "Value", admin: { description: "Value, e.g. '40+ Years'." } },
+            { name: "v", type: "text", required: true, label: "Value", admin: { description: "Value, e.g. '25+ Years'." } },
           ],
         },
         {
@@ -238,7 +238,7 @@ const SECTION_FIELDS: Field[] = [
         {
           type: "row",
           fields: [
-            { name: "sinceValue", type: "text", label: "Floating Chip — Title", admin: { width: "50%", description: "e.g. 'Since 1983'." } },
+            { name: "sinceValue", type: "text", label: "Floating Chip — Title", admin: { width: "50%", description: "e.g. 'Since 1998'." } },
             { name: "sinceLabel", type: "text", label: "Floating Chip — Caption", admin: { width: "50%", description: "e.g. 'Pioneering fertility care'." } },
           ],
         },

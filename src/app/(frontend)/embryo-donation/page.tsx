@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "Embryo Donation Treatment — Donor Embryos at Bavishi Fertility Institute",
       description:
-        "How donor-embryo treatment works when both eggs and sperm are needed, who needs it, and how donors are screened. Trusted fertility specialists since 1984.",
+        "How donor-embryo treatment works when both eggs and sperm are needed, who needs it, and how donors are screened. Trusted fertility specialists since 1998.",
       url: t.href,
       type: "article",
       images: [t.meta.ogImage],

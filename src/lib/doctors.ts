@@ -152,7 +152,7 @@ function cityDoctor(opts: {
       opts.shortBio ??
       `${opts.name} is part of the Bavishi Fertility Institute fertility team in ${opts.city}.`,
     bio: opts.bio ?? [
-      `${opts.name} is a fertility specialist with Bavishi Fertility Institute in ${opts.city}, supporting couples through evaluation and assisted-reproduction care backed by the institute's four-decade expertise.`,
+      `${opts.name} is a fertility specialist with Bavishi Fertility Institute in ${opts.city}, supporting couples through evaluation and assisted-reproduction care backed by the institute's 25-year expertise.`,
     ],
     knowsAbout: opts.knowsAbout ?? ["In Vitro Fertilization", "Fertility Treatment"],
     alumniOf: opts.alumniOf ?? [],
@@ -184,7 +184,7 @@ export const DOCTORS: Doctor[] = [
     shortBio:
       "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
     bio: [
-      "Dr. Himanshu Bavishi founded Bavishi Fertility Institute in 1984 and has since helped pioneer assisted reproduction in India. He has led the institute's growth into a national network credited with 30,000+ pregnancies.",
+      "Dr. Himanshu Bavishi founded Bavishi Fertility Institute in 1998 and has since helped pioneer assisted reproduction in India. He has led the institute's growth into a national network credited with 30,000+ pregnancies.",
       "A pioneer and leader in infertility and IVF, he is widely respected for the reputation of a doctor with a 'golden hand' — bringing positive results in the most difficult cases — and treats couples from across India and overseas with excellent outcomes.",
       "His clinical focus spans customised ovarian-stimulation protocols, ICSI, and safe-stimulation strategies designed to avoid severe OHSS. He is a frequent speaker, invited faculty at national and regional conferences, and an educator on responsible, transparent fertility care.",
     ],
@@ -208,6 +208,10 @@ export const DOCTORS: Doctor[] = [
     awards: [
       "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
       "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat",
+    ],
+    publications: [
+      "Author — 'Devna Didhela, Mangine Lidhela...' (Gujarati, 2011)",
+      "Author — 'Vismitlo' (Gujarati, 2012)",
     ],
     languages: ["English", "Hindi", "Gujarati"],
     sameAs: [],
@@ -297,7 +301,8 @@ export const DOCTORS: Doctor[] = [
       "Advanced reproductive techniques — HART Institute, Japan",
     ],
     publications: [
-      "Author — 'Your Miracle in Making: A Couple's Guide to Pregnancy'",
+      "Author — 'Aapnu Adbhut Sarjan' (Gujarati, 2017)",
+      "Author — 'Your Miracle in Making: A Couple's Guide to Pregnancy' (English, 2017)",
     ],
     languages: ["English", "Hindi", "Gujarati"],
     sameAs: [],
@@ -340,7 +345,8 @@ export const DOCTORS: Doctor[] = [
       "Advanced reproductive techniques — HART Institute, Japan",
     ],
     publications: [
-      "Co-author — 'Your Miracle in Making: A Couple's Guide to Pregnancy'",
+      "Co-author — 'Aapnu Adbhut Sarjan' (Gujarati, 2017)",
+      "Co-author — 'Your Miracle in Making: A Couple's Guide to Pregnancy' (English, 2017)",
     ],
     languages: ["English", "Hindi", "Gujarati"],
     sameAs: [],
@@ -454,27 +460,6 @@ export const DOCTORS: Doctor[] = [
       "Known for her empathetic attitude towards patients, she offers advanced treatments such as IVF, ICSI and egg freezing.",
     ],
     knowsAbout: ["In Vitro Fertilization", "Intracytoplasmic Sperm Injection", "Fertility Preservation", "Female Infertility"],
-  }),
-  cityDoctor({
-    slug: "jayna-unadkat", name: "Dr. Jayna Unadkat", image: "/assets/doctors/Dr.-Jayna-Unadkat-221x300.webp",
-    city: "Vadodara", citySlug: "vadodara", locations: ["jetalpur-road"],
-    credentials: "MBBS, DGO, FRM (Fellowship in Reproductive Medicine)", experienceLabel: "8+ yrs", experienceYears: 8,
-    specialty: "Reproductive Medicine & IVF", role: "IVF Specialist",
-    medicalSpecialty: ["ReproductiveMedicine", "Gynecology", "Fertility"],
-    shortBio: "Reproductive medicine specialist in Vadodara with a patient-centred, scientifically-grounded approach to complex infertility cases.",
-    bio: [
-      "Dr. Jayna Unadkat is a reproductive medicine specialist recognised for her patient-centred and scientifically-grounded approach to infertility management.",
-      "She has particular expertise in complex cases including PCOS, endometriosis, diminished ovarian reserve and unsuccessful IVF cycles, alongside advanced donor and fertility-preservation procedures.",
-    ],
-    knowsAbout: ["In Vitro Fertilization", "PCOS", "Endometriosis", "Poor Ovarian Reserve", "Fertility Preservation"],
-    memberOf: [
-      "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
-      "Indian Fertility Society (IFS)",
-      "European Society of Human Reproduction and Embryology (ESHRE)",
-    ],
-    training: [
-      "Certificate Course in Ultrasound in Pregnancy — FOGSI in association with the Fetal Medicine Foundation, India",
-    ],
   }),
   // Bhuj
   cityDoctor({

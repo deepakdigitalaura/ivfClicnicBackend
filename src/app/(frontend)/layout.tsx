@@ -16,11 +16,11 @@ export const metadata: Metadata = {
     template: "%s · Bavishi Fertility Centre",
   },
   description:
-    "Premium fertility care across 15 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI, and personalised treatment plans by leading specialists.",
+    "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI, and personalised treatment plans by leading specialists.",
   openGraph: {
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
-      "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 25+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     type: "website",
     images: [OG_IMAGE],
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
-      "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 25+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     images: [OG_IMAGE],
   },
 };

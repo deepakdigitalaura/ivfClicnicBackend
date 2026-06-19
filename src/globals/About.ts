@@ -91,7 +91,7 @@ const ABOUT_FIELDS: Field[] = [
       name: "legacy",
       type: "group",
       label: "Legacy Timeline Heading",
-      admin: { description: "The '40+ Years of Legacy' section heading. Leave empty to use the default." },
+      admin: { description: "The '25+ Years of Legacy' section heading. Leave empty to use the default." },
       fields: [
         { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
@@ -103,7 +103,7 @@ const ABOUT_FIELDS: Field[] = [
       labels: { singular: "Milestone", plural: "Milestones" },
       admin: { description: "The history timeline. Leave empty to use the built-in milestones." },
       fields: [
-        { name: "y", type: "text", required: true, label: "Year", admin: { description: "Year or label, e.g. '1984' or 'Today'." } },
+        { name: "y", type: "text", required: true, label: "Year", admin: { description: "Year or label, e.g. '1998' or 'Today'." } },
         { name: "t", type: "text", required: true, label: "Title", admin: { description: "Milestone title." } },
         { name: "d", type: "textarea", required: true, label: "Description", admin: { description: "Milestone description." } },
       ],

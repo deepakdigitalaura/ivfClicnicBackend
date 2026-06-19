@@ -147,15 +147,15 @@ export const CENTRES: Centre[] = [
     doctors: ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"],
     treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation", "pgt"],
     faqs: [
-      { q: "Where is the Bavishi Fertility Institute Paldi IVF centre?", a: "It is at Paldi Cross Roads — opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi, Ahmedabad – 380007. This is Bavishi Fertility Institute's head office and flagship lab, established in 1984." },
+      { q: "Where is the Bavishi Fertility Institute Paldi IVF centre?", a: "It is at Paldi Cross Roads — opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi, Ahmedabad – 380007. This is Bavishi Fertility Institute's head office and flagship lab, established in 1998." },
       { q: "What are the timings at the Paldi centre?", a: "The Paldi centre is open Monday to Saturday, 9:00 am to 7:00 pm. Appointments are recommended; call +91 97126 22288 to book." },
       { q: "Which areas does the Paldi centre serve?", a: "Paldi conveniently serves patients from Paldi, Vasna, Ambawadi, Ellisbridge, Vejalpur and Maninagar, as well as families travelling from across Ahmedabad and Gujarat." },
       { q: "What facilities are available at Paldi?", a: "A Class 1000 embryology & IVF lab, andrology lab, in-house diagnostics and sonography, a day-care operation theatre, counselling and nutrition suites, and an on-site pharmacy — everything under one roof." },
-      { q: "Why choose the Paldi centre for IVF?", a: "As the flagship head office, Paldi offers the institute's most advanced lab, senior promoter doctors and four decades of experience — combined with transparent pricing, EMI options and the Suraksha Kavach package." },
+      { q: "Why choose the Paldi centre for IVF?", a: "As the flagship head office, Paldi offers the institute's most advanced lab, senior promoter doctors and over two decades of experience — combined with transparent pricing, EMI options and the Suraksha Kavach package." },
     ],
     sameAs: [],
     intro:
-      "Paldi is where Bavishi Fertility Institute began in 1984 — and remains our flagship head office. This centre houses our most advanced Class 1000 embryology lab, senior promoter doctors and the full spectrum of fertility services under one roof, in the heart of west Ahmedabad.",
+      "Paldi is where Bavishi Fertility Institute began in 1998 — and remains our flagship head office. This centre houses our most advanced Class 1000 embryology lab, senior promoter doctors and the full spectrum of fertility services under one roof, in the heart of west Ahmedabad.",
     gallery: [
       { src: "/assets/centres/paldi-ot.webp", alt: "Bavishi Fertility Institute Paldi — operation theatre & advanced equipment" },
       { src: "/assets/centres/paldi-reception.webp", alt: "Bavishi Fertility Institute Paldi — reception & front desk" },
@@ -312,7 +312,7 @@ export const CENTRES: Centre[] = [
     ],
     sameAs: [],
     intro:
-      "Our Ghatkopar centre is Bavishi Fertility Institute's flagship facility in Mumbai, bringing four decades of fertility expertise to the city's central and eastern suburbs. Conveniently located on M.G. Road opposite Kotak Mahindra Bank — minutes from Ghatkopar station — it offers the full spectrum of IVF, ICSI, IUI and infertility care under one roof.",
+      "Our Ghatkopar centre is Bavishi Fertility Institute's flagship facility in Mumbai, bringing over two decades of fertility expertise to the city's central and eastern suburbs. Conveniently located on M.G. Road opposite Kotak Mahindra Bank — minutes from Ghatkopar station — it offers the full spectrum of IVF, ICSI, IUI and infertility care under one roof.",
     gallery: sharedGallery("Ghatkopar"),
     built: true,
   },
@@ -804,11 +804,11 @@ export const CITIES: City[] = [
     heroImage: "/assets/centres/paldi-waiting.webp",
     hero360Url: "https://www.google.com/maps/embed?pb=!4v1780725289034!6m8!1m7!1sCAoSHENJQUJJaEFEeWM1VXZ6ZGI4R2U4cTNVQUFmWWI.!2m2!1d23.01327543356341!2d72.56405585909516!3f43.197350683590116!4f-11.407427687968791!5f0.4000000000000002",
     intro: [
-      "For four decades, couples across Gujarat have turned to Bavishi Fertility Institute for honest counselling, advanced IVF technology and a genuinely caring team. From your first consultation to the moment you hold your baby, our Ahmedabad centres combine clinical excellence with the warmth of a family-led institute.",
+      "For over two decades, couples across Gujarat have turned to Bavishi Fertility Institute for honest counselling, advanced IVF technology and a genuinely caring team. From your first consultation to the moment you hold your baby, our Ahmedabad centres combine clinical excellence with the warmth of a family-led institute.",
       "Whether you are exploring IVF, ICSI, IUI, fertility preservation or treatment for male or female infertility, you will find every service — diagnostics, embryology lab, surgery and maternity care — under one roof, at a location convenient to you.",
     ],
     faqs: [
-      { q: "Which is the best IVF centre in Ahmedabad?", a: "Bavishi Fertility Institute is widely regarded as one of Ahmedabad's most trusted IVF centres — operating in the city since 1984, with Class 1000 labs, senior promoter doctors and 30,000+ successful pregnancies nationwide." },
+      { q: "Which is the best IVF centre in Ahmedabad?", a: "Bavishi Fertility Institute is widely regarded as one of Ahmedabad's most trusted IVF centres — operating in the city since 1998, with Class 1000 labs, senior promoter doctors and 30,000+ successful pregnancies nationwide." },
       { q: "How many Bavishi Fertility Institute IVF centres are there in Ahmedabad?", a: "Three — at Paldi (head office), Sindhu Bhavan Road and Nikol — so expert fertility care is always close to home." },
       { q: "Where is the Bavishi Fertility Institute Paldi IVF centre located?", a: "Opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi, Ahmedabad – 380007. It is the institute's head office and flagship lab." },
       { q: "What are the consultation timings in Ahmedabad?", a: "Paldi is open Mon–Sat, 9:00 am–7:00 pm; Sindhu Bhavan Road Mon–Sat, 10:30 am–7:00 pm; and Nikol Mon–Sat, 10:00 am–7:00 pm. Appointments are recommended." },
@@ -829,11 +829,11 @@ export const CITIES: City[] = [
     heroImage: "/assets/Locations/Mumbai.png",
     hero360Url: "https://www.google.com/maps/embed?pb=!4v1780725760082!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRHlrdE9iX2dF!2m2!1d19.07851750759122!2d72.90374191572629!3f331.0839116483176!4f-6.84920058783446!5f0.4000000000000002",
     intro: [
-      "For couples across Mumbai and Navi Mumbai, Bavishi Fertility Institute brings four decades of pioneering IVF experience together with genuinely compassionate care. From your first consultation to the moment you hold your baby, our Mumbai centres combine clinical excellence with the warmth of a family-led institute.",
+      "For couples across Mumbai and Navi Mumbai, Bavishi Fertility Institute brings over two decades of pioneering IVF experience together with genuinely compassionate care. From your first consultation to the moment you hold your baby, our Mumbai centres combine clinical excellence with the warmth of a family-led institute.",
       "With centres in Ghatkopar, Thane, Vile Parle, Borivali and Vashi, expert fertility care is always close to home. Whether you are exploring IVF, ICSI, IUI, fertility preservation or treatment for male or female infertility, you will find advanced diagnostics, embryology and counselling at a location convenient to you.",
     ],
     faqs: [
-      { q: "Which is the best IVF centre in Mumbai?", a: "Bavishi Fertility Institute is among Mumbai's most trusted IVF centres, with a family-led legacy since 1984, Class 1000 labs, experienced specialists and 30,000+ successful pregnancies nationwide." },
+      { q: "Which is the best IVF centre in Mumbai?", a: "Bavishi Fertility Institute is among Mumbai's most trusted IVF centres, with a family-led legacy since 1998, Class 1000 labs, experienced specialists and 30,000+ successful pregnancies nationwide." },
       { q: "How many Bavishi Fertility Institute centres are there in Mumbai?", a: "Five — at Ghatkopar, Thane, Vile Parle, Borivali and Vashi (Navi Mumbai) — so expert fertility care is always close to home." },
       { q: "Do you offer IVF treatment in Navi Mumbai?", a: "Yes. Our Vashi centre at Mahavir Centre, Sector 17, serves Navi Mumbai — including Nerul, Belapur, Kharghar and Sanpada." },
       { q: "What are the consultation timings in Mumbai?", a: "Ghatkopar is open Mon–Sat, 9:00 am–9:00 pm. Thane, Vile Parle, Borivali and Vashi run dedicated consultation slots — please call the centre to confirm your time and book." },
@@ -1027,7 +1027,7 @@ export const CITY_DOCTORS: Record<string, string[]> = {
   ahmedabad: ["falguni-bavishi", "parth-bavishi", "janki-bavishi", "binal-shah", "jaydeep-patel"],
   mumbai: ["suman-singh", "nilesh-jain", "priyanka-sinha"],
   surat: ["deep-gajiwala"],
-  vadodara: ["mita-shah", "jayna-unadkat"],
+  vadodara: ["mita-shah"],
   bhuj: ["surbhi-vegad"],
   anand: ["chetna-vyas", "rakhee-patel"],
   bhavnagar: ["deepali-pandya"],

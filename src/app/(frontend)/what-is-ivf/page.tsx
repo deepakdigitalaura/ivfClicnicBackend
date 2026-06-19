@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "IVF Treatment — In Vitro Fertilization at Bavishi Fertility Institute",
       description:
-        "How IVF works, step by step. India's trusted IVF specialists since 1984 — 30,000+ successful pregnancies, Class 1000 IVF labs, Suraksha Kavach assurance.",
+        "How IVF works, step by step. India's trusted IVF specialists since 1998 — 30,000+ successful pregnancies, Class 1000 IVF labs, Suraksha Kavach assurance.",
       url: t.href,
       type: "article",
       images: [t.meta.ogImage],

@@ -172,7 +172,7 @@ export const ivf: Treatment = {
   meta: {
     title: "IVF Treatment (In Vitro Fertilization) — Bavishi Fertility Institute",
     description:
-      "What is IVF? Learn how In Vitro Fertilization works step by step, who needs it, success factors and costs. India's trusted IVF specialists since 1984 — 30,000+ pregnancies, Class 1000 labs.",
+      "What is IVF? Learn how In Vitro Fertilization works step by step, who needs it, success factors and costs. India's trusted IVF specialists since 1998 — 30,000+ pregnancies, Class 1000 labs.",
     ogImage: "/assets/hero-mother-baby1.png",
   },
   procedure: {
@@ -189,8 +189,8 @@ export const ivf: Treatment = {
     h1: "IVF Treatment",
     h1Em: "In Vitro Fertilization at Bavishi Fertility Institute",
     tagline:
-      "India's trusted IVF specialists since 1984 — 30,000+ successful pregnancies, Class 1000 IVF labs, and the Suraksha Kavach promise. Personalised, transparent and compassionate fertility care, every step of the way.",
-    badges: ["30,000+ Pregnancies", "Since 1984", "Class 1000 Labs", "National Fertility Award 5×"],
+      "India's trusted IVF specialists since 1998 — 30,000+ successful pregnancies, Class 1000 IVF labs, and the Suraksha Kavach promise. Personalised, transparent and compassionate fertility care, every step of the way.",
+    badges: ["30,000+ Pregnancies", "Since 1998", "Class 1000 Labs", "National Fertility Award 5×"],
     image: "/assets/ivf-icsi.png",
     imageAlt:
       "IVF / ICSI — sperm microinjection into an egg under the microscope at Bavishi Fertility Institute",
@@ -203,7 +203,7 @@ export const ivf: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — pioneering IVF clinic in India and running Class 1000 embryology labs.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — pioneering IVF clinic in India and running Class 1000 embryology labs.",
     },
   },
   benefits: {
@@ -306,7 +306,7 @@ export const ivf: Treatment = {
       { icon: Microscope, t: "ICSI for All", d: "Microinjection for every couple gives the maximum chance of fertilisation and minimises the risk of total fertilisation failure." },
       { icon: Sparkles, t: "Customised Protocols", d: "Tailor-made stimulation and our 'trigger it right' strategy retrieve the best number of best-quality eggs, safely." },
       { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and peace of mind on your journey to parenthood." },
-      { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1984 and the National Fertility Award for five consecutive years (2021–2025)." },
+      { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award for five consecutive years (2021–2025)." },
       { icon: HeartPulse, t: "One-Stop Care", d: "Tests, surgery, embryology and treatment under one roof — with safe-stimulation protocols designed to avoid severe OHSS." },
     ],
   },
@@ -366,7 +366,7 @@ export const ivf: Treatment = {
     { q: "Is egg retrieval painful?", a: "No. Egg retrieval is a short, painless procedure done through the vagina under light sedation — with no cut and no stitch. Most patients go home within about two hours." },
     { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a free consultation for a personalised estimate." },
     { q: "Does Bavishi Fertility Institute offer a money-back guarantee for IVF?", a: "Yes — through the Suraksha Kavach programme, which provides financial protection and assurance on your fertility journey. Speak to our team to see if you qualify." },
-    { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1984 across 15 centres in 8 cities, with 30,000+ successful pregnancies and the National Fertility Award for five consecutive years." },
+    { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 30,000+ successful pregnancies and the National Fertility Award for five consecutive years." },
     { q: "What lifestyle changes should I make before starting IVF?", a: "Focus on a healthy lifestyle — a balanced diet, regular exercise, maintaining a healthy weight, and avoiding smoking and excessive alcohol. Your specialist will give you any additional, personalised advice during your consultation." },
     { q: "Are there any dietary recommendations during IVF?", a: "There are no strict restrictions, but a balanced diet rich in fruits, vegetables, whole grains and lean proteins is recommended, along with good hydration. Follow any specific guidance your clinic provides for your treatment." },
     { q: "What is embryo grading?", a: "Embryo grading assesses the quality of embryos based on their appearance and development. Higher-grade embryos are more likely to implant successfully, which is why our embryologists select the best-quality embryo(s) for transfer." },
@@ -410,7 +410,7 @@ const STD_PREP = [
 const WHY_BAVISHI_FERTILITY_INSTITUTE: IconCard[] = [
   { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting your embryos at every moment." },
   { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
-  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1984 and the National Fertility Award for five consecutive years (2021–2025)." },
+  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award for five consecutive years (2021–2025)." },
   { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and peace of mind on your journey." },
   { icon: HeartPulse, t: "One-Stop Care", d: "Tests, surgery, embryology and treatment under one roof, with transparent, honest counselling." },
   { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
@@ -447,7 +447,7 @@ export const ivfFailure: Treatment = {
     h1Em: "A systematic path forward at Bavishi Fertility Institute",
     tagline:
       "A failed cycle is not the end of the road. At Bavishi Fertility Institute we analyse each stage of the previous cycle to understand what happened — and then build a clearer, more personalised plan for your next attempt.",
-    badges: ["Stage-by-stage analysis", "Since 1984", "Class 1000 Labs", "Advanced diagnostics"],
+    badges: ["Stage-by-stage analysis", "Since 1998", "Class 1000 Labs", "Advanced diagnostics"],
     image: "/assets/treatments/Ivf-Failure.png",
     imageAlt: "A hopeful couple — moving forward after a failed IVF cycle with Bavishi Fertility Institute",
   },
@@ -574,7 +574,7 @@ export const iui: Treatment = {
   meta: {
     title: "IUI Treatment (Intrauterine Insemination) — Bavishi Fertility Institute",
     description:
-      "What is IUI? Learn how intrauterine insemination works, who it suits, success rates and what to expect. A simple, less invasive fertility treatment at Bavishi Fertility Institute, trusted since 1984.",
+      "What is IUI? Learn how intrauterine insemination works, who it suits, success rates and what to expect. A simple, less invasive fertility treatment at Bavishi Fertility Institute, trusted since 1998.",
     ogImage: "/assets/hero-mother-baby1.png",
   },
   procedure: {
@@ -592,7 +592,7 @@ export const iui: Treatment = {
     h1Em: "Intrauterine Insemination at Bavishi Fertility Institute",
     tagline:
       "A simple, less invasive and more affordable fertility treatment. At the time of ovulation, specially prepared sperm is placed directly into the uterus to improve the chance of conception.",
-    badges: ["Simple & non-surgical", "Since 1984", "Less invasive than IVF", "Personalised care"],
+    badges: ["Simple & non-surgical", "Since 1998", "Less invasive than IVF", "Personalised care"],
     image: "/assets/treatments/IUI.png",
     imageAlt: "Intrauterine insemination (IUI) at Bavishi Fertility Institute",
   },
@@ -723,7 +723,7 @@ export const icsi: Treatment = {
   meta: {
     title: "ICSI Treatment (Intracytoplasmic Sperm Injection) — Bavishi Fertility Institute",
     description:
-      "What is ICSI? Learn how a single sperm is injected into an egg to overcome male-factor infertility and fertilisation failure. Performed in Class 1000 labs at Bavishi Fertility Institute since 1984.",
+      "What is ICSI? Learn how a single sperm is injected into an egg to overcome male-factor infertility and fertilisation failure. Performed in Class 1000 labs at Bavishi Fertility Institute since 1998.",
     ogImage: "/assets/ivf-icsi.png",
   },
   procedure: {
@@ -741,7 +741,7 @@ export const icsi: Treatment = {
     h1Em: "Intracytoplasmic Sperm Injection at Bavishi Fertility Institute",
     tagline:
       "The technique where just one sperm is needed to fertilise one egg. ICSI overcomes male-factor infertility and previous fertilisation failure — performed in our Class 1000 labs by experienced embryologists.",
-    badges: ["One sperm per egg", "Class 1000 Labs", "Since 1984", "Skilled embryology"],
+    badges: ["One sperm per egg", "Class 1000 Labs", "Since 1998", "Skilled embryology"],
     image: "/assets/treatments/ICSI.png",
     imageAlt: "ICSI — a single sperm being microinjected into an egg at Bavishi Fertility Institute",
   },
@@ -1628,7 +1628,7 @@ export const eggDonation: Treatment = {
   meta: {
     title: "Egg Donation Treatment (Oocyte Donation) — Bavishi Fertility Institute",
     description:
-      "What is egg donation? How oocyte donation works, who needs it, donor screening and success factors. Young screened donors, Class 1000 labs, India's trusted fertility specialists since 1984.",
+      "What is egg donation? How oocyte donation works, who needs it, donor screening and success factors. Young screened donors, Class 1000 labs, India's trusted fertility specialists since 1998.",
     ogImage: "/assets/donor services/Egg-donation.png",
   },
   procedure: {
@@ -1645,8 +1645,8 @@ export const eggDonation: Treatment = {
     h1: "Egg Donation Treatment",
     h1Em: "Oocyte Donation at Bavishi Fertility Institute",
     tagline:
-      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1984 — Class 1000 IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
-    badges: ["Young Screened Donors", "Since 1984", "Class 1000 Labs", "ART Act Compliant"],
+      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1998 — Class 1000 IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
+    badges: ["Young Screened Donors", "Since 1998", "Class 1000 Labs", "ART Act Compliant"],
     image: "/assets/donor services/Egg-donation.png",
     imageAlt: "Egg donation (oocyte donation) at Bavishi Fertility Institute — a hopeful mother-to-be",
   },
@@ -1658,7 +1658,7 @@ export const eggDonation: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — running Class 1000 embryology labs and well-regulated, ethical donor programmes.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — running Class 1000 embryology labs and well-regulated, ethical donor programmes.",
     },
   },
   benefits: {
@@ -1723,7 +1723,7 @@ export const eggDonation: Treatment = {
   whyUs: {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for egg donation" },
     items: [
-      { icon: Award, t: "Trusted Since 1984", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
       { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Advanced embryology labs and ICSI expertise for the best chance with every donor egg." },
       { icon: ShieldCheck, t: "Rigorously Screened Donors", d: "Young donors cleared on medical, genetic, psychological and health screening before matching." },
       { icon: Layers, t: "Fresh or Frozen Donors", d: "Access to fresh donors and a vitrified donor-egg bank for immediate treatment." },
@@ -1795,7 +1795,7 @@ export const spermDonation: Treatment = {
   meta: {
     title: "Donor Sperm Treatment (Sperm Donation) — Bavishi Fertility Institute",
     description:
-      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. Large screened donor pool, no waiting, trusted since 1984.",
+      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. Large screened donor pool, no waiting, trusted since 1998.",
     ogImage: "/assets/donor services/Sperm-dontation.png",
   },
   procedure: {
@@ -1813,7 +1813,7 @@ export const spermDonation: Treatment = {
     h1Em: "at Bavishi Fertility Institute",
     tagline:
       "When the partner's sperm cannot be used, carefully screened donor sperm offers a clear path to parenthood — through IUI or IVF–ICSI. A large pool of screened frozen donors means minimal waiting, with complete confidentiality.",
-    badges: ["Large Screened Donor Pool", "No Waiting Time", "Since 1984", "ART Act Compliant"],
+    badges: ["Large Screened Donor Pool", "No Waiting Time", "Since 1998", "ART Act Compliant"],
     image: "/assets/donor services/Sperm-dontation.png",
     imageAlt: "Sperm donation (donor sperm treatment) at Bavishi Fertility Institute",
   },
@@ -1825,7 +1825,7 @@ export const spermDonation: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — with a large, well-regulated donor-sperm programme.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — with a large, well-regulated donor-sperm programme.",
     },
   },
   benefits: {
@@ -1879,7 +1879,7 @@ export const spermDonation: Treatment = {
   whyUs: {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for sperm donation" },
     items: [
-      { icon: Award, t: "Trusted Since 1984", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
       { icon: Layers, t: "Large Donor Pool", d: "A large bank of frozen, screened donor sperm ready for use — no long waiting times." },
       { icon: ShieldCheck, t: "Rigorously Screened Donors", d: "Donors cleared on medical, genetic and psychological screening, with semen analysis and infection testing." },
       { icon: Sparkles, t: "Careful Matching", d: "Matched on height, build, complexion, eye colour, ethnicity and education wherever possible." },
@@ -1951,7 +1951,7 @@ export const embryoDonation: Treatment = {
   meta: {
     title: "Embryo Donation Treatment (Donor Embryo) — Bavishi Fertility Institute",
     description:
-      "What is embryo donation? How donor-embryo treatment works when both eggs and sperm are needed, who needs it, donor screening and success factors. Trusted fertility specialists since 1984.",
+      "What is embryo donation? How donor-embryo treatment works when both eggs and sperm are needed, who needs it, donor screening and success factors. Trusted fertility specialists since 1998.",
     ogImage: "/assets/donor services/Embryo-dontation.png",
   },
   procedure: {
@@ -1969,7 +1969,7 @@ export const embryoDonation: Treatment = {
     h1Em: "Donor Embryos at Bavishi Fertility Institute",
     tagline:
       "When both eggs and sperm are needed, embryo donation offers a single, compassionate path to pregnancy. Embryos created from young, screened donors — and you carry and deliver your baby yourself.",
-    badges: ["Screened Donor Embryos", "Carry Your Own Pregnancy", "Since 1984", "ART Act Compliant"],
+    badges: ["Screened Donor Embryos", "Carry Your Own Pregnancy", "Since 1998", "ART Act Compliant"],
     image: "/assets/donor services/Embryo-dontation.png",
     imageAlt: "Embryo donation (donor embryo treatment) at Bavishi Fertility Institute",
   },
@@ -1981,7 +1981,7 @@ export const embryoDonation: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — with well-regulated egg, sperm and embryo donor programmes.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — with well-regulated egg, sperm and embryo donor programmes.",
     },
   },
   benefits: {
@@ -2033,7 +2033,7 @@ export const embryoDonation: Treatment = {
   whyUs: {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for embryo donation" },
     items: [
-      { icon: Award, t: "Trusted Since 1984", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
       { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Advanced embryology labs where donor embryos are cultured and transferred with precision." },
       { icon: ShieldCheck, t: "Screened Donor Embryos", d: "Embryos from healthy, genetically tested and medically screened egg and sperm donors." },
       { icon: Layers, t: "Ready Donor Pathway", d: "An established donor programme means donor embryos are generally available without long waits." },
@@ -2099,7 +2099,7 @@ export const embryoDonation: Treatment = {
  * ===================================================================== */
 const BFI_ASIDE = {
   title: "About Bavishi Fertility Institute",
-  body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — running Class 1000 embryology labs.",
+  body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — running Class 1000 embryology labs.",
 };
 
 const DEFAULT_COST = {
@@ -2139,7 +2139,7 @@ export const oligospermia = defineTreatment({
   meta: {
     title: "Low Sperm Count (Oligospermia) Treatment — Bavishi Fertility Institute",
     description:
-      "What causes a low sperm count (oligospermia), how it is diagnosed and treated — from lifestyle and medical therapy to IUI, IVF and ICSI. Expert male-fertility care since 1984.",
+      "What causes a low sperm count (oligospermia), how it is diagnosed and treated — from lifestyle and medical therapy to IUI, IVF and ICSI. Expert male-fertility care since 1998.",
     ogImage: "/assets/conditions/oligospermia.png",
   },
   procedure: {
@@ -2155,7 +2155,7 @@ export const oligospermia = defineTreatment({
     h1Em: "(Oligospermia) Treatment",
     tagline:
       "A low sperm count is one of the most common — and most treatable — causes of male infertility. With accurate diagnosis and the right plan, most couples can still conceive.",
-    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1984", "IUI · IVF · ICSI"],
+    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1998", "IUI · IVF · ICSI"],
     image: "/assets/conditions/oligospermia.png",
     imageAlt: "Low sperm count (oligospermia) treatment at Bavishi Fertility Institute",
   },
@@ -2245,7 +2245,7 @@ export const asthenospermia = defineTreatment({
   meta: {
     title: "Low Sperm Motility (Asthenospermia) Treatment — Bavishi Fertility Institute",
     description:
-      "Asthenospermia (poor sperm motility) explained — causes, diagnosis and treatment, from correcting the cause to IUI, IVF and ICSI. Expert male-fertility care since 1984.",
+      "Asthenospermia (poor sperm motility) explained — causes, diagnosis and treatment, from correcting the cause to IUI, IVF and ICSI. Expert male-fertility care since 1998.",
     ogImage: "/assets/conditions/asthenospermia.png",
   },
   procedure: {
@@ -2261,7 +2261,7 @@ export const asthenospermia = defineTreatment({
     h1Em: "(Asthenospermia) Treatment",
     tagline:
       "When sperm cannot swim well, they struggle to reach and fertilise the egg. Identifying why — and using the right technique — restores the chance of conception.",
-    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1984", "IVF · ICSI"],
+    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1998", "IVF · ICSI"],
     image: "/assets/conditions/asthenospermia.png",
     imageAlt: "Low sperm motility (asthenospermia) treatment at Bavishi Fertility Institute",
   },
@@ -2349,7 +2349,7 @@ export const azoospermia = defineTreatment({
   meta: {
     title: "Azoospermia (Zero Sperm Count) Treatment — Bavishi Fertility Institute",
     description:
-      "Azoospermia — no sperm in the ejaculate — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1984.",
+      "Azoospermia — no sperm in the ejaculate — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1998.",
     ogImage: "/assets/conditions/azoospermia.png",
   },
   procedure: {
@@ -2365,7 +2365,7 @@ export const azoospermia = defineTreatment({
     h1Em: "(Azoospermia) Treatment",
     tagline:
       "No sperm in the ejaculate does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
-    badges: ["Surgical Sperm Retrieval", "Micro-TESE", "Since 1984", "ICSI"],
+    badges: ["Surgical Sperm Retrieval", "Micro-TESE", "Since 1998", "ICSI"],
     image: "/assets/conditions/azoospermia.png",
     imageAlt: "Azoospermia (zero sperm count) treatment at Bavishi Fertility Institute",
   },
@@ -2461,7 +2461,7 @@ export const surgicalSpermRetrieval = defineTreatment({
   meta: {
     title: "Surgical Sperm Retrieval — PESA, TESA, TESE & Micro-TESE — Bavishi Fertility Institute",
     description:
-      "Surgical sperm retrieval explained — PESA, TESA, TESE and microsurgical Micro-TESE for azoospermia, used with ICSI. Experienced andrology surgeons, trusted since 1984.",
+      "Surgical sperm retrieval explained — PESA, TESA, TESE and microsurgical Micro-TESE for azoospermia, used with ICSI. Experienced andrology surgeons, trusted since 1998.",
     ogImage: "/assets/conditions/surgical-sperm-retrieval.png",
   },
   procedure: {
@@ -2477,7 +2477,7 @@ export const surgicalSpermRetrieval = defineTreatment({
     h1Em: "(PESA / TESA / Micro-TESE)",
     tagline:
       "When there is no sperm in the ejaculate, these minor procedures recover sperm directly from the testes or epididymis — so your own sperm can still be used with ICSI.",
-    badges: ["Microsurgery", "Day-care Procedure", "Since 1984", "ICSI-ready"],
+    badges: ["Microsurgery", "Day-care Procedure", "Since 1998", "ICSI-ready"],
     image: "/assets/conditions/surgical-sperm-retrieval.png",
     imageAlt: "Surgical sperm retrieval (PESA, TESA, Micro-TESE) at Bavishi Fertility Institute",
   },
@@ -2565,7 +2565,7 @@ export const varicocele = defineTreatment({
   meta: {
     title: "Varicocele Treatment & Microsurgery — Bavishi Fertility Institute",
     description:
-      "Varicocele and male infertility — how enlarged scrotal veins affect sperm, when treatment helps, and microsurgical varicocelectomy. Expert andrology care since 1984.",
+      "Varicocele and male infertility — how enlarged scrotal veins affect sperm, when treatment helps, and microsurgical varicocelectomy. Expert andrology care since 1998.",
     ogImage: "/assets/conditions/varicocele.png",
   },
   procedure: {
@@ -2581,7 +2581,7 @@ export const varicocele = defineTreatment({
     h1Em: "& Microsurgery",
     tagline:
       "A varicocele — enlarged veins in the scrotum — is one of the commonest and most correctable causes of male infertility. Microsurgery can improve sperm quality and natural fertility.",
-    badges: ["Microsurgical Repair", "Day-care Surgery", "Since 1984", "Fertility-focused"],
+    badges: ["Microsurgical Repair", "Day-care Surgery", "Since 1998", "Fertility-focused"],
     image: "/assets/conditions/varicocele.png",
     imageAlt: "Varicocele treatment and microsurgery at Bavishi Fertility Institute",
   },
@@ -2669,7 +2669,7 @@ export const erectileDysfunction = defineTreatment({
   meta: {
     title: "Erectile Dysfunction Treatment — Bavishi Fertility Institute",
     description:
-      "Erectile dysfunction and fertility — causes, evaluation and treatment options, plus how couples can still conceive through assisted reproduction. Confidential care since 1984.",
+      "Erectile dysfunction and fertility — causes, evaluation and treatment options, plus how couples can still conceive through assisted reproduction. Confidential care since 1998.",
     ogImage: "/assets/conditions/erectile-dysfunction.png",
   },
   procedure: {
@@ -2685,7 +2685,7 @@ export const erectileDysfunction = defineTreatment({
     h1Em: "Treatment",
     tagline:
       "Erectile dysfunction is common, treatable and rarely a barrier to parenthood. With the right support — and assisted reproduction when needed — couples can still conceive.",
-    badges: ["Confidential Care", "Holistic Evaluation", "Since 1984", "Fertility Support"],
+    badges: ["Confidential Care", "Holistic Evaluation", "Since 1998", "Fertility Support"],
     image: "/assets/conditions/erectile-dysfunction.png",
     imageAlt: "Erectile dysfunction treatment and fertility support at Bavishi Fertility Institute",
   },
@@ -2777,7 +2777,7 @@ export const conceiveNaturally = defineTreatment({
   meta: {
     title: "Conceive Naturally — Natural Fertility Care — Bavishi Fertility Institute",
     description:
-      "Improve your chances of conceiving naturally — fertile-window timing, lifestyle, simple evaluation and ovulation support, before considering advanced treatment. Trusted since 1984.",
+      "Improve your chances of conceiving naturally — fertile-window timing, lifestyle, simple evaluation and ovulation support, before considering advanced treatment. Trusted since 1998.",
     ogImage: "/assets/conditions/conceive-naturally.png",
   },
   procedure: {
@@ -2793,7 +2793,7 @@ export const conceiveNaturally = defineTreatment({
     h1Em: "Naturally",
     tagline:
       "Many couples can conceive naturally with the right timing, simple evaluation and small lifestyle changes — before any advanced treatment is needed. We help you start there.",
-    badges: ["Fertility Evaluation", "Ovulation Support", "Since 1984", "Personalised Plan"],
+    badges: ["Fertility Evaluation", "Ovulation Support", "Since 1998", "Personalised Plan"],
     image: "/assets/conditions/conceive-naturally.png",
     imageAlt: "Natural conception and fertility care at Bavishi Fertility Institute",
   },
@@ -2882,7 +2882,7 @@ export const prpInfertility = defineTreatment({
   meta: {
     title: "PRP (Platelet-Rich Plasma) Therapy in Infertility — Bavishi Fertility Institute",
     description:
-      "PRP therapy in fertility — ovarian PRP for low ovarian reserve and endometrial PRP for thin lining or repeated implantation failure. How it works, who may benefit, since 1984.",
+      "PRP therapy in fertility — ovarian PRP for low ovarian reserve and endometrial PRP for thin lining or repeated implantation failure. How it works, who may benefit, since 1998.",
     ogImage: "/assets/conditions/prp-infertility.png",
   },
   procedure: {
@@ -2898,7 +2898,7 @@ export const prpInfertility = defineTreatment({
     h1Em: "in Infertility",
     tagline:
       "Platelet-rich plasma uses your body's own growth factors to support a low ovarian reserve or a thin uterine lining — an emerging option in carefully selected cases.",
-    badges: ["Autologous (Your Own Blood)", "Ovarian & Endometrial PRP", "Since 1984", "Selective Use"],
+    badges: ["Autologous (Your Own Blood)", "Ovarian & Endometrial PRP", "Since 1998", "Selective Use"],
     image: "/assets/conditions/prp-infertility.png",
     imageAlt: "PRP (platelet-rich plasma) therapy in infertility at Bavishi Fertility Institute",
   },
@@ -2994,7 +2994,7 @@ export const pcos = defineTreatment({
   meta: {
     title: "PCOS (Polycystic Ovary Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
     description:
-      "PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PCOS is one of the most treatable causes of infertility. Since 1984.",
+      "PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PCOS is one of the most treatable causes of infertility. Since 1998.",
     ogImage: "/assets/conditions/pcos.png",
   },
   procedure: {
@@ -3010,7 +3010,7 @@ export const pcos = defineTreatment({
     h1Em: "& Fertility",
     tagline:
       "Polycystic ovary syndrome is the commonest hormonal cause of infertility — and one of the most treatable. With the right plan, most women with PCOS go on to conceive.",
-    badges: ["Hormone Specialists", "Ovulation Induction", "Since 1984", "IUI · IVF"],
+    badges: ["Hormone Specialists", "Ovulation Induction", "Since 1998", "IUI · IVF"],
     image: "/assets/conditions/pcos.png",
     imageAlt: "PCOS (polycystic ovary syndrome) treatment and fertility care at Bavishi Fertility Institute",
   },
@@ -3107,7 +3107,7 @@ export const ovarianReserve = defineTreatment({
   meta: {
     title: "Poor Ovarian Reserve / Low AMH Treatment — Bavishi Fertility Institute",
     description:
-      "Low ovarian reserve and low AMH explained — what the numbers mean, how it is assessed, and tailored IVF protocols that make the most of the eggs you have. Trusted since 1984.",
+      "Low ovarian reserve and low AMH explained — what the numbers mean, how it is assessed, and tailored IVF protocols that make the most of the eggs you have. Trusted since 1998.",
     ogImage: "/assets/conditions/ovarian-reserve.png",
   },
   procedure: {
@@ -3123,7 +3123,7 @@ export const ovarianReserve = defineTreatment({
     h1Em: "/ Low AMH",
     tagline:
       "A low egg count or low AMH means fewer eggs — not no chance. Tailored protocols help us recover and use the best eggs you have, with honest guidance throughout.",
-    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1984", "Class 1000 Labs"],
+    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1998", "Class 1000 Labs"],
     image: "/assets/conditions/ovarian-reserve.png",
     imageAlt: "Poor ovarian reserve / low AMH treatment at Bavishi Fertility Institute",
   },
@@ -3219,7 +3219,7 @@ export const ovarianRejuvenation = defineTreatment({
   meta: {
     title: "Ovarian Rejuvenation Therapy — Bavishi Fertility Institute",
     description:
-      "Ovarian rejuvenation explained — an emerging option using ovarian PRP to support follicle activity in low reserve or early menopause. Who may benefit, honestly assessed. Since 1984.",
+      "Ovarian rejuvenation explained — an emerging option using ovarian PRP to support follicle activity in low reserve or early menopause. Who may benefit, honestly assessed. Since 1998.",
     ogImage: "/assets/conditions/ovarian-rejuvenation.png",
   },
   procedure: {
@@ -3235,7 +3235,7 @@ export const ovarianRejuvenation = defineTreatment({
     h1Em: "Rejuvenation",
     tagline:
       "An emerging therapy that uses your own platelet-rich plasma to try to reactivate ovarian activity — offered selectively, with honest expectations, for low reserve or early menopause.",
-    badges: ["Ovarian PRP", "Autologous", "Since 1984", "Selective Use"],
+    badges: ["Ovarian PRP", "Autologous", "Since 1998", "Selective Use"],
     image: "/assets/conditions/ovarian-rejuvenation.png",
     imageAlt: "Ovarian rejuvenation therapy at Bavishi Fertility Institute",
   },
@@ -3331,7 +3331,7 @@ export const fibroids = defineTreatment({
   meta: {
     title: "Fibroids & Fertility — Uterine Fibroid Treatment — Bavishi Fertility Institute",
     description:
-      "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1984.",
+      "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1998.",
     ogImage: "/assets/conditions/fibroids.png",
   },
   procedure: {
@@ -3347,7 +3347,7 @@ export const fibroids = defineTreatment({
     h1Em: "& Fertility",
     tagline:
       "Not all fibroids affect fertility — but those that distort the uterine cavity can. Fertility-preserving surgery removes the problem while protecting your chance of pregnancy.",
-    badges: ["Reproductive Surgery", "Fertility-preserving", "Since 1984", "Minimally Invasive"],
+    badges: ["Reproductive Surgery", "Fertility-preserving", "Since 1998", "Minimally Invasive"],
     image: "/assets/conditions/fibroids.png",
     imageAlt: "Uterine fibroids and fertility treatment at Bavishi Fertility Institute",
   },
@@ -3442,7 +3442,7 @@ export const endometriosis = defineTreatment({
   meta: {
     title: "Endometriosis & Fertility Treatment — Bavishi Fertility Institute",
     description:
-      "Endometriosis and infertility — symptoms, diagnosis and fertility-focused treatment, from laparoscopic surgery to IVF. Compassionate, expert reproductive care since 1984.",
+      "Endometriosis and infertility — symptoms, diagnosis and fertility-focused treatment, from laparoscopic surgery to IVF. Compassionate, expert reproductive care since 1998.",
     ogImage: "/assets/conditions/endometriosis.png",
   },
   procedure: {
@@ -3458,7 +3458,7 @@ export const endometriosis = defineTreatment({
     h1Em: "& Fertility",
     tagline:
       "Endometriosis can cause pain and affect fertility — but with the right combination of surgery and IVF, many women with endometriosis go on to have a baby.",
-    badges: ["Reproductive Surgery", "Endometriosis & IVF", "Since 1984", "Compassionate Care"],
+    badges: ["Reproductive Surgery", "Endometriosis & IVF", "Since 1998", "Compassionate Care"],
     image: "/assets/conditions/endometriosis.png",
     imageAlt: "Endometriosis and fertility treatment at Bavishi Fertility Institute",
   },
@@ -3558,7 +3558,7 @@ export const cryopreservation = defineTreatment({
   meta: {
     title: "Cryopreservation — Egg, Sperm & Embryo Freezing — Bavishi Fertility Institute",
     description:
-      "Cryopreservation explained — vitrification of eggs, sperm and embryos to preserve fertility for medical or personal reasons. Class 1000 labs, high survival rates, since 1984.",
+      "Cryopreservation explained — vitrification of eggs, sperm and embryos to preserve fertility for medical or personal reasons. Class 1000 labs, high survival rates, since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -3574,7 +3574,7 @@ export const cryopreservation = defineTreatment({
     h1Em: "(Fertility Preservation)",
     tagline:
       "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline.",
-    badges: ["Vitrification", "High Survival Rates", "Since 1984", "Class 1000 Labs"],
+    badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 Labs"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "Cryopreservation (egg, sperm and embryo freezing) at Bavishi Fertility Institute",
   },
@@ -3663,7 +3663,7 @@ export const embryoFreezing = defineTreatment({
   meta: {
     title: "Embryo Freezing (Embryo Cryopreservation) — Bavishi Fertility Institute",
     description:
-      "Embryo freezing explained — how surplus IVF embryos are vitrified and stored for frozen-embryo transfer, who benefits, and success factors. High survival rates, since 1984.",
+      "Embryo freezing explained — how surplus IVF embryos are vitrified and stored for frozen-embryo transfer, who benefits, and success factors. High survival rates, since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -3679,7 +3679,7 @@ export const embryoFreezing = defineTreatment({
     h1Em: "Freezing",
     tagline:
       "Surplus embryos from an IVF cycle can be safely frozen and stored — giving you further chances of pregnancy without repeating full stimulation and egg collection.",
-    badges: ["Vitrification", "Frozen-Embryo Transfer", "Since 1984", "High Survival"],
+    badges: ["Vitrification", "Frozen-Embryo Transfer", "Since 1998", "High Survival"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "Embryo freezing (embryo cryopreservation) at Bavishi Fertility Institute",
   },
@@ -3768,7 +3768,7 @@ export const spermFreezing = defineTreatment({
   meta: {
     title: "Sperm Freezing (Sperm Banking) — Bavishi Fertility Institute",
     description:
-      "Sperm freezing explained — preserving sperm before cancer treatment, surgery or vasectomy, or as a backup for IVF. Simple, safe and long-lasting. Trusted since 1984.",
+      "Sperm freezing explained — preserving sperm before cancer treatment, surgery or vasectomy, or as a backup for IVF. Simple, safe and long-lasting. Trusted since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -3784,7 +3784,7 @@ export const spermFreezing = defineTreatment({
     h1Em: "(Sperm Banking)",
     tagline:
       "A simple, reliable way to preserve fertility — before cancer treatment or surgery, or as a backup for IVF — so your sperm is ready whenever you need it.",
-    badges: ["Simple & Quick", "Long-term Storage", "Since 1984", "IUI · IVF–ICSI"],
+    badges: ["Simple & Quick", "Long-term Storage", "Since 1998", "IUI · IVF–ICSI"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "Sperm freezing (sperm banking) at Bavishi Fertility Institute",
   },
@@ -3873,7 +3873,7 @@ export const eggFreezing = defineTreatment({
   meta: {
     title: "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute",
     description:
-      "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1984.",
+      "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -3889,7 +3889,7 @@ export const eggFreezing = defineTreatment({
     h1Em: "(Oocyte Cryopreservation)",
     tagline:
       "Freeze younger, healthier eggs now to keep your options open for later — whether for medical reasons or to give yourself time on your own terms.",
-    badges: ["Vitrification", "Freeze Younger Eggs", "Since 1984", "Class 1000 Labs"],
+    badges: ["Vitrification", "Freeze Younger Eggs", "Since 1998", "Class 1000 Labs"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "Egg freezing (oocyte cryopreservation) at Bavishi Fertility Institute",
   },
@@ -3982,7 +3982,7 @@ export const ivfEvaluation = defineTreatment({
   meta: {
     title: "IVF Failure Evaluation — Why IVF Failed & What Next — Bavishi Fertility Institute",
     description:
-      "A thorough evaluation after failed IVF — analysing eggs, sperm, embryos, the uterus and implantation to find the real reason, and building a smarter next plan. Trusted since 1984.",
+      "A thorough evaluation after failed IVF — analysing eggs, sperm, embryos, the uterus and implantation to find the real reason, and building a smarter next plan. Trusted since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -3998,7 +3998,7 @@ export const ivfEvaluation = defineTreatment({
     h1Em: "Evaluation",
     tagline:
       "A failed cycle is not the end — it is information. A meticulous evaluation of every step tells us why IVF did not work, so the next attempt is smarter, not just another try.",
-    badges: ["Root-cause Analysis", "Personalised Re-plan", "Since 1984", "Second-opinion Friendly"],
+    badges: ["Root-cause Analysis", "Personalised Re-plan", "Since 1998", "Second-opinion Friendly"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "IVF failure evaluation at Bavishi Fertility Institute",
   },
@@ -4087,7 +4087,7 @@ export const eraTest = defineTreatment({
   meta: {
     title: "ERA Test (Endometrial Receptivity Analysis) — Bavishi Fertility Institute",
     description:
-      "The ERA test explained — how endometrial receptivity analysis personalises embryo-transfer timing to find your window of implantation, especially after repeated failure. Since 1984.",
+      "The ERA test explained — how endometrial receptivity analysis personalises embryo-transfer timing to find your window of implantation, especially after repeated failure. Since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -4103,7 +4103,7 @@ export const eraTest = defineTreatment({
     h1Em: "(Endometrial Receptivity Analysis)",
     tagline:
       "Even a perfect embryo needs the right moment to implant. The ERA test finds your personal window of implantation, so the transfer is timed precisely for you.",
-    badges: ["Personalised Timing", "For Recurrent Failure", "Since 1984", "Genomic Test"],
+    badges: ["Personalised Timing", "For Recurrent Failure", "Since 1998", "Genomic Test"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "ERA test (endometrial receptivity analysis) at Bavishi Fertility Institute",
   },
@@ -4191,7 +4191,7 @@ export const pgt = defineTreatment({
   meta: {
     title: "Preimplantation Genetic Testing (PGT-A / PGT-M / PGT-SR) — Bavishi Fertility Institute",
     description:
-      "PGT explained — testing IVF embryos for chromosomal and genetic conditions before transfer, to improve success and reduce miscarriage. PGT-A, PGT-M and PGT-SR, since 1984.",
+      "PGT explained — testing IVF embryos for chromosomal and genetic conditions before transfer, to improve success and reduce miscarriage. PGT-A, PGT-M and PGT-SR, since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -4207,7 +4207,7 @@ export const pgt = defineTreatment({
     h1Em: "Genetic Testing (PGT)",
     tagline:
       "PGT screens IVF embryos for chromosomal and genetic problems before transfer — helping select the healthiest embryo, improving success and reducing the risk of miscarriage.",
-    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1984", "Class 1000 Labs"],
+    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1998", "Class 1000 Labs"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "Preimplantation genetic testing (PGT) at Bavishi Fertility Institute",
   },
@@ -4296,7 +4296,7 @@ export const surrogacy = defineTreatment({
   meta: {
     title: "Surrogacy Treatment — Gestational Surrogacy — Bavishi Fertility Institute",
     description:
-      "Gestational surrogacy explained — when it is needed, how the process works, and India's legal framework under the Surrogacy Act. Ethical, fully-supported care since 1984.",
+      "Gestational surrogacy explained — when it is needed, how the process works, and India's legal framework under the Surrogacy Act. Ethical, fully-supported care since 1998.",
     ogImage: "/assets/about-clinic.jpg",
   },
   procedure: {
@@ -4312,7 +4312,7 @@ export const surrogacy = defineTreatment({
     h1Em: "Treatment",
     tagline:
       "When carrying a pregnancy is not possible, gestational surrogacy offers a path to parenthood — handled ethically, legally and with complete support at every step.",
-    badges: ["Gestational Surrogacy", "Surrogacy Act Compliant", "Since 1984", "Full Support"],
+    badges: ["Gestational Surrogacy", "Surrogacy Act Compliant", "Since 1998", "Full Support"],
     image: "/assets/about-clinic.jpg",
     imageAlt: "Surrogacy treatment at Bavishi Fertility Institute",
   },

@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "Egg Donation Treatment — Oocyte Donation at Bavishi Fertility Institute",
       description:
-        "How egg donation works, who needs it, and how donors are screened. Young screened donors, Class 1000 IVF labs, trusted fertility specialists since 1984.",
+        "How egg donation works, who needs it, and how donors are screened. Young screened donors, Class 1000 IVF labs, trusted fertility specialists since 1998.",
       url: t.href,
       type: "article",
       images: [t.meta.ogImage],

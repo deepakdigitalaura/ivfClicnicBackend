@@ -61,7 +61,7 @@ export function SiteHeader({
       <div className="hidden border-b border-border/60 bg-[color:var(--plum)] text-white lg:block">
         <div className="container-px mx-auto flex h-9 max-w-[1400px] items-center justify-between text-xs">
           <div className="flex items-center gap-5 text-white/70">
-            <span>India's Trusted Fertility Experts · Since 1983</span>
+            <span>India's Trusted Fertility Experts · Since 1998</span>
           </div>
           <div className="flex items-center gap-5">
             <a href="tel:+919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><Phone className="h-3 w-3" /> +91 97126 22288</a>

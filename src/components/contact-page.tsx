@@ -25,7 +25,6 @@ const DEFAULT_CARDS: Card[] = [
   { icon: "Phone", t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 patient helpline" },
   { icon: "MessageCircle", t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712622288", note: "Quick replies, every day" },
   { icon: "Mail", t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
-  { icon: "Clock", t: "Working Hours", v: "Mon – Sat · 9:00 am – 7:00 pm", href: undefined, note: "Sunday by appointment" },
 ];
 
 type Centre = { name: string; address: string; phone: string; phoneLabel: string; href?: string };
@@ -42,7 +41,6 @@ const directory: Centre[] = [
   { name: "Mumbai — Vile Parle", address: "Irla Nursing Home & Polyclinic, 1st Floor, S.V. Road, Navpada, Irla, Vile Parle West – 400056", phone: "919167204019", phoneLabel: "+91 91672 04019", href: "/locations/mumbai/vile-parle" },
   { name: "Mumbai — Borivali", address: "M.M. Medical Center, Ankur, nr. Marry Imm School, L.M. Road, Shivajinagar, Borivali West", phone: "919167204019", phoneLabel: "+91 91672 04019", href: "/locations/mumbai/borivali" },
   { name: "Mumbai — Vashi", address: "Precision Superspeciality Clinic, 52/53, 3rd Floor, Mahavir Centre, Sector 17, Vashi – 400703", phone: "919687004268", phoneLabel: "+91 96870 04268", href: "/locations/mumbai/vashi" },
-  { name: "Mumbai — Dadar", address: "Kohinoor Superspeciality Clinic, 503, Central Tower, Kohinoor Square, opp. Shivsena Bhavan, Dadar West – 400028", phone: "919328190146", phoneLabel: "+91 93281 90146", href: "/locations/mumbai" },
   // Other cities
   { name: "Vadodara", address: "4th Floor, Trisha Square-2, Sampatrao Colony, Jetalpur Road, Alkapuri – 390007", phone: "917575099898", phoneLabel: "+91 75750 99898", href: "/locations/vadodara/jetalpur-road" },
   { name: "Surat", address: "9th Floor, Param Doctor House, Lal Darwaja, Station Road, Surat", phone: "919879572247", phoneLabel: "+91 98795 72247", href: "/locations/surat/lal-darwaja" },
@@ -68,7 +66,7 @@ export const DEFAULT_HERO: Hero = {
 export const DEFAULT_FAQS: Faq[] = [
   { q: "How do I book an appointment at Bavishi Fertility Institute?", a: "Fill in the enquiry form on this page, call us on +91 97126 22288, or message us on WhatsApp. Our team will help you choose the nearest centre and a convenient time." },
   { q: "Can I have an online (video) consultation?", a: "Yes. We offer video consultations for patients across India and abroad, so you can begin your fertility journey from the comfort of home before visiting a centre." },
-  { q: "Which Bavishi Fertility Institute centre is nearest to me?", a: "We have 15 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
+  { q: "Which Bavishi Fertility Institute centre is nearest to me?", a: "We have 14 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
   { q: "Is the first consultation free?", a: "We offer a free initial consultation so you can understand your options with no obligation. Diagnostic tests and treatments are quoted transparently, with EMI options available." },
   { q: "Do you treat international patients?", a: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including pre-arrival video consultations and treatment planning." },
 ];
@@ -117,7 +115,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
 
       {/* Contact info cards */}
       <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
-        <Stagger className="grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4">
+        <Stagger className="grid grid-cols-1 gap-5 sm:grid-cols-3">
           {cardList.map((c) => {
             const Icon = ICONS[c.icon] ?? Phone;
             const inner = (
@@ -142,7 +140,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
 
       {/* Locations directory */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "15 fertility centres across 8 Indian cities — world-class care, close to home.")} />
+        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "14 fertility centres across 8 Indian cities — world-class care, close to home.")} />
 
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {centreList.map((c) => (

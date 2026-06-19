@@ -149,14 +149,7 @@ export function HomePage({
       />
     ),
     about: <About content={data.about} />,
-    doctors: (
-      <Doctors
-        eyebrow={ed("doctors.eyebrow", data.doctors.eyebrow)}
-        title={edTitle("doctors", data.doctors.heading)}
-        subtitle={ed("doctors.subtitle", data.doctors.subtitle)}
-        ctaLabel={ed("doctors.ctaLabel", data.doctors.ctaLabel)}
-      />
-    ),
+    doctors: null,
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
     media: <Media content={data.media} />,
@@ -395,6 +388,7 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
                 {content.secondaryCta.label}
               </Magnetic>
             </div>
+            <p className="mt-3 text-xs text-white/40">* Terms and conditions apply.</p>
           </Reveal>
         </div>
 
@@ -457,6 +451,14 @@ export function TreatmentCard({
 
 /* ---------- Treatments ---------- */
 
+const MOBILE_TREATMENT_TITLES = new Set([
+  "IVF / ICSI / ART",
+  "IUI",
+  "Advanced Fertility Techniques",
+  "PGT — Genetic Testing",
+  "Fertility Preservation",
+]);
+
 export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
@@ -470,7 +472,7 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
         {content.items.map(({ icon, t, d }, i) => (
-          <StaggerItem key={t}>
+          <StaggerItem key={t} className={!MOBILE_TREATMENT_TITLES.has(t) ? "hidden sm:block" : undefined}>
             <TreatmentCard
               icon={resolveIcon(icon)}
               title={t}
@@ -540,9 +542,9 @@ export function SuccessStories({
     <section className={`${tone === "tint" ? "bg-[color:var(--rose-soft)]/40" : "bg-white"} py-10 md:py-16`}>
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
-        <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
           {stories.map((s) => (
-            <StaggerItem key={s.n}>
+            <StaggerItem key={s.n} className="w-full shrink-0 snap-start md:w-auto md:shrink">
               <motion.article
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
@@ -600,9 +602,9 @@ export function VideoHub({
           <GhostBtn icon={Video} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ctaLabel}</GhostBtn>
         </Reveal>
       </div>
-      <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-4">
         {videos.map((v) => (
-          <StaggerItem key={v.id}>
+          <StaggerItem key={v.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
             <motion.a
               href={`https://www.youtube.com/watch?v=${v.id}`}
               target="_blank" rel="noopener noreferrer"
@@ -1106,10 +1108,12 @@ export function Testimonials({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                className="flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 lg:grid-cols-3"
               >
                 {reviewPages[page].map((c, i) => (
-                  <ReviewTestimonialCard key={`${c.r.author}-${i}`} r={c.r} verified={c.verified} />
+                  <div key={`${c.r.author}-${i}`} className="w-full shrink-0 snap-start sm:w-auto sm:shrink">
+                    <ReviewTestimonialCard r={c.r} verified={c.verified} />
+                  </div>
                 ))}
               </motion.div>
             </AnimatePresence>
@@ -1144,7 +1148,7 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
         title={<><Editable path="events.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="events.heading.em">{content.heading.em}</Editable></em></>}
         align="center"
       />
-      <Stagger className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
+      <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {content.posters.map((e, i) => (
           <StaggerItem key={e.src}>
             <motion.div
@@ -1152,7 +1156,7 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
               transition={{ duration: 0.5 }}
               className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
-              <EditableImage path={`events.posters.${i}.src`} src={e.src} alt={e.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+              <EditableImage path={`events.posters.${i}.src`} src={e.src} alt={e.alt} loading="lazy" className="aspect-[3/4] w-full object-cover" />
             </motion.div>
           </StaggerItem>
         ))}
@@ -1186,9 +1190,9 @@ function Blogs({
             <GhostBtn icon={BookOpen} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ed("blogs.ctaLabel", content.ctaLabel)}</GhostBtn>
           </Reveal>
         </div>
-        <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
           {videos.map((p) => (
-            <StaggerItem key={p.id}>
+            <StaggerItem key={p.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
               <motion.a
                 href={`https://www.youtube.com/watch?v=${p.id}`}
                 target="_blank" rel="noopener noreferrer"
@@ -1250,7 +1254,9 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
             <>
               <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
               <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`locations.cities.${i}.c`}>{c.c}</Editable></h3>
-              <p className="text-sm text-muted-foreground">{c.n} {c.n > 1 ? "centres" : "centre"}</p>
+              {c.centres && c.centres.length > 0 && (
+                <p className="mt-1 text-xs text-muted-foreground">{c.centres.join(" · ")}</p>
+              )}
               {editing ? (
                 <a href={href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                   View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />

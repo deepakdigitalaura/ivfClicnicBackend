@@ -188,8 +188,8 @@ export type HomepageData = {
   blogs: { eyebrow: string; heading: Heading; ctaLabel: string };
   testimonials: { eyebrow: string; heading: Heading };
   media: { eyebrow: string; heading: Heading; logos: { src: string; alt: string }[] };
-  /** City cards: name (c), centre count (n), slug (s, the link target). */
-  locations: { eyebrow: string; heading: Heading; subtitle: string; cities: { c: string; n: number; s: string }[] };
+  /** City cards: name (c), centre count (n), slug (s, the link target), optional centre area names for multi-centre cities. */
+  locations: { eyebrow: string; heading: Heading; subtitle: string; cities: { c: string; n: number; s: string; centres?: string[] }[] };
   calculators: { eyebrow: string; heading: Heading; subtitle: string; items: string[] };
   /** Contact rows carry editable text only — the icon stays code-owned (it maps
    *  to the contact method, by index). */
@@ -215,14 +215,14 @@ const whyIcons = {
  */
 export const HOMEPAGE_DEFAULTS: HomepageData = {
   hero: {
-    eyebrow: "Trusted Since 1983",
-    headline: "India's Trusted Fertility Center for 40+ Years",
+    eyebrow: "Trusted Since 1998",
+    headline: "India's Trusted Fertility Center for 25+ Years",
     headlineItalic: "Fertility",
     paragraph:
       "Helping families achieve parenthood through advanced fertility treatments, compassionate care, and personalised IVF programs.",
     badges: [
-      "30,000+ Successful Pregnancies",
-      "40+ Years Experience",
+      "30,000+ Happy Families",
+      "25+ Years Experience",
       "14 Fertility Centres",
       "Leading IVF Specialists",
     ],
@@ -231,8 +231,8 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     image: heroImg,
   },
   stats: [
-    { value: "30,000+", l: "Successful Pregnancies" },
-    { value: "40+", l: "Years Legacy" },
+    { value: "30,000+", l: "Happy Families" },
+    { value: "25+", l: "Years Legacy" },
     { value: "15+", l: "Locations" },
     { value: "100+", l: "Experts" },
     { value: "5× Winner", l: "National Fertility Award" },
@@ -291,10 +291,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
         icon: whyIcons.successful, alt: "Successful IVF outcomes",
         title: "Successful", subtitle: "Proven IVF Excellence",
         points: [
-          { h: "20,000+ IVF Success Stories", d: "Families who trusted us with parenthood." },
+          { h: "30,000+ Happy Families", d: "Families who trusted us with parenthood." },
           { h: "100+ Years of Combined Expertise", d: "A family of seasoned fertility specialists." },
           { h: "Safe & Healthy Pregnancy Focus", d: "Care that extends beyond conception." },
-          { h: "Unique IVF Packages", d: "Suraksha Kavach benefits & refund protection." },
+          { h: "Unique IVF Packages", d: "Suraksha Kavach benefits & protection." },
         ],
       },
     ],
@@ -303,8 +303,8 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     badge: "Exclusive Program",
     heading: { lead: "Suraksha Kavach —", em: "peace of mind, guaranteed." },
     paragraph:
-      "India's most trusted IVF refund & protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
-    features: ["Refund Guarantee", "Risk Reduction", "Multiple IVF Cycles", "Priority Care"],
+      "India's most trusted IVF protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
+    features: ["Risk Reduction", "Multiple IVF Cycles", "Priority Care", "Unique Optional Package"],
     primaryCta: { label: "Explore Suraksha Kavach", href: destinationHref("suraksha-kavach") },
     secondaryCta: { label: "Learn More", href: "/#book" },
     image: surakshaImg,
@@ -314,16 +314,16 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     eyebrow: "About the Institute",
     heading: { lead: "A legacy of", em: "life-changing care." },
     subtitle:
-      "For over four decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
+      "For over two decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
     stats: [
-      { k: "Legacy", v: "40+ Years" },
+      { k: "Legacy", v: "25+ Years" },
       { k: "Recognition", v: "Award-Winning" },
       { k: "Patient Care", v: "Personalised" },
       { k: "IVF Leadership", v: "India's First" },
     ],
     primaryCta: "Read More",
     secondaryCta: "Our Story",
-    sinceValue: "Since 1983",
+    sinceValue: "Since 1998",
     sinceLabel: "Pioneering fertility care",
     image: aboutImg,
     imageAlt: "Bavishi Fertility Institute",
@@ -343,8 +343,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     eyebrow: "Upcoming Events",
     heading: { lead: "Learn directly from", em: "our specialists." },
     posters: [
-      { src: "/assets/events/event-1.webp", alt: "Special Consultation with Dr. Himanshu Bavishi — upcoming visit schedule" },
-      { src: "/assets/events/event-2.webp", alt: "Bavishi Fertility — upcoming events & visit plan" },
+      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/dr.-visit_2.jpg-768x960.jpeg", alt: "Doctor visit — Bavishi Fertility Institute upcoming camp" },
+      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/General-camp-2.jpg-768x960.jpeg", alt: "General fertility camp — Bavishi Fertility Institute" },
+      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/Camps-2.jpg-768x960.jpeg", alt: "Camps — Bavishi Fertility Institute upcoming event" },
+      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/OPD_-1.jpg-768x960.jpeg", alt: "OPD — Bavishi Fertility Institute outreach event" },
     ],
   },
   videos: {
@@ -375,7 +377,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       { q: "Is fertility treatment painful?", a: "Most fertility treatments cause minimal discomfort. Egg retrieval is performed under sedation. Our team prioritises your comfort at every step." },
       { q: "How do I get started?", a: "Begin with a consultation — in-person or by video. Our specialists will review your history and design a personalised plan." },
       { q: "Do you offer video consultations?", a: "Yes. Secure video consultations are available with all our senior specialists, across India and internationally." },
-      { q: "What is the Suraksha Kavach refund program?", a: "Suraksha Kavach is our pioneering refund-and-protection program: eligible patients pay only for success, with a refund guarantee if treatment outcomes are not achieved." },
+      { q: "What is the Suraksha Kavach program?", a: "Suraksha Kavach is our pioneering protection program designed to give you peace of mind on your fertility journey. It includes multiple IVF cycles, risk reduction and priority care. Terms and conditions apply." },
     ],
   },
   finalCta: {
@@ -384,9 +386,9 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     paragraph:
       "Speak with our fertility experts today — confidential, compassionate and complimentary.",
     stats: [
-      { v: 30000, s: "+", l: "Pregnancies" },
-      { v: 40, s: "+", l: "Years" },
-      { v: 15, s: "+", l: "Centres" },
+      { v: 30000, s: "+", l: "Happy Families" },
+      { v: 25, s: "+", l: "Years" },
+      { v: 14, s: "+", l: "Centres" },
     ],
     ctas: ["Book Consultation", "WhatsApp Now", "Call Now"],
   },
@@ -462,10 +464,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   locations: {
     eyebrow: "Our Locations",
     heading: { lead: "Find a Bavishi Fertility Institute Centre", em: "near you." },
-    subtitle: "15 centres across 8 cities — premium fertility care, close to home wherever you are.",
+    subtitle: "14 centres across 8 cities — premium fertility care, close to home wherever you are.",
     cities: [
-      { c: "Ahmedabad", n: 3, s: "ahmedabad" },
-      { c: "Mumbai", n: 5, s: "mumbai" },
+      { c: "Ahmedabad", n: 3, s: "ahmedabad", centres: ["Paldi", "Sindhu Bhavan", "Nikol"] },
+      { c: "Mumbai", n: 5, s: "mumbai", centres: ["Ghatkopar", "Thane", "Vile Parle", "Borivali", "Vashi"] },
       { c: "Vadodara", n: 1, s: "vadodara" },
       { c: "Surat", n: 1, s: "surat" },
       { c: "Bhuj", n: 1, s: "bhuj" },
@@ -490,12 +492,12 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     ],
   },
   seo: {
-    metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 40+ Years",
+    metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 25+ Years",
     metaDescription:
-      "Premium fertility care across 15 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
+      "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
     ogTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     ogDescription:
-      "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 25+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     ogImage: heroImg,
   },
 };
@@ -927,6 +929,7 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
       c: x?.c ?? def?.c ?? "",
       n: x?.n ?? def?.n ?? 1,
       s: x?.s ?? def?.s ?? "",
+      centres: def?.centres,
     })),
   };
   const calculators = {

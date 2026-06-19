@@ -18,7 +18,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "Donor Sperm Treatment (Sperm Donation) at Bavishi Fertility Institute",
       description:
-        "How donor sperm is used in IUI and IVF–ICSI, who needs it, and how donors are screened. Large screened donor pool, no waiting, trusted since 1984.",
+        "How donor sperm is used in IUI and IVF–ICSI, who needs it, and how donors are screened. Large screened donor pool, no waiting, trusted since 1998.",
       url: t.href,
       type: "article",
       images: [t.meta.ogImage],
