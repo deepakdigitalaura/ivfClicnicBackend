@@ -3,7 +3,7 @@
     "eyebrow": "About Bavishi Fertility Institute",
     "headline": "Over two decades of fertility excellence — built on hope",
     "headlineItalic": "fertility excellence",
-    "paragraph": "Since 1998, Bavishi Fertility Institute has helped over 30,000 families experience the joy of parenthood — pioneering IVF in India and growing into one of the country's most trusted fertility networks, with 15 centres across 8 cities."
+    "paragraph": "Since 1998, Bavishi Fertility Institute has helped over 30,000 families experience the joy of parenthood — pioneering IVF in India and growing into one of the country's most trusted fertility networks, with 14 centres across 8 cities."
   },
   "story": {
     "eyebrow": "Our Story",
@@ -18,7 +18,7 @@
     { "value": "1998", "label": "Founded in Ahmedabad" },
     { "value": "30,000+", "label": "Successful pregnancies" },
     { "value": "3,000+", "label": "IVF cycles every year" },
-    { "value": "15", "label": "Centres across 8 cities" },
+    { "value": "14", "label": "Centres across 8 cities" },
     { "value": "5×", "label": "National Fertility Award (2021–25)" }
   ],
   "legacy": {
@@ -49,7 +49,7 @@
     { "y": "2023", "t": "25 years completed", "d": "Celebrated 25 years of completing families — a quarter century of pioneering IVF, national firsts, and 30,000+ successful pregnancies." },
     { "y": "2024", "t": "IVF Chain of the Year — West", "d": "Received the 'IVF / Fertility Chain of the Year – West' award for the fourth time." },
     { "y": "2025", "t": "Nikol, Ahmedabad", "d": "Opened the Nikol centre in east Ahmedabad — making expert fertility care accessible across the city." },
-    { "y": "Today", "t": "15 centres, one family", "d": "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." }
+    { "y": "Today", "t": "14 centres, one family", "d": "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." }
   ],
   "trustPillars": [
     { "icon": "Award", "t": "25+ Years of Experience", "d": "Since 1998, a family-led institute that pioneered IVF in India and has guided 30,000+ families to parenthood." },
@@ -66,7 +66,7 @@
     { "value": "8", "label": "Cities, one standard of care" }
   ],
   "network": {
-    "heading": { "lead": "15 centres across", "em": "8 Indian cities" },
+    "heading": { "lead": "14 centres across", "em": "8 Indian cities" },
     "subtitle": "World-class fertility care, close to home — wherever you are.",
     "cities": [
       { "c": "Ahmedabad", "n": "3 centres" },
@@ -84,8 +84,8 @@
   },
   "seo": {
     "metaTitle": "About Bavishi Fertility Institute — 25+ Years of IVF Excellence in India",
-    "metaDescription": "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 15 centres. Discover our story, legacy and values.",
+    "metaDescription": "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 14 centres. Discover our story, legacy and values.",
     "ogTitle": "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1998",
-    "ogDescription": "30,000+ pregnancies. 15 centres across 8 cities. National Fertility Award 5 years running. The story of India's pioneering fertility institute."
+    "ogDescription": "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 5 years running. The story of India's pioneering fertility institute."
   }
 }

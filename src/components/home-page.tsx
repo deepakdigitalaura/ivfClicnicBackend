@@ -1,10 +1,10 @@
 "use client";
-import { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
+import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
   Stethoscope, Microscope, Baby, Dna, FlaskConical, Activity, MapPin,
-  Star, ArrowRight, ChevronDown, Quote, Clock, CheckCircle2,
+  Star, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Quote, Clock, CheckCircle2,
   Video, BookOpen, Calculator, Mail, User, Send,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -54,6 +54,66 @@ const edTitle = (base: string, h: Heading) => (
     <em className="font-display italic text-[color:var(--rose)]">{ed(`${base}.heading.em`, h.em)}</em>
   </>
 );
+
+/* ---------- Mobile carousel: arrows + auto-scroll ---------- */
+
+function MobileCarousel({ children, interval = 2000 }: { children: React.ReactElement<{ ref?: React.Ref<HTMLDivElement> }>; interval?: number }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const check = () => {
+      const scrollable = el.scrollWidth > el.clientWidth + 4;
+      setIsMobile(scrollable);
+      setCanLeft(el.scrollLeft > 4);
+      setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+    };
+    check();
+    el.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => { el.removeEventListener("scroll", check); window.removeEventListener("resize", check); };
+  }, []);
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    let paused = false;
+    const tid = setInterval(() => {
+      if (paused) return;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: el.clientWidth, behavior: "smooth" });
+      }
+    }, interval);
+    const pause = () => { paused = true; };
+    const resume = () => { setTimeout(() => { paused = false; }, interval); };
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("touchend", resume, { passive: true });
+    return () => { clearInterval(tid); el.removeEventListener("touchstart", pause); el.removeEventListener("touchend", resume); };
+  }, [isMobile, interval]);
+
+  const scroll = (dir: -1 | 1) => {
+    scrollRef.current?.scrollBy({ left: dir * (scrollRef.current.clientWidth * 0.85), behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative">
+      {React.cloneElement(children, { ref: scrollRef })}
+      {isMobile && (
+        <div className="pointer-events-none absolute inset-y-0 -inset-x-1 flex items-center justify-between md:hidden">
+          <button aria-label="Previous" onClick={() => scroll(-1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity ${canLeft ? "opacity-100" : "opacity-0"}`}><ChevronLeft className="h-4 w-4 text-[color:var(--plum)]" /></button>
+          <button aria-label="Next" onClick={() => scroll(1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity ${canRight ? "opacity-100" : "opacity-0"}`}><ChevronRight className="h-4 w-4 text-[color:var(--plum)]" /></button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /* ---------- Primitives ---------- */
 
@@ -324,9 +384,6 @@ function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }
               </Float>
               <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`whyBavishi.cards.${i}.t`}>{t}</Editable></h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><Editable path={`whyBavishi.cards.${i}.d`}>{d}</Editable></p>
-              <div className="mt-6 inline-flex translate-y-1 items-center gap-1 text-sm font-medium text-[color:var(--rose)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                Learn more <ArrowRight className="h-4 w-4" />
-              </div>
             </LiftCard>
           </StaggerItem>
           );
@@ -542,6 +599,7 @@ export function SuccessStories({
     <section className={`${tone === "tint" ? "bg-[color:var(--rose-soft)]/40" : "bg-white"} py-10 md:py-16`}>
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
+        <MobileCarousel>
         <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
           {stories.map((s) => (
             <StaggerItem key={s.n} className="w-full shrink-0 snap-start md:w-auto md:shrink">
@@ -567,6 +625,7 @@ export function SuccessStories({
             </StaggerItem>
           ))}
         </Stagger>
+        </MobileCarousel>
         {showCta && (
           <Reveal delay={0.2}>
             <div className="mt-9 text-center">
@@ -602,6 +661,7 @@ export function VideoHub({
           <GhostBtn icon={Video} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ctaLabel}</GhostBtn>
         </Reveal>
       </div>
+      <MobileCarousel>
       <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-4">
         {videos.map((v) => (
           <StaggerItem key={v.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
@@ -631,6 +691,7 @@ export function VideoHub({
           </StaggerItem>
         ))}
       </Stagger>
+      </MobileCarousel>
     </section>
   );
 }
@@ -1190,6 +1251,7 @@ function Blogs({
             <GhostBtn icon={BookOpen} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ed("blogs.ctaLabel", content.ctaLabel)}</GhostBtn>
           </Reveal>
         </div>
+        <MobileCarousel>
         <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
           {videos.map((p) => (
             <StaggerItem key={p.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
@@ -1226,6 +1288,7 @@ function Blogs({
             </StaggerItem>
           ))}
         </Stagger>
+        </MobileCarousel>
       </div>
     </section>
   );

@@ -185,7 +185,7 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Vadodara", href: "/locations/vadodara" },
       { label: "Bhuj", href: "/locations/bhuj" },
       { label: "Varanasi", href: "/locations/varanasi" },
-      { label: "All 15 Centres", href: "/#locations" },
+      { label: "All 14 Centres", href: "/#locations" },
     ]},
     { h: "Calculators", l: [
       { label: "IVF Success Rate", href: "/#tools" },

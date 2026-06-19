@@ -55,24 +55,20 @@ export function Reveal({
 }
 
 /* ---------- Stagger ---------- */
-export function Stagger({
-  children,
-  className,
-  stagger = 0.08,
-  delay = 0,
-}: {
+export const Stagger = React.forwardRef<HTMLDivElement, {
   children: React.ReactNode;
   className?: string;
   stagger?: number;
   delay?: number;
-}) {
+}>(function Stagger({ children, className, stagger = 0.08, delay = 0 }, ref) {
   // See Reveal: static in the editor so a re-render can't strand off-screen cards
   // at opacity:0. Public unchanged (byte-identical).
   if (useEdit()?.editMode) {
-    return <div className={className}>{children}</div>;
+    return <div ref={ref} className={className}>{children}</div>;
   }
   return (
     <motion.div
+      ref={ref}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-60px" }}
@@ -85,7 +81,7 @@ export function Stagger({
       {children}
     </motion.div>
   );
-}
+});
 
 const childVariants: Variants = {
   hidden: { opacity: 0, y: 24, filter: "blur(6px)" },

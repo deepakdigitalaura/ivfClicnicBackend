@@ -3468,7 +3468,7 @@ export interface SiteSetting {
    */
   logoUrl?: string | null;
   /**
-   * Year, e.g. 1984.
+   * Year, e.g. 1998.
    */
   foundingDate?: string | null;
   /**
@@ -4124,7 +4124,7 @@ export interface Homepage {
            */
           k: string;
           /**
-           * Value, e.g. '40+ Years'.
+           * Value, e.g. '25+ Years'.
            */
           v: string;
           id?: string | null;
@@ -4133,7 +4133,7 @@ export interface Homepage {
     primaryCta?: string | null;
     secondaryCta?: string | null;
     /**
-     * e.g. 'Since 1983'.
+     * e.g. 'Since 1998'.
      */
     sinceValue?: string | null;
     /**
@@ -4778,7 +4778,7 @@ export interface AboutPage {
       }[]
     | null;
   /**
-   * The '40+ Years of Legacy' section heading. Leave empty to use the default.
+   * The '25+ Years of Legacy' section heading. Leave empty to use the default.
    */
   legacy?: {
     eyebrow?: string | null;
@@ -4802,7 +4802,7 @@ export interface AboutPage {
   milestones?:
     | {
         /**
-         * Year or label, e.g. '1984' or 'Today'.
+         * Year or label, e.g. '1998' or 'Today'.
          */
         y: string;
         /**

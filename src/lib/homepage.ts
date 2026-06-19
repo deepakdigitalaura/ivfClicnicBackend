@@ -223,7 +223,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     badges: [
       "30,000+ Happy Families",
       "25+ Years Experience",
-      "14 Fertility Centres",
+      "14 Centres",
       "Leading IVF Specialists",
     ],
     ctas: ["Book Consultation", "Check IVF Eligibility", "Video Consultation"],
@@ -233,8 +233,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   stats: [
     { value: "30,000+", l: "Happy Families" },
     { value: "25+", l: "Years Legacy" },
-    { value: "15+", l: "Locations" },
-    { value: "100+", l: "Experts" },
+    { value: "14", l: "Fertility Centres" },
     { value: "5× Winner", l: "National Fertility Award" },
     { value: "Rank #1", l: "Best IVF Center in India" },
     { value: "300+", l: "International Patients" },
@@ -333,10 +332,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     heading: { lead: "Our Awards &", em: "Achievements." },
     subtitle: "Awarded for Excellence in IVF & Fertility Care.",
     items: [
-      { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "Economic Times Healthworld · 2025" },
-      { img: "/assets/awards/patient-centric-award.png", title: "Patient Centric Hospital Award", desc: "IHW Patient First Awards" },
-      { img: "/assets/awards/bharat-excellence-award.png", title: "Bharat Excellence Award", desc: "For IVF & Infertility Care" },
-      { img: "/assets/awards/times-healthcare-award.png", title: "Times Healthcare Leaders Award", desc: "Times Healthcare · 2025" },
+      { img: "/assets/awards/ivf-chain-of-the-year.png", title: "No.1 in West India", desc: "6 consecutive years · 2019–2026" },
+      { img: "/assets/awards/patient-centric-award.png", title: "Best IVF Chain in India – West", desc: "The Economic Times" },
+      { img: "/assets/awards/bharat-excellence-award.png", title: "Best IVF Clinic Chain in India", desc: "Mid-Day" },
+      { img: "/assets/awards/times-healthcare-award.png", title: "India's No.1 Fertility Clinic", desc: "Ahmedabad Institute · TOI National Survey 2020" },
     ],
   },
   events: {
@@ -388,7 +387,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     stats: [
       { v: 30000, s: "+", l: "Happy Families" },
       { v: 25, s: "+", l: "Years" },
-      { v: 14, s: "+", l: "Centres" },
+      { v: 14, s: "", l: "Centres" },
     ],
     ctas: ["Book Consultation", "WhatsApp Now", "Call Now"],
   },

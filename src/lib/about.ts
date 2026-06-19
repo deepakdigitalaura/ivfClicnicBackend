@@ -99,7 +99,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     { n: "1998", l: "Founded in Ahmedabad" },
     { n: "30,000+", l: "Successful pregnancies" },
     { n: "3,000+", l: "IVF cycles every year" },
-    { n: "15", l: "Centres across 8 cities" },
+    { n: "14", l: "Centres across 8 cities" },
     { n: "5×", l: "National Fertility Award (2021–25)" },
   ],
   legacy: {
@@ -130,7 +130,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     { y: "2023", t: "25 years completed", d: "Celebrated 25 years of completing families — a quarter century of pioneering IVF, national firsts, and 30,000+ successful pregnancies." },
     { y: "2024", t: "IVF Chain of the Year — West", d: "Received the 'IVF / Fertility Chain of the Year – West' award for the fourth time." },
     { y: "2025", t: "Nikol, Ahmedabad", d: "Opened the Nikol centre in east Ahmedabad — making expert fertility care accessible across the city." },
-    { y: "Today", t: "15 centres, one family", d: "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." },
+    { y: "Today", t: "14 centres, one family", d: "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." },
   ],
   trust: {
     eyebrow: "Why Bavishi Fertility Center",
