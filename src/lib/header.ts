@@ -39,6 +39,15 @@ const HEADER_CATEGORY_LABELS: Record<string, string> = {
   "female-infertility": "Female Infertility",
   "fertility-preservation": "Fertility Preservation",
 };
+
+/** Hub page URL for each navCategory column heading link. */
+const HEADER_CATEGORY_HREFS: Record<string, string> = {
+  "advanced-ivf": "/treatments/advanced-fertility-techniques",
+  "donor-services": "/treatments/advanced-fertility-techniques",
+  "male-infertility": "/treatments/male-infertility",
+  "female-infertility": "/treatments/female-infertility",
+  "fertility-preservation": "/treatments/advanced-fertility-techniques",
+};
 // Note: "maternity-services" is intentionally excluded from the IVF Treatments header column.
 
 /** Canonical column order in the "IVF Treatments" mega menu. */
@@ -181,7 +190,7 @@ export const HEADER_DEFAULTS: HeaderData = {
     {
       label: "IVF Treatments",
       mega: [
-        { heading: "Advanced IVF Treatment", items: [
+        { heading: "Advanced IVF Treatment", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "IVF", href: "/what-is-ivf" },
           { label: "IVF Failure", href: "/ivf-failure" },
           { label: "IUI", href: "/intra-uterine-insemination-iui" },
@@ -193,12 +202,12 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
           { label: "Laser Hatching", href: "/laser-assisted-hatching" },
         ]},
-        { heading: "Donor Services", items: [
+        { heading: "Donor Services", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Egg Donation", href: "/egg-donation" },
           { label: "Sperm Donation", href: "/sperm-donation" },
           { label: "Embryo Donation", href: "/embryo-donation" },
         ]},
-        { heading: "Male Infertility", items: [
+        { heading: "Male Infertility", headingHref: "/treatments/male-infertility", items: [
           { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
           { label: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
           { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
@@ -206,7 +215,7 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Varicocele / Micro Surgery", href: "/varicocele" },
           { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
         ]},
-        { heading: "Female Infertility", items: [
+        { heading: "Female Infertility", headingHref: "/treatments/female-infertility", items: [
           { label: "Conceive Naturally", href: "/conceive-naturally" },
           { label: "PRP Infertility", href: "/prp-infertility" },
           { label: "PCOS", href: "/pcos" },
@@ -215,13 +224,14 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Fibroid", href: "/fibroids" },
           { label: "Endometriosis", href: "/endometriosis" },
         ]},
-        { heading: "Fertility Preservation", items: [
+        { heading: "Fertility Preservation", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Cryopreservation", href: "/cryopreservation" },
         ]},
       ],
     },
     {
       label: "Maternity Services",
+      href: "/services/maternity-services",
       mega: [
         { heading: "", items: [
           { label: "3D/4D Sonography", href: "/services/3d-4d-sonography" },
@@ -433,6 +443,7 @@ function buildTreatmentMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] 
     .filter((cat) => byCat.has(cat))
     .map((cat) => ({
       heading: HEADER_CATEGORY_LABELS[cat],
+      ...(HEADER_CATEGORY_HREFS[cat] ? { headingHref: HEADER_CATEGORY_HREFS[cat] } : {}),
       items: byCat.get(cat)!
         .sort((a, b) => a.navOrder - b.navOrder)
         .map((t) => ({ label: t.name, href: t.href })),

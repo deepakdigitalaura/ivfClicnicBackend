@@ -19,7 +19,7 @@ import { testimonialsForCity } from "@/lib/video-testimonials";
 import { blogsForLocation, type BlogPost } from "@/lib/blogs";
 
 const trust = [
-  { icon: Award, t: "Trusted since 1998", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for over two decades." },
+  { icon: Award, t: "Trusted since 1998", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for over three decades." },
   { icon: FlaskConical, t: "Class 1000 IVF labs", d: "Embryology labs 10× cleaner than the international standard, with vitrification." },
   { icon: HeartPulse, t: "Senior promoter doctors", d: "Consult experienced fertility specialists across convenient locations." },
   { icon: Building2, t: "One-stop fertility care", d: "Tests, sonography, andrology, surgery and IVF — everything under one roof." },

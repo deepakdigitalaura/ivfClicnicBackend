@@ -79,7 +79,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#treatments" className="hover:text-[color:var(--rose)]">Maternity Services</a>
+          <a href="/services/maternity-services" className="hover:text-[color:var(--rose)]">Maternity Services</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{s.breadcrumbName}</span>
         </nav>

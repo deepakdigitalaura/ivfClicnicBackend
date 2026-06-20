@@ -91,7 +91,7 @@ const ABOUT_FIELDS: Field[] = [
       name: "legacy",
       type: "group",
       label: "Legacy Timeline Heading",
-      admin: { description: "The '25+ Years of Legacy' section heading. Leave empty to use the default." },
+      admin: { description: "The '30+ Years of Legacy' section heading. Leave empty to use the default." },
       fields: [
         { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),

@@ -151,7 +151,7 @@ export const CENTRES: Centre[] = [
       { q: "What are the timings at the Paldi centre?", a: "The Paldi centre is open Monday to Saturday, 9:00 am to 7:00 pm. Appointments are recommended; call +91 97126 22288 to book." },
       { q: "Which areas does the Paldi centre serve?", a: "Paldi conveniently serves patients from Paldi, Vasna, Ambawadi, Ellisbridge, Vejalpur and Maninagar, as well as families travelling from across Ahmedabad and Gujarat." },
       { q: "What facilities are available at Paldi?", a: "A Class 1000 embryology & IVF lab, andrology lab, in-house diagnostics and sonography, a day-care operation theatre, counselling and nutrition suites, and an on-site pharmacy — everything under one roof." },
-      { q: "Why choose the Paldi centre for IVF?", a: "As the flagship head office, Paldi offers the institute's most advanced lab, senior promoter doctors and over two decades of experience — combined with transparent pricing, EMI options and the Suraksha Kavach package." },
+      { q: "Why choose the Paldi centre for IVF?", a: "As the flagship head office, Paldi offers the institute's most advanced lab, senior promoter doctors and over three decades of experience — combined with transparent pricing, EMI options and the Suraksha Kavach package." },
     ],
     sameAs: [],
     intro:
@@ -312,7 +312,7 @@ export const CENTRES: Centre[] = [
     ],
     sameAs: [],
     intro:
-      "Our Ghatkopar centre is Bavishi Fertility Institute's flagship facility in Mumbai, bringing over two decades of fertility expertise to the city's central and eastern suburbs. Conveniently located on M.G. Road opposite Kotak Mahindra Bank — minutes from Ghatkopar station — it offers the full spectrum of IVF, ICSI, IUI and infertility care under one roof.",
+      "Our Ghatkopar centre is Bavishi Fertility Institute's flagship facility in Mumbai, bringing over three decades of fertility expertise to the city's central and eastern suburbs. Conveniently located on M.G. Road opposite Kotak Mahindra Bank — minutes from Ghatkopar station — it offers the full spectrum of IVF, ICSI, IUI and infertility care under one roof.",
     gallery: sharedGallery("Ghatkopar"),
     built: true,
   },
@@ -804,7 +804,7 @@ export const CITIES: City[] = [
     heroImage: "/assets/centres/paldi-waiting.webp",
     hero360Url: "https://www.google.com/maps/embed?pb=!4v1780725289034!6m8!1m7!1sCAoSHENJQUJJaEFEeWM1VXZ6ZGI4R2U4cTNVQUFmWWI.!2m2!1d23.01327543356341!2d72.56405585909516!3f43.197350683590116!4f-11.407427687968791!5f0.4000000000000002",
     intro: [
-      "For over two decades, couples across Gujarat have turned to Bavishi Fertility Institute for honest counselling, advanced IVF technology and a genuinely caring team. From your first consultation to the moment you hold your baby, our Ahmedabad centres combine clinical excellence with the warmth of a family-led institute.",
+      "For over three decades, couples across Gujarat have turned to Bavishi Fertility Institute for honest counselling, advanced IVF technology and a genuinely caring team. From your first consultation to the moment you hold your baby, our Ahmedabad centres combine clinical excellence with the warmth of a family-led institute.",
       "Whether you are exploring IVF, ICSI, IUI, fertility preservation or treatment for male or female infertility, you will find every service — diagnostics, embryology lab, surgery and maternity care — under one roof, at a location convenient to you.",
     ],
     faqs: [
@@ -829,7 +829,7 @@ export const CITIES: City[] = [
     heroImage: "/assets/Locations/Mumbai.png",
     hero360Url: "https://www.google.com/maps/embed?pb=!4v1780725760082!6m8!1m7!1sCAoSF0NJSE0wb2dLRUlDQWdJRHlrdE9iX2dF!2m2!1d19.07851750759122!2d72.90374191572629!3f331.0839116483176!4f-6.84920058783446!5f0.4000000000000002",
     intro: [
-      "For couples across Mumbai and Navi Mumbai, Bavishi Fertility Institute brings over two decades of pioneering IVF experience together with genuinely compassionate care. From your first consultation to the moment you hold your baby, our Mumbai centres combine clinical excellence with the warmth of a family-led institute.",
+      "For couples across Mumbai and Navi Mumbai, Bavishi Fertility Institute brings over three decades of pioneering IVF experience together with genuinely compassionate care. From your first consultation to the moment you hold your baby, our Mumbai centres combine clinical excellence with the warmth of a family-led institute.",
       "With centres in Ghatkopar, Thane, Vile Parle, Borivali and Vashi, expert fertility care is always close to home. Whether you are exploring IVF, ICSI, IUI, fertility preservation or treatment for male or female infertility, you will find advanced diagnostics, embryology and counselling at a location convenient to you.",
     ],
     faqs: [

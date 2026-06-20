@@ -216,13 +216,13 @@ const whyIcons = {
 export const HOMEPAGE_DEFAULTS: HomepageData = {
   hero: {
     eyebrow: "Trusted Since 1998",
-    headline: "India's Trusted Fertility Center for 25+ Years",
+    headline: "India's Trusted Fertility Center for 30+ Years",
     headlineItalic: "Fertility",
     paragraph:
       "Helping families achieve parenthood through advanced fertility treatments, compassionate care, and personalised IVF programs.",
     badges: [
       "30,000+ Happy Families",
-      "25+ Years Experience",
+      "30+ Years Experience",
       "14 Centres",
       "Leading IVF Specialists",
       "NABH Accredited",
@@ -233,7 +233,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   },
   stats: [
     { value: "30,000+", l: "Happy Couples" },
-    { value: "25+", l: "Years Legacy" },
+    { value: "30+", l: "Years Legacy" },
     { value: "14", l: "Fertility Centres" },
     { value: "6× Winner", l: "Best IVF Chain in India (West)" },
     { value: "Best IVF Clinic Chain in India", l: "Mid-Day" },
@@ -315,9 +315,9 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     eyebrow: "About the Institute",
     heading: { lead: "A legacy of", em: "life-changing care." },
     subtitle:
-      "For over two decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
+      "For over three decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
     stats: [
-      { k: "Legacy", v: "25+ Years" },
+      { k: "Legacy", v: "30+ Years" },
       { k: "Recognition", v: "Award-Winning" },
       { k: "Patient Care", v: "Personalised" },
       { k: "IVF Leadership", v: "India's First" },
@@ -390,7 +390,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       "Speak with our fertility experts today — confidential, compassionate and complimentary.",
     stats: [
       { v: 30000, s: "+", l: "Happy Families" },
-      { v: 25, s: "+", l: "Years" },
+      { v: 30, s: "+", l: "Years" },
       { v: 14, s: "", l: "Centres" },
     ],
     ctas: ["Book Consultation", "WhatsApp Now", "Call Now"],
@@ -420,7 +420,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   },
   successStories: {
     eyebrow: "Success Stories",
-    heading: { lead: "30,000+ journeys.", em: "One promise kept." },
+    heading: { lead: "30,000+ couples.", em: "One promise kept." },
     subtitle: "Real stories from real families who began their parenthood journey with us.",
     ctaLabel: "View More Success Stories",
   },
@@ -495,12 +495,12 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     ],
   },
   seo: {
-    metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 25+ Years",
+    metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 30+ Years",
     metaDescription:
       "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
     ogTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     ogDescription:
-      "30,000+ pregnancies. 25+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 30+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     ogImage: heroImg,
   },
 };

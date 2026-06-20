@@ -14,7 +14,7 @@ const DB_URI =
 
 const STATS = [
   { value: "30,000+",                    label: "Happy Couples" },
-  { value: "25+",                        label: "Years Legacy" },
+  { value: "30+",                        label: "Years Legacy" },
   { value: "14",                         label: "Fertility Centres" },
   { value: "6× Winner",                  label: "Best IVF Chain in India (West)" },
   { value: "Best IVF Clinic Chain in India", label: "Mid-Day" },

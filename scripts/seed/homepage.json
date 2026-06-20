@@ -23,12 +23,12 @@
   ],
   "hero": {
     "eyebrow": "Trusted Since 1998",
-    "headline": "India's Trusted Fertility Center for 25+ Years",
+    "headline": "India's Trusted Fertility Center for 30+ Years",
     "headlineItalic": "Fertility",
     "paragraph": "Helping families achieve parenthood through advanced fertility treatments, compassionate care, and personalised IVF programs.",
     "badges": [
       { "text": "30,000+ Happy Families" },
-      { "text": "25+ Years Experience" },
+      { "text": "30+ Years Experience" },
       { "text": "14 Centres" },
       { "text": "Leading IVF Specialists" }
     ],
@@ -36,7 +36,7 @@
   },
   "stats": [
     { "value": "30,000+", "label": "Happy Couples" },
-    { "value": "25+", "label": "Years Legacy" },
+    { "value": "30+", "label": "Years Legacy" },
     { "value": "14", "label": "Fertility Centres" },
     { "value": "6× Winner", "label": "Best IVF Chain in India (West)" },
     { "value": "Best IVF Clinic Chain in India", "label": "Mid-Day" },
@@ -119,9 +119,9 @@
   "about": {
     "eyebrow": "About the Institute",
     "heading": { "lead": "A legacy of", "em": "life-changing care." },
-    "subtitle": "For over two decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
+    "subtitle": "For over three decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
     "stats": [
-      { "k": "Legacy", "v": "25+ Years" },
+      { "k": "Legacy", "v": "30+ Years" },
       { "k": "Recognition", "v": "Award-Winning" },
       { "k": "Patient Care", "v": "Personalised" },
       { "k": "IVF Leadership", "v": "India's First" }
@@ -191,14 +191,14 @@
     "paragraph": "Speak with our fertility experts today — confidential, compassionate and complimentary.",
     "stats": [
       { "v": 30000, "s": "+", "l": "Happy Families" },
-      { "v": 25, "s": "+", "l": "Years" },
+      { "v": 30, "s": "+", "l": "Years" },
       { "v": 14, "s": "", "l": "Centres" }
     ]
   },
   "seo": {
-    "metaTitle": "Bavishi Fertility Centre — India's Trusted IVF Experts for 25+ Years",
+    "metaTitle": "Bavishi Fertility Centre — India's Trusted IVF Experts for 30+ Years",
     "metaDescription": "Premium fertility care across 15 centres in India. 30,000+ happy families, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
     "ogTitle": "Bavishi Fertility Centre — India's Trusted IVF Experts",
-    "ogDescription": "30,000+ happy families. 25+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care."
+    "ogDescription": "30,000+ happy families. 30+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care."
   }
 }

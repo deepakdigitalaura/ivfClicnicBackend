@@ -363,13 +363,13 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "binal-shah", name: "Dr. Binal Shah", image: "/assets/doctors/binal-shah.png",
     city: "Ahmedabad", citySlug: "ahmedabad", locations: ["paldi"],
-    credentials: "MBBS, DGO", experienceLabel: "25+ yrs", experienceYears: 25,
+    credentials: "MBBS, DGO", experienceLabel: "30+ yrs", experienceYears: 30,
     specialty: "Obstetrics, Gynaecology & IVF",
     role: "IVF Specialist · Chief Quality Control & NABH Nodal Officer",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
     shortBio: "Experienced obstetrician and IVF specialist managing normal and IVF pregnancies, and Chief Quality Control & NABH Nodal Officer at Bavishi Fertility Institute.",
     bio: [
-      "Dr. Binal Shah is an experienced obstetrician and IVF specialist with over two decades of practice in managing normal and IVF pregnancies, including complex cases such as twin pregnancies and high-risk deliveries.",
+      "Dr. Binal Shah is an experienced obstetrician and IVF specialist with over three decades of practice in managing normal and IVF pregnancies, including complex cases such as twin pregnancies and high-risk deliveries.",
       "She serves as the Chief Quality Control Officer and NABH Nodal Officer at Bavishi Fertility Institute, helping uphold the institute's clinical quality and accreditation standards.",
     ],
     knowsAbout: ["In Vitro Fertilization", "High-Risk Pregnancy", "Twin Pregnancy", "Female Infertility"],

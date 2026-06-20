@@ -441,9 +441,6 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
               <Magnetic as="a" href={content.primaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
                 {content.primaryCta.label} <ArrowRight className="h-4 w-4" />
               </Magnetic>
-              <Magnetic as="a" href={content.secondaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                {content.secondaryCta.label}
-              </Magnetic>
             </div>
             <p className="mt-3 text-xs text-white/40">* Terms and conditions apply.</p>
           </Reveal>
@@ -509,11 +506,11 @@ export function TreatmentCard({
 /* ---------- Treatments ---------- */
 
 const TREATMENT_TITLE_HREFS: Record<string, string> = {
-  "Male Infertility": "/oligospermia",
-  "Female Infertility": "/pcos",
+  "Male Infertility": "/treatments/male-infertility",
+  "Female Infertility": "/treatments/female-infertility",
   "IVF / ICSI / ART": "/what-is-ivf",
   "IUI": "/intra-uterine-insemination-iui",
-  "Advanced Fertility Techniques": "/what-is-ivf",
+  "Advanced Fertility Techniques": "/treatments/advanced-fertility-techniques",
   "PGT — Genetic Testing": "/pgt",
   "Fertility Preservation": "/cryopreservation",
   "Sperm Donation": "/sperm-donation",
@@ -523,7 +520,7 @@ const TREATMENT_TITLE_HREFS: Record<string, string> = {
   "Endometriosis": "/endometriosis",
   "Ovarian Rejuvenation": "/ovarian-rejuvenation",
   "High Risk Obstetrics": "/services/high-risk-pregnancy-care",
-  "Maternity Services": "/services/painless-delivery",
+  "Maternity Services": "/services/maternity-services",
 };
 
 const MOBILE_TREATMENT_TITLES = new Set([
@@ -599,7 +596,7 @@ export function LiteYouTube({ id, title, className = "" }: { id: string; title: 
 export function SuccessStories({
   stories = HOMEPAGE_DEFAULTS.videos.stories,
   eyebrow = "Success Stories",
-  title = <>30,000+ journeys. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
+  title = <>30,000+ couples. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
   subtitle = "Real stories from real families who began their parenthood journey with us.",
   ctaLabel = "View More Success Stories",
   tone = "white",

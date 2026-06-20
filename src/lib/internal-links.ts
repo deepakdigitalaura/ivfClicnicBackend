@@ -38,8 +38,8 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
   "suraksha-kavach": {
     key: "suraksha-kavach",
     label: "Suraksha Kavach",
-    href: "/suraksha-kavach", // future dedicated page
-    published: false,
+    href: "/suraksha-kavach",
+    published: true,
     fallback: "/#suraksha",
     aliases: ["Suraksha Kavach Package", "Suraksha Kavach programme", "Suraksha Kavach program"],
   },

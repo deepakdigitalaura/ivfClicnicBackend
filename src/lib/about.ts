@@ -80,7 +80,7 @@ export type AboutData = {
 export const ABOUT_DEFAULTS: AboutData = {
   hero: {
     eyebrow: "About Bavishi Fertility Institute",
-    headline: "Over two decades of fertility excellence — built on hope",
+    headline: "Over three decades of fertility excellence — built on hope",
     headlineItalic: "fertility excellence",
     paragraph:
       "Since 1998, Bavishi Fertility Institute has helped over 30,000 families experience the joy of parenthood — pioneering IVF in India and growing into one of the country's most trusted fertility networks, with 14 centres across 8 cities.",
@@ -103,7 +103,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     { n: "6×", l: "National Fertility Award (2019–26)" },
   ],
   legacy: {
-    eyebrow: "25+ Years of Legacy",
+    eyebrow: "30+ Years of Legacy",
     heading: { lead: "Milestones that shaped", em: "Indian fertility care" },
   },
   milestones: [
@@ -137,7 +137,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     heading: { lead: "Why families across India", em: "trust Bavishi Fertility Institute" },
   },
   trustPillars: [
-    { icon: "Award", t: "25+ Years of Experience", d: "Since 1998, a family-led institute that pioneered IVF in India and has guided 30,000+ families to parenthood." },
+    { icon: "Award", t: "30+ Years of Experience", d: "Since 1998, a family-led institute that pioneered IVF in India and has guided 30,000+ families to parenthood." },
     { icon: "HeartPulse", t: "Outcomes That Matter", d: "3,000+ IVF cycles a year with a focus on safe stimulation, best-quality embryos and healthy single pregnancies." },
     { icon: "Users", t: "A Family of Specialists", d: "Reproductive endocrinologists, embryologists, andrologists, fetal-medicine experts, counsellors and nutritionists under one roof." },
     { icon: "Microscope", t: "World-Class Technology", d: "Class 1000 IVF labs — 10× cleaner than the international standard — with time-lapse imaging, vitrification and PGT." },
@@ -154,7 +154,7 @@ export const ABOUT_DEFAULTS: AboutData = {
   },
   patientStats: [
     { n: "30,000+", l: "Happy families" },
-    { n: "25+", l: "Years of fertility expertise" },
+    { n: "30+", l: "Years of fertility expertise" },
     { n: "300+", l: "International patients a year" },
     { n: "8", l: "Cities, one standard of care" },
   ],
@@ -179,7 +179,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     ctas: ["Book Free Consultation", "WhatsApp Us"],
   },
   seo: {
-    metaTitle: "About Bavishi Fertility Institute — 25+ Years of IVF Excellence in India",
+    metaTitle: "About Bavishi Fertility Institute — 30+ Years of IVF Excellence in India",
     metaDescription:
       "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 14 centres. Discover our story, legacy and values.",
     ogTitle: "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1998",

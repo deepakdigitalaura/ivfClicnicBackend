@@ -20,7 +20,7 @@ export const metadata: Metadata = {
   openGraph: {
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
-      "30,000+ pregnancies. 25+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 30+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     type: "website",
     images: [OG_IMAGE],
   },
@@ -28,7 +28,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
-      "30,000+ pregnancies. 25+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 30+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     images: [OG_IMAGE],
   },
 };
