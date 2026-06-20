@@ -8,6 +8,7 @@ import {
 } from "@/lib/locations";
 import {
   getCity, getCentre, getPublishedCitySlugs, getPublishedCentresForCity, getBlogsByLocationSlug,
+  getHomepage,
 } from "@/lib/payload";
 import { toBlogPost } from "@/lib/blogs";
 import { abs } from "@/lib/seo";
@@ -84,6 +85,8 @@ export default async function Page({ params }: { params: Promise<{ city: string 
   const c = await getCity(city);
   if (!c || !c.built) notFound();
 
+  const homepageData = await getHomepage();
+
   if (!await isMultiCentreCity(city)) {
     const soleCentreSlug = await resolveSoleCentreSlug(city);
     if (!soleCentreSlug) notFound();
@@ -92,7 +95,7 @@ export default async function Page({ params }: { params: Promise<{ city: string 
     return (
       <>
         <JsonLd graph={centerGraph(centre)} />
-        <CenterPage centre={centre} />
+        <CenterPage centre={centre} stats={homepageData.stats} />
       </>
     );
   }
@@ -101,7 +104,7 @@ export default async function Page({ params }: { params: Promise<{ city: string 
   return (
     <>
       <JsonLd graph={cityGraph(c)} />
-      <CityPage city={c} cmsBlogs={cmsBlogs} />
+      <CityPage city={c} cmsBlogs={cmsBlogs} stats={homepageData.stats} />
     </>
   );
 }

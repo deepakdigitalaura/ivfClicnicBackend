@@ -39,7 +39,7 @@ const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
 const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
 
-export function CityPage({ city, cmsBlogs }: { city: City | ResolvedCity; cmsBlogs?: BlogPost[] }) {
+export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity; cmsBlogs?: BlogPost[]; stats?: { value: string; l: string }[] }) {
   const sl = (city as ResolvedCity).sectionLabels ?? {};
   const blogs = blogsForLocation(city.slug, city.name, 3, cmsBlogs);
   const editing = !!useEdit()?.editMode;
@@ -121,7 +121,7 @@ export function CityPage({ city, cmsBlogs }: { city: City | ResolvedCity; cmsBlo
         </div>
       </section>
 
-      <StatsStrip />
+      <StatsStrip stats={stats} />
 
       {/* Overview */}
       {city.intro.length > 0 && (

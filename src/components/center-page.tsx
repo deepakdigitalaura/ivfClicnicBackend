@@ -35,7 +35,7 @@ const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
  * One Centre object renders the entire page: NAP, map, geo, hours,
  * facilities, treatments, doctors, areas served, landmarks, how-to-reach,
  * FAQs and verified reviews. Reused by every centre, every city. */
-export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
+export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre; stats?: { value: string; l: string }[] }) {
   const editing = !!useEdit()?.editMode;
   const sl = (centre as ResolvedCentre).sectionLabels ?? {};
   const city = cityBySlug(centre.citySlug);
@@ -139,7 +139,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
         </div>
       </section>
 
-      <StatsStrip />
+      <StatsStrip stats={stats} />
 
       {/* Overview */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">

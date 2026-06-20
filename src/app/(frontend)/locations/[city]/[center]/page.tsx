@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { CenterPage } from "@/components/center-page";
 import { JsonLd } from "@/components/json-ld";
 import { cityBySlug, centerGraph, builtCentreParams, cityHasOwnPage } from "@/lib/locations";
-import { getCentre, getPublishedCentreParams, getPublishedCentresForCity } from "@/lib/payload";
+import { getCentre, getPublishedCentreParams, getPublishedCentresForCity, getHomepage } from "@/lib/payload";
 import { abs } from "@/lib/seo";
 
 /** Pre-render every built centre from both code defaults and DB. */
@@ -50,10 +50,11 @@ export default async function Page({ params }: { params: Promise<{ city: string;
   const { city, center } = await params;
   const c = await getCentre(city, center);
   if (!c || !c.built || !await cityIsMultiCentre(city)) notFound();
+  const homepageData = await getHomepage();
   return (
     <>
       <JsonLd graph={centerGraph(c)} />
-      <CenterPage centre={c} />
+      <CenterPage centre={c} stats={homepageData.stats} />
     </>
   );
 }
