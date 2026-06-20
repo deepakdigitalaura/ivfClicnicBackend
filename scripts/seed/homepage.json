@@ -35,14 +35,13 @@
     "floatingBadge": "National Fertility Award · 6× Winner"
   },
   "stats": [
-    { "value": "30,000+", "label": "Happy Families" },
+    { "value": "30,000+", "label": "Happy Couples" },
     { "value": "25+", "label": "Years Legacy" },
     { "value": "14", "label": "Fertility Centres" },
-    { "value": "6× Winner", "label": "National Fertility Award" },
-    { "value": "Rank #1", "label": "Best IVF Center in India" },
-    { "value": "300+", "label": "International Patients" },
-    { "value": "Best IVF Clinic Chain", "label": "Mid-Day" },
-    { "value": "Best IVF Chain – West", "label": "The Economic Times" }
+    { "value": "6× Winner", "label": "Best IVF Chain in India (West)" },
+    { "value": "Best IVF Clinic Chain in India", "label": "Mid-Day" },
+    { "value": "Rank #1", "label": "All India Ahmedabad Institute" },
+    { "value": "500+", "label": "International Patients Per Year" }
   ],
   "whyBavishi": {
     "eyebrow": "Why Bavishi Fertility Center",
