@@ -27,27 +27,27 @@ const DEFAULT_CARDS: Card[] = [
   { icon: "Mail", t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
 ];
 
-type Centre = { name: string; address: string; phone: string; phoneLabel: string; href?: string };
+type Centre = { name: string; address: string; phone: string; phoneLabel: string; hours?: string; href?: string };
 
-// Full Bavishi Fertility Institute centre directory — real addresses; unique per-centre phones.
+// Full Bavishi Fertility Institute centre directory — real addresses, phones and GMB hours.
 const directory: Centre[] = [
   // Ahmedabad
-  { name: "Ahmedabad — Paldi", address: "Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi – 380007", phone: "919712622288", phoneLabel: "+91 97126 22288", href: "/locations/ahmedabad/paldi" },
-  { name: "Ahmedabad — Sindhu Bhavan Road", address: "SF-213, Stellar, Sindhu Bhavan Marg, near Pakvan Cross Roads, Bodakdev – 380059", phone: "919712622288", phoneLabel: "+91 97126 22288", href: "/locations/ahmedabad/sindhu-bhavan-road" },
-  { name: "Ahmedabad — Nikol", address: "Hill Town Plaza, 501, near Amar Jawan Circle, Nikol – 380049", phone: "919227114040", phoneLabel: "+91 92271 14040", href: "/locations/ahmedabad/nikol" },
+  { name: "Ahmedabad — Paldi", address: "Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi – 380007", phone: "919712622288", phoneLabel: "+91 97126 22288", hours: "Mon–Sat · 9:00 am – 7:00 pm", href: "/locations/ahmedabad/paldi" },
+  { name: "Ahmedabad — Sindhu Bhavan Road", address: "SF-213, Stellar, Sindhu Bhavan Marg, near Pakvan Cross Roads, Bodakdev – 380059", phone: "919712622288", phoneLabel: "+91 97126 22288", hours: "Mon–Sat · 10:30 am – 7:00 pm", href: "/locations/ahmedabad/sindhu-bhavan-road" },
+  { name: "Ahmedabad — Nikol", address: "Hill Town Plaza, 501, near Amar Jawan Circle, Nikol – 380049", phone: "919227114040", phoneLabel: "+91 92271 14040", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/ahmedabad/nikol" },
   // Mumbai
-  { name: "Mumbai — Ghatkopar", address: "2nd Floor, Vallabh Vihar CHS, opp. Kotak Mahindra Bank, M.G. Road, Ghatkopar East – 400077", phone: "919328190146", phoneLabel: "+91 93281 90146", href: "/locations/mumbai/ghatkopar" },
-  { name: "Mumbai — Thane", address: "Bapat Urology Center, A.K. Vaidya Marg, near Paramarth Niketan, Panch Pakhdi, Thane West – 400602", phone: "919167204018", phoneLabel: "+91 91672 04018", href: "/locations/mumbai/thane" },
-  { name: "Mumbai — Vile Parle", address: "Irla Nursing Home & Polyclinic, 1st Floor, S.V. Road, Navpada, Irla, Vile Parle West – 400056", phone: "919167204019", phoneLabel: "+91 91672 04019", href: "/locations/mumbai/vile-parle" },
-  { name: "Mumbai — Borivali", address: "M.M. Medical Center, Ankur, nr. Marry Imm School, L.M. Road, Shivajinagar, Borivali West", phone: "919167204019", phoneLabel: "+91 91672 04019", href: "/locations/mumbai/borivali" },
-  { name: "Mumbai — Vashi", address: "Precision Superspeciality Clinic, 52/53, 3rd Floor, Mahavir Centre, Sector 17, Vashi – 400703", phone: "919687004268", phoneLabel: "+91 96870 04268", href: "/locations/mumbai/vashi" },
+  { name: "Mumbai — Ghatkopar", address: "2nd Floor, Vallabh Vihar CHS, opp. Kotak Mahindra Bank, M.G. Road, Ghatkopar East – 400077", phone: "919328190146", phoneLabel: "+91 93281 90146", hours: "Mon–Sat · 9:00 am – 9:00 pm", href: "/locations/mumbai/ghatkopar" },
+  { name: "Mumbai — Thane", address: "Bapat Urology Center, A.K. Vaidya Marg, near Paramarth Niketan, Panch Pakhdi, Thane West – 400602", phone: "919167204018", phoneLabel: "+91 91672 04018", hours: "Mon–Sat · 10:00 am – 1:00 pm", href: "/locations/mumbai/thane" },
+  { name: "Mumbai — Vile Parle", address: "Irla Nursing Home & Polyclinic, 1st Floor, S.V. Road, Navpada, Irla, Vile Parle West – 400056", phone: "919167204019", phoneLabel: "+91 91672 04019", hours: "Mon–Sat · 2:00 pm – 5:00 pm", href: "/locations/mumbai/vile-parle" },
+  { name: "Mumbai — Borivali", address: "M.M. Medical Center, Ankur, nr. Marry Imm School, L.M. Road, Shivajinagar, Borivali West", phone: "919167204019", phoneLabel: "+91 91672 04019", hours: "Mon–Sat · 10:00 am – 1:00 pm", href: "/locations/mumbai/borivali" },
+  { name: "Mumbai — Vashi", address: "Precision Superspeciality Clinic, 52/53, 3rd Floor, Mahavir Centre, Sector 17, Vashi – 400703", phone: "919687004268", phoneLabel: "+91 96870 04268", hours: "Tue, Thu & Sat · 3:00 pm – 5:00 pm", href: "/locations/mumbai/vashi" },
   // Other cities
-  { name: "Vadodara", address: "4th Floor, Trisha Square-2, Sampatrao Colony, Jetalpur Road, Alkapuri – 390007", phone: "917575099898", phoneLabel: "+91 75750 99898", href: "/locations/vadodara/jetalpur-road" },
-  { name: "Surat", address: "9th Floor, Param Doctor House, Lal Darwaja, Station Road, Surat", phone: "919879572247", phoneLabel: "+91 98795 72247", href: "/locations/surat/lal-darwaja" },
-  { name: "Bhuj", address: "Spandan Maternity Home, 13-28 Shivam Nagar, near Uma Nagar, Mirzapar Highway, Bhuj – 370040", phone: "919687188550", phoneLabel: "+91 96871 88550", href: "/locations/bhuj/mirjapar" },
-  { name: "Bhavnagar", address: "Hema Women's Hospital, 203-205 Sai Ganga, Kalubha Road, Bhavnagar – 364001", phone: "917069314040", phoneLabel: "+91 70693 14040", href: "/locations/bhavnagar/kalubha-road" },
-  { name: "Anand", address: "Unit 2, IRIS Hospital, Nanikhodiyar, Anand – 388001", phone: "917069034565", phoneLabel: "+91 70690 34565", href: "/locations/anand/nanikhodiyar" },
-  { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", href: "/locations/varanasi/shivpur" },
+  { name: "Vadodara", address: "4th Floor, Trisha Square-2, Sampatrao Colony, Jetalpur Road, Alkapuri – 390007", phone: "917575099898", phoneLabel: "+91 75750 99898", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/vadodara/jetalpur-road" },
+  { name: "Surat", address: "9th Floor, Param Doctor House, Lal Darwaja, Station Road, Surat", phone: "919879572247", phoneLabel: "+91 98795 72247", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/surat/lal-darwaja" },
+  { name: "Bhuj", address: "Spandan Maternity Home, 13-28 Shivam Nagar, near Uma Nagar, Mirzapar Highway, Bhuj – 370040", phone: "919687188550", phoneLabel: "+91 96871 88550", hours: "Mon–Fri · 8:00 am – 7:00 pm · Sat till 1:00 pm", href: "/locations/bhuj/mirjapar" },
+  { name: "Bhavnagar", address: "Hema Women's Hospital, 203-205 Sai Ganga, Kalubha Road, Bhavnagar – 364001", phone: "917069314040", phoneLabel: "+91 70693 14040", hours: "Mon–Sat · 10:00 am – 2:00 pm & 4:00 pm – 8:00 pm", href: "/locations/bhavnagar/kalubha-road" },
+  { name: "Anand", address: "Unit 2, IRIS Hospital, Nanikhodiyar, Anand – 388001", phone: "917069034565", phoneLabel: "+91 70690 34565", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/anand/nanikhodiyar" },
+  { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/varanasi/shivpur" },
 ];
 
 type Faq = { q: string; a: string };
@@ -158,6 +158,13 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
                 <a href={`tel:+${c.phone}`} className="mt-4 inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">
                   <Phone className="h-4 w-4 text-[color:var(--rose)]" /> {c.phoneLabel}
                 </a>
+
+                {c.hours && (
+                  <div className="mt-2 inline-flex items-start gap-2 text-[12px] text-muted-foreground">
+                    <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" />
+                    <span>{c.hours}</span>
+                  </div>
+                )}
 
                 <div className="mt-auto flex flex-nowrap items-center gap-1.5 border-t border-border/60 pt-4">
                   <a href={`tel:+${c.phone}`} className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-[color:var(--rose)] px-2.5 py-1.5 text-[11px] font-semibold text-white transition hover:brightness-110">

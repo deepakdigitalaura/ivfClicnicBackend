@@ -15,11 +15,10 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 /* ---------- Data ---------- */
 
 const HERO_STATS = [
-  { value: 20000, suffix: "+", label: "Successful IVF Pregnancies" },
+  { value: 25000, suffix: "+", label: "Successful IVF Pregnancies" },
   { value: 98, suffix: "%", label: "Success Rate" },
   { value: 100, suffix: "+", label: "Years Combined Experience" },
-  { value: 3000, suffix: "+", label: "Cycles / Year" },
-  { value: 15, suffix: "", label: "Centres Across India" },
+  { value: 14, suffix: "", label: "Centres Across India" },
 ];
 
 const PILLARS = [
@@ -110,15 +109,15 @@ export function SuccessBenchmarksPage() {
       </div>
 
       {/* ==================== HERO ==================== */}
-      <section className="relative overflow-hidden bg-[color:var(--plum)] text-white noise">
+      <section className="relative overflow-hidden gradient-warm noise">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/25 blur-3xl"
+            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/20 blur-3xl"
             animate={{ x: [0, 60, 0], y: [0, 30, 0] }}
             transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--gold)]/15 blur-3xl"
+            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl"
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -126,29 +125,31 @@ export function SuccessBenchmarksPage() {
 
         <div className="container-px relative mx-auto max-w-[1400px] py-20 text-center lg:py-28">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-              <Award className="h-3.5 w-3.5" /> Proven Track Record
+            <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
+              <Award className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Proven Track Record
             </span>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.5rem] text-balance">
-              Our numbers <em className="font-display italic text-[color:var(--rose-soft)]">speak.</em>
+            <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
+              Our numbers <em className="font-display italic text-[color:var(--rose)]">speak.</em>
             </h1>
           </Reveal>
           <Reveal delay={0.18}>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75 text-pretty">
-              With over 20,000+ successful IVF pregnancies and one of the highest success rates
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
+              With over 25,000+ successful IVF pregnancies and one of the highest success rates
               across India and the world!
             </p>
           </Reveal>
           <Reveal delay={0.25}>
-            <p className="mx-auto mt-4 max-w-2xl text-[15px] leading-relaxed text-white/55 italic text-pretty">
-              &ldquo;Success is not a random incident; it is years of learning, observing,
-              implementing best practices, and prudent use of technology and resources.&rdquo;
-            </p>
+            <blockquote className="mt-8 mx-auto max-w-2xl rounded-2xl border border-[color:var(--plum)]/10 bg-white/50 px-8 py-6 backdrop-blur">
+              <p className="text-[15px] leading-relaxed text-[color:var(--plum)]/70 italic text-pretty">
+                &ldquo;Success is not a random incident; it is years of learning, observing,
+                implementing best practices, and prudent use of technology and resources.&rdquo;
+              </p>
+            </blockquote>
           </Reveal>
           <Reveal delay={0.35}>
-            <div className="mt-10 flex flex-wrap justify-center gap-3">
+            <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Magnetic
                 as="a"
                 href="/#book"
@@ -161,7 +162,7 @@ export function SuccessBenchmarksPage() {
                 href="https://wa.me/919712622288"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white"
+                className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]"
               >
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us
               </Magnetic>
@@ -177,7 +178,7 @@ export function SuccessBenchmarksPage() {
           <div className="absolute -bottom-20 -right-20 h-80 w-80 rounded-full bg-[color:var(--gold)]/15 blur-3xl" />
         </div>
         <div className="container-px relative mx-auto max-w-[1400px]">
-          <Stagger className="grid grid-cols-2 gap-8 md:grid-cols-3 lg:grid-cols-5">
+          <Stagger className="grid grid-cols-2 gap-8 md:grid-cols-4">
             {HERO_STATS.map((s, i) => (
               <StaggerItem key={i}>
                 <div className="text-center">

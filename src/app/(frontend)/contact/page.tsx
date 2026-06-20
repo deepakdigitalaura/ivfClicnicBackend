@@ -81,7 +81,7 @@ async function loadContact() {
 
   // Centres directory — pulled live from the CMS so edits in /admin/collections/centres
   // are reflected immediately without any code change.
-  let directory: { name: string; address: string; phone: string; phoneLabel: string; href?: string }[] | undefined;
+  let directory: { name: string; address: string; phone: string; phoneLabel: string; hours?: string; href?: string }[] | undefined;
   try {
     const payload = await payloadClient();
     const res = await payload.find({ collection: "centres", limit: 100, depth: 0, sort: "citySlug" });
@@ -91,6 +91,7 @@ async function loadContact() {
         address: c.address ?? "",
         phone: c.phone ?? "",
         phoneLabel: c.phoneLabel ?? "",
+        hours: c.hours ?? undefined,
         href: `/locations/${c.citySlug}/${c.slug}`,
       }));
     }

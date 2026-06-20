@@ -81,10 +81,10 @@ const TECH_HIGHLIGHTS = [
 ];
 
 const STATS = [
-  { value: 15, suffix: "", label: "Centres", sub: "across 8 cities in India" },
+  { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
   { value: 10, suffix: "x", label: "Superior Air Quality", sub: "Class 1000 vs Class 10,000" },
   { value: 25, suffix: "+", label: "Years of Excellence", sub: "pioneering IVF since 1998" },
-  { value: 30000, suffix: "+", label: "Babies Born", sub: "across all centres" },
+  { value: 25000, suffix: "+", label: "Successful Pregnancies", sub: "across all centres" },
 ];
 
 /* ---------- Page ---------- */
@@ -404,7 +404,7 @@ export function InfrastructurePage() {
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-                Book a free consultation and visit any of our 15 centres across India. See the
+                Book a free consultation and visit any of our 14 centres across India. See the
                 Class 1000 labs, meet the team, and experience the difference that world-class
                 infrastructure makes for your fertility journey.
               </p>

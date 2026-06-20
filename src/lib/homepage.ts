@@ -225,7 +225,6 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       "30+ Years Experience",
       "14 Centres",
       "Leading IVF Specialists",
-      "NABH Accredited",
     ],
     ctas: ["Book Consultation", "Check IVF Eligibility", "Video Consultation"],
     floatingBadge: "National Fertility Award · 6× Winner",

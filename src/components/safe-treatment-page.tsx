@@ -1,7 +1,7 @@
 "use client";
 import {
   ArrowRight, Calendar, MessageCircle, Shield, ShieldCheck,
-  Microscope, HeartPulse, Wind, Award, Baby, Lock, Syringe,
+  Microscope, HeartPulse, Wind, Baby, Lock, Syringe,
   CheckCircle2,
 } from "lucide-react";
 import { motion } from "framer-motion";
@@ -39,12 +39,6 @@ const SAFETY_FEATURES = [
       "Our labs maintain air quality ten times cleaner than European standards. HEPA-filtered laminar flow hoods, AI-integrated trigas incubators with smart alarm systems, and continuous temperature monitoring at 37°C.",
   },
   {
-    icon: Award,
-    title: "NABH Accreditation",
-    description:
-      "Our centres are NABH accredited (or under process), reflecting the highest quality and safety standards. We follow regular equipment maintenance schedules and continuous bacterial contamination monitoring.",
-  },
-  {
     icon: Baby,
     title: "Single Embryo Transfer (eSET)",
     description:
@@ -68,7 +62,6 @@ const STATS = [
   { value: 10, suffix: "+ Years", label: "OHSS Free", sub: "zero severe cases in over a decade" },
   { value: 1000, suffix: "", label: "Class 1000 Labs", sub: "ten times cleaner than EU standards" },
   { value: 2, suffix: "x", label: "Double-Witness", sub: "two professionals at every step" },
-  { value: 15, suffix: "", label: "NABH Centres", sub: "accredited across India" },
 ];
 
 const PROTOCOLS = [
@@ -106,15 +99,15 @@ export function SafeTreatmentPage() {
       </div>
 
       {/* ==================== HERO ==================== */}
-      <section className="relative overflow-hidden bg-[color:var(--plum)] text-white noise">
+      <section className="relative overflow-hidden gradient-warm noise">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/25 blur-3xl"
+            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/20 blur-3xl"
             animate={{ x: [0, 60, 0], y: [0, 30, 0] }}
             transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--gold)]/15 blur-3xl"
+            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl"
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -122,32 +115,32 @@ export function SafeTreatmentPage() {
 
         <div className="container-px relative mx-auto max-w-[1400px] py-20 text-center lg:py-28">
           <Reveal>
-            <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-              <Shield className="h-3.5 w-3.5" /> Safety First, Safety for All
+            <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
+              <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Safety First, Safety for All
             </span>
           </Reveal>
           <Reveal delay={0.1}>
-            <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.5rem] text-balance">
+            <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
               Absolute safety for your{" "}
-              <em className="font-display italic text-[color:var(--rose-soft)]">
+              <em className="font-display italic text-[color:var(--rose)]">
                 fertility treatment.
               </em>
             </h1>
           </Reveal>
           <Reveal delay={0.18}>
-            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75 text-pretty">
+            <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
               At Bavishi Fertility Institute, safety isn&#39;t a feature — it&#39;s the foundation of everything we do.
               From OHSS-free protocols to Class 1000 labs, every detail is engineered to protect you and your future child.
             </p>
           </Reveal>
           <Reveal delay={0.25}>
-            <div className="mx-auto mt-8 flex max-w-md items-center gap-4 rounded-2xl border border-white/10 bg-white/5 px-6 py-5 backdrop-blur">
-              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[color:var(--rose)]/20">
-                <Shield className="h-7 w-7 text-[color:var(--rose-soft)]" />
+            <div className="mx-auto mt-8 flex max-w-md items-center gap-4 rounded-2xl border border-[color:var(--plum)]/10 bg-white/60 px-6 py-5 backdrop-blur">
+              <div className="grid h-14 w-14 shrink-0 place-items-center rounded-full bg-[color:var(--rose-soft)]/50">
+                <Shield className="h-7 w-7 text-[color:var(--rose)]" />
               </div>
               <div className="text-left">
-                <div className="text-xl font-semibold">Our Motto</div>
-                <div className="text-sm text-white/60">
+                <div className="text-xl font-semibold text-[color:var(--plum)]">Our Motto</div>
+                <div className="text-sm text-[color:var(--plum)]/60">
                   &ldquo;Safety First, Safety for All&rdquo; — the principle behind every procedure
                 </div>
               </div>
@@ -168,7 +161,7 @@ export function SafeTreatmentPage() {
                 href="https://wa.me/919712622288"
                 target="_blank"
                 rel="noopener noreferrer"
-                className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white"
+                className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]"
               >
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us
               </Magnetic>
@@ -440,7 +433,6 @@ export function SafeTreatmentPage() {
                 {[
                   { icon: HeartPulse, text: "OHSS-Free Clinic" },
                   { icon: Wind, text: "Class 1000 Labs" },
-                  { icon: Award, text: "NABH Accredited" },
                   { icon: ShieldCheck, text: "Double-Witness Protocol" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-white/80">

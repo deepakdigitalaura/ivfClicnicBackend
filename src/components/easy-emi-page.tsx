@@ -65,7 +65,7 @@ const VALUE_PACKAGES = [
   {
     icon: Package,
     title: "Best Treatment at Optimal Pricing",
-    description: "We leverage our scale across 15 centres to negotiate the best rates for medications, consumables, and lab services — savings we pass directly to you.",
+    description: "We leverage our scale across 14 centres to negotiate the best rates for medications, consumables, and lab services — savings we pass directly to you.",
   },
   {
     icon: BadgeCheck,

@@ -82,9 +82,9 @@ const STEPS = [
 
 const STATS = [
   { value: 98, suffix: "%", label: "Success Rate", sub: "Suraksha Kavach patients" },
-  { value: 30000, suffix: "+", label: "Babies Born", sub: "across all Bavishi Fertility Institute centres" },
+  { value: 25000, suffix: "+", label: "Successful IVF Pregnancies", sub: "across all Bavishi Fertility Institute centres" },
   { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
-  { value: 15, suffix: "", label: "Centres", sub: "across 8 cities in India" },
+  { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
 ];
 
 const FAQS: { q: string; a: string }[] = [
@@ -114,7 +114,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How do I enrol in Suraksha Kavach?",
-    a: "Start by booking a free consultation at any of our 15 centres across India. After your initial evaluation, if you are eligible, our team will walk you through the enrolment process, package details, and answer any questions you may have.",
+    a: "Start by booking a free consultation at any of our 14 centres across India. After your initial evaluation, if you are eligible, our team will walk you through the enrolment process, package details, and answer any questions you may have.",
   },
   {
     q: "Can I transfer my package to someone else?",
@@ -171,15 +171,15 @@ export function SurakshaKavachPage() {
       </div>
 
       {/* ==================== HERO ==================== */}
-      <section className="relative overflow-hidden bg-[color:var(--plum)] text-white noise">
+      <section className="relative overflow-hidden gradient-warm noise">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/25 blur-3xl"
+            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/20 blur-3xl"
             animate={{ x: [0, 60, 0], y: [0, 30, 0] }}
             transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--gold)]/15 blur-3xl"
+            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl"
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -188,29 +188,29 @@ export function SurakshaKavachPage() {
         <div className="container-px relative mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-12 py-20 lg:grid-cols-2 lg:py-28">
           <div>
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-                <Shield className="h-3.5 w-3.5" /> India&#39;s Only IVF Protection Program
+              <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
+                <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> India&#39;s Only IVF Protection Program
               </span>
             </Reveal>
             <Reveal delay={0.1}>
-              <h1 className="mt-6 text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.5rem] text-balance">
-                No tall claims, <em className="font-display italic text-[color:var(--rose-soft)]">but a solid promise.</em>
+              <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
+                No tall claims, <em className="font-display italic text-[color:var(--rose)]">but a solid promise.</em>
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
-              <p className="mt-6 max-w-xl text-lg leading-relaxed text-white/75 text-pretty">
+              <p className="mt-6 max-w-xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
                 Suraksha Kavach is a unique and only one-of-its-kind package in the entire world.
                 It promises at least one healthy baby from your investment — for you, or for someone you love.
               </p>
             </Reveal>
             <Reveal delay={0.25}>
-              <div className="mt-5 flex items-center gap-3 rounded-2xl border border-white/10 bg-white/5 px-5 py-4 backdrop-blur">
-                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[color:var(--rose)]/20">
-                  <Award className="h-6 w-6 text-[color:var(--rose-soft)]" />
+              <div className="mt-5 flex items-center gap-3 rounded-2xl border border-[color:var(--plum)]/10 bg-white/60 px-5 py-4 backdrop-blur">
+                <div className="grid h-12 w-12 shrink-0 place-items-center rounded-full bg-[color:var(--rose-soft)]/50">
+                  <Award className="h-6 w-6 text-[color:var(--rose)]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-semibold">98% Success Rate</div>
-                  <div className="text-sm text-white/60">of Suraksha Kavach patients have a healthy live-born child</div>
+                  <div className="text-2xl font-semibold text-[color:var(--plum)]">98% Success Rate</div>
+                  <div className="text-sm text-[color:var(--plum)]/60">of Suraksha Kavach patients have a healthy live-born child</div>
                 </div>
               </div>
             </Reveal>
@@ -219,7 +219,7 @@ export function SurakshaKavachPage() {
                 <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
                   <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
                 </Magnetic>
-                <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
+                <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
                   <MessageCircle className="h-4 w-4" /> WhatsApp Us
                 </Magnetic>
               </div>

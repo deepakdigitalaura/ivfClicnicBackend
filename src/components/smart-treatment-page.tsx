@@ -110,7 +110,7 @@ const COST_PACKAGES = [
     icon: IndianRupee,
     title: "Best Treatment at Optimal Pricing",
     description:
-      "Economy of scale across 15+ centres means you receive world-class treatment at a fraction of the cost charged by standalone clinics. Smart packages for every pocket.",
+      "Economy of scale across 14 centres means you receive world-class treatment at a fraction of the cost charged by standalone clinics. Smart packages for every pocket.",
   },
   {
     icon: Heart,
@@ -161,15 +161,15 @@ export function SmartTreatmentPage() {
       </div>
 
       {/* ==================== HERO ==================== */}
-      <section className="relative overflow-hidden bg-[color:var(--plum)] text-white noise">
+      <section className="relative overflow-hidden gradient-warm noise">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/25 blur-3xl"
+            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/20 blur-3xl"
             animate={{ x: [0, 60, 0], y: [0, 30, 0] }}
             transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--gold)]/15 blur-3xl"
+            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl"
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -178,20 +178,20 @@ export function SmartTreatmentPage() {
         <div className="container-px relative mx-auto max-w-[1400px] py-20 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-                <Sparkles className="h-3.5 w-3.5" /> Intelligent Fertility Care
+              <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Intelligent Fertility Care
               </span>
             </Reveal>
             <Reveal delay={0.1}>
-              <h1 className="mt-6 text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.5rem] text-balance">
+              <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
                 Smart Treatments and Steady Care{" "}
-                <em className="font-display italic text-[color:var(--rose-soft)]">
+                <em className="font-display italic text-[color:var(--rose)]">
                   Meets the Goal.
                 </em>
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75 text-pretty">
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
                 The most important decision of your life — having a child and starting a family — calls for
                 a personalized smart strategy. At Bavishi Fertility Institute, every step is intelligent,
                 every choice is data-driven, and every outcome is optimized for your success.
@@ -204,9 +204,9 @@ export function SmartTreatmentPage() {
                 {SMART_PILLARS.map((p, i) => (
                   <div
                     key={i}
-                    className="flex items-center gap-2 rounded-full border border-white/10 bg-white/5 px-4 py-2.5 text-sm text-white/80 backdrop-blur"
+                    className="flex items-center gap-2 rounded-full border border-[color:var(--plum)]/10 bg-white/60 px-4 py-2.5 text-sm text-[color:var(--plum)]/80 backdrop-blur"
                   >
-                    <p.icon className="h-4 w-4 text-[color:var(--rose-soft)]" />
+                    <p.icon className="h-4 w-4 text-[color:var(--rose)]" />
                     {p.label}
                   </div>
                 ))}
@@ -228,7 +228,7 @@ export function SmartTreatmentPage() {
                   href="https://wa.me/919712622288"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white"
+                  className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]"
                 >
                   <MessageCircle className="h-4 w-4" /> WhatsApp Us
                 </Magnetic>
@@ -531,7 +531,7 @@ export function SmartTreatmentPage() {
           </Reveal>
           <Reveal delay={0.25}>
             <p className="mt-4 text-xs text-white/40">
-              Free consultation at any of our 15+ centres across India.
+              Free consultation at any of our 14 centres across India.
             </p>
           </Reveal>
         </div>

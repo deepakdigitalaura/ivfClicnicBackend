@@ -15,10 +15,10 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 /* ---------- Data ---------- */
 
 const STATS = [
-  { value: 30000, suffix: "+", label: "Success Stories", sub: "healthy babies born" },
+  { value: 25000, suffix: "+", label: "Successful IVF Pregnancies", sub: "and counting" },
   { value: 98, suffix: "%", label: "Success Rate", sub: "couples achieved a healthy baby" },
   { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
-  { value: 15, suffix: "", label: "Centres", sub: "across 8 cities in India" },
+  { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
 ];
 
 const REASONS = [
@@ -30,9 +30,9 @@ const REASONS = [
   },
   {
     icon: Baby,
-    title: "20,000+ Success Stories",
+    title: "25,000+ Successful IVF Pregnancies",
     description:
-      "Over 20,000 happy families and counting. 98% of couples who entrusted us with their dream received a healthy live-born baby through our proven protocols.",
+      "Over 25,000 happy families and counting. 98% of couples who entrusted us with their dream received a healthy live-born baby through our proven protocols.",
   },
   {
     icon: Lightbulb,
@@ -92,7 +92,7 @@ const REASONS = [
     icon: Scale,
     title: "Value-Based Services",
     description:
-      "High-quality treatment at affordable prices. Economy of scale across 15 centres means we offer a range of packages without compromising on care.",
+      "High-quality treatment at affordable prices. Economy of scale across 14 centres means we offer a range of packages without compromising on care.",
   },
 ];
 
@@ -102,9 +102,8 @@ const FIRSTS = [
   { year: "2006", milestone: "India’s first international surrogacy program" },
   { year: "2010", milestone: "Launched Suraksha Kavach — the world’s only IVF protection program" },
   { year: "2014", milestone: "Introduced PGT (Preimplantation Genetic Testing) across all centres" },
-  { year: "2018", milestone: "Achieved 20,000+ successful IVF births milestone" },
-  { year: "2022", milestone: "Expanded to 15 centres across 8 cities in India" },
-  { year: "2024", milestone: "Over 30,000 babies born — and counting" },
+  { year: "2018", milestone: "Achieved 25,000+ successful IVF pregnancies milestone" },
+  { year: "2022", milestone: "Expanded to 14 centres across 8 cities in India" },
 ];
 
 const ETHICS = [
@@ -163,7 +162,7 @@ export function WhyBfiPage() {
                   &#34;The right treatment at the right time at the right place in the right numbers can almost always bring success.&#34;
                 </p>
                 <footer className="mt-3 text-sm font-medium text-[color:var(--rose)]">
-                  &mdash; Dr. Naresh Bhandari, Founder, Bavishi Fertility Institute
+                  &mdash; Bavishi Fertility Institute
                 </footer>
               </blockquote>
             </Reveal>
@@ -440,7 +439,7 @@ export function WhyBfiPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a free consultation at any of our 15 centres across India. No obligation, no pressure &mdash; just honest, compassionate guidance from the pioneers of IVF in India.
+              Book a free consultation at any of our 14 centres across India. No obligation, no pressure &mdash; just honest, compassionate guidance from the pioneers of IVF in India.
             </p>
           </Reveal>
           <Reveal delay={0.2}>

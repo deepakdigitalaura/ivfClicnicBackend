@@ -122,12 +122,12 @@ export function SimpleTreatmentPage() {
       <section className="relative overflow-hidden gradient-warm noise">
         <div className="pointer-events-none absolute inset-0 overflow-hidden">
           <motion.div
-            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/25 blur-3xl"
+            className="absolute -top-40 left-1/4 h-[32rem] w-[32rem] rounded-full bg-[color:var(--rose)]/20 blur-3xl"
             animate={{ x: [0, 60, 0], y: [0, 30, 0] }}
             transition={{ duration: 16, repeat: Infinity, ease: "easeInOut" }}
           />
           <motion.div
-            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--gold)]/15 blur-3xl"
+            className="absolute -bottom-20 right-0 h-[28rem] w-[28rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl"
             animate={{ scale: [1, 1.15, 1] }}
             transition={{ duration: 10, repeat: Infinity, ease: "easeInOut" }}
           />
@@ -136,22 +136,22 @@ export function SimpleTreatmentPage() {
         <div className="container-px relative mx-auto max-w-[1400px] py-20 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-                <Sparkles className="h-3.5 w-3.5" /> Simple by Design
+              <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Simple by Design
               </span>
             </Reveal>
             <Reveal delay={0.1}>
-              <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-white md:text-5xl lg:text-[3.5rem] text-balance">
+              <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
                 Most Complex things can be made{" "}
-                <em className="font-display italic text-[color:var(--rose-soft)]">
+                <em className="font-display italic text-[color:var(--rose)]">
                   Simple with Science &amp; Care.
                 </em>
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
-              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75 text-pretty">
+              <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
                 At Bavishi Fertility Institute, with 100+ years combined IVF experience,
-                we have made the most complex IVF treatment <strong className="text-white">SIMPLE</strong>.
+                we have made the most complex IVF treatment <strong className="text-[color:var(--plum)]">SIMPLE</strong>.
               </p>
             </Reveal>
             <Reveal delay={0.25}>
@@ -169,7 +169,7 @@ export function SimpleTreatmentPage() {
                   href="https://wa.me/919712622288"
                   target="_blank"
                   rel="noopener noreferrer"
-                  className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white"
+                  className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]"
                 >
                   <MessageCircle className="h-4 w-4" /> WhatsApp Us
                 </Magnetic>

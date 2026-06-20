@@ -7,9 +7,9 @@ const PATH = "/safe-treatment";
 
 export const metadata: Metadata = {
   title: "Safe IVF Treatment — Safety First, Safety for All | Bavishi Fertility Institute",
-  description: "Bavishi Fertility Institute's motto: Safety First. OHSS-free clinic, Class 1000 labs, double-witness protocol, NABH accredited. Your safety is our top priority.",
+  description: "Bavishi Fertility Institute's motto: Safety First. OHSS-free clinic, Class 1000 labs, double-witness protocol. Your safety is our top priority.",
   alternates: { canonical: PATH },
-  openGraph: { title: "Safe IVF Treatment | Bavishi Fertility Institute", description: "OHSS-free clinic, Class 1000 labs, NABH accredited. Your safety is our top priority.", url: abs(PATH), type: "website" },
+  openGraph: { title: "Safe IVF Treatment | Bavishi Fertility Institute", description: "OHSS-free clinic, Class 1000 labs, double-witness protocol. Your safety is our top priority.", url: abs(PATH), type: "website" },
 };
 
 const graph = [
