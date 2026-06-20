@@ -29,7 +29,8 @@
     "seed:about:gen": "tsx --tsconfig tsconfig.json scripts/seed/gen-about.mts",
     "seed:about:roundtrip": "tsx --tsconfig tsconfig.json scripts/seed/roundtrip-about.mts",
     "seo:snapshot": "node scripts/seo/snapshot.mjs",
-    "seo:diff": "node scripts/seo/diff.mjs"
+    "seo:diff": "node scripts/seo/diff.mjs",
+    "seed:calculators": "node scripts/seed-calculators.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

@@ -1,16 +1,17 @@
 "use client";
-import { ArrowRight } from "lucide-react";
+import { ArrowRight, TrendingUp, Flower2, ShieldCheck, Sprout, Wallet, Microscope, Calendar, Dna } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 
-const ALL_CALCULATORS = [
-  { title: "IVF Success Rate Calculator", href: "/ivf-success-rate-calculator", emoji: "📊" },
-  { title: "Fertile Period Calculator", href: "/fertile-period-calculator", emoji: "🌸" },
-  { title: "Risk of Repeat Miscarriage Calculator", href: "/risk-of-repeat-miscarriage-calculator", emoji: "🛡️" },
-  { title: "Natural Pregnancy Calculator", href: "/natural-pregnancy-calculator", emoji: "🌿" },
-  { title: "IVF Cost Calculator", href: "/ivf-cost-calculator", emoji: "💰" },
-  { title: "AMH Level Interpreter", href: "/amh-level-interpreter", emoji: "🔬" },
-  { title: "Ovulation Calculator", href: "/ovulation-calculator", emoji: "📅" },
-  { title: "Semen Analysis Calculator", href: "/semen-analysis-calculator", emoji: "🧬" },
+const ALL_CALCULATORS: { title: string; href: string; icon: LucideIcon }[] = [
+  { title: "IVF Success Rate Calculator", href: "/ivf-success-rate-calculator", icon: TrendingUp },
+  { title: "Fertile Period Calculator", href: "/fertile-period-calculator", icon: Flower2 },
+  { title: "Risk of Repeat Miscarriage Calculator", href: "/risk-of-repeat-miscarriage-calculator", icon: ShieldCheck },
+  { title: "Natural Pregnancy Calculator", href: "/natural-pregnancy-calculator", icon: Sprout },
+  { title: "IVF Cost Calculator", href: "/ivf-cost-calculator", icon: Wallet },
+  { title: "AMH Level Interpreter", href: "/amh-level-interpreter", icon: Microscope },
+  { title: "Ovulation Calculator", href: "/ovulation-calculator", icon: Calendar },
+  { title: "Semen Analysis Calculator", href: "/semen-analysis-calculator", icon: Dna },
 ];
 
 export function CalculatorCrossLinks({ current }: { current?: string }) {
@@ -32,7 +33,7 @@ export function CalculatorCrossLinks({ current }: { current?: string }) {
               href={c.href}
               className="group flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft transition hover:border-[color:var(--rose)]/50 hover:bg-[color:var(--rose-soft)]/20"
             >
-              <span className="text-2xl">{c.emoji}</span>
+              <c.icon className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
               <span className="flex-1 text-xs font-semibold leading-snug text-[color:var(--plum)]">{c.title}</span>
               <ArrowRight className="h-3.5 w-3.5 shrink-0 text-muted-foreground transition group-hover:translate-x-0.5 group-hover:text-[color:var(--rose)]" />
             </a>

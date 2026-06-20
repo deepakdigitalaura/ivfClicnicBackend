@@ -30,6 +30,7 @@ import { Centres } from "./collections/Centres";
 import { Inquiries } from "./collections/Inquiries";
 import { Testimonials } from "./collections/Testimonials";
 import { Redirects } from "./collections/Redirects";
+import { Calculators } from "./collections/Calculators";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
 import { BlogHub } from "./globals/BlogHub";
@@ -69,7 +70,7 @@ export default buildConfig({
       },
     },
   },
-  collections: [Inquiries, Testimonials, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Redirects, Media, Users],
+  collections: [Inquiries, Testimonials, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Calculators, Redirects, Media, Users],
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About, SeoSettings],
   // Vercel's serverless functions have a read-only filesystem (only /tmp is
   // writable) — writing uploads to Media's local `staticDir` 500s in production

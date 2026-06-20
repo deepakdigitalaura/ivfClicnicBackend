@@ -12,9 +12,65 @@ const pluginCloudStorageRoot = path.dirname(
   path.dirname(require.resolve("@payloadcms/plugin-cloud-storage")),
 );
 
+/* ─── 301 redirects: old static routes → canonical CMS routes ─── */
+const REDIRECTS = [
+  // Treatment pages
+  ["/asthenospermia",                                                    "/treatments/asthenospermia"],
+  ["/azoospermia",                                                       "/treatments/azoospermia"],
+  ["/blastocyst-culture-blastocyst-transfer",                            "/treatments/blastocyst-transfer"],
+  ["/conceive-naturally",                                                "/treatments/conceive-naturally"],
+  ["/cryopreservation",                                                  "/treatments/cryopreservation"],
+  ["/egg-donation",                                                      "/treatments/egg-donation"],
+  ["/egg-freezing",                                                      "/treatments/egg-freezing"],
+  ["/embryo-donation",                                                   "/treatments/embryo-donation"],
+  ["/embryo-freezing",                                                   "/treatments/embryo-freezing"],
+  ["/endometriosis",                                                     "/treatments/endometriosis"],
+  ["/era-test",                                                          "/treatments/era-test"],
+  ["/erectile-dysfunction",                                              "/treatments/erectile-dysfunction"],
+  ["/fibroids",                                                          "/treatments/fibroids"],
+  ["/icsi-treatment-intracytoplasmic-sperm-injection",                   "/treatments/icsi"],
+  ["/intra-uterine-insemination-iui",                                    "/treatments/iui"],
+  ["/intracytoplasmic-morphologically-selected-sperm-injection-imsi",    "/treatments/imsi"],
+  ["/ivf-evaluation",                                                    "/treatments/ivf-evaluation"],
+  ["/ivf-failure",                                                       "/treatments/ivf-failure"],
+  ["/laser-assisted-hatching",                                           "/treatments/laser-hatching"],
+  ["/magnetic-activated-cell-sorting-macs",                              "/treatments/macs"],
+  ["/oligospermia",                                                      "/treatments/oligospermia"],
+  ["/ovarian-rejuvenation",                                              "/treatments/ovarian-rejuvenation"],
+  ["/ovarian-reserve",                                                   "/treatments/ovarian-reserve"],
+  ["/pcos",                                                              "/treatments/pcos"],
+  ["/pgt",                                                               "/treatments/pgt"],
+  ["/physiological-intracytoplasmic-sperm-injection-picsi",              "/treatments/picsi"],
+  ["/prp-infertility",                                                   "/treatments/prp-infertility"],
+  ["/sperm-donation",                                                    "/treatments/sperm-donation"],
+  ["/sperm-freezing",                                                    "/treatments/sperm-freezing"],
+  ["/spindle-view-icsi",                                                 "/treatments/spindle-view-icsi"],
+  ["/surgical-sperm-retrieval",                                          "/treatments/surgical-sperm-retrieval"],
+  ["/surrogacy",                                                         "/treatments/surrogacy"],
+  ["/varicocele",                                                        "/treatments/varicocele"],
+  ["/what-is-ivf",                                                       "/treatments/ivf"],
+  // Calculator pages
+  ["/ivf-success-rate-calculator",          "/calculators/ivf-success-rate"],
+  ["/ivf-cost-calculator",                  "/calculators/ivf-cost"],
+  ["/ovulation-calculator",                 "/calculators/ovulation"],
+  ["/natural-pregnancy-calculator",         "/calculators/natural-pregnancy"],
+  ["/fertile-period-calculator",            "/calculators/fertile-period"],
+  ["/amh-level-interpreter",               "/calculators/amh-level"],
+  ["/semen-analysis-calculator",            "/calculators/semen-analysis"],
+  ["/risk-of-repeat-miscarriage-calculator","/calculators/miscarriage-risk"],
+];
+
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
+
+  async redirects() {
+    return REDIRECTS.map(([source, destination]) => ({
+      source,
+      destination,
+      permanent: true,
+    }));
+  },
 
   // @payloadcms/storage-vercel-blob's client upload handler imports
   // `getFileKey` from the `@payloadcms/plugin-cloud-storage/utilities`

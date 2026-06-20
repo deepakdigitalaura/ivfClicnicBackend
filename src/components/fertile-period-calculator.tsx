@@ -1,12 +1,15 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, Flower2 } from "lucide-react";
+import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, Flower2, Target, BarChart3, Hourglass, Hospital, Star, Users, Droplets, Pill, Smartphone, RefreshCcw, ClipboardList } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
 function addDays(date: Date, n: number): Date {
   const d = new Date(date);
@@ -43,7 +46,13 @@ function calc(lmpStr: string, cycleLength: number): Result {
   return { ovulationDate, fertileStart, fertileEnd, nextPeriod, dayOfCycle, cyclePercent };
 }
 
-export function FertilePeriodCalculatorPage() {
+export function FertilePeriodCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle      = cms?.title     ?? "Fertile Period Calculator";
+  const cmsSubtitle   = cms?.subtitle  ?? "Discover your most fertile days, ovulation date, and next period — so you can plan your pregnancy journey with confidence.";
+  const cmsDisclaimer = cms?.disclaimer ?? "Fertile period estimates are based on average cycle patterns. This tool is for informational purposes only and is not a substitute for medical advice.";
+  const titleWords    = cmsTitle.split(" ");
+  const titleMain     = titleWords.slice(0, -1).join(" ");
+  const titleEm       = titleWords.at(-1) ?? "";
   const [lmp, setLmp] = useState("");
   const [cycleLength, setCycleLength] = useState(28);
   const [duration, setDuration] = useState(5);
@@ -69,7 +78,7 @@ export function FertilePeriodCalculatorPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Fertile Period Calculator</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -87,13 +96,13 @@ export function FertilePeriodCalculatorPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              Fertile Period <em className="font-display italic text-[color:var(--rose)]">Calculator</em>
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Discover your most fertile days, ovulation date, and next period — so you can plan your pregnancy journey with confidence.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -155,16 +164,16 @@ export function FertilePeriodCalculatorPage() {
             <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Knowing Your Fertile Window Matters</h2>
             <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Timing is everything — understanding your cycle puts you in control.</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-              {[
-                { emoji: "🎯", title: "Stop Guessing, Start Knowing", desc: "Many couples try at the wrong times. Knowing your fertile window removes the guesswork entirely." },
-                { emoji: "📅", title: "Plan Around Your Life", desc: "Understanding your fertile days helps you schedule time off, travel, and appointments around conception." },
-                { emoji: "❤️", title: "Reduce Relationship Stress", desc: "Tracking your cycle naturally reduces the pressure of 'trying' by giving clear, actionable days to focus on." },
-                { emoji: "📊", title: "Track Patterns Over Time", desc: "Observing your cycle over several months helps identify irregularities early and guides specialist discussions." },
-                { emoji: "⏳", title: "Save Months of Trying", desc: "Correctly timed intercourse can reduce the average time to conception significantly for many couples." },
-                { emoji: "🏥", title: "Prepare for Your Consultation", desc: "Sharing cycle data with your fertility specialist provides valuable context for your assessment." },
-              ].map((c) => (
+              {([
+                { icon: Target, title: "Stop Guessing, Start Knowing", desc: "Many couples try at the wrong times. Knowing your fertile window removes the guesswork entirely." },
+                { icon: Calendar, title: "Plan Around Your Life", desc: "Understanding your fertile days helps you schedule time off, travel, and appointments around conception." },
+                { icon: Heart, title: "Reduce Relationship Stress", desc: "Tracking your cycle naturally reduces the pressure of 'trying' by giving clear, actionable days to focus on." },
+                { icon: BarChart3, title: "Track Patterns Over Time", desc: "Observing your cycle over several months helps identify irregularities early and guides specialist discussions." },
+                { icon: Hourglass, title: "Save Months of Trying", desc: "Correctly timed intercourse can reduce the average time to conception significantly for many couples." },
+                { icon: Hospital, title: "Prepare for Your Consultation", desc: "Sharing cycle data with your fertility specialist provides valuable context for your assessment." },
+              ] as { icon: LucideIcon; title: string; desc: string }[]).map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <div className="text-2xl">{c.emoji}</div>
+                  <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                   <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
                 </div>
@@ -246,13 +255,13 @@ export function FertilePeriodCalculatorPage() {
               </button>
 
               <div className="grid gap-4 sm:grid-cols-3">
-                {[
-                  { icon: "🌸", label: "Fertile Window", value: `${fmtShort(result.fertileStart)} – ${fmtShort(result.fertileEnd)}`, sub: "Best days to try", color: "bg-rose-50 border-rose-200" },
-                  { icon: "⭐", label: "Peak Ovulation", value: fmt(result.ovulationDate), sub: "Highest fertility day", color: "bg-amber-50 border-amber-200" },
-                  { icon: "📅", label: "Next Period", value: fmt(result.nextPeriod), sub: "Expected start date", color: "bg-blue-50 border-blue-200" },
-                ].map((c) => (
+                {([
+                  { icon: Flower2, label: "Fertile Window", value: `${fmtShort(result.fertileStart)} – ${fmtShort(result.fertileEnd)}`, sub: "Best days to try", color: "bg-rose-50 border-rose-200" },
+                  { icon: Star, label: "Peak Ovulation", value: fmt(result.ovulationDate), sub: "Highest fertility day", color: "bg-amber-50 border-amber-200" },
+                  { icon: Calendar, label: "Next Period", value: fmt(result.nextPeriod), sub: "Expected start date", color: "bg-blue-50 border-blue-200" },
+                ] as { icon: LucideIcon; label: string; value: string; sub: string; color: string }[]).map((c) => (
                   <div key={c.label} className={`rounded-2xl border p-5 text-center shadow-soft ${c.color}`}>
-                    <div className="text-2xl">{c.icon}</div>
+                    <c.icon className="mx-auto h-6 w-6 text-[color:var(--rose)]" />
                     <div className="mt-2 text-xs font-semibold uppercase tracking-wider text-muted-foreground">{c.label}</div>
                     <div className="mt-2 text-base font-bold text-[color:var(--plum)]">{c.value}</div>
                     <div className="mt-1 text-xs text-muted-foreground">{c.sub}</div>
@@ -271,7 +280,7 @@ export function FertilePeriodCalculatorPage() {
                   />
                 </div>
                 <div className="mt-2 flex justify-between text-xs text-muted-foreground">
-                  <span>Period</span><span>Low</span><span>Rising</span><span>🌸 Peak fertile</span><span>Low</span>
+                  <span>Period</span><span>Low</span><span>Rising</span><span className="flex items-center gap-1"><Flower2 className="h-3 w-3" /> Peak fertile</span><span>Low</span>
                 </div>
                 <p className="mt-3 text-xs text-muted-foreground">
                   You are approximately on day <strong>{result.dayOfCycle}</strong> of your cycle.
@@ -279,13 +288,13 @@ export function FertilePeriodCalculatorPage() {
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-3">
-                {[
-                  { icon: "💑", title: "Time Intercourse Right", text: "Have intercourse every 1–2 days during your fertile window, especially the 2 days before ovulation." },
-                  { icon: "💧", title: "Watch Cervical Mucus", text: "Egg-white consistency mucus — clear & stretchable — appears just before ovulation." },
-                  { icon: "💊", title: "Take Folic Acid", text: "Start 400mcg folic acid daily while trying to conceive to reduce neural tube defect risk." },
-                ].map((t) => (
+                {([
+                  { icon: Users, title: "Time Intercourse Right", text: "Have intercourse every 1–2 days during your fertile window, especially the 2 days before ovulation." },
+                  { icon: Droplets, title: "Watch Cervical Mucus", text: "Egg-white consistency mucus — clear & stretchable — appears just before ovulation." },
+                  { icon: Pill, title: "Take Folic Acid", text: "Start 400mcg folic acid daily while trying to conceive to reduce neural tube defect risk." },
+                ] as { icon: LucideIcon; title: string; text: string }[]).map((t) => (
                   <div key={t.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
-                    <div className="text-2xl">{t.icon}</div>
+                    <t.icon className="h-6 w-6 text-[color:var(--rose)]" />
                     <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{t.title}</h4>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t.text}</p>
                   </div>
@@ -320,16 +329,16 @@ export function FertilePeriodCalculatorPage() {
         <Reveal>
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { emoji: "💑", title: "Couples trying to conceive naturally", desc: "Find your fertile window to time intercourse on the right days every cycle." },
-              { emoji: "📱", title: "Cycle tracking beginners", desc: "No apps or wearables needed — enter two numbers and get an instant prediction." },
-              { emoji: "🌀", title: "Women with irregular cycles", desc: "Adjust cycle length and get customised predictions based on your own pattern." },
-              { emoji: "💊", title: "Coming off contraception", desc: "Understand when your cycle is likely to return to normal and when fertility returns." },
-              { emoji: "🏥", title: "Before IUI or IVF treatment", desc: "Use natural cycle tracking alongside medical treatment to optimise timing." },
-              { emoji: "📋", title: "Preparing for your consultation", desc: "Share accurate cycle data with your specialist for a more informed assessment." },
-            ].map((p) => (
+            {([
+              { icon: Users, title: "Couples trying to conceive naturally", desc: "Find your fertile window to time intercourse on the right days every cycle." },
+              { icon: Smartphone, title: "Cycle tracking beginners", desc: "No apps or wearables needed — enter two numbers and get an instant prediction." },
+              { icon: RefreshCcw, title: "Women with irregular cycles", desc: "Adjust cycle length and get customised predictions based on your own pattern." },
+              { icon: Pill, title: "Coming off contraception", desc: "Understand when your cycle is likely to return to normal and when fertility returns." },
+              { icon: Hospital, title: "Before IUI or IVF treatment", desc: "Use natural cycle tracking alongside medical treatment to optimise timing." },
+              { icon: ClipboardList, title: "Preparing for your consultation", desc: "Share accurate cycle data with your specialist for a more informed assessment." },
+            ] as { icon: LucideIcon; title: string; desc: string }[]).map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -393,25 +402,25 @@ export function FertilePeriodCalculatorPage() {
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
             <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>
-                The Fertile Period Calculator uses your menstrual cycle data — specifically the first day of your last period and your average cycle length — to predict your fertile window, peak ovulation day, and next expected period. The calculation is based on the standard calendar method used by fertility specialists worldwide.
-              </p>
-              <p>
-                For a typical 28-day cycle, ovulation occurs around day 14. Your fertile window spans the 5 days before ovulation plus the day of ovulation itself — giving you a 6-day window each cycle when pregnancy is possible. Sperm can survive in the female reproductive tract for up to 72 hours, while an egg is viable for only 12–24 hours after ovulation, making the days leading up to ovulation the most important for timed intercourse.
-              </p>
-              <p>
-                This calculator is designed for women with relatively regular cycles. If your cycles are very irregular, you may benefit from ovulation predictor kits, basal body temperature tracking, or a specialist consultation for a more accurate assessment.
-              </p>
-              <p className="text-xs">
-                Results are estimates only and should not be used as a substitute for medical advice. Always consult a fertility specialist for personalised guidance.
-              </p>
-            </div>
+            <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+            {cms?.faqs && cms.faqs.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {cms.faqs.map((f, i) => (
+                    <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                      <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/fertile-period-calculator" />
+      <CalculatorCrossLinks current="/calculators/fertile-period" />
       <Locations />
       <Footer />
       <FloatingCTA />

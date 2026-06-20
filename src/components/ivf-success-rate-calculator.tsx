@@ -1,12 +1,19 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, TrendingUp, CheckCircle2, Users } from "lucide-react";
+import {
+  ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw,
+  TrendingUp, CheckCircle2, Users, Target, Lightbulb, Wallet, Brain, Dumbbell,
+  ClipboardList, Microscope, Pill, Sprout, RefreshCw, HelpCircle, AlertTriangle,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
 /* ── lookup tables (ported from live ivfclinic.com inline JS) ── */
 const AGE_BASE: Record<string, number> = { u30: 68, "30": 62, "35": 52, "38": 38, "41": 24, "43": 12 };
@@ -75,7 +82,13 @@ function calc(
   };
 }
 
-export function IvfSuccessRateCalculatorPage() {
+export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle     = cms?.title     ?? "IVF Success Rate Calculator";
+  const cmsSubtitle  = cms?.subtitle  ?? "Estimate your personalised IVF success probability based on your age, diagnosis, treatment history, and embryo details.";
+  const cmsDisclaimer= cms?.disclaimer ?? "This calculator is provided for planning and educational purposes only. It does not constitute medical advice and cannot replace a full fertility assessment by a specialist.";
+  const titleWords   = cmsTitle.split(" ");
+  const titleMain    = titleWords.slice(0, -1).join(" ");
+  const titleEm      = titleWords.at(-1) ?? "";
   const [age, setAge] = useState("");
   const [diag, setDiag] = useState("");
   const [prev, setPrev] = useState("0");
@@ -109,6 +122,31 @@ export function IvfSuccessRateCalculatorPage() {
     setResult(calc(age, diag, prev, prevPreg, embryo, eggs));
   };
 
+  const WHY_CARDS: { icon: LucideIcon; title: string; desc: string }[] = [
+    { icon: Target, title: "Set Realistic Expectations", desc: "Knowing your actual probability helps you prepare emotionally and practically for each cycle." },
+    { icon: Lightbulb, title: "Understand What Helps", desc: "Discover which factors are in your favour and which are modifiable before your next cycle." },
+    { icon: Wallet, title: "Plan Your Budget", desc: "Your success rate estimate helps you decide how many cycles to budget for and when to review options." },
+    { icon: Brain, title: "Make Informed Decisions", desc: "Evidence-based estimates help you and your doctor choose the right protocol and timing." },
+    { icon: Dumbbell, title: "Stay Motivated", desc: "Understanding your real chances — not just a generic number — keeps you focused and hopeful." },
+    { icon: Clock, title: "Time Your Treatment", desc: "Seeing the age impact first-hand motivates acting at the right moment rather than delaying." },
+  ];
+
+  const RESULT_CARDS: { icon: LucideIcon; title: string; text: string }[] = [
+    { icon: ClipboardList, title: "Consult a Specialist", text: "Book a consultation to validate your profile and design a personalised protocol." },
+    { icon: Microscope, title: "Full Fertility Workup", text: "A thorough investigation helps identify factors not captured by this calculator." },
+    { icon: Pill, title: "Optimise Your Health", text: "Folic acid, vitamin D, and lifestyle changes can meaningfully improve outcomes." },
+    { icon: TrendingUp, title: "Explore All Options", text: "Ask about multi-cycle packages, donor egg programmes, and advanced techniques like PGT-A." },
+  ];
+
+  const WHO_CARDS: { icon: LucideIcon; title: string; desc: string }[] = [
+    { icon: Sprout, title: "First-time IVF patients", desc: "Get a personalised baseline before your first cycle to set realistic expectations." },
+    { icon: RefreshCw, title: "After previous IVF failure", desc: "Understand how your history and any new clinical factors affect your next cycle's odds." },
+    { icon: Calendar, title: "Women over 35", desc: "See exactly how age impacts your probability and why acting sooner matters." },
+    { icon: Sparkles, title: "Considering donor eggs", desc: "Compare your own-egg probability against the donor egg baseline for informed decision-making." },
+    { icon: HelpCircle, title: "Unexplained infertility", desc: "Understand your profile when no clear cause has been identified yet." },
+    { icon: Heart, title: "PCOS or Endometriosis", desc: "See how your diagnosis specifically shifts your success rate and what can be optimised." },
+  ];
+
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -119,7 +157,7 @@ export function IvfSuccessRateCalculatorPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">IVF Success Rate Calculator</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -137,13 +175,13 @@ export function IvfSuccessRateCalculatorPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              IVF Success Rate <em className="font-display italic text-[color:var(--rose)]">Calculator</em>
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Estimate your personalised IVF success probability based on your age, diagnosis, treatment history, and embryo details.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -154,7 +192,6 @@ export function IvfSuccessRateCalculatorPage() {
               ))}
             </div>
           </Reveal>
-          {/* Hero stats */}
           <Reveal delay={0.22}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               {[
@@ -206,16 +243,9 @@ export function IvfSuccessRateCalculatorPage() {
             <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Know Your Success Rate?</h2>
             <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Understanding your odds helps you plan, stay motivated, and make the right decisions.</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-              {[
-                { emoji: "🎯", title: "Set Realistic Expectations", desc: "Knowing your actual probability helps you prepare emotionally and practically for each cycle." },
-                { emoji: "💡", title: "Understand What Helps", desc: "Discover which factors are in your favour and which are modifiable before your next cycle." },
-                { emoji: "💰", title: "Plan Your Budget", desc: "Your success rate estimate helps you decide how many cycles to budget for and when to review options." },
-                { emoji: "🧠", title: "Make Informed Decisions", desc: "Evidence-based estimates help you and your doctor choose the right protocol and timing." },
-                { emoji: "💪", title: "Stay Motivated", desc: "Understanding your real chances — not just a generic number — keeps you focused and hopeful." },
-                { emoji: "⏰", title: "Time Your Treatment", desc: "Seeing the age impact first-hand motivates acting at the right moment rather than delaying." },
-              ].map((c) => (
+              {WHY_CARDS.map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <div className="text-2xl">{c.emoji}</div>
+                  <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                   <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
                 </div>
@@ -278,7 +308,7 @@ export function IvfSuccessRateCalculatorPage() {
                     <div>
                       <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Previous Successful Pregnancy?</label>
                       <div className="grid grid-cols-2 gap-3">
-                        {[["yes","✅ Yes"],["no","❌ No"]].map(([v,l]) => radioBtn("prevPreg","pp-"+v,v,l,prevPreg,setPrevPreg))}
+                        {[["yes","Yes"],["no","No"]].map(([v,l]) => radioBtn("prevPreg","pp-"+v,v,l,prevPreg,setPrevPreg))}
                       </div>
                     </div>
                   </div>
@@ -305,8 +335,9 @@ export function IvfSuccessRateCalculatorPage() {
                     <p role="alert" className="mt-5 rounded-xl bg-[color:var(--rose)]/10 px-4 py-3 text-sm text-[color:var(--rose)]">{error}</p>
                   )}
 
-                  <div className="mt-8 rounded-xl bg-amber-50 border-l-4 border-amber-400 px-4 py-3 text-xs font-semibold text-amber-900">
-                    ⚠️ If your AMH is below 0.5, endometrial thickness below 7mm, or you have severe adenomyosis, please consult a specialist directly.
+                  <div className="mt-8 rounded-xl bg-amber-50 border-l-4 border-amber-400 px-4 py-3 text-xs font-semibold text-amber-900 flex items-center gap-2">
+                    <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-600" />
+                    <span>If your AMH is below 0.5, endometrial thickness below 7mm, or you have severe adenomyosis, please consult a specialist directly.</span>
                   </div>
 
                   <div className="mt-8 flex justify-end border-t border-border/60 pt-7">
@@ -328,8 +359,8 @@ export function IvfSuccessRateCalculatorPage() {
                 <div className="mt-4 text-7xl font-black">{result.score}%</div>
                 <div className="mt-3 text-lg font-semibold">{BAND_LABEL[result.band]}</div>
                 <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/80">{BAND_TEXT[result.band]}</p>
-                <div className="mt-5 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold">
-                  📈 Cumulative chance over 3 cycles: approximately {result.cumulative}%
+                <div className="mt-5 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold flex items-center justify-center gap-2">
+                  <TrendingUp className="h-4 w-4 shrink-0" /> Cumulative chance over 3 cycles: approximately {result.cumulative}%
                 </div>
               </div>
 
@@ -365,14 +396,9 @@ export function IvfSuccessRateCalculatorPage() {
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {[
-                  { icon: "📋", title: "Consult a Specialist", text: "Book a consultation to validate your profile and design a personalised protocol." },
-                  { icon: "🔬", title: "Full Fertility Workup", text: "A thorough investigation helps identify factors not captured by this calculator." },
-                  { icon: "💊", title: "Optimise Your Health", text: "Folic acid, vitamin D, and lifestyle changes can meaningfully improve outcomes." },
-                  { icon: "📈", title: "Explore All Options", text: "Ask about multi-cycle packages, donor egg programmes, and advanced techniques like PGT-A." },
-                ].map((c) => (
+                {RESULT_CARDS.map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
-                    <div className="text-2xl">{c.icon}</div>
+                    <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                     <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
                   </div>
@@ -407,16 +433,9 @@ export function IvfSuccessRateCalculatorPage() {
         <Reveal>
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { emoji: "🌱", title: "First-time IVF patients", desc: "Get a personalised baseline before your first cycle to set realistic expectations." },
-              { emoji: "🔄", title: "After previous IVF failure", desc: "Understand how your history and any new clinical factors affect your next cycle's odds." },
-              { emoji: "📅", title: "Women over 35", desc: "See exactly how age impacts your probability and why acting sooner matters." },
-              { emoji: "🥚", title: "Considering donor eggs", desc: "Compare your own-egg probability against the donor egg baseline for informed decision-making." },
-              { emoji: "❓", title: "Unexplained infertility", desc: "Understand your profile when no clear cause has been identified yet." },
-              { emoji: "💗", title: "PCOS or Endometriosis", desc: "See how your diagnosis specifically shifts your success rate and what can be optimised." },
-            ].map((p) => (
+            {WHO_CARDS.map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -480,22 +499,25 @@ export function IvfSuccessRateCalculatorPage() {
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
             <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>
-                The IVF Success Rate Calculator is a clinically informed tool built on real-world IVF data and age-adjusted live-birth rates used by fertility specialists worldwide. Your personalised probability is calculated by adjusting your age-group baseline for five key clinical factors: your primary fertility diagnosis, embryo transfer type, number of previous IVF attempts, prior successful pregnancy history, and whether you are using your own eggs or donor eggs.
-              </p>
-              <p>
-                A team of 500+ IVF success stories at Bavishi Fertility Institute demonstrates that our specialised approach consistently achieves success rates in the 60–70% range per cycle — significantly above the national average. Your individual result may vary based on factors not captured in this calculator, including AMH level, antral follicle count, uterine receptivity, sperm DNA fragmentation, and the specific IVF protocol used.
-              </p>
-              <p>
-                This calculator is provided for planning and educational purposes only. It does not constitute medical advice and cannot replace a full fertility assessment by a specialist. Please do not make treatment decisions based solely on this result — book a consultation to receive a complete, personalised evaluation.
-              </p>
-            </div>
+            <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+            {cms?.faqs && cms.faqs.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {cms.faqs.map((f, i) => (
+                    <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                      <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/ivf-success-rate-calculator" />
+      <CalculatorCrossLinks current="/calculators/ivf-success-rate" />
       <Locations />
       <Footer />
       <FloatingCTA />

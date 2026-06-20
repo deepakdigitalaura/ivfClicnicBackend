@@ -1,12 +1,19 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, Microscope } from "lucide-react";
+import {
+  ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, Microscope,
+  Droplets, Hash, Activity, Dna, Pill, CheckCircle2, ClipboardList, Leaf,
+  Stethoscope, AlertCircle, Hospital, RefreshCw, Users, Lightbulb, Sprout,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
 /* ── WHO 2021 reference values ── */
 const WHO_REF = {
@@ -22,36 +29,36 @@ type ParamKey = "volume" | "conc" | "wbc" | "tmot" | "pr" | "morph";
 type Band = "normal" | "mild" | "mod" | "severe";
 
 const BAND_META: Record<Band, { label: string; color: string; bgClass: string }> = {
-  normal: { label: "✅ Normal — All Parameters in Range", color: "#5cb85c", bgClass: "bg-emerald-600" },
-  mild:   { label: "⚠ Mild Abnormality",                  color: "#f0ad4e", bgClass: "bg-amber-500" },
-  mod:    { label: "⚠ Moderate Abnormalities",            color: "#ff9800", bgClass: "bg-orange-500" },
-  severe: { label: "❌ Severe Abnormalities",              color: "#e74c3c", bgClass: "bg-red-600" },
+  normal: { label: "Normal — All Parameters in Range", color: "#5cb85c", bgClass: "bg-emerald-600" },
+  mild:   { label: "Mild Abnormality",                  color: "#f0ad4e", bgClass: "bg-amber-500" },
+  mod:    { label: "Moderate Abnormalities",            color: "#ff9800", bgClass: "bg-orange-500" },
+  severe: { label: "Severe Abnormalities",              color: "#e74c3c", bgClass: "bg-red-600" },
 };
 
-const NEXT_STEPS: Record<Band, { icon: string; title: string; text: string }[]> = {
+const NEXT_STEPS: Record<Band, { icon: LucideIcon; title: string; text: string }[]> = {
   normal: [
-    { icon: "✅", title: "Results Look Healthy", text: "All parameters are within WHO reference ranges. A fertility specialist can confirm your full reproductive health." },
-    { icon: "📋", title: "Annual Check-Up", text: "Consider annual semen analysis if actively trying to conceive, to catch any changes early." },
-    { icon: "🥗", title: "Support Sperm Health", text: "Maintain healthy diet, avoid heat exposure to testes, manage stress, and avoid smoking or excessive alcohol." },
-    { icon: "💬", title: "Plan Your Next Steps", text: "Consult a fertility specialist to integrate semen health into your complete couple fertility assessment." },
+    { icon: CheckCircle2, title: "Results Look Healthy", text: "All parameters are within WHO reference ranges. A fertility specialist can confirm your full reproductive health." },
+    { icon: ClipboardList, title: "Annual Check-Up", text: "Consider annual semen analysis if actively trying to conceive, to catch any changes early." },
+    { icon: Leaf, title: "Support Sperm Health", text: "Maintain healthy diet, avoid heat exposure to testes, manage stress, and avoid smoking or excessive alcohol." },
+    { icon: MessageCircle, title: "Plan Your Next Steps", text: "Consult a fertility specialist to integrate semen health into your complete couple fertility assessment." },
   ],
   mild: [
-    { icon: "🩺", title: "Mild Issue — Treatable", text: "Mild sperm abnormalities are often reversible. See a urologist or andrologist for evaluation." },
-    { icon: "🥗", title: "Lifestyle Optimisation", text: "Diet, antioxidants (zinc, CoQ10, vitamin C), exercise, and avoiding heat can improve sperm parameters in 3 months." },
-    { icon: "🔬", title: "Repeat in 3 Months", text: "Sperm takes ~90 days to mature. Lifestyle changes can be assessed by repeating the analysis after 3 months." },
-    { icon: "💬", title: "Fertility Consultation", text: "A specialist can guide treatment and advise whether IUI or other assisted conception is appropriate." },
+    { icon: Stethoscope, title: "Mild Issue — Treatable", text: "Mild sperm abnormalities are often reversible. See a urologist or andrologist for evaluation." },
+    { icon: Leaf, title: "Lifestyle Optimisation", text: "Diet, antioxidants (zinc, CoQ10, vitamin C), exercise, and avoiding heat can improve sperm parameters in 3 months." },
+    { icon: Microscope, title: "Repeat in 3 Months", text: "Sperm takes ~90 days to mature. Lifestyle changes can be assessed by repeating the analysis after 3 months." },
+    { icon: MessageCircle, title: "Fertility Consultation", text: "A specialist can guide treatment and advise whether IUI or other assisted conception is appropriate." },
   ],
   mod: [
-    { icon: "⚕️", title: "Specialist Referral", text: "Multiple abnormalities warrant a full andrological evaluation to identify and treat the underlying cause." },
-    { icon: "🔬", title: "Advanced Testing", text: "Sperm DNA fragmentation, DNA integrity, and hormonal tests (FSH, LH, testosterone) can reveal the root cause." },
-    { icon: "💊", title: "Medical Treatment", text: "Depending on findings: hormonal therapy, antioxidants, varicocele repair, or assisted techniques may be recommended." },
-    { icon: "🧬", title: "IVF/ICSI Planning", text: "With your profile, ICSI (injecting a single sperm into the egg) can achieve high fertilisation rates in IVF." },
+    { icon: Stethoscope, title: "Specialist Referral", text: "Multiple abnormalities warrant a full andrological evaluation to identify and treat the underlying cause." },
+    { icon: Microscope, title: "Advanced Testing", text: "Sperm DNA fragmentation, DNA integrity, and hormonal tests (FSH, LH, testosterone) can reveal the root cause." },
+    { icon: Pill, title: "Medical Treatment", text: "Depending on findings: hormonal therapy, antioxidants, varicocele repair, or assisted techniques may be recommended." },
+    { icon: Dna, title: "IVF/ICSI Planning", text: "With your profile, ICSI (injecting a single sperm into the egg) can achieve high fertilisation rates in IVF." },
   ],
   severe: [
-    { icon: "🚨", title: "Urgent Andrological Review", text: "Severe abnormalities require prompt specialist evaluation. Several causes are treatable with the right diagnosis." },
-    { icon: "🧬", title: "Genetic Testing", text: "Karyotyping and Y-chromosome microdeletion testing can identify hereditary causes affecting sperm production." },
-    { icon: "🏥", title: "Surgical Sperm Retrieval", text: "Even with zero sperm in ejaculate, sperm may be retrieved surgically (PESA/TESA/Micro-TESE) for use in ICSI." },
-    { icon: "💬", title: "Fertility Team Consultation", text: "A combined fertility specialist and andrologist assessment will explore all available options for you to father a child." },
+    { icon: AlertCircle, title: "Urgent Andrological Review", text: "Severe abnormalities require prompt specialist evaluation. Several causes are treatable with the right diagnosis." },
+    { icon: Dna, title: "Genetic Testing", text: "Karyotyping and Y-chromosome microdeletion testing can identify hereditary causes affecting sperm production." },
+    { icon: Hospital, title: "Surgical Sperm Retrieval", text: "Even with zero sperm in ejaculate, sperm may be retrieved surgically (PESA/TESA/Micro-TESE) for use in ICSI." },
+    { icon: MessageCircle, title: "Fertility Team Consultation", text: "A combined fertility specialist and andrologist assessment will explore all available options for you to father a child." },
   ],
 };
 
@@ -104,7 +111,13 @@ function runCalc(fields: FieldState): Result {
   return { band, params, conditions, totalCount, tmsc };
 }
 
-export function SemenAnalysisCalculatorPage() {
+export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle      = cms?.title     ?? "Semen Analysis Calculator";
+  const cmsSubtitle   = cms?.subtitle  ?? "Enter your semen analysis report values and get an instant interpretation against WHO 2021 reference ranges, with derived metrics and personalised next steps.";
+  const cmsDisclaimer = cms?.disclaimer ?? "This tool compares your results to WHO 2021 reference values for educational purposes only. Always discuss your results with a fertility or andrology specialist.";
+  const titleWords    = cmsTitle.split(" ");
+  const titleMain     = titleWords.slice(0, -1).join(" ");
+  const titleEm       = titleWords.at(-1) ?? "";
   const emptyFields = (): FieldState => ({ volume: "", conc: "", wbc: "", tmot: "", pr: "", morph: "" });
   const [fields, setFields] = useState<FieldState>(emptyFields());
   const [error, setError] = useState("");
@@ -141,7 +154,7 @@ export function SemenAnalysisCalculatorPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Sperm Analysis Calculator</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -158,13 +171,13 @@ export function SemenAnalysisCalculatorPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              Sperm Analysis <em className="font-display italic text-[color:var(--rose)]">Calculator</em>
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Enter your semen analysis report values and get an instant interpretation against WHO 2021 reference ranges, with derived metrics and personalised next steps.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -175,7 +188,6 @@ export function SemenAnalysisCalculatorPage() {
               ))}
             </div>
           </Reveal>
-          {/* Hero stats */}
           <Reveal delay={0.22}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               {[
@@ -203,15 +215,15 @@ export function SemenAnalysisCalculatorPage() {
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
             {[
-              { emoji: "💧", title: "Volume & pH", desc: "Normal volume is ≥ 1.4 mL. Low volume may indicate retrograde ejaculation or blocked ejaculatory ducts. pH (7.2–8.0) reflects secretion from seminal vesicles and prostate." },
-              { emoji: "🔢", title: "Count & Concentration", desc: "Concentration ≥ 16 million/mL and total count ≥ 39 million per ejaculate are normal. Oligozoospermia (low count) has many treatable causes including hormonal imbalance and varicocele." },
-              { emoji: "🏃", title: "Motility", desc: "At least 42% of sperm should be moving (total motility) and 30% should move progressively forward. Poor motility (asthenozoospermia) reduces the chance of natural fertilisation." },
-              { emoji: "🔬", title: "Morphology", desc: "At least 4% normal forms (Kruger strict criteria) are required. Morphology reflects sperm DNA packaging quality. Teratozoospermia can affect fertilisation even with ICSI." },
-              { emoji: "🧬", title: "DNA & WBC", desc: "WBCs > 1 million/mL (leukocytospermia) may indicate infection or inflammation. Sperm DNA fragmentation (not in this calculator) is a separate test for cases with normal parameters but poor outcomes." },
-              { emoji: "💊", title: "Treatment Path", desc: "Results guide treatment: Mild issues may improve with lifestyle and supplements. Moderate issues often respond to medication. Severe cases may need ICSI, surgical retrieval, or donor sperm." },
+              { icon: Droplets, title: "Volume & pH", desc: "Normal volume is ≥ 1.4 mL. Low volume may indicate retrograde ejaculation or blocked ejaculatory ducts. pH (7.2–8.0) reflects secretion from seminal vesicles and prostate." },
+              { icon: Hash, title: "Count & Concentration", desc: "Concentration ≥ 16 million/mL and total count ≥ 39 million per ejaculate are normal. Oligozoospermia (low count) has many treatable causes including hormonal imbalance and varicocele." },
+              { icon: Activity, title: "Motility", desc: "At least 42% of sperm should be moving (total motility) and 30% should move progressively forward. Poor motility (asthenozoospermia) reduces the chance of natural fertilisation." },
+              { icon: Microscope, title: "Morphology", desc: "At least 4% normal forms (Kruger strict criteria) are required. Morphology reflects sperm DNA packaging quality. Teratozoospermia can affect fertilisation even with ICSI." },
+              { icon: Dna, title: "DNA & WBC", desc: "WBCs > 1 million/mL (leukocytospermia) may indicate infection or inflammation. Sperm DNA fragmentation (not in this calculator) is a separate test for cases with normal parameters but poor outcomes." },
+              { icon: Pill, title: "Treatment Path", desc: "Results guide treatment: Mild issues may improve with lifestyle and supplements. Moderate issues often respond to medication. Severe cases may need ICSI, surgical retrieval, or donor sperm." },
             ].map((c) => (
               <div key={c.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
-                <div className="text-2xl">{c.emoji}</div>
+                <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                 <h3 className="mt-4 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
                 <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
               </div>
@@ -295,8 +307,9 @@ export function SemenAnalysisCalculatorPage() {
                     ))}
                   </div>
 
-                  <div className="mt-5 rounded-xl bg-[color:var(--ivory)] px-4 py-3 text-xs text-muted-foreground">
-                    💡 <strong>Total Count</strong> and <strong>TMSC</strong> are calculated automatically from Volume × Concentration.
+                  <div className="mt-5 rounded-xl bg-[color:var(--ivory)] px-4 py-3 text-xs text-muted-foreground flex items-center gap-2">
+                    <Lightbulb className="h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" />
+                    <span><strong>Total Count</strong> and <strong>TMSC</strong> are calculated automatically from Volume × Concentration.</span>
                   </div>
 
                   {error && (
@@ -357,7 +370,7 @@ export function SemenAnalysisCalculatorPage() {
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {NEXT_STEPS[result.band].map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
-                    <div className="text-2xl">{c.icon}</div>
+                    <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                     <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
                   </div>
@@ -439,15 +452,15 @@ export function SemenAnalysisCalculatorPage() {
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {[
-              { emoji: "📋", title: "Just received your semen report", desc: "Make sense of your results before — or as preparation for — your specialist appointment." },
-              { emoji: "🔄", title: "Repeating after lifestyle changes", desc: "Track improvement across reports after making dietary or lifestyle changes over 3–6 months." },
-              { emoji: "💑", title: "Couples investigating infertility", desc: "Male factor affects 50% of cases. This gives both partners a clearer picture from day one." },
-              { emoji: "💊", title: "Before starting IVF/ICSI", desc: "Understand whether your TMSC supports IUI, standard IVF, or whether ICSI is the recommended path." },
-              { emoji: "🔬", title: "Monitoring a known condition", desc: "Men with varicocele, hormonal treatment, or prior infection can track parameter improvements." },
-              { emoji: "🌱", title: "Proactive male health check", desc: "No fertility concerns yet? Understanding your baseline before trying is always a positive step." },
+              { icon: ClipboardList, title: "Just received your semen report", desc: "Make sense of your results before — or as preparation for — your specialist appointment." },
+              { icon: RefreshCw, title: "Repeating after lifestyle changes", desc: "Track improvement across reports after making dietary or lifestyle changes over 3–6 months." },
+              { icon: Users, title: "Couples investigating infertility", desc: "Male factor affects 50% of cases. This gives both partners a clearer picture from day one." },
+              { icon: Pill, title: "Before starting IVF/ICSI", desc: "Understand whether your TMSC supports IUI, standard IVF, or whether ICSI is the recommended path." },
+              { icon: Microscope, title: "Monitoring a known condition", desc: "Men with varicocele, hormonal treatment, or prior infection can track parameter improvements." },
+              { icon: Sprout, title: "Proactive male health check", desc: "No fertility concerns yet? Understanding your baseline before trying is always a positive step." },
             ].map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -463,28 +476,25 @@ export function SemenAnalysisCalculatorPage() {
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
             <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>
-                The Semen Analysis Calculator compares your reported parameters against the WHO 2021 lower reference limits — the 5th centile values from fertile men (men who had fathered a child within the past 12 months) as published in the WHO Laboratory Manual for the Examination and Processing of Human Semen, 6th Edition.
-              </p>
-              <p>
-                In addition to individual parameter comparison, the calculator derives two key composite metrics: <strong>Total Sperm Count</strong> (Volume × Concentration) and <strong>TMSC — Total Motile Sperm Count</strong> (Volume × Concentration × Progressive Motility / 100), which is the gold-standard measure for IUI candidacy (≥ 9 million is generally required).
-              </p>
-              <p>
-                Standard andrological conditions are automatically identified: Oligozoospermia (low count), Asthenozoospermia (poor motility), Teratozoospermia (abnormal morphology), Leukocytospermia (elevated WBCs), and OAT Syndrome (all three O+A+T together). Azoospermia (zero sperm) is not currently evaluated in this tool.
-              </p>
-              <p>
-                Results are classified into four bands: Normal, Mild, Moderate, and Severe — with band-specific clinical next steps. This classification is for educational guidance only.
-              </p>
-              <p className="text-xs">
-                This calculator is for informational purposes only. Semen analysis must be interpreted by a qualified andrologist or fertility specialist in the context of full clinical history, repeat testing, and partner evaluation.
-              </p>
-            </div>
+            <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+            {cms?.faqs && cms.faqs.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {cms.faqs.map((f, i) => (
+                    <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                      <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/semen-analysis-calculator" />
+      <CalculatorCrossLinks current="/calculators/semen-analysis" />
       <Locations />
       <Footer />
       <FloatingCTA />

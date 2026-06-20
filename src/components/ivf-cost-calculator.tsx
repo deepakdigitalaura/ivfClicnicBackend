@@ -1,12 +1,15 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, IndianRupee } from "lucide-react";
+import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, IndianRupee, ClipboardList, Wallet, Scale, Smile, Phone, Building, Microscope, BarChart3, Users, Lightbulb, Sprout, RefreshCw, Pill } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
 /* ── cost data (ported from live ivfclinic.com inline JS) ── */
 const BASE_COSTS: Record<string, { base: [number, number]; label: string }> = {
@@ -50,7 +53,13 @@ function calc(type: string, cycles: number, addOns: string[]): Result {
   return { perCycleLo: lo, perCycleHi: hi, totalLo: lo * cycles, totalHi: hi * cycles, cycles, rows };
 }
 
-export function IvfCostCalculatorPage() {
+export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle      = cms?.title     ?? "IVF Cost Calculator";
+  const cmsSubtitle   = cms?.subtitle  ?? "Get a realistic estimate of your IVF treatment costs — broken down by cycle type, add-ons, and number of cycles — so you can plan with confidence.";
+  const cmsDisclaimer = cms?.disclaimer ?? "Cost estimates are indicative only. Actual costs depend on your personalised treatment plan. Consult our team for an exact quote.";
+  const titleWords    = cmsTitle.split(" ");
+  const titleMain     = titleWords.slice(0, -1).join(" ");
+  const titleEm       = titleWords.at(-1) ?? "";
   const [type, setType] = useState("icsi");
   const [cycles, setCycles] = useState(1);
   const [addOns, setAddOns] = useState<string[]>([]);
@@ -73,7 +82,7 @@ export function IvfCostCalculatorPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">IVF Cost Calculator</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -91,13 +100,13 @@ export function IvfCostCalculatorPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              IVF Cost <em className="font-display italic text-[color:var(--rose)]">Calculator</em>
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Get a realistic estimate of your IVF treatment costs — broken down by cycle type, add-ons, and number of cycles — so you can plan with confidence.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -159,16 +168,16 @@ export function IvfCostCalculatorPage() {
             <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Know Your Costs Upfront?</h2>
             <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Financial clarity removes one major stressor from your fertility journey.</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-              {[
-                { emoji: "📋", title: "No Unexpected Bills", desc: "Know what to expect before you commit. Our estimates include medication ranges and common add-ons." },
-                { emoji: "💰", title: "Plan Your Finances", desc: "Use the cost range to plan savings, explore EMI options, or check insurance coverage in advance." },
-                { emoji: "🔄", title: "Compare Options", desc: "See how cycle type and add-ons affect your investment before making any decisions." },
-                { emoji: "👨‍👩‍👧", title: "Family Discussion Ready", desc: "Share a clear cost breakdown with your partner to make decisions together with full information." },
-                { emoji: "⚖️", title: "Prioritise Your Add-Ons", desc: "Understand which add-ons are most cost-effective for your specific situation — ask your specialist." },
-                { emoji: "😌", title: "Reduce Financial Anxiety", desc: "Uncertainty about cost is one of the biggest barriers to seeking care. This calculator removes that barrier." },
-              ].map((c) => (
+              {([
+                { icon: ClipboardList, title: "No Unexpected Bills", desc: "Know what to expect before you commit. Our estimates include medication ranges and common add-ons." },
+                { icon: Wallet, title: "Plan Your Finances", desc: "Use the cost range to plan savings, explore EMI options, or check insurance coverage in advance." },
+                { icon: RefreshCw, title: "Compare Options", desc: "See how cycle type and add-ons affect your investment before making any decisions." },
+                { icon: Users, title: "Family Discussion Ready", desc: "Share a clear cost breakdown with your partner to make decisions together with full information." },
+                { icon: Scale, title: "Prioritise Your Add-Ons", desc: "Understand which add-ons are most cost-effective for your specific situation — ask your specialist." },
+                { icon: Smile, title: "Reduce Financial Anxiety", desc: "Uncertainty about cost is one of the biggest barriers to seeking care. This calculator removes that barrier." },
+              ] as { icon: LucideIcon; title: string; desc: string }[]).map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <div className="text-2xl">{c.emoji}</div>
+                  <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                   <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
                 </div>
@@ -256,7 +265,7 @@ export function IvfCostCalculatorPage() {
               </div>
 
               <div className="mt-6 rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
-                <h3 className="font-semibold text-[color:var(--plum)]">💊 Cost Breakdown (per cycle)</h3>
+                <h3 className="flex items-center gap-2 font-semibold text-[color:var(--plum)]"><Pill className="h-4 w-4 text-[color:var(--rose)]" /> Cost Breakdown (per cycle)</h3>
                 <div className="mt-4 space-y-2">
                   {result.rows.map((row, i) => (
                     <div
@@ -275,14 +284,14 @@ export function IvfCostCalculatorPage() {
               </div>
 
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
-                {[
-                  { icon: "📞", title: "Get an Exact Quote", text: "Book a consultation at Bavishi Fertility Institute for a precise, personalised cost plan based on your specific diagnosis." },
-                  { icon: "🏦", title: "Explore EMI Options", text: "Ask about Bavishi Fertility Institute's flexible payment plans and medical finance options to spread your treatment costs." },
-                  { icon: "📋", title: "Review What's Included", text: "Always ask for a full itemised quote — medications, scans, blood tests, and lab fees can add significantly." },
-                  { icon: "💡", title: "Consider a Package Deal", text: "Multi-cycle packages often offer better value. Ask Bavishi Fertility Institute about bundled pricing for 2–3 cycle commitments." },
-                ].map((c) => (
+                {([
+                  { icon: Phone, title: "Get an Exact Quote", text: "Book a consultation at Bavishi Fertility Institute for a precise, personalised cost plan based on your specific diagnosis." },
+                  { icon: Building, title: "Explore EMI Options", text: "Ask about Bavishi Fertility Institute's flexible payment plans and medical finance options to spread your treatment costs." },
+                  { icon: ClipboardList, title: "Review What's Included", text: "Always ask for a full itemised quote — medications, scans, blood tests, and lab fees can add significantly." },
+                  { icon: Lightbulb, title: "Consider a Package Deal", text: "Multi-cycle packages often offer better value. Ask Bavishi Fertility Institute about bundled pricing for 2–3 cycle commitments." },
+                ] as { icon: LucideIcon; title: string; text: string }[]).map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
-                    <div className="text-2xl">{c.icon}</div>
+                    <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                     <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
                   </div>
@@ -317,16 +326,16 @@ export function IvfCostCalculatorPage() {
         <Reveal>
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { emoji: "🌱", title: "Planning your first IVF cycle", desc: "Get a realistic cost estimate before your first consultation so there are no surprises." },
-              { emoji: "🔄", title: "Budgeting for multiple cycles", desc: "See how total investment scales across 2–4 cycles and plan financially for the full journey." },
-              { emoji: "🏦", title: "Exploring financing options", desc: "Use the estimate to understand how much you need to save or borrow for EMI planning." },
-              { emoji: "🔬", title: "Comparing treatment types", desc: "Switch between Standard IVF, ICSI, FET, and Donor Egg to compare costs before deciding." },
-              { emoji: "📊", title: "Understanding add-on costs", desc: "See exactly how PGT-A, ERA, or other add-ons affect your total investment." },
-              { emoji: "👨‍👩‍👧", title: "Family financial planning", desc: "Share a clear, itemised estimate with your partner before making major treatment decisions." },
-            ].map((p) => (
+            {([
+              { icon: Sprout, title: "Planning your first IVF cycle", desc: "Get a realistic cost estimate before your first consultation so there are no surprises." },
+              { icon: RefreshCw, title: "Budgeting for multiple cycles", desc: "See how total investment scales across 2–4 cycles and plan financially for the full journey." },
+              { icon: Building, title: "Exploring financing options", desc: "Use the estimate to understand how much you need to save or borrow for EMI planning." },
+              { icon: Microscope, title: "Comparing treatment types", desc: "Switch between Standard IVF, ICSI, FET, and Donor Egg to compare costs before deciding." },
+              { icon: BarChart3, title: "Understanding add-on costs", desc: "See exactly how PGT-A, ERA, or other add-ons affect your total investment." },
+              { icon: Users, title: "Family financial planning", desc: "Share a clear, itemised estimate with your partner before making major treatment decisions." },
+            ] as { icon: LucideIcon; title: string; desc: string }[]).map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -390,25 +399,25 @@ export function IvfCostCalculatorPage() {
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
             <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>
-                The IVF Cost Calculator provides realistic cost estimates based on current pricing ranges at fertility clinics in India, including Bavishi Fertility Institute. Costs vary significantly between clinics, cities, and individual treatment protocols — the ranges shown are indicative estimates for planning purposes only.
-              </p>
-              <p>
-                IVF costs in India typically range from ₹1.25 lakh to ₹2.5 lakh per cycle for standard IVF or ICSI, before medication and add-ons. Medications (stimulation injections) typically add ₹30,000–₹80,000 per cycle depending on your protocol and response. Frozen embryo transfer (FET) cycles are significantly less expensive than full stimulation cycles. Donor egg IVF has a higher base cost that includes donor recruitment and evaluation.
-              </p>
-              <p>
-                Add-ons like PGT-A, ERA endometrial testing, and laser-assisted hatching can significantly improve outcomes in specific clinical situations — but they are not appropriate for everyone. Ask your specialist which add-ons are evidence-based for your specific diagnosis before selecting them.
-              </p>
-              <p className="text-xs">
-                All cost estimates are for planning purposes only. Actual costs depend on your individual protocol, response, clinic, and city. Request a full itemised written quote from your clinic before committing to treatment.
-              </p>
-            </div>
+            <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+            {cms?.faqs && cms.faqs.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {cms.faqs.map((f, i) => (
+                    <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                      <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/ivf-cost-calculator" />
+      <CalculatorCrossLinks current="/calculators/ivf-cost" />
       <Locations />
       <Footer />
       <FloatingCTA />

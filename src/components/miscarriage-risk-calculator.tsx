@@ -1,66 +1,74 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, ShieldCheck } from "lucide-react";
+import {
+  ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw,
+  ShieldCheck, AlertTriangle, AlertCircle, AlertOctagon, Search, Map, Star,
+  HeartCrack, HelpCircle, Zap, Syringe, Users, Dna, Hospital, ClipboardList,
+  Leaf, Droplets, BarChart3, Stethoscope, Microscope, Pill,
+} from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
 type Band = "low" | "moderate" | "high" | "very-high";
 
-const BAND_META: Record<Band, { emoji: string; label: string; text: string; prognosis: string; color: string; bg: string }> = {
+const BAND_META: Record<Band, { icon: LucideIcon; label: string; text: string; prognosis: string; color: string; bg: string }> = {
   low: {
-    emoji: "💚", label: "Lower Risk Profile",
+    icon: ShieldCheck, label: "Lower Risk Profile",
     text: "Your risk factors are fewer than average. With appropriate medical support and investigation, your outlook for a successful pregnancy is encouraging.",
-    prognosis: "🌟 With proper care: approximately 65–75% chance of successful next pregnancy",
+    prognosis: "With proper care: approximately 65–75% chance of successful next pregnancy",
     color: "#5cb85c", bg: "bg-emerald-600",
   },
   moderate: {
-    emoji: "🟡", label: "Moderate Risk Profile",
+    icon: AlertTriangle, label: "Moderate Risk Profile",
     text: "You have several identifiable risk factors. A full RPL investigation is strongly recommended — many of these factors are treatable.",
-    prognosis: "📊 With specialist treatment: approximately 50–65% chance of successful next pregnancy",
+    prognosis: "With specialist treatment: approximately 50–65% chance of successful next pregnancy",
     color: "#f0ad4e", bg: "bg-amber-500",
   },
   high: {
-    emoji: "🔴", label: "Higher Risk Profile",
+    icon: AlertCircle, label: "Higher Risk Profile",
     text: "Your risk factors are significant and warrant specialist evaluation. Over 50% of cases at this level have treatable underlying causes — do not lose hope.",
-    prognosis: "⚕️ With comprehensive treatment: approximately 40–55% chance of successful next pregnancy",
+    prognosis: "With comprehensive treatment: approximately 40–55% chance of successful next pregnancy",
     color: "#ff9800", bg: "bg-orange-500",
   },
   "very-high": {
-    emoji: "❗", label: "High Risk — Specialist Review Needed",
+    icon: AlertOctagon, label: "High Risk — Specialist Review Needed",
     text: "Your profile indicates multiple significant risk factors. We strongly recommend an urgent specialist consultation. Many couples with this profile achieve success with the right treatment.",
-    prognosis: "💜 With expert multi-disciplinary care: meaningful chance of success — do not give up",
+    prognosis: "With expert multi-disciplinary care: meaningful chance of success — do not give up",
     color: "#e74c3c", bg: "bg-red-600",
   },
 };
 
-const NEXT_STEPS: Record<Band, { icon: string; title: string; text: string }[]> = {
+const NEXT_STEPS: Record<Band, { icon: LucideIcon; title: string; text: string }[]> = {
   low: [
-    { icon: "📋", title: "Full RPL Investigation", text: "Request a comprehensive panel including blood clotting tests, hormonal profile, and uterine scan even at lower risk." },
-    { icon: "💊", title: "Progesterone Support", text: "Talk to your doctor about luteal phase support and early pregnancy progesterone therapy for your next pregnancy." },
-    { icon: "🧬", title: "Consider PGT-A", text: "Pre-implantation genetic testing (if doing IVF) can screen embryos for chromosomal abnormalities." },
-    { icon: "🥗", title: "Optimise Health", text: "Focus on folic acid (5mg), vitamin D, healthy weight, and stress management to improve your chances." },
+    { icon: ClipboardList, title: "Full RPL Investigation", text: "Request a comprehensive panel including blood clotting tests, hormonal profile, and uterine scan even at lower risk." },
+    { icon: Pill, title: "Progesterone Support", text: "Talk to your doctor about luteal phase support and early pregnancy progesterone therapy for your next pregnancy." },
+    { icon: Dna, title: "Consider PGT-A", text: "Pre-implantation genetic testing (if doing IVF) can screen embryos for chromosomal abnormalities." },
+    { icon: Leaf, title: "Optimise Health", text: "Focus on folic acid (5mg), vitamin D, healthy weight, and stress management to improve your chances." },
   ],
   moderate: [
-    { icon: "🔬", title: "Specialist Referral Now", text: "See a recurrent pregnancy loss specialist for a structured investigation including chromosomal, immunological and anatomical workup." },
-    { icon: "🩸", title: "Thrombophilia Screen", text: "Get tested for antiphospholipid antibodies, anticardiolipin antibodies and lupus anticoagulant — highly treatable." },
-    { icon: "🏥", title: "Uterine Assessment", text: "A hysteroscopy or 3D scan can identify and correct uterine abnormalities preventing successful implantation." },
-    { icon: "🤝", title: "Supportive Care Programme", text: "Ask about our dedicated RPL clinic offering emotional support, close early monitoring, and a personalised management plan." },
+    { icon: Microscope, title: "Specialist Referral Now", text: "See a recurrent pregnancy loss specialist for a structured investigation including chromosomal, immunological and anatomical workup." },
+    { icon: Droplets, title: "Thrombophilia Screen", text: "Get tested for antiphospholipid antibodies, anticardiolipin antibodies and lupus anticoagulant — highly treatable." },
+    { icon: Hospital, title: "Uterine Assessment", text: "A hysteroscopy or 3D scan can identify and correct uterine abnormalities preventing successful implantation." },
+    { icon: Users, title: "Supportive Care Programme", text: "Ask about our dedicated RPL clinic offering emotional support, close early monitoring, and a personalised management plan." },
   ],
   high: [
-    { icon: "⚡", title: "Urgent Specialist Review", text: "Book an RPL specialist appointment promptly. A structured diagnostic protocol can identify treatable causes in over 50% of cases." },
-    { icon: "🧬", title: "Genetic Testing", text: "Both partners should undergo karyotyping to check for chromosomal translocations — a key cause of higher-order pregnancy losses." },
-    { icon: "🩺", title: "Immune Workup", text: "Comprehensive immune testing including NK cells, cytokine profiles, and HLA typing may reveal immunological causes." },
-    { icon: "💉", title: "Treatment Options", text: "Depending on findings: anticoagulants, immunotherapy, progesterone, surgery, or IVF with PGT-A may significantly improve outcomes." },
+    { icon: Zap, title: "Urgent Specialist Review", text: "Book an RPL specialist appointment promptly. A structured diagnostic protocol can identify treatable causes in over 50% of cases." },
+    { icon: Dna, title: "Genetic Testing", text: "Both partners should undergo karyotyping to check for chromosomal translocations — a key cause of higher-order pregnancy losses." },
+    { icon: Stethoscope, title: "Immune Workup", text: "Comprehensive immune testing including NK cells, cytokine profiles, and HLA typing may reveal immunological causes." },
+    { icon: Syringe, title: "Treatment Options", text: "Depending on findings: anticoagulants, immunotherapy, progesterone, surgery, or IVF with PGT-A may significantly improve outcomes." },
   ],
   "very-high": [
-    { icon: "🚨", title: "Immediate Specialist Care", text: "Please book an urgent consultation with an RPL specialist. Your risk profile warrants a thorough, fast-tracked investigation." },
-    { icon: "🔬", title: "Comprehensive Genetic Testing", text: "Full karyotyping for both partners plus preconception genetic counselling to understand hereditary factors and IVF/PGT-A options." },
-    { icon: "🏥", title: "Multi-Disciplinary Approach", text: "Your care should involve reproductive immunologists, haematologists, and fertility specialists working together on your case." },
-    { icon: "💜", title: "Emotional Support", text: "Multiple losses take a significant emotional toll. Access our counselling services and patient support groups alongside medical treatment." },
+    { icon: AlertCircle, title: "Immediate Specialist Care", text: "Please book an urgent consultation with an RPL specialist. Your risk profile warrants a thorough, fast-tracked investigation." },
+    { icon: Microscope, title: "Comprehensive Genetic Testing", text: "Full karyotyping for both partners plus preconception genetic counselling to understand hereditary factors and IVF/PGT-A options." },
+    { icon: Hospital, title: "Multi-Disciplinary Approach", text: "Your care should involve reproductive immunologists, haematologists, and fertility specialists working together on your case." },
+    { icon: Heart, title: "Emotional Support", text: "Multiple losses take a significant emotional toll. Access our counselling services and patient support groups alongside medical treatment." },
   ],
 };
 
@@ -87,7 +95,36 @@ function calc(
   return { score, band };
 }
 
-export function MiscarriageRiskCalculatorPage() {
+const WHAT_CARDS: { icon: LucideIcon; title: string; desc: string }[] = [
+  { icon: Heart, title: "Emotional Clarity", desc: "Replace fear and confusion with factual, compassionate information about your specific situation." },
+  { icon: Search, title: "Know Which Facts Matter", desc: "Understand which risk factors are most significant in recurrent pregnancy loss — and which ones are modifiable." },
+  { icon: BarChart3, title: "Understand Your Odds", desc: "See a realistic probability range for your next pregnancy based on your history and risk profile." },
+  { icon: Map, title: "Plan Your Next Steps", desc: "Get a clear, prioritised action plan specific to your risk level — from investigation to treatment." },
+  { icon: Hospital, title: "Prepare for Your Doctor", desc: "Walk into your next appointment knowing exactly what questions to ask and what to push for." },
+  { icon: Star, title: "Evidence-Based Hope", desc: "Most RPL risk factors are treatable. This calculator helps you identify those and find the right path forward." },
+];
+
+const WHO_CARDS: { icon: LucideIcon; title: string; desc: string }[] = [
+  { icon: HeartCrack, title: "Couples with 2+ miscarriages", desc: "If you've experienced recurrent pregnancy loss, this tool helps profile your risk and guide next steps." },
+  { icon: Microscope, title: "Women diagnosed with APS", desc: "Antiphospholipid syndrome is one of the most common — and treatable — causes of RPL." },
+  { icon: Hospital, title: "Women with uterine abnormalities", desc: "Septum, fibroids, polyps, or adhesions can be corrected — understand your risk profile first." },
+  { icon: Stethoscope, title: "Women with thyroid disorders", desc: "Thyroid issues affect implantation and early pregnancy — know how much they contribute to your risk." },
+  { icon: Users, title: "Couples wanting to try again", desc: "Before your next pregnancy, understand what investigations to prioritise and what treatment to discuss." },
+  { icon: HelpCircle, title: "Unexplained recurrent losses", desc: "Even when no cause has been found, this tool helps guide what to investigate next." },
+];
+
+function BandIconDisplay({ band }: { band: Band }) {
+  const Icon = BAND_META[band].icon;
+  return <Icon className="mx-auto h-8 w-8 text-white" />;
+}
+
+export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle      = cms?.title     ?? "Miscarriage Risk Calculator";
+  const cmsSubtitle   = cms?.subtitle  ?? "Understand your personal risk profile for recurrent pregnancy loss and get a clearer picture of your path forward with expert guidance.";
+  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides a statistical risk estimate. The risk of miscarriage is not a certainty. Please consult a specialist for personalised medical advice.";
+  const titleWords    = cmsTitle.split(" ");
+  const titleMain     = titleWords.slice(0, -1).join(" ");
+  const titleEm       = titleWords.at(-1) ?? "";
   const [losses, setLosses] = useState("");
   const [age, setAge] = useState("");
   const [livebirth, setLivebirth] = useState("");
@@ -132,7 +169,7 @@ export function MiscarriageRiskCalculatorPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Miscarriage Risk Calculator</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -150,13 +187,13 @@ export function MiscarriageRiskCalculatorPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              Risk of Repeat Miscarriage <em className="font-display italic text-[color:var(--rose)]">Calculator</em>
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Understand your personal risk profile for recurrent pregnancy loss and get a clearer picture of your path forward with expert guidance.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -167,7 +204,6 @@ export function MiscarriageRiskCalculatorPage() {
               ))}
             </div>
           </Reveal>
-          {/* Hero stats */}
           <Reveal delay={0.22}>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               {[
@@ -218,16 +254,9 @@ export function MiscarriageRiskCalculatorPage() {
             <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">What This Calculator Does for You</h2>
             <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Turning uncertainty into understanding — step by step toward answers.</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-              {[
-                { emoji: "💜", title: "Emotional Clarity", desc: "Replace fear and confusion with factual, compassionate information about your specific situation." },
-                { emoji: "🔍", title: "Know Which Facts Matter", desc: "Understand which risk factors are most significant in recurrent pregnancy loss — and which ones are modifiable." },
-                { emoji: "📊", title: "Understand Your Odds", desc: "See a realistic probability range for your next pregnancy based on your history and risk profile." },
-                { emoji: "🗺️", title: "Plan Your Next Steps", desc: "Get a clear, prioritised action plan specific to your risk level — from investigation to treatment." },
-                { emoji: "🏥", title: "Prepare for Your Doctor", desc: "Walk into your next appointment knowing exactly what questions to ask and what to push for." },
-                { emoji: "🌟", title: "Evidence-Based Hope", desc: "Most RPL risk factors are treatable. This calculator helps you identify those and find the right path forward." },
-              ].map((c) => (
+              {WHAT_CARDS.map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <div className="text-2xl">{c.emoji}</div>
+                  <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                   <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
                 </div>
@@ -271,7 +300,7 @@ export function MiscarriageRiskCalculatorPage() {
                   <div className="mt-6">
                     <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Previous successful pregnancy (live birth)? <span className="text-[color:var(--rose)]">*</span></label>
                     <div className="grid grid-cols-2 gap-3">
-                      {[["yes","✅ Yes"],["no","❌ No"]].map(([v,l]) => radioBtn("livebirth",v,l,livebirth,setLivebirth))}
+                      {[["yes","Yes"],["no","No"]].map(([v,l]) => radioBtn("livebirth",v,l,livebirth,setLivebirth))}
                     </div>
                   </div>
 
@@ -322,7 +351,7 @@ export function MiscarriageRiskCalculatorPage() {
               </button>
 
               <div className={`rounded-[2rem] p-8 text-center text-white md:p-10 ${BAND_META[result.band].bg}`}>
-                <div className="text-4xl">{BAND_META[result.band].emoji}</div>
+                <BandIconDisplay band={result.band} />
                 <div className="mt-3 text-2xl font-bold">{BAND_META[result.band].label}</div>
                 <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/85">{BAND_META[result.band].text}</p>
                 <div className="mt-5 rounded-xl bg-white/15 px-4 py-2 text-sm font-semibold">{BAND_META[result.band].prognosis}</div>
@@ -349,7 +378,7 @@ export function MiscarriageRiskCalculatorPage() {
               <div className="mt-6 grid gap-4 sm:grid-cols-2">
                 {NEXT_STEPS[result.band].map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
-                    <div className="text-2xl">{c.icon}</div>
+                    <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                     <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
                     <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
                   </div>
@@ -384,16 +413,9 @@ export function MiscarriageRiskCalculatorPage() {
         <Reveal>
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { emoji: "💔", title: "Couples with 2+ miscarriages", desc: "If you've experienced recurrent pregnancy loss, this tool helps profile your risk and guide next steps." },
-              { emoji: "🔬", title: "Women diagnosed with APS", desc: "Antiphospholipid syndrome is one of the most common — and treatable — causes of RPL." },
-              { emoji: "🏥", title: "Women with uterine abnormalities", desc: "Septum, fibroids, polyps, or adhesions can be corrected — understand your risk profile first." },
-              { emoji: "🩺", title: "Women with thyroid disorders", desc: "Thyroid issues affect implantation and early pregnancy — know how much they contribute to your risk." },
-              { emoji: "👨‍👩‍👧", title: "Couples wanting to try again", desc: "Before your next pregnancy, understand what investigations to prioritise and what treatment to discuss." },
-              { emoji: "❓", title: "Unexplained recurrent losses", desc: "Even when no cause has been found, this tool helps guide what to investigate next." },
-            ].map((p) => (
+            {WHO_CARDS.map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -457,22 +479,25 @@ export function MiscarriageRiskCalculatorPage() {
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
             <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>
-                The Risk of Repeat Miscarriage Calculator is clinically informed by published research on recurrent pregnancy loss (RPL). It uses seven risk factors — number of previous losses, maternal and paternal age, prior live birth history, antiphospholipid syndrome, uterine abnormalities, and thyroid disorders — to generate a personalised risk profile score.
-              </p>
-              <p>
-                Recurrent pregnancy loss affects approximately 1 in 100 couples. In 70–75% of cases, no specific cause is identified even after investigation. However, in 40%+ of cases, at least one treatable contributing factor is found. The most commonly identified treatable causes include antiphospholipid syndrome (APS), uterine abnormalities (septum, fibroids, polyps), thyroid dysfunction, chromosomal abnormalities in one partner, and immune system dysregulation.
-              </p>
-              <p>
-                This calculator does not diagnose the cause of your losses. Its purpose is to help you understand your risk level and prioritise the investigations most likely to yield actionable answers. Please use these results as a starting point for a conversation with your fertility specialist, not as a substitute for medical evaluation.
-              </p>
-            </div>
+            <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+            {cms?.faqs && cms.faqs.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {cms.faqs.map((f, i) => (
+                    <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                      <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/risk-of-repeat-miscarriage-calculator" />
+      <CalculatorCrossLinks current="/calculators/miscarriage-risk" />
       <Locations />
       <Footer />
       <FloatingCTA />

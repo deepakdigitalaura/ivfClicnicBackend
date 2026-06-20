@@ -5,12 +5,16 @@ import {
   ArrowRight, ArrowLeft, Calendar, Phone, MessageCircle, CheckCircle2,
   ShieldCheck, BarChart3, Lock, Sprout, Baby, Home as HomeIcon, Stethoscope,
   Zap, Building2, RotateCcw, Microscope, HeartPulse,
+  Target, Smile, Hospital, Wallet, HelpCircle, Dna, Users, RefreshCw,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
 /* ────────────────────────────────────────────────────────────────────────
  * Hunault et al. (2004), Erasmus University Medical Centre, Rotterdam —
@@ -36,7 +40,13 @@ type StepN = 1 | 2 | 3;
 
 const STEP_LABELS: Record<StepN, string> = { 1: "Your Age", 2: "Your History", 3: "Sperm & Referral" };
 
-export function NaturalPregnancyCalculatorPage() {
+export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle      = cms?.title     ?? "Natural Pregnancy Calculator";
+  const cmsSubtitle   = cms?.subtitle  ?? "Estimate your probability of natural pregnancy within the next 12 months, used by fertility specialists worldwide to guide treatment decisions.";
+  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides a statistical estimate only. If you have been trying to conceive for 12 months without success, consult a fertility specialist.";
+  const titleWords    = cmsTitle.split(" ");
+  const titleMain     = titleWords.slice(0, -1).join(" ");
+  const titleEm       = titleWords.at(-1) ?? "";
   const widgetRef = useRef<HTMLDivElement>(null);
 
   const [step, setStep] = useState<StepN>(1);
@@ -99,7 +109,7 @@ export function NaturalPregnancyCalculatorPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Natural Pregnancy Calculator</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -117,14 +127,13 @@ export function NaturalPregnancyCalculatorPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              What Are My Chances of Conceiving <em className="font-display italic text-[color:var(--rose)]">Naturally?</em>
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              This Natural Pregnancy Calculator predicts your probability of natural pregnancy within the next 12 months —
-              used by fertility specialists worldwide to guide treatment decisions.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -443,33 +452,24 @@ export function NaturalPregnancyCalculatorPage() {
         )}
       </section>
 
-      {/* Always-visible disclaimer */}
+      {/* About / Disclaimer */}
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
-        <div className="rounded-r-2xl border border-border/70 border-l-4 border-l-[color:var(--rose)] bg-muted/60 p-7 md:p-8">
-          <p className="text-[13px] leading-relaxed text-muted-foreground">
-            This Natural Pregnancy Calculator is a clinically validated tool used by fertility specialists worldwide — but
-            it works with population-level statistics, not your individual biology. Your score is a starting point, not a
-            final answer.
-          </p>
-          <p className="mt-3.5 text-[13px] leading-relaxed text-muted-foreground">
-            A score of 15% does not mean you cannot have a baby naturally. A score of 70% does not guarantee you will. Many
-            factors that affect your fertility — the condition of your fallopian tubes, the quality of your eggs, the shape
-            of your uterus, your hormone levels — are invisible to this calculator.
-          </p>
-          <p className="mt-3.5 text-[13px] font-semibold leading-relaxed text-[color:var(--plum)]">
-            Please do not make any treatment decisions based on this result alone.
-          </p>
-          <p className="mt-3.5 text-[13px] leading-relaxed text-muted-foreground">
-            If your score concerns you, or if you have been trying to conceive for more than 6 months (over 35) or 12
-            months (under 35) without success, we strongly encourage you to book a consultation with a specialist at
-            Bavishi Fertility Institute. A complete fertility assessment — including blood tests, ultrasound, and semen
-            analysis — gives you a far more accurate and personalised picture than any online calculator can.
-          </p>
-          <p className="mt-3.5 text-xs leading-relaxed text-muted-foreground/70">
-            This tool is provided for educational purposes only. It does not constitute medical advice and is not a
-            substitute for professional clinical assessment. Bavishi Fertility Institute accepts no liability for
-            decisions made based solely on this calculator&apos;s output.
-          </p>
+        <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
+          <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+          <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+          {cms?.faqs && cms.faqs.length > 0 && (
+            <div className="mt-8 space-y-4">
+              <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+              <div className="space-y-3">
+                {cms.faqs.map((f, i) => (
+                  <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                    <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                    <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                  </details>
+                ))}
+              </div>
+            </div>
+          )}
         </div>
       </section>
 
@@ -480,16 +480,16 @@ export function NaturalPregnancyCalculatorPage() {
             <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Patients Use This Calculator</h2>
             <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Built for patients who need real numbers — not just hope.</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
-              {[
-                { emoji: "🎯", title: "Know Where You Stand — Right Now", desc: "Stop guessing. Your natural pregnancy probability is calculated instantly based on validated clinical data." },
-                { emoji: "😌", title: "Reduce Anxiety & Uncertainty", desc: "Knowing your actual probability — even if it's lower than hoped — is less distressing than not knowing at all." },
-                { emoji: "⚡", title: "Stop Waiting — Start Acting", desc: "A low score removes the temptation to 'just try a few more months' when time is your most valuable resource." },
-                { emoji: "🏥", title: "Walk Into Your Consultation Prepared", desc: "Share your probability score with your specialist to have a more focused, productive first appointment." },
-                { emoji: "💰", title: "Make Smarter Financial Decisions", desc: "Knowing whether IUI or IVF is appropriate first helps you avoid spending months on ineffective treatment." },
-                { emoji: "👨‍⚕️", title: "A Tool Loved by Your Own Doctor", desc: "The Hunault model is the same tool used by fertility specialists at Bavishi and leading clinics worldwide." },
-              ].map((c) => (
+              {([
+                { icon: Target, title: "Know Where You Stand — Right Now", desc: "Stop guessing. Your natural pregnancy probability is calculated instantly based on validated clinical data." },
+                { icon: Smile, title: "Reduce Anxiety & Uncertainty", desc: "Knowing your actual probability — even if it's lower than hoped — is less distressing than not knowing at all." },
+                { icon: Zap, title: "Stop Waiting — Start Acting", desc: "A low score removes the temptation to 'just try a few more months' when time is your most valuable resource." },
+                { icon: Hospital, title: "Walk Into Your Consultation Prepared", desc: "Share your probability score with your specialist to have a more focused, productive first appointment." },
+                { icon: Wallet, title: "Make Smarter Financial Decisions", desc: "Knowing whether IUI or IVF is appropriate first helps you avoid spending months on ineffective treatment." },
+                { icon: Stethoscope, title: "A Tool Loved by Your Own Doctor", desc: "The Hunault model is the same tool used by fertility specialists at Bavishi and leading clinics worldwide." },
+              ] as { icon: LucideIcon; title: string; desc: string }[]).map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <div className="text-2xl">{c.emoji}</div>
+                  <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
                   <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
                   <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
                 </div>
@@ -519,16 +519,16 @@ export function NaturalPregnancyCalculatorPage() {
         <Reveal>
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { emoji: "💑", title: "Couples trying 6+ months", desc: "If you've been trying for 6 months or more without success, it's time to understand your probability." },
-              { emoji: "📅", title: "Women aged 35–40 planning a pregnancy", desc: "Age is the strongest predictor — understanding your score motivates acting at the right time." },
-              { emoji: "🧬", title: "Couples with a known semen report", desc: "Sperm motility is a key input — use your semen analysis result to get a more accurate score." },
-              { emoji: "❓", title: "Unexplained infertility", desc: "When no cause is found, this model helps guide whether expectant management or treatment is better." },
-              { emoji: "🔄", title: "Considering IUI or IVF", desc: "Use your score to understand whether IUI is appropriate first or if IVF is the better path." },
-              { emoji: "🌱", title: "After initial fertility investigations", desc: "Integrate your test results into a probability score before deciding on your treatment pathway." },
-            ].map((p) => (
+            {([
+              { icon: Users, title: "Couples trying 6+ months", desc: "If you've been trying for 6 months or more without success, it's time to understand your probability." },
+              { icon: Calendar, title: "Women aged 35–40 planning a pregnancy", desc: "Age is the strongest predictor — understanding your score motivates acting at the right time." },
+              { icon: Dna, title: "Couples with a known semen report", desc: "Sperm motility is a key input — use your semen analysis result to get a more accurate score." },
+              { icon: HelpCircle, title: "Unexplained infertility", desc: "When no cause is found, this model helps guide whether expectant management or treatment is better." },
+              { icon: RefreshCw, title: "Considering IUI or IVF", desc: "Use your score to understand whether IUI is appropriate first or if IVF is the better path." },
+              { icon: Sprout, title: "After initial fertility investigations", desc: "Integrate your test results into a probability score before deciding on your treatment pathway." },
+            ] as { icon: LucideIcon; title: string; desc: string }[]).map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -540,7 +540,7 @@ export function NaturalPregnancyCalculatorPage() {
       </section>
 
       {/* Our network — locations (reused) */}
-      <CalculatorCrossLinks current="/natural-pregnancy-calculator" />
+      <CalculatorCrossLinks current="/calculators/natural-pregnancy" />
       <Locations />
 
       <Footer />

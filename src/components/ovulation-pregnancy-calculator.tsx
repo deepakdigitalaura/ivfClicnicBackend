@@ -15,56 +15,64 @@ import {
   Clock,
   Lock,
   RotateCcw,
+  Microscope,
+  Sprout,
+  Hospital,
+  Plane,
+  Search,
 } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
-const BABY_SIZES: Record<number, { name: string; emoji: string; desc: string }> = {
-  1: { name: "Early Development", emoji: "🔬", desc: "Early development stage. Your body prepares for ovulation." },
-  2: { name: "Cell Division", emoji: "🔬", desc: "Rapid cell division occurring. This is when fertilization may happen." },
-  3: { name: "Implantation", emoji: "🔬", desc: "Embryo attaches to uterine lining. Pregnancy hormones begin production. Embryo size: 0.1mm" },
-  4: { name: "Poppy Seed", emoji: "🌱", desc: "Pregnancy tests can now detect hCG hormone. Embryo size: 0.2mm" },
-  5: { name: "Sesame Seed", emoji: "🌾", desc: "Embryo size: 1.5mm. Neural tube forming, which becomes brain and spinal cord" },
-  6: { name: "Sweet Pea", emoji: "🫛", desc: "Your embryo is approximately 6mm long and starting to develop facial features" },
-  7: { name: "Blueberry", emoji: "🫐", desc: "Your baby is around 13mm long and developing arm and leg buds" },
-  8: { name: "Raspberry", emoji: "🍓", desc: "Your baby measures about 16mm long and all essential organs are beginning to form" },
-  9: { name: "Grape", emoji: "🍇", desc: "Your baby is approximately 23mm long and now officially called a fetus" },
-  10: { name: "Prune", emoji: "🫒", desc: "Your baby measures about 31mm from crown to rump and is developing more defined features" },
-  11: { name: "Fig", emoji: "🍑", desc: "Your baby is approximately 41mm long and starting to move around actively" },
-  12: { name: "Lime", emoji: "🍋", desc: "Your baby measures about 5.4cm long and is fully formed with all organs in place" },
-  13: { name: "Peach", emoji: "🍑", desc: "Your baby is approximately 7.4cm long and has unique fingerprints forming" },
-  14: { name: "Lemon", emoji: "🍋", desc: "Your baby measures about 8.7cm long and can now make facial expressions" },
-  15: { name: "Orange", emoji: "🍊", desc: "Your baby is approximately 10.1cm long and can sense light through closed eyelids" },
-  16: { name: "Avocado", emoji: "🥑", desc: "Your baby measures about 11.6cm long and weighs approximately 100 grams" },
-  17: { name: "Grapefruit", emoji: "🍊", desc: "Your baby is approximately 13cm long and developing adipose (fat) tissue" },
-  18: { name: "Bell Pepper", emoji: "🫑", desc: "Your baby measures about 14.2cm long and weighs around 190 grams" },
-  19: { name: "Mango", emoji: "🥭", desc: "Your baby is approximately 15.3cm long and developing a protective coating called vernix" },
-  20: { name: "Banana", emoji: "🍌", desc: "Your baby measures about 16.4cm long and weighs around 300 grams" },
-  21: { name: "Corn", emoji: "🌽", desc: "Your baby is approximately 26.7cm long (head to heel) and can now swallow" },
-  22: { name: "Papaya", emoji: "🥭", desc: "Your baby measures about 27.8cm long and weighs around 430 grams" },
-  23: { name: "Daikon", emoji: "🥬", desc: "Your baby is approximately 28.9cm long and developing rapid eye movements" },
-  24: { name: "Cauliflower", emoji: "🥦", desc: "Your baby measures about 30cm long and weighs around 600 grams" },
-  25: { name: "Scallion", emoji: "🧅", desc: "Your baby is approximately 34.6cm long and weighs about 660 grams" },
-  26: { name: "Jicama", emoji: "🥔", desc: "Your baby measures about 35.6cm long and weighs around 760 grams" },
-  27: { name: "Rutabaga", emoji: "🥔", desc: "Your baby is approximately 36.6cm long and weighs around 875 grams" },
-  28: { name: "Eggplant", emoji: "🍆", desc: "Your baby measures about 37.6cm long and weighs around 1kg" },
-  29: { name: "Butternut Squash", emoji: "🎃", desc: "Your baby is approximately 38.6cm long and weighs about 1.15kg" },
-  30: { name: "Acorn Squash", emoji: "🎃", desc: "Your baby measures about 39.9cm long and weighs around 1.3kg" },
-  31: { name: "Coconut", emoji: "🥥", desc: "Your baby is approximately 41.1cm long and weighs about 1.5kg" },
-  32: { name: "Rhubarb", emoji: "🌿", desc: "Your baby measures about 42.4cm long and weighs around 1.7kg" },
-  33: { name: "Pineapple", emoji: "🍍", desc: "Your baby is approximately 43.7cm long and weighs about 1.9kg" },
-  34: { name: "Cantaloupe", emoji: "🍈", desc: "Your baby measures about 45cm long and weighs about 2.1kg" },
-  35: { name: "Honeydew Melon", emoji: "🍈", desc: "Your baby is approximately 46.2cm long and weighs about 2.4kg" },
-  36: { name: "Romaine Lettuce", emoji: "🥬", desc: "Your baby measures about 47.4cm long and weighs around 2.6kg" },
-  37: { name: "Winter Melon", emoji: "🫧", desc: "Your baby is approximately 48.6cm long and weighs about 2.9kg. Now considered full term!" },
-  38: { name: "Pumpkin", emoji: "🎃", desc: "Your baby measures about 49.8cm long and weighs around 3.1kg" },
-  39: { name: "Watermelon", emoji: "🍉", desc: "Your baby is approximately 50.7cm long and weighs about 3.3kg" },
-  40: { name: "Jackfruit", emoji: "🌾", desc: "Your baby measures about 51.2cm long and weighs around 3.4kg. Ready to meet the world!" },
-  41: { name: "Jackfruit", emoji: "🌾", desc: "Your baby is approximately 51.7cm long and weighs about 3.6kg. Fully developed and ready for birth" },
-  42: { name: "Jackfruit", emoji: "🌾", desc: "Your baby measures about 52.3cm long and weighs about 3.7kg. You are now post-term" },
+const BABY_SIZES: Record<number, { name: string; icon: LucideIcon; desc: string }> = {
+  1: { name: "Early Development", icon: Microscope, desc: "Early development stage. Your body prepares for ovulation." },
+  2: { name: "Cell Division", icon: Microscope, desc: "Rapid cell division occurring. This is when fertilization may happen." },
+  3: { name: "Implantation", icon: Microscope, desc: "Embryo attaches to uterine lining. Pregnancy hormones begin production. Embryo size: 0.1mm" },
+  4: { name: "Poppy Seed", icon: Sprout, desc: "Pregnancy tests can now detect hCG hormone. Embryo size: 0.2mm" },
+  5: { name: "Sesame Seed", icon: Sprout, desc: "Embryo size: 1.5mm. Neural tube forming, which becomes brain and spinal cord" },
+  6: { name: "Sweet Pea", icon: Sprout, desc: "Your embryo is approximately 6mm long and starting to develop facial features" },
+  7: { name: "Blueberry", icon: Heart, desc: "Your baby is around 13mm long and developing arm and leg buds" },
+  8: { name: "Raspberry", icon: Heart, desc: "Your baby measures about 16mm long and all essential organs are beginning to form" },
+  9: { name: "Grape", icon: Heart, desc: "Your baby is approximately 23mm long and now officially called a fetus" },
+  10: { name: "Prune", icon: Heart, desc: "Your baby measures about 31mm from crown to rump and is developing more defined features" },
+  11: { name: "Fig", icon: Heart, desc: "Your baby is approximately 41mm long and starting to move around actively" },
+  12: { name: "Lime", icon: Heart, desc: "Your baby measures about 5.4cm long and is fully formed with all organs in place" },
+  13: { name: "Peach", icon: Baby, desc: "Your baby is approximately 7.4cm long and has unique fingerprints forming" },
+  14: { name: "Lemon", icon: Baby, desc: "Your baby measures about 8.7cm long and can now make facial expressions" },
+  15: { name: "Orange", icon: Baby, desc: "Your baby is approximately 10.1cm long and can sense light through closed eyelids" },
+  16: { name: "Avocado", icon: Baby, desc: "Your baby measures about 11.6cm long and weighs approximately 100 grams" },
+  17: { name: "Grapefruit", icon: Baby, desc: "Your baby is approximately 13cm long and developing adipose (fat) tissue" },
+  18: { name: "Bell Pepper", icon: Baby, desc: "Your baby measures about 14.2cm long and weighs around 190 grams" },
+  19: { name: "Mango", icon: Baby, desc: "Your baby is approximately 15.3cm long and developing a protective coating called vernix" },
+  20: { name: "Banana", icon: Baby, desc: "Your baby measures about 16.4cm long and weighs around 300 grams" },
+  21: { name: "Corn", icon: Baby, desc: "Your baby is approximately 26.7cm long (head to heel) and can now swallow" },
+  22: { name: "Papaya", icon: Baby, desc: "Your baby measures about 27.8cm long and weighs around 430 grams" },
+  23: { name: "Daikon", icon: Baby, desc: "Your baby is approximately 28.9cm long and developing rapid eye movements" },
+  24: { name: "Cauliflower", icon: Baby, desc: "Your baby measures about 30cm long and weighs around 600 grams" },
+  25: { name: "Scallion", icon: Baby, desc: "Your baby is approximately 34.6cm long and weighs about 660 grams" },
+  26: { name: "Jicama", icon: Baby, desc: "Your baby measures about 35.6cm long and weighs around 760 grams" },
+  27: { name: "Rutabaga", icon: Baby, desc: "Your baby is approximately 36.6cm long and weighs around 875 grams" },
+  28: { name: "Eggplant", icon: Baby, desc: "Your baby measures about 37.6cm long and weighs around 1kg" },
+  29: { name: "Butternut Squash", icon: Baby, desc: "Your baby is approximately 38.6cm long and weighs about 1.15kg" },
+  30: { name: "Acorn Squash", icon: Baby, desc: "Your baby measures about 39.9cm long and weighs around 1.3kg" },
+  31: { name: "Coconut", icon: Baby, desc: "Your baby is approximately 41.1cm long and weighs about 1.5kg" },
+  32: { name: "Rhubarb", icon: Baby, desc: "Your baby measures about 42.4cm long and weighs around 1.7kg" },
+  33: { name: "Pineapple", icon: Baby, desc: "Your baby is approximately 43.7cm long and weighs about 1.9kg" },
+  34: { name: "Cantaloupe", icon: Baby, desc: "Your baby measures about 45cm long and weighs about 2.1kg" },
+  35: { name: "Honeydew Melon", icon: Baby, desc: "Your baby is approximately 46.2cm long and weighs about 2.4kg" },
+  36: { name: "Romaine Lettuce", icon: Baby, desc: "Your baby measures about 47.4cm long and weighs around 2.6kg" },
+  37: { name: "Winter Melon", icon: Baby, desc: "Your baby is approximately 48.6cm long and weighs about 2.9kg. Now considered full term!" },
+  38: { name: "Pumpkin", icon: Baby, desc: "Your baby measures about 49.8cm long and weighs around 3.1kg" },
+  39: { name: "Watermelon", icon: Baby, desc: "Your baby is approximately 50.7cm long and weighs about 3.3kg" },
+  40: { name: "Jackfruit", icon: Baby, desc: "Your baby measures about 51.2cm long and weighs around 3.4kg. Ready to meet the world!" },
+  41: { name: "Jackfruit", icon: Baby, desc: "Your baby is approximately 51.7cm long and weighs about 3.6kg. Fully developed and ready for birth" },
+  42: { name: "Jackfruit", icon: Baby, desc: "Your baby measures about 52.3cm long and weighs about 3.7kg. You are now post-term" },
 };
 
 const PHASES: Record<"menstrual" | "fertile" | "ovulation" | "luteal", { name: string; desc: string; color: string }> = {
@@ -105,12 +113,18 @@ type PregnancyResult = {
   t1Progress: number;
   t2Progress: number;
   t3Progress: number;
-  babySize: { name: string; emoji: string; desc: string };
+  babySize: { name: string; icon: LucideIcon; desc: string };
   weeks: number;
   extraDays: number;
 };
 
-export function OvulationPregnancyCalculatorPage() {
+export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle      = cms?.title     ?? "Ovulation Calculator";
+  const cmsSubtitle   = cms?.subtitle  ?? "Use this free calculator to estimate your ovulation date, fertile window, pregnancy test date, next period, and baby progress through the full pregnancy.";
+  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides estimates based on average cycle patterns. Ovulation timing can vary. Consult a fertility specialist for personalised guidance.";
+  const titleWords    = cmsTitle.split(" ");
+  const titleMain     = titleWords.slice(0, -1).join(" ");
+  const titleEm       = titleWords.at(-1) ?? "";
   const widgetRef = useRef<HTMLDivElement>(null);
   const [activeTab, setActiveTab] = useState<"ovulation" | "pregnancy">("ovulation");
 
@@ -415,7 +429,7 @@ export function OvulationPregnancyCalculatorPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Ovulation &amp; Pregnancy Calculator</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -432,13 +446,13 @@ export function OvulationPregnancyCalculatorPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              Know Your <em className="font-display italic text-[color:var(--rose)]">Fertile Window</em> &amp; Due Date
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Use this free calculator to estimate your ovulation date, fertile window, pregnancy test date, next period, and baby progress through the full pregnancy.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -700,7 +714,7 @@ export function OvulationPregnancyCalculatorPage() {
 
               <div className="mt-7 grid gap-5 md:grid-cols-2">
                 <div className="rounded-2xl border border-border/70 bg-card p-6 text-center shadow-soft">
-                  <div className="text-4xl">{pregnancyResult.babySize.emoji}</div>
+                  <pregnancyResult.babySize.icon className="mx-auto h-10 w-10 text-[color:var(--rose)]" />
                   <div className="mt-4 text-sm uppercase tracking-[0.18em] text-muted-foreground">Baby Size</div>
                   <div className="mt-2 text-xl font-semibold text-[color:var(--plum)]">{pregnancyResult.babySize.name}</div>
                   <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pregnancyResult.babySize.desc}</p>
@@ -806,16 +820,16 @@ export function OvulationPregnancyCalculatorPage() {
         <Reveal>
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { emoji: "🌱", title: "Just started trying to conceive", desc: "Learn when your fertile window actually falls — most couples are surprised by the timing." },
-              { emoji: "📅", title: "Irregular cycle trackers", desc: "Adjust cycle length each month to see how your fertile window shifts with irregular cycles." },
-              { emoji: "🏥", title: "Timing IUI or natural cycles", desc: "Use the ovulation date estimate to plan intercourse or IUI timing with greater precision." },
-              { emoji: "✈️", title: "Planning around travel or schedules", desc: "The 6-month calendar helps you and your partner plan ahead when time apart is a factor." },
-              { emoji: "🤰", title: "Already pregnant", desc: "Switch to pregnancy mode to track your due date, trimester progress, and baby size week by week." },
-              { emoji: "🔍", title: "Understanding your cycle", desc: "Not ready to try yet? Use the tool to understand your natural rhythm before you start." },
-            ].map((p) => (
+            {([
+              { icon: Sprout, title: "Just started trying to conceive", desc: "Learn when your fertile window actually falls — most couples are surprised by the timing." },
+              { icon: Calendar, title: "Irregular cycle trackers", desc: "Adjust cycle length each month to see how your fertile window shifts with irregular cycles." },
+              { icon: Hospital, title: "Timing IUI or natural cycles", desc: "Use the ovulation date estimate to plan intercourse or IUI timing with greater precision." },
+              { icon: Plane, title: "Planning around travel or schedules", desc: "The 6-month calendar helps you and your partner plan ahead when time apart is a factor." },
+              { icon: Baby, title: "Already pregnant", desc: "Switch to pregnancy mode to track your due date, trimester progress, and baby size week by week." },
+              { icon: Search, title: "Understanding your cycle", desc: "Not ready to try yet? Use the tool to understand your natural rhythm before you start." },
+            ] as { icon: LucideIcon; title: string; desc: string }[]).map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -831,25 +845,25 @@ export function OvulationPregnancyCalculatorPage() {
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
             <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>
-                The Ovulation Calculator uses the standard luteal phase method: ovulation is estimated to occur 14 days before the start of the next period (cycle length minus 14 days). The fertile window is calculated as 5 days before ovulation through 1 day after, reflecting the typical lifespan of sperm (up to 5 days) and the egg (12–24 hours post-ovulation).
-              </p>
-              <p>
-                This method assumes a consistent luteal phase length. Women with irregular cycles, anovulatory cycles, PCOS, thyroid disorders, or those approaching perimenopause may have unpredictable ovulation timing. In these cases, the calculator provides a starting estimate — but monitoring with ovulation predictor kits (OPKs), basal body temperature (BBT) charting, or ultrasound follicle tracking will be more accurate.
-              </p>
-              <p>
-                The Pregnancy Calculator uses Naegele&apos;s Rule: add 280 days (40 weeks) to the first day of the last menstrual period for an estimated due date. Trimester boundaries are set at weeks 1–12 (T1), 13–27 (T2), and 28–40 (T3). Baby size comparisons are for educational purposes only.
-              </p>
-              <p className="text-xs">
-                This tool is for educational purposes only. All results are estimates. Always confirm your ovulation timing and pregnancy dates with a qualified healthcare provider.
-              </p>
-            </div>
+            <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+            {cms?.faqs && cms.faqs.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {cms.faqs.map((f, i) => (
+                    <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                      <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/ovulation-calculator" />
+      <CalculatorCrossLinks current="/calculators/ovulation" />
       <Locations />
       <Footer />
       <FloatingCTA />

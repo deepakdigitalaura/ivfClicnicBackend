@@ -78,6 +78,7 @@ export interface Config {
     treatments: Treatment;
     cities: City;
     centres: Centre;
+    calculators: Calculator;
     redirects: Redirect;
     media: Media;
     users: User;
@@ -99,6 +100,7 @@ export interface Config {
     treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
     cities: CitiesSelect<false> | CitiesSelect<true>;
     centres: CentresSelect<false> | CentresSelect<true>;
+    calculators: CalculatorsSelect<false> | CalculatorsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -2113,6 +2115,70 @@ export interface Centre {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Manage the 8 fertility calculator pages — edit titles, descriptions, FAQs and SEO.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "calculators".
+ */
+export interface Calculator {
+  id: number;
+  /**
+   * Which calculator this page represents. Set once — do not change.
+   */
+  slug:
+    | 'ivf-success-rate'
+    | 'ivf-cost'
+    | 'ovulation'
+    | 'natural-pregnancy'
+    | 'fertile-period'
+    | 'amh-level'
+    | 'semen-analysis'
+    | 'miscarriage-risk';
+  /**
+   * The main heading shown at the top of the calculator page.
+   */
+  title: string;
+  /**
+   * One or two sentences shown below the page title to explain what the calculator does.
+   */
+  subtitle?: string | null;
+  /**
+   * Disclaimer text shown below the calculator results. E.g. 'Results are estimates only…'
+   */
+  disclaimer?: string | null;
+  /**
+   * Questions and answers shown in the FAQ section below the calculator.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Controls how this page appears in Google search results.
+   */
+  seo?: {
+    /**
+     * Title shown in Google results (50–60 chars).
+     */
+    metaTitle?: string | null;
+    /**
+     * Description shown in Google results (120–160 chars).
+     */
+    metaDescription?: string | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    /**
+     * Image shown when sharing this page on WhatsApp, Facebook, etc. (1200×630px ideal).
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Send an old or changed web address to a new one (e.g. after renaming a page) so visitors and search engines never hit a dead link.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2239,6 +2305,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'centres';
         value: number | Centre;
+      } | null)
+    | ({
+        relationTo: 'calculators';
+        value: number | Calculator;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -3359,6 +3429,34 @@ export interface CentresSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "calculators_select".
+ */
+export interface CalculatorsSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  subtitle?: T;
+  disclaimer?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -4096,7 +4194,7 @@ export interface Homepage {
     imageAlt?: string | null;
   };
   /**
-   * The homepage's 'About the Institute' summary section (its own copy — separate from the full About BFI page).
+   * The homepage's 'About the Institute' summary section (its own copy — separate from the full About Bavishi Fertility Institute page).
    */
   about?: {
     eyebrow?: string | null;

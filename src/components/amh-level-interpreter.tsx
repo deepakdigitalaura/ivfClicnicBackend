@@ -1,12 +1,15 @@
 "use client";
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, Activity } from "lucide-react";
+import { ArrowRight, Calendar, MessageCircle, Heart, Clock, Lock, Sparkles, RotateCcw, Activity, Phone, Hospital, ClipboardList, Dna, Leaf, Stethoscope, BarChart3, Snowflake, MapPin, Microscope, Pill, Search, Syringe, Flower2, Briefcase } from "lucide-react";
+import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
+import type { CalculatorCmsData } from "@/lib/calculators";
+import { Editable } from "@/components/editor/Editable";
 
 /* ── AMH interpretation data (ported from live ivfclinic.com) ── */
 type AmhBand = "vl" | "l" | "n" | "h" | "vh";
@@ -14,7 +17,7 @@ type AmhBand = "vl" | "l" | "n" | "h" | "vh";
 const AMH_BANDS: Record<AmhBand, {
   name: string; cls: string;
   meaning: string[];
-  steps: { icon: string; text: string }[];
+  steps: { icon: LucideIcon; text: string }[];
   bgClass: string;
   color: string;
 }> = {
@@ -28,10 +31,10 @@ const AMH_BANDS: Record<AmhBand, {
       "Some women with very low AMH have conceived with individualised treatment and donor egg options.",
     ],
     steps: [
-      { icon: "📞", text: "Book an urgent fertility consultation" },
-      { icon: "🔬", text: "Request an AFC (antral follicle count) scan" },
-      { icon: "💊", text: "Discuss tailored IVF stimulation protocols" },
-      { icon: "🥚", text: "Explore egg donation options if advised" },
+      { icon: Phone, text: "Book an urgent fertility consultation" },
+      { icon: Microscope, text: "Request an AFC (antral follicle count) scan" },
+      { icon: Pill, text: "Discuss tailored IVF stimulation protocols" },
+      { icon: Sparkles, text: "Explore egg donation options if advised" },
     ],
   },
   l: {
@@ -44,10 +47,10 @@ const AMH_BANDS: Record<AmhBand, {
       "Lifestyle factors like diet, supplements (CoQ10, DHEA) may be discussed by your specialist.",
     ],
     steps: [
-      { icon: "🏥", text: "Schedule a fertility consultation soon" },
-      { icon: "📋", text: "Get a baseline hormone panel (FSH, LH, E2)" },
-      { icon: "🔬", text: "Antral follicle count scan for full picture" },
-      { icon: "💬", text: "Discuss IVF timeline with your specialist" },
+      { icon: Hospital, text: "Schedule a fertility consultation soon" },
+      { icon: ClipboardList, text: "Get a baseline hormone panel (FSH, LH, E2)" },
+      { icon: Microscope, text: "Antral follicle count scan for full picture" },
+      { icon: MessageCircle, text: "Discuss IVF timeline with your specialist" },
     ],
   },
   n: {
@@ -60,10 +63,10 @@ const AMH_BANDS: Record<AmhBand, {
       "Continue monitoring yearly if not yet trying to conceive, as levels naturally decline with time.",
     ],
     steps: [
-      { icon: "👩‍⚕️", text: "Discuss your full fertility plan with a specialist" },
-      { icon: "📅", text: "Monitor AMH annually if not yet actively trying" },
-      { icon: "🧬", text: "Consider genetic screening for egg quality assessment" },
-      { icon: "🥗", text: "Maintain a fertility-supportive lifestyle" },
+      { icon: Stethoscope, text: "Discuss your full fertility plan with a specialist" },
+      { icon: Calendar, text: "Monitor AMH annually if not yet actively trying" },
+      { icon: Dna, text: "Consider genetic screening for egg quality assessment" },
+      { icon: Leaf, text: "Maintain a fertility-supportive lifestyle" },
     ],
   },
   h: {
@@ -76,10 +79,10 @@ const AMH_BANDS: Record<AmhBand, {
       "High AMH does not mean fertility is guaranteed — ovulation and other factors still need evaluation.",
     ],
     steps: [
-      { icon: "⚕️", text: "Screen for PCOS with ultrasound and hormones" },
-      { icon: "📋", text: "Discuss gentle IVF protocols to minimise OHSS risk" },
-      { icon: "🔬", text: "Monitor follicle development closely during stimulation" },
-      { icon: "💬", text: "Ask your doctor about long-term management if PCOS is confirmed" },
+      { icon: Stethoscope, text: "Screen for PCOS with ultrasound and hormones" },
+      { icon: ClipboardList, text: "Discuss gentle IVF protocols to minimise OHSS risk" },
+      { icon: Microscope, text: "Monitor follicle development closely during stimulation" },
+      { icon: MessageCircle, text: "Ask your doctor about long-term management if PCOS is confirmed" },
     ],
   },
   vh: {
@@ -92,10 +95,10 @@ const AMH_BANDS: Record<AmhBand, {
       "Regular monitoring and a full hormonal workup are essential before starting any treatment.",
     ],
     steps: [
-      { icon: "🏥", text: "Consult a specialist before any treatment begins" },
-      { icon: "📊", text: "Full hormonal + metabolic panel recommended" },
-      { icon: "❄️", text: "Ask about freeze-all IVF cycles for safety" },
-      { icon: "💊", text: "Discuss pre-treatment medication to reduce OHSS risk" },
+      { icon: Hospital, text: "Consult a specialist before any treatment begins" },
+      { icon: BarChart3, text: "Full hormonal + metabolic panel recommended" },
+      { icon: Snowflake, text: "Ask about freeze-all IVF cycles for safety" },
+      { icon: Pill, text: "Discuss pre-treatment medication to reduce OHSS risk" },
     ],
   },
 };
@@ -140,7 +143,13 @@ type Result = {
   ageComp: { text: string; color: string };
 };
 
-export function AmhLevelInterpreterPage() {
+export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
+  const cmsTitle      = cms?.title     ?? "AMH Level Interpreter";
+  const cmsSubtitle   = cms?.subtitle  ?? "Understand what your Anti-Mullerian Hormone (AMH) result means for your ovarian reserve, IVF response, and fertility outlook — with age-specific context.";
+  const cmsDisclaimer = cms?.disclaimer ?? "AMH is one indicator of ovarian reserve and should be interpreted alongside other tests by a qualified fertility specialist. A low AMH does not mean you cannot conceive.";
+  const titleWords    = cmsTitle.split(" ");
+  const titleMain     = titleWords.slice(0, -1).join(" ");
+  const titleEm       = titleWords.at(-1) ?? "";
   const [unit, setUnit] = useState<"ngml" | "pmol">("ngml");
   const [value, setValue] = useState("");
   const [ageGroup, setAgeGroup] = useState("");
@@ -172,7 +181,7 @@ export function AmhLevelInterpreterPage() {
           <span>/</span>
           <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">AMH Level Interpreter</span>
+          <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
       </div>
 
@@ -189,13 +198,13 @@ export function AmhLevelInterpreterPage() {
           </Reveal>
           <Reveal delay={0.06}>
             <h1 className="mt-6 text-4xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-5xl text-balance">
-              AMH Level <em className="font-display italic text-[color:var(--rose)]">Interpreter</em>
+              {titleMain} <em className="font-display italic text-[color:var(--rose)]">{titleEm}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
-            <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              Understand what your Anti-Müllerian Hormone (AMH) result means for your ovarian reserve, IVF response, and fertility outlook — with age-specific context.
-            </p>
+            <Editable path="subtitle" as="p" className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty" rich={false}>
+              {cmsSubtitle}
+            </Editable>
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
@@ -387,8 +396,8 @@ export function AmhLevelInterpreterPage() {
 
               {/* Absolute + age context */}
               <div className="mt-5 space-y-3">
-                <div className="rounded-xl bg-amber-50 border-l-4 border-amber-400 px-4 py-3 text-sm font-medium text-amber-900">
-                  📌 <strong>Absolute level:</strong> {AMH_BANDS[result.band].name} — {result.ngml.toFixed(2)} ng/mL
+                <div className="rounded-xl bg-amber-50 border-l-4 border-amber-400 px-4 py-3 text-sm font-medium text-amber-900 flex items-center gap-2">
+                  <MapPin className="h-3.5 w-3.5 shrink-0" /><strong>Absolute level:</strong> {AMH_BANDS[result.band].name} — {result.ngml.toFixed(2)} ng/mL
                 </div>
                 <div className="rounded-xl border-l-4 px-4 py-3 text-sm font-medium" style={{ borderColor: result.ageComp.color, color: result.ageComp.color, background: "#f9f9f9" }}>
                   <strong>Age-wise comparison:</strong> {result.ageComp.text}
@@ -412,7 +421,7 @@ export function AmhLevelInterpreterPage() {
               <div className="mt-5 grid gap-4 sm:grid-cols-2">
                 {AMH_BANDS[result.band].steps.map((s) => (
                   <div key={s.text} className="flex items-center gap-3 rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-4 shadow-soft">
-                    <span className="text-2xl">{s.icon}</span>
+                    <s.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                     <p className="text-sm font-medium text-[color:var(--plum)]">{s.text}</p>
                   </div>
                 ))}
@@ -467,16 +476,16 @@ export function AmhLevelInterpreterPage() {
         <Reveal>
           <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Interpreter?</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
-            {[
-              { emoji: "📋", title: "Just received your AMH result", desc: "Understand what your lab number means before or after your specialist appointment." },
-              { emoji: "🔍", title: "Comparing results over time", desc: "Track how your AMH has changed year-on-year and understand whether decline is expected or concerning." },
-              { emoji: "💉", title: "Planning IVF treatment", desc: "AMH predicts IVF egg yield. Know where you stand before committing to a stimulation protocol." },
-              { emoji: "🌸", title: "Investigating fertility before trying", desc: "Get a baseline understanding of your ovarian reserve before you start trying to conceive." },
-              { emoji: "⚕️", title: "Managing PCOS", desc: "High AMH often signals PCOS. Understand the link and what it means for your treatment options." },
-              { emoji: "👩‍💼", title: "Considering egg freezing", desc: "AMH is a key factor in egg freezing decisions — understand your reserve before time becomes a factor." },
-            ].map((p) => (
+            {([
+              { icon: ClipboardList, title: "Just received your AMH result", desc: "Understand what your lab number means before or after your specialist appointment." },
+              { icon: Search, title: "Comparing results over time", desc: "Track how your AMH has changed year-on-year and understand whether decline is expected or concerning." },
+              { icon: Syringe, title: "Planning IVF treatment", desc: "AMH predicts IVF egg yield. Know where you stand before committing to a stimulation protocol." },
+              { icon: Flower2, title: "Investigating fertility before trying", desc: "Get a baseline understanding of your ovarian reserve before you start trying to conceive." },
+              { icon: Stethoscope, title: "Managing PCOS", desc: "High AMH often signals PCOS. Understand the link and what it means for your treatment options." },
+              { icon: Briefcase, title: "Considering egg freezing", desc: "AMH is a key factor in egg freezing decisions — understand your reserve before time becomes a factor." },
+            ] as { icon: LucideIcon; title: string; desc: string }[]).map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                <span className="text-2xl">{p.emoji}</span>
+                <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
                   <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
                   <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
@@ -538,28 +547,25 @@ export function AmhLevelInterpreterPage() {
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
             <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
-            <div className="mt-5 space-y-4 text-[15px] leading-relaxed text-muted-foreground">
-              <p>
-                The AMH Level Interpreter uses age-specific reference ranges based on published literature (Seifer et al., 2011; Nelson et al., 2015) and widely accepted clinical practice guidelines. AMH values are classified into five bands — Very Low, Low, Normal, High, and Very High — and then compared against the normal range for your specific age group to provide additional context.
-              </p>
-              <p>
-                Anti-Müllerian Hormone (AMH) is produced by granulosa cells in small preantral and antral follicles and is directly proportional to the number of remaining primordial follicles — your ovarian reserve. Unlike FSH, AMH remains stable throughout the menstrual cycle and does not require timed blood draws.
-              </p>
-              <p>
-                AMH measures egg <strong>quantity</strong>, not egg <strong>quality</strong>. A woman with a low AMH can still conceive with high-quality eggs; a woman with a high AMH may have egg quality issues affecting IVF outcomes. Always interpret AMH alongside antral follicle count (AFC), FSH, and clinical assessment by a specialist.
-              </p>
-              <p>
-                AMH values can vary between laboratories due to different assay methods. Roche Elecsys, Beckman Coulter Access, and other platforms may give slightly different results. Always compare results from the same lab when tracking changes over time.
-              </p>
-              <p className="text-xs">
-                This tool is for informational purposes only and does not constitute medical advice. Always discuss your AMH result with a qualified fertility specialist before making treatment decisions.
-              </p>
-            </div>
+            <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
+            {cms?.faqs && cms.faqs.length > 0 && (
+              <div className="mt-8 space-y-4">
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <div className="space-y-3">
+                  {cms.faqs.map((f, i) => (
+                    <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
+                      <summary className="cursor-pointer list-none font-semibold text-[color:var(--plum)] text-[15px]">{f.question}</summary>
+                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{f.answer}</p>
+                    </details>
+                  ))}
+                </div>
+              </div>
+            )}
           </div>
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/amh-level-interpreter" />
+      <CalculatorCrossLinks current="/calculators/amh-level" />
       <Locations />
       <Footer />
       <FloatingCTA />
