@@ -176,7 +176,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     key: "3d-4d-sonography",
     slug: "3d-4d-sonography",
     schemaType: "MedicalTest",
-    shortName: "3D/4D sonography",
+    shortName: "3D/4D Sonography",
     meta: {
       title: "3D/4D Sonography in Ahmedabad — Bavishi Fertility & Birthing",
       description:
@@ -272,7 +272,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     key: "painless-delivery",
     slug: "painless-delivery",
     schemaType: "MedicalProcedure",
-    shortName: "painless delivery",
+    shortName: "Painless Delivery",
     meta: {
       title: "Painless Delivery (Epidural) in Ahmedabad — Bavishi Fertility & Birthing",
       description:
@@ -360,7 +360,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     key: "normal-delivery",
     slug: "normal-delivery",
     schemaType: "MedicalProcedure",
-    shortName: "normal delivery",
+    shortName: "Normal Delivery",
     meta: {
       title: "Normal (Vaginal) Delivery in Ahmedabad — Bavishi Fertility & Birthing",
       description:
@@ -449,7 +449,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     key: "fetal-medicine",
     slug: "fetal-medicine",
     schemaType: "MedicalTest",
-    shortName: "fetal medicine",
+    shortName: "Fetal Medicine",
     meta: {
       title: "Fetal Medicine Services in Ahmedabad — Bavishi Fertility & Birthing",
       description:
@@ -537,7 +537,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     key: "high-risk-pregnancy-care",
     slug: "high-risk-pregnancy-care",
     schemaType: "MedicalProcedure",
-    shortName: "high-risk pregnancy care",
+    shortName: "High-Risk Pregnancy Care",
     meta: {
       title: "High Risk Pregnancy Care in Ahmedabad — Bavishi Fertility & Birthing",
       description:
@@ -625,7 +625,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     key: "twin-pregnancy-care",
     slug: "twin-pregnancy-care",
     schemaType: "MedicalProcedure",
-    shortName: "twin pregnancy care",
+    shortName: "Twin Pregnancy Care",
     meta: {
       title: "Twin & Multiple Pregnancy Care in Ahmedabad — Bavishi Fertility & Birthing",
       description:
