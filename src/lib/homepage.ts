@@ -238,6 +238,8 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     { value: "6× Winner", l: "National Fertility Award" },
     { value: "Rank #1", l: "Best IVF Center in India" },
     { value: "300+", l: "International Patients" },
+    { value: "Best IVF Clinic Chain", l: "Mid-Day" },
+    { value: "Best IVF Chain – West", l: "The Economic Times" },
   ],
   whyBavishi: {
     eyebrow: "Why Bavishi Fertility Center",

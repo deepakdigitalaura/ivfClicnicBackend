@@ -32,15 +32,17 @@
       { "text": "14 Centres" },
       { "text": "Leading IVF Specialists" }
     ],
-    "floatingBadge": "National Fertility Award · 5× Winner"
+    "floatingBadge": "National Fertility Award · 6× Winner"
   },
   "stats": [
     { "value": "30,000+", "label": "Happy Families" },
     { "value": "25+", "label": "Years Legacy" },
-    { "value": "15+", "label": "Locations" },
-    { "value": "5× Winner", "label": "National Fertility Award" },
+    { "value": "14", "label": "Fertility Centres" },
+    { "value": "6× Winner", "label": "National Fertility Award" },
     { "value": "Rank #1", "label": "Best IVF Center in India" },
-    { "value": "300+", "label": "International Patients" }
+    { "value": "300+", "label": "International Patients" },
+    { "value": "Best IVF Clinic Chain", "label": "Mid-Day" },
+    { "value": "Best IVF Chain – West", "label": "The Economic Times" }
   ],
   "whyBavishi": {
     "eyebrow": "Why Bavishi Fertility Center",
