@@ -291,9 +291,10 @@ export const HEADER_DEFAULTS: HeaderData = {
       mega: [
         { heading: "Learn", items: [
           { label: "Blogs", href: destinationHref("blog") },
-          { label: "Success Stories", href: "/#stories" },
-          { label: "Videos", href: "/#videos" },
-          { label: "Events & Webinars", href: "/#events" },
+          { label: "Testimonial Videos", href: "/testimonial-videos" },
+          { label: "Education Videos", href: "/education-videos" },
+          { label: "Camps", href: "/camps" },
+          { label: "CME", href: "/cme" },
         ]},
         { heading: "Tools", items: [
           { label: "Fertility Calculators", href: "/ivf-success-rate-calculator" },

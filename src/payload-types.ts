@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     inquiries: Inquiry;
     testimonials: Testimonial;
+    'testimonial-videos': TestimonialVideo;
+    'education-videos': EducationVideo;
     pages: Page;
     blogs: Blog;
     authors: Author;
@@ -91,6 +93,8 @@ export interface Config {
   collectionsSelect: {
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'testimonial-videos': TestimonialVideosSelect<false> | TestimonialVideosSelect<true>;
+    'education-videos': EducationVideosSelect<false> | EducationVideosSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
@@ -217,6 +221,76 @@ export interface Testimonial {
   published?: boolean | null;
   /**
    * Lower numbers show first. Leave at 0 to sort by newest.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Patient-story YouTube videos shown on the Testimonial Videos page. Add a video by pasting its YouTube ID, the patient's name and a short quote.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial-videos".
+ */
+export interface TestimonialVideo {
+  id: number;
+  /**
+   * Shown under the quote, e.g. 'Anita Thakkar' or 'Rekha's Journey'.
+   */
+  patientName: string;
+  /**
+   * How many stars to show, from 1 to 5.
+   */
+  rating: number;
+  /**
+   * The ID after watch?v= in a YouTube URL. e.g. for youtube.com/watch?v=6bH_RnV-_2Y the ID is '6bH_RnV-_2Y'.
+   */
+  youtubeId: string;
+  /**
+   * A short line in the patient's words, shown on the card.
+   */
+  quote: string;
+  /**
+   * Untick to hide this video without deleting it.
+   */
+  published?: boolean | null;
+  /**
+   * Lower numbers show first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Educational YouTube videos shown on the Education Videos page. Add a video by pasting its YouTube ID and a short description.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "education-videos".
+ */
+export interface EducationVideo {
+  id: number;
+  /**
+   * The heading shown on the video card.
+   */
+  title: string;
+  /**
+   * Groups the video under a filter tab, e.g. 'IVF', 'IVF Cost', 'Male Infertility'.
+   */
+  category: string;
+  /**
+   * The ID after watch?v= in a YouTube URL. e.g. for youtube.com/watch?v=lovYgHlbZoE the ID is 'lovYgHlbZoE'.
+   */
+  youtubeId: string;
+  /**
+   * One or two sentences shown under the title on the card.
+   */
+  description?: string | null;
+  /**
+   * Untick to hide this video without deleting it.
+   */
+  published?: boolean | null;
+  /**
+   * Lower numbers show first.
    */
   order?: number | null;
   updatedAt: string;
@@ -2271,6 +2345,14 @@ export interface PayloadLockedDocument {
         value: number | Testimonial;
       } | null)
     | ({
+        relationTo: 'testimonial-videos';
+        value: number | TestimonialVideo;
+      } | null)
+    | ({
+        relationTo: 'education-videos';
+        value: number | EducationVideo;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -2390,6 +2472,34 @@ export interface TestimonialsSelect<T extends boolean = true> {
   rating?: T;
   quote?: T;
   role?: T;
+  published?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial-videos_select".
+ */
+export interface TestimonialVideosSelect<T extends boolean = true> {
+  patientName?: T;
+  rating?: T;
+  youtubeId?: T;
+  quote?: T;
+  published?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "education-videos_select".
+ */
+export interface EducationVideosSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  youtubeId?: T;
+  description?: T;
   published?: T;
   order?: T;
   updatedAt?: T;

@@ -2,6 +2,7 @@ import * as migration_20260615_121444 from './20260615_121444';
 import * as migration_20260616_103116_blog_fields_locationslugs_faqs_lastupdated from './20260616_103116_blog_fields_locationslugs_faqs_lastupdated';
 import * as migration_20260616_113942_blog_dropdowns_and_content_blocks from './20260616_113942_blog_dropdowns_and_content_blocks';
 import * as migration_20260620_093506_add_calculators_collection from './20260620_093506_add_calculators_collection';
+import * as migration_20260620_132418_add_video_collections from './20260620_132418_add_video_collections';
 
 export const migrations = [
   {
@@ -22,6 +23,11 @@ export const migrations = [
   {
     up: migration_20260620_093506_add_calculators_collection.up,
     down: migration_20260620_093506_add_calculators_collection.down,
-    name: '20260620_093506_add_calculators_collection'
+    name: '20260620_093506_add_calculators_collection',
+  },
+  {
+    up: migration_20260620_132418_add_video_collections.up,
+    down: migration_20260620_132418_add_video_collections.down,
+    name: '20260620_132418_add_video_collections'
   },
 ];

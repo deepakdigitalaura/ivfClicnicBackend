@@ -259,6 +259,110 @@ export const getRelatedBlogs = reactCache(
     )(),
 );
 
+/** Canonical slug list for CME / seminar blog posts. */
+export const CME_BLOG_SLUGS = [
+  "cme-program-on-infertility-management-successfully-conducted-at-idar",
+  "bavishi-fertility-institute-conducts-a-successful-cme-program-at-bardoli",
+  "bavishi-fertility-institute-hosts-joint-educational-cme-with-east-ahmedabad-gynaecologist-association",
+  "advancing-ovarian-science-a-full-day-scientific-program-in-surat",
+  "bavishi-fertility-institute-conducts-an-educational-programme-at-rajkot",
+  "bavishi-fertility-institute-hosts-knowledge-sharing-program-with-bharuch-ob-gy-society",
+  "bavishi-fertility-institute-hosts-fogsi-recognized-training-program-in-ahmedabad",
+  "dr-himanshu-bavishi-speaks-on-ivf-at-sogog-conference",
+  "dr-falguni-bavishi-at-sogog-conference-on-iui-success",
+  "empowering-women-in-medicine-knowledge-sharing-program-on-advanced-fertility-and-ivf-techniques-at-nikol",
+] as const;
+
+/** All published CME / seminar blog posts (newest first). Cached + tagged `blogs`. */
+export const getCMEBlogs = reactCache(
+  (): Promise<Blog[]> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "blogs",
+            where: { slug: { in: CME_BLOG_SLUGS as unknown as string[] } },
+            limit: 20,
+            sort: "-publishedAt",
+            depth: 1,
+          });
+          return res.docs as Blog[];
+        },
+        [],
+      ),
+      ["cme-blogs"],
+      { tags: [cacheTags.collectionList("blogs")] },
+    )(),
+);
+
+/** One education-video card, shaped for the /education-videos page. */
+export type EducationVideoItem = { id: string; title: string; desc: string; tab: string };
+
+/**
+ * Published education videos (by sort order) for the /education-videos page.
+ * Cached + tagged `education-videos`. Returns [] on any error/empty so the page
+ * falls back to its built-in default list (never breaks).
+ */
+export const getEducationVideos = reactCache(
+  (): Promise<EducationVideoItem[]> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "education-videos",
+            where: { published: { equals: true } },
+            limit: 200,
+            sort: "order",
+            depth: 0,
+          });
+          return res.docs.map((d) => ({
+            id: String(d.youtubeId ?? ""),
+            title: String(d.title ?? ""),
+            desc: String(d.description ?? ""),
+            tab: String(d.category ?? ""),
+          }));
+        },
+        [] as EducationVideoItem[],
+      ),
+      ["education-videos"],
+      { tags: [cacheTags.collectionList("education-videos")] },
+    )(),
+);
+
+/** One testimonial-video card, shaped for the /testimonial-videos page. */
+export type TestimonialVideoItem = { id: string; name: string; quote: string; stars: number };
+
+/**
+ * Published testimonial videos (by sort order) for the /testimonial-videos page.
+ * Cached + tagged `testimonial-videos`. Returns [] on any error/empty so the
+ * page falls back to its built-in default list (never breaks).
+ */
+export const getTestimonialVideos = reactCache(
+  (): Promise<TestimonialVideoItem[]> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "testimonial-videos",
+            where: { published: { equals: true } },
+            limit: 200,
+            sort: "order",
+            depth: 0,
+          });
+          return res.docs.map((d) => ({
+            id: String(d.youtubeId ?? ""),
+            name: String(d.patientName ?? ""),
+            quote: String(d.quote ?? ""),
+            stars: Number(d.rating ?? 5),
+          }));
+        },
+        [] as TestimonialVideoItem[],
+      ),
+      ["testimonial-videos"],
+      { tags: [cacheTags.collectionList("testimonial-videos")] },
+    )(),
+);
+
 /** Published blog slugs for generateStaticParams. Cached + tagged `blogs`. */
 export const getPublishedBlogSlugs = reactCache(
   (): Promise<string[]> =>
