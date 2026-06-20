@@ -318,7 +318,7 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             className="mt-10 flex flex-wrap items-center gap-3"
           >
             <PrimaryBtn icon={Calendar} href="/#book">{hero.ctas[0]}</PrimaryBtn>
-            <GhostBtn icon={Sparkles}>{hero.ctas[1]}</GhostBtn>
+            <GhostBtn icon={Sparkles} href="https://ivf-clicnic-backend-weld.vercel.app/calculators/ivf-success-rate" target="_blank">{hero.ctas[1]}</GhostBtn>
             <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
           </motion.div>
         </div>

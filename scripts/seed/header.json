@@ -4,18 +4,18 @@
     { "label": "About", "columns": [
       { "heading": "", "items": [
         { "label": "About Bavishi Fertility Institute", "url": "/about-bfi" },
-        { "label": "Why Bavishi Fertility Institute", "url": "/#about" },
-        { "label": "Simple Treatment", "url": "/#about" },
-        { "label": "Safe Treatment", "url": "/#about" },
-        { "label": "Smart Treatment", "url": "/#about" },
-        { "label": "Success Benchmarks", "url": "/#about" }
+        { "label": "Why Bavishi Fertility Institute", "url": "/why-bfi" },
+        { "label": "Simple Treatment", "url": "/simple-treatment" },
+        { "label": "Safe Treatment", "url": "/safe-treatment" },
+        { "label": "Smart Treatment", "url": "/smart-treatment" },
+        { "label": "Success Benchmarks", "url": "/success-benchmarks" }
       ]},
       { "heading": "", "items": [
-        { "label": "History", "url": "/#about" },
+        { "label": "History", "url": "/history" },
         { "label": "Our Team", "url": "/#doctors" },
-        { "label": "Infrastructure", "url": "/#about" },
-        { "label": "Suraksha Kavach Package", "url": "/#suraksha" },
-        { "label": "Easy / Interest Free EMI", "url": "/#about" }
+        { "label": "Infrastructure", "url": "/infrastructure" },
+        { "label": "Suraksha Kavach Package", "url": "/suraksha-kavach" },
+        { "label": "Easy / Interest Free EMI", "url": "/easy-emi" }
       ]}
     ]},
     { "label": "Doctors", "doctors": true },
