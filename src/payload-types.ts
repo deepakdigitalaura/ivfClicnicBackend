@@ -4222,7 +4222,7 @@ export interface Homepage {
            */
           k: string;
           /**
-           * Value, e.g. '25+ Years'.
+           * Value, e.g. '30+ Years'.
            */
           v: string;
           id?: string | null;
@@ -4876,7 +4876,7 @@ export interface AboutPage {
       }[]
     | null;
   /**
-   * The '25+ Years of Legacy' section heading. Leave empty to use the default.
+   * The '30+ Years of Legacy' section heading. Leave empty to use the default.
    */
   legacy?: {
     eyebrow?: string | null;
