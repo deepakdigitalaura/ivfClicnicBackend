@@ -187,8 +187,8 @@ export function HomePage({
   // key is never serialised to HTML).
   const sections: Record<HomeSection, React.ReactNode> = {
     hero: <Hero hero={data.hero} />,
-    stats: <StatsStrip stats={data.stats} />,
-    accolades: <AccoladesStrip items={data.accolades} />,
+    stats: <StatsStrip stats={data.stats} accolades={data.accolades} />,
+    accolades: null,
     whyBavishi: <WhyBavishiFertilityInstitute content={data.whyBavishi} />,
     suraksha: <Suraksha content={data.suraksha} />,
     treatments: <Treatments content={data.treatments} />,
@@ -349,40 +349,42 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
   );
 }
 
-/* ---------- Stats strip with counters ---------- */
-export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats }: { stats?: { value: string; l: string }[] } = {}) {
+/* ---------- Stats + Accolades unified strip ---------- */
+const STRIP_CARD = "flex h-24 w-[300px] shrink-0 items-center gap-4 rounded-[20px] border border-[color:var(--plum)]/[0.06] bg-white px-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)] md:w-[330px]";
+const STRIP_ICON = "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[color:var(--plum)]/[0.08] to-[color:var(--rose)]/[0.06]";
+
+export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats, accolades = HOMEPAGE_DEFAULTS.accolades }: { stats?: { value: string; l: string }[]; accolades?: AccoladeItem[] } = {}) {
   return (
-    <section className="border-y border-border/60 bg-white py-7 md:py-9">
-      <Marquee speed={45}>
+    <section className="border-y border-border/40 bg-[linear-gradient(180deg,_#fafafa_0%,_#fff_100%)] py-5 md:py-7">
+      <Marquee speed={50}>
         {stats.map((s, i) => (
-          <div key={s.l} className="px-6 text-center">
-            <div className="whitespace-nowrap font-display text-3xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-4xl"><Editable path={`stats.${i}.value`}>{s.value}</Editable></div>
-            <div className="mt-1.5 whitespace-nowrap text-sm uppercase tracking-wider text-muted-foreground"><Editable path={`stats.${i}.label`}>{s.l}</Editable></div>
+          <div key={`s-${i}`} className={STRIP_CARD}>
+            <div className={STRIP_ICON}>
+              <Star className="h-[18px] w-[18px] text-[color:var(--plum)]/80" />
+            </div>
+            <div className="min-w-0">
+              <div className="whitespace-nowrap font-display text-[28px] font-bold leading-none text-[color:var(--plum)] md:text-[32px]">
+                <Editable path={`stats.${i}.value`}>{s.value}</Editable>
+              </div>
+              <div className="mt-1 text-[11px] uppercase tracking-[0.12em] text-muted-foreground/70 md:text-xs">
+                <Editable path={`stats.${i}.label`}>{s.l}</Editable>
+              </div>
+            </div>
           </div>
         ))}
-      </Marquee>
-    </section>
-  );
-}
-
-/* ---------- Awards & Accolades ticker ---------- */
-function AccoladesStrip({ items = HOMEPAGE_DEFAULTS.accolades }: { items?: AccoladeItem[] }) {
-  return (
-    <section className="relative overflow-hidden bg-[color:var(--plum)] py-4 md:py-5">
-      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,transparent_25%,rgba(255,255,255,0.03)_50%,transparent_75%)]" />
-      <Marquee speed={55} fadeColor="var(--plum)">
-        {items.map((item, i) => (
-          <div key={i} className="flex shrink-0 items-center gap-8 md:gap-10">
-            <div className="flex items-center gap-3">
-              <Trophy className="h-5 w-5 shrink-0 text-[color:var(--gold)]" />
-              <span className="whitespace-nowrap font-display text-base font-medium tracking-wide text-white md:text-lg">
-                <Editable path={`accolades.${i}.text`}>{item.text}</Editable>
-              </span>
-              <span className="whitespace-nowrap text-xs tracking-wider text-white/60 uppercase md:text-sm">
-                <Editable path={`accolades.${i}.source`}>{item.source}</Editable>
-              </span>
+        {accolades.map((item, i) => (
+          <div key={`a-${i}`} className={STRIP_CARD}>
+            <div className={STRIP_ICON}>
+              <Trophy className="h-[18px] w-[18px] text-[color:var(--plum)]/80" />
             </div>
-            <span className="h-4 w-px bg-white/20" aria-hidden />
+            <div className="min-w-0 py-1">
+              <div className="font-display text-sm font-semibold leading-snug text-[color:var(--plum)] md:text-[15px]">
+                <Editable path={`accolades.${i}.text`}>{item.text}</Editable>
+              </div>
+              <div className="mt-0.5 text-[11px] leading-snug tracking-wide text-muted-foreground/70 md:text-xs">
+                <Editable path={`accolades.${i}.source`}>{item.source}</Editable>
+              </div>
+            </div>
           </div>
         ))}
       </Marquee>

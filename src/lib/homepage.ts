@@ -238,9 +238,6 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     { value: "30,000+", l: "Happy Couples" },
     { value: "30+", l: "Years Legacy" },
     { value: "14", l: "Fertility Centres" },
-    { value: "6× Winner", l: "Best IVF Chain in India (West)" },
-    { value: "Best IVF Clinic Chain in India", l: "Mid-Day" },
-    { value: "Rank #1", l: "All India Ahmedabad Institute" },
     { value: "500+", l: "International Patients Per Year" },
   ],
   accolades: [
