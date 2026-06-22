@@ -1751,12 +1751,12 @@ export function Footer() {
                       <a
                         href={x.href}
                         {...(x.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                        className="transition-colors hover:text-[color:var(--rose)]"
+                        className="capitalize transition-colors hover:text-[color:var(--rose)]"
                       >
                         {x.label}
                       </a>
                     ) : (
-                      <span className="cursor-default text-muted-foreground/70">{x.label}</span>
+                      <span className="capitalize cursor-default text-muted-foreground/70">{x.label}</span>
                     )}
                   </li>
                 ))}
