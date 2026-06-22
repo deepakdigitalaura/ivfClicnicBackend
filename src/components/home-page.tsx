@@ -1268,7 +1268,7 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
       </Stagger>
       <Reveal delay={0.2}>
         <div className="mt-9 text-center">
-          <Magnetic as="a" href="#contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+          <Magnetic as="a" href="/camps" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
             View More Events <ArrowRight className="h-4 w-4" />
           </Magnetic>
         </div>

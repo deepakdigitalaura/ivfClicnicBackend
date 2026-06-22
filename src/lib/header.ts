@@ -512,7 +512,7 @@ export function resolveHeader(
 
   const finalNav = nav.map((item) => {
     if (item.label === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
-    if (item.label === "Maternity Services" && maternityMega) return { ...item, mega: maternityMega };
+    if (item.label === "Maternity Services" && maternityMega) return { ...item, href: item.href || "/services/maternity-services", mega: maternityMega };
     if (item.label === "Locations" && locationsMega) return { ...item, mega: locationsMega };
     if (item.doctors && doctorMenu) return { ...item, doctorMenu };
     if (item.label === "Resources" && item.mega) {
