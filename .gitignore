@@ -30,3 +30,8 @@ tmp/pilot-1-top.png
 tmp/pilot-2-cards.png
 tmp/pilot-3-decision.png
 tmp/pilot-4-icsi.png
+scripts/replace-hero-images.mjs
+scripts/_unlock-admin.mjs
+scripts/_ref-blog-content.json
+scripts/_hero-images-progress.json
+scripts/_enrich-quality-progress.json
