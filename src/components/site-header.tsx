@@ -173,7 +173,7 @@ export function SiteHeader({
                         it.children ? (
                           <li key={it.label} className="group/sub">
                             <a href={it.href} className="block">
-                              <span className="text-sm font-semibold text-[color:var(--plum)] transition-colors group-hover/sub:text-[color:var(--rose)]">{it.label}</span>
+                              <span className="text-sm font-semibold capitalize text-[color:var(--plum)] transition-colors group-hover/sub:text-[color:var(--rose)]">{it.label}</span>
                             </a>
                             <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 ease-out group-hover/sub:grid-rows-[1fr] group-focus-within/sub:grid-rows-[1fr]">
                               <div className="overflow-hidden">
@@ -190,7 +190,7 @@ export function SiteHeader({
                         ) : (
                           <li key={it.label}>
                             <a href={it.href} className="group block">
-                              <div className="text-sm font-semibold text-[color:var(--plum)] group-hover:text-[color:var(--rose)] transition-colors">{it.label}</div>
+                              <div className="text-sm font-semibold capitalize text-[color:var(--plum)] group-hover:text-[color:var(--rose)] transition-colors">{it.label}</div>
                               {it.desc && <div className="text-xs text-muted-foreground">{it.desc}</div>}
                             </a>
                           </li>
@@ -292,7 +292,7 @@ function MobileNavItem({ item, onNavigate }: { item: HeaderNavItem; onNavigate: 
                       <MobileSubItem key={it.label} item={it} onNavigate={onNavigate} />
                     ) : (
                       <li key={it.label}>
-                        <a href={it.href} onClick={onNavigate} className="block py-1.5 text-sm text-[color:var(--plum)]/80 hover:text-[color:var(--rose)]">{it.label}</a>
+                        <a href={it.href} onClick={onNavigate} className="block py-1.5 text-sm capitalize text-[color:var(--plum)]/80 hover:text-[color:var(--rose)]">{it.label}</a>
                       </li>
                     )
                   ))}
