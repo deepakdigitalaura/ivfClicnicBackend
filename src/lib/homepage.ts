@@ -50,6 +50,8 @@ export type HeroContent = {
 
 export type StatItem = { value: string; l: string };
 
+export type AccoladeItem = { text: string; source: string };
+
 /** A Lucide-icon "Why Bavishi" card (icon carried as a curated NAME). */
 export type WhyCard = { icon: IconName; t: string; d: string };
 
@@ -127,7 +129,7 @@ export type HomepageSeo = {
  * renders byte-identically. Adding a section to the page = unhiding it; removing
  * = hiding it; dragging a row = reordering. */
 export const HOME_SECTIONS = [
-  "hero", "stats", "whyBavishi", "suraksha", "treatments", "successStories",
+  "hero", "stats", "accolades", "whyBavishi", "suraksha", "treatments", "successStories",
   "videoHub", "about", "doctors", "whyChoose", "awards", "media", "testimonials",
   "events", "blogs", "locations", "faq", "calculators", "inquiry", "finalCta",
 ] as const;
@@ -138,6 +140,7 @@ export type HomeSectionLayout = { section: HomeSection; visible: boolean };
 export const HOME_SECTION_LABELS: Record<HomeSection, string> = {
   hero: "Top Banner",
   stats: "Stats Strip",
+  accolades: "Awards & Accolades Ticker",
   whyBavishi: "Why Bavishi Cards",
   suraksha: "Suraksha Kavach",
   treatments: "Treatments Grid",
@@ -170,6 +173,7 @@ export type HomepageData = {
   layout?: HomeSectionLayout[];
   hero: HeroContent;
   stats: StatItem[];
+  accolades: AccoladeItem[];
   whyBavishi: { eyebrow: string; heading: Heading; subtitle: string; cards: WhyCard[] };
   whyChoose: { eyebrow: string; heading: Heading; subtitle: string; blocks: WhyChooseBlock[] };
   suraksha: SurakshaContent;
@@ -239,6 +243,11 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     { value: "Rank #1", l: "All India Ahmedabad Institute" },
     { value: "500+", l: "International Patients Per Year" },
   ],
+  accolades: [
+    { text: "Best IVF Chain In India (WEST)", source: "The Economic Times — 2019 · 2022 · 2023 · 2024 · 2025 · 2026" },
+    { text: "Best IVF Clinic Chain in India", source: "Mid-Day" },
+    { text: "All India Ranked #1 Ahmedabad Fertility Institute", source: "TOI National Survey — 2020" },
+  ],
   whyBavishi: {
     eyebrow: "Why Bavishi Fertility Center",
     heading: { lead: "A different kind of", em: "fertility experience." },
@@ -301,7 +310,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   },
   suraksha: {
     badge: "Exclusive Program",
-    heading: { lead: "Suraksha Kavach —", em: "peace of mind, guaranteed." },
+    heading: { lead: "Suraksha Kavach —", em: "complete peace of mind." },
     paragraph:
       "India's most trusted IVF protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
     features: ["Risk Reduction", "Multiple IVF Cycles", "Priority Care", "Unique Optional Package"],
@@ -727,6 +736,14 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     l: s?.label ?? def?.l ?? "",
   }));
 
+  const accolades: AccoladeItem[] = mergeList(
+    (src as any).accolades, d.accolades,
+    (a: any, def: AccoladeItem | undefined) => ({
+      text: a?.text ?? def?.text ?? "",
+      source: a?.source ?? def?.source ?? "",
+    }),
+  );
+
   const whyBavishi = src.whyBavishi?.cards?.length
     ? {
         eyebrow: src.whyBavishi.eyebrow ?? d.whyBavishi.eyebrow,
@@ -951,7 +968,7 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, locations, calculators, seo };
+  return { layout, hero, stats, accolades, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, locations, calculators, seo };
 }
 
 /**

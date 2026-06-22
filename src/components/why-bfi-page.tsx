@@ -16,9 +16,9 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 
 const STATS = [
   { value: 25000, suffix: "+", label: "Successful IVF Pregnancies", sub: "and counting" },
-  { value: 98, suffix: "%", label: "Success Rate", sub: "couples achieved a healthy baby" },
   { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
   { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
+  { value: 1998, suffix: "", label: "Est.", sub: "pioneering fertility care" },
 ];
 
 const REASONS = [
@@ -32,7 +32,7 @@ const REASONS = [
     icon: Baby,
     title: "25,000+ Successful IVF Pregnancies",
     description:
-      "Over 25,000 happy families and counting. 98% of couples who entrusted us with their dream received a healthy live-born baby through our proven protocols.",
+      "Over 25,000 happy families and counting. Thousands of couples who entrusted us with their dream have welcomed healthy babies through our proven protocols.",
   },
   {
     icon: Lightbulb,

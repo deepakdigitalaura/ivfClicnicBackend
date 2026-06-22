@@ -162,31 +162,6 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         </div>
       </section>
 
-      {/* Legacy timeline */}
-      <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
-        <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead
-            center
-            eyebrow={ed("legacy.eyebrow", data.legacy.eyebrow)}
-            title={<>{ed("legacy.heading.lead", data.legacy.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{ed("legacy.heading.em", data.legacy.heading.em)}</em></>}
-          />
-          <div className="mx-auto mt-10 max-w-3xl">
-            <Stagger className="relative space-y-8 border-l-2 border-[color:var(--rose)]/20 pl-8">
-              {data.milestones.map((m, i) => (
-                <StaggerItem key={i}>
-                  <div className="relative">
-                    <span className="absolute -left-[2.6rem] top-1 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--rose)] text-[10px] font-bold text-white ring-4 ring-white">●</span>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ed(`milestones.${i}.y`, m.y)}</div>
-                    <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{ed(`milestones.${i}.t`, m.t)}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`milestones.${i}.d`, m.d)}</p>
-                  </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
-          </div>
-        </div>
-      </section>
-
       {/* Infrastructure & Technology */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
         <SectionHead

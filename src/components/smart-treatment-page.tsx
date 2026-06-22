@@ -425,9 +425,9 @@ export function SmartTreatmentPage() {
                     Suraksha Kavach — India&#39;s Only IVF Protection Program
                   </h3>
                   <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                    Our flagship package promises at least one healthy baby. Multiple cycles covered,
-                    fully transferable, and designed for complete peace of mind. 98% of enrolled couples
-                    achieve a successful outcome.
+                    Our flagship IVF protection program covers multiple cycles,
+                    is fully transferable, and designed for complete financial peace of mind. Thousands of couples
+                    have trusted Suraksha Kavach for their parenthood journey.
                   </p>
                 </div>
                 <Magnetic

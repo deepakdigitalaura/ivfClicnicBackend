@@ -291,11 +291,14 @@ export function Marquee({
   children,
   speed = 40,
   className,
+  fadeColor,
 }: {
   children: React.ReactNode;
   speed?: number;
   className?: string;
+  fadeColor?: string;
 }) {
+  const from = fadeColor ?? "var(--ivory)";
   return (
     <div className={`relative overflow-hidden ${className ?? ""}`}>
       <div
@@ -305,8 +308,8 @@ export function Marquee({
         <div className="flex shrink-0 items-center gap-12">{children}</div>
         <div className="flex shrink-0 items-center gap-12" aria-hidden>{children}</div>
       </div>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--ivory)] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[var(--ivory)] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24" style={{ background: `linear-gradient(to right, ${from}, transparent)` }} />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24" style={{ background: `linear-gradient(to left, ${from}, transparent)` }} />
     </div>
   );
 }

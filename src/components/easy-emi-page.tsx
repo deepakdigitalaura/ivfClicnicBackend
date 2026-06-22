@@ -417,7 +417,7 @@ export function EasyEmiPage() {
                       a family member or loved one.
                     </p>
                     <p>
-                      Your investment always results in the gift of life — for you, or for someone you choose.
+                      Multiple IVF cycles covered with complete financial protection — for you, or transferable to someone you choose.
                     </p>
                   </div>
                 </Reveal>
@@ -426,7 +426,7 @@ export function EasyEmiPage() {
                     {[
                       { icon: Repeat, text: "Multiple Cycles Covered" },
                       { icon: Gift, text: "Fully Transferable" },
-                      { icon: Shield, text: "98% Success Rate" },
+                      { icon: Shield, text: "25,000+ Happy Families" },
                     ].map((item, i) => (
                       <div key={i} className="flex items-center gap-2 text-white/80">
                         <item.icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {item.text}

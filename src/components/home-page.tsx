@@ -4,7 +4,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
   Stethoscope, Microscope, Baby, Dna, FlaskConical, Activity, MapPin,
-  Star, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Quote, Clock, CheckCircle2,
+  Star, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Quote, Clock, CheckCircle2, Trophy,
   Video, BookOpen, Calculator, Mail, User, Send,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
@@ -38,6 +38,7 @@ import {
   type EduVideo,
   type ResourceVideo,
   type AwardItem,
+  type AccoladeItem,
   type HomeAboutContent,
   type Heading,
 } from "@/lib/homepage";
@@ -187,6 +188,7 @@ export function HomePage({
   const sections: Record<HomeSection, React.ReactNode> = {
     hero: <Hero hero={data.hero} />,
     stats: <StatsStrip stats={data.stats} />,
+    accolades: <AccoladesStrip items={data.accolades} />,
     whyBavishi: <WhyBavishiFertilityInstitute content={data.whyBavishi} />,
     suraksha: <Suraksha content={data.suraksha} />,
     treatments: <Treatments content={data.treatments} />,
@@ -356,6 +358,31 @@ export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats }: { stats?: { valu
           <div key={s.l} className="px-6 text-center">
             <div className="whitespace-nowrap font-display text-3xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-4xl"><Editable path={`stats.${i}.value`}>{s.value}</Editable></div>
             <div className="mt-1.5 whitespace-nowrap text-sm uppercase tracking-wider text-muted-foreground"><Editable path={`stats.${i}.label`}>{s.l}</Editable></div>
+          </div>
+        ))}
+      </Marquee>
+    </section>
+  );
+}
+
+/* ---------- Awards & Accolades ticker ---------- */
+function AccoladesStrip({ items = HOMEPAGE_DEFAULTS.accolades }: { items?: AccoladeItem[] }) {
+  return (
+    <section className="relative overflow-hidden bg-[color:var(--plum)] py-4 md:py-5">
+      <div className="pointer-events-none absolute inset-0 bg-[linear-gradient(135deg,transparent_25%,rgba(255,255,255,0.03)_50%,transparent_75%)]" />
+      <Marquee speed={55} fadeColor="var(--plum)">
+        {items.map((item, i) => (
+          <div key={i} className="flex shrink-0 items-center gap-8 md:gap-10">
+            <div className="flex items-center gap-3">
+              <Trophy className="h-5 w-5 shrink-0 text-[color:var(--gold)]" />
+              <span className="whitespace-nowrap font-display text-base font-medium tracking-wide text-white md:text-lg">
+                <Editable path={`accolades.${i}.text`}>{item.text}</Editable>
+              </span>
+              <span className="whitespace-nowrap text-xs tracking-wider text-white/60 uppercase md:text-sm">
+                <Editable path={`accolades.${i}.source`}>{item.source}</Editable>
+              </span>
+            </div>
+            <span className="h-4 w-px bg-white/20" aria-hidden />
           </div>
         ))}
       </Marquee>

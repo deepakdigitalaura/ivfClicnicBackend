@@ -16,7 +16,7 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 
 const HERO_STATS = [
   { value: 25000, suffix: "+", label: "Successful IVF Pregnancies" },
-  { value: 98, suffix: "%", label: "Success Rate" },
+  { value: 25, suffix: "+", label: "Years of Excellence" },
   { value: 100, suffix: "+", label: "Years Combined Experience" },
   { value: 14, suffix: "", label: "Centres Across India" },
 ];
@@ -73,7 +73,7 @@ const PILLARS = [
     icon: IndianRupee,
     title: "Unique IVF Packages",
     description:
-      "World-class fertility care should not be a privilege. We offer parsimonious packages for every pocket — from our three-cycle package that maximises your chances over multiple attempts to the Suraksha Kavach Package that gives you complete peace of mind with guaranteed protection of your investment.",
+      "World-class fertility care should not be a privilege. We offer parsimonious packages for every pocket — from our three-cycle package that maximises your chances over multiple attempts to the Suraksha Kavach Package that gives you complete financial peace of mind.",
     highlights: [
       "Parsimonious packages for every budget",
       "Three-cycle package for maximum chances",
@@ -391,7 +391,7 @@ export function SuccessBenchmarksPage() {
                     },
                     {
                       title: "Suraksha Kavach Package",
-                      desc: "India's only IVF protection program — complete peace of mind with guaranteed investment protection.",
+                      desc: "India's only IVF protection program — complete financial peace of mind with multiple cycles covered.",
                     },
                   ].map((pkg, i) => (
                     <div key={i} className="flex items-start gap-3">

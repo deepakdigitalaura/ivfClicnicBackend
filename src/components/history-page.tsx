@@ -10,6 +10,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { ABOUT_DEFAULTS } from "@/lib/about";
 
 /* ---------- Timeline data ---------- */
 
@@ -252,7 +253,32 @@ export function HistoryPage() {
         </div>
       </section>
 
-      {/* ==================== TIMELINE ==================== */}
+      {/* ==================== LEGACY TIMELINE (moved from about-bfi) ==================== */}
+      <section className="bg-[color:var(--rose-soft)]/40 py-16 md:py-24">
+        <div className="container-px mx-auto max-w-[1400px]">
+          <SectionHead
+            center
+            eyebrow={ABOUT_DEFAULTS.legacy.eyebrow}
+            title={<>{ABOUT_DEFAULTS.legacy.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{ABOUT_DEFAULTS.legacy.heading.em}</em></>}
+          />
+          <div className="mx-auto mt-10 max-w-3xl">
+            <Stagger className="relative space-y-8 border-l-2 border-[color:var(--rose)]/20 pl-8">
+              {ABOUT_DEFAULTS.milestones.map((m, i) => (
+                <StaggerItem key={i}>
+                  <div className="relative">
+                    <span className="absolute -left-[2.6rem] top-1 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--rose)] text-[10px] font-bold text-white ring-4 ring-white">●</span>
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{m.y}</div>
+                    <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{m.t}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: m.d }} />
+                  </div>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          </div>
+        </div>
+      </section>
+
+      {/* ==================== OLD MILESTONES (hidden for now) ====================
       <section className="bg-[color:var(--rose-soft)]/40 py-16 md:py-24">
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
@@ -262,10 +288,8 @@ export function HistoryPage() {
             subtitle="Every milestone represents thousands of families who trusted us with their dream of parenthood."
           />
 
-          {/* Desktop: alternating left/right timeline */}
           <div className="mx-auto mt-14 hidden max-w-5xl md:block">
             <div className="relative">
-              {/* Centre vertical line */}
               <div className="absolute left-1/2 top-0 h-full w-0.5 -translate-x-1/2 bg-[color:var(--rose)]/20" />
 
               {MILESTONES.map((m, i) => {
@@ -274,7 +298,6 @@ export function HistoryPage() {
                 return (
                   <Reveal key={m.year + i} delay={i * 0.03}>
                     <div className={`relative mb-12 flex items-start ${isLeft ? "flex-row" : "flex-row-reverse"}`}>
-                      {/* Content card */}
                       <div className={`w-[calc(50%-2rem)] ${isLeft ? "pr-4 text-right" : "pl-4 text-left"}`}>
                         <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
                           <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{m.year}</div>
@@ -283,21 +306,18 @@ export function HistoryPage() {
                         </div>
                       </div>
 
-                      {/* Centre dot */}
                       <div className="absolute left-1/2 z-10 -translate-x-1/2">
                         <div className="grid h-10 w-10 place-items-center rounded-full bg-[color:var(--rose)] text-white ring-4 ring-white shadow-soft">
                           <Icon className="h-4 w-4" />
                         </div>
                       </div>
 
-                      {/* Spacer for opposite side */}
                       <div className="w-[calc(50%-2rem)]" />
                     </div>
                   </Reveal>
                 );
               })}
 
-              {/* End cap */}
               <div className="absolute bottom-0 left-1/2 z-10 -translate-x-1/2">
                 <div className="grid h-10 w-10 place-items-center rounded-full bg-[color:var(--plum)] text-white ring-4 ring-white shadow-soft">
                   <Heart className="h-4 w-4" />
@@ -306,7 +326,6 @@ export function HistoryPage() {
             </div>
           </div>
 
-          {/* Mobile: single-column timeline with border-l-2 */}
           <div className="mx-auto mt-10 max-w-2xl md:hidden">
             <Stagger className="relative space-y-8 border-l-2 border-[color:var(--rose)]/20 pl-8">
               {MILESTONES.map((m, i) => {
@@ -328,6 +347,7 @@ export function HistoryPage() {
           </div>
         </div>
       </section>
+      ==================== */}
 
       {/* ==================== FINAL CTA ==================== */}
       <section className="container-px mx-auto max-w-[1400px] py-16 md:py-20">

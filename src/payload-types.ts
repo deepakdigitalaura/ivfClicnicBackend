@@ -4051,6 +4051,7 @@ export interface Homepage {
         section:
           | 'hero'
           | 'stats'
+          | 'accolades'
           | 'whyBavishi'
           | 'suraksha'
           | 'treatments'
