@@ -324,7 +324,7 @@ export const getEducationVideos = reactCache(
         },
         [] as EducationVideoItem[],
       ),
-      ["education-videos"],
+      ["education-videos", "v2"],
       { tags: [cacheTags.collectionList("education-videos")] },
     )(),
 );
@@ -358,7 +358,7 @@ export const getTestimonialVideos = reactCache(
         },
         [] as TestimonialVideoItem[],
       ),
-      ["testimonial-videos"],
+      ["testimonial-videos", "v2"],
       { tags: [cacheTags.collectionList("testimonial-videos")] },
     )(),
 );
@@ -862,7 +862,10 @@ export function getGlobalSafe<S extends keyof Config["globals"]>(
         return null;
       }
     },
-    ["global", String(slug)],
+    // "v2" in the key forces a one-time Data-Cache miss after globals were
+    // edited directly in the DB (bypassing the revalidate hooks). Tag-based
+    // revalidation (admin edits) is unaffected.
+    ["global", "v2", String(slug)],
     { tags: [cacheTags.global(String(slug))] },
   )();
 }
