@@ -7,7 +7,7 @@
     "sync-reviews": "node scripts/sync-reviews.mjs",
     "audit:gmb-hours": "node scripts/audit-gmb-hours.mjs",
     "audit:gmb-hours:fix": "node scripts/audit-gmb-hours.mjs --fix --save-ids",
-    "build": "DATABASE_URI=${MIGRATE_DATABASE_URI:-$DATABASE_URI} payload migrate && next build",
+    "build": "DATABASE_URI=${MIGRATE_DATABASE_URI:-$DATABASE_URI} payload migrate --yes && next build",
     "start": "next start",
     "lint": "next lint",
     "format": "prettier --write .",
