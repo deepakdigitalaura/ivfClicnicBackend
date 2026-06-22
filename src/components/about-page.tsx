@@ -141,21 +141,21 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><Target className="h-6 w-6" /></div>
                 <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Mission</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Achieve excellence through knowledge, education, training, brainstorming, innovation, experimentation, analysis, and research. Provide customised, personalised, simple, effective and safe treatment to every couple. Create the best qualified, experienced and expert team of medical professionals, reproductive biologists, counsellors and support staff. Impart all the best IVF treatments in India under one roof — without any discrimination — and spread the benefits of the latest technology. An ideal blend of professional treatment and personalised care.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">Achieve excellence through knowledge, education, training, brainstorming, innovation, experimentation, analysis, and research. Provide customised, personalised, simple, effective and safe treatment to every couple. Create the best qualified, experienced and expert team of medical professionals, reproductive biologists, counsellors and support staff. Impart all the best <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">IVF treatments</a> in India under one roof — without any discrimination — and spread the benefits of the latest technology. An ideal blend of professional treatment and personalised care.</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/40 p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--plum)]/10 text-[color:var(--plum)] mb-5"><Eye className="h-6 w-6" /></div>
                 <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Vision</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Be a pioneer and leader as the most preferred fertility institute, and provide IVF & ART treatment above international standards — with Indian heart and at India-friendly cost. The best IVF institute in India.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">Be a pioneer and leader as the most preferred fertility institute, and provide <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">IVF</a> &amp; ART treatment above international standards — with Indian heart and at India-friendly cost. The best IVF institute in India.</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><Star className="h-6 w-6" /></div>
                 <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Values</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground"><strong className="text-[color:var(--plum)]">Simple, Safe, Smart and Successful!</strong> The qualified, experienced, skilled and dedicated team delivers the best outcomes. Every decision is guided by evidence, every interaction by empathy — making your fertility journey as smooth as possible.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground"><strong className="text-[color:var(--plum)]"><a href="/simple-treatment" className="text-[color:var(--plum)]">Simple</a>, <a href="/safe-treatment" className="text-[color:var(--plum)]">Safe</a>, <a href="/smart-treatment" className="text-[color:var(--plum)]">Smart</a> and <a href="/success-benchmarks" className="text-[color:var(--plum)]">Successful</a>!</strong> The qualified, experienced, skilled and dedicated team delivers the best outcomes. Every decision is guided by evidence, every interaction by empathy — making your fertility journey as smooth as possible.</p>
               </div>
             </StaggerItem>
           </Stagger>
@@ -202,7 +202,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
                 <h3 className="text-xl font-semibold text-[color:var(--plum)]">Infrastructure</h3>
               </div>
               <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">We have a highly automated and optimised environment. For the past 35+ years, we continue to research and innovate to ensure that treatments are done in the best possible environment.</p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">Our <strong className="text-[color:var(--plum)]">Class 1000 IVF labs</strong> — 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with time-lapse imaging, vitrification, and advanced preimplantation genetic testing (PGT).</p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground">Our <strong className="text-[color:var(--plum)]">Class 1000 <a href="/what-is-ivf" style={{color: "var(--plum)"}}>IVF</a> labs</strong> — 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with time-lapse imaging, <a href="/cryopreservation" className="text-[color:var(--plum)] underline">vitrification</a>, and advanced preimplantation genetic testing (PGT).</p>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
@@ -228,25 +228,32 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
             subtitle="Any problem — the best solution — under one roof = Bavishi Fertility Institute!"
           />
           <Stagger className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {[
-              "Male & Female Infertility",
-              "IVF – ICSI – ART",
-              "Advanced Reproductive Techniques",
-              "Egg Donation",
-              "Surrogacy",
-              "Fertility Preservation – Egg / Embryo Freezing",
-              "Preimplantation Genetic Testing (PGT / PGD)",
-              "IUI (Intrauterine Insemination)",
-              "Laparoscopy / Hysteroscopy",
-              "Ovary Rejuvenation – PRP / Stem Cell",
-              "Fibroids & Endometriosis",
-              "Semen Analysis & Banking",
-            ].map((t, i) => (
+            {([
+              { t: "Male & Female Infertility", href: "/treatments/male-infertility" },
+              { t: "IVF – ICSI – ART", href: "/what-is-ivf" },
+              { t: "Advanced Reproductive Techniques", href: "/treatments/advanced-fertility-techniques" },
+              { t: "Egg Donation", href: "/egg-donation" },
+              { t: "Surrogacy", href: null },
+              { t: "Fertility Preservation – Egg / Embryo Freezing", href: "/cryopreservation" },
+              { t: "Preimplantation Genetic Testing (PGT / PGD)", href: null },
+              { t: "IUI (Intrauterine Insemination)", href: "/intra-uterine-insemination-iui" },
+              { t: "Laparoscopy / Hysteroscopy", href: null },
+              { t: "Ovary Rejuvenation – PRP / Stem Cell", href: "/ovarian-rejuvenation" },
+              { t: "Fibroids & Endometriosis", href: "/fibroids" },
+              { t: "Semen Analysis & Banking", href: null },
+            ] as { t: string; href: string | null }[]).map(({ t, href }, i) => (
               <StaggerItem key={i}>
-                <div className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
-                  <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] font-medium text-[color:var(--plum)]">{t}</span>
-                </div>
+                {href ? (
+                  <a href={href} className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift">
+                    <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-[color:var(--rose)]" />
+                    <span className="text-[15px] font-medium text-[color:var(--plum)]">{t}</span>
+                  </a>
+                ) : (
+                  <div className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
+                    <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-[color:var(--rose)]" />
+                    <span className="text-[15px] font-medium text-[color:var(--plum)]">{t}</span>
+                  </div>
+                )}
               </StaggerItem>
             ))}
           </Stagger>
@@ -301,11 +308,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {([
-            { Icon: Trophy, year: "2009", t: "India's First — Vitrified Frozen Oocyte Baby", d: "Bavishi Fertility Institute achieved the first live birth in India with a vitrified frozen egg — a landmark milestone that reshaped Indian reproductive medicine and opened a new era of fertility preservation." },
+            { Icon: Trophy, year: "2009", t: "India's First — Vitrified Frozen Oocyte Baby", d: "Bavishi Fertility Institute achieved the first live birth in India with a vitrified frozen egg — a landmark milestone that reshaped Indian reproductive medicine and opened a new era of <a href='/cryopreservation' style='color:var(--plum);text-decoration:underline'>fertility preservation</a>." },
             { Icon: Globe, year: "2009", t: "First European Surrogacy in India", d: "First surrogacy for a European couple — a testament to the institute's world-class capabilities, ethical standards, and international trust built over decades." },
             { Icon: Star, year: "2016–2020", t: "No. 1 in Western India — 5 Consecutive Years", d: "Ranked No. 1 fertility clinic in Western India for five consecutive years by the Times of India national survey (2016, 2017, 2018, 2019, 2020)." },
             { Icon: Trophy, year: "2020", t: "Ranked All India No. 1", d: "Ranked All India No. 1 in 2020 by the Times of India National Survey of fertility clinics — the highest national recognition for clinical excellence." },
-            { Icon: Award, year: "2014", t: "Founded INSTAR", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in donor and surrogacy programmes across India." },
+            { Icon: Award, year: "2014", t: "Founded INSTAR", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in <a href='/egg-donation' style='color:var(--plum);text-decoration:underline'>egg donation</a>, <a href='/sperm-donation' style='color:var(--plum);text-decoration:underline'>sperm donation</a> and surrogacy programmes across India." },
             { Icon: Award, year: "6 Times", t: "National Award — 6 Consecutive Years", d: "Received the 'Best IVF Chain in India – West' award by The Economic Times for six consecutive years — reinforcing BFI's position as the nation's most trusted fertility network." },
           ] as { Icon: LucideIcon, year: string, t: string, d: string }[]).map(({ Icon, year, t, d }, i) => (
             <StaggerItem key={i}>
@@ -315,7 +322,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
                   <span className="text-xs font-semibold text-[color:var(--rose)] bg-[color:var(--rose)]/10 px-3 py-1 rounded-full">{year}</span>
                 </div>
                 <h3 className="text-base font-semibold text-[color:var(--plum)] mb-2">{t}</h3>
-                <p className="text-[14px] leading-relaxed text-muted-foreground">{d}</p>
+                <p className="text-[14px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: d }} />
               </div>
             </StaggerItem>
           ))}
@@ -369,7 +376,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/40 p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><RadioTower className="h-6 w-6" /></div>
                 <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">Public Awareness Activities</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Knowledge is the key. We organised massive <strong className="text-[color:var(--plum)]">Jan Jagruti Abhiyan – Parivar Milan</strong> programmes to provide correct scientific guidance at the patient's own doorstep. We empower couples through books, TV talk shows, FB live, YouTube education sessions and blogs.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">Knowledge is the key. We organised massive <strong className="text-[color:var(--plum)]">Jan Jagruti Abhiyan – Parivar Milan</strong> programmes to provide correct scientific guidance at the patient&apos;s own doorstep. We empower couples through books, TV talk shows, FB live, YouTube education sessions and <a href="/blog" className="text-[color:var(--plum)] underline">blogs</a>.</p>
               </div>
             </StaggerItem>
             <StaggerItem>
@@ -395,7 +402,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               <div className="hidden sm:flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><Newspaper className="h-6 w-6" /></div>
               <div>
                 <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)] mb-3">Surrogacy Stays Within The Great Gujarati Family</div>
-                <p className="text-[16px] leading-relaxed text-muted-foreground">GK Mawani and his wife Rama celebrated their son Jay's first birthday in Surat (2009). Also present at the party was Chetna (26), who gave birth to Jay. Chetna is the wife of Mawani's nephew. Rama hadn't been able to conceive in her 16-year marriage, so Chetna agreed to carry her uncle's child as a surrogate mother — made possible by Bavishi Fertility Institute's expertise in surrogacy and compassionate care.</p>
+                <p className="text-[16px] leading-relaxed text-muted-foreground">GK Mawani and his wife Rama celebrated their son Jay&apos;s first birthday in <a href="/locations/surat" className="text-[color:var(--plum)] underline">Surat</a> (2009). Also present at the party was Chetna (26), who gave birth to Jay. Chetna is the wife of Mawani&apos;s nephew. Rama hadn&apos;t been able to conceive in her 16-year marriage, so Chetna agreed to carry her uncle&apos;s child as a surrogate mother — made possible by Bavishi Fertility Institute&apos;s expertise in surrogacy and compassionate care.</p>
               </div>
             </div>
           </div>
@@ -408,7 +415,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <Stagger className="mt-9 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4">
           {data.network.cities.map((c, i) => (
             <StaggerItem key={i}>
-              <a href={c.c === "Ahmedabad" ? "/locations/ahmedabad" : "/#locations"} className="group flex items-center justify-between rounded-2xl border border-border/70 bg-card p-5 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
+              <a href={`/locations/${c.c.toLowerCase()}`} className="group flex items-center justify-between rounded-2xl border border-border/70 bg-card p-5 shadow-soft transition-all hover:-translate-y-1 hover:shadow-lift">
                 <div>
                   <div className="flex items-center gap-2 font-semibold text-[color:var(--plum)]"><Building2 className="h-4 w-4 text-[color:var(--rose)]" /> {ed(`network.cities.${i}.c`, c.c)}</div>
                   <div className="mt-1 text-xs text-muted-foreground">{ed(`network.cities.${i}.n`, c.n)}</div>
