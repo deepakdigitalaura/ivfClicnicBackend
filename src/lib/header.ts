@@ -176,7 +176,7 @@ export const HEADER_DEFAULTS: HeaderData = {
         ]},
         { heading: "", items: [
           { label: "History", href: "/history" },
-          { label: "Our Team", href: "/#doctors" },
+          { label: "Our Team", href: "/doctors" },
           { label: "Infrastructure", href: "/infrastructure" },
           { label: "Suraksha Kavach Package", href: destinationHref("suraksha-kavach") },
           { label: "Easy / Interest Free EMI", href: "/easy-emi" },

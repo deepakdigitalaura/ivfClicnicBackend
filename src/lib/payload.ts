@@ -865,7 +865,7 @@ export function getGlobalSafe<S extends keyof Config["globals"]>(
     // "v2" in the key forces a one-time Data-Cache miss after globals were
     // edited directly in the DB (bypassing the revalidate hooks). Tag-based
     // revalidation (admin edits) is unaffected.
-    ["global", "v2", String(slug)],
+    ["global", "v3", String(slug)],
     { tags: [cacheTags.global(String(slug))] },
   )();
 }
