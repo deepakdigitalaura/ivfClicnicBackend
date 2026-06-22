@@ -150,7 +150,7 @@ export function CtaSidebarCard() {
   return (
     <div className="relative overflow-hidden rounded-2xl gradient-dark noise p-5 text-white">
       <p className="text-[10px] font-bold uppercase tracking-widest text-white/50">
-        Free Consultation
+        Consultation
       </p>
       <h3 className="mt-2 font-display text-lg font-medium leading-tight text-balance">
         Start Your{" "}
@@ -163,7 +163,7 @@ export function CtaSidebarCard() {
         href="/#book"
         className="btn-luxury mt-4 flex items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-4 py-2.5 text-sm font-semibold text-white shadow-glow"
       >
-        <Calendar className="h-3.5 w-3.5" /> Book Free Consultation
+        <Calendar className="h-3.5 w-3.5" /> Book Consultation
       </a>
       <a
         href={`tel:${SITE.telephone}`}

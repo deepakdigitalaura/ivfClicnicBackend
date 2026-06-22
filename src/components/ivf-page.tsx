@@ -90,7 +90,7 @@ const faqs = [
   { q: "How does age affect IVF success?", a: "Age is the single biggest factor — younger women generally have higher success rates. For older patients, options such as donor eggs, previously-frozen embryos or advanced IVF techniques can improve the chances." },
   { q: "How long does one IVF cycle take?", a: "From the start of stimulation to embryo transfer, the active treatment usually takes about 12–17 days, plus the pre-treatment evaluation beforehand." },
   { q: "Is egg retrieval painful?", a: "No. Egg retrieval is a short, painless procedure done through the vagina under light sedation — with no cut and no stitch. Most patients go home within about two hours." },
-  { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a free consultation for a personalised estimate." },
+  { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a consultation for a personalised estimate." },
   { q: "Does Bavishi Fertility Institute offer a money-back guarantee for IVF?", a: "Yes — through the Suraksha Kavach programme, which provides financial protection and assurance on your fertility journey. Speak to our team to see if you qualify." },
   { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 25,000+ successful pregnancies and the National Fertility Award for five consecutive years." },
   { q: "What lifestyle changes should I make before starting IVF?", a: "Focus on a healthy lifestyle — a balanced diet, regular exercise, maintaining a healthy weight, and avoiding smoking and excessive alcohol. Your specialist will give you any additional, personalised advice during your consultation." },
@@ -286,7 +286,7 @@ export function IvfPage() {
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation
+                  <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                   <MessageCircle className="h-4 w-4 text-[#25D366]" /> Chat on WhatsApp
@@ -519,7 +519,7 @@ export function IvfPage() {
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
               <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                <Calendar className="h-4 w-4" /> Book Free Consultation
+                <Calendar className="h-4 w-4" /> Book Consultation
               </Magnetic>
               <Magnetic as="a" href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                 <PlayCircle className="h-4 w-4" /> More Videos
@@ -744,7 +744,7 @@ export function IvfPage() {
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Free Consultation
+                <Calendar className="h-4 w-4" /> Book Consultation
               </Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                 <Phone className="h-4 w-4" /> +91 97126 22288

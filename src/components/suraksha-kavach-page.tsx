@@ -114,7 +114,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "How do I enrol in Suraksha Kavach?",
-    a: "Start by booking a free consultation at any of our 14 centres across India. After your initial evaluation, if you are eligible, our team will walk you through the enrolment process, package details, and answer any questions you may have.",
+    a: "Start by booking a consultation at any of our 14 centres across India. After your initial evaluation, if you are eligible, our team will walk you through the enrolment process, package details, and answer any questions you may have.",
   },
   {
     q: "Can I transfer my package to someone else?",
@@ -217,7 +217,7 @@ export function SurakshaKavachPage() {
             <Reveal delay={0.35}>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
                   <MessageCircle className="h-4 w-4" /> WhatsApp Us
@@ -470,13 +470,13 @@ export function SurakshaKavachPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a free consultation to learn if Suraksha Kavach is right for you. No obligation, no pressure — just honest guidance from Bavishi Fertility Institute.
+              Book a consultation to learn if Suraksha Kavach is right for you. No obligation, no pressure — just honest guidance from Bavishi Fertility Institute.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
+                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us

@@ -565,7 +565,7 @@ const content = {
         headline: "Not sure whether IUI or IVF is right for your case?",
         subtext: "Our fertility specialists in Ahmedabad review your reports and give you an honest recommendation — not the most expensive option.",
         buttons: [
-          { label: "Book Free Consultation",  url: "/#book",   variant: "primary" },
+          { label: "Book Consultation",  url: "/#book",   variant: "primary" },
           { label: "WhatsApp a Specialist",   url: "https://wa.me/919825600900", variant: "secondary" },
         ],
         accent: "rose",
@@ -633,9 +633,9 @@ const content = {
       /* ─── BOTTOM-OF-FUNNEL CTA ─── */
       inlineCta({
         headline: "Ready to find out which treatment is right for you?",
-        subtext: "Book a free consultation at Bavishi Fertility Institute — bring your latest reports and get a clear, honest plan.",
+        subtext: "Book a consultation at Bavishi Fertility Institute — bring your latest reports and get a clear, honest plan.",
         buttons: [
-          { label: "Book Free Consultation in Ahmedabad", url: "/#book",                          variant: "primary" },
+          { label: "Book Consultation in Ahmedabad", url: "/#book",                          variant: "primary" },
           { label: "Call Us",                             url: "tel:+919825600900",                variant: "secondary" },
         ],
         accent: "plum",
@@ -688,7 +688,7 @@ const faqs = [
  * ══════════════════════════════════════════════════════════════════ */
 const seo = {
   metaTitle: "IUI vs IVF: Which Fertility Treatment Is Right for You? | Bavishi Fertility Institute",
-  metaDescription: "IUI vs IVF — success rates, costs, who each suits, and how to choose. Expert guidance from fertility specialists at Bavishi Fertility Institute, Ahmedabad. Free consultation available.",
+  metaDescription: "IUI vs IVF — success rates, costs, who each suits, and how to choose. Expert guidance from fertility specialists at Bavishi Fertility Institute, Ahmedabad. Consultation available.",
 };
 
 const excerpt = "IUI and IVF are both proven fertility treatments — but they suit different situations. Here's an honest comparison of success rates, costs, and who each treatment is right for, reviewed by our specialists in Ahmedabad.";

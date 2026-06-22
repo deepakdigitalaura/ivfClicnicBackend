@@ -176,7 +176,7 @@ export const ABOUT_DEFAULTS: AboutData = {
   },
   finalCta: {
     heading: { lead: "Begin your journey with", em: "people who care." },
-    ctas: ["Book Free Consultation", "WhatsApp Us"],
+    ctas: ["Book Consultation", "WhatsApp Us"],
   },
   seo: {
     metaTitle: "About Bavishi Fertility Institute — 30+ Years of IVF Excellence in India",

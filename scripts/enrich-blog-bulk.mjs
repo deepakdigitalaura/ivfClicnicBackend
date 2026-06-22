@@ -118,7 +118,7 @@ const TEMPLATES = {
     cta: { accent: "rose",
       headline: "Ready to Explore Your IVF Options at BFI?",
       subtext: "Our specialists will walk you through every step — from first consultation to embryo transfer and beyond.",
-      buttons: [{ label: "Book Free Consultation", url: "/contact", variant: "primary" }, { label: "Learn About IVF", url: "/treatments/ivf", variant: "secondary" }],
+      buttons: [{ label: "Book Consultation", url: "/contact", variant: "primary" }, { label: "Learn About IVF", url: "/treatments/ivf", variant: "secondary" }],
     },
   },
 
@@ -456,7 +456,7 @@ const TEMPLATES = {
     cta: { accent: "plum",
       headline: "Experience the BFI Difference",
       subtext: "With 3 centres across Gujarat and 15+ years of clinical excellence, BFI offers world-class fertility care close to home.",
-      buttons: [{ label: "Book Free Consultation", url: "/contact", variant: "primary" }, { label: "Visit a BFI Centre", url: "/locations", variant: "secondary" }],
+      buttons: [{ label: "Book Consultation", url: "/contact", variant: "primary" }, { label: "Visit a BFI Centre", url: "/locations", variant: "secondary" }],
     },
   },
 
@@ -481,7 +481,7 @@ const TEMPLATES = {
     cta: { accent: "rose",
       headline: "Get Evidence-Based Answers From BFI Specialists",
       subtext: "No judgement, no pressure — just clarity on your specific situation from a team with 15+ years of clinical experience.",
-      buttons: [{ label: "Book Free Consultation", url: "/contact", variant: "primary" }, { label: "Browse Fertility Guides", url: "/blog", variant: "secondary" }],
+      buttons: [{ label: "Book Consultation", url: "/contact", variant: "primary" }, { label: "Browse Fertility Guides", url: "/blog", variant: "secondary" }],
     },
   },
 
@@ -506,7 +506,7 @@ const TEMPLATES = {
     cta: { accent: "rose",
       headline: "Take the First Step Toward Parenthood",
       subtext: "Schedule a consultation with BFI's fertility specialists — personalised, evidence-based care for your unique journey.",
-      buttons: [{ label: "Book Free Consultation", url: "/contact", variant: "primary" }, { label: "Explore Treatments", url: "/treatments", variant: "secondary" }],
+      buttons: [{ label: "Book Consultation", url: "/contact", variant: "primary" }, { label: "Explore Treatments", url: "/treatments", variant: "secondary" }],
     },
   },
 };

@@ -74,7 +74,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation
+                  <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
                 <Magnetic as="a" href="/what-is-ivf" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                   Explore IVF <ArrowRight className="h-4 w-4" />

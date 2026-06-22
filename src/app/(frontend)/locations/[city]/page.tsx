@@ -60,7 +60,7 @@ export async function generateMetadata(
     if (!centre) return {};
     const place = c.name && c.name !== centre.area ? `${centre.area}, ${c.name}` : centre.area;
     const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-    const description = `${centre.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${centre.address}. Book a free consultation.`;
+    const description = `${centre.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${centre.address}. Book a consultation.`;
     return {
       title,
       description,

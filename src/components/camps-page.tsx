@@ -27,7 +27,7 @@ const DEFAULT_POSTERS: EventPoster[] = [
 ];
 
 const WHAT_TO_EXPECT = [
-  { icon: Calendar, title: "Free Consultations", desc: "Meet our specialists face-to-face at no cost during camp days." },
+  { icon: Calendar, title: "Consultations", desc: "Meet our specialists face-to-face during camp days." },
   { icon: MapPin, title: "Multiple Cities", desc: "We bring fertility care to your city — camps held across Gujarat and India." },
   { icon: Phone, title: "Follow-Up Support", desc: "Camp attendees receive priority scheduling for follow-up appointments." },
 ];

@@ -263,7 +263,7 @@ function BlogCta() {
               href="/#book"
               className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"
             >
-              <Calendar className="h-4 w-4" /> Book Free Consultation
+              <Calendar className="h-4 w-4" /> Book Consultation
             </Magnetic>
             <Magnetic
               as="a"

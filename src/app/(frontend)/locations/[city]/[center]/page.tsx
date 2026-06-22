@@ -37,7 +37,7 @@ export async function generateMetadata(
   const cityName = cityBySlug(city)?.name ?? c.citySlug;
   const place = cityName && cityName !== c.area ? `${c.area}, ${cityName}` : c.area;
   const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-  const description = `${c.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${c.address}. Book a free consultation.`;
+  const description = `${c.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${c.address}. Book a consultation.`;
   return {
     title,
     description,

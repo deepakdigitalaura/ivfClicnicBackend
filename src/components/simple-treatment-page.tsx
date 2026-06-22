@@ -161,7 +161,7 @@ export function SimpleTreatmentPage() {
                   href="/#book"
                   className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
                 >
-                  <Calendar className="h-4 w-4" /> Book Free Consultation{" "}
+                  <Calendar className="h-4 w-4" /> Book Consultation{" "}
                   <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic
@@ -391,7 +391,7 @@ export function SimpleTreatmentPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a free consultation at Bavishi Fertility Institute. Let us show you how
+              Book a consultation at Bavishi Fertility Institute. Let us show you how
               science, care, and 100+ years of experience make your journey simple.
             </p>
           </Reveal>
@@ -402,7 +402,7 @@ export function SimpleTreatmentPage() {
                 href="/#book"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
               >
-                <Calendar className="h-4 w-4" /> Book Free Consultation{" "}
+                <Calendar className="h-4 w-4" /> Book Consultation{" "}
                 <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic

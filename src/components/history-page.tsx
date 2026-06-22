@@ -214,7 +214,7 @@ export function HistoryPage() {
             <Reveal delay={0.24}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation
+                  <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
                 <Magnetic as="a" href="/about-bfi" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                   About BFI <ArrowRight className="h-4 w-4" />
@@ -339,14 +339,14 @@ export function HistoryPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              35+ years of trust, 25,000+ successful pregnancies, and counting. Book a free consultation
+              35+ years of trust, 25,000+ successful pregnancies, and counting. Book a consultation
               to start your own family&apos;s story with Bavishi Fertility Institute.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
+                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us

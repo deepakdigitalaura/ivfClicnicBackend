@@ -220,7 +220,7 @@ export function SmartTreatmentPage() {
                   href="/#book"
                   className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
                 >
-                  <Calendar className="h-4 w-4" /> Book Free Consultation{" "}
+                  <Calendar className="h-4 w-4" /> Book Consultation{" "}
                   <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic
@@ -504,7 +504,7 @@ export function SmartTreatmentPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a free consultation to see how our smart approach can give you the best chance of
+              Book a consultation to see how our smart approach can give you the best chance of
               success — with fewer procedures, lower costs, and a treatment plan tailored entirely to you.
             </p>
           </Reveal>
@@ -515,7 +515,7 @@ export function SmartTreatmentPage() {
                 href="/#book"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
               >
-                <Calendar className="h-4 w-4" /> Book Free Consultation{" "}
+                <Calendar className="h-4 w-4" /> Book Consultation{" "}
                 <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic
@@ -531,7 +531,7 @@ export function SmartTreatmentPage() {
           </Reveal>
           <Reveal delay={0.25}>
             <p className="mt-4 text-xs text-white/40">
-              Free consultation at any of our 14 centres across India.
+              Book a consultation at any of our 14 centres across India.
             </p>
           </Reveal>
         </div>

@@ -169,7 +169,7 @@ export function WhyBfiPage() {
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
                 <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
                   <MessageCircle className="h-4 w-4" /> WhatsApp Us
@@ -439,13 +439,13 @@ export function WhyBfiPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a free consultation at any of our 14 centres across India. No obligation, no pressure &mdash; just honest, compassionate guidance from the pioneers of IVF in India.
+              Book a consultation at any of our 14 centres across India. No obligation, no pressure &mdash; just honest, compassionate guidance from the pioneers of IVF in India.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
+                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us

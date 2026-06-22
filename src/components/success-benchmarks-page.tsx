@@ -155,7 +155,7 @@ export function SuccessBenchmarksPage() {
                 href="/#book"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
               >
-                <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
+                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic
                 as="a"
@@ -456,7 +456,7 @@ export function SuccessBenchmarksPage() {
                   href="/#book"
                   className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
                 >
-                  <Calendar className="h-4 w-4" /> Book Free Consultation <ArrowRight className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic
                   as="a"
