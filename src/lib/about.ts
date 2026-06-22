@@ -79,35 +79,35 @@ export type AboutData = {
  */
 export const ABOUT_DEFAULTS: AboutData = {
   hero: {
-    eyebrow: "About Bavishi Fertility Institute",
+    eyebrow: "About Bavishi Fertility Institute — IVF Pioneers Since 1986",
     headline: "Over three decades of fertility excellence — built on hope",
     headlineItalic: "fertility excellence",
     paragraph:
-      "Since 1998, Bavishi Fertility Institute has helped over 30,000 families experience the joy of parenthood — pioneering IVF in India and growing into one of the country's most trusted fertility networks, with 14 centres across 8 cities.",
+      "Founded and led by the well-known experts of the Bavishi family — Dr. Himanshu Bavishi & Dr. Falguni Bavishi — all Bavishi Fertility Institute clinics offer meticulous attention of the highest order in a pleasant and avant-garde environment to make your treatment Simple, Safe, Smart and Successful.",
     image: "/assets/about-bavishi-family.png",
   },
   story: {
     eyebrow: "Our Story",
     heading: { lead: "A family's vision, an", em: "institution's legacy" },
     paragraphs: [
-      "Bavishi Fertility Institute was founded in 1998 by <strong style=\"color:var(--plum)\">Dr. Himanshu Bavishi</strong> and <strong style=\"color:var(--plum)\">Dr. Falguni Bavishi</strong> with a simple but powerful belief: that world-class fertility care should be within every family's reach — delivered with science, sincerity and a deeply human touch.",
-      "What began as a single clinic in Ahmedabad has grown into a multi-centre institute that pioneered IVF in India, achieved national firsts, and today welcomes the second generation of Bavishi doctors. Through every year, the mission has stayed the same — to achieve excellence through knowledge, innovation and research, and to offer customised, safe and effective treatment. The institute has also championed public awareness through books like 'Devna Didhela, Mangine Lidhela', 'Vismitlo', 'Aapnu Adbhut Sarjan' and 'Your Miracle in Making', and through initiatives such as the Divya Santan organisation, Jan Jagruti Abhiyan and Parivar Milan campaigns.",
-      "Our values guide everything we do: <strong style=\"color:var(--plum)\">Simple, Safe, Smart and Successful</strong>. We believe in being a pioneer and leader — the most preferred fertility institute, offering IVF & ART above international standards, with an Indian heart and at India-friendly cost.",
+      "From 1986 to the present day, our rich and cultural significance has given us some of the most remarkable accomplishments a fertility clinic can achieve. Bavishi Fertility Institute was formally established by <strong style=\"color:var(--plum)\">Dr. Himanshu Bavishi</strong> and <strong style=\"color:var(--plum)\">Dr. Falguni Bavishi</strong> in Ahmedabad with a simple but powerful belief: that world-class fertility care should be within every family's reach — delivered with science, sincerity and a deeply human touch. Today, our centres perform more than 3,000 IVF cycles every year with the best results in the world.",
+      "Bavishi Fertility Institute was ranked all India No. 1 in 2020 & ranked <strong style=\"color:var(--plum)\">&ldquo;Number one in western India&rdquo;</strong> for the fifth time in a row in Times of India, a national survey of fertility clinics (2016, 2017, 2018, 2019, 2020). A familial team that stands with you at every step of your fertility journey — welcoming, listening and advising patients before, during and after their journey is our priority.",
+      "What began as a single clinic has grown into a multi-centre institute that pioneered IVF in India, achieved national firsts, and today welcomes the second generation of Bavishi doctors. The institute has also championed public awareness through books like 'Devna Didhela, Mangine Lidhela', 'Vismitlo', 'Aapnu Adbhut Sarjan' and 'Your Miracle in Making', and through initiatives such as the Divya Santan organisation, Jan Jagruti Abhiyan and Parivar Milan campaigns. Our values guide everything we do: <strong style=\"color:var(--plum)\">Simple, Safe, Smart and Successful</strong>.",
     ],
   },
   atAGlance: [
-    { n: "1998", l: "Founded in Ahmedabad" },
+    { n: "Since 1986", l: "Pioneering fertility care in India" },
     { n: "30,000+", l: "Successful pregnancies" },
     { n: "3,000+", l: "IVF cycles every year" },
     { n: "14", l: "Centres across 8 cities" },
-    { n: "6×", l: "National Fertility Award (2019–26)" },
+    { n: "6×", l: "National Fertility Award winner" },
   ],
   legacy: {
     eyebrow: "30+ Years of Legacy",
     heading: { lead: "Milestones that shaped", em: "Indian fertility care" },
   },
   milestones: [
-    { y: "1990", t: "The foundation", d: "Establishment of an infertility hospital in Ahmedabad — the seed of what would become one of India's most trusted fertility networks." },
+    { y: "1986", t: "The foundation", d: "Establishment of a fertility practice in Ahmedabad — the seed of what would become one of India's most trusted fertility networks and the beginning of 'IVF Pioneers Since 1986'." },
     { y: "1998", t: "Bavishi Fertility Institute begins", d: "Dr. Himanshu & Dr. Falguni Bavishi establish Bavishi Fertility Institute (Test Tube Baby Clinic) in Ahmedabad. Preimplantation Genetic Diagnosis (PGD) also launched the same year — bringing advanced genetic screening to Indian fertility care from the very start." },
     { y: "2002", t: "Test Tube Baby Fair", d: "Organised 'Testtube Balakono Melavado 2004' — a landmark gathering celebrating test-tube baby families and spreading awareness about IVF across Gujarat." },
     { y: "2005", t: "Full-service fertility institute", d: "Established a comprehensive fertility institute with complete facilities in Ahmedabad." },
@@ -139,10 +139,10 @@ export const ABOUT_DEFAULTS: AboutData = {
   trustPillars: [
     { icon: "Award", t: "30+ Years of Experience", d: "Since 1998, a family-led institute that pioneered IVF in India and has guided 30,000+ families to parenthood." },
     { icon: "HeartPulse", t: "Outcomes That Matter", d: "3,000+ IVF cycles a year with a focus on safe stimulation, best-quality embryos and healthy single pregnancies." },
-    { icon: "Users", t: "A Family of Specialists", d: "Reproductive endocrinologists, embryologists, andrologists, fetal-medicine experts, counsellors and nutritionists under one roof." },
+    { icon: "Users", t: "A Family of Specialists", d: "Gynaecologists, obstetricians, embryologists, psychologists, nutritionists, consultants, coordinators and managers — exclusively dedicated to resolving patients' issues and treating them. Shared infrastructure with more than 35+ years of experience." },
     { icon: "Microscope", t: "World-Class Technology", d: "Class 1000 IVF labs — 10× cleaner than the international standard — with time-lapse imaging, vitrification and PGT." },
     { icon: "ShieldCheck", t: "Transparency & Ethics", d: "Honest counselling, no hidden costs, double-witnessing of every sample, and the Suraksha Kavach assurance." },
-    { icon: "Sparkles", t: "Simple · Safe · Smart · Successful", d: "Our four values shape every plan — personalised, compassionate and judicious use of advanced reproductive technology." },
+    { icon: "Sparkles", t: "Simple · Safe · Smart · Successful", d: "When you choose Bavishi Fertility Institute, your choice is right. Only the most innovative and experienced fertility clinics can make complex IVF treatment simple, safe, smart and successful — and that's our 'EASY IVF'." },
   ],
   patientFirst: {
     eyebrow: "Patient First",
