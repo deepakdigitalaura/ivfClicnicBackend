@@ -79,7 +79,7 @@ export type AboutData = {
  */
 export const ABOUT_DEFAULTS: AboutData = {
   hero: {
-    eyebrow: "About Bavishi Fertility Institute — IVF Pioneers Since 1986",
+    eyebrow: "About Bavishi Fertility Institute — IVF Pioneers Since 1998",
     headline: "Over three decades of fertility excellence — built on hope",
     headlineItalic: "fertility excellence",
     paragraph:
@@ -90,24 +90,23 @@ export const ABOUT_DEFAULTS: AboutData = {
     eyebrow: "Our Story",
     heading: { lead: "A family's vision, an", em: "institution's legacy" },
     paragraphs: [
-      "From 1986 to the present day, our rich and cultural significance has given us some of the most remarkable accomplishments a fertility clinic can achieve. Bavishi Fertility Institute was formally established by <strong style=\"color:var(--plum)\">Dr. Himanshu Bavishi</strong> and <strong style=\"color:var(--plum)\">Dr. Falguni Bavishi</strong> in Ahmedabad with a simple but powerful belief: that world-class fertility care should be within every family's reach — delivered with science, sincerity and a deeply human touch. Today, our centres perform more than 3,000 IVF cycles every year with the best results in the world.",
-      "Bavishi Fertility Institute was ranked all India No. 1 in 2020 & ranked <strong style=\"color:var(--plum)\">&ldquo;Number one in western India&rdquo;</strong> for the fifth time in a row in Times of India, a national survey of fertility clinics (2016, 2017, 2018, 2019, 2020). A familial team that stands with you at every step of your fertility journey — welcoming, listening and advising patients before, during and after their journey is our priority.",
-      "What began as a single clinic has grown into a multi-centre institute that pioneered IVF in India, achieved national firsts, and today welcomes the second generation of Bavishi doctors. The institute has also championed public awareness through books like 'Devna Didhela, Mangine Lidhela', 'Vismitlo', 'Aapnu Adbhut Sarjan' and 'Your Miracle in Making', and through initiatives such as the Divya Santan organisation, Jan Jagruti Abhiyan and Parivar Milan campaigns. Our values guide everything we do: <strong style=\"color:var(--plum)\">Simple, Safe, Smart and Successful</strong>.",
+      "From 1998 to the present day, our rich and cultural significance has given us some of the most remarkable accomplishments a fertility clinic can achieve. Bavishi Fertility Institute was formally established by <strong style=\"color:var(--plum)\">Dr. Himanshu Bavishi</strong> and <strong style=\"color:var(--plum)\">Dr. Falguni Bavishi</strong> in Ahmedabad with a simple but powerful belief: that world-class fertility care should be within every family's reach — delivered with science, sincerity and a deeply human touch. Today, our centres perform more than 3,000 IVF cycles every year with the best results in the world.",
+      "Bavishi Fertility Institute was ranked all India No. 1 in 2020 by Times of India and has been recognised as <strong style=\"color:var(--plum)\">&ldquo;Best IVF Chain in India &ndash; West&rdquo;</strong> by The Economic Times six times (2019, 2022, 2023, 2024, 2025 and 2026). A familial team that stands with you at every step of your fertility journey — welcoming, listening and advising patients before, during and after their journey is our priority.",
+      "What began as a single clinic has grown into a multi-centre institute that pioneered IVF in India, achieved national firsts, and today welcomes the second generation of Bavishi doctors. The institute has also championed public awareness through books like 'Devna Didhela, Mangine Lidhela', 'Viknadog', 'Aapnu Adbhut Sarjan' and 'Your Miracle in Making', and through initiatives such as the Divya Santan organisation, Jan Jagruti Abhiyan and Parivar Milan campaigns. Our values guide everything we do: <strong style=\"color:var(--plum)\">Simple, Safe, Smart and Successful</strong>.",
     ],
   },
   atAGlance: [
-    { n: "Since 1986", l: "Pioneering fertility care in India" },
+    { n: "Since 1998", l: "Pioneering fertility care in India" },
     { n: "30,000+", l: "Successful pregnancies" },
     { n: "3,000+", l: "IVF cycles every year" },
     { n: "14", l: "Centres across 8 cities" },
-    { n: "6×", l: "National Fertility Award winner" },
+    { n: "5×", l: "National Fertility Award winner (2021–2025)" },
   ],
   legacy: {
     eyebrow: "30+ Years of Legacy",
     heading: { lead: "Milestones that shaped", em: "Indian fertility care" },
   },
   milestones: [
-    { y: "1986", t: "The foundation", d: "Establishment of a fertility practice in Ahmedabad — the seed of what would become one of India's most trusted fertility networks and the beginning of 'IVF Pioneers Since 1986'." },
     { y: "1998", t: "Bavishi Fertility Institute begins", d: "Dr. Himanshu & Dr. Falguni Bavishi establish Bavishi Fertility Institute (Test Tube Baby Clinic) in Ahmedabad. Preimplantation Genetic Diagnosis (PGD) also launched the same year — bringing advanced genetic screening to Indian fertility care from the very start." },
     { y: "2002", t: "Test Tube Baby Fair", d: "Organised 'Testtube Balakono Melavado 2004' — a landmark gathering celebrating test-tube baby families and spreading awareness about IVF across Gujarat." },
     { y: "2005", t: "Full-service fertility institute", d: "Established a comprehensive fertility institute with complete facilities in Ahmedabad." },
@@ -116,20 +115,21 @@ export const ABOUT_DEFAULTS: AboutData = {
     { y: "2008", t: "Expanding to Mumbai & Surat", d: "Opened offices in Mumbai and Surat, taking trusted fertility care beyond Ahmedabad for the first time." },
     { y: "2009", t: "A national first", d: "Birth of India's first baby through Vitrified Frozen Oocytes — a milestone that shaped Indian reproductive medicine." },
     { y: "2011", t: "Divya Santan & first book", d: "Founded the 'Divya Santan' organisation and published 'Devna Didhela, Mangine Lidhela' — sharing the stories of 111 test-tube-baby families." },
-    { y: "2012", t: "Awareness through publishing", d: "Published 'Vismitlo' — a book on the infertility journey, problems and solutions for couples struggling to conceive." },
+    { y: "2012", t: "Awareness through publishing", d: "Published 'Viknadog' — a book on the infertility journey, problems and solutions for couples struggling to conceive." },
     { y: "2013", t: "Public awareness campaigns", d: "Launched 'Jan Jagruti Abhiyan' and 'Parivar Milan' — special awareness campaigns to support infertile couples and remove social stigma." },
     { y: "2014", t: "INSTAR founded", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in donor and surrogacy programmes." },
     { y: "2015", t: "Power Brand Award", d: "Recognised as a 'Power Brand' by IVF India — a testament to the institute's growing national reputation." },
-    { y: "2017", t: "National & international recognition", d: "Received the 'Excellence in IVF' award (My FM / Divya Bhaskar Group — Ahmedabad Institute was the first to receive it), the 'Rose of Paracelsus' award (European Medical Association), the IMA Gujarat 'Excellence in the Field of Medicine' award (Dr. Himanshu Bavishi — first IVF graduate recipient), and the Gujarat Chief Minister's 'Shreshtha' award to Dr. Himanshu & Dr. Falguni Bavishi for contributions to infertility treatment. Also published 'Aapnu Adbhut Sarjan' (Gujarati) and 'Your Miracle in Making' (English)." },
+    { y: "2016", t: "Kolkata expansion & first national award", d: "Bavishi Pratiksha Fertility Institute opened in Kolkata — the first national expansion. Received the 'Excellence in IVF' award from My FM / Divya Bhaskar Group — BFI was the first institute in Ahmedabad to receive it." },
+    { y: "2017", t: "International recognition", d: "Received the 'Socrates Award — Rose of Paracelsus' from the European Medical Association, the IMA Gujarat 'Excellence in the Field of Medicine' award (Dr. Himanshu Bavishi — first IVF graduate recipient), and the Gujarat Chief Minister's 'Shreshtha' award to Dr. Himanshu & Dr. Falguni Bavishi for contributions to infertility treatment. Also published 'Aapnu Adbhut Sarjan' (Gujarati) and 'Your Miracle in Making' (English)." },
     { y: "2018", t: "Surat centre & national awards", d: "Started the Surat centre. Received 'Best IVF Clinic Chain in India' (Mid-Day) and 'Times Health Icon' award. The book 'Devna Didhela Mangine Lidhela' was adapted into a TV serial on infertility awareness." },
     { y: "2019", t: "Best IVF Chain — West", d: "Awarded 'Best IVF Chain in India – West' by The Economic Times. Expanded to Vadodara." },
-    { y: "2020", t: "India's No.1 Fertility Clinic", d: "Ranked No.1 in India by Times of India National Survey. No.1 in Western India for five consecutive years (2016–2020). Expanded to Bhuj." },
-    { y: "2021", t: "PGD-HLA Matching breakthrough", d: "Introduced PGD-HLA Matching technology for stem-cell donor matching and leukemia treatment support — a highly specialised capability available in very few centres worldwide." },
-    { y: "2022", t: "New Ahmedabad centre", d: "Opened a new centre at Sindhu Bhavan Road, Bodakdev, Ahmedabad — bringing world-class fertility care to the west side of the city." },
-    { y: "2023", t: "25 years completed", d: "Celebrated 25 years of completing families — a quarter century of pioneering IVF, national firsts, and 30,000+ successful pregnancies." },
-    { y: "2024", t: "IVF Chain of the Year — West", d: "Received the 'IVF / Fertility Chain of the Year – West' award for the fourth time." },
-    { y: "2025", t: "Nikol, Ahmedabad", d: "Opened the Nikol centre in east Ahmedabad — making expert fertility care accessible across the city." },
-    { y: "2026", t: "National Fertility Award — 6th time", d: "Received the 'Best IVF Chain in India – West' award by The Economic Times for the sixth consecutive year — reinforcing Bavishi Fertility Institute's position as the nation's most trusted fertility network." },
+    { y: "2020", t: "India's No.1 Fertility Clinic", d: "Ranked No.1 in India by Times of India National Survey. Bhuj clinic started." },
+    { y: "2021", t: "PGD-HLA Matching breakthrough & National Fertility Award", d: "Introduced PGD-HLA Matching technology for stem-cell donor matching and leukaemia treatment support — a highly specialised capability available in very few centres worldwide. Received the National Fertility Award (year 1 of 5)." },
+    { y: "2022", t: "New Ahmedabad centre & awards", d: "Opened a new centre at Sindhu Bhavan Road, Bodakdev, Ahmedabad. Received 'Best IVF Chain in India — West' (The Economic Times) and the National Fertility Award (year 2 of 5)." },
+    { y: "2023", t: "25 years & awards", d: "Celebrated 25 years of completing families — a quarter century of pioneering IVF, national firsts, and 30,000+ successful pregnancies. Received 'Best IVF Chain in India — West' (The Economic Times) and the National Fertility Award (year 3 of 5)." },
+    { y: "2024", t: "Best IVF Chain — West, fourth time", d: "Received 'Best IVF Chain in India — West' (The Economic Times) for the fourth time. National Fertility Award (year 4 of 5)." },
+    { y: "2025", t: "Nikol, Ahmedabad & fifth National Fertility Award", d: "Opened the Nikol centre in east Ahmedabad — making expert fertility care accessible across the city. Received 'Best IVF Chain in India — West' (The Economic Times) and the National Fertility Award for the fifth consecutive year (2021–2025)." },
+    { y: "2026", t: "Best IVF Chain — West, sixth time", d: "Received the 'Best IVF Chain in India – West' award by The Economic Times for the sixth time (2019, 2022, 2023, 2024, 2025, 2026) — reinforcing Bavishi Fertility Institute's position as the nation's most trusted fertility network." },
     { y: "Today", t: "14 centres, one family", d: "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." },
   ],
   trust: {
@@ -184,7 +184,7 @@ export const ABOUT_DEFAULTS: AboutData = {
       "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 14 centres. Discover our story, legacy and values.",
     ogTitle: "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1998",
     ogDescription:
-      "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 6 years running. The story of India's pioneering fertility institute.",
+      "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 5 consecutive years (2021–2025). The story of India's pioneering fertility institute.",
     ogImage: "/assets/about-clinic.jpg",
   },
 };

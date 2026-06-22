@@ -50,14 +50,13 @@ export const SITE = {
     "Bharat Excellence Award for IVF and Infertility Care",
     "Best Test Tube Baby Clinic — 2004",
     "Power Brand Award — IVF India (2015)",
-    "Excellence in IVF — Divya Bhaskar Group / My FM (2017)",
+    "Excellence in IVF — Divya Bhaskar Group / My FM (2016)",
     "Rose of Paracelsus Award — European Medical Association (2017)",
     "Best IVF Clinic Chain in India — Mid-Day (2018)",
     "Times Health Icon Award — Times of India (2018)",
     "Best IVF Chain in India – West — The Economic Times (2019)",
     "India's No.1 Fertility Clinic — TOI National Survey (2020)",
-    "No.1 in Western India — 5 consecutive years (2016–2020)",
-    "IVF / Fertility Chain of the Year – West (2024)",
+    "Best IVF Chain in India – West — The Economic Times (2019, 2022, 2023, 2024, 2025, 2026)",
   ],
 } as const;
 

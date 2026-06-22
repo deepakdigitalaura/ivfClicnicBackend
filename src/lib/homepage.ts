@@ -227,7 +227,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       "Leading IVF Specialists",
     ],
     ctas: ["Book Consultation", "Check IVF Eligibility", "Video Consultation"],
-    floatingBadge: "National Fertility Award · 6× Winner",
+    floatingBadge: "National Fertility Award · 5× Winner (2021–2025)",
     image: heroImg,
   },
   stats: [
@@ -333,7 +333,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     heading: { lead: "Our Awards &", em: "Achievements." },
     subtitle: "Awarded for Excellence in IVF & Fertility Care.",
     items: [
-      { img: "/assets/awards/ivf-chain-of-the-year.png", title: "No.1 in West India", desc: "6 consecutive years · 2019–2026" },
+      { img: "/assets/awards/ivf-chain-of-the-year.png", title: "No.1 in West India", desc: "2019 · 2022 · 2023 · 2024 · 2025 · 2026" },
       { img: "/assets/awards/patient-centric-award.png", title: "Best IVF Chain in India – West", desc: "The Economic Times" },
       { img: "/assets/awards/bharat-excellence-award.png", title: "Best IVF Clinic Chain in India", desc: "Mid-Day" },
       { img: "/assets/awards/times-healthcare-award.png", title: "India's No.1 Fertility Clinic", desc: "Ahmedabad Institute · TOI National Survey 2020" },
