@@ -259,21 +259,9 @@ export const getRelatedBlogs = reactCache(
     )(),
 );
 
-/** Canonical slug list for CME / seminar blog posts. */
-export const CME_BLOG_SLUGS = [
-  "cme-program-on-infertility-management-successfully-conducted-at-idar",
-  "bavishi-fertility-institute-conducts-a-successful-cme-program-at-bardoli",
-  "bavishi-fertility-institute-hosts-joint-educational-cme-with-east-ahmedabad-gynaecologist-association",
-  "advancing-ovarian-science-a-full-day-scientific-program-in-surat",
-  "bavishi-fertility-institute-conducts-an-educational-programme-at-rajkot",
-  "bavishi-fertility-institute-hosts-knowledge-sharing-program-with-bharuch-ob-gy-society",
-  "bavishi-fertility-institute-hosts-fogsi-recognized-training-program-in-ahmedabad",
-  "dr-himanshu-bavishi-speaks-on-ivf-at-sogog-conference",
-  "dr-falguni-bavishi-at-sogog-conference-on-iui-success",
-  "empowering-women-in-medicine-knowledge-sharing-program-on-advanced-fertility-and-ivf-techniques-at-nikol",
-] as const;
-
-/** All published CME / seminar blog posts (newest first). Cached + tagged `blogs`. */
+/** All published CME / seminar blog posts (newest first).
+ *  Driven by the "cme" category in the Blogs collection — tag any blog
+ *  as category = CME in the admin panel and it appears here automatically. */
 export const getCMEBlogs = reactCache(
   (): Promise<Blog[]> =>
     unstable_cache(
@@ -281,8 +269,8 @@ export const getCMEBlogs = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
-            where: { slug: { in: CME_BLOG_SLUGS as unknown as string[] } },
-            limit: 20,
+            where: { "category.slug": { equals: "cme" } },
+            limit: 100,
             sort: "-publishedAt",
             depth: 1,
           });
