@@ -1,12 +1,15 @@
 "use client";
-import { Calendar, Clock, ArrowRight, GraduationCap } from "lucide-react";
+import { useState } from "react";
+import { Calendar, Clock, ArrowRight, GraduationCap, ChevronLeft, ChevronRight } from "lucide-react";
 import { format } from "date-fns";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import type { Blog, Category, Media } from "@/payload-types";
+
+const PAGE_SIZE = 9;
 
 const asObj = <T,>(v: T | number | null | undefined): T | null =>
   v && typeof v === "object" ? (v as T) : null;
@@ -110,7 +113,79 @@ function CMECard({ blog }: { blog: Blog }) {
   );
 }
 
+function Pagination({
+  page, total, pageSize, onChange,
+}: { page: number; total: number; pageSize: number; onChange: (p: number) => void }) {
+  const totalPages = Math.ceil(total / pageSize);
+  if (totalPages <= 1) return null;
+
+  const pages: (number | "…")[] = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== "…") {
+      pages.push("…");
+    }
+  }
+
+  return (
+    <div className="mt-10 flex items-center justify-center gap-2 flex-wrap">
+      <button
+        type="button"
+        onClick={() => onChange(page - 1)}
+        disabled={page === 1}
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-[color:var(--plum)] disabled:opacity-30 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)] transition-colors"
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+
+      {pages.map((p, i) =>
+        p === "…" ? (
+          <span key={`e${i}`} className="px-1 text-[color:var(--plum)]/40 text-sm">…</span>
+        ) : (
+          <button
+            key={p}
+            type="button"
+            onClick={() => onChange(p as number)}
+            className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 ${
+              p === page
+                ? "bg-[color:var(--rose)] text-white shadow-soft"
+                : "border border-border bg-white text-[color:var(--plum)]/70 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]"
+            }`}
+          >
+            {p}
+          </button>
+        )
+      )}
+
+      <button
+        type="button"
+        onClick={() => onChange(page + 1)}
+        disabled={page === totalPages}
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-[color:var(--plum)] disabled:opacity-30 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)] transition-colors"
+        aria-label="Next page"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+
+      <span className="ml-2 text-xs text-[color:var(--plum)]/50">
+        Page {page} of {totalPages} &nbsp;·&nbsp; {total} events
+      </span>
+    </div>
+  );
+}
+
 export function CmePage({ blogs }: { blogs: Blog[] }) {
+  const [page, setPage] = useState(1);
+  const totalPages = Math.ceil(blogs.length / PAGE_SIZE);
+  const paged = blogs.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  function goTo(p: number) {
+    setPage(Math.min(Math.max(1, p), totalPages));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <>
       <SiteHeader />
@@ -158,24 +233,43 @@ export function CmePage({ blogs }: { blogs: Blog[] }) {
         {/* Blog Cards */}
         <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
           <Reveal>
-            <div className="mb-8 flex items-center gap-3">
-              <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
-                <GraduationCap className="h-5 w-5" />
+            <div className="mb-8 flex items-center justify-between gap-3">
+              <div className="flex items-center gap-3">
+                <div className="flex h-10 w-10 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
+                  <GraduationCap className="h-5 w-5" />
+                </div>
+                <h2 className="font-display text-2xl font-bold text-[color:var(--plum)]">
+                  CME Reports & Seminar Highlights
+                </h2>
               </div>
-              <h2 className="font-display text-2xl font-bold text-[color:var(--plum)]">
-                CME Reports & Seminar Highlights
-              </h2>
+              {blogs.length > 0 && (
+                <span className="text-sm text-[color:var(--plum)]/50">{blogs.length} events</span>
+              )}
             </div>
           </Reveal>
 
           {blogs.length > 0 ? (
-            <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-              {blogs.map((blog) => (
-                <StaggerItem key={blog.id}>
-                  <CMECard blog={blog} />
-                </StaggerItem>
-              ))}
-            </Stagger>
+            <>
+              <AnimatePresence mode="wait">
+                <motion.div
+                  key={page}
+                  initial={{ opacity: 0, y: 12 }}
+                  animate={{ opacity: 1, y: 0 }}
+                  exit={{ opacity: 0, y: -8 }}
+                  transition={{ duration: 0.3 }}
+                >
+                  <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+                    {paged.map((blog) => (
+                      <StaggerItem key={blog.id}>
+                        <CMECard blog={blog} />
+                      </StaggerItem>
+                    ))}
+                  </Stagger>
+                </motion.div>
+              </AnimatePresence>
+
+              <Pagination page={page} total={blogs.length} pageSize={PAGE_SIZE} onChange={goTo} />
+            </>
           ) : (
             <div className="rounded-3xl border border-border/50 bg-card py-16 text-center">
               <p className="text-[color:var(--plum)]/50">CME content coming soon.</p>
