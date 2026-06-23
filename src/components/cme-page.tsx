@@ -67,7 +67,7 @@ function CMECard({ blog }: { blog: Blog }) {
           <span className="inline-block rounded-full bg-[color:var(--rose)]/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[color:var(--rose)]">
             CME
           </span>
-          {category?.title && (
+          {category?.title && category.title.toLowerCase() !== "cme" && (
             <span className="inline-block rounded-full bg-[color:var(--plum)]/8 px-3 py-0.5 text-[10px] font-medium text-[color:var(--plum)]/60">
               {category.title}
             </span>
