@@ -30,6 +30,7 @@ function CMECard({ blog }: { blog: Blog }) {
   const hero = asObj<Media>(blog.heroImage);
   const category = asObj<Category>(blog.category);
   const { from, to } = cardAccent(blog.slug);
+  const [portrait, setPortrait] = useState(false);
 
   return (
     <motion.article
@@ -44,7 +45,11 @@ function CMECard({ blog }: { blog: Blog }) {
             src={hero.url}
             alt={hero.alt ?? blog.title}
             loading="lazy"
-            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
+            className={`h-full w-full object-cover transition-transform duration-700 group-hover:scale-105 ${portrait ? "object-top" : "object-center"}`}
+            onLoad={(e) => {
+              const img = e.currentTarget;
+              setPortrait(img.naturalHeight > img.naturalWidth);
+            }}
           />
         ) : (
           <div className={`relative h-full w-full bg-gradient-to-br ${from} ${to} overflow-hidden`}>
