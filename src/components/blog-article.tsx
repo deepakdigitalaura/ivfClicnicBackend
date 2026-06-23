@@ -308,7 +308,6 @@ export function BlogArticle({
   const heroRaw: unknown = blog.heroImage;
   const hero = asObj<Media>(blog.heroImage ?? undefined);
   const heroUrl = typeof heroRaw === "string" ? heroRaw : hero?.url;
-  const heroIsPortrait = (hero?.height ?? 0) > (hero?.width ?? 0);
   const faqs = (blog.faqs ?? []).filter(
     (f) => f.question && f.answer,
   ) as { question: string; answer: string }[];
@@ -431,20 +430,26 @@ export function BlogArticle({
       {/* ════════════════════════════════════════
           FEATURED IMAGE — full-bleed cinematic strip.
           Spans the full viewport width; height is responsive
-          (clamp 300 → 520 px). Top gradient blends out of the
-          dark hero; bottom gradient fades into the page bg.
-          No card/border — the image is a visual scene transition.
+          (clamp 300 → 520 px). The real photo is never cropped —
+          a blurred copy of itself fills the backdrop so portrait
+          and odd-aspect event photos never lose heads/faces.
       ════════════════════════════════════════ */}
       {heroUrl && (
         <div
-          className="w-full overflow-hidden"
+          className="relative w-full overflow-hidden bg-[color:var(--plum)]"
           style={{ height: "clamp(320px, 44vw, 540px)" }}
         >
+          <img
+            src={heroUrl}
+            alt=""
+            aria-hidden="true"
+            className="absolute inset-0 h-full w-full scale-110 object-cover object-center blur-2xl brightness-[0.55] saturate-[1.2]"
+          />
           <EditableImage
             path="heroImage"
             src={heroUrl}
             alt={hero?.alt ?? blog.title}
-            className={`h-full w-full object-cover brightness-125 contrast-105 saturate-[1.2] ${heroIsPortrait ? "object-[center_25%]" : "object-[center_35%]"}`}
+            className="absolute inset-0 h-full w-full object-contain brightness-110 contrast-105 saturate-[1.2]"
             loading="eager"
           />
         </div>
