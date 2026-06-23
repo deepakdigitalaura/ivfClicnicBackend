@@ -37,14 +37,23 @@ function CMECard({ blog }: { blog: Blog }) {
       className="group flex flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
     >
       {/* Thumbnail */}
-      <a href={`/blog/${blog.slug}`} className="block aspect-[16/9] overflow-hidden bg-[color:var(--plum)]/5">
+      <a href={`/blog/${blog.slug}`} className="relative block aspect-[16/9] overflow-hidden bg-[color:var(--plum)]">
         {hero?.url ? (
-          <img
-            src={hero.url}
-            alt={hero.alt ?? blog.title}
-            loading="lazy"
-            className="h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
-          />
+          <>
+            <img
+              src={hero.url}
+              alt=""
+              aria-hidden="true"
+              loading="lazy"
+              className="absolute inset-0 h-full w-full scale-110 object-cover object-center blur-2xl brightness-[0.55] transition-transform duration-700 group-hover:scale-125"
+            />
+            <img
+              src={hero.url}
+              alt={hero.alt ?? blog.title}
+              loading="lazy"
+              className="absolute inset-0 h-full w-full object-contain transition-transform duration-700 group-hover:scale-105"
+            />
+          </>
         ) : (
           <div className={`relative h-full w-full bg-gradient-to-br ${from} ${to} overflow-hidden`}>
             <div aria-hidden className="pointer-events-none absolute -top-6 -right-6 h-24 w-24 rounded-full bg-white/10 blur-2xl" />
