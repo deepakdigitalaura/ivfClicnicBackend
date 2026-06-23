@@ -296,10 +296,6 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Camps", href: "/camps" },
           { label: "CME", href: "/cme" },
         ]},
-        { heading: "Tools", items: [
-          { label: "Fertility Calculators", href: "/ivf-success-rate-calculator" },
-          { label: "Check IVF Eligibility", href: "/#book" },
-        ]},
       ],
     },
     { label: "Contact", href: "/contact" },

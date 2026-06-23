@@ -111,10 +111,6 @@
         { "label": "Videos", "url": "/#videos" },
         { "label": "Events & Webinars", "url": "/#events" }
       ]},
-      { "heading": "Tools", "items": [
-        { "label": "Fertility Calculators", "url": "/#tools" },
-        { "label": "Check IVF Eligibility", "url": "/#book" }
-      ]}
     ]},
     { "label": "Contact", "url": "/contact" }
   ],
