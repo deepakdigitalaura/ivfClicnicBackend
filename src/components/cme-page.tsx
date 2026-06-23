@@ -44,7 +44,7 @@ function CMECard({ blog }: { blog: Blog }) {
             src={hero.url}
             alt={hero.alt ?? blog.title}
             loading="lazy"
-            className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-105"
+            className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
           />
         ) : (
           <div className={`relative h-full w-full bg-gradient-to-br ${from} ${to} overflow-hidden`}>
