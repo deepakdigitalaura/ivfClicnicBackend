@@ -308,6 +308,7 @@ export function BlogArticle({
   const heroRaw: unknown = blog.heroImage;
   const hero = asObj<Media>(blog.heroImage ?? undefined);
   const heroUrl = typeof heroRaw === "string" ? heroRaw : hero?.url;
+  const heroIsPortrait = (hero?.height ?? 0) > (hero?.width ?? 0);
   const faqs = (blog.faqs ?? []).filter(
     (f) => f.question && f.answer,
   ) as { question: string; answer: string }[];
@@ -443,7 +444,7 @@ export function BlogArticle({
             path="heroImage"
             src={heroUrl}
             alt={hero?.alt ?? blog.title}
-            className="h-full w-full object-cover object-center brightness-125 contrast-105 saturate-[1.2]"
+            className={`h-full w-full object-cover brightness-125 contrast-105 saturate-[1.2] ${heroIsPortrait ? "object-[center_25%]" : "object-center"}`}
             loading="eager"
           />
         </div>
