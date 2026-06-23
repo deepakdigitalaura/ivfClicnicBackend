@@ -444,7 +444,7 @@ export function BlogArticle({
             path="heroImage"
             src={heroUrl}
             alt={hero?.alt ?? blog.title}
-            className={`h-full w-full object-cover brightness-125 contrast-105 saturate-[1.2] ${heroIsPortrait ? "object-[center_25%]" : "object-center"}`}
+            className={`h-full w-full object-cover brightness-125 contrast-105 saturate-[1.2] ${heroIsPortrait ? "object-[center_25%]" : "object-[center_35%]"}`}
             loading="eager"
           />
         </div>
