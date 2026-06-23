@@ -1,4 +1,5 @@
 "use client";
+import { useState } from "react";
 import {
   Calendar,
   Clock,
@@ -10,6 +11,7 @@ import {
   MessageCircle,
   AlertTriangle,
   ChevronRight,
+  ChevronDown,
 } from "lucide-react";
 import { format } from "date-fns";
 import { Reveal, Magnetic, Stagger, StaggerItem } from "@/components/motion";
@@ -64,10 +66,14 @@ function MedicalDisclaimer() {
 
 /* ── About the Author ────────────────────────────────────────── */
 function AboutAuthor({ author }: { author: Author }) {
+  const [expanded, setExpanded] = useState(false);
   const avatar = asObj<Media>(author.avatar ?? undefined);
   const profileUrl = author.sameAs?.[0]?.url
     ? localizeUrl(author.sameAs[0].url)
     : null;
+  const bioParagraphs = author.bio?.split(/\n\n+/).map((p) => p.trim()) ?? [];
+  const hasMore = bioParagraphs.length > 2;
+  const visibleParagraphs = expanded ? bioParagraphs : bioParagraphs.slice(0, 2);
 
   return (
     <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft md:p-8">
@@ -100,22 +106,35 @@ function AboutAuthor({ author }: { author: Author }) {
           )}
         </div>
       </div>
-      {author.bio && (
-        /* Split on blank lines so a multi-paragraph bio renders correctly. */
+      {bioParagraphs.length > 0 && (
         <div className="mt-5 space-y-3">
-          {author.bio.split(/\n\n+/).map((para, i) => (
-            <p key={i} className="text-[15px] leading-relaxed text-muted-foreground">{para.trim()}</p>
+          {visibleParagraphs.map((para, i) => (
+            <p key={i} className="text-[15px] leading-relaxed text-muted-foreground">{para}</p>
           ))}
         </div>
       )}
-      {profileUrl && (
-        <a
-          href={profileUrl}
-          className="mt-5 inline-flex items-center gap-1.5 rounded-full border border-[color:var(--rose)]/30 px-5 py-2 text-sm font-semibold text-[color:var(--rose)] transition-colors hover:bg-[color:var(--rose)] hover:text-white"
-        >
-          View Full Profile <ChevronRight className="h-3.5 w-3.5" />
-        </a>
-      )}
+      <div className="mt-5 flex flex-wrap items-center gap-3">
+        {hasMore && (
+          <button
+            type="button"
+            onClick={() => setExpanded((v) => !v)}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--plum)]/20 px-5 py-2 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:bg-[color:var(--plum)]/5"
+          >
+            {expanded ? "Read less" : "Read more"}
+            <ChevronDown
+              className={`h-3.5 w-3.5 transition-transform ${expanded ? "rotate-180" : ""}`}
+            />
+          </button>
+        )}
+        {profileUrl && (
+          <a
+            href={profileUrl}
+            className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--rose)]/30 px-5 py-2 text-sm font-semibold text-[color:var(--rose)] transition-colors hover:bg-[color:var(--rose)] hover:text-white"
+          >
+            View Full Profile <ChevronRight className="h-3.5 w-3.5" />
+          </a>
+        )}
+      </div>
     </div>
   );
 }
