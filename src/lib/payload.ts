@@ -111,7 +111,7 @@ export const getBlogBySlug = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
-            where: { slug: { equals: slug } },
+            where: { and: [{ slug: { equals: slug } }, { _status: { equals: "published" } }] },
             limit: 1,
             depth: 2,
           });
@@ -132,6 +132,7 @@ export const getBlogs = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
+            where: { _status: { equals: "published" } },
             limit,
             sort: "-publishedAt",
             depth: 1,
@@ -164,6 +165,7 @@ export const getBlogsPage = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
+            where: { _status: { equals: "published" } },
             limit,
             page,
             sort: "-publishedAt",
@@ -195,7 +197,12 @@ export const getBlogsByTreatmentSlug = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
-            where: { "treatmentSlugs.slug": { equals: treatmentSlug } },
+            where: {
+              and: [
+                { "treatmentSlugs.slug": { equals: treatmentSlug } },
+                { _status: { equals: "published" } },
+              ],
+            },
             limit,
             sort: "-publishedAt",
             depth: 1,
@@ -218,7 +225,12 @@ export const getBlogsByLocationSlug = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
-            where: { "locationSlugs.slug": { equals: locationSlug } },
+            where: {
+              and: [
+                { "locationSlugs.slug": { equals: locationSlug } },
+                { _status: { equals: "published" } },
+              ],
+            },
             limit,
             sort: "-publishedAt",
             depth: 1,
@@ -245,7 +257,9 @@ export const getRelatedBlogs = reactCache(
           if (!or.length) return [];
           const res = await payload.find({
             collection: "blogs",
-            where: { and: [{ slug: { not_equals: slug } }, { or }] },
+            where: {
+              and: [{ slug: { not_equals: slug } }, { _status: { equals: "published" } }, { or }],
+            },
             limit,
             sort: "-publishedAt",
             depth: 1,
@@ -269,7 +283,9 @@ export const getCMEBlogs = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
-            where: { "category.slug": { equals: "cme" } },
+            where: {
+              and: [{ "category.slug": { equals: "cme" } }, { _status: { equals: "published" } }],
+            },
             limit: 100,
             sort: "-publishedAt",
             depth: 1,
@@ -359,6 +375,7 @@ export const getPublishedBlogSlugs = reactCache(
         async (payload) => {
           const res = await payload.find({
             collection: "blogs",
+            where: { _status: { equals: "published" } },
             limit: 1000,
             depth: 0,
             select: { slug: true },
