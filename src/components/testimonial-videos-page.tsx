@@ -1,16 +1,16 @@
 "use client";
-import { PlayCircle, Star } from "lucide-react";
+import { PlayCircle, Star, ChevronLeft, ChevronRight } from "lucide-react";
 import { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 
+const PAGE_SIZE = 12;
+
 type TestimonialVideo = { id: string; name: string; quote: string; stars: number };
 
-/** Built-in fallback list — used only when the CMS `testimonial-videos`
- * collection is empty, so the page renders identically before it is seeded. */
 const DEFAULT_TESTIMONIAL_VIDEOS: TestimonialVideo[] = [
   { id: "6bH_RnV-_2Y", name: "Anita Thakkar", quote: "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", stars: 5 },
   { id: "KKf6tNrlvoc", name: "Rekha's Journey", quote: "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", stars: 5 },
@@ -78,8 +78,81 @@ function VideoCard({ id, name, quote, stars }: { id: string; name: string; quote
   );
 }
 
+function Pagination({
+  page, total, pageSize, onChange,
+}: { page: number; total: number; pageSize: number; onChange: (p: number) => void }) {
+  const totalPages = Math.ceil(total / pageSize);
+  if (totalPages <= 1) return null;
+
+  const pages: (number | "…")[] = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== "…") {
+      pages.push("…");
+    }
+  }
+
+  return (
+    <div className="mt-12 flex items-center justify-center gap-2 flex-wrap">
+      <button
+        type="button"
+        onClick={() => onChange(page - 1)}
+        disabled={page === 1}
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-[color:var(--plum)] disabled:opacity-30 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)] transition-colors"
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+
+      {pages.map((p, i) =>
+        p === "…" ? (
+          <span key={`e${i}`} className="px-1 text-[color:var(--plum)]/40 text-sm">…</span>
+        ) : (
+          <button
+            key={p}
+            type="button"
+            onClick={() => onChange(p as number)}
+            className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 ${
+              p === page
+                ? "bg-[color:var(--rose)] text-white shadow-soft"
+                : "border border-border bg-white text-[color:var(--plum)]/70 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]"
+            }`}
+          >
+            {p}
+          </button>
+        )
+      )}
+
+      <button
+        type="button"
+        onClick={() => onChange(page + 1)}
+        disabled={page === totalPages}
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-[color:var(--plum)] disabled:opacity-30 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)] transition-colors"
+        aria-label="Next page"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+
+      <span className="ml-2 text-xs text-[color:var(--plum)]/50">
+        Page {page} of {totalPages} &nbsp;·&nbsp; {total} stories
+      </span>
+    </div>
+  );
+}
+
 export function TestimonialVideosPage({ videos }: { videos?: TestimonialVideo[] }) {
-  const TESTIMONIAL_VIDEOS = videos?.length ? videos : DEFAULT_TESTIMONIAL_VIDEOS;
+  const ALL = videos?.length ? videos : DEFAULT_TESTIMONIAL_VIDEOS;
+  const [page, setPage] = useState(1);
+
+  const totalPages = Math.ceil(ALL.length / PAGE_SIZE);
+  const paged = ALL.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  function goTo(p: number) {
+    setPage(Math.min(Math.max(1, p), totalPages));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
+
   return (
     <>
       <SiteHeader />
@@ -110,7 +183,7 @@ export function TestimonialVideosPage({ videos }: { videos?: TestimonialVideo[] 
                   {Array.from({ length: 5 }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
                 </div>
                 <span className="text-sm font-medium text-[color:var(--plum)]/70">
-                  30,000+ happy families across India
+                  30,000+ happy families across India &nbsp;·&nbsp; {ALL.length} patient stories
                 </span>
               </div>
             </Reveal>
@@ -119,13 +192,25 @@ export function TestimonialVideosPage({ videos }: { videos?: TestimonialVideo[] 
 
         {/* Video Grid */}
         <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
-          <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-            {TESTIMONIAL_VIDEOS.map((v) => (
-              <StaggerItem key={v.id}>
-                <VideoCard {...v} />
-              </StaggerItem>
-            ))}
-          </Stagger>
+          <AnimatePresence mode="wait">
+            <motion.div
+              key={page}
+              initial={{ opacity: 0, y: 12 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -8 }}
+              transition={{ duration: 0.3 }}
+            >
+              <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                {paged.map((v) => (
+                  <StaggerItem key={v.id}>
+                    <VideoCard {...v} />
+                  </StaggerItem>
+                ))}
+              </Stagger>
+            </motion.div>
+          </AnimatePresence>
+
+          <Pagination page={page} total={ALL.length} pageSize={PAGE_SIZE} onChange={goTo} />
 
           <Reveal delay={0.2}>
             <div className="mt-12 rounded-3xl bg-[color:var(--rose-soft)]/50 p-8 text-center">

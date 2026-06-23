@@ -1,44 +1,35 @@
 "use client";
 import { useState } from "react";
-import { PlayCircle, ExternalLink } from "lucide-react";
+import { PlayCircle, ExternalLink, ChevronLeft, ChevronRight } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 
-type VideoEntry = {
-  id: string;
-  title: string;
-  desc: string;
-  tab: string;
-};
+const PAGE_SIZE = 12;
 
-/** Built-in fallback list — used only when the CMS `education-videos`
- * collection is empty, so the page renders identically before it is seeded. */
+type VideoEntry = { id: string; title: string; desc: string; tab: string };
+
 const DEFAULT_VIDEOS: VideoEntry[] = [
-  /* IVF */
   { id: "lovYgHlbZoE", title: "Fertility Expert Dr. Janki Bavishi on IVF", desc: "A comprehensive overview of In Vitro Fertilisation explained by our senior specialist.", tab: "IVF" },
   { id: "Pzbwv2EZlrM", title: "Ovarian Cyst Before IVF — What to Do", desc: "Do you need to remove an ovarian cyst before starting your IVF cycle? Dr. Bavishi explains.", tab: "IVF" },
   { id: "AO_J6jKeCck", title: "How Many Eggs Are Needed for IVF?", desc: "Understanding egg numbers and their impact on IVF outcomes — a patient guide.", tab: "IVF" },
   { id: "8eietbeNbfw", title: "Side Effects of IVF — Q&A with Our Doctors", desc: "Common concerns and honest answers about IVF side effects and what to expect.", tab: "IVF" },
-  /* IVF Cost */
   { id: "7Gy15T3JoEg", title: "IVF Cost in Ahmedabad", desc: "A transparent breakdown of IVF treatment costs at Bavishi Fertility Institute, Ahmedabad.", tab: "IVF Cost" },
   { id: "BQ9nbKU9WM8", title: "IVF Examination Cost Explained", desc: "What does an IVF evaluation include and what does it cost? Your questions answered.", tab: "IVF Cost" },
   { id: "LnZWhnY64Bo", title: "Low Cost IVF — Is It Right for You?", desc: "Understanding low-cost IVF options, indications, and expected outcomes.", tab: "IVF Cost" },
-  /* Male Infertility */
   { id: "22xqpk3-z2I", title: "How to Increase Sperm Count", desc: "Practical, science-backed advice from our specialists on improving male fertility.", tab: "Male Infertility" },
-  /* Embryo Transfer */
-  { id: "5oKbplu1Qzs", title: "Medicines After Embryo Transfer", desc: "Which medications are necessary after embryo transfer and why they matter.", tab: "Embryo Transfer" },
-  /* Fertility Preservation */
+  { id: "5oKbplu1Qzs", title: "Medicines After Embryo Transfer", desc: "Which medications are necessary after embryo transfer and why they matter.", tab: "Embryo & Transfer" },
   { id: "eON_mr8bz-A", title: "Egg Freezing vs Embryo Freezing", desc: "Dr. Parth Bavishi explains the key differences and which option suits you best.", tab: "Fertility Preservation" },
   { id: "f3N5WJtGwmk", title: "5 Things to Know Before Egg Freezing", desc: "Essential information every woman should know before starting her egg-freezing journey.", tab: "Fertility Preservation" },
-  /* Female Infertility */
-  { id: "bNZiMbg4Wkw", title: "Natural Pregnancy After 40?", desc: "Understanding your real chances and options for conceiving naturally after 40.", tab: "Female Infertility" },
+  { id: "bNZiMbg4Wkw", title: "Natural Pregnancy After 40?", desc: "Understanding your real chances and options for conceiving naturally after 40.", tab: "Female Fertility" },
 ];
 
 function EduVideoCard({ id, title, desc, tab }: VideoEntry) {
   const [play, setPlay] = useState(false);
+  // Clean up title for display — remove excessive special chars
+  const displayTitle = title.replace(/[^\x20-\x7Eऀ-ॿ઀-૿]/g, " ").replace(/\s{2,}/g, " ").trim();
   return (
     <motion.article
       layout
@@ -51,7 +42,7 @@ function EduVideoCard({ id, title, desc, tab }: VideoEntry) {
           <iframe
             className="absolute inset-0 h-full w-full"
             src={`https://www.youtube-nocookie.com/embed/${id}?autoplay=1&rel=0`}
-            title={title}
+            title={displayTitle}
             loading="lazy"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
             allowFullScreen
@@ -60,12 +51,12 @@ function EduVideoCard({ id, title, desc, tab }: VideoEntry) {
           <button
             type="button"
             onClick={() => setPlay(true)}
-            aria-label={`Play video: ${title}`}
+            aria-label={`Play video: ${displayTitle}`}
             className="group/yt absolute inset-0 h-full w-full"
           >
             <img
               src={`https://img.youtube.com/vi/${id}/hqdefault.jpg`}
-              alt={title}
+              alt={displayTitle}
               loading="lazy"
               className="h-full w-full object-cover transition-transform duration-700 group-hover/yt:scale-105"
             />
@@ -80,8 +71,8 @@ function EduVideoCard({ id, title, desc, tab }: VideoEntry) {
         <span className="inline-block rounded-full bg-[color:var(--rose)]/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[color:var(--rose)]">
           {tab}
         </span>
-        <h3 className="mt-2.5 font-display text-base font-semibold leading-snug text-[color:var(--plum)]">{title}</h3>
-        <p className="mt-1.5 text-sm text-[color:var(--plum)]/65 line-clamp-2">{desc}</p>
+        <h3 className="mt-2.5 font-display text-base font-semibold leading-snug text-[color:var(--plum)] line-clamp-2">{displayTitle}</h3>
+        {desc && <p className="mt-1.5 text-sm text-[color:var(--plum)]/65 line-clamp-2">{desc}</p>}
         <a
           href={`https://www.youtube.com/watch?v=${id}`}
           target="_blank"
@@ -95,12 +86,88 @@ function EduVideoCard({ id, title, desc, tab }: VideoEntry) {
   );
 }
 
+function Pagination({
+  page, total, pageSize, onChange,
+}: { page: number; total: number; pageSize: number; onChange: (p: number) => void }) {
+  const totalPages = Math.ceil(total / pageSize);
+  if (totalPages <= 1) return null;
+
+  const pages: (number | "…")[] = [];
+  for (let i = 1; i <= totalPages; i++) {
+    if (i === 1 || i === totalPages || (i >= page - 1 && i <= page + 1)) {
+      pages.push(i);
+    } else if (pages[pages.length - 1] !== "…") {
+      pages.push("…");
+    }
+  }
+
+  return (
+    <div className="mt-10 flex items-center justify-center gap-2 flex-wrap">
+      <button
+        type="button"
+        onClick={() => onChange(page - 1)}
+        disabled={page === 1}
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-[color:var(--plum)] disabled:opacity-30 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)] transition-colors"
+        aria-label="Previous page"
+      >
+        <ChevronLeft className="h-4 w-4" />
+      </button>
+
+      {pages.map((p, i) =>
+        p === "…" ? (
+          <span key={`e${i}`} className="px-1 text-[color:var(--plum)]/40 text-sm">…</span>
+        ) : (
+          <button
+            key={p}
+            type="button"
+            onClick={() => onChange(p as number)}
+            className={`flex h-9 w-9 items-center justify-center rounded-full text-sm font-semibold transition-all duration-200 ${
+              p === page
+                ? "bg-[color:var(--rose)] text-white shadow-soft"
+                : "border border-border bg-white text-[color:var(--plum)]/70 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]"
+            }`}
+          >
+            {p}
+          </button>
+        )
+      )}
+
+      <button
+        type="button"
+        onClick={() => onChange(page + 1)}
+        disabled={page === totalPages}
+        className="flex h-9 w-9 items-center justify-center rounded-full border border-border bg-white text-[color:var(--plum)] disabled:opacity-30 hover:border-[color:var(--rose)] hover:text-[color:var(--rose)] transition-colors"
+        aria-label="Next page"
+      >
+        <ChevronRight className="h-4 w-4" />
+      </button>
+
+      <span className="ml-2 text-xs text-[color:var(--plum)]/50">
+        Page {page} of {totalPages} &nbsp;·&nbsp; {total} videos
+      </span>
+    </div>
+  );
+}
+
 export function EducationVideosPage({ videos }: { videos?: VideoEntry[] }) {
   const VIDEOS = videos?.length ? videos : DEFAULT_VIDEOS;
   const TABS = ["All", ...Array.from(new Set(VIDEOS.map((v) => v.tab)))];
   const [activeTab, setActiveTab] = useState("All");
+  const [page, setPage] = useState(1);
 
   const filtered = activeTab === "All" ? VIDEOS : VIDEOS.filter((v) => v.tab === activeTab);
+  const totalPages = Math.ceil(filtered.length / PAGE_SIZE);
+  const paged = filtered.slice((page - 1) * PAGE_SIZE, page * PAGE_SIZE);
+
+  function selectTab(tab: string) {
+    setActiveTab(tab);
+    setPage(1);
+  }
+
+  function goTo(p: number) {
+    setPage(Math.min(Math.max(1, p), totalPages));
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  }
 
   return (
     <>
@@ -123,7 +190,12 @@ export function EducationVideosPage({ videos }: { videos?: VideoEntry[] }) {
             <Reveal delay={0.2}>
               <p className="mt-5 max-w-2xl text-lg text-[color:var(--plum)]/70">
                 Clear, trustworthy fertility education from Bavishi Fertility Institute's specialists —
-                covering IVF, male infertility, fertility preservation, embryo transfer, and more.
+                covering IVF, AMH, PCOS, male infertility, embryo transfer, and more.
+              </p>
+            </Reveal>
+            <Reveal delay={0.3}>
+              <p className="mt-3 text-sm text-[color:var(--plum)]/50">
+                {VIDEOS.length} educational videos across {TABS.length - 1} topics
               </p>
             </Reveal>
           </div>
@@ -138,7 +210,7 @@ export function EducationVideosPage({ videos }: { videos?: VideoEntry[] }) {
                 <button
                   key={tab}
                   type="button"
-                  onClick={() => setActiveTab(tab)}
+                  onClick={() => selectTab(tab)}
                   className={`rounded-full px-4 py-2 text-sm font-semibold transition-all duration-200 ${
                     activeTab === tab
                       ? "bg-[color:var(--rose)] text-white shadow-soft"
@@ -159,14 +231,14 @@ export function EducationVideosPage({ videos }: { videos?: VideoEntry[] }) {
           {/* Grid */}
           <AnimatePresence mode="wait">
             <motion.div
-              key={activeTab}
+              key={`${activeTab}-${page}`}
               initial={{ opacity: 0, y: 12 }}
               animate={{ opacity: 1, y: 0 }}
               exit={{ opacity: 0, y: -8 }}
               transition={{ duration: 0.3 }}
             >
               <Stagger className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {filtered.map((v) => (
+                {paged.map((v) => (
                   <StaggerItem key={v.id}>
                     <EduVideoCard {...v} />
                   </StaggerItem>
@@ -174,6 +246,8 @@ export function EducationVideosPage({ videos }: { videos?: VideoEntry[] }) {
               </Stagger>
             </motion.div>
           </AnimatePresence>
+
+          <Pagination page={page} total={filtered.length} pageSize={PAGE_SIZE} onChange={goTo} />
 
           <Reveal delay={0.2}>
             <div className="mt-12 flex flex-col items-center gap-3 rounded-3xl bg-[color:var(--plum)]/5 p-8 text-center">

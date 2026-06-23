@@ -311,7 +311,7 @@ export const getEducationVideos = reactCache(
           const res = await payload.find({
             collection: "education-videos",
             where: { published: { equals: true } },
-            limit: 200,
+            limit: 500,
             sort: "order",
             depth: 0,
           });
@@ -345,7 +345,7 @@ export const getTestimonialVideos = reactCache(
           const res = await payload.find({
             collection: "testimonial-videos",
             where: { published: { equals: true } },
-            limit: 200,
+            limit: 500,
             sort: "order",
             depth: 0,
           });
