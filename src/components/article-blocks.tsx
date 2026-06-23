@@ -13,7 +13,7 @@
  * animations always play on public blog pages.
  * ===================================================================== */
 
-import React, { useState } from "react";
+import React from "react";
 import { motion } from "framer-motion";
 import { CheckCircle2, ArrowRight, Lightbulb } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Counter } from "@/components/motion";
@@ -482,21 +482,16 @@ export function AnimatedInlineCta({ node }: { node: { fields: unknown } }) {
  * ══════════════════════════════════════════════════════════════════════ */
 export function AnimatedExternalImage({ node }: { node: { fields: unknown } }) {
   const { url, alt, caption, credit } = node.fields as ExternalImageBlock;
-  const [portrait, setPortrait] = useState(false);
   if (!url) return null;
 
   return (
     <Reveal className="my-8">
-      <figure className="overflow-hidden rounded-2xl border border-border/40 bg-white shadow-soft">
+      <figure className="overflow-hidden rounded-2xl border border-border/40 bg-[color:var(--plum)]/5 shadow-soft">
         <img
           src={url}
           alt={alt}
-          className={`w-full object-cover max-h-[480px] ${portrait ? "object-top" : "object-center"}`}
+          className="w-full max-h-[520px] object-contain"
           loading="lazy"
-          onLoad={(e) => {
-            const img = e.currentTarget;
-            setPortrait(img.naturalHeight > img.naturalWidth);
-          }}
         />
         {(caption || credit) && (
           <figcaption className="px-4 py-2.5 text-center text-xs text-muted-foreground">
