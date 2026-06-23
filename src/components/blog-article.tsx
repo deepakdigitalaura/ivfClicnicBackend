@@ -339,10 +339,26 @@ export function BlogArticle({
       <SiteHeader />
 
       {/* ════════════════════════════════════════
-          DARK HERO BAND
+          DARK HERO BAND — featured image as full-bleed background
+          (object-cover, no letterboxing) with a dark-purple gradient
+          overlay; falls back to the flat gradient when there's no image.
       ════════════════════════════════════════ */}
-      <section className="noise relative overflow-hidden gradient-dark pb-14 pt-12 md:pb-20 md:pt-16">
-        <div className="container-px mx-auto max-w-[1400px]">
+      <section
+        className={`noise relative overflow-hidden pb-14 pt-12 md:pb-20 md:pt-16 ${heroUrl ? "min-h-[380px] md:min-h-[440px]" : "gradient-dark"}`}
+      >
+        {heroUrl && (
+          <>
+            <EditableImage
+              path="heroImage"
+              src={heroUrl}
+              alt={hero?.alt ?? blog.title}
+              className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+              loading="eager"
+            />
+            <div className="absolute inset-0 z-[1] gradient-dark-overlay pointer-events-none" />
+          </>
+        )}
+        <div className="container-px relative z-10 mx-auto max-w-[1400px]">
 
           {/* Breadcrumb */}
           <nav
@@ -447,39 +463,9 @@ export function BlogArticle({
       </section>
 
       {/* ════════════════════════════════════════
-          FEATURED IMAGE — full-bleed cinematic strip.
-          Spans the full viewport width; height is responsive
-          (clamp 300 → 520 px). The real photo is never cropped —
-          a blurred copy of itself fills the backdrop so portrait
-          and odd-aspect event photos never lose heads/faces.
-      ════════════════════════════════════════ */}
-      {heroUrl && (
-        <div
-          className="relative w-full overflow-hidden bg-[color:var(--plum)]"
-          style={{ height: "clamp(320px, 44vw, 540px)" }}
-        >
-          <img
-            src={heroUrl}
-            alt=""
-            aria-hidden="true"
-            className="absolute inset-0 h-full w-full scale-110 object-cover object-center blur-2xl brightness-[0.55] saturate-[1.2]"
-          />
-          <EditableImage
-            path="heroImage"
-            src={heroUrl}
-            alt={hero?.alt ?? blog.title}
-            className="absolute inset-0 h-full w-full object-contain brightness-110 contrast-105 saturate-[1.2]"
-            loading="eager"
-          />
-        </div>
-      )}
-
-      {/* ════════════════════════════════════════
           TWO-COLUMN LAYOUT
       ════════════════════════════════════════ */}
-      <div
-        className={`container-px mx-auto max-w-[1400px] ${heroUrl ? "mt-10 md:mt-14" : "mt-8 md:mt-12"}`}
-      >
+      <div className="container-px mx-auto max-w-[1400px] mt-8 md:mt-12">
         <div className="grid gap-10 lg:grid-cols-[1fr_340px] xl:gap-14 pb-14">
 
           {/* ── Main content column ── */}
