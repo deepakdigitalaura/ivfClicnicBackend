@@ -473,6 +473,18 @@ export function BlogArticle({
             {/* Medical disclaimer at top of article */}
             <MedicalDisclaimer />
 
+            {/* Hero image in a rounded box below disclaimer */}
+            {heroUrl && (
+              <div className="mt-6 overflow-hidden rounded-2xl border border-border/40 shadow-soft">
+                <img
+                  src={heroUrl}
+                  alt={hero?.alt ?? blog.title}
+                  className="h-auto w-full object-cover"
+                  loading="eager"
+                />
+              </div>
+            )}
+
             {/* Article body — rich text in public; "Open in Admin" in the editor
                 (Lexical content editing lives in the Payload admin panel). */}
             <div className="mt-8">

@@ -25,7 +25,6 @@ import type {
   HighlightCardBlock,
   DecisionListBlock,
   ConclusionPanelBlock,
-  InfographicBlock,
   InlineCtaBlock,
   ExternalImageBlock,
 } from "@/payload-types";
@@ -390,34 +389,9 @@ export function AnimatedDecisionList({ node }: { node: { fields: unknown } }) {
  * dangerouslySetInnerHTML inside a role="img" container so screen readers
  * use the altText; the SVG itself should omit aria-label to avoid duplication.
  * ══════════════════════════════════════════════════════════════════════ */
-export function AnimatedInfographic({ node }: { node: { fields: unknown } }) {
-  const { title, svgContent, altText, caption } = node.fields as InfographicBlock;
-  if (!svgContent) return null;
-
-  return (
-    <Reveal className="my-8">
-      <figure className="overflow-hidden rounded-2xl border border-border/40 bg-white p-5 shadow-soft md:p-7">
-        {title && (
-          <p className="mb-4 text-center text-[10px] font-bold uppercase tracking-widest text-[color:var(--plum)]/50">
-            {title}
-          </p>
-        )}
-        <div
-          className="mx-auto max-w-full [&>svg]:mx-auto [&>svg]:h-auto [&>svg]:max-w-full"
-          role="img"
-          aria-label={altText}
-          /* SVG content authored by editorial team / enrichment scripts only */
-          /* eslint-disable-next-line react/no-danger */
-          dangerouslySetInnerHTML={{ __html: svgContent }}
-        />
-        {caption && (
-          <figcaption className="mt-3 text-center text-xs text-muted-foreground">
-            {caption}
-          </figcaption>
-        )}
-      </figure>
-    </Reveal>
-  );
+export function AnimatedInfographic({ node: _node }: { node: { fields: unknown } }) {
+  // Infographic blocks duplicate the "In this article" sidebar TOC — hidden.
+  return null;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
