@@ -410,6 +410,7 @@ export interface Blog {
    */
   excerpt?: string | null;
   heroImage?: (number | null) | Media;
+  heroTextDark?: boolean | null;
   content?: {
     root: {
       type: string;
@@ -2556,6 +2557,7 @@ export interface BlogsSelect<T extends boolean = true> {
   slug?: T;
   excerpt?: T;
   heroImage?: T;
+  heroTextDark?: T;
   content?: T;
   author?: T;
   reviewedBy?: T;

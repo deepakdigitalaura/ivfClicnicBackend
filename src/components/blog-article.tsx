@@ -473,15 +473,50 @@ export function BlogArticle({
             {/* Medical disclaimer at top of article */}
             <MedicalDisclaimer />
 
-            {/* Hero image in a rounded box below disclaimer */}
+            {/* Hero image card with title overlay on the left empty area.
+                heroTextDark=true  → light left side image → dark plum text + white gradient
+                heroTextDark=false → dark left side image  → white text + black gradient */}
             {heroUrl && (
-              <div className="mt-6 overflow-hidden rounded-2xl border border-border/40 shadow-soft">
+              <div className="relative mt-6 overflow-hidden rounded-2xl border border-border/40 shadow-soft aspect-[16/7]">
                 <img
                   src={heroUrl}
                   alt={hero?.alt ?? blog.title}
-                  className="h-auto w-full object-cover"
+                  className="absolute inset-0 h-full w-full object-cover object-right"
                   loading="eager"
                 />
+                {/* directional gradient to make left area readable */}
+                <div
+                  className={`absolute inset-0 pointer-events-none bg-gradient-to-r to-transparent ${
+                    blog.heroTextDark
+                      ? "from-white/85 via-white/55"
+                      : "from-black/70 via-black/40"
+                  }`}
+                />
+                {/* title + category badge on the left */}
+                <div className="absolute inset-0 flex items-center">
+                  <div className="px-7 md:px-10 max-w-[55%]">
+                    {category?.title && (
+                      <span
+                        className={`mb-3 inline-block rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider ${
+                          blog.heroTextDark
+                            ? "bg-[color:var(--rose)]/15 text-[color:var(--rose)]"
+                            : "border border-white/25 bg-white/10 text-white/80"
+                        }`}
+                      >
+                        {category.title}
+                      </span>
+                    )}
+                    <p
+                      className={`text-xl font-semibold leading-snug md:text-2xl lg:text-[1.75rem] ${
+                        blog.heroTextDark
+                          ? "text-[color:var(--plum)]"
+                          : "text-white"
+                      }`}
+                    >
+                      {blog.title}
+                    </p>
+                  </div>
+                </div>
               </div>
             )}
 

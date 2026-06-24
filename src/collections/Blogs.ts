@@ -90,6 +90,15 @@ const BLOG_FIELDS: Field[] = [
     { name: "excerpt", type: "textarea", label: "Short Summary", admin: { description: "Short summary shown on cards and used as the Google search description if none is set." } },
     { name: "heroImage", type: "upload", relationTo: "media", label: "Cover Image" },
     {
+      name: "heroTextDark",
+      type: "checkbox",
+      label: "Dark text on hero card",
+      defaultValue: false,
+      admin: {
+        description: "Tick this if the LEFT side of the cover image is LIGHT (cream / white / grey). The in-article title overlay will use dark plum text so it's readable. Leave un-ticked for images that have a dark left side — white text is used instead.",
+      },
+    },
+    {
       name: "content",
       type: "richText",
       label: "Article Body",
@@ -199,10 +208,10 @@ export const Blogs: CollectionConfig = {
     {
       type: "tabs",
       tabs: [
-        { label: "Article", fields: BLOG_FIELDS.slice(0, 5) },
-        { label: "Details", fields: BLOG_FIELDS.slice(5, 9) },
-        { label: "Tagging", fields: BLOG_FIELDS.slice(9, 11) },
-        { label: "FAQs & SEO", fields: BLOG_FIELDS.slice(11) },
+        { label: "Article", fields: BLOG_FIELDS.slice(0, 6) },
+        { label: "Details", fields: BLOG_FIELDS.slice(6, 10) },
+        { label: "Tagging", fields: BLOG_FIELDS.slice(10, 12) },
+        { label: "FAQs & SEO", fields: BLOG_FIELDS.slice(12) },
       ],
     },
   ],
