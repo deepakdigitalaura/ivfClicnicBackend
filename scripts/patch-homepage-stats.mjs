@@ -13,13 +13,10 @@ const DB_URI =
   "postgresql://postgres.acugkaaiyzbckwafudxa:deepakDigitalAura@aws-1-ap-northeast-2.pooler.supabase.com:5432/postgres";
 
 const STATS = [
-  { value: "30,000+",                    label: "Happy Couples" },
-  { value: "30+",                        label: "Years Legacy" },
-  { value: "14",                         label: "Fertility Centres" },
-  { value: "6× Winner",                  label: "Best IVF Chain in India (West)" },
-  { value: "Best IVF Clinic Chain in India", label: "Mid-Day" },
-  { value: "Rank #1",                    label: "All India Ahmedabad Institute" },
-  { value: "500+",                       label: "International Patients Per Year" },
+  { value: "30,000+", label: "Happy Couples" },
+  { value: "30+",     label: "Years Legacy" },
+  { value: "14",      label: "Fertility Centres" },
+  { value: "500+",    label: "International Patients Per Year" },
 ];
 
 const rand24 = () =>
