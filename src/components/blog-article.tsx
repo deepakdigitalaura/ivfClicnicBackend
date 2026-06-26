@@ -12,6 +12,7 @@ import {
   AlertTriangle,
   ChevronRight,
   ChevronDown,
+  MapPin,
 } from "lucide-react";
 import { format } from "date-fns";
 import { Reveal, Magnetic, Stagger, StaggerItem } from "@/components/motion";
@@ -34,6 +35,7 @@ import {
 import { useEdit } from "@/components/editor/edit-context";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { SITE } from "@/lib/seo";
+import { cityBySlug } from "@/lib/locations";
 import type { BlogPost } from "@/lib/blogs";
 import type { Blog, Author, Category, Media } from "@/payload-types";
 import type { TocHeading } from "@/lib/headings";
@@ -322,6 +324,10 @@ export function BlogArticle({
   const author = asObj<Author>(blog.author);
   const reviewedBy = asObj<Author>(blog.reviewedBy ?? undefined);
   const category = asObj<Category>(blog.category ?? undefined);
+  const locationLinks = (blog.locationSlugs ?? []).map((entry) => {
+    const city = cityBySlug(entry.slug);
+    return { slug: entry.slug, name: city?.name ?? entry.slug.charAt(0).toUpperCase() + entry.slug.slice(1) };
+  });
   // After editor image-replace, heroImage may be a raw URL string rather than a
   // populated Media object — handle both so the editor shows the replaced image.
   const heroRaw: unknown = blog.heroImage;
@@ -445,6 +451,21 @@ export function BlogArticle({
                 </span>
               ) : null}
 
+              {locationLinks.length > 0 && (
+                <span className="inline-flex flex-wrap items-center gap-1.5">
+                  <MapPin className="h-3.5 w-3.5 shrink-0 text-[color:var(--rose-soft)]" />
+                  {locationLinks.map((loc) => (
+                    <a
+                      key={loc.slug}
+                      href={`/locations/${loc.slug}`}
+                      className="rounded-full border border-white/20 bg-white/10 px-2.5 py-0.5 text-[11px] font-semibold text-white/80 transition-colors hover:bg-white/20 hover:text-white"
+                    >
+                      {loc.name}
+                    </a>
+                  ))}
+                </span>
+              )}
+
               {reviewedBy && (
                 <span className="inline-flex items-center gap-1.5">
                   <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--gold)]" />
@@ -544,6 +565,23 @@ export function BlogArticle({
 
             {/* Back to blog */}
             <div className="mt-10 border-t border-border/60 pt-6">
+              {locationLinks.length > 0 && (
+                <div className="mb-6 flex flex-wrap items-center gap-2">
+                  <span className="inline-flex items-center gap-1.5 text-sm text-muted-foreground">
+                    <MapPin className="h-4 w-4 text-[color:var(--rose)]" />
+                    Available at our clinics in
+                  </span>
+                  {locationLinks.map((loc) => (
+                    <a
+                      key={loc.slug}
+                      href={`/locations/${loc.slug}`}
+                      className="inline-flex items-center gap-1 rounded-full border border-[color:var(--rose)]/25 bg-[color:var(--rose)]/5 px-3 py-1 text-sm font-semibold text-[color:var(--rose)] transition-colors hover:bg-[color:var(--rose)] hover:text-white"
+                    >
+                      {loc.name} <ChevronRight className="h-3.5 w-3.5" />
+                    </a>
+                  ))}
+                </div>
+              )}
               <a
                 href="/blog"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--rose)] hover:underline"
