@@ -26,7 +26,6 @@ import type {
   DecisionListBlock,
   ConclusionPanelBlock,
   InlineCtaBlock,
-  ExternalImageBlock,
 } from "@/payload-types";
 
 const EASE = [0.22, 1, 0.36, 1] as const;
@@ -454,29 +453,8 @@ export function AnimatedInlineCta({ node }: { node: { fields: unknown } }) {
  * URL is set by the editorial team / enrichment scripts; never from
  * arbitrary user input. Renders with credit attribution below.
  * ══════════════════════════════════════════════════════════════════════ */
-export function AnimatedExternalImage({ node }: { node: { fields: unknown } }) {
-  const { url, alt, caption, credit } = node.fields as ExternalImageBlock;
-  if (!url) return null;
-
-  return (
-    <Reveal className="my-8">
-      <figure className="overflow-hidden rounded-2xl border border-border/40 bg-[color:var(--plum)]/5 shadow-soft">
-        <img
-          src={url}
-          alt={alt}
-          className="w-full max-h-[520px] object-contain"
-          loading="lazy"
-        />
-        {(caption || credit) && (
-          <figcaption className="px-4 py-2.5 text-center text-xs text-muted-foreground">
-            {caption}
-            {caption && credit && " · "}
-            {credit && <span className="opacity-60">{credit}</span>}
-          </figcaption>
-        )}
-      </figure>
-    </Reveal>
-  );
+export function AnimatedExternalImage({ node: _node }: { node: { fields: unknown } }) {
+  return null;
 }
 
 /* ══════════════════════════════════════════════════════════════════════
