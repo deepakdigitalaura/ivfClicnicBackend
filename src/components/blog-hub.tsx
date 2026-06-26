@@ -42,12 +42,32 @@ function BlogCardThumbnail({
   imagePosition?: string | null;
 }) {
   if (hero?.url) {
+    // PNG infographic banners: subject on right half, empty/text-overlay area on left.
+    // `object-position: right center` only helps when the image is wider than the card,
+    // which isn't guaranteed for square/portrait PNGs. Instead, scale to 200% width so
+    // the right half fills the card entirely — this works for any image aspect ratio.
+    if (imagePosition === "right center") {
+      return (
+        <div
+          role="img"
+          aria-label={hero.alt ?? title}
+          className="h-full w-full transition-transform duration-700 group-hover:scale-105"
+          style={{
+            backgroundImage: `url(${hero.url})`,
+            backgroundSize: "200% auto",
+            backgroundPosition: "right center",
+            filter: "brightness(1.25) contrast(1.05) saturate(1.3)",
+          }}
+        />
+      );
+    }
+
     return (
       <img
         src={hero.url}
         alt={hero.alt ?? title}
         loading="lazy"
-        style={{ objectPosition: imagePosition ?? "center center" }}
+        style={{ objectPosition: "center center" }}
         className="h-full w-full object-cover brightness-125 contrast-105 saturate-[1.3] transition-transform duration-700 group-hover:scale-105"
       />
     );
