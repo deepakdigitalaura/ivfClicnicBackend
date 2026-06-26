@@ -361,7 +361,7 @@ export const DOCTORS: Doctor[] = [
    * no reviewer badge, but their full profile still renders). */
   // Ahmedabad
   cityDoctor({
-    slug: "binal-shah", name: "Dr. Binal Shah", image: "/assets/doctors/binal-shah.png",
+    slug: "binal-shah", name: "Dr. Binal Shah", image: "/assets/doctors/binal-shah.webp",
     city: "Ahmedabad", citySlug: "ahmedabad", locations: ["paldi"],
     credentials: "MBBS, DGO", experienceLabel: "30+ yrs", experienceYears: 30,
     specialty: "Obstetrics, Gynaecology & IVF",
@@ -375,17 +375,33 @@ export const DOCTORS: Doctor[] = [
     knowsAbout: ["In Vitro Fertilization", "High-Risk Pregnancy", "Twin Pregnancy", "Female Infertility"],
   }),
   cityDoctor({
-    slug: "jaydeep-patel", name: "Dr. Jaydeep Patel", image: "/assets/doctors/jaydeep-patel.png",
+    slug: "jaydeep-patel", name: "Dr. Jaydeep Patel", image: "/assets/doctors/jaydeep-patel.webp",
     city: "Ahmedabad", citySlug: "ahmedabad", locations: ["nikol"],
-    experienceLabel: "8+ yrs", experienceYears: 8,
+    credentials: "MBBS, DGO",
+    experienceLabel: "10+ yrs", experienceYears: 10,
     specialty: "Obstetrics & IVF", role: "IVF Specialist",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
-    shortBio: "Obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, experienced in infertility management and normal & IVF pregnancy care.",
+    shortBio: "IVF specialist at Bavishi Fertility Institute Nikol, Ahmedabad, with 10+ years of experience in PCOS infertility, male factor, poor endometrium and high-risk pregnancy management.",
     bio: [
-      "Dr. Jaydeep Patel is an experienced obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, with vast experience in infertility management and normal & IVF pregnancy care and delivery.",
-      "He has treated thousands of patients successfully, including those with unexplained infertility and high-risk pregnancies.",
+      "Dr. Jaydeep Patel is an IVF specialist at the Bavishi Fertility Institute Nikol centre in Ahmedabad, with over ten years of experience in infertility management and high-risk pregnancy care.",
+      "He focuses on couples with PCOS, male factor infertility, poor endometrium, and bad obstetric history — including those with multiple prior IVF failures. His treatment philosophy: \"Self Egg, Self Sperm, Own Baby.\"",
     ],
-    knowsAbout: ["In Vitro Fertilization", "High-Risk Pregnancy", "Female Infertility"],
+    knowsAbout: [
+      "In Vitro Fertilization", "PCOS", "Male Factor Infertility",
+      "High-Risk Pregnancy", "Poor Endometrium", "Bad Obstetric History",
+    ],
+    alumniOf: [
+      "MBBS — B.J. Medical College, Ahmedabad (2013)",
+      "DGO — The College of Physicians & Surgeons of Mumbai (2018)",
+    ],
+    languages: ["Hindi", "English", "Gujarati"],
+    training: [
+      "Invited Faculty — SOGOG Conference (2022)",
+      "Invited Faculty — JIC Conference (2023)",
+      "Speaker — Ahmedabad Women Doctor's Federation CME (2025)",
+      "Speaker — New Vastral General Practitioners CME (2025)",
+    ],
+    verified: true,
   }),
   // Mumbai
   cityDoctor({
@@ -413,7 +429,7 @@ export const DOCTORS: Doctor[] = [
     knowsAbout: ["In Vitro Fertilization", "IUI", "Male Infertility", "Female Infertility"],
   }),
   cityDoctor({
-    slug: "priyanka-sinha", name: "Dr. Priyanka Sinha", image: "/assets/doctors/Dr.-Priyanka-Sinha-221x300.webp",
+    slug: "priyanka-sinha", name: "Dr. Priyanka Sinha", image: "/assets/doctors/priyanka-sinha.webp",
     city: "Mumbai", citySlug: "mumbai", locations: ["borivali", "vile-parle"],
     credentials: "MBBS, MD, Fellowship in Reproductive Medicine (USA)", experienceLabel: "15+ yrs", experienceYears: 15,
     specialty: "Reproductive Medicine & IVF", role: "IVF Specialist",
@@ -450,20 +466,40 @@ export const DOCTORS: Doctor[] = [
   }),
   // Vadodara
   cityDoctor({
-    slug: "mita-shah", name: "Dr. Mita Shah", image: "/assets/doctors/Dr.-Mita-Shah-221x300.webp",
+    slug: "mita-shah", name: "Dr. Mita Shah", image: "/assets/doctors/mita-shah.webp",
     city: "Vadodara", citySlug: "vadodara", locations: ["jetalpur-road"],
-    experienceLabel: "20+ yrs", experienceYears: 20,
-    specialty: "Fertility & IVF", role: "Fertility & IVF Consultant",
-    shortBio: "Fertility and IVF consultant in Vadodara with over 20 years of experience, known for an empathetic, patient-centred approach.",
+    credentials: "MBBS, DGO",
+    experienceLabel: "22+ yrs", experienceYears: 22,
+    specialty: "Obstetrics, Gynaecology & Fertility", role: "Consultant Fertility Specialist",
+    medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
+    shortBio: "Consultant Fertility Specialist at Bavishi Fertility Institute Vadodara with 22 years of experience, known for individualised, evidence-based care for complex fertility challenges including PGT-M, recurrent IVF failure and uterine anomalies.",
     bio: [
-      "Dr. Mita Shah is a fertility and IVF consultant at the Bavishi Fertility Institute Vadodara centre, with more than 20 years of total experience in helping couples struggling with infertility.",
-      "Known for her empathetic attitude towards patients, she offers advanced treatments such as IVF, ICSI and egg freezing.",
+      "Dr. Mita A. Shah is a Consultant Fertility Specialist at the Bavishi Fertility Institute Vadodara centre with 22 years of experience in obstetrics, gynaecology and fertility medicine.",
+      "She specialises in individualised ovarian stimulation protocols, PGT-A and PGT-M, fertility preservation, third-party reproduction (gamete donation and gestational surrogacy), and the management of diminished ovarian reserve, recurrent IVF failure and recurrent pregnancy loss. Her approach combines evidence-based medicine with empathy, patience and honest communication — ensuring patients understand every step of their treatment.",
     ],
-    knowsAbout: ["In Vitro Fertilization", "Intracytoplasmic Sperm Injection", "Fertility Preservation", "Female Infertility"],
+    knowsAbout: [
+      "In Vitro Fertilization", "Intracytoplasmic Sperm Injection",
+      "Preimplantation Genetic Testing", "Fertility Preservation",
+      "Diminished Ovarian Reserve", "Recurrent Pregnancy Loss",
+      "Male Factor Infertility", "Gestational Surrogacy", "Gamete Donation",
+    ],
+    alumniOf: [
+      "MBBS — Govt. Medical College, Surat (2001)",
+      "DGO — Govt. Medical College, Surat (2003)",
+    ],
+    memberOf: [
+      "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+      "Indian Medical Association (IMA)",
+    ],
+    awards: [
+      "Times Power Brand Award for Excellence in Genetics & IVF Treatment — Times Group, powered by Baroda Times (March 2026)",
+    ],
+    languages: ["English", "Gujarati", "Hindi"],
+    verified: true,
   }),
   // Bhuj
   cityDoctor({
-    slug: "surbhi-vegad", name: "Dr. Surbhi Vegad", image: "/assets/doctors/Dr.-Surbhi-Vegad-221x300.webp",
+    slug: "surbhi-vegad", name: "Dr. Surbhi Vegad", image: "/assets/doctors/surbhi-vegad.webp",
     city: "Bhuj", citySlug: "bhuj", locations: ["mirjapar"],
     experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Gynaecology, IVF & 3D Laparoscopy", role: "IVF Specialist & 3D Laparoscopic Surgeon",
@@ -498,7 +534,7 @@ export const DOCTORS: Doctor[] = [
     ],
   }),
   cityDoctor({
-    slug: "rakhee-patel", name: "Dr. Rakhee Patel", image: "/assets/doctors/Dr.-Rakhee-Patel-221x300.webp",
+    slug: "rakhee-patel", name: "Dr. Rakhee Patel", image: "/assets/doctors/rakhee-patel.webp",
     city: "Anand", citySlug: "anand", locations: ["nanikhodiyar"],
     credentials: "MBBS, MD", experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Obstetrics, Gynaecology & IVF", role: "Co-founder, Bavishi Fertility Institute — IRIS Hospital · Minimal Access Surgeon",
@@ -526,45 +562,82 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "deepali-pandya", name: "Dr. Deepali Pandya", image: "/assets/doctors/Dr.-Deepali-Pandya-1-1.webp",
     city: "Bhavnagar", citySlug: "bhavnagar", locations: ["kalubha-road"],
-    credentials: "MS (Obstetrics & Gynaecology), FIAMS, FRM",
-    specialty: "Reproductive Medicine & Endoscopic Surgery", role: "IVF Specialist & Endoscopic Surgeon",
+    credentials: "MS (Obstetrics & Gynaecology), FMAS, FRM — Gold Medalist",
+    experienceLabel: "12+ yrs", experienceYears: 12,
+    specialty: "Reproductive Medicine & Laparoscopic Surgery", role: "Chief IVF Specialist, Bavishi Fertility Institute Bhavnagar",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
-    shortBio: "Fertility specialist and endoscopic surgeon with comprehensive training in reproductive medicine, consulting at the Bavishi Fertility Institute Bhavnagar centre.",
+    shortBio: "Gold Medalist MS (OBG) and Chief IVF Specialist at Bavishi Fertility Institute Bhavnagar, with 12 years of experience in recurrent implantation failure, PGT-A, endometriosis-related infertility and high-risk obstetrics.",
     bio: [
-      "Dr. Deepali Pandya is a fertility specialist and endoscopic surgeon with comprehensive training in reproductive medicine and minimally invasive gynaecological surgery.",
-      "She combines clinical expertise with personalised patient care to address infertility and gynaecological concerns at the Bavishi Fertility Institute Bhavnagar centre.",
+      "Dr. Deepali D. Pandya is a Gold Medalist MS (Obstetrics & Gynaecology) and Chief IVF Specialist at the Bavishi Fertility Institute Bhavnagar centre, with 12 years of experience in fertility medicine and laparoscopic surgery.",
+      "She is also the Founder of Hema Women's Health, Bhavnagar, and Visiting Consultant at Ram Mantra Seva Trust and Nirma Colony Hospital. Her clinical focus is on recurrent implantation failure, PGT-A, infertility in endometriosis and complex laparoscopy. Her philosophy: \"Give your 100% to your patient, never give up on them.\"",
     ],
-    knowsAbout: ["In Vitro Fertilization", "Laparoscopy", "Hysteroscopy", "Female Infertility"],
+    knowsAbout: [
+      "In Vitro Fertilization", "Recurrent Implantation Failure",
+      "Preimplantation Genetic Testing", "Endometriosis",
+      "Laparoscopy", "High-Risk Pregnancy",
+    ],
     alumniOf: [
-      "MS, Obstetrics & Gynaecology — Smt. N.H.L. Municipal Medical College & Sheth V.S. General Hospital, Ahmedabad",
-      "FIAMS — Jogal Women's Hospital",
-      "FRM (Fellowship in Reproductive Medicine) — 21st Century Hospital, Surat",
+      "MS, Obstetrics & Gynaecology — V.S. General Hospital, Ahmedabad",
+      "FMAS — Jogal Women's Hospital, Bhuj",
+      "FRM (Fellowship in Reproductive Medicine) — Nimayaa Training Academy",
+    ],
+    memberOf: [
+      "Indian Association of Gynaecological Endoscopists (IAGE)",
+      "Indian Society for Assisted Reproduction (ISAR)",
+      "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+    ],
+    awards: [
+      "Pride of Bhavnagar Award — Divya Bhaskar Group (2026)",
+      "Gold Medal — Gujarat University (2022)",
+    ],
+    publications: [
+      "'Role of USG in First Trimester Bleeding PV' — International Journal of Gynaecology (2020)",
+      "'Fetomaternal Outcomes in Pregnant Women in COVID Positive Patients' — International Journal of Gynaecology (2022)",
+      "'Role of Colour Doppler in High Risk Pregnancy' (2022)",
+      "'Role of PGT-A in Recurrent IVF Failure Patients' — Indian Fertility Society (IFS) (2023)",
     ],
     training: [
-      "Infertility & IVF training — Bavishi Fertility Institute, Ahmedabad",
+      "IVF training — Bavishi Fertility Institute, Paldi, Ahmedabad",
     ],
+    languages: ["Gujarati", "Hindi", "English"],
+    verified: true,
   }),
   // Varanasi
   cityDoctor({
     slug: "parnnika-agarwal", name: "Dr. Parnnika Agarwal", image: "/assets/doctors/Dr.-Parnnika-Agarwal-221x300.webp",
     city: "Varanasi", citySlug: "varanasi", locations: ["shivpur"],
+    credentials: "MBBS, MS, FMAS, FRM",
     experienceLabel: "6+ yrs", experienceYears: 6,
-    specialty: "Fertility & Gynaec Laparoscopy", role: "Fertility Expert & Laparoscopic Surgeon",
+    specialty: "Fertility, IVF & Gynaecological Laparoscopy", role: "Chief Consultant, Bavishi Neo Fertility Varanasi",
     medicalSpecialty: ["ReproductiveMedicine", "Gynecology", "Fertility"],
-    shortBio: "Fertility expert and gynaec laparoscopic surgeon in Varanasi with an evidence-based, patient-centric approach to male and female infertility.",
+    shortBio: "Gold Medalist MBBS & MS and Chief Consultant at Bavishi Neo Fertility Varanasi, specialising in fertility-enhancing laparoscopy, hysteroscopy and tailored IVF protocols with empathy at the core.",
     bio: [
-      "Dr. Parnnika Agarwal is a fertility expert and gynaec laparoscopic surgeon with over six years of experience treating male and female infertility through evidence-based, patient-centric care.",
-      "She combines advanced surgical training with expertise in IVF and reproductive medicine — including PCOS, endometriosis, poor ovarian reserve and recurrent IVF failure — and regularly presents research at national conferences.",
+      "Dr. Parnnika Agarwal is the Chief Consultant at Bavishi Neo Fertility Varanasi, holding MBBS and MS degrees from Rohilkhand Medical College & Hospital, Bareilly (Gold Medalist in both), along with fellowships in ART and minimally invasive gynaecological surgery (FMAS, FRM).",
+      "A former Assistant Professor at Rohilkhand Medical College and continuing Consultant Gynaecologist at Jamuna Sewa Sadan Hospital, Varanasi, she believes that a scientific approach and genuine empathy must go hand in hand — understanding a couple's emotional journey is as essential as the clinical plan.",
     ],
-    knowsAbout: ["In Vitro Fertilization", "IUI", "PCOS", "Endometriosis", "Fertility Preservation"],
+    knowsAbout: [
+      "In Vitro Fertilization", "Fertility-Enhancing Laparoscopy",
+      "Hysteroscopy", "Tailored IVF Protocols",
+      "PCOS", "Endometriosis", "Fertility Preservation",
+    ],
+    alumniOf: [
+      "MBBS — Rohilkhand Medical College & Hospital, Bareilly, UP (2015) — Gold Medalist",
+      "MS (Obstetrics & Gynaecology) — Rohilkhand Medical College & Hospital, Bareilly, UP (2019) — Gold Medalist",
+      "FMAS, FRM — Fellowship in ART and Minimally Invasive Gynaecological Surgery",
+    ],
     memberOf: [
       "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+      "Indian Society for Assisted Reproduction (ISAR)",
       "Indian Fertility Society (IFS)",
+      "European Society of Human Reproduction and Embryology (ESHRE)",
     ],
-    awards: ["Gold Medalist — medical studies"],
-    training: [
-      "Advanced training in IVF & laparoscopic gynaecological surgery — reputed centres, New Delhi",
+    awards: [
+      "Gold Medalist — MBBS, Rohilkhand Medical College & Hospital (2015)",
+      "Gold Medalist — MS (Obstetrics & Gynaecology), Rohilkhand Medical College & Hospital (2019)",
+      "Prizes in paper and poster presentations at national and international conferences",
     ],
+    languages: ["Hindi", "English"],
+    verified: true,
   }),
 ];
 
