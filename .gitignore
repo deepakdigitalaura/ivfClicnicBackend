@@ -35,3 +35,9 @@ scripts/_unlock-admin.mjs
 scripts/_ref-blog-content.json
 scripts/_hero-images-progress.json
 scripts/_enrich-quality-progress.json
+
+# Doctor source files (originals already converted to WebP and committed)
+public/assets/doctors/finalDoctors/
+
+# Script log/output files
+scripts/import-blogs/fix-tables.log.json

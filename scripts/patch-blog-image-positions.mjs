@@ -117,7 +117,7 @@ async function fetchAllBlogs(auth) {
   let page = 1;
   while (true) {
     const res = await fetch(
-      `${BASE}/api/blogs?limit=100&page=${page}&depth=1&select=id,slug,heroImage`,
+      `${BASE}/api/blogs?limit=100&page=${page}&depth=1`,
       { headers: auth }
     );
     if (!res.ok) throw new Error(`Fetch blogs p${page}: ${res.status}`);

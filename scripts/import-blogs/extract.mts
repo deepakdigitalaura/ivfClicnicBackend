@@ -169,6 +169,24 @@ const listItemNode = (value: number, children: LexicalNode[]): LexicalNode => ({
   children,
 });
 
+const comparisonTableBlock = (
+  rowHeader: string,
+  columns: { header: string }[],
+  rows: { rowLabel: string; cells: { value: string }[] }[],
+): LexicalNode => ({
+  type: "block",
+  version: 2,
+  format: "",
+  indent: 0,
+  fields: {
+    blockType: "comparisonTable",
+    blockName: "",
+    rowHeader,
+    columns,
+    rows,
+  },
+});
+
 /* ---------- inline (text-level) HTML → Lexical ---------- */
 
 const BOLD = 1;
@@ -236,6 +254,57 @@ function parseInline($: cheerio.CheerioAPI, el: AnyNode, format = 0): LexicalNod
 
 /* ---------- block-level HTML → Lexical ---------- */
 
+/** Extract plain text from a table cell, collapsing whitespace. */
+function cellText($: cheerio.CheerioAPI, el: AnyNode): string {
+  return decodeEntities(($ as any)(el).text().replace(/\s+/g, " ").trim());
+}
+
+/** Convert an HTML <table> to a comparisonTable block node.
+ *  Returns null if the table is too small to be useful (< 2 columns or < 1 data row). */
+function tableToBlock($: cheerio.CheerioAPI, el: AnyNode): LexicalNode | null {
+  const $table = ($ as any)(el);
+
+  // Collect header cells — prefer <thead><tr>, fall back to first <tr>
+  const headers: string[] = [];
+  const $theadRow = $table.find("thead tr").first();
+  if ($theadRow.length) {
+    $theadRow.find("th, td").each((_: number, th: AnyNode) => {
+      headers.push(cellText($, th));
+    });
+  } else {
+    $table.find("tr").first().find("th, td").each((_: number, th: AnyNode) => {
+      headers.push(cellText($, th));
+    });
+  }
+
+  if (headers.length < 2) return null; // need rowHeader + at least one column
+
+  const rowHeader = headers[0];
+  const columns = headers.slice(1).map((h) => ({ header: h }));
+
+  // Collect data rows — from <tbody> if present, otherwise skip the first <tr>
+  const rows: { rowLabel: string; cells: { value: string }[] }[] = [];
+  const $dataRows = $table.find("tbody tr").length
+    ? $table.find("tbody tr")
+    : $table.find("tr").slice($theadRow.length ? 0 : 1);
+
+  $dataRows.each((_: number, tr: AnyNode) => {
+    const cells: string[] = [];
+    ($ as any)(tr).find("td, th").each((_i: number, td: AnyNode) => {
+      cells.push(cellText($, td));
+    });
+    if (cells.length < 1) return;
+    rows.push({
+      rowLabel: cells[0],
+      cells: cells.slice(1).map((v) => ({ value: v })),
+    });
+  });
+
+  if (!rows.length) return null;
+
+  return comparisonTableBlock(rowHeader, columns, rows);
+}
+
 function blockToNode($: cheerio.CheerioAPI, el: AnyNode): LexicalNode | null {
   const tag = (el as any).name as string;
   if (tag === "h2" || tag === "h3" || tag === "h4") {
@@ -259,6 +328,9 @@ function blockToNode($: cheerio.CheerioAPI, el: AnyNode): LexicalNode | null {
     if (!items.length) return null;
     return listNode(tag === "ol", items);
   }
+  if (tag === "table") {
+    return tableToBlock($, el);
+  }
   return null;
 }
 
@@ -267,13 +339,13 @@ export function htmlToLexical(html: string): Record<string, unknown> {
   const $ = cheerio.load(html);
   const children: LexicalNode[] = [];
   $("body")
-    .find("h2,h3,h4,p,ul,ol")
+    .find("h2,h3,h4,p,ul,ol,table")
     .each((_, el) => {
-      // Skip nodes nested inside a list/heading we already captured whole (e.g. a
-      // stray <p> inside a <li>, which this content set doesn't really have, but
-      // guards against double-counting if it ever does).
       const $el = $(el);
+      // Skip <p> nodes nested inside a list (already captured as listitem children).
       if ($el.parents("ul,ol").length && el.name === "p") return;
+      // Skip any element nested inside a <table> — we convert the whole table at once.
+      if ($el.parents("table").length) return;
       const node = blockToNode($, el);
       if (node) children.push(node);
     });
