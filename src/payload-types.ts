@@ -411,6 +411,7 @@ export interface Blog {
   excerpt?: string | null;
   heroImage?: (number | null) | Media;
   heroTextDark?: boolean | null;
+  heroImagePosition?: ('center center' | 'right center' | 'left center' | 'right top' | 'center top') | null;
   content?: {
     root: {
       type: string;

@@ -33,11 +33,13 @@ function BlogCardThumbnail({
   title,
   slug,
   category,
+  imagePosition,
 }: {
   hero: Media | null;
   title: string;
   slug: string;
   category: string | null;
+  imagePosition?: string | null;
 }) {
   if (hero?.url) {
     return (
@@ -45,6 +47,7 @@ function BlogCardThumbnail({
         src={hero.url}
         alt={hero.alt ?? title}
         loading="lazy"
+        style={{ objectPosition: imagePosition ?? "center center" }}
         className="h-full w-full object-cover brightness-125 contrast-105 saturate-[1.3] transition-transform duration-700 group-hover:scale-105"
       />
     );
@@ -231,6 +234,7 @@ export function BlogHub({
                         title={p.title}
                         slug={p.slug}
                         category={cat?.title ?? null}
+                        imagePosition={p.heroImagePosition}
                       />
                     </div>
                     <div className="flex flex-1 flex-col p-6">

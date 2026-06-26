@@ -99,6 +99,22 @@ const BLOG_FIELDS: Field[] = [
       },
     },
     {
+      name: "heroImagePosition",
+      type: "select",
+      label: "Card image focus",
+      defaultValue: "center center",
+      options: [
+        { label: "Centre (default)", value: "center center" },
+        { label: "Focus right — subject on the right half of image", value: "right center" },
+        { label: "Focus left — subject on the left half of image", value: "left center" },
+        { label: "Focus top-right", value: "right top" },
+        { label: "Focus centre-top", value: "center top" },
+      ],
+      admin: {
+        description: "Controls which part of the cover image is shown in the blog listing card. Use 'Focus right' when the main subject (person, diagram) sits on the right side of the image — this prevents blank empty space appearing on the left of the card.",
+      },
+    },
+    {
       name: "content",
       type: "richText",
       label: "Article Body",
