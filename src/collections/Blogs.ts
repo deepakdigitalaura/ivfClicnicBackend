@@ -108,7 +108,8 @@ const BLOG_FIELDS: Field[] = [
         { label: "Focus right — subject on the right half of image", value: "right center" },
         { label: "Focus left — subject on the left half of image", value: "left center" },
         { label: "Focus top-right", value: "right top" },
-        { label: "Focus centre-top", value: "center top" },
+        { label: "Focus centre-top — subject near top of image", value: "center top" },
+        { label: "Focus centre-bottom — subject near bottom of image", value: "center bottom" },
       ],
       admin: {
         description: "Controls which part of the cover image is shown in the blog listing card. Use 'Focus right' when the main subject (person, diagram) sits on the right side of the image — this prevents blank empty space appearing on the left of the card.",
