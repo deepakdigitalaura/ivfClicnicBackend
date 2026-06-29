@@ -461,6 +461,8 @@ export function AnimatedExternalImage({ node }: { node: { fields: unknown } }) {
     credit?: string | null;
   };
   if (!url) return null;
+  // Pexels stock images are intentionally hidden — only show real event photos
+  if (url.includes("pexels.com")) return null;
 
   return (
     <Reveal className="my-6">
