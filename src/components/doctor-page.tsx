@@ -36,7 +36,7 @@ const EXPERTISE_TREATMENT_SLUG: Record<string, string> = {
   "Andrology": "oligospermia",
   "Female Infertility": "pcos",
   "Reproductive Gynaecology": "pcos",
-  "Fertility Preservation": "egg-freezing",
+  "Fertility Preservation": "cryopreservation",
   "Reproductive Surgery": "fibroids",
   "Hysteroscopy": "fibroids",
   "Laparoscopy": "endometriosis",

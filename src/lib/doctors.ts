@@ -99,7 +99,7 @@ export const ALL_TREATMENT_SLUGS: string[] = [
   // Female infertility
   "pcos", "endometriosis", "fibroids", "ovarian-reserve", "ovarian-rejuvenation", "conceive-naturally", "prp-infertility",
   // Fertility preservation
-  "egg-freezing", "sperm-freezing", "embryo-freezing", "cryopreservation",
+  "cryopreservation",
   // Third-party reproduction
   "egg-donation", "sperm-donation", "embryo-donation", "surrogacy",
 ];

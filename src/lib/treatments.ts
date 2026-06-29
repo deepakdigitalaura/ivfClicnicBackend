@@ -3593,60 +3593,82 @@ export const cryopreservation = defineTreatment({
       "Protects fertility before chemotherapy, radiation or surgery.",
       "Lets you plan parenthood on your own timeline.",
       "Vitrification gives high survival rates on thawing.",
-      "Stores surplus IVF embryos for later attempts.",
+      "Stores surplus IVF embryos for later attempts without repeating full stimulation.",
       "Frozen embryo transfers can be as successful as fresh.",
       "Samples remain viable for many years in secure storage.",
+      "Stores eggs at their current, younger quality — no need for a partner at the time of freezing.",
+      "A reliable backup for IVF and IUI cycles — avoids the pressure of producing a sample on the day.",
+    ],
+  },
+  types: {
+    heading: { lead: "Types of", em: "cryopreservation" },
+    subtitle: "Three forms of fertility freezing — each suited to different circumstances.",
+    items: [
+      { icon: Egg, t: "Egg Freezing (Oocyte Cryopreservation)", d: "Mature eggs are collected after ovarian stimulation and vitrified. Ideal for women wishing to delay childbearing, those facing cancer treatment or surgery, or anyone who wants to preserve younger, healthier eggs. When ready, eggs are thawed, fertilised by ICSI, and transferred as embryos." },
+      { icon: Baby, t: "Embryo Freezing (Embryo Cryopreservation)", d: "Good-quality embryos created during IVF are vitrified and stored for future frozen-embryo transfer (FET). Lets couples try again — or plan a sibling — without repeating stimulation and egg retrieval. FET success can match or exceed fresh transfer." },
+      { icon: Beaker, t: "Sperm Freezing (Sperm Banking)", d: "A semen sample is analysed, frozen and stored in liquid nitrogen. Simple, quick and reliable — ideal before cancer treatment, vasectomy, declining counts, or as a backup so a sample is always available on the day of IVF or IUI." },
     ],
   },
   whoNeedsIt: {
     heading: { lead: "Who should", em: "consider it" },
     subtitle: "Cryopreservation suits a wide range of medical and personal situations.",
     items: [
-      "Before cancer treatment that can harm fertility.",
+      "Before cancer treatment that can harm fertility (eggs, sperm or embryos).",
       "Before surgery that may reduce ovarian or testicular function.",
       "Women wishing to delay childbearing while preserving younger eggs.",
-      "Men who will be unavailable on the day of an IVF procedure.",
+      "Men who will be unavailable on the day of an IVF procedure, or with a low or falling sperm count.",
       "Couples with surplus good-quality embryos after IVF.",
+      "Before a vasectomy, as a safeguard.",
+      "Anyone undergoing PGT, where embryos are frozen pending results.",
+      "Single women who want to preserve their options.",
+      "Couples wishing to space pregnancies or plan a sibling.",
     ],
   },
   process: {
     heading: { lead: "How freezing", em: "works" },
     subtitle: "A safe, well-established process from collection to storage.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Consultation", d: "We discuss your goals and which cells to preserve — eggs, sperm or embryos." },
-      { icon: Egg, n: "02", t: "Collection", d: "Egg retrieval after stimulation, a sperm sample, or embryos created by IVF." },
-      { icon: Snowflake, n: "03", t: "Vitrification", d: "Cells are flash-frozen by vitrification to avoid ice-crystal damage." },
-      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Samples are stored safely in monitored liquid-nitrogen tanks." },
-      { icon: FlaskConical, n: "05", t: "Future Use", d: "Thawed and used in IUI, IVF or a frozen-embryo transfer when you are ready." },
+      { icon: ClipboardCheck, n: "01", t: "Consultation & Assessment", d: "We discuss your goals and which cells to preserve — eggs, sperm or embryos. For egg freezing, AMH and antral-follicle count are assessed." },
+      { icon: Syringe, n: "02", t: "Collection / Stimulation", d: "Egg retrieval after ~2 weeks of ovarian stimulation, a same-day sperm sample, or embryos created by IVF and cultured to the best stage." },
+      { icon: Snowflake, n: "03", t: "Vitrification", d: "Cells or embryos are flash-frozen by vitrification to avoid ice-crystal damage." },
+      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Samples are stored safely in monitored liquid-nitrogen tanks for years." },
+      { icon: FlaskConical, n: "05", t: "Future Use", d: "Thawed and used in IUI, IVF–ICSI or a frozen-embryo transfer when you are ready." },
     ],
-    note: "Storage is reviewed periodically, and samples can be kept for many years.",
+    note: "Storage is reviewed periodically, and samples can be kept for many years. For egg freezing, freezing more eggs and at a younger age improves the chance of a future baby.",
   },
   success: {
     factors: [
-      "Age at the time of freezing (especially for eggs)",
-      "The number of eggs or embryos stored",
-      "Cell quality before freezing",
+      "Age at the time of freezing (especially for eggs — the single biggest factor)",
+      "The number of eggs, embryos or sperm vials stored",
+      "Cell or embryo quality before freezing",
       "Laboratory and vitrification expertise",
-      "Uterine health at the time of future transfer",
+      "Endometrial preparation and uterine health at the time of future transfer",
+      "The fertility treatment used later (IUI vs IVF–ICSI)",
     ],
-    note: "Survival after thawing is high with vitrification, but a future pregnancy depends on many factors and cannot be guaranteed. Younger age at freezing improves outcomes.",
+    note: "Survival after thawing is high with vitrification, but a future pregnancy depends on many factors and cannot be guaranteed. Younger age at freezing improves outcomes. Even low-count sperm samples can be used effectively with ICSI.",
   },
   risks: {
     heading: { lead: "Risks &", em: "considerations" },
     items: [
       { t: "Not a guarantee", d: "Freezing preserves cells but does not guarantee a future baby.", help: "We give realistic, age-based expectations so you can plan with clarity." },
-      { t: "Some loss on thawing", d: "Not every frozen cell survives the freeze–thaw process.", help: "Vitrification gives high survival, and we advise on numbers to store accordingly." },
+      { t: "Some loss on thawing", d: "Not every frozen cell or embryo survives the freeze–thaw process.", help: "Vitrification gives high survival, and we advise on numbers to store accordingly." },
+      { t: "Stimulation effects (egg freezing)", d: "The stimulation cycle carries a small risk of OHSS and minor side-effects.", help: "Safe, individualised protocols and monitoring keep this risk low." },
+      { t: "Best done younger (egg freezing)", d: "Eggs frozen at an older age have lower success.", help: "We advise on ideal timing so the eggs you store give the best chance." },
       { t: "Ongoing storage", d: "Stored samples need continued, secure storage over time.", help: "Our monitored facility and clear storage agreements keep samples safe." },
     ],
   },
   faqs: [
     { q: "What can be frozen?", a: "Eggs, sperm and embryos can all be cryopreserved. Which is right for you depends on your situation, relationship status and goals." },
     { q: "What is vitrification?", a: "An ultra-rapid freezing method that turns cells to a glass-like state without forming ice crystals, giving much higher survival rates than older slow-freezing." },
-    { q: "How long can samples be stored?", a: "For many years. Cells frozen by vitrification remain viable over long periods when stored correctly in liquid nitrogen." },
-    { q: "Is frozen as good as fresh?", a: "For embryos, frozen-embryo transfers can be as successful as fresh. Egg and sperm outcomes depend on age and quality at freezing." },
-    { q: "Who should freeze their fertility?", a: "Anyone facing fertility-reducing treatment or surgery, those wishing to delay parenthood, and couples with surplus embryos after IVF." },
+    { q: "How long can samples be stored?", a: "For many years. Cells frozen by vitrification remain viable over long periods when stored correctly in liquid nitrogen, with no clear reduction in quality over time." },
+    { q: "Is frozen as good as fresh?", a: "For embryos, frozen-embryo transfers can be as successful as — and sometimes more successful than — fresh transfers, because the lining can be optimally prepared. Egg and sperm outcomes depend on age and quality at freezing." },
+    { q: "What is the best age to freeze eggs?", a: "Earlier is better — ideally in your late twenties to early thirties — because egg quality and quantity decline with age. Freezing younger eggs gives the best future chance." },
+    { q: "How many eggs should I freeze?", a: "It varies with age, but more eggs improve the odds. After assessing your reserve, your specialist will advise a target number, sometimes over more than one cycle." },
+    { q: "Does freezing affect sperm quality?", a: "Motility can fall slightly after thawing, but stored sperm works well for IUI and especially IVF–ICSI, which needs only a few healthy sperm." },
+    { q: "Can frozen embryos be used for a sibling later?", a: "Yes. Many couples return to use their stored embryos to try for a second child without repeating a full IVF cycle." },
+    { q: "Who should freeze their fertility?", a: "Anyone facing fertility-reducing treatment or surgery, those wishing to delay parenthood, men with declining sperm counts, and couples with surplus embryos after IVF." },
   ],
-  related: ["egg-freezing", "sperm-freezing", "embryo-freezing", "ivf", "fertility-preservation"],
+  related: ["ivf", "ovarian-reserve", "azoospermia", "surgical-sperm-retrieval", "pgt"],
   cta: {
     heading: "Thinking about",
     headingEm: "preserving your fertility?",
@@ -3654,320 +3676,7 @@ export const cryopreservation = defineTreatment({
   },
 });
 
-export const embryoFreezing = defineTreatment({
-  slug: "embryo-freezing",
-  name: "Embryo Freezing (Embryo Cryopreservation)",
-  shortName: "Embryo Freezing",
-  alternateName: "Embryo Cryopreservation",
-  reviewerSlug: "falguni-bavishi",
-  meta: {
-    title: "Embryo Freezing (Embryo Cryopreservation) — Bavishi Fertility Institute",
-    description:
-      "Embryo freezing explained — how surplus IVF embryos are vitrified and stored for frozen-embryo transfer, who benefits, and success factors. High survival rates, since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
-  },
-  procedure: {
-    procedureType: "https://schema.org/MedicalProcedure",
-    bodyLocation: "Embryos",
-    howPerformed:
-      "Good-quality embryos from an IVF cycle are frozen by vitrification and stored, then thawed and transferred to the uterus in a later frozen-embryo-transfer (FET) cycle.",
-    followup: "A pregnancy test follows the frozen-embryo transfer about two weeks later.",
-  },
-  hero: {
-    eyebrow: "Fertility Preservation",
-    h1: "Embryo",
-    h1Em: "Freezing",
-    tagline:
-      "Surplus embryos from an IVF cycle can be safely frozen and stored — giving you further chances of pregnancy without repeating full stimulation and egg collection.",
-    badges: ["Vitrification", "Frozen-Embryo Transfer", "Since 1998", "High Survival"],
-    image: "/assets/about-clinic.jpg",
-    imageAlt: "Embryo freezing (embryo cryopreservation) at Bavishi Fertility Institute",
-  },
-  whatIs: {
-    heading: { lead: "What is", em: "Embryo Freezing?" },
-    paragraphs: [
-      "Embryo freezing is the cryopreservation of embryos created during IVF. After fertilisation, good-quality embryos that are not transferred in the fresh cycle are frozen by vitrification and stored for future use.",
-      "It is one of the most established and successful forms of fertility preservation. A frozen-embryo transfer (FET) in a later cycle can be as successful as a fresh transfer, and lets couples try for further pregnancies — or a sibling — without repeating stimulation and egg retrieval.",
-    ],
-    aside: BFI_ASIDE,
-  },
-  benefits: {
-    heading: { lead: "The advantages of", em: "embryo freezing" },
-    subtitle: "More chances of pregnancy from a single IVF cycle.",
-    items: [
-      "Extra attempts without repeating full IVF stimulation.",
-      "Frozen-embryo transfers can match fresh-cycle success.",
-      "Allows a planned, optimal transfer in a natural-like cycle.",
-      "Lets the body recover before transfer, reducing OHSS risk.",
-      "Enables PGT, where the embryo is frozen while results return.",
-      "Supports planning for a future sibling.",
-    ],
-  },
-  whoNeedsIt: {
-    heading: { lead: "Who benefits", em: "from it" },
-    subtitle: "Embryo freezing is part of most modern IVF journeys.",
-    items: [
-      "Couples with surplus good-quality embryos after IVF.",
-      "Those advised a freeze-all cycle to avoid OHSS.",
-      "Anyone undergoing PGT, where embryos are frozen pending results.",
-      "Couples wishing to space pregnancies or plan a sibling.",
-      "Before treatment or surgery that may affect fertility.",
-    ],
-  },
-  process: {
-    heading: { lead: "How it", em: "works" },
-    subtitle: "From IVF to storage and a future frozen transfer.",
-    steps: [
-      { icon: FlaskConical, n: "01", t: "IVF & Fertilisation", d: "Eggs are collected and fertilised, and embryos are cultured in the lab." },
-      { icon: Microscope, n: "02", t: "Embryo Selection", d: "Good-quality embryos suitable for freezing are identified." },
-      { icon: Snowflake, n: "03", t: "Vitrification", d: "Selected embryos are flash-frozen to preserve them safely." },
-      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Embryos are stored in monitored liquid-nitrogen tanks." },
-      { icon: Baby, n: "05", t: "Frozen-Embryo Transfer", d: "Thawed and transferred in a prepared cycle when you are ready." },
-    ],
-    note: "FET timing can be optimised to the lining, often improving the chance of implantation.",
-  },
-  success: {
-    factors: [
-      "Embryo quality and stage at freezing",
-      "The woman's age when the embryos were created",
-      "Endometrial preparation for the transfer",
-      "Laboratory and vitrification expertise",
-      "Overall uterine and general health",
-    ],
-    note: "Vitrified embryos have high survival rates and FET success can equal fresh transfer, though a pregnancy still cannot be guaranteed.",
-  },
-  risks: {
-    heading: { lead: "Risks &", em: "considerations" },
-    items: [
-      { t: "Some loss on thawing", d: "A small proportion of embryos may not survive thawing.", help: "Vitrification gives high survival, and surviving embryos are assessed before transfer." },
-      { t: "No guarantee of pregnancy", d: "A frozen embryo is a chance of pregnancy, not a certainty.", help: "We give realistic expectations based on embryo quality and your age." },
-      { t: "Storage decisions", d: "Stored embryos involve ongoing storage and future choices.", help: "Clear consent and storage agreements cover these from the start." },
-    ],
-  },
-  faqs: [
-    { q: "How long can embryos stay frozen?", a: "For many years. Vitrified embryos remain viable over long periods when stored correctly, with no clear reduction in quality over time." },
-    { q: "Is a frozen-embryo transfer as good as fresh?", a: "Yes — frozen-embryo transfers can be as successful as, and sometimes more successful than, fresh transfers, because the lining can be optimally prepared." },
-    { q: "Do all embryos survive freezing?", a: "Most do. Vitrification gives high survival rates, though a small number may not survive thawing." },
-    { q: "Why might a freeze-all cycle be advised?", a: "To avoid OHSS, to allow PGT results, or to transfer into a better-prepared lining — all of which can improve safety and success." },
-    { q: "Can frozen embryos be used for a sibling later?", a: "Yes. Many couples return to use their stored embryos to try for a second child without repeating a full IVF cycle." },
-  ],
-  related: ["cryopreservation", "egg-freezing", "ivf", "pgt", "fertility-preservation"],
-  cta: {
-    heading: "Considering",
-    headingEm: "embryo freezing?",
-    subtitle: "Learn how freezing your embryos can give you more chances from one IVF cycle — book a consultation.",
-  },
-});
-
-export const spermFreezing = defineTreatment({
-  slug: "sperm-freezing",
-  name: "Sperm Freezing (Sperm Banking)",
-  shortName: "Sperm Freezing",
-  alternateName: "Sperm Banking / Sperm Cryopreservation",
-  reviewerSlug: "parth-bavishi",
-  meta: {
-    title: "Sperm Freezing (Sperm Banking) — Bavishi Fertility Institute",
-    description:
-      "Sperm freezing explained — preserving sperm before cancer treatment, surgery or vasectomy, or as a backup for IVF. Simple, safe and long-lasting. Trusted since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
-  },
-  procedure: {
-    procedureType: "https://schema.org/MedicalProcedure",
-    bodyLocation: "Sperm",
-    howPerformed:
-      "A semen sample is analysed, frozen by cryopreservation and stored in liquid nitrogen, then thawed for use in IUI or IVF–ICSI in the future.",
-    followup: "Stored sperm is thawed and used in a future fertility-treatment cycle as required.",
-  },
-  hero: {
-    eyebrow: "Fertility Preservation",
-    h1: "Sperm Freezing",
-    h1Em: "(Sperm Banking)",
-    tagline:
-      "A simple, reliable way to preserve fertility — before cancer treatment or surgery, or as a backup for IVF — so your sperm is ready whenever you need it.",
-    badges: ["Simple & Quick", "Long-term Storage", "Since 1998", "IUI · IVF–ICSI"],
-    image: "/assets/about-clinic.jpg",
-    imageAlt: "Sperm freezing (sperm banking) at Bavishi Fertility Institute",
-  },
-  whatIs: {
-    heading: { lead: "What is", em: "Sperm Freezing?" },
-    paragraphs: [
-      "Sperm freezing, or sperm banking, is the collection, freezing and storage of a man's sperm so it can be used to achieve a pregnancy in the future. It is a simple, quick and well-established method of preserving male fertility.",
-      "Men freeze sperm before cancer treatment or surgery that can affect fertility, before a vasectomy, when sperm counts are declining, or as a backup so a sample is always available on the day of an IVF or IUI procedure. Frozen sperm remains usable for many years.",
-    ],
-    aside: BFI_ASIDE,
-  },
-  benefits: {
-    heading: { lead: "Why bank", em: "your sperm" },
-    subtitle: "A small step now that protects your options later.",
-    items: [
-      "Preserves fertility before chemotherapy, radiation or surgery.",
-      "A reliable backup for IVF and IUI cycles.",
-      "Useful when sperm counts are low or declining.",
-      "Avoids the pressure of producing a sample on the day.",
-      "Simple, quick and minimally invasive.",
-      "Stored samples remain usable for many years.",
-    ],
-  },
-  whoNeedsIt: {
-    heading: { lead: "Who should", em: "consider it" },
-    subtitle: "Sperm banking suits many medical and practical situations.",
-    items: [
-      "Before cancer treatment or fertility-affecting surgery.",
-      "Before a vasectomy, as a safeguard.",
-      "Men with a low or falling sperm count.",
-      "Those who may be travelling or unavailable for an IVF cycle.",
-      "Before surgical sperm retrieval, to store surplus sperm.",
-    ],
-  },
-  process: {
-    heading: { lead: "How it", em: "works" },
-    subtitle: "A straightforward, same-day process.",
-    steps: [
-      { icon: ClipboardCheck, n: "01", t: "Consultation & Screening", d: "A brief consultation and routine infection screening before storage." },
-      { icon: Beaker, n: "02", t: "Sample & Analysis", d: "A semen sample is provided and analysed for count and quality." },
-      { icon: Snowflake, n: "03", t: "Freezing", d: "The sample is cryopreserved and divided into storage vials." },
-      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Vials are stored safely in monitored liquid-nitrogen tanks." },
-      { icon: FlaskConical, n: "05", t: "Future Use", d: "Thawed and used for IUI or IVF–ICSI whenever needed." },
-    ],
-    note: "Where possible, banking before cancer treatment is arranged quickly so it does not delay care.",
-  },
-  success: {
-    factors: [
-      "Sperm count and quality before freezing",
-      "The number of vials stored",
-      "The fertility treatment used later (IUI vs IVF–ICSI)",
-      "The female partner's age and fertility",
-      "Laboratory and storage standards",
-    ],
-    note: "Sperm survives freezing well, and even samples with a low count can be used effectively with ICSI. A future pregnancy still depends on many factors.",
-  },
-  risks: {
-    heading: { lead: "Risks &", em: "considerations" },
-    items: [
-      { t: "Some loss on thawing", d: "Motility can drop a little after thawing.", help: "We store enough vials and can use ICSI, which needs very few sperm." },
-      { t: "Time before treatment", d: "Banking is best done before fertility-reducing treatment starts.", help: "We arrange urgent storage quickly so it does not delay cancer care." },
-      { t: "Ongoing storage", d: "Stored sperm needs continued secure storage.", help: "Clear storage agreements and a monitored facility keep samples safe." },
-    ],
-  },
-  faqs: [
-    { q: "Why should I freeze my sperm?", a: "Common reasons are before cancer treatment or surgery that can affect fertility, before a vasectomy, a declining sperm count, or as a backup for IVF/IUI." },
-    { q: "How long can sperm be stored?", a: "For many years. Properly frozen sperm remains viable over long periods in liquid-nitrogen storage." },
-    { q: "Does freezing affect sperm quality?", a: "Motility can fall slightly after thawing, but stored sperm works well for IUI and especially IVF–ICSI, which needs only a few healthy sperm." },
-    { q: "Is sperm banking before cancer treatment urgent?", a: "Ideally it is done before chemotherapy or radiation begins. We arrange storage quickly so it does not delay your cancer treatment." },
-    { q: "Can low-count samples be banked?", a: "Yes. Even low-count samples are worth freezing, as ICSI can achieve fertilisation with very few sperm." },
-  ],
-  related: ["cryopreservation", "azoospermia", "surgical-sperm-retrieval", "ivf", "fertility-preservation"],
-  cta: {
-    heading: "Need to",
-    headingEm: "bank your sperm?",
-    subtitle: "Arrange simple, secure sperm freezing — book a confidential appointment with our team.",
-  },
-});
-
-export const eggFreezing = defineTreatment({
-  slug: "egg-freezing",
-  name: "Egg Freezing (Oocyte Cryopreservation)",
-  shortName: "Egg Freezing",
-  alternateName: "Oocyte Cryopreservation",
-  reviewerSlug: "falguni-bavishi",
-  meta: {
-    title: "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute",
-    description:
-      "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
-  },
-  procedure: {
-    procedureType: "https://schema.org/MedicalProcedure",
-    bodyLocation: "Oocytes (eggs)",
-    howPerformed:
-      "After ovarian stimulation, mature eggs are collected and frozen by vitrification, then thawed, fertilised by ICSI and transferred as embryos in a future cycle.",
-    followup: "Frozen eggs are thawed and used in a future IVF cycle when the woman is ready.",
-  },
-  hero: {
-    eyebrow: "Fertility Preservation",
-    h1: "Egg Freezing",
-    h1Em: "(Oocyte Cryopreservation)",
-    tagline:
-      "Freeze younger, healthier eggs now to keep your options open for later — whether for medical reasons or to give yourself time on your own terms.",
-    badges: ["Vitrification", "Freeze Younger Eggs", "Since 1998", "Class 1000 Labs"],
-    image: "/assets/about-clinic.jpg",
-    imageAlt: "Egg freezing (oocyte cryopreservation) at Bavishi Fertility Institute",
-  },
-  whatIs: {
-    heading: { lead: "What is", em: "Egg Freezing?" },
-    paragraphs: [
-      "Egg freezing, or oocyte cryopreservation, is the collection and freezing of a woman's eggs so they can be used to attempt a pregnancy in the future. Because egg quality declines with age, freezing eggs while younger preserves a better chance for later.",
-      "Women freeze eggs for medical reasons — such as before cancer treatment — or for personal reasons, to give themselves time before starting a family. When she is ready, the eggs are thawed, fertilised by ICSI, and the resulting embryos are transferred.",
-    ],
-    aside: BFI_ASIDE,
-  },
-  benefits: {
-    heading: { lead: "The advantages of", em: "egg freezing" },
-    subtitle: "Preserving younger eggs preserves future possibilities.",
-    items: [
-      "Stores eggs at their current, younger quality.",
-      "Keeps the option of a biological child open for later.",
-      "Protects fertility before cancer treatment or surgery.",
-      "Vitrification gives high egg-survival rates.",
-      "No need for a partner or donor sperm at the time of freezing.",
-      "Reduces time pressure on major life decisions.",
-    ],
-  },
-  whoNeedsIt: {
-    heading: { lead: "Who should", em: "consider it" },
-    subtitle: "Egg freezing suits both medical and personal circumstances.",
-    items: [
-      "Before cancer treatment that can damage the ovaries.",
-      "Women wishing to delay childbearing for personal or career reasons.",
-      "A declining ovarian reserve or family history of early menopause.",
-      "Before surgery that may reduce ovarian function.",
-      "Single women who want to preserve their options.",
-    ],
-  },
-  process: {
-    heading: { lead: "How it", em: "works" },
-    subtitle: "A short IVF-style cycle to collect and freeze eggs.",
-    steps: [
-      { icon: ClipboardCheck, n: "01", t: "Assessment", d: "AMH, antral-follicle count and counselling on likely egg numbers." },
-      { icon: Syringe, n: "02", t: "Ovarian Stimulation", d: "About two weeks of injections to grow multiple eggs, monitored by scan." },
-      { icon: Egg, n: "03", t: "Egg Retrieval", d: "Mature eggs are collected in a short procedure under sedation." },
-      { icon: Snowflake, n: "04", t: "Vitrification", d: "Mature eggs are flash-frozen and stored safely." },
-      { icon: Microscope, n: "05", t: "Future Use", d: "Thawed, fertilised by ICSI and transferred as embryos when ready." },
-    ],
-    note: "Freezing more eggs, and at a younger age, improves the chance of a future baby.",
-  },
-  success: {
-    factors: [
-      "Age at the time of freezing — the single biggest factor",
-      "The number of mature eggs frozen",
-      "Egg quality and survival on thawing",
-      "Laboratory and vitrification expertise",
-      "Uterine health at the time of future transfer",
-    ],
-    note: "Younger age and more eggs improve the odds, but egg freezing preserves a chance — not a guarantee — of a future pregnancy. We give honest, age-based estimates.",
-  },
-  risks: {
-    heading: { lead: "Risks &", em: "considerations" },
-    items: [
-      { t: "Not a guarantee", d: "Frozen eggs improve future chances but cannot promise a baby.", help: "We give realistic, age-based numbers and may advise freezing more eggs." },
-      { t: "Stimulation effects", d: "The stimulation cycle carries a small risk of OHSS and minor side-effects.", help: "Safe, individualised protocols and monitoring keep this risk low." },
-      { t: "Best done younger", d: "Eggs frozen at an older age have lower success.", help: "We advise on the ideal timing so the eggs you store give the best chance." },
-    ],
-  },
-  faqs: [
-    { q: "What is the best age to freeze eggs?", a: "Earlier is better — ideally in your late twenties to early thirties — because egg quality and quantity decline with age. Freezing younger eggs gives the best future chance." },
-    { q: "How many eggs should I freeze?", a: "It varies with age, but more eggs improve the odds. After assessing your reserve, your specialist will advise a target number, sometimes over more than one cycle." },
-    { q: "Is egg freezing painful?", a: "The injections cause minimal discomfort and egg retrieval is done under sedation, so it is not painful. Mild bloating afterwards settles quickly." },
-    { q: "How are frozen eggs used later?", a: "They are thawed, fertilised with sperm by ICSI, and the resulting embryos are transferred to the uterus in an IVF cycle." },
-    { q: "Do frozen eggs survive well?", a: "Vitrification gives high egg-survival rates, though not every egg survives or fertilises — which is why the number frozen matters." },
-  ],
-  related: ["cryopreservation", "embryo-freezing", "ovarian-reserve", "ivf", "fertility-preservation"],
-  cta: {
-    heading: "Thinking about",
-    headingEm: "freezing your eggs?",
-    subtitle: "Get an honest assessment of your reserve and what egg freezing could mean for you — book a consultation.",
-  },
-});
+/* embryoFreezing, spermFreezing, eggFreezing — MERGED into cryopreservation above */
 
 /* ===================================================================== */
 /* IVF FAILURE SOLUTIONS                                                  */
