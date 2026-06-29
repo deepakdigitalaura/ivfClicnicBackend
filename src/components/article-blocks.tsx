@@ -15,7 +15,7 @@
 
 import React from "react";
 import { motion } from "framer-motion";
-import { CheckCircle2, ArrowRight, Lightbulb } from "lucide-react";
+import { CheckCircle2, ArrowRight, Lightbulb, ThumbsUp, ThumbsDown, Check, X } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Counter } from "@/components/motion";
 import { resolveIcon } from "@/lib/icon-map";
 import { cn } from "@/lib/utils";
@@ -482,6 +482,88 @@ export function AnimatedExternalImage({ node }: { node: { fields: unknown } }) {
           </figcaption>
         )}
       </figure>
+    </Reveal>
+  );
+}
+
+/* ══════════════════════════════════════════════════════════════════════
+ * ProsConsGrid — side-by-side coloured cards for Pros & Cons.
+ *
+ * Two cards in a responsive grid: emerald-tinted "Pros" card on the left
+ * with checkmark bullets, rose-tinted "Cons" card on the right with X
+ * bullets. Distinct from ComparisonTable (which uses plum gradient
+ * headers and a tabular layout).
+ * ══════════════════════════════════════════════════════════════════════ */
+export function AnimatedProsConsGrid({ node }: { node: { fields: unknown } }) {
+  const fields = node.fields as {
+    prosLabel?: string | null;
+    consLabel?: string | null;
+    pros?: { text: string; id?: string | null }[];
+    cons?: { text: string; id?: string | null }[];
+  };
+  const pros = fields.pros ?? [];
+  const cons = fields.cons ?? [];
+  const prosLabel = fields.prosLabel || "Pros";
+  const consLabel = fields.consLabel || "Cons";
+  if (!pros.length && !cons.length) return null;
+
+  return (
+    <Reveal className="my-8">
+      <div className="grid gap-4 md:grid-cols-2">
+        {/* ── Pros column ── */}
+        {pros.length > 0 && (
+          <div className="overflow-hidden rounded-2xl border border-emerald-200/60 bg-white shadow-soft">
+            <div className="flex items-center gap-2.5 bg-gradient-to-r from-emerald-700 to-emerald-600 px-5 py-3.5">
+              <ThumbsUp className="h-5 w-5 text-white" strokeWidth={1.75} />
+              <h4 className="font-display text-lg font-semibold tracking-wide text-white">
+                {prosLabel}
+              </h4>
+            </div>
+            <div className="divide-y divide-emerald-100/80">
+              {pros.map((item, i) => (
+                <div
+                  key={item.id ?? i}
+                  className="flex items-start gap-3 px-5 py-3 transition-colors hover:bg-emerald-50/60"
+                >
+                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-emerald-100 ring-1 ring-emerald-200/60">
+                    <Check className="h-3 w-3 text-emerald-700" strokeWidth={2.5} />
+                  </div>
+                  <p className="text-sm leading-relaxed text-foreground/80">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+
+        {/* ── Cons column ── */}
+        {cons.length > 0 && (
+          <div className="overflow-hidden rounded-2xl border border-[color:var(--rose)]/20 bg-white shadow-soft">
+            <div className="flex items-center gap-2.5 bg-gradient-to-r from-[color:var(--rose)] to-[color:var(--rose)]/85 px-5 py-3.5">
+              <ThumbsDown className="h-5 w-5 text-white" strokeWidth={1.75} />
+              <h4 className="font-display text-lg font-semibold tracking-wide text-white">
+                {consLabel}
+              </h4>
+            </div>
+            <div className="divide-y divide-[color:var(--rose)]/10">
+              {cons.map((item, i) => (
+                <div
+                  key={item.id ?? i}
+                  className="flex items-start gap-3 px-5 py-3 transition-colors hover:bg-[color:var(--rose)]/[0.04]"
+                >
+                  <div className="mt-0.5 flex h-5 w-5 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10 ring-1 ring-[color:var(--rose)]/20">
+                    <X className="h-3 w-3 text-[color:var(--rose)]" strokeWidth={2.5} />
+                  </div>
+                  <p className="text-sm leading-relaxed text-foreground/80">
+                    {item.text}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+        )}
+      </div>
     </Reveal>
   );
 }

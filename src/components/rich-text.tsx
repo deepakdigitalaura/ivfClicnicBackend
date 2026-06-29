@@ -16,6 +16,7 @@ import {
   AnimatedInfographic,
   AnimatedInlineCta,
   AnimatedExternalImage,
+  AnimatedProsConsGrid,
 } from "@/components/article-blocks";
 
 /* =====================================================================
@@ -109,6 +110,49 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
     );
   },
 
+  /* ── Native Lexical table nodes ─────────────────────────────────────
+   * Editors may insert tables via the Lexical toolbar or paste from
+   * external sources. These nodes have no default JSX converter so
+   * they fall back to plain-text rendering. We style them to match
+   * the custom AnimatedComparisonTable block. */
+  table: ({ node, nodesToJSX }) => (
+    <div className="my-8 overflow-x-auto rounded-2xl border border-border/60 shadow-soft">
+      <table className="w-full min-w-[480px] border-collapse text-left text-sm">
+        {nodesToJSX({ nodes: node.children })}
+      </table>
+    </div>
+  ),
+
+  tablerow: ({ node, nodesToJSX }) => (
+    <tr className="border-b border-border/40 last:border-0 even:bg-[color:var(--plum)]/[0.03] transition-colors hover:bg-[color:var(--plum)]/[0.06]">
+      {nodesToJSX({ nodes: node.children })}
+    </tr>
+  ),
+
+  tablecell: ({ node, nodesToJSX }) => {
+    const n = node as unknown as { headerState?: number; colSpan?: number; rowSpan?: number; children: unknown[] };
+    const isHeader = (n.headerState ?? 0) > 0;
+    const colSpan = n.colSpan && n.colSpan > 1 ? n.colSpan : undefined;
+    const rowSpan = n.rowSpan && n.rowSpan > 1 ? n.rowSpan : undefined;
+    return isHeader ? (
+      <th
+        colSpan={colSpan}
+        rowSpan={rowSpan}
+        className="bg-gradient-to-r from-[color:var(--plum)] to-[color:var(--plum)]/80 px-5 py-4 font-semibold text-white [&_p]:mt-0"
+      >
+        {nodesToJSX({ nodes: node.children })}
+      </th>
+    ) : (
+      <td
+        colSpan={colSpan}
+        rowSpan={rowSpan}
+        className="px-5 py-3.5 text-muted-foreground [&_p]:mt-0"
+      >
+        {nodesToJSX({ nodes: node.children })}
+      </td>
+    );
+  },
+
   /* Inline images (Upload nodes) — render at natural size, never cropped.
    * The default Payload converter wraps them in a <span> which can collapse
    * dimensions; we render a plain block-level <figure> instead. */
@@ -159,6 +203,7 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
     infographic: AnimatedInfographic,
     inlineCta: AnimatedInlineCta,
     externalImage: AnimatedExternalImage,
+    prosConsGrid: AnimatedProsConsGrid,
   },
 });
 

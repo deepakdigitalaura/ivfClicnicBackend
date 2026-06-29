@@ -235,6 +235,48 @@ export const ExternalImageBlock: Block = {
   ],
 };
 
+/** Side-by-side Pros & Cons visual grid — two coloured cards with
+ *  checkmark/X bullets. Replaces flat text "Pros: / Cons:" sections. */
+export const ProsConsGridBlock: Block = {
+  slug: "prosConsGrid",
+  labels: { singular: "Pros & Cons Grid", plural: "Pros & Cons Grids" },
+  interfaceName: "ProsConsGridBlock",
+  fields: [
+    {
+      name: "prosLabel",
+      type: "text",
+      defaultValue: "Pros",
+      label: "Pros Column Label",
+      admin: { description: "Header text for the pros column, e.g. 'Pros', 'Advantages', 'Benefits'." },
+    },
+    {
+      name: "consLabel",
+      type: "text",
+      defaultValue: "Cons",
+      label: "Cons Column Label",
+      admin: { description: "Header text for the cons column, e.g. 'Cons', 'Disadvantages', 'Risks'." },
+    },
+    {
+      name: "pros",
+      type: "array",
+      minRows: 1,
+      labels: { singular: "Pro", plural: "Pros" },
+      fields: [
+        { name: "text", type: "text", required: true, label: "Pro item" },
+      ],
+    },
+    {
+      name: "cons",
+      type: "array",
+      minRows: 1,
+      labels: { singular: "Con", plural: "Cons" },
+      fields: [
+        { name: "text", type: "text", required: true, label: "Con item" },
+      ],
+    },
+  ],
+};
+
 export const ARTICLE_BLOCKS: Block[] = [
   StatStripBlock,
   ComparisonTableBlock,
@@ -244,4 +286,5 @@ export const ARTICLE_BLOCKS: Block[] = [
   InfographicBlock,
   InlineCtaBlock,
   ExternalImageBlock,
+  ProsConsGridBlock,
 ];
