@@ -60,7 +60,7 @@ function buildEmailHtml(fields: {
           </table>
         </td></tr>
         <tr><td style="background:#f9f9f9;padding:16px 32px;font-size:13px;color:#888;border-top:1px solid #eee">
-          View all inquiries in the <a href="https://ivfclinic.vercel.app/admin/collections/inquiries" style="color:#1a6b3f">admin panel</a>.
+          View all inquiries in the <a href="https://ivf-clicnic-backend-weld.vercel.app/admin/collections/inquiries" style="color:#1a6b3f">admin panel</a>.
         </td></tr>
       </table>
     </td></tr>
