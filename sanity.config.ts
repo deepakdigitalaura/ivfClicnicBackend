@@ -22,6 +22,9 @@ export default defineConfig({
             S.listItem()
               .title("🏠 Homepage")
               .child(S.document().schemaType("homepage").documentId("homepage")),
+            S.listItem()
+              .title("⚙️ Site Settings")
+              .child(S.document().schemaType("siteSettings").documentId("siteSettings")),
             S.documentTypeListItem("inquiry").title("📨 Inquiries"),
             S.documentTypeListItem("doctor").title("🩺 Doctors"),
             S.documentTypeListItem("testimonial").title("⭐ Testimonials"),

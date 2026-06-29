@@ -197,3 +197,36 @@ export const getSanityHomepage = () =>
     ["sanity-homepage"],
     { revalidate: 3600, tags: ["sanity-homepage"] },
   )();
+
+// ── Site Settings (singleton — shared across every page) ──
+
+export type SanitySiteSettings = {
+  brandName?: string;
+  alternateName?: string;
+  legalName?: string;
+  logoUrl?: string;
+  foundingDate?: string;
+  telephone?: string;
+  telephoneDisplay?: string;
+  email?: string;
+  whatsapp?: string;
+  address?: {
+    streetAddress?: string;
+    addressLocality?: string;
+    addressRegion?: string;
+    postalCode?: string;
+    addressCountry?: string;
+  };
+  socialLinks?: string[];
+  awards?: string[];
+  knowsAbout?: string[];
+} | null;
+
+/** The site-settings singleton (cached + tagged). Null when unset, so identity /
+ *  contact fall back to the SITE constant byte-identically. */
+export const getSanitySiteSettings = () =>
+  unstable_cache(
+    () => sanityFetch<SanitySiteSettings>(`*[_type == "siteSettings"][0]`),
+    ["sanity-site-settings"],
+    { revalidate: 3600, tags: ["sanity-site-settings"] },
+  )();

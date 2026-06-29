@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope, Star, Home,
+  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope, Star, Home, Settings,
 } from "lucide-react";
 import { logoutAction } from "../../actions";
 
@@ -59,6 +59,11 @@ export function Sidebar() {
             <Icon /> {label}
           </Link>
         ))}
+
+        <div className="admin-nav-section">Settings</div>
+        <Link href="/admin-panel/site-settings" className={isActive("/admin-panel/site-settings") ? "active" : ""}>
+          <Settings /> Site Settings
+        </Link>
 
         <div className="admin-nav-section">Advanced</div>
         <Link href="/studio" target="_blank">

@@ -8,6 +8,7 @@ import inquiry from "./inquiry";
 import doctor from "./doctor";
 import testimonial from "./testimonial";
 import homepage from "./homepage";
+import siteSettings from "./siteSettings";
 
 export const schemas = [
   robotsConfig,
@@ -20,4 +21,5 @@ export const schemas = [
   doctor,
   testimonial,
   homepage,
+  siteSettings,
 ];

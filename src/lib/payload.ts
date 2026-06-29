@@ -21,7 +21,8 @@ import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
 import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
-import { getSanityDoctors, getSanityTestimonials, type SanityDoctor } from "@/sanity/lib/fetch";
+import { getSanityDoctors, getSanityTestimonials, getSanitySiteSettings, type SanityDoctor, type SanitySiteSettings } from "@/sanity/lib/fetch";
+import type { ContactSource } from "@/lib/contact";
 import { resolveTreatment, type ResolvedTreatment } from "@/lib/treatment-content";
 import { TREATMENTS } from "@/lib/treatments";
 import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre } from "@/lib/location-content";
@@ -188,10 +189,41 @@ export function getGlobalSafe<S extends keyof Config["globals"]>(
   return Promise.resolve(null);
 }
 
-export const getSiteIdentity = async (): Promise<SiteIdentity | undefined> => undefined;
+/** Map the Sanity site-settings doc → ContactSource (phone/email/WhatsApp). */
+function toContactSource(s: SanitySiteSettings): ContactSource {
+  if (!s) return null;
+  return {
+    telephone: s.telephone ?? null,
+    telephoneDisplay: s.telephoneDisplay ?? null,
+    email: s.email ?? null,
+    whatsapp: s.whatsapp ?? null,
+  };
+}
 
-export const getFooter = async (): Promise<FooterData> =>
-  resolveFooter(null as unknown as FooterSource, resolveContactValues(null), [], [], []);
+/** Map the Sanity site-settings doc → SiteIdentity (schema/identity). Returns
+ *  undefined when unset so siteGraph() falls back to the SITE constant. */
+export const getSiteIdentity = async (): Promise<SiteIdentity | undefined> => {
+  const s = await getSanitySiteSettings();
+  if (!s) return undefined;
+  return {
+    name: s.brandName ?? null,
+    alternateName: s.alternateName ?? null,
+    legalName: s.legalName ?? null,
+    logo: s.logoUrl ?? null,
+    foundingDate: s.foundingDate ?? null,
+    telephone: s.telephone ?? null,
+    email: s.email ?? null,
+    address: s.address ?? null,
+    awards: s.awards?.length ? s.awards : null,
+    knowsAbout: s.knowsAbout?.length ? s.knowsAbout : null,
+    sameAs: s.socialLinks?.length ? s.socialLinks : null,
+  };
+};
+
+export const getFooter = async (): Promise<FooterData> => {
+  const settings = await getSanitySiteSettings();
+  return resolveFooter(null as unknown as FooterSource, resolveContactValues(toContactSource(settings)), [], [], []);
+};
 
 export const getHeader = async (): Promise<HeaderData> =>
   resolveHeader(null as unknown as HeaderSource, [], [], []);

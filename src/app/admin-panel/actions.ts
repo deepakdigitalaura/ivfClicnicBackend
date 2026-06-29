@@ -17,10 +17,12 @@ import {
   saveTestimonial,
   deleteTestimonial,
   saveHomepage,
+  saveSiteSettings,
   type Inquiry,
   type AdminDoctor,
   type AdminTestimonial,
   type AdminHomepage,
+  type AdminSiteSettings,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -170,5 +172,14 @@ export async function saveHomepageAction(data: AdminHomepage): Promise<SaveResul
   const r = await guard(() => saveHomepage(data));
   revalidatePath("/");
   revalidatePath("/admin-panel/homepage");
+  return r;
+}
+
+// ── Site Settings (affects every page: header, footer, schema, contact) ──
+
+export async function saveSiteSettingsAction(data: AdminSiteSettings): Promise<SaveResult> {
+  const r = await guard(() => saveSiteSettings(data));
+  revalidatePath("/", "layout"); // header/footer/schema render on every page
+  revalidatePath("/admin-panel/site-settings");
   return r;
 }
