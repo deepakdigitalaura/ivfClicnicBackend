@@ -9,6 +9,7 @@ const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 export default defineConfig({
   name: "bfi-cms",
   title: "BFI Admin",
+  basePath: "/studio",
   projectId,
   dataset,
 
