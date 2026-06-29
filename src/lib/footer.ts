@@ -93,7 +93,7 @@ function buildDoctorFooterGroup(navDoctors: NavDoctorItem[]): FooterGroup | unde
     l: [
       ...senior.map((d) => ({ label: d.name, href: d.href })),
       { label: "All Doctors", href: "/doctors" },
-      { label: "Book Consultation", href: "/#book" },
+      { label: "Book Consultation", href: "/contact#book" },
     ],
   };
 }
@@ -176,7 +176,7 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Dr. Parth Bavishi", href: "/doctors/parth-bavishi" },
       { label: "Dr. Janki Bavishi", href: "/doctors/janki-bavishi" },
       { label: "All Doctors", href: "/doctors" },
-      { label: "Book Consultation", href: "/#book" },
+      { label: "Book Consultation", href: "/contact#book" },
     ]},
     { h: "Locations", l: [
       { label: "Ahmedabad", href: "/locations/ahmedabad" },
