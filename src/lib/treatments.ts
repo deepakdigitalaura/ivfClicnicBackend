@@ -3983,7 +3983,7 @@ export const ivfEvaluation = defineTreatment({
     title: "IVF Failure Evaluation — Why IVF Failed & What Next — Bavishi Fertility Institute",
     description:
       "A thorough evaluation after failed IVF — analysing eggs, sperm, embryos, the uterus and implantation to find the real reason, and building a smarter next plan. Trusted since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
+    ogImage: "/assets/treatments/ivf-evaluation.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -3999,7 +3999,7 @@ export const ivfEvaluation = defineTreatment({
     tagline:
       "A failed cycle is not the end — it is information. A meticulous evaluation of every step tells us why IVF did not work, so the next attempt is smarter, not just another try.",
     badges: ["Root-cause Analysis", "Personalised Re-plan", "Since 1998", "Second-opinion Friendly"],
-    image: "/assets/about-clinic.jpg",
+    image: "/assets/treatments/ivf-evaluation.png",
     imageAlt: "IVF failure evaluation at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -4088,7 +4088,7 @@ export const eraTest = defineTreatment({
     title: "ERA Test (Endometrial Receptivity Analysis) — Bavishi Fertility Institute",
     description:
       "The ERA test explained — how endometrial receptivity analysis personalises embryo-transfer timing to find your window of implantation, especially after repeated failure. Since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
+    ogImage: "/assets/treatments/era-test.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalTest",
@@ -4104,7 +4104,7 @@ export const eraTest = defineTreatment({
     tagline:
       "Even a perfect embryo needs the right moment to implant. The ERA test finds your personal window of implantation, so the transfer is timed precisely for you.",
     badges: ["Personalised Timing", "For Recurrent Failure", "Since 1998", "Genomic Test"],
-    image: "/assets/about-clinic.jpg",
+    image: "/assets/treatments/era-test.png",
     imageAlt: "ERA test (endometrial receptivity analysis) at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -4192,7 +4192,7 @@ export const pgt = defineTreatment({
     title: "Preimplantation Genetic Testing (PGT-A / PGT-M / PGT-SR) — Bavishi Fertility Institute",
     description:
       "PGT explained — testing IVF embryos for chromosomal and genetic conditions before transfer, to improve success and reduce miscarriage. PGT-A, PGT-M and PGT-SR, since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
+    ogImage: "/assets/treatments/pgt.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalTest",
@@ -4208,7 +4208,7 @@ export const pgt = defineTreatment({
     tagline:
       "PGT screens IVF embryos for chromosomal and genetic problems before transfer — helping select the healthiest embryo, improving success and reducing the risk of miscarriage.",
     badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1998", "Class 1000 Labs"],
-    image: "/assets/about-clinic.jpg",
+    image: "/assets/treatments/pgt.png",
     imageAlt: "Preimplantation genetic testing (PGT) at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -4297,7 +4297,7 @@ export const surrogacy = defineTreatment({
     title: "Surrogacy Treatment — Gestational Surrogacy — Bavishi Fertility Institute",
     description:
       "Gestational surrogacy explained — when it is needed, how the process works, and India's legal framework under the Surrogacy Act. Ethical, fully-supported care since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
+    ogImage: "/assets/treatments/surrogacy.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -4313,7 +4313,7 @@ export const surrogacy = defineTreatment({
     tagline:
       "When carrying a pregnancy is not possible, gestational surrogacy offers a path to parenthood — handled ethically, legally and with complete support at every step.",
     badges: ["Gestational Surrogacy", "Surrogacy Act Compliant", "Since 1998", "Full Support"],
-    image: "/assets/about-clinic.jpg",
+    image: "/assets/treatments/surrogacy.png",
     imageAlt: "Surrogacy treatment at Bavishi Fertility Institute",
   },
   whatIs: {
