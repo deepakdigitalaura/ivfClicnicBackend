@@ -105,18 +105,20 @@ export function EditableImage({
   src,
   alt,
   className,
+  style,
   loading,
 }: {
   path: string;
   src: string;
   alt: string;
   className?: string;
+  style?: React.CSSProperties;
   loading?: "lazy" | "eager";
 }) {
   const ctx = useEdit();
   if (!ctx?.editMode) {
     // eslint-disable-next-line @next/next/no-img-element
-    return <img src={src} alt={alt} loading={loading} className={className} />;
+    return <img src={src} alt={alt} loading={loading} className={className} style={style} />;
   }
   return (
     // eslint-disable-next-line @next/next/no-img-element
@@ -125,6 +127,7 @@ export function EditableImage({
       alt={alt}
       loading={loading}
       className={`${className ?? ""} bfi-editable bfi-editable-img`.trim()}
+      style={style}
       data-edit-path={path}
       data-bfi-selected={ctx.selected === path ? "true" : undefined}
       onClick={(e) => {

@@ -358,7 +358,8 @@ export function BlogArticle({
               path="heroImage"
               src={heroUrl}
               alt={hero?.alt ?? blog.title}
-              className="absolute inset-0 z-0 h-full w-full object-cover object-center"
+              className="absolute inset-0 z-0 h-full w-full object-cover"
+              style={{ objectPosition: blog.heroImagePosition ?? "center center" }}
               loading="eager"
             />
             <div className="absolute inset-0 z-[1] gradient-dark-overlay pointer-events-none" />
