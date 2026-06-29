@@ -67,7 +67,7 @@ function BlogCardThumbnail({
         src={hero.url}
         alt={hero.alt ?? title}
         loading="lazy"
-        style={{ objectPosition: "center center" }}
+        style={{ objectPosition: imagePosition ?? "center center" }}
         className="h-full w-full object-cover brightness-125 contrast-105 saturate-[1.3] transition-transform duration-700 group-hover:scale-105"
       />
     );

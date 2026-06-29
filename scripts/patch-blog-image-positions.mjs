@@ -75,6 +75,21 @@ const CENTER_PNG_FRAGMENTS = [
   "uterus normal after birth",// pexels/uterus normal after birth.png — centred diagram
 ];
 
+/**
+ * Blog slugs whose PNG covers have centred content (not right-side subjects).
+ * They must stay "center center" even though they are PNGs.
+ */
+const CENTER_SLUG_EXCEPTIONS = new Set([
+  "the-emotional-rollercoaster-of-ivf-why-mental-health-support-is-essential",
+  "bavishi-fertility-institute-conducts-an-educational-programme-at-rajkot",
+  "bavishi-fertility-institute-conducts-a-successful-cme-program-at-bardoli",
+  "bavishi-fertility-institute-hosts-knowledge-sharing-program-with-bharuch-ob-gy-society",
+  "empowering-women-in-medicine-knowledge-sharing-program-on-advanced-fertility-and-ivf-techniques-at-nikol",
+  "ivf-treatment-cost-in-ahmedabad-across-india",
+  "dr-himanshu-bavishi-speaks-on-ivf-at-sogog-conference",
+  "dr-falguni-bavishi-at-sogog-conference-on-iui-success",
+]);
+
 /** Derive a position from the Payload media URL/filename. */
 function positionFor(mediaUrl) {
   if (!mediaUrl) return "center center";
@@ -155,7 +170,10 @@ async function run() {
   for (let i = 0; i < blogs.length; i++) {
     const b = blogs[i];
     const heroUrl = typeof b.heroImage === "object" ? b.heroImage?.url : null;
-    const position = positionFor(heroUrl);
+    // Slug-level exception overrides filename-based detection
+    const position = CENTER_SLUG_EXCEPTIONS.has(b.slug)
+      ? "center center"
+      : positionFor(heroUrl);
 
     const label = heroUrl
       ? heroUrl.split("/").pop()?.slice(0, 50) ?? heroUrl
