@@ -6,12 +6,12 @@
  * 2. Update cryopreservation's `related` array (remove the 3 slugs).
  * 3. Clean up `related` arrays in every other treatment that referenced them.
  *
- * Run:  PAYLOAD_URL=https://ivfclinic.vercel.app node scripts/patch-merge-cryopreservation.mjs
+ * Run:  PAYLOAD_URL=https://ivf-clicnic-backend-weld.vercel.app node scripts/patch-merge-cryopreservation.mjs
  */
 
 const BASE = process.env.PAYLOAD_URL ?? "http://localhost:3000";
-const EMAIL = process.env.SEED_ADMIN_EMAIL ?? "admin@bfi.local";
-const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "BfiPayload!2026";
+const EMAIL = process.env.SEED_ADMIN_EMAIL ?? "deepak.digitalaura@gmail.com";
+const PASSWORD = process.env.SEED_ADMIN_PASSWORD ?? "Zxcvbnm@123";
 
 const REMOVE_SLUGS = ["embryo-freezing", "sperm-freezing", "egg-freezing"];
 
