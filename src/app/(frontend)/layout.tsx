@@ -6,6 +6,7 @@ import { siteGraph } from "@/lib/seo";
 import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
+import { CookieConsent } from "@/components/cookie-consent";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
@@ -63,6 +64,7 @@ export default async function RootLayout({
         <HeaderProvider value={header}>
           <FooterProvider value={footer}>{children}</FooterProvider>
         </HeaderProvider>
+        <CookieConsent />
       </body>
     </html>
   );
