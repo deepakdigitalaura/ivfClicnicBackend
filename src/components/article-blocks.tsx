@@ -97,9 +97,12 @@ function getNumericSuffix(value: string): string {
  * ambient colour blobs, a subtle grid texture, and per-stat counting
  * animation driven by Payload's Counter primitive. Stagger entrance.
  * ══════════════════════════════════════════════════════════════════════ */
+const isPlaceholderValue = (v: string) => /^0[\s%+×/\d]*$/.test(v.trim());
+
 export function AnimatedStatStrip({ node }: { node: { fields: unknown } }) {
-  const items = (node.fields as StatStripBlock).items ?? [];
-  if (!items.length) return null;
+  const raw = (node.fields as StatStripBlock).items ?? [];
+  const items = raw.filter((item) => !isPlaceholderValue(item.value));
+  if (items.length < 2) return null;
 
   const gridCls =
     items.length === 2

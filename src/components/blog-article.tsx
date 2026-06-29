@@ -516,7 +516,7 @@ export function BlogArticle({
                 />
                 {/* title + category badge on the left */}
                 <div className="absolute inset-0 flex items-center">
-                  <div className="px-7 md:px-10 max-w-[55%]">
+                  <div className="px-7 md:px-10 max-w-[60%]">
                     {category?.title && (
                       <span
                         className={`mb-3 inline-block rounded-full px-3 py-1 text-[10px] font-semibold uppercase tracking-wider ${
@@ -529,7 +529,11 @@ export function BlogArticle({
                       </span>
                     )}
                     <p
-                      className={`text-xl font-semibold leading-snug md:text-2xl lg:text-[1.75rem] ${
+                      className={`font-semibold leading-snug line-clamp-3 ${
+                        blog.title.length > 60
+                          ? "text-base md:text-lg lg:text-xl"
+                          : "text-xl md:text-2xl lg:text-[1.75rem]"
+                      } ${
                         blog.heroTextDark
                           ? "text-[color:var(--plum)]"
                           : "text-white"
