@@ -8,6 +8,7 @@
  * SEO features (robots, sitemap, scripts, redirects, JSON-LD, per-page SEO) are
  * now managed via Sanity — see src/sanity/.
  */
+import type { Page, Blog } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
@@ -27,7 +28,7 @@ import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre } fr
 export type EducationVideoItem = { id: string; title: string; desc: string; tab: string };
 export type TestimonialVideoItem = { id: string; name: string; quote: string; stars: number };
 export type BlogsPage = {
-  docs: unknown[];
+  docs: Blog[];
   page: number;
   totalPages: number;
   totalDocs: number;
@@ -45,15 +46,15 @@ export const payloadClient = async (): Promise<any> => {
 
 // ---------- Pages ----------
 
-export const getPageBySlug = async (_slug: string) => null;
-export const getPageBySlugDraft = async (_slug: string) => null;
+export const getPageBySlug = async (_slug: string): Promise<Page | null> => null;
+export const getPageBySlugDraft = async (_slug: string): Promise<Page | null> => null;
 export const getPublishedPageSlugs = async (): Promise<string[]> => [];
 
 // ---------- Blogs ----------
 
-export const getBlogBySlug = async (_slug: string) => null;
-export const getBlogBySlugDraft = async (_slug: string) => null;
-export const getBlogs = async (_limit = 24): Promise<unknown[]> => [];
+export const getBlogBySlug = async (_slug: string): Promise<Blog | null> => null;
+export const getBlogBySlugDraft = async (_slug: string): Promise<Blog | null> => null;
+export const getBlogs = async (_limit = 24): Promise<Blog[]> => [];
 export const getBlogsPage = async (_page = 1, _limit = 24): Promise<BlogsPage> => ({
   docs: [],
   page: 1,
@@ -62,10 +63,10 @@ export const getBlogsPage = async (_page = 1, _limit = 24): Promise<BlogsPage> =
   hasPrevPage: false,
   hasNextPage: false,
 });
-export const getBlogsByTreatmentSlug = async (_treatmentSlug: string, _limit = 3): Promise<unknown[]> => [];
-export const getBlogsByLocationSlug = async (_locationSlug: string, _limit = 3): Promise<unknown[]> => [];
-export const getRelatedBlogs = async (_slug: string, _treatmentSlugs: string[], _categoryId: number | null, _limit = 3): Promise<unknown[]> => [];
-export const getCMEBlogs = async (): Promise<unknown[]> => [];
+export const getBlogsByTreatmentSlug = async (_treatmentSlug: string, _limit = 3): Promise<Blog[]> => [];
+export const getBlogsByLocationSlug = async (_locationSlug: string, _limit = 3): Promise<Blog[]> => [];
+export const getRelatedBlogs = async (_slug: string, _treatmentSlugs: string[], _categoryId: number | null, _limit = 3): Promise<Blog[]> => [];
+export const getCMEBlogs = async (): Promise<Blog[]> => [];
 export const getPublishedBlogSlugs = async (): Promise<string[]> => [];
 
 // ---------- Videos ----------
