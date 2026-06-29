@@ -1,4 +1,5 @@
 import type { CollectionConfig, Field } from "payload";
+import { lexicalEditor } from "@payloadcms/richtext-lexical";
 import { revalidateCollection } from "@/lib/revalidate";
 import { seoField } from "@/fields/seo";
 import { isAdmin, isEditor, isAdminField } from "@/access/roles";
@@ -57,6 +58,13 @@ const PAGE_FIELDS: Field[] = [
       ],
     },
     {
+      name: "content",
+      type: "richText",
+      label: "Page Content",
+      editor: lexicalEditor({}),
+      admin: { description: "Main body content for this page (used by policy/legal pages)." },
+    },
+    {
       name: "faqs",
       type: "array",
       labels: { singular: "FAQ", plural: "FAQs" },
@@ -82,7 +90,7 @@ const PAGE_FIELDS: Field[] = [
 
 export const Pages: CollectionConfig = {
   slug: "pages",
-  labels: { singular: "Contact Page", plural: "Contact Page" },
+  labels: { singular: "Page", plural: "Pages" },
   admin: {
     group: "Website Pages",
     useAsTitle: "title",
@@ -117,9 +125,10 @@ export const Pages: CollectionConfig = {
       type: "tabs",
       tabs: [
         { label: "Page", fields: PAGE_FIELDS.slice(0, 3) },
-        { label: "FAQs", fields: PAGE_FIELDS.slice(3, 4) },
-        { label: "Section Labels", fields: PAGE_FIELDS.slice(4, 5) },
-        { label: "Search & Social", fields: PAGE_FIELDS.slice(5) },
+        { label: "Content", fields: PAGE_FIELDS.slice(3, 4) },
+        { label: "FAQs", fields: PAGE_FIELDS.slice(4, 5) },
+        { label: "Section Labels", fields: PAGE_FIELDS.slice(5, 6) },
+        { label: "Search & Social", fields: PAGE_FIELDS.slice(6) },
       ],
     },
   ],

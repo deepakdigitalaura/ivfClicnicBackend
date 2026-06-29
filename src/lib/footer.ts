@@ -211,11 +211,11 @@ export const FOOTER_DEFAULTS: FooterData = {
   social: [],
   copyrightText: DEFAULT_COPYRIGHT,
   legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Refund Policy", href: "#" },
-    { label: "Cookie Policy", href: "#" },
-    { label: "Sitemap", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Refund Policy", href: "/refund-policy" },
+    { label: "Cookie Policy", href: "/cookie-policy" },
+    { label: "Sitemap", href: "/sitemap" },
   ],
 };
 

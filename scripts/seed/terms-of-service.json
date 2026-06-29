@@ -1,0 +1,261 @@
+{
+  "title": "Terms of Service",
+  "slug": "terms-of-service",
+  "_status": "published",
+  "hero": {
+    "lead": "Terms of",
+    "em": "Service",
+    "subtitle": "Terms and conditions governing your use of the Bavishi Fertility Institute website."
+  },
+  "content": {
+    "root": {
+      "type": "root",
+      "format": "",
+      "indent": 0,
+      "version": 1,
+      "children": [
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Website Ownership & Access", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "The website https://ivfclinic.com/ is owned by Bavishi Fertility Institute with registered office at Opp. Manjulal Municipal Garden, Next to Adani CNG & Orion Building, Paldi, Ahmedabad. Website access is free except for telecommunications connection costs.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Acceptance of Terms", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Using the website constitutes acceptance of all terms outlined in this notice. Users should review this document periodically as conditions may change. The institute reserves unilateral modification rights, with changes published visibly and dated.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Navigation & Security", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "The institute makes efforts to ensure safe browsing but accepts no liability for damages from using incompatible browsers or versions.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "User Obligations", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Users must comply with laws and good faith principles. Activities that are illicit, infringe third-party rights, or damage or overload the website are prohibited. The following activities are specifically prohibited:", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "ul",
+          "type": "list",
+          "start": 1,
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {"type": "listitem", "value": 1, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Violating third-party rights (privacy, image rights, intellectual property)", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 2, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Sending unsolicited communications or spam", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 3, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Introducing computer viruses or malicious software", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"}
+          ],
+          "listType": "bullet",
+          "direction": "ltr"
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Intellectual Property Rights", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "All website content, graphics, and code are protected by copyright and belong exclusively to Bavishi Fertility Institute or licensors. Reproduction, distribution, or public communication of content requires prior written consent. Content cannot be modified, copied, republished, or used for commercial purposes without authorization.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Trademarks", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "All trademarks, logos, and distinctive signs are protected property of Bavishi Fertility Institute. Use without consent is prohibited.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Data Collection & Privacy", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Personal data is collected for managing information requests, suggestions, and service-related communications. Data is retained for legal compliance periods or until deletion is requested. Processing relies on user consent. Data is not transferred to third parties except when necessary for stated purposes or legally required.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Users may access, correct, delete, limit, object to processing of, or request portability of their personal data. The institute implements required technical and organizational safeguards to protect data integrity and confidentiality.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Hyperlink Requirements", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Users establishing links to the institute's website must follow these conditions:", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "ol",
+          "type": "list",
+          "start": 1,
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {"type": "listitem", "value": 1, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Links direct only to the homepage without reproducing content", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 2, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Frames surrounding pages or displaying content through different URLs are prohibited when causing user confusion about origin", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 3, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "No false statements about the institute, employees, or activities", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 4, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Cannot express that the institute consents to or sponsors the link", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 5, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Linking pages must comply with law and cannot contain illegal, harmful, or inappropriate content", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"}
+          ],
+          "listType": "number",
+          "direction": "ltr"
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Liability Limitations", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Users bear sole responsibility for infractions and third-party damages from improper website use. The institute is not liable for:", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "ul",
+          "type": "list",
+          "start": 1,
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {"type": "listitem", "value": 1, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Technical failures beyond company control (interference, viruses, disconnections, delays, overloads)", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 2, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Third-party content errors appearing on the website", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 3, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Linked site content, products, or services accessed through external links", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"},
+            {"type": "listitem", "value": 4, "format": "", "indent": 0, "version": 1, "children": [{"mode": "normal", "text": "Third-party cookie installations on user devices", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}], "direction": "ltr"}
+          ],
+          "listType": "bullet",
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "External links do not necessarily indicate relationships with linked entities or represent institute endorsement of their content or services. The institute reserves unilateral link removal rights.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Content Updates", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Information reflects the last update date. The owner reserves rights to update, modify, or delete website information at any time.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        }
+      ],
+      "direction": "ltr"
+    }
+  },
+  "seo": {
+    "metaTitle": "Terms of Service — Bavishi Fertility Institute",
+    "metaDescription": "Terms and conditions governing your use of the Bavishi Fertility Institute website. Read about user obligations, intellectual property, and liability limitations.",
+    "ogTitle": "Terms of Service — Bavishi Fertility Institute",
+    "ogDescription": "Terms and conditions for using the Bavishi Fertility Institute website."
+  }
+}

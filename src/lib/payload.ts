@@ -100,6 +100,28 @@ export async function getPageBySlugDraft(slug: string): Promise<Page | null> {
   }, null);
 }
 
+/** Published page slugs for generateStaticParams. Cached + tagged `pages`. */
+export const getPublishedPageSlugs = reactCache(
+  (): Promise<string[]> =>
+    unstable_cache(
+      () => safeQuery(
+        async (payload) => {
+          const res = await payload.find({
+            collection: "pages",
+            where: { _status: { equals: "published" } },
+            limit: 100,
+            depth: 0,
+            select: { slug: true },
+          });
+          return res.docs.map((d) => d.slug).filter(Boolean) as string[];
+        },
+        [],
+      ),
+      ["published-page-slugs"],
+      { tags: [cacheTags.collectionList("pages")] },
+    )(),
+);
+
 /* ---------- Blogs (Phase 3) ---------- */
 
 /** Single published blog by slug. Cached + tagged `blogs`, `blogs:<slug>`.
