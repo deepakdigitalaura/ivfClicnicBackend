@@ -17,6 +17,9 @@ const LANGS = [
   { code: "mr", label: "मराठी" },
 ];
 
+// Site only has English content today — switcher re-enables once translations ship.
+const LANGUAGE_SWITCHER_ENABLED = false;
+
 export function SiteHeader({
   logoSrc,
   logoAlt,
@@ -67,34 +70,38 @@ export function SiteHeader({
             <a href="tel:+919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><Phone className="h-3 w-3" /> +91 97126 22288</a>
             <a href="https://wa.me/919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
             <a href="/#book" className="flex items-center gap-1.5 text-white/80 hover:text-white">24×7 Care</a>
-            <span className="h-3 w-px bg-white/20" />
-            {/* Language */}
-            <div className="relative" data-lang>
-              <button
-                type="button"
-                onClick={(e) => { e.stopPropagation(); setLangOpen((v) => !v); }}
-                className="flex items-center gap-1.5 text-white/80 hover:text-white"
-              >
-                <Globe className="h-3 w-3" />
-                {LANGS.find((l) => l.code === lang)?.label}
-                <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
-              </button>
-              {langOpen && (
-                <div className="absolute right-0 z-[70] mt-2 w-40 overflow-hidden rounded-xl border border-border bg-white shadow-lift">
-                  {LANGS.map((l) => (
-                    <button
-                      key={l.code}
-                      type="button"
-                      onClick={() => { setLang(l.code); setLangOpen(false); }}
-                      className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition-colors hover:bg-[color:var(--ivory)] ${lang === l.code ? "text-[color:var(--rose)] font-semibold" : "text-[color:var(--plum)]"}`}
-                    >
-                      {l.label}
-                      {lang === l.code && <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--rose)]" />}
-                    </button>
-                  ))}
+            {LANGUAGE_SWITCHER_ENABLED && (
+              <>
+                <span className="h-3 w-px bg-white/20" />
+                {/* Language */}
+                <div className="relative" data-lang>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setLangOpen((v) => !v); }}
+                    className="flex items-center gap-1.5 text-white/80 hover:text-white"
+                  >
+                    <Globe className="h-3 w-3" />
+                    {LANGS.find((l) => l.code === lang)?.label}
+                    <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {langOpen && (
+                    <div className="absolute right-0 z-[70] mt-2 w-40 overflow-hidden rounded-xl border border-border bg-white shadow-lift">
+                      {LANGS.map((l) => (
+                        <button
+                          key={l.code}
+                          type="button"
+                          onClick={() => { setLang(l.code); setLangOpen(false); }}
+                          className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition-colors hover:bg-[color:var(--ivory)] ${lang === l.code ? "text-[color:var(--rose)] font-semibold" : "text-[color:var(--plum)]"}`}
+                        >
+                          {l.label}
+                          {lang === l.code && <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--rose)]" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -218,20 +225,22 @@ export function SiteHeader({
               </button>
             </div>
 
-            <div className="px-5 py-4">
-              <div className="flex items-center gap-2 rounded-full border border-border bg-[color:var(--ivory)] p-1">
-                {LANGS.map((l) => (
-                  <button
-                    key={l.code}
-                    type="button"
-                    onClick={() => setLang(l.code)}
-                    className={`flex-1 rounded-full px-2 py-1.5 text-xs font-semibold transition ${lang === l.code ? "bg-white text-[color:var(--rose)] shadow-soft" : "text-[color:var(--plum)]/70"}`}
-                  >
-                    {l.label}
-                  </button>
-                ))}
+            {LANGUAGE_SWITCHER_ENABLED && (
+              <div className="px-5 py-4">
+                <div className="flex items-center gap-2 rounded-full border border-border bg-[color:var(--ivory)] p-1">
+                  {LANGS.map((l) => (
+                    <button
+                      key={l.code}
+                      type="button"
+                      onClick={() => setLang(l.code)}
+                      className={`flex-1 rounded-full px-2 py-1.5 text-xs font-semibold transition ${lang === l.code ? "bg-white text-[color:var(--rose)] shadow-soft" : "text-[color:var(--plum)]/70"}`}
+                    >
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <nav className="px-2 pb-6">
               {NAV.map((item) => (
