@@ -1,5 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
-import nodemailer from "nodemailer";
+import { Resend } from "resend";
 import { payloadClient } from "@/lib/payload";
 
 /* =====================================================================
@@ -78,17 +78,12 @@ async function sendNotificationEmail(fields: {
   message: string;
   source: string;
 }) {
-  const user = process.env.GMAIL_USER;
-  const pass = process.env.GMAIL_APP_PASSWORD;
-  if (!user || !pass) return; // silently skip if not configured
+  const apiKey = process.env.RESEND_API_KEY;
+  if (!apiKey) return; // silently skip if not configured
 
-  const transporter = nodemailer.createTransport({
-    service: "gmail",
-    auth: { user, pass },
-  });
-
-  await transporter.sendMail({
-    from: `"BFI IVF Clinic" <${user}>`,
+  const resend = new Resend(apiKey);
+  await resend.emails.send({
+    from: "BFI IVF Clinic <onboarding@resend.dev>",
     to: "deepak.digitalaura@gmail.com",
     subject: `New Inquiry from ${fields.name} — BFI IVF Clinic`,
     html: buildEmailHtml(fields),
