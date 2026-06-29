@@ -133,10 +133,13 @@ export async function POST(req: NextRequest) {
       overrideAccess: true,
     });
 
-    // Fire email notification — non-blocking, failure doesn't break the user's submit
-    sendNotificationEmail({ name, phone, email, treatment, location, message, source }).catch(
-      (err) => console.error("[inquiry] email notification failed:", err),
-    );
+    // Send email notification — awaited so the runtime doesn't kill it before it completes.
+    // A failed send is logged but never surfaces to the user.
+    try {
+      await sendNotificationEmail({ name, phone, email, treatment, location, message, source });
+    } catch (err) {
+      console.error("[inquiry] email notification failed:", err);
+    }
 
     return NextResponse.json({ ok: true });
   } catch {
