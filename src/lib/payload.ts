@@ -35,6 +35,14 @@ export type BlogsPage = {
   hasNextPage: boolean;
 };
 
+// ---------- Legacy compatibility (payloadClient used by some editor routes) ----------
+
+/** @deprecated Payload removed — returns a no-op stub so imports don't crash. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const payloadClient = async (): Promise<any> => {
+  throw new Error("Payload CMS has been removed. Use Sanity instead.");
+};
+
 // ---------- Pages ----------
 
 export const getPageBySlug = async (_slug: string) => null;
