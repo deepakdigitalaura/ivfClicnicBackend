@@ -8,6 +8,7 @@
  * SEO features (robots, sitemap, scripts, redirects, JSON-LD, per-page SEO) are
  * now managed via Sanity — see src/sanity/.
  */
+import type { Payload } from "payload";
 import type { Page, Blog, Config } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
 import { resolveContactValues } from "@/lib/contact";
@@ -38,9 +39,8 @@ export type BlogsPage = {
 
 // ---------- Legacy compatibility (payloadClient used by some editor routes) ----------
 
-/** @deprecated Payload removed — returns a no-op stub so imports don't crash. */
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const payloadClient = async (): Promise<any> => {
+/** @deprecated Payload removed. Always throws — callers have try/catch fallbacks. */
+export const payloadClient = async (): Promise<Payload> => {
   throw new Error("Payload CMS has been removed. Use Sanity instead.");
 };
 
