@@ -129,18 +129,12 @@ console.log("[education] Cleared existing rows.");
 
 let eOrder = 0;
 for (const v of education) {
-  // Build a clean title — strip non-ASCII cruft for display
-  const cleanTitle = v.title
-    .replace(/[^\x00-\x7Fऀ-ॿ઀-૿]+/g, " ")
-    .replace(/\s{2,}/g, " ")
-    .trim();
-
   await client.query(
     `INSERT INTO education_videos
        (title, category, youtube_id, description, published, "order", updated_at, created_at)
      VALUES ($1, $2, $3, $4, $5, $6, NOW(), NOW())`,
     [
-      cleanTitle || v.title,
+      v.title,
       v.category,
       v.id,
       null,
