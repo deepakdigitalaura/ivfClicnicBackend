@@ -19,6 +19,9 @@ export default defineConfig({
         S.list()
           .title("BFI CMS")
           .items([
+            S.listItem()
+              .title("🏠 Homepage")
+              .child(S.document().schemaType("homepage").documentId("homepage")),
             S.documentTypeListItem("inquiry").title("📨 Inquiries"),
             S.documentTypeListItem("doctor").title("🩺 Doctors"),
             S.documentTypeListItem("testimonial").title("⭐ Testimonials"),

@@ -15,6 +15,7 @@ import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
+import { getSanityHomepage } from "@/sanity/lib/fetch";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
@@ -195,8 +196,26 @@ export const getFooter = async (): Promise<FooterData> =>
 export const getHeader = async (): Promise<HeaderData> =>
   resolveHeader(null as unknown as HeaderSource, [], [], []);
 
-export const getHomepage = async (): Promise<HomepageData> =>
-  resolveHomepage(null as unknown as HomepageSource);
+/** Map the Sanity homepage doc → the HomepageSource shape resolveHomepage
+ *  overlays. Converts string[] badge/feature lists to the {text}[] form the
+ *  source expects; everything else passes through. Unknown/empty → resolver
+ *  uses HOMEPAGE_DEFAULTS per-section (byte-identical). */
+function mapHomepageSource(doc: Record<string, unknown> | null): HomepageSource {
+  if (!doc) return null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const d = doc as any;
+  const textRows = (a?: string[] | null) => (Array.isArray(a) ? a.filter(Boolean).map((text) => ({ text })) : undefined);
+  return {
+    ...d,
+    hero: d.hero ? { ...d.hero, badges: textRows(d.hero.badges) } : undefined,
+    suraksha: d.suraksha ? { ...d.suraksha, features: textRows(d.suraksha.features) } : undefined,
+  } as HomepageSource;
+}
+
+export const getHomepage = async (): Promise<HomepageData> => {
+  const doc = await getSanityHomepage();
+  return resolveHomepage(mapHomepageSource(doc));
+};
 
 export const getAbout = async (): Promise<AboutData> =>
   resolveAbout(null as unknown as AboutSource);

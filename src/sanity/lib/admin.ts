@@ -211,6 +211,27 @@ export async function deleteDoctor(id: string) {
   revalidateDoctors();
 }
 
+// ── Homepage (singleton) ──
+
+export type AdminHomepage = Record<string, unknown>;
+
+export async function readHomepage(): Promise<AdminHomepage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("homepage")) as AdminHomepage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveHomepage(data: AdminHomepage) {
+  // Strip system fields before write.
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "homepage", _type: "homepage", ...rest });
+  revalidateTag("sanity-homepage");
+}
+
 // ── Testimonials ──
 
 export type AdminTestimonial = {

@@ -183,3 +183,17 @@ export const getSanityTestimonials = () =>
     ["sanity-testimonials"],
     { revalidate: 3600, tags: ["sanity-testimonials"] },
   )();
+
+// ── Homepage (singleton) ──
+
+/** Loose shape — kept decoupled; mapped to HomepageSource in payload.ts. */
+export type SanityHomepage = Record<string, unknown> | null;
+
+/** The homepage singleton from Sanity (cached + tagged). Null when unset, so the
+ *  homepage falls back to HOMEPAGE_DEFAULTS byte-identically. */
+export const getSanityHomepage = () =>
+  unstable_cache(
+    () => sanityFetch<SanityHomepage>(`*[_type == "homepage"][0]`),
+    ["sanity-homepage"],
+    { revalidate: 3600, tags: ["sanity-homepage"] },
+  )();
