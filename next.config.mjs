@@ -1,114 +1,60 @@
-import path from "path";
-import { createRequire } from "module";
-import { withPayload } from "@payloadcms/next/withPayload";
-
-const require = createRequire(import.meta.url);
-// `exports` in plugin-cloud-storage's package.json only allows the "."/
-// "./utilities"/"./client" subpaths — even "./package.json" is blocked, so
-// we can't require.resolve() our way to the package root directly. Resolve
-// the "." entry (./dist/index.js, which *is* exported) and walk up two
-// dirs to the package root instead, then join the deep path by hand.
-const pluginCloudStorageRoot = path.dirname(
-  path.dirname(require.resolve("@payloadcms/plugin-cloud-storage")),
-);
-
-/* ─── 301 redirects: old static routes → canonical CMS routes ─── */
-const REDIRECTS = [
-  // Treatment pages
-  ["/asthenospermia",                                                    "/treatments/asthenospermia"],
-  ["/azoospermia",                                                       "/treatments/azoospermia"],
-  ["/blastocyst-culture-blastocyst-transfer",                            "/treatments/blastocyst-transfer"],
-  ["/conceive-naturally",                                                "/treatments/conceive-naturally"],
-  ["/cryopreservation",                                                  "/treatments/cryopreservation"],
-  ["/egg-donation",                                                      "/treatments/egg-donation"],
-  ["/egg-freezing",                                                      "/treatments/cryopreservation"],
-  ["/treatments/egg-freezing",                                           "/treatments/cryopreservation"],
-  ["/embryo-donation",                                                   "/treatments/embryo-donation"],
-  ["/embryo-freezing",                                                   "/treatments/cryopreservation"],
-  ["/treatments/embryo-freezing",                                        "/treatments/cryopreservation"],
-  ["/endometriosis",                                                     "/treatments/endometriosis"],
-  ["/era-test",                                                          "/treatments/era-test"],
-  ["/erectile-dysfunction",                                              "/treatments/erectile-dysfunction"],
-  ["/fibroids",                                                          "/treatments/fibroids"],
-  ["/icsi-treatment-intracytoplasmic-sperm-injection",                   "/treatments/icsi"],
-  ["/intra-uterine-insemination-iui",                                    "/treatments/iui"],
-  ["/intracytoplasmic-morphologically-selected-sperm-injection-imsi",    "/treatments/imsi"],
-  ["/ivf-evaluation",                                                    "/treatments/ivf-evaluation"],
-  ["/ivf-failure",                                                       "/treatments/ivf-failure"],
-  ["/laser-assisted-hatching",                                           "/treatments/laser-hatching"],
-  ["/magnetic-activated-cell-sorting-macs",                              "/treatments/macs"],
-  ["/oligospermia",                                                      "/treatments/oligospermia"],
-  ["/ovarian-rejuvenation",                                              "/treatments/ovarian-rejuvenation"],
-  ["/ovarian-reserve",                                                   "/treatments/ovarian-reserve"],
-  ["/pcos",                                                              "/treatments/pcos"],
-  ["/pgt",                                                               "/treatments/pgt"],
-  ["/physiological-intracytoplasmic-sperm-injection-picsi",              "/treatments/picsi"],
-  ["/prp-infertility",                                                   "/treatments/prp-infertility"],
-  ["/sperm-donation",                                                    "/treatments/sperm-donation"],
-  ["/sperm-freezing",                                                    "/treatments/cryopreservation"],
-  ["/treatments/sperm-freezing",                                         "/treatments/cryopreservation"],
-  ["/spindle-view-icsi",                                                 "/treatments/spindle-view-icsi"],
-  ["/surgical-sperm-retrieval",                                          "/treatments/surgical-sperm-retrieval"],
-  ["/surrogacy",                                                         "/treatments/surrogacy"],
-  ["/varicocele",                                                        "/treatments/varicocele"],
-  ["/what-is-ivf",                                                       "/treatments/ivf"],
-  // Calculator pages
-  ["/ivf-success-rate-calculator",          "/calculators/ivf-success-rate"],
-  ["/ivf-cost-calculator",                  "/calculators/ivf-cost"],
-  ["/ovulation-calculator",                 "/calculators/ovulation"],
-  ["/natural-pregnancy-calculator",         "/calculators/natural-pregnancy"],
-  ["/fertile-period-calculator",            "/calculators/fertile-period"],
-  ["/amh-level-interpreter",               "/calculators/amh-level"],
-  ["/semen-analysis-calculator",            "/calculators/semen-analysis"],
-  ["/risk-of-repeat-miscarriage-calculator","/calculators/miscarriage-risk"],
-];
-
 /** @type {import('next').NextConfig} */
 const nextConfig = {
   reactStrictMode: true,
 
   async redirects() {
-    return REDIRECTS.map(([source, destination]) => ({
-      source,
-      destination,
-      permanent: true,
-    }));
+    return [
+      // Treatment pages
+      { source: "/asthenospermia",                                                    destination: "/treatments/asthenospermia",           permanent: true },
+      { source: "/azoospermia",                                                       destination: "/treatments/azoospermia",              permanent: true },
+      { source: "/blastocyst-culture-blastocyst-transfer",                            destination: "/treatments/blastocyst-transfer",      permanent: true },
+      { source: "/conceive-naturally",                                                destination: "/treatments/conceive-naturally",       permanent: true },
+      { source: "/cryopreservation",                                                  destination: "/treatments/cryopreservation",         permanent: true },
+      { source: "/egg-donation",                                                      destination: "/treatments/egg-donation",             permanent: true },
+      { source: "/egg-freezing",                                                      destination: "/treatments/cryopreservation",         permanent: true },
+      { source: "/treatments/egg-freezing",                                           destination: "/treatments/cryopreservation",         permanent: true },
+      { source: "/embryo-donation",                                                   destination: "/treatments/embryo-donation",          permanent: true },
+      { source: "/embryo-freezing",                                                   destination: "/treatments/cryopreservation",         permanent: true },
+      { source: "/treatments/embryo-freezing",                                        destination: "/treatments/cryopreservation",         permanent: true },
+      { source: "/endometriosis",                                                     destination: "/treatments/endometriosis",            permanent: true },
+      { source: "/era-test",                                                          destination: "/treatments/era-test",                 permanent: true },
+      { source: "/erectile-dysfunction",                                              destination: "/treatments/erectile-dysfunction",     permanent: true },
+      { source: "/fibroids",                                                          destination: "/treatments/fibroids",                 permanent: true },
+      { source: "/icsi-treatment-intracytoplasmic-sperm-injection",                   destination: "/treatments/icsi",                    permanent: true },
+      { source: "/intra-uterine-insemination-iui",                                    destination: "/treatments/iui",                     permanent: true },
+      { source: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",    destination: "/treatments/imsi",                    permanent: true },
+      { source: "/ivf-evaluation",                                                    destination: "/treatments/ivf-evaluation",          permanent: true },
+      { source: "/ivf-failure",                                                       destination: "/treatments/ivf-failure",             permanent: true },
+      { source: "/laser-assisted-hatching",                                           destination: "/treatments/laser-hatching",          permanent: true },
+      { source: "/magnetic-activated-cell-sorting-macs",                              destination: "/treatments/macs",                    permanent: true },
+      { source: "/oligospermia",                                                      destination: "/treatments/oligospermia",            permanent: true },
+      { source: "/ovarian-rejuvenation",                                              destination: "/treatments/ovarian-rejuvenation",    permanent: true },
+      { source: "/ovarian-reserve",                                                   destination: "/treatments/ovarian-reserve",         permanent: true },
+      { source: "/pcos",                                                              destination: "/treatments/pcos",                    permanent: true },
+      { source: "/pgt",                                                               destination: "/treatments/pgt",                     permanent: true },
+      { source: "/physiological-intracytoplasmic-sperm-injection-picsi",              destination: "/treatments/picsi",                   permanent: true },
+      { source: "/prp-infertility",                                                   destination: "/treatments/prp-infertility",         permanent: true },
+      { source: "/sperm-donation",                                                    destination: "/treatments/sperm-donation",          permanent: true },
+      { source: "/sperm-freezing",                                                    destination: "/treatments/cryopreservation",         permanent: true },
+      { source: "/treatments/sperm-freezing",                                         destination: "/treatments/cryopreservation",         permanent: true },
+      { source: "/spindle-view-icsi",                                                 destination: "/treatments/spindle-view-icsi",       permanent: true },
+      { source: "/surgical-sperm-retrieval",                                          destination: "/treatments/surgical-sperm-retrieval",permanent: true },
+      { source: "/surrogacy",                                                         destination: "/treatments/surrogacy",               permanent: true },
+      { source: "/varicocele",                                                        destination: "/treatments/varicocele",              permanent: true },
+      { source: "/what-is-ivf",                                                       destination: "/treatments/ivf",                     permanent: true },
+      // Calculator pages
+      { source: "/ivf-success-rate-calculator",            destination: "/calculators/ivf-success-rate",   permanent: true },
+      { source: "/ivf-cost-calculator",                    destination: "/calculators/ivf-cost",           permanent: true },
+      { source: "/ovulation-calculator",                   destination: "/calculators/ovulation",          permanent: true },
+      { source: "/natural-pregnancy-calculator",           destination: "/calculators/natural-pregnancy",  permanent: true },
+      { source: "/fertile-period-calculator",              destination: "/calculators/fertile-period",     permanent: true },
+      { source: "/amh-level-interpreter",                  destination: "/calculators/amh-level",          permanent: true },
+      { source: "/semen-analysis-calculator",              destination: "/calculators/semen-analysis",     permanent: true },
+      { source: "/risk-of-repeat-miscarriage-calculator",  destination: "/calculators/miscarriage-risk",   permanent: true },
+    ];
   },
 
-  // @payloadcms/storage-vercel-blob's client upload handler imports
-  // `getFileKey` from the `@payloadcms/plugin-cloud-storage/utilities`
-  // barrel — which *also* re-exports `resolveSignedURLKey`, a server-only
-  // util that transitively pulls in `undici` and several `node:`-prefixed
-  // built-ins (node:async_hooks, node:buffer, node:console). Webpack can
-  // polyfill bare `path`/`crypto` for the browser but refuses `node:`
-  // specifiers outright, so bundling the admin client fails. We never use
-  // signed URLs, so for the browser bundle only, redirect that barrel
-  // import straight to the one file we actually need (no `node:` deps).
-  webpack: (config, { isServer }) => {
-    if (!isServer) {
-      config.resolve.alias["@payloadcms/plugin-cloud-storage/utilities"] = path.join(
-        pluginCloudStorageRoot,
-        "dist/utilities/getFileKey.js",
-      );
-    }
-    return config;
-  },
-
-  // IMAGE STRATEGY — decision: keep `unoptimized: true` *while* the deploy
-  // target is a static export with no image server.
-  //  - next/image still earns its keep: explicit width/height (via `fill` +
-  //    sized containers) reserves layout space (CLS≈0) and `priority` emits a
-  //    <link rel=preload> for the LCP hero. `sizes` is authored everywhere so
-  //    a real srcset appears automatically the moment optimization is enabled.
-  //  - To get resizing + AVIF/WebP (byte-weight reduction) WITHOUT leaving
-  //    static export, set a CDN loader in Phase B, e.g.:
-  //        images: { loader: 'custom', loaderFile: './src/lib/cf-image-loader.ts' }
-  //    backed by Cloudflare Images / Netlify Image CDN. Components need NO
-  //    changes — only this config flips. Until then, source assets should be
-  //    pre-compressed (hero exported as WebP/AVIF ≤150 KB).
   images: { unoptimized: true },
 };
 
-// withPayload mounts the CMS (admin + api) into this Next app. devBundleServerPackages
-// is left default; the existing (frontend) build behaviour is unchanged.
-export default withPayload(nextConfig);
+export default nextConfig;

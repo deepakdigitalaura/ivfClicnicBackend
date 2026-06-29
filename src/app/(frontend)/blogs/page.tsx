@@ -6,7 +6,7 @@ import { getBlogsPage, getGlobalSafe } from "@/lib/payload";
 
 const PAGE_SIZE = 24;
 
-const PATH = "/blog";
+const PATH = "/blogs";
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
 
 /* Fallbacks = the original hardcoded copy, so the route is byte-identical when

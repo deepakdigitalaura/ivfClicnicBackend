@@ -46,8 +46,8 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
   blog: {
     key: "blog",
     label: "Blog",
-    href: "/blog",
-    published: true, // Phase 3: /blog hub is live.
+    href: "/blogs",
+    published: true, // Phase 3: /blogs hub is live.
     fallback: "/#blogs",
   },
   "success-stories": {

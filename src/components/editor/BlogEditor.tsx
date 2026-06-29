@@ -48,7 +48,7 @@ export function BlogEditor({
         <div className="bfi-editing notranslate" translate="no">
           <EditorToolbar
             pageLabel={`Blog: ${draft.title || "post"}`}
-            backUrl={`/blog/${draft.slug}`}
+            backUrl={`/blogs/${draft.slug}`}
             deleteUrl={apiPath}
             hubUrl="/edit/blog"
           />

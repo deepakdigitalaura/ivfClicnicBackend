@@ -1,55 +1,59 @@
-import { NextResponse, type NextRequest } from "next/server";
+import { NextResponse } from "next/server";
+import type { NextRequest } from "next/server";
 
-/* =====================================================================
- * Redirect middleware (Phase B.3) — applies the CMS-managed 301/302 rules.
- * ---------------------------------------------------------------------
- * Edge middleware can't reach the database, so it fetches the redirect map
- * from the cached `/redirect-map` route. To avoid a subrequest on every page
- * view, the fetched map is memoised in module scope with a short TTL; edits
- * still propagate within TTL (and the route's own cache is busted on save).
- *
- * The matcher below skips Next internals, the admin/api, uploads, static files
- * and the map route itself — so middleware only runs on real page requests and
- * never loops through its own fetch.
- * ===================================================================== */
+// Sanity-managed redirects — fetched from CDN and cached for 1 hour.
+// Existing treatment/calculator redirects are baked into next.config.mjs.
 
-type RedirectRule = { to: string; permanent: boolean };
-type RedirectMap = Record<string, RedirectRule>;
+type SanityRule = { source: string; destination: string; permanent: boolean };
 
-const TTL_MS = 60_000;
-let cache: { at: number; map: RedirectMap } | null = null;
+let ruleCache: { at: number; rules: SanityRule[] } | null = null;
+const CACHE_TTL = 3_600_000; // 1 hour
 
-async function loadMap(origin: string): Promise<RedirectMap> {
-  if (cache && Date.now() - cache.at < TTL_MS) return cache.map;
+async function loadSanityRules(): Promise<SanityRule[]> {
+  if (ruleCache && Date.now() - ruleCache.at < CACHE_TTL) return ruleCache.rules;
+
+  const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+  const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
+  if (!projectId) return [];
+
   try {
-    const res = await fetch(`${origin}/redirect-map`, { headers: { "x-mw-redirect": "1" } });
-    if (!res.ok) return cache?.map ?? {};
-    const map = (await res.json()) as RedirectMap;
-    cache = { at: Date.now(), map };
-    return map;
+    const query = encodeURIComponent(
+      `*[_type == "redirectsConfig"][0]{rules[enabled == true]{source,destination,permanent}}`,
+    );
+    const res = await fetch(
+      `https://${projectId}.apicdn.sanity.io/v2024-01-01/data/query/${dataset}?query=${query}`,
+    );
+    if (!res.ok) return ruleCache?.rules ?? [];
+    const data = (await res.json()) as { result?: { rules?: SanityRule[] } };
+    const rules = data?.result?.rules ?? [];
+    ruleCache = { at: Date.now(), rules };
+    return rules;
   } catch {
-    // Endpoint unreachable (e.g. boot) → reuse last good map, else no-op.
-    return cache?.map ?? {};
+    return ruleCache?.rules ?? [];
   }
 }
 
-/** Drop a trailing slash (except root) so lookups match the stored shape. */
-const norm = (p: string): string => (p.length > 1 && p.endsWith("/") ? p.replace(/\/+$/, "") : p);
+const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
 
-export async function middleware(req: NextRequest): Promise<NextResponse> {
-  const { pathname, origin, search } = req.nextUrl;
-  const map = await loadMap(origin);
-  const rule = map[norm(pathname)];
-  if (!rule) return NextResponse.next();
+export async function middleware(request: NextRequest): Promise<NextResponse> {
+  const pathname = norm(request.nextUrl.pathname);
+  const rules = await loadSanityRules();
 
-  const isAbsolute = /^https?:\/\//i.test(rule.to);
-  const target = isAbsolute ? rule.to : `${origin}${rule.to}${search}`;
-  // 308/307 preserve the method; permanent flag distinguishes 301-equivalent.
-  return NextResponse.redirect(target, rule.permanent ? 308 : 307);
+  for (const rule of rules) {
+    if (!rule.source || !rule.destination) continue;
+    if (norm(rule.source) !== pathname) continue;
+
+    if (/^https?:\/\//i.test(rule.destination)) {
+      return NextResponse.redirect(rule.destination, { status: rule.permanent ? 301 : 302 });
+    }
+    const url = request.nextUrl.clone();
+    url.pathname = rule.destination;
+    return NextResponse.redirect(url, { status: rule.permanent ? 301 : 302 });
+  }
+
+  return NextResponse.next();
 }
 
 export const config = {
-  // Run on page-like requests only: exclude Next internals, admin/api, uploads,
-  // the map route, and anything with a file extension (static assets).
-  matcher: ["/((?!_next/|api|admin|media/|assets/|redirect-map|.*\\.).*)"],
+  matcher: ["/((?!_next/static|_next/image|favicon\\.ico|assets|studio|api|admin|.*\\.).*)"],
 };

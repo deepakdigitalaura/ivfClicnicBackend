@@ -34,7 +34,7 @@ export function SitemapPage() {
               { label: "About Us", href: "/about-bfi" },
               { label: "Why Bavishi Fertility Institute", href: "/why-bfi" },
               { label: "Contact Us", href: "/contact" },
-              { label: "Blog", href: "/blog" },
+              { label: "Blog", href: "/blogs" },
               { label: "Suraksha Kavach", href: "/suraksha-kavach" },
             ]} />
 

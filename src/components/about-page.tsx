@@ -351,7 +351,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/40 p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><RadioTower className="h-6 w-6" /></div>
                 <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">Public Awareness Activities</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Knowledge is the key. We organised massive <strong className="text-[color:var(--plum)]">Jan Jagruti Abhiyan – Parivar Milan</strong> programmes to provide correct scientific guidance at the patient&apos;s own doorstep. We empower couples through books, TV talk shows, FB live, YouTube education sessions and <a href="/blog" className="text-[color:var(--plum)] underline">blogs</a>.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">Knowledge is the key. We organised massive <strong className="text-[color:var(--plum)]">Jan Jagruti Abhiyan – Parivar Milan</strong> programmes to provide correct scientific guidance at the patient&apos;s own doorstep. We empower couples through books, TV talk shows, FB live, YouTube education sessions and <a href="/blogs" className="text-[color:var(--plum)] underline">blogs</a>.</p>
               </div>
             </StaggerItem>
             <StaggerItem>

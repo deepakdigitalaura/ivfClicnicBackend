@@ -37,7 +37,7 @@ function CMECard({ blog }: { blog: Blog }) {
       className="group flex flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
     >
       {/* Thumbnail */}
-      <a href={`/blog/${blog.slug}`} className="relative block aspect-[16/9] overflow-hidden bg-[color:var(--plum)]">
+      <a href={`/blogs/${blog.slug}`} className="relative block aspect-[16/9] overflow-hidden bg-[color:var(--plum)]">
         {hero?.url ? (
           <>
             <img
@@ -82,7 +82,7 @@ function CMECard({ blog }: { blog: Blog }) {
           )}
         </div>
 
-        <a href={`/blog/${blog.slug}`} className="mt-3 block group/title">
+        <a href={`/blogs/${blog.slug}`} className="mt-3 block group/title">
           <h3 className="font-display text-base font-semibold leading-snug text-[color:var(--plum)] transition-colors duration-200 group-hover/title:text-[color:var(--rose)] line-clamp-3">
             {blog.title}
           </h3>
@@ -110,7 +110,7 @@ function CMECard({ blog }: { blog: Blog }) {
             )}
           </div>
           <a
-            href={`/blog/${blog.slug}`}
+            href={`/blogs/${blog.slug}`}
             className="flex items-center gap-1 text-xs font-semibold text-[color:var(--rose)] hover:gap-2 transition-all duration-200"
           >
             Read <ArrowRight className="h-3 w-3" />

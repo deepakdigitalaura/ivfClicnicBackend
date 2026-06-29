@@ -7,6 +7,7 @@ import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
 import { CookieConsent } from "@/components/cookie-consent";
+import { getScriptsConfig } from "@/sanity/lib/fetch";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
@@ -39,32 +40,34 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Identity comes from the CMS `site-settings` global; falls back to the SITE
-  // constant when unavailable so the entity graph is never empty. The header and
-  // footer are resolved once here and carried to <SiteHeader> / <Footer>
-  // (rendered inside the per-page client components) via context — all stay
-  // static (cached + tagged reads).
-  const [identity, header, footer] = await Promise.all([
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const [identity, header, footer, scripts] = await Promise.all([
     getSiteIdentity(),
     getHeader(),
     getFooter(),
+    getScriptsConfig(),
   ]);
+
+  const headScripts = scripts?.headScripts?.filter((s) => s.enabled && s.code) ?? [];
+  const bodyScripts = scripts?.bodyScripts?.filter((s) => s.enabled && s.code) ?? [];
+
   return (
     <html lang="en">
+      <head>
+        {headScripts.map((s, i) => (
+          <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />
+        ))}
+      </head>
       <body>
-        {/* Sitewide entity graph — #organization + #website are referenced by
-            every page's per-page schema so all facts merge into one entity. */}
         <JsonLd graph={siteGraph(identity)} />
         <ScrollProgress />
         <HeaderProvider value={header}>
           <FooterProvider value={footer}>{children}</FooterProvider>
         </HeaderProvider>
         <CookieConsent />
+        {bodyScripts.map((s, i) => (
+          <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />
+        ))}
       </body>
     </html>
   );

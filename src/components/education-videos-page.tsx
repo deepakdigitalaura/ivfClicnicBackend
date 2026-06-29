@@ -71,7 +71,7 @@ function EduVideoCard({ id, title, desc, tab }: VideoEntry) {
         <span className="inline-block rounded-full bg-[color:var(--rose)]/10 px-3 py-0.5 text-[10px] font-bold uppercase tracking-wider text-[color:var(--rose)]">
           {tab}
         </span>
-        <h3 className="mt-2.5 font-display text-base font-semibold leading-snug text-[color:var(--plum)] line-clamp-2">{displayTitle}</h3>
+        <h3 className="mt-2.5 font-display text-base font-semibold leading-relaxed text-[color:var(--plum)] line-clamp-2">{displayTitle}</h3>
         {desc && <p className="mt-1.5 text-sm text-[color:var(--plum)]/65 line-clamp-2">{desc}</p>}
         <a
           href={`https://www.youtube.com/watch?v=${id}`}

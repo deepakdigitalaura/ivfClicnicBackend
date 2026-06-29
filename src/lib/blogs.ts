@@ -41,7 +41,7 @@ export function toBlogPost(blog: Blog): BlogPost {
     title: blog.title,
     excerpt: blog.excerpt ?? "",
     category: category?.title ?? "Article",
-    href: `/blog/${blog.slug}`,
+    href: `/blogs/${blog.slug}`,
     published: true,
     treatments: (blog.treatmentSlugs ?? []).map((t) => t.slug),
     readMins: blog.readMins ?? undefined,

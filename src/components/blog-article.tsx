@@ -374,7 +374,7 @@ export function BlogArticle({
           >
             <a href="/" className="transition-colors hover:text-white/90">Home</a>
             <span>/</span>
-            <a href="/blog" className="transition-colors hover:text-white/90">Blog</a>
+            <a href="/blogs" className="transition-colors hover:text-white/90">Blog</a>
             <span>/</span>
             <span className="line-clamp-1 text-white/70">{blog.title}</span>
           </nav>
@@ -588,7 +588,7 @@ export function BlogArticle({
                 </div>
               )}
               <a
-                href="/blog"
+                href="/blogs"
                 className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--rose)] hover:underline"
               >
                 <ArrowLeft className="h-4 w-4" /> Back to all articles

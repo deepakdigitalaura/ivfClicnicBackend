@@ -113,7 +113,7 @@ type Hub = {
 const DEFAULT_HERO_DESCRIPTION =
   "Expert, compassionate guidance on fertility, IVF and your journey to parenthood — reviewed by our specialists.";
 
-const pageHref = (n: number) => (n <= 1 ? "/blog" : `/blog?page=${n}`);
+const pageHref = (n: number) => (n <= 1 ? "/blogs" : `/blogs?page=${n}`);
 
 /** Windowed page-number pagination: first, last, current ±1, with "…" gaps. */
 function Pagination({
@@ -247,7 +247,7 @@ export function BlogHub({
               const hero = asObj<Media>(p.heroImage ?? undefined);
               return (
                 <StaggerItem key={p.id} className="h-full">
-                  <a href={`/blog/${p.slug}`} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+                  <a href={`/blogs/${p.slug}`} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                     <div className="relative aspect-[16/10] overflow-hidden bg-muted">
                       <BlogCardThumbnail
                         hero={hero}

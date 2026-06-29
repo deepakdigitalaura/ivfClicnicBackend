@@ -4,31 +4,23 @@ import { TREATMENTS_REGISTRY } from "@/lib/treatments";
 import { DOCTORS } from "@/lib/doctors";
 import { CITIES, CENTRES, cityHref, centreHref } from "@/lib/locations";
 import { SERVICE_CONTENT } from "@/lib/womens-health";
-import { getPublishedBlogSlugs } from "@/lib/payload";
-
-/* =====================================================================
- * /sitemap.xml — every indexable public URL, generated from the same data
- * the site renders from (treatments, services, doctors, locations) plus the
- * published blogs from the CMS. Regenerated hourly (revalidate) and on-demand
- * when blogs change (the blog read is cache-tagged). Tolerates an unavailable
- * CMS by falling back to the code-defined routes.
- * ===================================================================== */
+import { getSitemapConfig } from "@/sanity/lib/fetch";
 
 export const revalidate = 3600;
 
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.url;
-  const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blog"]);
+  const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blogs"]);
 
-  // Treatments — registry hrefs that are real pages (skip hub anchors like /#…).
+  // Treatments
   for (const ref of Object.values(TREATMENTS_REGISTRY)) {
     if (ref.href.startsWith("/") && !ref.href.includes("#")) paths.add(ref.href);
   }
-  // Maternity services.
+  // Services
   for (const slug of Object.keys(SERVICE_CONTENT)) paths.add(`/services/${slug}`);
-  // Doctor profiles.
+  // Doctors
   for (const d of DOCTORS) paths.add(`/doctors/${d.slug}`);
-  // Locations — built only; helpers collapse single-centre cities to /[city].
+  // Locations
   for (const c of CITIES) {
     if (c.built) {
       const href = cityHref(c.slug);
@@ -38,15 +30,30 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
   for (const c of CENTRES) {
     if (c.built) paths.add(centreHref(c));
   }
-  // Published blog posts (CMS; tolerate failure).
-  try {
-    for (const slug of await getPublishedBlogSlugs()) paths.add(`/blog/${slug}`);
-  } catch {
-    /* CMS unavailable — code routes above still produce a valid sitemap. */
+
+  // Sanity-managed sitemap config
+  const sitemapCfg = await getSitemapConfig();
+  const excluded = new Set(sitemapCfg?.excludePaths ?? []);
+  const additionalUrls = sitemapCfg?.additionalUrls ?? [];
+
+  for (const item of additionalUrls) {
+    if (item.url) paths.add(item.url);
   }
 
   const lastModified = new Date();
+
+  const additionalMap = new Map(additionalUrls.map((u) => [u.url, u]));
+
   return [...paths]
+    .filter((p) => !excluded.has(p))
     .sort()
-    .map((p) => ({ url: `${base}${p === "/" ? "" : p}`, lastModified }));
+    .map((p) => {
+      const extra = additionalMap.get(p);
+      return {
+        url: `${base}${p === "/" ? "" : p}`,
+        lastModified,
+        ...(extra?.priority ? { priority: extra.priority } : {}),
+        ...(extra?.changefreq ? { changeFrequency: extra.changefreq as MetadataRoute.Sitemap[number]["changeFrequency"] } : {}),
+      };
+    });
 }

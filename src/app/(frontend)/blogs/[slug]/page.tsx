@@ -33,7 +33,7 @@ export async function generateMetadata(
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
   if (!blog) return {};
-  const path = `/blog/${slug}`;
+  const path = `/blogs/${slug}`;
   const hero = asObj<Media>(blog.heroImage ?? undefined);
   const ogImg = asObj<Media>(blog.seo?.ogImage ?? undefined);
   const title = blog.seo?.metaTitle || blog.title;
@@ -58,7 +58,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const blog = await getBlogBySlug(slug);
   if (!blog) notFound();
 
-  const path = `/blog/${slug}`;
+  const path = `/blogs/${slug}`;
   const url = abs(path);
   const hero = asObj<Media>(blog.heroImage ?? undefined);
   const author = asObj<Author>(blog.author);
@@ -98,7 +98,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     },
     breadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Blog", url: "/blog" },
+      { name: "Blog", url: "/blogs" },
       { name: blog.title, url: path },
     ]),
     ...(blog.faqs?.length ? [faqSchema(blog.faqs.map((f) => ({ q: f.question, a: f.answer })))] : []),
