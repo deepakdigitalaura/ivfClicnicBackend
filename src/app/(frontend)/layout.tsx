@@ -7,7 +7,7 @@ import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
 import { CookieConsent } from "@/components/cookie-consent";
-import { getScriptsConfig } from "@/sanity/lib/fetch";
+import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
@@ -41,15 +41,25 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [identity, header, footer, scripts] = await Promise.all([
+  const [identity, header, footer, scripts, schemaOrg] = await Promise.all([
     getSiteIdentity(),
     getHeader(),
     getFooter(),
     getScriptsConfig(),
+    getSchemaOrgConfig(),
   ]);
 
   const headScripts = scripts?.headScripts?.filter((s) => s.enabled && s.code) ?? [];
   const bodyScripts = scripts?.bodyScripts?.filter((s) => s.enabled && s.code) ?? [];
+
+  // Custom JSON-LD blocks added in the admin (Structured Data). Each is parsed;
+  // invalid JSON is skipped so a typo can never break the page.
+  const customSchemas = (schemaOrg?.customSchemas ?? [])
+    .filter((s) => s.enabled && s.jsonCode)
+    .map((s) => {
+      try { return JSON.parse(s.jsonCode!); } catch { return null; }
+    })
+    .filter(Boolean);
 
   return (
     <html lang="en">
@@ -60,6 +70,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
       </head>
       <body>
         <JsonLd graph={siteGraph(identity)} />
+        {customSchemas.map((schema, i) => (
+          <script key={`cs-${i}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        ))}
         <ScrollProgress />
         <HeaderProvider value={header}>
           <FooterProvider value={footer}>{children}</FooterProvider>
