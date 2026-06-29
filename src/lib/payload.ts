@@ -8,7 +8,7 @@
  * SEO features (robots, sitemap, scripts, redirects, JSON-LD, per-page SEO) are
  * now managed via Sanity — see src/sanity/.
  */
-import type { Page, Blog } from "@/payload-types";
+import type { Page, Blog, Config } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
@@ -112,7 +112,11 @@ export const getPublishedCentresForCity = async (_citySlug: string): Promise<{ s
 // ---------- Globals ----------
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
-export const getGlobalSafe = async (_slug: string): Promise<any> => null;
+export function getGlobalSafe<S extends keyof Config["globals"]>(
+  _slug: S,
+): Promise<Config["globals"][S] | null> {
+  return Promise.resolve(null);
+}
 
 export const getSiteIdentity = async (): Promise<SiteIdentity | undefined> => undefined;
 
