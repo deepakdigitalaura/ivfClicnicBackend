@@ -20,7 +20,7 @@ import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
 import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
-import { getSanityDoctors, type SanityDoctor } from "@/sanity/lib/fetch";
+import { getSanityDoctors, getSanityTestimonials, type SanityDoctor } from "@/sanity/lib/fetch";
 import { resolveTreatment, type ResolvedTreatment } from "@/lib/treatment-content";
 import { TREATMENTS } from "@/lib/treatments";
 import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre } from "@/lib/location-content";
@@ -73,7 +73,19 @@ export const getPublishedBlogSlugs = async (): Promise<string[]> => [];
 // ---------- Videos ----------
 
 export const getEducationVideos = async (): Promise<EducationVideoItem[]> => [];
-export const getTestimonialVideos = async (): Promise<TestimonialVideoItem[]> => [];
+
+/** Video testimonials (those with a YouTube ID) for /testimonial-videos. */
+export const getTestimonialVideos = async (): Promise<TestimonialVideoItem[]> => {
+  const docs = await getSanityTestimonials();
+  return docs
+    .filter((t) => t.youtubeId && t.author && t.quote)
+    .map((t) => ({
+      id: t.youtubeId as string,
+      name: t.author as string,
+      quote: t.quote as string,
+      stars: typeof t.rating === "number" ? t.rating : 5,
+    }));
+};
 
 // ---------- Services ----------
 
@@ -189,5 +201,20 @@ export const getHomepage = async (): Promise<HomepageData> =>
 export const getAbout = async (): Promise<AboutData> =>
   resolveAbout(null as unknown as AboutSource);
 
-export const getTestimonials = async (): Promise<Review[]> =>
-  resolveTestimonials([]);
+/** Text testimonials (no YouTube ID) for the homepage "Patient review" cards. */
+export const getTestimonials = async (): Promise<Review[]> => {
+  const docs = await getSanityTestimonials();
+  return resolveTestimonials(
+    docs
+      .filter((t) => !t.youtubeId)
+      .map((t) => ({
+        author: t.author ?? null,
+        rating: t.rating ?? null,
+        quote: t.quote ?? null,
+        role: t.role ?? null,
+        published: t.published ?? null,
+        order: t.order ?? null,
+        createdAt: t.createdAt ?? null,
+      })),
+  );
+};

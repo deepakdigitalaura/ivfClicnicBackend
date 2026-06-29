@@ -21,6 +21,7 @@ export default defineConfig({
           .items([
             S.documentTypeListItem("inquiry").title("📨 Inquiries"),
             S.documentTypeListItem("doctor").title("🩺 Doctors"),
+            S.documentTypeListItem("testimonial").title("⭐ Testimonials"),
             S.divider(),
             S.listItem()
               .title("🤖 Robots.txt")

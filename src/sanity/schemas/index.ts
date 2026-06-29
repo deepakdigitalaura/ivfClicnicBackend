@@ -6,6 +6,7 @@ import schemaOrgConfig from "./schemaOrgConfig";
 import pageSeo from "./pageSeo";
 import inquiry from "./inquiry";
 import doctor from "./doctor";
+import testimonial from "./testimonial";
 
 export const schemas = [
   robotsConfig,
@@ -16,4 +17,5 @@ export const schemas = [
   pageSeo,
   inquiry,
   doctor,
+  testimonial,
 ];

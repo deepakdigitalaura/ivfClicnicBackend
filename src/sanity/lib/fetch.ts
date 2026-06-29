@@ -157,3 +157,29 @@ export const getSanityDoctors = () =>
     ["sanity-doctors"],
     { revalidate: 3600, tags: ["sanity-doctors"] },
   )();
+
+// ── Testimonials (text + video) ──
+
+export type SanityTestimonial = {
+  author?: string;
+  role?: string;
+  quote?: string;
+  rating?: number;
+  youtubeId?: string;
+  published?: boolean;
+  order?: number;
+  createdAt?: string;
+};
+
+const TESTIMONIALS_QUERY = `*[_type == "testimonial" && published != false] | order(order asc){
+  author, role, quote, rating, youtubeId, published, order, "createdAt": _createdAt
+}`;
+
+/** All visible testimonials from Sanity (cached + tagged). Empty when none, so
+ *  the homepage/testimonial pages fall back to their built-in defaults. */
+export const getSanityTestimonials = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityTestimonial[]>(TESTIMONIALS_QUERY)) ?? [],
+    ["sanity-testimonials"],
+    { revalidate: 3600, tags: ["sanity-testimonials"] },
+  )();

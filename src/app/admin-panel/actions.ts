@@ -14,8 +14,11 @@ import {
   deleteInquiry,
   saveDoctor,
   deleteDoctor,
+  saveTestimonial,
+  deleteTestimonial,
   type Inquiry,
   type AdminDoctor,
+  type AdminTestimonial,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -136,5 +139,25 @@ export async function saveDoctorAction(doc: AdminDoctor): Promise<SaveResult> {
 export async function deleteDoctorAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deleteDoctor(id));
   revalidateDoctorPages();
+  return r;
+}
+
+// ── Testimonials ──
+
+function revalidateTestimonialPages() {
+  revalidatePath("/"); // homepage patient-review cards
+  revalidatePath("/testimonial-videos");
+  revalidatePath("/admin-panel/testimonials");
+}
+
+export async function saveTestimonialAction(doc: AdminTestimonial): Promise<SaveResult> {
+  const r = await guard(() => saveTestimonial(doc));
+  revalidateTestimonialPages();
+  return r;
+}
+
+export async function deleteTestimonialAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteTestimonial(id));
+  revalidateTestimonialPages();
   return r;
 }

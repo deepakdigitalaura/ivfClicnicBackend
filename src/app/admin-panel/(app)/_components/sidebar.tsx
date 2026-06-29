@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope,
+  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope, Star,
 } from "lucide-react";
 import { logoutAction } from "../../actions";
 
@@ -14,6 +14,7 @@ const NAV = [
 
 const CONTENT_NAV = [
   { href: "/admin-panel/doctors", label: "Doctors", icon: Stethoscope },
+  { href: "/admin-panel/testimonials", label: "Testimonials", icon: Star },
 ];
 
 const SEO_NAV = [

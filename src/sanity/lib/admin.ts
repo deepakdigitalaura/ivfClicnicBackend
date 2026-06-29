@@ -211,6 +211,47 @@ export async function deleteDoctor(id: string) {
   revalidateDoctors();
 }
 
+// ── Testimonials ──
+
+export type AdminTestimonial = {
+  _id?: string;
+  author?: string;
+  role?: string;
+  quote?: string;
+  rating?: number;
+  youtubeId?: string;
+  published?: boolean;
+  order?: number;
+};
+
+const TESTIMONIAL_TAG = "sanity-testimonials";
+
+export async function readAdminTestimonials(): Promise<AdminTestimonial[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "testimonial"] | order(order asc){ _id, author, role, quote, rating, youtubeId, published, order }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function saveTestimonial(doc: AdminTestimonial) {
+  const { _id, ...rest } = doc;
+  if (_id) {
+    await writeClient.createOrReplace({ _id, _type: "testimonial", ...rest });
+  } else {
+    await writeClient.create({ _type: "testimonial", ...rest });
+  }
+  revalidateTag(TESTIMONIAL_TAG);
+}
+
+export async function deleteTestimonial(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(TESTIMONIAL_TAG);
+}
+
 /** Lightweight counts for the dashboard stat cards. */
 export async function getDashboardStats() {
   const empty = { redirects: 0, pageSeo: 0, headScripts: 0, bodyScripts: 0, customSchemas: 0, blocked: 0, newInquiries: 0, totalInquiries: 0 };
