@@ -160,7 +160,7 @@ export function CtaSidebarCard() {
         Talk to our specialists — no obligation, just honest guidance.
       </p>
       <a
-        href="/#book"
+        href="/contact#book"
         className="btn-luxury mt-4 flex items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-4 py-2.5 text-sm font-semibold text-white shadow-glow"
       >
         <Calendar className="h-3.5 w-3.5" /> Book Consultation
@@ -202,7 +202,7 @@ export function TrustSidebarCard() {
         ))}
       </ul>
       <a
-        href="/#book"
+        href="/contact#book"
         className="btn-luxury mt-4 flex items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-4 py-2 text-xs font-semibold text-white"
       >
         Book Appointment <ChevronRight className="h-3 w-3" />

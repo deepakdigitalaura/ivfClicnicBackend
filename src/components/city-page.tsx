@@ -3,7 +3,7 @@ import Image from "next/image";
 import { ArrowRight, Calendar, MessageCircle, Phone, MapPin, Clock, Navigation, Award, FlaskConical, HeartPulse, Building2, Rotate3d, BookOpen } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer } from "@/components/home-page";
+import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
@@ -88,7 +88,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
             )}
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
+                <Magnetic as="a" href="#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
                 <Magnetic as="a" href={`tel:+${city.helpline}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white"><Phone className="h-4 w-4" /> {city.helplineLabel}</Magnetic>
               </div>
             </Reveal>
@@ -154,7 +154,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
                         <a href={centreUrl(c.citySlug, c.slug)} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">View Centre <ArrowRight className="h-3.5 w-3.5" /></a>
                       )}
                       <a href={centreMapUrl(c)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--plum)]/15 px-4 py-2 text-xs font-semibold text-[color:var(--plum)] transition hover:bg-[color:var(--plum)]/5"><Navigation className="h-3.5 w-3.5" /> Directions</a>
-                      {!c.built && <a href="/#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110"><Calendar className="h-3.5 w-3.5" /> Book</a>}
+                      {!c.built && <a href="#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110"><Calendar className="h-3.5 w-3.5" /> Book</a>}
                     </div>
                   </div>
                 </StaggerItem>
@@ -305,7 +305,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
               <Magnetic as="a" href={`tel:+${city.helpline}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><Phone className="h-4 w-4" /> {city.helplineLabel}</Magnetic>
               <Magnetic as="a" href={`https://wa.me/${city.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
             </div>
@@ -313,6 +313,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
         </div>
       </section>
 
+      <InquiryForm />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

@@ -319,7 +319,7 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <PrimaryBtn icon={Calendar} href="/#book">{hero.ctas[0]}</PrimaryBtn>
+            <PrimaryBtn icon={Calendar} href="#book">{hero.ctas[0]}</PrimaryBtn>
             <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate">{hero.ctas[1]}</GhostBtn>
             <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
           </motion.div>
@@ -853,7 +853,7 @@ export function Doctors({
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
                   </a>
                   <a
-                    href="/#book"
+                    href="#book"
                     className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full bg-[color:var(--rose)] px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-[color:var(--rose)]/20 transition-all duration-300 hover:bg-[color:var(--rose)]/90 hover:shadow-md hover:shadow-[color:var(--rose)]/30 active:scale-[0.97]"
                   >
                     <Calendar className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:-translate-y-0.5" />
@@ -1735,7 +1735,7 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               {content.ctas.map((label, i) => {
                 const Icon = ctaIcons[i] ?? Calendar;
-                const hrefs = ["/#book", "https://wa.me/919712622288", "tel:+919712622288"];
+                const hrefs = ["#book", "https://wa.me/919712622288", "tel:+919712622288"];
                 const isExternal = i === 1;
                 const cls =
                   i === 0

@@ -300,7 +300,7 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     { label: "Contact", href: "/contact" },
   ],
-  cta: { label: "Book Appointment", href: "/#book", styleVariant: "primary" },
+  cta: { label: "Book Appointment", href: "/contact#book", styleVariant: "primary" },
 };
 
 /* The subset of the `header` global this resolver reads (kept loose so it stays

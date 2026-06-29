@@ -150,7 +150,7 @@ export function SafeTreatmentPage() {
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Magnetic
                 as="a"
-                href="/#book"
+                href="/contact#book"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
               >
                 <Calendar className="h-4 w-4" /> Book Consultation{" "}
@@ -466,7 +466,7 @@ export function SafeTreatmentPage() {
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic
                 as="a"
-                href="/#book"
+                href="/contact#book"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
               >
                 <Calendar className="h-4 w-4" /> Book Consultation{" "}

@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Footer, Locations, Calculators, TreatmentCard } from "@/components/home-page";
+import { Footer, Locations, Calculators, TreatmentCard, InquiryForm } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { SectionHead, Faq } from "@/components/ivf-page";
 import { MedicalReviewer } from "@/components/medical-reviewer";
@@ -144,7 +144,7 @@ function DoctorCard({ d }: { d: Doctor }) {
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
           </a>
           <a
-            href="/#book"
+            href="#book"
             className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full bg-[color:var(--rose)] px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-[color:var(--rose)]/20 transition-all duration-300 hover:bg-[color:var(--rose)]/90 hover:shadow-md hover:shadow-[color:var(--rose)]/30 active:scale-[0.97]"
           >
             <Calendar className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:-translate-y-0.5" />
@@ -507,7 +507,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
             )}
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                <Magnetic as="a" href="#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
                   <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
@@ -853,7 +853,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                 ))}
               </ul>
               <div className="mt-auto pt-6">
-                <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
+                <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
                   Get a personalised estimate <ArrowRight className="h-4 w-4" />
                 </Magnetic>
               </div>
@@ -1077,7 +1077,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           )}
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
                 <Calendar className="h-4 w-4" /> Book Consultation
               </Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
@@ -1092,6 +1092,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
         </div>
       </section>
 
+      <InquiryForm />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

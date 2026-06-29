@@ -6,7 +6,7 @@ import type { LucideIcon } from "lucide-react";
 import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Footer } from "@/components/home-page";
+import { Footer, InquiryForm } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { useState } from "react";
 
@@ -182,7 +182,7 @@ export function CategoryHubPage({
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-4">
                 <a
-                  href="/#book"
+                  href="#book"
                   className="inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg hover:brightness-110"
                 >
                   <Calendar className="h-4 w-4" /> Book Appointment
@@ -413,7 +413,7 @@ export function CategoryHubPage({
             <p className="mx-auto mt-4 max-w-xl text-lg text-white/70">{ctaSubtitle}</p>
             <div className="mt-8 flex flex-wrap justify-center gap-4">
               <a
-                href="/#book"
+                href="#book"
                 className="inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-8 py-3.5 text-sm font-semibold text-white shadow-md transition-all hover:shadow-lg hover:brightness-110"
               >
                 <Calendar className="h-4 w-4" /> Book a Consultation
@@ -429,6 +429,7 @@ export function CategoryHubPage({
         </div>
       </section>
 
+      <InquiryForm />
       <Footer />
       <FloatingCTA />
       <MobileBottomBar />

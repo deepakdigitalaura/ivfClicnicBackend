@@ -491,7 +491,7 @@ export function ContactInfo({
                   <a href={`https://wa.me/${c.phone}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--plum)]/15 px-4 py-2 text-xs font-semibold text-[color:var(--plum)] transition hover:bg-[color:var(--plum)]/5">
                     <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
                   </a>
-                  <a href="/#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">
+                  <a href="#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">
                     <Calendar className="h-3.5 w-3.5" /> Book
                   </a>
                 </div>

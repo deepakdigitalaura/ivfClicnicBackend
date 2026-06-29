@@ -69,7 +69,7 @@ export function SiteHeader({
           <div className="flex items-center gap-5">
             <a href="tel:+919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><Phone className="h-3 w-3" /> +91 97126 22288</a>
             <a href="https://wa.me/919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
-            <a href="/#book" className="flex items-center gap-1.5 text-white/80 hover:text-white">24×7 Care</a>
+            <a href="/contact#book" className="flex items-center gap-1.5 text-white/80 hover:text-white">24×7 Care</a>
             {LANGUAGE_SWITCHER_ENABLED && (
               <>
                 <span className="h-3 w-px bg-white/20" />
@@ -377,7 +377,7 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 text-sm">
         <a href="/doctors" className="inline-flex items-center gap-1 font-semibold text-[color:var(--rose)] transition-opacity hover:opacity-70">All Doctors <ArrowRight className="h-3.5 w-3.5" /></a>
         <a href="/#locations" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">By Location</a>
-        <a href="/#book" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">Book Consultation</a>
+        <a href="/contact#book" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">Book Consultation</a>
       </div>
     </div>
   );

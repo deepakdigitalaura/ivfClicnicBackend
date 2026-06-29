@@ -225,7 +225,7 @@ export function EasyEmiPage() {
             </Reveal>
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
                   <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
@@ -378,7 +378,7 @@ export function EasyEmiPage() {
                     ))}
                   </ul>
                   <div className="mt-6">
-                    <Magnetic as="a" href="/#book" className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
+                    <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
                       <Calendar className="h-4 w-4" /> Enquire Now
                     </Magnetic>
                   </div>
@@ -439,7 +439,7 @@ export function EasyEmiPage() {
                     <Magnetic as="a" href="/suraksha-kavach" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
                       Learn About Suraksha Kavach <ArrowRight className="h-4 w-4" />
                     </Magnetic>
-                    <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
+                    <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
                       <Calendar className="h-4 w-4" /> Book Consultation
                     </Magnetic>
                   </div>
@@ -477,7 +477,7 @@ export function EasyEmiPage() {
                 <Magnetic as="a" href="/ivf-cost-calculator" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--plum)] px-7 py-4 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
                   <Calculator className="h-4 w-4" /> Open Cost Calculator <ArrowRight className="h-4 w-4" />
                 </Magnetic>
-                <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
+                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
                   <MessageCircle className="h-4 w-4" /> Talk to Our Team
                 </Magnetic>
               </div>
@@ -504,7 +504,7 @@ export function EasyEmiPage() {
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                  <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
                     <Calendar className="h-4 w-4" /> Book Consultation
                   </Magnetic>
                   <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)]">
@@ -546,7 +546,7 @@ export function EasyEmiPage() {
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+              <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
                 <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">

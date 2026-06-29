@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Calendar, MessageCircle, Phone, MapPin, Clock, Rotate3d } from "lucide-react";
 import { Reveal, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer } from "@/components/home-page";
+import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import {
@@ -106,7 +106,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
             </Reveal>
             <Reveal delay={0.24}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
+                <Magnetic as="a" href="#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
                 <Magnetic as="a" href={`tel:+${centre.phone}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white"><Phone className="h-4 w-4" /> {centre.phoneLabel}</Magnetic>
               </div>
             </Reveal>
@@ -222,7 +222,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
               <Magnetic as="a" href={`tel:+${centre.phone}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><Phone className="h-4 w-4" /> {centre.phoneLabel}</Magnetic>
               <Magnetic as="a" href={`https://wa.me/${centre.phone}`} target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
             </div>
@@ -230,6 +230,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         </div>
       </section>
 
+      <InquiryForm />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

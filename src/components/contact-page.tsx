@@ -189,7 +189,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
               <a href="tel:+919712622288" className="inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
                 <Phone className="h-4 w-4" /> Call Us
               </a>
-              <a href="/#book" className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white px-6 py-3 text-sm font-semibold text-[color:var(--plum)] transition hover:border-[color:var(--rose)]/40">
+              <a href="#book" className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white px-6 py-3 text-sm font-semibold text-[color:var(--plum)] transition hover:border-[color:var(--rose)]/40">
                 <Calendar className="h-4 w-4" /> Book Consultation
               </a>
             </div>
@@ -217,7 +217,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><Phone className="h-4 w-4" /> +91 97126 22288</Magnetic>
               <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
             </div>

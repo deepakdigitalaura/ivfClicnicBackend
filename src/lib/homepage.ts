@@ -312,7 +312,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       "India's most trusted IVF protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
     features: ["Risk Reduction", "Multiple IVF Cycles", "Priority Care", "Unique Optional Package"],
     primaryCta: { label: "Explore Suraksha Kavach", href: destinationHref("suraksha-kavach") },
-    secondaryCta: { label: "Learn More", href: "/#book" },
+    secondaryCta: { label: "Learn More", href: "#book" },
     image: surakshaImg,
     imageAlt: "Expecting parents — the journey to parenthood, protected",
   },
