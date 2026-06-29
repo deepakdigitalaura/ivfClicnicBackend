@@ -62,37 +62,32 @@
       { "label": "Surat", "url": "/locations/surat" },
       { "label": "Vadodara", "url": "/locations/vadodara" },
       { "label": "Bhuj", "url": "/locations/bhuj" },
-      { "label": "Varanasi", "url": "/locations/varanasi" },
-      { "label": "All 15 Centres", "url": "/#locations" }
+      { "label": "Varanasi", "url": "/locations/varanasi" }
     ]},
     { "title": "Calculators", "links": [
-      { "label": "IVF Success Rate", "url": "/#tools" },
-      { "label": "IVF Cost Estimate", "url": "/#tools" },
-      { "label": "AMH Interpreter", "url": "/#tools" },
-      { "label": "Ovulation Calculator", "url": "/#tools" },
-      { "label": "Fertile Period", "url": "/#tools" },
-      { "label": "Semen Analysis", "url": "/#tools" },
-      { "label": "Natural Pregnancy", "url": "/#tools" },
-      { "label": "Miscarriage Risk", "url": "/#tools" }
+      { "label": "IVF Success Rate", "url": "/ivf-success-rate-calculator" },
+      { "label": "IVF Cost Estimate", "url": "/ivf-cost-calculator" },
+      { "label": "AMH Interpreter", "url": "/amh-level-interpreter" },
+      { "label": "Ovulation Calculator", "url": "/ovulation-calculator" },
+      { "label": "Fertile Period", "url": "/fertile-period-calculator" },
+      { "label": "Semen Analysis", "url": "/semen-analysis-calculator" },
+      { "label": "Natural Pregnancy", "url": "/natural-pregnancy-calculator" },
+      { "label": "Miscarriage Risk", "url": "/risk-of-repeat-miscarriage-calculator" }
     ]},
     { "title": "Resources", "links": [
       { "label": "Blog", "url": "/blog" },
-      { "label": "Success Stories", "url": "/#stories" },
-      { "label": "Patient Videos", "url": "/#videos" },
-      { "label": "Events & Webinars", "url": "/#events" }
+      { "label": "Testimonial Videos", "url": "https://ivf-clicnic-backend-weld.vercel.app/testimonial-videos", "external": true },
+      { "label": "Educational Videos", "url": "https://ivf-clicnic-backend-weld.vercel.app/education-videos", "external": true },
+      { "label": "CME", "url": "https://ivf-clicnic-backend-weld.vercel.app/cme", "external": true }
     ]},
     { "title": "About", "links": [
       { "label": "Our Story", "url": "/about-bfi" },
-      { "label": "Suraksha Kavach", "url": "/#suraksha" },
-      { "label": "Why Bavishi Fertility Institute", "url": "/#about" }
+      { "label": "Suraksha Kavach", "url": "/suraksha-kavach" },
+      { "label": "Why Bavishi Fertility Institute", "url": "/why-bfi" }
     ]},
     { "title": "Contact", "links": [
-      { "label": "Book Appointment", "url": "/#book" },
-      { "label": "Video Consultation", "url": "/#book" },
-      { "label": "WhatsApp Chat", "channel": "whatsapp", "external": true },
-      { "label": "Call +91 97126 22288", "channel": "phone", "external": true },
-      { "label": "Find a Centre", "url": "/#locations" },
-      { "label": "Patient Support", "url": "/contact" }
+      { "label": "Book Appointment", "url": "/contact#book" },
+      { "label": "Call +91 97126 22288", "channel": "phone", "external": true }
     ]}
   ],
   "legalLinks": [

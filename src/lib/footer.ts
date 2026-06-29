@@ -62,20 +62,16 @@ function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] 
     }));
 }
 
-/** Build the footer "Locations" group — one link per published city plus an "All Centres" link. */
+/** Build the footer "Locations" group — one link per published city. */
 function buildLocationsFooterGroup(navLocations: NavLocationItem[]): FooterGroup | undefined {
   if (!navLocations.length) return undefined;
   const ordered = sortNavLocations(navLocations);
-  const totalCentres = ordered.reduce((sum, c) => sum + c.centres.length, 0);
   return {
     h: "Locations",
-    l: [
-      ...ordered.map((city) => ({
-        label: city.cityName,
-        href: `/locations/${city.citySlug}`,
-      })),
-      { label: `All ${totalCentres} Centres`, href: "/#locations" },
-    ],
+    l: ordered.map((city) => ({
+      label: city.cityName,
+      href: `/locations/${city.citySlug}`,
+    })),
   };
 }
 
@@ -185,36 +181,31 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Vadodara", href: "/locations/vadodara" },
       { label: "Bhuj", href: "/locations/bhuj" },
       { label: "Varanasi", href: "/locations/varanasi" },
-      { label: "All 14 Centres", href: "/#locations" },
     ]},
     { h: "Calculators", l: [
-      { label: "IVF Success Rate", href: "/#tools" },
-      { label: "IVF Cost Estimate", href: "/#tools" },
-      { label: "AMH Interpreter", href: "/#tools" },
-      { label: "Ovulation Calculator", href: "/#tools" },
-      { label: "Fertile Period", href: "/#tools" },
-      { label: "Semen Analysis", href: "/#tools" },
-      { label: "Natural Pregnancy", href: "/#tools" },
-      { label: "Miscarriage Risk", href: "/#tools" },
+      { label: "IVF Success Rate", href: "/ivf-success-rate-calculator" },
+      { label: "IVF Cost Estimate", href: "/ivf-cost-calculator" },
+      { label: "AMH Interpreter", href: "/amh-level-interpreter" },
+      { label: "Ovulation Calculator", href: "/ovulation-calculator" },
+      { label: "Fertile Period", href: "/fertile-period-calculator" },
+      { label: "Semen Analysis", href: "/semen-analysis-calculator" },
+      { label: "Natural Pregnancy", href: "/natural-pregnancy-calculator" },
+      { label: "Miscarriage Risk", href: "/risk-of-repeat-miscarriage-calculator" },
     ]},
     { h: "Resources", l: [
       { label: "Blog", href: destinationHref("blog") },
-      { label: "Success Stories", href: "/#stories" },
-      { label: "Patient Videos", href: "/#videos" },
-      { label: "Events & Webinars", href: "/#events" },
+      { label: "Testimonial Videos", href: "https://ivf-clicnic-backend-weld.vercel.app/testimonial-videos", external: true },
+      { label: "Educational Videos", href: "https://ivf-clicnic-backend-weld.vercel.app/education-videos", external: true },
+      { label: "CME", href: "https://ivf-clicnic-backend-weld.vercel.app/cme", external: true },
     ]},
     { h: "About", l: [
       { label: "Our Story", href: "/about-bfi" },
       { label: "Suraksha Kavach", href: destinationHref("suraksha-kavach") },
-      { label: "Why Bavishi Fertility Institute", href: "/#about" },
+      { label: "Why Bavishi Fertility Institute", href: "/why-bfi" },
     ]},
     { h: "Contact", l: [
-      { label: "Book Appointment", href: "/#book" },
-      { label: "Video Consultation", href: "/#book" },
-      { label: "WhatsApp Chat", href: "https://wa.me/919712622288", external: true },
+      { label: "Book Appointment", href: "/contact#book" },
       { label: "Call +91 97126 22288", href: "tel:+919712622288", external: true },
-      { label: "Find a Centre", href: "/#locations" },
-      { label: "Patient Support", href: "/contact" },
     ]},
   ],
   social: [],
