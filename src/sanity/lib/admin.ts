@@ -141,6 +141,76 @@ export async function deleteInquiry(id: string) {
   await writeClient.delete(id);
 }
 
+// ── Doctors ──
+
+export type AdminDoctor = {
+  _id?: string;
+  slug?: string;
+  name?: string;
+  credentials?: string;
+  specialty?: string;
+  role?: string;
+  imageUrl?: string;
+  photoUrl?: string;
+  experienceLabel?: string;
+  experienceYears?: number;
+  cities?: string[];
+  treatments?: string[];
+  locations?: string[];
+  shortBio?: string;
+  bio?: string[];
+  knowsAbout?: string[];
+  alumniOf?: string[];
+  memberOf?: string[];
+  awards?: string[];
+  training?: string[];
+  publications?: string[];
+  languages?: string[];
+  sameAs?: string[];
+  verified?: boolean;
+  visitsAllCentres?: boolean;
+  navRole?: "senior-specialist" | "specialist";
+  navOrder?: number;
+};
+
+const DOCTOR_TAG = "sanity-doctors";
+
+function revalidateDoctors() {
+  revalidateTag(DOCTOR_TAG);
+}
+
+export async function readAdminDoctors(): Promise<AdminDoctor[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "doctor"] | order(navOrder asc, name asc){ _id, slug, name, credentials, specialty, role, imageUrl, "photoUrl": photo.asset->url, experienceLabel, experienceYears, cities, treatments, locations, shortBio, bio, knowsAbout, alumniOf, memberOf, awards, training, publications, languages, sameAs, verified, visitsAllCentres, navRole, navOrder }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function saveDoctor(doc: AdminDoctor) {
+  const { _id, photoUrl, ...rest } = doc;
+  // photoUrl is a read-only projection; never write it back.
+  void photoUrl;
+  const id = _id || `doctor.${(doc.slug ?? "").trim()}`;
+  // Preserve an existing uploaded photo asset by merging onto the current doc.
+  const existing = (await writeClient.getDocument(id)) as { photo?: unknown } | null;
+  await writeClient.createOrReplace({
+    _id: id,
+    _type: "doctor",
+    ...(existing?.photo ? { photo: existing.photo } : {}),
+    ...rest,
+  });
+  revalidateDoctors();
+}
+
+export async function deleteDoctor(id: string) {
+  await writeClient.delete(id);
+  revalidateDoctors();
+}
+
 /** Lightweight counts for the dashboard stat cards. */
 export async function getDashboardStats() {
   const empty = { redirects: 0, pageSeo: 0, headScripts: 0, bodyScripts: 0, customSchemas: 0, blocked: 0, newInquiries: 0, totalInquiries: 0 };

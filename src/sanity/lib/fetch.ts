@@ -107,3 +107,53 @@ export const getPageSeo = (path: string) =>
     ["sanity-page-seo", path],
     { revalidate: 3600, tags: ["sanity-page-seo"] },
   )();
+
+// ── Doctors ──
+
+export type SanityDoctor = {
+  slug?: string;
+  name?: string;
+  credentials?: string;
+  specialty?: string;
+  role?: string;
+  imageUrl?: string;
+  photoUrl?: string;
+  experienceLabel?: string;
+  experienceYears?: number;
+  cities?: string[];
+  treatments?: string[];
+  locations?: string[];
+  shortBio?: string;
+  bio?: string[];
+  knowsAbout?: string[];
+  alumniOf?: string[];
+  memberOf?: string[];
+  awards?: string[];
+  training?: string[];
+  publications?: string[];
+  languages?: string[];
+  sameAs?: string[];
+  verified?: boolean;
+  visitsAllCentres?: boolean;
+  navRole?: "senior-specialist" | "specialist";
+  navOrder?: number;
+};
+
+const DOCTORS_QUERY = `*[_type == "doctor"]{
+  slug, name, credentials, specialty, role, imageUrl,
+  "photoUrl": photo.asset->url,
+  experienceLabel, experienceYears,
+  cities, treatments, locations,
+  shortBio, bio,
+  knowsAbout, alumniOf, memberOf, awards, training, publications, languages, sameAs,
+  verified, visitsAllCentres, navRole, navOrder
+}`;
+
+/** All doctors from Sanity (cached + tagged). Empty array when none/unconfigured,
+ *  so the resolver falls back to the code DOCTORS list byte-identically. */
+export const getSanityDoctors = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityDoctor[]>(DOCTORS_QUERY)) ?? [],
+    ["sanity-doctors"],
+    { revalidate: 3600, tags: ["sanity-doctors"] },
+  )();

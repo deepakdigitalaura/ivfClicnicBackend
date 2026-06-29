@@ -2,27 +2,15 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DoctorProfile } from "@/components/doctor-page";
 import { JsonLd } from "@/components/json-ld";
-import { DOCTORS, physicianSchema } from "@/lib/doctors";
-import { getDoctor, payloadClient } from "@/lib/payload";
+import { physicianSchema } from "@/lib/doctors";
+import { getDoctor, getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 
-/** DB-first: union of Payload-published slugs + code-known DOCTORS slugs. */
+/** Union of code-known + Sanity doctor slugs (getDoctors merges both). New
+ *  admin-created doctors not in this set still render on-demand (dynamicParams). */
 export async function generateStaticParams() {
-  const codeSlugs = DOCTORS.map((d) => d.slug);
-  try {
-    const payload = await payloadClient();
-    const res = await payload.find({
-      collection: "doctors",
-      limit: codeSlugs.length + 200,
-      depth: 0,
-      select: { slug: true },
-    });
-    const dbSlugs = res.docs.map((d) => (d as { slug: string }).slug);
-    const all = [...new Set([...codeSlugs, ...dbSlugs])];
-    return all.map((slug) => ({ slug }));
-  } catch {
-    return codeSlugs.map((slug) => ({ slug }));
-  }
+  const doctors = await getDoctors();
+  return doctors.map((d) => ({ slug: d.slug }));
 }
 
 export async function generateMetadata(

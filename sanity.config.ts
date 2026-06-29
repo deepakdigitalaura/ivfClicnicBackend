@@ -20,6 +20,7 @@ export default defineConfig({
           .title("BFI CMS")
           .items([
             S.documentTypeListItem("inquiry").title("📨 Inquiries"),
+            S.documentTypeListItem("doctor").title("🩺 Doctors"),
             S.divider(),
             S.listItem()
               .title("🤖 Robots.txt")

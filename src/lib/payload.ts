@@ -19,7 +19,8 @@ import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
-import { resolveDoctor, DOCTORS, type Doctor } from "@/lib/doctors";
+import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
+import { getSanityDoctors, type SanityDoctor } from "@/sanity/lib/fetch";
 import { resolveTreatment, type ResolvedTreatment } from "@/lib/treatment-content";
 import { TREATMENTS } from "@/lib/treatments";
 import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre } from "@/lib/location-content";
@@ -81,13 +82,69 @@ export const getService = async (slug: string): Promise<ResolvedService | undefi
 
 export const getPublishedServiceSlugs = async (): Promise<string[]> => [];
 
-// ---------- Doctors ----------
+// ---------- Doctors (Sanity-backed, code fallback) ----------
 
-export const getDoctor = async (slug: string): Promise<Doctor | undefined> =>
-  resolveDoctor(slug, null) ?? undefined;
+const toRows = (a?: string[] | null) => (a && a.length ? a.map((value) => ({ value })) : undefined);
 
-export const getDoctors = async (): Promise<Doctor[]> =>
-  DOCTORS.map((d) => resolveDoctor(d.slug, null)).filter((d): d is Doctor => !!d);
+/** Map a Sanity doctor doc to the DoctorSource shape resolveDoctor overlays. */
+function toDoctorSource(d: SanityDoctor): DoctorSource {
+  return {
+    name: d.name ?? null,
+    credentials: d.credentials ?? null,
+    specialty: d.specialty ?? null,
+    role: d.role ?? null,
+    image: d.photoUrl ?? d.imageUrl ?? null,
+    experienceLabel: d.experienceLabel ?? null,
+    experienceYears: d.experienceYears ?? null,
+    cities: toRows(d.cities),
+    locations: toRows(d.locations),
+    treatments: toRows(d.treatments),
+    shortBio: d.shortBio ?? null,
+    bio: toRows(d.bio),
+    knowsAbout: toRows(d.knowsAbout),
+    alumniOf: toRows(d.alumniOf),
+    memberOf: toRows(d.memberOf),
+    awards: toRows(d.awards),
+    training: toRows(d.training),
+    publications: toRows(d.publications),
+    languages: toRows(d.languages),
+    sameAs: toRows(d.sameAs),
+    verified: d.verified ?? null,
+    visitsAllCentres: d.visitsAllCentres ?? null,
+    navRole: d.navRole ?? null,
+    navOrder: d.navOrder ?? null,
+  };
+}
+
+export const getDoctor = async (slug: string): Promise<Doctor | undefined> => {
+  const docs = await getSanityDoctors();
+  const found = docs.find((d) => d.slug === slug);
+  return resolveDoctor(slug, found ? toDoctorSource(found) : null);
+};
+
+/**
+ * All doctors, code order first (founders/core), then any Sanity-only doctors
+ * (admin-created) appended by navOrder. Falls back to the code DOCTORS list when
+ * Sanity is empty/unavailable — byte-identical to before.
+ */
+export const getDoctors = async (): Promise<Doctor[]> => {
+  const docs = await getSanityDoctors();
+  const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, toDoctorSource(d)]));
+  const codeSlugs = new Set(DOCTORS.map((d) => d.slug));
+
+  const resolved: Doctor[] = DOCTORS
+    .map((d) => resolveDoctor(d.slug, bySlug.get(d.slug) ?? null))
+    .filter((d): d is Doctor => !!d);
+
+  const dbOnly = docs
+    .filter((d) => d.slug && !codeSlugs.has(d.slug))
+    .sort((a, b) => (a.navOrder ?? 999) - (b.navOrder ?? 999) || (a.slug! < b.slug! ? -1 : 1));
+  for (const d of dbOnly) {
+    const doc = resolveDoctor(d.slug as string, toDoctorSource(d));
+    if (doc) resolved.push(doc);
+  }
+  return resolved;
+};
 
 // ---------- Treatments ----------
 

@@ -3,13 +3,17 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Database, Inbox,
+  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope,
 } from "lucide-react";
 import { logoutAction } from "../../actions";
 
 const NAV = [
   { href: "/admin-panel", label: "Dashboard", icon: LayoutDashboard, exact: true },
   { href: "/admin-panel/inquiries", label: "Inquiries", icon: Inbox },
+];
+
+const CONTENT_NAV = [
+  { href: "/admin-panel/doctors", label: "Doctors", icon: Stethoscope },
 ];
 
 const SEO_NAV = [
@@ -36,6 +40,13 @@ export function Sidebar() {
       <nav className="admin-nav">
         {NAV.map(({ href, label, icon: Icon, exact }) => (
           <Link key={href} href={href} className={isActive(href, exact) ? "active" : ""}>
+            <Icon /> {label}
+          </Link>
+        ))}
+
+        <div className="admin-nav-section">Content</div>
+        {CONTENT_NAV.map(({ href, label, icon: Icon }) => (
+          <Link key={href} href={href} className={isActive(href) ? "active" : ""}>
             <Icon /> {label}
           </Link>
         ))}

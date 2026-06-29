@@ -12,7 +12,10 @@ import {
   deletePageSeo,
   setInquiryStatus,
   deleteInquiry,
+  saveDoctor,
+  deleteDoctor,
   type Inquiry,
+  type AdminDoctor,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -111,5 +114,27 @@ export async function deleteInquiryAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deleteInquiry(id));
   revalidatePath("/admin-panel/inquiries");
   revalidatePath("/admin-panel");
+  return r;
+}
+
+// ── Doctors ──
+
+/** Revalidate every public surface that renders doctor data. */
+function revalidateDoctorPages() {
+  revalidatePath("/doctors");
+  revalidatePath("/doctors/[slug]", "page");
+  revalidatePath("/"); // homepage doctor cards
+  revalidatePath("/admin-panel/doctors");
+}
+
+export async function saveDoctorAction(doc: AdminDoctor): Promise<SaveResult> {
+  const r = await guard(() => saveDoctor(doc));
+  revalidateDoctorPages();
+  return r;
+}
+
+export async function deleteDoctorAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteDoctor(id));
+  revalidateDoctorPages();
   return r;
 }
