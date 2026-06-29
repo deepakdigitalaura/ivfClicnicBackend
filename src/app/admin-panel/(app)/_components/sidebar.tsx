@@ -3,12 +3,13 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Database,
+  FileText, ExternalLink, LogOut, Database, Inbox,
 } from "lucide-react";
 import { logoutAction } from "../../actions";
 
 const NAV = [
   { href: "/admin-panel", label: "Dashboard", icon: LayoutDashboard, exact: true },
+  { href: "/admin-panel/inquiries", label: "Inquiries", icon: Inbox },
 ];
 
 const SEO_NAV = [

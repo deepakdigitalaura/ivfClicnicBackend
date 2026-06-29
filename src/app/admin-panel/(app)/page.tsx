@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   CornerUpRight, FileText, Code2, BarChart3, Bot, Map,
-  Plus, ExternalLink, Database,
+  Plus, ExternalLink, Database, Inbox,
 } from "lucide-react";
 import { getDashboardStats, hasSanity } from "@/sanity/lib/admin";
 
@@ -12,13 +12,14 @@ export default async function Dashboard() {
   const connected = hasSanity();
 
   const cards = [
+    { num: stats.newInquiries, label: "New Inquiries", icon: Inbox, bg: "#dcfce7", fg: "#166534" },
     { num: stats.pageSeo, label: "Page SEO Entries", icon: FileText, bg: "var(--rose-soft)", fg: "var(--rose)" },
     { num: stats.redirects, label: "Redirects", icon: CornerUpRight, bg: "#ede9fe", fg: "var(--plum)" },
     { num: stats.headScripts + stats.bodyScripts, label: "Scripts Injected", icon: Code2, bg: "#fef3c7", fg: "#b45309" },
-    { num: stats.customSchemas, label: "Custom Schemas", icon: BarChart3, bg: "#dcfce7", fg: "#166534" },
   ];
 
   const quick = [
+    { href: "/admin-panel/inquiries", label: "View Inquiries", icon: Inbox },
     { href: "/admin-panel/page-seo", label: "Edit Page SEO", icon: FileText },
     { href: "/admin-panel/scripts", label: "Add a Script", icon: Plus },
     { href: "/admin-panel/redirects", label: "Add Redirect", icon: CornerUpRight },

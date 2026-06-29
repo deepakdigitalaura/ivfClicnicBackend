@@ -10,6 +10,9 @@ import {
   saveSchema,
   savePageSeo,
   deletePageSeo,
+  setInquiryStatus,
+  deleteInquiry,
+  type Inquiry,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -92,5 +95,21 @@ export async function savePageSeoAction(doc: PageSeo & { _id?: string }): Promis
 export async function deletePageSeoAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deletePageSeo(id));
   revalidatePath("/admin-panel/page-seo");
+  return r;
+}
+
+// ── Inquiries ──
+
+export async function setInquiryStatusAction(id: string, status: Inquiry["status"]): Promise<SaveResult> {
+  const r = await guard(() => setInquiryStatus(id, status));
+  revalidatePath("/admin-panel/inquiries");
+  revalidatePath("/admin-panel");
+  return r;
+}
+
+export async function deleteInquiryAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteInquiry(id));
+  revalidatePath("/admin-panel/inquiries");
+  revalidatePath("/admin-panel");
   return r;
 }

@@ -19,6 +19,8 @@ export default defineConfig({
         S.list()
           .title("BFI CMS")
           .items([
+            S.documentTypeListItem("inquiry").title("📨 Inquiries"),
+            S.divider(),
             S.listItem()
               .title("🤖 Robots.txt")
               .child(S.document().schemaType("robotsConfig").documentId("robotsConfig")),

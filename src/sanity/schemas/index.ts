@@ -4,6 +4,7 @@ import redirectsConfig from "./redirectsConfig";
 import sitemapConfig from "./sitemapConfig";
 import schemaOrgConfig from "./schemaOrgConfig";
 import pageSeo from "./pageSeo";
+import inquiry from "./inquiry";
 
 export const schemas = [
   robotsConfig,
@@ -12,4 +13,5 @@ export const schemas = [
   sitemapConfig,
   schemaOrgConfig,
   pageSeo,
+  inquiry,
 ];

@@ -1,15 +1,14 @@
 import { NextResponse, type NextRequest } from "next/server";
 import { Resend } from "resend";
-import { payloadClient } from "@/lib/payload";
+import { createInquiry } from "@/sanity/lib/admin";
 
 /* =====================================================================
  * Public lead intake  ( POST /inquiry ).
  * ---------------------------------------------------------------------
- * The homepage / contact `<InquiryForm>` posts here. We validate, then write
- * the lead through the Payload LOCAL API with `overrideAccess` so the public
- * never touches the REST create directly (the `inquiries` collection keeps
- * create staff-only). Mounted at /inquiry — NOT under /api/* — to avoid
- * colliding with Payload's /api catch-all (same reason as /preview).
+ * The homepage / contact `<InquiryForm>` posts here. We validate, then (a) email
+ * the clinic via Resend and (b) store the lead in Sanity. Both are best-effort;
+ * the lead is confirmed to the visitor if EITHER path succeeds, so a transient
+ * backend issue never loses a lead or shows a false error.
  *
  * Spam: a hidden honeypot field (`company`) — real users leave it empty; bots
  * fill every field. A filled honeypot returns a success-looking response
@@ -60,7 +59,7 @@ function buildEmailHtml(fields: {
           </table>
         </td></tr>
         <tr><td style="background:#f9f9f9;padding:16px 32px;font-size:13px;color:#888;border-top:1px solid #eee">
-          View all inquiries in the <a href="https://ivf-clicnic-backend-weld.vercel.app/admin/collections/inquiries" style="color:#1a6b3f">admin panel</a>.
+          View all inquiries in the <a href="https://ivf-clicnic-backend-weld.vercel.app/admin-panel/inquiries" style="color:#1a6b3f">admin panel</a>.
         </td></tr>
       </table>
     </td></tr>
@@ -124,36 +123,39 @@ export async function POST(req: NextRequest) {
   if (email && !emailOk(email))
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 422 });
 
+  // Store the lead in Sanity (best-effort).
+  let stored = false;
   try {
-    const payload = await payloadClient();
-    await payload.create({
-      collection: "inquiries",
-      data: {
-        name,
-        phone,
-        email: email || undefined,
-        treatment: treatment || undefined,
-        location: location || undefined,
-        message: message || undefined,
-        source: source || undefined,
-        status: "new",
-      },
-      overrideAccess: true,
+    await createInquiry({
+      name,
+      phone,
+      email: email || undefined,
+      treatment: treatment || undefined,
+      location: location || undefined,
+      message: message || undefined,
+      source: source || undefined,
+      status: "new",
+      createdAt: new Date().toISOString(),
     });
-
-    // Send email notification — awaited so the runtime doesn't kill it before it completes.
-    // A failed send is logged but never surfaces to the user.
-    try {
-      await sendNotificationEmail({ name, phone, email, treatment, location, message, source });
-    } catch (err) {
-      console.error("[inquiry] email notification failed:", err);
-    }
-
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json(
-      { error: "Something went wrong. Please call us on +91 97126 22288." },
-      { status: 500 },
-    );
+    stored = true;
+  } catch (err) {
+    console.error("[inquiry] Sanity store failed:", err);
   }
+
+  // Email the clinic (best-effort). Independent of storage so a lead is never lost.
+  let emailed = false;
+  try {
+    await sendNotificationEmail({ name, phone, email, treatment, location, message, source });
+    emailed = true;
+  } catch (err) {
+    console.error("[inquiry] email notification failed:", err);
+  }
+
+  // Confirm to the visitor if either path captured the lead.
+  if (stored || emailed) return NextResponse.json({ ok: true });
+
+  return NextResponse.json(
+    { error: "Something went wrong. Please call us on +91 97126 22288." },
+    { status: 500 },
+  );
 }

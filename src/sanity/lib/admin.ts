@@ -101,17 +101,58 @@ export async function deletePageSeo(id: string) {
   revalidateTag("sanity-page-seo");
 }
 
+// ── Inquiries (leads) ──
+
+export type Inquiry = {
+  _id: string;
+  name?: string;
+  phone?: string;
+  email?: string;
+  treatment?: string;
+  location?: string;
+  message?: string;
+  source?: string;
+  status?: "new" | "contacted" | "closed";
+  createdAt?: string;
+};
+
+/** Public lead intake — called by the /inquiry route. Best-effort; never throws
+ *  to the caller silently (the route handles failures). Returns the created id. */
+export async function createInquiry(data: Omit<Inquiry, "_id">): Promise<string> {
+  if (!hasSanity()) throw new Error("Sanity not configured");
+  const doc = await writeClient.create({ _type: "inquiry", ...data });
+  return doc._id;
+}
+
+export async function readInquiries(): Promise<Inquiry[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(`*[_type == "inquiry"] | order(createdAt desc)`);
+  } catch {
+    return [];
+  }
+}
+
+export async function setInquiryStatus(id: string, status: Inquiry["status"]) {
+  await writeClient.patch(id).set({ status }).commit();
+}
+
+export async function deleteInquiry(id: string) {
+  await writeClient.delete(id);
+}
+
 /** Lightweight counts for the dashboard stat cards. */
 export async function getDashboardStats() {
-  const empty = { redirects: 0, pageSeo: 0, headScripts: 0, bodyScripts: 0, customSchemas: 0, blocked: 0 };
+  const empty = { redirects: 0, pageSeo: 0, headScripts: 0, bodyScripts: 0, customSchemas: 0, blocked: 0, newInquiries: 0, totalInquiries: 0 };
   if (!hasSanity()) return empty;
   try {
-    const [redirects, scripts, schema, pageSeo, robots] = await Promise.all([
+    const [redirects, scripts, schema, pageSeo, robots, inquiries] = await Promise.all([
       readRedirects(),
       readScripts(),
       readSchema(),
       readAllPageSeo(),
       readRobots(),
+      readInquiries(),
     ]);
     return {
       redirects: redirects?.rules?.length ?? 0,
@@ -120,6 +161,8 @@ export async function getDashboardStats() {
       bodyScripts: scripts?.bodyScripts?.length ?? 0,
       customSchemas: schema?.customSchemas?.length ?? 0,
       blocked: robots?.disallowPaths?.length ?? 0,
+      newInquiries: inquiries.filter((i) => (i.status ?? "new") === "new").length,
+      totalInquiries: inquiries.length,
     };
   } catch {
     return empty;
