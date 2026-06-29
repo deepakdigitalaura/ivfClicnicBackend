@@ -79,15 +79,23 @@ async function sendNotificationEmail(fields: {
   source: string;
 }) {
   const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) return; // silently skip if not configured
+  if (!apiKey) {
+    console.error("[inquiry] RESEND_API_KEY is not set — email skipped");
+    return;
+  }
 
   const resend = new Resend(apiKey);
-  await resend.emails.send({
+  const result = await resend.emails.send({
     from: "BFI IVF Clinic <onboarding@resend.dev>",
     to: "deepak.digitalaura@gmail.com",
     subject: `New Inquiry from ${fields.name} — BFI IVF Clinic`,
     html: buildEmailHtml(fields),
   });
+
+  if (result.error) {
+    throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
+  }
+  console.log("[inquiry] email sent, id:", result.data?.id);
 }
 
 export async function POST(req: NextRequest) {
