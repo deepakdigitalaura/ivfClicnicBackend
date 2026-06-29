@@ -1,4 +1,5 @@
 import { NextResponse, type NextRequest } from "next/server";
+import nodemailer from "nodemailer";
 import { payloadClient } from "@/lib/payload";
 
 /* =====================================================================
@@ -21,6 +22,78 @@ const emailOk = (v: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
 /** Trim + cap an incoming string field (defends against oversized payloads). */
 const clean = (v: unknown, max = 2000): string =>
   (typeof v === "string" ? v : "").trim().slice(0, max);
+
+function buildEmailHtml(fields: {
+  name: string;
+  phone: string;
+  email: string;
+  treatment: string;
+  location: string;
+  message: string;
+  source: string;
+}) {
+  const row = (label: string, value: string) =>
+    value
+      ? `<tr><td style="padding:8px 12px;font-weight:600;white-space:nowrap;color:#555;border-bottom:1px solid #f0f0f0">${label}</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0">${value}</td></tr>`
+      : "";
+
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"/></head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:Arial,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:32px 0">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+        <tr><td style="background:#1a6b3f;padding:24px 32px">
+          <h1 style="margin:0;color:#fff;font-size:20px">New Inquiry — BFI IVF Clinic</h1>
+          <p style="margin:4px 0 0;color:rgba(255,255,255,.8);font-size:14px">Submitted via website contact form</p>
+        </td></tr>
+        <tr><td style="padding:24px 32px">
+          <table width="100%" cellpadding="0" cellspacing="0" style="font-size:15px;color:#333">
+            ${row("Name", fields.name)}
+            ${row("Phone", fields.phone)}
+            ${row("Email", fields.email)}
+            ${row("Treatment", fields.treatment)}
+            ${row("Preferred Centre", fields.location)}
+            ${row("Message", fields.message.replace(/\n/g, "<br/>"))}
+            ${row("Source page", fields.source)}
+          </table>
+        </td></tr>
+        <tr><td style="background:#f9f9f9;padding:16px 32px;font-size:13px;color:#888;border-top:1px solid #eee">
+          View all inquiries in the <a href="https://ivfclinic.vercel.app/admin/collections/inquiries" style="color:#1a6b3f">admin panel</a>.
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+async function sendNotificationEmail(fields: {
+  name: string;
+  phone: string;
+  email: string;
+  treatment: string;
+  location: string;
+  message: string;
+  source: string;
+}) {
+  const user = process.env.GMAIL_USER;
+  const pass = process.env.GMAIL_APP_PASSWORD;
+  if (!user || !pass) return; // silently skip if not configured
+
+  const transporter = nodemailer.createTransport({
+    service: "gmail",
+    auth: { user, pass },
+  });
+
+  await transporter.sendMail({
+    from: `"BFI IVF Clinic" <${user}>`,
+    to: "deepak.digitalaura@gmail.com",
+    subject: `New Inquiry from ${fields.name} — BFI IVF Clinic`,
+    html: buildEmailHtml(fields),
+  });
+}
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
@@ -64,6 +137,12 @@ export async function POST(req: NextRequest) {
       },
       overrideAccess: true,
     });
+
+    // Fire email notification — non-blocking, failure doesn't break the user's submit
+    sendNotificationEmail({ name, phone, email, treatment, location, message, source }).catch(
+      (err) => console.error("[inquiry] email notification failed:", err),
+    );
+
     return NextResponse.json({ ok: true });
   } catch {
     return NextResponse.json(
