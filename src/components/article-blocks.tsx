@@ -448,13 +448,40 @@ export function AnimatedInlineCta({ node }: { node: { fields: unknown } }) {
 }
 
 /* ══════════════════════════════════════════════════════════════════════
- * ExternalImage — topic-relevant stock photo from Pexels / Unsplash.
+ * ExternalImage — real event photo or topic-relevant image.
  *
  * URL is set by the editorial team / enrichment scripts; never from
  * arbitrary user input. Renders with credit attribution below.
  * ══════════════════════════════════════════════════════════════════════ */
-export function AnimatedExternalImage({ node: _node }: { node: { fields: unknown } }) {
-  return null;
+export function AnimatedExternalImage({ node }: { node: { fields: unknown } }) {
+  const { url, alt, caption, credit } = node.fields as {
+    url?: string | null;
+    alt?: string | null;
+    caption?: string | null;
+    credit?: string | null;
+  };
+  if (!url) return null;
+
+  return (
+    <Reveal className="my-6">
+      <figure className="overflow-hidden rounded-xl shadow-md">
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src={url}
+          alt={alt ?? ""}
+          loading="lazy"
+          className="w-full object-cover max-h-[480px]"
+        />
+        {(caption || credit) && (
+          <figcaption className="bg-gray-50 px-4 py-2 text-xs text-gray-500 leading-snug">
+            {caption && <span>{caption}</span>}
+            {caption && credit && <span className="mx-1">·</span>}
+            {credit && <span className="italic">{credit}</span>}
+          </figcaption>
+        )}
+      </figure>
+    </Reveal>
+  );
 }
 
 /* ══════════════════════════════════════════════════════════════════════
