@@ -1,4 +1,4 @@
-import { revalidateTag } from "next/cache";
+import { revalidateTag, revalidatePath } from "next/cache";
 import { NextRequest, NextResponse } from "next/server";
 
 const SECRET = "bfi-revalidate-9x7k2";
@@ -9,9 +9,11 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Unauthorized" }, { status: 401 });
   }
   const tags = searchParams.get("tags")?.split(",").filter(Boolean) ?? [];
-  if (!tags.length) {
-    return NextResponse.json({ error: "No tags provided" }, { status: 400 });
+  const paths = searchParams.get("paths")?.split(",").filter(Boolean) ?? [];
+  if (!tags.length && !paths.length) {
+    return NextResponse.json({ error: "No tags or paths provided" }, { status: 400 });
   }
   tags.forEach((tag) => revalidateTag(tag));
-  return NextResponse.json({ revalidated: tags });
+  paths.forEach((p) => revalidatePath(p));
+  return NextResponse.json({ revalidated: { tags, paths } });
 }
