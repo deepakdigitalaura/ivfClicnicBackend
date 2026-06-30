@@ -11,20 +11,35 @@ import type {
   PageSeo,
 } from "./fetch";
 
+export const hasSanity = () => Boolean(projectId && process.env.SANITY_API_TOKEN);
+
 /**
  * Server-only Sanity client with WRITE access (uses SANITY_API_TOKEN). Reads are
  * uncached (perspective: drafts off; we read published) so the admin panel always
  * shows the latest saved values immediately after a write.
+ * Lazily created so module import never throws when projectId is not configured.
  */
-const writeClient = createClient({
-  projectId,
-  dataset,
-  apiVersion: "2024-01-01",
-  useCdn: false,
-  token: process.env.SANITY_API_TOKEN,
+let _writeClient: ReturnType<typeof createClient> | null = null;
+function getWriteClient() {
+  if (!projectId) throw new Error("Sanity not configured");
+  if (!_writeClient) {
+    _writeClient = createClient({
+      projectId,
+      dataset,
+      apiVersion: "2024-01-01",
+      useCdn: false,
+      token: process.env.SANITY_API_TOKEN,
+    });
+  }
+  return _writeClient;
+}
+const writeClient = new Proxy({} as ReturnType<typeof createClient>, {
+  get(_t, prop) {
+    const c = getWriteClient();
+    const val = (c as Record<string, unknown>)[prop as string];
+    return typeof val === "function" ? (val as Function).bind(c) : val;
+  },
 });
-
-export const hasSanity = () => Boolean(projectId && process.env.SANITY_API_TOKEN);
 
 /** Fresh (uncached) read of a singleton document by its fixed _id. */
 async function readSingleton<T>(id: string): Promise<T | null> {

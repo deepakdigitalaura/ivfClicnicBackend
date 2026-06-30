@@ -12,6 +12,8 @@ public/media
 supabase-schema.sql
 .vercel
 .env*
+!.env.vps.example
+!.env.local.example
 bfi-pregnancy-calculator.zip
 tmp/check.json
 tmp/commit-msg.txt
