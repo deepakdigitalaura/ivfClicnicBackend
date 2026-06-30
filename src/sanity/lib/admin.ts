@@ -209,7 +209,11 @@ export async function saveDoctor(doc: AdminDoctor) {
   const { _id, photoUrl, ...rest } = doc;
   // photoUrl is a read-only projection; never write it back.
   void photoUrl;
-  const id = _id || `doctor.${(doc.slug ?? "").trim()}`;
+  // NOTE: must NOT contain a literal "." — Sanity's public/anonymous read API
+  // silently excludes document IDs with a dot outside recognised system
+  // prefixes (e.g. "drafts."), so a "doctor.<slug>" id is invisible on the
+  // live site even though it reads fine via the authenticated admin client.
+  const id = _id || `doctor-${(doc.slug ?? "").trim()}`;
   // Preserve an existing uploaded photo asset by merging onto the current doc.
   const existing = (await writeClient.getDocument(id)) as { photo?: unknown } | null;
   await writeClient.createOrReplace({

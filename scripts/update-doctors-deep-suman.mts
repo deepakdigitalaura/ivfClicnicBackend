@@ -27,7 +27,7 @@ const ALL_TREATMENT_SLUGS = [
 ];
 
 const DEEP: Record<string, unknown> = {
-  _id: "doctor.deep-gajiwala",
+  _id: "doctor-deep-gajiwala",
   _type: "doctor",
   slug: "deep-gajiwala",
   name: "Dr. Deep Gajiwala",
@@ -104,7 +104,7 @@ const DEEP: Record<string, unknown> = {
 };
 
 const SUMAN: Record<string, unknown> = {
-  _id: "doctor.suman-singh",
+  _id: "doctor-suman-singh",
   _type: "doctor",
   slug: "suman-singh",
   name: "Dr. Suman Singh",
