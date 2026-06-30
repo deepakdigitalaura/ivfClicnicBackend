@@ -3,7 +3,7 @@ import { notFound } from "next/navigation";
 import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
 import { treatmentGraph } from "@/lib/treatments";
-import { getTreatment, getBlogsByTreatmentSlug, payloadClient } from "@/lib/payload";
+import { getTreatment, getTreatments, getBlogsByTreatmentSlug } from "@/lib/payload";
 import { toBlogPost } from "@/lib/blogs";
 
 type Props = {
@@ -11,18 +11,8 @@ type Props = {
 };
 
 export async function generateStaticParams() {
-  try {
-    const payload = await payloadClient();
-    const res = await payload.find({
-      collection: "treatments",
-      limit: 500,
-      depth: 0,
-      select: { slug: true },
-    });
-    return res.docs.map((d) => ({ slug: d.slug }));
-  } catch {
-    return [];
-  }
+  const treatments = await getTreatments();
+  return treatments.map((t) => ({ slug: t.slug }));
 }
 
 export async function generateMetadata({ params }: Props): Promise<Metadata> {

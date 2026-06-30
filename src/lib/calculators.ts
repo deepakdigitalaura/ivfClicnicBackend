@@ -1,7 +1,5 @@
 import { cache as reactCache } from "react";
 import { unstable_cache } from "next/cache";
-import { payloadClient } from "@/lib/payload";
-import { cacheTags } from "@/lib/cache-tags";
 
 export type CalculatorFaq = { question: string; answer: string };
 
@@ -37,69 +35,38 @@ export function isCalculatorSlug(s: string): s is CalculatorSlug {
   return (CALCULATOR_SLUGS as readonly string[]).includes(s);
 }
 
+const CALCULATOR_DEFAULTS: Record<string, Pick<CalculatorCmsData, "title" | "subtitle" | "disclaimer">> = {
+  "ivf-success-rate":  { title: "IVF Success Rate Calculator", subtitle: "Estimate your IVF success probability based on key fertility factors.", disclaimer: "" },
+  "ivf-cost":          { title: "IVF Cost Calculator", subtitle: "Get a personalised cost estimate for IVF treatment at BFI.", disclaimer: "" },
+  "ovulation":         { title: "Ovulation & Pregnancy Calculator", subtitle: "Track your fertile window and predict your most fertile days.", disclaimer: "" },
+  "natural-pregnancy": { title: "Natural Pregnancy Calculator", subtitle: "Understand your natural conception chances based on key factors.", disclaimer: "" },
+  "fertile-period":    { title: "Fertile Period Calculator", subtitle: "Calculate your fertile window based on your menstrual cycle.", disclaimer: "" },
+  "amh-level":         { title: "AMH Level Interpreter", subtitle: "Interpret your Anti-Müllerian Hormone (AMH) level and what it means for your fertility.", disclaimer: "" },
+  "semen-analysis":    { title: "Semen Analysis Calculator", subtitle: "Understand your semen analysis results and what they mean.", disclaimer: "" },
+  "miscarriage-risk":  { title: "Miscarriage Risk Calculator", subtitle: "Understand the risk factors associated with miscarriage.", disclaimer: "" },
+};
+
 export const getCalculator = reactCache(
   (slug: string): Promise<CalculatorCmsData | null> =>
     unstable_cache(
       async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "calculators",
-            where: { slug: { equals: slug } },
-            limit: 1,
-            depth: 1,
-          });
-          const doc = res.docs[0];
-          if (!doc) return null;
-          return {
-            slug: doc.slug as string,
-            title: (doc.title as string) ?? "",
-            subtitle: (doc.subtitle as string) ?? "",
-            disclaimer: (doc.disclaimer as string) ?? "",
-            faqs: ((doc.faqs as { question: string; answer: string }[]) ?? []).map((f) => ({
-              question: f.question,
-              answer: f.answer,
-            })),
-            seo: {
-              metaTitle: (doc.seo as { metaTitle?: string })?.metaTitle ?? null,
-              metaDescription: (doc.seo as { metaDescription?: string })?.metaDescription ?? null,
-              ogTitle: (doc.seo as { ogTitle?: string })?.ogTitle ?? null,
-              ogDescription: (doc.seo as { ogDescription?: string })?.ogDescription ?? null,
-              ogImage:
-                typeof (doc.seo as { ogImage?: { url?: string } })?.ogImage === "object"
-                  ? ((doc.seo as { ogImage?: { url?: string } })?.ogImage?.url ?? null)
-                  : null,
-            },
-          };
-        } catch {
-          return null;
-        }
+        if (!isCalculatorSlug(slug)) return null;
+        const defaults = CALCULATOR_DEFAULTS[slug];
+        return {
+          slug,
+          title: defaults?.title ?? slug,
+          subtitle: defaults?.subtitle ?? "",
+          disclaimer: defaults?.disclaimer ?? "",
+          faqs: [],
+          seo: { metaTitle: null, metaDescription: null, ogTitle: null, ogDescription: null, ogImage: null },
+        };
       },
       ["calculator-by-slug", slug],
-      { tags: [cacheTags.collectionList("calculators"), cacheTags.collectionItem("calculators", slug)] },
+      { revalidate: 86400 },
     )(),
 );
 
-export const getAllCalculators = reactCache(
-  (): Promise<CalculatorCmsData[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({ collection: "calculators", limit: 20, depth: 0 });
-          return res.docs.map((doc) => ({
-            slug: doc.slug as string,
-            title: (doc.title as string) ?? "",
-            subtitle: (doc.subtitle as string) ?? "",
-            disclaimer: (doc.disclaimer as string) ?? "",
-            faqs: [],
-            seo: {},
-          }));
-        } catch {
-          return [];
-        }
-      },
-      ["calculators-all"],
-      { tags: [cacheTags.collectionList("calculators")] },
-    )(),
-);
+export const getAllCalculators = async (): Promise<CalculatorCmsData[]> =>
+  Promise.all(CALCULATOR_SLUGS.map((slug) => getCalculator(slug))).then(
+    (results) => results.filter((c): c is CalculatorCmsData => c !== null),
+  );
