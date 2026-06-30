@@ -365,6 +365,8 @@ export type AdminBlogMeta = {
   categoryTitle?: string | null;
   categorySlug?: string | null;
   authorName?: string | null;
+  heroImageUrl?: string | null;
+  heroImageAlt?: string | null;
   status?: string | null;
   publishedAt?: string | null;
   lastUpdatedAt?: string | null;
@@ -374,15 +376,33 @@ export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, status, publishedAt, lastUpdatedAt }`,
+      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, heroImageUrl, heroImageAlt, status, publishedAt, lastUpdatedAt }`,
     );
   } catch {
     return [];
   }
 }
 
+/** Quick-add / meta-edit from the admin panel. Article body (contentRaw) and
+ *  SEO/FAQs are intentionally left untouched here — those still go through
+ *  Sanity Studio. New posts default to draft until someone publishes them. */
+export async function saveBlog(doc: AdminBlogMeta) {
+  const { _id, ...rest } = doc;
+  if (_id) {
+    await writeClient.patch(_id).set(rest).commit();
+  } else {
+    await writeClient.create({ _type: "blog", status: "draft", ...rest });
+  }
+  revalidateTag(BLOG_TAG);
+}
+
 export async function deleteBlog(id: string) {
   await writeClient.delete(id);
+  revalidateTag(BLOG_TAG);
+}
+
+export async function setBlogStatus(id: string, status: "published" | "draft") {
+  await writeClient.patch(id).set({ status }).commit();
   revalidateTag(BLOG_TAG);
 }
 

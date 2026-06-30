@@ -1,25 +1,29 @@
 import type { Metadata } from "next";
 import { EducationVideosPage } from "@/components/education-videos-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { getEducationVideos } from "@/lib/payload";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/education-videos";
 
-export const metadata: Metadata = {
-  title: "Fertility Education Videos — IVF, PCOS, Male Infertility & More | Bavishi Fertility Institute",
-  description:
-    "Watch expert fertility education videos from Bavishi Fertility Institute specialists. Topics include IVF, egg freezing, male infertility, embryo transfer, and more.",
-  alternates: { canonical: PATH },
-  openGraph: {
-    title: "Fertility Education Videos — Bavishi Fertility Institute",
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeoOverride(PATH, {
+    title: "Fertility Education Videos — IVF, PCOS, Male Infertility & More | Bavishi Fertility Institute",
     description:
-      "Expert fertility education from BFI specialists — IVF, PCOS, sperm count, egg freezing, embryo transfer and more.",
-    url: abs(PATH),
-    type: "website",
-    images: ["/assets/hero-mother-baby1.png"],
-  },
-};
+      "Watch expert fertility education videos from Bavishi Fertility Institute specialists. Topics include IVF, egg freezing, male infertility, embryo transfer, and more.",
+    alternates: { canonical: PATH },
+    openGraph: {
+      title: "Fertility Education Videos — Bavishi Fertility Institute",
+      description:
+        "Expert fertility education from BFI specialists — IVF, PCOS, sperm count, egg freezing, embryo transfer and more.",
+      url: abs(PATH),
+      type: "website",
+      images: ["/assets/hero-mother-baby1.png"],
+    },
+  });
+}
 
 const graph = [
   {
@@ -43,6 +47,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
       <EducationVideosPage videos={videos} />
     </>
   );

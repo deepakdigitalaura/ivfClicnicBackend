@@ -20,13 +20,16 @@ import {
   saveSiteSettings,
   saveEducationVideo,
   deleteEducationVideo,
+  saveBlog,
   deleteBlog,
+  setBlogStatus,
   type Inquiry,
   type AdminDoctor,
   type AdminTestimonial,
   type AdminHomepage,
   type AdminSiteSettings,
   type AdminEducationVideo,
+  type AdminBlogMeta,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -216,8 +219,20 @@ function revalidateBlogPages(slug?: string) {
   if (slug) revalidatePath(`/blogs/${slug}`);
 }
 
+export async function saveBlogAction(doc: AdminBlogMeta): Promise<SaveResult> {
+  const r = await guard(() => saveBlog(doc));
+  revalidateBlogPages(doc.slug);
+  return r;
+}
+
 export async function deleteBlogAction(id: string, slug?: string): Promise<SaveResult> {
   const r = await guard(() => deleteBlog(id));
+  revalidateBlogPages(slug);
+  return r;
+}
+
+export async function setBlogStatusAction(id: string, status: "published" | "draft", slug?: string): Promise<SaveResult> {
+  const r = await guard(() => setBlogStatus(id, status));
   revalidateBlogPages(slug);
   return r;
 }

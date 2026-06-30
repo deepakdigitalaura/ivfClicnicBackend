@@ -25,9 +25,20 @@ export default defineConfig({
             S.listItem()
               .title("⚙️ Site Settings")
               .child(S.document().schemaType("siteSettings").documentId("siteSettings")),
+            S.listItem()
+              .title("ℹ️ About Page")
+              .child(S.document().schemaType("aboutPage").documentId("aboutPage")),
+            S.divider(),
+            S.documentTypeListItem("treatment").title("💉 Treatments"),
+            S.documentTypeListItem("service").title("🏥 Services"),
+            S.documentTypeListItem("city").title("📍 Locations — Cities"),
+            S.documentTypeListItem("centre").title("🏢 Locations — Centres"),
+            S.divider(),
             S.documentTypeListItem("inquiry").title("📨 Inquiries"),
             S.documentTypeListItem("doctor").title("🩺 Doctors"),
             S.documentTypeListItem("testimonial").title("⭐ Testimonials"),
+            S.documentTypeListItem("educationVideo").title("🎬 Education Videos"),
+            S.documentTypeListItem("blog").title("📝 Blog Posts"),
             S.divider(),
             S.listItem()
               .title("🤖 Robots.txt")

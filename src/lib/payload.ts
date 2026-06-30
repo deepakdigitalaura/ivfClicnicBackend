@@ -20,7 +20,7 @@ import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
-import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
+import { resolveDoctor, DOCTORS, doctorUrl, type Doctor, type DoctorSource } from "@/lib/doctors";
 import {
   getSanityDoctors,
   getSanityTestimonials,
@@ -33,14 +33,26 @@ import {
   getSanityBlogsByLocationSlug,
   getSanityRelatedBlogs,
   getSanityCMEBlogs,
+  getSanityTreatments,
+  getSanityTreatment,
+  getSanityServices,
+  getSanityService,
+  getSanityCities,
+  getSanityCity,
+  getSanityCentres,
+  getSanityCentre,
+  getSanityAbout,
   type SanityDoctor,
   type SanitySiteSettings,
   type SanityBlog,
+  type SanityTreatment,
+  type SanityCentre as SanityCentreDoc,
 } from "@/sanity/lib/fetch";
 import type { ContactSource } from "@/lib/contact";
-import { resolveTreatment, type ResolvedTreatment } from "@/lib/treatment-content";
-import { TREATMENTS } from "@/lib/treatments";
-import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre } from "@/lib/location-content";
+import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
+import { TREATMENTS, treatmentBySlug } from "@/lib/treatments";
+import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre, type CitySource, type CentreSource } from "@/lib/location-content";
+import { type ServiceSource } from "@/lib/services";
 
 // ---------- Types (kept for callers) ----------
 
@@ -243,10 +255,42 @@ export const getTestimonialVideos = async (): Promise<TestimonialVideoItem[]> =>
 
 // ---------- Services ----------
 
-export const getService = async (slug: string): Promise<ResolvedService | undefined> =>
-  resolveService(slug, null);
+/** Map a Sanity service doc to the ServiceSource shape resolveService overlays. */
+function toServiceSource(d: Awaited<ReturnType<typeof getSanityService>>): ServiceSource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    hero: d.hero ? {
+      eyebrow: d.hero.eyebrow ?? null,
+      h1: d.hero.h1 ?? null,
+      h1Em: d.hero.h1Em ?? null,
+      tagline: d.hero.tagline ?? null,
+      badges: d.hero.badges ?? null,
+      image: d.hero.image ?? null,
+      imageAlt: d.hero.imageAlt ?? null,
+      heroPhoto: d.hero.heroPhoto?.asset?.url
+        ? { url: d.hero.heroPhoto.asset.url }
+        : undefined,
+    } : null,
+    seo: d.seo ? { metaTitle: d.seo.metaTitle ?? null, metaDescription: d.seo.metaDescription ?? null } : null,
+    overview: d.overview ?? null,
+    benefits: d.benefits ?? null,
+    whoFor: d.whoFor ?? null,
+    process: d.process ?? null,
+    whyUs: d.whyUs ?? null,
+    faqs: d.faqs ?? null,
+  };
+}
 
-export const getPublishedServiceSlugs = async (): Promise<string[]> => [];
+export const getService = async (slug: string): Promise<ResolvedService | undefined> => {
+  const doc = await getSanityService(slug);
+  return resolveService(slug, toServiceSource(doc));
+};
+
+export const getPublishedServiceSlugs = async (): Promise<string[]> => {
+  const docs = await getSanityServices();
+  return docs.filter((d) => d.slug).map((d) => d.slug as string);
+};
 
 // ---------- Doctors (Sanity-backed, code fallback) ----------
 
@@ -314,23 +358,132 @@ export const getDoctors = async (): Promise<Doctor[]> => {
 
 // ---------- Treatments ----------
 
-export const getTreatment = async (slug: string): Promise<ResolvedTreatment | undefined> =>
-  resolveTreatment(slug, null);
+/** Map a Sanity treatment doc to the TreatmentSource shape resolveTreatment overlays. */
+function toTreatmentSource(d: SanityTreatment | null | undefined): TreatmentSource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    href: d.href ?? null,
+    hero: d.hero ? {
+      eyebrow: d.hero.eyebrow ?? null,
+      h1: d.hero.h1 ?? null,
+      h1Em: d.hero.h1Em ?? null,
+      tagline: d.hero.tagline ?? null,
+      badges: d.hero.badges ?? null,
+      image: d.hero.image ?? null,
+      imageAlt: d.hero.imageAlt ?? null,
+      heroPhoto: d.hero.heroPhoto?.asset?.url
+        ? { url: d.hero.heroPhoto.asset.url }
+        : undefined,
+    } : null,
+    meta: d.meta ?? null,
+    whatIs: d.whatIs ?? null,
+    benefits: d.benefits ?? null,
+    whoNeedsIt: d.whoNeedsIt ?? null,
+    process: d.process ?? null,
+    risks: d.risks ?? null,
+    faqs: d.faqs ?? null,
+    cta: d.cta ?? null,
+  };
+}
 
-export const getTreatments = async (): Promise<ResolvedTreatment[]> =>
-  TREATMENTS.map((t) => resolveTreatment(t.slug, null)).filter((t): t is ResolvedTreatment => !!t);
+export const getTreatment = async (slug: string): Promise<ResolvedTreatment | undefined> => {
+  const doc = await getSanityTreatment(slug);
+  return resolveTreatment(slug, toTreatmentSource(doc));
+};
+
+export const getTreatments = async (): Promise<ResolvedTreatment[]> => {
+  const docs = await getSanityTreatments();
+  const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, d]));
+  return TREATMENTS
+    .map((t) => resolveTreatment(t.slug, toTreatmentSource(bySlug.get(t.slug) ?? null)))
+    .filter((t): t is ResolvedTreatment => !!t);
+};
 
 // ---------- Locations ----------
 
-export const getCity = async (slug: string): Promise<ResolvedCity | undefined> =>
-  resolveCity(slug, null);
+function toCitySource(d: Awaited<ReturnType<typeof getSanityCity>>): CitySource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    name: d.name ?? null,
+    region: d.region ?? null,
+    country: d.country ?? null,
+    helpline: d.helpline ?? null,
+    helplineLabel: d.helplineLabel ?? null,
+    whatsapp: d.whatsapp ?? null,
+    heroImage: d.heroImage ?? null,
+    hero360Url: d.hero360Url ?? null,
+    built: d.built ?? null,
+    intro: d.intro ?? null,
+    faqs: d.faqs ?? null,
+    womensHealth: d.womensHealth ?? null,
+  };
+}
 
-export const getCentre = async (citySlug: string, slug: string): Promise<ResolvedCentre | undefined> =>
-  resolveCentre(citySlug, slug, null);
+function toCentreSource(d: SanityCentreDoc | null | undefined): CentreSource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    citySlug: d.citySlug ?? null,
+    name: d.name ?? null,
+    fullName: d.fullName ?? null,
+    isHeadOffice: d.isHeadOffice ?? null,
+    area: d.area ?? null,
+    built: d.built ?? null,
+    address: d.address ?? null,
+    pin: d.pin ?? null,
+    phone: d.phone ?? null,
+    phoneLabel: d.phoneLabel ?? null,
+    hours: d.hours ?? null,
+    opening: d.opening ? { opens: d.opening.opens ?? null, closes: d.opening.closes ?? null, days: d.opening.days ?? null } : null,
+    geo: d.geo ? { lat: d.geo.lat ?? null, lng: d.geo.lng ?? null } : null,
+    mapQuery: d.mapQuery ?? null,
+    image: d.image ?? null,
+    hero360Url: d.hero360Url ?? null,
+    nearby: d.nearby ?? null,
+    landmarks: d.landmarks ?? null,
+    howToReach: d.howToReach ?? null,
+    facilities: d.facilities ?? null,
+    doctors: d.doctors ?? null,
+    treatments: d.treatments ?? null,
+    faqs: d.faqs ?? null,
+    reviewsKey: d.reviewsKey ?? null,
+    sameAs: d.sameAs ?? null,
+    intro: d.intro ?? null,
+    gallery: d.gallery ?? null,
+    womensHealth: d.womensHealth ?? null,
+  };
+}
 
-export const getPublishedCitySlugs = async (): Promise<string[]> => [];
-export const getPublishedCentreParams = async (): Promise<{ city: string; center: string }[]> => [];
-export const getPublishedCentresForCity = async (_citySlug: string): Promise<{ slug: string; name: string }[]> => [];
+export const getCity = async (slug: string): Promise<ResolvedCity | undefined> => {
+  const doc = await getSanityCity(slug);
+  return resolveCity(slug, toCitySource(doc));
+};
+
+export const getCentre = async (citySlug: string, slug: string): Promise<ResolvedCentre | undefined> => {
+  const doc = await getSanityCentre(citySlug, slug);
+  return resolveCentre(citySlug, slug, toCentreSource(doc));
+};
+
+export const getPublishedCitySlugs = async (): Promise<string[]> => {
+  const docs = await getSanityCities();
+  return docs.filter((d) => d.slug && d.built !== false).map((d) => d.slug as string);
+};
+
+export const getPublishedCentreParams = async (): Promise<{ city: string; center: string }[]> => {
+  const docs = await getSanityCentres();
+  return docs
+    .filter((d) => d.slug && d.citySlug && d.built !== false)
+    .map((d) => ({ city: d.citySlug as string, center: d.slug as string }));
+};
+
+export const getPublishedCentresForCity = async (citySlug: string): Promise<{ slug: string; name: string }[]> => {
+  const docs = await getSanityCentres();
+  return docs
+    .filter((d) => d.citySlug === citySlug && d.slug && d.built !== false)
+    .map((d) => ({ slug: d.slug as string, name: d.name ?? d.slug ?? "" }));
+};
 
 // ---------- Globals ----------
 
@@ -372,13 +525,73 @@ export const getSiteIdentity = async (): Promise<SiteIdentity | undefined> => {
   };
 };
 
+/** Build NavTreatmentItem list from Sanity treatment docs + code fallback hrefs. */
+async function getNavTreatments(): Promise<NavTreatmentItem[]> {
+  const docs = await getSanityTreatments();
+  return docs
+    .filter((d) => d.slug && d.navCategory)
+    .map((d) => {
+      const codeDef = treatmentBySlug(d.slug as string);
+      return {
+        slug: d.slug as string,
+        name: (codeDef?.name ?? d.slug) as string,
+        href: d.href || codeDef?.href || `/treatments/${d.slug}`,
+        navCategory: d.navCategory as string,
+        navOrder: d.navOrder ?? 0,
+      };
+    });
+}
+
+/** Build NavDoctorItem list from Sanity doctor docs with navRole set (code doctors
+ *  don't carry navRole — this stays empty until an admin sets it in Sanity, and
+ *  the header/footer then fall back to their hardcoded doctorMenuData()). */
+async function getNavDoctors(): Promise<NavDoctorItem[]> {
+  const docs = await getSanityDoctors();
+  return docs
+    .filter((d): d is SanityDoctor & { slug: string; name: string; navRole: "senior-specialist" | "specialist" } =>
+      !!d.slug && !!d.name && !!d.navRole)
+    .map((d) => ({
+      slug: d.slug,
+      name: d.name,
+      href: doctorUrl(d.slug),
+      navRole: d.navRole,
+      navOrder: d.navOrder ?? 0,
+      city: d.cities?.[0] ?? "",
+      experienceLabel: d.experienceLabel || undefined,
+    }));
+}
+
+/** Build NavLocationItem list (one entry per city, each carrying its live centres). */
+async function getNavLocations(): Promise<NavLocationItem[]> {
+  const [cities, centres] = await Promise.all([getSanityCities(), getSanityCentres()]);
+  const liveCities = cities.filter((c) => c.slug && c.built !== false);
+  return liveCities.map((c) => ({
+    citySlug: c.slug as string,
+    cityName: c.name || (c.slug as string),
+    centres: centres
+      .filter((cn) => cn.citySlug === c.slug && cn.slug && cn.built !== false)
+      .map((cn) => ({ slug: cn.slug as string, name: cn.name || (cn.slug as string) })),
+  }));
+}
+
 export const getFooter = async (): Promise<FooterData> => {
-  const settings = await getSanitySiteSettings();
-  return resolveFooter(null as unknown as FooterSource, resolveContactValues(toContactSource(settings)), [], [], []);
+  const [settings, navTreatments, navDoctors, navLocations] = await Promise.all([
+    getSanitySiteSettings(),
+    getNavTreatments(),
+    getNavDoctors(),
+    getNavLocations(),
+  ]);
+  return resolveFooter(null as unknown as FooterSource, resolveContactValues(toContactSource(settings)), navTreatments, navDoctors, navLocations);
 };
 
-export const getHeader = async (): Promise<HeaderData> =>
-  resolveHeader(null as unknown as HeaderSource, [], [], []);
+export const getHeader = async (): Promise<HeaderData> => {
+  const [navTreatments, navDoctors, navLocations] = await Promise.all([
+    getNavTreatments(),
+    getNavDoctors(),
+    getNavLocations(),
+  ]);
+  return resolveHeader(null as unknown as HeaderSource, navTreatments, navDoctors, navLocations);
+};
 
 /** Map the Sanity homepage doc → the HomepageSource shape resolveHomepage
  *  overlays. Converts string[] badge/feature lists to the {text}[] form the
@@ -401,8 +614,25 @@ export const getHomepage = async (): Promise<HomepageData> => {
   return resolveHomepage(mapHomepageSource(doc));
 };
 
-export const getAbout = async (): Promise<AboutData> =>
-  resolveAbout(null as unknown as AboutSource);
+export const getAbout = async (): Promise<AboutData> => {
+  const doc = await getSanityAbout();
+  if (!doc) return resolveAbout(null);
+  return resolveAbout({
+    hero: doc.hero ?? null,
+    story: doc.story ?? null,
+    atAGlance: doc.atAGlance ?? null,
+    legacy: doc.legacy ?? null,
+    milestones: doc.milestones ?? null,
+    trust: doc.trust ?? null,
+    trustPillars: doc.trustPillars ?? null,
+    patientFirst: doc.patientFirst ?? null,
+    patientStats: doc.patientStats ?? null,
+    meetSpecialists: doc.meetSpecialists ?? null,
+    network: doc.network ?? null,
+    finalCta: doc.finalCta ?? null,
+    seo: doc.seo ?? null,
+  } as AboutSource);
+};
 
 /** Text testimonials (no YouTube ID) for the homepage "Patient review" cards. */
 export const getTestimonials = async (): Promise<Review[]> => {

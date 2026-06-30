@@ -1,25 +1,29 @@
 import type { Metadata } from "next";
 import { CmePage } from "@/components/cme-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { getCMEBlogs } from "@/lib/payload";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/cme";
 
-export const metadata: Metadata = {
-  title: "CME — Continuing Medical Education | Bavishi Fertility Institute",
-  description:
-    "Bavishi Fertility Institute is a FOGSI-recognised centre for fertility training. Explore our CME programmes, seminar reports, and knowledge-sharing events for medical professionals.",
-  alternates: { canonical: PATH },
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeoOverride(PATH, {
     title: "CME — Continuing Medical Education | Bavishi Fertility Institute",
     description:
-      "FOGSI-recognised CME programmes, seminars, and knowledge-sharing events for gynaecologists and medical professionals by Bavishi Fertility Institute.",
-    url: abs(PATH),
-    type: "website",
-    images: ["/assets/hero-mother-baby1.png"],
-  },
-};
+      "Bavishi Fertility Institute is a FOGSI-recognised centre for fertility training. Explore our CME programmes, seminar reports, and knowledge-sharing events for medical professionals.",
+    alternates: { canonical: PATH },
+    openGraph: {
+      title: "CME — Continuing Medical Education | Bavishi Fertility Institute",
+      description:
+        "FOGSI-recognised CME programmes, seminars, and knowledge-sharing events for gynaecologists and medical professionals by Bavishi Fertility Institute.",
+      url: abs(PATH),
+      type: "website",
+      images: ["/assets/hero-mother-baby1.png"],
+    },
+  });
+}
 
 const graph = [
   {
@@ -44,6 +48,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
       <CmePage blogs={blogs} />
     </>
   );

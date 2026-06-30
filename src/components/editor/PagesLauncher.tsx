@@ -15,7 +15,7 @@ const PAGES: { label: string; desc: string; href: string; ready: boolean }[] = [
   { label: "Cities", desc: "City hub pages (multi-centre cities)", href: "/edit/locations", ready: true },
   { label: "Centres", desc: "Individual clinic pages", href: "/edit/centres", ready: true },
   { label: "Contact", desc: "Contact page", href: "/edit/contact", ready: true },
-  { label: "Blog", desc: "Blog articles (title, excerpt, hero image)", href: "/edit/blog", ready: true },
+  { label: "Blog", desc: "Blog articles — title, excerpt, hero image, drafts", href: "/admin-panel/blogs", ready: true },
   { label: "Calculators", desc: "Calculator pages (title, subtitle, disclaimer, FAQs)", href: "/edit/calculators", ready: true },
 ];
 

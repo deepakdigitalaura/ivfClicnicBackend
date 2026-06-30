@@ -1,24 +1,28 @@
 import type { Metadata } from "next";
 import { SurakshaKavachPage } from "@/components/suraksha-kavach-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/suraksha-kavach";
 
-export const metadata: Metadata = {
-  title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
-  description:
-    "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Fully transferable package. Complete financial peace of mind — only at Bavishi Fertility Institute.",
-  alternates: { canonical: PATH },
-  openGraph: {
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeoOverride(PATH, {
     title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
     description:
-      "India's only IVF protection program. Multiple IVF cycles covered. Fully transferable package. Complete financial peace of mind at Bavishi Fertility Institute.",
-    url: abs(PATH),
-    type: "website",
-    images: ["/assets/suraksha-parenthood.png"],
-  },
-};
+      "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Fully transferable package. Complete financial peace of mind — only at Bavishi Fertility Institute.",
+    alternates: { canonical: PATH },
+    openGraph: {
+      title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
+      description:
+        "India's only IVF protection program. Multiple IVF cycles covered. Fully transferable package. Complete financial peace of mind at Bavishi Fertility Institute.",
+      url: abs(PATH),
+      type: "website",
+      images: ["/assets/suraksha-parenthood.png"],
+    },
+  });
+}
 
 const graph = [
   {
@@ -75,6 +79,7 @@ export default function Page() {
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
       <SurakshaKavachPage />
     </>
   );

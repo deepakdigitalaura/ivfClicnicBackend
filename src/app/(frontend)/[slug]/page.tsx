@@ -3,8 +3,10 @@ import { notFound } from "next/navigation";
 import { LegalPage } from "@/components/legal-page";
 import { SitemapPage } from "@/components/sitemap-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { abs, WEBSITE_ID, breadcrumbSchema } from "@/lib/seo";
 import { getPageBySlug, getPublishedPageSlugs } from "@/lib/payload";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const KNOWN_SLUGS = new Set([
   "privacy-policy",
@@ -33,18 +35,18 @@ export async function generateMetadata(
   const { slug } = await params;
   if (!KNOWN_SLUGS.has(slug)) return {};
   if (slug === "sitemap") {
-    return {
+    return withPageSeoOverride("/sitemap", {
       title: "Sitemap — Bavishi Fertility Institute",
       description: "Browse all pages on the Bavishi Fertility Institute website.",
       alternates: { canonical: "/sitemap" },
-    };
+    });
   }
   const page = await getPageBySlug(slug);
   if (!page) return {};
   const path = `/${slug}`;
   const title = page.seo?.metaTitle || page.title;
   const description = page.seo?.metaDescription || page.hero?.subtitle || undefined;
-  return {
+  return withPageSeoOverride(path, {
     title,
     description,
     alternates: { canonical: path },
@@ -54,7 +56,7 @@ export async function generateMetadata(
       url: abs(path),
       type: "website",
     },
-  };
+  });
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -78,6 +80,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     return (
       <>
         <JsonLd graph={graph} />
+        <PageSeoSchema path="/sitemap" />
         <SitemapPage />
       </>
     );
@@ -104,6 +107,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={path} />
       <LegalPage
         title={page.title}
         subtitle={page.hero?.subtitle}

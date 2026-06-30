@@ -1,20 +1,31 @@
 import type { Metadata } from "next";
 import { FemaleInfertilityHub } from "./hub";
+import { PageSeoSchema } from "@/components/page-seo-schema";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
-export const metadata: Metadata = {
-  title: "Female Infertility Treatments — Personalised Pathways to Motherhood",
-  description:
-    "Specialised treatment for PCOS, endometriosis, low ovarian reserve, fibroids, and more. Personalised fertility pathways by Bavishi Fertility Institute's expert gynaecologists.",
-  alternates: { canonical: "/treatments/female-infertility" },
-  openGraph: {
-    title: "Female Infertility Treatments — Bavishi Fertility Institute",
+const PATH = "/treatments/female-infertility";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeoOverride(PATH, {
+    title: "Female Infertility Treatments — Personalised Pathways to Motherhood",
     description:
-      "Specialised treatment for PCOS, endometriosis, low ovarian reserve, fibroids, and more.",
-    url: "/treatments/female-infertility",
-    type: "website",
-  },
-};
+      "Specialised treatment for PCOS, endometriosis, low ovarian reserve, fibroids, and more. Personalised fertility pathways by Bavishi Fertility Institute's expert gynaecologists.",
+    alternates: { canonical: PATH },
+    openGraph: {
+      title: "Female Infertility Treatments — Bavishi Fertility Institute",
+      description:
+        "Specialised treatment for PCOS, endometriosis, low ovarian reserve, fibroids, and more.",
+      url: PATH,
+      type: "website",
+    },
+  });
+}
 
 export default function Page() {
-  return <FemaleInfertilityHub />;
+  return (
+    <>
+      <PageSeoSchema path={PATH} />
+      <FemaleInfertilityHub />
+    </>
+  );
 }

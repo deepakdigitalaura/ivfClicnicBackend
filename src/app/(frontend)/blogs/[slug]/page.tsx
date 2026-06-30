@@ -2,10 +2,12 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { BlogArticle } from "@/components/blog-article";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { getBlogBySlug, getPublishedBlogSlugs, getRelatedBlogs } from "@/lib/payload";
 import { toBlogPost } from "@/lib/blogs";
 import { extractHeadings } from "@/lib/headings";
+import { withPageSeoOverride } from "@/lib/page-seo";
 import type { Author, Category, Media } from "@/payload-types";
 
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -39,7 +41,7 @@ export async function generateMetadata(
   const title = blog.seo?.metaTitle || blog.title;
   const description = blog.seo?.metaDescription || blog.excerpt || undefined;
   const image = ogImg?.url || hero?.url || DEFAULT_OG_IMAGE;
-  return {
+  return withPageSeoOverride(path, {
     title,
     description,
     alternates: { canonical: path },
@@ -50,7 +52,7 @@ export async function generateMetadata(
       type: "article",
       images: [image],
     },
-  };
+  });
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -107,6 +109,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={path} />
       <BlogArticle blog={blog} relatedBlogs={relatedBlogs.map(toBlogPost)} headings={headings} />
     </>
   );

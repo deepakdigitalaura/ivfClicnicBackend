@@ -3559,7 +3559,7 @@ export const cryopreservation = defineTreatment({
     title: "Cryopreservation — Egg, Sperm & Embryo Freezing — Bavishi Fertility Institute",
     description:
       "Cryopreservation explained — vitrification of eggs, sperm and embryos to preserve fertility for medical or personal reasons. Class 1000 labs, high survival rates, since 1998.",
-    ogImage: "/assets/about-clinic.jpg",
+    ogImage: "/assets/treatments/fertility-preservation.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -3575,7 +3575,7 @@ export const cryopreservation = defineTreatment({
     tagline:
       "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline.",
     badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 Labs"],
-    image: "/assets/about-clinic.jpg",
+    image: "/assets/treatments/fertility-preservation.png",
     imageAlt: "Cryopreservation (egg, sperm and embryo freezing) at Bavishi Fertility Institute",
   },
   whatIs: {

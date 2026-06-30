@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema } from "@/lib/seo";
 import { getCalculator, CALCULATOR_SLUGS, isCalculatorSlug } from "@/lib/calculators";
+import { withPageSeoOverride } from "@/lib/page-seo";
 import type { CalculatorCmsData } from "@/lib/calculators";
 
 import { IvfSuccessRateCalculatorPage } from "@/components/ivf-success-rate-calculator";
@@ -28,7 +30,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const title       = cms.seo.metaTitle       ?? cms.title;
   const description = cms.seo.metaDescription ?? cms.subtitle;
   const path        = `/calculators/${slug}`;
-  return {
+  return withPageSeoOverride(path, {
     title,
     description,
     alternates: { canonical: path },
@@ -39,7 +41,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
       type:        "article",
       images:      cms.seo.ogImage ? [cms.seo.ogImage] : ["/assets/hero-mother-baby1.png"],
     },
-  };
+  });
 }
 
 function calcGraph(cms: CalculatorCmsData) {
@@ -87,6 +89,7 @@ export default async function Page({ params }: Props) {
   return (
     <>
       <JsonLd graph={calcGraph(cms)} />
+      <PageSeoSchema path={`/calculators/${slug}`} />
       <CalculatorWidget slug={slug} cms={cms} />
     </>
   );

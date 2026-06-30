@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DoctorProfile } from "@/components/doctor-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { physicianSchema } from "@/lib/doctors";
 import { getDoctor, getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 /** ISR: re-render every hour so admin edits go live without a full redeploy. */
 export const revalidate = 3600;
@@ -23,7 +25,7 @@ export async function generateMetadata(
   const d = await getDoctor(slug);
   if (!d) return {};
   const title = `${d.name} — ${d.specialty} | Bavishi Fertility Institute`;
-  return {
+  return withPageSeoOverride(`/doctors/${d.slug}`, {
     title,
     description: d.shortBio,
     alternates: { canonical: `/doctors/${d.slug}` },
@@ -34,7 +36,7 @@ export async function generateMetadata(
       type: "profile",
       images: [d.image],
     },
-  };
+  });
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -54,6 +56,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={`/doctors/${d.slug}`} />
       <DoctorProfile doctor={d} />
     </>
   );

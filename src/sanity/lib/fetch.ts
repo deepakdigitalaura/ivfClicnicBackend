@@ -402,3 +402,282 @@ export const getSanityCMEBlogs = () =>
     ["sanity-blogs-cme"],
     { revalidate: 3600, tags: ["sanity-blogs"] },
   )();
+
+// ── Treatments ──
+
+export type SanityTreatment = {
+  slug?: string | null;
+  href?: string | null;
+  navCategory?: string | null;
+  navOrder?: number | null;
+  hero?: {
+    eyebrow?: string | null; h1?: string | null; h1Em?: string | null;
+    tagline?: string | null; badges?: { value?: string | null }[] | null;
+    image?: string | null; imageAlt?: string | null;
+    heroPhoto?: { asset?: { url?: string | null } | null } | null;
+  } | null;
+  meta?: { title?: string | null; description?: string | null; ogImage?: string | null } | null;
+  whatIs?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    paragraphs?: { text?: string | null }[] | null;
+    aside?: { title?: string | null; body?: string | null } | null;
+  } | null;
+  benefits?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    items?: { value?: string | null }[] | null;
+  } | null;
+  whoNeedsIt?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    items?: { value?: string | null }[] | null;
+  } | null;
+  process?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    steps?: { icon?: string | null; n?: string | null; t?: string | null; d?: string | null }[] | null;
+    note?: string | null;
+  } | null;
+  risks?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    items?: { t?: string | null; d?: string | null; help?: string | null }[] | null;
+  } | null;
+  faqs?: { q?: string | null; a?: string | null }[] | null;
+  cta?: { heading?: string | null; headingEm?: string | null; subtitle?: string | null } | null;
+};
+
+const TREATMENT_FIELDS = `
+  slug, href, navCategory, navOrder,
+  hero { eyebrow, h1, h1Em, tagline, badges, image, imageAlt, heroPhoto { asset->{ url } } },
+  meta { title, description, ogImage },
+  whatIs { heading, paragraphs, aside },
+  benefits { heading, subtitle, items },
+  whoNeedsIt { heading, subtitle, items },
+  process { heading, subtitle, steps, note },
+  risks { heading, subtitle, items },
+  faqs, cta
+`;
+
+export const getSanityTreatments = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityTreatment[]>(`*[_type == "treatment"]{ ${TREATMENT_FIELDS} }`)) ?? [],
+    ["sanity-treatments"],
+    { revalidate: 3600, tags: ["sanity-treatments"] },
+  )();
+
+export const getSanityTreatment = (slug: string) =>
+  unstable_cache(
+    () => sanityFetch<SanityTreatment>(`*[_type == "treatment" && slug == $slug][0]{ ${TREATMENT_FIELDS} }`, { slug }),
+    ["sanity-treatment", slug],
+    { revalidate: 3600, tags: ["sanity-treatments"] },
+  )();
+
+// ── Services ──
+
+export type SanityService = {
+  slug?: string | null;
+  hero?: {
+    eyebrow?: string | null; h1?: string | null; h1Em?: string | null;
+    tagline?: string | null; badges?: { badge?: string | null }[] | null;
+    image?: string | null; imageAlt?: string | null;
+    heroPhoto?: { asset?: { url?: string | null } | null } | null;
+  } | null;
+  seo?: { metaTitle?: string | null; metaDescription?: string | null } | null;
+  overview?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    paragraphs?: { text?: string | null }[] | null;
+    aside?: { title?: string | null; body?: string | null } | null;
+  } | null;
+  benefits?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    items?: { item?: string | null }[] | null;
+  } | null;
+  whoFor?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    items?: { item?: string | null }[] | null;
+  } | null;
+  process?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    steps?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+    note?: string | null;
+  } | null;
+  whyUs?: {
+    heading?: { lead?: string | null; em?: string | null } | null;
+    items?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+  } | null;
+  faqs?: { q?: string | null; a?: string | null }[] | null;
+  cta?: { heading?: string | null; headingEm?: string | null; subtitle?: string | null } | null;
+};
+
+const SERVICE_FIELDS = `
+  slug,
+  hero { eyebrow, h1, h1Em, tagline, badges, image, imageAlt, heroPhoto { asset->{ url } } },
+  seo { metaTitle, metaDescription },
+  overview { heading, paragraphs, aside },
+  benefits { heading, subtitle, items },
+  whoFor { heading, subtitle, items },
+  process { heading, subtitle, steps, note },
+  whyUs { heading, items },
+  faqs, cta
+`;
+
+export const getSanityServices = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityService[]>(`*[_type == "service"]{ ${SERVICE_FIELDS} }`)) ?? [],
+    ["sanity-services"],
+    { revalidate: 3600, tags: ["sanity-services"] },
+  )();
+
+export const getSanityService = (slug: string) =>
+  unstable_cache(
+    () => sanityFetch<SanityService>(`*[_type == "service" && slug == $slug][0]{ ${SERVICE_FIELDS} }`, { slug }),
+    ["sanity-service", slug],
+    { revalidate: 3600, tags: ["sanity-services"] },
+  )();
+
+// ── Cities ──
+
+export type SanityCity = {
+  slug?: string | null;
+  name?: string | null;
+  region?: string | null;
+  country?: string | null;
+  helpline?: string | null;
+  helplineLabel?: string | null;
+  whatsapp?: string | null;
+  heroImage?: string | null;
+  hero360Url?: string | null;
+  built?: boolean | null;
+  intro?: { value?: string | null }[] | null;
+  faqs?: { q?: string | null; a?: string | null }[] | null;
+  womensHealth?: { value?: string | null }[] | null;
+};
+
+const CITY_FIELDS = `slug, name, region, country, helpline, helplineLabel, whatsapp, heroImage, hero360Url, built, intro, faqs, womensHealth`;
+
+export const getSanityCities = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityCity[]>(`*[_type == "city"]{ ${CITY_FIELDS} }`)) ?? [],
+    ["sanity-cities"],
+    { revalidate: 3600, tags: ["sanity-locations"] },
+  )();
+
+export const getSanityCity = (slug: string) =>
+  unstable_cache(
+    () => sanityFetch<SanityCity>(`*[_type == "city" && slug == $slug][0]{ ${CITY_FIELDS} }`, { slug }),
+    ["sanity-city", slug],
+    { revalidate: 3600, tags: ["sanity-locations"] },
+  )();
+
+// ── Centres ──
+
+export type SanityCentre = {
+  slug?: string | null;
+  citySlug?: string | null;
+  name?: string | null;
+  fullName?: string | null;
+  isHeadOffice?: boolean | null;
+  area?: string | null;
+  address?: string | null;
+  pin?: string | null;
+  phone?: string | null;
+  phoneLabel?: string | null;
+  hours?: string | null;
+  opening?: { opens?: string | null; closes?: string | null; days?: { value?: string | null }[] | null } | null;
+  geo?: { lat?: number | null; lng?: number | null } | null;
+  mapQuery?: string | null;
+  image?: string | null;
+  hero360Url?: string | null;
+  nearby?: { value?: string | null }[] | null;
+  landmarks?: { value?: string | null }[] | null;
+  howToReach?: { value?: string | null }[] | null;
+  facilities?: { value?: string | null }[] | null;
+  doctors?: { value?: string | null }[] | null;
+  treatments?: { value?: string | null }[] | null;
+  faqs?: { q?: string | null; a?: string | null }[] | null;
+  reviewsKey?: string | null;
+  sameAs?: { value?: string | null }[] | null;
+  intro?: string | null;
+  gallery?: { src?: string | null; alt?: string | null }[] | null;
+  womensHealth?: { value?: string | null }[] | null;
+  built?: boolean | null;
+};
+
+const CENTRE_FIELDS = `
+  slug, citySlug, name, fullName, isHeadOffice, area, built,
+  address, pin, phone, phoneLabel, hours,
+  opening { opens, closes, days },
+  geo { lat, lng },
+  mapQuery, image, hero360Url,
+  nearby, landmarks, howToReach, facilities, doctors, treatments,
+  faqs, reviewsKey, sameAs, intro, gallery, womensHealth
+`;
+
+export const getSanityCentres = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityCentre[]>(`*[_type == "centre"]{ ${CENTRE_FIELDS} }`)) ?? [],
+    ["sanity-centres"],
+    { revalidate: 3600, tags: ["sanity-locations"] },
+  )();
+
+export const getSanityCentre = (citySlug: string, slug: string) =>
+  unstable_cache(
+    () => sanityFetch<SanityCentre>(
+      `*[_type == "centre" && citySlug == $citySlug && slug == $slug][0]{ ${CENTRE_FIELDS} }`,
+      { citySlug, slug },
+    ),
+    ["sanity-centre", citySlug, slug],
+    { revalidate: 3600, tags: ["sanity-locations"] },
+  )();
+
+// ── About Page (singleton) ──
+
+export type SanityAbout = {
+  hero?: {
+    eyebrow?: string | null; headline?: string | null; headlineItalic?: string | null;
+    paragraph?: string | null; image?: string | null;
+  } | null;
+  story?: {
+    eyebrow?: string | null;
+    heading?: { lead?: string | null; em?: string | null } | null;
+    paragraphs?: { value?: string | null }[] | null;
+  } | null;
+  atAGlance?: { value?: string | null; label?: string | null }[] | null;
+  legacy?: { eyebrow?: string | null; heading?: { lead?: string | null; em?: string | null } | null } | null;
+  milestones?: { y?: string | null; t?: string | null; d?: string | null }[] | null;
+  trust?: { eyebrow?: string | null; heading?: { lead?: string | null; em?: string | null } | null } | null;
+  trustPillars?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+  patientFirst?: {
+    eyebrow?: string | null;
+    heading?: { lead?: string | null; em?: string | null } | null;
+    paragraphs?: { value?: string | null }[] | null;
+  } | null;
+  patientStats?: { value?: string | null; label?: string | null }[] | null;
+  meetSpecialists?: {
+    eyebrow?: string | null;
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+  } | null;
+  network?: {
+    eyebrow?: string | null;
+    heading?: { lead?: string | null; em?: string | null } | null;
+    subtitle?: string | null;
+    cities?: { c?: string | null; n?: string | null }[] | null;
+  } | null;
+  finalCta?: { heading?: { lead?: string | null; em?: string | null } | null } | null;
+  seo?: {
+    metaTitle?: string | null; metaDescription?: string | null;
+    ogTitle?: string | null; ogDescription?: string | null; ogImage?: string | null;
+  } | null;
+};
+
+export const getSanityAbout = () =>
+  unstable_cache(
+    () => sanityFetch<SanityAbout>(`*[_type == "aboutPage"][0]`),
+    ["sanity-about"],
+    { revalidate: 3600, tags: ["sanity-about"] },
+  )();

@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { getPageBySlug, getGlobalSafe, payloadClient } from "@/lib/payload";
 import { resolveContactValues, resolveCardChannel, type ContactChannel } from "@/lib/contact";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/contact";
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -103,7 +105,7 @@ async function loadContact() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo, ogImage } = await loadContact();
-  return {
+  return withPageSeoOverride(PATH, {
     title: seo.metaTitle,
     description: seo.metaDescription,
     alternates: { canonical: PATH },
@@ -114,7 +116,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       images: [ogImage],
     },
-  };
+  });
 }
 
 export default async function Page() {
@@ -148,6 +150,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
       <ContactPage hero={hero} faqs={faqs} cards={cards} sectionLabels={sectionLabels} directory={directory} />
     </>
   );

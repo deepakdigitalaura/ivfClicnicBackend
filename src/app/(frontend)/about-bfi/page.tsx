@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { AboutPage } from "@/components/about-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { getAbout, getGlobalSafe } from "@/lib/payload";
 import { ABOUT_DEFAULTS } from "@/lib/about";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/about-bfi";
 
@@ -18,7 +20,7 @@ export async function generateMetadata(): Promise<Metadata> {
     about?.seo && typeof about.seo.ogImage === "object" && about.seo.ogImage?.url
       ? about.seo.ogImage.url
       : d.ogImage;
-  return {
+  return withPageSeoOverride(PATH, {
     title: about?.seo?.metaTitle || d.metaTitle,
     description: about?.seo?.metaDescription || d.metaDescription,
     alternates: { canonical: PATH },
@@ -29,7 +31,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       images: [ogImage],
     },
-  };
+  });
 }
 
 // The full MedicalOrganization entity lives sitewide (layout). Here we only
@@ -55,6 +57,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
       <AboutPage data={data} />
     </>
   );

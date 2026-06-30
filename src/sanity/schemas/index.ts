@@ -11,6 +11,11 @@ import homepage from "./homepage";
 import siteSettings from "./siteSettings";
 import educationVideo from "./educationVideo";
 import blog from "./blog";
+import treatment from "./treatment";
+import service from "./service";
+import city from "./city";
+import centre from "./centre";
+import aboutPage from "./aboutPage";
 
 export const schemas = [
   robotsConfig,
@@ -26,4 +31,9 @@ export const schemas = [
   siteSettings,
   educationVideo,
   blog,
+  treatment,
+  service,
+  city,
+  centre,
+  aboutPage,
 ];

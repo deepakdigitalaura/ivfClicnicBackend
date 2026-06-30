@@ -1,8 +1,10 @@
 import type { Metadata } from "next";
 import { BlogHub } from "@/components/blog-hub";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema } from "@/lib/seo";
 import { getBlogsPage, getGlobalSafe } from "@/lib/payload";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PAGE_SIZE = 24;
 
@@ -39,7 +41,7 @@ export async function generateMetadata(
       ? hub.seo.ogImage.url
       : DEFAULT_OG_IMAGE;
   const canonicalPath = page > 1 ? `${PATH}?page=${page}` : PATH;
-  return {
+  return withPageSeoOverride(PATH, {
     title: page > 1 ? `${metaTitle} — Page ${page}` : metaTitle,
     description: metaDescription,
     alternates: { canonical: canonicalPath },
@@ -50,7 +52,7 @@ export async function generateMetadata(
       type: "website",
       images: [ogImage],
     },
-  };
+  });
 }
 
 export default async function Page(
@@ -87,6 +89,7 @@ export default async function Page(
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
       <BlogHub
         posts={blogsPage.docs}
         hero={hero}
