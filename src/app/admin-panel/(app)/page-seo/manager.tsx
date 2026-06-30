@@ -10,6 +10,7 @@ type Entry = PageSeo & { _id?: string };
 const EMPTY: Entry = {
   pagePath: "", pageName: "", metaTitle: "", metaDescription: "",
   ogTitle: "", ogDescription: "", ogImageUrl: "", canonicalUrl: "", noIndex: false,
+  customSchemaJson: "",
 };
 
 export function PageSeoManager({ initial }: { initial: (PageSeo & { _id: string })[] }) {
@@ -130,6 +131,29 @@ export function PageSeoManager({ initial }: { initial: (PageSeo & { _id: string 
                   <span style={{ fontSize: 13.5 }}>{editing.noIndex ? "Hidden (noindex)" : "Indexed by Google"}</span>
                 </div>
               </div>
+            </div>
+
+            <div className="admin-field">
+              <label className="admin-label">Structured Data — JSON-LD (page-specific)</label>
+              <p className="admin-hint">
+                Paste a valid JSON-LD object for <em>this page only</em>. Example types:{" "}
+                <code>MedicalProcedure</code>, <code>Physician</code>, <code>FAQPage</code>,{" "}
+                <code>Article</code>. Leave blank to skip. Invalid JSON is silently ignored.
+              </p>
+              <textarea
+                className="admin-textarea"
+                style={{ fontFamily: "monospace", fontSize: 12, minHeight: 140 }}
+                placeholder={'{\n  "@type": "MedicalProcedure",\n  "name": "IVF"\n}'}
+                value={editing.customSchemaJson ?? ""}
+                onChange={(e) => set({ customSchemaJson: e.target.value })}
+                spellCheck={false}
+              />
+              {(() => {
+                const v = editing.customSchemaJson?.trim();
+                if (!v) return null;
+                try { JSON.parse(v); return <p style={{ fontSize: 12, color: "green", marginTop: 4 }}>✓ Valid JSON</p>; }
+                catch { return <p style={{ fontSize: 12, color: "red", marginTop: 4 }}>✗ Invalid JSON — will not be injected</p>; }
+              })()}
             </div>
 
             <div className="admin-actions-bar">

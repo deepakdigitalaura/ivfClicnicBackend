@@ -63,6 +63,7 @@ export type PageSeo = {
   ogImageUrl?: string;
   canonicalUrl?: string;
   noIndex?: boolean;
+  customSchemaJson?: string;
 };
 
 export const getRobotsConfig = () =>

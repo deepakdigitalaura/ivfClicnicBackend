@@ -62,6 +62,14 @@ export default defineType({
       type: "boolean",
       initialValue: false,
     }),
+    defineField({
+      name: "customSchemaJson",
+      title: "Structured Data (JSON-LD)",
+      description:
+        "Paste a valid JSON-LD schema for this page only. Use schema.org types like MedicalProcedure, Physician, FAQPage, Article, etc. Must be valid JSON — invalid JSON is silently ignored.",
+      type: "text",
+      rows: 10,
+    }),
   ],
   preview: {
     select: { title: "pageName", subtitle: "pagePath" },

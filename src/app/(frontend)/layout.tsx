@@ -1,4 +1,5 @@
 import type { Metadata, Viewport } from "next";
+import { headers } from "next/headers";
 import "@/styles.css";
 import { ScrollProgress } from "@/components/conversion";
 import { JsonLd } from "@/components/json-ld";
@@ -7,7 +8,7 @@ import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
 import { CookieConsent } from "@/components/cookie-consent";
-import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
+import { getScriptsConfig, getSchemaOrgConfig, getPageSeo } from "@/sanity/lib/fetch";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
@@ -41,25 +42,34 @@ export const viewport: Viewport = {
 };
 
 export default async function RootLayout({ children }: { children: React.ReactNode }) {
-  const [identity, header, footer, scripts, schemaOrg] = await Promise.all([
+  const h = await headers();
+  const currentPath = h.get("x-pathname") ?? "/";
+
+  const [identity, header, footer, scripts, schemaOrg, pageSeo] = await Promise.all([
     getSiteIdentity(),
     getHeader(),
     getFooter(),
     getScriptsConfig(),
     getSchemaOrgConfig(),
+    getPageSeo(currentPath),
   ]);
 
   const headScripts = scripts?.headScripts?.filter((s) => s.enabled && s.code) ?? [];
   const bodyScripts = scripts?.bodyScripts?.filter((s) => s.enabled && s.code) ?? [];
 
-  // Custom JSON-LD blocks added in the admin (Structured Data). Each is parsed;
-  // invalid JSON is skipped so a typo can never break the page.
+  // Global custom JSON-LD blocks (Structured Data → Custom schemas, apply to all pages).
   const customSchemas = (schemaOrg?.customSchemas ?? [])
     .filter((s) => s.enabled && s.jsonCode)
     .map((s) => {
       try { return JSON.parse(s.jsonCode!); } catch { return null; }
     })
     .filter(Boolean);
+
+  // Per-page JSON-LD set in Page SEO admin. Parsed once; invalid JSON is silently skipped.
+  let pageSchema: Record<string, unknown> | null = null;
+  if (pageSeo?.customSchemaJson?.trim()) {
+    try { pageSchema = JSON.parse(pageSeo.customSchemaJson); } catch { /* invalid — ignore */ }
+  }
 
   return (
     <html lang="en">
@@ -73,6 +83,12 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         {customSchemas.map((schema, i) => (
           <script key={`cs-${i}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
         ))}
+        {pageSchema && (
+          <script
+            type="application/ld+json"
+            dangerouslySetInnerHTML={{ __html: JSON.stringify({ "@context": "https://schema.org", ...pageSchema }) }}
+          />
+        )}
         <ScrollProgress />
         <HeaderProvider value={header}>
           <FooterProvider value={footer}>{children}</FooterProvider>
