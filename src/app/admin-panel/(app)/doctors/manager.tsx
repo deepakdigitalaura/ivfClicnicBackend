@@ -4,6 +4,7 @@ import { Pencil, Trash2, Plus, X, Stethoscope } from "lucide-react";
 import type { AdminDoctor } from "@/sanity/lib/admin";
 import { saveDoctorAction, deleteDoctorAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
+import { ImageUpload } from "../_components/image-upload";
 
 type CodeDoctor = { slug: string; name: string; specialty: string; image: string };
 
@@ -84,9 +85,8 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
               <input className="admin-input" placeholder="Director & Chief IVF Specialist" value={editing.role ?? ""} onChange={(e) => set({ role: e.target.value })} />
             </div>
             <div className="admin-field">
-              <label className="admin-label">Photo URL</label>
-              <p className="admin-hint">Paste an image URL (or upload via Sanity Studio).</p>
-              <input className="admin-input" value={editing.imageUrl ?? ""} onChange={(e) => set({ imageUrl: e.target.value })} />
+              <label className="admin-label">Doctor Photo</label>
+              <ImageUpload value={editing.imageUrl ?? ""} onChange={(url) => set({ imageUrl: url })} label="Photo" />
             </div>
             <div className="admin-field">
               <label className="admin-label">Experience label</label>
