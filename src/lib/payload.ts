@@ -9,7 +9,7 @@
  * now managed via Sanity — see src/sanity/.
  */
 import type { Payload } from "payload";
-import type { Page, Blog, Config } from "@/payload-types";
+import type { Page, Blog, Author, Category, Media, Config } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
@@ -21,7 +21,22 @@ import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
 import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
-import { getSanityDoctors, getSanityTestimonials, getSanitySiteSettings, type SanityDoctor, type SanitySiteSettings } from "@/sanity/lib/fetch";
+import {
+  getSanityDoctors,
+  getSanityTestimonials,
+  getSanitySiteSettings,
+  getSanityEducationVideos,
+  getSanityBlogsPage,
+  getSanityBlogBySlug,
+  getSanityPublishedBlogSlugs,
+  getSanityBlogsByTreatmentSlug,
+  getSanityBlogsByLocationSlug,
+  getSanityRelatedBlogs,
+  getSanityCMEBlogs,
+  type SanityDoctor,
+  type SanitySiteSettings,
+  type SanityBlog,
+} from "@/sanity/lib/fetch";
 import type { ContactSource } from "@/lib/contact";
 import { resolveTreatment, type ResolvedTreatment } from "@/lib/treatment-content";
 import { TREATMENTS } from "@/lib/treatments";
@@ -53,28 +68,165 @@ export const getPageBySlug = async (_slug: string): Promise<Page | null> => null
 export const getPageBySlugDraft = async (_slug: string): Promise<Page | null> => null;
 export const getPublishedPageSlugs = async (): Promise<string[]> => [];
 
+// ---------- Blog helpers ----------
+
+function makeMedia(url: string | null | undefined, alt: string): Media | null {
+  if (!url) return null;
+  return { id: 0, alt, url, updatedAt: "", createdAt: "" };
+}
+
+function makeAuthor(
+  name: string | null | undefined,
+  slug: string | null | undefined,
+  role: string | null | undefined,
+  credentials: string | null | undefined,
+  avatarUrl: string | null | undefined,
+  bio: string | null | undefined,
+): Author | null {
+  if (!name) return null;
+  return {
+    id: 0,
+    name,
+    slug: slug ?? "",
+    role: role ?? null,
+    credentials: credentials ?? null,
+    avatar: makeMedia(avatarUrl, name),
+    bio: bio ?? null,
+    sameAs: null,
+    updatedAt: "",
+    createdAt: "",
+  };
+}
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeJSON(s: string | null | undefined): any {
+  if (!s) return null;
+  try { return JSON.parse(s); } catch { return null; }
+}
+
+function toBlogDoc(b: SanityBlog): Blog {
+  const author = makeAuthor(
+    b.authorName, b.authorSlug, b.authorRole, b.authorCredentials, b.authorAvatarUrl, b.authorBioText,
+  ) ?? { id: 0, name: "", slug: "", updatedAt: "", createdAt: "" };
+
+  const reviewer = makeAuthor(
+    b.reviewerName, b.reviewerSlug, b.reviewerRole, b.reviewerCredentials, b.reviewerAvatarUrl, null,
+  );
+
+  const category: Category | null = b.categorySlug
+    ? {
+        id: b.categorySlug as unknown as number,
+        title: b.categoryTitle ?? b.categorySlug,
+        slug: b.categorySlug,
+        updatedAt: "",
+        createdAt: "",
+      }
+    : null;
+
+  return {
+    id: b.pgId ?? 0,
+    title: b.title ?? "",
+    slug: b.slug ?? "",
+    excerpt: b.excerpt ?? null,
+    heroImage: makeMedia(b.heroImageUrl, b.heroImageAlt ?? ""),
+    heroTextDark: b.heroTextDark ?? null,
+    heroImagePosition: b.heroImagePosition as Blog["heroImagePosition"] ?? null,
+    content: safeJSON(b.contentRaw),
+    author,
+    reviewedBy: reviewer,
+    category,
+    readMins: b.readMins ?? null,
+    publishedAt: b.publishedAt ?? null,
+    lastUpdatedAt: b.lastUpdatedAt ?? null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    treatmentSlugs: b.treatmentSlugs?.map((slug) => ({ slug: slug as any, id: null })) ?? null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    locationSlugs: b.locationSlugs?.map((slug) => ({ slug: slug as any, id: null })) ?? null,
+    faqs: b.faqs?.map((f, i) => ({ question: f.question, answer: f.answer, id: String(i) })) ?? null,
+    seo: {
+      metaTitle: b.seoMetaTitle ?? null,
+      metaDescription: b.seoMetaDescription ?? null,
+      ogTitle: b.seoOgTitle ?? null,
+      ogDescription: b.seoOgDescription ?? null,
+      ogImage: makeMedia(b.seoOgImageUrl, ""),
+    },
+    updatedAt: b.lastUpdatedAt ?? b.publishedAt ?? new Date().toISOString(),
+    createdAt: b.publishedAt ?? new Date().toISOString(),
+    _status: (b.status === "draft" ? "draft" : "published") as Blog["_status"],
+  };
+}
+
 // ---------- Blogs ----------
 
-export const getBlogBySlug = async (_slug: string): Promise<Blog | null> => null;
+export const getBlogBySlug = async (slug: string): Promise<Blog | null> => {
+  const b = await getSanityBlogBySlug(slug);
+  return b ? toBlogDoc(b) : null;
+};
+
 export const getBlogBySlugDraft = async (_slug: string): Promise<Blog | null> => null;
-export const getBlogs = async (_limit = 24): Promise<Blog[]> => [];
-export const getBlogsPage = async (_page = 1, _limit = 24): Promise<BlogsPage> => ({
-  docs: [],
-  page: 1,
-  totalPages: 1,
-  totalDocs: 0,
-  hasPrevPage: false,
-  hasNextPage: false,
-});
-export const getBlogsByTreatmentSlug = async (_treatmentSlug: string, _limit = 3): Promise<Blog[]> => [];
-export const getBlogsByLocationSlug = async (_locationSlug: string, _limit = 3): Promise<Blog[]> => [];
-export const getRelatedBlogs = async (_slug: string, _treatmentSlugs: string[], _categoryId: number | null, _limit = 3): Promise<Blog[]> => [];
-export const getCMEBlogs = async (): Promise<Blog[]> => [];
-export const getPublishedBlogSlugs = async (): Promise<string[]> => [];
+export const getBlogs = async (_limit = 24): Promise<Blog[]> => {
+  const r = await getSanityBlogsPage(1, _limit);
+  return r ? r.docs.map(toBlogDoc) : [];
+};
+
+export const getBlogsPage = async (page = 1, limit = 24): Promise<BlogsPage> => {
+  const r = await getSanityBlogsPage(page, limit);
+  if (!r) return { docs: [], page: 1, totalPages: 1, totalDocs: 0, hasPrevPage: false, hasNextPage: false };
+  const totalPages = Math.max(1, Math.ceil(r.total / limit));
+  return {
+    docs: r.docs.map(toBlogDoc),
+    page,
+    totalPages,
+    totalDocs: r.total,
+    hasPrevPage: page > 1,
+    hasNextPage: page < totalPages,
+  };
+};
+
+export const getBlogsByTreatmentSlug = async (treatmentSlug: string, _limit = 3): Promise<Blog[]> => {
+  const docs = await getSanityBlogsByTreatmentSlug(treatmentSlug);
+  return docs.slice(0, _limit).map(toBlogDoc);
+};
+
+export const getBlogsByLocationSlug = async (locationSlug: string, _limit = 3): Promise<Blog[]> => {
+  const docs = await getSanityBlogsByLocationSlug(locationSlug);
+  return docs.slice(0, _limit).map(toBlogDoc);
+};
+
+export const getRelatedBlogs = async (
+  slug: string,
+  _treatmentSlugs: string[],
+  categoryId: number | string | null,
+  limit = 3,
+): Promise<Blog[]> => {
+  const categorySlug = categoryId != null ? String(categoryId) : null;
+  const docs = await getSanityRelatedBlogs(slug, categorySlug);
+  return docs.slice(0, limit).map(toBlogDoc);
+};
+
+export const getCMEBlogs = async (): Promise<Blog[]> => {
+  const docs = await getSanityCMEBlogs();
+  return docs.map(toBlogDoc);
+};
+
+export const getPublishedBlogSlugs = async (): Promise<string[]> => {
+  const docs = await getSanityPublishedBlogSlugs();
+  return docs.map((d) => d.slug).filter(Boolean) as string[];
+};
 
 // ---------- Videos ----------
 
-export const getEducationVideos = async (): Promise<EducationVideoItem[]> => [];
+export const getEducationVideos = async (): Promise<EducationVideoItem[]> => {
+  const docs = await getSanityEducationVideos();
+  return docs
+    .filter((v) => v.youtubeId && v.title)
+    .map((v) => ({
+      id: v.youtubeId as string,
+      title: v.title as string,
+      desc: v.description ?? "",
+      tab: v.category ?? "",
+    }));
+};
 
 /** Video testimonials (those with a YouTube ID) for /testimonial-videos. */
 export const getTestimonialVideos = async (): Promise<TestimonialVideoItem[]> => {

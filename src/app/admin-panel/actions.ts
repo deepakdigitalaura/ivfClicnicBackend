@@ -18,11 +18,15 @@ import {
   deleteTestimonial,
   saveHomepage,
   saveSiteSettings,
+  saveEducationVideo,
+  deleteEducationVideo,
+  deleteBlog,
   type Inquiry,
   type AdminDoctor,
   type AdminTestimonial,
   type AdminHomepage,
   type AdminSiteSettings,
+  type AdminEducationVideo,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -181,5 +185,39 @@ export async function saveSiteSettingsAction(data: AdminSiteSettings): Promise<S
   const r = await guard(() => saveSiteSettings(data));
   revalidatePath("/", "layout"); // header/footer/schema render on every page
   revalidatePath("/admin-panel/site-settings");
+  return r;
+}
+
+// ── Education Videos ──
+
+function revalidateEducationVideoPages() {
+  revalidatePath("/education-videos");
+  revalidatePath("/admin-panel/education-videos");
+}
+
+export async function saveEducationVideoAction(doc: AdminEducationVideo): Promise<SaveResult> {
+  const r = await guard(() => saveEducationVideo(doc));
+  revalidateEducationVideoPages();
+  return r;
+}
+
+export async function deleteEducationVideoAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteEducationVideo(id));
+  revalidateEducationVideoPages();
+  return r;
+}
+
+// ── Blogs ──
+
+function revalidateBlogPages(slug?: string) {
+  revalidatePath("/blogs");
+  revalidatePath("/cme");
+  revalidatePath("/admin-panel/blogs");
+  if (slug) revalidatePath(`/blogs/${slug}`);
+}
+
+export async function deleteBlogAction(id: string, slug?: string): Promise<SaveResult> {
+  const r = await guard(() => deleteBlog(id));
+  revalidateBlogPages(slug);
   return r;
 }

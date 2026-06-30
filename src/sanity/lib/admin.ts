@@ -293,6 +293,80 @@ export async function deleteTestimonial(id: string) {
   revalidateTag(TESTIMONIAL_TAG);
 }
 
+// ── Education Videos ──
+
+export type AdminEducationVideo = {
+  _id?: string;
+  title?: string;
+  category?: string;
+  youtubeId?: string;
+  description?: string;
+  published?: boolean;
+  order?: number;
+};
+
+const EDU_VIDEO_TAG = "sanity-education-videos";
+
+export async function readAdminEducationVideos(): Promise<AdminEducationVideo[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "educationVideo"] | order(category asc, order asc){ _id, title, category, youtubeId, description, published, order }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function saveEducationVideo(doc: AdminEducationVideo) {
+  const { _id, ...rest } = doc;
+  if (_id) {
+    await writeClient.createOrReplace({ _id, _type: "educationVideo", ...rest });
+  } else {
+    await writeClient.create({ _type: "educationVideo", ...rest });
+  }
+  revalidateTag(EDU_VIDEO_TAG);
+}
+
+export async function deleteEducationVideo(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(EDU_VIDEO_TAG);
+}
+
+// ── Blogs ──
+
+const BLOG_TAG = "sanity-blogs";
+
+export type AdminBlogMeta = {
+  _id?: string;
+  pgId?: number;
+  title?: string;
+  slug?: string;
+  excerpt?: string | null;
+  categoryTitle?: string | null;
+  categorySlug?: string | null;
+  authorName?: string | null;
+  status?: string | null;
+  publishedAt?: string | null;
+  lastUpdatedAt?: string | null;
+};
+
+export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, status, publishedAt, lastUpdatedAt }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function deleteBlog(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(BLOG_TAG);
+}
+
 /** Lightweight counts for the dashboard stat cards. */
 export async function getDashboardStats() {
   const empty = { redirects: 0, pageSeo: 0, headScripts: 0, bodyScripts: 0, customSchemas: 0, blocked: 0, newInquiries: 0, totalInquiries: 0 };

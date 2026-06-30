@@ -574,7 +574,7 @@ export interface Author {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: number;
+  id: number | string;
   title: string;
   /**
    * The web address for this category. Changing it breaks existing links, so set it once and leave it.

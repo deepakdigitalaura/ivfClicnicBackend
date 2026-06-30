@@ -229,3 +229,175 @@ export const getSanitySiteSettings = () =>
     ["sanity-site-settings"],
     { revalidate: 3600, tags: ["sanity-site-settings"] },
   )();
+
+// ── Education Videos ──
+
+export type SanityEducationVideo = {
+  _id: string;
+  title?: string;
+  category?: string;
+  youtubeId?: string;
+  description?: string;
+  published?: boolean;
+  order?: number;
+};
+
+const EDUCATION_VIDEOS_QUERY = `*[_type == "educationVideo" && published != false] | order(category asc, order asc){
+  _id, title, category, youtubeId, description, published, order
+}`;
+
+export const getSanityEducationVideos = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityEducationVideo[]>(EDUCATION_VIDEOS_QUERY)) ?? [],
+    ["sanity-education-videos"],
+    { revalidate: 3600, tags: ["sanity-education-videos"] },
+  )();
+
+// ── Blogs ──
+
+export type SanityBlog = {
+  _id: string;
+  pgId?: number;
+  title?: string;
+  slug?: string;
+  excerpt?: string | null;
+  heroImageUrl?: string | null;
+  heroImageAlt?: string | null;
+  heroTextDark?: boolean | null;
+  heroImagePosition?: string | null;
+  contentRaw?: string | null;
+  authorSlug?: string | null;
+  authorName?: string | null;
+  authorRole?: string | null;
+  authorCredentials?: string | null;
+  authorAvatarUrl?: string | null;
+  authorBioText?: string | null;
+  reviewerSlug?: string | null;
+  reviewerName?: string | null;
+  reviewerRole?: string | null;
+  reviewerCredentials?: string | null;
+  reviewerAvatarUrl?: string | null;
+  categoryTitle?: string | null;
+  categorySlug?: string | null;
+  readMins?: number | null;
+  publishedAt?: string | null;
+  lastUpdatedAt?: string | null;
+  treatmentSlugs?: string[] | null;
+  locationSlugs?: string[] | null;
+  faqs?: { question: string; answer: string }[] | null;
+  seoMetaTitle?: string | null;
+  seoMetaDescription?: string | null;
+  seoOgTitle?: string | null;
+  seoOgDescription?: string | null;
+  seoOgImageUrl?: string | null;
+  status?: string | null;
+};
+
+const BLOG_FIELDS = `
+  _id, pgId, title, slug, excerpt,
+  heroImageUrl, heroImageAlt, heroTextDark, heroImagePosition,
+  contentRaw,
+  authorSlug, authorName, authorRole, authorCredentials, authorAvatarUrl, authorBioText,
+  reviewerSlug, reviewerName, reviewerRole, reviewerCredentials, reviewerAvatarUrl,
+  categoryTitle, categorySlug,
+  readMins, publishedAt, lastUpdatedAt,
+  treatmentSlugs, locationSlugs,
+  faqs[]{ question, answer },
+  seoMetaTitle, seoMetaDescription, seoOgTitle, seoOgDescription, seoOgImageUrl,
+  status
+`;
+
+export const getSanityBlogsPage = (page: number, limit: number) =>
+  unstable_cache(
+    async () => {
+      if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return { docs: [], total: 0 };
+      const offset = (page - 1) * limit;
+      try {
+        const [docs, total] = await Promise.all([
+          client.fetch<SanityBlog[]>(
+            `*[_type == "blog" && status != "draft"] | order(publishedAt desc)[${offset}...${offset + limit}]{ ${BLOG_FIELDS} }`,
+          ),
+          client.fetch<number>(`count(*[_type == "blog" && status != "draft"])`),
+        ]);
+        return { docs: docs ?? [], total: total ?? 0 };
+      } catch {
+        return { docs: [], total: 0 };
+      }
+    },
+    ["sanity-blogs-page", String(page), String(limit)],
+    { revalidate: 3600, tags: ["sanity-blogs"] },
+  )();
+
+export const getSanityBlogBySlug = (slug: string) =>
+  unstable_cache(
+    async () => sanityFetch<SanityBlog>(`*[_type == "blog" && slug == $slug][0]{ ${BLOG_FIELDS} }`, { slug }),
+    ["sanity-blog-slug", slug],
+    { revalidate: 3600, tags: ["sanity-blogs", `sanity-blog-${slug}`] },
+  )();
+
+export const getSanityPublishedBlogSlugs = () =>
+  unstable_cache(
+    async () =>
+      (await sanityFetch<{ slug: string }[]>(`*[_type == "blog" && status != "draft"]{ slug }`)) ?? [],
+    ["sanity-blog-slugs"],
+    { revalidate: 3600, tags: ["sanity-blogs"] },
+  )();
+
+export const getSanityBlogsByTreatmentSlug = (treatmentSlug: string) =>
+  unstable_cache(
+    async () =>
+      (await sanityFetch<SanityBlog[]>(
+        `*[_type == "blog" && status != "draft" && $slug in treatmentSlugs] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+        { slug: treatmentSlug },
+      )) ?? [],
+    ["sanity-blogs-treatment", treatmentSlug],
+    { revalidate: 3600, tags: ["sanity-blogs"] },
+  )();
+
+export const getSanityBlogsByLocationSlug = (locationSlug: string) =>
+  unstable_cache(
+    async () =>
+      (await sanityFetch<SanityBlog[]>(
+        `*[_type == "blog" && status != "draft" && $slug in locationSlugs] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+        { slug: locationSlug },
+      )) ?? [],
+    ["sanity-blogs-location", locationSlug],
+    { revalidate: 3600, tags: ["sanity-blogs"] },
+  )();
+
+export const getSanityRelatedBlogs = (currentSlug: string, categorySlug: string | null) =>
+  unstable_cache(
+    async () => {
+      if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
+      try {
+        if (categorySlug) {
+          return (
+            (await client.fetch<SanityBlog[]>(
+              `*[_type == "blog" && status != "draft" && slug != $currentSlug && categorySlug == $categorySlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+              { currentSlug, categorySlug },
+            )) ?? []
+          );
+        }
+        return (
+          (await client.fetch<SanityBlog[]>(
+            `*[_type == "blog" && status != "draft" && slug != $currentSlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+            { currentSlug },
+          )) ?? []
+        );
+      } catch {
+        return [];
+      }
+    },
+    ["sanity-blogs-related", currentSlug, categorySlug ?? "none"],
+    { revalidate: 3600, tags: ["sanity-blogs"] },
+  )();
+
+export const getSanityCMEBlogs = () =>
+  unstable_cache(
+    async () =>
+      (await sanityFetch<SanityBlog[]>(
+        `*[_type == "blog" && status != "draft" && categorySlug == "cme"] | order(publishedAt desc){ ${BLOG_FIELDS} }`,
+      )) ?? [],
+    ["sanity-blogs-cme"],
+    { revalidate: 3600, tags: ["sanity-blogs"] },
+  )();

@@ -9,6 +9,8 @@ import doctor from "./doctor";
 import testimonial from "./testimonial";
 import homepage from "./homepage";
 import siteSettings from "./siteSettings";
+import educationVideo from "./educationVideo";
+import blog from "./blog";
 
 export const schemas = [
   robotsConfig,
@@ -22,4 +24,6 @@ export const schemas = [
   testimonial,
   homepage,
   siteSettings,
+  educationVideo,
+  blog,
 ];
