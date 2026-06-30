@@ -44,11 +44,34 @@ const headingClass: Record<string, string> = {
   h6: "mt-6 text-sm font-semibold uppercase tracking-wider text-[color:var(--plum)]",
 };
 
+// Old ivfclinic.com used singular path segments; new site uses plural.
+const OLD_SITE_ORIGIN = /^https?:\/\/(www\.)?ivfclinic\.com/i;
+const SINGULAR_TO_PLURAL: [RegExp, string][] = [
+  [/^\/blog\//, "/blogs/"],
+  [/^\/treatment\//, "/treatments/"],
+  [/^\/doctor\//, "/doctors/"],
+  [/^\/service\//, "/services/"],
+  [/^\/location\//, "/locations/"],
+];
+
+function rewriteOldSiteUrl(raw: string): string {
+  if (!OLD_SITE_ORIGIN.test(raw)) return raw;
+  let path = raw.replace(OLD_SITE_ORIGIN, "").replace(/\/+$/, "") || "/";
+  for (const [pattern, replacement] of SINGULAR_TO_PLURAL) {
+    if (pattern.test(path)) {
+      path = path.replace(pattern, replacement);
+      break;
+    }
+  }
+  return path;
+}
+
 const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
   ...defaultConverters,
 
   /* Rose-coloured underlined links — both internal (doc relationship) and
-   * custom (plain URL). LinkJSXConverter renders unstyled <a> so we override. */
+   * custom (plain URL). LinkJSXConverter renders unstyled <a> so we override.
+   * Old ivfclinic.com URLs are rewritten to new-site relative paths at render time. */
   link: ({ node, nodesToJSX }) => {
     const fields = (node.fields ?? {}) as {
       url?: string;
@@ -64,7 +87,7 @@ const jsxConverters: JSXConvertersFunction = ({ defaultConverters }) => ({
           : null;
       href = value?.slug ? `/${value.slug}` : "#";
     } else {
-      href = fields.url ?? "#";
+      href = rewriteOldSiteUrl(fields.url ?? "#");
     }
     return (
       <a
