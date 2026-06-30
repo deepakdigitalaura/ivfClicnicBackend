@@ -20,7 +20,7 @@ import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
-import { resolveDoctor, DOCTORS, doctorUrl, type Doctor, type DoctorSource } from "@/lib/doctors";
+import { resolveDoctor, DOCTORS, doctorUrl, defaultDoctorNavRole, defaultDoctorNavOrder, type Doctor, type DoctorSource } from "@/lib/doctors";
 import {
   getSanityDoctors,
   getSanityTestimonials,
@@ -542,14 +542,34 @@ async function getNavTreatments(): Promise<NavTreatmentItem[]> {
     });
 }
 
-/** Build NavDoctorItem list from Sanity doctor docs with navRole set (code doctors
- *  don't carry navRole — this stays empty until an admin sets it in Sanity, and
- *  the header/footer then fall back to their hardcoded doctorMenuData()). */
+/**
+ * Build NavDoctorItem list, code doctors first (with their per-field Sanity
+ * overlay applied, falling back to a default navRole/navOrder when an admin
+ * hasn't set one), then any Sanity-only (admin-created) doctors appended.
+ * An admin editing/adding one doctor must never make the rest disappear from
+ * the nav menu — each doctor resolves independently, like getDoctors().
+ */
 async function getNavDoctors(): Promise<NavDoctorItem[]> {
   const docs = await getSanityDoctors();
-  return docs
+  const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, d]));
+  const codeSlugs = new Set(DOCTORS.map((d) => d.slug));
+
+  const fromCode: NavDoctorItem[] = DOCTORS.map((d) => {
+    const sanityDoc = bySlug.get(d.slug);
+    return {
+      slug: d.slug,
+      name: sanityDoc?.name || d.name,
+      href: doctorUrl(d.slug),
+      navRole: sanityDoc?.navRole ?? defaultDoctorNavRole(d.slug),
+      navOrder: sanityDoc?.navOrder ?? defaultDoctorNavOrder(d.slug),
+      city: sanityDoc?.cities?.[0] ?? d.cities[0] ?? "",
+      experienceLabel: sanityDoc?.experienceLabel || d.experienceLabel || undefined,
+    };
+  });
+
+  const dbOnly: NavDoctorItem[] = docs
     .filter((d): d is SanityDoctor & { slug: string; name: string; navRole: "senior-specialist" | "specialist" } =>
-      !!d.slug && !!d.name && !!d.navRole)
+      !!d.slug && !!d.name && !!d.navRole && !codeSlugs.has(d.slug))
     .map((d) => ({
       slug: d.slug,
       name: d.name,
@@ -559,6 +579,8 @@ async function getNavDoctors(): Promise<NavDoctorItem[]> {
       city: d.cities?.[0] ?? "",
       experienceLabel: d.experienceLabel || undefined,
     }));
+
+  return [...fromCode, ...dbOnly];
 }
 
 /** Build NavLocationItem list (one entry per city, each carrying its live centres). */

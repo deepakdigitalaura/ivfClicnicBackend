@@ -698,6 +698,20 @@ export const doctorUrl = (slug: string) => `/doctors/${slug}`;
  * as a muted secondary label. Stays in sync as the DOCTORS array grows. */
 export type DoctorMenuEntry = { name: string; href: string; city: string; meta?: string };
 
+/** Default nav role/order for a code-defined doctor — same tiering as
+ *  doctorMenuData() below, so the merge in getNavDoctors() (payload.ts) can
+ *  fall back per-doctor instead of all-or-nothing when only some doctors
+ *  have an admin-set navRole in Sanity. */
+export function defaultDoctorNavRole(slug: string): "senior-specialist" | "specialist" {
+  return CORE_DOCTOR_SLUGS.includes(slug) ? "senior-specialist" : "specialist";
+}
+
+export function defaultDoctorNavOrder(slug: string): number {
+  const core = CORE_DOCTOR_SLUGS.indexOf(slug);
+  if (core !== -1) return core;
+  return DOCTORS.findIndex((d) => d.slug === slug);
+}
+
 export function doctorMenuData(): { senior: DoctorMenuEntry[]; specialists: DoctorMenuEntry[] } {
   const senior = CORE_DOCTOR_SLUGS.map((slug) => {
     const d = doctorBySlug(slug)!;
