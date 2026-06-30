@@ -97,9 +97,12 @@ const AHMEDABAD_WOMENS_HEALTH = [
 ];
 
 const sharedGallery = (area: string): { src: string; alt: string }[] => [
+  { src: "/assets/centres/paldi-ot.webp", alt: `Bavishi Fertility Institute ${area} — operation theatre & advanced equipment` },
+  { src: "/assets/centres/paldi-reception.webp", alt: `Bavishi Fertility Institute ${area} — reception & front desk` },
+  { src: "/assets/centres/paldi-nicu.webp", alt: `Bavishi Fertility Institute ${area} — neonatal / newborn care room` },
+  { src: "/assets/centres/paldi-waiting.webp", alt: `Bavishi Fertility Institute ${area} — patient waiting lounge` },
+  { src: "/assets/centres/paldi-building.png", alt: `Bavishi Fertility Institute ${area} — centre building` },
   { src: "/assets/about-clinic.jpg", alt: `Bavishi Fertility Institute ${area} — treatment room` },
-  { src: "/assets/hero-mother-baby.jpg", alt: `Bavishi Fertility Institute ${area} — parenthood journey` },
-  { src: "/assets/suraksha-parenthood.png", alt: `Bavishi Fertility Institute ${area} — Suraksha Kavach care` },
 ];
 
 /* =====================================================================
