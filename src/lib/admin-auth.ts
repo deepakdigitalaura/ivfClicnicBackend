@@ -46,14 +46,14 @@ export async function createSession(): Promise<void> {
     httpOnly: true,
     secure: true,
     sameSite: "lax",
-    path: "/admin-panel",
+    path: "/",
     maxAge: 60 * 60 * 24 * 7, // 7 days
   });
 }
 
 export async function destroySession(): Promise<void> {
   const jar = await cookies();
-  jar.delete(COOKIE);
+  jar.delete({ name: COOKIE, path: "/" });
 }
 
 /** True if the current request carries a valid session cookie. */

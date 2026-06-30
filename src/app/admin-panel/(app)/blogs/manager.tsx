@@ -3,6 +3,11 @@ import { useState } from "react";
 import { Pencil, Plus, X } from "lucide-react";
 import { deleteBlogAction, saveBlogAction, setBlogStatusAction } from "../../actions";
 import type { AdminBlogMeta } from "@/sanity/lib/admin";
+
+const BLOG_HERO_IMAGE_POSITIONS = [
+  "center center", "right center", "left center",
+  "right top", "center top", "center bottom",
+] as const;
 import { ImageUpload } from "../_components/image-upload";
 import { useSave, Toast } from "../_components/save-kit";
 
@@ -12,6 +17,15 @@ const EMPTY: AdminBlogMeta = { title: "", slug: "", status: "draft" };
 
 const slugify = (s: string) =>
   s.toLowerCase().trim().replace(/[^a-z0-9]+/g, "-").replace(/(^-|-$)/g, "");
+
+const HERO_POSITION_LABELS: Record<string, string> = {
+  "center center": "Center",
+  "right center": "Right",
+  "left center": "Left",
+  "right top": "Top Right",
+  "center top": "Top",
+  "center bottom": "Bottom",
+};
 
 export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
   const [items, setItems] = useState(initial);
@@ -140,6 +154,20 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
           <div className="admin-field">
             <label className="admin-label">Hero Image</label>
             <ImageUpload value={editing.heroImageUrl ?? ""} onChange={(url) => set({ heroImageUrl: url })} label="hero image" />
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Hero Image Position</label>
+            <p className="admin-hint">Controls which part of the image stays visible when it's cropped to fit the banner.</p>
+            <select
+              className="admin-input"
+              value={editing.heroImagePosition ?? "center center"}
+              onChange={(e) => set({ heroImagePosition: e.target.value })}
+            >
+              {BLOG_HERO_IMAGE_POSITIONS.map((pos) => (
+                <option key={pos} value={pos}>{HERO_POSITION_LABELS[pos]}</option>
+              ))}
+            </select>
           </div>
 
           <div className="admin-actions-bar">

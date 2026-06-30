@@ -367,6 +367,7 @@ export type AdminBlogMeta = {
   authorName?: string | null;
   heroImageUrl?: string | null;
   heroImageAlt?: string | null;
+  heroImagePosition?: string | null;
   status?: string | null;
   publishedAt?: string | null;
   lastUpdatedAt?: string | null;
@@ -376,7 +377,7 @@ export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, heroImageUrl, heroImageAlt, status, publishedAt, lastUpdatedAt }`,
+      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt }`,
     );
   } catch {
     return [];
