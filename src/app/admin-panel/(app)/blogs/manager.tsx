@@ -206,38 +206,40 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
 
       <div style={{ display: "grid", gap: 8 }}>
         {list.map((b) => (
-          <div key={b._id} className="admin-card" style={{ display: "flex", alignItems: "flex-start", gap: 14 }}>
-            <div style={{ flex: 1, minWidth: 0 }}>
+          <div key={b._id} className="admin-card" style={{ display: "flex", alignItems: "flex-start", gap: 14, flexWrap: "wrap" }}>
+            <div style={{ flex: "1 1 220px", minWidth: 0 }}>
               <div style={{ fontWeight: 600, fontSize: 14 }}>{b.title}</div>
-              <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginTop: 2 }}>
+              <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginTop: 2, overflowWrap: "break-word" }}>
                 /blogs/{b.slug} · {b.categoryTitle ?? b.categorySlug ?? "—"} · {b.authorName ?? "—"} ·{" "}
                 {b.publishedAt ? new Date(b.publishedAt).toLocaleDateString("en-IN") : "no date"}
               </div>
               {b.excerpt && (
-                <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginTop: 4, whiteSpace: "nowrap", overflow: "hidden", textOverflow: "ellipsis" }}>
+                <div style={{ fontSize: 12, color: "var(--muted-foreground)", marginTop: 4, overflow: "hidden", textOverflow: "ellipsis", display: "-webkit-box", WebkitLineClamp: 1, WebkitBoxOrient: "vertical" }}>
                   {b.excerpt}
                 </div>
               )}
             </div>
-            <button
-              className="admin-btn-ghost"
-              style={{ fontSize: 12 }}
-              disabled={busyId === b._id}
-              onClick={() => toggleStatus(b)}
-            >
-              {busyId === b._id ? "Saving…" : b.status === "draft" ? "Publish" : "Move to draft"}
-            </button>
-            <button className="admin-btn-ghost" style={{ padding: "6px 10px" }} onClick={() => startEdit(b)}><Pencil size={14} /></button>
-            <a className="admin-btn-ghost" style={{ fontSize: 12, textDecoration: "none" }} href={`/blogs/${b.slug}`} target="_blank">
-              View ↗
-            </a>
-            <button
-              className="admin-btn-ghost"
-              style={{ fontSize: 12, color: "var(--destructive)" }}
-              onClick={() => del(b._id!, b.slug)}
-            >
-              Delete
-            </button>
+            <div style={{ display: "flex", gap: 6, flexWrap: "wrap", flexShrink: 0 }}>
+              <button
+                className="admin-btn-ghost"
+                style={{ fontSize: 12 }}
+                disabled={busyId === b._id}
+                onClick={() => toggleStatus(b)}
+              >
+                {busyId === b._id ? "Saving…" : b.status === "draft" ? "Publish" : "Move to draft"}
+              </button>
+              <button className="admin-btn-ghost" style={{ padding: "6px 10px" }} onClick={() => startEdit(b)}><Pencil size={14} /></button>
+              <a className="admin-btn-ghost" style={{ fontSize: 12, textDecoration: "none" }} href={`/blogs/${b.slug}`} target="_blank">
+                View ↗
+              </a>
+              <button
+                className="admin-btn-ghost"
+                style={{ fontSize: 12, color: "var(--destructive)" }}
+                onClick={() => del(b._id!, b.slug)}
+              >
+                Delete
+              </button>
+            </div>
           </div>
         ))}
       </div>
