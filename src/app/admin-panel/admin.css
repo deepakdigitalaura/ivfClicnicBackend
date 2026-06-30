@@ -42,7 +42,7 @@
   color: #fff; font-size: 14px; font-weight: 800;
 }
 
-.admin-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; }
+.admin-nav { display: flex; flex-direction: column; gap: 2px; flex: 1; overflow-y: auto; }
 .admin-nav-section {
   font-size: 11px; text-transform: uppercase; letter-spacing: .06em;
   color: var(--muted-foreground); padding: 14px 10px 6px; font-weight: 600;
