@@ -5,6 +5,8 @@ import { physicianSchema } from "@/lib/doctors";
 import { getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 
+export const revalidate = 3600;
+
 const URL = "/doctors";
 
 export const metadata: Metadata = {

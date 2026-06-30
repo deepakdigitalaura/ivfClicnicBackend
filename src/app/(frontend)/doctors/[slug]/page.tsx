@@ -6,6 +6,9 @@ import { physicianSchema } from "@/lib/doctors";
 import { getDoctor, getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 
+/** ISR: re-render every hour so admin edits go live without a full redeploy. */
+export const revalidate = 3600;
+
 /** Union of code-known + Sanity doctor slugs (getDoctors merges both). New
  *  admin-created doctors not in this set still render on-demand (dynamicParams). */
 export async function generateStaticParams() {
