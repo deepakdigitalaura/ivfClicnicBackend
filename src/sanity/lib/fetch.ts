@@ -20,8 +20,7 @@ async function sanityFetch<T>(query: string, params?: Record<string, unknown>): 
 }
 
 export type RobotsConfig = {
-  discourageSearchEngines?: boolean;
-  disallowPaths?: string[];
+  rawContent?: string;
 };
 
 export type ScriptEntry = { name?: string; enabled?: boolean; code?: string };

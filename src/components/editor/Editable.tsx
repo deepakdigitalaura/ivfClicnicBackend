@@ -22,6 +22,7 @@
  * ===================================================================== */
 
 import { useEdit } from "./edit-context";
+import { useMark } from "./mark-context";
 
 type Tag = keyof React.JSX.IntrinsicElements;
 
@@ -39,7 +40,27 @@ export function Editable({
   children: React.ReactNode;
 }) {
   const ctx = useEdit();
+  const mark = useMark();
   const Comp = as as React.ElementType;
+
+  // Mark mode (admin preview iframe): render a click-to-select target with a
+  // hover outline; clicking postMessages the path to the parent editor. No
+  // contentEditable. Takes precedence over the (absent) full editor.
+  if (!ctx?.editMode && mark?.markMode) {
+    const markProps = {
+      className: `${className ?? ""} bfi-mark`.trim(),
+      "data-edit-path": path,
+      onClick: (e: React.MouseEvent) => {
+        e.stopPropagation();
+        e.preventDefault();
+        mark.select(path);
+      },
+    };
+    if (rich && typeof children === "string") {
+      return <Comp {...markProps} dangerouslySetInnerHTML={{ __html: children }} />;
+    }
+    return <Comp {...markProps}>{children}</Comp>;
+  }
 
   if (!ctx?.editMode) {
     if (rich && typeof children === "string") {
@@ -116,6 +137,21 @@ export function EditableImage({
   loading?: "lazy" | "eager";
 }) {
   const ctx = useEdit();
+  const mark = useMark();
+  if (!ctx?.editMode && mark?.markMode) {
+    return (
+      // eslint-disable-next-line @next/next/no-img-element
+      <img
+        src={src}
+        alt={alt}
+        loading={loading}
+        className={`${className ?? ""} bfi-mark`.trim()}
+        style={style}
+        data-edit-path={path}
+        onClick={(e) => { e.stopPropagation(); e.preventDefault(); mark.select(path); }}
+      />
+    );
+  }
   if (!ctx?.editMode) {
     // eslint-disable-next-line @next/next/no-img-element
     return <img src={src} alt={alt} loading={loading} className={className} style={style} />;

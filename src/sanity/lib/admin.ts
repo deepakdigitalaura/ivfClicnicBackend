@@ -312,7 +312,7 @@ export async function getDashboardStats() {
       headScripts: scripts?.headScripts?.length ?? 0,
       bodyScripts: scripts?.bodyScripts?.length ?? 0,
       customSchemas: schema?.customSchemas?.length ?? 0,
-      blocked: robots?.disallowPaths?.length ?? 0,
+      blocked: (robots?.rawContent?.match(/^\s*Disallow:\s*\S+/gim) ?? []).length,
       newInquiries: inquiries.filter((i) => (i.status ?? "new") === "new").length,
       totalInquiries: inquiries.length,
     };

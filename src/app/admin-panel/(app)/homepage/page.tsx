@@ -6,13 +6,7 @@ export const dynamic = "force-dynamic";
 
 export default async function HomepageAdminPage() {
   const doc = await readHomepage();
-  return (
-    <>
-      <div className="admin-page-head">
-        <h1 className="admin-h1">Homepage Editor</h1>
-        <p className="admin-sub">Edit the homepage content — changes preview live on the right and go live on save.</p>
-      </div>
-      <HomepageEditor initial={doc} defaults={HOMEPAGE_DEFAULTS} />
-    </>
-  );
+  // The editor renders full-screen (fixed overlay with its own top bar), so it
+  // intentionally covers the admin shell sidebar for maximum preview width.
+  return <HomepageEditor initial={doc} defaults={HOMEPAGE_DEFAULTS} />;
 }
