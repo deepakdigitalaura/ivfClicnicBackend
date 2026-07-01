@@ -316,6 +316,27 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "icsi-vs-ivf-success-rates-benefits-and-risks-compared": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+
+  // ── Wave 3: Next 5 blogs ────────────────────────────────────────────
+  "how-lifestyle-choices-of-both-partners-impact-icsi-success-rates": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+
+  "how-pre-implantation-genetic-testing-boosts-ivf-success": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+
+  "is-egg-freezing-a-good-option-if-i-want-to-delay-pregnancy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "ivf-after-35-navigating-fertility-challenges-with-confidence-and-hope": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+
+  "how-to-improve-ovulation-naturally-when-you-have-pcos": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

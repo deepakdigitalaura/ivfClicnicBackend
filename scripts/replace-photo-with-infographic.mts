@@ -516,6 +516,249 @@ const SVG_ICSI_VS_IVF_WHEN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0
   <text x="400" y="226" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute treatment guidelines</text>
 </svg>`;
 
+// ── Wave 3 SVGs ──────────────────────────────────────────────────────
+
+// Blog W3-1 (ICSI Lifestyle): "5 Lifestyle Factors That Affect ICSI Success"
+// Data sourced from blog H2 sections: Diet & Nutrition, Smoking, Stress, Exercise, Shared Responsibility
+const SVG_ICSI_LIFESTYLE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 252" font-family="${FONT}">
+  <rect width="800" height="252" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="250.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 LIFESTYLE FACTORS THAT AFFECT ICSI SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="40" y="44" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="62" r="12" fill="${C.rose}"/>
+  <text x="72" y="66.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="98" y="57" font-size="11.5" font-weight="600" fill="${C.dark}">Diet &amp; Nutrition</text>
+  <text x="98" y="72" font-size="10.5" fill="${C.muted}">Antioxidant-rich foods (fruits, vegetables, lean protein) build healthy eggs and sperm</text>
+
+  <!-- Row 2 -->
+  <rect x="40" y="86" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="104" r="12" fill="${C.rose}"/>
+  <text x="72" y="108.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="98" y="99" font-size="11.5" font-weight="600" fill="${C.dark}">Avoid Smoking</text>
+  <text x="98" y="114" font-size="10.5" fill="${C.muted}">Smoking reduces sperm quality and egg health — significant risk to ICSI outcomes</text>
+
+  <!-- Row 3 -->
+  <rect x="40" y="128" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="146" r="12" fill="${C.rose}"/>
+  <text x="72" y="150.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="98" y="141" font-size="11.5" font-weight="600" fill="${C.dark}">Manage Stress &amp; Psychological Well-Being</text>
+  <text x="98" y="156" font-size="10.5" fill="${C.muted}">Counselling, mindfulness and emotional support improve the mind-body connection</text>
+
+  <!-- Row 4 -->
+  <rect x="40" y="170" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="188" r="12" fill="${C.rose}"/>
+  <text x="72" y="192.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="98" y="183" font-size="11.5" font-weight="600" fill="${C.dark}">Exercise &amp; Body Weight</text>
+  <text x="98" y="198" font-size="10.5" fill="${C.muted}">Maintain a healthy BMI — both extremes of weight can affect hormones and fertility</text>
+
+  <!-- Row 5 -->
+  <rect x="40" y="212" width="720" height="32" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="228" r="12" fill="${C.rose}"/>
+  <text x="72" y="232.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="98" y="223" font-size="11.5" font-weight="600" fill="${C.dark}">Shared Responsibility</text>
+  <text x="98" y="238" font-size="10.5" fill="${C.muted}">ICSI success depends on both partners — lifestyle changes together yield best results</text>
+</svg>`;
+
+// Blog W3-2 (PGT): "3 Types of Pre-Implantation Genetic Testing (PGT)"
+// Data from blog nodes [8][9]: PGT-A (aneuploidies), PGT-M (monogenic), PGT-SR (structural)
+const SVG_PGT_TYPES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 228" font-family="${FONT}">
+  <rect width="800" height="228" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="226.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 TYPES OF PRE-IMPLANTATION GENETIC TESTING (PGT)</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Panel 1: PGT-A -->
+  <rect x="40" y="44" width="220" height="172" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="220" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="68" width="220" height="12" fill="${C.rose}"/>
+  <text x="150" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">PGT-A</text>
+  <text x="150" y="75" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.white}">Aneuploidies</text>
+  <text x="58" y="102" font-size="10.5" font-weight="600" fill="${C.dark}">What it screens:</text>
+  <text x="58" y="118" font-size="10" fill="${C.muted}">Abnormal chromosome numbers</text>
+  <text x="58" y="133" font-size="10" fill="${C.muted}">(extra or missing chromosomes)</text>
+  <text x="58" y="152" font-size="10.5" font-weight="600" fill="${C.dark}">Best for:</text>
+  <text x="58" y="168" font-size="10" fill="${C.muted}">Women over 35</text>
+  <text x="58" y="183" font-size="10" fill="${C.muted}">Recurrent miscarriage</text>
+  <text x="58" y="198" font-size="10" fill="${C.muted}">Multiple IVF failures</text>
+
+  <!-- Panel 2: PGT-M -->
+  <rect x="290" y="44" width="220" height="172" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="290" y="44" width="220" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="290" y="68" width="220" height="12" fill="${C.rose}"/>
+  <text x="400" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">PGT-M</text>
+  <text x="400" y="75" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.white}">Monogenic / Single Gene</text>
+  <text x="308" y="102" font-size="10.5" font-weight="600" fill="${C.dark}">What it screens:</text>
+  <text x="308" y="118" font-size="10" fill="${C.muted}">Specific inherited genetic</text>
+  <text x="308" y="133" font-size="10" fill="${C.muted}">disorders in embryos</text>
+  <text x="308" y="152" font-size="10.5" font-weight="600" fill="${C.dark}">Best for:</text>
+  <text x="308" y="168" font-size="10" fill="${C.muted}">Carriers of BRCA mutation</text>
+  <text x="308" y="183" font-size="10" fill="${C.muted}">Cystic fibrosis / sickle cell</text>
+  <text x="308" y="198" font-size="10" fill="${C.muted}">Known hereditary conditions</text>
+
+  <!-- Panel 3: PGT-SR -->
+  <rect x="540" y="44" width="220" height="172" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="540" y="44" width="220" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="540" y="68" width="220" height="12" fill="${C.rose}"/>
+  <text x="650" y="60" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">PGT-SR</text>
+  <text x="650" y="75" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.white}">Structural Rearrangements</text>
+  <text x="558" y="102" font-size="10.5" font-weight="600" fill="${C.dark}">What it screens:</text>
+  <text x="558" y="118" font-size="10" fill="${C.muted}">Structural chromosome</text>
+  <text x="558" y="133" font-size="10" fill="${C.muted}">rearrangements in embryos</text>
+  <text x="558" y="152" font-size="10.5" font-weight="600" fill="${C.dark}">Best for:</text>
+  <text x="558" y="168" font-size="10" fill="${C.muted}">Balanced translocation carriers</text>
+  <text x="558" y="183" font-size="10" fill="${C.muted}">Inversions or deletions</text>
+  <text x="558" y="198" font-size="10" fill="${C.muted}">Recurrent pregnancy loss</text>
+</svg>`;
+
+// Blog W3-3 (Egg Freezing): "How Egg Freezing Works — 3 Steps"
+// Data from blog nodes [11] Ovarian Stimulation, [14] Egg Retrieval, [16] Vitrification/Storage
+const SVG_EGG_FREEZING_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 210" font-family="${FONT}">
+  <rect width="800" height="210" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="208.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW EGG FREEZING WORKS — 3 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Step 1 -->
+  <rect x="40" y="48" width="210" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="145" cy="78" r="22" fill="${C.rose}"/>
+  <text x="145" y="83" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">STEP 1</text>
+  <text x="145" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Ovarian Stimulation</text>
+  <text x="145" y="136" text-anchor="middle" font-size="10" fill="${C.muted}">Hormone injections over</text>
+  <text x="145" y="150" text-anchor="middle" font-size="10" fill="${C.muted}">10–14 days to produce</text>
+  <text x="145" y="164" text-anchor="middle" font-size="10" fill="${C.muted}">multiple mature eggs</text>
+  <text x="145" y="186" text-anchor="middle" font-size="9" fill="${C.muted}">Monitored via ultrasound</text>
+
+  <!-- Arrow 1 -->
+  <text x="268" y="128" text-anchor="middle" font-size="22" fill="${C.rose}">→</text>
+
+  <!-- Step 2 -->
+  <rect x="295" y="48" width="210" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="400" cy="78" r="22" fill="${C.rose}"/>
+  <text x="400" y="83" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">STEP 2</text>
+  <text x="400" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="400" y="136" text-anchor="middle" font-size="10" fill="${C.muted}">Minor procedure under</text>
+  <text x="400" y="150" text-anchor="middle" font-size="10" fill="${C.muted}">sedation — ultrasound-</text>
+  <text x="400" y="164" text-anchor="middle" font-size="10" fill="${C.muted}">guided needle collection</text>
+  <text x="400" y="186" text-anchor="middle" font-size="9" fill="${C.muted}">Takes 20–30 minutes</text>
+
+  <!-- Arrow 2 -->
+  <text x="523" y="128" text-anchor="middle" font-size="22" fill="${C.rose}">→</text>
+
+  <!-- Step 3 -->
+  <rect x="550" y="48" width="210" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="655" cy="78" r="22" fill="${C.rose}"/>
+  <text x="655" y="83" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">STEP 3</text>
+  <text x="655" y="118" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Freeze &amp; Store</text>
+  <text x="655" y="136" text-anchor="middle" font-size="10" fill="${C.muted}">Vitrification (flash-</text>
+  <text x="655" y="150" text-anchor="middle" font-size="10" fill="${C.muted}">freezing) technique</text>
+  <text x="655" y="164" text-anchor="middle" font-size="10" fill="${C.muted}">stored in liquid nitrogen</text>
+  <text x="655" y="186" text-anchor="middle" font-size="9" fill="${C.muted}">Preserved for years</text>
+</svg>`;
+
+// Blog W3-4 (IVF after 35): "IVF After 35 — 5 Techniques That Help"
+// Data from blog nodes [10-14]: Genetic testing/PGT, Egg Freezing, Embryo Banking, Ovarian Rejuvenation, Personalised Protocol
+const SVG_IVF_AFTER_35 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 252" font-family="${FONT}">
+  <rect width="800" height="252" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="250.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IVF AFTER 35 — 5 TECHNIQUES THAT MAKE A DIFFERENCE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1: items 1 + 2 -->
+  <rect x="40" y="46" width="340" height="64" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="66" r="13" fill="${C.rose}"/>
+  <text x="72" y="71" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="98" y="60" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Testing (PGT)</text>
+  <text x="98" y="76" font-size="10.5" fill="${C.muted}">Screens embryos for chromosomal</text>
+  <text x="98" y="90" font-size="10.5" fill="${C.muted}">abnormalities before transfer</text>
+
+  <rect x="420" y="46" width="340" height="64" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="452" cy="66" r="13" fill="${C.rose}"/>
+  <text x="452" y="71" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="478" y="60" font-size="11.5" font-weight="700" fill="${C.dark}">Egg Freezing</text>
+  <text x="478" y="76" font-size="10.5" fill="${C.muted}">Preserve fertility before age</text>
+  <text x="478" y="90" font-size="10.5" fill="${C.muted}">further impacts egg quality</text>
+
+  <!-- Row 2: items 3 + 4 -->
+  <rect x="40" y="120" width="340" height="64" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="140" r="13" fill="${C.rose}"/>
+  <text x="72" y="145" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="98" y="134" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Banking</text>
+  <text x="98" y="150" font-size="10.5" fill="${C.muted}">Multiple stimulation cycles to</text>
+  <text x="98" y="164" font-size="10.5" fill="${C.muted}">accumulate a healthy embryo batch</text>
+
+  <rect x="420" y="120" width="340" height="64" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="452" cy="140" r="13" fill="${C.rose}"/>
+  <text x="452" y="145" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="478" y="134" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Rejuvenation</text>
+  <text x="478" y="150" font-size="10.5" fill="${C.muted}">Emerging treatments for women</text>
+  <text x="478" y="164" font-size="10.5" fill="${C.muted}">with significant ovarian reserve challenges</text>
+
+  <!-- Row 3: item 5 (full width) -->
+  <rect x="40" y="194" width="720" height="48" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="218" r="13" fill="${C.rose}"/>
+  <text x="72" y="223" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="98" y="209" font-size="11.5" font-weight="700" fill="${C.dark}">Personalised IVF Protocol</text>
+  <text x="98" y="225" font-size="10.5" fill="${C.muted}">Medication doses, stimulation timing, and transfer strategy tailored to each woman's unique fertility profile</text>
+</svg>`;
+
+// Blog W3-5 (PCOS Ovulation): "7 Natural Ways to Improve Ovulation with PCOS"
+// Data from blog H3 headings across sections [11]-[46]
+const SVG_PCOS_OVULATION = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260" font-family="${FONT}">
+  <rect width="800" height="260" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="258.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 NATURAL WAYS TO IMPROVE OVULATION WITH PCOS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left column: items 1–4 -->
+  <rect x="40" y="44" width="340" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="65" r="12" fill="${C.rose}"/>
+  <text x="70" y="69.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="95" y="60" font-size="11.5" font-weight="600" fill="${C.dark}">PCOS-Friendly Diet</text>
+  <text x="95" y="76" font-size="10" fill="${C.muted}">Low-GI foods that balance blood sugar and support ovulation</text>
+
+  <rect x="40" y="92" width="340" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="113" r="12" fill="${C.rose}"/>
+  <text x="70" y="117.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="95" y="108" font-size="11.5" font-weight="600" fill="${C.dark}">Maintain a Healthy Weight</text>
+  <text x="95" y="124" font-size="10" fill="${C.muted}">Even 5–10% weight loss can restore regular ovulation in PCOS</text>
+
+  <rect x="40" y="140" width="340" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="161" r="12" fill="${C.rose}"/>
+  <text x="70" y="165.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="95" y="156" font-size="11.5" font-weight="600" fill="${C.dark}">Smart Exercise</text>
+  <text x="95" y="172" font-size="10" fill="${C.muted}">Moderate cardio + strength training improves insulin sensitivity</text>
+
+  <rect x="40" y="188" width="340" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="209" r="12" fill="${C.rose}"/>
+  <text x="70" y="213.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="95" y="204" font-size="11.5" font-weight="600" fill="${C.dark}">Manage Stress &amp; Sleep</text>
+  <text x="95" y="220" font-size="10" fill="${C.muted}">Chronic stress disrupts LH/FSH balance — aim for 7–9 hrs sleep</text>
+
+  <!-- Right column: items 5–7 -->
+  <rect x="420" y="44" width="340" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="65" r="12" fill="${C.rose}"/>
+  <text x="450" y="69.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="475" y="60" font-size="11.5" font-weight="600" fill="${C.dark}">Evidence-Based Supplements</text>
+  <text x="475" y="76" font-size="10" fill="${C.muted}">Inositol, Vitamin D, Omega-3 — discuss with your doctor</text>
+
+  <rect x="420" y="92" width="340" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="113" r="12" fill="${C.rose}"/>
+  <text x="450" y="117.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="475" y="108" font-size="11.5" font-weight="600" fill="${C.dark}">Herbal Support</text>
+  <text x="475" y="124" font-size="10" fill="${C.muted}">Spearmint tea, cinnamon — emerging evidence, always consult first</text>
+
+  <rect x="420" y="140" width="340" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="161" r="12" fill="${C.rose}"/>
+  <text x="450" y="165.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="475" y="156" font-size="11.5" font-weight="600" fill="${C.dark}">Track Ovulation Naturally</text>
+  <text x="475" y="172" font-size="10" fill="${C.muted}">OPK strips, BBT charting — identify your fertile window</text>
+
+  <text x="400" y="248" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute clinical guidance</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -573,6 +816,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_ICSI_VS_IVF_WHEN,
     title:   "When to Choose IVF vs ICSI",
     altText: "Two-column decision guide: IVF when — female or unexplained infertility, normal sperm, no previous fertilization failure, fertility preservation. ICSI when — low sperm count, poor motility, abnormal morphology, previous IVF fertilization failure, frozen or surgically retrieved sperm.",
+  },
+
+  // ── Wave 3: Next 5 blogs ────────────────────────────────────────────
+  "how-lifestyle-choices-of-both-partners-impact-icsi-success-rates": {
+    svg:     SVG_ICSI_LIFESTYLE,
+    title:   "5 Lifestyle Factors That Affect ICSI Success",
+    altText: "Five-item infographic: 1 Diet & Nutrition (healthy eggs and sperm), 2 Avoid Smoking (significant risk to outcomes), 3 Manage Stress (mind-body connection), 4 Exercise & Body Weight (healthy BMI improves outcomes), 5 Shared Responsibility (both partners matter equally).",
+  },
+
+  "how-pre-implantation-genetic-testing-boosts-ivf-success": {
+    svg:     SVG_PGT_TYPES,
+    title:   "3 Types of Pre-Implantation Genetic Testing (PGT)",
+    altText: "Three-panel infographic: PGT-A screens for abnormal chromosome numbers (aneuploidies), best for women over 35 and recurrent miscarriage. PGT-M identifies specific single-gene disorders like BRCA and cystic fibrosis. PGT-SR detects structural chromosome rearrangements in translocation carriers.",
+  },
+
+  "is-egg-freezing-a-good-option-if-i-want-to-delay-pregnancy": {
+    svg:     SVG_EGG_FREEZING_STEPS,
+    title:   "How Egg Freezing Works — 3 Steps",
+    altText: "Three-step horizontal flow: Step 1 Ovarian Stimulation (hormone injections over 10–14 days to produce multiple eggs), Step 2 Egg Retrieval (minor procedure under sedation using ultrasound-guided needle), Step 3 Freeze & Store (vitrification flash-freezing, stored in liquid nitrogen).",
+  },
+
+  "ivf-after-35-navigating-fertility-challenges-with-confidence-and-hope": {
+    svg:     SVG_IVF_AFTER_35,
+    title:   "IVF After 35 — 5 Techniques That Help",
+    altText: "Five-item grid: 1 Genetic Testing / PGT (screens embryos for chromosomal issues), 2 Egg Freezing (preserve fertility before age affects quality), 3 Embryo Banking (multiple cycles to build a healthy batch), 4 Ovarian Rejuvenation (emerging treatments), 5 Personalised IVF Protocol (tailored to each woman's unique profile).",
+  },
+
+  "how-to-improve-ovulation-naturally-when-you-have-pcos": {
+    svg:     SVG_PCOS_OVULATION,
+    title:   "7 Natural Ways to Improve Ovulation with PCOS",
+    altText: "Two-column grid: 1 PCOS-Friendly Diet, 2 Maintain Healthy Weight, 3 Smart Exercise, 4 Manage Stress & Sleep, 5 Evidence-Based Supplements, 6 Herbal Support, 7 Track Ovulation Naturally.",
   },
 };
 
