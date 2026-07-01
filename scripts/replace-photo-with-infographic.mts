@@ -759,6 +759,264 @@ const SVG_PCOS_OVULATION = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
   <text x="400" y="248" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute clinical guidance</text>
 </svg>`;
 
+// ── Wave 4 SVGs ──────────────────────────────────────────────────────
+
+// Blog W4-1 (Miscarriage): "Waiting to Try Again After Miscarriage — Recommended Timeline"
+// Data from blog node [6]: 1-2 cycles (4-8 wks), 3-6 months (after D&C), 6-12 months (recurrent)
+const SVG_MISCARRIAGE_TIMELINE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="198.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WAITING TO TRY AGAIN AFTER MISCARRIAGE — RECOMMENDED TIMELINE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Panel 1 -->
+  <rect x="40" y="48" width="218" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">4 – 8 Weeks</text>
+  <text x="149" y="78" text-anchor="middle" font-size="9.5" fill="${C.white}">1–2 Menstrual Cycles</text>
+  <text x="149" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="${C.dark}">General Recommendation</text>
+  <text x="149" y="120" text-anchor="middle" font-size="10" fill="${C.muted}">Allows uterus to heal</text>
+  <text x="149" y="135" text-anchor="middle" font-size="10" fill="${C.muted}">and hormonal balance</text>
+  <text x="149" y="150" text-anchor="middle" font-size="10" fill="${C.muted}">to be restored</text>
+  <text x="149" y="175" text-anchor="middle" font-size="9" fill="${C.rose}" font-weight="600">Standard recovery</text>
+
+  <!-- Panel 2 -->
+  <rect x="291" y="48" width="218" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">3 – 6 Months</text>
+  <text x="400" y="78" text-anchor="middle" font-size="9.5" fill="${C.white}">After D&amp;C Procedure</text>
+  <text x="400" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="${C.dark}">Post-Procedure Recovery</text>
+  <text x="400" y="120" text-anchor="middle" font-size="10" fill="${C.muted}">Uterus recovers fully</text>
+  <text x="400" y="135" text-anchor="middle" font-size="10" fill="${C.muted}">from dilation &amp;</text>
+  <text x="400" y="150" text-anchor="middle" font-size="10" fill="${C.muted}">curettage procedure</text>
+  <text x="400" y="175" text-anchor="middle" font-size="9" fill="${C.rose}" font-weight="600">D&amp;C recovery window</text>
+
+  <!-- Panel 3 -->
+  <rect x="542" y="48" width="218" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="64" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">6 – 12 Months</text>
+  <text x="651" y="78" text-anchor="middle" font-size="9.5" fill="${C.white}">Recurrent Miscarriage (3+)</text>
+  <text x="651" y="104" text-anchor="middle" font-size="11" font-weight="600" fill="${C.dark}">Evaluation &amp; Treatment</text>
+  <text x="651" y="120" text-anchor="middle" font-size="10" fill="${C.muted}">Time for full workup,</text>
+  <text x="651" y="135" text-anchor="middle" font-size="10" fill="${C.muted}">underlying cause</text>
+  <text x="651" y="150" text-anchor="middle" font-size="10" fill="${C.muted}">diagnosis &amp; treatment</text>
+  <text x="651" y="175" text-anchor="middle" font-size="9" fill="${C.rose}" font-weight="600">Specialist consultation needed</text>
+</svg>`;
+
+// Blog W4-2 (Letrozole): "How Long Letrozole Stays in Your System"
+// Data from blog node [11]: 1-2 days peak; 2-4 days half-life (50%); 4-7 days 75%; 10-14 days 95%
+const SVG_LETROZOLE_CLEARANCE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 196" font-family="${FONT}">
+  <rect width="800" height="196" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="194.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW LONG LETROZOLE STAYS IN YOUR SYSTEM</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Stage 1 -->
+  <rect x="40" y="48" width="160" height="132" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="120" cy="78" r="24" fill="${C.rose}"/>
+  <text x="120" y="74" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1–2</text>
+  <text x="120" y="87" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">DAYS</text>
+  <text x="120" y="116" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Peak</text>
+  <text x="120" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">Plasma concentration</text>
+  <text x="120" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">at its highest</text>
+  <text x="120" y="167" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.rose}">100% present</text>
+
+  <!-- Arrow -->
+  <text x="213" y="120" text-anchor="middle" font-size="20" fill="${C.rose}">→</text>
+
+  <!-- Stage 2 -->
+  <rect x="227" y="48" width="160" height="132" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="307" cy="78" r="24" fill="${C.rose}"/>
+  <text x="307" y="74" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2–4</text>
+  <text x="307" y="87" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">DAYS</text>
+  <text x="307" y="116" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Half-Life</text>
+  <text x="307" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">50% of medication</text>
+  <text x="307" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">eliminated from body</text>
+  <text x="307" y="167" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.rose}">~50% cleared</text>
+
+  <!-- Arrow -->
+  <text x="400" y="120" text-anchor="middle" font-size="20" fill="${C.rose}">→</text>
+
+  <!-- Stage 3 -->
+  <rect x="414" y="48" width="160" height="132" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="494" cy="78" r="24" fill="${C.rose}"/>
+  <text x="494" y="74" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4–7</text>
+  <text x="494" y="87" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">DAYS</text>
+  <text x="494" y="116" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Mostly Gone</text>
+  <text x="494" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">75% of medication</text>
+  <text x="494" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">has been eliminated</text>
+  <text x="494" y="167" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.rose}">~75% cleared</text>
+
+  <!-- Arrow -->
+  <text x="587" y="120" text-anchor="middle" font-size="20" fill="${C.rose}">→</text>
+
+  <!-- Stage 4 -->
+  <rect x="601" y="48" width="159" height="132" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="680" cy="78" r="24" fill="${C.rose}"/>
+  <text x="680" y="74" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">10–14</text>
+  <text x="680" y="87" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">DAYS</text>
+  <text x="680" y="116" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Fully Cleared</text>
+  <text x="680" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">95% of medication</text>
+  <text x="680" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">out of your system</text>
+  <text x="680" y="167" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.rose}">~95% cleared</text>
+</svg>`;
+
+// Blog W4-3 (Uterus recovery): "Uterine Recovery After Birth — Timeline"
+// Data from blog node [9]: 0-24h grapefruit 2-3 lbs; 1-2 wks orange; 2-6 wks pear; 6-12 wks full tone
+const SVG_UTERUS_RECOVERY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 196" font-family="${FONT}">
+  <rect width="800" height="196" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="194.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">UTERINE RECOVERY AFTER BIRTH — TIMELINE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Stage 1 -->
+  <rect x="40" y="48" width="160" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="160" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="68" width="160" height="12" fill="${C.rose}"/>
+  <text x="120" y="67" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">0 – 24 Hours</text>
+  <text x="120" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="${C.dark}">Grapefruit Size</text>
+  <text x="120" y="116" text-anchor="middle" font-size="10" fill="${C.muted}">~2–3 lbs in weight</text>
+  <text x="120" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">Uterine contractions</text>
+  <text x="120" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">begin immediately</text>
+  <text x="120" y="171" text-anchor="middle" font-size="9" fill="${C.muted}">Immediate postpartum</text>
+
+  <!-- Arrow -->
+  <text x="213" y="122" text-anchor="middle" font-size="20" fill="${C.rose}">→</text>
+
+  <!-- Stage 2 -->
+  <rect x="227" y="48" width="160" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="227" y="48" width="160" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="227" y="68" width="160" height="12" fill="${C.rose}"/>
+  <text x="307" y="67" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">1 – 2 Weeks</text>
+  <text x="307" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="${C.dark}">Orange Size</text>
+  <text x="307" y="116" text-anchor="middle" font-size="10" fill="${C.muted}">Continues to shrink</text>
+  <text x="307" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">Breastfeeding helps</text>
+  <text x="307" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">speed involution</text>
+  <text x="307" y="171" text-anchor="middle" font-size="9" fill="${C.muted}">Early postpartum</text>
+
+  <!-- Arrow -->
+  <text x="400" y="122" text-anchor="middle" font-size="20" fill="${C.rose}">→</text>
+
+  <!-- Stage 3 -->
+  <rect x="414" y="48" width="160" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="414" y="48" width="160" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="414" y="68" width="160" height="12" fill="${C.rose}"/>
+  <text x="494" y="67" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">2 – 6 Weeks</text>
+  <text x="494" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="${C.dark}">Pear Size</text>
+  <text x="494" y="116" text-anchor="middle" font-size="10" fill="${C.muted}">Pre-pregnancy size</text>
+  <text x="494" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">and shape restored</text>
+  <text x="494" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">6-week checkup time</text>
+  <text x="494" y="171" text-anchor="middle" font-size="9" fill="${C.muted}">Postpartum recovery</text>
+
+  <!-- Arrow -->
+  <text x="587" y="122" text-anchor="middle" font-size="20" fill="${C.rose}">→</text>
+
+  <!-- Stage 4 -->
+  <rect x="601" y="48" width="159" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="601" y="48" width="159" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="601" y="68" width="159" height="12" fill="${C.rose}"/>
+  <text x="680" y="67" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">6 – 12 Weeks</text>
+  <text x="680" y="100" text-anchor="middle" font-size="11" font-weight="600" fill="${C.dark}">Fully Restored</text>
+  <text x="680" y="116" text-anchor="middle" font-size="10" fill="${C.muted}">Continues to tone</text>
+  <text x="680" y="131" text-anchor="middle" font-size="10" fill="${C.muted}">and strengthen</text>
+  <text x="680" y="146" text-anchor="middle" font-size="10" fill="${C.muted}">All changes resolve</text>
+  <text x="680" y="171" text-anchor="middle" font-size="9" fill="${C.muted}">Full recovery</text>
+</svg>`;
+
+// Blog W4-4 (Gynecologist visits): "What Your Postpartum Gynecologist Visits Cover"
+// Data from blog H3 sections [38]-[46]: Physical exam, Mental health, Breastfeeding, Family planning, Pelvic floor
+const SVG_POSTPARTUM_VISITS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 252" font-family="${FONT}">
+  <rect width="800" height="252" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="250.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHAT YOUR POSTPARTUM GYNECOLOGIST VISITS COVER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1: items 1 + 2 -->
+  <rect x="40" y="46" width="340" height="62" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="66" r="13" fill="${C.rose}"/>
+  <text x="72" y="71" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="98" y="60" font-size="11.5" font-weight="700" fill="${C.dark}">Physical Examinations</text>
+  <text x="98" y="75" font-size="10" fill="${C.muted}">Pelvic exam, breast check &amp; scar / incision</text>
+  <text x="98" y="89" font-size="10" fill="${C.muted}">evaluation (C-section or episiotomy)</text>
+
+  <rect x="420" y="46" width="340" height="62" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="452" cy="66" r="13" fill="${C.rose}"/>
+  <text x="452" y="71" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="478" y="60" font-size="11.5" font-weight="700" fill="${C.dark}">Mental Health Evaluation</text>
+  <text x="478" y="75" font-size="10" fill="${C.muted}">Screening for postpartum depression (PPD)</text>
+  <text x="478" y="89" font-size="10" fill="${C.muted}">and anxiety; counselling referral if needed</text>
+
+  <!-- Row 2: items 3 + 4 -->
+  <rect x="40" y="118" width="340" height="62" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="138" r="13" fill="${C.rose}"/>
+  <text x="72" y="143" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="98" y="132" font-size="11.5" font-weight="700" fill="${C.dark}">Breastfeeding Support</text>
+  <text x="98" y="147" font-size="10" fill="${C.muted}">Lactation guidance, managing sore nipples,</text>
+  <text x="98" y="161" font-size="10" fill="${C.muted}">mastitis treatment and milk supply concerns</text>
+
+  <rect x="420" y="118" width="340" height="62" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="452" cy="138" r="13" fill="${C.rose}"/>
+  <text x="452" y="143" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="478" y="132" font-size="11.5" font-weight="700" fill="${C.dark}">Family Planning</text>
+  <text x="478" y="147" font-size="10" fill="${C.muted}">Contraception options discussed;</text>
+  <text x="478" y="161" font-size="10" fill="${C.muted}">readiness for future pregnancies assessed</text>
+
+  <!-- Row 3: item 5 (full width) -->
+  <rect x="40" y="190" width="720" height="50" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="215" r="13" fill="${C.rose}"/>
+  <text x="72" y="220" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="98" y="207" font-size="11.5" font-weight="700" fill="${C.dark}">Pelvic Floor Health</text>
+  <text x="98" y="222" font-size="10" fill="${C.muted}">Assessment and exercises for pelvic floor dysfunction, incontinence, or pelvic pressure common after childbirth</text>
+</svg>`;
+
+// Blog W4-5 (Low AMH): "4 Ways Low AMH Affects Menstrual Cycles"
+// Data from blog H3 sections [9], [13], [16], [19]: Irregular cycles, follicle count, ovulation, hormones
+const SVG_LOW_AMH_EFFECTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 WAYS LOW AMH AFFECTS MENSTRUAL CYCLES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Box 1: Irregular Cycles -->
+  <rect x="40" y="48" width="340" height="92" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="66" width="340" height="12" fill="${C.rose}"/>
+  <text x="210" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">IRREGULAR CYCLES</text>
+  <text x="58" y="92" font-size="10.5" fill="${C.dark}">• Skipped or missed periods</text>
+  <text x="58" y="108" font-size="10.5" fill="${C.dark}">• Variable cycle length (shorter or longer)</text>
+  <text x="58" y="124" font-size="10.5" fill="${C.dark}">• Diminished ovarian reserve as root cause</text>
+
+  <!-- Box 2: Decreased Follicle Count -->
+  <rect x="420" y="48" width="340" height="92" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="420" y="48" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="420" y="66" width="340" height="12" fill="${C.rose}"/>
+  <text x="590" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">DECREASED FOLLICLE COUNT</text>
+  <text x="438" y="92" font-size="10.5" fill="${C.dark}">• Fewer ovarian follicles available</text>
+  <text x="438" y="108" font-size="10.5" fill="${C.dark}">• Inconsistent egg production each cycle</text>
+  <text x="438" y="124" font-size="10.5" fill="${C.dark}">• Reduced egg reserve over time</text>
+
+  <!-- Box 3: Disrupted Ovulation -->
+  <rect x="40" y="152" width="340" height="84" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="152" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="170" width="340" height="12" fill="${C.rose}"/>
+  <text x="210" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">DISRUPTED OVULATION</text>
+  <text x="58" y="196" font-size="10.5" fill="${C.dark}">• Inconsistent or absent ovulation</text>
+  <text x="58" y="212" font-size="10.5" fill="${C.dark}">• Anovulation — no egg released in cycle</text>
+  <text x="58" y="228" font-size="10.5" fill="${C.dark}">• Disrupts cycle regularity directly</text>
+
+  <!-- Box 4: Hormonal Imbalances -->
+  <rect x="420" y="152" width="340" height="84" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="420" y="152" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="420" y="170" width="340" height="12" fill="${C.rose}"/>
+  <text x="590" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">HORMONAL IMBALANCES</text>
+  <text x="438" y="196" font-size="10.5" fill="${C.dark}">• Estrogen &amp; progesterone fluctuations</text>
+  <text x="438" y="212" font-size="10.5" fill="${C.dark}">• Altered feedback to brain hormones</text>
+  <text x="438" y="228" font-size="10.5" fill="${C.dark}">• Mood swings &amp; cycle instability</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -847,6 +1105,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_PCOS_OVULATION,
     title:   "7 Natural Ways to Improve Ovulation with PCOS",
     altText: "Two-column grid: 1 PCOS-Friendly Diet, 2 Maintain Healthy Weight, 3 Smart Exercise, 4 Manage Stress & Sleep, 5 Evidence-Based Supplements, 6 Herbal Support, 7 Track Ovulation Naturally.",
+  },
+
+  // ── Wave 4: Next 5 blogs ────────────────────────────────────────────
+  "how-long-do-you-have-to-wait-to-try-again-after-a-miscarriage": {
+    svg:     SVG_MISCARRIAGE_TIMELINE,
+    title:   "Waiting to Try Again After Miscarriage — Recommended Timeline",
+    altText: "Three-panel infographic: 4–8 weeks (1–2 menstrual cycles) general recommendation for uterus healing; 3–6 months after D&C procedure for complete uterine recovery; 6–12 months after recurrent miscarriage (3 or more) for thorough evaluation and treatment.",
+  },
+
+  "how-long-does-it-take-for-letrozole-to-get-out-of-your-system": {
+    svg:     SVG_LETROZOLE_CLEARANCE,
+    title:   "How Long Letrozole Stays in Your System",
+    altText: "Four-stage elimination chart: 1–2 days peak plasma concentration; 2–4 days half-life (50% eliminated); 4–7 days 75% eliminated; 10–14 days 95% cleared from system.",
+  },
+
+  "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth": {
+    svg:     SVG_UTERUS_RECOVERY,
+    title:   "Uterine Recovery After Birth — Timeline",
+    altText: "Four-stage recovery timeline: 0–24 hours grapefruit-size uterus (2–3 lbs); 1–2 weeks shrinks to small orange size; 2–6 weeks returns to pre-pregnancy pear size; 6–12 weeks fully tones and all pregnancy changes resolve.",
+  },
+
+  "how-long-should-you-see-a-gynecologist-after-delivery": {
+    svg:     SVG_POSTPARTUM_VISITS,
+    title:   "What Your Postpartum Gynecologist Visits Cover",
+    altText: "Five-item infographic: 1 Physical Examinations (pelvic, breast, scar checks); 2 Mental Health Evaluation (PPD and anxiety screening); 3 Breastfeeding Support (lactation guidance, mastitis management); 4 Family Planning (contraception options, future pregnancies); 5 Pelvic Floor Health (incontinence exercises).",
+  },
+
+  "how-low-amh-affects-menstrual-cycle-regularity": {
+    svg:     SVG_LOW_AMH_EFFECTS,
+    title:   "4 Ways Low AMH Affects Menstrual Cycles",
+    altText: "Four-box grid: 1 Irregular Cycles (skipped periods, variable cycle length); 2 Decreased Follicle Count (fewer eggs, inconsistent ovulation signals); 3 Disrupted Ovulation (inconsistent or absent ovulation, anovulation); 4 Hormonal Imbalances (estrogen and progesterone fluctuations affecting cycle regularity).",
   },
 };
 

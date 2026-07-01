@@ -337,6 +337,27 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "how-to-improve-ovulation-naturally-when-you-have-pcos": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+
+  // ── Wave 4: Next 5 blogs ────────────────────────────────────────────
+  "how-long-do-you-have-to-wait-to-try-again-after-a-miscarriage": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-long-does-it-take-for-letrozole-to-get-out-of-your-system": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-long-should-you-see-a-gynecologist-after-delivery": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-low-amh-affects-menstrual-cycle-regularity": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
