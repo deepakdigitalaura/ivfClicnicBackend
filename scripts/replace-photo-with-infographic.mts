@@ -257,6 +257,265 @@ const SVG_HIGHRISK_CONDITIONS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox
   <text x="400" y="222" text-anchor="middle" font-size="9" fill="${C.muted}">With proper management, most women with these conditions achieve healthy outcomes — Source: Bavishi Fertility Institute</text>
 </svg>`;
 
+// ── Wave 2 SVGs ──────────────────────────────────────────────────────
+
+// Blog 1 (IUI vs IVF): "Who Should Choose IUI vs IVF?" — 2-col decision guide
+// Data from blog nodes [7] (IUI candidates) and [12] (IVF candidates)
+const SVG_IUI_VS_IVF_CHOOSE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="238.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHO SHOULD CHOOSE IUI vs IVF?</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left panel header: IUI -->
+  <rect x="40" y="44" width="340" height="32" rx="6" fill="${C.rose}"/>
+  <text x="210" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">CHOOSE IUI WHEN:</text>
+
+  <!-- IUI items -->
+  <circle cx="64" cy="97" r="10" fill="${C.rose}"/><text x="64" y="101" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="84" y="93" font-size="11" font-weight="600" fill="${C.dark}">Mild male factor infertility</text>
+  <text x="84" y="107" font-size="10" fill="${C.muted}">Low count or mild motility issues</text>
+
+  <circle cx="64" cy="130" r="10" fill="${C.rose}"/><text x="64" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="84" y="126" font-size="11" font-weight="600" fill="${C.dark}">Ovulation disorders (PCOS)</text>
+  <text x="84" y="140" font-size="10" fill="${C.muted}">With or without mild stimulation</text>
+
+  <circle cx="64" cy="163" r="10" fill="${C.rose}"/><text x="64" y="167" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="84" y="159" font-size="11" font-weight="600" fill="${C.dark}">Unexplained infertility (under 35)</text>
+  <text x="84" y="173" font-size="10" fill="${C.muted}">Tubes open, reasonable sperm</text>
+
+  <circle cx="64" cy="196" r="10" fill="${C.rose}"/><text x="64" y="200" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">4</text>
+  <text x="84" y="192" font-size="11" font-weight="600" fill="${C.dark}">Single women / donor sperm</text>
+  <text x="84" y="206" font-size="10" fill="${C.muted}">Or cervical factor infertility</text>
+
+  <!-- Divider -->
+  <line x1="400" y1="44" x2="400" y2="228" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Right panel header: IVF -->
+  <rect x="420" y="44" width="340" height="32" rx="6" fill="${C.rose}"/>
+  <text x="590" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">CHOOSE IVF WHEN:</text>
+
+  <!-- IVF items -->
+  <circle cx="444" cy="97" r="10" fill="${C.rose}"/><text x="444" y="101" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="464" y="93" font-size="11" font-weight="600" fill="${C.dark}">Blocked / damaged fallopian tubes</text>
+  <text x="464" y="107" font-size="10" fill="${C.muted}">Most common IVF indication</text>
+
+  <circle cx="444" cy="130" r="10" fill="${C.rose}"/><text x="444" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="464" y="126" font-size="11" font-weight="600" fill="${C.dark}">Severe male factor / azoospermia</text>
+  <text x="464" y="140" font-size="10" fill="${C.muted}">Very low count, zero motility</text>
+
+  <circle cx="444" cy="163" r="10" fill="${C.rose}"/><text x="444" y="167" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="464" y="159" font-size="11" font-weight="600" fill="${C.dark}">Failed 3 or more IUI cycles</text>
+  <text x="464" y="173" font-size="10" fill="${C.muted}">Or women over 35 trying 6+ months</text>
+
+  <circle cx="444" cy="196" r="10" fill="${C.rose}"/><text x="444" y="200" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">4</text>
+  <text x="464" y="192" font-size="11" font-weight="600" fill="${C.dark}">Endometriosis / poor ovarian reserve</text>
+  <text x="464" y="206" font-size="10" fill="${C.muted}">Recurrent miscarriage needing PGT</text>
+
+  <text x="400" y="234" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute clinical guidelines</text>
+</svg>`;
+
+// Blog 2 (10 foods): "10 Foods That Boost Egg Quality" — 2×5 grid
+// Data from blog headings: Avocados [6], Leafy Greens [11], Berries [17], Nuts & Seeds [23],
+// Whole Grains [28], Eggs [33], Fatty Fish [38], Lentils [43], Citrus [48], Dark Chocolate [53]
+const SVG_TEN_FOODS_EGG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 248" font-family="${FONT}">
+  <rect width="800" height="248" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="246.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 FOODS THAT BOOST EGG QUALITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left column: items 1-5 -->
+  <rect x="40" y="44" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="62" r="12" fill="${C.rose}"/><text x="70" y="66.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="94" y="58" font-size="11.5" font-weight="600" fill="${C.dark}">Avocados</text>
+  <text x="94" y="71" font-size="10" fill="${C.muted}">Healthy fats, Vitamin E &amp; folate</text>
+
+  <rect x="40" y="86" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="104" r="12" fill="${C.rose}"/><text x="70" y="108.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="94" y="100" font-size="11.5" font-weight="600" fill="${C.dark}">Leafy Green Vegetables</text>
+  <text x="94" y="113" font-size="10" fill="${C.muted}">Spinach, Kale, Fenugreek — rich in folate</text>
+
+  <rect x="40" y="128" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="146" r="12" fill="${C.rose}"/><text x="70" y="150.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="94" y="142" font-size="11.5" font-weight="600" fill="${C.dark}">Berries</text>
+  <text x="94" y="155" font-size="10" fill="${C.muted}">Blueberries, Strawberries — antioxidants</text>
+
+  <rect x="40" y="170" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="188" r="12" fill="${C.rose}"/><text x="70" y="192.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="94" y="184" font-size="11.5" font-weight="600" fill="${C.dark}">Nuts &amp; Seeds</text>
+  <text x="94" y="197" font-size="10" fill="${C.muted}">Walnuts, Flaxseeds, Pumpkin Seeds</text>
+
+  <rect x="40" y="212" width="340" height="28" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="226" r="12" fill="${C.rose}"/><text x="70" y="230.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="94" y="230" font-size="11.5" font-weight="600" fill="${C.dark}">Whole Grains</text>
+
+  <!-- Right column: items 6-10 -->
+  <rect x="420" y="44" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="62" r="12" fill="${C.rose}"/><text x="450" y="66.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="474" y="58" font-size="11.5" font-weight="600" fill="${C.dark}">Eggs</text>
+  <text x="474" y="71" font-size="10" fill="${C.muted}">Protein, choline &amp; Vitamin D</text>
+
+  <rect x="420" y="86" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="104" r="12" fill="${C.rose}"/><text x="450" y="108.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="474" y="100" font-size="11.5" font-weight="600" fill="${C.dark}">Fatty Fish</text>
+  <text x="474" y="113" font-size="10" fill="${C.muted}">Salmon, Sardines — Omega-3 rich</text>
+
+  <rect x="420" y="128" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="146" r="12" fill="${C.rose}"/><text x="450" y="150.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="474" y="142" font-size="11.5" font-weight="600" fill="${C.dark}">Lentils &amp; Legumes</text>
+  <text x="474" y="155" font-size="10" fill="${C.muted}">Plant iron, folate &amp; protein</text>
+
+  <rect x="420" y="170" width="340" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="188" r="12" fill="${C.rose}"/><text x="450" y="192.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">9</text>
+  <text x="474" y="184" font-size="11.5" font-weight="600" fill="${C.dark}">Citrus Fruits</text>
+  <text x="474" y="197" font-size="10" fill="${C.muted}">Oranges, Lemons — Vitamin C</text>
+
+  <rect x="420" y="212" width="340" height="28" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="226" r="12" fill="${C.rose}"/><text x="450" y="230.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">10</text>
+  <text x="474" y="230" font-size="11.5" font-weight="600" fill="${C.dark}">Dark Chocolate (70%+ Cocoa)</text>
+</svg>`;
+
+// Blog 3 (male infertility): "Common Causes of Male Infertility" — 4-box grid
+// Data from blog node [29]
+const SVG_MALE_INFERTILITY_CAUSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 248" font-family="${FONT}">
+  <rect width="800" height="248" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="246.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">COMMON CAUSES OF MALE INFERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Box 1: Medical -->
+  <rect x="40" y="48" width="340" height="92" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="66" width="340" height="12" fill="${C.rose}"/>
+  <text x="210" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">MEDICAL</text>
+  <text x="58" y="92" font-size="10.5" fill="${C.dark}">• Varicocele (enlarged scrotal veins)</text>
+  <text x="58" y="108" font-size="10.5" fill="${C.dark}">• Hormonal imbalances &amp; infections</text>
+  <text x="58" y="124" font-size="10.5" fill="${C.dark}">• Undescended testes / diabetes</text>
+
+  <!-- Box 2: Genetic -->
+  <rect x="420" y="48" width="340" height="92" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="420" y="48" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="420" y="66" width="340" height="12" fill="${C.rose}"/>
+  <text x="590" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">GENETIC</text>
+  <text x="438" y="92" font-size="10.5" fill="${C.dark}">• Klinefelter syndrome</text>
+  <text x="438" y="108" font-size="10.5" fill="${C.dark}">• Y-chromosome microdeletions</text>
+  <text x="438" y="124" font-size="10.5" fill="${C.dark}">• Other chromosomal disorders</text>
+
+  <!-- Box 3: Lifestyle -->
+  <rect x="40" y="152" width="340" height="88" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="152" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="170" width="340" height="12" fill="${C.rose}"/>
+  <text x="210" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">LIFESTYLE</text>
+  <text x="58" y="196" font-size="10.5" fill="${C.dark}">• Smoking, alcohol &amp; drug use</text>
+  <text x="58" y="212" font-size="10.5" fill="${C.dark}">• Obesity &amp; poor diet</text>
+  <text x="58" y="228" font-size="10.5" fill="${C.dark}">• Stress &amp; lack of exercise</text>
+
+  <!-- Box 4: Environmental -->
+  <rect x="420" y="152" width="340" height="88" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="420" y="152" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="420" y="170" width="340" height="12" fill="${C.rose}"/>
+  <text x="590" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">ENVIRONMENTAL</text>
+  <text x="438" y="196" font-size="10.5" fill="${C.dark}">• Heat exposure (hot tubs, laptops)</text>
+  <text x="438" y="212" font-size="10.5" fill="${C.dark}">• Toxins, radiation &amp; chemicals</text>
+  <text x="438" y="228" font-size="10.5" fill="${C.dark}">• Occupational exposures</text>
+</svg>`;
+
+// Blog 4 (nutrition): "Key Nutrients for Fertility" — 2-col female / male
+// Data from blog nodes [9-17] (female) and [19-24] (male)
+const SVG_FERTILITY_NUTRIENTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="238.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">KEY NUTRIENTS FOR FERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left panel: Female -->
+  <rect x="40" y="44" width="340" height="30" rx="6" fill="${C.rose}"/>
+  <text x="210" y="64" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">FEMALE FERTILITY</text>
+
+  <circle cx="64" cy="97" r="11" fill="${C.rose}"/><text x="64" y="101" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="93" font-size="11" font-weight="600" fill="${C.dark}">Folate (Vitamin B9)</text>
+  <text x="86" y="107" font-size="10" fill="${C.muted}">Leafy greens, citrus, beans</text>
+
+  <circle cx="64" cy="128" r="11" fill="${C.rose}"/><text x="64" y="132" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="86" y="124" font-size="11" font-weight="600" fill="${C.dark}">Iron</text>
+  <text x="86" y="138" font-size="10" fill="${C.muted}">Lentils, spinach, tofu</text>
+
+  <circle cx="64" cy="159" r="11" fill="${C.rose}"/><text x="64" y="163" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="86" y="155" font-size="11" font-weight="600" fill="${C.dark}">Omega-3 Fatty Acids</text>
+  <text x="86" y="169" font-size="10" fill="${C.muted}">Salmon, sardines, flaxseeds</text>
+
+  <circle cx="64" cy="190" r="11" fill="${C.rose}"/><text x="64" y="194" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="186" font-size="11" font-weight="600" fill="${C.dark}">Vitamin D</text>
+  <text x="86" y="200" font-size="10" fill="${C.muted}">Sunlight, egg yolks, mushrooms</text>
+
+  <!-- Divider -->
+  <line x1="400" y1="44" x2="400" y2="224" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Right panel: Male -->
+  <rect x="420" y="44" width="340" height="30" rx="6" fill="${C.rose}"/>
+  <text x="590" y="64" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">MALE FERTILITY</text>
+
+  <circle cx="444" cy="97" r="11" fill="${C.rose}"/><text x="444" y="101" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="466" y="93" font-size="11" font-weight="600" fill="${C.dark}">Zinc</text>
+  <text x="466" y="107" font-size="10" fill="${C.muted}">Pumpkin seeds, oysters, legumes</text>
+
+  <circle cx="444" cy="128" r="11" fill="${C.rose}"/><text x="444" y="132" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="466" y="124" font-size="11" font-weight="600" fill="${C.dark}">Vitamin C</text>
+  <text x="466" y="138" font-size="10" fill="${C.muted}">Citrus fruits, bell peppers</text>
+
+  <circle cx="444" cy="159" r="11" fill="${C.rose}"/><text x="444" y="163" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="466" y="155" font-size="11" font-weight="600" fill="${C.dark}">Coenzyme Q10</text>
+  <text x="466" y="169" font-size="10" fill="${C.muted}">Organ meats, soybeans, whole grains</text>
+
+  <text x="400" y="234" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute nutrition guidelines</text>
+</svg>`;
+
+// Blog 5 (ICSI vs IVF): "When to Choose IVF vs ICSI" — 2-col decision guide
+// Data from blog nodes [23-26]
+const SVG_ICSI_VS_IVF_WHEN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 232" font-family="${FONT}">
+  <rect width="800" height="232" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="230.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHEN TO CHOOSE IVF VS ICSI</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left: IVF -->
+  <rect x="40" y="44" width="340" height="30" rx="6" fill="${C.rose}"/>
+  <text x="210" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">CHOOSE IVF WHEN:</text>
+
+  <circle cx="64" cy="97" r="10" fill="${C.rose}"/><text x="64" y="101" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="84" y="93" font-size="11" font-weight="600" fill="${C.dark}">Female or unexplained infertility</text>
+  <text x="84" y="107" font-size="10" fill="${C.muted}">Male partner has normal sperm</text>
+
+  <circle cx="64" cy="130" r="10" fill="${C.rose}"/><text x="64" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="84" y="126" font-size="11" font-weight="600" fill="${C.dark}">No previous fertilization failure</text>
+  <text x="84" y="140" font-size="10" fill="${C.muted}">Eggs and sperm can fertilize naturally</text>
+
+  <circle cx="64" cy="163" r="10" fill="${C.rose}"/><text x="64" y="167" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="84" y="159" font-size="11" font-weight="600" fill="${C.dark}">Fertility preservation</text>
+  <text x="84" y="173" font-size="10" fill="${C.muted}">Egg freezing before cancer treatment</text>
+
+  <!-- Divider -->
+  <line x1="400" y1="44" x2="400" y2="216" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Right: ICSI -->
+  <rect x="420" y="44" width="340" height="30" rx="6" fill="${C.rose}"/>
+  <text x="590" y="64" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">CHOOSE ICSI WHEN:</text>
+
+  <circle cx="444" cy="97" r="10" fill="${C.rose}"/><text x="444" y="101" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="464" y="93" font-size="11" font-weight="600" fill="${C.dark}">Low sperm count or poor motility</text>
+  <text x="464" y="107" font-size="10" fill="${C.muted}">Abnormal sperm shape (morphology)</text>
+
+  <circle cx="444" cy="130" r="10" fill="${C.rose}"/><text x="444" y="134" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="464" y="126" font-size="11" font-weight="600" fill="${C.dark}">Previous IVF fertilization failure</text>
+  <text x="464" y="140" font-size="10" fill="${C.muted}">Eggs not fertilizing in standard IVF</text>
+
+  <circle cx="444" cy="163" r="10" fill="${C.rose}"/><text x="444" y="167" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="464" y="159" font-size="11" font-weight="600" fill="${C.dark}">Frozen or surgically retrieved sperm</text>
+  <text x="464" y="173" font-size="10" fill="${C.muted}">TESA, PESA, or Micro-TESE</text>
+
+  <text x="400" y="226" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute treatment guidelines</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -283,6 +542,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_HIGHRISK_CONDITIONS,
     title:   "How These Conditions Affect Pregnancy",
     altText: "Three-column infographic comparing pregnancy risks: Diabetes (high birth weight, delivery complications, C-section risk), Hypertension (preeclampsia, IUGR, preterm delivery, placental abruption), Thyroid Disorders (miscarriage, developmental delays, preterm birth, low birth weight).",
+  },
+
+  // ── Wave 2: Next 5 blogs ────────────────────────────────────────────
+  "iui-vs-ivf-which-fertility-treatment-is-right-for-you": {
+    svg:     SVG_IUI_VS_IVF_CHOOSE,
+    title:   "Who Should Choose IUI vs IVF?",
+    altText: "Two-panel decision guide: IUI when — mild male factor, ovulation disorders (PCOS), unexplained infertility under 35, donor sperm, cervical factor. IVF when — blocked tubes, severe male factor, 3+ failed IUIs, women over 35, endometriosis or poor ovarian reserve.",
+  },
+
+  "10-foods-to-improve-female-egg-quality": {
+    svg:     SVG_TEN_FOODS_EGG,
+    title:   "10 Foods That Boost Egg Quality",
+    altText: "Two-column grid of 10 egg-quality foods: 1 Avocados, 2 Leafy Greens (Spinach, Kale), 3 Berries, 4 Nuts & Seeds, 5 Whole Grains, 6 Eggs, 7 Fatty Fish (Salmon), 8 Lentils & Legumes, 9 Citrus Fruits, 10 Dark Chocolate (70%+).",
+  },
+
+  "how-male-infertility-affects-ivf-treatment": {
+    svg:     SVG_MALE_INFERTILITY_CAUSES,
+    title:   "Common Causes of Male Infertility",
+    altText: "Four-box grid of male infertility causes: Medical (varicocele, hormonal imbalances, infections), Genetic (Klinefelter syndrome, Y-chromosome microdeletions), Lifestyle (smoking, alcohol, obesity), Environmental (heat exposure, toxins, radiation).",
+  },
+
+  "how-nutrition-impacts-your-fertility-what-science-says": {
+    svg:     SVG_FERTILITY_NUTRIENTS,
+    title:   "Key Nutrients for Fertility",
+    altText: "Two-column infographic: Female fertility nutrients — Folate (leafy greens), Iron (lentils, spinach), Omega-3 (salmon, flaxseeds), Vitamin D (sunlight, eggs). Male fertility nutrients — Zinc (pumpkin seeds, oysters), Vitamin C (citrus, bell peppers), CoQ10 (soybeans, whole grains).",
+  },
+
+  "icsi-vs-ivf-success-rates-benefits-and-risks-compared": {
+    svg:     SVG_ICSI_VS_IVF_WHEN,
+    title:   "When to Choose IVF vs ICSI",
+    altText: "Two-column decision guide: IVF when — female or unexplained infertility, normal sperm, no previous fertilization failure, fertility preservation. ICSI when — low sperm count, poor motility, abnormal morphology, previous IVF fertilization failure, frozen or surgically retrieved sperm.",
   },
 };
 

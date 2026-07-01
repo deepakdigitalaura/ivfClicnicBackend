@@ -24,7 +24,7 @@ const dataset   = process.env.NEXT_PUBLIC_SANITY_DATASET ?? "production";
 const token     = process.env.SANITY_API_TOKEN;
 const pexelsKey = process.env.PEXELS_API_KEY;
 if (!projectId || !token) throw new Error("NEXT_PUBLIC_SANITY_PROJECT_ID and SANITY_API_TOKEN required");
-if (!pexelsKey)           throw new Error("PEXELS_API_KEY required");
+// pexelsKey only required when newPhoto config is set — checked lazily in main()
 
 const slug = (process.argv.find(a => a.startsWith("--slug="))?.split("=")[1])
   ?? process.argv[process.argv.indexOf("--slug") + 1];
@@ -298,6 +298,24 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
     removeBlocks: ["complete guide", "key numbers"],
     svgUpdates: [["high-risk pregnancy care", SVG_HIGHRISK_PHASES_LIGHT]],
   },
+
+  // ── Wave 2: Next 5 blogs ────────────────────────────────────────────
+  // blog-pg-1: no Complete Guide / Key Numbers detected — only replace-photo needed
+  "10-foods-to-improve-female-egg-quality": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-male-infertility-affects-ivf-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+
+  "how-nutrition-impacts-your-fertility-what-science-says": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "icsi-vs-ivf-success-rates-benefits-and-risks-compared": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
@@ -337,6 +355,7 @@ async function main() {
 
   // 3. Replace photo
   if (cfg.newPhoto) {
+    if (!pexelsKey) throw new Error("PEXELS_API_KEY required for newPhoto config");
     const { query, alt, caption } = cfg.newPhoto;
     console.log(`\n📷 Searching Pexels: "${query}"`);
     const photo = await pexelsSearch(query);
