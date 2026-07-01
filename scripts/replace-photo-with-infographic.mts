@@ -131,6 +131,132 @@ const SVG_THYROID_WHAT_TO_EXPECT = `<svg xmlns="http://www.w3.org/2000/svg" view
   <text x="640" y="177" text-anchor="middle" font-size="10" fill="${C.muted}">ultrasounds throughout IVF</text>
 </svg>`;
 
+// ── Blog 3: First Trimester Key Nutrients ──────────────────────────
+// Data from blog nodes [19]-[21]: folic acid, iron, vitamin B6, protein, choline
+const SVG_DIET_NUTRIENTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 218" font-family="${FONT}">
+  <rect width="800" height="218" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="216.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">KEY NUTRIENTS IN THE FIRST TRIMESTER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left column: 1 2 3 -->
+  <circle cx="68" cy="62" r="13" fill="${C.rose}"/>
+  <text x="68" y="66.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="57" font-size="11.5" font-weight="600" fill="${C.dark}">Folic Acid</text>
+  <text x="92" y="72" font-size="10.5" fill="${C.muted}">Prevents neural tube defects — most critical</text>
+
+  <circle cx="68" cy="107" r="13" fill="${C.rose}"/>
+  <text x="68" y="111.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="102" font-size="11.5" font-weight="600" fill="${C.dark}">Iron</text>
+  <text x="92" y="117" font-size="10.5" fill="${C.muted}">Prevents anaemia, supports rising blood volume</text>
+
+  <circle cx="68" cy="152" r="13" fill="${C.rose}"/>
+  <text x="68" y="156.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="147" font-size="11.5" font-weight="600" fill="${C.dark}">Vitamin B6</text>
+  <text x="92" y="162" font-size="10.5" fill="${C.muted}">Helps manage first-trimester nausea</text>
+
+  <!-- Divider -->
+  <line x1="400" y1="44" x2="400" y2="190" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Right column: 4 5 -->
+  <circle cx="418" cy="62" r="13" fill="${C.rose}"/>
+  <text x="418" y="66.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="442" y="57" font-size="11.5" font-weight="600" fill="${C.dark}">Protein</text>
+  <text x="442" y="72" font-size="10.5" fill="${C.muted}">Supports fetal growth and organ development</text>
+
+  <circle cx="418" cy="107" r="13" fill="${C.rose}"/>
+  <text x="418" y="111.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="442" y="102" font-size="11.5" font-weight="600" fill="${C.dark}">Choline</text>
+  <text x="442" y="117" font-size="10.5" fill="${C.muted}">Essential for baby's brain development</text>
+
+  <line x1="40" y1="194" x2="760" y2="194" stroke="${C.border}" stroke-width="0.75"/>
+  <text x="400" y="209" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute pregnancy nutrition guidelines</text>
+</svg>`;
+
+// ── Blog 4: BFI Mental Health Support Services ──────────────────────
+// Data from blog node [12]: 4 services listed verbatim
+const SVG_EMOTIONAL_SUPPORT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 210" font-family="${FONT}">
+  <rect width="800" height="210" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="208.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI MENTAL HEALTH SUPPORT SERVICES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Top-left quadrant -->
+  <rect x="40" y="48" width="340" height="70" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="73" r="13" fill="${C.rose}"/>
+  <text x="70" y="77.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="96" y="68" font-size="11.5" font-weight="600" fill="${C.dark}">One-on-One Counselling</text>
+  <text x="96" y="83" font-size="10.5" fill="${C.muted}">Individualised support &amp; guidance</text>
+
+  <!-- Top-right quadrant -->
+  <rect x="420" y="48" width="340" height="70" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="73" r="13" fill="${C.rose}"/>
+  <text x="450" y="77.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="476" y="68" font-size="11.5" font-weight="600" fill="${C.dark}">Group Therapy Sessions</text>
+  <text x="476" y="83" font-size="10.5" fill="${C.muted}">Share experiences in a safe space</text>
+
+  <!-- Bottom-left quadrant -->
+  <rect x="40" y="128" width="340" height="70" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="153" r="13" fill="${C.rose}"/>
+  <text x="70" y="157.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="96" y="148" font-size="11.5" font-weight="600" fill="${C.dark}">24/7 Emotional Support</text>
+  <text x="96" y="163" font-size="10.5" fill="${C.muted}">Team available around the clock</text>
+
+  <!-- Bottom-right quadrant -->
+  <rect x="420" y="128" width="340" height="70" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="450" cy="153" r="13" fill="${C.rose}"/>
+  <text x="450" y="157.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="476" y="148" font-size="11.5" font-weight="600" fill="${C.dark}">Mindfulness &amp; Relaxation</text>
+  <text x="476" y="163" font-size="10.5" fill="${C.muted}">Meditation and yoga techniques</text>
+
+  <text x="400" y="206" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute patient support programme</text>
+</svg>`;
+
+// ── Blog 5: 3 Conditions — Pregnancy Impact ─────────────────────────
+// Data from blog nodes [13],[16]-[18],[21]: verbatim risks per condition
+const SVG_HIGHRISK_CONDITIONS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 232" font-family="${FONT}">
+  <rect width="800" height="232" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="230.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW THESE CONDITIONS AFFECT PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Column 1: Diabetes -->
+  <rect x="32" y="48" width="228" height="170" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="32" y="48" width="228" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="32" y="68" width="228" height="12" fill="${C.rose}"/>
+  <text x="146" y="69" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">DIABETES</text>
+  <text x="50" y="100" font-size="10.5" fill="${C.dark}">• High birth weight (GDM)</text>
+  <text x="50" y="120" font-size="10.5" fill="${C.dark}">• Delivery complications</text>
+  <text x="50" y="140" font-size="10.5" fill="${C.dark}">• Increased C-section risk</text>
+  <text x="50" y="160" font-size="10.5" fill="${C.dark}">• Risks for mother &amp; baby</text>
+  <text x="50" y="180" font-size="9.5" fill="${C.muted}">(Type 1, 2 or gestational)</text>
+
+  <!-- Column 2: Hypertension -->
+  <rect x="286" y="48" width="228" height="170" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="286" y="48" width="228" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="286" y="68" width="228" height="12" fill="${C.rose}"/>
+  <text x="400" y="69" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">HYPERTENSION</text>
+  <text x="304" y="100" font-size="10.5" fill="${C.dark}">• Preeclampsia risk</text>
+  <text x="304" y="120" font-size="10.5" fill="${C.dark}">• Fetal growth restriction (IUGR)</text>
+  <text x="304" y="140" font-size="10.5" fill="${C.dark}">• Preterm delivery</text>
+  <text x="304" y="160" font-size="10.5" fill="${C.dark}">• Placental abruption</text>
+  <text x="304" y="180" font-size="9.5" fill="${C.muted}">(chronic or gestational)</text>
+
+  <!-- Column 3: Thyroid -->
+  <rect x="540" y="48" width="228" height="170" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="540" y="48" width="228" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="540" y="68" width="228" height="12" fill="${C.rose}"/>
+  <text x="654" y="69" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">THYROID DISORDERS</text>
+  <text x="558" y="100" font-size="10.5" fill="${C.dark}">• Miscarriage risk (hypothyroid)</text>
+  <text x="558" y="120" font-size="10.5" fill="${C.dark}">• Developmental delays (hypo)</text>
+  <text x="558" y="140" font-size="10.5" fill="${C.dark}">• Preterm birth (hyperthyroid)</text>
+  <text x="558" y="160" font-size="10.5" fill="${C.dark}">• Low birth weight (hyper)</text>
+  <text x="558" y="180" font-size="9.5" fill="${C.muted}">(hypo or hyperthyroidism)</text>
+
+  <line x1="40" y1="226" x2="760" y2="226" stroke="${C.border}" stroke-width="0.75"/>
+  <text x="400" y="222" text-anchor="middle" font-size="9" fill="${C.muted}">With proper management, most women with these conditions achieve healthy outcomes — Source: Bavishi Fertility Institute</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -142,6 +268,21 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_THYROID_WHAT_TO_EXPECT,
     title:   "IVF + Thyroid Disorders: What to Expect",
     altText: "Three-step infographic: Step 1 — Stabilise thyroid levels before IVF; Step 2 — Medication adjusted to optimise hormones; Step 3 — Close monitoring via regular blood tests and ultrasounds throughout IVF.",
+  },
+  "complete-pregnancy-diet-chart-by-trimester-what-to-eat-in-the-first-second-third-trimester": {
+    svg:     SVG_DIET_NUTRIENTS,
+    title:   "Key Nutrients in the First Trimester",
+    altText: "Five-panel infographic of first-trimester nutrients: 1 Folic Acid (prevents neural tube defects), 2 Iron (prevents anaemia), 3 Vitamin B6 (manages nausea), 4 Protein (fetal growth), 5 Choline (brain development).",
+  },
+  "the-emotional-rollercoaster-of-ivf-why-mental-health-support-is-essential": {
+    svg:     SVG_EMOTIONAL_SUPPORT,
+    title:   "BFI Mental Health Support Services",
+    altText: "Four-panel infographic of BFI support services: 1 One-on-One Counselling, 2 Group Therapy Sessions, 3 24/7 Emotional Support, 4 Mindfulness and Relaxation (meditation, yoga).",
+  },
+  "high-risk-pregnancy-due-to-diabetes-bp-thyroid-disorders": {
+    svg:     SVG_HIGHRISK_CONDITIONS,
+    title:   "How These Conditions Affect Pregnancy",
+    altText: "Three-column infographic comparing pregnancy risks: Diabetes (high birth weight, delivery complications, C-section risk), Hypertension (preeclampsia, IUGR, preterm delivery, placental abruption), Thyroid Disorders (miscarriage, developmental delays, preterm birth, low birth weight).",
   },
 };
 
