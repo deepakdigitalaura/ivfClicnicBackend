@@ -1750,6 +1750,238 @@ const SVG_IVF_STAGES_PAIN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 
   <text x="62" y="296" font-size="10.5" fill="${C.muted}">Progesterone supplementation; possible bloating, breast tenderness &amp; mood changes</text>
 </svg>`;
 
+// ── Wave 8 SVGs ──────────────────────────────────────────────────────
+
+const SVG_INJECTION_FREE_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" font-family="${FONT}">
+  <rect width="800" height="220" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">3 Paths to Easier IVF — Less Injection, More Comfort</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Panel 1: Easy IVF -->
+  <rect x="40" y="56" width="218" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="40" y="56" width="218" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="76" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Easy IVF</text>
+  <text x="62" y="112" font-size="10" fill="${C.dark}">• Fewer injections overall</text>
+  <text x="62" y="130" font-size="10" fill="${C.dark}">• Shorter treatment cycles</text>
+  <text x="62" y="148" font-size="10" fill="${C.dark}">• Simplified medication schedules</text>
+  <text x="62" y="166" font-size="10" fill="${C.dark}">• Oral meds or patches replace some</text>
+  <text x="62" y="182" font-size="10" fill="${C.dark}">  injectable hormones</text>
+
+  <!-- Panel 2: Minimal Stimulation IVF -->
+  <rect x="291" y="56" width="218" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="291" y="56" width="218" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="76" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Minimal Stimulation IVF</text>
+  <text x="313" y="112" font-size="10" fill="${C.dark}">• Oral medications (Clomid/Letrozole)</text>
+  <text x="313" y="130" font-size="10" fill="${C.dark}">• Fewer gonadotropin injections</text>
+  <text x="313" y="148" font-size="10" fill="${C.dark}">• Lower cost than standard IVF</text>
+  <text x="313" y="166" font-size="10" fill="${C.dark}">• Ideal for poor ovarian responders</text>
+  <text x="313" y="182" font-size="10" fill="${C.dark}">  who produce few eggs regardless</text>
+
+  <!-- Panel 3: Natural Cycle IVF -->
+  <rect x="542" y="56" width="218" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="542" y="56" width="218" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="76" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="78" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Natural Cycle IVF</text>
+  <text x="564" y="112" font-size="10" fill="${C.dark}">• No hormonal medications at all</text>
+  <text x="564" y="130" font-size="10" fill="${C.dark}">• Monitors your body's natural cycle</text>
+  <text x="564" y="148" font-size="10" fill="${C.dark}">• One egg retrieved per cycle</text>
+  <text x="564" y="166" font-size="10" fill="${C.dark}">• Only one final trigger injection</text>
+  <text x="564" y="182" font-size="10" fill="${C.dark}">  may still be required</text>
+</svg>`;
+
+const SVG_NATURAL_CYCLE_IVF_BENEFITS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" font-family="${FONT}">
+  <rect width="800" height="220" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Key Benefits of Natural Cycle IVF</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Card 1 -->
+  <rect x="40" y="56" width="346" height="68" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="72" cy="84" r="14" fill="${C.rose}"/>
+  <text x="72" y="88.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="98" y="76" font-size="12" font-weight="700" fill="${C.dark}">Reduced Risk of OHSS</text>
+  <text x="98" y="93" font-size="10.5" fill="${C.muted}">No ovarian stimulation = no risk of</text>
+  <text x="98" y="109" font-size="10.5" fill="${C.muted}">hyperstimulation syndrome</text>
+
+  <!-- Card 2 -->
+  <rect x="414" y="56" width="346" height="68" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="446" cy="84" r="14" fill="${C.rose}"/>
+  <text x="446" y="88.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="472" y="76" font-size="12" font-weight="700" fill="${C.dark}">Lower Cost</text>
+  <text x="472" y="93" font-size="10.5" fill="${C.muted}">No expensive hormonal medications;</text>
+  <text x="472" y="109" font-size="10.5" fill="${C.muted}">more affordable than standard IVF</text>
+
+  <!-- Card 3 -->
+  <rect x="40" y="136" width="346" height="68" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="72" cy="164" r="14" fill="${C.rose}"/>
+  <text x="72" y="168.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="98" y="156" font-size="12" font-weight="700" fill="${C.dark}">Fewer Side Effects</text>
+  <text x="98" y="173" font-size="10.5" fill="${C.muted}">No bloating, mood swings or</text>
+  <text x="98" y="189" font-size="10.5" fill="${C.muted}">injection-site discomfort</text>
+
+  <!-- Card 4 -->
+  <rect x="414" y="136" width="346" height="68" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="446" cy="164" r="14" fill="${C.rose}"/>
+  <text x="446" y="168.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="472" y="156" font-size="12" font-weight="700" fill="${C.dark}">Potentially Better Egg Quality</text>
+  <text x="472" y="173" font-size="10.5" fill="${C.muted}">Natural selection may produce the</text>
+  <text x="472" y="189" font-size="10.5" fill="${C.muted}">body's highest-quality egg</text>
+</svg>`;
+
+const SVG_IUI_8_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">8 Steps of the IUI Process — What to Expect</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Column 1: Steps 1-4 -->
+  <rect x="40" y="56" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="80" r="12" fill="${C.rose}"/>
+  <text x="66" y="84.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="90" y="74" font-size="11.5" font-weight="600" fill="${C.dark}">Initial Consultation &amp; Fertility Evaluation</text>
+  <text x="90" y="91" font-size="10" fill="${C.muted}">Medical history, blood tests, ultrasound, semen analysis</text>
+
+  <rect x="40" y="112" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="136" r="12" fill="${C.rose}"/>
+  <text x="66" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="90" y="130" font-size="11.5" font-weight="600" fill="${C.dark}">Ovulation Monitoring or Induction</text>
+  <text x="90" y="147" font-size="10" fill="${C.muted}">Natural cycle tracking or fertility meds (Clomiphene/Gonadotropins)</text>
+
+  <rect x="40" y="168" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="192" r="12" fill="${C.rose}"/>
+  <text x="66" y="196.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="90" y="186" font-size="11.5" font-weight="600" fill="${C.dark}">Triggering Ovulation</text>
+  <text x="90" y="203" font-size="10" fill="${C.muted}">HCG trigger shot when follicle reaches 18–20 mm</text>
+
+  <rect x="40" y="224" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="248" r="12" fill="${C.rose}"/>
+  <text x="66" y="252.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="90" y="242" font-size="11.5" font-weight="600" fill="${C.dark}">Sperm Collection &amp; Preparation</text>
+  <text x="90" y="259" font-size="10" fill="${C.muted}">Semen washed &amp; concentrated to isolate motile sperm</text>
+
+  <!-- Column 2: Steps 5-8 -->
+  <rect x="414" y="56" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="80" r="12" fill="${C.rose}"/>
+  <text x="440" y="84.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="464" y="74" font-size="11.5" font-weight="600" fill="${C.dark}">The IUI Procedure</text>
+  <text x="464" y="91" font-size="10" fill="${C.muted}">Catheter places sperm into uterus; takes just a few minutes</text>
+
+  <rect x="414" y="112" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="136" r="12" fill="${C.rose}"/>
+  <text x="440" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="464" y="130" font-size="11.5" font-weight="600" fill="${C.dark}">Post-IUI Instructions &amp; Medications</text>
+  <text x="464" y="147" font-size="10" fill="${C.muted}">Progesterone support; avoid heavy lifting or intense exercise</text>
+
+  <rect x="414" y="168" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="192" r="12" fill="${C.rose}"/>
+  <text x="440" y="196.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="464" y="186" font-size="11.5" font-weight="600" fill="${C.dark}">The Two-Week Wait</text>
+  <text x="464" y="203" font-size="10" fill="${C.muted}">Manage stress; continue medications; watch for symptoms</text>
+
+  <rect x="414" y="224" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="248" r="12" fill="${C.rose}"/>
+  <text x="440" y="252.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="464" y="242" font-size="11.5" font-weight="600" fill="${C.dark}">Pregnancy Testing &amp; Next Steps</text>
+  <text x="464" y="259" font-size="10" fill="${C.muted}">Blood beta-hCG test; scan if positive; review if negative</text>
+</svg>`;
+
+const SVG_IUI_SIDE_EFFECTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" font-family="${FONT}">
+  <rect width="800" height="280" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">5 Common Physical Side Effects of IUI</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="40" y="56" width="720" height="40" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="76" r="12" fill="${C.rose}"/>
+  <text x="68" y="80.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="70" font-size="12" font-weight="600" fill="${C.dark}">Cramping &amp; Mild Discomfort</text>
+  <text x="92" y="87" font-size="10.5" fill="${C.muted}">Caused by catheter insertion through the cervix; use a warm compress and rest after the procedure</text>
+
+  <!-- Row 2 -->
+  <rect x="40" y="104" width="720" height="40" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="124" r="12" fill="${C.rose}"/>
+  <text x="68" y="128.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="118" font-size="12" font-weight="600" fill="${C.dark}">Spotting or Light Bleeding</text>
+  <text x="92" y="135" font-size="10.5" fill="${C.muted}">Minor spotting from slight cervical irritation by the catheter; harmless and does not affect outcome</text>
+
+  <!-- Row 3 -->
+  <rect x="40" y="152" width="720" height="40" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="172" r="12" fill="${C.rose}"/>
+  <text x="68" y="176.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="166" font-size="12" font-weight="600" fill="${C.dark}">Breast Tenderness</text>
+  <text x="92" y="183" font-size="10.5" fill="${C.muted}">Caused by fertility medications; swollen or sore breasts are a common hormonal side effect</text>
+
+  <!-- Row 4 -->
+  <rect x="40" y="200" width="720" height="40" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="220" r="12" fill="${C.rose}"/>
+  <text x="68" y="224.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="214" font-size="12" font-weight="600" fill="${C.dark}">Bloating or Abdominal Fullness</text>
+  <text x="92" y="231" font-size="10.5" fill="${C.muted}">Hormonal stimulation causes temporary bloating; resolves on its own within a few days</text>
+
+  <!-- Row 5 -->
+  <rect x="40" y="248" width="720" height="24" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="260" r="12" fill="${C.rose}"/>
+  <text x="68" y="264.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="255" font-size="12" font-weight="600" fill="${C.dark}">Headaches or Mood Swings</text>
+  <text x="92" y="266" font-size="10.5" fill="${C.muted}">Linked to Clomiphene or Gonadotropin medications; relatively uncommon and temporary</text>
+</svg>`;
+
+const SVG_EGG_DONOR_IVF_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">8 Steps: IVF with Egg Donation</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Column 1: Steps 1-4 -->
+  <rect x="40" y="56" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="80" r="12" fill="${C.rose}"/>
+  <text x="66" y="84.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="90" y="74" font-size="11.5" font-weight="600" fill="${C.dark}">Initial Consultation &amp; Counseling</text>
+  <text x="90" y="91" font-size="10" fill="${C.muted}">Medical history review; emotional &amp; psychological counseling</text>
+
+  <rect x="40" y="112" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="136" r="12" fill="${C.rose}"/>
+  <text x="66" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="90" y="130" font-size="11.5" font-weight="600" fill="${C.dark}">Selecting an Egg Donor</text>
+  <text x="90" y="147" font-size="10" fill="${C.muted}">Anonymous or known donor; screened for genetics, health &amp; psychology</text>
+
+  <rect x="40" y="168" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="192" r="12" fill="${C.rose}"/>
+  <text x="66" y="196.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="90" y="186" font-size="11.5" font-weight="600" fill="${C.dark}">Synchronising Menstrual Cycles</text>
+  <text x="90" y="203" font-size="10" fill="${C.muted}">Hormonal medications synchronise recipient &amp; donor cycles</text>
+
+  <rect x="40" y="224" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="248" r="12" fill="${C.rose}"/>
+  <text x="66" y="252.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="90" y="242" font-size="11.5" font-weight="600" fill="${C.dark}">Egg Retrieval (Aspiration)</text>
+  <text x="90" y="259" font-size="10" fill="${C.muted}">Donor eggs collected under light sedation; 20–30 minutes</text>
+
+  <!-- Column 2: Steps 5-8 -->
+  <rect x="414" y="56" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="80" r="12" fill="${C.rose}"/>
+  <text x="440" y="84.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="464" y="74" font-size="11.5" font-weight="600" fill="${C.dark}">Fertilisation &amp; Embryo Culture</text>
+  <text x="464" y="91" font-size="10" fill="${C.muted}">Eggs fertilised in lab; embryos cultured &amp; monitored 3–5 days</text>
+
+  <rect x="414" y="112" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="136" r="12" fill="${C.rose}"/>
+  <text x="440" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="464" y="130" font-size="11.5" font-weight="600" fill="${C.dark}">Embryo Transfer</text>
+  <text x="464" y="147" font-size="10" fill="${C.muted}">Best embryo(s) placed into uterus; quick, minimally invasive</text>
+
+  <rect x="414" y="168" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="192" r="12" fill="${C.rose}"/>
+  <text x="440" y="196.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="464" y="186" font-size="11.5" font-weight="600" fill="${C.dark}">Pregnancy Test &amp; Follow-up</text>
+  <text x="464" y="203" font-size="10" fill="${C.muted}">Beta-hCG blood test 10–14 days after transfer</text>
+
+  <rect x="414" y="224" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="440" cy="248" r="12" fill="${C.rose}"/>
+  <text x="440" y="252.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="464" y="242" font-size="11.5" font-weight="600" fill="${C.dark}">Emotional Support &amp; Counseling</text>
+  <text x="464" y="259" font-size="10" fill="${C.muted}">Ongoing psychological support &amp; fertility counseling throughout</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -1962,6 +2194,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IVF_STAGES_PAIN,
     title:   "5 IVF Stages: What to Expect",
     altText: "Five-row stage chart. Stage 1 Ovarian Stimulation (8-14 days): daily hormone injections, mild bloating and injection-site discomfort. Stage 2 Egg Retrieval (20-30 min): performed under sedation; mild cramping after. Stage 3 Fertilisation and Embryo Development (3-5 days): entirely in the lab, no physical discomfort. Stage 4 Embryo Transfer (10-15 min): thin catheter guided by ultrasound; mild pressure, no sedation. Stage 5 Luteal Phase Support: progesterone supplements; possible bloating and mood changes.",
+  },
+
+  // ── Wave 8: Published blogs ─────────────────────────────────────────
+  "is-ivf-possible-without-injections-understanding-easy-ivf-and-injection-free-ivf": {
+    svg:     SVG_INJECTION_FREE_IVF,
+    title:   "3 Paths to Easier IVF — Less Injection, More Comfort",
+    altText: "Three-panel horizontal infographic. Panel 1 Easy IVF: fewer injections overall; shorter cycles; simplified schedules; oral medications or patches replace some injectables. Panel 2 Minimal Stimulation IVF: oral medications (Clomid/Letrozole); fewer gonadotropin injections; lower cost; ideal for poor ovarian responders. Panel 3 Natural Cycle IVF: no hormonal medications; monitors natural cycle; one egg retrieved per cycle; only one final trigger injection may be required.",
+  },
+
+  "is-natural-cycle-ivf-better-for-women-with-poor-ovarian-reserve": {
+    svg:     SVG_NATURAL_CYCLE_IVF_BENEFITS,
+    title:   "4 Key Benefits of Natural Cycle IVF",
+    altText: "Two-by-two card grid. Card 1 Reduced Risk of OHSS: no ovarian stimulation means no risk of hyperstimulation syndrome. Card 2 Lower Cost: no expensive hormonal medications; more affordable than standard IVF. Card 3 Fewer Side Effects: no bloating, mood swings or injection-site discomfort. Card 4 Potentially Better Egg Quality: natural selection may produce the body's highest-quality egg.",
+  },
+
+  "iui-process-explained-what-to-expect-at-every-step": {
+    svg:     SVG_IUI_8_STEPS,
+    title:   "8 Steps of the IUI Process — What to Expect",
+    altText: "Two-column 8-step grid. Step 1 Initial Consultation and Fertility Evaluation (medical history, blood tests, ultrasound, semen analysis). Step 2 Ovulation Monitoring or Induction (natural tracking or Clomiphene/Gonadotropins). Step 3 Triggering Ovulation (HCG shot when follicle reaches 18-20 mm). Step 4 Sperm Collection and Preparation (washed and concentrated to isolate motile sperm). Step 5 The IUI Procedure (catheter places sperm into uterus; few minutes). Step 6 Post-IUI Instructions and Medications (progesterone support; avoid heavy lifting). Step 7 The Two-Week Wait (manage stress; continue medications). Step 8 Pregnancy Testing and Next Steps (blood beta-hCG test; scan if positive).",
+  },
+
+  "iui-side-effects-on-the-body-and-emotions-a-complete-guide": {
+    svg:     SVG_IUI_SIDE_EFFECTS,
+    title:   "5 Common Physical Side Effects of IUI",
+    altText: "Five-row infographic. Row 1 Cramping and Mild Discomfort: caused by catheter insertion; use warm compress and rest after. Row 2 Spotting or Light Bleeding: minor cervical irritation from catheter; harmless. Row 3 Breast Tenderness: hormonal medications cause swollen or sore breasts. Row 4 Bloating or Abdominal Fullness: hormonal stimulation causes temporary heaviness; resolves in days. Row 5 Headaches or Mood Swings: linked to Clomiphene or Gonadotropins; uncommon and temporary.",
+  },
+
+  "a-quick-guide-on-the-ivf-journey-with-egg-donors": {
+    svg:     SVG_EGG_DONOR_IVF_STEPS,
+    title:   "8 Steps: IVF with Egg Donation",
+    altText: "Two-column 8-step grid. Step 1 Initial Consultation and Counseling (medical history; psychological counseling). Step 2 Selecting an Egg Donor (anonymous or known; screened for genetics, health, psychology). Step 3 Synchronising Menstrual Cycles (hormonal medications synchronise recipient and donor). Step 4 Egg Retrieval under light sedation; 20-30 minutes. Step 5 Fertilisation and Embryo Culture (lab fertilisation; embryos cultured 3-5 days). Step 6 Embryo Transfer (best embryo placed into uterus). Step 7 Pregnancy Test and Follow-up (beta-hCG blood test 10-14 days after transfer). Step 8 Emotional Support and Counseling (ongoing psychological support throughout journey).",
   },
 };
 

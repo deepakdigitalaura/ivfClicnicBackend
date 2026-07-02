@@ -417,6 +417,23 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "is-ivf-painful": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+
+  // ── Wave 8: Published blogs ─────────────────────────────────────────
+  "is-ivf-possible-without-injections-understanding-easy-ivf-and-injection-free-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "is-natural-cycle-ivf-better-for-women-with-poor-ovarian-reserve": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "iui-process-explained-what-to-expect-at-every-step": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "iui-side-effects-on-the-body-and-emotions-a-complete-guide": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "a-quick-guide-on-the-ivf-journey-with-egg-donors": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

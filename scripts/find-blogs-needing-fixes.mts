@@ -46,6 +46,12 @@ const DONE = new Set([
   "indian-celebrities-who-improved-fertility-through-yoga",
   "a-guide-to-the-different-types-of-ivf-treatments",
   "innovative-treatments-for-low-amh",
+  // Wave 7
+  "how-to-prepare-for-your-first-iui-cycle-tips-and-advice",
+  "icsi-dos-and-donts",
+  "is-icsi-better-for-men-with-low-sperm-count",
+  "is-iui-painful-everything-you-need-to-know",
+  "is-ivf-painful",
 ]);
 
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };
