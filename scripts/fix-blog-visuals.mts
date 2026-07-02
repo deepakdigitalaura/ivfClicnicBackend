@@ -467,6 +467,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "lifestyle-changes-to-boost-ivf-success-and-increase-your-chances-of-a-healthy-pregnancy": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 11 ──────────────────────────────────────────────────────────
+  "natural-conception-with-low-amh-levels": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "necrozoospermia-symptoms-causes-and-treatment-options": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "nourishing-your-body-after-embryo-transfer-a-comprehensive-guide": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "ovarian-rejuvenation-for-restoring-fertility-a-new-ray-of-hope": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

@@ -2495,6 +2495,213 @@ const SVG_IVF_SUCCESS_LIFESTYLE = `<svg xmlns="http://www.w3.org/2000/svg" viewB
   <text x="457" y="322" font-size="10" fill="${C.muted}">Reduce occupational stress; take regular breaks</text>
 </svg>`;
 
+// ── Wave 11 SVGs ─────────────────────────────────────────────────────
+
+// Blog W11-1 (Low AMH): "6 Ways to Improve Natural Conception with Low AMH"
+// Source: Blog nodes [15-33] — 6 H3 strategy sections in the blog
+const SVG_NATURAL_CONCEPTION_LOW_AMH = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" font-family="${FONT}">
+  <rect width="800" height="280" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="278.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 WAYS TO IMPROVE NATURAL CONCEPTION WITH LOW AMH</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="355" height="70" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="79" r="15" fill="${C.rose}"/>
+  <text x="68" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="93" y="74" font-size="11.5" font-weight="700" fill="${C.dark}">Optimize Your Diet</text>
+  <text x="93" y="91" font-size="10" fill="${C.muted}">Antioxidants, healthy fats, lean proteins, whole grains</text>
+  <rect x="40" y="120" width="355" height="70" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="155" r="15" fill="${C.rose}"/>
+  <text x="68" y="159.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="93" y="150" font-size="11.5" font-weight="700" fill="${C.dark}">Manage Stress Effectively</text>
+  <text x="93" y="167" font-size="10" fill="${C.muted}">Mindfulness, yoga, breathing and quality sleep</text>
+  <rect x="40" y="196" width="355" height="70" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="231" r="15" fill="${C.rose}"/>
+  <text x="68" y="235.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="93" y="226" font-size="11.5" font-weight="700" fill="${C.dark}">Exercise in Moderation</text>
+  <text x="93" y="243" font-size="10" fill="${C.muted}">Walking, swimming, yoga; avoid over-exercising</text>
+  <rect x="405" y="44" width="355" height="70" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="79" r="15" fill="${C.rose}"/>
+  <text x="433" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="458" y="74" font-size="11.5" font-weight="700" fill="${C.dark}">Maintain a Healthy Weight</text>
+  <text x="458" y="91" font-size="10" fill="${C.muted}">Balanced BMI supports hormone production and ovulation</text>
+  <rect x="405" y="120" width="355" height="70" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="155" r="15" fill="${C.rose}"/>
+  <text x="433" y="159.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="458" y="150" font-size="11.5" font-weight="700" fill="${C.dark}">Take Fertility Supplements</text>
+  <text x="458" y="167" font-size="10" fill="${C.muted}">CoQ10, Vitamin D, Omega-3, Folate — with your doctor</text>
+  <rect x="405" y="196" width="355" height="70" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="231" r="15" fill="${C.rose}"/>
+  <text x="433" y="235.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="458" y="226" font-size="11.5" font-weight="700" fill="${C.dark}">Track Ovulation Carefully</text>
+  <text x="458" y="243" font-size="10" fill="${C.muted}">OPKs, BBT charting, cervical mucus monitoring</text>
+</svg>`;
+
+// Blog W11-2 (Necrozoospermia): "8 Common Causes of Necrozoospermia"
+// Source: Blog nodes [15-30] — 8 H3 cause sections
+const SVG_NECROZOOSPERMIA_CAUSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="${FONT}">
+  <rect width="800" height="320" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="318.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">8 COMMON CAUSES OF NECROZOOSPERMIA</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="75" r="15" fill="${C.rose}"/>
+  <text x="68" y="79.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="93" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Infections &amp; Inflammation</text>
+  <text x="93" y="87" font-size="10" fill="${C.muted}">Prostatitis, epididymitis — toxins that damage sperm cells</text>
+  <rect x="40" y="112" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="143" r="15" fill="${C.rose}"/>
+  <text x="68" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="93" y="138" font-size="11.5" font-weight="700" fill="${C.dark}">Oxidative Stress</text>
+  <text x="93" y="155" font-size="10" fill="${C.muted}">ROS from poor diet, smoking, toxins, heat exposure</text>
+  <rect x="40" y="180" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="211" r="15" fill="${C.rose}"/>
+  <text x="68" y="215.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="93" y="206" font-size="11.5" font-weight="700" fill="${C.dark}">Exposure to Toxins</text>
+  <text x="93" y="223" font-size="10" fill="${C.muted}">Industrial chemicals, pesticides and radiation damage sperm</text>
+  <rect x="40" y="248" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="279" r="15" fill="${C.rose}"/>
+  <text x="68" y="283.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="93" y="274" font-size="11.5" font-weight="700" fill="${C.dark}">High Scrotal Temperature</text>
+  <text x="93" y="291" font-size="10" fill="${C.muted}">Varicocele, tight clothing, hot baths, laptop heat</text>
+  <rect x="405" y="44" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="75" r="15" fill="${C.rose}"/>
+  <text x="433" y="79.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="458" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Medications &amp; Treatments</text>
+  <text x="458" y="87" font-size="10" fill="${C.muted}">Chemotherapy, radiation or certain antibiotics harm sperm</text>
+  <rect x="405" y="112" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="143" r="15" fill="${C.rose}"/>
+  <text x="433" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="458" y="138" font-size="11.5" font-weight="700" fill="${C.dark}">Autoimmune Reactions</text>
+  <text x="458" y="155" font-size="10" fill="${C.muted}">Anti-sperm antibodies attack and kill viable sperm cells</text>
+  <rect x="405" y="180" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="211" r="15" fill="${C.rose}"/>
+  <text x="433" y="215.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="458" y="206" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Imbalance</text>
+  <text x="458" y="223" font-size="10" fill="${C.muted}">Testosterone disorders reduce sperm quality and survival</text>
+  <rect x="405" y="248" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="279" r="15" fill="${C.rose}"/>
+  <text x="433" y="283.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="458" y="274" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Factors</text>
+  <text x="458" y="291" font-size="10" fill="${C.muted}">Chromosomal defects impair sperm development and function</text>
+</svg>`;
+
+// Blog W11-3 (Embryo Transfer Diet): "5 Key Nutrients for Embryo Implantation"
+// Source: Blog nodes [18-23] — 5 nutrients listed with descriptions
+const SVG_EMBRYO_TRANSFER_NUTRIENTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 KEY NUTRIENTS FOR EMBRYO IMPLANTATION</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Folic Acid</text>
+  <text x="108" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Fetal neural</text>
+  <text x="108" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">tube development</text>
+  <text x="108" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">and cell health</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Omega-3</text>
+  <text x="254" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Reduces uterine</text>
+  <text x="254" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">inflammation and</text>
+  <text x="254" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">supports embryo</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Protein</text>
+  <text x="400" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Fuels cell repair</text>
+  <text x="400" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">and embryo growth</text>
+  <text x="400" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">after transfer</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Iron</text>
+  <text x="546" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Prevents anaemia</text>
+  <text x="546" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">for healthy</text>
+  <text x="546" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">embryo development</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Antioxidants</text>
+  <text x="692" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Protects cells</text>
+  <text x="692" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">from oxidative</text>
+  <text x="692" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">stress damage</text>
+</svg>`;
+
+// Blog W11-4 (Ovarian Rejuvenation): "5 Key Benefits of Ovarian Rejuvenation Therapy"
+// Source: Blog node [19] — benefits bullet list
+const SVG_OVARIAN_REJUVENATION_BENEFITS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 KEY BENEFITS OF OVARIAN REJUVENATION THERAPY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="67" r="14" fill="${C.rose}"/>
+  <text x="68" y="71.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="63" font-size="11.5" font-weight="700" fill="${C.dark}">May Improve Hormone Levels</text>
+  <text x="92" y="79" font-size="10" fill="${C.muted}">AMH and oestrogen levels may improve after PRP ovarian treatment</text>
+  <rect x="40" y="96" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="119" r="14" fill="${C.rose}"/>
+  <text x="68" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="115" font-size="11.5" font-weight="700" fill="${C.dark}">Could Lead to Natural Ovulation</text>
+  <text x="92" y="131" font-size="10" fill="${C.muted}">Dormant follicles may be re-activated to produce viable eggs</text>
+  <rect x="40" y="148" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="171" r="14" fill="${C.rose}"/>
+  <text x="68" y="175.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="167" font-size="11.5" font-weight="700" fill="${C.dark}">Potential for More Eggs in IVF</text>
+  <text x="92" y="183" font-size="10" fill="${C.muted}">Better ovarian response allows retrieval of more eggs per cycle</text>
+  <rect x="40" y="200" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="223" r="14" fill="${C.rose}"/>
+  <text x="68" y="227.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="219" font-size="11.5" font-weight="700" fill="${C.dark}">Chance to Conceive with Own Eggs</text>
+  <text x="92" y="235" font-size="10" fill="${C.muted}">Explore natural conception before considering egg donation</text>
+  <rect x="40" y="252" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="275" r="14" fill="${C.rose}"/>
+  <text x="68" y="279.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="271" font-size="11.5" font-weight="700" fill="${C.dark}">Minimally Invasive and Safe</text>
+  <text x="92" y="287" font-size="10" fill="${C.muted}">Uses patient's own blood (PRP) — no risk of allergic reactions</text>
+</svg>`;
+
+// Blog W11-5 (Ovarian Rejuvenation + IVF at BFI): "Why Choose BFI for Ovarian Rejuvenation + IVF"
+// Source: Blog node [18] — 5 BFI differentiators (bullet list)
+const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="${FONT}">
+  <rect width="800" height="340" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="338.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHY CHOOSE BFI FOR OVARIAN REJUVENATION + IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="63" font-size="10" font-weight="700" fill="${C.rose}">Reason 1</text>
+  <text x="60" y="79" font-size="11.5" font-weight="600" fill="${C.dark}">Personalised Assessment</text>
+  <text x="60" y="90" font-size="10" fill="${C.muted}">Thorough evaluation of ovarian reserve, fertility history and treatment goals</text>
+  <rect x="40" y="102" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="102" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="121" font-size="10" font-weight="700" fill="${C.rose}">Reason 2</text>
+  <text x="60" y="137" font-size="11.5" font-weight="600" fill="${C.dark}">Realistic Expectations</text>
+  <text x="60" y="148" font-size="10" fill="${C.muted}">Honest guidance on what each procedure can realistically achieve for you</text>
+  <rect x="40" y="160" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="160" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="179" font-size="10" font-weight="700" fill="${C.rose}">Reason 3</text>
+  <text x="60" y="195" font-size="11.5" font-weight="600" fill="${C.dark}">Transparent Counselling</text>
+  <text x="60" y="206" font-size="10" fill="${C.muted}">Clear explanation of benefits, limitations and potential risks of all options</text>
+  <rect x="40" y="218" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="218" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="237" font-size="10" font-weight="700" fill="${C.rose}">Reason 4</text>
+  <text x="60" y="253" font-size="11.5" font-weight="600" fill="${C.dark}">Comprehensive Fertility Solutions</text>
+  <text x="60" y="264" font-size="10" fill="${C.muted}">IVF, ICSI, PRP and emerging treatments — all tailored to each patient</text>
+  <rect x="40" y="276" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="276" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="295" font-size="10" font-weight="700" fill="${C.rose}">Reason 5</text>
+  <text x="60" y="311" font-size="11.5" font-weight="600" fill="${C.dark}">Ethical &amp; Compassionate Care</text>
+  <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -2800,6 +3007,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IVF_SUCCESS_LIFESTYLE,
     title:   "10 Lifestyle Changes to Boost IVF Success",
     altText: "Two-column ten-item grid. Items 1-5: Maintain a Healthy Diet (antioxidant-rich whole foods; avoid processed food); Achieve a Healthy Weight (BMI 18.5-24.9 optimal for implantation); Exercise Moderately (walking, swimming, yoga; avoid high-intensity training); Manage Stress Effectively (meditation, mindfulness, partner communication); Quit Smoking and Limit Alcohol (reduces egg quality and sperm count). Items 6-10: Focus on Fertility Supplements (folic acid, CoQ10, Vitamin D — with your doctor); Get Sufficient Sleep (7-8 hours nightly; consistent schedule); Avoid Environmental Toxins (BPA, pesticides and chemicals); Stay Well Hydrated (8-10 glasses daily); Maintain Work-Life Balance (reduce occupational stress; take regular breaks).",
+  },
+
+  // ── Wave 11: Published blogs ──────────────────────────────────────────
+  "natural-conception-with-low-amh-levels": {
+    svg:     SVG_NATURAL_CONCEPTION_LOW_AMH,
+    title:   "6 Ways to Improve Natural Conception with Low AMH",
+    altText: "Two-column six-item grid. Items 1-3: Optimize Your Diet (antioxidants, healthy fats, lean proteins, whole grains); Manage Stress Effectively (mindfulness, yoga, breathing and quality sleep); Exercise in Moderation (walking, swimming, yoga; avoid over-exercising). Items 4-6: Maintain a Healthy Weight (balanced BMI supports hormone production); Take Fertility Supplements (CoQ10, Vitamin D, Omega-3, Folate — with your doctor); Track Ovulation Carefully (OPKs, BBT charting, cervical mucus monitoring).",
+  },
+
+  "necrozoospermia-symptoms-causes-and-treatment-options": {
+    svg:     SVG_NECROZOOSPERMIA_CAUSES,
+    title:   "8 Common Causes of Necrozoospermia",
+    altText: "Two-column eight-item grid. Items 1-4: Infections and Inflammation (prostatitis, epididymitis — toxins that damage sperm cells); Oxidative Stress (ROS from poor diet, smoking, toxins, heat); Exposure to Toxins (industrial chemicals, pesticides and radiation damage sperm); High Scrotal Temperature (varicocele, tight clothing, hot baths, laptop heat). Items 5-8: Medications and Treatments (chemotherapy, radiation or certain antibiotics); Autoimmune Reactions (anti-sperm antibodies attack and kill viable sperm); Hormonal Imbalance (testosterone disorders reduce sperm quality); Genetic Factors (chromosomal defects impair sperm development and function).",
+  },
+
+  "nourishing-your-body-after-embryo-transfer-a-comprehensive-guide": {
+    svg:     SVG_EMBRYO_TRANSFER_NUTRIENTS,
+    title:   "5 Key Nutrients for Embryo Implantation",
+    altText: "Five-panel horizontal infographic. Panel 1 Folic Acid: fetal neural tube development and cell health. Panel 2 Omega-3: reduces uterine inflammation and supports embryo. Panel 3 Protein: fuels cell repair and embryo growth after transfer. Panel 4 Iron: prevents anaemia for healthy embryo development. Panel 5 Antioxidants: protects cells from oxidative stress damage.",
+  },
+
+  "ovarian-rejuvenation-for-restoring-fertility-a-new-ray-of-hope": {
+    svg:     SVG_OVARIAN_REJUVENATION_BENEFITS,
+    title:   "5 Key Benefits of Ovarian Rejuvenation Therapy",
+    altText: "Five-row single-column infographic. Row 1 May Improve Hormone Levels: AMH and oestrogen levels may improve after PRP ovarian treatment. Row 2 Could Lead to Natural Ovulation: dormant follicles may be re-activated to produce viable eggs. Row 3 Potential for More Eggs in IVF: better ovarian response allows retrieval of more eggs per cycle. Row 4 Chance to Conceive with Own Eggs: explore natural conception before considering egg donation. Row 5 Minimally Invasive and Safe: uses patient's own blood (PRP) — no risk of allergic reactions.",
+  },
+
+  "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
+    svg:     SVG_BFI_REJUVENATION_IVF,
+    title:   "Why Choose BFI for Ovarian Rejuvenation + IVF",
+    altText: "Five-row accent-bar infographic listing BFI differentiators. Reason 1 Personalised Assessment: thorough evaluation of ovarian reserve, fertility history and treatment goals. Reason 2 Realistic Expectations: honest guidance on what each procedure can achieve. Reason 3 Transparent Counselling: clear explanation of benefits, limitations and risks. Reason 4 Comprehensive Fertility Solutions: IVF, ICSI, PRP and emerging treatments tailored to each patient. Reason 5 Ethical and Compassionate Care: patient comfort, safety and emotional support throughout the journey.",
   },
 };
 

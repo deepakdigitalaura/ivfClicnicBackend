@@ -70,6 +70,12 @@ const DONE = new Set([
   "life-after-iui-precautions-lifestyle-tips-and-what-to-expect",
   "lifestyle-changes-that-boost-fertility-in-pcos-women",
   "lifestyle-changes-to-boost-ivf-success-and-increase-your-chances-of-a-healthy-pregnancy",
+  // Wave 11
+  "natural-conception-with-low-amh-levels",
+  "necrozoospermia-symptoms-causes-and-treatment-options",
+  "nourishing-your-body-after-embryo-transfer-a-comprehensive-guide",
+  "ovarian-rejuvenation-for-restoring-fertility-a-new-ray-of-hope",
+  "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments",
 ]);
 
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };
