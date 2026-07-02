@@ -400,6 +400,23 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "innovative-treatments-for-low-amh": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+
+  // ── Wave 7: Published blogs ─────────────────────────────────────────
+  "how-to-prepare-for-your-first-iui-cycle-tips-and-advice": {
+    removeBlocks: ["key numbers"],
+  },
+  "icsi-dos-and-donts": {
+    removeBlocks: ["key numbers"],
+  },
+  "is-icsi-better-for-men-with-low-sperm-count": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "is-iui-painful-everything-you-need-to-know": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "is-ivf-painful": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

@@ -1535,6 +1535,221 @@ const SVG_LOW_AMH_INNOVATIVE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox=
   <text x="400" y="294" text-anchor="middle" font-size="10" fill="${C.muted}">Bavishi Fertility Institute — individualised care for every low-AMH case</text>
 </svg>`;
 
+// ── Wave 7 SVGs ──────────────────────────────────────────────────────
+
+const SVG_IUI_PREP_TIPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 280" font-family="${FONT}">
+  <rect width="800" height="280" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">6 Essential IUI Preparation Tips</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1: 1–2 -->
+  <rect x="40" y="56" width="346" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="79" r="13" fill="${C.rose}"/>
+  <text x="68" y="83.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="73" font-size="12" font-weight="600" fill="${C.dark}">Monitor Your Cycle</text>
+  <text x="92" y="90" font-size="10" fill="${C.muted}">Use OPKs or basal body temp to track</text>
+  <text x="92" y="105" font-size="10" fill="${C.muted}">your fertile window precisely</text>
+
+  <rect x="414" y="56" width="346" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="79" r="13" fill="${C.rose}"/>
+  <text x="442" y="83.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="466" y="73" font-size="12" font-weight="600" fill="${C.dark}">Maintain a Healthy Diet</text>
+  <text x="466" y="90" font-size="10" fill="${C.muted}">Fruits, vegetables, lean proteins, omega-3</text>
+  <text x="466" y="105" font-size="10" fill="${C.muted}">fatty acids &amp; prenatal vitamins</text>
+
+  <!-- Row 2: 3–4 -->
+  <rect x="40" y="126" width="346" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="149" r="13" fill="${C.rose}"/>
+  <text x="68" y="153.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="143" font-size="12" font-weight="600" fill="${C.dark}">Manage Stress</text>
+  <text x="92" y="160" font-size="10" fill="${C.muted}">Mindfulness, yoga &amp; fertility support</text>
+  <text x="92" y="175" font-size="10" fill="${C.muted}">groups reduce anxiety during treatment</text>
+
+  <rect x="414" y="126" width="346" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="149" r="13" fill="${C.rose}"/>
+  <text x="442" y="153.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="466" y="143" font-size="12" font-weight="600" fill="${C.dark}">Prepare for Medications</text>
+  <text x="466" y="160" font-size="10" fill="${C.muted}">Follow prescription schedule closely;</text>
+  <text x="466" y="175" font-size="10" fill="${C.muted}">ask your doctor about side effects</text>
+
+  <!-- Row 3: 5–6 -->
+  <rect x="40" y="196" width="346" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="219" r="13" fill="${C.rose}"/>
+  <text x="68" y="223.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="213" font-size="12" font-weight="600" fill="${C.dark}">Make Lifestyle Changes</text>
+  <text x="92" y="230" font-size="10" fill="${C.muted}">Limit caffeine &amp; alcohol, quit smoking,</text>
+  <text x="92" y="245" font-size="10" fill="${C.muted}">maintain a healthy body weight</text>
+
+  <rect x="414" y="196" width="346" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="219" r="13" fill="${C.rose}"/>
+  <text x="442" y="223.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="466" y="213" font-size="12" font-weight="600" fill="${C.dark}">Plan for the Procedure Day</text>
+  <text x="466" y="230" font-size="10" fill="${C.muted}">Arrive rested; procedure takes ~15 minutes</text>
+  <text x="466" y="245" font-size="10" fill="${C.muted}">and is generally painless</text>
+</svg>`;
+
+const SVG_ICSI_DOS_DONTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" font-family="${FONT}">
+  <rect width="800" height="290" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">ICSI Do's &amp; Don'ts: 5 Key Rules Each</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Column headers -->
+  <rect x="40" y="54" width="346" height="28" rx="6" fill="${C.rose}"/>
+  <text x="213" y="73" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">✓  Do's</text>
+
+  <rect x="414" y="54" width="346" height="28" rx="6" fill="${C.dark}"/>
+  <text x="587" y="73" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">✕  Don'ts</text>
+
+  <!-- Do items -->
+  <rect x="40" y="90" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="62" y="113" font-size="11" font-weight="600" fill="${C.rose}">1</text>
+  <text x="80" y="113" font-size="11" fill="${C.dark}">Follow your doctor's medication schedule</text>
+
+  <rect x="40" y="132" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="62" y="155" font-size="11" font-weight="600" fill="${C.rose}">2</text>
+  <text x="80" y="155" font-size="11" fill="${C.dark}">Eat a balanced, nutrient-rich diet</text>
+
+  <rect x="40" y="174" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="62" y="197" font-size="11" font-weight="600" fill="${C.rose}">3</text>
+  <text x="80" y="197" font-size="11" fill="${C.dark}">Stay well hydrated throughout treatment</text>
+
+  <rect x="40" y="216" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="62" y="239" font-size="11" font-weight="600" fill="${C.rose}">4</text>
+  <text x="80" y="239" font-size="11" fill="${C.dark}">Light exercise — walking or yoga only</text>
+
+  <rect x="40" y="258" width="346" height="24" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="62" y="275" font-size="11" font-weight="600" fill="${C.rose}">5</text>
+  <text x="80" y="275" font-size="11" fill="${C.dark}">Get 7–8 hours of quality sleep each night</text>
+
+  <!-- Dont items -->
+  <rect x="414" y="90" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="436" y="113" font-size="11" font-weight="600" fill="${C.dark}">1</text>
+  <text x="454" y="113" font-size="11" fill="${C.dark}">Don't skip medications or appointments</text>
+
+  <rect x="414" y="132" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="436" y="155" font-size="11" font-weight="600" fill="${C.dark}">2</text>
+  <text x="454" y="155" font-size="11" fill="${C.dark}">Avoid alcohol and excessive caffeine</text>
+
+  <rect x="414" y="174" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="436" y="197" font-size="11" font-weight="600" fill="${C.dark}">3</text>
+  <text x="454" y="197" font-size="11" fill="${C.dark}">Don't smoke during your ICSI cycle</text>
+
+  <rect x="414" y="216" width="346" height="36" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="436" y="239" font-size="11" font-weight="600" fill="${C.dark}">4</text>
+  <text x="454" y="239" font-size="11" fill="${C.dark}">No high-intensity or strenuous exercise</text>
+
+  <rect x="414" y="258" width="346" height="24" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="436" y="275" font-size="11" font-weight="600" fill="${C.dark}">5</text>
+  <text x="454" y="275" font-size="11" fill="${C.dark}">Don't self-prescribe supplements or herbs</text>
+</svg>`;
+
+const SVG_ICSI_SPERM_CONDITIONS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 300" font-family="${FONT}">
+  <rect width="800" height="300" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">5 Male Factor Conditions Where ICSI Works Best</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="40" y="58" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="79" r="13" fill="${C.rose}"/>
+  <text x="70" y="83.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="96" y="73" font-size="12" font-weight="600" fill="${C.dark}">Oligospermia — Low Sperm Count</text>
+  <text x="96" y="90" font-size="10.5" fill="${C.muted}">Only one viable sperm is needed per egg; low count is no barrier with ICSI</text>
+
+  <!-- Row 2 -->
+  <rect x="40" y="108" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="129" r="13" fill="${C.rose}"/>
+  <text x="70" y="133.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="96" y="123" font-size="12" font-weight="600" fill="${C.dark}">Asthenospermia — Poor Sperm Motility</text>
+  <text x="96" y="140" font-size="10.5" fill="${C.muted}">ICSI bypasses the need for sperm to swim and reach the egg naturally</text>
+
+  <!-- Row 3 -->
+  <rect x="40" y="158" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="179" r="13" fill="${C.rose}"/>
+  <text x="70" y="183.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="96" y="173" font-size="12" font-weight="600" fill="${C.dark}">Teratospermia — Abnormal Sperm Shape</text>
+  <text x="96" y="190" font-size="10.5" fill="${C.muted}">The embryologist selects the best-looking sperm; morphology does not prevent fertilisation</text>
+
+  <!-- Row 4 -->
+  <rect x="40" y="208" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="229" r="13" fill="${C.rose}"/>
+  <text x="70" y="233.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="96" y="223" font-size="12" font-weight="600" fill="${C.dark}">Previous IVF Failure Due to Fertilisation Issues</text>
+  <text x="96" y="240" font-size="10.5" fill="${C.muted}">Direct injection resolves poor fertilisation that occurred with conventional IVF</text>
+
+  <!-- Row 5 -->
+  <rect x="40" y="258" width="720" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="70" cy="275" r="13" fill="${C.rose}"/>
+  <text x="70" y="279.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="96" y="270" font-size="12" font-weight="600" fill="${C.dark}">Azoospermia — No Sperm in Semen</text>
+  <text x="96" y="286" font-size="10.5" fill="${C.muted}">Sperm surgically retrieved via TESA, PESA, or Micro-TESE then used for ICSI</text>
+</svg>`;
+
+const SVG_IUI_PAIN_GUIDE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" font-family="${FONT}">
+  <rect width="800" height="220" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">IUI Comfort Guide: During &amp; After the Procedure</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- During panel -->
+  <rect x="40" y="56" width="346" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="40" y="56" width="346" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="74" width="346" height="12" fill="${C.rose}"/>
+  <text x="213" y="77" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">During IUI</text>
+  <text x="62" y="108" font-size="10.5" fill="${C.dark}">• Procedure takes just 5–10 minutes</text>
+  <text x="62" y="128" font-size="10.5" fill="${C.dark}">• Similar in feel to a routine Pap smear</text>
+  <text x="62" y="148" font-size="10.5" fill="${C.dark}">• Mild pressure when catheter passes the cervix</text>
+  <text x="62" y="168" font-size="10.5" fill="${C.dark}">• Many women feel almost nothing at all</text>
+
+  <!-- After panel -->
+  <rect x="414" y="56" width="346" height="148" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="414" y="56" width="346" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="414" y="74" width="346" height="12" fill="${C.rose}"/>
+  <text x="587" y="77" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">After IUI</text>
+  <text x="436" y="108" font-size="10.5" fill="${C.dark}">• Mild cramping (like menstrual cramps)</text>
+  <text x="436" y="128" font-size="10.5" fill="${C.dark}">• Light spotting may occur — this is normal</text>
+  <text x="436" y="148" font-size="10.5" fill="${C.dark}">• Normal activities can resume the same day</text>
+  <text x="436" y="168" font-size="10.5" fill="${C.dark}">• Symptoms typically resolve within 24 hours</text>
+</svg>`;
+
+const SVG_IVF_STAGES_PAIN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">5 IVF Stages: What to Expect</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Stage 1 -->
+  <rect x="40" y="56" width="720" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="56" width="6" height="44" rx="3" fill="${C.rose}"/>
+  <text x="62" y="73" font-size="12" font-weight="700" fill="${C.dark}">1. Ovarian Stimulation</text>
+  <text x="62" y="73" font-size="10" fill="${C.rose}" dx="190">  8–14 days</text>
+  <text x="62" y="90" font-size="10.5" fill="${C.muted}">Daily hormone injections; mild injection-site discomfort, bloating, slight cramping</text>
+
+  <!-- Stage 2 -->
+  <rect x="40" y="108" width="720" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="108" width="6" height="44" rx="3" fill="${C.rose}"/>
+  <text x="62" y="125" font-size="12" font-weight="700" fill="${C.dark}">2. Egg Retrieval</text>
+  <text x="62" y="125" font-size="10" fill="${C.rose}" dx="130">  20–30 minutes</text>
+  <text x="62" y="142" font-size="10.5" fill="${C.muted}">Performed under sedation — no pain during; mild cramping or spotting may follow</text>
+
+  <!-- Stage 3 -->
+  <rect x="40" y="160" width="720" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="160" width="6" height="44" rx="3" fill="${C.rose}"/>
+  <text x="62" y="177" font-size="12" font-weight="700" fill="${C.dark}">3. Fertilisation &amp; Embryo Development</text>
+  <text x="62" y="177" font-size="10" fill="${C.rose}" dx="290">  3–5 days</text>
+  <text x="62" y="194" font-size="10.5" fill="${C.muted}">Entirely in the embryology lab — no physical interventions; completely painless</text>
+
+  <!-- Stage 4 -->
+  <rect x="40" y="212" width="720" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="212" width="6" height="44" rx="3" fill="${C.rose}"/>
+  <text x="62" y="229" font-size="12" font-weight="700" fill="${C.dark}">4. Embryo Transfer</text>
+  <text x="62" y="229" font-size="10" fill="${C.rose}" dx="150">  10–15 minutes</text>
+  <text x="62" y="246" font-size="10.5" fill="${C.muted}">Thin catheter guided by ultrasound; mild pressure; no sedation required</text>
+
+  <!-- Stage 5 -->
+  <rect x="40" y="264" width="720" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="264" width="6" height="38" rx="3" fill="${C.rose}"/>
+  <text x="62" y="281" font-size="12" font-weight="700" fill="${C.dark}">5. Luteal Phase Support</text>
+  <text x="62" y="296" font-size="10.5" fill="${C.muted}">Progesterone supplementation; possible bloating, breast tenderness &amp; mood changes</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -1716,6 +1931,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_LOW_AMH_INNOVATIVE,
     title:   "9 Innovative Treatments for Low AMH",
     altText: "Three-column grid: 1 Personalised IVF Protocols; 2 Ovarian PRP Therapy; 3 Stem Cell Therapy; 4 Genetic Modifications; 5 Hormonal Supplementation (DHEA); 6 Acupuncture and Complementary Therapies; 7 Lifestyle Modifications; 8 Oocyte Preservation (Vitrification); 9 Time-Lapse Technology for embryo monitoring.",
+  },
+
+  // ── Wave 7: Published blogs ─────────────────────────────────────────
+  "how-to-prepare-for-your-first-iui-cycle-tips-and-advice": {
+    svg:     SVG_IUI_PREP_TIPS,
+    title:   "6 Essential IUI Preparation Tips",
+    altText: "Two-column grid of 6 IUI preparation tips: 1 Monitor Your Cycle (use OPKs or basal body temperature to track ovulation and fertile window); 2 Maintain a Healthy Diet (fruits, vegetables, lean proteins, omega-3 fatty acids, prenatal vitamins); 3 Manage Stress (mindfulness, yoga, counselling or fertility support groups); 4 Prepare for Medications (follow prescription schedule, ask about side effects); 5 Make Lifestyle Changes (limit caffeine and alcohol, quit smoking, maintain healthy weight); 6 Plan for the Procedure Day (arrive rested, procedure takes 15 minutes, rest lightly afterward).",
+  },
+
+  "icsi-dos-and-donts": {
+    svg:     SVG_ICSI_DOS_DONTS,
+    title:   "ICSI Do's & Don'ts: 5 Key Rules Each",
+    altText: "Two-column comparison: Do's column — Follow doctor's instructions, Eat a balanced diet, Stay hydrated, Moderate exercise (walking/yoga), Get 7-8 hours sleep. Don'ts column — Don't skip medications or appointments, Avoid alcohol and caffeine, Don't smoke, No high-intensity exercise, Don't self-prescribe supplements.",
+  },
+
+  "is-icsi-better-for-men-with-low-sperm-count": {
+    svg:     SVG_ICSI_SPERM_CONDITIONS,
+    title:   "5 Male Factor Conditions Where ICSI Works Best",
+    altText: "Five-row infographic: 1 Oligospermia — low sperm count; only one viable sperm needed per egg; 2 Asthenospermia — poor sperm motility; ICSI bypasses natural swim requirement; 3 Teratospermia — abnormal sperm shape; morphology does not affect ICSI success; 4 Previous IVF Failure — fertilisation issues resolved by direct injection; 5 Azoospermia — no sperm in semen; surgically retrieved via TESA, PESA, or Micro-TESE.",
+  },
+
+  "is-iui-painful-everything-you-need-to-know": {
+    svg:     SVG_IUI_PAIN_GUIDE,
+    title:   "IUI Comfort Guide: During & After the Procedure",
+    altText: "Two-panel infographic. During IUI panel: procedure takes 5-10 minutes; similar to a Pap smear; mild pressure when catheter passes through cervix; many women feel almost nothing. After IUI panel: mild cramping similar to menstrual cramps; light spotting may occur; normal activities can resume same day; symptoms typically resolve within 24 hours.",
+  },
+
+  "is-ivf-painful": {
+    svg:     SVG_IVF_STAGES_PAIN,
+    title:   "5 IVF Stages: What to Expect",
+    altText: "Five-row stage chart. Stage 1 Ovarian Stimulation (8-14 days): daily hormone injections, mild bloating and injection-site discomfort. Stage 2 Egg Retrieval (20-30 min): performed under sedation; mild cramping after. Stage 3 Fertilisation and Embryo Development (3-5 days): entirely in the lab, no physical discomfort. Stage 4 Embryo Transfer (10-15 min): thin catheter guided by ultrasound; mild pressure, no sedation. Stage 5 Luteal Phase Support: progesterone supplements; possible bloating and mood changes.",
   },
 };
 

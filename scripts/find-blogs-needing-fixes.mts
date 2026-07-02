@@ -10,11 +10,42 @@ const sanity = createClient({ projectId, dataset, apiVersion: "2024-01-01", useC
 
 // Already-done slugs
 const DONE = new Set([
+  // Wave 1
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility",
   "ivf-for-women-with-thyroid-disorders-what-patients-should-know",
   "complete-pregnancy-diet-chart-by-trimester-what-to-eat-in-the-first-second-third-trimester",
   "the-emotional-rollercoaster-of-ivf-why-mental-health-support-is-essential",
   "high-risk-pregnancy-due-to-diabetes-bp-thyroid-disorders",
+  // Wave 2
+  "iui-vs-ivf-which-fertility-treatment-is-right-for-you",
+  "10-foods-to-improve-female-egg-quality",
+  "how-male-infertility-affects-ivf-treatment",
+  "how-nutrition-impacts-your-fertility-what-science-says",
+  "icsi-vs-ivf-success-rates-benefits-and-risks-compared",
+  // Wave 3
+  "how-lifestyle-choices-of-both-partners-impact-icsi-success-rates",
+  "how-pre-implantation-genetic-testing-boosts-ivf-success",
+  "is-egg-freezing-a-good-option-if-i-want-to-delay-pregnancy",
+  "ivf-after-35-navigating-fertility-challenges-with-confidence-and-hope",
+  "how-to-improve-ovulation-naturally-when-you-have-pcos",
+  // Wave 4
+  "how-long-do-you-have-to-wait-to-try-again-after-a-miscarriage",
+  "how-long-does-it-take-for-letrozole-to-get-out-of-your-system",
+  "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "how-long-should-you-see-a-gynecologist-after-delivery",
+  "how-low-amh-affects-menstrual-cycle-regularity",
+  // Wave 5
+  "how-to-boost-your-ivf-success-rates-naturally",
+  "how-to-choose-the-best-ivf-centre-in-india",
+  "how-to-deal-with-ivf-failure",
+  "how-to-find-the-right-ivf-specialist",
+  "how-to-improve-your-chances-of-iui-success-naturally",
+  // Wave 6
+  "how-to-protect-your-mental-health-during-ivf-and-fertility-treatments",
+  "a-complete-guide-on-explaining-periods-to-men",
+  "indian-celebrities-who-improved-fertility-through-yoga",
+  "a-guide-to-the-different-types-of-ivf-treatments",
+  "innovative-treatments-for-low-amh",
 ]);
 
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };
