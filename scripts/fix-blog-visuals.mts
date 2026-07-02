@@ -451,6 +451,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ivf-pregnancy-week-by-week-symptoms-and-safety": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 10 ──────────────────────────────────────────────────────────
+  "advancing-ovarian-science-a-full-day-scientific-program-in-surat": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "ivf-pregnancy-with-pcos-and-endometriosis": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "life-after-iui-precautions-lifestyle-tips-and-what-to-expect": {
+    removeBlocks: ["key numbers"],
+  },
+  "lifestyle-changes-that-boost-fertility-in-pcos-women": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "lifestyle-changes-to-boost-ivf-success-and-increase-your-chances-of-a-healthy-pregnancy": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

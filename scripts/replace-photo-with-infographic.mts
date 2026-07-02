@@ -2246,6 +2246,255 @@ const SVG_IVF_PREGNANCY_MILESTONES = `<svg xmlns="http://www.w3.org/2000/svg" vi
   <text x="432" y="267" font-size="10" fill="${C.muted}">Labor signs appear; prepare for hospital &amp; postpartum care</text>
 </svg>`;
 
+// ── Wave 10 SVGs ─────────────────────────────────────────────────────
+
+// Blog W10-1 (Ovarian Science): "4 Key Topics of the BFI Ovarian Science Program"
+// Source: Blog node [6] — Ovarian Physiology, Ovarian Reserve, Poor Ovarian Response, Advanced Fertility Mgmt
+const SVG_OVARIAN_SCIENCE_TOPICS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="198.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 KEY TOPICS OF THE BFI OVARIAN SCIENCE PROGRAM</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="172" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="172" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="172" height="12" fill="${C.rose}"/>
+  <text x="126" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="126" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Physiology</text>
+  <text x="126" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">How the ovary</text>
+  <text x="126" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">functions and</text>
+  <text x="126" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">produces eggs</text>
+  <rect x="222" y="48" width="172" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="222" y="48" width="172" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="222" y="72" width="172" height="12" fill="${C.rose}"/>
+  <text x="308" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="308" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Reserve</text>
+  <text x="308" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Assessment and</text>
+  <text x="308" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">management</text>
+  <text x="308" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">strategies</text>
+  <rect x="404" y="48" width="172" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="404" y="48" width="172" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="404" y="72" width="172" height="12" fill="${C.rose}"/>
+  <text x="490" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="490" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Poor Ovarian</text>
+  <text x="490" y="116" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Response</text>
+  <text x="490" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">Advanced management</text>
+  <text x="490" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">approaches</text>
+  <rect x="586" y="48" width="174" height="136" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="586" y="48" width="174" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="586" y="72" width="174" height="12" fill="${C.rose}"/>
+  <text x="673" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="673" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Advanced Fertility</text>
+  <text x="673" y="116" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Management</text>
+  <text x="673" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">Expert clinical insights</text>
+  <text x="673" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">from BFI specialists</text>
+</svg>`;
+
+// Blog W10-2 (PCOS & Endo IVF): "4 Key Benefits of IVF for PCOS and Endometriosis"
+// Source: Blog nodes [13-14] — benefits of IVF in overcoming PCOS/endo challenges
+const SVG_IVF_PCOS_ENDO_BENEFITS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="238.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 KEY BENEFITS OF IVF FOR PCOS AND ENDOMETRIOSIS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="345" height="82" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="89" r="16" fill="${C.rose}"/>
+  <text x="68" y="93.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="94" y="78" font-size="11.5" font-weight="700" fill="${C.dark}">Overcomes Ovulation Issues</text>
+  <text x="94" y="94" font-size="10" fill="${C.muted}">Controlled stimulation bypasses</text>
+  <text x="94" y="108" font-size="10" fill="${C.muted}">irregular ovulation in PCOS</text>
+  <rect x="415" y="48" width="345" height="82" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="443" cy="89" r="16" fill="${C.rose}"/>
+  <text x="443" y="93.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="469" y="78" font-size="11.5" font-weight="700" fill="${C.dark}">Bypasses Endometriosis Blockages</text>
+  <text x="469" y="94" font-size="10" fill="${C.muted}">Eggs retrieved directly, avoiding</text>
+  <text x="469" y="108" font-size="10" fill="${C.muted}">fallopian tube damage</text>
+  <rect x="40" y="142" width="345" height="82" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="183" r="16" fill="${C.rose}"/>
+  <text x="68" y="187.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="94" y="172" font-size="11.5" font-weight="700" fill="${C.dark}">Improves Fertilisation Rates</text>
+  <text x="94" y="188" font-size="10" fill="${C.muted}">ICSI and advanced lab techniques</text>
+  <text x="94" y="202" font-size="10" fill="${C.muted}">maximise each fertilisation chance</text>
+  <rect x="415" y="142" width="345" height="82" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="443" cy="183" r="16" fill="${C.rose}"/>
+  <text x="443" y="187.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="469" y="172" font-size="11.5" font-weight="700" fill="${C.dark}">Increases Implantation Chances</text>
+  <text x="469" y="188" font-size="10" fill="${C.muted}">Careful embryo selection ensures</text>
+  <text x="469" y="202" font-size="10" fill="${C.muted}">uterine readiness for transfer</text>
+</svg>`;
+
+// Blog W10-3 (Life after IUI): "Post-IUI Care Guide: What to Do and What to Avoid"
+// Source: Blog nodes [13-16] — do's and don'ts after IUI procedure
+const SVG_POST_IUI_DOS_DONTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 308" font-family="${FONT}">
+  <rect width="800" height="308" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="306.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">POST-IUI CARE GUIDE: WHAT TO DO AND WHAT TO AVOID</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="356" height="34" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="66" width="356" height="12" fill="${C.rose}"/>
+  <text x="218" y="65" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">5 THINGS TO DO AFTER IUI</text>
+  <rect x="404" y="44" width="356" height="34" rx="8" fill="${C.dark}"/>
+  <rect x="404" y="66" width="356" height="12" fill="${C.dark}"/>
+  <text x="582" y="65" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">5 THINGS TO AVOID AFTER IUI</text>
+  <rect x="40" y="90" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="109" r="13" fill="${C.rose}"/>
+  <text x="68" y="113.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="90" y="103" font-size="11" font-weight="600" fill="${C.dark}">Take medications as prescribed</text>
+  <text x="90" y="119" font-size="10" fill="${C.muted}">Progesterone support on schedule</text>
+  <rect x="40" y="132" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="151" r="13" fill="${C.rose}"/>
+  <text x="68" y="155.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="90" y="145" font-size="11" font-weight="600" fill="${C.dark}">Rest for 24 hours after IUI</text>
+  <text x="90" y="161" font-size="10" fill="${C.muted}">Mild cramping is normal — rest helps</text>
+  <rect x="40" y="174" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="193" r="13" fill="${C.rose}"/>
+  <text x="68" y="197.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="90" y="187" font-size="11" font-weight="600" fill="${C.dark}">Stay hydrated and eat well</text>
+  <text x="90" y="203" font-size="10" fill="${C.muted}">8–10 glasses water; balanced meals</text>
+  <rect x="40" y="216" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="235" r="13" fill="${C.rose}"/>
+  <text x="68" y="239.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="90" y="229" font-size="11" font-weight="600" fill="${C.dark}">Use a warm compress for comfort</text>
+  <text x="90" y="245" font-size="10" fill="${C.muted}">Eases pelvic heaviness after the procedure</text>
+  <rect x="40" y="258" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="277" r="13" fill="${C.rose}"/>
+  <text x="68" y="281.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="90" y="271" font-size="11" font-weight="600" fill="${C.dark}">Attend your follow-up appointment</text>
+  <text x="90" y="287" font-size="10" fill="${C.muted}">Beta-hCG test typically after 14 days</text>
+  <rect x="404" y="90" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="432" cy="109" r="13" fill="${C.rose}"/>
+  <text x="432" y="113.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="454" y="103" font-size="11" font-weight="600" fill="${C.dark}">No heavy lifting or intense exercise</text>
+  <text x="454" y="119" font-size="10" fill="${C.muted}">Elevated heart rate may affect outcome</text>
+  <rect x="404" y="132" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="432" cy="151" r="13" fill="${C.rose}"/>
+  <text x="432" y="155.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="454" y="145" font-size="11" font-weight="600" fill="${C.dark}">No hot baths, saunas or swimming</text>
+  <text x="454" y="161" font-size="10" fill="${C.muted}">Heat increases pelvic blood flow</text>
+  <rect x="404" y="174" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="432" cy="193" r="13" fill="${C.rose}"/>
+  <text x="432" y="197.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="454" y="187" font-size="11" font-weight="600" fill="${C.dark}">No alcohol, smoking or caffeine</text>
+  <text x="454" y="203" font-size="10" fill="${C.muted}">These affect the implantation environment</text>
+  <rect x="404" y="216" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="432" cy="235" r="13" fill="${C.rose}"/>
+  <text x="432" y="239.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="454" y="229" font-size="11" font-weight="600" fill="${C.dark}">Don't test pregnancy before 14 days</text>
+  <text x="454" y="245" font-size="10" fill="${C.muted}">Testing too early gives false results</text>
+  <rect x="404" y="258" width="356" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="432" cy="277" r="13" fill="${C.rose}"/>
+  <text x="432" y="281.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="454" y="271" font-size="11" font-weight="600" fill="${C.dark}">Don't panic over mild symptoms</text>
+  <text x="454" y="287" font-size="10" fill="${C.muted}">Light spotting and bloating are normal</text>
+</svg>`;
+
+// Blog W10-4 (PCOS Lifestyle Fertility): "8 Lifestyle Changes to Boost Fertility with PCOS"
+// Source: Blog node [9] — 8 lifestyle factors affecting PCOS fertility
+const SVG_PCOS_FERTILITY_LIFESTYLE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="${FONT}">
+  <rect width="800" height="320" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="318.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">8 LIFESTYLE CHANGES TO BOOST FERTILITY WITH PCOS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="75" r="15" fill="${C.rose}"/>
+  <text x="68" y="79.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="93" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Balanced Nutrition</text>
+  <text x="93" y="87" font-size="10" fill="${C.muted}">Low-GI foods, lean proteins, healthy fats</text>
+  <rect x="40" y="112" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="143" r="15" fill="${C.rose}"/>
+  <text x="68" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="93" y="138" font-size="11.5" font-weight="700" fill="${C.dark}">Regular Smart Exercise</text>
+  <text x="93" y="155" font-size="10" fill="${C.muted}">Cardio, strength and yoga — avoid overtraining</text>
+  <rect x="40" y="180" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="211" r="15" fill="${C.rose}"/>
+  <text x="68" y="215.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="93" y="206" font-size="11.5" font-weight="700" fill="${C.dark}">Maintain Healthy Weight</text>
+  <text x="93" y="223" font-size="10" fill="${C.muted}">5–10% weight loss can restore ovulation in PCOS</text>
+  <rect x="40" y="248" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="279" r="15" fill="${C.rose}"/>
+  <text x="68" y="283.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="93" y="274" font-size="11.5" font-weight="700" fill="${C.dark}">Reduce Stress</text>
+  <text x="93" y="291" font-size="10" fill="${C.muted}">Mindfulness, meditation and counselling help</text>
+  <rect x="405" y="44" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="75" r="15" fill="${C.rose}"/>
+  <text x="433" y="79.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="458" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Prioritize Quality Sleep</text>
+  <text x="458" y="87" font-size="10" fill="${C.muted}">7–9 hours nightly with a consistent schedule</text>
+  <rect x="405" y="112" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="143" r="15" fill="${C.rose}"/>
+  <text x="433" y="147.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="458" y="138" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Smoking &amp; Limit Alcohol</text>
+  <text x="458" y="155" font-size="10" fill="${C.muted}">Both affect ovarian reserve and hormone levels</text>
+  <rect x="405" y="180" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="211" r="15" fill="${C.rose}"/>
+  <text x="433" y="215.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="458" y="206" font-size="11.5" font-weight="700" fill="${C.dark}">Consider Supplements</text>
+  <text x="458" y="223" font-size="10" fill="${C.muted}">Inositol, Vitamin D, Omega-3 — with your doctor</text>
+  <rect x="405" y="248" width="355" height="62" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="279" r="15" fill="${C.rose}"/>
+  <text x="433" y="283.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="458" y="274" font-size="11.5" font-weight="700" fill="${C.dark}">Track Ovulation</text>
+  <text x="458" y="291" font-size="10" fill="${C.muted}">OPKs, BBT charts or ultrasound monitoring</text>
+</svg>`;
+
+// Blog W10-5 (IVF Success Lifestyle): "10 Lifestyle Changes to Boost IVF Success"
+// Source: Blog H2 sections — 10 key lifestyle pillars from the blog's own content
+const SVG_IVF_SUCCESS_LIFESTYLE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 360" font-family="${FONT}">
+  <rect width="800" height="360" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="358.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 LIFESTYLE CHANGES TO BOOST IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="71" r="14" fill="${C.rose}"/>
+  <text x="68" y="75.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="66" font-size="11.5" font-weight="700" fill="${C.dark}">Maintain a Healthy Diet</text>
+  <text x="92" y="82" font-size="10" fill="${C.muted}">Antioxidant-rich whole foods; avoid processed food</text>
+  <rect x="40" y="104" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="131" r="14" fill="${C.rose}"/>
+  <text x="68" y="135.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="126" font-size="11.5" font-weight="700" fill="${C.dark}">Achieve a Healthy Weight</text>
+  <text x="92" y="142" font-size="10" fill="${C.muted}">BMI 18.5–24.9 optimal for implantation success</text>
+  <rect x="40" y="164" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="191" r="14" fill="${C.rose}"/>
+  <text x="68" y="195.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="186" font-size="11.5" font-weight="700" fill="${C.dark}">Exercise Moderately</text>
+  <text x="92" y="202" font-size="10" fill="${C.muted}">Walking, swimming, yoga; avoid high-intensity training</text>
+  <rect x="40" y="224" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="251" r="14" fill="${C.rose}"/>
+  <text x="68" y="255.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="246" font-size="11.5" font-weight="700" fill="${C.dark}">Manage Stress Effectively</text>
+  <text x="92" y="262" font-size="10" fill="${C.muted}">Meditation, mindfulness, partner communication</text>
+  <rect x="40" y="284" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="311" r="14" fill="${C.rose}"/>
+  <text x="68" y="315.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="306" font-size="11.5" font-weight="700" fill="${C.dark}">Quit Smoking &amp; Limit Alcohol</text>
+  <text x="92" y="322" font-size="10" fill="${C.muted}">Smoking reduces egg quality and sperm count</text>
+  <rect x="405" y="44" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="71" r="14" fill="${C.rose}"/>
+  <text x="433" y="75.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="457" y="66" font-size="11.5" font-weight="700" fill="${C.dark}">Focus on Fertility Supplements</text>
+  <text x="457" y="82" font-size="10" fill="${C.muted}">Folic acid, CoQ10, Vitamin D — with your doctor</text>
+  <rect x="405" y="104" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="131" r="14" fill="${C.rose}"/>
+  <text x="433" y="135.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="457" y="126" font-size="11.5" font-weight="700" fill="${C.dark}">Get Sufficient Sleep</text>
+  <text x="457" y="142" font-size="10" fill="${C.muted}">7–8 hours nightly; keep a consistent schedule</text>
+  <rect x="405" y="164" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="191" r="14" fill="${C.rose}"/>
+  <text x="433" y="195.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="457" y="186" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Environmental Toxins</text>
+  <text x="457" y="202" font-size="10" fill="${C.muted}">BPA, pesticides and chemicals affect fertility</text>
+  <rect x="405" y="224" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="251" r="14" fill="${C.rose}"/>
+  <text x="433" y="255.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">9</text>
+  <text x="457" y="246" font-size="11.5" font-weight="700" fill="${C.dark}">Stay Well Hydrated</text>
+  <text x="457" y="262" font-size="10" fill="${C.muted}">8–10 glasses of water daily; avoid sugary drinks</text>
+  <rect x="405" y="284" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="433" cy="311" r="14" fill="${C.rose}"/>
+  <text x="433" y="315.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">10</text>
+  <text x="457" y="306" font-size="11.5" font-weight="700" fill="${C.dark}">Maintain Work-Life Balance</text>
+  <text x="457" y="322" font-size="10" fill="${C.muted}">Reduce occupational stress; take regular breaks</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -2520,6 +2769,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IVF_PREGNANCY_MILESTONES,
     title:   "IVF Pregnancy: 8 Key Weekly Milestones",
     altText: "Two-column 8-milestone chart with rose accent bars. Weeks 1-4 Conception and Confirmation (embryo implants; avoid alcohol and smoking). Weeks 5-8 Early Pregnancy Symptoms (nausea, fatigue, breast tenderness; prenatal check-ups begin). Weeks 9-12 Transition to Second Trimester (energy returns; genetic screening). Weeks 13-16 Maternal Comfort and Fetal Growth (amniocentesis may be offered; light exercise with clearance). Weeks 17-20 Halfway Milestone (fetal movements felt; gestational diabetes screening). Weeks 21-24 Fetal Anomaly Scan (most important structural scan; fetal echo if advised). Weeks 25-28 Third Trimester Begins (fetal movements monitored; swelling increases). Weeks 37-40 Full-Term Pregnancy (labor signs appear; prepare for hospital).",
+  },
+
+  // ── Wave 10: Published blogs ──────────────────────────────────────────
+  "advancing-ovarian-science-a-full-day-scientific-program-in-surat": {
+    svg:     SVG_OVARIAN_SCIENCE_TOPICS,
+    title:   "4 Key Topics of the BFI Ovarian Science Program",
+    altText: "Four-panel horizontal infographic. Panel 1 Ovarian Physiology: how the ovary functions and produces eggs. Panel 2 Ovarian Reserve: assessment and management strategies. Panel 3 Poor Ovarian Response: advanced management approaches. Panel 4 Advanced Fertility Management: expert clinical insights from BFI specialists.",
+  },
+
+  "ivf-pregnancy-with-pcos-and-endometriosis": {
+    svg:     SVG_IVF_PCOS_ENDO_BENEFITS,
+    title:   "4 Key Benefits of IVF for PCOS and Endometriosis",
+    altText: "Two-by-two card grid. Card 1 Overcomes Ovulation Issues: controlled stimulation bypasses irregular ovulation in PCOS. Card 2 Bypasses Endometriosis Blockages: eggs retrieved directly, avoiding fallopian tube damage. Card 3 Improves Fertilisation Rates: ICSI and advanced lab techniques maximise each fertilisation chance. Card 4 Increases Implantation Chances: careful embryo selection ensures uterine readiness for transfer.",
+  },
+
+  "life-after-iui-precautions-lifestyle-tips-and-what-to-expect": {
+    svg:     SVG_POST_IUI_DOS_DONTS,
+    title:   "Post-IUI Care Guide: What to Do and What to Avoid",
+    altText: "Two-column comparison infographic. Left column 5 things to do after IUI: Take medications as prescribed (progesterone support on schedule); Rest for 24 hours (mild cramping is normal); Stay hydrated and eat well (8-10 glasses water); Use a warm compress for comfort (eases pelvic heaviness); Attend follow-up appointment (beta-hCG test after 14 days). Right column 5 things to avoid: No heavy lifting or intense exercise; No hot baths, saunas or swimming; No alcohol, smoking or caffeine; Don't test pregnancy before 14 days; Don't panic over mild symptoms (light spotting and bloating are normal).",
+  },
+
+  "lifestyle-changes-that-boost-fertility-in-pcos-women": {
+    svg:     SVG_PCOS_FERTILITY_LIFESTYLE,
+    title:   "8 Lifestyle Changes to Boost Fertility with PCOS",
+    altText: "Two-column eight-item grid. Items 1-4: Balanced Nutrition (low-GI foods, lean proteins, healthy fats); Regular Smart Exercise (cardio, strength and yoga — avoid overtraining); Maintain Healthy Weight (5-10% weight loss can restore ovulation in PCOS); Reduce Stress (mindfulness, meditation and counselling). Items 5-8: Prioritize Quality Sleep (7-9 hours nightly with a consistent schedule); Avoid Smoking and Limit Alcohol (both affect ovarian reserve and hormone levels); Consider Supplements (Inositol, Vitamin D, Omega-3 — with your doctor); Track Ovulation (OPKs, BBT charts or ultrasound monitoring).",
+  },
+
+  "lifestyle-changes-to-boost-ivf-success-and-increase-your-chances-of-a-healthy-pregnancy": {
+    svg:     SVG_IVF_SUCCESS_LIFESTYLE,
+    title:   "10 Lifestyle Changes to Boost IVF Success",
+    altText: "Two-column ten-item grid. Items 1-5: Maintain a Healthy Diet (antioxidant-rich whole foods; avoid processed food); Achieve a Healthy Weight (BMI 18.5-24.9 optimal for implantation); Exercise Moderately (walking, swimming, yoga; avoid high-intensity training); Manage Stress Effectively (meditation, mindfulness, partner communication); Quit Smoking and Limit Alcohol (reduces egg quality and sperm count). Items 6-10: Focus on Fertility Supplements (folic acid, CoQ10, Vitamin D — with your doctor); Get Sufficient Sleep (7-8 hours nightly; consistent schedule); Avoid Environmental Toxins (BPA, pesticides and chemicals); Stay Well Hydrated (8-10 glasses daily); Maintain Work-Life Balance (reduce occupational stress; take regular breaks).",
   },
 };
 

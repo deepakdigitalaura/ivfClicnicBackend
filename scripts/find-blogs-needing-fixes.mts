@@ -58,6 +58,18 @@ const DONE = new Set([
   "iui-process-explained-what-to-expect-at-every-step",
   "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
   "a-quick-guide-on-the-ivf-journey-with-egg-donors",
+  // Wave 9
+  "iui-success-rate-what-to-expect-after-iui-treatment",
+  "ivf-cost-in-ahmedabad-whats-included-how-to-plan-your-budget",
+  "ivf-failure-doesnt-mean-the-end-what-can-you-do-next",
+  "ivf-for-single-women-in-india-navigating-new-art-law",
+  "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  // Wave 10
+  "advancing-ovarian-science-a-full-day-scientific-program-in-surat",
+  "ivf-pregnancy-with-pcos-and-endometriosis",
+  "life-after-iui-precautions-lifestyle-tips-and-what-to-expect",
+  "lifestyle-changes-that-boost-fertility-in-pcos-women",
+  "lifestyle-changes-to-boost-ivf-success-and-increase-your-chances-of-a-healthy-pregnancy",
 ]);
 
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };
