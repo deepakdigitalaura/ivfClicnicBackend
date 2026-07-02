@@ -52,6 +52,12 @@ const DONE = new Set([
   "is-icsi-better-for-men-with-low-sperm-count",
   "is-iui-painful-everything-you-need-to-know",
   "is-ivf-painful",
+  // Wave 8
+  "is-ivf-possible-without-injections-understanding-easy-ivf-and-injection-free-ivf",
+  "is-natural-cycle-ivf-better-for-women-with-poor-ovarian-reserve",
+  "iui-process-explained-what-to-expect-at-every-step",
+  "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "a-quick-guide-on-the-ivf-journey-with-egg-donors",
 ]);
 
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };

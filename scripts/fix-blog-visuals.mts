@@ -434,6 +434,23 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "a-quick-guide-on-the-ivf-journey-with-egg-donors": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+
+  // ── Wave 9: Published blogs ─────────────────────────────────────────
+  "iui-success-rate-what-to-expect-after-iui-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ivf-cost-in-ahmedabad-whats-included-how-to-plan-your-budget": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ivf-failure-doesnt-mean-the-end-what-can-you-do-next": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ivf-for-single-women-in-india-navigating-new-art-law": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ivf-pregnancy-week-by-week-symptoms-and-safety": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

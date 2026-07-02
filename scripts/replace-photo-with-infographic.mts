@@ -1982,6 +1982,270 @@ const SVG_EGG_DONOR_IVF_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox
   <text x="464" y="259" font-size="10" fill="${C.muted}">Ongoing psychological support &amp; fertility counseling throughout</text>
 </svg>`;
 
+// ── Wave 9 SVGs ──────────────────────────────────────────────────────
+
+const SVG_IUI_SUCCESS_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Key Factors That Affect IUI Success Rate</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Card 1 -->
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Age of the</text>
+  <text x="122" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Woman</text>
+  <text x="122" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Under 35: ~15–18%</text>
+  <text x="122" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">Age 35–40: ~10–15%</text>
+  <text x="122" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">Over 40: lower rates</text>
+  <text x="122" y="200" text-anchor="middle" font-size="9.5" fill="${C.muted}">due to egg quality</text>
+
+  <!-- Card 2 -->
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Fertility</text>
+  <text x="300" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Issues</text>
+  <text x="300" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Best results with</text>
+  <text x="300" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">healthy tubes &amp;</text>
+  <text x="300" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">mild ovulation or</text>
+  <text x="300" y="200" text-anchor="middle" font-size="9.5" fill="${C.muted}">unexplained infertility</text>
+
+  <!-- Card 3 -->
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Sperm</text>
+  <text x="478" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Quality</text>
+  <text x="478" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Higher motility &amp;</text>
+  <text x="478" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">concentration</text>
+  <text x="478" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">improve fertilisation</text>
+  <text x="478" y="200" text-anchor="middle" font-size="9.5" fill="${C.muted}">odds significantly</text>
+
+  <!-- Card 4 -->
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Number of</text>
+  <text x="667" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Cycles</text>
+  <text x="667" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Cumulative success</text>
+  <text x="667" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">improves over</text>
+  <text x="667" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">multiple attempts;</text>
+  <text x="667" y="200" text-anchor="middle" font-size="9.5" fill="${C.muted}">typically 3–6 cycles</text>
+</svg>`;
+
+const SVG_IVF_COST_COMPONENTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">10 Cost Components of an IVF Cycle</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Column 1: 1-5 -->
+  <rect x="40" y="56" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="63" cy="75" r="11" fill="${C.rose}"/>
+  <text x="63" y="79.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">1</text>
+  <text x="84" y="70" font-size="11.5" font-weight="600" fill="${C.dark}">Initial Consultation &amp; Diagnostic Tests</text>
+  <text x="84" y="85" font-size="10" fill="${C.muted}">Blood tests, hormone levels, ultrasound, semen analysis</text>
+
+  <rect x="40" y="102" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="63" cy="121" r="11" fill="${C.rose}"/>
+  <text x="63" y="125.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">2</text>
+  <text x="84" y="116" font-size="11.5" font-weight="600" fill="${C.dark}">Ovarian Stimulation Medications</text>
+  <text x="84" y="131" font-size="10" fill="${C.muted}">Hormonal injections + monitoring (ultrasound &amp; blood tests)</text>
+
+  <rect x="40" y="148" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="63" cy="167" r="11" fill="${C.rose}"/>
+  <text x="63" y="171.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">3</text>
+  <text x="84" y="162" font-size="11.5" font-weight="600" fill="${C.dark}">Egg Retrieval Procedure</text>
+  <text x="84" y="177" font-size="10" fill="${C.muted}">Daycare procedure; anaesthesia &amp; operation theatre charges</text>
+
+  <rect x="40" y="194" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="63" cy="213" r="11" fill="${C.rose}"/>
+  <text x="63" y="217.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">4</text>
+  <text x="84" y="208" font-size="11.5" font-weight="600" fill="${C.dark}">Sperm Collection &amp; Preparation</text>
+  <text x="84" y="223" font-size="10" fill="${C.muted}">Sample processing; TESA/PESA if advanced retrieval is needed</text>
+
+  <rect x="40" y="240" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="63" cy="259" r="11" fill="${C.rose}"/>
+  <text x="63" y="263.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">5</text>
+  <text x="84" y="254" font-size="11.5" font-weight="600" fill="${C.dark}">IVF Lab Charges &amp; Fertilisation</text>
+  <text x="84" y="269" font-size="10" fill="${C.muted}">ICSI if needed; embryo culture in advanced lab environment</text>
+
+  <!-- Column 2: 6-10 -->
+  <rect x="414" y="56" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="437" cy="75" r="11" fill="${C.rose}"/>
+  <text x="437" y="79.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">6</text>
+  <text x="458" y="70" font-size="11.5" font-weight="600" fill="${C.dark}">Embryo Transfer Procedure</text>
+  <text x="458" y="85" font-size="10" fill="${C.muted}">Transfer + luteal phase support medications</text>
+
+  <rect x="414" y="102" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="437" cy="121" r="11" fill="${C.rose}"/>
+  <text x="437" y="125.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">7</text>
+  <text x="458" y="116" font-size="11.5" font-weight="600" fill="${C.dark}">Embryo Freezing &amp; Storage</text>
+  <text x="458" y="131" font-size="10" fill="${C.muted}">Vitrification of extra embryos; 1-year storage included</text>
+
+  <rect x="414" y="148" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="437" cy="167" r="11" fill="${C.rose}"/>
+  <text x="437" y="171.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">8</text>
+  <text x="458" y="162" font-size="11.5" font-weight="600" fill="${C.dark}">Additional Procedures (if required)</text>
+  <text x="458" y="177" font-size="10" fill="${C.muted}">PGT, Laser Hatching, ERA, donor gametes, surrogacy</text>
+
+  <rect x="414" y="194" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="437" cy="213" r="11" fill="${C.rose}"/>
+  <text x="437" y="217.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">9</text>
+  <text x="458" y="208" font-size="11.5" font-weight="600" fill="${C.dark}">Pregnancy Test &amp; Follow-up</text>
+  <text x="458" y="223" font-size="10" fill="${C.muted}">Beta-hCG test; first ultrasound; follow-up consultations</text>
+
+  <rect x="414" y="240" width="346" height="38" rx="5" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="437" cy="259" r="11" fill="${C.rose}"/>
+  <text x="437" y="263.5" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.white}">10</text>
+  <text x="458" y="254" font-size="11.5" font-weight="600" fill="${C.dark}">Total Cycle Cost</text>
+  <text x="458" y="269" font-size="10" fill="${C.muted}">Varies by treatment type, medications &amp; clinic infrastructure</text>
+</svg>`;
+
+const SVG_IVF_FAILURE_REASONS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" font-family="${FONT}">
+  <rect width="800" height="290" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">6 Common Reasons IVF Cycles Fail</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1: 1-2 -->
+  <rect x="40" y="56" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="82" r="13" fill="${C.rose}"/>
+  <text x="68" y="86.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="76" font-size="12" font-weight="600" fill="${C.dark}">Poor Egg Quality</text>
+  <text x="92" y="93" font-size="10" fill="${C.muted}">Genetic abnormalities prevent fertilisation or healthy development</text>
+
+  <rect x="414" y="56" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="82" r="13" fill="${C.rose}"/>
+  <text x="442" y="86.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="466" y="76" font-size="12" font-weight="600" fill="${C.dark}">Embryo Quality Issues</text>
+  <text x="466" y="93" font-size="10" fill="${C.muted}">Chromosomal problems prevent implantation even after fertilisation</text>
+
+  <!-- Row 2: 3-4 -->
+  <rect x="40" y="116" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="142" r="13" fill="${C.rose}"/>
+  <text x="68" y="146.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="136" font-size="12" font-weight="600" fill="${C.dark}">Uterine Issues</text>
+  <text x="92" y="153" font-size="10" fill="${C.muted}">Thin lining, polyps, fibroids or septum block implantation</text>
+
+  <rect x="414" y="116" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="142" r="13" fill="${C.rose}"/>
+  <text x="442" y="146.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="466" y="136" font-size="12" font-weight="600" fill="${C.dark}">Sperm Factors</text>
+  <text x="466" y="153" font-size="10" fill="${C.muted}">Low count, motility, morphology or high DNA fragmentation</text>
+
+  <!-- Row 3: 5-6 -->
+  <rect x="40" y="176" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="202" r="13" fill="${C.rose}"/>
+  <text x="68" y="206.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="196" font-size="12" font-weight="600" fill="${C.dark}">Immune or Genetic Factors</text>
+  <text x="92" y="213" font-size="10" fill="${C.muted}">Immune system may reject the embryo or block implantation</text>
+
+  <rect x="414" y="176" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="202" r="13" fill="${C.rose}"/>
+  <text x="442" y="206.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="466" y="196" font-size="12" font-weight="600" fill="${C.dark}">Timing &amp; Technique</text>
+  <text x="466" y="213" font-size="10" fill="${C.muted}">Transfer precision and lab expertise influence outcome</text>
+
+  <!-- Footer -->
+  <rect x="40" y="238" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="400" y="258" text-anchor="middle" font-size="11" font-weight="600" fill="${C.rose}">One failed cycle is not the end.</text>
+  <text x="400" y="266" text-anchor="middle" font-size="10" fill="${C.muted}"> Advanced testing (PGT-A, ERA, Hysteroscopy) and revised protocols help most couples succeed in subsequent cycles.</text>
+</svg>`;
+
+const SVG_ART_LAW_SINGLE_WOMEN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 230" font-family="${FONT}">
+  <rect width="800" height="230" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Key ART Law Provisions for Single Women in India</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Card 1 -->
+  <rect x="40" y="58" width="346" height="72" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="72" cy="86" r="14" fill="${C.rose}"/>
+  <text x="72" y="90.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="98" y="78" font-size="12" font-weight="700" fill="${C.dark}">Eligibility for IVF</text>
+  <text x="98" y="95" font-size="10.5" fill="${C.muted}">Single women — including unmarried women</text>
+  <text x="98" y="111" font-size="10.5" fill="${C.muted}">and single mothers — are legally eligible for IVF</text>
+
+  <!-- Card 2 -->
+  <rect x="414" y="58" width="346" height="72" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="446" cy="86" r="14" fill="${C.rose}"/>
+  <text x="446" y="90.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="472" y="78" font-size="12" font-weight="700" fill="${C.dark}">Age Requirements</text>
+  <text x="472" y="95" font-size="10.5" fill="${C.muted}">Women must be between 21 and 50 years</text>
+  <text x="472" y="111" font-size="10.5" fill="${C.muted}">of age to qualify for IVF services</text>
+
+  <!-- Card 3 -->
+  <rect x="40" y="142" width="346" height="72" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="72" cy="170" r="14" fill="${C.rose}"/>
+  <text x="72" y="174.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="98" y="162" font-size="12" font-weight="700" fill="${C.dark}">Informed Consent</text>
+  <text x="98" y="179" font-size="10.5" fill="${C.muted}">All ART procedures require pre-treatment</text>
+  <text x="98" y="195" font-size="10.5" fill="${C.muted}">counseling and documented informed consent</text>
+
+  <!-- Card 4 -->
+  <rect x="414" y="142" width="346" height="72" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="446" cy="170" r="14" fill="${C.rose}"/>
+  <text x="446" y="174.5" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="472" y="162" font-size="12" font-weight="700" fill="${C.dark}">Confidentiality</text>
+  <text x="472" y="179" font-size="10.5" fill="${C.muted}">Patient identities and all medical records</text>
+  <text x="472" y="195" font-size="10.5" fill="${C.muted}">are kept strictly confidential by law</text>
+</svg>`;
+
+const SVG_IVF_PREGNANCY_MILESTONES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">IVF Pregnancy: 8 Key Weekly Milestones</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Column 1: Weeks 1-4, 5-8, 9-12, 13-16 -->
+  <rect x="40" y="56" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="56" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="58" y="74" font-size="10" font-weight="700" fill="${C.rose}">Weeks 1–4</text>
+  <text x="58" y="88" font-size="11.5" font-weight="600" fill="${C.dark}">Conception &amp; Confirmation</text>
+  <text x="58" y="99" font-size="10" fill="${C.muted}">Embryo implants; avoid alcohol, smoking &amp; risky medications</text>
+
+  <rect x="40" y="112" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="112" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="58" y="130" font-size="10" font-weight="700" fill="${C.rose}">Weeks 5–8</text>
+  <text x="58" y="144" font-size="11.5" font-weight="600" fill="${C.dark}">Early Pregnancy Symptoms</text>
+  <text x="58" y="155" font-size="10" fill="${C.muted}">Nausea, fatigue, breast tenderness; prenatal check-ups begin</text>
+
+  <rect x="40" y="168" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="168" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="58" y="186" font-size="10" font-weight="700" fill="${C.rose}">Weeks 9–12</text>
+  <text x="58" y="200" font-size="11.5" font-weight="600" fill="${C.dark}">Transition to Second Trimester</text>
+  <text x="58" y="211" font-size="10" fill="${C.muted}">Energy returns; genetic screening &amp; structural anomaly tests</text>
+
+  <rect x="40" y="224" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="224" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="58" y="242" font-size="10" font-weight="700" fill="${C.rose}">Weeks 13–16</text>
+  <text x="58" y="256" font-size="11.5" font-weight="600" fill="${C.dark}">Maternal Comfort &amp; Fetal Growth</text>
+  <text x="58" y="267" font-size="10" fill="${C.muted}">Amniocentesis or CVS may be offered; light exercise with clearance</text>
+
+  <!-- Column 2: Weeks 17-20, 21-24, 25-28, 37-40 -->
+  <rect x="414" y="56" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="414" y="56" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="432" y="74" font-size="10" font-weight="700" fill="${C.rose}">Weeks 17–20</text>
+  <text x="432" y="88" font-size="11.5" font-weight="600" fill="${C.dark}">Halfway Milestone</text>
+  <text x="432" y="99" font-size="10" fill="${C.muted}">Fetal movements felt; gestational diabetes screening begins</text>
+
+  <rect x="414" y="112" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="414" y="112" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="432" y="130" font-size="10" font-weight="700" fill="${C.rose}">Weeks 21–24</text>
+  <text x="432" y="144" font-size="11.5" font-weight="600" fill="${C.dark}">Fetal Anomaly Scan</text>
+  <text x="432" y="155" font-size="10" fill="${C.muted}">Most important structural scan; fetal echo if advised</text>
+
+  <rect x="414" y="168" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="414" y="168" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="432" y="186" font-size="10" font-weight="700" fill="${C.rose}">Weeks 25–28</text>
+  <text x="432" y="200" font-size="11.5" font-weight="600" fill="${C.dark}">Third Trimester Begins</text>
+  <text x="432" y="211" font-size="10" fill="${C.muted}">Fetal movements monitored; swelling &amp; discomfort may increase</text>
+
+  <rect x="414" y="224" width="346" height="48" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="414" y="224" width="6" height="48" rx="3" fill="${C.rose}"/>
+  <text x="432" y="242" font-size="10" font-weight="700" fill="${C.rose}">Weeks 37–40</text>
+  <text x="432" y="256" font-size="11.5" font-weight="600" fill="${C.dark}">Full-Term Pregnancy</text>
+  <text x="432" y="267" font-size="10" fill="${C.muted}">Labor signs appear; prepare for hospital &amp; postpartum care</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -2225,6 +2489,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_EGG_DONOR_IVF_STEPS,
     title:   "8 Steps: IVF with Egg Donation",
     altText: "Two-column 8-step grid. Step 1 Initial Consultation and Counseling (medical history; psychological counseling). Step 2 Selecting an Egg Donor (anonymous or known; screened for genetics, health, psychology). Step 3 Synchronising Menstrual Cycles (hormonal medications synchronise recipient and donor). Step 4 Egg Retrieval under light sedation; 20-30 minutes. Step 5 Fertilisation and Embryo Culture (lab fertilisation; embryos cultured 3-5 days). Step 6 Embryo Transfer (best embryo placed into uterus). Step 7 Pregnancy Test and Follow-up (beta-hCG blood test 10-14 days after transfer). Step 8 Emotional Support and Counseling (ongoing psychological support throughout journey).",
+  },
+
+  // ── Wave 9: Published blogs ─────────────────────────────────────────
+  "iui-success-rate-what-to-expect-after-iui-treatment": {
+    svg:     SVG_IUI_SUCCESS_FACTORS,
+    title:   "4 Key Factors That Affect IUI Success Rate",
+    altText: "Four-card horizontal infographic. Card 1 Age of the Woman: under 35 approx 15-18%, age 35-40 approx 10-15%, over 40 lower rates due to egg quality decline. Card 2 Fertility Issues: best results with healthy tubes and mild ovulation or unexplained infertility. Card 3 Sperm Quality: higher motility and concentration improve fertilisation odds significantly. Card 4 Number of Cycles: cumulative success improves over multiple attempts; typically 3-6 cycles recommended.",
+  },
+
+  "ivf-cost-in-ahmedabad-whats-included-how-to-plan-your-budget": {
+    svg:     SVG_IVF_COST_COMPONENTS,
+    title:   "10 Cost Components of an IVF Cycle",
+    altText: "Two-column 10-item grid. Items 1-5: Initial Consultation and Diagnostic Tests; Ovarian Stimulation Medications; Egg Retrieval Procedure; Sperm Collection and Preparation; IVF Lab Charges and Fertilisation. Items 6-10: Embryo Transfer Procedure; Embryo Freezing and Storage; Additional Procedures such as PGT, ERA, and donor gametes; Pregnancy Test and Follow-up; Total Cycle Cost which varies by treatment type and clinic.",
+  },
+
+  "ivf-failure-doesnt-mean-the-end-what-can-you-do-next": {
+    svg:     SVG_IVF_FAILURE_REASONS,
+    title:   "6 Common Reasons IVF Cycles Fail",
+    altText: "Three-row two-column grid plus a footer note. Reason 1 Poor Egg Quality (genetic abnormalities prevent fertilisation). Reason 2 Embryo Quality Issues (chromosomal problems prevent implantation). Reason 3 Uterine Issues (thin lining, polyps, fibroids block implantation). Reason 4 Sperm Factors (low count, motility, morphology, or high DNA fragmentation). Reason 5 Immune or Genetic Factors (immune system may reject the embryo). Reason 6 Timing and Technique (transfer precision and lab expertise influence outcome). Footer: One failed cycle is not the end — PGT-A, ERA, and Hysteroscopy help most couples succeed in subsequent cycles.",
+  },
+
+  "ivf-for-single-women-in-india-navigating-new-art-law": {
+    svg:     SVG_ART_LAW_SINGLE_WOMEN,
+    title:   "4 Key ART Law Provisions for Single Women in India",
+    altText: "Two-by-two card grid. Card 1 Eligibility for IVF: single women including unmarried women and single mothers are legally eligible. Card 2 Age Requirements: women must be between 21 and 50 years of age. Card 3 Informed Consent: all ART procedures require pre-treatment counseling and documented consent. Card 4 Confidentiality: patient identities and medical records are kept strictly confidential by law.",
+  },
+
+  "ivf-pregnancy-week-by-week-symptoms-and-safety": {
+    svg:     SVG_IVF_PREGNANCY_MILESTONES,
+    title:   "IVF Pregnancy: 8 Key Weekly Milestones",
+    altText: "Two-column 8-milestone chart with rose accent bars. Weeks 1-4 Conception and Confirmation (embryo implants; avoid alcohol and smoking). Weeks 5-8 Early Pregnancy Symptoms (nausea, fatigue, breast tenderness; prenatal check-ups begin). Weeks 9-12 Transition to Second Trimester (energy returns; genetic screening). Weeks 13-16 Maternal Comfort and Fetal Growth (amniocentesis may be offered; light exercise with clearance). Weeks 17-20 Halfway Milestone (fetal movements felt; gestational diabetes screening). Weeks 21-24 Fetal Anomaly Scan (most important structural scan; fetal echo if advised). Weeks 25-28 Third Trimester Begins (fetal movements monitored; swelling increases). Weeks 37-40 Full-Term Pregnancy (labor signs appear; prepare for hospital).",
   },
 };
 
