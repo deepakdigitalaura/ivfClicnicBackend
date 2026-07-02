@@ -2702,6 +2702,246 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 12 SVG constants ─────────────────────────────────────────────
+
+// Blog W12-1 (Asthenospermia + ART options): "5 ART Options for Asthenospermia"
+// Source: Blog nodes [19-20] — IUI, IVF, ICSI, MACS, PICSI
+const SVG_ART_OPTIONS_ASTHENOSPERMIA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 210" font-family="${FONT}">
+  <rect width="800" height="210" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="208.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 ART OPTIONS FOR ASTHENOSPERMIA</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">IUI</text>
+  <text x="108" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Washed sperm</text>
+  <text x="108" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">placed directly</text>
+  <text x="108" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">into uterus</text>
+  <rect x="186" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">IVF</text>
+  <text x="254" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Eggs retrieved</text>
+  <text x="254" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">and fertilised</text>
+  <text x="254" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">in the lab</text>
+  <rect x="332" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">ICSI</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Single sperm</text>
+  <text x="400" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">injected directly</text>
+  <text x="400" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">into the egg</text>
+  <rect x="478" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">MACS</text>
+  <text x="546" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Sperm sorted by</text>
+  <text x="546" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">motility and</text>
+  <text x="546" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">DNA integrity</text>
+  <rect x="624" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="104" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">PICSI</text>
+  <text x="692" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Healthiest sperm</text>
+  <text x="692" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">selected via</text>
+  <text x="692" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">hyaluronan binding</text>
+</svg>`;
+
+// Blog W12-2 (Pregnancy Signs): "12 Early Signs of Pregnancy"
+// Source: Blog nodes [5-30] — 12 symptoms listed
+const SVG_PREGNANCY_SIGNS_12 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 380" font-family="${FONT}">
+  <rect width="800" height="380" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="378.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">12 EARLY SIGNS OF PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="75" r="12" fill="${C.rose}"/>
+  <text x="66" y="79" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="70" font-size="11" font-weight="700" fill="${C.dark}">Missed Period</text>
+  <text x="86" y="86" font-size="9.5" fill="${C.muted}">Most common first sign of pregnancy</text>
+  <rect x="40" y="104" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="127" r="12" fill="${C.rose}"/>
+  <text x="66" y="131" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="86" y="122" font-size="11" font-weight="700" fill="${C.dark}">Nausea / Vomiting</text>
+  <text x="86" y="138" font-size="9.5" fill="${C.muted}">Often called morning sickness</text>
+  <rect x="40" y="156" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="179" r="12" fill="${C.rose}"/>
+  <text x="66" y="183" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="86" y="174" font-size="11" font-weight="700" fill="${C.dark}">Fatigue</text>
+  <text x="86" y="190" font-size="9.5" fill="${C.muted}">Extreme tiredness in early pregnancy</text>
+  <rect x="40" y="208" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="231" r="12" fill="${C.rose}"/>
+  <text x="66" y="235" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="226" font-size="11" font-weight="700" fill="${C.dark}">Breast Changes</text>
+  <text x="86" y="242" font-size="9.5" fill="${C.muted}">Tenderness, swelling and darkening</text>
+  <rect x="40" y="260" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="283" r="12" fill="${C.rose}"/>
+  <text x="66" y="287" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">5</text>
+  <text x="86" y="278" font-size="11" font-weight="700" fill="${C.dark}">Frequent Urination</text>
+  <text x="86" y="294" font-size="9.5" fill="${C.muted}">Kidneys processing extra fluid volume</text>
+  <rect x="40" y="312" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="335" r="12" fill="${C.rose}"/>
+  <text x="66" y="339" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">6</text>
+  <text x="86" y="330" font-size="11" font-weight="700" fill="${C.dark}">Food Aversions / Cravings</text>
+  <text x="86" y="346" font-size="9.5" fill="${C.muted}">Hormonal changes alter taste and smell</text>
+  <rect x="405" y="52" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="75" r="12" fill="${C.rose}"/>
+  <text x="431" y="79" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">7</text>
+  <text x="451" y="70" font-size="11" font-weight="700" fill="${C.dark}">Mood Swings</text>
+  <text x="451" y="86" font-size="9.5" fill="${C.muted}">Rapid hormone fluctuations affect emotions</text>
+  <rect x="405" y="104" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="127" r="12" fill="${C.rose}"/>
+  <text x="431" y="131" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">8</text>
+  <text x="451" y="122" font-size="11" font-weight="700" fill="${C.dark}">Light Spotting / Cramping</text>
+  <text x="451" y="138" font-size="9.5" fill="${C.muted}">May indicate implantation bleeding</text>
+  <rect x="405" y="156" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="179" r="12" fill="${C.rose}"/>
+  <text x="431" y="183" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">9</text>
+  <text x="451" y="174" font-size="11" font-weight="700" fill="${C.dark}">Bloating / Constipation</text>
+  <text x="451" y="190" font-size="9.5" fill="${C.muted}">Progesterone slows digestion</text>
+  <rect x="405" y="208" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="231" r="12" fill="${C.rose}"/>
+  <text x="431" y="235" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">10</text>
+  <text x="451" y="226" font-size="11" font-weight="700" fill="${C.dark}">Dizziness</text>
+  <text x="451" y="242" font-size="9.5" fill="${C.muted}">Blood pressure and volume changes</text>
+  <rect x="405" y="260" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="283" r="12" fill="${C.rose}"/>
+  <text x="431" y="287" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">11</text>
+  <text x="451" y="278" font-size="11" font-weight="700" fill="${C.dark}">Headaches</text>
+  <text x="451" y="294" font-size="9.5" fill="${C.muted}">Hormonal shifts in early pregnancy</text>
+  <rect x="405" y="312" width="355" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="335" r="12" fill="${C.rose}"/>
+  <text x="431" y="339" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">12</text>
+  <text x="451" y="330" font-size="11" font-weight="700" fill="${C.dark}">Heightened Sense of Smell</text>
+  <text x="451" y="346" font-size="9.5" fill="${C.muted}">Oestrogen amplifies scent sensitivity</text>
+</svg>`;
+
+// Blog W12-3 (PGT preparation): "3 Phases of the PGT Process"
+// Source: Blog nodes [4-19] — Before/During/After PGT
+const SVG_PGT_PHASES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 228" font-family="${FONT}">
+  <rect width="800" height="228" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="226.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 PHASES OF THE PGT PROCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <defs><marker id="arrPGT" markerWidth="8" markerHeight="6" refX="7" refY="3" orient="auto"><polygon points="0 0,8 3,0 6" fill="${C.rose}"/></marker></defs>
+  <rect x="40" y="44" width="230" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="230" height="40" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="76" width="230" height="8" fill="${C.rose}"/>
+  <text x="155" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">BEFORE PGT</text>
+  <circle cx="60" cy="107" r="5" fill="${C.rose}"/>
+  <text x="74" y="111" font-size="10.5" fill="${C.dark}" font-weight="600">Fertility consultation</text>
+  <circle cx="60" cy="135" r="5" fill="${C.rose}"/>
+  <text x="74" y="139" font-size="10.5" fill="${C.dark}" font-weight="600">Genetic counselling</text>
+  <circle cx="60" cy="163" r="5" fill="${C.rose}"/>
+  <text x="74" y="167" font-size="10.5" fill="${C.dark}" font-weight="600">IVF protocol preparation</text>
+  <line x1="272" y1="127" x2="287" y2="127" stroke="${C.rose}" stroke-width="1.5" marker-end="url(#arrPGT)"/>
+  <rect x="290" y="44" width="220" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="290" y="44" width="220" height="40" rx="8" fill="${C.dark}"/>
+  <rect x="290" y="76" width="220" height="8" fill="${C.dark}"/>
+  <text x="400" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">DURING PGT</text>
+  <circle cx="310" cy="107" r="5" fill="${C.rose}"/>
+  <text x="324" y="111" font-size="10.5" fill="${C.dark}" font-weight="600">Embryo biopsy (day 5)</text>
+  <circle cx="310" cy="135" r="5" fill="${C.rose}"/>
+  <text x="324" y="139" font-size="10.5" fill="${C.dark}" font-weight="600">Genetic lab testing</text>
+  <circle cx="310" cy="163" r="5" fill="${C.rose}"/>
+  <text x="324" y="167" font-size="10.5" fill="${C.dark}" font-weight="600">Embryo freezing</text>
+  <line x1="512" y1="127" x2="527" y2="127" stroke="${C.rose}" stroke-width="1.5" marker-end="url(#arrPGT)"/>
+  <rect x="530" y="44" width="230" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="530" y="44" width="230" height="40" rx="8" fill="${C.dark}"/>
+  <rect x="530" y="76" width="230" height="8" fill="${C.dark}"/>
+  <text x="645" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">AFTER PGT</text>
+  <circle cx="550" cy="107" r="5" fill="${C.rose}"/>
+  <text x="564" y="111" font-size="10.5" fill="${C.dark}" font-weight="600">Receiving results</text>
+  <circle cx="550" cy="135" r="5" fill="${C.rose}"/>
+  <text x="564" y="139" font-size="10.5" fill="${C.dark}" font-weight="600">Embryo transfer</text>
+  <circle cx="550" cy="163" r="5" fill="${C.rose}"/>
+  <text x="564" y="167" font-size="10.5" fill="${C.dark}" font-weight="600">Post-transfer monitoring</text>
+</svg>`;
+
+// Blog W12-4 (PRP vs Traditional): "When to Choose PRP vs Traditional"
+// Source: Blog nodes [15-17] — 4 PRP use cases, 3 traditional use cases
+const SVG_PRP_VS_TRADITIONAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}" letter-spacing="0.3">PRP vs TRADITIONAL FERTILITY — WHEN TO CHOOSE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="355" height="40" rx="8" fill="${C.rose}"/>
+  <text x="218" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">CHOOSE PRP WHEN…</text>
+  <rect x="405" y="44" width="355" height="40" rx="8" fill="${C.dark}"/>
+  <text x="582" y="68" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">CHOOSE TRADITIONAL WHEN…</text>
+  <rect x="40" y="92" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="56" y="107" font-size="10.5" font-weight="700" fill="${C.rose}">Poor egg quality</text>
+  <text x="56" y="122" font-size="9.5" fill="${C.muted}">PRP stimulates cellular repair and regeneration</text>
+  <rect x="40" y="134" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="56" y="149" font-size="10.5" font-weight="700" fill="${C.rose}">Uterine lining issues</text>
+  <text x="56" y="164" font-size="9.5" fill="${C.muted}">PRP thickens lining to improve implantation</text>
+  <rect x="40" y="176" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="56" y="191" font-size="10.5" font-weight="700" fill="${C.rose}">Recurrent miscarriage</text>
+  <text x="56" y="206" font-size="9.5" fill="${C.muted}">PRP may reduce inflammation for healthy pregnancy</text>
+  <rect x="40" y="218" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="56" y="233" font-size="10.5" font-weight="700" fill="${C.rose}">Failed IVF cycles</text>
+  <text x="56" y="248" font-size="9.5" fill="${C.muted}">Combine PRP with IVF to boost success rates</text>
+  <rect x="405" y="92" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="421" y="107" font-size="10.5" font-weight="700" fill="${C.dark}">Severe infertility</text>
+  <text x="421" y="122" font-size="9.5" fill="${C.muted}">IVF or ICSI may be more effective</text>
+  <rect x="405" y="134" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="421" y="149" font-size="10.5" font-weight="700" fill="${C.dark}">Blocked fallopian tubes</text>
+  <text x="421" y="164" font-size="9.5" fill="${C.muted}">IVF bypasses blocked tubes for fertilisation</text>
+  <rect x="405" y="176" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="421" y="191" font-size="10.5" font-weight="700" fill="${C.dark}">Male factor infertility</text>
+  <text x="421" y="206" font-size="9.5" fill="${C.muted}">ICSI addresses low or abnormal sperm issues</text>
+</svg>`;
+
+// Blog W12-5 (IUI Failure reasons): "7 Common Causes of IUI Failure"
+// Source: Blog nodes [29-42] — 7 causes listed
+const SVG_IUI_FAILURE_CAUSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 316" font-family="${FONT}">
+  <rect width="800" height="316" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="314.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 COMMON CAUSES OF IUI FAILURE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="79" r="14" fill="${C.rose}"/>
+  <text x="64" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="74" font-size="11" font-weight="700" fill="${C.dark}">Age Factor</text>
+  <text x="86" y="90" font-size="9.5" fill="${C.muted}">Women over 35 have lower IUI success rates</text>
+  <rect x="40" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="139" r="14" fill="${C.rose}"/>
+  <text x="64" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="86" y="134" font-size="11" font-weight="700" fill="${C.dark}">Poor Sperm Quality</text>
+  <text x="86" y="150" font-size="9.5" fill="${C.muted}">Low motility or abnormal morphology reduces fertilisation</text>
+  <rect x="40" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="199" r="14" fill="${C.rose}"/>
+  <text x="64" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="86" y="194" font-size="11" font-weight="700" fill="${C.dark}">Ovulation Issues</text>
+  <text x="86" y="210" font-size="9.5" fill="${C.muted}">Irregular or absent ovulation (PCOS) limits success</text>
+  <rect x="40" y="232" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="259" r="14" fill="${C.rose}"/>
+  <text x="64" y="263.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="254" font-size="11" font-weight="700" fill="${C.dark}">Tubal Blockage or Damage</text>
+  <text x="86" y="270" font-size="9.5" fill="${C.muted}">Blocked or damaged tubes prevent egg-sperm meeting</text>
+  <rect x="405" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="79" r="14" fill="${C.rose}"/>
+  <text x="429" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="451" y="74" font-size="11" font-weight="700" fill="${C.dark}">Endometrial Lining Issues</text>
+  <text x="451" y="90" font-size="9.5" fill="${C.muted}">Thin or unhealthy lining prevents implantation</text>
+  <rect x="405" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="139" r="14" fill="${C.rose}"/>
+  <text x="429" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="451" y="134" font-size="11" font-weight="700" fill="${C.dark}">Hormonal Imbalances</text>
+  <text x="451" y="150" font-size="9.5" fill="${C.muted}">Thyroid disorders and insulin resistance disrupt ovulation</text>
+  <rect x="405" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="199" r="14" fill="${C.rose}"/>
+  <text x="429" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="451" y="194" font-size="11" font-weight="700" fill="${C.dark}">Unexplained Infertility</text>
+  <text x="451" y="210" font-size="9.5" fill="${C.muted}">No specific cause found despite normal test results</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -3038,6 +3278,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_BFI_REJUVENATION_IVF,
     title:   "Why Choose BFI for Ovarian Rejuvenation + IVF",
     altText: "Five-row accent-bar infographic listing BFI differentiators. Reason 1 Personalised Assessment: thorough evaluation of ovarian reserve, fertility history and treatment goals. Reason 2 Realistic Expectations: honest guidance on what each procedure can achieve. Reason 3 Transparent Counselling: clear explanation of benefits, limitations and risks. Reason 4 Comprehensive Fertility Solutions: IVF, ICSI, PRP and emerging treatments tailored to each patient. Reason 5 Ethical and Compassionate Care: patient comfort, safety and emotional support throughout the journey.",
+  },
+
+  // ── Wave 12: Published blogs ──────────────────────────────────────────
+  "asthenospermia-understanding-the-condition-and-exploring-assisted-reproductive-technologies-art-options": {
+    svg:     SVG_ART_OPTIONS_ASTHENOSPERMIA,
+    title:   "5 ART Options for Asthenospermia",
+    altText: "Five-panel horizontal infographic. Panel 1 IUI: washed sperm placed directly into the uterus. Panel 2 IVF: eggs retrieved and fertilised in the lab. Panel 3 ICSI: single sperm injected directly into the egg. Panel 4 MACS: sperm sorted by motility and DNA integrity. Panel 5 PICSI: healthiest sperm selected via hyaluronan binding.",
+  },
+
+  "pregnancy-signs-symptoms": {
+    svg:     SVG_PREGNANCY_SIGNS_12,
+    title:   "12 Early Signs of Pregnancy",
+    altText: "Two-column twelve-item grid. Items 1-6 (left): Missed Period (most common first sign); Nausea / Vomiting (morning sickness); Fatigue (extreme tiredness); Breast Changes (tenderness, swelling, darkening); Frequent Urination (kidneys processing extra fluid); Food Aversions / Cravings (hormonal changes alter taste and smell). Items 7-12 (right): Mood Swings (rapid hormone fluctuations); Light Spotting / Cramping (may indicate implantation bleeding); Bloating / Constipation (progesterone slows digestion); Dizziness (blood pressure and volume changes); Headaches (hormonal shifts); Heightened Sense of Smell (oestrogen amplifies scent sensitivity).",
+  },
+
+  "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure": {
+    svg:     SVG_PGT_PHASES,
+    title:   "3 Phases of the PGT Process",
+    altText: "Three-panel horizontal infographic with arrows. Panel 1 Before PGT (rose header): fertility consultation, genetic counselling, IVF protocol preparation. Panel 2 During PGT (dark header): embryo biopsy on day 5, genetic lab testing, embryo freezing. Panel 3 After PGT (dark header): receiving results, embryo transfer, post-transfer monitoring.",
+  },
+
+  "prp-vs-traditional-fertility-treatments-whats-the-difference": {
+    svg:     SVG_PRP_VS_TRADITIONAL,
+    title:   "When to Choose: PRP vs Traditional Fertility Treatment",
+    altText: "Two-column comparison infographic. Left column Choose PRP When (rose header) — 4 items: Poor egg quality (PRP stimulates cellular repair); Uterine lining issues (PRP thickens lining for implantation); Recurrent miscarriage (PRP may reduce inflammation); Failed IVF cycles (combine PRP with IVF). Right column Choose Traditional When (dark header) — 3 items: Severe infertility (IVF or ICSI may be more effective); Blocked fallopian tubes (IVF bypasses blockage); Male factor infertility (ICSI addresses sperm issues).",
+  },
+
+  "reasons-for-iui-failure-symptoms-and-causes": {
+    svg:     SVG_IUI_FAILURE_CAUSES,
+    title:   "7 Common Causes of IUI Failure",
+    altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 };
 

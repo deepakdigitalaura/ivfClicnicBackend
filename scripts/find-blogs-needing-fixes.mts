@@ -76,6 +76,12 @@ const DONE = new Set([
   "nourishing-your-body-after-embryo-transfer-a-comprehensive-guide",
   "ovarian-rejuvenation-for-restoring-fertility-a-new-ray-of-hope",
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments",
+  // Wave 12
+  "asthenospermia-understanding-the-condition-and-exploring-assisted-reproductive-technologies-art-options",
+  "pregnancy-signs-symptoms",
+  "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
+  "prp-vs-traditional-fertility-treatments-whats-the-difference",
+  "reasons-for-iui-failure-symptoms-and-causes",
 ]);
 
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };

@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 12 ──────────────────────────────────────────────────────────
+  "asthenospermia-understanding-the-condition-and-exploring-assisted-reproductive-technologies-art-options": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "pregnancy-signs-symptoms": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "prp-vs-traditional-fertility-treatments-whats-the-difference": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "reasons-for-iui-failure-symptoms-and-causes": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
