@@ -82,6 +82,12 @@ const DONE = new Set([
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
   "prp-vs-traditional-fertility-treatments-whats-the-difference",
   "reasons-for-iui-failure-symptoms-and-causes",
+  // Wave 13
+  "advantages-and-disadvantages-of-pgt",
+  "normal-delivery-tips-to-increase-your-chances-of-a-natural-birth",
+  "pcos-diet-tips-to-support-natural-conception",
+  "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "pros-and-cons-of-using-donor-eggs",
 ]);
 
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };

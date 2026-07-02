@@ -483,6 +483,19 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 13 ──────────────────────────────────────────────────────────
+  "advantages-and-disadvantages-of-pgt": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "normal-delivery-tips-to-increase-your-chances-of-a-natural-birth": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "pcos-diet-tips-to-support-natural-conception": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "pros-and-cons-of-using-donor-eggs": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 12 ──────────────────────────────────────────────────────────
   "asthenospermia-understanding-the-condition-and-exploring-assisted-reproductive-technologies-art-options": {
     removeBlocks: ["complete guide", "key numbers"],

@@ -2702,6 +2702,130 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 13 SVG constants ─────────────────────────────────────────────
+
+// Blog W13-2 (Normal delivery tips): "6 Tips to Increase Your Chances of a Natural Birth"
+// Source: Blog nodes [4-25] — 6 sections: understand body, prepare, nutrition, support, stimulation, mindset
+const SVG_NATURAL_DELIVERY_TIPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 242" font-family="${FONT}">
+  <rect width="800" height="242" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="240.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 TIPS TO INCREASE YOUR CHANCES OF A NATURAL BIRTH</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="78" r="14" fill="${C.rose}"/>
+  <text x="66" y="82.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="88" y="73" font-size="11" font-weight="700" fill="${C.dark}">Understand Your Body</text>
+  <text x="88" y="89" font-size="9.5" fill="${C.muted}">Take prenatal yoga and know your body's limits</text>
+  <rect x="40" y="110" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="136" r="14" fill="${C.rose}"/>
+  <text x="66" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="88" y="131" font-size="11" font-weight="700" fill="${C.dark}">Prepare Your Body</text>
+  <text x="88" y="147" font-size="9.5" fill="${C.muted}">Pelvic floor, perineal massage, fetal positioning</text>
+  <rect x="40" y="168" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="194" r="14" fill="${C.rose}"/>
+  <text x="66" y="198.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="88" y="189" font-size="11" font-weight="700" fill="${C.dark}">Nutrition and Hydration</text>
+  <text x="88" y="205" font-size="9.5" fill="${C.muted}">Whole foods balanced diet; stay well hydrated</text>
+  <rect x="405" y="52" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="78" r="14" fill="${C.rose}"/>
+  <text x="431" y="82.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="453" y="73" font-size="11" font-weight="700" fill="${C.dark}">Labour Support</text>
+  <text x="453" y="89" font-size="9.5" fill="${C.muted}">Supportive care, birth plan and doula support</text>
+  <rect x="405" y="110" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="136" r="14" fill="${C.rose}"/>
+  <text x="431" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="453" y="131" font-size="11" font-weight="700" fill="${C.dark}">Natural Stimulation</text>
+  <text x="453" y="147" font-size="9.5" fill="${C.muted}">Evening primrose, acupuncture and gentle walking</text>
+  <rect x="405" y="168" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="194" r="14" fill="${C.rose}"/>
+  <text x="431" y="198.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="453" y="189" font-size="11" font-weight="700" fill="${C.dark}">Mindset and Relaxation</text>
+  <text x="453" y="205" font-size="9.5" fill="${C.muted}">Positive affirmations, breathing and meditation</text>
+</svg>`;
+
+// Blog W13-3 (PCOS diet tips): "9 PCOS Diet Tips to Support Natural Conception"
+// Source: Blog node [8-9] — 9 diet tips listed
+const SVG_PCOS_DIET_TIPS_9 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 326" font-family="${FONT}">
+  <rect width="800" height="326" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="324.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">9 PCOS DIET TIPS FOR NATURAL CONCEPTION</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="74" r="12" fill="${C.rose}"/>
+  <text x="64" y="78" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="84" y="69" font-size="11" font-weight="700" fill="${C.dark}">Low-GI Foods</text>
+  <text x="84" y="85" font-size="9.5" fill="${C.muted}">Whole grains, legumes and non-starchy vegetables</text>
+  <rect x="40" y="102" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="124" r="12" fill="${C.rose}"/>
+  <text x="64" y="128" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="84" y="119" font-size="11" font-weight="700" fill="${C.dark}">Carbs + Protein Balance</text>
+  <text x="84" y="135" font-size="9.5" fill="${C.muted}">Pair carbs with protein to reduce blood sugar spikes</text>
+  <rect x="40" y="152" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="174" r="12" fill="${C.rose}"/>
+  <text x="64" y="178" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="84" y="169" font-size="11" font-weight="700" fill="${C.dark}">Healthy Fats</text>
+  <text x="84" y="185" font-size="9.5" fill="${C.muted}">Avocado, olive oil, nuts and omega-3 fatty acids</text>
+  <rect x="40" y="202" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="224" r="12" fill="${C.rose}"/>
+  <text x="64" y="228" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">4</text>
+  <text x="84" y="219" font-size="11" font-weight="700" fill="${C.dark}">Increase Fiber</text>
+  <text x="84" y="235" font-size="9.5" fill="${C.muted}">Supports digestion and improves insulin sensitivity</text>
+  <rect x="40" y="252" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="274" r="12" fill="${C.rose}"/>
+  <text x="64" y="278" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">5</text>
+  <text x="84" y="269" font-size="11" font-weight="700" fill="${C.dark}">Avoid Processed Foods</text>
+  <text x="84" y="285" font-size="9.5" fill="${C.muted}">Cut refined sugar, white bread and sweetened drinks</text>
+  <rect x="405" y="52" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="74" r="12" fill="${C.rose}"/>
+  <text x="429" y="78" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">6</text>
+  <text x="449" y="69" font-size="11" font-weight="700" fill="${C.dark}">Stay Hydrated</text>
+  <text x="449" y="85" font-size="9.5" fill="${C.muted}">Drink plenty of water for hormonal balance</text>
+  <rect x="405" y="102" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="124" r="12" fill="${C.rose}"/>
+  <text x="429" y="128" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">7</text>
+  <text x="449" y="119" font-size="11" font-weight="700" fill="${C.dark}">Limit Dairy</text>
+  <text x="449" y="135" font-size="9.5" fill="${C.muted}">Reduce if sensitive; opt for plant-based alternatives</text>
+  <rect x="405" y="152" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="174" r="12" fill="${C.rose}"/>
+  <text x="429" y="178" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">8</text>
+  <text x="449" y="169" font-size="11" font-weight="700" fill="${C.dark}">Anti-Inflammatory Foods</text>
+  <text x="449" y="185" font-size="9.5" fill="${C.muted}">Turmeric, ginger, berries and leafy greens</text>
+  <rect x="405" y="202" width="355" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="224" r="12" fill="${C.rose}"/>
+  <text x="429" y="228" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">9</text>
+  <text x="449" y="219" font-size="11" font-weight="700" fill="${C.dark}">Supplements (with Doctor)</text>
+  <text x="449" y="235" font-size="9.5" fill="${C.muted}">Inositol, Vitamin D and Omega-3 under guidance</text>
+</svg>`;
+
+// Blog W13-4 (Post-embryo transfer timeline): "Post-Embryo Transfer: 4 Key Milestones"
+// Source: Blog nodes [7-22] — day-by-day biological story in 4 phases
+const SVG_EMBRYO_TRANSFER_TIMELINE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">POST-EMBRYO TRANSFER: 4 KEY MILESTONES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="63" font-size="10" font-weight="700" fill="${C.rose}">Days 1–3</text>
+  <text x="60" y="79" font-size="11.5" font-weight="600" fill="${C.dark}">Embryo Hatches &amp; Settles</text>
+  <text x="60" y="90" font-size="10" fill="${C.muted}">Zona pellucida dissolves; embryo floats freely in uterine cavity</text>
+  <rect x="40" y="102" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="102" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="121" font-size="10" font-weight="700" fill="${C.rose}">Days 4–5</text>
+  <text x="60" y="137" font-size="11.5" font-weight="600" fill="${C.dark}">Implantation Occurs</text>
+  <text x="60" y="148" font-size="10" fill="${C.muted}">Hatched embryo attaches to and burrows into the endometrial lining</text>
+  <rect x="40" y="160" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="160" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="179" font-size="10" font-weight="700" fill="${C.rose}">Days 6–9</text>
+  <text x="60" y="195" font-size="11.5" font-weight="600" fill="${C.dark}">hCG Production Begins</text>
+  <text x="60" y="206" font-size="10" fill="${C.muted}">Pregnancy hormone rises but may be too low for most home tests</text>
+  <rect x="40" y="218" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="218" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="237" font-size="10" font-weight="700" fill="${C.rose}">Days 10–14</text>
+  <text x="60" y="253" font-size="11.5" font-weight="600" fill="${C.dark}">Official Blood Pregnancy Test</text>
+  <text x="60" y="264" font-size="10" fill="${C.muted}">Beta hCG blood test gives a clear and reliable result</text>
+</svg>`;
+
 // ── Wave 12 SVG constants ─────────────────────────────────────────────
 
 // Blog W12-1 (Asthenospermia + ART options): "5 ART Options for Asthenospermia"
@@ -3309,6 +3433,25 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IUI_FAILURE_CAUSES,
     title:   "7 Common Causes of IUI Failure",
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
+  },
+
+  // ── Wave 13: Published blogs ──────────────────────────────────────────
+  "normal-delivery-tips-to-increase-your-chances-of-a-natural-birth": {
+    svg:     SVG_NATURAL_DELIVERY_TIPS,
+    title:   "6 Tips to Increase Your Chances of a Natural Birth",
+    altText: "Two-column six-item grid. Items 1-3 (left): Understand Your Body (take prenatal yoga and know your body's limits); Prepare Your Body (pelvic floor, perineal massage, fetal positioning); Nutrition and Hydration (whole foods balanced diet; stay well hydrated). Items 4-6 (right): Labour Support (supportive care provider, birth plan and doula); Natural Stimulation (evening primrose, acupuncture and gentle walking); Mindset and Relaxation (positive affirmations, breathing and meditation).",
+  },
+
+  "pcos-diet-tips-to-support-natural-conception": {
+    svg:     SVG_PCOS_DIET_TIPS_9,
+    title:   "9 PCOS Diet Tips to Support Natural Conception",
+    altText: "Two-column nine-item grid. Items 1-5 (left): Low-GI Foods (whole grains, legumes and non-starchy vegetables); Carbs + Protein (pair carbs with protein to reduce blood sugar spikes); Healthy Fats (avocado, olive oil, nuts and omega-3); Increase Fiber (supports digestion and improves insulin sensitivity); Avoid Processed Foods (cut refined sugar, white bread and sweetened drinks). Items 6-9 (right): Stay Hydrated (drink plenty of water for hormonal balance); Limit Dairy (reduce if sensitive; opt for plant-based alternatives); Anti-Inflammatory Foods (turmeric, ginger, berries and leafy greens); Supplements with Doctor (inositol, Vitamin D and Omega-3 under guidance).",
+  },
+
+  "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days": {
+    svg:     SVG_EMBRYO_TRANSFER_TIMELINE,
+    title:   "Post-Embryo Transfer: 4 Key Milestones",
+    altText: "Four-row accent-bar infographic. Milestone 1 Days 1–3: Embryo Hatches and Settles — zona pellucida dissolves; embryo floats freely in uterine cavity. Milestone 2 Days 4–5: Implantation Occurs — hatched embryo attaches to and burrows into the endometrial lining. Milestone 3 Days 6–9: hCG Production Begins — pregnancy hormone rises but may be too low for home tests. Milestone 4 Days 10–14: Official Blood Pregnancy Test — beta hCG blood test gives a clear and reliable result.",
   },
 };
 
