@@ -20,11 +20,11 @@ const DONE = new Set([
 type Block = { type: string; fields?: Record<string, unknown>; children?: Block[] };
 
 async function main() {
-  const docs = await sanity.fetch<{ _id: string; slug: string; title: string; contentRaw: string }[]>(
-    `*[_type=="blog"]{_id,slug,title,contentRaw} | order(_id asc)`
+  const docs = await sanity.fetch<{ _id: string; slug: string; title: string; contentRaw: string; status: string }[]>(
+    `*[_type=="blog" && status=="published"]{_id,slug,title,contentRaw,status} | order(_id asc)`
   );
 
-  console.log(`Total published blogs with contentRaw: ${docs.length}\n`);
+  console.log(`Total PUBLISHED blogs: ${docs.length}\n`);
 
   const candidates: { slug: string; title: string; _id: string; issues: string[] }[] = [];
 

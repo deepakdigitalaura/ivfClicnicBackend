@@ -358,6 +358,27 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "how-low-amh-affects-menstrual-cycle-regularity": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+
+  // ── Wave 5: Published blogs ─────────────────────────────────────────
+  "how-many-times-can-a-person-undergo-ivf-procedure": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+
+  "how-much-weight-can-a-baby-gain-in-a-week-in-the-womb": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-to-get-pregnant-without-removing-fibroid-or-without-surgery": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-to-improve-your-chances-of-conceiving-naturally-with-low-amh-levels": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "how-to-improve-your-chances-of-iui-success-naturally": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

@@ -1017,6 +1017,254 @@ const SVG_LOW_AMH_EFFECTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 
   <text x="438" y="228" font-size="10.5" fill="${C.dark}">• Mood swings &amp; cycle instability</text>
 </svg>`;
 
+// ── Wave 5 SVGs ──────────────────────────────────────────────────────
+
+// Blog W5-1 (IVF cycles): "4 Factors That Influence How Many IVF Cycles You May Need"
+// Data from blog nodes [8-11]: Age, Fertility issues, Medical history, Response to previous cycles
+const SVG_IVF_CYCLE_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 FACTORS THAT INFLUENCE HOW MANY IVF CYCLES YOU MAY NEED</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Box 1: Age -->
+  <rect x="40" y="48" width="340" height="92" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="66" width="340" height="12" fill="${C.rose}"/>
+  <text x="210" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">AGE</text>
+  <text x="58" y="92" font-size="10.5" fill="${C.dark}">• Success rates decline with age, especially after 40</text>
+  <text x="58" y="108" font-size="10.5" fill="${C.dark}">• Younger women may need fewer cycles</text>
+  <text x="58" y="124" font-size="10.5" fill="${C.dark}">• Women over 45 may consider egg donation</text>
+
+  <!-- Box 2: Fertility Issues -->
+  <rect x="420" y="48" width="340" height="92" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="420" y="48" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="420" y="66" width="340" height="12" fill="${C.rose}"/>
+  <text x="590" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">TYPE OF FERTILITY ISSUES</text>
+  <text x="438" y="92" font-size="10.5" fill="${C.dark}">• Severity of the condition impacts outcomes</text>
+  <text x="438" y="108" font-size="10.5" fill="${C.dark}">• Tubal, ovarian or male factor each differ</text>
+  <text x="438" y="124" font-size="10.5" fill="${C.dark}">• Unexplained infertility may require more cycles</text>
+
+  <!-- Box 3: Medical History -->
+  <rect x="40" y="152" width="340" height="84" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="152" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="170" width="340" height="12" fill="${C.rose}"/>
+  <text x="210" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">MEDICAL HISTORY</text>
+  <text x="58" y="196" font-size="10.5" fill="${C.dark}">• Previous surgeries affect uterine environment</text>
+  <text x="58" y="212" font-size="10.5" fill="${C.dark}">• Chronic conditions require tailored protocols</text>
+  <text x="58" y="228" font-size="10.5" fill="${C.dark}">• Prior treatments inform the current plan</text>
+
+  <!-- Box 4: Response to Previous Cycles -->
+  <rect x="420" y="152" width="340" height="84" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="420" y="152" width="340" height="30" rx="8" fill="${C.rose}"/>
+  <rect x="420" y="170" width="340" height="12" fill="${C.rose}"/>
+  <text x="590" y="172" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">RESPONSE TO PREVIOUS CYCLES</text>
+  <text x="438" y="196" font-size="10.5" fill="${C.dark}">• Ovarian response guides future stimulation</text>
+  <text x="438" y="212" font-size="10.5" fill="${C.dark}">• Embryo quality from prior cycles matters</text>
+  <text x="438" y="228" font-size="10.5" fill="${C.dark}">• Most clinics recommend 3–6 cycles total</text>
+</svg>`;
+
+// Blog W5-2 (Fetal weight): "Baby Weight Gain by Trimester"
+// Data from blog nodes [6][7][9][10]: trimester-by-trimester weekly gain + milestone weights
+const SVG_BABY_WEIGHT_TRIMESTERS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 206" font-family="${FONT}">
+  <rect width="800" height="206" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="204.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BABY WEIGHT GAIN BY TRIMESTER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Panel 1: First Trimester -->
+  <rect x="40" y="48" width="218" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">FIRST TRIMESTER</text>
+  <text x="149" y="78" text-anchor="middle" font-size="10" fill="${C.white}">Weeks 0 – 12</text>
+  <text x="149" y="106" text-anchor="middle" font-size="13" font-weight="700" fill="${C.rose}">0.5 – 1g / week</text>
+  <line x1="68" y1="118" x2="230" y2="118" stroke="${C.border}" stroke-width="1"/>
+  <text x="149" y="136" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Milestone</text>
+  <text x="149" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">At 12 weeks:</text>
+  <text x="149" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">~14 grams</text>
+  <text x="149" y="184" text-anchor="middle" font-size="9" fill="${C.muted}">Organs forming rapidly</text>
+
+  <!-- Panel 2: Second Trimester -->
+  <rect x="291" y="48" width="218" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">SECOND TRIMESTER</text>
+  <text x="400" y="78" text-anchor="middle" font-size="10" fill="${C.white}">Weeks 13 – 26</text>
+  <text x="400" y="106" text-anchor="middle" font-size="13" font-weight="700" fill="${C.rose}">50 – 100g / week</text>
+  <line x1="319" y1="118" x2="481" y2="118" stroke="${C.border}" stroke-width="1"/>
+  <text x="400" y="136" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Milestone</text>
+  <text x="400" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">At 20 weeks:</text>
+  <text x="400" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">~300 grams</text>
+  <text x="400" y="184" text-anchor="middle" font-size="9" fill="${C.muted}">Movement felt by mother</text>
+
+  <!-- Panel 3: Third Trimester -->
+  <rect x="542" y="48" width="218" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">THIRD TRIMESTER</text>
+  <text x="651" y="78" text-anchor="middle" font-size="10" fill="${C.white}">Weeks 27 – 40</text>
+  <text x="651" y="106" text-anchor="middle" font-size="13" font-weight="700" fill="${C.rose}">100 – 200g / week</text>
+  <line x1="570" y1="118" x2="732" y2="118" stroke="${C.border}" stroke-width="1"/>
+  <text x="651" y="136" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Milestone</text>
+  <text x="651" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">At 40 weeks:</text>
+  <text x="651" y="167" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">3 – 4 kg</text>
+  <text x="651" y="184" text-anchor="middle" font-size="9" fill="${C.muted}">Full-term birth weight</text>
+</svg>`;
+
+// Blog W5-3 (Fibroids): "3 Types of Uterine Fibroids"
+// Data from blog nodes [11][13][14]: Submucosal, Intramural (most common), Subserosal
+const SVG_FIBROID_TYPES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 210" font-family="${FONT}">
+  <rect width="800" height="210" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="208.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 TYPES OF UTERINE FIBROIDS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Panel 1: Submucosal -->
+  <rect x="40" y="48" width="218" height="150" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">SUBMUCOSAL</text>
+  <text x="149" y="78" text-anchor="middle" font-size="9.5" fill="${C.white}">Inner lining layer</text>
+  <text x="149" y="104" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Location</text>
+  <text x="149" y="120" text-anchor="middle" font-size="10" fill="${C.muted}">Just beneath the inner</text>
+  <text x="149" y="134" text-anchor="middle" font-size="10" fill="${C.muted}">uterine lining (endometrium)</text>
+  <text x="149" y="152" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Main Symptom</text>
+  <text x="149" y="168" text-anchor="middle" font-size="10" fill="${C.muted}">Heavy menstrual bleeding</text>
+  <text x="149" y="182" text-anchor="middle" font-size="10" fill="${C.muted}">Prolonged periods</text>
+
+  <!-- Panel 2: Intramural -->
+  <rect x="291" y="48" width="218" height="150" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">INTRAMURAL</text>
+  <text x="400" y="78" text-anchor="middle" font-size="9.5" fill="${C.white}">Most common type</text>
+  <text x="400" y="104" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Location</text>
+  <text x="400" y="120" text-anchor="middle" font-size="10" fill="${C.muted}">Within the muscular wall</text>
+  <text x="400" y="134" text-anchor="middle" font-size="10" fill="${C.muted}">of the uterus (myometrium)</text>
+  <text x="400" y="152" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Main Symptom</text>
+  <text x="400" y="168" text-anchor="middle" font-size="10" fill="${C.muted}">Pelvic pain &amp; pressure</text>
+  <text x="400" y="182" text-anchor="middle" font-size="10" fill="${C.muted}">if large (&gt;4 cm)</text>
+
+  <!-- Panel 3: Subserosal -->
+  <rect x="542" y="48" width="218" height="150" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="65" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">SUBSEROSAL</text>
+  <text x="651" y="78" text-anchor="middle" font-size="9.5" fill="${C.white}">Outer wall layer</text>
+  <text x="651" y="104" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Location</text>
+  <text x="651" y="120" text-anchor="middle" font-size="10" fill="${C.muted}">On the outer wall of</text>
+  <text x="651" y="134" text-anchor="middle" font-size="10" fill="${C.muted}">the uterus; grows outward</text>
+  <text x="651" y="152" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Main Symptom</text>
+  <text x="651" y="168" text-anchor="middle" font-size="10" fill="${C.muted}">Pressure on bladder</text>
+  <text x="651" y="182" text-anchor="middle" font-size="10" fill="${C.muted}">or rectum</text>
+</svg>`;
+
+// Blog W5-4 (Low AMH conception): "5 Ways to Improve Natural Conception with Low AMH"
+// Data from blog H3 sections [16][19][22][25][27][29]: 10 tips — showing top 5 most actionable
+const SVG_LOW_AMH_CONCEPTION = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 252" font-family="${FONT}">
+  <rect width="800" height="252" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="250.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 WAYS TO IMPROVE NATURAL CONCEPTION WITH LOW AMH</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="40" y="44" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="62" r="12" fill="${C.rose}"/>
+  <text x="72" y="66.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="98" y="57" font-size="11.5" font-weight="600" fill="${C.dark}">Track Ovulation Accurately</text>
+  <text x="98" y="72" font-size="10.5" fill="${C.muted}">Use OPKs, BBT charting or apps — timing intercourse to your fertile window is crucial with low reserve</text>
+
+  <!-- Row 2 -->
+  <rect x="40" y="86" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="104" r="12" fill="${C.rose}"/>
+  <text x="72" y="108.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="98" y="99" font-size="11.5" font-weight="600" fill="${C.dark}">Eat a Fertility-Friendly Diet</text>
+  <text x="98" y="114" font-size="10.5" fill="${C.muted}">Antioxidant-rich foods (berries, leafy greens, nuts), whole grains, omega-3s — Mediterranean style diet</text>
+
+  <!-- Row 3 -->
+  <rect x="40" y="128" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="146" r="12" fill="${C.rose}"/>
+  <text x="72" y="150.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="98" y="141" font-size="11.5" font-weight="600" fill="${C.dark}">Maintain a Healthy Body Weight</text>
+  <text x="98" y="156" font-size="10.5" fill="${C.muted}">Aim for BMI 18.5–24.9; moderate exercise like yoga or walking supports hormonal balance</text>
+
+  <!-- Row 4 -->
+  <rect x="40" y="170" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="188" r="12" fill="${C.rose}"/>
+  <text x="72" y="192.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="98" y="183" font-size="11.5" font-weight="600" fill="${C.dark}">Reduce Stress</text>
+  <text x="98" y="198" font-size="10.5" fill="${C.muted}">Chronic stress disrupts ovulation — try meditation, yoga, acupuncture or counselling</text>
+
+  <!-- Row 5 -->
+  <rect x="40" y="212" width="720" height="32" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="72" cy="228" r="12" fill="${C.rose}"/>
+  <text x="72" y="232.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="98" y="223" font-size="11.5" font-weight="600" fill="${C.dark}">Consider Evidence-Based Supplements</text>
+  <text x="98" y="238" font-size="10.5" fill="${C.muted}">CoQ10 (Ubiquinol), Vitamin D, Omega-3s may support egg quality — always consult your doctor first</text>
+</svg>`;
+
+// Blog W5-5 (IUI naturally): "10 Natural Ways to Boost IUI Success"
+// Data from blog node [5] list: all 10 tips verbatim from the blog's own introduction
+const SVG_IUI_NATURAL_TIPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 264" font-family="${FONT}">
+  <rect width="800" height="264" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="262.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 NATURAL WAYS TO BOOST IUI SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left column: 1-5 -->
+  <rect x="40" y="44" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="63" r="11" fill="${C.rose}"/><text x="66" y="67.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">1</text>
+  <text x="88" y="58" font-size="11" font-weight="600" fill="${C.dark}">Track Ovulation Accurately</text>
+  <text x="88" y="74" font-size="9.5" fill="${C.muted}">OPKs, BBT charting, cervical mucus</text>
+
+  <rect x="40" y="88" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="107" r="11" fill="${C.rose}"/><text x="66" y="111.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">2</text>
+  <text x="88" y="102" font-size="11" font-weight="600" fill="${C.dark}">Eat a Fertility-Friendly Diet</text>
+  <text x="88" y="118" font-size="9.5" fill="${C.muted}">Leafy greens, whole grains, omega-3s</text>
+
+  <rect x="40" y="132" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="151" r="11" fill="${C.rose}"/><text x="66" y="155.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">3</text>
+  <text x="88" y="146" font-size="11" font-weight="600" fill="${C.dark}">Maintain Healthy Body Weight</text>
+  <text x="88" y="162" font-size="9.5" fill="${C.muted}">BMI 18.5–24.9 improves ovulation</text>
+
+  <rect x="40" y="176" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="195" r="11" fill="${C.rose}"/><text x="66" y="199.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">4</text>
+  <text x="88" y="190" font-size="11" font-weight="600" fill="${C.dark}">Reduce Stress &amp; Prioritise Mental Health</text>
+  <text x="88" y="206" font-size="9.5" fill="${C.muted}">Yoga, meditation, counselling</text>
+
+  <rect x="40" y="220" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="239" r="11" fill="${C.rose}"/><text x="66" y="243.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">5</text>
+  <text x="88" y="234" font-size="11" font-weight="600" fill="${C.dark}">Fertility Yoga &amp; Light Exercise</text>
+  <text x="88" y="250" font-size="9.5" fill="${C.muted}">Increases blood flow to reproductive organs</text>
+
+  <!-- Right column: 6-10 -->
+  <rect x="420" y="44" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="446" cy="63" r="11" fill="${C.rose}"/><text x="446" y="67.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">6</text>
+  <text x="468" y="58" font-size="11" font-weight="600" fill="${C.dark}">Avoid Alcohol, Smoking &amp; Toxins</text>
+  <text x="468" y="74" font-size="9.5" fill="${C.muted}">BPA, phthalates harm egg &amp; sperm quality</text>
+
+  <rect x="420" y="88" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="446" cy="107" r="11" fill="${C.rose}"/><text x="446" y="111.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">7</text>
+  <text x="468" y="102" font-size="11" font-weight="600" fill="${C.dark}">Get Adequate Sleep</text>
+  <text x="468" y="118" font-size="9.5" fill="${C.muted}">Aim 7–9 hrs; consistent schedule</text>
+
+  <rect x="420" y="132" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="446" cy="151" r="11" fill="${C.rose}"/><text x="446" y="155.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">8</text>
+  <text x="468" y="146" font-size="11" font-weight="600" fill="${C.dark}">Evidence-Based Supplements</text>
+  <text x="468" y="162" font-size="9.5" fill="${C.muted}">CoQ10, Vitamin D, Inositol (with doctor)</text>
+
+  <rect x="420" y="176" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="446" cy="195" r="11" fill="${C.rose}"/><text x="446" y="199.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">9</text>
+  <text x="468" y="190" font-size="11" font-weight="600" fill="${C.dark}">Male Partner Health Matters Too</text>
+  <text x="468" y="206" font-size="9.5" fill="${C.muted}">Antioxidants, no heat, no smoking</text>
+
+  <rect x="420" y="220" width="340" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="446" cy="239" r="11" fill="${C.rose}"/><text x="446" y="243.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">10</text>
+  <text x="468" y="234" font-size="11" font-weight="600" fill="${C.dark}">Build a Positive Mindset</text>
+  <text x="468" y="250" font-size="9.5" fill="${C.muted}">Set realistic expectations; trust the process</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -1136,6 +1384,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_LOW_AMH_EFFECTS,
     title:   "4 Ways Low AMH Affects Menstrual Cycles",
     altText: "Four-box grid: 1 Irregular Cycles (skipped periods, variable cycle length); 2 Decreased Follicle Count (fewer eggs, inconsistent ovulation signals); 3 Disrupted Ovulation (inconsistent or absent ovulation, anovulation); 4 Hormonal Imbalances (estrogen and progesterone fluctuations affecting cycle regularity).",
+  },
+
+  // ── Wave 5: Published blogs ─────────────────────────────────────────
+  "how-many-times-can-a-person-undergo-ivf-procedure": {
+    svg:     SVG_IVF_CYCLE_FACTORS,
+    title:   "4 Factors That Influence How Many IVF Cycles You May Need",
+    altText: "Four-box grid: 1 Age (women's age significantly affects IVF success rates); 2 Type of Fertility Issues (severity of condition impacts treatment outcomes); 3 Medical History (previous conditions or surgeries influence decisions); 4 Response to Previous Cycles (prior IVF outcomes guide future treatment plans).",
+  },
+
+  "how-much-weight-can-a-baby-gain-in-a-week-in-the-womb": {
+    svg:     SVG_BABY_WEIGHT_TRIMESTERS,
+    title:   "Baby Weight Gain by Trimester",
+    altText: "Three-panel infographic: First Trimester 0–12 weeks (0.5–1 gram per week, ~14 grams at 12 weeks); Second Trimester 13–26 weeks (50–100 grams per week, ~300 grams at 20 weeks); Third Trimester 27–40 weeks (100–200 grams per week, 3–4 kg at 40 weeks).",
+  },
+
+  "how-to-get-pregnant-without-removing-fibroid-or-without-surgery": {
+    svg:     SVG_FIBROID_TYPES,
+    title:   "3 Types of Uterine Fibroids",
+    altText: "Three-panel infographic: Submucosal fibroids grow under the inner uterine lining, protrude into the cavity, and cause heavy bleeding. Intramural fibroids (most common) grow within the muscular wall causing pelvic pain and pressure. Subserosal fibroids grow on the outer uterine wall, pressing on bladder or rectum.",
+  },
+
+  "how-to-improve-your-chances-of-conceiving-naturally-with-low-amh-levels": {
+    svg:     SVG_LOW_AMH_CONCEPTION,
+    title:   "5 Ways to Improve Natural Conception with Low AMH",
+    altText: "Five-row infographic: 1 Track Ovulation Accurately (OPKs, BBT charting, fertile window); 2 Eat a Fertility-Friendly Diet (antioxidants, leafy greens, omega-3s, Mediterranean style); 3 Maintain Healthy Body Weight (BMI 18.5–24.9, yoga or walking); 4 Reduce Stress (meditation, yoga, acupuncture, counselling); 5 Consider Supplements with medical advice (CoQ10, Vitamin D, Omega-3s).",
+  },
+
+  "how-to-improve-your-chances-of-iui-success-naturally": {
+    svg:     SVG_IUI_NATURAL_TIPS,
+    title:   "10 Natural Ways to Boost IUI Success",
+    altText: "Two-column grid of 10 natural tips: Track Ovulation, Fertility-Friendly Diet, Healthy Body Weight, Reduce Stress, Fertility Yoga and Light Exercise, Avoid Alcohol and Smoking, Adequate Sleep, Evidence-Based Supplements, Male Partner Health, and Positive Mindset.",
   },
 };
 
