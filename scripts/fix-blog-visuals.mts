@@ -379,6 +379,27 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "how-to-improve-your-chances-of-iui-success-naturally": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+
+  // ── Wave 6: Published blogs ─────────────────────────────────────────
+  "how-to-protect-your-mental-health-during-ivf-and-fertility-treatments": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+
+  "a-complete-guide-on-explaining-periods-to-men": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "indian-celebrities-who-improved-fertility-through-yoga": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  "a-guide-to-the-different-types-of-ivf-treatments": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+
+  "innovative-treatments-for-low-amh": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

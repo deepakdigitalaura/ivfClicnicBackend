@@ -1265,6 +1265,276 @@ const SVG_IUI_NATURAL_TIPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0
   <text x="468" y="250" font-size="9.5" fill="${C.muted}">Set realistic expectations; trust the process</text>
 </svg>`;
 
+// ── Wave 6 SVGs ──────────────────────────────────────────────────────
+
+const SVG_IVF_MENTAL_HEALTH = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="38" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">5 Reasons IVF Can Be Emotionally Challenging</text>
+  <line x1="40" y1="52" x2="760" y2="52" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="40" y="64" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="85" r="13" fill="${C.rose}"/>
+  <text x="68" y="89.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="94" y="80" font-size="12" font-weight="600" fill="${C.dark}">Uncertainty of Outcomes</text>
+  <text x="94" y="97" font-size="10.5" fill="${C.muted}">Each cycle brings anticipation — results may vary and are never guaranteed</text>
+
+  <!-- Row 2 -->
+  <rect x="40" y="114" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="135" r="13" fill="${C.rose}"/>
+  <text x="68" y="139.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="94" y="130" font-size="12" font-weight="600" fill="${C.dark}">Hormonal Changes</text>
+  <text x="94" y="147" font-size="10.5" fill="${C.muted}">Fertility medications intensify emotional sensitivity and mood fluctuations</text>
+
+  <!-- Row 3 -->
+  <rect x="40" y="164" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="185" r="13" fill="${C.rose}"/>
+  <text x="68" y="189.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="94" y="180" font-size="12" font-weight="600" fill="${C.dark}">Social Pressure</text>
+  <text x="94" y="197" font-size="10.5" fill="${C.muted}">Family and societal expectations create additional emotional burden</text>
+
+  <!-- Row 4 -->
+  <rect x="40" y="214" width="720" height="42" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="235" r="13" fill="${C.rose}"/>
+  <text x="68" y="239.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="94" y="230" font-size="12" font-weight="600" fill="${C.dark}">Financial Stress</text>
+  <text x="94" y="247" font-size="10.5" fill="${C.muted}">Treatments can be costly, adding significant financial pressure to couples</text>
+
+  <!-- Row 5 -->
+  <rect x="40" y="264" width="720" height="36" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="282" r="13" fill="${C.rose}"/>
+  <text x="68" y="286.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="94" y="277" font-size="12" font-weight="600" fill="${C.dark}">Repeated Procedures</text>
+  <text x="94" y="294" font-size="10.5" fill="${C.muted}">Multiple cycles or failures take a significant mental and physical toll</text>
+</svg>`;
+
+const SVG_MENSTRUAL_CYCLE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">The 4 Phases of the Menstrual Cycle</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Phase 1 -->
+  <rect x="40" y="58" width="162" height="124" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="40" y="58" width="162" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="78" width="162" height="12" fill="${C.rose}"/>
+  <text x="121" y="79" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Menstruation</text>
+  <text x="121" y="106" text-anchor="middle" font-size="10" font-weight="600" fill="${C.rose}">Day 1 – 5</text>
+  <text x="121" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}" width="140">Uterine lining sheds;</text>
+  <text x="121" y="140" text-anchor="middle" font-size="9.5" fill="${C.muted}">bleeding occurs</text>
+
+  <!-- Phase 2 -->
+  <rect x="214" y="58" width="162" height="124" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="214" y="58" width="162" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="214" y="78" width="162" height="12" fill="${C.rose}"/>
+  <text x="295" y="79" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Follicular Phase</text>
+  <text x="295" y="106" text-anchor="middle" font-size="10" font-weight="600" fill="${C.rose}">Day 6 – 14</text>
+  <text x="295" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Hormones stimulate</text>
+  <text x="295" y="140" text-anchor="middle" font-size="9.5" fill="${C.muted}">follicle growth; oestrogen rises</text>
+
+  <!-- Phase 3 -->
+  <rect x="388" y="58" width="162" height="124" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="388" y="58" width="162" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="388" y="78" width="162" height="12" fill="${C.rose}"/>
+  <text x="469" y="79" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Ovulation</text>
+  <text x="469" y="106" text-anchor="middle" font-size="10" font-weight="600" fill="${C.rose}">Day 14</text>
+  <text x="469" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">LH surge triggers egg release;</text>
+  <text x="469" y="140" text-anchor="middle" font-size="9.5" fill="${C.muted}">peak fertility window</text>
+
+  <!-- Phase 4 -->
+  <rect x="562" y="58" width="198" height="124" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <rect x="562" y="58" width="198" height="32" rx="8" fill="${C.rose}"/>
+  <rect x="562" y="78" width="198" height="12" fill="${C.rose}"/>
+  <text x="661" y="79" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Luteal Phase</text>
+  <text x="661" y="106" text-anchor="middle" font-size="10" font-weight="600" fill="${C.rose}">Day 15 – 28</text>
+  <text x="661" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Hormones prepare uterus</text>
+  <text x="661" y="140" text-anchor="middle" font-size="9.5" fill="${C.muted}">for potential pregnancy</text>
+</svg>`;
+
+const SVG_YOGA_FERTILITY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 290" font-family="${FONT}">
+  <rect width="800" height="290" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">7 Ways Yoga Supports Fertility</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1: items 1–2 -->
+  <rect x="40" y="58" width="346" height="54" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="85" r="13" fill="${C.rose}"/>
+  <text x="68" y="89.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="79" font-size="12" font-weight="600" fill="${C.dark}">Reduce Stress</text>
+  <text x="92" y="96" font-size="10" fill="${C.muted}">Pranayama &amp; meditation calm cortisol levels</text>
+
+  <rect x="414" y="58" width="346" height="54" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="85" r="13" fill="${C.rose}"/>
+  <text x="442" y="89.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="466" y="79" font-size="12" font-weight="600" fill="${C.dark}">Improve Blood Circulation</text>
+  <text x="466" y="96" font-size="10" fill="${C.muted}">Supta Baddha Konasana enhances pelvic flow</text>
+
+  <!-- Row 2: items 3–4 -->
+  <rect x="40" y="122" width="346" height="54" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="149" r="13" fill="${C.rose}"/>
+  <text x="68" y="153.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="143" font-size="12" font-weight="600" fill="${C.dark}">Balance Hormonal Levels</text>
+  <text x="92" y="160" font-size="10" fill="${C.muted}">Surya Namaskar stimulates endocrine function</text>
+
+  <rect x="414" y="122" width="346" height="54" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="149" r="13" fill="${C.rose}"/>
+  <text x="442" y="153.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="466" y="143" font-size="12" font-weight="600" fill="${C.dark}">Strengthen the Body</text>
+  <text x="466" y="160" font-size="10" fill="${C.muted}">Bridge Pose strengthens pelvic floor muscles</text>
+
+  <!-- Row 3: items 5–6 -->
+  <rect x="40" y="186" width="346" height="54" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="213" r="13" fill="${C.rose}"/>
+  <text x="68" y="217.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="207" font-size="12" font-weight="600" fill="${C.dark}">Promote Detoxification</text>
+  <text x="92" y="224" font-size="10" fill="${C.muted}">Hydration &amp; gentle detox poses support cleansing</text>
+
+  <rect x="414" y="186" width="346" height="54" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="213" r="13" fill="${C.rose}"/>
+  <text x="442" y="217.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="466" y="207" font-size="12" font-weight="600" fill="${C.dark}">Enhance Emotional Well-being</text>
+  <text x="466" y="224" font-size="10" fill="${C.muted}">Heart-opening poses like Ustrasana uplift mood</text>
+
+  <!-- Row 4: item 7 centred -->
+  <rect x="227" y="250" width="346" height="30" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="255" cy="265" r="11" fill="${C.rose}"/>
+  <text x="255" y="269.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="278" y="261" font-size="12" font-weight="600" fill="${C.dark}">Improve Sleep Quality</text>
+  <text x="278" y="277" font-size="10" fill="${C.muted}">Yoga Nidra &amp; Balasana promote deep, restful sleep</text>
+</svg>`;
+
+const SVG_IVF_TYPES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">8 Types of IVF Treatment — At a Glance</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1: 1–2 -->
+  <rect x="40" y="56" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="67" cy="82" r="13" fill="${C.rose}"/>
+  <text x="67" y="86.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="76" font-size="12" font-weight="600" fill="${C.dark}">Conventional IVF</text>
+  <text x="92" y="93" font-size="10" fill="${C.muted}">Eggs fertilised with sperm in a lab dish</text>
+
+  <rect x="414" y="56" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="441" cy="82" r="13" fill="${C.rose}"/>
+  <text x="441" y="86.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="466" y="76" font-size="12" font-weight="600" fill="${C.dark}">ICSI</text>
+  <text x="466" y="93" font-size="10" fill="${C.muted}">Single sperm injected directly into the egg</text>
+
+  <!-- Row 2: 3–4 -->
+  <rect x="40" y="118" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="67" cy="144" r="13" fill="${C.rose}"/>
+  <text x="67" y="148.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="138" font-size="12" font-weight="600" fill="${C.dark}">Donor IVF</text>
+  <text x="92" y="155" font-size="10" fill="${C.muted}">Uses donor eggs, sperm, or embryos</text>
+
+  <rect x="414" y="118" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="441" cy="144" r="13" fill="${C.rose}"/>
+  <text x="441" y="148.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="466" y="138" font-size="12" font-weight="600" fill="${C.dark}">Surrogacy</text>
+  <text x="466" y="155" font-size="10" fill="${C.muted}">Another woman carries and delivers the baby</text>
+
+  <!-- Row 3: 5–6 -->
+  <rect x="40" y="180" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="67" cy="206" r="13" fill="${C.rose}"/>
+  <text x="67" y="210.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="200" font-size="12" font-weight="600" fill="${C.dark}">PGD</text>
+  <text x="92" y="217" font-size="10" fill="${C.muted}">Tests embryos for specific genetic disorders</text>
+
+  <rect x="414" y="180" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="441" cy="206" r="13" fill="${C.rose}"/>
+  <text x="441" y="210.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="466" y="200" font-size="12" font-weight="600" fill="${C.dark}">PGT-A</text>
+  <text x="466" y="217" font-size="10" fill="${C.muted}">Screens embryos for chromosomal abnormalities</text>
+
+  <!-- Row 4: 7–8 -->
+  <rect x="40" y="242" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="67" cy="268" r="13" fill="${C.rose}"/>
+  <text x="67" y="272.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="92" y="262" font-size="12" font-weight="600" fill="${C.dark}">FET (Frozen Embryo Transfer)</text>
+  <text x="92" y="279" font-size="10" fill="${C.muted}">Frozen embryos thawed and transferred to uterus</text>
+
+  <rect x="414" y="242" width="346" height="52" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="441" cy="268" r="13" fill="${C.rose}"/>
+  <text x="441" y="272.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="466" y="262" font-size="12" font-weight="600" fill="${C.dark}">Natural Cycle IVF</text>
+  <text x="466" y="279" font-size="10" fill="${C.muted}">No medications; monitors and uses natural cycle</text>
+</svg>`;
+
+const SVG_LOW_AMH_INNOVATIVE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 330" font-family="${FONT}">
+  <rect width="800" height="330" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">9 Innovative Treatments for Low AMH</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1: 1–3 -->
+  <rect x="40" y="56" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="65" cy="78" r="11" fill="${C.rose}"/>
+  <text x="65" y="82" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="74" font-size="11" font-weight="600" fill="${C.dark}">Personalised</text>
+  <text x="86" y="88" font-size="11" font-weight="600" fill="${C.dark}">IVF Protocols</text>
+  <text x="86" y="104" font-size="9.5" fill="${C.muted}">Tailored stimulation plans</text>
+
+  <rect x="292" y="56" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="317" cy="78" r="11" fill="${C.rose}"/>
+  <text x="317" y="82" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="338" y="74" font-size="11" font-weight="600" fill="${C.dark}">Ovarian PRP</text>
+  <text x="338" y="88" font-size="11" font-weight="600" fill="${C.dark}">Therapy</text>
+  <text x="338" y="104" font-size="9.5" fill="${C.muted}">Platelet-rich plasma rejuvenation</text>
+
+  <rect x="544" y="56" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="569" cy="78" r="11" fill="${C.rose}"/>
+  <text x="569" y="82" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="590" y="74" font-size="11" font-weight="600" fill="${C.dark}">Stem Cell</text>
+  <text x="590" y="88" font-size="11" font-weight="600" fill="${C.dark}">Therapy</text>
+  <text x="590" y="104" font-size="9.5" fill="${C.muted}">Regenerating ovarian tissue</text>
+
+  <!-- Row 2: 4–6 -->
+  <rect x="40" y="130" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="65" cy="152" r="11" fill="${C.rose}"/>
+  <text x="65" y="156" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="148" font-size="11" font-weight="600" fill="${C.dark}">Genetic</text>
+  <text x="86" y="162" font-size="11" font-weight="600" fill="${C.dark}">Modifications</text>
+  <text x="86" y="178" font-size="9.5" fill="${C.muted}">Targeting underlying causes</text>
+
+  <rect x="292" y="130" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="317" cy="152" r="11" fill="${C.rose}"/>
+  <text x="317" y="156" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="338" y="148" font-size="11" font-weight="600" fill="${C.dark}">Hormonal</text>
+  <text x="338" y="162" font-size="11" font-weight="600" fill="${C.dark}">Supplementation</text>
+  <text x="338" y="178" font-size="9.5" fill="${C.muted}">DHEA improves egg quality</text>
+
+  <rect x="544" y="130" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="569" cy="152" r="11" fill="${C.rose}"/>
+  <text x="569" y="156" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="590" y="148" font-size="11" font-weight="600" fill="${C.dark}">Acupuncture &amp;</text>
+  <text x="590" y="162" font-size="11" font-weight="600" fill="${C.dark}">Complementary</text>
+  <text x="590" y="178" font-size="9.5" fill="${C.muted}">Holistic fertility support</text>
+
+  <!-- Row 3: 7–9 -->
+  <rect x="40" y="204" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="65" cy="226" r="11" fill="${C.rose}"/>
+  <text x="65" y="230" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="86" y="222" font-size="11" font-weight="600" fill="${C.dark}">Lifestyle</text>
+  <text x="86" y="236" font-size="11" font-weight="600" fill="${C.dark}">Modifications</text>
+  <text x="86" y="252" font-size="9.5" fill="${C.muted}">Diet, exercise &amp; stress reduction</text>
+
+  <rect x="292" y="204" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="317" cy="226" r="11" fill="${C.rose}"/>
+  <text x="317" y="230" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="338" y="222" font-size="11" font-weight="600" fill="${C.dark}">Oocyte</text>
+  <text x="338" y="236" font-size="11" font-weight="600" fill="${C.dark}">Preservation</text>
+  <text x="338" y="252" font-size="9.5" fill="${C.muted}">Vitrification to freeze eggs early</text>
+
+  <rect x="544" y="204" width="216" height="60" rx="7" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="569" cy="226" r="11" fill="${C.rose}"/>
+  <text x="569" y="230" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">9</text>
+  <text x="590" y="222" font-size="11" font-weight="600" fill="${C.dark}">Time-Lapse</text>
+  <text x="590" y="236" font-size="11" font-weight="600" fill="${C.dark}">Technology</text>
+  <text x="590" y="252" font-size="9.5" fill="${C.muted}">Optimal embryo selection via imaging</text>
+
+  <!-- Footer note -->
+  <text x="400" y="294" text-anchor="middle" font-size="10" fill="${C.muted}">Bavishi Fertility Institute — individualised care for every low-AMH case</text>
+</svg>`;
+
 // ── Per-slug config ───────────────────────────────────────────────────
 const CONFIGS: Record<string, { svg: string; title: string; altText: string }> = {
   "prp-ovarian-rejuvenation-boosting-egg-quality-and-fertility": {
@@ -1415,6 +1685,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IUI_NATURAL_TIPS,
     title:   "10 Natural Ways to Boost IUI Success",
     altText: "Two-column grid of 10 natural tips: Track Ovulation, Fertility-Friendly Diet, Healthy Body Weight, Reduce Stress, Fertility Yoga and Light Exercise, Avoid Alcohol and Smoking, Adequate Sleep, Evidence-Based Supplements, Male Partner Health, and Positive Mindset.",
+  },
+
+  // ── Wave 6: Published blogs ─────────────────────────────────────────
+  "how-to-protect-your-mental-health-during-ivf-and-fertility-treatments": {
+    svg:     SVG_IVF_MENTAL_HEALTH,
+    title:   "5 Reasons IVF Can Be Emotionally Challenging",
+    altText: "Five-row infographic: 1 Uncertainty of Outcomes (each cycle brings anticipation, results may vary); 2 Hormonal Changes (fertility medications intensify emotional sensitivity); 3 Social Pressure (family and societal expectations feel overwhelming); 4 Financial Stress (treatments are costly, adding extra burden); 5 Repeated Procedures (multiple cycles or failures take a mental and physical toll).",
+  },
+
+  "a-complete-guide-on-explaining-periods-to-men": {
+    svg:     SVG_MENSTRUAL_CYCLE,
+    title:   "The 4 Phases of the Menstrual Cycle",
+    altText: "Four-panel horizontal infographic: Day 1–5 Menstruation (uterine lining sheds, bleeding occurs); Day 6–14 Follicular Phase (hormones stimulate follicle growth, estrogen rises); Day 14 Ovulation (LH surge triggers egg release, peak fertility); Day 15–28 Luteal Phase (hormones prepare uterus for potential pregnancy).",
+  },
+
+  "indian-celebrities-who-improved-fertility-through-yoga": {
+    svg:     SVG_YOGA_FERTILITY,
+    title:   "7 Ways Yoga Supports Fertility",
+    altText: "Two-column grid: 1 Reduce Stress (Pranayama, meditation calm cortisol); 2 Improve Blood Circulation (Supta Baddha Konasana enhances pelvic flow); 3 Balance Hormonal Levels (Surya Namaskar stimulates endocrine function); 4 Strengthen the Body (Bridge Pose strengthens pelvic floor); 5 Promote Detoxification (hydration and gentle detox); 6 Enhance Emotional Well-being (heart-opening poses); 7 Improve Sleep Quality (Yoga Nidra promotes restful sleep).",
+  },
+
+  "a-guide-to-the-different-types-of-ivf-treatments": {
+    svg:     SVG_IVF_TYPES,
+    title:   "8 Types of IVF Treatment — At a Glance",
+    altText: "Two-column grid of 8 IVF types: 1 Conventional IVF (egg fertilised with sperm in lab dish); 2 ICSI (single sperm injected into egg); 3 Donor IVF (uses donor eggs, sperm, or embryos); 4 Surrogacy (another woman carries the baby); 5 PGD (tests embryos for genetic disorders); 6 PGT-A (screens embryos for chromosomal abnormalities); 7 FET (transfers frozen embryos); 8 Natural Cycle IVF (no medications, monitors natural cycle).",
+  },
+
+  "innovative-treatments-for-low-amh": {
+    svg:     SVG_LOW_AMH_INNOVATIVE,
+    title:   "9 Innovative Treatments for Low AMH",
+    altText: "Three-column grid: 1 Personalised IVF Protocols; 2 Ovarian PRP Therapy; 3 Stem Cell Therapy; 4 Genetic Modifications; 5 Hormonal Supplementation (DHEA); 6 Acupuncture and Complementary Therapies; 7 Lifestyle Modifications; 8 Oocyte Preservation (Vitrification); 9 Time-Lapse Technology for embryo monitoring.",
   },
 };
 
