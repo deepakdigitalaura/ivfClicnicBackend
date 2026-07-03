@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 27 ──────────────────────────────────────────────────────────
+  "can-varicocele-be-treated-without-surgery-exploring-your-options": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "can-you-get-pregnant-with-ovarian-cysts": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "celebrating-the-divine-joy-six-babies-born-on-janmashtami-at-bavishi-fertility-institute": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "choosing-between-a-day-5-vs-day-3-embryo-transfer": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "cme-program-on-infertility-management-successfully-conducted-at-idar": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 26 ──────────────────────────────────────────────────────────
   "breaking-free-from-varicocele-pain-3-innovative-ways-to-find-relief": {
     removeBlocks: ["complete guide", "key numbers"],

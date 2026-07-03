@@ -2702,6 +2702,121 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 27 SVG constants ─────────────────────────────────────────────
+
+// Blog W27-1 (Varicocele non-surgical treatment): "4 Non-Surgical Treatment Options for Varicocele"
+// Source: Blog headings [16],[20],[25],[32] — 4 approaches, stated verbatim
+const SVG_VARICOCELE_NONSURGICAL_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="${C.dark}">4 Non-Surgical Treatment Options for Varicocele</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Lifestyle</text>
+  <text x="122" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Changes</text>
+  <text x="122" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Supportive underwear,</text>
+  <text x="122" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">cold packs</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Medications &amp;</text>
+  <text x="300" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Supplements</text>
+  <text x="300" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Antioxidants and</text>
+  <text x="300" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">L-Carnitine support</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Varicocele</text>
+  <text x="478" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Embolization</text>
+  <text x="478" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Minimally invasive,</text>
+  <text x="478" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">similar success rate</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Observation &amp;</text>
+  <text x="667" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Monitoring</text>
+  <text x="667" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Regular semen</text>
+  <text x="667" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">analysis, ultrasounds</text>
+</svg>`;
+
+// Blog W27-2 (Ovarian cysts & fertility): "Ovarian Cysts: Effect on Fertility"
+// Source: Blog nodes [19],[21] — cysts that do/don't affect fertility, stated verbatim
+const SVG_OVARIAN_CYSTS_FERTILITY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 236" font-family="${FONT}">
+  <rect width="800" height="236" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="234.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Usually Don't Affect Fertility</text>
+  <rect x="22" y="72" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="77.5" font-size="11.5" font-weight="700" fill="${C.dark}">Functional Cysts</text>
+  <text x="34" y="93" font-size="10.5" fill="${C.muted}">Follicular and corpus luteum cysts usually resolve on their own</text>
+  <rect x="22" y="128" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="133.5" font-size="11.5" font-weight="700" fill="${C.dark}">Cystadenomas &amp; Dermoid Cysts</text>
+  <text x="34" y="149" font-size="10.5" fill="${C.muted}">Rarely interfere with conception when small</text>
+  <rect x="410" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">May Impact Fertility</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Endometriomas</text>
+  <text x="434" y="91" font-size="10.5" fill="${C.muted}">Can damage ovarian reserve and egg quality</text>
+  <rect x="422" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Large Cysts (&gt;5cm)</text>
+  <text x="434" y="143" font-size="10.5" fill="${C.muted}">May distort anatomy and impact ovulation</text>
+  <rect x="422" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">PCOS-Related Cysts</text>
+  <text x="434" y="195" font-size="10.5" fill="${C.muted}">Hormonal imbalances disrupt regular ovulation</text>
+</svg>`;
+
+// Blog W27-3 (Janmashtami babies): celebratory single-stat hero card
+// Source: Blog nodes [4],[9] — the one central fact, stated verbatim (no list content in this blog)
+const SVG_JANMASHTAMI_BABIES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 220" font-family="${FONT}">
+  <rect width="800" height="220" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="218.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <circle cx="400" cy="88" r="52" fill="${C.rose}"/>
+  <text x="400" y="105" text-anchor="middle" font-size="48" font-weight="800" fill="${C.white}">6</text>
+  <text x="400" y="164" text-anchor="middle" font-size="15" font-weight="700" fill="${C.dark}">Healthy Babies Born on Janmashtami 2025</text>
+  <text x="400" y="185" text-anchor="middle" font-size="11" fill="${C.muted}">At Bavishi Fertility Institute — Ahmedabad's Leading IVF Center</text>
+  <line x1="260" y1="200" x2="540" y2="200" stroke="${C.border}" stroke-width="1"/>
+  <text x="400" y="214" text-anchor="middle" font-size="9.5" fill="${C.muted}">A blend of science and spirituality, celebrated together</text>
+</svg>`;
+
+// Blog W27-4 (Day 3 vs Day 5 transfer): "Day 3 vs Day 5 Embryo Transfer"
+// Source: Blog nodes [9],[13] — advantages of each, stated verbatim
+const SVG_DAY3_VS_DAY5_TRANSFER = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 258" font-family="${FONT}">
+  <rect width="800" height="258" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="256.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="238" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Day 3 Transfer (Cleavage-Stage)</text>
+  <rect x="22" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Suits Low Embryo Numbers</text>
+  <text x="34" y="91" font-size="10.5" fill="${C.muted}">Avoids risking viable embryos waiting to day 5</text>
+  <rect x="22" y="118" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="123.5" font-size="11.5" font-weight="700" fill="${C.dark}">Less Time in the Lab</text>
+  <text x="34" y="139" font-size="10.5" fill="${C.muted}">May benefit embryos that don't thrive in culture</text>
+  <rect x="22" y="166" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="171.5" font-size="11.5" font-weight="700" fill="${C.dark}">Earlier Transfer</text>
+  <text x="34" y="187" font-size="10.5" fill="${C.muted}">Good for time-sensitive or urgent cycles</text>
+  <rect x="410" y="10" width="380" height="238" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Day 5 Transfer (Blastocyst)</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Better Embryo Selection</text>
+  <text x="434" y="91" font-size="10.5" fill="${C.muted}">Surviving embryos show better developmental potential</text>
+  <rect x="422" y="118" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="123.5" font-size="11.5" font-weight="700" fill="${C.dark}">Higher Implantation Rates</text>
+  <text x="434" y="139" font-size="10.5" fill="${C.muted}">Closer to natural implantation timing</text>
+  <rect x="422" y="166" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="171.5" font-size="11.5" font-weight="700" fill="${C.dark}">Facilitates PGT Testing</text>
+  <text x="434" y="187" font-size="10.5" fill="${C.muted}">More accurate genetic testing at this stage</text>
+  <rect x="422" y="214" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="219.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reduces Multiple Pregnancies</text>
+  <text x="434" y="235" font-size="10.5" fill="${C.muted}">Fewer embryos needed due to higher potential</text>
+</svg>`;
+
 // ── Wave 26 SVG constants ─────────────────────────────────────────────
 
 // Blog W26-1 (Varicocele pain relief): "3 Innovative Ways to Relieve Varicocele Pain"
@@ -5967,6 +6082,27 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 27: Published blogs ──────────────────────────────────────────
+  "can-varicocele-be-treated-without-surgery-exploring-your-options": {
+    svg:     SVG_VARICOCELE_NONSURGICAL_4,
+    title:   "4 Non-Surgical Treatment Options for Varicocele",
+    altText: "Four-card horizontal infographic. Card 1 Lifestyle Changes: supportive underwear, cold packs. Card 2 Medications and Supplements: antioxidants and L-Carnitine support. Card 3 Varicocele Embolization: minimally invasive, similar success rate. Card 4 Observation and Monitoring: regular semen analysis, ultrasounds.",
+  },
+  "can-you-get-pregnant-with-ovarian-cysts": {
+    svg:     SVG_OVARIAN_CYSTS_FERTILITY,
+    title:   "Ovarian Cysts: Effect on Fertility",
+    altText: "Two-panel comparison infographic. Left panel Usually Don't Affect Fertility with rose header: Functional Cysts (follicular and corpus luteum cysts usually resolve on their own); Cystadenomas and Dermoid Cysts (rarely interfere with conception when small). Right panel May Impact Fertility: Endometriomas (can damage ovarian reserve and egg quality); Large Cysts over 5cm (may distort anatomy and impact ovulation); PCOS-Related Cysts (hormonal imbalances disrupt regular ovulation).",
+  },
+  "celebrating-the-divine-joy-six-babies-born-on-janmashtami-at-bavishi-fertility-institute": {
+    svg:     SVG_JANMASHTAMI_BABIES,
+    title:   "6 Healthy Babies Born on Janmashtami 2025",
+    altText: "Celebratory single-stat hero card. Large number 6 in a rose circle. Headline: Healthy Babies Born on Janmashtami 2025. Subtext: at Bavishi Fertility Institute, Ahmedabad's leading IVF center. Footer: a blend of science and spirituality, celebrated together.",
+  },
+  "choosing-between-a-day-5-vs-day-3-embryo-transfer": {
+    svg:     SVG_DAY3_VS_DAY5_TRANSFER,
+    title:   "Day 3 vs Day 5 Embryo Transfer",
+    altText: "Two-panel comparison infographic. Left panel Day 3 Transfer Cleavage-Stage with rose header: Suits Low Embryo Numbers (avoids risking viable embryos waiting to day 5); Less Time in the Lab (may benefit embryos that don't thrive in culture); Earlier Transfer (good for time-sensitive or urgent cycles). Right panel Day 5 Transfer Blastocyst: Better Embryo Selection (surviving embryos show better developmental potential); Higher Implantation Rates (closer to natural implantation timing); Facilitates PGT Testing (more accurate genetic testing at this stage); Reduces Multiple Pregnancies (fewer embryos needed due to higher potential).",
+  },
   // ── Wave 26: Published blogs ──────────────────────────────────────────
   "breaking-free-from-varicocele-pain-3-innovative-ways-to-find-relief": {
     svg:     SVG_VARICOCELE_RELIEF_3,
