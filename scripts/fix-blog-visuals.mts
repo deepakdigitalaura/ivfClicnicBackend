@@ -483,6 +483,28 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 32 (FINAL WAVE) ─────────────────────────────────────────────
+  "how-do-male-fertility-supplements-impact-ivf-results": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "how-do-thyroid-disorders-affect-fertility-in-women": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "how-does-follicle-count-affect-ivf-success-rates": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "how-does-letrozole-help-with-ovulation-and-pregnancy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "how-does-the-number-of-eggs-affect-ivf-success-rate": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "how-human-fertilization-works-step-by-step-explanation": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "how-letrozole-works-a-comprehensive-guide-to-boosting-ovulation-for-fertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 31 ──────────────────────────────────────────────────────────
   "frozen-vs-fresh-embryo-transfer-which-is-better": {
     removeBlocks: ["complete guide", "key numbers"],

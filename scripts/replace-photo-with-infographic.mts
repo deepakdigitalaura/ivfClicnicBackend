@@ -2702,6 +2702,221 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
+
+// Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
+// Source: Blog node [9] — 4 nutrients, stated verbatim
+const SVG_MALE_SUPPLEMENT_NUTRIENTS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="${C.dark}">4 Key Nutrients for Male Fertility Supplements</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">CoQ10</text>
+  <text x="122" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Boosts motility and</text>
+  <text x="122" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">sperm energy</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">L-Carnitine</text>
+  <text x="300" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Enhances motility</text>
+  <text x="300" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">and repro health</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Zinc &amp; Selenium</text>
+  <text x="478" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Support maturation</text>
+  <text x="478" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">and DNA integrity</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Folate &amp; Vit C/E</text>
+  <text x="667" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Protect sperm from</text>
+  <text x="667" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">oxidative damage</text>
+</svg>`;
+
+// Blog W32-2 (Thyroid & fertility in women): comparison infographic
+// Source: Blog nodes [8]-[9] — hypo vs hyperthyroidism effects, stated verbatim
+const SVG_THYROID_FERTILITY_WOMEN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 236" font-family="${FONT}">
+  <rect width="800" height="236" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="234.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Hypothyroidism (Underactive)</text>
+  <rect x="22" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Irregular or Missed Periods</text>
+  <text x="34" y="91" font-size="10.5" fill="${C.muted}">Low hormone levels disrupt the cycle</text>
+  <rect x="22" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Anovulation</text>
+  <text x="34" y="143" font-size="10.5" fill="${C.muted}">Increased prolactin suppresses egg release</text>
+  <rect x="22" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reduced Luteal Phase</text>
+  <text x="34" y="195" font-size="10.5" fill="${C.muted}">Shorter phase makes implantation difficult</text>
+  <rect x="410" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Hyperthyroidism (Overactive)</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Light or Infrequent Periods</text>
+  <text x="434" y="91" font-size="10.5" fill="${C.muted}">Excess hormone alters the cycle</text>
+  <rect x="422" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Poor Egg Quality</text>
+  <text x="434" y="143" font-size="10.5" fill="${C.muted}">Increased miscarriage risk</text>
+  <rect x="422" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Altered Cervical Mucus</text>
+  <text x="434" y="195" font-size="10.5" fill="${C.muted}">Less receptive to sperm; affects lining too</text>
+</svg>`;
+
+// Blog W32-3 (Follicle count & IVF): "Follicle Count & IVF Success"
+// Source: Blog node [11] — 3 ranges, stated verbatim
+const SVG_FOLLICLE_COUNT_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">FOLLICLE COUNT &amp; IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">LOW</text>
+  <text x="149" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">&lt;5</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Diminished ovarian reserve</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">MODERATE (IDEAL)</text>
+  <text x="400" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">6–15</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Best balance of eggs and safety</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">HIGH</text>
+  <text x="651" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">&gt;15</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Higher OHSS risk</text>
+  <text x="400" y="190" text-anchor="middle" font-size="9.5" fill="${C.muted}">Egg quality matters as much as follicle quantity for IVF success</text>
+</svg>`;
+
+// Blog W32-4 (Letrozole ovulation & pregnancy): "Letrozole Success Rates"
+// Source: Blog node [26] — stated success rates, verbatim
+const SVG_LETROZOLE_SUCCESS_RATES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="198.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">LETROZOLE SUCCESS RATES</text>
+  <line x1="60" y1="36" x2="740" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="70" y="48" width="200" height="126" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="170" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">OVULATION</text>
+  <text x="170" y="118" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">60–80%</text>
+  <text x="170" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">of women ovulate</text>
+  <rect x="300" y="40" width="200" height="134" rx="8" fill="${C.white}" stroke="${C.rose}" stroke-width="1.5"/>
+  <text x="400" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">PREGNANCY (PCOS)</text>
+  <text x="400" y="112" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">20–27%</text>
+  <text x="400" y="134" text-anchor="middle" font-size="10" fill="${C.muted}">per cycle, when ovulating</text>
+  <rect x="530" y="48" width="200" height="126" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="630" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">LIVE BIRTH</text>
+  <text x="630" y="118" text-anchor="middle" font-size="20" font-weight="800" fill="${C.rose}">Higher</text>
+  <text x="630" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">vs Clomid in PCOS patients</text>
+</svg>`;
+
+// Blog W32-5 (Number of eggs & IVF): "Egg Count & IVF Success"
+// Source: Blog nodes [12],[16],[19] — 3 ranges, stated verbatim
+const SVG_EGG_COUNT_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">EGG COUNT &amp; IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">TOO FEW</text>
+  <text x="149" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">&lt;5</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Limits fertilisation chances</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">OPTIMAL</text>
+  <text x="400" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">10–15</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Best balance of quality and safety</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">HIGH</text>
+  <text x="651" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">&gt;20</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">OHSS risk; may need frozen transfer</text>
+  <text x="400" y="190" text-anchor="middle" font-size="9.5" fill="${C.muted}">12 high-quality eggs can outperform 25 lower-quality eggs</text>
+</svg>`;
+
+// Blog W32-6 (Human fertilization steps): "Human Fertilization: 5 Steps"
+// Source: Blog headings [4],[5],[7],[9],[11] — 5 steps, stated verbatim
+const SVG_HUMAN_FERTILIZATION_5STEP = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HUMAN FERTILIZATION: 5 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Ovulation</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Egg released</text>
+  <text x="108" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">around day 14</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Sperm</text>
+  <text x="254" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Production</text>
+  <text x="254" y="133" text-anchor="middle" font-size="9" fill="${C.muted}">Mature in epididymis</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Fertilization</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Sperm fuses</text>
+  <text x="400" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">with the egg</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Zygote</text>
+  <text x="546" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Formation</text>
+  <text x="546" y="133" text-anchor="middle" font-size="9" fill="${C.muted}">Cells begin dividing</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">5</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Implantation</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Into the uterine</text>
+  <text x="692" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">lining</text>
+</svg>`;
+
+// Blog W32-7 (How Letrozole works — comprehensive guide): "How Letrozole Triggers Ovulation: 4 Steps"
+// Source: Blog node [10] — 4-step mechanism, stated verbatim
+const SVG_LETROZOLE_MECHANISM_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 246" font-family="${FONT}">
+  <rect width="800" height="246" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="244.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW LETROZOLE TRIGGERS OVULATION: 4 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="72" font-size="14" font-weight="700" fill="${C.rose}">1</text>
+  <text x="60" y="63" font-size="12" font-weight="700" fill="${C.dark}">Reduces Estrogen</text>
+  <text x="60" y="79" font-size="10.5" fill="${C.muted}">Blocks the aromatase enzyme, lowering circulating estrogen</text>
+  <rect x="20" y="98" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="98" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="14" font-weight="700" fill="${C.rose}">2</text>
+  <text x="60" y="117" font-size="12" font-weight="700" fill="${C.dark}">Increases FSH &amp; LH</text>
+  <text x="60" y="133" font-size="10.5" fill="${C.muted}">Pituitary responds to lower estrogen with more hormone</text>
+  <rect x="20" y="152" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="152" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="180" font-size="14" font-weight="700" fill="${C.rose}">3</text>
+  <text x="60" y="171" font-size="12" font-weight="700" fill="${C.dark}">Follicle Development</text>
+  <text x="60" y="187" font-size="10.5" fill="${C.muted}">Higher FSH stimulates ovarian follicle growth</text>
+  <rect x="20" y="206" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="206" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="226" font-size="14" font-weight="700" fill="${C.rose}">4</text>
+  <text x="60" y="225" font-size="12" font-weight="700" fill="${C.dark}">Triggers Ovulation — a mature egg is released from the ovary</text>
+</svg>`;
+
 // ── Wave 31 SVG constants ─────────────────────────────────────────────
 
 // Blog W31-1 (Frozen vs Fresh embryo transfer): comparison infographic
@@ -6788,6 +7003,42 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 32: Published blogs (FINAL WAVE) ─────────────────────────────
+  "how-do-male-fertility-supplements-impact-ivf-results": {
+    svg:     SVG_MALE_SUPPLEMENT_NUTRIENTS_4,
+    title:   "4 Key Nutrients for Male Fertility Supplements",
+    altText: "Four-card horizontal infographic. Card 1 CoQ10: boosts motility and sperm energy. Card 2 L-Carnitine: enhances motility and reproductive health. Card 3 Zinc and Selenium: support maturation and DNA integrity. Card 4 Folate and Vitamin C/E: protect sperm from oxidative damage.",
+  },
+  "how-do-thyroid-disorders-affect-fertility-in-women": {
+    svg:     SVG_THYROID_FERTILITY_WOMEN,
+    title:   "Thyroid Disorders: Effects on Fertility",
+    altText: "Two-panel comparison infographic. Left panel Hypothyroidism Underactive with rose header: Irregular or Missed Periods (low hormone levels disrupt the cycle); Anovulation (increased prolactin suppresses egg release); Reduced Luteal Phase (shorter phase makes implantation difficult). Right panel Hyperthyroidism Overactive: Light or Infrequent Periods (excess hormone alters the cycle); Poor Egg Quality (increased miscarriage risk); Altered Cervical Mucus (less receptive to sperm; affects lining too).",
+  },
+  "how-does-follicle-count-affect-ivf-success-rates": {
+    svg:     SVG_FOLLICLE_COUNT_IVF,
+    title:   "Follicle Count & IVF Success",
+    altText: "Three-panel infographic with rose headers. Panel Low: fewer than 5, diminished ovarian reserve. Panel Moderate (Ideal): 6 to 15, best balance of eggs and safety. Panel High: more than 15, higher OHSS risk. Footer note: egg quality matters as much as follicle quantity for IVF success.",
+  },
+  "how-does-letrozole-help-with-ovulation-and-pregnancy": {
+    svg:     SVG_LETROZOLE_SUCCESS_RATES,
+    title:   "Letrozole Success Rates",
+    altText: "Three-panel infographic. Panel Ovulation: 60 to 80 percent of women ovulate. Panel Pregnancy PCOS, highlighted: 20 to 27 percent per cycle when ovulating. Panel Live Birth: higher rates versus Clomid in PCOS patients.",
+  },
+  "how-does-the-number-of-eggs-affect-ivf-success-rate": {
+    svg:     SVG_EGG_COUNT_IVF,
+    title:   "Egg Count & IVF Success",
+    altText: "Three-panel infographic with rose headers. Panel Too Few: fewer than 5, limits fertilisation chances. Panel Optimal: 10 to 15 eggs, best balance of quality and safety. Panel High: more than 20, OHSS risk, may need frozen transfer. Footer note: 12 high-quality eggs can outperform 25 lower-quality eggs.",
+  },
+  "how-human-fertilization-works-step-by-step-explanation": {
+    svg:     SVG_HUMAN_FERTILIZATION_5STEP,
+    title:   "Human Fertilization: 5 Steps",
+    altText: "Five-panel horizontal infographic. Panel 1 Ovulation: egg released around day 14. Panel 2 Sperm Production: mature in epididymis. Panel 3 Fertilization: sperm fuses with the egg. Panel 4 Zygote Formation: cells begin dividing. Panel 5 Implantation: into the uterine lining.",
+  },
+  "how-letrozole-works-a-comprehensive-guide-to-boosting-ovulation-for-fertility": {
+    svg:     SVG_LETROZOLE_MECHANISM_4,
+    title:   "How Letrozole Triggers Ovulation: 4 Steps",
+    altText: "Four-row accent-bar infographic. Step 1 Reduces Estrogen: blocks the aromatase enzyme, lowering circulating estrogen. Step 2 Increases FSH and LH: pituitary responds to lower estrogen with more hormone. Step 3 Follicle Development: higher FSH stimulates ovarian follicle growth. Step 4 Triggers Ovulation: a mature egg is released from the ovary.",
+  },
   // ── Wave 31: Published blogs ──────────────────────────────────────────
   "frozen-vs-fresh-embryo-transfer-which-is-better": {
     svg:     SVG_FROZEN_VS_FRESH_TRANSFER,
