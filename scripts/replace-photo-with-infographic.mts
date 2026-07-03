@@ -2702,6 +2702,193 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 19 SVG constants ─────────────────────────────────────────────
+
+// Blog W19-1 (FOGSI training Ahmedabad): "FOGSI Training Program: 3 Courses Offered"
+// Source: Blog node [7] list — 3 courses with durations, stated verbatim
+const SVG_FOGSI_TRAINING_COURSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="198.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">FOGSI TRAINING PROGRAM: 3 COURSES OFFERED</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">IUI &amp; STIMULATION</text>
+  <text x="149" y="118" text-anchor="middle" font-size="15" font-weight="800" fill="${C.rose}">2 Days</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Protocol Course</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">BASIC INFERTILITY</text>
+  <text x="400" y="118" text-anchor="middle" font-size="15" font-weight="800" fill="${C.rose}">7 Days</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Foundation Course</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">ADVANCED INFERTILITY</text>
+  <text x="651" y="118" text-anchor="middle" font-size="15" font-weight="800" fill="${C.rose}">14 Days</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Specialist Course</text>
+  <text x="400" y="188" text-anchor="middle" font-size="9.5" fill="${C.muted}">Open exclusively to FOGSI members with an MCI-recognised OB-GYN degree or diploma</text>
+</svg>`;
+
+// Blog W19-2 (Sperm cramps): "8 Common Causes of Sperm Cramps (Testicular Pain)"
+// Source: Blog nodes [14]-[21] — 8 causes listed
+const SVG_SPERM_CRAMPS_CAUSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 316" font-family="${FONT}">
+  <rect width="800" height="316" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="314.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">8 COMMON CAUSES OF SPERM CRAMPS (TESTICULAR PAIN)</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="79" r="14" fill="${C.rose}"/>
+  <text x="64" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="74" font-size="11" font-weight="700" fill="${C.dark}">Epididymitis</text>
+  <text x="86" y="90" font-size="9.5" fill="${C.muted}">Inflammation of the epididymis, often from bacterial infection or STIs</text>
+  <rect x="40" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="139" r="14" fill="${C.rose}"/>
+  <text x="64" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="86" y="134" font-size="11" font-weight="700" fill="${C.dark}">Varicocele</text>
+  <text x="86" y="150" font-size="9.5" fill="${C.muted}">Enlarged scrotal veins causing dull, aching pain</text>
+  <rect x="40" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="199" r="14" fill="${C.rose}"/>
+  <text x="64" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="86" y="194" font-size="11" font-weight="700" fill="${C.dark}">Testicular Torsion</text>
+  <text x="86" y="210" font-size="9.5" fill="${C.muted}">Medical emergency — spermatic cord twists, cutting off blood flow</text>
+  <rect x="40" y="232" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="259" r="14" fill="${C.rose}"/>
+  <text x="64" y="263.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="254" font-size="11" font-weight="700" fill="${C.dark}">Inguinal Hernia</text>
+  <text x="86" y="270" font-size="9.5" fill="${C.muted}">Intestine protrudes through the abdominal wall, causing groin pain</text>
+  <rect x="405" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="79" r="14" fill="${C.rose}"/>
+  <text x="429" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="451" y="74" font-size="11" font-weight="700" fill="${C.dark}">Orchitis</text>
+  <text x="451" y="90" font-size="9.5" fill="${C.muted}">Inflammation of one or both testicles from viral or bacterial infection</text>
+  <rect x="405" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="139" r="14" fill="${C.rose}"/>
+  <text x="429" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="451" y="134" font-size="11" font-weight="700" fill="${C.dark}">Prostatitis</text>
+  <text x="451" y="150" font-size="9.5" fill="${C.muted}">Inflamed prostate gland causing pelvic pain perceived as testicular pain</text>
+  <rect x="405" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="199" r="14" fill="${C.rose}"/>
+  <text x="429" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="451" y="194" font-size="11" font-weight="700" fill="${C.dark}">Injury or Trauma</text>
+  <text x="451" y="210" font-size="9.5" fill="${C.muted}">Direct injury to the testicles or groin causes temporary or lasting pain</text>
+  <rect x="405" y="232" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="259" r="14" fill="${C.rose}"/>
+  <text x="429" y="263.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="451" y="254" font-size="11" font-weight="700" fill="${C.dark}">Hydrocele</text>
+  <text x="451" y="270" font-size="9.5" fill="${C.muted}">Fluid-filled sac around a testicle causing swelling and discomfort</text>
+</svg>`;
+
+// Blog W19-3 (IVF success rate): "IVF Success Rate by Age"
+// Source: Blog node [12] list — 4 age brackets with stated success-rate ranges
+const SVG_IVF_SUCCESS_BY_AGE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">IVF Success Rate by Age</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">&lt;35</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Under 35</text>
+  <text x="122" y="135" text-anchor="middle" font-size="20" font-weight="800" fill="${C.rose}">40–50%</text>
+  <text x="122" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Highest success</text>
+  <text x="122" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">rates; strongest</text>
+  <text x="122" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">ovarian reserve</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">35–37</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">35–37 Years</text>
+  <text x="300" y="135" text-anchor="middle" font-size="20" font-weight="800" fill="${C.rose}">30–40%</text>
+  <text x="300" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Slight decline</text>
+  <text x="300" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">vs under-35</text>
+  <text x="300" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">age group</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">38–40</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">38–40 Years</text>
+  <text x="478" y="135" text-anchor="middle" font-size="20" font-weight="800" fill="${C.rose}">20–25%</text>
+  <text x="478" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">More significant</text>
+  <text x="478" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">decline begins</text>
+  <text x="478" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">after age 38</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">40+</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Over 40 Years</text>
+  <text x="667" y="135" text-anchor="middle" font-size="20" font-weight="800" fill="${C.rose}">10–15%</text>
+  <text x="667" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Donor eggs can</text>
+  <text x="667" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">significantly</text>
+  <text x="667" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">improve outcomes</text>
+</svg>`;
+
+// Blog W19-4 (Thin endometrium): "6 Causes of Thin Endometrium"
+// Source: Blog nodes [9]-[14] — 6 causes listed
+const SVG_THIN_ENDOMETRIUM_CAUSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 CAUSES OF THIN ENDOMETRIUM</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Imbalance</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Low estrogen or estrogen/progesterone imbalance</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Age</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Natural thinning from decreased estrogen production</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Previous Uterine Procedures</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">D&amp;C or C-section can cause scarring and thinning</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Uterine Infections</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Endometritis can damage and thin the lining</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Poor Blood Flow</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Inadequate uterine blood flow impedes growth</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Factors</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Some women have a genetic predisposition</text>
+</svg>`;
+
+// Blog W19-5 (CME East Ahmedabad): "BFI × East Ahmedabad CME: 4 Key Highlights"
+// Source: Blog paras [3],[6],[7] — venue/attendance, ART Act discussion, interactive format
+const SVG_CME_EAST_AHMEDABAD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI x EAST AHMEDABAD CME: 4 KEY HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Venue &amp; Collaboration</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Held at Nikol, Ahmedabad, jointly with the East Ahmedabad Gynaecologist Association</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Strong Attendance</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Around 35 gynecologists participated, including eminent East Ahmedabad practitioners</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Key Discussion Topic</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">In-depth session on the newly implemented ART Act and its clinical implications</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Interactive Format</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Brainstorming sessions and open doubt-solving encouraged active engagement</text>
+</svg>`;
+
 // ── Wave 18 SVG constants ─────────────────────────────────────────────
 
 // Blog W18-1 (Twin pregnancy after IVF): "4 Special Care Steps for Twin Pregnancy After IVF"
@@ -4512,6 +4699,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 19: Published blogs ──────────────────────────────────────────
+  "bavishi-fertility-institute-hosts-fogsi-recognized-training-program-in-ahmedabad": {
+    svg:     SVG_FOGSI_TRAINING_COURSES,
+    title:   "FOGSI Training Program: 3 Courses Offered",
+    altText: "Three-panel infographic with rose headers. Panel 1 IUI and Stimulation Protocol Course: 2 Days. Panel 2 Basic Infertility Foundation Course: 7 Days. Panel 3 Advanced Infertility Specialist Course: 14 Days. Footer note: open exclusively to FOGSI members with an MCI-recognised OB-GYN degree or diploma.",
+  },
+  "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment": {
+    svg:     SVG_SPERM_CRAMPS_CAUSES,
+    title:   "8 Common Causes of Sperm Cramps (Testicular Pain)",
+    altText: "Two-column eight-item grid infographic. Items 1-4 (left): Epididymitis (inflammation of the epididymis, often from bacterial infection or STIs); Varicocele (enlarged scrotal veins causing dull, aching pain); Testicular Torsion (medical emergency — spermatic cord twists, cutting off blood flow); Inguinal Hernia (intestine protrudes through the abdominal wall, causing groin pain). Items 5-8 (right): Orchitis (inflammation of one or both testicles from viral or bacterial infection); Prostatitis (inflamed prostate gland causing pelvic pain perceived as testicular pain); Injury or Trauma (direct injury to the testicles or groin causes temporary or lasting pain); Hydrocele (fluid-filled sac around a testicle causing swelling and discomfort).",
+  },
+  "understanding-the-success-rate-of-ivf-treatment": {
+    svg:     SVG_IVF_SUCCESS_BY_AGE,
+    title:   "IVF Success Rate by Age",
+    altText: "Four-card horizontal infographic. Card Under 35: 40 to 50 percent success rate, highest rates with strongest ovarian reserve. Card 35-37 Years: 30 to 40 percent, slight decline versus under-35 age group. Card 38-40 Years: 20 to 25 percent, more significant decline begins after age 38. Card Over 40 Years: 10 to 15 percent, though donor eggs can significantly improve outcomes.",
+  },
+  "understanding-thin-endometrium-causes-impact-and-treatment-options": {
+    svg:     SVG_THIN_ENDOMETRIUM_CAUSES,
+    title:   "6 Causes of Thin Endometrium",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Hormonal Imbalance (low estrogen or estrogen/progesterone imbalance); Previous Uterine Procedures (D&C or C-section can cause scarring and thinning); Poor Blood Flow (inadequate uterine blood flow impedes growth). Items 4-6 (right): Age (natural thinning from decreased estrogen production); Uterine Infections (endometritis can damage and thin the lining); Genetic Factors (some women have a genetic predisposition).",
+  },
+  "bavishi-fertility-institute-hosts-joint-educational-cme-with-east-ahmedabad-gynaecologist-association": {
+    svg:     SVG_CME_EAST_AHMEDABAD,
+    title:   "BFI x East Ahmedabad CME: 4 Key Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 Venue and Collaboration: held at Nikol, Ahmedabad, jointly with the East Ahmedabad Gynaecologist Association. Highlight 02 Strong Attendance: around 35 gynecologists participated, including eminent East Ahmedabad practitioners. Highlight 03 Key Discussion Topic: in-depth session on the newly implemented ART Act and its clinical implications. Highlight 04 Interactive Format: brainstorming sessions and open doubt-solving encouraged active engagement.",
+  },
   // ── Wave 18: Published blogs ──────────────────────────────────────────
   "twin-and-multiple-pregnancies-after-ivf-risks-and-care": {
     svg:     SVG_TWIN_PREGNANCY_CARE,

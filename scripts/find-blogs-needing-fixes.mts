@@ -82,6 +82,12 @@ const DONE = new Set([
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
   "prp-vs-traditional-fertility-treatments-whats-the-difference",
   "reasons-for-iui-failure-symptoms-and-causes",
+  // Wave 19
+  "bavishi-fertility-institute-hosts-fogsi-recognized-training-program-in-ahmedabad",
+  "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "understanding-the-success-rate-of-ivf-treatment",
+  "understanding-thin-endometrium-causes-impact-and-treatment-options",
+  "bavishi-fertility-institute-hosts-joint-educational-cme-with-east-ahmedabad-gynaecologist-association",
   // Wave 18
   "twin-and-multiple-pregnancies-after-ivf-risks-and-care",
   "twin-pregnancy-delivery-options-normal-delivery-vs-c-section",

@@ -128,7 +128,9 @@ function updateExternalImageBlock(
 const C = {
   ivory:    "#FAF9F6",
   border:   "#E2DEED",
-  rose:     "#CF3A6A",  // --primary / "Book Appointment" button — single accent, used everywhere
+  rose:     "#CF3A6A",  // --primary / "Book Appointment" button
+  roseMid:  "#E07098",  // rose tint 2 (80% lightness relative to rose)
+  roseSoft: "#F4C0D0",  // rose tint 1 (very light)
   dark:     "#1A1825",  // --foreground charcoal
   muted:    "#6B6580",  // muted foreground
   white:    "#FFFFFF",
@@ -167,35 +169,32 @@ const SVG_PRP_PROCESS_LIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="
   <text x="400" y="193" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute clinical protocol</text>
 </svg>`;
 
-const SVG_DIET_WEIGHT_GAIN_LIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
-  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
-  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+const SVG_DIET_WEIGHT_GAIN_LIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 210" font-family="${FONT}">
+  <rect width="800" height="210" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="208.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
   <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">RECOMMENDED WEIGHT GAIN BY TRIMESTER</text>
-  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
-  <!-- Panel 1: First Trimester -->
-  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
-  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
-  <text x="149" y="65" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">FIRST TRIMESTER</text>
-  <text x="149" y="78" text-anchor="middle" font-size="10" fill="${C.white}">Week 1–12</text>
-  <text x="149" y="118" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">1–2 kg</text>
-  <!-- Panel 2: Second Trimester -->
-  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
-  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
-  <text x="400" y="65" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">SECOND TRIMESTER</text>
-  <text x="400" y="78" text-anchor="middle" font-size="10" fill="${C.white}">Week 13–27</text>
-  <text x="400" y="118" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">4–5 kg</text>
-  <!-- Panel 3: Third Trimester -->
-  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
-  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
-  <text x="651" y="65" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">THIRD TRIMESTER</text>
-  <text x="651" y="78" text-anchor="middle" font-size="10" fill="${C.white}">Week 28–Delivery</text>
-  <text x="651" y="118" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">5–6 kg</text>
+  <line x1="60" y1="36" x2="740" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <!-- T1 column -->
+  <rect x="70" y="52" width="170" height="108" rx="8" fill="${C.roseSoft}" stroke="${C.rose}" stroke-width="1"/>
+  <text x="155" y="76" text-anchor="middle" font-size="10" font-weight="700" fill="${C.rose}">FIRST TRIMESTER</text>
+  <text x="155" y="92" text-anchor="middle" font-size="9.5" fill="${C.muted}">Week 1–12</text>
+  <text x="155" y="125" text-anchor="middle" font-size="30" font-weight="800" fill="${C.rose}">1–2</text>
+  <text x="155" y="143" text-anchor="middle" font-size="12" fill="${C.dark}">kg</text>
+  <!-- T2 column -->
+  <rect x="310" y="44" width="180" height="116" rx="8" fill="${C.roseMid}" stroke="${C.rose}" stroke-width="1"/>
+  <text x="400" y="68" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">SECOND TRIMESTER</text>
+  <text x="400" y="84" text-anchor="middle" font-size="9.5" fill="${C.white}" opacity="0.85">Week 13–27</text>
+  <text x="400" y="117" text-anchor="middle" font-size="30" font-weight="800" fill="${C.white}">4–5</text>
+  <text x="400" y="135" text-anchor="middle" font-size="12" fill="${C.white}">kg</text>
+  <!-- T3 column -->
+  <rect x="558" y="36" width="175" height="124" rx="8" fill="${C.rose}"/>
+  <text x="646" y="60" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">THIRD TRIMESTER</text>
+  <text x="646" y="76" text-anchor="middle" font-size="9.5" fill="${C.white}" opacity="0.85">Week 28–Delivery</text>
+  <text x="646" y="109" text-anchor="middle" font-size="30" font-weight="800" fill="${C.white}">5–6</text>
+  <text x="646" y="127" text-anchor="middle" font-size="12" fill="${C.white}">kg</text>
   <!-- Note -->
-  <text x="400" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Total healthy gain: 10–13 kg</text>
-  <text x="400" y="205" text-anchor="middle" font-size="9.5" fill="${C.muted}">Varies by pre-pregnancy BMI — confirm targets with your doctor</text>
+  <text x="400" y="183" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Total healthy gain: 10–13 kg</text>
+  <text x="400" y="198" text-anchor="middle" font-size="9.5" fill="${C.muted}">Varies by pre-pregnancy BMI — confirm targets with your doctor</text>
 </svg>`;
 
 const SVG_HIGHRISK_PHASES_LIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
@@ -483,6 +482,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   },
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  // ── Wave 19 ──────────────────────────────────────────────────────────
+  "bavishi-fertility-institute-hosts-fogsi-recognized-training-program-in-ahmedabad": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "understanding-the-success-rate-of-ivf-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "understanding-thin-endometrium-causes-impact-and-treatment-options": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "bavishi-fertility-institute-hosts-joint-educational-cme-with-east-ahmedabad-gynaecologist-association": {
+    removeBlocks: ["key aspects", "key numbers"],
   },
   // ── Wave 18 ──────────────────────────────────────────────────────────
   "twin-and-multiple-pregnancies-after-ivf-risks-and-care": {
