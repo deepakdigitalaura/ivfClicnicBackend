@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 26 ──────────────────────────────────────────────────────────
+  "breaking-free-from-varicocele-pain-3-innovative-ways-to-find-relief": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "can-a-woman-get-pregnant-once-her-periods-stop": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "can-endometriosis-come-back-after-surgery-recurrence-rates-prevention-tips": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "can-ivf-work-with-low-amh": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "can-natural-cycle-ivf-reduce-the-risk-of-ovarian-hyperstimulation": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
   // ── Wave 25 ──────────────────────────────────────────────────────────
   "ovarian-hyperstimulation-syndrome": {
     removeBlocks: ["complete guide", "key numbers"],

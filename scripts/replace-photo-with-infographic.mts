@@ -2702,6 +2702,156 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 26 SVG constants ─────────────────────────────────────────────
+
+// Blog W26-1 (Varicocele pain relief): "3 Innovative Ways to Relieve Varicocele Pain"
+// Source: Blog headings [5],[11],[15] — 3 approaches, stated verbatim
+const SVG_VARICOCELE_RELIEF_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="198.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 INNOVATIVE WAYS TO RELIEVE VARICOCELE PAIN</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="72" font-size="14" font-weight="700" fill="${C.rose}">1</text>
+  <text x="60" y="63" font-size="12" font-weight="700" fill="${C.dark}">Pelvic Floor Physical Therapy</text>
+  <text x="60" y="79" font-size="10.5" fill="${C.muted}">Releases muscle tension and improves blood flow</text>
+  <rect x="20" y="98" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="98" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="14" font-weight="700" fill="${C.rose}">2</text>
+  <text x="60" y="117" font-size="12" font-weight="700" fill="${C.dark}">Acupuncture</text>
+  <text x="60" y="133" font-size="10.5" fill="${C.muted}">Reduces inflammation and stimulates natural pain relief</text>
+  <rect x="20" y="152" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="152" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="172" font-size="14" font-weight="700" fill="${C.rose}">3</text>
+  <text x="60" y="171" font-size="12" font-weight="700" fill="${C.dark}">Nutrition &amp; Lifestyle — antioxidants, hydration, exercise, less stress</text>
+</svg>`;
+
+// Blog W26-2 (Pregnancy after periods stop): "3 Health Priorities for IVF After Periods Stop"
+// Source: Blog nodes [18]-[20] — 3 health considerations, stated verbatim
+const SVG_IVF_POST_MENOPAUSE_PRIORITIES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="${C.dark}">3 Health Priorities for IVF After Periods Stop</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="60" y="58" width="215" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="167" cy="86" r="18" fill="${C.rose}"/>
+  <text x="167" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="167" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Manage Existing</text>
+  <text x="167" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Conditions</text>
+  <text x="167" y="158" text-anchor="middle" font-size="9.5" fill="${C.muted}">Blood pressure, thyroid</text>
+  <text x="167" y="173" text-anchor="middle" font-size="9.5" fill="${C.muted}">and diabetes addressed</text>
+  <rect x="292" y="58" width="215" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="399" cy="86" r="18" fill="${C.rose}"/>
+  <text x="399" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="399" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Nutrition &amp; Medical</text>
+  <text x="399" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Care</text>
+  <text x="399" y="158" text-anchor="middle" font-size="9.5" fill="${C.muted}">Balanced diet, consistent</text>
+  <text x="399" y="173" text-anchor="middle" font-size="9.5" fill="${C.muted}">prenatal attention</text>
+  <rect x="524" y="58" width="215" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="631" cy="86" r="18" fill="${C.rose}"/>
+  <text x="631" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="631" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Ongoing Pregnancy</text>
+  <text x="631" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Monitoring</text>
+  <text x="631" y="158" text-anchor="middle" font-size="9.5" fill="${C.muted}">Regular check-ups for</text>
+  <text x="631" y="173" text-anchor="middle" font-size="9.5" fill="${C.muted}">mother and baby</text>
+</svg>`;
+
+// Blog W26-3 (Endometriosis recurrence): "Endometriosis Recurrence Rates After Surgery"
+// Source: Blog node [14] — recurrence rates stated verbatim
+const SVG_ENDOMETRIOSIS_RECURRENCE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">ENDOMETRIOSIS RECURRENCE RATES AFTER SURGERY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WITHIN 2 YEARS</text>
+  <text x="149" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">20–30%</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">experience recurrence</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WITHIN 5 YEARS</text>
+  <text x="400" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">40–50%</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">if no preventive therapy</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WITH HORMONAL THERAPY</text>
+  <text x="651" y="115" text-anchor="middle" font-size="15" font-weight="800" fill="${C.rose}">Significantly</text>
+  <text x="651" y="133" text-anchor="middle" font-size="15" font-weight="800" fill="${C.rose}">Lower</text>
+  <text x="651" y="153" text-anchor="middle" font-size="10" fill="${C.muted}">when combined with surgery</text>
+  <text x="400" y="188" text-anchor="middle" font-size="9.5" fill="${C.muted}">Women who undergo complete excision by experienced specialists tend to have better long-term outcomes</text>
+</svg>`;
+
+// Blog W26-4 (IVF with low AMH): "3 Factors That Affect IVF Success with Low AMH"
+// Source: Blog node [11] — 3 factors, stated verbatim
+const SVG_LOW_AMH_IVF_SUCCESS_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="198.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 FACTORS THAT AFFECT IVF SUCCESS WITH LOW AMH</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="72" font-size="14" font-weight="700" fill="${C.rose}">1</text>
+  <text x="60" y="63" font-size="12" font-weight="700" fill="${C.dark}">Age</text>
+  <text x="60" y="79" font-size="10.5" fill="${C.muted}">Younger women with low AMH often see better outcomes</text>
+  <rect x="20" y="98" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="98" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="14" font-weight="700" fill="${C.rose}">2</text>
+  <text x="60" y="117" font-size="12" font-weight="700" fill="${C.dark}">Overall Health</text>
+  <text x="60" y="133" font-size="10.5" fill="${C.muted}">Good health supports a stronger response to stimulation</text>
+  <rect x="20" y="152" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="152" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="172" font-size="14" font-weight="700" fill="${C.rose}">3</text>
+  <text x="60" y="171" font-size="12" font-weight="700" fill="${C.dark}">Previous Treatments — inform a more customised protocol</text>
+</svg>`;
+
+// Blog W26-5 (Natural cycle IVF & OHSS): "How Natural Cycle IVF Works: 5 Steps"
+// Source: Blog node [14] — 5-step process, stated verbatim
+const SVG_NATURAL_CYCLE_IVF_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW NATURAL CYCLE IVF WORKS: 5 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Track Natural</text>
+  <text x="108" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Cycle</text>
+  <text x="108" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">No heavy stimulation</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Monitor</text>
+  <text x="254" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Follicle</text>
+  <text x="254" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">The natural one</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Retrieve</text>
+  <text x="400" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Single Egg</text>
+  <text x="400" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">One mature egg</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Fertilize in</text>
+  <text x="546" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">the Lab</text>
+  <text x="546" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">Egg meets sperm</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">5</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Transfer</text>
+  <text x="692" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Embryo</text>
+  <text x="692" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">Back to the uterus</text>
+</svg>`;
+
 // ── Wave 25 SVG constants ─────────────────────────────────────────────
 
 // Blog W25-1 (OHSS): "OHSS: Primary vs Secondary"
@@ -5817,6 +5967,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 26: Published blogs ──────────────────────────────────────────
+  "breaking-free-from-varicocele-pain-3-innovative-ways-to-find-relief": {
+    svg:     SVG_VARICOCELE_RELIEF_3,
+    title:   "3 Innovative Ways to Relieve Varicocele Pain",
+    altText: "Four-row accent-bar infographic (3 items). Highlight 1 Pelvic Floor Physical Therapy: releases muscle tension and improves blood flow. Highlight 2 Acupuncture: reduces inflammation and stimulates natural pain relief. Highlight 3 Nutrition and Lifestyle: antioxidants, hydration, exercise, less stress.",
+  },
+  "can-a-woman-get-pregnant-once-her-periods-stop": {
+    svg:     SVG_IVF_POST_MENOPAUSE_PRIORITIES,
+    title:   "3 Health Priorities for IVF After Periods Stop",
+    altText: "Three-card horizontal infographic. Card 1 Manage Existing Conditions: blood pressure, thyroid and diabetes addressed. Card 2 Nutrition and Medical Care: balanced diet, consistent prenatal attention. Card 3 Ongoing Pregnancy Monitoring: regular check-ups for mother and baby.",
+  },
+  "can-endometriosis-come-back-after-surgery-recurrence-rates-prevention-tips": {
+    svg:     SVG_ENDOMETRIOSIS_RECURRENCE,
+    title:   "Endometriosis Recurrence Rates After Surgery",
+    altText: "Three-panel infographic with rose headers. Panel Within 2 Years: 20 to 30 percent experience recurrence. Panel Within 5 Years: 40 to 50 percent if no preventive therapy. Panel With Hormonal Therapy: significantly lower when combined with surgery. Footer note: women who undergo complete excision by experienced specialists tend to have better long-term outcomes.",
+  },
+  "can-ivf-work-with-low-amh": {
+    svg:     SVG_LOW_AMH_IVF_SUCCESS_FACTORS,
+    title:   "3 Factors That Affect IVF Success with Low AMH",
+    altText: "Four-row accent-bar infographic (3 items). Highlight 1 Age: younger women with low AMH often see better outcomes. Highlight 2 Overall Health: good health supports a stronger response to stimulation. Highlight 3 Previous Treatments: inform a more customised protocol.",
+  },
+  "can-natural-cycle-ivf-reduce-the-risk-of-ovarian-hyperstimulation": {
+    svg:     SVG_NATURAL_CYCLE_IVF_STEPS,
+    title:   "How Natural Cycle IVF Works: 5 Steps",
+    altText: "Five-panel horizontal infographic. Panel 1 Track Natural Cycle: no heavy stimulation. Panel 2 Monitor Follicle: the natural one. Panel 3 Retrieve Single Egg: one mature egg. Panel 4 Fertilize in the Lab: egg meets sperm. Panel 5 Transfer Embryo: back to the uterus.",
+  },
   // ── Wave 25: Published blogs ──────────────────────────────────────────
   "ovarian-hyperstimulation-syndrome": {
     svg:     SVG_OHSS_PRIMARY_VS_SECONDARY,
