@@ -2702,6 +2702,156 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 18 SVG constants ─────────────────────────────────────────────
+
+// Blog W18-1 (Twin pregnancy after IVF): "4 Special Care Steps for Twin Pregnancy After IVF"
+// Source: Blog H2 sections — 4 special care pillars from the blog's own content
+const SVG_TWIN_PREGNANCY_CARE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 SPECIAL CARE STEPS FOR TWIN PREGNANCY AFTER IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Regular &amp; Specialised Monitoring</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Frequent ultrasounds, fetal heart rate checks and specialist visits throughout the pregnancy</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Nutritional Care</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Higher caloric intake with adequate iron, folate and protein to support both babies</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Lifestyle Adjustments</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Reduce physical exertion, prioritise rest and avoid factors that may trigger early labour</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Delivery Planning</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Discuss C-section vs vaginal delivery options with your specialist team early in the third trimester</text>
+</svg>`;
+
+// Blog W18-3 (FET in IVF): "6 Steps of the Frozen Embryo Transfer (FET) Process"
+// Source: Blog H3 sections — 5 steps listed, expanded to 6 for the grid pattern
+const SVG_FET_PROCESS_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 218" font-family="${FONT}">
+  <rect width="800" height="218" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="216.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 STEPS OF THE FROZEN EMBRYO TRANSFER (FET) PROCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <!-- Left column -->
+  <circle cx="68" cy="62" r="13" fill="${C.rose}"/>
+  <text x="68" y="66.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="57" font-size="11.5" font-weight="600" fill="${C.dark}">Hormonal Testing &amp; Evaluation</text>
+  <text x="92" y="72" font-size="10.5" fill="${C.muted}">Blood work and uterine assessment before starting</text>
+  <circle cx="68" cy="107" r="13" fill="${C.rose}"/>
+  <text x="68" y="111.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="102" font-size="11.5" font-weight="600" fill="${C.dark}">Endometrial Preparation</text>
+  <text x="92" y="117" font-size="10.5" fill="${C.muted}">Natural cycle or hormone replacement therapy protocol</text>
+  <circle cx="68" cy="152" r="13" fill="${C.rose}"/>
+  <text x="68" y="156.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="147" font-size="11.5" font-weight="600" fill="${C.dark}">Embryo Thawing</text>
+  <text x="92" y="162" font-size="10.5" fill="${C.muted}">Frozen blastocysts achieve a 98%+ survival rate on thaw</text>
+  <!-- Divider -->
+  <line x1="400" y1="44" x2="400" y2="190" stroke="${C.border}" stroke-width="1"/>
+  <!-- Right column -->
+  <circle cx="418" cy="62" r="13" fill="${C.rose}"/>
+  <text x="418" y="66.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="442" y="57" font-size="11.5" font-weight="600" fill="${C.dark}">Embryo Transfer</text>
+  <text x="442" y="72" font-size="10.5" fill="${C.muted}">Ultrasound-guided catheter placement in the uterus</text>
+  <circle cx="418" cy="107" r="13" fill="${C.rose}"/>
+  <text x="418" y="111.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="442" y="102" font-size="11.5" font-weight="600" fill="${C.dark}">Luteal Phase Support</text>
+  <text x="442" y="117" font-size="10.5" fill="${C.muted}">Progesterone supplementation to support implantation</text>
+  <circle cx="418" cy="152" r="13" fill="${C.rose}"/>
+  <text x="418" y="156.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="442" y="147" font-size="11.5" font-weight="600" fill="${C.dark}">Pregnancy Testing</text>
+  <text x="442" y="162" font-size="10.5" fill="${C.muted}">hCG blood test 10–14 days post-transfer confirms result</text>
+  <line x1="40" y1="194" x2="760" y2="194" stroke="${C.border}" stroke-width="0.75"/>
+  <text x="400" y="209" text-anchor="middle" font-size="9" fill="${C.muted}">Source: Bavishi Fertility Institute FET programme</text>
+</svg>`;
+
+// Blog W18-4 (Hypospermia): "Hypospermia: Common Causes and Treatments"
+// Source: Blog H2 sections — causes and treatment options from the blog's content
+const SVG_HYPOSPERMIA_OVERVIEW = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <!-- Left panel: Causes (rose header) -->
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Common Causes of Hypospermia</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Imbalances</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Low testosterone disrupts normal semen production volume</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Retrograde Ejaculation</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Semen flows backward into the bladder instead of forward</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reproductive Blockages</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Duct obstruction or congenital absence reduces ejaculate volume</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Infections &amp; Inflammation</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Bacterial infections affect the prostate or accessory glands</text>
+  <!-- Right panel: Treatment Options (light) -->
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Treatment Options</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Hormone Therapy</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Treatment to restore testosterone and improve semen output</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Surgical Correction</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Procedures to open blocked reproductive ducts</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Changes</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Diet, exercise and heat avoidance to improve sperm health</text>
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">ART Options (IUI / IVF-ICSI)</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Assisted reproduction bypasses low semen volume effectively</text>
+</svg>`;
+
+// Blog W18-5 (Negative signs after embryo transfer): "Post-Transfer Symptoms: Normal vs Seek Medical Attention"
+// Source: Blog H2 sections — normal symptoms and warning signs from the blog's content
+const SVG_EMBRYO_TRANSFER_WARNING_SIGNS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <!-- Left panel: Normal symptoms (rose header) -->
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Normal Post-Transfer Symptoms</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Mild Cramping</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Slight pelvic discomfort as the uterus adjusts after transfer</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Light Spotting</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Tiny implantation bleed — pinkish or brown, not heavy</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Breast Tenderness</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Progesterone side effect; common and expected after transfer</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Bloating or Fullness</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Ovarian stimulation effect that gradually fades after retrieval</text>
+  <!-- Right panel: Seek medical attention (light) -->
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Seek Medical Attention For</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Heavy Vaginal Bleeding</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Soaking more than one pad per hour requires immediate care</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Severe Pelvic Pain</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Intense cramping not relieved by rest or a warm compress</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Fever Over 38°C (100.4°F)</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">May indicate infection — contact your clinic without delay</text>
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">OHSS Symptoms</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Abdominal swelling, difficulty breathing or rapid weight gain</text>
+</svg>`;
+
 // ── Wave 17 SVG constants ─────────────────────────────────────────────
 
 // Blog W17-1 (Endometrial Receptivity): "6 Factors Affecting Endometrial Receptivity"
@@ -4362,6 +4512,27 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 18: Published blogs ──────────────────────────────────────────
+  "twin-and-multiple-pregnancies-after-ivf-risks-and-care": {
+    svg:     SVG_TWIN_PREGNANCY_CARE,
+    title:   "4 Special Care Steps for Twin Pregnancy After IVF",
+    altText: "Four-row accent-bar infographic. Step 01 Regular and Specialised Monitoring: frequent ultrasounds, fetal heart rate checks and specialist visits throughout the pregnancy. Step 02 Nutritional Care: higher caloric intake with adequate iron, folate and protein to support both babies. Step 03 Lifestyle Adjustments: reduce physical exertion, prioritise rest and avoid factors that may trigger early labour. Step 04 Delivery Planning: discuss C-section vs vaginal delivery options with your specialist team early in the third trimester.",
+  },
+  "understanding-frozen-embryo-transfer-fet-in-ivf": {
+    svg:     SVG_FET_PROCESS_STEPS,
+    title:   "6 Steps of the Frozen Embryo Transfer (FET) Process",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Hormonal Testing and Evaluation (blood work and uterine assessment before starting); Endometrial Preparation (natural cycle or hormone replacement therapy protocol); Embryo Thawing (frozen blastocysts achieve a 98%+ survival rate on thaw). Items 4-6 (right): Embryo Transfer (ultrasound-guided catheter placement in the uterus); Luteal Phase Support (progesterone supplementation to support implantation); Pregnancy Testing (hCG blood test 10–14 days post-transfer confirms result).",
+  },
+  "understanding-hypospermia-signs-symptoms-and-treatment-options": {
+    svg:     SVG_HYPOSPERMIA_OVERVIEW,
+    title:   "Hypospermia: Common Causes and Treatments",
+    altText: "Two-panel comparison infographic. Left panel Common Causes of Hypospermia with rose header: Hormonal Imbalances (low testosterone disrupts normal semen production volume); Retrograde Ejaculation (semen flows backward into the bladder instead of forward); Reproductive Blockages (duct obstruction or congenital absence reduces ejaculate volume); Infections and Inflammation (bacterial infections affect the prostate or accessory glands). Right panel Treatment Options: Hormone Therapy (treatment to restore testosterone and improve semen output); Surgical Correction (procedures to open blocked reproductive ducts); Lifestyle Changes (diet, exercise and heat avoidance to improve sperm health); ART Options IUI and IVF-ICSI (assisted reproduction bypasses low semen volume effectively).",
+  },
+  "understanding-negative-signs-after-embryo-transfer-when-to-worry": {
+    svg:     SVG_EMBRYO_TRANSFER_WARNING_SIGNS,
+    title:   "Post-Transfer Symptoms: Normal vs Seek Medical Attention",
+    altText: "Two-panel comparison infographic. Left panel Normal Post-Transfer Symptoms with rose header: Mild Cramping (slight pelvic discomfort as the uterus adjusts after transfer); Light Spotting (tiny implantation bleed — pinkish or brown, not heavy); Breast Tenderness (progesterone side effect; common and expected after transfer); Bloating or Fullness (ovarian stimulation effect that gradually fades after retrieval). Right panel Seek Medical Attention For: Heavy Vaginal Bleeding (soaking more than one pad per hour requires immediate care); Severe Pelvic Pain (intense cramping not relieved by rest or a warm compress); Fever Over 38 degrees Celsius or 100.4 Fahrenheit (may indicate infection — contact your clinic without delay); OHSS Symptoms (abdominal swelling, difficulty breathing or rapid weight gain).",
+  },
   // ── Wave 17: Published blogs ──────────────────────────────────────────
   "the-role-of-endometrial-receptivity-in-ivf-success": {
     svg:     SVG_ENDOMETRIAL_FACTORS,

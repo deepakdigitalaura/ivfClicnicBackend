@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 18 ──────────────────────────────────────────────────────────
+  "twin-and-multiple-pregnancies-after-ivf-risks-and-care": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "twin-pregnancy-delivery-options-normal-delivery-vs-c-section": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "understanding-frozen-embryo-transfer-fet-in-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "understanding-hypospermia-signs-symptoms-and-treatment-options": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "understanding-negative-signs-after-embryo-transfer-when-to-worry": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 17 ──────────────────────────────────────────────────────────
   "the-role-of-endometrial-receptivity-in-ivf-success": {
     removeBlocks: ["step-by-step process", "key numbers"],

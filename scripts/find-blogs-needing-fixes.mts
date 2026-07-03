@@ -82,6 +82,12 @@ const DONE = new Set([
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
   "prp-vs-traditional-fertility-treatments-whats-the-difference",
   "reasons-for-iui-failure-symptoms-and-causes",
+  // Wave 18
+  "twin-and-multiple-pregnancies-after-ivf-risks-and-care",
+  "twin-pregnancy-delivery-options-normal-delivery-vs-c-section",
+  "understanding-frozen-embryo-transfer-fet-in-ivf",
+  "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "understanding-negative-signs-after-embryo-transfer-when-to-worry",
   // Wave 17
   "the-role-of-endometrial-receptivity-in-ivf-success",
   "the-thyroid-connection-understanding-its-role-in-female-fertility-health",
