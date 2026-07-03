@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 22 ──────────────────────────────────────────────────────────
+  "when-should-you-get-3d-4d-ultrasound-during-pregnancy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "when-to-consider-sperm-dna-fragmentation-testing-in-low-sperm-count-cases": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "when-to-take-a-pregnancy-test-after-iui-timing-and-accuracy-explained": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "why-do-some-embryos-not-implant-even-if-they-look-healthy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "why-dont-embryos-stick-key-reasons-you-need-to-know": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 21 ──────────────────────────────────────────────────────────
   "what-is-the-non-stress-test-nst-in-pregnancy-and-why-is-it-important": {
     removeBlocks: ["complete guide", "key numbers"],

@@ -2702,6 +2702,202 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 22 SVG constants ─────────────────────────────────────────────
+
+// Blog W22-1 (3D/4D ultrasound timing): "Best Time for 3D/4D Ultrasound: Weeks 26-32"
+// Source: Blog nodes [10],[12],[13] — timing window stated verbatim
+const SVG_3D4D_ULTRASOUND_TIMING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BEST TIME FOR 3D/4D ULTRASOUND: WEEKS 26–32</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">BEFORE 24 WEEKS</text>
+  <text x="149" y="112" text-anchor="middle" font-size="10.5" fill="${C.dark}" font-weight="600">Facial features may</text>
+  <text x="149" y="128" text-anchor="middle" font-size="10.5" fill="${C.dark}" font-weight="600">appear less defined</text>
+  <text x="149" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Too early for clarity</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.rose}" stroke-width="1.5"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">26–32 WEEKS (IDEAL)</text>
+  <text x="400" y="112" text-anchor="middle" font-size="10.5" fill="${C.rose}" font-weight="700">Formed features,</text>
+  <text x="400" y="128" text-anchor="middle" font-size="10.5" fill="${C.rose}" font-weight="700">active movement</text>
+  <text x="400" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Best image clarity</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">AFTER 32–34 WEEKS</text>
+  <text x="651" y="112" text-anchor="middle" font-size="10.5" fill="${C.dark}" font-weight="600">Baby may be too</text>
+  <text x="651" y="128" text-anchor="middle" font-size="10.5" fill="${C.dark}" font-weight="600">cramped in uterus</text>
+  <text x="651" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Can limit image quality</text>
+  <text x="400" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Sufficient fat, well-formed features, and active movement peak in this window</text>
+  <text x="400" y="205" text-anchor="middle" font-size="9.5" fill="${C.muted}">Your specialist will confirm the right timing for your pregnancy</text>
+</svg>`;
+
+// Blog W22-2 (Sperm DNA fragmentation): "8 Signs You May Need Sperm DNA Fragmentation Testing"
+// Source: Blog nodes [10]-[29] — 8 numbered indicators
+const SVG_DNA_FRAGMENTATION_SIGNS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 316" font-family="${FONT}">
+  <rect width="800" height="316" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="314.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">8 SIGNS YOU MAY NEED SPERM DNA FRAGMENTATION TESTING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="79" r="14" fill="${C.rose}"/>
+  <text x="64" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="74" font-size="11" font-weight="700" fill="${C.dark}">Repeated IVF/ICSI Failure</text>
+  <text x="86" y="90" font-size="9.5" fill="${C.muted}">Embryos fail to implant or grow well despite low sperm count</text>
+  <rect x="40" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="139" r="14" fill="${C.rose}"/>
+  <text x="64" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="86" y="134" font-size="11" font-weight="700" fill="${C.dark}">Recurrent Pregnancy Loss</text>
+  <text x="86" y="150" font-size="9.5" fill="${C.muted}">Repeated miscarriages when female factors are normal</text>
+  <rect x="40" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="199" r="14" fill="${C.rose}"/>
+  <text x="64" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="86" y="194" font-size="11" font-weight="700" fill="${C.dark}">Very Low or Fluctuating Count</text>
+  <text x="86" y="210" font-size="9.5" fill="${C.muted}">Higher oxidative stress increases fragmentation risk</text>
+  <rect x="40" y="232" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="259" r="14" fill="${C.rose}"/>
+  <text x="64" y="263.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="254" font-size="11" font-weight="700" fill="${C.dark}">Poor Motility + Abnormal Shape</text>
+  <text x="86" y="270" font-size="9.5" fill="${C.muted}">Multiple affected sperm parameters together</text>
+  <rect x="405" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="79" r="14" fill="${C.rose}"/>
+  <text x="429" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="451" y="74" font-size="11" font-weight="700" fill="${C.dark}">Male Partner Age 35+</text>
+  <text x="451" y="90" font-size="9.5" fill="${C.muted}">DNA damage increases naturally with age</text>
+  <rect x="405" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="139" r="14" fill="${C.rose}"/>
+  <text x="429" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="451" y="134" font-size="11" font-weight="700" fill="${C.dark}">Lifestyle Risk Factors</text>
+  <text x="451" y="150" font-size="9.5" fill="${C.muted}">Smoking, alcohol, stress, obesity, heat exposure</text>
+  <rect x="405" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="199" r="14" fill="${C.rose}"/>
+  <text x="429" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="451" y="194" font-size="11" font-weight="700" fill="${C.dark}">Oxidative Stress Conditions</text>
+  <text x="451" y="210" font-size="9.5" fill="${C.muted}">Varicocele, infections, diabetes, hormonal imbalance</text>
+  <rect x="405" y="232" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="259" r="14" fill="${C.rose}"/>
+  <text x="429" y="263.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="451" y="254" font-size="11" font-weight="700" fill="${C.dark}">Unexplained Infertility</text>
+  <text x="451" y="270" font-size="9.5" fill="${C.muted}">Normal semen report but conception still doesn't happen</text>
+</svg>`;
+
+// Blog W22-3 (Pregnancy test after IUI): "Pregnancy Testing After IUI: Key Timing"
+// Source: Blog nodes [8]-[18],[22]-[23],[28] — timing windows stated verbatim
+const SVG_IUI_PREGNANCY_TEST_TIMING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">PREGNANCY TESTING AFTER IUI: KEY TIMING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">14 DAYS</text>
+  <text x="110" y="63" font-size="12" font-weight="700" fill="${C.dark}">Minimum Wait Before Testing</text>
+  <text x="110" y="81" font-size="10.5" fill="${C.muted}">Testing earlier risks a false negative before hCG is detectable</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">14–16 DAYS</text>
+  <text x="120" y="126" font-size="12" font-weight="700" fill="${C.dark}">Ideal Beta-hCG Blood Test</text>
+  <text x="120" y="144" font-size="10.5" fill="${C.muted}">Recommended by BFI for the most reliable result</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">10–12 DAYS</text>
+  <text x="122" y="189" font-size="12" font-weight="700" fill="${C.dark}">Wait After Trigger Shot</text>
+  <text x="122" y="207" font-size="10.5" fill="${C.muted}">Avoids a false positive from residual synthetic hCG</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">48 HOURS</text>
+  <text x="115" y="252" font-size="12" font-weight="700" fill="${C.dark}">Confirm a Positive Result</text>
+  <text x="115" y="270" font-size="10.5" fill="${C.muted}">Repeat blood test checks that hCG levels are rising appropriately</text>
+</svg>`;
+
+// Blog W22-4 (Embryo implantation factors): "4 Factors Behind Implantation Failure"
+// Source: Blog node [6] — 4 categories listed verbatim
+const SVG_IMPLANTATION_FAILURE_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Factors Behind Implantation Failure</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Chromosomal</text>
+  <text x="122" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Abnormalities</text>
+  <text x="122" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Up to 50% of normal-</text>
+  <text x="122" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">looking embryos carry</text>
+  <text x="122" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">hidden genetic issues</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Endometrial</text>
+  <text x="300" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Receptivity</text>
+  <text x="300" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Uterine timing and</text>
+  <text x="300" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">lining thickness must</text>
+  <text x="300" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">be optimal</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Immune</text>
+  <text x="478" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Response</text>
+  <text x="478" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Overactive immune</text>
+  <text x="478" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">cells can prevent the</text>
+  <text x="478" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">embryo implanting</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Hormonal</text>
+  <text x="667" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Factors</text>
+  <text x="667" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Progesterone deficiency</text>
+  <text x="667" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">can make implantation</text>
+  <text x="667" y="185" text-anchor="middle" font-size="9.5" fill="${C.muted}">difficult</text>
+</svg>`;
+
+// Blog W22-5 (Why embryos don't stick): "5 Key Reasons Embryos Don't Stick"
+// Source: Blog headings [7],[11],[14],[16],[19] — 5 numbered reasons
+const SVG_EMBRYOS_DONT_STICK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 KEY REASONS EMBRYOS DON'T STICK</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Embryo Quality</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Even top embryos</text>
+  <text x="108" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">have ~50% odds</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Uterine Problems</text>
+  <text x="254" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Fibroids, thin lining,</text>
+  <text x="254" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">or infection</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Health &amp; Lifestyle</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Illness or high stress</text>
+  <text x="400" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">post-transfer</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Uterine Receptivity</text>
+  <text x="546" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Hormone-driven</text>
+  <text x="546" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">timing must align</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Transfer Technique</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Gentle, precise</text>
+  <text x="692" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">transfer matters</text>
+</svg>`;
+
 // ── Wave 21 SVG constants ─────────────────────────────────────────────
 
 // Blog W21-1 (NST in pregnancy): "5 Reasons Your Doctor May Recommend an NST"
@@ -5060,6 +5256,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 22: Published blogs ──────────────────────────────────────────
+  "when-should-you-get-3d-4d-ultrasound-during-pregnancy": {
+    svg:     SVG_3D4D_ULTRASOUND_TIMING,
+    title:   "Best Time for 3D/4D Ultrasound: Weeks 26-32",
+    altText: "Three-panel infographic with rose headers. Panel Before 24 Weeks: facial features may appear less defined, too early for clarity. Panel 26-32 Weeks (Ideal), highlighted: formed features and active movement, best image clarity. Panel After 32-34 Weeks: baby may be too cramped in uterus, can limit image quality. Footer note: sufficient fat, well-formed features, and active movement peak in this window; your specialist will confirm the right timing for your pregnancy.",
+  },
+  "when-to-consider-sperm-dna-fragmentation-testing-in-low-sperm-count-cases": {
+    svg:     SVG_DNA_FRAGMENTATION_SIGNS,
+    title:   "8 Signs You May Need Sperm DNA Fragmentation Testing",
+    altText: "Two-column eight-item grid infographic. Items 1-4 (left): Repeated IVF/ICSI Failure (embryos fail to implant or grow well despite low sperm count); Recurrent Pregnancy Loss (repeated miscarriages when female factors are normal); Very Low or Fluctuating Count (higher oxidative stress increases fragmentation risk); Poor Motility plus Abnormal Shape (multiple affected sperm parameters together). Items 5-8 (right): Male Partner Age 35 Plus (DNA damage increases naturally with age); Lifestyle Risk Factors (smoking, alcohol, stress, obesity, heat exposure); Oxidative Stress Conditions (varicocele, infections, diabetes, hormonal imbalance); Unexplained Infertility (normal semen report but conception still doesn't happen).",
+  },
+  "when-to-take-a-pregnancy-test-after-iui-timing-and-accuracy-explained": {
+    svg:     SVG_IUI_PREGNANCY_TEST_TIMING,
+    title:   "Pregnancy Testing After IUI: Key Timing",
+    altText: "Four-row accent-bar infographic. Highlight 14 Days Minimum Wait Before Testing: testing earlier risks a false negative before hCG is detectable. Highlight 14-16 Days Ideal Beta-hCG Blood Test: recommended by BFI for the most reliable result. Highlight 10-12 Days Wait After Trigger Shot: avoids a false positive from residual synthetic hCG. Highlight 48 Hours to Confirm a Positive Result: repeat blood test checks that hCG levels are rising appropriately.",
+  },
+  "why-do-some-embryos-not-implant-even-if-they-look-healthy": {
+    svg:     SVG_IMPLANTATION_FAILURE_FACTORS,
+    title:   "4 Factors Behind Implantation Failure",
+    altText: "Four-card horizontal infographic. Card 1 Chromosomal Abnormalities: up to 50% of normal-looking embryos carry hidden genetic issues. Card 2 Endometrial Receptivity: uterine timing and lining thickness must be optimal. Card 3 Immune Response: overactive immune cells can prevent the embryo implanting. Card 4 Hormonal Factors: progesterone deficiency can make implantation difficult.",
+  },
+  "why-dont-embryos-stick-key-reasons-you-need-to-know": {
+    svg:     SVG_EMBRYOS_DONT_STICK,
+    title:   "5 Key Reasons Embryos Don't Stick",
+    altText: "Five-panel horizontal infographic. Panel 01 Embryo Quality: even top embryos have around 50% implantation odds. Panel 02 Uterine Problems: fibroids, thin lining, or infection. Panel 03 Health and Lifestyle: illness or high stress post-transfer. Panel 04 Uterine Receptivity: hormone-driven timing must align. Panel 05 Transfer Technique: gentle, precise transfer matters.",
+  },
   // ── Wave 21: Published blogs ──────────────────────────────────────────
   "what-is-the-non-stress-test-nst-in-pregnancy-and-why-is-it-important": {
     svg:     SVG_NST_REASONS,
