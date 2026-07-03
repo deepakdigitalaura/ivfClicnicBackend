@@ -2702,6 +2702,209 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 23 SVG constants ─────────────────────────────────────────────
+
+// Blog W23-1 (AMH/AFC ovarian reserve): "AMH Levels: What They Mean"
+// Source: Blog node [13] — AMH ranges stated verbatim
+const SVG_AMH_LEVELS_MEANING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">AMH Levels: What They Mean</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1–4</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Normal Ovarian</text>
+  <text x="122" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Reserve</text>
+  <text x="122" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">1.0–4.0 ng/mL</text>
+  <text x="122" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">(ranges vary by lab)</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">&lt;1</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Low Ovarian</text>
+  <text x="300" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Reserve</text>
+  <text x="300" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Below 1.0 ng/mL</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">&lt;0.4</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Very Low Ovarian</text>
+  <text x="478" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Reserve</text>
+  <text x="478" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Below 0.4 ng/mL</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.white}">HIGH</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">High AMH</text>
+  <text x="667" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Seen in PCOS or</text>
+  <text x="667" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">very high egg reserve</text>
+</svg>`;
+
+// Blog W23-2 (Pregnancy ultrasound schedule): "5 Standard Pregnancy Ultrasound Scans"
+// Source: Blog nodes [11]-[20] — 5 scans with week ranges, stated verbatim
+const SVG_PREGNANCY_ULTRASOUND_SCANS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 STANDARD PREGNANCY ULTRASOUND SCANS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WEEKS 6–9</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">First Trimester</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Confirms pregnancy,</text>
+  <text x="108" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">heartbeat, due date</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WEEKS 11–14</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Nuchal Translucency</text>
+  <text x="254" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Screens for chromo-</text>
+  <text x="254" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">somal abnormalities</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WEEKS 18–22</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Anomaly Scan</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Checks organs,</text>
+  <text x="400" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">spine, limbs</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WEEKS 28–32</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Growth Scan</text>
+  <text x="546" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Monitors growth,</text>
+  <text x="546" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">placenta function</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">WEEKS 36–40</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Final Scan</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Confirms position</text>
+  <text x="692" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">before delivery</text>
+</svg>`;
+
+// Blog W23-3 (Microplastics): "How Microplastics Enter Your Body"
+// Source: Blog node [13] — 4 exposure pathways stated verbatim
+const SVG_MICROPLASTICS_ENTRY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">How Microplastics Enter Your Body</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Food &amp; Water</text>
+  <text x="122" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Contaminated water,</text>
+  <text x="122" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">seafood, packaged</text>
+  <text x="122" y="180" text-anchor="middle" font-size="9.5" fill="${C.muted}">food</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Air</text>
+  <text x="300" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Airborne fibers from</text>
+  <text x="300" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">synthetic fabrics</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Cosmetics</text>
+  <text x="478" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Exfoliating beads via</text>
+  <text x="478" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">skin contact or</text>
+  <text x="478" y="180" text-anchor="middle" font-size="9.5" fill="${C.muted}">ingestion</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Household Dust</text>
+  <text x="667" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Synthetic furniture</text>
+  <text x="667" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">and carpet particles</text>
+</svg>`;
+
+// Blog W23-4 (12 PCOS pregnancy tips): "12 Tips for Getting Pregnant Faster with PCOS"
+// Source: Blog node [4] — 12-item master list, stated verbatim (compact, no descriptions)
+const SVG_PCOS_12_TIPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 296" font-family="${FONT}">
+  <rect width="800" height="296" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="294.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">12 TIPS FOR GETTING PREGNANT FASTER WITH PCOS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="60" cy="61" r="12" fill="${C.rose}"/><text x="60" y="65" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="80" y="65" font-size="11" font-weight="600" fill="${C.dark}">Understand PCOS &amp; Fertility</text>
+  <rect x="40" y="82" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="60" cy="99" r="12" fill="${C.rose}"/><text x="60" y="103" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="80" y="103" font-size="11" font-weight="600" fill="${C.dark}">Track Your Ovulation</text>
+  <rect x="40" y="120" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="60" cy="137" r="12" fill="${C.rose}"/><text x="60" y="141" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="80" y="141" font-size="11" font-weight="600" fill="${C.dark}">Maintain a Healthy Weight</text>
+  <rect x="40" y="158" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="60" cy="175" r="12" fill="${C.rose}"/><text x="60" y="179" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="80" y="179" font-size="11" font-weight="600" fill="${C.dark}">Manage Insulin Levels</text>
+  <rect x="40" y="196" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="60" cy="213" r="12" fill="${C.rose}"/><text x="60" y="217" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="80" y="217" font-size="11" font-weight="600" fill="${C.dark}">Consider Fertility Treatments</text>
+  <rect x="40" y="234" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="60" cy="251" r="12" fill="${C.rose}"/><text x="60" y="255" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="80" y="255" font-size="11" font-weight="600" fill="${C.dark}">Balance Hormones with Medical Support</text>
+  <rect x="405" y="44" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="425" cy="61" r="12" fill="${C.rose}"/><text x="425" y="65" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="445" y="65" font-size="11" font-weight="600" fill="${C.dark}">Adopt Stress-Reduction Techniques</text>
+  <rect x="405" y="82" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="425" cy="99" r="12" fill="${C.rose}"/><text x="425" y="103" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">8</text>
+  <text x="445" y="103" font-size="11" font-weight="600" fill="${C.dark}">Be Patient and Stay Positive</text>
+  <rect x="405" y="120" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="425" cy="137" r="12" fill="${C.rose}"/><text x="425" y="141" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">9</text>
+  <text x="445" y="141" font-size="11" font-weight="600" fill="${C.dark}">Optimize Vitamin &amp; Mineral Intake</text>
+  <rect x="405" y="158" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="425" cy="175" r="12" fill="${C.rose}"/><text x="425" y="179" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">10</text>
+  <text x="445" y="179" font-size="11" font-weight="600" fill="${C.dark}">Prioritize Sleep Quality</text>
+  <rect x="405" y="196" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="425" cy="213" r="12" fill="${C.rose}"/><text x="425" y="217" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">11</text>
+  <text x="445" y="217" font-size="11" font-weight="600" fill="${C.dark}">Avoid Environmental Hormone Disruptors</text>
+  <rect x="405" y="234" width="355" height="34" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="425" cy="251" r="12" fill="${C.rose}"/><text x="425" y="255" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">12</text>
+  <text x="445" y="255" font-size="11" font-weight="600" fill="${C.dark}">Seek Support &amp; Build a Community</text>
+</svg>`;
+
+// Blog W23-5 (13 Best IVF Clinics Mumbai): "5 Things to Compare When Choosing an IVF Clinic"
+// Source: recurring evaluation criteria used across every clinic profile in the blog
+// (IVF doctors, Range of treatment, Technology, Accreditation & awards, Location) — not
+// invented; synthesised from the blog's own repeated section structure across all 13 clinics.
+const SVG_CHOOSE_IVF_CLINIC = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 THINGS TO COMPARE WHEN CHOOSING AN IVF CLINIC</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Accreditation</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">NABH, JCI and</text>
+  <text x="108" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">other certifications</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Doctor Experience</text>
+  <text x="254" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Specialist</text>
+  <text x="254" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">qualifications</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Technology &amp; Lab</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Advanced equipment</text>
+  <text x="400" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">and techniques</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Success Rates</text>
+  <text x="546" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Published pregnancy</text>
+  <text x="546" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">outcomes</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Location &amp; Access</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Convenient centres</text>
+</svg>`;
+
 // ── Wave 22 SVG constants ─────────────────────────────────────────────
 
 // Blog W22-1 (3D/4D ultrasound timing): "Best Time for 3D/4D Ultrasound: Weeks 26-32"
@@ -5256,6 +5459,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 23: Published blogs ──────────────────────────────────────────
+  "how-to-interpret-amh-afc-and-other-ovarian-reserve-rests-what-the-numbers-really-mean": {
+    svg:     SVG_AMH_LEVELS_MEANING,
+    title:   "AMH Levels: What They Mean",
+    altText: "Four-card horizontal infographic. Card 1.0-4.0 Normal Ovarian Reserve: 1.0 to 4.0 ng/mL, ranges vary by lab. Card Under 1 Low Ovarian Reserve: below 1.0 ng/mL. Card Under 0.4 Very Low Ovarian Reserve: below 0.4 ng/mL. Card High AMH: seen in PCOS or very high egg reserve.",
+  },
+  "do-i-need-an-ultrasound-in-every-pregnancy-visit-is-it-safe": {
+    svg:     SVG_PREGNANCY_ULTRASOUND_SCANS,
+    title:   "5 Standard Pregnancy Ultrasound Scans",
+    altText: "Five-panel horizontal infographic. Panel Weeks 6-9 First Trimester: confirms pregnancy, heartbeat, due date. Panel Weeks 11-14 Nuchal Translucency: screens for chromosomal abnormalities. Panel Weeks 18-22 Anomaly Scan: checks organs, spine, limbs. Panel Weeks 28-32 Growth Scan: monitors growth, placenta function. Panel Weeks 36-40 Final Scan: confirms position before delivery.",
+  },
+  "what-are-microplastics-how-do-they-affect-reproductive-health": {
+    svg:     SVG_MICROPLASTICS_ENTRY,
+    title:   "How Microplastics Enter Your Body",
+    altText: "Four-card horizontal infographic. Card 1 Food and Water: contaminated water, seafood, packaged food. Card 2 Air: airborne fibers from synthetic fabrics. Card 3 Cosmetics: exfoliating beads via skin contact or ingestion. Card 4 Household Dust: synthetic furniture and carpet particles.",
+  },
+  "12-tips-for-getting-pregnant-faster-with-pcos-a-step-by-step-guide": {
+    svg:     SVG_PCOS_12_TIPS,
+    title:   "12 Tips for Getting Pregnant Faster with PCOS",
+    altText: "Two-column twelve-item compact grid infographic. Items 1-6 (left): Understand PCOS and Fertility; Track Your Ovulation; Maintain a Healthy Weight; Manage Insulin Levels; Consider Fertility Treatments; Balance Hormones with Medical Support. Items 7-12 (right): Adopt Stress-Reduction Techniques; Be Patient and Stay Positive; Optimize Vitamin and Mineral Intake; Prioritize Sleep Quality; Avoid Environmental Hormone Disruptors; Seek Support and Build a Community.",
+  },
+  "13-best-ivf-clinics-in-mumbai": {
+    svg:     SVG_CHOOSE_IVF_CLINIC,
+    title:   "5 Things to Compare When Choosing an IVF Clinic",
+    altText: "Five-panel horizontal infographic. Panel 01 Accreditation: NABH, JCI and other certifications. Panel 02 Doctor Experience: specialist qualifications. Panel 03 Technology and Lab: advanced equipment and techniques. Panel 04 Success Rates: published pregnancy outcomes. Panel 05 Location and Access: convenient centres.",
+  },
   // ── Wave 22: Published blogs ──────────────────────────────────────────
   "when-should-you-get-3d-4d-ultrasound-during-pregnancy": {
     svg:     SVG_3D4D_ULTRASOUND_TIMING,

@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 23 ──────────────────────────────────────────────────────────
+  "how-to-interpret-amh-afc-and-other-ovarian-reserve-rests-what-the-numbers-really-mean": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "do-i-need-an-ultrasound-in-every-pregnancy-visit-is-it-safe": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "what-are-microplastics-how-do-they-affect-reproductive-health": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "12-tips-for-getting-pregnant-faster-with-pcos-a-step-by-step-guide": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "13-best-ivf-clinics-in-mumbai": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
   // ── Wave 22 ──────────────────────────────────────────────────────────
   "when-should-you-get-3d-4d-ultrasound-during-pregnancy": {
     removeBlocks: ["complete guide", "key numbers"],
