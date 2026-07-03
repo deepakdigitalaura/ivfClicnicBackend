@@ -483,6 +483,20 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 20 ──────────────────────────────────────────────────────────
+  "what-happens-after-embryo-transfer-day-by-day": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "what-is-epigenetics-does-it-affect-ivf-pregnancies-only": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "what-is-the-difference-between-pcod-pcos": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "what-is-the-max-number-of-eggs-that-you-can-retrieve-in-an-ivf-cycle": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  // ivf-treatment-cost-in-ahmedabad-across-india: NOT in FIX_CONFIGS — no redundant blocks, replace-only
   // ── Wave 19 ──────────────────────────────────────────────────────────
   "bavishi-fertility-institute-hosts-fogsi-recognized-training-program-in-ahmedabad": {
     removeBlocks: ["complete guide", "key numbers"],

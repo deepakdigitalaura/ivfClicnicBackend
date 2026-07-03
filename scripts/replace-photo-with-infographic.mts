@@ -2702,6 +2702,182 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 20 SVG constants ─────────────────────────────────────────────
+
+// Blog W20-1 (Embryo transfer day-by-day): "Embryo Transfer: 4 Key Milestones"
+// Source: Blog nodes [4]-[24] — day-by-day breakdown, 4 milestone days pulled verbatim
+const SVG_EMBRYO_TRANSFER_MILESTONES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">EMBRYO TRANSFER: 4 KEY MILESTONES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">DAY 1</text>
+  <text x="90" y="63" font-size="12" font-weight="700" fill="${C.dark}">Embryo Begins to Settle</text>
+  <text x="90" y="81" font-size="10.5" fill="${C.muted}">Free-floating in the uterus; mild cramping or bloating is normal</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">DAY 3</text>
+  <text x="90" y="126" font-size="12" font-weight="700" fill="${C.dark}">Early Implantation Begins</text>
+  <text x="90" y="144" font-size="10.5" fill="${C.muted}">Embryo attaches to the uterine lining; slight spotting can be a positive sign</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">DAY 5</text>
+  <text x="90" y="189" font-size="12" font-weight="700" fill="${C.dark}">Full Implantation &amp; hCG Begins</text>
+  <text x="90" y="207" font-size="10.5" fill="${C.muted}">Embryo is firmly implanted; hCG hormone production increases</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">DAY 13–14</text>
+  <text x="90" y="252" font-size="12" font-weight="700" fill="${C.dark}">Official Pregnancy Test</text>
+  <text x="90" y="270" font-size="10.5" fill="${C.muted}">Beta hCG blood test gives the most accurate result at this point</text>
+</svg>`;
+
+// Blog W20-2 (Epigenetics & IVF): "5 Lifestyle Factors That Shape Your Epigenetics"
+// Source: Blog node [16] — factors that modify epigenetic markers, stated verbatim
+const SVG_EPIGENETICS_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 LIFESTYLE FACTORS THAT SHAPE YOUR EPIGENETICS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Obesity</text>
+  <text x="108" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Modifies markers</text>
+  <text x="108" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">in sperm and</text>
+  <text x="108" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">eggs</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Chronic Stress</text>
+  <text x="254" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Can affect embryo</text>
+  <text x="254" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">development and</text>
+  <text x="254" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">pregnancy success</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Pollution</text>
+  <text x="400" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Environmental</text>
+  <text x="400" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">exposure alters</text>
+  <text x="400" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">gene expression</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Smoking</text>
+  <text x="546" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Can imprint markers</text>
+  <text x="546" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">on sperm affecting</text>
+  <text x="546" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">future generations</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Sleep Patterns</text>
+  <text x="692" y="118" text-anchor="middle" font-size="10" fill="${C.muted}">Affects hormone</text>
+  <text x="692" y="133" text-anchor="middle" font-size="10" fill="${C.muted}">and epigenetic</text>
+  <text x="692" y="148" text-anchor="middle" font-size="10" fill="${C.muted}">marker balance</text>
+</svg>`;
+
+// Blog W20-3 (PCOD vs PCOS): "PCOD vs PCOS: Key Differences"
+// Source: Blog nodes [10]-[22] — characteristics of each condition, stated verbatim
+const SVG_PCOD_VS_PCOS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">PCOD (Polycystic Ovary Disease)</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Imbalance</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Excess androgens cause acne, hirsutism, hair thinning</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Cysts</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Numerous small cysts, generally not cancerous</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Irregular Cycles</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Missed periods or very long menstrual cycles</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Milder &amp; Manageable</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Often managed with lifestyle changes and medication</text>
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">PCOS (Polycystic Ovary Syndrome)</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Complex Hormonal Disorder</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Affects ovaries and other endocrine organs</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Metabolic Concerns</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Insulin resistance, weight gain, diabetes risk</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Leading Infertility Cause</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">One of the most common causes of female infertility</text>
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Needs Ongoing Management</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Birth control, metformin, or IVF may be required</text>
+</svg>`;
+
+// Blog W20-4 (Max eggs retrieved): "How Many Eggs Can Be Retrieved? By Ovarian Reserve"
+// Source: Blog nodes [6],[16],[29],[31] — AMH-based egg counts, stated verbatim
+const SVG_EGG_RETRIEVAL_BY_RESERVE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW MANY EGGS CAN BE RETRIEVED? BY OVARIAN RESERVE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">HIGH AMH (&gt;4 ng/ml)</text>
+  <text x="149" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">25–30+</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Strong ovarian response</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">AVERAGE RESERVE</text>
+  <text x="400" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">10–20</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Typical IVF cycle yield</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">LOW AMH (&lt;1 ng/ml)</text>
+  <text x="651" y="118" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">5–8</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Can still succeed with quality</text>
+  <text x="400" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">10–15 mature eggs is the ideal safety/success balance</text>
+  <text x="400" y="205" text-anchor="middle" font-size="9.5" fill="${C.muted}">Quality matters more than quantity — more eggs isn't always better</text>
+</svg>`;
+
+// Blog W20-5 (IVF cost Ahmedabad): "IVF Cost: Ahmedabad vs Other Indian Cities"
+// Source: Blog node [0] — city cost ranges, stated verbatim
+const SVG_IVF_COST_BY_CITY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IVF COST: AHMEDABAD VS OTHER INDIAN CITIES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">AHMEDABAD</text>
+  <text x="149" y="118" text-anchor="middle" font-size="19" font-weight="800" fill="${C.rose}">₹1.2L–2.5L</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">All-in standard cycle</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">MUMBAI</text>
+  <text x="400" y="118" text-anchor="middle" font-size="19" font-weight="800" fill="${C.rose}">₹1.8L–3.5L</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">All-in standard cycle</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">DELHI</text>
+  <text x="651" y="118" text-anchor="middle" font-size="19" font-weight="800" fill="${C.rose}">₹1.5L–3L</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">All-in standard cycle</text>
+  <text x="400" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Same internationally accredited lab standards across all three cities</text>
+  <text x="400" y="205" text-anchor="middle" font-size="9.5" fill="${C.muted}">Ranges reflect protocol type, medication dose, and clinic-specific inclusions</text>
+</svg>`;
+
 // ── Wave 19 SVG constants ─────────────────────────────────────────────
 
 // Blog W19-1 (FOGSI training Ahmedabad): "FOGSI Training Program: 3 Courses Offered"
@@ -4699,6 +4875,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 20: Published blogs ──────────────────────────────────────────
+  "what-happens-after-embryo-transfer-day-by-day": {
+    svg:     SVG_EMBRYO_TRANSFER_MILESTONES,
+    title:   "Embryo Transfer: 4 Key Milestones",
+    altText: "Four-row accent-bar infographic. Day 1 Embryo Begins to Settle: free-floating in the uterus, mild cramping or bloating is normal. Day 3 Early Implantation Begins: embryo attaches to the uterine lining, slight spotting can be a positive sign. Day 5 Full Implantation and hCG Begins: embryo is firmly implanted, hCG hormone production increases. Day 13-14 Official Pregnancy Test: beta hCG blood test gives the most accurate result at this point.",
+  },
+  "what-is-epigenetics-does-it-affect-ivf-pregnancies-only": {
+    svg:     SVG_EPIGENETICS_FACTORS,
+    title:   "5 Lifestyle Factors That Shape Your Epigenetics",
+    altText: "Five-panel horizontal infographic. Panel 1 Obesity: modifies markers in sperm and eggs. Panel 2 Chronic Stress: can affect embryo development and pregnancy success. Panel 3 Pollution: environmental exposure alters gene expression. Panel 4 Smoking: can imprint markers on sperm affecting future generations. Panel 5 Sleep Patterns: affects hormone and epigenetic marker balance.",
+  },
+  "what-is-the-difference-between-pcod-pcos": {
+    svg:     SVG_PCOD_VS_PCOS,
+    title:   "PCOD vs PCOS: Key Differences",
+    altText: "Two-panel comparison infographic. Left panel PCOD Polycystic Ovary Disease with rose header: Hormonal Imbalance (excess androgens cause acne, hirsutism, hair thinning); Ovarian Cysts (numerous small cysts, generally not cancerous); Irregular Cycles (missed periods or very long menstrual cycles); Milder and Manageable (often managed with lifestyle changes and medication). Right panel PCOS Polycystic Ovary Syndrome: Complex Hormonal Disorder (affects ovaries and other endocrine organs); Metabolic Concerns (insulin resistance, weight gain, diabetes risk); Leading Infertility Cause (one of the most common causes of female infertility); Needs Ongoing Management (birth control, metformin, or IVF may be required).",
+  },
+  "what-is-the-max-number-of-eggs-that-you-can-retrieve-in-an-ivf-cycle": {
+    svg:     SVG_EGG_RETRIEVAL_BY_RESERVE,
+    title:   "How Many Eggs Can Be Retrieved? By Ovarian Reserve",
+    altText: "Three-panel infographic with rose headers. Panel High AMH (above 4 ng/ml): 25 to 30 plus eggs, strong ovarian response. Panel Average Reserve: 10 to 20 eggs, typical IVF cycle yield. Panel Low AMH (below 1 ng/ml): 5 to 8 eggs, can still succeed with quality. Footer note: 10 to 15 mature eggs is the ideal safety and success balance; quality matters more than quantity.",
+  },
+  "ivf-treatment-cost-in-ahmedabad-across-india": {
+    svg:     SVG_IVF_COST_BY_CITY,
+    title:   "IVF Cost: Ahmedabad vs Other Indian Cities",
+    altText: "Three-panel infographic with rose headers. Panel Ahmedabad: 1.2 to 2.5 lakh rupees all-in standard cycle. Panel Mumbai: 1.8 to 3.5 lakh rupees all-in standard cycle. Panel Delhi: 1.5 to 3 lakh rupees all-in standard cycle. Footer note: same internationally accredited lab standards across all three cities; ranges reflect protocol type, medication dose, and clinic-specific inclusions.",
+  },
   // ── Wave 19: Published blogs ──────────────────────────────────────────
   "bavishi-fertility-institute-hosts-fogsi-recognized-training-program-in-ahmedabad": {
     svg:     SVG_FOGSI_TRAINING_COURSES,
