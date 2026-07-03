@@ -431,19 +431,42 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "priyanka-sinha", name: "Dr. Priyanka Sinha", image: "/assets/doctors/priyanka-sinha.webp",
     city: "Mumbai", citySlug: "mumbai", locations: ["borivali", "vile-parle"],
-    credentials: "MBBS, MD, Fellowship in Reproductive Medicine (USA)", experienceLabel: "15+ yrs", experienceYears: 15,
-    specialty: "Reproductive Medicine & IVF", role: "IVF Specialist",
+    credentials: "MBBS, MD, Fellowship in Reproductive Medicine (USA)", experienceLabel: "20+ yrs", experienceYears: 20,
+    specialty: "Reproductive Medicine & IVF", role: "Senior IVF Consultant",
     medicalSpecialty: ["ReproductiveMedicine", "Gynecology", "Fertility"],
-    shortBio: "Reproductive medicine physician with over 15 years of experience, offering IVF, ICSI, PGT and fertility preservation at the Borivali and Vile Parle centres.",
+    shortBio: "Senior IVF Consultant with 20 years of experience and US fellowship training, consulting at the Borivali and Vile Parle centres in Mumbai, with special focus on low AMH, recurrent IVF failure and PCOS.",
     bio: [
-      "Dr. Priyanka Sinha is a reproductive medicine physician with over 15 years of clinical practice, holding an MD and a Fellowship in Reproductive Medicine from the USA.",
-      "She provides comprehensive infertility care including IVF, ICSI, PGT, egg and embryo freezing, and the management of both male and female infertility at the institute's Borivali and Vile Parle centres.",
+      "Dr. Priyanka Sinha is a Senior IVF Consultant with 20 years of experience in reproductive medicine. She consults Monday to Saturday at the Borivali (10 AM–1 PM) and Vile Parle (2 PM–5 PM) centres of Bavishi Fertility Institute in Mumbai, and at the Ghatkopar centre by appointment. Video consultations are also available.",
+      "She completed her MBBS at Patna Medical College (2004) and her MD in Obstetrics & Gynaecology at RIMS, Ranchi (2010), followed by a Fellowship in Reproductive Medicine and Infertility at the West Texas Fertility Center, Texas, USA, and ART & andrology training at the Cleveland Clinic, USA. She is a member of FOGSI, ISAR and the American Society for Reproductive Medicine (ASRM).",
+      "Her clinical focus spans customised ovarian-stimulation protocols, recurrent IVF failure, poor ovarian reserve and low AMH, PCOS and ovulation disorders, fertility preservation (egg freezing) and male-factor infertility — including complex cases such as recurrent implantation failure, recurrent miscarriage, endometriosis and advanced maternal age. She is known for personalised, evidence-based treatment with strong patient counselling and continuity of care.",
+      "\"I chose fertility medicine because it combines advanced science with the opportunity to help people achieve their dream of parenthood. Every patient is unique and deserves an individualised treatment plan, honest communication and compassionate care.\" — Dr. Priyanka Sinha",
     ],
-    knowsAbout: ["In Vitro Fertilization", "Intracytoplasmic Sperm Injection", "Fertility Preservation", "Male Infertility", "Female Infertility"],
+    knowsAbout: [
+      "Customised Ovarian Stimulation Protocols",
+      "Recurrent IVF Failure",
+      "Poor Ovarian Reserve & Low AMH",
+      "PCOS & Ovulation Disorders",
+      "Fertility Preservation (Egg Freezing)",
+      "Male Factor Infertility",
+      "Recurrent Pregnancy Loss",
+      "Endometriosis",
+    ],
+    alumniOf: [
+      "MBBS — Patna Medical College, Patna (2004)",
+      "MD, Obstetrics & Gynaecology — Rajendra Institute of Medical Sciences (RIMS), Ranchi (2010)",
+      "Fellowship in Reproductive Medicine and Infertility — West Texas Fertility Center, Texas, USA",
+    ],
     memberOf: [
       "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
       "Indian Society for Assisted Reproduction (ISAR)",
+      "American Society for Reproductive Medicine (ASRM)",
     ],
+    training: [
+      "Fellowship in Reproductive Medicine and Infertility — West Texas Fertility Center, Texas, USA",
+      "ART and Andrology Training — Cleveland Clinic, USA",
+    ],
+    languages: ["Hindi", "English"],
+    verified: true,
   }),
   // Surat
   cityDoctor({

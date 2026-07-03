@@ -352,7 +352,7 @@ export const CENTRES: Centre[] = [
       "Sample collection",
       "Comfortable patient lounge",
     ],
-    doctors: ["suman-singh", "nilesh-jain", "priyanka-sinha"],
+    doctors: ["suman-singh", "nilesh-jain"],
     treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Thane centre?", a: "At Bapat Urology Center, A.K. Vaidya Marg, near Paramarth Niketan Bus Stop, Panch Pakhdi, Thane West – 400602 — close to Thane station." },
@@ -490,7 +490,7 @@ export const CENTRES: Centre[] = [
       "Sample collection",
       "Comfortable patient lounge",
     ],
-    doctors: ["suman-singh", "nilesh-jain", "priyanka-sinha"],
+    doctors: ["suman-singh", "nilesh-jain"],
     treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Vashi centre?", a: "At Precision Super Speciality Clinic, 3rd Floor, Mahavir Centre, above Hotel Golden Punjab, Sector 17, Vashi, Navi Mumbai – 400703." },
