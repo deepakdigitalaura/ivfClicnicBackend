@@ -2702,6 +2702,187 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 31 SVG constants ─────────────────────────────────────────────
+
+// Blog W31-1 (Frozen vs Fresh embryo transfer): comparison infographic
+// Source: Blog nodes [13],[18],[27] — advantages of each, stated verbatim
+const SVG_FROZEN_VS_FRESH_TRANSFER = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 236" font-family="${FONT}">
+  <rect width="800" height="236" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="234.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Frozen Embryo Transfer (FET)</text>
+  <rect x="22" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Often Higher Success Rates</text>
+  <text x="34" y="91" font-size="10.5" fill="${C.muted}">Body recovers; uterine lining can be optimised</text>
+  <rect x="22" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reduced OHSS Risk</text>
+  <text x="34" y="143" font-size="10.5" fill="${C.muted}">Avoids the hormonal peak right after stimulation</text>
+  <rect x="22" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Allows PGT-A Testing</text>
+  <text x="34" y="195" font-size="10.5" fill="${C.muted}">99%+ embryo survival with modern vitrification</text>
+  <rect x="410" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Fresh Embryo Transfer</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Suits Normal Hormone Levels</text>
+  <text x="434" y="91" font-size="10.5" fill="${C.muted}">Best when stimulation response is balanced</text>
+  <rect x="422" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Good for Younger Responders</text>
+  <text x="434" y="143" font-size="10.5" fill="${C.muted}">Works well without needing genetic testing</text>
+  <rect x="422" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Shorter Overall Timeline</text>
+  <text x="434" y="195" font-size="10.5" fill="${C.muted}">No freezing wait or extra storage cost</text>
+</svg>`;
+
+// Blog W31-2 (Government vs Private IVF): comparison infographic
+// Source: Blog comparison table rows [7]-[22] — stated verbatim
+const SVG_GOVT_VS_PRIVATE_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 236" font-family="${FONT}">
+  <rect width="800" height="236" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="234.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Private IVF Centres</text>
+  <rect x="22" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Higher Cost, EMI Options</text>
+  <text x="34" y="91" font-size="10.5" fill="${C.muted}">Transparent billing with flexible payment plans</text>
+  <rect x="22" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Tailored Care</text>
+  <text x="34" y="143" font-size="10.5" fill="${C.muted}">One-on-one counselling and personalised protocols</text>
+  <rect x="22" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Higher Success Rates</text>
+  <text x="34" y="195" font-size="10.5" fill="${C.muted}">Skilled experts and modern technology</text>
+  <rect x="410" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Government IVF Centres</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Low-Cost or Subsidised</text>
+  <text x="434" y="91" font-size="10.5" fill="${C.muted}">Supported by government health schemes</text>
+  <rect x="422" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">General Approach</text>
+  <text x="434" y="143" font-size="10.5" fill="${C.muted}">Less individualised attention due to patient volume</text>
+  <rect x="422" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Standard Success Rates</text>
+  <text x="434" y="195" font-size="10.5" fill="${C.muted}">Part-time fertility specialists, simpler cases</text>
+</svg>`;
+
+// Blog W31-3 (Age & fertility myths): "4 Fertility Age Myths — Busted"
+// Source: Blog headings [4]-[16] — myth/fact pairs 1-4, stated verbatim
+const SVG_FERTILITY_AGE_MYTHS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 260" font-family="${FONT}">
+  <rect width="800" height="260" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Fertility Age Myths — Busted</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="186" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="82" r="16" fill="${C.rose}"/>
+  <text x="122" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="112" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.rose}">MYTH</text>
+  <text x="122" y="128" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">Fertile until</text>
+  <text x="122" y="141" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">menopause</text>
+  <text x="122" y="160" text-anchor="middle" font-size="9" fill="${C.muted}">FACT: Declines</text>
+  <text x="122" y="172" text-anchor="middle" font-size="9" fill="${C.muted}">sharply after 35</text>
+  <rect x="218" y="58" width="164" height="186" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="82" r="16" fill="${C.rose}"/>
+  <text x="300" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="112" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.rose}">MYTH</text>
+  <text x="300" y="128" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">Male fertility</text>
+  <text x="300" y="141" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">unaffected</text>
+  <text x="300" y="160" text-anchor="middle" font-size="9" fill="${C.muted}">FACT: Sperm quality</text>
+  <text x="300" y="172" text-anchor="middle" font-size="9" fill="${C.muted}">declines with age</text>
+  <rect x="396" y="58" width="164" height="186" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="82" r="16" fill="${C.rose}"/>
+  <text x="478" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="112" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.rose}">MYTH</text>
+  <text x="478" y="128" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">IVF overcomes</text>
+  <text x="478" y="141" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">age decline</text>
+  <text x="478" y="160" text-anchor="middle" font-size="9" fill="${C.muted}">FACT: IVF success</text>
+  <text x="478" y="172" text-anchor="middle" font-size="9" fill="${C.muted}">also drops with age</text>
+  <rect x="574" y="58" width="186" height="186" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="82" r="16" fill="${C.rose}"/>
+  <text x="667" y="87" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="112" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.rose}">MYTH</text>
+  <text x="667" y="128" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">Egg freezing</text>
+  <text x="667" y="141" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">guarantees pregnancy</text>
+  <text x="667" y="160" text-anchor="middle" font-size="9" fill="${C.muted}">FACT: Improves odds,</text>
+  <text x="667" y="172" text-anchor="middle" font-size="9" fill="${C.muted}">doesn't guarantee</text>
+</svg>`;
+
+// Blog W31-4 (IVF vs Surrogacy — actual body content of this slug): comparison infographic
+// Source: Blog node [22]-[25] — key differences, stated verbatim
+const SVG_IVF_VS_SURROGACY_KEY_DIFF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 236" font-family="${FONT}">
+  <rect width="800" height="236" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="234.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">In Vitro Fertilisation (IVF)</text>
+  <rect x="22" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Intended Mother Carries</text>
+  <text x="34" y="91" font-size="10.5" fill="${C.muted}">Suits women who can carry but struggle to conceive</text>
+  <rect x="22" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Biological Connection</text>
+  <text x="34" y="143" font-size="10.5" fill="${C.muted}">Both parents can be genetically linked to the baby</text>
+  <rect x="22" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Simpler Legal Process</text>
+  <text x="34" y="195" font-size="10.5" fill="${C.muted}">No surrogacy contracts or court procedures needed</text>
+  <rect x="410" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Surrogacy</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Another Woman Carries</text>
+  <text x="434" y="91" font-size="10.5" fill="${C.muted}">For those unable to safely carry a pregnancy</text>
+  <rect x="422" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Link Still Possible</text>
+  <text x="434" y="143" font-size="10.5" fill="${C.muted}">In gestational surrogacy, own eggs and sperm can be used</text>
+  <rect x="422" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Requires Legal Contracts</text>
+  <text x="434" y="195" font-size="10.5" fill="${C.muted}">Formal agreements and compliance with national laws</text>
+</svg>`;
+
+// Blog W31-5 (Increase AMH levels): "7 Ways to Support AMH & Ovarian Health"
+// Source: Blog node [15] — 7 strategies, stated verbatim
+const SVG_AMH_SUPPORT_STRATEGIES_7 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 WAYS TO SUPPORT AMH &amp; OVARIAN HEALTH</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="79" r="14" fill="${C.rose}"/>
+  <text x="64" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="74" font-size="11" font-weight="700" fill="${C.dark}">Fertility-Friendly Diet</text>
+  <text x="86" y="90" font-size="9.5" fill="${C.muted}">Healthy fats, antioxidants, CoQ10</text>
+  <rect x="40" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="139" r="14" fill="${C.rose}"/>
+  <text x="64" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="86" y="134" font-size="11" font-weight="700" fill="${C.dark}">Supplements (Supervised)</text>
+  <text x="86" y="150" font-size="9.5" fill="${C.muted}">DHEA, CoQ10, Vitamin D</text>
+  <rect x="40" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="199" r="14" fill="${C.rose}"/>
+  <text x="64" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="86" y="194" font-size="11" font-weight="700" fill="${C.dark}">Reduce Stress &amp; Sleep Well</text>
+  <text x="86" y="210" font-size="9.5" fill="${C.muted}">7–8 hours nightly, yoga, meditation</text>
+  <rect x="40" y="232" width="355" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="247" r="14" fill="${C.rose}"/>
+  <text x="64" y="251.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="252" font-size="11" font-weight="700" fill="${C.dark}">Quit Smoking &amp; Limit Toxins</text>
+  <rect x="405" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="79" r="14" fill="${C.rose}"/>
+  <text x="429" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="451" y="74" font-size="11" font-weight="700" fill="${C.dark}">Ovarian PRP Therapy</text>
+  <text x="451" y="90" font-size="9.5" fill="${C.muted}">Stimulates follicle growth</text>
+  <rect x="405" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="139" r="14" fill="${C.rose}"/>
+  <text x="429" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="451" y="134" font-size="11" font-weight="700" fill="${C.dark}">Fertility Preservation</text>
+  <text x="451" y="150" font-size="9.5" fill="${C.muted}">Egg or embryo freezing</text>
+  <rect x="405" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="199" r="14" fill="${C.rose}"/>
+  <text x="429" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="451" y="194" font-size="11" font-weight="700" fill="${C.dark}">Customised IVF Protocols</text>
+  <text x="451" y="210" font-size="9.5" fill="${C.muted}">Tailored to AMH, age and history</text>
+</svg>`;
+
 // ── Wave 30 SVG constants ─────────────────────────────────────────────
 
 // Blog W30-1 (Post-embryo-transfer precautions): "6 Key Precautions After Embryo Transfer"
@@ -6607,6 +6788,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 31: Published blogs ──────────────────────────────────────────
+  "frozen-vs-fresh-embryo-transfer-which-is-better": {
+    svg:     SVG_FROZEN_VS_FRESH_TRANSFER,
+    title:   "Frozen vs Fresh Embryo Transfer",
+    altText: "Two-panel comparison infographic. Left panel Frozen Embryo Transfer FET with rose header: Often Higher Success Rates (body recovers, uterine lining can be optimised); Reduced OHSS Risk (avoids the hormonal peak right after stimulation); Allows PGT-A Testing (99%+ embryo survival with modern vitrification). Right panel Fresh Embryo Transfer: Suits Normal Hormone Levels (best when stimulation response is balanced); Good for Younger Responders (works well without needing genetic testing); Shorter Overall Timeline (no freezing wait or extra storage cost).",
+  },
+  "government-vs-private-ivf-centres-in-ahmedabad-which-one-is-better": {
+    svg:     SVG_GOVT_VS_PRIVATE_IVF,
+    title:   "Government vs Private IVF Centres",
+    altText: "Two-panel comparison infographic. Left panel Private IVF Centres with rose header: Higher Cost, EMI Options (transparent billing with flexible payment plans); Tailored Care (one-on-one counselling and personalised protocols); Higher Success Rates (skilled experts and modern technology). Right panel Government IVF Centres: Low-Cost or Subsidised (supported by government health schemes); General Approach (less individualised attention due to patient volume); Standard Success Rates (part-time fertility specialists, simpler cases).",
+  },
+  "how-age-affects-fertility-myths-vs-facts": {
+    svg:     SVG_FERTILITY_AGE_MYTHS_4,
+    title:   "4 Fertility Age Myths — Busted",
+    altText: "Four-card myth-versus-fact infographic. Card 1 Myth Fertile until menopause, Fact declines sharply after 35. Card 2 Myth Male fertility unaffected, Fact sperm quality declines with age. Card 3 Myth IVF overcomes age decline, Fact IVF success also drops with age. Card 4 Myth Egg freezing guarantees pregnancy, Fact improves odds but doesn't guarantee.",
+  },
+  "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid": {
+    svg:     SVG_IVF_VS_SURROGACY_KEY_DIFF,
+    title:   "IVF vs Surrogacy: Key Differences",
+    altText: "Two-panel comparison infographic. Left panel In Vitro Fertilisation IVF with rose header: Intended Mother Carries (suits women who can carry but struggle to conceive); Biological Connection (both parents can be genetically linked to the baby); Simpler Legal Process (no surrogacy contracts or court procedures needed). Right panel Surrogacy: Another Woman Carries (for those unable to safely carry a pregnancy); Genetic Link Still Possible (in gestational surrogacy, own eggs and sperm can be used); Requires Legal Contracts (formal agreements and compliance with national laws).",
+  },
+  "how-can-i-increase-my-amh-levels": {
+    svg:     SVG_AMH_SUPPORT_STRATEGIES_7,
+    title:   "7 Ways to Support AMH & Ovarian Health",
+    altText: "Two-column seven-item grid infographic. Items 1-4 (left): Fertility-Friendly Diet (healthy fats, antioxidants, CoQ10); Supplements under supervision (DHEA, CoQ10, Vitamin D); Reduce Stress and Sleep Well (7-8 hours nightly, yoga, meditation); Quit Smoking and Limit Toxins. Items 5-7 (right): Ovarian PRP Therapy (stimulates follicle growth); Fertility Preservation (egg or embryo freezing); Customised IVF Protocols (tailored to AMH, age and history).",
+  },
   // ── Wave 30: Published blogs ──────────────────────────────────────────
   "essential-precautions-to-take-after-embryo-transfer-for-ivf-success": {
     svg:     SVG_EMBRYO_TRANSFER_PRECAUTIONS_6,

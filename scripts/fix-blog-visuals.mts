@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 31 ──────────────────────────────────────────────────────────
+  "frozen-vs-fresh-embryo-transfer-which-is-better": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "government-vs-private-ivf-centres-in-ahmedabad-which-one-is-better": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "how-age-affects-fertility-myths-vs-facts": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "how-can-i-increase-my-amh-levels": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 30 ──────────────────────────────────────────────────────────
   "essential-precautions-to-take-after-embryo-transfer-for-ivf-success": {
     removeBlocks: ["key recommendations", "key numbers"],
