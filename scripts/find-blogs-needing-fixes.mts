@@ -82,6 +82,12 @@ const DONE = new Set([
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
   "prp-vs-traditional-fertility-treatments-whats-the-difference",
   "reasons-for-iui-failure-symptoms-and-causes",
+  // Wave 17
+  "the-role-of-endometrial-receptivity-in-ivf-success",
+  "the-thyroid-connection-understanding-its-role-in-female-fertility-health",
+  "top-10-reasons-to-consider-egg-freezing",
+  "top-fertility-treatments-for-women-with-pcos",
+  "trying-to-conceive-after-40-what-you-need-to-know",
   // Wave 16
   "the-connection-between-quality-sleep-and-ivf-success-a-hormonal-perspective",
   "the-dfi-test-a-crucial-diagnostic-tool-for-male-infertility",

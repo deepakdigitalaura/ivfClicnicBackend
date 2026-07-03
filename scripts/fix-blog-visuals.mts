@@ -483,6 +483,19 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 17 ──────────────────────────────────────────────────────────
+  "the-role-of-endometrial-receptivity-in-ivf-success": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "the-thyroid-connection-understanding-its-role-in-female-fertility-health": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "top-10-reasons-to-consider-egg-freezing": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "trying-to-conceive-after-40-what-you-need-to-know": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 16 ──────────────────────────────────────────────────────────
   "the-connection-between-quality-sleep-and-ivf-success-a-hormonal-perspective": {
     removeBlocks: ["step-by-step process", "key numbers"],

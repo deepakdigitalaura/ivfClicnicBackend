@@ -2702,6 +2702,266 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 17 SVG constants ─────────────────────────────────────────────
+
+// Blog W17-1 (Endometrial Receptivity): "6 Factors Affecting Endometrial Receptivity"
+// Source: Blog h3 sections [14],[16],[18],[20],[22],[24] — six factors listed
+const SVG_ENDOMETRIAL_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 FACTORS AFFECTING ENDOMETRIAL RECEPTIVITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Endometrial Thickness</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Optimal uterine lining thickness supports embryo attachment</text>
+
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Balance</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Oestrogen and progesterone must sync with embryo development</text>
+
+  <!-- Row 2 -->
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Endometrial Blood Flow</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Adequate blood supply creates a nutrient-rich uterine environment</text>
+
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Chronic Endometritis</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Untreated inflammation or infection reduces receptivity significantly</text>
+
+  <!-- Row 3 -->
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Window of Implantation</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Embryo transfer must align with this unique receptive phase</text>
+
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Factors</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Weight, stress, smoking and diet affect uterine lining quality</text>
+</svg>`;
+
+// Blog W17-2 (Thyroid & Fertility): "Thyroid Disorders and Female Fertility"
+// Source: Blog h2 sections [14],[15] — hypothyroidism vs hyperthyroidism effects on fertility
+const SVG_THYROID_FERTILITY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+
+  <!-- Left panel: Hypothyroidism (rose header) -->
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Hypothyroidism (Underactive)</text>
+
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Irregular or Absent Periods</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Low T3/T4 disrupts the regularity of the menstrual cycle</text>
+
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Difficulty Ovulating</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Elevated TSH suppresses normal ovulation signals in the brain</text>
+
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Higher Miscarriage Risk</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Inadequate thyroid hormones affect early embryo development</text>
+
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Weight Gain &amp; Fatigue</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Metabolic slowdown disrupts overall hormonal balance</text>
+
+  <!-- Right panel: Hyperthyroidism (dark header) -->
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
+  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Hyperthyroidism (Overactive)</text>
+
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Shortened Menstrual Cycles</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Excess thyroid hormones can accelerate cycle length</text>
+
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reduced Fertility</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Suppressed FSH/LH disrupts follicle development and ovulation</text>
+
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Pregnancy Complications</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Can increase risk of premature delivery or fetal growth issues</text>
+
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Palpitations &amp; Anxiety</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">High metabolic demands strain the body during conception attempts</text>
+</svg>`;
+
+// Blog W17-3 (Top 10 Egg Freezing Reasons): "10 Reasons to Consider Egg Freezing"
+// Source: Blog h2 sections [4],[6],[9],[11],[13],[15],[17],[19],[21],[23] — ten reasons
+const SVG_EGG_FREEZING_10_REASONS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 326" font-family="${FONT}">
+  <rect width="800" height="326" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="324.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 REASONS TO CONSIDER EGG FREEZING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="10" y="52" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="77" r="14" fill="${C.rose}"/>
+  <text x="36" y="81.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="58" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Preserve Fertility</text>
+  <text x="58" y="86" font-size="10.5" fill="${C.muted}">Protect egg quality before age-related decline begins</text>
+
+  <rect x="410" y="52" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="77" r="14" fill="${C.rose}"/>
+  <text x="436" y="81.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="458" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Family Planning Flexibility</text>
+  <text x="458" y="86" font-size="10.5" fill="${C.muted}">Delay pregnancy until career, relationships and timing align</text>
+
+  <!-- Row 2 -->
+  <rect x="10" y="108" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="133" r="14" fill="${C.rose}"/>
+  <text x="36" y="137.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="58" y="126" font-size="11.5" font-weight="700" fill="${C.dark}">Medical Protection</text>
+  <text x="58" y="142" font-size="10.5" fill="${C.muted}">Safeguard eggs before chemotherapy or treatments affecting fertility</text>
+
+  <rect x="410" y="108" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="133" r="14" fill="${C.rose}"/>
+  <text x="436" y="137.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="458" y="126" font-size="11.5" font-weight="700" fill="${C.dark}">Vitrification Technology</text>
+  <text x="458" y="142" font-size="10.5" fill="${C.muted}">Modern flash-freezing significantly improves egg survival rates</text>
+
+  <!-- Row 3 -->
+  <rect x="10" y="164" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="189" r="14" fill="${C.rose}"/>
+  <text x="36" y="193.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="58" y="182" font-size="11.5" font-weight="700" fill="${C.dark}">Peace of Mind</text>
+  <text x="58" y="198" font-size="10.5" fill="${C.muted}">Knowing eggs are preserved reduces reproductive anxiety</text>
+
+  <rect x="410" y="164" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="189" r="14" fill="${C.rose}"/>
+  <text x="436" y="193.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="458" y="182" font-size="11.5" font-weight="700" fill="${C.dark}">No Biological Clock Pressure</text>
+  <text x="458" y="198" font-size="10.5" fill="${C.muted}">Take control of your own reproductive timeline</text>
+
+  <!-- Row 4 -->
+  <rect x="10" y="220" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="245" r="14" fill="${C.rose}"/>
+  <text x="36" y="249.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="58" y="238" font-size="11.5" font-weight="700" fill="${C.dark}">Align with Partner's Timing</text>
+  <text x="58" y="254" font-size="10.5" fill="${C.muted}">Synchronize family planning when both partners are ready</text>
+
+  <rect x="410" y="220" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="245" r="14" fill="${C.rose}"/>
+  <text x="436" y="249.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="458" y="238" font-size="11.5" font-weight="700" fill="${C.dark}">Better Future IVF Success</text>
+  <text x="458" y="254" font-size="10.5" fill="${C.muted}">Younger frozen eggs can improve IVF outcomes when used later</text>
+
+  <!-- Row 5 -->
+  <rect x="10" y="276" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="301" r="14" fill="${C.rose}"/>
+  <text x="36" y="305.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="58" y="294" font-size="11.5" font-weight="700" fill="${C.dark}">Option for Single Women</text>
+  <text x="58" y="310" font-size="10.5" fill="${C.muted}">Build your family on your own terms and timeline</text>
+
+  <rect x="410" y="276" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="301" r="14" fill="${C.rose}"/>
+  <text x="436" y="305.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">10</text>
+  <text x="458" y="294" font-size="11.5" font-weight="700" fill="${C.dark}">Career Advancement</text>
+  <text x="458" y="310" font-size="10.5" fill="${C.muted}">Balance professional goals with the option to start a family later</text>
+</svg>`;
+
+// Blog W17-4 (PCOS Fertility Treatments): "4-Step PCOS Fertility Treatment Pathway"
+// Source: Blog h2 sections [7],[9],[13],[20],[23] — four treatment steps described in blog
+const SVG_PCOS_TREATMENT_PATHWAY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4-STEP PCOS FERTILITY TREATMENT PATHWAY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Step 1 -->
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">S1</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Step 1: Lifestyle Optimisation</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">A 5–10% weight reduction is clinically proven to restore spontaneous ovulation in PCOS</text>
+
+  <!-- Step 2 -->
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">S2</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Step 2: Ovulation Induction</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Letrozole (first choice) or Clomiphene tablets stimulate follicle growth and ovulation</text>
+
+  <!-- Step 3 -->
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">S3</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Step 3: IUI — Intrauterine Insemination</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Recommended if ovulation induction cycles have not resulted in pregnancy after 3–4 attempts</text>
+
+  <!-- Step 4 -->
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">S4</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Step 4: IVF with OHSS Risk Management</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Advanced stimulation protocol for unresponsive cases; freeze-all strategy minimises OHSS risk</text>
+</svg>`;
+
+// Blog W17-5 (Conceive After 40): "6 Key Fertility Tests for Women Over 40"
+// Source: Blog h3 sections [14],[16],[18],[20],[22],[24] — six recommended tests
+const SVG_FERTILITY_TESTS_OVER40 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 KEY FERTILITY TESTS FOR WOMEN OVER 40</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">AMH Test</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Measures ovarian reserve and remaining egg supply</text>
+
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Antral Follicle Count (AFC)</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Ultrasound count of available follicles available per cycle</text>
+
+  <!-- Row 2 -->
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">FSH &amp; LH Levels</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Hormonal balance test assessing pituitary-ovarian communication</text>
+
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Pelvic Ultrasound</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Examines uterus and ovaries for structural abnormalities</text>
+
+  <!-- Row 3 -->
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">HSG — Tube Patency Test</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">X-ray test to confirm that the fallopian tubes are open</text>
+
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Partner's Semen Analysis</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Evaluates sperm count, motility and morphology</text>
+</svg>`;
+
 // ── Wave 16 SVG constants ─────────────────────────────────────────────
 
 // Blog W16-1 (Sleep & IVF): "6 Tips for Better Sleep During IVF"
@@ -4106,6 +4366,33 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IUI_FAILURE_CAUSES,
     title:   "7 Common Causes of IUI Failure",
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
+  },
+
+  // ── Wave 17: Published blogs ──────────────────────────────────────────
+  "the-role-of-endometrial-receptivity-in-ivf-success": {
+    svg:     SVG_ENDOMETRIAL_FACTORS,
+    title:   "6 Factors Affecting Endometrial Receptivity",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Endometrial Thickness (optimal uterine lining thickness supports embryo attachment); Endometrial Blood Flow (adequate blood supply creates a nutrient-rich uterine environment); Window of Implantation (embryo transfer must align with this unique receptive phase). Items 4-6 (right): Hormonal Balance (oestrogen and progesterone must sync with embryo development); Chronic Endometritis (untreated inflammation or infection reduces receptivity significantly); Lifestyle Factors (weight, stress, smoking and diet affect uterine lining quality).",
+  },
+  "the-thyroid-connection-understanding-its-role-in-female-fertility-health": {
+    svg:     SVG_THYROID_FERTILITY,
+    title:   "Thyroid Disorders and Female Fertility",
+    altText: "Two-panel infographic. Left panel Hypothyroidism Underactive with rose header: Irregular or Absent Periods (low T3/T4 disrupts menstrual cycle regularity); Difficulty Ovulating (elevated TSH suppresses normal ovulation signals); Higher Miscarriage Risk (inadequate thyroid hormones affect early embryo development); Weight Gain and Fatigue (metabolic slowdown disrupts overall hormonal balance). Right panel Hyperthyroidism Overactive with dark header: Shortened Menstrual Cycles (excess thyroid hormones can accelerate cycle length); Reduced Fertility (suppressed FSH/LH disrupts follicle development and ovulation); Pregnancy Complications (can increase risk of premature delivery or fetal growth issues); Palpitations and Anxiety (high metabolic demands strain the body during conception attempts).",
+  },
+  "top-10-reasons-to-consider-egg-freezing": {
+    svg:     SVG_EGG_FREEZING_10_REASONS,
+    title:   "10 Reasons to Consider Egg Freezing",
+    altText: "Two-column ten-item grid infographic. Items 1-5 (left): Preserve Fertility (protect egg quality before age-related decline begins); Medical Protection (safeguard eggs before chemotherapy or treatments affecting fertility); Peace of Mind (knowing eggs are preserved reduces reproductive anxiety); Align with Partner's Timing (synchronize family planning when both partners are ready); Option for Single Women (build your family on your own terms and timeline). Items 6-10 (right): Family Planning Flexibility (delay pregnancy until career, relationships and timing align); Vitrification Technology (modern flash-freezing significantly improves egg survival rates); No Biological Clock Pressure (take control of your own reproductive timeline); Better Future IVF Success (younger frozen eggs can improve IVF outcomes when used later); Career Advancement (balance professional goals with the option to start a family later).",
+  },
+  "top-fertility-treatments-for-women-with-pcos": {
+    svg:     SVG_PCOS_TREATMENT_PATHWAY,
+    title:   "4-Step PCOS Fertility Treatment Pathway",
+    altText: "Four-row accent-bar infographic. Step S1 Lifestyle Optimisation: a 5–10% weight reduction is clinically proven to restore spontaneous ovulation in PCOS. Step S2 Ovulation Induction: Letrozole first choice or Clomiphene tablets stimulate follicle growth and ovulation. Step S3 IUI Intrauterine Insemination: recommended if ovulation induction cycles have not resulted in pregnancy after 3–4 attempts. Step S4 IVF with OHSS Risk Management: advanced stimulation protocol for unresponsive cases, freeze-all strategy minimises OHSS risk.",
+  },
+  "trying-to-conceive-after-40-what-you-need-to-know": {
+    svg:     SVG_FERTILITY_TESTS_OVER40,
+    title:   "6 Key Fertility Tests for Women Over 40",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): AMH Test (measures ovarian reserve and remaining egg supply); FSH and LH Levels (hormonal balance test assessing pituitary-ovarian communication); HSG Tube Patency Test (X-ray test to confirm that the fallopian tubes are open). Items 4-6 (right): Antral Follicle Count AFC (ultrasound count of available follicles per cycle); Pelvic Ultrasound (examines uterus and ovaries for structural abnormalities); Partner's Semen Analysis (evaluates sperm count, motility and morphology).",
   },
 
   // ── Wave 16: Published blogs ──────────────────────────────────────────
