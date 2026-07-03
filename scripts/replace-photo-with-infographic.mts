@@ -2702,6 +2702,215 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 24 SVG constants ─────────────────────────────────────────────
+
+// Blog W24-1 (Low AMH reasons): "9 Reasons Behind Low AMH Levels"
+// Source: Blog node [15] — 9 reasons listed
+const SVG_LOW_AMH_REASONS_9 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 370" font-family="${FONT}">
+  <rect width="800" height="370" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="368.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">9 REASONS BEHIND LOW AMH LEVELS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Age-Related Decline</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Fertility decreases gradually after 30, more after 35</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Reserve Dynamics</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Genetic and environmental factors affect decline rate</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">PCOS</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Hormonal imbalance disturbs follicle maturation</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Premature Ovarian Insufficiency</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Ovaries cease normal function before age 40</text>
+  <rect x="10" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="313" r="16" fill="${C.rose}"/>
+  <text x="42" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="307" font-size="11.5" font-weight="700" fill="${C.dark}">Endometriosis</text>
+  <text x="67" y="324" font-size="10.5" fill="${C.muted}">Inflammation affects ovarian follicle health</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Cancer Treatments</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Chemotherapy and radiation reduce viable eggs</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Underlying Medical Conditions</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Autoimmune and genetic conditions can play a role</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Surgery</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Removal of ovarian cysts can reduce reserve</text>
+  <rect x="410" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="253" r="16" fill="${C.rose}"/>
+  <text x="442" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="467" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Factors</text>
+  <text x="467" y="264" font-size="10.5" fill="${C.muted}">Smoking, alcohol and obesity affect ovarian function</text>
+</svg>`;
+
+// Blog W24-2 (Miscarriage during IVF): "5 Signs of Possible Miscarriage During IVF"
+// Source: Blog node [9]-[14] — 5 signs listed verbatim
+const SVG_MISCARRIAGE_SIGNS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 SIGNS OF POSSIBLE MISCARRIAGE DURING IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Vaginal Bleeding</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Light spotting to</text>
+  <text x="108" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">heavy bleeding</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Abdominal Pain</text>
+  <text x="254" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Cramping in the</text>
+  <text x="254" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">lower abdomen</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Passage of Tissue</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Tissue or clots in</text>
+  <text x="400" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">vaginal bleeding</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Fewer Symptoms</text>
+  <text x="546" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Sudden drop in</text>
+  <text x="546" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">nausea, tenderness</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Back Pain</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Can accompany</text>
+  <text x="692" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">other signs</text>
+</svg>`;
+
+// Blog W24-3 (IVF babies health): "IVF Births Worldwide: The Numbers"
+// Source: Blog nodes [28]-[30] — global IVF birth statistics, stated verbatim
+const SVG_IVF_BIRTHS_WORLDWIDE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 200" font-family="${FONT}">
+  <rect width="800" height="200" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="198.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IVF BIRTHS WORLDWIDE: THE NUMBERS</text>
+  <line x1="60" y1="36" x2="740" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="70" y="48" width="200" height="126" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="170" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">AUSTRALIA</text>
+  <text x="170" y="118" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">1 in 18</text>
+  <text x="170" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">babies born via IVF</text>
+  <rect x="300" y="40" width="200" height="134" rx="8" fill="${C.white}" stroke="${C.rose}" stroke-width="1.5"/>
+  <text x="400" y="68" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">GLOBAL (2019)</text>
+  <text x="400" y="112" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">4.2%</text>
+  <text x="400" y="134" text-anchor="middle" font-size="10" fill="${C.muted}">of all children born via IVF</text>
+  <rect x="530" y="48" width="200" height="126" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="630" y="76" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">UNITED STATES</text>
+  <text x="630" y="118" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">1–2%</text>
+  <text x="630" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">of all births are IVF</text>
+</svg>`;
+
+// Blog W24-4 (Bed rest myth): "5 Risks of Unnecessary Bed Rest After Embryo Transfer"
+// Source: Blog node [13]-[17] — 5 numbered complications, stated verbatim
+const SVG_BED_REST_RISKS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 RISKS OF UNNECESSARY BED REST AFTER EMBRYO TRANSFER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Blood Clot</text>
+  <text x="108" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Formation</text>
+  <text x="108" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">Increased DVT risk</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Muscle</text>
+  <text x="254" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Atrophy</text>
+  <text x="254" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">Weakens the body</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Psychological</text>
+  <text x="400" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Impact</text>
+  <text x="400" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">Raises anxiety</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Reduced</text>
+  <text x="546" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Blood Flow</text>
+  <text x="546" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">Affects uterus</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">No Proven</text>
+  <text x="692" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Benefit</text>
+  <text x="692" y="134" text-anchor="middle" font-size="9.5" fill="${C.muted}">Doesn't improve odds</text>
+</svg>`;
+
+// Blog W24-5 (Twins & IVF myth): "5 Factors in the Single vs Multiple Embryo Decision"
+// Source: Blog headings [12],[14],[17],[19],[21] — 5 decision factors
+const SVG_EMBRYO_TRANSFER_DECISION_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 FACTORS IN THE SINGLE VS MULTIPLE EMBRYO DECISION</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Age of Patient</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Younger women often</text>
+  <text x="108" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">succeed with SET</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Reproductive</text>
+  <text x="254" y="114" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">History</text>
+  <text x="254" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">Past outcomes shape it</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Embryo Quality</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Assessed viability</text>
+  <text x="400" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">guides the decision</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Patient Health</text>
+  <text x="546" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Overall conditions</text>
+  <text x="546" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">are factored in</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Preferences</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9.5" fill="${C.muted}">Family-building</text>
+  <text x="692" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">goals matter most</text>
+</svg>`;
+
 // ── Wave 23 SVG constants ─────────────────────────────────────────────
 
 // Blog W23-1 (AMH/AFC ovarian reserve): "AMH Levels: What They Mean"
@@ -5459,6 +5668,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 24: Published blogs ──────────────────────────────────────────
+  "reasons-behind-low-amh-levels-ways-to-increase": {
+    svg:     SVG_LOW_AMH_REASONS_9,
+    title:   "9 Reasons Behind Low AMH Levels",
+    altText: "Two-column nine-item grid infographic. Items 1-5 (left): Age-Related Decline (fertility decreases gradually after 30, more after 35); Ovarian Reserve Dynamics (genetic and environmental factors affect decline rate); PCOS (hormonal imbalance disturbs follicle maturation); Premature Ovarian Insufficiency (ovaries cease normal function before age 40); Endometriosis (inflammation affects ovarian follicle health). Items 6-9 (right): Cancer Treatments (chemotherapy and radiation reduce viable eggs); Underlying Medical Conditions (autoimmune and genetic conditions); Ovarian Surgery (removal of ovarian cysts can reduce reserve); Lifestyle Factors (smoking, alcohol and obesity affect ovarian function).",
+  },
+  "miscarriages-during-ivf-signs-causes-prevention-hope": {
+    svg:     SVG_MISCARRIAGE_SIGNS,
+    title:   "5 Signs of Possible Miscarriage During IVF",
+    altText: "Five-panel horizontal infographic. Panel 01 Vaginal Bleeding: light spotting to heavy bleeding. Panel 02 Abdominal Pain: cramping in the lower abdomen. Panel 03 Passage of Tissue: tissue or clots in vaginal bleeding. Panel 04 Fewer Symptoms: sudden drop in nausea, tenderness. Panel 05 Back Pain: can accompany other signs.",
+  },
+  "are-ivf-babies-healthy-as-naturally-conceived": {
+    svg:     SVG_IVF_BIRTHS_WORLDWIDE,
+    title:   "IVF Births Worldwide: The Numbers",
+    altText: "Three-panel infographic. Panel Australia: 1 in 18 babies born via IVF. Panel Global 2019, highlighted: 4.2% of all children born via IVF. Panel United States: 1 to 2% of all births are IVF.",
+  },
+  "bed-rest-myth-during-ivf": {
+    svg:     SVG_BED_REST_RISKS,
+    title:   "5 Risks of Unnecessary Bed Rest After Embryo Transfer",
+    altText: "Five-panel horizontal infographic. Panel 01 Blood Clot Formation: increased DVT risk. Panel 02 Muscle Atrophy: weakens the body. Panel 03 Psychological Impact: raises anxiety. Panel 04 Reduced Blood Flow: affects uterus. Panel 05 No Proven Benefit: doesn't improve odds.",
+  },
+  "myth-twins-and-ivf": {
+    svg:     SVG_EMBRYO_TRANSFER_DECISION_FACTORS,
+    title:   "5 Factors in the Single vs Multiple Embryo Decision",
+    altText: "Five-panel horizontal infographic. Panel 01 Age of Patient: younger women often succeed with single embryo transfer. Panel 02 Reproductive History: past outcomes shape it. Panel 03 Embryo Quality: assessed viability guides the decision. Panel 04 Patient Health: overall conditions are factored in. Panel 05 Preferences: family-building goals matter most.",
+  },
   // ── Wave 23: Published blogs ──────────────────────────────────────────
   "how-to-interpret-amh-afc-and-other-ovarian-reserve-rests-what-the-numbers-really-mean": {
     svg:     SVG_AMH_LEVELS_MEANING,

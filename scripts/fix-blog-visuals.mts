@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 24 ──────────────────────────────────────────────────────────
+  "reasons-behind-low-amh-levels-ways-to-increase": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "miscarriages-during-ivf-signs-causes-prevention-hope": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "are-ivf-babies-healthy-as-naturally-conceived": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "bed-rest-myth-during-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "myth-twins-and-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
   // ── Wave 23 ──────────────────────────────────────────────────────────
   "how-to-interpret-amh-afc-and-other-ovarian-reserve-rests-what-the-numbers-really-mean": {
     removeBlocks: ["complete guide", "key numbers"],
