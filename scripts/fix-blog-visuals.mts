@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 29 ──────────────────────────────────────────────────────────
+  "embryo-transfer-procedure-for-in-vitro-fertilization-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "empowering-women-in-medicine-knowledge-sharing-program-on-advanced-fertility-and-ivf-techniques-at-nikol": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "endometrial-lining-remedies-for-abnormal-thickness": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "uterine-fibroids-symptoms-causes-and-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "endometriosis-and-ivf-what-to-expect-and-how-to-prepare": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
   // ── Wave 28 ──────────────────────────────────────────────────────────
   "common-risks-in-twin-pregnancy-and-how-do-doctors-manage-them": {
     removeBlocks: ["complete guide", "key numbers"],

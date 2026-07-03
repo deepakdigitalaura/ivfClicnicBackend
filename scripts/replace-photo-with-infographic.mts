@@ -2702,6 +2702,173 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 29 SVG constants ─────────────────────────────────────────────
+
+// Blog W29-1 (Embryo transfer procedure): "Embryo Transfer: 5-Step Procedure"
+// Source: Blog headings [17],[20],[23],[25],[27] — 5 steps, stated verbatim
+const SVG_EMBRYO_TRANSFER_5STEP = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">EMBRYO TRANSFER: 5-STEP PROCEDURE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="44" rx="3" fill="${C.rose}"/>
+  <text x="38" y="70" font-size="13" font-weight="700" fill="${C.rose}">1</text>
+  <text x="60" y="62" font-size="11.5" font-weight="700" fill="${C.dark}">Endometrial Preparation</text>
+  <text x="60" y="78" font-size="10" fill="${C.muted}">Hormonal support; lining thickness monitored at 7–12mm</text>
+  <rect x="20" y="94" width="760" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="94" width="8" height="44" rx="3" fill="${C.rose}"/>
+  <text x="38" y="120" font-size="13" font-weight="700" fill="${C.rose}">2</text>
+  <text x="60" y="112" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Selection</text>
+  <text x="60" y="128" font-size="10" fill="${C.muted}">Morphological grading; PGT if indicated</text>
+  <rect x="20" y="144" width="760" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="144" width="8" height="44" rx="3" fill="${C.rose}"/>
+  <text x="38" y="170" font-size="13" font-weight="700" fill="${C.rose}">3</text>
+  <text x="60" y="162" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Thawing (FET cycles)</text>
+  <text x="60" y="178" font-size="10" fill="${C.muted}">Precise warming protocol to maintain viability</text>
+  <rect x="20" y="194" width="760" height="44" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="194" width="8" height="44" rx="3" fill="${C.rose}"/>
+  <text x="38" y="220" font-size="13" font-weight="700" fill="${C.rose}">4</text>
+  <text x="60" y="212" font-size="11.5" font-weight="700" fill="${C.dark}">The Transfer</text>
+  <text x="60" y="228" font-size="10" fill="${C.muted}">10–15 minutes via soft catheter; usually painless</text>
+  <rect x="20" y="244" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="244" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="264" font-size="13" font-weight="700" fill="${C.rose}">5</text>
+  <text x="60" y="263" font-size="11.5" font-weight="700" fill="${C.dark}">Post-Transfer Rest — 15–30 minutes, no strict bed rest</text>
+</svg>`;
+
+// Blog W29-2 (Nikol women in medicine event): "5 Modern Fertility Techniques Discussed"
+// Source: Blog node [7] — 5 techniques listed verbatim
+const SVG_NIKOL_FERTILITY_TECHNIQUES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 MODERN FERTILITY TECHNIQUES DISCUSSED</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">PGT</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Preimplantation</text>
+  <text x="108" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">Genetic Testing</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">ERA</text>
+  <text x="254" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Endometrial</text>
+  <text x="254" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">Receptivity Array</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Advanced</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Stimulation</text>
+  <text x="400" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">Protocols</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Egg &amp; Embryo</text>
+  <text x="546" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Freezing for</text>
+  <text x="546" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">preservation</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Male Infertility</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Sperm retrieval,</text>
+  <text x="692" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">PRP treatments</text>
+</svg>`;
+
+// Blog W29-3 (Endometrial thickness): "4 Signs of Abnormal Endometrial Thickness"
+// Source: Blog node [12] — 4 symptoms, stated verbatim
+const SVG_ENDOMETRIAL_THICKNESS_SIGNS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="${C.dark}">4 Signs of Abnormal Endometrial Thickness</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Heavy Menstrual</text>
+  <text x="122" y="135" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Bleeding</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Spotting Between</text>
+  <text x="300" y="135" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Periods</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Difficulty</text>
+  <text x="478" y="135" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Conceiving</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Repeated Implantation</text>
+  <text x="667" y="135" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Failure (IVF)</text>
+</svg>`;
+
+// Blog W29-4 (Uterine fibroids): "4 Types of Uterine Fibroids"
+// Source: Blog node [7] — 4 types, stated verbatim
+const SVG_UTERINE_FIBROID_TYPES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Types of Uterine Fibroids</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Intramural</text>
+  <text x="122" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Within the muscular</text>
+  <text x="122" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">wall; most common</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Submucosal</text>
+  <text x="300" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Under the lining;</text>
+  <text x="300" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">often heavy bleeding</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Subserosal</text>
+  <text x="478" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Outer uterine wall;</text>
+  <text x="478" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">may press on organs</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Pedunculated</text>
+  <text x="667" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Attached by a stalk;</text>
+  <text x="667" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">inside or outside</text>
+</svg>`;
+
+// Blog W29-5 (Endometriosis & IVF): "IVF Process for Endometriosis: 4 Steps"
+// Source: Blog nodes [11]-[14] — 4 steps, stated verbatim
+const SVG_ENDOMETRIOSIS_IVF_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 246" font-family="${FONT}">
+  <rect width="800" height="246" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="244.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IVF PROCESS FOR ENDOMETRIOSIS: 4 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="72" font-size="14" font-weight="700" fill="${C.rose}">1</text>
+  <text x="60" y="63" font-size="12" font-weight="700" fill="${C.dark}">Initial Consultation &amp; Diagnosis</text>
+  <text x="60" y="79" font-size="10.5" fill="${C.muted}">Medical history review, ultrasounds or MRI to assess severity</text>
+  <rect x="20" y="98" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="98" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="14" font-weight="700" fill="${C.rose}">2</text>
+  <text x="60" y="117" font-size="12" font-weight="700" fill="${C.dark}">Ovarian Stimulation</text>
+  <text x="60" y="133" font-size="10.5" fill="${C.muted}">Tailored protocols monitored via blood tests and ultrasounds</text>
+  <rect x="20" y="152" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="152" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="180" font-size="14" font-weight="700" fill="${C.rose}">3</text>
+  <text x="60" y="171" font-size="12" font-weight="700" fill="${C.dark}">Egg Retrieval &amp; Fertilization</text>
+  <text x="60" y="187" font-size="10.5" fill="${C.muted}">ICSI often recommended to enhance fertilization success</text>
+  <rect x="20" y="206" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="206" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="226" font-size="14" font-weight="700" fill="${C.rose}">4</text>
+  <text x="60" y="225" font-size="12" font-weight="700" fill="${C.dark}">Embryo Transfer — carefully timed for optimal implantation</text>
+</svg>`;
+
 // ── Wave 28 SVG constants ─────────────────────────────────────────────
 
 // Blog W28-1 (Twin pregnancy risks): "5 Common Risks in Twin Pregnancy"
@@ -6250,6 +6417,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 29: Published blogs ──────────────────────────────────────────
+  "embryo-transfer-procedure-for-in-vitro-fertilization-ivf": {
+    svg:     SVG_EMBRYO_TRANSFER_5STEP,
+    title:   "Embryo Transfer: 5-Step Procedure",
+    altText: "Five-row accent-bar infographic. Step 1 Endometrial Preparation: hormonal support, lining thickness monitored at 7-12mm. Step 2 Embryo Selection: morphological grading, PGT if indicated. Step 3 Embryo Thawing for FET cycles: precise warming protocol to maintain viability. Step 4 The Transfer: 10-15 minutes via soft catheter, usually painless. Step 5 Post-Transfer Rest: 15-30 minutes, no strict bed rest.",
+  },
+  "empowering-women-in-medicine-knowledge-sharing-program-on-advanced-fertility-and-ivf-techniques-at-nikol": {
+    svg:     SVG_NIKOL_FERTILITY_TECHNIQUES,
+    title:   "5 Modern Fertility Techniques Discussed",
+    altText: "Five-panel horizontal infographic. Panel 01 PGT: Preimplantation Genetic Testing. Panel 02 ERA: Endometrial Receptivity Array. Panel 03 Advanced Stimulation Protocols. Panel 04 Egg and Embryo Freezing for preservation. Panel 05 Male Infertility: sperm retrieval, PRP treatments.",
+  },
+  "endometrial-lining-remedies-for-abnormal-thickness": {
+    svg:     SVG_ENDOMETRIAL_THICKNESS_SIGNS,
+    title:   "4 Signs of Abnormal Endometrial Thickness",
+    altText: "Four-card horizontal infographic. Card 1 Heavy Menstrual Bleeding. Card 2 Spotting Between Periods. Card 3 Difficulty Conceiving. Card 4 Repeated Implantation Failure during IVF.",
+  },
+  "uterine-fibroids-symptoms-causes-and-treatment": {
+    svg:     SVG_UTERINE_FIBROID_TYPES,
+    title:   "4 Types of Uterine Fibroids",
+    altText: "Four-card horizontal infographic. Card 1 Intramural: within the muscular wall, most common. Card 2 Submucosal: under the lining, often heavy bleeding. Card 3 Subserosal: outer uterine wall, may press on organs. Card 4 Pedunculated: attached by a stalk, inside or outside.",
+  },
+  "endometriosis-and-ivf-what-to-expect-and-how-to-prepare": {
+    svg:     SVG_ENDOMETRIOSIS_IVF_STEPS,
+    title:   "IVF Process for Endometriosis: 4 Steps",
+    altText: "Four-row accent-bar infographic. Step 1 Initial Consultation and Diagnosis: medical history review, ultrasounds or MRI to assess severity. Step 2 Ovarian Stimulation: tailored protocols monitored via blood tests and ultrasounds. Step 3 Egg Retrieval and Fertilization: ICSI often recommended to enhance fertilization success. Step 4 Embryo Transfer: carefully timed for optimal implantation.",
+  },
   // ── Wave 28: Published blogs ──────────────────────────────────────────
   "common-risks-in-twin-pregnancy-and-how-do-doctors-manage-them": {
     svg:     SVG_TWIN_PREGNANCY_RISKS_5,
