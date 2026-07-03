@@ -2702,6 +2702,174 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 28 SVG constants ─────────────────────────────────────────────
+
+// Blog W28-1 (Twin pregnancy risks): "5 Common Risks in Twin Pregnancy"
+// Source: Blog headings [15],[21],[25],[29],[33] + node [16] — 5 risks, one real stat
+const SVG_TWIN_PREGNANCY_RISKS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 COMMON RISKS IN TWIN PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Preterm</text>
+  <text x="108" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Labour</text>
+  <text x="108" y="132" text-anchor="middle" font-size="9" fill="${C.muted}">50%+ born before</text>
+  <text x="108" y="145" text-anchor="middle" font-size="9" fill="${C.muted}">37 weeks</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Low Birth</text>
+  <text x="254" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Weight</text>
+  <text x="254" y="132" text-anchor="middle" font-size="9" fill="${C.muted}">Shared uterine</text>
+  <text x="254" y="145" text-anchor="middle" font-size="9" fill="${C.muted}">space</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Hypertension</text>
+  <text x="400" y="132" text-anchor="middle" font-size="9" fill="${C.muted}">Higher preeclampsia</text>
+  <text x="400" y="145" text-anchor="middle" font-size="9" fill="${C.muted}">risk</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Gestational</text>
+  <text x="546" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Diabetes</text>
+  <text x="546" y="132" text-anchor="middle" font-size="9" fill="${C.muted}">Pronounced hormone</text>
+  <text x="546" y="145" text-anchor="middle" font-size="9" fill="${C.muted}">shifts</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">TTTS</text>
+  <text x="692" y="132" text-anchor="middle" font-size="9" fill="${C.muted}">Uneven blood flow</text>
+  <text x="692" y="145" text-anchor="middle" font-size="9" fill="${C.muted}">(monochorionic)</text>
+</svg>`;
+
+// Blog W28-2 (IVF stimulation dos/donts): "IVF Stimulation: Key Do's and Don'ts"
+// Source: Blog nodes [6],[9],[13],[16] + [29],[32],[35],[41] — top 4 each, stated verbatim
+const SVG_IVF_STIMULATION_DOS_DONTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Do's During IVF Stimulation</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Follow Medication Schedule</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Right time, right dosage for optimal response</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Eat a Balanced Diet</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Antioxidants, vitamins and minerals support the body</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Stay Hydrated</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">8–10 glasses of water daily</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Get Plenty of Rest</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">7–8 hours nightly to support medication response</text>
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Don'ts During IVF Stimulation</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid High-Intensity Exercise</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Enlarged ovaries risk complications like torsion</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Limit Caffeine &amp; Alcohol</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Can interfere with hormone levels and medication</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Don't Smoke</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Reduces success rates and affects egg quality</text>
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Don't Ignore Unusual Symptoms</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Severe pain or bloating may signal OHSS</text>
+</svg>`;
+
+// Blog W28-3 (Dr. Falguni Bavishi at SOGOG): speaker-highlight card
+// Source: Blog paras [3],[5],[6] — event, topic, focus, stated verbatim
+const SVG_DR_FALGUNI_SOGOG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 218" font-family="${FONT}">
+  <rect width="800" height="218" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="216.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">DR. FALGUNI BAVISHI AT SOGOG: ADVANCING IUI SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="50" rx="3" fill="${C.rose}"/>
+  <text x="38" y="66" font-size="11" font-weight="700" fill="${C.rose}">EVENT</text>
+  <text x="130" y="66" font-size="12" font-weight="700" fill="${C.dark}">SOGOG Annual Conference</text>
+  <text x="130" y="83" font-size="10.5" fill="${C.muted}">Society of Obstetricians and Gynecologists of Gujarat</text>
+  <rect x="20" y="102" width="760" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="102" width="8" height="50" rx="3" fill="${C.rose}"/>
+  <text x="38" y="124" font-size="11" font-weight="700" fill="${C.rose}">TOPIC</text>
+  <text x="130" y="124" font-size="12" font-weight="700" fill="${C.dark}">Enhancing IUI Success Rates</text>
+  <text x="130" y="141" font-size="10.5" fill="${C.muted}">A simple, accessible and cost-effective fertility treatment</text>
+  <rect x="20" y="160" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="160" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="182" font-size="11" font-weight="700" fill="${C.rose}">FOCUS</text>
+  <text x="130" y="182" font-size="11.5" font-weight="600" fill="${C.dark}">Making accessible care even more successful for patients</text>
+</svg>`;
+
+// Blog W28-4 (Dr. Himanshu Bavishi at SOGOG): speaker-highlight card
+// Source: Blog paras [3],[5] — event, topic, recognition, stated verbatim
+const SVG_DR_HIMANSHU_SOGOG = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 218" font-family="${FONT}">
+  <rect width="800" height="218" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="216.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">DR. HIMANSHU BAVISHI AT SOGOG: IVF ADVANCEMENTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="50" rx="3" fill="${C.rose}"/>
+  <text x="38" y="66" font-size="11" font-weight="700" fill="${C.rose}">EVENT</text>
+  <text x="130" y="66" font-size="12" font-weight="700" fill="${C.dark}">SOGOG State Conference</text>
+  <text x="130" y="83" font-size="10.5" fill="${C.muted}">Gynecologists gathered from all over the country</text>
+  <rect x="20" y="102" width="760" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="102" width="8" height="50" rx="3" fill="${C.rose}"/>
+  <text x="38" y="124" font-size="11" font-weight="700" fill="${C.rose}">TOPIC</text>
+  <text x="130" y="124" font-size="12" font-weight="700" fill="${C.dark}">Latest Advancements in IVF Techniques</text>
+  <text x="130" y="141" font-size="10.5" fill="${C.muted}">Cutting-edge solutions for infertility</text>
+  <rect x="20" y="160" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="160" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="182" font-size="11" font-weight="700" fill="${C.rose}">RECOGNITION</text>
+  <text x="185" y="182" font-size="11.5" font-weight="600" fill="${C.dark}">Invited as authority speaker in reproductive medicine</text>
+</svg>`;
+
+// Blog W28-5 (PCOS & infertility): "4 Ways PCOS Affects Fertility"
+// Source: Blog headings [11],[14],[16],[18] — 4 mechanisms, stated verbatim
+const SVG_PCOS_FERTILITY_MECHANISMS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Ways PCOS Affects Fertility</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Hormonal</text>
+  <text x="122" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Imbalance</text>
+  <text x="122" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Excess androgens</text>
+  <text x="122" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">disrupt ovulation</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Anovulation</text>
+  <text x="300" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">No egg is released</text>
+  <text x="300" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">for fertilisation</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Insulin</text>
+  <text x="478" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Resistance</text>
+  <text x="478" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Worsens androgen</text>
+  <text x="478" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">production</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Chronic</text>
+  <text x="667" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Inflammation</text>
+  <text x="667" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Affects egg quality</text>
+  <text x="667" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">and uterine lining</text>
+</svg>`;
+
 // ── Wave 27 SVG constants ─────────────────────────────────────────────
 
 // Blog W27-1 (Varicocele non-surgical treatment): "4 Non-Surgical Treatment Options for Varicocele"
@@ -6082,6 +6250,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 28: Published blogs ──────────────────────────────────────────
+  "common-risks-in-twin-pregnancy-and-how-do-doctors-manage-them": {
+    svg:     SVG_TWIN_PREGNANCY_RISKS_5,
+    title:   "5 Common Risks in Twin Pregnancy",
+    altText: "Five-panel horizontal infographic. Panel 01 Preterm Labour: 50 percent plus born before 37 weeks. Panel 02 Low Birth Weight: shared uterine space. Panel 03 Hypertension: higher preeclampsia risk. Panel 04 Gestational Diabetes: pronounced hormone shifts. Panel 05 TTTS: uneven blood flow in monochorionic twins.",
+  },
+  "dos-and-donts-during-ivf-stimulation-a-comprehensive-guide": {
+    svg:     SVG_IVF_STIMULATION_DOS_DONTS,
+    title:   "IVF Stimulation: Key Do's and Don'ts",
+    altText: "Two-panel comparison infographic. Left panel Do's During IVF Stimulation with rose header: Follow Medication Schedule (right time, right dosage for optimal response); Eat a Balanced Diet (antioxidants, vitamins and minerals support the body); Stay Hydrated (8-10 glasses of water daily); Get Plenty of Rest (7-8 hours nightly to support medication response). Right panel Don'ts During IVF Stimulation: Avoid High-Intensity Exercise (enlarged ovaries risk complications like torsion); Limit Caffeine and Alcohol (can interfere with hormone levels and medication); Don't Smoke (reduces success rates and affects egg quality); Don't Ignore Unusual Symptoms (severe pain or bloating may signal OHSS).",
+  },
+  "dr-falguni-bavishi-at-sogog-conference-on-iui-success": {
+    svg:     SVG_DR_FALGUNI_SOGOG,
+    title:   "Dr. Falguni Bavishi at SOGOG: Advancing IUI Success",
+    altText: "Three-row accent-bar highlight card. Row Event: SOGOG Annual Conference, Society of Obstetricians and Gynecologists of Gujarat. Row Topic: Enhancing IUI Success Rates, a simple, accessible and cost-effective fertility treatment. Row Focus: making accessible care even more successful for patients.",
+  },
+  "dr-himanshu-bavishi-speaks-on-ivf-at-sogog-conference": {
+    svg:     SVG_DR_HIMANSHU_SOGOG,
+    title:   "Dr. Himanshu Bavishi at SOGOG: IVF Advancements",
+    altText: "Three-row accent-bar highlight card. Row Event: SOGOG State Conference, gynecologists gathered from all over the country. Row Topic: Latest Advancements in IVF Techniques, cutting-edge solutions for infertility. Row Recognition: invited as authority speaker in reproductive medicine.",
+  },
+  "the-link-between-pcos-and-infertility": {
+    svg:     SVG_PCOS_FERTILITY_MECHANISMS,
+    title:   "4 Ways PCOS Affects Fertility",
+    altText: "Four-card horizontal infographic. Card 1 Hormonal Imbalance: excess androgens disrupt ovulation. Card 2 Anovulation: no egg is released for fertilisation. Card 3 Insulin Resistance: worsens androgen production. Card 4 Chronic Inflammation: affects egg quality and uterine lining.",
+  },
   // ── Wave 27: Published blogs ──────────────────────────────────────────
   "can-varicocele-be-treated-without-surgery-exploring-your-options": {
     svg:     SVG_VARICOCELE_NONSURGICAL_4,

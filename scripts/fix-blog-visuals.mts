@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 28 ──────────────────────────────────────────────────────────
+  "common-risks-in-twin-pregnancy-and-how-do-doctors-manage-them": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "dos-and-donts-during-ivf-stimulation-a-comprehensive-guide": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "dr-falguni-bavishi-at-sogog-conference-on-iui-success": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "dr-himanshu-bavishi-speaks-on-ivf-at-sogog-conference": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "the-link-between-pcos-and-infertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 27 ──────────────────────────────────────────────────────────
   "can-varicocele-be-treated-without-surgery-exploring-your-options": {
     removeBlocks: ["step-by-step process", "key numbers"],
