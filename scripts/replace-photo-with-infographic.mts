@@ -2780,11 +2780,10 @@ const SVG_THYROID_FERTILITY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="
   <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Weight Gain &amp; Fatigue</text>
   <text x="34" y="233" font-size="10.5" fill="${C.muted}">Metabolic slowdown disrupts overall hormonal balance</text>
 
-  <!-- Right panel: Hyperthyroidism (dark header) -->
+  <!-- Right panel: Hyperthyroidism (light) -->
   <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
-  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
-  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Hyperthyroidism (Overactive)</text>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Hyperthyroidism (Overactive)</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
 
   <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
   <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Shortened Menstrual Cycles</text>
@@ -3077,11 +3076,10 @@ const SVG_IUI_DOS_DONTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 
   <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Take Medications as Prescribed</text>
   <text x="34" y="233" font-size="10.5" fill="${C.muted}">Progesterone and supplements must be taken on schedule</text>
 
-  <!-- Right panel: Don'ts (dark header) -->
+  <!-- Right panel: Don'ts (light) -->
   <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
-  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
-  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Don'ts After IUI</text>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Don'ts After IUI</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
 
   <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
   <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Don't Test Too Early</text>
@@ -3337,11 +3335,10 @@ const SVG_SURROGACY_VS_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0
   <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">More Accessible Cost</text>
   <text x="34" y="233" font-size="10.5" fill="${C.muted}">Generally lower overall cost than surrogacy</text>
 
-  <!-- Right panel: Surrogacy (dark header) -->
+  <!-- Right panel: Surrogacy (light) -->
   <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
-  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
-  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Surrogacy</text>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Surrogacy</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
 
   <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
   <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Surrogate Carries</text>
@@ -3425,11 +3422,10 @@ const SVG_TERATOZOOSPERMIA_OVERVIEW = `<svg xmlns="http://www.w3.org/2000/svg" v
   <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Environmental Toxins</text>
   <text x="34" y="233" font-size="10.5" fill="${C.muted}">Chemical or radiation exposure affects sperm shape</text>
 
-  <!-- Right panel: Treatment Options (dark header) -->
+  <!-- Right panel: Treatment Options (light) -->
   <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
-  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
-  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Treatment Options</text>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Treatment Options</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
 
   <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
   <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Changes</text>
@@ -3899,9 +3895,8 @@ const SVG_PGT_PHASES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800
   <text x="74" y="167" font-size="10.5" fill="${C.dark}" font-weight="600">IVF protocol preparation</text>
   <line x1="272" y1="127" x2="287" y2="127" stroke="${C.rose}" stroke-width="1.5" marker-end="url(#arrPGT)"/>
   <rect x="290" y="44" width="220" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="290" y="44" width="220" height="40" rx="8" fill="${C.dark}"/>
-  <rect x="290" y="76" width="220" height="8" fill="${C.dark}"/>
-  <text x="400" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">DURING PGT</text>
+  <text x="400" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">DURING PGT</text>
+  <line x1="298" y1="82" x2="502" y2="82" stroke="${C.border}" stroke-width="1"/>
   <circle cx="310" cy="107" r="5" fill="${C.rose}"/>
   <text x="324" y="111" font-size="10.5" fill="${C.dark}" font-weight="600">Embryo biopsy (day 5)</text>
   <circle cx="310" cy="135" r="5" fill="${C.rose}"/>
@@ -3910,9 +3905,8 @@ const SVG_PGT_PHASES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800
   <text x="324" y="167" font-size="10.5" fill="${C.dark}" font-weight="600">Embryo freezing</text>
   <line x1="512" y1="127" x2="527" y2="127" stroke="${C.rose}" stroke-width="1.5" marker-end="url(#arrPGT)"/>
   <rect x="530" y="44" width="230" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
-  <rect x="530" y="44" width="230" height="40" rx="8" fill="${C.dark}"/>
-  <rect x="530" y="76" width="230" height="8" fill="${C.dark}"/>
-  <text x="645" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">AFTER PGT</text>
+  <text x="645" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">AFTER PGT</text>
+  <line x1="538" y1="82" x2="752" y2="82" stroke="${C.border}" stroke-width="1"/>
   <circle cx="550" cy="107" r="5" fill="${C.rose}"/>
   <text x="564" y="111" font-size="10.5" fill="${C.dark}" font-weight="600">Receiving results</text>
   <circle cx="550" cy="135" r="5" fill="${C.rose}"/>
@@ -3930,8 +3924,8 @@ const SVG_PRP_VS_TRADITIONAL = `<svg xmlns="http://www.w3.org/2000/svg" viewBox=
   <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
   <rect x="40" y="44" width="355" height="40" rx="8" fill="${C.rose}"/>
   <text x="218" y="68" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">CHOOSE PRP WHEN…</text>
-  <rect x="405" y="44" width="355" height="40" rx="8" fill="${C.dark}"/>
-  <text x="582" y="68" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">CHOOSE TRADITIONAL WHEN…</text>
+  <rect x="405" y="44" width="355" height="40" rx="8" fill="${C.ivory}" stroke="${C.border}" stroke-width="1"/>
+  <text x="582" y="68" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">CHOOSE TRADITIONAL WHEN…</text>
   <rect x="40" y="92" width="355" height="38" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
   <text x="56" y="107" font-size="10.5" font-weight="700" fill="${C.rose}">Poor egg quality</text>
   <text x="56" y="122" font-size="9.5" fill="${C.muted}">PRP stimulates cellular repair and regeneration</text>
@@ -4353,13 +4347,13 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure": {
     svg:     SVG_PGT_PHASES,
     title:   "3 Phases of the PGT Process",
-    altText: "Three-panel horizontal infographic with arrows. Panel 1 Before PGT (rose header): fertility consultation, genetic counselling, IVF protocol preparation. Panel 2 During PGT (dark header): embryo biopsy on day 5, genetic lab testing, embryo freezing. Panel 3 After PGT (dark header): receiving results, embryo transfer, post-transfer monitoring.",
+    altText: "Three-panel horizontal infographic with arrows. Panel 1 Before PGT (rose header): fertility consultation, genetic counselling, IVF protocol preparation. Panel 2 During PGT: embryo biopsy on day 5, genetic lab testing, embryo freezing. Panel 3 After PGT: receiving results, embryo transfer, post-transfer monitoring.",
   },
 
   "prp-vs-traditional-fertility-treatments-whats-the-difference": {
     svg:     SVG_PRP_VS_TRADITIONAL,
     title:   "When to Choose: PRP vs Traditional Fertility Treatment",
-    altText: "Two-column comparison infographic. Left column Choose PRP When (rose header) — 4 items: Poor egg quality (PRP stimulates cellular repair); Uterine lining issues (PRP thickens lining for implantation); Recurrent miscarriage (PRP may reduce inflammation); Failed IVF cycles (combine PRP with IVF). Right column Choose Traditional When (dark header) — 3 items: Severe infertility (IVF or ICSI may be more effective); Blocked fallopian tubes (IVF bypasses blockage); Male factor infertility (ICSI addresses sperm issues).",
+    altText: "Two-column comparison infographic. Left column Choose PRP When (rose header) — 4 items: Poor egg quality (PRP stimulates cellular repair); Uterine lining issues (PRP thickens lining for implantation); Recurrent miscarriage (PRP may reduce inflammation); Failed IVF cycles (combine PRP with IVF). Right column Choose Traditional When — 3 items: Severe infertility (IVF or ICSI may be more effective); Blocked fallopian tubes (IVF bypasses blockage); Male factor infertility (ICSI addresses sperm issues).",
   },
 
   "reasons-for-iui-failure-symptoms-and-causes": {
@@ -4377,7 +4371,7 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
   "the-thyroid-connection-understanding-its-role-in-female-fertility-health": {
     svg:     SVG_THYROID_FERTILITY,
     title:   "Thyroid Disorders and Female Fertility",
-    altText: "Two-panel infographic. Left panel Hypothyroidism Underactive with rose header: Irregular or Absent Periods (low T3/T4 disrupts menstrual cycle regularity); Difficulty Ovulating (elevated TSH suppresses normal ovulation signals); Higher Miscarriage Risk (inadequate thyroid hormones affect early embryo development); Weight Gain and Fatigue (metabolic slowdown disrupts overall hormonal balance). Right panel Hyperthyroidism Overactive with dark header: Shortened Menstrual Cycles (excess thyroid hormones can accelerate cycle length); Reduced Fertility (suppressed FSH/LH disrupts follicle development and ovulation); Pregnancy Complications (can increase risk of premature delivery or fetal growth issues); Palpitations and Anxiety (high metabolic demands strain the body during conception attempts).",
+    altText: "Two-panel infographic. Left panel Hypothyroidism Underactive with rose header: Irregular or Absent Periods (low T3/T4 disrupts menstrual cycle regularity); Difficulty Ovulating (elevated TSH suppresses normal ovulation signals); Higher Miscarriage Risk (inadequate thyroid hormones affect early embryo development); Weight Gain and Fatigue (metabolic slowdown disrupts overall hormonal balance). Right panel Hyperthyroidism Overactive: Shortened Menstrual Cycles (excess thyroid hormones can accelerate cycle length); Reduced Fertility (suppressed FSH/LH disrupts follicle development and ovulation); Pregnancy Complications (can increase risk of premature delivery or fetal growth issues); Palpitations and Anxiety (high metabolic demands strain the body during conception attempts).",
   },
   "top-10-reasons-to-consider-egg-freezing": {
     svg:     SVG_EGG_FREEZING_10_REASONS,
@@ -4409,7 +4403,7 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
   "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide": {
     svg:     SVG_IUI_DOS_DONTS,
     title:   "Key Do's and Don'ts After IUI Treatment",
-    altText: "Two-panel infographic. Left panel Do's After IUI with rose header: Resume Light Activities (no bed rest needed, gentle walks and daily tasks are fine); Eat Fertility-Friendly Foods (whole grains, leafy greens and omega-3 rich foods); Stay Well Hydrated (8–10 glasses of water daily to support uterine blood flow); Take Medications as Prescribed (progesterone and supplements must be taken on schedule). Right panel Don'ts After IUI with dark header: Don't Test Too Early (wait until Day 14 as hCG trigger shot can skew early results); Avoid High-Intensity Exercise (no running, weightlifting or aerobics in the first week); No Smoking or Alcohol (both harm egg quality and can disrupt early implantation); Limit Caffeine Intake (keep below 200 mg per day during the two-week wait).",
+    altText: "Two-panel infographic. Left panel Do's After IUI with rose header: Resume Light Activities (no bed rest needed, gentle walks and daily tasks are fine); Eat Fertility-Friendly Foods (whole grains, leafy greens and omega-3 rich foods); Stay Well Hydrated (8–10 glasses of water daily to support uterine blood flow); Take Medications as Prescribed (progesterone and supplements must be taken on schedule). Right panel Don'ts After IUI: Don't Test Too Early (wait until Day 14 as hCG trigger shot can skew early results); Avoid High-Intensity Exercise (no running, weightlifting or aerobics in the first week); No Smoking or Alcohol (both harm egg quality and can disrupt early implantation); Limit Caffeine Intake (keep below 200 mg per day during the two-week wait).",
   },
   "the-miracle-of-implantation-recognizing-the-signs": {
     svg:     SVG_IMPLANTATION_SIGNS,
@@ -4436,7 +4430,7 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
   "surrogacy-vs-ivf-key-differences-benefits-and-choosing-the-right-path-to-parenthood": {
     svg:     SVG_SURROGACY_VS_IVF,
     title:   "IVF vs Surrogacy: Key Benefits Compared",
-    altText: "Two-panel comparison infographic. Left panel In Vitro Fertilisation IVF with rose header: You Carry the Baby (intended mother experiences the pregnancy herself); Genetic Connection (both parents can be biologically linked to the baby); Simpler Legal Process (no surrogate contracts or complex court approvals); More Accessible Cost (generally lower overall cost than surrogacy). Right panel Surrogacy with dark header: Surrogate Carries (for those medically unable to carry a pregnancy); No Pregnancy Risk (intended mother avoids pregnancy-related complications); Gestational Option (surrogate has no genetic link to the baby); Supports Diverse Families (ideal for same-sex couples and single parents).",
+    altText: "Two-panel comparison infographic. Left panel In Vitro Fertilisation IVF with rose header: You Carry the Baby (intended mother experiences the pregnancy herself); Genetic Connection (both parents can be biologically linked to the baby); Simpler Legal Process (no surrogate contracts or complex court approvals); More Accessible Cost (generally lower overall cost than surrogacy). Right panel Surrogacy: Surrogate Carries (for those medically unable to carry a pregnancy); No Pregnancy Risk (intended mother avoids pregnancy-related complications); Gestational Option (surrogate has no genetic link to the baby); Supports Diverse Families (ideal for same-sex couples and single parents).",
   },
   "bavishi-fertility-institute-conducts-an-educational-programme-at-rajkot": {
     svg:     SVG_BFI_RAJKOT_CME,
@@ -4446,7 +4440,7 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
   "teratozoospermia-uncovering-the-causes-symptoms-and-solutions": {
     svg:     SVG_TERATOZOOSPERMIA_OVERVIEW,
     title:   "Teratozoospermia: Causes & Treatments",
-    altText: "Two-panel infographic. Left panel Common Causes with rose header: Genetic Factors (chromosomal abnormalities that disrupt sperm formation); Infections (viral or bacterial infections damage sperm development); Lifestyle Factors (smoking, alcohol and excess heat harm sperm morphology); Environmental Toxins (chemical or radiation exposure affects sperm shape). Right panel Treatment Options with dark header: Lifestyle Changes (healthy diet, exercise, avoid alcohol, smoking and heat); ICSI Procedure (a single healthy sperm injected directly into the egg); IVF with ICSI (stimulation cycle combined with ICSI injection technique); Medical Therapy (antioxidants and hormonal treatments improve morphology).",
+    altText: "Two-panel infographic. Left panel Common Causes with rose header: Genetic Factors (chromosomal abnormalities that disrupt sperm formation); Infections (viral or bacterial infections damage sperm development); Lifestyle Factors (smoking, alcohol and excess heat harm sperm morphology); Environmental Toxins (chemical or radiation exposure affects sperm shape). Right panel Treatment Options: Lifestyle Changes (healthy diet, exercise, avoid alcohol, smoking and heat); ICSI Procedure (a single healthy sperm injected directly into the egg); IVF with ICSI (stimulation cycle combined with ICSI injection technique); Medical Therapy (antioxidants and hormonal treatments improve morphology).",
   },
 
   // ── Wave 14: Published blogs ──────────────────────────────────────────
