@@ -2702,6 +2702,191 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 21 SVG constants ─────────────────────────────────────────────
+
+// Blog W21-1 (NST in pregnancy): "5 Reasons Your Doctor May Recommend an NST"
+// Source: Blog nodes [10]-[20] — 5 numbered reasons the NST is done
+const SVG_NST_REASONS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 REASONS YOUR DOCTOR MAY RECOMMEND AN NST</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">High-Risk</text>
+  <text x="108" y="114" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Pregnancies</text>
+  <text x="108" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">Diabetes,</text>
+  <text x="108" y="146" text-anchor="middle" font-size="9.5" fill="${C.muted}">hypertension</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Post-Term</text>
+  <text x="254" y="114" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Pregnancy</text>
+  <text x="254" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">Beyond 40</text>
+  <text x="254" y="146" text-anchor="middle" font-size="9.5" fill="${C.muted}">weeks</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Decreased Fetal</text>
+  <text x="400" y="114" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Movement</text>
+  <text x="400" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">Confirms baby</text>
+  <text x="400" y="146" text-anchor="middle" font-size="9.5" fill="${C.muted}">is well</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Prior</text>
+  <text x="546" y="114" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Complications</text>
+  <text x="546" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">Stillbirth, preterm</text>
+  <text x="546" y="146" text-anchor="middle" font-size="9.5" fill="${C.muted}">labor history</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Multiple</text>
+  <text x="692" y="114" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Pregnancies</text>
+  <text x="692" y="132" text-anchor="middle" font-size="9.5" fill="${C.muted}">Tracks each</text>
+  <text x="692" y="146" text-anchor="middle" font-size="9.5" fill="${C.muted}">baby's health</text>
+</svg>`;
+
+// Blog W21-2 (PCOS & AMH): "PCOS & AMH: What the Numbers Show"
+// Source: Blog node [11],[17] — AMH values stated verbatim
+const SVG_PCOS_AMH_NUMBERS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">PCOS &amp; AMH: WHAT THE NUMBERS SHOW</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">VS WOMEN WITHOUT PCOS</text>
+  <text x="149" y="118" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">2–3x</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">Higher AMH levels</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">MEAN AMH IN PCOS</text>
+  <text x="400" y="118" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">8.63</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">ng/mL average</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">DIAGNOSTIC CUT-OFF</text>
+  <text x="651" y="118" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">4.1+</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">ng/mL commonly used</text>
+  <text x="400" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">High AMH alone does not diagnose PCOS</text>
+  <text x="400" y="205" text-anchor="middle" font-size="9.5" fill="${C.muted}">Used alongside the Rotterdam Criteria and other clinical assessments</text>
+</svg>`;
+
+// Blog W21-3 (Pregnancy nutrition): "Key Pregnancy Nutrients by Trimester"
+// Source: Blog nodes [8],[10],[12],[27],[29],[31],[44],[46],[48] — nutrients per trimester
+const SVG_PREGNANCY_NUTRIENTS_TRIMESTER = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">KEY PREGNANCY NUTRIENTS BY TRIMESTER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">FIRST (WEEKS 1–12)</text>
+  <text x="149" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Folic Acid</text>
+  <text x="149" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Protein</text>
+  <text x="149" y="142" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Iron</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">SECOND (WEEKS 13–26)</text>
+  <text x="400" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Calcium</text>
+  <text x="400" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Vitamin D</text>
+  <text x="400" y="142" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Omega-3</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">THIRD (WEEKS 27–40)</text>
+  <text x="651" y="102" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Protein</text>
+  <text x="651" y="122" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Magnesium</text>
+  <text x="651" y="142" text-anchor="middle" font-size="12" font-weight="700" fill="${C.rose}">Zinc</text>
+  <text x="400" y="190" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Both vegetarian and non-vegetarian sources available for every nutrient</text>
+  <text x="400" y="205" text-anchor="middle" font-size="9.5" fill="${C.muted}">Always confirm your personal nutrition plan with your doctor</text>
+</svg>`;
+
+// Blog W21-4 (Bharuch OB-GY event): "BFI x Bharuch OB-GY Society: 4 Key Highlights"
+// Source: Blog paras [3],[6],[7],[8] — collaboration, faculty, session focus, format
+const SVG_CME_BHARUCH = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI x BHARUCH OB-GY SOCIETY: 4 KEY HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Collaboration</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Joint academic program held with the Bharuch OB &amp; GY Society</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Expert Faculty</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Led by Dr. Himanshu Bavishi, Dr. Falguni Bavishi, Dr. Parth Bavishi &amp; Dr. Deep Gajiwala</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Session Focus</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Treatment advances, challenging cases, and future directions in reproductive medicine</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Interactive Format</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Case-based discussions strengthened professional bonds among gynecologists</text>
+</svg>`;
+
+// Blog W21-5 (Donor eggs/sperm): "7 Reasons to Consider Donor Eggs"
+// Source: Blog nodes [12],[15],[19],[21],[23],[25],[27] — 7 reasons listed
+const SVG_DONOR_EGGS_REASONS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 316" font-family="${FONT}">
+  <rect width="800" height="316" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="314.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 REASONS TO CONSIDER DONOR EGGS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="79" r="14" fill="${C.rose}"/>
+  <text x="64" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="86" y="74" font-size="11" font-weight="700" fill="${C.dark}">Poor Ovarian Reserve</text>
+  <text x="86" y="90" font-size="9.5" fill="${C.muted}">Very low AMH or high FSH limits good-quality egg production</text>
+  <rect x="40" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="139" r="14" fill="${C.rose}"/>
+  <text x="64" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="86" y="134" font-size="11" font-weight="700" fill="${C.dark}">Advanced Maternal Age</text>
+  <text x="86" y="150" font-size="9.5" fill="${C.muted}">Above 40–42 years; higher risk of chromosomal issues and miscarriage</text>
+  <rect x="40" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="199" r="14" fill="${C.rose}"/>
+  <text x="64" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="86" y="194" font-size="11" font-weight="700" fill="${C.dark}">Premature Ovarian Failure</text>
+  <text x="86" y="210" font-size="9.5" fill="${C.muted}">Early menopause in the 20s or 30s often requires donor eggs</text>
+  <rect x="40" y="232" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="64" cy="259" r="14" fill="${C.rose}"/>
+  <text x="64" y="263.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="86" y="254" font-size="11" font-weight="700" fill="${C.dark}">Repeated IVF Failure</text>
+  <text x="86" y="270" font-size="9.5" fill="${C.muted}">Multiple failed cycles from poor-quality embryos or egg response</text>
+  <rect x="405" y="52" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="79" r="14" fill="${C.rose}"/>
+  <text x="429" y="83.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="451" y="74" font-size="11" font-weight="700" fill="${C.dark}">Genetic Disorders</text>
+  <text x="451" y="90" font-size="9.5" fill="${C.muted}">Avoids passing on an inheritable condition to the child</text>
+  <rect x="405" y="112" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="139" r="14" fill="${C.rose}"/>
+  <text x="429" y="143.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="451" y="134" font-size="11" font-weight="700" fill="${C.dark}">Surgical or Medical Causes</text>
+  <text x="451" y="150" font-size="9.5" fill="${C.muted}">Ovary removal, chemo/radiation, or severe endometriosis damage</text>
+  <rect x="405" y="172" width="355" height="54" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="429" cy="199" r="14" fill="${C.rose}"/>
+  <text x="429" y="203.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">7</text>
+  <text x="451" y="194" font-size="11" font-weight="700" fill="${C.dark}">Poor Egg Quality</text>
+  <text x="451" y="210" font-size="9.5" fill="${C.muted}">Normal egg count but quality prevents fertilisation or implantation</text>
+</svg>`;
+
 // ── Wave 20 SVG constants ─────────────────────────────────────────────
 
 // Blog W20-1 (Embryo transfer day-by-day): "Embryo Transfer: 4 Key Milestones"
@@ -4875,6 +5060,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 21: Published blogs ──────────────────────────────────────────
+  "what-is-the-non-stress-test-nst-in-pregnancy-and-why-is-it-important": {
+    svg:     SVG_NST_REASONS,
+    title:   "5 Reasons Your Doctor May Recommend an NST",
+    altText: "Five-panel horizontal infographic. Panel 1 High-Risk Pregnancies: diabetes, hypertension. Panel 2 Post-Term Pregnancy: beyond 40 weeks. Panel 3 Decreased Fetal Movement: confirms baby is well. Panel 4 Prior Complications: stillbirth, preterm labor history. Panel 5 Multiple Pregnancies: tracks each baby's health.",
+  },
+  "what-is-the-relationship-between-pcos-and-amh-level": {
+    svg:     SVG_PCOS_AMH_NUMBERS,
+    title:   "PCOS & AMH: What the Numbers Show",
+    altText: "Three-panel infographic with rose headers. Panel Versus Women Without PCOS: 2 to 3 times higher AMH levels. Panel Mean AMH in PCOS: 8.63 ng/mL average. Panel Diagnostic Cut-Off: 4.1 plus ng/mL commonly used. Footer note: high AMH alone does not diagnose PCOS; used alongside the Rotterdam Criteria and other clinical assessments.",
+  },
+  "what-to-eat-during-pregnancy-a-week-by-week-nutrition-plan": {
+    svg:     SVG_PREGNANCY_NUTRIENTS_TRIMESTER,
+    title:   "Key Pregnancy Nutrients by Trimester",
+    altText: "Three-panel infographic with rose headers. Panel First Trimester Weeks 1-12: Folic Acid, Protein, Iron. Panel Second Trimester Weeks 13-26: Calcium, Vitamin D, Omega-3. Panel Third Trimester Weeks 27-40: Protein, Magnesium, Zinc. Footer note: both vegetarian and non-vegetarian sources available for every nutrient; always confirm your personal nutrition plan with your doctor.",
+  },
+  "bavishi-fertility-institute-hosts-knowledge-sharing-program-with-bharuch-ob-gy-society": {
+    svg:     SVG_CME_BHARUCH,
+    title:   "BFI x Bharuch OB-GY Society: 4 Key Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 Collaboration: joint academic program held with the Bharuch OB and GY Society. Highlight 02 Expert Faculty: led by Dr. Himanshu Bavishi, Dr. Falguni Bavishi, Dr. Parth Bavishi and Dr. Deep Gajiwala. Highlight 03 Session Focus: treatment advances, challenging cases, and future directions in reproductive medicine. Highlight 04 Interactive Format: case-based discussions strengthened professional bonds among gynecologists.",
+  },
+  "when-should-you-consider-donor-eggs-or-sperm": {
+    svg:     SVG_DONOR_EGGS_REASONS,
+    title:   "7 Reasons to Consider Donor Eggs",
+    altText: "Two-column seven-item grid infographic. Items 1-4 (left): Poor Ovarian Reserve (very low AMH or high FSH limits good-quality egg production); Advanced Maternal Age (above 40-42 years, higher risk of chromosomal issues and miscarriage); Premature Ovarian Failure (early menopause in the 20s or 30s often requires donor eggs); Repeated IVF Failure (multiple failed cycles from poor-quality embryos or egg response). Items 5-7 (right): Genetic Disorders (avoids passing on an inheritable condition to the child); Surgical or Medical Causes (ovary removal, chemo/radiation, or severe endometriosis damage); Poor Egg Quality (normal egg count but quality prevents fertilisation or implantation).",
+  },
   // ── Wave 20: Published blogs ──────────────────────────────────────────
   "what-happens-after-embryo-transfer-day-by-day": {
     svg:     SVG_EMBRYO_TRANSFER_MILESTONES,

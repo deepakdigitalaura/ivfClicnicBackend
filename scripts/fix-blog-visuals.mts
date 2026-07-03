@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 21 ──────────────────────────────────────────────────────────
+  "what-is-the-non-stress-test-nst-in-pregnancy-and-why-is-it-important": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "what-is-the-relationship-between-pcos-and-amh-level": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "what-to-eat-during-pregnancy-a-week-by-week-nutrition-plan": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "bavishi-fertility-institute-hosts-knowledge-sharing-program-with-bharuch-ob-gy-society": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "when-should-you-consider-donor-eggs-or-sperm": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 20 ──────────────────────────────────────────────────────────
   "what-happens-after-embryo-transfer-day-by-day": {
     removeBlocks: ["complete guide", "key numbers"],
