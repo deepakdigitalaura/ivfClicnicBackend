@@ -2702,6 +2702,155 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 25 SVG constants ─────────────────────────────────────────────
+
+// Blog W25-1 (OHSS): "OHSS: Primary vs Secondary"
+// Source: Blog nodes [9]-[12] — 2 types described verbatim
+const SVG_OHSS_PRIMARY_VS_SECONDARY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 236" font-family="${FONT}">
+  <rect width="800" height="236" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="234.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Primary OHSS</text>
+  <rect x="22" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Caused by Fertility Medication</text>
+  <text x="34" y="91" font-size="10.5" fill="${C.muted}">Drugs used to stimulate egg growth</text>
+  <rect x="22" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">Ovaries Enlarge</text>
+  <text x="34" y="143" font-size="10.5" fill="${C.muted}">More eggs cause temporary enlargement</text>
+  <rect x="22" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Regresses on Its Own</text>
+  <text x="34" y="195" font-size="10.5" fill="${C.muted}">Stopping medication ends stimulation</text>
+  <rect x="410" y="10" width="380" height="216" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Secondary OHSS</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="70" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="75.5" font-size="11.5" font-weight="700" fill="${C.dark}">Occurs During Pregnancy</text>
+  <text x="434" y="91" font-size="10.5" fill="${C.muted}">Not linked to the stimulation drugs alone</text>
+  <rect x="422" y="122" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="127.5" font-size="11.5" font-weight="700" fill="${C.dark}">hCG Keeps Stimulating</text>
+  <text x="434" y="143" font-size="10.5" fill="${C.muted}">Pregnancy hormone continuously acts on ovaries</text>
+  <rect x="422" y="174" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="179.5" font-size="11.5" font-weight="700" fill="${C.dark}">Can Be More Severe</text>
+  <text x="434" y="195" font-size="10.5" fill="${C.muted}">Often more intense than primary OHSS</text>
+</svg>`;
+
+// Blog W25-2 (Egg freezing): "The Egg Freezing Process: 4 Steps"
+// Source: Blog nodes [15]-[18] — 4-step process, stated verbatim
+const SVG_EGG_FREEZING_PROCESS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 246" font-family="${FONT}">
+  <rect width="800" height="246" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="244.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">THE EGG FREEZING PROCESS: 4 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="72" font-size="14" font-weight="700" fill="${C.rose}">1</text>
+  <text x="60" y="63" font-size="12" font-weight="700" fill="${C.dark}">Initial Consultation &amp; Testing</text>
+  <text x="60" y="79" font-size="10.5" fill="${C.muted}">Medical history review, blood tests, and ultrasound to assess ovarian reserve</text>
+  <rect x="20" y="98" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="98" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="14" font-weight="700" fill="${C.rose}">2</text>
+  <text x="60" y="117" font-size="12" font-weight="700" fill="${C.dark}">Ovarian Stimulation</text>
+  <text x="60" y="133" font-size="10.5" fill="${C.muted}">Hormonal injections stimulate the ovaries to produce multiple eggs</text>
+  <rect x="20" y="152" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="152" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="180" font-size="14" font-weight="700" fill="${C.rose}">3</text>
+  <text x="60" y="171" font-size="12" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="60" y="187" font-size="10.5" fill="${C.muted}">Eggs are retrieved through a minimally invasive procedure</text>
+  <rect x="20" y="206" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="206" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="226" font-size="14" font-weight="700" fill="${C.rose}">4</text>
+  <text x="60" y="225" font-size="12" font-weight="700" fill="${C.dark}">Freezing — eggs are frozen and stored in a cryobank</text>
+</svg>`;
+
+// Blog W25-3 (Best IVF hospitals Ahmedabad): "Bavishi Fertility Institute: By the Numbers"
+// Source: Blog node [20] — statistics stated verbatim
+const SVG_BFI_AHMEDABAD_NUMBERS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">Bavishi Fertility Institute: By the Numbers</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="122" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">25,000+</text>
+  <text x="122" y="150" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Successful IVF</text>
+  <text x="122" y="165" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Pregnancies</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="300" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">45,000+</text>
+  <text x="300" y="150" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Patient Visits</text>
+  <text x="300" y="165" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Annually</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="478" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">100+ Years</text>
+  <text x="478" y="150" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Combined Doctor</text>
+  <text x="478" y="165" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Experience</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="667" y="105" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">7 Cities</text>
+  <text x="667" y="150" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Across India</text>
+</svg>`;
+
+// Blog W25-4 (Exercise during IVF): "How Exercise Supports IVF Success"
+// Source: Blog nodes [8]-[16] — 4 mechanisms, stated verbatim
+const SVG_EXERCISE_IVF_BENEFITS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 246" font-family="${FONT}">
+  <rect width="800" height="246" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="244.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW EXERCISE SUPPORTS IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Hormonal Balance</text>
+  <text x="68" y="80" font-size="10.5" fill="${C.muted}">Regulates insulin, cortisol, estrogen and progesterone</text>
+  <rect x="20" y="98" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="98" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="117" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="117" font-size="12" font-weight="700" fill="${C.dark}">Blood Flow</text>
+  <text x="68" y="134" font-size="10.5" fill="${C.muted}">Enhances blood flow to the uterus and ovaries</text>
+  <rect x="20" y="152" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="152" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="171" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="171" font-size="12" font-weight="700" fill="${C.dark}">Mental Health</text>
+  <text x="68" y="188" font-size="10.5" fill="${C.muted}">Reduces cortisol, promotes emotional stability</text>
+  <rect x="20" y="206" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="206" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="226" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="225" font-size="12" font-weight="700" fill="${C.dark}">Weight Management — maintains a healthy BMI</text>
+</svg>`;
+
+// Blog W25-5 (Blighted ovum): "4 Causes of Blighted Ovum"
+// Source: Blog node [9]-[12] — 4 causes, stated verbatim
+const SVG_BLIGHTED_OVUM_CAUSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="17" font-weight="700" fill="${C.dark}">4 Causes of Blighted Ovum</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Chromosomal</text>
+  <text x="122" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Abnormalities</text>
+  <text x="122" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Genetic issues</text>
+  <text x="122" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">block development</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Hormonal</text>
+  <text x="300" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Imbalance</text>
+  <text x="300" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Affects embryo</text>
+  <text x="300" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">development</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Uterine</text>
+  <text x="478" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Abnormalities</text>
+  <text x="478" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Can affect</text>
+  <text x="478" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">implantation</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Advanced Maternal</text>
+  <text x="667" y="135" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Age</text>
+  <text x="667" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">Women over 35 at</text>
+  <text x="667" y="170" text-anchor="middle" font-size="9.5" fill="${C.muted}">higher risk</text>
+</svg>`;
+
 // ── Wave 24 SVG constants ─────────────────────────────────────────────
 
 // Blog W24-1 (Low AMH reasons): "9 Reasons Behind Low AMH Levels"
@@ -5668,6 +5817,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 25: Published blogs ──────────────────────────────────────────
+  "ovarian-hyperstimulation-syndrome": {
+    svg:     SVG_OHSS_PRIMARY_VS_SECONDARY,
+    title:   "OHSS: Primary vs Secondary",
+    altText: "Two-panel comparison infographic. Left panel Primary OHSS with rose header: Caused by Fertility Medication (drugs used to stimulate egg growth); Ovaries Enlarge (more eggs cause temporary enlargement); Regresses on Its Own (stopping medication ends stimulation). Right panel Secondary OHSS: Occurs During Pregnancy (not linked to the stimulation drugs alone); hCG Keeps Stimulating (pregnancy hormone continuously acts on ovaries); Can Be More Severe (often more intense than primary OHSS).",
+  },
+  "egg-freezing-preserving-your-fertility-for-the-future": {
+    svg:     SVG_EGG_FREEZING_PROCESS_4,
+    title:   "The Egg Freezing Process: 4 Steps",
+    altText: "Four-row accent-bar infographic. Step 1 Initial Consultation and Testing: medical history review, blood tests, and ultrasound to assess ovarian reserve. Step 2 Ovarian Stimulation: hormonal injections stimulate the ovaries to produce multiple eggs. Step 3 Egg Retrieval: eggs are retrieved through a minimally invasive procedure. Step 4 Freezing: eggs are frozen and stored in a cryobank.",
+  },
+  "best-ivf-hospitals-in-ahmedabad": {
+    svg:     SVG_BFI_AHMEDABAD_NUMBERS,
+    title:   "Bavishi Fertility Institute: By the Numbers",
+    altText: "Four-card horizontal infographic. Card 25,000 Plus: successful IVF pregnancies. Card 45,000 Plus: patient visits annually. Card 100 Plus Years: combined doctor experience. Card 7 Cities: across India.",
+  },
+  "best-types-of-exercise-to-support-your-ivf-journey": {
+    svg:     SVG_EXERCISE_IVF_BENEFITS,
+    title:   "How Exercise Supports IVF Success",
+    altText: "Four-row accent-bar infographic. Highlight 01 Hormonal Balance: regulates insulin, cortisol, estrogen and progesterone. Highlight 02 Blood Flow: enhances blood flow to the uterus and ovaries. Highlight 03 Mental Health: reduces cortisol, promotes emotional stability. Highlight 04 Weight Management: maintains a healthy BMI.",
+  },
+  "blighted-ovum-symptoms-causes-and-more": {
+    svg:     SVG_BLIGHTED_OVUM_CAUSES,
+    title:   "4 Causes of Blighted Ovum",
+    altText: "Four-card horizontal infographic. Card 1 Chromosomal Abnormalities: genetic issues block development. Card 2 Hormonal Imbalance: affects embryo development. Card 3 Uterine Abnormalities: can affect implantation. Card 4 Advanced Maternal Age: women over 35 at higher risk.",
+  },
   // ── Wave 24: Published blogs ──────────────────────────────────────────
   "reasons-behind-low-amh-levels-ways-to-increase": {
     svg:     SVG_LOW_AMH_REASONS_9,

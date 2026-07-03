@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 25 ──────────────────────────────────────────────────────────
+  "ovarian-hyperstimulation-syndrome": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "egg-freezing-preserving-your-fertility-for-the-future": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "best-ivf-hospitals-in-ahmedabad": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "best-types-of-exercise-to-support-your-ivf-journey": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "blighted-ovum-symptoms-causes-and-more": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 24 ──────────────────────────────────────────────────────────
   "reasons-behind-low-amh-levels-ways-to-increase": {
     removeBlocks: ["complete guide", "key numbers"],
