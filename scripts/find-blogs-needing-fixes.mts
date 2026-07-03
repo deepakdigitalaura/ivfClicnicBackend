@@ -82,6 +82,12 @@ const DONE = new Set([
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
   "prp-vs-traditional-fertility-treatments-whats-the-difference",
   "reasons-for-iui-failure-symptoms-and-causes",
+  // Wave 15
+  "step-by-step-process-of-embryo-freezing-in-an-ivf-cycle",
+  "stories-from-indian-celebrities-of-egg-freezing",
+  "surrogacy-vs-ivf-key-differences-benefits-and-choosing-the-right-path-to-parenthood",
+  "bavishi-fertility-institute-conducts-an-educational-programme-at-rajkot",
+  "teratozoospermia-uncovering-the-causes-symptoms-and-solutions",
   // Wave 14
   "risks-and-benefits-of-laser-assisted-hatching-in-ivf",
   "bavishi-fertility-institute-conducts-a-successful-cme-program-at-bardoli",

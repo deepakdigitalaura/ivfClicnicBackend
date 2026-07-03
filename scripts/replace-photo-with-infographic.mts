@@ -2702,6 +2702,269 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 15 SVG constants ─────────────────────────────────────────────
+
+// Blog W15-1 (Embryo Freezing): "6 Steps of Embryo Freezing (Vitrification)"
+// Source: Blog headings [3],[5],[9],[11],[14],[16] — six process steps
+const SVG_EMBRYO_FREEZING_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 STEPS OF EMBRYO FREEZING (VITRIFICATION)</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Eggs collected via ultrasound-guided procedure</text>
+
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Fertilization in Lab</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Sperm fertilises eggs; embryos begin developing</text>
+
+  <!-- Row 2 -->
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Culture</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Embryos grown 3–5 days to blastocyst stage</text>
+
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Vitrification</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Flash-frozen at −196°C; prevents ice crystal damage</text>
+
+  <!-- Row 3 -->
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Cryo Storage</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Safely stored in liquid nitrogen tanks long-term</text>
+
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Thaw &amp; Embryo Transfer</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Warmed embryo transferred to the uterus when ready</text>
+</svg>`;
+
+// Blog W15-2 (Celebrities Egg Freezing): "10 Key Benefits of Egg Freezing"
+// Source: Blog h3 sections [11],[13],[16],[18],[20],[22],[24],[26],[28],[30]
+const SVG_EGG_FREEZING_BENEFITS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 326" font-family="${FONT}">
+  <rect width="800" height="326" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="324.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 KEY BENEFITS OF EGG FREEZING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="10" y="52" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="77" r="14" fill="${C.rose}"/>
+  <text x="36" y="81.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="58" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Delayed Parenthood</text>
+  <text x="58" y="86" font-size="10.5" fill="${C.muted}">Preserve fertility until you're ready to start a family</text>
+
+  <rect x="410" y="52" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="77" r="14" fill="${C.rose}"/>
+  <text x="436" y="81.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="458" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Medical Safety Net</text>
+  <text x="458" y="86" font-size="10.5" fill="${C.muted}">Protect eggs before cancer treatment or surgery</text>
+
+  <!-- Row 2 -->
+  <rect x="10" y="108" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="133" r="14" fill="${C.rose}"/>
+  <text x="36" y="137.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="58" y="126" font-size="11.5" font-weight="700" fill="${C.dark}">Reduced Age-Related Risk</text>
+  <text x="58" y="142" font-size="10.5" fill="${C.muted}">Younger frozen eggs retain better quality over time</text>
+
+  <rect x="410" y="108" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="133" r="14" fill="${C.rose}"/>
+  <text x="436" y="137.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="458" y="126" font-size="11.5" font-weight="700" fill="${C.dark}">Reproductive Control</text>
+  <text x="458" y="142" font-size="10.5" fill="${C.muted}">Choose when and how you want to start your family</text>
+
+  <!-- Row 3 -->
+  <rect x="10" y="164" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="189" r="14" fill="${C.rose}"/>
+  <text x="36" y="193.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="58" y="182" font-size="11.5" font-weight="700" fill="${C.dark}">Better IVF Success</text>
+  <text x="58" y="198" font-size="10.5" fill="${C.muted}">Younger frozen eggs can improve IVF outcomes later</text>
+
+  <rect x="410" y="164" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="189" r="14" fill="${C.rose}"/>
+  <text x="436" y="193.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="458" y="182" font-size="11.5" font-weight="700" fill="${C.dark}">Peace of Mind</text>
+  <text x="458" y="198" font-size="10.5" fill="${C.muted}">Reduces pressure from the ticking biological clock</text>
+
+  <!-- Row 4 -->
+  <rect x="10" y="220" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="245" r="14" fill="${C.rose}"/>
+  <text x="36" y="249.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="58" y="238" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Testing Option</text>
+  <text x="58" y="254" font-size="10.5" fill="${C.muted}">Screen embryos before transfer using PGT</text>
+
+  <rect x="410" y="220" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="245" r="14" fill="${C.rose}"/>
+  <text x="436" y="249.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="458" y="238" font-size="11.5" font-weight="700" fill="${C.dark}">For Single Women</text>
+  <text x="458" y="254" font-size="10.5" fill="${C.muted}">Build your family on your own timeline and terms</text>
+
+  <!-- Row 5 -->
+  <rect x="10" y="276" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="36" cy="301" r="14" fill="${C.rose}"/>
+  <text x="36" y="305.5" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="58" y="294" font-size="11.5" font-weight="700" fill="${C.dark}">For Same-Sex Couples</text>
+  <text x="58" y="310" font-size="10.5" fill="${C.muted}">Flexible family planning for diverse family types</text>
+
+  <rect x="410" y="276" width="380" height="50" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="436" cy="301" r="14" fill="${C.rose}"/>
+  <text x="436" y="305.5" text-anchor="middle" font-size="9" font-weight="700" fill="${C.white}">10</text>
+  <text x="458" y="294" font-size="11.5" font-weight="700" fill="${C.dark}">Lower Emotional Stress</text>
+  <text x="458" y="310" font-size="10.5" fill="${C.muted}">Reduces fertility-related anxiety and time pressure</text>
+</svg>`;
+
+// Blog W15-3 (Surrogacy vs IVF): "IVF vs Surrogacy: Key Benefits Compared"
+// Source: Blog h2 sections "Benefits of IVF" [26] and "Benefits of surrogacy" [28]
+const SVG_SURROGACY_VS_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+
+  <!-- Left panel: IVF (rose header) -->
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">In Vitro Fertilisation (IVF)</text>
+
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">You Carry the Baby</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Intended mother experiences the pregnancy herself</text>
+
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Connection</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Both parents can be biologically linked to the baby</text>
+
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Simpler Legal Process</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">No surrogate contracts or complex court approvals</text>
+
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">More Accessible Cost</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Generally lower overall cost than surrogacy</text>
+
+  <!-- Right panel: Surrogacy (dark header) -->
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
+  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Surrogacy</text>
+
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Surrogate Carries</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">For those medically unable to carry a pregnancy</text>
+
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">No Pregnancy Risk</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Intended mother avoids pregnancy-related complications</text>
+
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Gestational Option</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Surrogate has no genetic link to the baby</text>
+
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Supports Diverse Families</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Ideal for same-sex couples and single parents</text>
+</svg>`;
+
+// Blog W15-4 (BFI Rajkot CME): "BFI Rajkot CME: 4 Key Highlights"
+// Source: Blog paras [3],[5],[9],[11] — date, organiser, speakers, interactive sessions
+const SVG_BFI_RAJKOT_CME = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI EDUCATIONAL PROGRAMME AT RAJKOT: KEY HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Date &amp; Venue</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">21st September 2025, Rajkot — a landmark knowledge-sharing event for gynaecologists</text>
+
+  <!-- Row 2 -->
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Organiser</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Hosted in collaboration with the Rajkot Gynaecologist Doctors Association</text>
+
+  <!-- Row 3 -->
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Expert Speakers</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Senior BFI specialists shared the latest advances in reproductive medicine and IVF</text>
+
+  <!-- Row 4 -->
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Interactive Sessions</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Live Q&amp;A and open discussions actively engaged the attending gynaecologists</text>
+</svg>`;
+
+// Blog W15-5 (Teratozoospermia): "Teratozoospermia: Causes & Treatments"
+// Source: Blog h2 sections [4],[7],[14],[17] — causes and treatment options
+const SVG_TERATOZOOSPERMIA_OVERVIEW = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+
+  <!-- Left panel: Common Causes (rose header) -->
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Common Causes</text>
+
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Factors</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Chromosomal abnormalities that disrupt sperm formation</text>
+
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Infections</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Viral or bacterial infections damage sperm development</text>
+
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Factors</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Smoking, alcohol and excess heat harm sperm morphology</text>
+
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Environmental Toxins</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Chemical or radiation exposure affects sperm shape</text>
+
+  <!-- Right panel: Treatment Options (dark header) -->
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
+  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Treatment Options</text>
+
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Changes</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Healthy diet, exercise, avoid alcohol, smoking and heat</text>
+
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">ICSI Procedure</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">A single healthy sperm injected directly into the egg</text>
+
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">IVF with ICSI</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Stimulation cycle combined with ICSI injection technique</text>
+
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Medical Therapy</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Antioxidants and hormonal treatments improve morphology</text>
+</svg>`;
+
 // ── Wave 14 SVG constants ─────────────────────────────────────────────
 
 // Blog W14-1 (Laser-assisted hatching): "5 Cases Where LAH May Help"
@@ -3620,6 +3883,33 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IUI_FAILURE_CAUSES,
     title:   "7 Common Causes of IUI Failure",
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
+  },
+
+  // ── Wave 15: Published blogs ──────────────────────────────────────────
+  "step-by-step-process-of-embryo-freezing-in-an-ivf-cycle": {
+    svg:     SVG_EMBRYO_FREEZING_STEPS,
+    title:   "6 Steps of Embryo Freezing (Vitrification)",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Egg Retrieval (eggs collected via ultrasound-guided procedure); Embryo Culture (embryos grown 3–5 days to blastocyst stage); Cryo Storage (safely stored in liquid nitrogen tanks long-term). Items 4-6 (right): Fertilization in Lab (sperm fertilises eggs and embryos begin developing); Vitrification (flash-frozen at minus 196 degrees Celsius preventing ice crystal damage); Thaw and Embryo Transfer (warmed embryo transferred to the uterus when ready).",
+  },
+  "stories-from-indian-celebrities-of-egg-freezing": {
+    svg:     SVG_EGG_FREEZING_BENEFITS,
+    title:   "10 Key Benefits of Egg Freezing",
+    altText: "Two-column ten-item grid infographic. Items 1-5 (left): Delayed Parenthood (preserve fertility until you're ready to start a family); Reduced Age-Related Risk (younger frozen eggs retain better quality over time); Better IVF Success (younger frozen eggs can improve IVF outcomes later); Genetic Testing Option (screen embryos before transfer using PGT); For Same-Sex Couples (flexible family planning for diverse family types). Items 6-10 (right): Medical Safety Net (protect eggs before cancer treatment or surgery); Reproductive Control (choose when and how you want to start your family); Peace of Mind (reduces pressure from the ticking biological clock); For Single Women (build your family on your own timeline and terms); Lower Emotional Stress (reduces fertility-related anxiety and time pressure).",
+  },
+  "surrogacy-vs-ivf-key-differences-benefits-and-choosing-the-right-path-to-parenthood": {
+    svg:     SVG_SURROGACY_VS_IVF,
+    title:   "IVF vs Surrogacy: Key Benefits Compared",
+    altText: "Two-panel comparison infographic. Left panel In Vitro Fertilisation IVF with rose header: You Carry the Baby (intended mother experiences the pregnancy herself); Genetic Connection (both parents can be biologically linked to the baby); Simpler Legal Process (no surrogate contracts or complex court approvals); More Accessible Cost (generally lower overall cost than surrogacy). Right panel Surrogacy with dark header: Surrogate Carries (for those medically unable to carry a pregnancy); No Pregnancy Risk (intended mother avoids pregnancy-related complications); Gestational Option (surrogate has no genetic link to the baby); Supports Diverse Families (ideal for same-sex couples and single parents).",
+  },
+  "bavishi-fertility-institute-conducts-an-educational-programme-at-rajkot": {
+    svg:     SVG_BFI_RAJKOT_CME,
+    title:   "BFI Rajkot CME: 4 Key Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 Date and Venue: 21st September 2025 Rajkot — a landmark knowledge-sharing event for gynaecologists. Highlight 02 Organiser: hosted in collaboration with the Rajkot Gynaecologist Doctors Association. Highlight 03 Expert Speakers: senior BFI specialists shared the latest advances in reproductive medicine and IVF. Highlight 04 Interactive Sessions: live Q and A and open discussions actively engaged the attending gynaecologists.",
+  },
+  "teratozoospermia-uncovering-the-causes-symptoms-and-solutions": {
+    svg:     SVG_TERATOZOOSPERMIA_OVERVIEW,
+    title:   "Teratozoospermia: Causes & Treatments",
+    altText: "Two-panel infographic. Left panel Common Causes with rose header: Genetic Factors (chromosomal abnormalities that disrupt sperm formation); Infections (viral or bacterial infections damage sperm development); Lifestyle Factors (smoking, alcohol and excess heat harm sperm morphology); Environmental Toxins (chemical or radiation exposure affects sperm shape). Right panel Treatment Options with dark header: Lifestyle Changes (healthy diet, exercise, avoid alcohol, smoking and heat); ICSI Procedure (a single healthy sperm injected directly into the egg); IVF with ICSI (stimulation cycle combined with ICSI injection technique); Medical Therapy (antioxidants and hormonal treatments improve morphology).",
   },
 
   // ── Wave 14: Published blogs ──────────────────────────────────────────

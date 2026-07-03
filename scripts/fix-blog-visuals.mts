@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 15 ──────────────────────────────────────────────────────────
+  "step-by-step-process-of-embryo-freezing-in-an-ivf-cycle": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "stories-from-indian-celebrities-of-egg-freezing": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "surrogacy-vs-ivf-key-differences-benefits-and-choosing-the-right-path-to-parenthood": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "bavishi-fertility-institute-conducts-an-educational-programme-at-rajkot": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "teratozoospermia-uncovering-the-causes-symptoms-and-solutions": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 14 ──────────────────────────────────────────────────────────
   "risks-and-benefits-of-laser-assisted-hatching-in-ivf": {
     removeBlocks: ["step-by-step process", "key numbers"],
