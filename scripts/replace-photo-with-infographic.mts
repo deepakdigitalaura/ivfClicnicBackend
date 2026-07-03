@@ -2702,6 +2702,229 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 16 SVG constants ─────────────────────────────────────────────
+
+// Blog W16-1 (Sleep & IVF): "6 Tips for Better Sleep During IVF"
+// Source: Blog h3 sections [31],[33],[35],[37],[39],[41] — six sleep tips
+const SVG_SLEEP_IVF_TIPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 TIPS FOR BETTER SLEEP DURING IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Regular Sleep Schedule</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Sleep and wake at the same time daily to support your body clock</text>
+
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Sleep-Inducing Environment</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Keep bedroom cool, dark and quiet; no screens before bed</text>
+
+  <!-- Row 2 -->
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Relaxation Techniques</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Yoga, meditation or breathing exercises reduce cortisol</text>
+
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Limit Stimulants</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Avoid caffeine after 2 PM and alcohol close to bedtime</text>
+
+  <!-- Row 3 -->
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Digital Detox</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">No screens 1–2 hours before bed; blue light blocks melatonin</text>
+
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Melatonin (with Doctor Guidance)</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">May be prescribed during IVF cycles to improve egg quality</text>
+</svg>`;
+
+// Blog W16-2 (DFI Test): "4 Reasons DFI Testing is a Game-Changer"
+// Source: Blog h2 sections [4],[6],[9],[14] — DFI test value and interventions
+const SVG_DFI_TEST_MATTERS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 REASONS DFI TESTING IS A GAME-CHANGER FOR MALE FERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Detects Hidden DNA Damage</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Standard semen analysis can miss critical breaks in sperm DNA strands</text>
+
+  <!-- Row 2 -->
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Guides Treatment Selection</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">DFI score helps doctors choose the right path — IUI, IVF or ICSI</text>
+
+  <!-- Row 3 -->
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Identifies Lifestyle Root Causes</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Heat, smoking and oxidative stress are key contributors to sperm DNA damage</text>
+
+  <!-- Row 4 -->
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Supports Better IVF Outcomes</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Healthier sperm DNA leads to improved embryo development and pregnancy rates</text>
+</svg>`;
+
+// Blog W16-3 (IUI Do's & Don'ts): "Key Do's and Don'ts After IUI Treatment"
+// Source: Blog h3 sections [9],[13],[17],[23] (do's) and [30],[33],[35],[38] (don'ts)
+const SVG_IUI_DOS_DONTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+
+  <!-- Left panel: Do's (rose header) -->
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Do's After IUI</text>
+
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Resume Light Activities</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">No bed rest needed; gentle walks and daily tasks are fine</text>
+
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Eat Fertility-Friendly Foods</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Whole grains, leafy greens and omega-3 rich foods support implantation</text>
+
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Stay Well Hydrated</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">8–10 glasses of water daily to support uterine blood flow</text>
+
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Take Medications as Prescribed</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Progesterone and supplements must be taken on schedule</text>
+
+  <!-- Right panel: Don'ts (dark header) -->
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="410" y="10" width="380" height="46" rx="8" fill="${C.dark}"/>
+  <rect x="410" y="44" width="380" height="12" fill="${C.dark}"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Don'ts After IUI</text>
+
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Don't Test Too Early</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Wait until Day 14; the hCG trigger shot can skew early results</text>
+
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid High-Intensity Exercise</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">No running, weightlifting or aerobics in the first week post-IUI</text>
+
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">No Smoking or Alcohol</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Both harm egg quality and can disrupt early implantation</text>
+
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Limit Caffeine Intake</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Keep below 200 mg per day during the two-week wait</text>
+</svg>`;
+
+// Blog W16-4 (Implantation Signs): "6 Signs of Implantation to Look For"
+// Source: Blog section [7] — implantation symptoms listed in the blog's own text
+const SVG_IMPLANTATION_SIGNS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 SIGNS OF IMPLANTATION TO LOOK FOR</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Light Cramping</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Mild, brief cramps as the blastocyst attaches to the uterine lining</text>
+
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Implantation Bleeding</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Pinkish or brownish spotting, lighter than a normal period</text>
+
+  <!-- Row 2 -->
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Breast Tenderness</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Swelling or sensitivity due to rising progesterone levels</text>
+
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Fatigue</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Unusual tiredness as the body begins preparing for early pregnancy</text>
+
+  <!-- Row 3 -->
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Frequent Urination</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Increased urge to urinate as hormonal shifts begin post-implantation</text>
+
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Elevated Basal Temperature</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">BBT may remain consistently high after implantation occurs</text>
+</svg>`;
+
+// Blog W16-5 (Postpartum Journey): "4 Stages of Postpartum Recovery"
+// Source: Blog para [5] — general healing timeline outline described in blog's own text
+const SVG_POSTPARTUM_STAGES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 STAGES OF POSTPARTUM RECOVERY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Row 1 -->
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">W1</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">First Week</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Rest and initial healing; lochia discharge and wound or perineal care begins</text>
+
+  <!-- Row 2 -->
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">W2</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Weeks 2–4</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Gradual return to light activity; baby blues and emotional fluctuations are common</text>
+
+  <!-- Row 3 -->
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">W6</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Weeks 6–8</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Postpartum follow-up checkup to assess physical recovery and emotional well-being</text>
+
+  <!-- Row 4 -->
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">M3</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Months 3–6</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Hormones gradually stabilize; return to normal activities at your own pace</text>
+</svg>`;
+
 // ── Wave 15 SVG constants ─────────────────────────────────────────────
 
 // Blog W15-1 (Embryo Freezing): "6 Steps of Embryo Freezing (Vitrification)"
@@ -3883,6 +4106,33 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IUI_FAILURE_CAUSES,
     title:   "7 Common Causes of IUI Failure",
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
+  },
+
+  // ── Wave 16: Published blogs ──────────────────────────────────────────
+  "the-connection-between-quality-sleep-and-ivf-success-a-hormonal-perspective": {
+    svg:     SVG_SLEEP_IVF_TIPS,
+    title:   "6 Tips for Better Sleep During IVF",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Regular Sleep Schedule (sleep and wake at the same time daily to support your body clock); Relaxation Techniques (yoga, meditation or breathing exercises reduce cortisol); Digital Detox (no screens 1–2 hours before bed as blue light blocks melatonin). Items 4-6 (right): Sleep-Inducing Environment (keep bedroom cool, dark and quiet, no screens before bed); Limit Stimulants (avoid caffeine after 2 PM and alcohol close to bedtime); Melatonin with Doctor Guidance (may be prescribed during IVF cycles to improve egg quality).",
+  },
+  "the-dfi-test-a-crucial-diagnostic-tool-for-male-infertility": {
+    svg:     SVG_DFI_TEST_MATTERS,
+    title:   "4 Reasons DFI Testing is a Game-Changer",
+    altText: "Four-row accent-bar infographic. Highlight 01 Detects Hidden DNA Damage: standard semen analysis can miss critical breaks in sperm DNA strands. Highlight 02 Guides Treatment Selection: DFI score helps doctors choose the right path — IUI, IVF or ICSI. Highlight 03 Identifies Lifestyle Root Causes: heat, smoking and oxidative stress are key contributors to sperm DNA damage. Highlight 04 Supports Better IVF Outcomes: healthier sperm DNA leads to improved embryo development and pregnancy rates.",
+  },
+  "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide": {
+    svg:     SVG_IUI_DOS_DONTS,
+    title:   "Key Do's and Don'ts After IUI Treatment",
+    altText: "Two-panel infographic. Left panel Do's After IUI with rose header: Resume Light Activities (no bed rest needed, gentle walks and daily tasks are fine); Eat Fertility-Friendly Foods (whole grains, leafy greens and omega-3 rich foods); Stay Well Hydrated (8–10 glasses of water daily to support uterine blood flow); Take Medications as Prescribed (progesterone and supplements must be taken on schedule). Right panel Don'ts After IUI with dark header: Don't Test Too Early (wait until Day 14 as hCG trigger shot can skew early results); Avoid High-Intensity Exercise (no running, weightlifting or aerobics in the first week); No Smoking or Alcohol (both harm egg quality and can disrupt early implantation); Limit Caffeine Intake (keep below 200 mg per day during the two-week wait).",
+  },
+  "the-miracle-of-implantation-recognizing-the-signs": {
+    svg:     SVG_IMPLANTATION_SIGNS,
+    title:   "6 Signs of Implantation to Look For",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Light Cramping (mild, brief cramps as the blastocyst attaches to the uterine lining); Breast Tenderness (swelling or sensitivity due to rising progesterone levels); Frequent Urination (increased urge to urinate as hormonal shifts begin post-implantation). Items 4-6 (right): Implantation Bleeding (pinkish or brownish spotting, lighter than a normal period); Fatigue (unusual tiredness as the body begins preparing for early pregnancy); Elevated Basal Temperature (BBT may remain consistently high after implantation occurs).",
+  },
+  "the-postpartum-journey-how-long-does-it-take-to-heal-after-giving-birth": {
+    svg:     SVG_POSTPARTUM_STAGES,
+    title:   "4 Stages of Postpartum Recovery",
+    altText: "Four-row accent-bar infographic. Stage W1 First Week: rest and initial healing, lochia discharge and wound or perineal care begins. Stage W2 Weeks 2–4: gradual return to light activity, baby blues and emotional fluctuations are common. Stage W6 Weeks 6–8: postpartum follow-up checkup to assess physical recovery and emotional well-being. Stage M3 Months 3–6: hormones gradually stabilize and return to normal activities at your own pace.",
   },
 
   // ── Wave 15: Published blogs ──────────────────────────────────────────

@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 16 ──────────────────────────────────────────────────────────
+  "the-connection-between-quality-sleep-and-ivf-success-a-hormonal-perspective": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "the-dfi-test-a-crucial-diagnostic-tool-for-male-infertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "the-miracle-of-implantation-recognizing-the-signs": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "the-postpartum-journey-how-long-does-it-take-to-heal-after-giving-birth": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
   // ── Wave 15 ──────────────────────────────────────────────────────────
   "step-by-step-process-of-embryo-freezing-in-an-ivf-cycle": {
     removeBlocks: ["step-by-step process", "key numbers"],

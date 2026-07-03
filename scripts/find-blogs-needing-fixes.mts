@@ -82,6 +82,12 @@ const DONE = new Set([
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
   "prp-vs-traditional-fertility-treatments-whats-the-difference",
   "reasons-for-iui-failure-symptoms-and-causes",
+  // Wave 16
+  "the-connection-between-quality-sleep-and-ivf-success-a-hormonal-perspective",
+  "the-dfi-test-a-crucial-diagnostic-tool-for-male-infertility",
+  "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "the-miracle-of-implantation-recognizing-the-signs",
+  "the-postpartum-journey-how-long-does-it-take-to-heal-after-giving-birth",
   // Wave 15
   "step-by-step-process-of-embryo-freezing-in-an-ivf-cycle",
   "stories-from-indian-celebrities-of-egg-freezing",
