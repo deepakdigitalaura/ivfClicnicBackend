@@ -82,6 +82,12 @@ const DONE = new Set([
   "preparing-for-pgt-what-to-expect-before-during-and-after-the-procedure",
   "prp-vs-traditional-fertility-treatments-whats-the-difference",
   "reasons-for-iui-failure-symptoms-and-causes",
+  // Wave 14
+  "risks-and-benefits-of-laser-assisted-hatching-in-ivf",
+  "bavishi-fertility-institute-conducts-a-successful-cme-program-at-bardoli",
+  "secondary-infertility-why-getting-pregnant-again-can-be-hard",
+  "step-by-step-guide-to-the-icsi-procedure",
+  "step-by-step-process-of-an-iui-procedure-what-to-expect",
   // Wave 13
   "advantages-and-disadvantages-of-pgt",
   "normal-delivery-tips-to-increase-your-chances-of-a-natural-birth",

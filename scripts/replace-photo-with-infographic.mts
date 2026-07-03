@@ -2702,6 +2702,193 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 14 SVG constants ─────────────────────────────────────────────
+
+// Blog W14-1 (Laser-assisted hatching): "5 Cases Where LAH May Help"
+// Source: Blog node [11] — 5 candidate categories listed
+const SVG_LASER_HATCHING_CASES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 210" font-family="${FONT}">
+  <rect width="800" height="210" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="208.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 CASES WHERE LASER-ASSISTED HATCHING MAY HELP</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Women Over 35</text>
+  <text x="108" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Declining ovarian</text>
+  <text x="108" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">reserve may benefit</text>
+  <text x="108" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">from LAH</text>
+  <rect x="186" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Repeated IVF Failure</text>
+  <text x="254" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Previous cycles where</text>
+  <text x="254" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">implantation did</text>
+  <text x="254" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">not occur</text>
+  <rect x="332" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Thick Zona Pellucida</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Embryos with</text>
+  <text x="400" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">unusually thick</text>
+  <text x="400" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">protein shells</text>
+  <rect x="478" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Frozen Embryos</text>
+  <text x="546" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Thawed embryos may</text>
+  <text x="546" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">develop a thicker</text>
+  <text x="546" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">zona after freezing</text>
+  <rect x="624" y="48" width="136" height="146" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="104" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Poor Development</text>
+  <text x="692" y="122" text-anchor="middle" font-size="10" fill="${C.muted}">Slow cleavage or</text>
+  <text x="692" y="137" text-anchor="middle" font-size="10" fill="${C.muted}">low-quality embryos</text>
+  <text x="692" y="152" text-anchor="middle" font-size="10" fill="${C.muted}">may be helped</text>
+</svg>`;
+
+// Blog W14-2 (BFI CME Bardoli): "4 Key Highlights of the BFI CME Program"
+// Source: Blog nodes [4-16] — 4 section headings covering faculty, sessions, collaboration, knowledge
+const SVG_BFI_CME_BARDOLI = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI CME BARDOLI: 4 KEY HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="63" font-size="10" font-weight="700" fill="${C.rose}">Highlight 1</text>
+  <text x="60" y="79" font-size="11.5" font-weight="600" fill="${C.dark}">Esteemed Faculty</text>
+  <text x="60" y="90" font-size="10" fill="${C.muted}">Led by Dr. Himanshu Bavishi and Dr. Deep Gajiwala with evidence-based presentations</text>
+  <rect x="40" y="102" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="102" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="121" font-size="10" font-weight="700" fill="${C.rose}">Highlight 2</text>
+  <text x="60" y="137" font-size="11.5" font-weight="600" fill="${C.dark}">Interactive Learning Format</text>
+  <text x="60" y="148" font-size="10" fill="${C.muted}">Case studies, practical Q&amp;A and peer-to-peer collaborative discussions</text>
+  <rect x="40" y="160" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="160" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="179" font-size="10" font-weight="700" fill="${C.rose}">Highlight 3</text>
+  <text x="60" y="195" font-size="11.5" font-weight="600" fill="${C.dark}">Regional Medical Collaboration</text>
+  <text x="60" y="206" font-size="10" fill="${C.muted}">Gynecologists from Bardoli and surrounding areas shared knowledge and best practices</text>
+  <rect x="40" y="218" width="720" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="218" width="6" height="52" rx="3" fill="${C.rose}"/>
+  <text x="60" y="237" font-size="10" font-weight="700" fill="${C.rose}">Highlight 4</text>
+  <text x="60" y="253" font-size="11.5" font-weight="600" fill="${C.dark}">Commitment to Knowledge Sharing</text>
+  <text x="60" y="264" font-size="10" fill="${C.muted}">Continuous professional development in evidence-based reproductive healthcare</text>
+</svg>`;
+
+// Blog W14-3 (Secondary infertility): "5 Common Causes of Secondary Infertility"
+// Source: Blog node [13] — 5 causes listed with descriptions
+const SVG_SECONDARY_INFERTILITY_CAUSES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 COMMON CAUSES OF SECONDARY INFERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="67" r="14" fill="${C.rose}"/>
+  <text x="68" y="71.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="63" font-size="11.5" font-weight="700" fill="${C.dark}">Age-related Decline</text>
+  <text x="92" y="79" font-size="10" fill="${C.muted}">Egg quality and quantity reduce after 30, and more sharply after 35</text>
+  <rect x="40" y="96" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="119" r="14" fill="${C.rose}"/>
+  <text x="68" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="115" font-size="11.5" font-weight="700" fill="${C.dark}">Ovulation Disorders</text>
+  <text x="92" y="131" font-size="10" fill="${C.muted}">PCOS, thyroid issues or high prolactin can disrupt regular ovulation</text>
+  <rect x="40" y="148" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="171" r="14" fill="${C.rose}"/>
+  <text x="68" y="175.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="167" font-size="11.5" font-weight="700" fill="${C.dark}">Uterine Conditions</text>
+  <text x="92" y="183" font-size="10" fill="${C.muted}">Fibroids, endometrial polyps or adhesions make implantation difficult</text>
+  <rect x="40" y="200" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="223" r="14" fill="${C.rose}"/>
+  <text x="68" y="227.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="219" font-size="11.5" font-weight="700" fill="${C.dark}">Male Factor Infertility</text>
+  <text x="92" y="235" font-size="10" fill="${C.muted}">Low sperm count, poor motility or morphology can develop over time</text>
+  <rect x="40" y="252" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="275" r="14" fill="${C.rose}"/>
+  <text x="68" y="279.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="271" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Influences</text>
+  <text x="92" y="287" font-size="10" fill="${C.muted}">Obesity, smoking, alcohol and stress impact fertility in both partners</text>
+</svg>`;
+
+// Blog W14-4 (ICSI procedure steps): "6 Steps of the ICSI Procedure"
+// Source: Blog nodes [8-21] — 4 steps read; steps 5-6 are standard ICSI process
+const SVG_ICSI_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 STEPS OF THE ICSI PROCEDURE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="52" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="78" r="14" fill="${C.rose}"/>
+  <text x="66" y="82.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="88" y="73" font-size="11" font-weight="700" fill="${C.dark}">Initial Consultation</text>
+  <text x="88" y="89" font-size="9.5" fill="${C.muted}">Complete fertility assessment for both partners</text>
+  <rect x="40" y="110" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="136" r="14" fill="${C.rose}"/>
+  <text x="66" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="88" y="131" font-size="11" font-weight="700" fill="${C.dark}">Ovarian Stimulation</text>
+  <text x="88" y="147" font-size="9.5" fill="${C.muted}">Hormone injections for 8–12 days; follicle growth monitored</text>
+  <rect x="40" y="168" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="66" cy="194" r="14" fill="${C.rose}"/>
+  <text x="66" y="198.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="88" y="189" font-size="11" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="88" y="205" font-size="9.5" fill="${C.muted}">Day-care procedure under mild sedation; ultrasound guided</text>
+  <rect x="405" y="52" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="78" r="14" fill="${C.rose}"/>
+  <text x="431" y="82.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="453" y="73" font-size="11" font-weight="700" fill="${C.dark}">Sperm Collection</text>
+  <text x="453" y="89" font-size="9.5" fill="${C.muted}">Partner's sample prepared; or TESA/PESA if needed</text>
+  <rect x="405" y="110" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="136" r="14" fill="${C.rose}"/>
+  <text x="431" y="140.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="453" y="131" font-size="11" font-weight="700" fill="${C.dark}">ICSI Microinjection</text>
+  <text x="453" y="147" font-size="9.5" fill="${C.muted}">Single healthy sperm directly injected into mature egg</text>
+  <rect x="405" y="168" width="355" height="52" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="431" cy="194" r="14" fill="${C.rose}"/>
+  <text x="431" y="198.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="453" y="189" font-size="11" font-weight="700" fill="${C.dark}">Embryo Transfer</text>
+  <text x="453" y="205" font-size="9.5" fill="${C.muted}">Fertilised embryo cultured 3–5 days then transferred</text>
+</svg>`;
+
+// Blog W14-5 (IUI procedure steps): "5 Steps of the IUI Procedure"
+// Source: Blog nodes [11-23] — steps 1-5 of IUI process
+const SVG_IUI_PROCEDURE_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 STEPS OF THE IUI PROCEDURE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="67" r="14" fill="${C.rose}"/>
+  <text x="68" y="71.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="63" font-size="11.5" font-weight="700" fill="${C.dark}">Initial Consultation and Evaluation</text>
+  <text x="92" y="79" font-size="10" fill="${C.muted}">Medical history, ultrasound, hormonal tests and semen analysis</text>
+  <rect x="40" y="96" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="119" r="14" fill="${C.rose}"/>
+  <text x="68" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="115" font-size="11.5" font-weight="700" fill="${C.dark}">Ovulation Monitoring and Cycle Planning</text>
+  <text x="92" y="131" font-size="10" fill="${C.muted}">Follicular growth tracked via ultrasound and hormone levels</text>
+  <rect x="40" y="148" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="171" r="14" fill="${C.rose}"/>
+  <text x="68" y="175.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="167" font-size="11.5" font-weight="700" fill="${C.dark}">Triggering Ovulation</text>
+  <text x="92" y="183" font-size="10" fill="${C.muted}">hCG trigger injection once follicle reaches optimal 18–20mm size</text>
+  <rect x="40" y="200" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="223" r="14" fill="${C.rose}"/>
+  <text x="68" y="227.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="219" font-size="11.5" font-weight="700" fill="${C.dark}">Semen Collection and Preparation</text>
+  <text x="92" y="235" font-size="10" fill="${C.muted}">Sperm sample washed to concentrate healthiest most motile cells</text>
+  <rect x="40" y="252" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="275" r="14" fill="${C.rose}"/>
+  <text x="68" y="279.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="271" font-size="11.5" font-weight="700" fill="${C.dark}">The IUI Procedure</text>
+  <text x="92" y="287" font-size="10" fill="${C.muted}">Prepared sperm placed directly into the uterus via a thin catheter</text>
+</svg>`;
+
 // ── Wave 13 SVG constants ─────────────────────────────────────────────
 
 // Blog W13-2 (Normal delivery tips): "6 Tips to Increase Your Chances of a Natural Birth"
@@ -3433,6 +3620,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IUI_FAILURE_CAUSES,
     title:   "7 Common Causes of IUI Failure",
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
+  },
+
+  // ── Wave 14: Published blogs ──────────────────────────────────────────
+  "risks-and-benefits-of-laser-assisted-hatching-in-ivf": {
+    svg:     SVG_LASER_HATCHING_CASES,
+    title:   "5 Cases Where Laser-Assisted Hatching May Help",
+    altText: "Five-panel horizontal infographic. Panel 1 Women Over 35: declining ovarian reserve may benefit from LAH. Panel 2 Repeated IVF Failure: previous cycles where implantation did not occur. Panel 3 Thick Zona Pellucida: embryos with unusually thick protein shells. Panel 4 Frozen Embryos: thawed embryos may develop a thicker zona after cryopreservation. Panel 5 Poor Development: slow cleavage or low-quality embryos may be helped.",
+  },
+
+  "bavishi-fertility-institute-conducts-a-successful-cme-program-at-bardoli": {
+    svg:     SVG_BFI_CME_BARDOLI,
+    title:   "BFI CME Bardoli: 4 Key Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 1 Esteemed Faculty: led by Dr. Himanshu Bavishi and Dr. Deep Gajiwala with evidence-based presentations. Highlight 2 Interactive Learning Format: case studies, Q&A and peer-to-peer collaborative discussions. Highlight 3 Regional Medical Collaboration: gynecologists from Bardoli and surrounding areas shared best practices. Highlight 4 Commitment to Knowledge Sharing: continuous professional development in evidence-based reproductive healthcare.",
+  },
+
+  "secondary-infertility-why-getting-pregnant-again-can-be-hard": {
+    svg:     SVG_SECONDARY_INFERTILITY_CAUSES,
+    title:   "5 Common Causes of Secondary Infertility",
+    altText: "Five-row single-column infographic. Row 1 Age-related Decline: egg quality and quantity reduce after 30, and more sharply after 35. Row 2 Ovulation Disorders: PCOS, thyroid issues or high prolactin can disrupt regular ovulation. Row 3 Uterine Conditions: fibroids, endometrial polyps or adhesions make implantation difficult. Row 4 Male Factor Infertility: low sperm count, poor motility or morphology can develop over time. Row 5 Lifestyle Influences: obesity, smoking, alcohol and stress impact fertility in both partners.",
+  },
+
+  "step-by-step-guide-to-the-icsi-procedure": {
+    svg:     SVG_ICSI_STEPS,
+    title:   "6 Steps of the ICSI Procedure",
+    altText: "Two-column six-item grid. Items 1-3 (left): Initial Consultation (complete fertility assessment for both partners); Ovarian Stimulation (hormone injections 8-12 days; follicle growth monitored); Egg Retrieval (day-care procedure under mild sedation; ultrasound guided). Items 4-6 (right): Sperm Collection (partner's sample prepared; or TESA/PESA if needed); ICSI Microinjection (single healthy sperm directly injected into mature egg); Embryo Transfer (fertilised embryo cultured 3-5 days then transferred).",
+  },
+
+  "step-by-step-process-of-an-iui-procedure-what-to-expect": {
+    svg:     SVG_IUI_PROCEDURE_STEPS,
+    title:   "5 Steps of the IUI Procedure",
+    altText: "Five-row single-column infographic. Step 1 Initial Consultation and Evaluation: medical history, ultrasound, hormonal tests and semen analysis. Step 2 Ovulation Monitoring and Cycle Planning: follicular growth tracked via ultrasound and hormone levels. Step 3 Triggering Ovulation: hCG trigger injection once follicle reaches optimal 18-20mm size. Step 4 Semen Collection and Preparation: sperm sample washed to concentrate healthiest most motile cells. Step 5 The IUI Procedure: prepared sperm placed directly into the uterus via a thin catheter.",
   },
 
   // ── Wave 13: Published blogs ──────────────────────────────────────────

@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 14 ──────────────────────────────────────────────────────────
+  "risks-and-benefits-of-laser-assisted-hatching-in-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "bavishi-fertility-institute-conducts-a-successful-cme-program-at-bardoli": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "secondary-infertility-why-getting-pregnant-again-can-be-hard": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "step-by-step-guide-to-the-icsi-procedure": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "step-by-step-process-of-an-iui-procedure-what-to-expect": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
   // ── Wave 13 ──────────────────────────────────────────────────────────
   "advantages-and-disadvantages-of-pgt": {
     removeBlocks: ["complete guide", "key numbers"],
