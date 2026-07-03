@@ -403,10 +403,10 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
 
   // ── Wave 7: Published blogs ─────────────────────────────────────────
   "how-to-prepare-for-your-first-iui-cycle-tips-and-advice": {
-    removeBlocks: ["key numbers"],
+    removeBlocks: ["key recommendations", "key numbers"],
   },
   "icsi-dos-and-donts": {
-    removeBlocks: ["key numbers"],
+    removeBlocks: ["key recommendations", "key numbers"],
   },
   "is-icsi-better-for-men-with-low-sperm-count": {
     removeBlocks: ["step-by-step process", "key numbers"],
@@ -459,7 +459,7 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
   "life-after-iui-precautions-lifestyle-tips-and-what-to-expect": {
-    removeBlocks: ["key numbers"],
+    removeBlocks: ["key recommendations", "key numbers"],
   },
   "lifestyle-changes-that-boost-fertility-in-pcos-women": {
     removeBlocks: ["complete guide", "key numbers"],
