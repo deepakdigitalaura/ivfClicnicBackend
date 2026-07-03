@@ -483,6 +483,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-rejuvenation-ivf-what-to-know-when-combining-treatments": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 30 ──────────────────────────────────────────────────────────
+  "essential-precautions-to-take-after-embryo-transfer-for-ivf-success": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "essential-tests-for-male-infertility-what-to-expect": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "fibroids-and-diet-foods-that-may-help-manage-symptoms-naturally": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "fibroids-in-young-women-and-teenagers-early-symptoms-and-myths": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "foods-to-avoid-during-pregnancy-and-why": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
   // ── Wave 29 ──────────────────────────────────────────────────────────
   "embryo-transfer-procedure-for-in-vitro-fertilization-ivf": {
     removeBlocks: ["step-by-step process", "key numbers"],

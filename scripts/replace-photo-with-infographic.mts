@@ -2702,6 +2702,196 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 30 SVG constants ─────────────────────────────────────────────
+
+// Blog W30-1 (Post-embryo-transfer precautions): "6 Key Precautions After Embryo Transfer"
+// Source: Blog node [4] + headings [5],[11],[17],[22],[27] — top 6 of 12, stated verbatim
+const SVG_EMBRYO_TRANSFER_PRECAUTIONS_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 KEY PRECAUTIONS AFTER EMBRYO TRANSFER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Complete Bed Rest</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Light activity supports circulation and uterine health</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Maintain a Balanced Diet</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Protein, fibre, folic acid, and 8–10 glasses of water daily</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Monitor Stress Levels</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Relaxation supports hormonal balance during implantation</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid High Temperatures</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">No hot baths, saunas or prolonged sun exposure</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Follow Medication Guidelines</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Progesterone and hormone support exactly as prescribed</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Harmful Substances</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">No smoking, alcohol or environmental toxins</text>
+</svg>`;
+
+// Blog W30-2 (Male infertility tests): "6 Essential Tests for Male Infertility"
+// Source: Blog node [4] + headings [5],[15],[23],[30],[36],[42] — 6 tests, stated verbatim
+const SVG_MALE_INFERTILITY_TESTS_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 ESSENTIAL TESTS FOR MALE INFERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Semen Analysis</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Measures sperm count, motility and morphology</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Physical Examination</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Checks testes, varicocele, vas and epididymis</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Hormone Testing</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Testosterone, LH, FSH, prolactin and estradiol levels</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Ultrasound Examination</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Detects varicocele, atrophy and blockages</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Testing</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Checks Y-chromosome deletions, Klinefelter syndrome</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Sperm DNA Fragmentation</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Assesses DNA integrity for embryo and IVF success</text>
+</svg>`;
+
+// Blog W30-3 (Fibroids & diet): "6 Foods That May Help Manage Fibroid Symptoms"
+// Source: Blog node [9] — top 6 of 10 beneficial foods, stated verbatim
+const SVG_FIBROID_DIET_FOODS_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 FOODS THAT MAY HELP MANAGE FIBROID SYMPTOMS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Leafy Greens</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Antioxidants support hormone regulation</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Cruciferous Vegetables</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">May help reduce estrogen levels</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Berries</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Antioxidants reduce inflammation and oxidative stress</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Fatty Fish</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Omega-3s promote hormone balance</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Whole Grains</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Regulate blood sugar and insulin levels</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Turmeric</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Curcumin may help reduce inflammation</text>
+</svg>`;
+
+// Blog W30-4 (Fibroids in young women): "4 Types of Fibroids in Young Women"
+// Source: Blog nodes [8]-[11] — 4 types, stated verbatim
+const SVG_YOUNG_WOMEN_FIBROID_TYPES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 240" font-family="${FONT}">
+  <rect width="800" height="240" rx="12" fill="${C.ivory}" stroke="${C.border}" stroke-width="1.5"/>
+  <text x="400" y="34" text-anchor="middle" font-size="16" font-weight="700" fill="${C.dark}">4 Types of Fibroids in Young Women</text>
+  <line x1="40" y1="46" x2="760" y2="46" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="122" cy="86" r="18" fill="${C.rose}"/>
+  <text x="122" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">1</text>
+  <text x="122" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Submucosal</text>
+  <text x="122" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Under the lining;</text>
+  <text x="122" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">affects fertility</text>
+  <rect x="218" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="300" cy="86" r="18" fill="${C.rose}"/>
+  <text x="300" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">2</text>
+  <text x="300" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Intramural</text>
+  <text x="300" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Muscular wall;</text>
+  <text x="300" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">heavy periods</text>
+  <rect x="396" y="58" width="164" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="478" cy="86" r="18" fill="${C.rose}"/>
+  <text x="478" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">3</text>
+  <text x="478" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Subserosal</text>
+  <text x="478" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Outer surface;</text>
+  <text x="478" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">presses on organs</text>
+  <rect x="574" y="58" width="186" height="166" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1.5"/>
+  <circle cx="667" cy="86" r="18" fill="${C.rose}"/>
+  <text x="667" y="91" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">4</text>
+  <text x="667" y="120" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Pedunculated</text>
+  <text x="667" y="150" text-anchor="middle" font-size="9.5" fill="${C.muted}">Attached by a stalk;</text>
+  <text x="667" y="165" text-anchor="middle" font-size="9.5" fill="${C.muted}">pain if it twists</text>
+</svg>`;
+
+// Blog W30-5 (Foods to avoid during pregnancy): "6 Foods to Avoid During Pregnancy"
+// Source: Blog headings [5],[9],[14],[18],[22],[35] — top 6 of 10, stated verbatim
+const SVG_PREGNANCY_FOODS_AVOID_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 FOODS TO AVOID DURING PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Raw or Undercooked Seafood</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Risk of Listeria, Salmonella or Vibrio infection</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Raw or Undercooked Meat</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Toxoplasma gondii risk to baby's development</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Unpasteurized Dairy</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Listeria risk from soft cheeses</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Raw or Undercooked Eggs</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Salmonella risk from runny yolks</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">High-Mercury Fish</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Shark, swordfish can affect baby's brain</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Alcohol</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">No level of alcohol is considered safe</text>
+</svg>`;
+
 // ── Wave 29 SVG constants ─────────────────────────────────────────────
 
 // Blog W29-1 (Embryo transfer procedure): "Embryo Transfer: 5-Step Procedure"
@@ -6417,6 +6607,32 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     altText: "Two-column seven-item grid. Items 1-4 (left): Age Factor (women over 35 have lower IUI success rates); Poor Sperm Quality (low motility or abnormal morphology reduces fertilisation); Ovulation Issues (irregular or absent ovulation as in PCOS); Tubal Blockage or Damage (blocked or damaged tubes prevent egg-sperm meeting). Items 5-7 (right): Endometrial Lining Issues (thin or unhealthy lining prevents implantation); Hormonal Imbalances (thyroid disorders and insulin resistance disrupt ovulation); Unexplained Infertility (no specific cause found despite normal test results).",
   },
 
+  // ── Wave 30: Published blogs ──────────────────────────────────────────
+  "essential-precautions-to-take-after-embryo-transfer-for-ivf-success": {
+    svg:     SVG_EMBRYO_TRANSFER_PRECAUTIONS_6,
+    title:   "6 Key Precautions After Embryo Transfer",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Avoid Complete Bed Rest (light activity supports circulation and uterine health); Monitor Stress Levels (relaxation supports hormonal balance during implantation); Follow Medication Guidelines (progesterone and hormone support exactly as prescribed). Items 4-6 (right): Maintain a Balanced Diet (protein, fibre, folic acid, and 8-10 glasses of water daily); Avoid High Temperatures (no hot baths, saunas or prolonged sun exposure); Avoid Harmful Substances (no smoking, alcohol or environmental toxins).",
+  },
+  "essential-tests-for-male-infertility-what-to-expect": {
+    svg:     SVG_MALE_INFERTILITY_TESTS_6,
+    title:   "6 Essential Tests for Male Infertility",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Semen Analysis (measures sperm count, motility and morphology); Hormone Testing (testosterone, LH, FSH, prolactin and estradiol levels); Genetic Testing (checks Y-chromosome deletions, Klinefelter syndrome). Items 4-6 (right): Physical Examination (checks testes, varicocele, vas and epididymis); Ultrasound Examination (detects varicocele, atrophy and blockages); Sperm DNA Fragmentation (assesses DNA integrity for embryo and IVF success).",
+  },
+  "fibroids-and-diet-foods-that-may-help-manage-symptoms-naturally": {
+    svg:     SVG_FIBROID_DIET_FOODS_6,
+    title:   "6 Foods That May Help Manage Fibroid Symptoms",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Leafy Greens (antioxidants support hormone regulation); Berries (antioxidants reduce inflammation and oxidative stress); Whole Grains (regulate blood sugar and insulin levels). Items 4-6 (right): Cruciferous Vegetables (may help reduce estrogen levels); Fatty Fish (omega-3s promote hormone balance); Turmeric (curcumin may help reduce inflammation).",
+  },
+  "fibroids-in-young-women-and-teenagers-early-symptoms-and-myths": {
+    svg:     SVG_YOUNG_WOMEN_FIBROID_TYPES,
+    title:   "4 Types of Fibroids in Young Women",
+    altText: "Four-card horizontal infographic. Card 1 Submucosal: under the lining, affects fertility. Card 2 Intramural: muscular wall, heavy periods. Card 3 Subserosal: outer surface, presses on organs. Card 4 Pedunculated: attached by a stalk, pain if it twists.",
+  },
+  "foods-to-avoid-during-pregnancy-and-why": {
+    svg:     SVG_PREGNANCY_FOODS_AVOID_6,
+    title:   "6 Foods to Avoid During Pregnancy",
+    altText: "Two-column six-item grid infographic. Items 1-3 (left): Raw or Undercooked Seafood (risk of Listeria, Salmonella or Vibrio infection); Unpasteurized Dairy (Listeria risk from soft cheeses); High-Mercury Fish (shark, swordfish can affect baby's brain). Items 4-6 (right): Raw or Undercooked Meat (Toxoplasma gondii risk to baby's development); Raw or Undercooked Eggs (Salmonella risk from runny yolks); Alcohol (no level of alcohol is considered safe).",
+  },
   // ── Wave 29: Published blogs ──────────────────────────────────────────
   "embryo-transfer-procedure-for-in-vitro-fertilization-ivf": {
     svg:     SVG_EMBRYO_TRANSFER_5STEP,
