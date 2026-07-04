@@ -284,7 +284,7 @@ export function SuccessBenchmarksPage() {
               <Float amplitude={6}>
                 <div className="relative overflow-hidden rounded-[2rem] shadow-lift">
                   <img
-                    src="/assets/ivf-lab.jpg"
+                    src="/assets/Locations/Thane.png"
                     alt="Bavishi Fertility Institute Class 1000 IVF laboratory with advanced embryology equipment"
                     className="aspect-square w-full object-cover"
                   />
