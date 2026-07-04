@@ -853,7 +853,7 @@ export function Doctors({
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
                   </a>
                   <a
-                    href="#book"
+                    href="/contact#book"
                     className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full bg-[color:var(--rose)] px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-[color:var(--rose)]/20 transition-all duration-300 hover:bg-[color:var(--rose)]/90 hover:shadow-md hover:shadow-[color:var(--rose)]/30 active:scale-[0.97]"
                   >
                     <Calendar className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:-translate-y-0.5" />
@@ -1060,13 +1060,6 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
         />
 
         <AwardsStage items={content.items} />
-
-        {/* CTA */}
-        <div className="mt-10 text-center">
-          <Magnetic as="a" href="#awards" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-            View More <ArrowRight className="h-4 w-4" />
-          </Magnetic>
-        </div>
       </div>
     </section>
   );
