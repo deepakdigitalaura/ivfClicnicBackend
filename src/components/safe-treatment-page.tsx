@@ -62,6 +62,7 @@ const STATS = [
   { value: 10, suffix: "+ Years", label: "OHSS Free", sub: "zero severe cases in over a decade" },
   { value: 1000, suffix: "", label: "Class 1000 Labs", sub: "ten times cleaner than EU standards" },
   { value: 2, suffix: "x", label: "Double-Witness", sub: "two professionals at every step" },
+  { value: 100, suffix: "%", label: "Infection Screened", sub: "mandatory testing for every patient" },
 ];
 
 const PROTOCOLS = [
