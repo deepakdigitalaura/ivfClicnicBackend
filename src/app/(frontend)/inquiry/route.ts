@@ -1,12 +1,12 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { Resend } from "resend";
+import nodemailer from "nodemailer";
 import { createInquiry } from "@/sanity/lib/admin";
 
 /* =====================================================================
  * Public lead intake  ( POST /inquiry ).
  * ---------------------------------------------------------------------
  * The homepage / contact `<InquiryForm>` posts here. We validate, then (a) email
- * the clinic via Resend and (b) store the lead in Sanity. Both are best-effort;
+ * the clinic via SMTP and (b) store the lead in Sanity. Both are best-effort;
  * the lead is confirmed to the visitor if EITHER path succeeds, so a transient
  * backend issue never loses a lead or shows a false error.
  *
@@ -77,24 +77,29 @@ async function sendNotificationEmail(fields: {
   message: string;
   source: string;
 }) {
-  const apiKey = process.env.RESEND_API_KEY;
-  if (!apiKey) {
-    console.error("[inquiry] RESEND_API_KEY is not set — email skipped");
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!user || !pass) {
+    console.error("[inquiry] SMTP_USER/SMTP_PASS not set — email skipped");
     return;
   }
 
-  const resend = new Resend(apiKey);
-  const result = await resend.emails.send({
-    from: "BFI IVF Clinic <onboarding@resend.dev>",
-    to: "sambhav.digitalaura@gmail.com",
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || "smtp.gmail.com",
+    port: Number(process.env.SMTP_PORT) || 465,
+    secure: true,
+    auth: { user, pass },
+  });
+
+  const to = process.env.INQUIRY_TO_EMAIL || user;
+  const info = await transporter.sendMail({
+    from: `BFI IVF Clinic <${user}>`,
+    to,
     subject: `New Inquiry from ${fields.name} — BFI IVF Clinic`,
     html: buildEmailHtml(fields),
   });
 
-  if (result.error) {
-    throw new Error(`Resend error: ${JSON.stringify(result.error)}`);
-  }
-  console.log("[inquiry] email sent, id:", result.data?.id);
+  console.log("[inquiry] email sent, id:", info.messageId);
 }
 
 export async function POST(req: NextRequest) {
