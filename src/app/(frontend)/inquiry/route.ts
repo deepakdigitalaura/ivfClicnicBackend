@@ -86,7 +86,7 @@ async function sendNotificationEmail(fields: {
   const resend = new Resend(apiKey);
   const result = await resend.emails.send({
     from: "BFI IVF Clinic <onboarding@resend.dev>",
-    to: "deepak.digitalaura@gmail.com",
+    to: "sambhav.digitalaura@gmail.com",
     subject: `New Inquiry from ${fields.name} — BFI IVF Clinic`,
     html: buildEmailHtml(fields),
   });
