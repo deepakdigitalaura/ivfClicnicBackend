@@ -3,7 +3,8 @@ import {
   ArrowRight, Calendar, MessageCircle, Award, Heart, Baby,
   Microscope, Users, Shield, Stethoscope, Clock, CheckCircle2,
   FlaskConical, Sparkles, Scale, HandHeart, Eye, Building2,
-  Lightbulb, Star, Zap, ThumbsUp, HeartHandshake,
+  Lightbulb, Star, Zap, ThumbsUp, HeartHandshake, MapPin,
+  BookOpen, Trophy,
 } from "lucide-react";
 import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem, Magnetic, Float, Counter } from "@/components/motion";
@@ -26,7 +27,7 @@ const REASONS = [
     icon: Award,
     title: "Pioneers Since 1998",
     description:
-      "Working in women’s health since 1986 and pioneering ART/IVF in India since 1998, in collaboration with the Diamond Institute, USA. Ranked No. 1 fertility clinic in All India.",
+      "Working in women’s health since 1990 and pioneering ART/IVF in India since 1998, in collaboration with the Diamond Institute, USA. Ranked No. 1 fertility clinic in All India.",
   },
   {
     icon: Baby,
@@ -96,14 +97,56 @@ const REASONS = [
   },
 ];
 
-const FIRSTS = [
-  { year: "1998", milestone: "Pioneered ART/IVF in India in collaboration with Diamond Institute, USA" },
-  { year: "2004", milestone: "India’s first live birth using frozen (vitrified) eggs" },
-  { year: "2006", milestone: "India’s first international surrogacy program" },
-  { year: "2010", milestone: "Launched Suraksha Kavach — the world’s only IVF protection program" },
-  { year: "2014", milestone: "Introduced PGT (Preimplantation Genetic Testing) across all centres" },
-  { year: "2018", milestone: "Achieved 25,000+ successful IVF pregnancies milestone" },
-  { year: "2022", milestone: "Expanded to 14 centres across 8 cities in India" },
+const JOURNEY = [
+  {
+    era: "1990 – 2001",
+    eraLabel: "Foundations",
+    entries: [
+      { year: "1990", icon: Building2, items: ["Established our women’s health & gynaecology hospital — the foundation Bavishi Fertility Institute would grow from."] },
+      { year: "1998", icon: FlaskConical, items: ["Pioneered ART/IVF in India, launching our test-tube baby clinic in collaboration with the Diamond Institute, USA."] },
+    ],
+  },
+  {
+    era: "2002 – 2013",
+    eraLabel: "Pioneering & Growth",
+    entries: [
+      { year: "2002", icon: Microscope, items: ["Introduced Preimplantation Genetic Diagnosis (PGD) in India."] },
+      { year: "2004", icon: Users, items: ["Hosted the “Test Tube Baby Reunion – 2004,” bringing together IVF families from across the country."] },
+      { year: "2005", icon: Building2, items: ["Opened a large, fully-equipped, state-of-the-art fertility institute."] },
+      { year: "2006", icon: Star, items: ["Established the Endoscopy Excellence Institute.", "Launched India’s first international surrogacy program."] },
+      { year: "2007", icon: HeartHandshake, items: ["Launched Santan Semen Bank, our dedicated sperm bank."] },
+      { year: "2008", icon: MapPin, items: ["Expanded with new offices in Mumbai and Surat."] },
+      { year: "2009", icon: Baby, items: ["India’s first baby born from vitrified (frozen) eggs — a landmark first for Indian fertility medicine."] },
+      { year: "2010", icon: MapPin, items: ["Began operations in Mumbai (Bavishi Fertility Institute) and Delhi (Bavishi Bhagat Fertility Institute).", "Launched Suraksha Kavach — the world’s only IVF protection program."] },
+      { year: "2011", icon: BookOpen, items: ["Founded the “Divya Santan” organisation and published “Devna Didhela, Mangine Lidhela,” chronicling the journeys of 111 IVF families."] },
+      { year: "2012", icon: BookOpen, items: ["Published “Vighnahod,” addressing the real struggles and solutions faced by childless couples."] },
+      { year: "2013", icon: HandHeart, items: ["Launched the “Jan Jagruti Abhiyan” awareness campaign and “Parivar Milan” initiative to support childless couples; translated both books into Hindi."] },
+    ],
+  },
+  {
+    era: "2014 – 2020",
+    eraLabel: "National Recognition",
+    entries: [
+      { year: "2014", icon: Microscope, items: ["Founded the Indian Society for Third-Party Assisted Reproduction (INSTAR).", "Introduced PGT (Preimplantation Genetic Testing) across all centres."] },
+      { year: "2015", icon: Trophy, items: ["Named a “Power Brand” by IVF India (India Today Group)."] },
+      { year: "2016", icon: MapPin, items: ["Established Bavishi Pratiksha Fertility Institute in Kolkata."] },
+      { year: "2017", icon: Award, items: ["Won the “Excellence in IVF” award from My FM.", "Received the “Rose of Paracelsus” award from the European Medical Association.", "Published “Aapnu Adbhut Sarjan” (Gujarati) and “Your Miracle in Making” (English) for expectant mothers."] },
+      { year: "2018", icon: Award, items: ["Opened in Surat.", "“Devna Didhela Mangine Lidhela” adapted into a TV serial.", "Awarded “Best IVF Clinic Chain in India” by Midday.", "Achieved 25,000+ successful IVF pregnancies milestone."] },
+      { year: "2019", icon: Trophy, items: ["Awarded “Best IVF Chain in India – West” by The Economic Times.", "Opened in Vadodara."] },
+      { year: "2020", icon: Star, items: ["Ranked the #1 fertility clinic in All India by the Times of India National Survey.", "Ranked #1 in West India for the 5th consecutive year running (2016–2020).", "Opened in Bhuj."] },
+    ],
+  },
+  {
+    era: "2021 – 2025",
+    eraLabel: "Innovation & Expansion",
+    entries: [
+      { year: "2021", icon: HeartHandshake, items: ["Achieved 3 successful bone-marrow transplants for thalassemia major using PGD-HLA donor-sibling matching — among only a handful of such cases worldwide."] },
+      { year: "2022", icon: MapPin, items: ["Opened a new clinic on Sindhu Bhavan Road, Bodakdev, Ahmedabad.", "Expanded to 14 centres across 8 cities in India."] },
+      { year: "2023", icon: Sparkles, items: ["Celebrated 25 years of Bavishi Fertility Institute."] },
+      { year: "2024", icon: Trophy, items: ["Won “IVF/Fertility Chain of the Year – West” for the fourth time."] },
+      { year: "2025", icon: MapPin, items: ["Opened a new centre in Nikol, Ahmedabad."] },
+    ],
+  },
 ];
 
 const ETHICS = [
@@ -228,33 +271,51 @@ export function WhyBfiPage() {
         </div>
       </section>
 
-      {/* ==================== INNOVATIONS TIMELINE ==================== */}
+      {/* ==================== OUR JOURNEY TIMELINE ==================== */}
       <section className="bg-[color:var(--ivory)] py-20 lg:py-28">
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Path-Breaking Firsts"
-            title={<>A legacy of <em className="font-display italic text-[color:var(--rose)]">innovation in fertility care.</em></>}
-            subtitle="From our founding partnership with Diamond Institute USA to pioneering breakthroughs that changed Indian fertility medicine forever."
+            eyebrow="Our Journey Since 1990"
+            title={<>Three decades of <em className="font-display italic text-[color:var(--rose)]">pioneering firsts.</em></>}
+            subtitle="From India&#39;s first ART/IVF clinic to a network of 14 centres across 8 cities — the milestones, breakthroughs, and honours that built Bavishi Fertility Institute."
           />
-          <div className="mx-auto mt-14 max-w-4xl">
-            <Stagger className="relative space-y-0">
-              {/* Vertical line */}
-              <div className="absolute left-[1.65rem] top-4 bottom-4 w-px bg-gradient-to-b from-[color:var(--rose)] via-[color:var(--rose)]/40 to-transparent lg:left-[1.85rem]" />
-
-              {FIRSTS.map((f, i) => (
-                <StaggerItem key={i}>
-                  <div className="relative flex gap-6 pb-10 last:pb-0 lg:gap-8">
-                    <div className="relative z-10 grid h-[3.3rem] w-[3.3rem] shrink-0 place-items-center rounded-full bg-[color:var(--rose)] text-xs font-bold text-white shadow-soft ring-4 ring-[color:var(--ivory)] lg:h-[3.7rem] lg:w-[3.7rem]">
-                      {f.year}
-                    </div>
-                    <div className="pt-2">
-                      <p className="text-[17px] leading-relaxed text-[color:var(--plum)] font-medium">{f.milestone}</p>
-                    </div>
+          <div className="mx-auto mt-14 max-w-4xl space-y-14">
+            {JOURNEY.map((era, eraIdx) => (
+              <div key={eraIdx}>
+                <Reveal>
+                  <div className="mb-8 flex items-center gap-4">
+                    <span className="shrink-0 rounded-full bg-[color:var(--plum)] px-4 py-1.5 text-xs font-semibold uppercase tracking-[0.14em] text-white">
+                      {era.era}
+                    </span>
+                    <span className="h-px flex-1 bg-[color:var(--plum)]/15" />
+                    <span className="shrink-0 text-sm font-medium text-[color:var(--plum)]/60">{era.eraLabel}</span>
                   </div>
-                </StaggerItem>
-              ))}
-            </Stagger>
+                </Reveal>
+                <Stagger className="relative space-y-0">
+                  {/* Vertical line */}
+                  <div className="absolute left-[1.65rem] top-4 bottom-4 w-px bg-gradient-to-b from-[color:var(--rose)] via-[color:var(--rose)]/40 to-transparent lg:left-[1.85rem]" />
+
+                  {era.entries.map((f, i) => (
+                    <StaggerItem key={i}>
+                      <div className="relative flex gap-6 pb-10 last:pb-0 lg:gap-8">
+                        <div className="relative z-10 grid h-[3.3rem] w-[3.3rem] shrink-0 place-items-center rounded-full bg-[color:var(--rose)] text-white shadow-soft ring-4 ring-[color:var(--ivory)] lg:h-[3.7rem] lg:w-[3.7rem]">
+                          <f.icon className="h-5 w-5" />
+                        </div>
+                        <div className="pt-1">
+                          <div className="text-sm font-bold uppercase tracking-wide text-[color:var(--rose)]">{f.year}</div>
+                          <div className="mt-1.5 space-y-1.5">
+                            {f.items.map((item, ii) => (
+                              <p key={ii} className="text-[16px] leading-relaxed text-[color:var(--plum)] font-medium">{item}</p>
+                            ))}
+                          </div>
+                        </div>
+                      </div>
+                    </StaggerItem>
+                  ))}
+                </Stagger>
+              </div>
+            ))}
           </div>
         </div>
       </section>
