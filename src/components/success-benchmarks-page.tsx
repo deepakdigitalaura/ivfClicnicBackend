@@ -353,7 +353,7 @@ export function SuccessBenchmarksPage() {
               <Float amplitude={6}>
                 <div className="relative overflow-hidden rounded-[2rem] shadow-lift">
                   <img
-                    src="/assets/happy-couple.jpg"
+                    src="/assets/unique-ivf-packages.png"
                     alt="Happy couple after successful IVF treatment at Bavishi Fertility Institute"
                     className="aspect-square w-full object-cover"
                   />
