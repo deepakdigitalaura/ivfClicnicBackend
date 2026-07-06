@@ -881,6 +881,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ovarian-follicles-the-tiny-heroes-of-fertility": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 37: Draft blogs (batch 5) ───────────────────────────────────
+  "parenting-after-ivf-unique-challenges-and-rewards": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "personalized-ivf-the-future-of-fertility-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "personalized-medicine-how-ivf-treatment-is-customized": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "pgt-and-its-role-in-preventing-recurrent-miscarriages": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "pgt-for-couples-with-recurrent-ivf-failure-or-miscarriages-does-it-help": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

@@ -3451,6 +3451,211 @@ const SVG_FOLLICLE_JOURNEY_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox=
   <text x="664" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">from the follicle</text>
 </svg>`;
 
+// ── Wave 37 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D5-1 (Parenting after IVF): "Parenting After IVF: Challenges & Rewards"
+// Source: Blog nodes [5]-[8] (challenges) and [11]-[14] (rewards), stated verbatim
+const SVG_PARENTING_AFTER_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Unique Challenges</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Emotional Rollercoaster</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Intense mix of emotions navigating parenthood</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">High Expectations</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Pressure to be perfect can bring guilt</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Multiple Pregnancies</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Higher chance of managing multiple babies</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Disclosure Decisions</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">When and how to share conception details</text>
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">The Rewards</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Unconditional Love</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Deepens the bond between parent and child</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Appreciation for Life</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">A profound appreciation for parenthood</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Resilience</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Prepares parents for parenthood's ups and downs</text>
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Community</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">Connection with others who share the journey</text>
+</svg>`;
+
+// Blog D5-2 (Personalized IVF): "How Personalized IVF Works: 4 Components"
+// Source: Blog nodes [10]-[13], stated verbatim
+const SVG_PERSONALIZED_IVF_COMPONENTS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW PERSONALIZED IVF WORKS: 4 COMPONENTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Genetic</text>
+  <text x="123" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Testing</text>
+  <text x="123" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Identifies fertility</text>
+  <text x="123" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">issues to tailor care</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Hormone</text>
+  <text x="299" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Profiling</text>
+  <text x="299" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Determines optimal</text>
+  <text x="299" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">stimulation protocol</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Ovarian Reserve</text>
+  <text x="475" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Testing</text>
+  <text x="475" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Guides best approach</text>
+  <text x="475" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">for egg retrieval</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Uterine</text>
+  <text x="664" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Evaluation</text>
+  <text x="664" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Ensures optimal</text>
+  <text x="664" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">implantation conditions</text>
+</svg>`;
+
+// Blog D5-3 (Personalized medicine in IVF): "7 Ways IVF Treatment Is Personalized"
+// Source: Blog nodes [14]-[36] (7 numbered H3 sections), stated verbatim
+const SVG_PERSONALIZED_MEDICINE_IVF_7 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 WAYS IVF TREATMENT IS PERSONALIZED</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Screening &amp; Counseling</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Identifies chromosomal risks before implantation</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Customized Ovarian Stimulation</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Tailored protocols based on individual response</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Assessment &amp; Regulation</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Corrects imbalances for optimal implantation</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Advanced Embryo Selection</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Time-lapse imaging and genetic testing (PGT)</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Personalized Fertility Medications</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Dosage tailored to each patient's needs</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle &amp; Dietary Recommendations</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Antioxidants, exercise and stress management</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Emotional &amp; Psychological Support</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Counseling throughout the fertility journey</text>
+</svg>`;
+
+// Blog D5-4 (PGT preventing recurrent miscarriages): "6 Causes of Recurrent Miscarriage"
+// Source: Blog node [7], stated verbatim
+const SVG_RECURRENT_MISCARRIAGE_CAUSES_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 CAUSES OF RECURRENT MISCARRIAGE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Chromosomal Abnormalities</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Incorrect chromosome number in embryos</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Anatomical Issues</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Fibroids, polyps or a uterine septum</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Imbalances</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Thyroid disorders or PCOS</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Factors</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Mutations affecting embryo development</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Blood Clotting Disorders</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Affects implantation and placental function</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Autoimmune Disorders</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Body's immune system rejects the embryo</text>
+</svg>`;
+
+// Blog D5-5 (PGT for recurrent IVF failure/miscarriage): "Who Should Consider PGT-A Testing?"
+// Source: Blog node [15], stated verbatim
+const SVG_PGTA_WHO_SHOULD_CONSIDER = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHO SHOULD CONSIDER PGT-A TESTING?</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Recurrent IVF</text>
+  <text x="123" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Failure</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Two or more failed</text>
+  <text x="123" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">IVF cycles</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Recurrent</text>
+  <text x="299" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Miscarriages</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Two or more</text>
+  <text x="299" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">pregnancy losses</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Advanced</text>
+  <text x="475" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Maternal Age</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Higher chromosomal</text>
+  <text x="475" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">abnormality risk</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Poor Embryo</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Development</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">History of low-quality</text>
+  <text x="664" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">embryos</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -8395,6 +8600,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_FOLLICLE_JOURNEY_4,
     title:   "The Follicle Journey: 4 Stages",
     altText: "Four-panel horizontal infographic. Stage 1 Growth: a tiny follicle cradles an egg. Stage 2 Estrogen Production: guides the menstrual cycle. Stage 3 Maturity: follicle reaches full maturity. Stage 4 Ovulation: egg is released from the follicle.",
+  },
+
+  // ── Wave 37: Draft blogs (batch 5) ──────────────────────────────────
+  "parenting-after-ivf-unique-challenges-and-rewards": {
+    svg:     SVG_PARENTING_AFTER_IVF,
+    title:   "Parenting After IVF: Challenges & Rewards",
+    altText: "Two-panel comparison. Left (Unique Challenges): Emotional Rollercoaster; High Expectations; Multiple Pregnancies; Disclosure Decisions. Right (The Rewards): Unconditional Love; Appreciation for Life; Resilience; Community.",
+  },
+
+  "personalized-ivf-the-future-of-fertility-treatment": {
+    svg:     SVG_PERSONALIZED_IVF_COMPONENTS_4,
+    title:   "How Personalized IVF Works: 4 Components",
+    altText: "Four-panel horizontal infographic. Genetic Testing: identifies fertility issues to tailor care. Hormone Profiling: determines optimal stimulation protocol. Ovarian Reserve Testing: guides best approach for egg retrieval. Uterine Evaluation: ensures optimal implantation conditions.",
+  },
+
+  "personalized-medicine-how-ivf-treatment-is-customized": {
+    svg:     SVG_PERSONALIZED_MEDICINE_IVF_7,
+    title:   "7 Ways IVF Treatment Is Personalized",
+    altText: "Two-column seven-item grid. Items 1-4 (left): Genetic Screening & Counseling; Customized Ovarian Stimulation; Hormonal Assessment & Regulation; Advanced Embryo Selection. Items 5-7 (right): Personalized Fertility Medications; Lifestyle & Dietary Recommendations; Emotional & Psychological Support.",
+  },
+
+  "pgt-and-its-role-in-preventing-recurrent-miscarriages": {
+    svg:     SVG_RECURRENT_MISCARRIAGE_CAUSES_6,
+    title:   "6 Causes of Recurrent Miscarriage",
+    altText: "Two-column six-item grid. Items 1-3 (left): Chromosomal Abnormalities; Hormonal Imbalances; Blood Clotting Disorders. Items 4-6 (right): Anatomical Issues; Genetic Factors; Autoimmune Disorders.",
+  },
+
+  "pgt-for-couples-with-recurrent-ivf-failure-or-miscarriages-does-it-help": {
+    svg:     SVG_PGTA_WHO_SHOULD_CONSIDER,
+    title:   "Who Should Consider PGT-A Testing?",
+    altText: "Four-panel horizontal infographic. Recurrent IVF Failure: two or more failed cycles. Recurrent Miscarriages: two or more pregnancy losses. Advanced Maternal Age: higher chromosomal abnormality risk. Poor Embryo Development: history of low-quality embryos.",
   },
 };
 
