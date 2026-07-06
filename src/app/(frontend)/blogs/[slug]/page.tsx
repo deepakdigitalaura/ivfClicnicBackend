@@ -34,7 +34,7 @@ export async function generateMetadata(
 ): Promise<Metadata> {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
-  if (!blog) return {};
+  if (!blog || blog._status === "draft") return {};
   const path = `/blogs/${slug}`;
   const hero = asObj<Media>(blog.heroImage ?? undefined);
   const ogImg = asObj<Media>(blog.seo?.ogImage ?? undefined);
@@ -58,7 +58,7 @@ export async function generateMetadata(
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
   const blog = await getBlogBySlug(slug);
-  if (!blog) notFound();
+  if (!blog || blog._status === "draft") notFound();
 
   const path = `/blogs/${slug}`;
   const url = abs(path);
