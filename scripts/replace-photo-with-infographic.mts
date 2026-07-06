@@ -4140,6 +4140,179 @@ const SVG_OBESITY_FERTILITY_MECHANISMS_4 = `<svg xmlns="http://www.w3.org/2000/s
   <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Sleep apnea affects it</text>
 </svg>`;
 
+// ── Wave 41 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D9-1 (Blastocyst stage & implantation): "Chances of Reaching Blastocyst Stage: By Age"
+// Source: Blog node [11], stated verbatim
+const SVG_BLASTOCYST_CHANCES_BY_AGE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">CHANCES OF REACHING BLASTOCYST STAGE: BY AGE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">UNDER 35</text>
+  <text x="123" y="118" text-anchor="middle" font-size="19" font-weight="800" fill="${C.rose}">50–60%</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">35–37</text>
+  <text x="299" y="118" text-anchor="middle" font-size="19" font-weight="800" fill="${C.rose}">40–50%</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">38–40</text>
+  <text x="475" y="118" text-anchor="middle" font-size="19" font-weight="800" fill="${C.rose}">30–40%</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">OVER 40</text>
+  <text x="664" y="118" text-anchor="middle" font-size="19" font-weight="800" fill="${C.rose}">20–30%</text>
+</svg>`;
+
+// Blog D9-2 (Match system): "How the Match System Works: 4 Steps"
+// Source: Blog node [9], stated verbatim
+const SVG_MATCH_SYSTEM_STEPS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 254" font-family="${FONT}">
+  <rect width="800" height="254" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="252.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW THE MATCH SYSTEM WORKS: 4 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="67" r="14" fill="${C.rose}"/>
+  <text x="68" y="71.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="63" font-size="11.5" font-weight="700" fill="${C.dark}">Patient Registration</text>
+  <text x="92" y="79" font-size="10" fill="${C.muted}">Facial recognition, fingerprint biometrics, RFID tagging</text>
+  <rect x="40" y="96" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="119" r="14" fill="${C.rose}"/>
+  <text x="68" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="115" font-size="11.5" font-weight="700" fill="${C.dark}">Gamete Collection</text>
+  <text x="92" y="131" font-size="10" fill="${C.muted}">Labelled with a unique identifier linked to biometric data</text>
+  <rect x="40" y="148" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="171" r="14" fill="${C.rose}"/>
+  <text x="68" y="175.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="167" font-size="11.5" font-weight="700" fill="${C.dark}">Verification</text>
+  <text x="92" y="183" font-size="10" fill="${C.muted}">Gamete identity verified before fertilization</text>
+  <rect x="40" y="200" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="223" r="14" fill="${C.rose}"/>
+  <text x="68" y="227.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="219" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Transfer</text>
+  <text x="92" y="235" font-size="10" fill="${C.muted}">Verified embryos transferred to the uterus</text>
+</svg>`;
+
+// Blog D9-3 (Miracle of bonding): "5 Signs of Prenatal Bonding"
+// Source: Blog nodes [8],[9],[10],[12],[13], stated verbatim
+const SVG_PRENATAL_BONDING_SIGNS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 SIGNS OF PRENATAL BONDING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="102" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Baby Responds</text>
+  <text x="108" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">to Your Voice</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="102" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">A Sense of</text>
+  <text x="254" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Calm</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="102" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Talking to</text>
+  <text x="400" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Your Baby</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="102" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">A Sense of</text>
+  <text x="546" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Excitement</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="102" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Noticing</text>
+  <text x="692" y="116" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Movement</text>
+</svg>`;
+
+// Blog D9-4 (Bhavnagar expansion): "Bhavnagar's New AI-Enabled Fertility Clinic: 4 Services"
+// Source: Blog node [9], stated verbatim
+const SVG_BHAVNAGAR_CLINIC_SERVICES_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BHAVNAGAR'S NEW AI-ENABLED FERTILITY CLINIC</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">IVF &amp; ICSI</text>
+  <text x="123" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">AI-enabled embryo</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">selection</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">IUI, Egg</text>
+  <text x="299" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Freezing &amp;</text>
+  <text x="299" y="130" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Donor Programs</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Advanced</text>
+  <text x="475" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Surgery</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Laparoscopy/Hysteroscopy</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Women's</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Health</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Complete health services</text>
+</svg>`;
+
+// Blog D9-5 (Egg freezing): "4 Reasons Women Consider Egg Freezing"
+// Source: Blog node [7], stated verbatim
+const SVG_EGG_FREEZING_REASONS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 REASONS WOMEN CONSIDER EGG FREEZING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Career</text>
+  <text x="123" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Advancement</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Focus without pressure</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Personal</text>
+  <text x="299" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Readiness</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Waiting for the right time</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Medical</text>
+  <text x="475" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Reasons</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Before chemo or illness</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Lifestyle</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Preferences</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Reproductive flexibility</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -9208,6 +9381,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_OBESITY_FERTILITY_MECHANISMS_4,
     title:   "How Obesity Affects Fertility: 4 Mechanisms",
     altText: "Four-panel horizontal infographic. Hormonal Imbalance: disrupts ovulation. Insulin Resistance: affects ovulation. Inflammation: damages reproductive tissues. Sleep Disturbances: sleep apnea affects fertility.",
+  },
+
+  // ── Wave 41: Draft blogs (batch 9) ──────────────────────────────────
+  "the-journey-to-blastocyst-stage-and-implantation-understanding-your-chances-and-how-bavishi-fertility-institutes-can-help": {
+    svg:     SVG_BLASTOCYST_CHANCES_BY_AGE,
+    title:   "Chances of Reaching Blastocyst Stage: By Age",
+    altText: "Four-panel horizontal stat infographic. Under 35: 50-60%. 35-37: 40-50%. 38-40: 30-40%. Over 40: 20-30%.",
+  },
+
+  "the-match-system-revolutionizing-ivf-with-unparalleled-accuracy-and-safety": {
+    svg:     SVG_MATCH_SYSTEM_STEPS_4,
+    title:   "How the Match System Works: 4 Steps",
+    altText: "Four-row single-column infographic. Step 1 Patient Registration: facial recognition, fingerprint biometrics, RFID tagging. Step 2 Gamete Collection: labelled with a unique identifier linked to biometric data. Step 3 Verification: gamete identity verified before fertilization. Step 4 Embryo Transfer: verified embryos transferred to the uterus.",
+  },
+
+  "the-miracle-of-bonding-connecting-with-your-baby-before-birth": {
+    svg:     SVG_PRENATAL_BONDING_SIGNS_5,
+    title:   "5 Signs of Prenatal Bonding",
+    altText: "Five-panel horizontal infographic. Baby Responds to Your Voice. A Sense of Calm. Talking to Your Baby. A Sense of Excitement. Noticing Movement patterns.",
+  },
+
+  "bavishi-fertility-institute-expands-to-bhavnagar-with-state-of-the-art-ai-enabled-ivf-and-womens-hospital": {
+    svg:     SVG_BHAVNAGAR_CLINIC_SERVICES_4,
+    title:   "Bhavnagar's New AI-Enabled Fertility Clinic: 4 Services",
+    altText: "Four-panel horizontal infographic. IVF & ICSI: AI-enabled embryo selection. IUI, Egg Freezing & Donor Programs. Advanced Surgery: laparoscopy and hysteroscopy. Women's Health: complete health services.",
+  },
+
+  "the-power-of-egg-freezing-empowering-choices-for-the-modern-generation": {
+    svg:     SVG_EGG_FREEZING_REASONS_4,
+    title:   "4 Reasons Women Consider Egg Freezing",
+    altText: "Four-panel horizontal infographic. Career Advancement: focus without pressure. Personal Readiness: waiting for the right time. Medical Reasons: before chemo or illness. Lifestyle Preferences: reproductive flexibility.",
   },
 };
 

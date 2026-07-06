@@ -943,6 +943,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "the-hidden-threat-to-fertility-how-obesity-affects-your-chances": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 41: Draft blogs (batch 9) ───────────────────────────────────
+  "the-journey-to-blastocyst-stage-and-implantation-understanding-your-chances-and-how-bavishi-fertility-institutes-can-help": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "the-match-system-revolutionizing-ivf-with-unparalleled-accuracy-and-safety": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "the-miracle-of-bonding-connecting-with-your-baby-before-birth": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "bavishi-fertility-institute-expands-to-bhavnagar-with-state-of-the-art-ai-enabled-ivf-and-womens-hospital": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "the-power-of-egg-freezing-empowering-choices-for-the-modern-generation": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
