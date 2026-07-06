@@ -1071,6 +1071,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "bavishi-fertility-institute-wins-patient-centric-hospital-award": {
     removeBlocks: ["key aspects", "key numbers"],
   },
+  // ── Wave 49: Draft blogs (batch 17) ──────────────────────────────────
+  "blastocyst-transfer-in-special-situations-pcos-poor-responders-recurrent-ivf-failure-endometriosis-uterine-factors": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "boosting-implantation-success-the-power-of-embryo-glue": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "boosting-male-fertility-tips-to-improve-sperm-quality": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "boosting-your-ivf-success-a-comprehensive-guide-for-couples": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "building-families-with-hope-the-power-of-assisted-reproductive-technology": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

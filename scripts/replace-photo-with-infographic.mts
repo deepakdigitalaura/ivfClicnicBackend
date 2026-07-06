@@ -5518,6 +5518,179 @@ const SVG_PATIENT_CENTRIC_AWARD = `<svg xmlns="http://www.w3.org/2000/svg" viewB
   <text x="68" y="270" font-size="10.5" fill="${C.muted}">Customized, compassionate patient-first treatment</text>
 </svg>`;
 
+// ── Wave 49 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D17-1 (Blastocyst transfer in special situations): "Blastocyst Transfer: 5 Special Situations"
+// Source: Blog H2 headings [10],[17],[25],[31],[37], stated verbatim
+const SVG_BLASTOCYST_SPECIAL_SITUATIONS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BLASTOCYST TRANSFER: 5 SPECIAL SITUATIONS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">PCOS</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Selects viable embryos, reduces OHSS risk</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Poor Responders</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Works when a few good embryos are available</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Recurrent IVF Failure</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Improves embryo selection and timing</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Endometriosis</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Selects healthier embryos for a compromised uterus</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Uterine Factors</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Better synchronization with the uterine lining</text>
+</svg>`;
+
+// Blog D17-2 (Embryo glue): "How Embryo Glue Works"
+// Source: Blog node [9], stated verbatim
+const SVG_EMBRYO_GLUE_MECHANISM_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW EMBRYO GLUE WORKS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Mimics Natural</text>
+  <text x="149" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Implantation</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Hyaluronan creates a</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">sticky surface</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="68" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.white}">Enhances Embryo-</text>
+  <text x="400" y="84" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.white}">Endometrial</text>
+  <text x="400" y="97" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.white}">Interaction</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Promotes a</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">stronger bond</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Reduces Embryo Loss</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Improves implantation</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">rates</text>
+</svg>`;
+
+// Blog D17-3 (Boosting male fertility): "7 Tips to Improve Sperm Quality"
+// Source: Blog nodes [8]-[14], stated verbatim
+const SVG_SPERM_QUALITY_TIPS_7 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 TIPS TO IMPROVE SPERM QUALITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Maintain a Healthy Weight</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Balanced diet and regular exercise</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Eat a Fertility-Friendly Diet</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Antioxidants and omega-3 fatty acids</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Stay Hydrated</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Essential for sperm production</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Manage Stress</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Yoga, meditation or deep breathing</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Get Enough Sleep</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">7-8 hours per night for hormone regulation</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Harmful Substances</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Toxins, smoking and excess alcohol</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Consider Supplements</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Zinc, vitamin C and vitamin D</text>
+</svg>`;
+
+// Blog D17-4 (Boosting IVF success comprehensive guide): "3 Ways to Support Sperm Health"
+// Source: Blog node [15], stated verbatim
+const SVG_SPERM_HEALTH_SUPPORT_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 WAYS TO SUPPORT SPERM HEALTH</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Wear Loose</text>
+  <text x="149" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Underwear</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Reduces heat</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">exposure</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Avoid Heat</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">No hot baths or</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">laptops on lap</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Eat Zinc-Rich</text>
+  <text x="651" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Foods</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Oysters, pumpkin</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">seeds &amp; more</text>
+</svg>`;
+
+// Blog D17-5 (Building families with ART): "5 Benefits of Assisted Reproductive Technology"
+// Source: Blog node [6], stated verbatim
+const SVG_ART_BENEFITS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 BENEFITS OF ASSISTED REPRODUCTIVE TECHNOLOGY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Increased Success Rates</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Especially for women under 35</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Treatment for Infertility</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Male factor, endometriosis, unexplained</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Family Building Options</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">IVF, ICSI, surrogacy and more</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Testing</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Reduces risk of chromosomal abnormalities</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Emotional Support</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Counseling throughout the journey</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -10834,6 +11007,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_PATIENT_CENTRIC_AWARD,
     title:   "Patient-Centric Hospital Award: Highlights",
     altText: "Four-row accent-bar infographic. Highlight 01 The Award: Patient-Centric Hospital in Reproductive Health, IHW 2024. Highlight 02 Ceremony: December 13, 2024 in New Delhi. Highlight 03 Our Philosophy: Simple, Safe, Smart and Successful care. Highlight 04 What It Recognizes: customized, compassionate patient-first treatment.",
+  },
+
+  // ── Wave 49: Draft blogs (batch 17) ─────────────────────────────────
+  "blastocyst-transfer-in-special-situations-pcos-poor-responders-recurrent-ivf-failure-endometriosis-uterine-factors": {
+    svg:     SVG_BLASTOCYST_SPECIAL_SITUATIONS_5,
+    title:   "Blastocyst Transfer: 5 Special Situations",
+    altText: "Two-column five-item grid. Items 1-3 (left): PCOS; Poor Responders; Recurrent IVF Failure. Items 4-5 (right): Endometriosis; Uterine Factors.",
+  },
+
+  "boosting-implantation-success-the-power-of-embryo-glue": {
+    svg:     SVG_EMBRYO_GLUE_MECHANISM_3,
+    title:   "How Embryo Glue Works",
+    altText: "Three-panel horizontal infographic. Mimics Natural Implantation: hyaluronan creates a sticky surface. Enhances Embryo-Endometrial Interaction: promotes a stronger bond. Reduces Embryo Loss: improves implantation rates.",
+  },
+
+  "boosting-male-fertility-tips-to-improve-sperm-quality": {
+    svg:     SVG_SPERM_QUALITY_TIPS_7,
+    title:   "7 Tips to Improve Sperm Quality",
+    altText: "Two-column seven-item grid. Items 1-4 (left): Maintain a Healthy Weight; Eat a Fertility-Friendly Diet; Stay Hydrated; Manage Stress. Items 5-7 (right): Get Enough Sleep; Avoid Harmful Substances; Consider Supplements.",
+  },
+
+  "boosting-your-ivf-success-a-comprehensive-guide-for-couples": {
+    svg:     SVG_SPERM_HEALTH_SUPPORT_3,
+    title:   "3 Ways to Support Sperm Health",
+    altText: "Three-panel horizontal infographic. Wear Loose Underwear: reduces heat exposure. Avoid Heat: no hot baths or laptops on lap. Eat Zinc-Rich Foods: oysters, pumpkin seeds and more.",
+  },
+
+  "building-families-with-hope-the-power-of-assisted-reproductive-technology": {
+    svg:     SVG_ART_BENEFITS_5,
+    title:   "5 Benefits of Assisted Reproductive Technology",
+    altText: "Two-column five-item grid. Items 1-3 (left): Increased Success Rates; Treatment for Infertility; Family Building Options. Items 4-5 (right): Genetic Testing; Emotional Support.",
   },
 };
 
