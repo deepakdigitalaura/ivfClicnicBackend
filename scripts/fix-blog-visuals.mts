@@ -911,6 +911,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "preserving-hope-ivf-and-fertility-preservation-for-cancer-patients": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 39: Draft blogs (batch 7) ───────────────────────────────────
+  "questions-to-ask-ivf-specialist-at-1st-visit": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "r-j-lajja-of-my-fm-taking-interview-of-dr-parth-bavishi": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "rebuilding-families-fertility-treatment-options-for-cancer-survivors": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "recurrent-miscarriage-why-does-it-keep-happening-and-what-can-you-do": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "role-of-exercise-in-ivf-success": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

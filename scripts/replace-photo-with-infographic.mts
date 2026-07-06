@@ -3822,6 +3822,170 @@ const SVG_CANCER_TREATMENT_FERTILITY_EFFECTS = `<svg xmlns="http://www.w3.org/20
   <text x="434" y="185" font-size="10.5" fill="${C.muted}">Severe cases stop sperm production</text>
 </svg>`;
 
+// ── Wave 39 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D7-1 (Questions to ask IVF specialist): "5 Questions to Ask Your IVF Specialist"
+// Source: Blog H2 headings [4],[8],[11],[13],[15], stated verbatim
+const SVG_IVF_SPECIALIST_QUESTIONS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 QUESTIONS TO ASK YOUR IVF SPECIALIST</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Success Rate</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Ask about live birth rates for your age group</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Diagnostic Tests</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Understand what tests are needed first</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Risks &amp; Complications</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Know potential side effects in advance</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Treatment Plan</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Get a plan personalized to your case</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Costs Involved</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Clarify all costs before beginning treatment</text>
+</svg>`;
+
+// Blog D7-2 (RJ Lajja interview): "RJ Lajja Interviews Dr. Parth Bavishi: Highlights"
+// Source: Blog para [3], stated verbatim
+const SVG_RJ_LAJJA_INTERVIEW = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">RJ LAJJA INTERVIEWS DR. PARTH BAVISHI: HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Interview</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">RJ Lajja of My FM interviewed Dr. Parth Bavishi</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Topics Discussed</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Advanced fertility treatments and IVF innovations</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Featured Expert</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Dr. Parth Bavishi, leading fertility specialist</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Compassionate Care</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Insights into care at Bavishi Fertility Institute</text>
+</svg>`;
+
+// Blog D7-3 (Rebuilding families after cancer): "4 Fertility Preservation Options"
+// Source: Blog nodes [21]-[24], stated verbatim
+const SVG_CANCER_SURVIVOR_PRESERVATION_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 FERTILITY PRESERVATION OPTIONS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Egg Freezing</text>
+  <text x="123" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Harvest and freeze</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">eggs for later use</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Sperm Banking</text>
+  <text x="299" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Freeze sperm for</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">future use</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Embryo Freezing</text>
+  <text x="475" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Freeze embryos</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">created via IVF</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Ovarian Tissue</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Freezing</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Experimental option</text>
+</svg>`;
+
+// Blog D7-4 (Recurrent miscarriage): "When to Investigate Recurrent Miscarriage"
+// Source: Blog node [13], stated verbatim
+const SVG_RECURRENT_MISCARRIAGE_TIMING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHEN TO INVESTIGATE RECURRENT MISCARRIAGE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="59" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="59" font-size="12" font-weight="700" fill="${C.dark}">Two Consecutive Miscarriages</text>
+  <text x="68" y="76" font-size="10.5" fill="${C.muted}">Seek evaluation immediately</text>
+  <rect x="20" y="98" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="98" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="113" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="113" font-size="12" font-weight="700" fill="${C.dark}">Two Non-Consecutive Losses</text>
+  <text x="68" y="130" font-size="10.5" fill="${C.muted}">Discuss with your doctor</text>
+  <rect x="20" y="152" width="760" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="152" width="8" height="46" rx="3" fill="${C.rose}"/>
+  <text x="38" y="167" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="167" font-size="12" font-weight="700" fill="${C.dark}">One Miscarriage, Age 35+</text>
+  <text x="68" y="184" font-size="10.5" fill="${C.muted}">Consider assessment</text>
+  <rect x="20" y="206" width="760" height="30" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="206" width="8" height="30" rx="3" fill="${C.rose}"/>
+  <text x="38" y="225" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="225" font-size="12" font-weight="700" fill="${C.dark}">Three or More Miscarriages — Full investigation required</text>
+</svg>`;
+
+// Blog D7-5 (Role of exercise in IVF): "5 Benefits of Exercise for IVF Success"
+// Source: Blog node [7], stated verbatim
+const SVG_EXERCISE_IVF_BENEFITS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 BENEFITS OF EXERCISE FOR IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Improved Circulation</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Better blood flow to reproductive organs</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Stress Reduction</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Releases endorphins to ease anxiety</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Healthy Weight &amp; BMI</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Supports optimal fertility outcomes</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Hormone Regulation</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Balances hormones involved in ovulation</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Enhanced Mood</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Supports emotional resilience during IVF</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -8828,6 +8992,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_CANCER_TREATMENT_FERTILITY_EFFECTS,
     title:   "How Cancer Treatment Affects Fertility",
     altText: "Two-panel comparison. Left (Effects on Women's Fertility): Premature Menopause; Reduced Egg Quality; Ovarian Failure. Right (Effects on Men's Fertility): Reduced Sperm Count; Abnormal Sperm; Azoospermia.",
+  },
+
+  // ── Wave 39: Draft blogs (batch 7) ──────────────────────────────────
+  "questions-to-ask-ivf-specialist-at-1st-visit": {
+    svg:     SVG_IVF_SPECIALIST_QUESTIONS_5,
+    title:   "5 Questions to Ask Your IVF Specialist",
+    altText: "Two-column five-item grid. Items 1-3 (left): Success Rate; Diagnostic Tests; Risks & Complications. Items 4-5 (right): Treatment Plan; Costs Involved.",
+  },
+
+  "r-j-lajja-of-my-fm-taking-interview-of-dr-parth-bavishi": {
+    svg:     SVG_RJ_LAJJA_INTERVIEW,
+    title:   "RJ Lajja Interviews Dr. Parth Bavishi: Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Interview: RJ Lajja of My FM interviewed Dr. Parth Bavishi. Highlight 02 Topics Discussed: advanced fertility treatments and IVF innovations. Highlight 03 Featured Expert: Dr. Parth Bavishi, leading fertility specialist. Highlight 04 Compassionate Care: insights into care at Bavishi Fertility Institute.",
+  },
+
+  "rebuilding-families-fertility-treatment-options-for-cancer-survivors": {
+    svg:     SVG_CANCER_SURVIVOR_PRESERVATION_4,
+    title:   "4 Fertility Preservation Options",
+    altText: "Four-panel horizontal infographic. Egg Freezing: harvest and freeze eggs for later use. Sperm Banking: freeze sperm for future use. Embryo Freezing: freeze embryos created via IVF. Ovarian Tissue Freezing: experimental option.",
+  },
+
+  "recurrent-miscarriage-why-does-it-keep-happening-and-what-can-you-do": {
+    svg:     SVG_RECURRENT_MISCARRIAGE_TIMING,
+    title:   "When to Investigate Recurrent Miscarriage",
+    altText: "Four-row accent-bar infographic. 01 Two Consecutive Miscarriages: seek evaluation immediately. 02 Two Non-Consecutive Losses: discuss with your doctor. 03 One Miscarriage, Age 35+: consider assessment. 04 Three or More Miscarriages: full investigation required.",
+  },
+
+  "role-of-exercise-in-ivf-success": {
+    svg:     SVG_EXERCISE_IVF_BENEFITS_5,
+    title:   "5 Benefits of Exercise for IVF Success",
+    altText: "Two-column five-item grid. Items 1-3 (left): Improved Circulation; Stress Reduction; Healthy Weight & BMI. Items 4-5 (right): Hormone Regulation; Enhanced Mood.",
   },
 };
 
