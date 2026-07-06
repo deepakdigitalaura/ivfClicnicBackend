@@ -2902,6 +2902,195 @@ const SVG_FEMALE_INFERTILITY_TESTS_6 = `<svg xmlns="http://www.w3.org/2000/svg" 
   <text x="467" y="216" font-size="10.5" fill="${C.muted}">AMH, AFC, FSH and estradiol levels</text>
 </svg>`;
 
+// ── Wave 34 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D2-1 (ICSI vs IVF upsold): "ICSI vs IVF: Is It Actually Needed?"
+// Source: Blog nodes [18] (genuinely recommended) and [21] (not necessary), stated verbatim
+const SVG_ICSI_ACTUALLY_NEEDED = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">ICSI Is Genuinely Needed</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Very Low Sperm Count</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Severe male factor infertility</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Poor Motility or Shape</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Abnormal morphology affects fertilisation</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">No Sperm in Semen</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Surgically retrieved sperm (azoospermia)</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Previous Fertilisation Failure</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Standard IVF fertilisation didn't work before</text>
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">ICSI Is Not Necessary</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Normal Semen Analysis</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">No male factor infertility present</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">First IVF Cycle</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">No prior fertilisation failure</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Unexplained Infertility</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">With normal sperm parameters</text>
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Female-Only Infertility</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">PCOS or endometriosis with normal sperm</text>
+</svg>`;
+
+// Blog D2-2 (Impact of age & repeated IVF cycles): "7 Strategies to Improve IVF Success"
+// Source: Blog node [17]-[24] — 7 unique strategies (deduplicated from a repeated list), stated verbatim
+const SVG_IVF_SUCCESS_STRATEGIES_7 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 STRATEGIES TO IMPROVE IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Healthy Diet</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Antioxidants, vitamins and minerals from balanced meals</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Weight Management</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Under- and over-weight can both affect fertility</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Harmful Substances</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Limit alcohol, quit smoking, avoid drugs</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Stress Management</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Yoga, meditation and mindfulness reduce stress</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Regular Physical Activity</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Moderate exercise like walking, swimming, yoga</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Consult a Fertility Specialist</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Personalized plan; PGT can boost implantation</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Mind Cycle Timing</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Shorter intervals between cycles aid cumulative success</text>
+</svg>`;
+
+// Blog D2-3 (Folic acid): "5 Reasons Folic Acid Matters"
+// Source: Blog nodes [16] (before conception) and [20],[22],[24] (during pregnancy), stated verbatim
+const SVG_FOLIC_ACID_REASONS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 REASONS FOLIC ACID MATTERS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Healthy DNA Synthesis</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Supports cell division from the very first weeks</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Prevents Neural Tube Defects</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Critical for brain and spinal cord formation</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Improved Reproductive Health</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Supports overall preconception wellness</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Reduces Risk of Premature Birth</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Lowers likelihood of early delivery</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Prevents Low Birth Weight</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Supports healthy fetal growth</text>
+</svg>`;
+
+// Blog D2-4 (IMSI technique): "How IMSI Works: 5 Lab Steps"
+// Source: Blog node [12] — 5 lab steps, stated verbatim
+const SVG_IMSI_LAB_STEPS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW IMSI WORKS: 5 LAB STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="67" r="14" fill="${C.rose}"/>
+  <text x="68" y="71.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="63" font-size="11.5" font-weight="700" fill="${C.dark}">Semen Preparation</text>
+  <text x="92" y="79" font-size="10" fill="${C.muted}">Density gradient or swim-up isolates the best motile sperm</text>
+  <rect x="40" y="96" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="119" r="14" fill="${C.rose}"/>
+  <text x="68" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="115" font-size="11.5" font-weight="700" fill="${C.dark}">High Magnification Screening</text>
+  <text x="92" y="131" font-size="10" fill="${C.muted}">Sperm scanned at 6000x under specialized optics</text>
+  <rect x="40" y="148" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="171" r="14" fill="${C.rose}"/>
+  <text x="68" y="175.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="167" font-size="11.5" font-weight="700" fill="${C.dark}">Morphological Assessment</text>
+  <text x="92" y="183" font-size="10" fill="${C.muted}">Checked for head shape, size, symmetry and vacuoles</text>
+  <rect x="40" y="200" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="223" r="14" fill="${C.rose}"/>
+  <text x="68" y="227.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="219" font-size="11.5" font-weight="700" fill="${C.dark}">Selection &amp; Injection</text>
+  <text x="92" y="235" font-size="10" fill="${C.muted}">Best morphologically normal sperm injected into the egg</text>
+  <rect x="40" y="252" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="275" r="14" fill="${C.rose}"/>
+  <text x="68" y="279.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="271" font-size="11.5" font-weight="700" fill="${C.dark}">Culture &amp; Monitoring</text>
+  <text x="92" y="287" font-size="10" fill="${C.muted}">Fertilized eggs tracked through embryo development</text>
+</svg>`;
+
+// Blog D2-5 (Egg retrieval process): "The Egg Retrieval Process: 4 Steps"
+// Source: Blog nodes [7],[9],[11] — 4-step retrieval sequence, stated verbatim
+const SVG_EGG_RETRIEVAL_STEPS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">THE EGG RETRIEVAL PROCESS: 4 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Preparation</text>
+  <text x="123" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Ovarian stimulation</text>
+  <text x="123" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">medications</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Monitoring</text>
+  <text x="299" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Ultrasound and hormone</text>
+  <text x="299" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">level checks</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Procedure</text>
+  <text x="475" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Ultrasound-guided needle</text>
+  <text x="475" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">under sedation</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Egg Collection</text>
+  <text x="664" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Eggs aspirated from</text>
+  <text x="664" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">follicles into a lab dish</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -7753,6 +7942,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_FEMALE_INFERTILITY_TESTS_6,
     title:   "6 Key Diagnostic Tests for Female Infertility",
     altText: "Two-column six-item grid. Items 1-3 (left): Hormonal Testing (FSH, LH, AMH, thyroid, prolactin); Ultrasound Evaluation (checks PCOS, fibroids, endometrial thickness); Laparoscopy (direct view to check endometriosis, PID). Items 4-6 (right): Ovulation Testing (progesterone levels, OPKs, ultrasound); HSG (X-ray checks tubal blockages and uterine shape); Ovarian Reserve Testing (AMH, AFC, FSH and estradiol levels).",
+  },
+
+  // ── Wave 34: Draft blogs (batch 2) ──────────────────────────────────
+  "icsi-vs-ivf-do-you-actually-need-icsi-or-is-it-being-upsold-to-you": {
+    svg:     SVG_ICSI_ACTUALLY_NEEDED,
+    title:   "ICSI vs IVF: Is It Actually Needed?",
+    altText: "Two-panel comparison. Left (ICSI Is Genuinely Needed): Very Low Sperm Count; Poor Motility or Shape; No Sperm in Semen (azoospermia); Previous Fertilisation Failure. Right (ICSI Is Not Necessary): Normal Semen Analysis; First IVF Cycle with no prior failure; Unexplained Infertility with normal sperm; Female-Only Infertility Issues (PCOS, endometriosis).",
+  },
+
+  "impact-of-age-repeated-ivf-cycles-on-pregnancy": {
+    svg:     SVG_IVF_SUCCESS_STRATEGIES_7,
+    title:   "7 Strategies to Improve IVF Success",
+    altText: "Two-column seven-item grid. Items 1-4 (left): Healthy Diet; Weight Management; Avoid Harmful Substances; Stress Management. Items 5-7 (right): Regular Physical Activity; Consult a Fertility Specialist; Mind Cycle Timing.",
+  },
+
+  "importance-of-folic-acid-before-and-during-pregnancy": {
+    svg:     SVG_FOLIC_ACID_REASONS_5,
+    title:   "5 Reasons Folic Acid Matters",
+    altText: "Two-column five-item grid. Items 1-3 (left): Healthy DNA Synthesis; Prevents Neural Tube Defects; Improved Reproductive Health. Items 4-5 (right): Reduces Risk of Premature Birth; Prevents Low Birth Weight.",
+  },
+
+  "imsi-technique-for-ivf-advanced-sperm-selection-for-better-success": {
+    svg:     SVG_IMSI_LAB_STEPS_5,
+    title:   "How IMSI Works: 5 Lab Steps",
+    altText: "Five-row single-column infographic. Step 1 Semen Preparation: density gradient or swim-up isolates the best motile sperm. Step 2 High Magnification Screening: sperm scanned at 6000x under specialized optics. Step 3 Morphological Assessment: checked for head shape, size, symmetry and vacuoles. Step 4 Selection & Injection: best morphologically normal sperm injected into the egg. Step 5 Culture & Monitoring: fertilized eggs tracked through embryo development.",
+  },
+
+  "in-vitro-egg-aspiration-how-the-ivf-egg-retrieval-process-works": {
+    svg:     SVG_EGG_RETRIEVAL_STEPS_4,
+    title:   "The Egg Retrieval Process: 4 Steps",
+    altText: "Four-panel horizontal infographic. Step 1 Preparation: ovarian stimulation medications. Step 2 Monitoring: ultrasound and hormone level checks. Step 3 Procedure: ultrasound-guided needle under sedation. Step 4 Egg Collection: eggs aspirated from follicles into a lab dish.",
   },
 };
 

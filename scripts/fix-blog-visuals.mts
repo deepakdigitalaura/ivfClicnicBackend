@@ -833,6 +833,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "how-to-test-for-female-infertility": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 34: Draft blogs (batch 2) ───────────────────────────────────
+  "icsi-vs-ivf-do-you-actually-need-icsi-or-is-it-being-upsold-to-you": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "impact-of-age-repeated-ivf-cycles-on-pregnancy": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "importance-of-folic-acid-before-and-during-pregnancy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "imsi-technique-for-ivf-advanced-sperm-selection-for-better-success": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "in-vitro-egg-aspiration-how-the-ivf-egg-retrieval-process-works": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
