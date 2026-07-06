@@ -1007,6 +1007,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "what-to-expect-during-each-stage-of-ivf": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 45: Draft blogs (batch 13) ──────────────────────────────────
+  "when-can-you-start-exercising-after-delivery": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "when-is-macs-most-useful-indications-ideal-candidates-limitations": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "when-is-the-right-time-to-freeze-your-eggs": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "who-should-consider-a-blastocyst-transfer-in-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "why-are-couples-from-other-cities-choosing-ahmedabad-for-ivf-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

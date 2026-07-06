@@ -4843,6 +4843,179 @@ const SVG_IVF_STAGES_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 8
   <text x="92" y="339" font-size="10" fill="${C.muted}">Confirms whether implantation succeeded</text>
 </svg>`;
 
+// ── Wave 45 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D13-1 (Exercise after delivery): "When to Start Exercising: By Delivery Type"
+// Source: Blog nodes [13],[16], stated verbatim
+const SVG_EXERCISE_AFTER_DELIVERY_TYPE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">After Vaginal Delivery</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Light Activities</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Walking, pelvic exercises within a few days</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Moderate Exercise</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">After 4–6 weeks, with doctor approval</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">After C-Section</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Light Walking</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Can begin after a few days</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Structured Exercise</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Wait at least 6–8 weeks with clearance</text>
+</svg>`;
+
+// Blog D13-2 (MACS sperm selection): "When Is MACS Most Useful? 5 Indications"
+// Source: Blog H3 headings [16],[18],[20],[22],[24], stated verbatim
+const SVG_MACS_INDICATIONS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHEN IS MACS MOST USEFUL? 5 INDICATIONS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Repeated IVF or ICSI Failure</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="130" font-size="11.5" font-weight="700" fill="${C.dark}">High Sperm DNA Fragmentation</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="190" font-size="11.5" font-weight="700" fill="${C.dark}">Recurrent Miscarriage</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="70" font-size="11.5" font-weight="700" fill="${C.dark}">Poor Embryo Quality</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="130" font-size="11.5" font-weight="700" fill="${C.dark}">Male Factor Infertility</text>
+</svg>`;
+
+// Blog D13-3 (Right time to freeze eggs): "3 Benefits of Egg Freezing"
+// Source: Blog node [12], stated verbatim
+const SVG_EGG_FREEZING_BENEFITS_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 BENEFITS OF EGG FREEZING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Delaying Childbirth</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Defer family planning to</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">pursue other goals</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Maintaining Fertility</text>
+  <text x="400" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Options</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Protect reproductive</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">potential for later</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Peace of Mind</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Emotional reassurance</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">about future fertility</text>
+</svg>`;
+
+// Blog D13-4 (Blastocyst transfer candidates): "6 Candidates for Blastocyst Transfer"
+// Source: Blog H3 headings [14],[17],[20],[23],[26],[29], stated verbatim
+const SVG_BLASTOCYST_TRANSFER_CANDIDATES_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 CANDIDATES FOR BLASTOCYST TRANSFER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11" font-weight="700" fill="${C.dark}">Multiple High-Quality Day-3</text>
+  <text x="67" y="83" font-size="11" font-weight="700" fill="${C.dark}">Embryos</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="76" font-size="11.5" font-weight="700" fill="${C.dark}">Previous IVF Failure</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="142" font-size="11.5" font-weight="700" fill="${C.dark}">Undergoing PGT-A Testing</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="142" font-size="11.5" font-weight="700" fill="${C.dark}">Normal Uterine Receptivity</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="208" font-size="11.5" font-weight="700" fill="${C.dark}">Younger Women (Under 35)</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="203" font-size="11" font-weight="700" fill="${C.dark}">Single Embryo Transfer</text>
+  <text x="467" y="219" font-size="11" font-weight="700" fill="${C.dark}">Candidates</text>
+</svg>`;
+
+// Blog D13-5 (Ahmedabad IVF choice): "10 Reasons Couples Choose Ahmedabad for IVF"
+// Source: Blog node [5], stated verbatim
+const SVG_AHMEDABAD_IVF_REASONS_10 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="${FONT}">
+  <rect width="800" height="400" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="398.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 REASONS COUPLES CHOOSE AHMEDABAD FOR IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="76" font-size="11.5" font-weight="700" fill="${C.dark}">Advanced Medical Infrastructure</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="130" font-size="11" font-weight="700" fill="${C.dark}">Expertise &amp; Experience of</text>
+  <text x="67" y="146" font-size="11" font-weight="700" fill="${C.dark}">Specialists</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="196" font-size="11.5" font-weight="700" fill="${C.dark}">Higher IVF Success Rates</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="250" font-size="11" font-weight="700" fill="${C.dark}">Affordability Without</text>
+  <text x="67" y="266" font-size="11" font-weight="700" fill="${C.dark}">Compromising Quality</text>
+  <rect x="10" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="313" r="16" fill="${C.rose}"/>
+  <text x="42" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="316" font-size="11.5" font-weight="700" fill="${C.dark}">Comprehensive Fertility Services</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="76" font-size="11.5" font-weight="700" fill="${C.dark}">Personalized &amp; Ethical Care</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="136" font-size="11.5" font-weight="700" fill="${C.dark}">Shorter Waiting Times</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="467" y="196" font-size="11.5" font-weight="700" fill="${C.dark}">Convenient Travel &amp; Stay Options</text>
+  <rect x="410" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="253" r="16" fill="${C.rose}"/>
+  <text x="442" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="467" y="250" font-size="11" font-weight="700" fill="${C.dark}">Supportive Environment &amp;</text>
+  <text x="467" y="266" font-size="11" font-weight="700" fill="${C.dark}">Patient Education</text>
+  <rect x="410" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="313" r="16" fill="${C.rose}"/>
+  <text x="442" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">10</text>
+  <text x="467" y="310" font-size="11" font-weight="700" fill="${C.dark}">Trusted Reputation &amp;</text>
+  <text x="467" y="326" font-size="11" font-weight="700" fill="${C.dark}">Patient Testimonials</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -10035,6 +10208,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IVF_STAGES_6,
     title:   "What to Expect: 6 Stages of IVF",
     altText: "Six-row single-column infographic. Stage 1 Ovarian Stimulation: medications stimulate the ovaries. Stage 2 Egg Retrieval: minor procedure to collect eggs. Stage 3 Sperm Collection: sample collected or surgically retrieved. Stage 4 Fertilization & Embryo Development: eggs and sperm combine in the lab. Stage 5 Embryo Transfer: selected embryo placed into the uterus. Stage 6 Pregnancy Test: confirms whether implantation succeeded.",
+  },
+
+  // ── Wave 45: Draft blogs (batch 13) ─────────────────────────────────
+  "when-can-you-start-exercising-after-delivery": {
+    svg:     SVG_EXERCISE_AFTER_DELIVERY_TYPE,
+    title:   "When to Start Exercising: By Delivery Type",
+    altText: "Two-panel comparison. Left (After Vaginal Delivery): Light Activities within a few days; Moderate Exercise after 4-6 weeks with doctor approval. Right (After C-Section): Light Walking after a few days; Structured Exercise waits at least 6-8 weeks with clearance.",
+  },
+
+  "when-is-macs-most-useful-indications-ideal-candidates-limitations": {
+    svg:     SVG_MACS_INDICATIONS_5,
+    title:   "When Is MACS Most Useful? 5 Indications",
+    altText: "Two-column five-item grid. Items 1-3 (left): Repeated IVF or ICSI Failure; High Sperm DNA Fragmentation; Recurrent Miscarriage. Items 4-5 (right): Poor Embryo Quality; Male Factor Infertility.",
+  },
+
+  "when-is-the-right-time-to-freeze-your-eggs": {
+    svg:     SVG_EGG_FREEZING_BENEFITS_3,
+    title:   "3 Benefits of Egg Freezing",
+    altText: "Three-panel horizontal infographic. Delaying Childbirth: defer family planning to pursue other goals. Maintaining Fertility Options: protect reproductive potential for later. Peace of Mind: emotional reassurance about future fertility.",
+  },
+
+  "who-should-consider-a-blastocyst-transfer-in-ivf": {
+    svg:     SVG_BLASTOCYST_TRANSFER_CANDIDATES_6,
+    title:   "6 Candidates for Blastocyst Transfer",
+    altText: "Two-column six-item grid. Items 1-3 (left): Multiple High-Quality Day-3 Embryos; Undergoing PGT-A Testing; Younger Women Under 35. Items 4-6 (right): Previous IVF Failure; Normal Uterine Receptivity; Single Embryo Transfer Candidates.",
+  },
+
+  "why-are-couples-from-other-cities-choosing-ahmedabad-for-ivf-treatment": {
+    svg:     SVG_AHMEDABAD_IVF_REASONS_10,
+    title:   "10 Reasons Couples Choose Ahmedabad for IVF",
+    altText: "Two-column ten-item grid. Items 1-5 (left): Advanced Medical Infrastructure; Expertise & Experience of Specialists; Higher IVF Success Rates; Affordability Without Compromising Quality; Comprehensive Fertility Services. Items 6-10 (right): Personalized & Ethical Care; Shorter Waiting Times; Convenient Travel & Stay Options; Supportive Environment & Patient Education; Trusted Reputation & Patient Testimonials.",
   },
 };
 
