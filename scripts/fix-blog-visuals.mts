@@ -1151,6 +1151,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "dr-nilesh-jains-expert-guidance-on-fertility-treatments-in-mumbai": {
     removeBlocks: ["key aspects", "key numbers"],
   },
+  // ── Wave 54: Draft blogs (batch 22) ──────────────────────────────────
+  "finding-fertility-options-with-low-amh-a-detailed-guide": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "from-diagnosis-to-conception-managing-pcos-for-a-healthy-pregnancy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "from-ivf-to-motherhood-the-journey-of-hope-and-happiness": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "genetic-testing-before-and-during-pregnancy-a-comprehensive-guide": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "high-risk-pregnancy-a-guide-to-lifestyle-diet-and-rest-tips": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

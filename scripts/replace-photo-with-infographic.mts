@@ -6327,6 +6327,175 @@ const SVG_NILESH_JAIN_ROUNDTABLE = `<svg xmlns="http://www.w3.org/2000/svg" view
   <text x="68" y="270" font-size="10.5" fill="${C.muted}">Empowering gynecologists to deliver better patient care</text>
 </svg>`;
 
+// ── Wave 54 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D22-1 (Low AMH fertility options): "5 Ways to Support AMH Levels"
+// Source: Blog H3 headings [11],[13],[15],[18],[21], stated verbatim
+const SVG_AMH_SUPPORT_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 WAYS TO SUPPORT AMH LEVELS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Diet &amp; Nutrition</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Antioxidant-rich foods and healthy fats</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Exercise</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Moderate activity supports hormonal balance</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Stress Management</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Mindfulness, meditation and yoga</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Supplements</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Vitamin D under medical supervision</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Consult a Specialist</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">IVF options with or without egg donation</text>
+</svg>`;
+
+// Blog D22-2 (PCOS diagnosis to conception): "PCOS to Pregnancy: 5-Step Journey"
+// Source: Blog H3 headings [15],[19],[29],[34],[40], stated verbatim
+const SVG_PCOS_PREGNANCY_JOURNEY_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 362" font-family="${FONT}">
+  <rect width="800" height="362" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="360.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">PCOS TO PREGNANCY: 5-STEP JOURNEY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="73" r="16" fill="${C.rose}"/>
+  <text x="68" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Accurate Diagnosis</text>
+  <text x="92" y="84" font-size="10.5" fill="${C.muted}">Hormone testing and pelvic ultrasound</text>
+  <rect x="40" y="110" width="720" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="139" r="16" fill="${C.rose}"/>
+  <text x="68" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Modifications</text>
+  <text x="92" y="150" font-size="10.5" fill="${C.muted}">Diet, exercise, weight and stress management</text>
+  <rect x="40" y="176" width="720" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="205" r="16" fill="${C.rose}"/>
+  <text x="68" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Ovulation Induction</text>
+  <text x="92" y="216" font-size="10.5" fill="${C.muted}">Letrozole, Clomid or gonadotropins</text>
+  <rect x="40" y="242" width="720" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="271" r="16" fill="${C.rose}"/>
+  <text x="68" y="276" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="265" font-size="11.5" font-weight="700" fill="${C.dark}">Assisted Reproductive Techniques</text>
+  <text x="92" y="282" font-size="10.5" fill="${C.muted}">IUI or IVF as needed</text>
+  <rect x="40" y="308" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="331" r="16" fill="${C.rose}"/>
+  <text x="68" y="336" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="327" font-size="11.5" font-weight="700" fill="${C.dark}">Pregnancy Monitoring &amp; Support</text>
+  <text x="92" y="343" font-size="10.5" fill="${C.muted}">Ongoing care throughout pregnancy</text>
+</svg>`;
+
+// Blog D22-3 (From IVF to Motherhood): "The IVF Journey: 4 Key Steps"
+// Source: Blog node [7], stated verbatim
+const SVG_IVF_JOURNEY_STEPS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">THE IVF JOURNEY: 4 KEY STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Ovulation</text>
+  <text x="123" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Induction</text>
+  <text x="123" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Stimulates multiple</text>
+  <text x="123" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">eggs</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="299" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Minor collection</text>
+  <text x="299" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">procedure</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Fertilization</text>
+  <text x="475" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Eggs meet sperm</text>
+  <text x="475" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">in the lab</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Embryo</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Transfer</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Placed into the uterus</text>
+</svg>`;
+
+// Blog D22-4 (Genetic testing before/during pregnancy): "3 Types of Preimplantation Genetic Testing"
+// Source: Blog node [9], stated verbatim
+const SVG_PGT_TYPES_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 TYPES OF PREIMPLANTATION GENETIC TESTING</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="720" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="77" r="16" fill="${C.rose}"/>
+  <text x="68" y="82" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">A</text>
+  <text x="92" y="71" font-size="11.5" font-weight="700" fill="${C.dark}">PGT-A</text>
+  <text x="92" y="88" font-size="10.5" fill="${C.muted}">Screens for chromosomal abnormalities (aneuploidy)</text>
+  <rect x="40" y="114" width="720" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="143" r="16" fill="${C.rose}"/>
+  <text x="68" y="148" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">M</text>
+  <text x="92" y="137" font-size="11.5" font-weight="700" fill="${C.dark}">PGT-M</text>
+  <text x="92" y="154" font-size="10.5" fill="${C.muted}">Detects specific inherited genetic mutations</text>
+  <rect x="40" y="180" width="720" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="209" r="16" fill="${C.rose}"/>
+  <text x="68" y="214" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">SR</text>
+  <text x="92" y="203" font-size="11.5" font-weight="700" fill="${C.dark}">PGT-SR</text>
+  <text x="92" y="220" font-size="10.5" fill="${C.muted}">Identifies structural chromosomal rearrangements</text>
+</svg>`;
+
+// Blog D22-5 (High-risk pregnancy lifestyle/diet/rest): "4 Lifestyle Tips for High-Risk Pregnancy"
+// Source: Blog nodes [7],[9],[10],[11], stated verbatim
+const SVG_HIGH_RISK_PREGNANCY_LIFESTYLE_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 LIFESTYLE TIPS FOR HIGH-RISK PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Stay Active</text>
+  <text x="123" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Prenatal yoga or</text>
+  <text x="123" y="139" text-anchor="middle" font-size="9" fill="${C.muted}">swimming</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Manage Stress</text>
+  <text x="299" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Meditation, deep</text>
+  <text x="299" y="139" text-anchor="middle" font-size="9" fill="${C.muted}">breathing</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Get Enough Sleep</text>
+  <text x="475" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">7-8 hours</text>
+  <text x="475" y="139" text-anchor="middle" font-size="9" fill="${C.muted}">per night</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Avoid Harmful</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Substances</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">No smoking or alcohol</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -11798,6 +11967,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_NILESH_JAIN_ROUNDTABLE,
     title:   "Dr. Nilesh Jain: Fertility Round Table Highlights",
     altText: "Four-row accent-bar infographic. Highlight 01 The Meeting: round table with gynecologists in Chembur, Mumbai. Highlight 02 Led By: Dr. Nilesh Jain, fertility and IVF expert at BFI Mumbai. Highlight 03 Key Focus: safe, effective, personalized fertility treatments. Highlight 04 The Outcome: empowering gynecologists to deliver better patient care.",
+  },
+
+  // ── Wave 54: Draft blogs (batch 22) ─────────────────────────────────
+  "finding-fertility-options-with-low-amh-a-detailed-guide": {
+    svg:     SVG_AMH_SUPPORT_5,
+    title:   "5 Ways to Support AMH Levels",
+    altText: "Two-column five-item grid. Items 1-3 (left): Diet & Nutrition; Exercise; Stress Management. Items 4-5 (right): Supplements; Consult a Specialist.",
+  },
+
+  "from-diagnosis-to-conception-managing-pcos-for-a-healthy-pregnancy": {
+    svg:     SVG_PCOS_PREGNANCY_JOURNEY_5,
+    title:   "PCOS to Pregnancy: 5-Step Journey",
+    altText: "Five-row single-column infographic. Step 1 Accurate Diagnosis: hormone testing and pelvic ultrasound. Step 2 Lifestyle Modifications: diet, exercise, weight and stress management. Step 3 Ovulation Induction: Letrozole, Clomid or gonadotropins. Step 4 Assisted Reproductive Techniques: IUI or IVF as needed. Step 5 Pregnancy Monitoring & Support: ongoing care throughout pregnancy.",
+  },
+
+  "from-ivf-to-motherhood-the-journey-of-hope-and-happiness": {
+    svg:     SVG_IVF_JOURNEY_STEPS_4,
+    title:   "The IVF Journey: 4 Key Steps",
+    altText: "Four-panel horizontal infographic. Ovulation Induction: stimulates multiple eggs. Egg Retrieval: minor collection procedure. Fertilization: eggs meet sperm in the lab. Embryo Transfer: placed into the uterus.",
+  },
+
+  "genetic-testing-before-and-during-pregnancy-a-comprehensive-guide": {
+    svg:     SVG_PGT_TYPES_3,
+    title:   "3 Types of Preimplantation Genetic Testing",
+    altText: "Three-row single-column infographic. PGT-A: screens for chromosomal abnormalities (aneuploidy). PGT-M: detects specific inherited genetic mutations. PGT-SR: identifies structural chromosomal rearrangements.",
+  },
+
+  "high-risk-pregnancy-a-guide-to-lifestyle-diet-and-rest-tips": {
+    svg:     SVG_HIGH_RISK_PREGNANCY_LIFESTYLE_4,
+    title:   "4 Lifestyle Tips for High-Risk Pregnancy",
+    altText: "Four-panel horizontal infographic. Stay Active: prenatal yoga or swimming. Manage Stress: meditation, deep breathing. Get Enough Sleep: 7-8 hours per night. Avoid Harmful Substances: no smoking or alcohol.",
   },
 };
 
