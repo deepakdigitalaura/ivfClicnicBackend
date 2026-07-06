@@ -817,6 +817,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "reasons-for-iui-failure-symptoms-and-causes": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 33: Draft blogs ─────────────────────────────────────────────
+  "how-many-embryos-should-be-transferred-risks-of-multiple-pregnancy-explained": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "10-signs-you-should-see-fertility-specialist-and-when-not-to-wait": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "how-to-improve-male-infertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "how-to-recognize-signs-of-ovulation-for-better-fertility-planning": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "how-to-test-for-female-infertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

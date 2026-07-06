@@ -2702,6 +2702,206 @@ const SVG_BFI_REJUVENATION_IVF = `<svg xmlns="http://www.w3.org/2000/svg" viewBo
   <text x="60" y="322" font-size="10" fill="${C.muted}">Patient comfort, safety and emotional support throughout the fertility journey</text>
 </svg>`;
 
+// ── Wave 33 SVG constants (Draft-blog enrichment begins) ──────────────
+
+// Blog D1-1 (How many embryos to transfer): "How Many Embryos to Transfer? By Age"
+// Source: Blog node [13] — 3 age-based recommendations, stated verbatim
+const SVG_EMBRYO_TRANSFER_COUNT_BY_AGE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW MANY EMBRYOS TO TRANSFER? BY AGE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">UNDER 35</text>
+  <text x="149" y="118" text-anchor="middle" font-size="16" font-weight="800" fill="${C.rose}">Single Embryo</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">SET usually recommended</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">35–40</text>
+  <text x="400" y="118" text-anchor="middle" font-size="16" font-weight="800" fill="${C.rose}">One or Two</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">May be considered</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">ABOVE 40</text>
+  <text x="651" y="118" text-anchor="middle" font-size="16" font-weight="800" fill="${C.rose}">Two Embryos</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">May be transferred</text>
+  <text x="400" y="190" text-anchor="middle" font-size="9.5" fill="${C.muted}">Many leading IVF centres now encourage SET to reduce risk while maintaining success</text>
+</svg>`;
+
+// Blog D1-2 (When to see a fertility specialist): "When to See a Fertility Specialist: By Age"
+// Source: Blog node [9] — 4 age-based timing thresholds, stated verbatim
+const SVG_FERTILITY_SPECIALIST_TIMING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHEN TO SEE A FERTILITY SPECIALIST: BY AGE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">UNDER 35</text>
+  <text x="108" y="112" text-anchor="middle" font-size="18" font-weight="800" fill="${C.rose}">12</text>
+  <text x="108" y="130" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">months first</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">35–37</text>
+  <text x="254" y="112" text-anchor="middle" font-size="18" font-weight="800" fill="${C.rose}">6</text>
+  <text x="254" y="130" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">months first</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">38–39</text>
+  <text x="400" y="112" text-anchor="middle" font-size="18" font-weight="800" fill="${C.rose}">3</text>
+  <text x="400" y="130" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">months first</text>
+  <rect x="478" y="48" width="282" height="138" rx="8" fill="${C.white}" stroke="${C.rose}" stroke-width="1.5"/>
+  <rect x="478" y="48" width="282" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="282" height="12" fill="${C.rose}"/>
+  <text x="619" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">40+</text>
+  <text x="619" y="118" text-anchor="middle" font-size="15" font-weight="800" fill="${C.rose}">See a Specialist</text>
+  <text x="619" y="135" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Immediately</text>
+</svg>`;
+
+// Blog D1-3 (Improve male infertility): "9 Ways to Improve Male Fertility"
+// Source: Blog headings [9],[13],[15],[17],[19],[21],[23],[25],[27] — 9 strategies, stated verbatim
+const SVG_MALE_INFERTILITY_IMPROVE_9 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 370" font-family="${FONT}">
+  <rect width="800" height="370" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="368.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">9 WAYS TO IMPROVE MALE FERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Healthy Diet</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Antioxidants, vitamins, zinc-rich foods</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Regular Exercise</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Maintains healthy weight and hormone balance</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Smoking &amp; Alcohol</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Both reduce sperm count and quality</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Reduce Stress</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Protects testosterone and sperm production</text>
+  <rect x="10" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="313" r="16" fill="${C.rose}"/>
+  <text x="42" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="307" font-size="11.5" font-weight="700" fill="${C.dark}">Limit Environmental Toxins</text>
+  <text x="67" y="324" font-size="10.5" fill="${C.muted}">Avoid pesticides, heavy metals, chemicals</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Loose-Fitting Underwear</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Reduces scrotal temperature</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Treat Underlying Conditions</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Varicocele, hormonal, ED treatments</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Fertility Supplements</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Zinc, folic acid, CoQ10, L-carnitine</text>
+  <rect x="410" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="253" r="16" fill="${C.rose}"/>
+  <text x="442" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="467" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Avoid Excessive Heat</text>
+  <text x="467" y="264" font-size="10.5" fill="${C.muted}">No hot tubs, saunas, prolonged heat exposure</text>
+</svg>`;
+
+// Blog D1-4 (Recognize signs of ovulation): "5 Physical Signs of Ovulation"
+// Source: Blog node [8] — 5 physical signs, stated verbatim
+const SVG_OVULATION_PHYSICAL_SIGNS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 PHYSICAL SIGNS OF OVULATION</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">BBT Shift</text>
+  <text x="108" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Temp rises</text>
+  <text x="108" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">after ovulation</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="100" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Cervical Mucus</text>
+  <text x="254" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Clear, slippery,</text>
+  <text x="254" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">egg-white like</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Ovulation Pain</text>
+  <text x="400" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Mild, sharp,</text>
+  <text x="400" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">one-sided</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="100" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Breast</text>
+  <text x="546" y="114" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Tenderness</text>
+  <text x="546" y="133" text-anchor="middle" font-size="9" fill="${C.muted}">Hormonal swelling</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="100" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.dark}">Increased Libido</text>
+  <text x="692" y="118" text-anchor="middle" font-size="9" fill="${C.muted}">Natural surge in</text>
+  <text x="692" y="131" text-anchor="middle" font-size="9" fill="${C.muted}">fertile window</text>
+</svg>`;
+
+// Blog D1-5 (Test for female infertility): "6 Key Diagnostic Tests for Female Infertility"
+// Source: Blog headings [19],[23],[25],[28],[34],[43] — 6 core tests, stated verbatim
+const SVG_FEMALE_INFERTILITY_TESTS_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 KEY DIAGNOSTIC TESTS FOR FEMALE INFERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Testing</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">FSH, LH, AMH, thyroid, prolactin</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Ovulation Testing</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Progesterone levels, OPKs, ultrasound</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Ultrasound Evaluation</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Checks PCOS, fibroids, endometrial thickness</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">HSG</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">X-ray checks tubal blockages and uterine shape</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Laparoscopy</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Direct view to check endometriosis, PID</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Reserve Testing</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">AMH, AFC, FSH and estradiol levels</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -7522,6 +7722,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_EMBRYO_TRANSFER_TIMELINE,
     title:   "Post-Embryo Transfer: 4 Key Milestones",
     altText: "Four-row accent-bar infographic. Milestone 1 Days 1–3: Embryo Hatches and Settles — zona pellucida dissolves; embryo floats freely in uterine cavity. Milestone 2 Days 4–5: Implantation Occurs — hatched embryo attaches to and burrows into the endometrial lining. Milestone 3 Days 6–9: hCG Production Begins — pregnancy hormone rises but may be too low for home tests. Milestone 4 Days 10–14: Official Blood Pregnancy Test — beta hCG blood test gives a clear and reliable result.",
+  },
+
+  // ── Wave 33: Draft blogs (enrichment continues into unpublished content) ──
+  "how-many-embryos-should-be-transferred-risks-of-multiple-pregnancy-explained": {
+    svg:     SVG_EMBRYO_TRANSFER_COUNT_BY_AGE,
+    title:   "How Many Embryos to Transfer? By Age",
+    altText: "Three-panel horizontal infographic. Under 35: Single Embryo Transfer (SET) usually recommended. 35–40: One or two embryos may be considered. Above 40: Two embryos may be transferred in some cases.",
+  },
+
+  "10-signs-you-should-see-fertility-specialist-and-when-not-to-wait": {
+    svg:     SVG_FERTILITY_SPECIALIST_TIMING,
+    title:   "When to See a Fertility Specialist: By Age",
+    altText: "Four-panel horizontal infographic. Under 35: try for 12 months first. 35–37: try for 6 months first. 38–39: try for 3 months first. 40+: see a specialist immediately.",
+  },
+
+  "how-to-improve-male-infertility": {
+    svg:     SVG_MALE_INFERTILITY_IMPROVE_9,
+    title:   "9 Ways to Improve Male Fertility",
+    altText: "Two-column nine-item grid. Items 1-5 (left): Healthy Diet (antioxidants, vitamins, zinc-rich foods); Regular Exercise (maintains healthy weight and hormone balance); Avoid Smoking & Alcohol (both reduce sperm count and quality); Reduce Stress (protects testosterone and sperm production); Limit Environmental Toxins (avoid pesticides, heavy metals, chemicals). Items 6-9 (right): Loose-Fitting Underwear (reduces scrotal temperature); Treat Underlying Conditions (varicocele, hormonal, ED treatments); Fertility Supplements (zinc, folic acid, CoQ10, L-carnitine); Avoid Excessive Heat (no hot tubs, saunas, prolonged heat exposure).",
+  },
+
+  "how-to-recognize-signs-of-ovulation-for-better-fertility-planning": {
+    svg:     SVG_OVULATION_PHYSICAL_SIGNS_5,
+    title:   "5 Physical Signs of Ovulation",
+    altText: "Five-panel horizontal infographic. Sign 1 BBT Shift: temperature rises slightly after ovulation. Sign 2 Cervical Mucus Changes: becomes clear, slippery, egg-white like. Sign 3 Ovulation Pain: mild, sharp pain on one side (mittelschmerz). Sign 4 Breast Tenderness: hormonal fluctuations cause swelling. Sign 5 Increased Libido: natural surge during the fertile window.",
+  },
+
+  "how-to-test-for-female-infertility": {
+    svg:     SVG_FEMALE_INFERTILITY_TESTS_6,
+    title:   "6 Key Diagnostic Tests for Female Infertility",
+    altText: "Two-column six-item grid. Items 1-3 (left): Hormonal Testing (FSH, LH, AMH, thyroid, prolactin); Ultrasound Evaluation (checks PCOS, fibroids, endometrial thickness); Laparoscopy (direct view to check endometriosis, PID). Items 4-6 (right): Ovulation Testing (progesterone levels, OPKs, ultrasound); HSG (X-ray checks tubal blockages and uterine shape); Ovarian Reserve Testing (AMH, AFC, FSH and estradiol levels).",
   },
 };
 
