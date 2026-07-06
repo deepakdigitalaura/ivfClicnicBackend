@@ -5691,6 +5691,182 @@ const SVG_ART_BENEFITS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0
   <text x="67" y="216" font-size="10.5" fill="${C.muted}">Counseling throughout the journey</text>
 </svg>`;
 
+// ── Wave 50 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D18-1 (Choose best IVF clinic in Ahmedabad): "10 Factors to Choose the Best IVF Clinic"
+// Source: Blog node [4], stated verbatim
+const SVG_IVF_CLINIC_CHOOSE_10 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="${FONT}">
+  <rect width="800" height="400" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="398.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 FACTORS TO CHOOSE THE BEST IVF CLINIC</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="76" font-size="11.5" font-weight="700" fill="${C.dark}">Expertise &amp; Experience</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="136" font-size="11.5" font-weight="700" fill="${C.dark}">IVF Success Rates</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="196" font-size="11.5" font-weight="700" fill="${C.dark}">Advanced Technology</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="256" font-size="11.5" font-weight="700" fill="${C.dark}">Range of Fertility Services</text>
+  <rect x="10" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="313" r="16" fill="${C.rose}"/>
+  <text x="42" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="316" font-size="11.5" font-weight="700" fill="${C.dark}">Ethical Practices &amp; Transparency</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="76" font-size="11.5" font-weight="700" fill="${C.dark}">Patient-Centric Care</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="130" font-size="11" font-weight="700" fill="${C.dark}">Hygiene, Infrastructure &amp;</text>
+  <text x="467" y="146" font-size="11" font-weight="700" fill="${C.dark}">Accessibility</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="467" y="196" font-size="11.5" font-weight="700" fill="${C.dark}">Customized Treatment Plans</text>
+  <rect x="410" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="253" r="16" fill="${C.rose}"/>
+  <text x="442" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="467" y="256" font-size="11.5" font-weight="700" fill="${C.dark}">Affordability &amp; Financing</text>
+  <rect x="410" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="313" r="16" fill="${C.rose}"/>
+  <text x="442" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">10</text>
+  <text x="467" y="316" font-size="11.5" font-weight="700" fill="${C.dark}">Reviews &amp; Testimonials</text>
+</svg>`;
+
+// Blog D18-2 (Vadodara 6-year anniversary): "BFI Vadodara: Celebrating 6 Years"
+// Source: Blog paras [3],[7],[8],[17], stated verbatim
+const SVG_VADODARA_6_YEARS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI VADODARA: CELEBRATING 6 YEARS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Milestone</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Six successful years serving Vadodara couples</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Comprehensive Care</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">IVF, ICSI, egg freezing and genetic screening</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Celebrating the Team</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Doctors, embryologists, nurses and support staff honoured</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Looking Ahead</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Continuing the mission of affordable, compassionate care</text>
+</svg>`;
+
+// Blog D18-3 (Laser assisted hatching): "Who Benefits From Laser-Assisted Hatching?"
+// Source: Blog node [10], stated verbatim
+const SVG_LAH_WHO_BENEFITS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHO BENEFITS FROM LASER-ASSISTED HATCHING?</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Women Over 35</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Thicker zona pellucida benefits from LAH</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Previous IVF Failures</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Can improve implantation rates</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Compromised Embryo Quality</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Even weaker zona pellucida can thrive</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Unexplained Infertility</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Helps when other factors are unclear</text>
+</svg>`;
+
+// Blog D18-4 (Decoding semen analysis report): "Semen Analysis: Normal Ranges"
+// Source: Blog nodes [13],[15],[17], stated verbatim
+const SVG_SEMEN_ANALYSIS_RANGES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">SEMEN ANALYSIS: NORMAL RANGES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">CONCENTRATION</text>
+  <text x="149" y="118" text-anchor="middle" font-size="17" font-weight="800" fill="${C.rose}">15M+/mL</text>
+  <text x="149" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">sperm per milliliter</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">MOTILITY</text>
+  <text x="400" y="118" text-anchor="middle" font-size="20" font-weight="800" fill="${C.rose}">40%+</text>
+  <text x="400" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">moving sperm</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">MORPHOLOGY</text>
+  <text x="651" y="118" text-anchor="middle" font-size="20" font-weight="800" fill="${C.rose}">4%+</text>
+  <text x="651" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">normal-shaped sperm</text>
+</svg>`;
+
+// Blog D18-5 (Demystifying IVF facts and myths): "4 Types of IVF Treatment"
+// Source: Blog node [12], stated verbatim
+const SVG_IVF_TYPES_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 TYPES OF IVF TREATMENT</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Conventional</text>
+  <text x="123" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">IVF</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Standard stimulation</text>
+  <text x="123" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">and transfer</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Natural Cycle</text>
+  <text x="299" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">IVF</text>
+  <text x="299" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">No hormonal</text>
+  <text x="299" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">stimulation</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Mini-IVF</text>
+  <text x="475" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Lower doses reduce</text>
+  <text x="475" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">OHSS risk</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">ICSI</text>
+  <text x="664" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">For male factor</text>
+  <text x="664" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">infertility</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -11038,6 +11214,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_ART_BENEFITS_5,
     title:   "5 Benefits of Assisted Reproductive Technology",
     altText: "Two-column five-item grid. Items 1-3 (left): Increased Success Rates; Treatment for Infertility; Family Building Options. Items 4-5 (right): Genetic Testing; Emotional Support.",
+  },
+
+  // ── Wave 50: Draft blogs (batch 18) ─────────────────────────────────
+  "how-to-choose-the-best-ivf-clinic-in-ahmedabad": {
+    svg:     SVG_IVF_CLINIC_CHOOSE_10,
+    title:   "10 Factors to Choose the Best IVF Clinic",
+    altText: "Two-column ten-item grid. Items 1-5 (left): Expertise & Experience; IVF Success Rates; Advanced Technology; Range of Fertility Services; Ethical Practices & Transparency. Items 6-10 (right): Patient-Centric Care; Hygiene, Infrastructure & Accessibility; Customized Treatment Plans; Affordability & Financing; Reviews & Testimonials.",
+  },
+
+  "celebrating-6-years-of-care-compassion-and-miracles-at-bavishi-fertility-institute-vadodara": {
+    svg:     SVG_VADODARA_6_YEARS,
+    title:   "BFI Vadodara: Celebrating 6 Years",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Milestone: six successful years serving Vadodara couples. Highlight 02 Comprehensive Care: IVF, ICSI, egg freezing and genetic screening. Highlight 03 Celebrating the Team: doctors, embryologists, nurses and support staff honoured. Highlight 04 Looking Ahead: continuing the mission of affordable, compassionate care.",
+  },
+
+  "cracking-opens-the-possibilities-how-laser-assisted-hatching-is-changing-the-game-for-ivf-patients": {
+    svg:     SVG_LAH_WHO_BENEFITS,
+    title:   "Who Benefits From Laser-Assisted Hatching?",
+    altText: "Four-row accent-bar infographic. Highlight 01 Women Over 35: thicker zona pellucida benefits from LAH. Highlight 02 Previous IVF Failures: can improve implantation rates. Highlight 03 Compromised Embryo Quality: even weaker zona pellucida can thrive. Highlight 04 Unexplained Infertility: helps when other factors are unclear.",
+  },
+
+  "decoding-your-semen-analysis-report-a-simple-guide": {
+    svg:     SVG_SEMEN_ANALYSIS_RANGES,
+    title:   "Semen Analysis: Normal Ranges",
+    altText: "Three-panel horizontal stat infographic. Concentration: 15 million+ per milliliter. Motility: 40%+ moving sperm. Morphology: 4%+ normal-shaped sperm.",
+  },
+
+  "demystifying-ivf-facts-and-myths": {
+    svg:     SVG_IVF_TYPES_4,
+    title:   "4 Types of IVF Treatment",
+    altText: "Four-panel horizontal infographic. Conventional IVF: standard stimulation and transfer. Natural Cycle IVF: no hormonal stimulation. Mini-IVF: lower doses reduce OHSS risk. ICSI: for male factor infertility.",
   },
 };
 

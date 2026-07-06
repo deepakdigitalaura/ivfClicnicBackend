@@ -1087,6 +1087,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "building-families-with-hope-the-power-of-assisted-reproductive-technology": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 50: Draft blogs (batch 18) ──────────────────────────────────
+  "how-to-choose-the-best-ivf-clinic-in-ahmedabad": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "celebrating-6-years-of-care-compassion-and-miracles-at-bavishi-fertility-institute-vadodara": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "cracking-opens-the-possibilities-how-laser-assisted-hatching-is-changing-the-game-for-ivf-patients": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "decoding-your-semen-analysis-report-a-simple-guide": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "demystifying-ivf-facts-and-myths": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
