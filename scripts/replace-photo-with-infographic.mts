@@ -5016,6 +5016,168 @@ const SVG_AHMEDABAD_IVF_REASONS_10 = `<svg xmlns="http://www.w3.org/2000/svg" vi
   <text x="467" y="326" font-size="11" font-weight="700" fill="${C.dark}">Patient Testimonials</text>
 </svg>`;
 
+// ── Wave 46 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D14-1 (Most Trusted Chain Hospital in Gujarat): "Bavishi Fertility Institute: Most Trusted in Gujarat"
+// Source: Blog paras [3],[5],[8],[9],[10], stated verbatim
+const SVG_BFI_MOST_TRUSTED_GUJARAT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI: MOST TRUSTED FERTILITY CHAIN IN GUJARAT</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Award</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Most Trusted Fertility Chain Hospital, featured on News18 Gujarati</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Complete Care Model</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Diagnostics, consultation and treatment under one roof</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Founding Doctors</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Dr. Himanshu &amp; Dr. Falguni Bavishi built BFI from the ground up</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Next Generation</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Dr. Parth &amp; Dr. Janki Bavishi carry the legacy forward</text>
+</svg>`;
+
+// Blog D14-2 (Republic Day celebration): "Republic Day at Bavishi Fertility Institute: Highlights"
+// Source: Blog paras [3],[5],[6], stated verbatim
+const SVG_REPUBLIC_DAY_BFI = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">REPUBLIC DAY AT BAVISHI FERTILITY INSTITUTE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Celebration</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Flag hoisting across Ahmedabad, Bhuj and Mumbai centres</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Team Spirit</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Speeches honouring the resilience of families and the nation</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Festive Activities</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Discussions and activities fostered joy and togetherness</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Our Mission</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Bringing happiness and hope, one story at a time</text>
+</svg>`;
+
+// Blog D14-3 (IVF Babies Meet Vadodara): "IVF Babies Meet Vadodara: Event Highlights"
+// Source: Blog paras [3],[5],[8],[14], stated verbatim (100+ figure is the blog's own stated number)
+const SVG_IVF_BABIES_MEET_VADODARA = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IVF BABIES MEET VADODARA: EVENT HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Gathering</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">100+ IVF-conceived babies and their parents came together</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">A Historic First</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Vadodara's first event of its kind for IVF families</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Breaking Stigma</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Open conversations to dispel myths around infertility</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Real Stories</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Parents shared their journeys of struggle and triumph</text>
+</svg>`;
+
+// Blog D14-4 (Questions during multiple IVF cycles): "5 Questions to Ask About Multiple IVF Cycles"
+// Source: Blog H4 headings [15],[17],[19],[21],[23], stated verbatim
+const SVG_MULTIPLE_IVF_CYCLES_QUESTIONS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 QUESTIONS TO ASK ABOUT MULTIPLE IVF CYCLES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Are Multiple Cycles Necessary?</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">How your doctor decides for your case</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">What Are the Success Rates?</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Multiple cycles vs a single cycle</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">What Are the Risks?</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Potential complications of repeated cycles</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">How Many Cycles Recommended?</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Before considering alternatives</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">How Long Between Cycles?</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Recommended waiting period</text>
+</svg>`;
+
+// Blog D14-5 (Male infertility signs): "6 Signs of Male Infertility"
+// Source: Blog node [8], stated verbatim
+const SVG_MALE_INFERTILITY_SIGNS_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 SIGNS OF MALE INFERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Changes in Sexual Function</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">ED, difficulty ejaculating, low desire</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Pain or Swelling</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Discomfort in the testicle area</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Abnormal Semen Analysis</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Irregular count, motility or morphology</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Imbalances</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Testosterone level issues</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Small or Firm Testicles</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">May suggest sperm production issues</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Gynecomastia</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Enlarged breasts linked to hormone imbalance</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -10239,6 +10401,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_AHMEDABAD_IVF_REASONS_10,
     title:   "10 Reasons Couples Choose Ahmedabad for IVF",
     altText: "Two-column ten-item grid. Items 1-5 (left): Advanced Medical Infrastructure; Expertise & Experience of Specialists; Higher IVF Success Rates; Affordability Without Compromising Quality; Comprehensive Fertility Services. Items 6-10 (right): Personalized & Ethical Care; Shorter Waiting Times; Convenient Travel & Stay Options; Supportive Environment & Patient Education; Trusted Reputation & Patient Testimonials.",
+  },
+
+  // ── Wave 46: Draft blogs (batch 14) ─────────────────────────────────
+  "bavishi-fertility-institute-most-trusted-fertility-chain-hospital-in-gujarat": {
+    svg:     SVG_BFI_MOST_TRUSTED_GUJARAT,
+    title:   "Bavishi Fertility Institute: Most Trusted in Gujarat",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Award: Most Trusted Fertility Chain Hospital, featured on News18 Gujarati. Highlight 02 Complete Care Model: diagnostics, consultation and treatment under one roof. Highlight 03 Founding Doctors: Dr. Himanshu and Dr. Falguni Bavishi built BFI from the ground up. Highlight 04 Next Generation: Dr. Parth and Dr. Janki Bavishi carry the legacy forward.",
+  },
+
+  "celebrated-republic-day-with-hope-and-happiness-at-bavishi-fertility-institute": {
+    svg:     SVG_REPUBLIC_DAY_BFI,
+    title:   "Republic Day at Bavishi Fertility Institute: Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Celebration: flag hoisting across Ahmedabad, Bhuj and Mumbai centres. Highlight 02 Team Spirit: speeches honouring resilience of families and the nation. Highlight 03 Festive Activities: discussions and activities fostered joy and togetherness. Highlight 04 Our Mission: bringing happiness and hope, one story at a time.",
+  },
+
+  "ivf-babies-meet-in-vadodara-a-momentous-event-creating-awareness": {
+    svg:     SVG_IVF_BABIES_MEET_VADODARA,
+    title:   "IVF Babies Meet Vadodara: Event Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Gathering: 100+ IVF-conceived babies and their parents came together. Highlight 02 A Historic First: Vadodara's first event of its kind for IVF families. Highlight 03 Breaking Stigma: open conversations to dispel myths around infertility. Highlight 04 Real Stories: parents shared their journeys of struggle and triumph.",
+  },
+
+  "questions-to-discuss-with-doctor-during-multiple-ivf-cycles": {
+    svg:     SVG_MULTIPLE_IVF_CYCLES_QUESTIONS_5,
+    title:   "5 Questions to Ask About Multiple IVF Cycles",
+    altText: "Two-column five-item grid. Items 1-3 (left): Are Multiple Cycles Necessary?; What Are the Risks?; How Long Between Cycles?. Items 4-5 (right): What Are the Success Rates?; How Many Cycles Recommended?.",
+  },
+
+  "male-infertility-signs-causes-treatment": {
+    svg:     SVG_MALE_INFERTILITY_SIGNS_6,
+    title:   "6 Signs of Male Infertility",
+    altText: "Two-column six-item grid. Items 1-3 (left): Changes in Sexual Function; Abnormal Semen Analysis; Small or Firm Testicles. Items 4-6 (right): Pain or Swelling; Hormonal Imbalances; Gynecomastia.",
   },
 };
 

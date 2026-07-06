@@ -1023,6 +1023,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "why-are-couples-from-other-cities-choosing-ahmedabad-for-ivf-treatment": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 46: Draft blogs (batch 14) ──────────────────────────────────
+  "bavishi-fertility-institute-most-trusted-fertility-chain-hospital-in-gujarat": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "celebrated-republic-day-with-hope-and-happiness-at-bavishi-fertility-institute": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "ivf-babies-meet-in-vadodara-a-momentous-event-creating-awareness": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "questions-to-discuss-with-doctor-during-multiple-ivf-cycles": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "male-infertility-signs-causes-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
