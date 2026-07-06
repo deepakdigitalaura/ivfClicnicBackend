@@ -991,6 +991,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "understanding-sperm-dna-fragmentation-causes-treatment-and-ivf-options": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 44: Draft blogs (batch 12) ──────────────────────────────────
+  "understanding-the-reasons-for-ivf-failure": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "unexplained-infertility-when-tests-are-normal-but-you-still-cant-conceive": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "unlocking-hope-getting-pregnant-with-pcos-and-irregular-periods": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "unlocking-the-puzzle-of-recurrent-ivf-failure-endometriosis-and-uterine-factors": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "what-to-expect-during-each-stage-of-ivf": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

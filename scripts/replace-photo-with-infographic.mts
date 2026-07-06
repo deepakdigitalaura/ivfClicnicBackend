@@ -4649,6 +4649,200 @@ const SVG_SPERM_DNA_FRAGMENTATION_CAUSES_6 = `<svg xmlns="http://www.w3.org/2000
   <text x="467" y="216" font-size="10.5" fill="${C.muted}">Pesticides, heavy metals and pollutants</text>
 </svg>`;
 
+// ── Wave 44 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D12-1 (Reasons for IVF failure): "8 Reasons IVF Cycles Fail"
+// Source: Blog node [4], stated verbatim
+const SVG_IVF_FAILURE_REASONS_8 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 340" font-family="${FONT}">
+  <rect width="800" height="340" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="338.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">8 REASONS IVF CYCLES FAIL</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Quality</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Genetic or developmental issues</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Uterine Health</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Implantation issues in the lining</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Response</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Egg quality and quantity</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Sperm Quality</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Male factor infertility</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Factors</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Smoking, obesity, stress</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Age-Related Decline</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Reduced ovarian reserve</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Unexplained Infertility</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">No clear identifiable cause</text>
+  <rect x="410" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="253" r="16" fill="${C.rose}"/>
+  <text x="442" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="467" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Protocol Variations</text>
+  <text x="467" y="264" font-size="10.5" fill="${C.muted}">Stimulation and timing issues</text>
+</svg>`;
+
+// Blog D12-2 (Unexplained infertility): "6 Diagnostic Criteria for Unexplained Infertility"
+// Source: Blog node [13], stated verbatim
+const SVG_UNEXPLAINED_INFERTILITY_CRITERIA_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 DIAGNOSTIC CRITERIA FOR UNEXPLAINED INFERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Normal Semen Analysis</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Count, motility and morphology</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Regular Ovulation</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Confirmed via progesterone or ultrasound</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Open Fallopian Tubes</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Confirmed by HSG or laparoscopy</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Normal Uterine Cavity</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">No fibroids, polyps or adhesions</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Adequate Ovarian Reserve</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">AMH, AFC and FSH within range</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">12 Months Trying</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Or 6 months if age 35+</text>
+</svg>`;
+
+// Blog D12-3 (PCOS pregnancy hope): "4 Tips for Getting Pregnant with PCOS"
+// Source: Blog node [8]-[11], stated verbatim
+const SVG_PCOS_PREGNANCY_TIPS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 TIPS FOR GETTING PREGNANT WITH PCOS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Track Your</text>
+  <text x="123" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Cycle</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">BBT, OPKs or apps</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Lifestyle</text>
+  <text x="299" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Changes</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Weight, diet, exercise</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Medications</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Clomid or letrozole</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Fertility</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Treatments</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">IUI or IVF options</text>
+</svg>`;
+
+// Blog D12-4 (Recurrent IVF failure — endometriosis/uterine): "Endometriosis & Uterine Factors in IVF Failure"
+// Source: Blog nodes [7] (endometriosis) and [11] (uterine), stated verbatim
+const SVG_ENDOMETRIOSIS_UTERINE_FACTORS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">How Endometriosis Affects IVF</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Poor Egg Quality</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Chronic inflammation affects eggs</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Implantation Failure</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Lesions release toxins affecting embryos</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Uterine Receptivity</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Alters contractions, harder to attach</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Uterine Factors</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Uterine Polyps</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Benign growths that interfere with implantation</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Fibroids</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Tumors that distort the uterine cavity</text>
+</svg>`;
+
+// Blog D12-5 (What to expect during IVF stages): "What to Expect: 6 Stages of IVF"
+// Source: Blog H2 headings [5],[8],[10],[12],[14],[17], stated verbatim
+const SVG_IVF_STAGES_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 362" font-family="${FONT}">
+  <rect width="800" height="362" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="360.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">WHAT TO EXPECT: 6 STAGES OF IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="67" r="14" fill="${C.rose}"/>
+  <text x="68" y="71.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="63" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Stimulation</text>
+  <text x="92" y="79" font-size="10" fill="${C.muted}">Medications stimulate the ovaries to produce eggs</text>
+  <rect x="40" y="96" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="119" r="14" fill="${C.rose}"/>
+  <text x="68" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="115" font-size="11.5" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="92" y="131" font-size="10" fill="${C.muted}">Minor procedure to collect mature eggs</text>
+  <rect x="40" y="148" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="171" r="14" fill="${C.rose}"/>
+  <text x="68" y="175.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="167" font-size="11.5" font-weight="700" fill="${C.dark}">Sperm Collection</text>
+  <text x="92" y="183" font-size="10" fill="${C.muted}">Sample collected or surgically retrieved</text>
+  <rect x="40" y="200" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="223" r="14" fill="${C.rose}"/>
+  <text x="68" y="227.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="219" font-size="11.5" font-weight="700" fill="${C.dark}">Fertilization &amp; Embryo Development</text>
+  <text x="92" y="235" font-size="10" fill="${C.muted}">Eggs and sperm combine in the lab</text>
+  <rect x="40" y="252" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="275" r="14" fill="${C.rose}"/>
+  <text x="68" y="279.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="271" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Transfer</text>
+  <text x="92" y="287" font-size="10" fill="${C.muted}">Selected embryo placed into the uterus</text>
+  <rect x="40" y="304" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="327" r="14" fill="${C.rose}"/>
+  <text x="68" y="331.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="92" y="323" font-size="11.5" font-weight="700" fill="${C.dark}">Pregnancy Test</text>
+  <text x="92" y="339" font-size="10" fill="${C.muted}">Confirms whether implantation succeeded</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -9810,6 +10004,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_SPERM_DNA_FRAGMENTATION_CAUSES_6,
     title:   "6 Causes of High Sperm DNA Fragmentation",
     altText: "Two-column six-item grid. Items 1-3 (left): Oxidative Stress; Varicocele; Aging. Items 4-6 (right): Infections; Lifestyle Factors; Environmental Toxins.",
+  },
+
+  // ── Wave 44: Draft blogs (batch 12) ─────────────────────────────────
+  "understanding-the-reasons-for-ivf-failure": {
+    svg:     SVG_IVF_FAILURE_REASONS_8,
+    title:   "8 Reasons IVF Cycles Fail",
+    altText: "Two-column eight-item grid. Items 1-4 (left): Embryo Quality; Uterine Health; Ovarian Response; Sperm Quality. Items 5-8 (right): Lifestyle Factors; Age-Related Decline; Unexplained Infertility; Protocol Variations.",
+  },
+
+  "unexplained-infertility-when-tests-are-normal-but-you-still-cant-conceive": {
+    svg:     SVG_UNEXPLAINED_INFERTILITY_CRITERIA_6,
+    title:   "6 Diagnostic Criteria for Unexplained Infertility",
+    altText: "Two-column six-item grid. Items 1-3 (left): Normal Semen Analysis; Open Fallopian Tubes; Adequate Ovarian Reserve. Items 4-6 (right): Regular Ovulation; Normal Uterine Cavity; 12 Months Trying.",
+  },
+
+  "unlocking-hope-getting-pregnant-with-pcos-and-irregular-periods": {
+    svg:     SVG_PCOS_PREGNANCY_TIPS_4,
+    title:   "4 Tips for Getting Pregnant with PCOS",
+    altText: "Four-panel horizontal infographic. Track Your Cycle: BBT, OPKs or apps. Lifestyle Changes: weight, diet, exercise. Medications: Clomid or letrozole. Fertility Treatments: IUI or IVF options.",
+  },
+
+  "unlocking-the-puzzle-of-recurrent-ivf-failure-endometriosis-and-uterine-factors": {
+    svg:     SVG_ENDOMETRIOSIS_UTERINE_FACTORS,
+    title:   "Endometriosis & Uterine Factors in IVF Failure",
+    altText: "Two-panel comparison. Left (How Endometriosis Affects IVF): Poor Egg Quality; Implantation Failure; Uterine Receptivity changes. Right (Uterine Factors): Uterine Polyps; Fibroids.",
+  },
+
+  "what-to-expect-during-each-stage-of-ivf": {
+    svg:     SVG_IVF_STAGES_6,
+    title:   "What to Expect: 6 Stages of IVF",
+    altText: "Six-row single-column infographic. Stage 1 Ovarian Stimulation: medications stimulate the ovaries. Stage 2 Egg Retrieval: minor procedure to collect eggs. Stage 3 Sperm Collection: sample collected or surgically retrieved. Stage 4 Fertilization & Embryo Development: eggs and sperm combine in the lab. Stage 5 Embryo Transfer: selected embryo placed into the uterus. Stage 6 Pregnancy Test: confirms whether implantation succeeded.",
   },
 };
 
