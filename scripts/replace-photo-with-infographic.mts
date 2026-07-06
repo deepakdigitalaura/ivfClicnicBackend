@@ -3986,6 +3986,160 @@ const SVG_EXERCISE_IVF_BENEFITS_5 = `<svg xmlns="http://www.w3.org/2000/svg" vie
   <text x="467" y="144" font-size="10.5" fill="${C.muted}">Supports emotional resilience during IVF</text>
 </svg>`;
 
+// ── Wave 40 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D8-1 (Silent endometriosis): "4 Ways Endometriosis Impacts the Pelvis"
+// Source: Blog node [9], stated verbatim
+const SVG_ENDOMETRIOSIS_PELVIC_IMPACTS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 WAYS ENDOMETRIOSIS IMPACTS THE PELVIS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Chronic Pelvic</text>
+  <text x="123" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Inflammation</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Scar Tissue &amp;</text>
+  <text x="299" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Adhesions</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Ovarian Cysts</text>
+  <text x="475" y="116" text-anchor="middle" font-size="9" fill="${C.muted}">(Endometriomas)</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Distorted Pelvic</text>
+  <text x="664" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Anatomy</text>
+</svg>`;
+
+// Blog D8-2 (Success rate IVF Ahmedabad 2025): "IVF Success Rates by Age: 2025 Outlook"
+// Source: Blog node [11], stated verbatim
+const SVG_IVF_SUCCESS_RATES_2025 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IVF SUCCESS RATES BY AGE: 2025 OUTLOOK</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="140" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">UNDER 35</text>
+  <text x="149" y="120" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">40–60%</text>
+  <text x="149" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">success per cycle</text>
+  <rect x="291" y="48" width="218" height="140" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">35–40</text>
+  <text x="400" y="120" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">30–50%</text>
+  <text x="400" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">success per cycle</text>
+  <rect x="542" y="48" width="218" height="140" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">OVER 40</text>
+  <text x="651" y="120" text-anchor="middle" font-size="24" font-weight="800" fill="${C.rose}">15–30%</text>
+  <text x="651" y="140" text-anchor="middle" font-size="10" fill="${C.muted}">success per cycle</text>
+</svg>`;
+
+// Blog D8-3 (Team Excellence at BFI): "Team Excellence & Innovation at Bavishi Fertility Institute"
+// Source: Blog paras [3],[5],[6],[7], stated verbatim
+const SVG_TEAM_EXCELLENCE_BFI = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">TEAM EXCELLENCE &amp; INNOVATION AT BFI</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Meeting</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">December 19th gathering of 100+ dedicated professionals</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Key Focus Areas</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Quality, safety, comfort, privacy and personalized care</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">New Facility</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">State-of-the-art Level 2 ART-IVF facility launching in Nikol</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">The Vision</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Redefining excellence in fertility care</text>
+</svg>`;
+
+// Blog D8-4 (Varicocele): "Understanding Varicocele Severity"
+// Source: Blog node [9], stated verbatim
+const SVG_VARICOCELE_SEVERITY_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">UNDERSTANDING VARICOCELE SEVERITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">GRADE</text>
+  <text x="149" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Graded 1–3;</text>
+  <text x="149" y="130" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Grade 3 is most severe</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">FERTILITY IMPACT</text>
+  <text x="400" y="112" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">Raises scrotal temp,</text>
+  <text x="400" y="130" text-anchor="middle" font-size="10" font-weight="600" fill="${C.dark}">reduces sperm quality</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">SYMPTOMS</text>
+  <text x="651" y="112" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">Pain, discomfort or</text>
+  <text x="651" y="130" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">heaviness in scrotum</text>
+</svg>`;
+
+// Blog D8-5 (Obesity & fertility): "How Obesity Affects Fertility: 4 Mechanisms"
+// Source: Blog node [11]-[14], stated verbatim
+const SVG_OBESITY_FERTILITY_MECHANISMS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW OBESITY AFFECTS FERTILITY: 4 MECHANISMS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Hormonal</text>
+  <text x="123" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Imbalance</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Disrupts ovulation</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Insulin</text>
+  <text x="299" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Resistance</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Affects ovulation</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Inflammation</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Damages tissues</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Sleep</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Disturbances</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Sleep apnea affects it</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -9023,6 +9177,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_EXERCISE_IVF_BENEFITS_5,
     title:   "5 Benefits of Exercise for IVF Success",
     altText: "Two-column five-item grid. Items 1-3 (left): Improved Circulation; Stress Reduction; Healthy Weight & BMI. Items 4-5 (right): Hormone Regulation; Enhanced Mood.",
+  },
+
+  // ── Wave 40: Draft blogs (batch 8) ──────────────────────────────────
+  "silent-endometriosis-can-you-have-it-without-symptoms": {
+    svg:     SVG_ENDOMETRIOSIS_PELVIC_IMPACTS_4,
+    title:   "4 Ways Endometriosis Impacts the Pelvis",
+    altText: "Four-panel horizontal infographic. Chronic Pelvic Inflammation. Scar Tissue & Adhesions. Ovarian Cysts (Endometriomas). Distorted Pelvic Anatomy.",
+  },
+
+  "success-rate-of-ivf-treatments-in-ahmedabad-what-to-expect-in-2025": {
+    svg:     SVG_IVF_SUCCESS_RATES_2025,
+    title:   "IVF Success Rates by Age: 2025 Outlook",
+    altText: "Three-panel horizontal stat infographic. Under 35: 40-60% success per cycle. 35-40: 30-50% success per cycle. Over 40: 15-30% success per cycle.",
+  },
+
+  "team-excellence-and-innovation-at-bavishi-fertility-institute": {
+    svg:     SVG_TEAM_EXCELLENCE_BFI,
+    title:   "Team Excellence & Innovation at Bavishi Fertility Institute",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Meeting: December 19th gathering of 100+ dedicated professionals. Highlight 02 Key Focus Areas: quality, safety, comfort, privacy and personalized care. Highlight 03 New Facility: state-of-the-art Level 2 ART-IVF facility launching in Nikol. Highlight 04 The Vision: redefining excellence in fertility care.",
+  },
+
+  "understanding-varicocele-how-serious-is-the-diagnosis": {
+    svg:     SVG_VARICOCELE_SEVERITY_3,
+    title:   "Understanding Varicocele Severity",
+    altText: "Three-panel horizontal infographic. Grade: graded 1-3, Grade 3 is most severe. Fertility Impact: raises scrotal temperature, reduces sperm quality. Symptoms: pain, discomfort or heaviness in the scrotum.",
+  },
+
+  "the-hidden-threat-to-fertility-how-obesity-affects-your-chances": {
+    svg:     SVG_OBESITY_FERTILITY_MECHANISMS_4,
+    title:   "How Obesity Affects Fertility: 4 Mechanisms",
+    altText: "Four-panel horizontal infographic. Hormonal Imbalance: disrupts ovulation. Insulin Resistance: affects ovulation. Inflammation: damages reproductive tissues. Sleep Disturbances: sleep apnea affects fertility.",
   },
 };
 

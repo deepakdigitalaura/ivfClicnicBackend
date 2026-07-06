@@ -927,6 +927,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "role-of-exercise-in-ivf-success": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 40: Draft blogs (batch 8) ───────────────────────────────────
+  "silent-endometriosis-can-you-have-it-without-symptoms": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "success-rate-of-ivf-treatments-in-ahmedabad-what-to-expect-in-2025": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "team-excellence-and-innovation-at-bavishi-fertility-institute": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "understanding-varicocele-how-serious-is-the-diagnosis": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "the-hidden-threat-to-fertility-how-obesity-affects-your-chances": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
