@@ -786,7 +786,20 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Varanasi centre brings Bavishi Fertility Institute's trusted fertility expertise to eastern Uttar Pradesh. Located at Jamuna Sewa Sadan Hospital on Panchkoshi Road in Shivpur, it offers advanced IVF treatments, expert guidance, personalised plans and end-to-end support to help families across the Purvanchal region achieve parenthood.",
-    gallery: sharedGallery("Varanasi"),
+    gallery: [
+      { src: "/assets/centres/varanasi-reception-interior.jpeg", alt: "Bavishi Fertility Institute Varanasi — reception desk" },
+      { src: "/assets/centres/varanasi-reception-lobby.jpeg", alt: "Bavishi Fertility Institute Varanasi — reception & entrance lobby" },
+      { src: "/assets/centres/varanasi-waiting-lounge.jpeg", alt: "Bavishi Fertility Institute Varanasi — patient waiting lounge" },
+      { src: "/assets/centres/varanasi-consultation-room.jpeg", alt: "Bavishi Fertility Institute Varanasi — consultation room" },
+      { src: "/assets/centres/varanasi-office-desk.jpeg", alt: "Bavishi Fertility Institute Varanasi — administrative office" },
+      { src: "/assets/centres/varanasi-andrology-lab.jpeg", alt: "Bavishi Fertility Institute Varanasi — andrology lab" },
+      { src: "/assets/centres/varanasi-embryology-lab.jpeg", alt: "Bavishi Fertility Institute Varanasi — embryology lab & cryo storage" },
+      { src: "/assets/centres/varanasi-icsi-workstation.jpeg", alt: "Bavishi Fertility Institute Varanasi — ICSI micromanipulation workstation" },
+      { src: "/assets/centres/varanasi-lab-microscopes.jpeg", alt: "Bavishi Fertility Institute Varanasi — embryology lab microscopes" },
+      { src: "/assets/centres/varanasi-lab-incubator.jpeg", alt: "Bavishi Fertility Institute Varanasi — lab incubator & laminar flow hood" },
+      { src: "/assets/centres/varanasi-lab-room.jpeg", alt: "Bavishi Fertility Institute Varanasi — laboratory room" },
+      { src: "/assets/centres/varanasi-ot.jpeg", alt: "Bavishi Fertility Institute Varanasi — operation theatre" },
+    ],
     built: true,
   },
 ];
