@@ -80,6 +80,8 @@ function parseNumeric(value: string): number | null {
   if (!/^\d/.test(trimmed)) return null;
   // Don't animate range values like "10–20%" — stripping dashes concatenates digits.
   if (/\d[–\-]\d/.test(trimmed)) return null;
+  // Don't animate fraction values like "24/7" — stripping the slash concatenates digits (24 + 7 -> 247).
+  if (/\d\/\d/.test(trimmed)) return null;
   const cleaned = trimmed.replace(/[^0-9.]/g, "");
   if (!cleaned) return null;
   const n = parseFloat(cleaned);
