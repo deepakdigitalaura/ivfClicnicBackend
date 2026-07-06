@@ -6028,6 +6028,146 @@ const SVG_EGG_FREEZING_PROCESS_3 = `<svg xmlns="http://www.w3.org/2000/svg" view
   <text x="651" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Frozen and stored securely</text>
 </svg>`;
 
+// ── Wave 52 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D20-1 (Egg quality vs quantity): "How Egg Quantity Is Measured"
+// Source: Blog node [10], stated verbatim
+const SVG_EGG_QUANTITY_TESTS_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW EGG QUANTITY IS MEASURED</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">AMH Blood Test</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Anti-Müllerian</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Hormone level</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Antral Follicle</text>
+  <text x="400" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Count</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Via ultrasound</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">FSH Levels</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Measured in certain</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">cases</text>
+</svg>`;
+
+// Blog D20-2 (Embracing positivity after embryo transfer): "3 Mindful Practices After Embryo Transfer"
+// Source: Blog node [5], stated verbatim
+const SVG_MINDFUL_PRACTICES_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 MINDFUL PRACTICES AFTER EMBRYO TRANSFER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Meditation</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Calm your mind,</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">visualize success</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Yoga</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Gentle stretches</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">reduce stress</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Deep Breathing</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Calms the nervous</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">system</text>
+</svg>`;
+
+// Blog D20-3 (Embryo glue game-changer): "How Embryo Glue Supports Implantation"
+// Source: Blog node [9], stated verbatim
+const SVG_EMBRYO_GLUE_SUPPORT_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW EMBRYO GLUE SUPPORTS IMPLANTATION</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Enhances Adhesion</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Helps embryo attach</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">to uterine lining</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Provides Nutrients</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Supports the embryo</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">during implantation</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Reduces Embryo Loss</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Improves transfer</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">outcomes</text>
+</svg>`;
+
+// Blog D20-4 (Endometrial scratching before IVF): "Endometrial Scratching: What the Evidence Shows"
+// Source: Blog node [10], stated verbatim
+const SVG_ENDOMETRIAL_SCRATCHING_EVIDENCE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">ENDOMETRIAL SCRATCHING: WHAT THE EVIDENCE SHOWS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="68" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.white}">Recurrent Implantation</text>
+  <text x="149" y="84" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.white}">Failure</text>
+  <text x="149" y="120" text-anchor="middle" font-size="18" font-weight="800" fill="${C.rose}">+10–15%</text>
+  <text x="149" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">success rate improvement</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">First IVF Cycle</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">No significant</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">benefit found</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">General Population</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Routine use not</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">supported by evidence</text>
+</svg>`;
+
+// Blog D20-5 (Endometriosis and gut health): "4 Ways Endometriosis & Gut Health Connect"
+// Source: Blog H3 headings [16],[20],[24],[28], stated verbatim
+const SVG_ENDOMETRIOSIS_GUT_CONNECTION_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 WAYS ENDOMETRIOSIS &amp; GUT HEALTH CONNECT</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Chronic Inflammation</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Irritates intestines, alters gut motility</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Gut Microbiome &amp; Estrogen</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Imbalance can worsen endometriosis growth</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Endometriosis on the Bowel</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Painful bowel movements, often mistaken for IBS</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Immune System Dysfunction</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Weakened immunity lets lesions persist</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -11437,6 +11577,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_EGG_FREEZING_PROCESS_3,
     title:   "The Egg Freezing Process: 3 Steps",
     altText: "Three-panel horizontal infographic. Ovarian Stimulation: hormonal injections. Egg Retrieval: minimally invasive procedure. Freezing: frozen and stored securely.",
+  },
+
+  // ── Wave 52: Draft blogs (batch 20) ─────────────────────────────────
+  "egg-quality-vs-egg-quantity-what-really-matters": {
+    svg:     SVG_EGG_QUANTITY_TESTS_3,
+    title:   "How Egg Quantity Is Measured",
+    altText: "Three-panel horizontal infographic. AMH Blood Test: Anti-Müllerian Hormone level. Antral Follicle Count: via ultrasound. FSH Levels: measured in certain cases.",
+  },
+
+  "embracing-positivity-activities-to-nurture-your-journey-to-motherhood-after-embryo-transfer": {
+    svg:     SVG_MINDFUL_PRACTICES_3,
+    title:   "3 Mindful Practices After Embryo Transfer",
+    altText: "Three-panel horizontal infographic. Meditation: calm your mind, visualize success. Yoga: gentle stretches reduce stress. Deep Breathing: calms the nervous system.",
+  },
+
+  "embryo-glue-a-game-changer-in-ivf-success-rates": {
+    svg:     SVG_EMBRYO_GLUE_SUPPORT_3,
+    title:   "How Embryo Glue Supports Implantation",
+    altText: "Three-panel horizontal infographic. Enhances Adhesion: helps embryo attach to uterine lining. Provides Nutrients: supports the embryo during implantation. Reduces Embryo Loss: improves transfer outcomes.",
+  },
+
+  "endometrial-scratching-before-ivf-evidence-benefits-and-risks": {
+    svg:     SVG_ENDOMETRIAL_SCRATCHING_EVIDENCE,
+    title:   "Endometrial Scratching: What the Evidence Shows",
+    altText: "Three-panel horizontal infographic. Recurrent Implantation Failure: +10-15% success rate improvement. First IVF Cycle: no significant benefit found. General Population: routine use not supported by evidence.",
+  },
+
+  "endometriosis-and-gut-health-the-hidden-connection": {
+    svg:     SVG_ENDOMETRIOSIS_GUT_CONNECTION_4,
+    title:   "4 Ways Endometriosis & Gut Health Connect",
+    altText: "Four-row accent-bar infographic. Highlight 01 Chronic Inflammation: irritates intestines, alters gut motility. Highlight 02 Gut Microbiome & Estrogen: imbalance can worsen endometriosis growth. Highlight 03 Endometriosis on the Bowel: painful bowel movements, often mistaken for IBS. Highlight 04 Immune System Dysfunction: weakened immunity lets lesions persist.",
   },
 };
 

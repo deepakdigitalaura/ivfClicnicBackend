@@ -1119,6 +1119,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "egg-freezing-your-fertility-time-capsule": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 52: Draft blogs (batch 20) ──────────────────────────────────
+  "egg-quality-vs-egg-quantity-what-really-matters": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "embracing-positivity-activities-to-nurture-your-journey-to-motherhood-after-embryo-transfer": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "embryo-glue-a-game-changer-in-ivf-success-rates": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "endometrial-scratching-before-ivf-evidence-benefits-and-risks": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "endometriosis-and-gut-health-the-hidden-connection": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
