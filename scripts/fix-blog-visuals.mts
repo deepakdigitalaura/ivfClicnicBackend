@@ -959,6 +959,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "the-power-of-egg-freezing-empowering-choices-for-the-modern-generation": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 42: Draft blogs (batch 10) ──────────────────────────────────
+  "the-relationship-between-egg-freezing-and-future-ivf-success-rates": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "the-role-of-nutrition-in-boosting-ivf-success": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "the-ultimate-guide-to-diet-in-lactation-nourishing-your-body-and-baby": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "the-unseen-struggle-understanding-male-infertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "thyroid-disorders-in-early-pregnancy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

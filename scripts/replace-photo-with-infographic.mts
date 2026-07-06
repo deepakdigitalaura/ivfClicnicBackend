@@ -4313,6 +4313,185 @@ const SVG_EGG_FREEZING_REASONS_4 = `<svg xmlns="http://www.w3.org/2000/svg" view
   <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Reproductive flexibility</text>
 </svg>`;
 
+// ── Wave 42 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D10-1 (Egg freezing & future IVF success): "How Egg Freezing Affects Future IVF Success"
+// Source: Blog node [12], stated verbatim
+const SVG_EGG_FREEZING_IVF_SUCCESS_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW EGG FREEZING AFFECTS FUTURE IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Higher Genetic</text>
+  <text x="149" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Quality</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Eggs frozen younger</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">retain better quality</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Frozen Eggs</text>
+  <text x="400" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Don't Age</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Storage halts the</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">biological clock</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Egg Quality</text>
+  <text x="651" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Matters Most</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Success depends on</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">quality, not age at use</text>
+</svg>`;
+
+// Blog D10-2 (Nutrition & IVF success): "7 Essential Nutrients for IVF Success"
+// Source: Blog H3 sections [9],[12],[14],[16],[18],[20],[22], stated verbatim
+const SVG_IVF_NUTRITION_ESSENTIALS_7 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 310" font-family="${FONT}">
+  <rect width="800" height="310" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="308.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">7 ESSENTIAL NUTRIENTS FOR IVF SUCCESS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Folic Acid</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">DNA synthesis and neural tube defect prevention</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Antioxidants</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Vitamin C, E, Zinc and CoQ10 protect eggs &amp; sperm</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Omega-3 Fatty Acids</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Improves egg quality and uterine blood flow</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Protein</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Supports cell growth and embryo development</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Iron &amp; Vitamin B12</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Oxygen transport and energy metabolism</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Vitamin D</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Supports hormonal balance and implantation</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Complex Carbohydrates</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Steady energy without insulin spikes</text>
+</svg>`;
+
+// Blog D10-3 (Diet in lactation): "6 Key Nutrients for Lactating Mothers"
+// Source: Blog node [12], stated verbatim (71g is the blog's own stated figure)
+const SVG_LACTATION_NUTRIENTS_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 KEY NUTRIENTS FOR LACTATING MOTHERS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Protein</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">~71g daily for mother and baby's growth</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Calcium</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Supports bone health</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Iron</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Replenishes the blood supply</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Vitamin D</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Aids calcium absorption and immunity</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Vitamin A</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Vital for immune function and vision</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Vitamin B12</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Supports nerve function and energy</text>
+</svg>`;
+
+// Blog D10-4 (Unseen struggle — male infertility): "5 Causes of Male Infertility"
+// Source: Blog nodes [8],[10],[11],[12],[13], stated verbatim
+const SVG_MALE_INFERTILITY_CAUSES_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 CAUSES OF MALE INFERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Factors</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Smoking, alcohol and poor diet</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Medical Conditions</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Varicocele, epididymitis, testicular torsion</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Imbalance</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Low testosterone impacts sperm production</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Factors</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Conditions like Klinefelter syndrome</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Environmental Factors</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Toxins, pesticides and heavy metals</text>
+</svg>`;
+
+// Blog D10-5 (Thyroid disorders in early pregnancy): "5 Thyroid Symptoms to Watch in Pregnancy"
+// Source: Blog node [17], stated verbatim
+const SVG_THYROID_PREGNANCY_SYMPTOMS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 THYROID SYMPTOMS TO WATCH IN PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Extreme Fatigue</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Beyond usual pregnancy tiredness</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Unexplained Weight Changes</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Rapid Heartbeat or Palpitations</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Heat or Cold Sensitivity</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Constipation or Anxiety</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -9412,6 +9591,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_EGG_FREEZING_REASONS_4,
     title:   "4 Reasons Women Consider Egg Freezing",
     altText: "Four-panel horizontal infographic. Career Advancement: focus without pressure. Personal Readiness: waiting for the right time. Medical Reasons: before chemo or illness. Lifestyle Preferences: reproductive flexibility.",
+  },
+
+  // ── Wave 42: Draft blogs (batch 10) ─────────────────────────────────
+  "the-relationship-between-egg-freezing-and-future-ivf-success-rates": {
+    svg:     SVG_EGG_FREEZING_IVF_SUCCESS_3,
+    title:   "How Egg Freezing Affects Future IVF Success",
+    altText: "Three-panel horizontal infographic. Higher Genetic Quality: eggs frozen younger retain better quality. Frozen Eggs Don't Age: storage halts the biological clock. Egg Quality Matters Most: success depends on quality, not age at use.",
+  },
+
+  "the-role-of-nutrition-in-boosting-ivf-success": {
+    svg:     SVG_IVF_NUTRITION_ESSENTIALS_7,
+    title:   "7 Essential Nutrients for IVF Success",
+    altText: "Two-column seven-item grid. Items 1-4 (left): Folic Acid; Antioxidants; Omega-3 Fatty Acids; Protein. Items 5-7 (right): Iron & Vitamin B12; Vitamin D; Complex Carbohydrates.",
+  },
+
+  "the-ultimate-guide-to-diet-in-lactation-nourishing-your-body-and-baby": {
+    svg:     SVG_LACTATION_NUTRIENTS_6,
+    title:   "6 Key Nutrients for Lactating Mothers",
+    altText: "Two-column six-item grid. Items 1-3 (left): Protein; Iron; Vitamin A. Items 4-6 (right): Calcium; Vitamin D; Vitamin B12.",
+  },
+
+  "the-unseen-struggle-understanding-male-infertility": {
+    svg:     SVG_MALE_INFERTILITY_CAUSES_5,
+    title:   "5 Causes of Male Infertility",
+    altText: "Two-column five-item grid. Items 1-3 (left): Lifestyle Factors; Medical Conditions; Hormonal Imbalance. Items 4-5 (right): Genetic Factors; Environmental Factors.",
+  },
+
+  "thyroid-disorders-in-early-pregnancy": {
+    svg:     SVG_THYROID_PREGNANCY_SYMPTOMS_5,
+    title:   "5 Thyroid Symptoms to Watch in Pregnancy",
+    altText: "Two-column five-item grid. Items 1-3 (left): Extreme Fatigue; Unexplained Weight Changes; Rapid Heartbeat or Palpitations. Items 4-5 (right): Heat or Cold Sensitivity; Constipation or Anxiety.",
   },
 };
 
