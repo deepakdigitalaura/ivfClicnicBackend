@@ -6168,6 +6168,165 @@ const SVG_ENDOMETRIOSIS_GUT_CONNECTION_4 = `<svg xmlns="http://www.w3.org/2000/s
   <text x="68" y="270" font-size="10.5" fill="${C.muted}">Weakened immunity lets lesions persist</text>
 </svg>`;
 
+// ── Wave 53 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D21-1 (Endometriosis and menopause): "Endometriosis vs Menopause: Symptoms"
+// Source: Blog nodes [7] (endometriosis) and [10] (menopause), stated verbatim
+const SVG_ENDOMETRIOSIS_MENOPAUSE_SYMPTOMS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Endometriosis Symptoms</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Chronic Pain</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Pelvic area, lower back and legs</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Pain During Intercourse</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Known as dyspareunia</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Bowel &amp; Bladder Issues</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Painful movements or urination</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Menopause Symptoms</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Hot Flashes &amp; Night Sweats</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Sudden heat and discomfort</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Mood Swings</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Irritability, depression, anxiety</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Vaginal Dryness</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Reduced estrogen thins tissues</text>
+</svg>`;
+
+// Blog D21-2 (ERA test explained): "How the ERA Test Works: 3 Steps"
+// Source: Blog node [8], stated verbatim
+const SVG_ERA_TEST_STEPS_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">HOW THE ERA TEST WORKS: 3 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">1</text>
+  <text x="149" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Endometrial</text>
+  <text x="149" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Biopsy</text>
+  <text x="149" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Small tissue sample</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">2</text>
+  <text x="400" y="106" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Gene Expression</text>
+  <text x="400" y="122" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Analysis</text>
+  <text x="400" y="144" text-anchor="middle" font-size="9.5" fill="${C.muted}">Finds implantation window</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">3</text>
+  <text x="651" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Personalized</text>
+  <text x="651" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Report</text>
+  <text x="651" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Best transfer timing</text>
+</svg>`;
+
+// Blog D21-3 (Fertility & ovulation facts): "4 Ways to Track Ovulation"
+// Source: Blog node [16], stated verbatim
+const SVG_OVULATION_TRACKING_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 WAYS TO TRACK OVULATION</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Basal Body</text>
+  <text x="123" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Temperature</text>
+  <text x="123" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Rises after</text>
+  <text x="123" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">ovulation</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Ovulation</text>
+  <text x="299" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Predictor Kits</text>
+  <text x="299" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Detects LH</text>
+  <text x="299" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">surge</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Cervical</text>
+  <text x="475" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Mucus</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Texture changes</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Fertility</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Apps</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Track your cycle</text>
+</svg>`;
+
+// Blog D21-4 (Fibroids and IVF): "3 Types of Uterine Fibroids"
+// Source: Blog node [6], stated verbatim
+const SVG_FIBROID_TYPES_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 TYPES OF UTERINE FIBROIDS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Submucosal</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Inside the uterine</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">cavity; can affect implantation</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Intramural</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Within the uterine</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">wall; may affect contractions</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Subserosal</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Outside the uterus;</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">typically asymptomatic</text>
+</svg>`;
+
+// Blog D21-5 (Dr Nilesh Jain — fertility round table): "Dr. Nilesh Jain: Fertility Round Table Highlights"
+// Source: Blog paras [3],[5],[6],[7], stated verbatim
+const SVG_NILESH_JAIN_ROUNDTABLE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">DR. NILESH JAIN: FERTILITY ROUND TABLE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Meeting</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Round table with gynecologists in Chembur, Mumbai</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Led By</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Dr. Nilesh Jain, fertility &amp; IVF expert at BFI Mumbai</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Key Focus</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Safe, effective, personalized fertility treatments</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">The Outcome</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Empowering gynecologists to deliver better patient care</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -11608,6 +11767,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_ENDOMETRIOSIS_GUT_CONNECTION_4,
     title:   "4 Ways Endometriosis & Gut Health Connect",
     altText: "Four-row accent-bar infographic. Highlight 01 Chronic Inflammation: irritates intestines, alters gut motility. Highlight 02 Gut Microbiome & Estrogen: imbalance can worsen endometriosis growth. Highlight 03 Endometriosis on the Bowel: painful bowel movements, often mistaken for IBS. Highlight 04 Immune System Dysfunction: weakened immunity lets lesions persist.",
+  },
+
+  // ── Wave 53: Draft blogs (batch 21) ─────────────────────────────────
+  "endometriosis-and-menopause-what-to-expect-and-how-to-manage-symptoms": {
+    svg:     SVG_ENDOMETRIOSIS_MENOPAUSE_SYMPTOMS,
+    title:   "Endometriosis vs Menopause: Symptoms",
+    altText: "Two-panel comparison. Left (Endometriosis Symptoms): Chronic Pain; Pain During Intercourse; Bowel & Bladder Issues. Right (Menopause Symptoms): Hot Flashes & Night Sweats; Mood Swings; Vaginal Dryness.",
+  },
+
+  "era-test-explained-does-it-really-improve-egg-quality": {
+    svg:     SVG_ERA_TEST_STEPS_3,
+    title:   "How the ERA Test Works: 3 Steps",
+    altText: "Three-panel horizontal infographic. Endometrial Biopsy: small tissue sample. Gene Expression Analysis: finds implantation window. Personalized Report: best transfer timing.",
+  },
+
+  "fertility-ovulation-facts-to-help-you-get-pregnant": {
+    svg:     SVG_OVULATION_TRACKING_4,
+    title:   "4 Ways to Track Ovulation",
+    altText: "Four-panel horizontal infographic. Basal Body Temperature: rises after ovulation. Ovulation Predictor Kits: detects LH surge. Cervical Mucus: texture changes. Fertility Apps: track your cycle.",
+  },
+
+  "fibroids-and-ivf-should-you-remove-them-before-treatment": {
+    svg:     SVG_FIBROID_TYPES_3,
+    title:   "3 Types of Uterine Fibroids",
+    altText: "Three-panel horizontal infographic. Submucosal: inside the uterine cavity, can affect implantation. Intramural: within the uterine wall, may affect contractions. Subserosal: outside the uterus, typically asymptomatic.",
+  },
+
+  "dr-nilesh-jains-expert-guidance-on-fertility-treatments-in-mumbai": {
+    svg:     SVG_NILESH_JAIN_ROUNDTABLE,
+    title:   "Dr. Nilesh Jain: Fertility Round Table Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Meeting: round table with gynecologists in Chembur, Mumbai. Highlight 02 Led By: Dr. Nilesh Jain, fertility and IVF expert at BFI Mumbai. Highlight 03 Key Focus: safe, effective, personalized fertility treatments. Highlight 04 The Outcome: empowering gynecologists to deliver better patient care.",
   },
 };
 

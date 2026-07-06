@@ -1135,6 +1135,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "endometriosis-and-gut-health-the-hidden-connection": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 53: Draft blogs (batch 21) ──────────────────────────────────
+  "endometriosis-and-menopause-what-to-expect-and-how-to-manage-symptoms": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "era-test-explained-does-it-really-improve-egg-quality": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "fertility-ovulation-facts-to-help-you-get-pregnant": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "fibroids-and-ivf-should-you-remove-them-before-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "dr-nilesh-jains-expert-guidance-on-fertility-treatments-in-mumbai": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
