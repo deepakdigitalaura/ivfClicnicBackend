@@ -1167,6 +1167,13 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "high-risk-pregnancy-a-guide-to-lifestyle-diet-and-rest-tips": {
     removeBlocks: ["key recommendations", "key numbers"],
   },
+  // ── Wave 55: Draft blogs (batch 23 — final batch) ────────────────────
+  "how-does-age-impact-the-success-rate-of-iui-procedures": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "how-does-the-climate-and-lifestyle-in-ahmedabad-affect-fertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

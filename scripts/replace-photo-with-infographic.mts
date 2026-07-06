@@ -6496,6 +6496,64 @@ const SVG_HIGH_RISK_PREGNANCY_LIFESTYLE_4 = `<svg xmlns="http://www.w3.org/2000/
   <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">No smoking or alcohol</text>
 </svg>`;
 
+// ── Wave 55 SVG constants (Draft-blog enrichment — final batch) ───────
+
+// Blog D23-1 (Age impact on IUI success): "IUI Success Rates by Age"
+// Source: Blog node [15], stated verbatim
+const SVG_IUI_SUCCESS_RATES_AGE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IUI SUCCESS RATES BY AGE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">UNDER 35</text>
+  <text x="149" y="120" text-anchor="middle" font-size="21" font-weight="800" fill="${C.rose}">10–20%</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.muted}">per cycle</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">35–40</text>
+  <text x="400" y="120" text-anchor="middle" font-size="21" font-weight="800" fill="${C.rose}">10–12%</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.muted}">per cycle</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">OVER 40</text>
+  <text x="651" y="120" text-anchor="middle" font-size="21" font-weight="800" fill="${C.rose}">&lt;5%</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.muted}">per cycle</text>
+</svg>`;
+
+// Blog D23-2 (Ahmedabad climate/lifestyle and fertility): "Ahmedabad's Climate: Fertility Risks"
+// Source: Blog nodes [8] (heat) and [12] (pollution), stated verbatim
+const SVG_AHMEDABAD_CLIMATE_FERTILITY_RISKS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Heat Exposure</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Lower Sperm Quality</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Prolonged heat reduces motility</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Ovulation Irregularities</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Extreme heat disrupts hormonal balance</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Dehydration Effects</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Impacts cervical mucus and semen volume</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Air Pollution</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reduced Sperm Count</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">PM2.5 and PM10 pollutants</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Higher Miscarriage Risk</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Increases implantation failure</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -11998,6 +12056,19 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_HIGH_RISK_PREGNANCY_LIFESTYLE_4,
     title:   "4 Lifestyle Tips for High-Risk Pregnancy",
     altText: "Four-panel horizontal infographic. Stay Active: prenatal yoga or swimming. Manage Stress: meditation, deep breathing. Get Enough Sleep: 7-8 hours per night. Avoid Harmful Substances: no smoking or alcohol.",
+  },
+
+  // ── Wave 55: Draft blogs (batch 23 — final batch) ───────────────────
+  "how-does-age-impact-the-success-rate-of-iui-procedures": {
+    svg:     SVG_IUI_SUCCESS_RATES_AGE,
+    title:   "IUI Success Rates by Age",
+    altText: "Three-panel horizontal stat infographic. Under 35: 10-20% per cycle. 35-40: 10-12% per cycle. Over 40: below 5% per cycle.",
+  },
+
+  "how-does-the-climate-and-lifestyle-in-ahmedabad-affect-fertility": {
+    svg:     SVG_AHMEDABAD_CLIMATE_FERTILITY_RISKS,
+    title:   "Ahmedabad's Climate: Fertility Risks",
+    altText: "Two-panel comparison. Left (Heat Exposure): Lower Sperm Quality; Ovulation Irregularities; Dehydration Effects. Right (Air Pollution): Reduced Sperm Count; Higher Miscarriage Risk.",
   },
 };
 
