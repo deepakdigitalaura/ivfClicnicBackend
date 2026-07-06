@@ -849,6 +849,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "in-vitro-egg-aspiration-how-the-ivf-egg-retrieval-process-works": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 35: Draft blogs (batch 3) ───────────────────────────────────
+  "inauguration-of-our-new-branch-in-nikol": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "insights-on-fertility-dr-bavishi-team-at-palanpur-society": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "ivf-after-age-40-realistic-success-rates-and-treatment-strategies": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ivf-and-career-balancing-work-and-fertility-treatments": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ivf-stimulation-protocols-a-comprehensive-guide": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

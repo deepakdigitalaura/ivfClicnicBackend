@@ -3091,6 +3091,166 @@ const SVG_EGG_RETRIEVAL_STEPS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewB
   <text x="664" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">follicles into a lab dish</text>
 </svg>`;
 
+// ── Wave 35 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D3-1 (Nikol branch inauguration): "Bavishi Fertility Institute: New Branch in Nikol"
+// Source: Blog paras [3],[5],[6] — location, facility, care details, stated verbatim
+const SVG_NIKOL_BRANCH_INAUGURATION = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BAVISHI FERTILITY INSTITUTE: NEW BRANCH IN NIKOL</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">New Location</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Nikol, Ahmedabad — bringing world-class fertility care closer to the community</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Advanced Facility</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">State-of-the-art technology and modern amenities for the highest standards of care</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Expert Team</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Dedicated fertility specialists, embryologists and support staff</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Comprehensive Care</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Full range of advanced IVF treatments for every stage of the fertility journey</text>
+</svg>`;
+
+// Blog D3-2 (Palanpur society talk): "BFI at Palanpur: 4 Key Highlights"
+// Source: Blog paras [3],[5],[6] — speakers, session focus, approach, impact, stated verbatim
+const SVG_PALANPUR_SOCIETY_TALK = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI AT PALANPUR: 4 KEY HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Event</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Dr. Himanshu, Dr. Falguni &amp; Dr. Parth Bavishi invited by the Palanpur Ob-Gyn Society</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Session Focus</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Latest advancements in infertility and IVF treatment</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Patient-Centric Approach</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Emphasis on personalized care for better treatment outcomes</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Real-World Impact</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Case studies and success stories shared with attending gynaecologists</text>
+</svg>`;
+
+// Blog D3-3 (IVF after age 40): "4 Treatment Strategies for IVF After 40"
+// Source: Blog nodes [8]-[11], stated verbatim (50-70% figure is the blog's own stated stat)
+const SVG_IVF_AFTER_40_STRATEGIES = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 TREATMENT STRATEGIES FOR IVF AFTER 40</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">Egg Donation</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Live birth rates of 50–70% using donor eggs from younger women</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">PGT (Genetic Testing)</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Identifies chromosomal abnormalities, improving healthy pregnancy chances</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">ICSI</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Single sperm injection improves fertilization rates</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Blastocyst Transfer</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Day 5–6 embryo transfer increases implantation rates</text>
+</svg>`;
+
+// Blog D3-4 (IVF and career): "Balancing IVF Treatment & Career: 3 Tips"
+// Source: Blog node [9] — 3 communication tips, stated verbatim
+const SVG_IVF_CAREER_BALANCE_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BALANCING IVF TREATMENT &amp; CAREER: 3 TIPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">1</text>
+  <text x="149" y="106" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Open Dialogue</text>
+  <text x="149" y="120" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">with Employer</text>
+  <text x="149" y="142" text-anchor="middle" font-size="9.5" fill="${C.muted}">Many companies offer</text>
+  <text x="149" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">flexible arrangements</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">2</text>
+  <text x="400" y="106" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Know Your</text>
+  <text x="400" y="120" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Treatment Needs</text>
+  <text x="400" y="142" text-anchor="middle" font-size="9.5" fill="${C.muted}">Modern protocols rarely</text>
+  <text x="400" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">need extended rest</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">3</text>
+  <text x="651" y="106" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Build a Support</text>
+  <text x="651" y="120" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.dark}">Network</text>
+  <text x="651" y="142" text-anchor="middle" font-size="9.5" fill="${C.muted}">A trusted colleague can</text>
+  <text x="651" y="155" text-anchor="middle" font-size="9.5" fill="${C.muted}">help navigate scheduling</text>
+</svg>`;
+
+// Blog D3-5 (IVF stimulation protocols): "IVF Stimulation Protocols: Long vs Short"
+// Source: Blog nodes [9] (Long/Down Regulation) and [11] (Short/Antagonist), stated verbatim
+const SVG_STIMULATION_PROTOCOLS_COMPARISON = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Long Protocol (Down Regulation)</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Duration: 4–6 Weeks</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">GnRH agonist down-regulation then FSH stimulation</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Benefit</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Improved egg quality, increased chances of pregnancy</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Best For</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Normal ovarian reserve, regular menstrual cycles</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Medications</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">GnRH agonist, FSH and hCG trigger</text>
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Short Protocol (Antagonist)</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Duration: 2–3 Weeks</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">GnRH antagonist prevents premature ovulation</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Benefit</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Reduced OHSS risk, flexible treatment start date</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Best For</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Normal reserve or those at risk of OHSS</text>
+  <rect x="422" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Medications</text>
+  <text x="434" y="233" font-size="10.5" fill="${C.muted}">GnRH antagonist, FSH and hCG trigger</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -7973,6 +8133,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_EGG_RETRIEVAL_STEPS_4,
     title:   "The Egg Retrieval Process: 4 Steps",
     altText: "Four-panel horizontal infographic. Step 1 Preparation: ovarian stimulation medications. Step 2 Monitoring: ultrasound and hormone level checks. Step 3 Procedure: ultrasound-guided needle under sedation. Step 4 Egg Collection: eggs aspirated from follicles into a lab dish.",
+  },
+
+  // ── Wave 35: Draft blogs (batch 3) ──────────────────────────────────
+  "inauguration-of-our-new-branch-in-nikol": {
+    svg:     SVG_NIKOL_BRANCH_INAUGURATION,
+    title:   "Bavishi Fertility Institute: New Branch in Nikol",
+    altText: "Four-row accent-bar infographic. Highlight 01 New Location: Nikol, Ahmedabad — bringing world-class fertility care closer to the community. Highlight 02 Advanced Facility: state-of-the-art technology and modern amenities. Highlight 03 Expert Team: dedicated fertility specialists, embryologists and support staff. Highlight 04 Comprehensive Care: full range of advanced IVF treatments for every stage of the journey.",
+  },
+
+  "insights-on-fertility-dr-bavishi-team-at-palanpur-society": {
+    svg:     SVG_PALANPUR_SOCIETY_TALK,
+    title:   "BFI at Palanpur: 4 Key Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Event: Dr. Himanshu, Dr. Falguni and Dr. Parth Bavishi invited by the Palanpur Ob-Gyn Society. Highlight 02 Session Focus: latest advancements in infertility and IVF treatment. Highlight 03 Patient-Centric Approach: emphasis on personalized care for better outcomes. Highlight 04 Real-World Impact: case studies and success stories shared with attending gynaecologists.",
+  },
+
+  "ivf-after-age-40-realistic-success-rates-and-treatment-strategies": {
+    svg:     SVG_IVF_AFTER_40_STRATEGIES,
+    title:   "4 Treatment Strategies for IVF After 40",
+    altText: "Four-row accent-bar infographic. Strategy 01 Egg Donation: live birth rates of 50-70% using donor eggs from younger women. Strategy 02 PGT: identifies chromosomal abnormalities, improving healthy pregnancy chances. Strategy 03 ICSI: single sperm injection improves fertilization rates. Strategy 04 Blastocyst Transfer: day 5-6 embryo transfer increases implantation rates.",
+  },
+
+  "ivf-and-career-balancing-work-and-fertility-treatments": {
+    svg:     SVG_IVF_CAREER_BALANCE_3,
+    title:   "Balancing IVF Treatment & Career: 3 Tips",
+    altText: "Three-panel horizontal infographic. Tip 1 Open Dialogue with Employer: many companies offer flexible arrangements. Tip 2 Know Your Treatment Needs: modern protocols rarely need extended rest. Tip 3 Build a Support Network: a trusted colleague can help navigate scheduling.",
+  },
+
+  "ivf-stimulation-protocols-a-comprehensive-guide": {
+    svg:     SVG_STIMULATION_PROTOCOLS_COMPARISON,
+    title:   "IVF Stimulation Protocols: Long vs Short",
+    altText: "Two-panel comparison. Left (Long Protocol / Down Regulation): duration 4-6 weeks, GnRH agonist then FSH stimulation, improved egg quality, best for normal ovarian reserve and regular cycles. Right (Short Protocol / Antagonist): duration 2-3 weeks, GnRH antagonist prevents premature ovulation, reduced OHSS risk with flexible start date, best for normal reserve or OHSS risk patients.",
   },
 };
 
