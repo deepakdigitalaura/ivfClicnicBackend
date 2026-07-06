@@ -1103,6 +1103,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "demystifying-ivf-facts-and-myths": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 51: Draft blogs (batch 19) ──────────────────────────────────
+  "does-stress-affect-ivf-success": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "dr-parth-bavishi-honoured-with-the-prestigious-achiever-award-at-fertivision-2025": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "dr-parth-bavishi-wins-bharat-excellence-award-for-ivf": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "egg-freezing-vs-embryo-freezing-making-the-right-choice-for-your-fertility-journey": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "egg-freezing-your-fertility-time-capsule": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

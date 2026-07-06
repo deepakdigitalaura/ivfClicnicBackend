@@ -5867,6 +5867,167 @@ const SVG_IVF_TYPES_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 80
   <text x="664" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">infertility</text>
 </svg>`;
 
+// ── Wave 51 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D19-1 (Does stress affect IVF success): "4 Ways Stress Manifests During IVF"
+// Source: Blog node [15], stated verbatim
+const SVG_STRESS_IVF_MANIFEST_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 WAYS STRESS MANIFESTS DURING IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Waiting</text>
+  <text x="123" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Periods</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">2-week wait after</text>
+  <text x="123" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">transfer</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Hormonal</text>
+  <text x="299" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Treatments</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Affects mood</text>
+  <text x="299" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">and emotions</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Financial</text>
+  <text x="475" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Stress</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">High treatment</text>
+  <text x="475" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">costs</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Fear of</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Failure</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Uncertainty brings</text>
+  <text x="664" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">frustration</text>
+</svg>`;
+
+// Blog D19-2 (Dr Parth Bavishi — Achiever Award Fertivision 2025): "Dr. Parth Bavishi: Achiever Award Highlights"
+// Source: Blog nodes [7],[11],[13], stated verbatim
+const SVG_ACHIEVER_AWARD_FERTIVISION = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">DR. PARTH BAVISHI: ACHIEVER AWARD HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Award</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Achiever Award at Fertivision 2025</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">The Organization</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Indian Fertility Society, IVF specialists &amp; embryologists</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">What It Recognizes</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Ethical practice and patient-centered treatment</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">A Moment of Pride</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">National recognition strengthens patient trust</text>
+</svg>`;
+
+// Blog D19-3 (Dr Parth Bavishi — Bharat Excellence Award): "Dr. Parth Bavishi: Bharat Excellence Award"
+// Source: Blog paras [3],[5],[6], stated verbatim
+const SVG_BHARAT_EXCELLENCE_AWARD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">DR. PARTH BAVISHI: BHARAT EXCELLENCE AWARD</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Award</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Bharat Excellence Award for contributions to IVF</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Notable Attendees</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Gujarat's Chief Minister and Health Minister present</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">What It Recognizes</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Innovative treatments improving patient outcomes</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">His Impact</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Enhanced success rates, bringing hope to families</text>
+</svg>`;
+
+// Blog D19-4 (Egg Freezing vs Embryo Freezing): "Egg Freezing vs Embryo Freezing"
+// Source: Blog nodes [10]-[13], stated verbatim
+const SVG_EGG_VS_EMBRYO_FREEZING = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Egg Freezing</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Ideal for Single Women</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">No need to decide on a partner or donor yet</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Career or Timing Focus</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Wait for the right time to start a family</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">More Flexibility, Lower Cost</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Lower upfront costs than embryo freezing</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Embryo Freezing</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">For Couples Ready for IVF</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Suitable with a partner or sperm donor</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Higher Success Rates</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Embryos are more robust when thawed</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">More Ethical &amp; Legal Complexity</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Considerations if circumstances change</text>
+</svg>`;
+
+// Blog D19-5 (Egg Freezing — fertility time capsule): "The Egg Freezing Process: 3 Steps"
+// Source: Blog nodes [6],[8],[9], stated verbatim
+const SVG_EGG_FREEZING_PROCESS_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">THE EGG FREEZING PROCESS: 3 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">1</text>
+  <text x="149" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Ovarian</text>
+  <text x="149" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Stimulation</text>
+  <text x="149" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Hormonal injections</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">2</text>
+  <text x="400" y="120" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="400" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Minimally invasive procedure</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">3</text>
+  <text x="651" y="120" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Freezing</text>
+  <text x="651" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Frozen and stored securely</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -11245,6 +11406,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_IVF_TYPES_4,
     title:   "4 Types of IVF Treatment",
     altText: "Four-panel horizontal infographic. Conventional IVF: standard stimulation and transfer. Natural Cycle IVF: no hormonal stimulation. Mini-IVF: lower doses reduce OHSS risk. ICSI: for male factor infertility.",
+  },
+
+  // ── Wave 51: Draft blogs (batch 19) ─────────────────────────────────
+  "does-stress-affect-ivf-success": {
+    svg:     SVG_STRESS_IVF_MANIFEST_4,
+    title:   "4 Ways Stress Manifests During IVF",
+    altText: "Four-panel horizontal infographic. Waiting Periods: 2-week wait after transfer. Hormonal Treatments: affects mood and emotions. Financial Stress: high treatment costs. Fear of Failure: uncertainty brings frustration.",
+  },
+
+  "dr-parth-bavishi-honoured-with-the-prestigious-achiever-award-at-fertivision-2025": {
+    svg:     SVG_ACHIEVER_AWARD_FERTIVISION,
+    title:   "Dr. Parth Bavishi: Achiever Award Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Award: Achiever Award at Fertivision 2025. Highlight 02 The Organization: Indian Fertility Society, IVF specialists and embryologists. Highlight 03 What It Recognizes: ethical practice and patient-centered treatment. Highlight 04 A Moment of Pride: national recognition strengthens patient trust.",
+  },
+
+  "dr-parth-bavishi-wins-bharat-excellence-award-for-ivf": {
+    svg:     SVG_BHARAT_EXCELLENCE_AWARD,
+    title:   "Dr. Parth Bavishi: Bharat Excellence Award",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Award: Bharat Excellence Award for contributions to IVF. Highlight 02 Notable Attendees: Gujarat's Chief Minister and Health Minister present. Highlight 03 What It Recognizes: innovative treatments improving patient outcomes. Highlight 04 His Impact: enhanced success rates, bringing hope to families.",
+  },
+
+  "egg-freezing-vs-embryo-freezing-making-the-right-choice-for-your-fertility-journey": {
+    svg:     SVG_EGG_VS_EMBRYO_FREEZING,
+    title:   "Egg Freezing vs Embryo Freezing",
+    altText: "Two-panel comparison. Left (Egg Freezing): Ideal for Single Women; Career or Timing Focus; More Flexibility, Lower Cost. Right (Embryo Freezing): For Couples Ready for IVF; Higher Success Rates; More Ethical & Legal Complexity.",
+  },
+
+  "egg-freezing-your-fertility-time-capsule": {
+    svg:     SVG_EGG_FREEZING_PROCESS_3,
+    title:   "The Egg Freezing Process: 3 Steps",
+    altText: "Three-panel horizontal infographic. Ovarian Stimulation: hormonal injections. Egg Retrieval: minimally invasive procedure. Freezing: frozen and stored securely.",
   },
 };
 
