@@ -3251,6 +3251,206 @@ const SVG_STIMULATION_PROTOCOLS_COMPARISON = `<svg xmlns="http://www.w3.org/2000
   <text x="434" y="233" font-size="10.5" fill="${C.muted}">GnRH antagonist, FSH and hCG trigger</text>
 </svg>`;
 
+// ── Wave 36 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D4-1 (High-risk pregnancy lifestyle/diet/rest): "4 Nutrient Priorities for High-Risk Pregnancy"
+// Source: Blog node [19], stated verbatim
+const SVG_HIGH_RISK_PREGNANCY_NUTRIENTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 NUTRIENT PRIORITIES FOR HIGH-RISK PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">PROTEIN</text>
+  <text x="123" y="112" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Eggs, paneer,</text>
+  <text x="123" y="128" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">lentils, chicken</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">IRON</text>
+  <text x="299" y="112" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Spinach, beetroot,</text>
+  <text x="299" y="128" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">dates</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">CALCIUM</text>
+  <text x="475" y="112" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Milk, yogurt,</text>
+  <text x="475" y="128" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">almonds</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">FOLIC ACID</text>
+  <text x="664" y="112" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Leafy greens,</text>
+  <text x="664" y="128" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">citrus fruits</text>
+</svg>`;
+
+// Blog D4-2 (Male infertility treatment options Ahmedabad): "10 Male Infertility Treatment Options"
+// Source: Blog node [5], stated verbatim
+const SVG_MALE_INFERTILITY_TREATMENTS_10 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 400" font-family="${FONT}">
+  <rect width="800" height="400" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="398.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">10 MALE INFERTILITY TREATMENT OPTIONS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Accurate Diagnosis</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">First step to effective treatment</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle &amp; Medical Counseling</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Nutrition, weight, toxin avoidance</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Varicocele Treatment</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Microsurgical correction improves sperm</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Hormonal Therapy</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Stimulates sperm production</text>
+  <rect x="10" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="313" r="16" fill="${C.rose}"/>
+  <text x="42" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="307" font-size="11.5" font-weight="700" fill="${C.dark}">ART (IUI / IVF / ICSI)</text>
+  <text x="67" y="324" font-size="10.5" fill="${C.muted}">Assisted reproductive techniques</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Surgical Sperm Retrieval</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">TESA, PESA, Micro-TESE</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Sperm Cryopreservation</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Freezing preserves future fertility</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Donor Sperm Programs</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Carefully screened donor options</text>
+  <rect x="410" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="253" r="16" fill="${C.rose}"/>
+  <text x="442" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="467" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Genetic Counseling &amp; Testing</text>
+  <text x="467" y="264" font-size="10.5" fill="${C.muted}">Karyotyping, Y-chromosome tests</text>
+  <rect x="410" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="313" r="16" fill="${C.rose}"/>
+  <text x="442" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">10</text>
+  <text x="467" y="307" font-size="11.5" font-weight="700" fill="${C.dark}">Psychological Support</text>
+  <text x="467" y="324" font-size="10.5" fill="${C.muted}">Counseling throughout the journey</text>
+</svg>`;
+
+// Blog D4-3 (Oncofertility): "Fertility Preservation Options: Women vs Men"
+// Source: Blog nodes [13]-[15] (women) and [17]-[19] (men), stated verbatim
+const SVG_ONCOFERTILITY_WOMEN_VS_MEN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 278" font-family="${FONT}">
+  <rect width="800" height="278" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="276.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Fertility Preservation: For Women</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Oocyte (Egg) Cryopreservation</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Mature eggs retrieved and frozen</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Cryopreservation</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Eggs fertilized, embryos frozen</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Tissue Cryopreservation</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Tissue frozen, later reimplanted</text>
+  <rect x="22" y="212" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="217.5" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Transposition</text>
+  <text x="34" y="233" font-size="10.5" fill="${C.muted}">Ovaries moved outside radiation field</text>
+  <rect x="410" y="10" width="380" height="258" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Fertility Preservation: For Men</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Sperm Cryopreservation</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Semen collected, tested and frozen</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Testicular Sperm Extraction</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Surgically retrieved when needed</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Testicular Tissue Cryopreservation</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Experimental option for young boys</text>
+</svg>`;
+
+// Blog D4-4 (Ovarian cysts): "5 Common Symptoms of Ovarian Cysts"
+// Source: Blog node [14], stated verbatim
+const SVG_OVARIAN_CYST_SYMPTOMS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 COMMON SYMPTOMS OF OVARIAN CYSTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Pelvic Pain</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Dull or sharp pain in the lower abdomen</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Bloating &amp; Swelling</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Abdominal discomfort</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Irregular Menstrual Cycles</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">Changes in periods</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Painful Intercourse</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Discomfort during sex</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Nausea &amp; Vomiting</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Rare but possible symptom</text>
+</svg>`;
+
+// Blog D4-5 (Ovarian follicles): "The Follicle Journey: 4 Stages"
+// Source: Blog para [5] (follicular development narrative), stated verbatim
+const SVG_FOLLICLE_JOURNEY_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">THE FOLLICLE JOURNEY: 4 STAGES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Growth</text>
+  <text x="123" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">A tiny follicle</text>
+  <text x="123" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">cradles an egg</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Estrogen</text>
+  <text x="299" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Production</text>
+  <text x="299" y="136" text-anchor="middle" font-size="9.5" fill="${C.muted}">Guides the cycle</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Maturity</text>
+  <text x="475" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Follicle reaches</text>
+  <text x="475" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">full maturity</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="11" font-weight="700" fill="${C.dark}">Ovulation</text>
+  <text x="664" y="124" text-anchor="middle" font-size="9.5" fill="${C.muted}">Egg is released</text>
+  <text x="664" y="138" text-anchor="middle" font-size="9.5" fill="${C.muted}">from the follicle</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -8164,6 +8364,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_STIMULATION_PROTOCOLS_COMPARISON,
     title:   "IVF Stimulation Protocols: Long vs Short",
     altText: "Two-panel comparison. Left (Long Protocol / Down Regulation): duration 4-6 weeks, GnRH agonist then FSH stimulation, improved egg quality, best for normal ovarian reserve and regular cycles. Right (Short Protocol / Antagonist): duration 2-3 weeks, GnRH antagonist prevents premature ovulation, reduced OHSS risk with flexible start date, best for normal reserve or OHSS risk patients.",
+  },
+
+  // ── Wave 36: Draft blogs (batch 4) ──────────────────────────────────
+  "lifestyle-diet-rest-tips-for-high-risk-pregnancy": {
+    svg:     SVG_HIGH_RISK_PREGNANCY_NUTRIENTS,
+    title:   "4 Nutrient Priorities for High-Risk Pregnancy",
+    altText: "Four-panel horizontal infographic. Protein: eggs, paneer, lentils, chicken. Iron: spinach, beetroot, dates. Calcium: milk, yogurt, almonds. Folic Acid: green leafy vegetables, citrus fruits.",
+  },
+
+  "male-infertility-treatment-options-in-ahmedabad-what-you-should-know": {
+    svg:     SVG_MALE_INFERTILITY_TREATMENTS_10,
+    title:   "10 Male Infertility Treatment Options",
+    altText: "Two-column ten-item grid. Items 1-5 (left): Accurate Diagnosis; Lifestyle & Medical Counseling; Varicocele Treatment; Hormonal Therapy; ART (IUI/IVF/ICSI). Items 6-10 (right): Surgical Sperm Retrieval; Sperm Cryopreservation; Donor Sperm Programs; Genetic Counseling & Testing; Psychological Support.",
+  },
+
+  "oncofertility-preserving-fertility-before-cancer-treatment": {
+    svg:     SVG_ONCOFERTILITY_WOMEN_VS_MEN,
+    title:   "Fertility Preservation Options: Women vs Men",
+    altText: "Two-panel comparison. Left (For Women): Oocyte Cryopreservation; Embryo Cryopreservation; Ovarian Tissue Cryopreservation; Ovarian Transposition. Right (For Men): Sperm Cryopreservation; Testicular Sperm Extraction; Testicular Tissue Cryopreservation.",
+  },
+
+  "ovarian-cysts-symptoms-causes-treatment-diagnosis": {
+    svg:     SVG_OVARIAN_CYST_SYMPTOMS_5,
+    title:   "5 Common Symptoms of Ovarian Cysts",
+    altText: "Two-column five-item grid. Items 1-3 (left): Pelvic Pain; Bloating & Swelling; Irregular Menstrual Cycles. Items 4-5 (right): Painful Intercourse; Nausea & Vomiting.",
+  },
+
+  "ovarian-follicles-the-tiny-heroes-of-fertility": {
+    svg:     SVG_FOLLICLE_JOURNEY_4,
+    title:   "The Follicle Journey: 4 Stages",
+    altText: "Four-panel horizontal infographic. Stage 1 Growth: a tiny follicle cradles an egg. Stage 2 Estrogen Production: guides the menstrual cycle. Stage 3 Maturity: follicle reaches full maturity. Stage 4 Ovulation: egg is released from the follicle.",
   },
 };
 

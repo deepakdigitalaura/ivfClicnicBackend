@@ -865,6 +865,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "ivf-stimulation-protocols-a-comprehensive-guide": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 36: Draft blogs (batch 4) ───────────────────────────────────
+  "lifestyle-diet-rest-tips-for-high-risk-pregnancy": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "male-infertility-treatment-options-in-ahmedabad-what-you-should-know": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "oncofertility-preserving-fertility-before-cancer-treatment": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ovarian-cysts-symptoms-causes-treatment-diagnosis": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ovarian-follicles-the-tiny-heroes-of-fertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
