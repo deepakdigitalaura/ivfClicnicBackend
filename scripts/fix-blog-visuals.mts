@@ -1039,6 +1039,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "male-infertility-signs-causes-treatment": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 47: Draft blogs (batch 15) ──────────────────────────────────
+  "bavishi-fertility-institute-nikol-ahmedabad-celebrates-its-first-anniversary": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "factors-to-consider-right-clinic-for-ivf-journey": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "checking-if-ivf-is-the-last-option-to-conceive": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "ivf-failure-treatment-is-possible": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "complications-of-delaying-your-ivf-journey": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

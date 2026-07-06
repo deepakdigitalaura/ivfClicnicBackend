@@ -5178,6 +5178,188 @@ const SVG_MALE_INFERTILITY_SIGNS_6 = `<svg xmlns="http://www.w3.org/2000/svg" vi
   <text x="467" y="216" font-size="10.5" fill="${C.muted}">Enlarged breasts linked to hormone imbalance</text>
 </svg>`;
 
+// ── Wave 47 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D15-1 (Nikol first anniversary): "BFI Nikol: Celebrating One Year"
+// Source: Blog paras [3],[6],[9],[12], stated verbatim
+const SVG_NIKOL_FIRST_ANNIVERSARY = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">BFI NIKOL: CELEBRATING ONE YEAR</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Milestone</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">First anniversary celebrated on 29th January 2026</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">A Year of Excellence</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Advanced treatments combined with compassionate care</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Achievements</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Successfully managed complex infertility cases ethically</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Looking Ahead</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Expanding services and strengthening its role in Ahmedabad</text>
+</svg>`;
+
+// Blog D15-2 (Choosing the right IVF clinic): "9 Factors When Choosing an IVF Clinic"
+// Source: Blog node [8], stated verbatim
+const SVG_IVF_CLINIC_FACTORS_9 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 370" font-family="${FONT}">
+  <rect width="800" height="370" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="368.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">9 FACTORS WHEN CHOOSING AN IVF CLINIC</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Reputation &amp; Success Rates</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Track record of successful pregnancies</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Medical Team Expertise</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Qualified specialists and embryologists</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Technology &amp; Facilities</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">State-of-the-art equipment and labs</text>
+  <rect x="10" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="253" r="16" fill="${C.rose}"/>
+  <text x="42" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="67" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Personalized Treatment Plans</text>
+  <text x="67" y="264" font-size="10.5" fill="${C.muted}">Tailored to your unique fertility needs</text>
+  <rect x="10" y="284" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="313" r="16" fill="${C.rose}"/>
+  <text x="42" y="318" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="307" font-size="11.5" font-weight="700" fill="${C.dark}">Patient Support &amp; Counselling</text>
+  <text x="67" y="324" font-size="10.5" fill="${C.muted}">Emotional and educational guidance</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Cost Transparency</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Clear breakdown of all treatment costs</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">7</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Convenient Location</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">Reduces stress of frequent visits</text>
+  <rect x="410" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="193" r="16" fill="${C.rose}"/>
+  <text x="442" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">8</text>
+  <text x="467" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">Legal &amp; Ethical Standards</text>
+  <text x="467" y="204" font-size="10.5" fill="${C.muted}">Compliance and transparent communication</text>
+  <rect x="410" y="224" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="253" r="16" fill="${C.rose}"/>
+  <text x="442" y="258" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">9</text>
+  <text x="467" y="247" font-size="11.5" font-weight="700" fill="${C.dark}">Reviews &amp; Testimonials</text>
+  <text x="467" y="264" font-size="10.5" fill="${C.muted}">Insights from former patients</text>
+</svg>`;
+
+// Blog D15-3 (Checking if IVF is last option): "3 Factors Affecting Fertility"
+// Source: Blog H3 headings [16],[18],[20], stated verbatim
+const SVG_FERTILITY_AFFECTING_FACTORS_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 FACTORS AFFECTING FERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">AGE</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Fertility declines as</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">women get older</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">HEALTH CONDITIONS</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Underlying issues</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">impact conception</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">LIFESTYLE FACTORS</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Habits and environment</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">affect fertility</text>
+</svg>`;
+
+// Blog D15-4 (IVF failure - treatment is possible): "4 Options After Failed IVF"
+// Source: Blog H3 headings [38],[40],[42],[44], stated verbatim
+const SVG_IVF_FAILURE_OPTIONS_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">4 OPTIONS AFTER FAILED IVF</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="102" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Natural</text>
+  <text x="123" y="116" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Pregnancy</text>
+  <text x="123" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Some conceive naturally</text>
+  <text x="123" y="149" text-anchor="middle" font-size="9" fill="${C.muted}">after failed IVF</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Genetic</text>
+  <text x="299" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Screening (PGS)</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">Screens embryos for</text>
+  <text x="299" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">abnormalities</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">IVF With</text>
+  <text x="475" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Donor Eggs</text>
+  <text x="475" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">When egg quality is</text>
+  <text x="475" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">a barrier</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="12" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Gestational</text>
+  <text x="664" y="120" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Surrogacy</text>
+  <text x="664" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">A path to parenthood</text>
+  <text x="664" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">via a surrogate</text>
+</svg>`;
+
+// Blog D15-5 (Complications of delaying IVF): "3 Effects of Age on Female Fertility"
+// Source: Blog node [10], stated verbatim
+const SVG_AGE_FEMALE_FERTILITY_EFFECTS_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 EFFECTS OF AGE ON FEMALE FERTILITY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Diminished Ovarian</text>
+  <text x="149" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Reserve</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Egg supply decreases</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">with age</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="76" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">Poor Egg Quality</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Higher risk of chromosomal</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">abnormalities</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="82" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="72" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Reduced IVF Success</text>
+  <text x="651" y="88" text-anchor="middle" font-size="11.5" font-weight="700" fill="${C.white}">Rates</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">Success declines especially</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">after 40</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -10432,6 +10614,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_MALE_INFERTILITY_SIGNS_6,
     title:   "6 Signs of Male Infertility",
     altText: "Two-column six-item grid. Items 1-3 (left): Changes in Sexual Function; Abnormal Semen Analysis; Small or Firm Testicles. Items 4-6 (right): Pain or Swelling; Hormonal Imbalances; Gynecomastia.",
+  },
+
+  // ── Wave 47: Draft blogs (batch 15) ─────────────────────────────────
+  "bavishi-fertility-institute-nikol-ahmedabad-celebrates-its-first-anniversary": {
+    svg:     SVG_NIKOL_FIRST_ANNIVERSARY,
+    title:   "BFI Nikol: Celebrating One Year",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Milestone: first anniversary celebrated on 29th January 2026. Highlight 02 A Year of Excellence: advanced treatments combined with compassionate care. Highlight 03 Achievements: successfully managed complex infertility cases ethically. Highlight 04 Looking Ahead: expanding services and strengthening its role in Ahmedabad.",
+  },
+
+  "factors-to-consider-right-clinic-for-ivf-journey": {
+    svg:     SVG_IVF_CLINIC_FACTORS_9,
+    title:   "9 Factors When Choosing an IVF Clinic",
+    altText: "Two-column nine-item grid. Items 1-5 (left): Reputation & Success Rates; Medical Team Expertise; Technology & Facilities; Personalized Treatment Plans; Patient Support & Counselling. Items 6-9 (right): Cost Transparency; Convenient Location; Legal & Ethical Standards; Reviews & Testimonials.",
+  },
+
+  "checking-if-ivf-is-the-last-option-to-conceive": {
+    svg:     SVG_FERTILITY_AFFECTING_FACTORS_3,
+    title:   "3 Factors Affecting Fertility",
+    altText: "Three-panel horizontal infographic. Age: fertility declines as women get older. Health Conditions: underlying issues impact conception. Lifestyle Factors: habits and environment affect fertility.",
+  },
+
+  "ivf-failure-treatment-is-possible": {
+    svg:     SVG_IVF_FAILURE_OPTIONS_4,
+    title:   "4 Options After Failed IVF",
+    altText: "Four-panel horizontal infographic. Natural Pregnancy: some conceive naturally after failed IVF. Genetic Screening (PGS): screens embryos for abnormalities. IVF With Donor Eggs: when egg quality is a barrier. Gestational Surrogacy: a path to parenthood via a surrogate.",
+  },
+
+  "complications-of-delaying-your-ivf-journey": {
+    svg:     SVG_AGE_FEMALE_FERTILITY_EFFECTS_3,
+    title:   "3 Effects of Age on Female Fertility",
+    altText: "Three-panel horizontal infographic. Diminished Ovarian Reserve: egg supply decreases with age. Poor Egg Quality: higher risk of chromosomal abnormalities. Reduced IVF Success Rates: success declines especially after 40.",
   },
 };
 
