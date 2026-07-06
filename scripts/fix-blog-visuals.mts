@@ -897,6 +897,20 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "pgt-for-couples-with-recurrent-ivf-failure-or-miscarriages-does-it-help": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 38: Draft blogs (batch 6) ───────────────────────────────────
+  // NOTE: azoospermia-can-you-have-a-baby-with-zero-sperm-count has NO redundant blocks (already has 2 good infographics) — replace-only, no fix-blog-visuals run needed.
+  "postpartum-mental-health-recognizing-baby-blues-and-postpartum-depression": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "pregnancy-complications": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "preparing-for-your-first-ivf-cycle-tips-and-advice": {
+    removeBlocks: ["key recommendations", "key numbers"],
+  },
+  "preserving-hope-ivf-and-fertility-preservation-for-cancer-patients": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

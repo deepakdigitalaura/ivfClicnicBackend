@@ -3656,6 +3656,172 @@ const SVG_PGTA_WHO_SHOULD_CONSIDER = `<svg xmlns="http://www.w3.org/2000/svg" vi
   <text x="664" y="153" text-anchor="middle" font-size="9" fill="${C.muted}">embryos</text>
 </svg>`;
 
+// ── Wave 38 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D6-1 (Postpartum mental health): "5 Symptoms of Baby Blues"
+// Source: Blog node [11], stated verbatim
+const SVG_BABY_BLUES_SYMPTOMS_5 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 202" font-family="${FONT}">
+  <rect width="800" height="202" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="200.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 SYMPTOMS OF BABY BLUES</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="108" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">01</text>
+  <text x="108" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Mood Swings</text>
+  <rect x="186" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="186" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="186" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="254" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">02</text>
+  <text x="254" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Irritability</text>
+  <rect x="332" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="332" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="332" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">03</text>
+  <text x="400" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Crying Spells</text>
+  <text x="400" y="124" text-anchor="middle" font-size="9" fill="${C.muted}">No clear reason</text>
+  <rect x="478" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="478" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="478" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="546" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">04</text>
+  <text x="546" y="112" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Anxiety</text>
+  <rect x="624" y="48" width="136" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="624" y="48" width="136" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="624" y="72" width="136" height="12" fill="${C.rose}"/>
+  <text x="692" y="70" text-anchor="middle" font-size="14" font-weight="700" fill="${C.white}">05</text>
+  <text x="692" y="106" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Difficulty</text>
+  <text x="692" y="124" text-anchor="middle" font-size="10" font-weight="700" fill="${C.dark}">Sleeping</text>
+</svg>`;
+
+// Blog D6-2 (Pregnancy complications): "Managing Gestational Diabetes: 4 Steps"
+// Source: Blog node [27], stated verbatim
+const SVG_GESTATIONAL_DIABETES_MANAGEMENT_4 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">MANAGING GESTATIONAL DIABETES: 4 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="123" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">1</text>
+  <text x="123" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Dietary Changes</text>
+  <text x="123" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Controlled carb</text>
+  <text x="123" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">intake</text>
+  <rect x="216" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="216" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="216" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="299" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">2</text>
+  <text x="299" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Regular Exercise</text>
+  <text x="299" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Regulates blood</text>
+  <text x="299" y="140" text-anchor="middle" font-size="9" fill="${C.muted}">sugar levels</text>
+  <rect x="392" y="48" width="166" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="392" y="48" width="166" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="392" y="72" width="166" height="12" fill="${C.rose}"/>
+  <text x="475" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">3</text>
+  <text x="475" y="102" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Blood Sugar</text>
+  <text x="475" y="116" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Monitoring</text>
+  <text x="475" y="136" text-anchor="middle" font-size="9" fill="${C.muted}">Regular checks</text>
+  <rect x="568" y="48" width="192" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="568" y="48" width="192" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="568" y="72" width="192" height="12" fill="${C.rose}"/>
+  <text x="664" y="70" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">4</text>
+  <text x="664" y="106" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Medication</text>
+  <text x="664" y="126" text-anchor="middle" font-size="9" fill="${C.muted}">Insulin if needed</text>
+</svg>`;
+
+// Blog D6-3 (Preparing for first IVF cycle): "Understanding the IVF Process: 6 Steps"
+// Source: Blog nodes [5],[7],[11],[14],[16],[18], stated verbatim
+const SVG_IVF_PROCESS_6_STEPS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 362" font-family="${FONT}">
+  <rect width="800" height="362" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="360.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">UNDERSTANDING THE IVF PROCESS: 6 STEPS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="44" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="67" r="14" fill="${C.rose}"/>
+  <text x="68" y="71.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">1</text>
+  <text x="92" y="63" font-size="11.5" font-weight="700" fill="${C.dark}">Initial Consultation</text>
+  <text x="92" y="79" font-size="10" fill="${C.muted}">Comprehensive evaluation to plan your cycle</text>
+  <rect x="40" y="96" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="119" r="14" fill="${C.rose}"/>
+  <text x="68" y="123.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">2</text>
+  <text x="92" y="115" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Stimulation</text>
+  <text x="92" y="131" font-size="10" fill="${C.muted}">Gonadotropins and hCG trigger mature the eggs</text>
+  <rect x="40" y="148" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="171" r="14" fill="${C.rose}"/>
+  <text x="68" y="175.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">3</text>
+  <text x="92" y="167" font-size="11.5" font-weight="700" fill="${C.dark}">Egg Retrieval</text>
+  <text x="92" y="183" font-size="10" fill="${C.muted}">Minor procedure to collect mature eggs</text>
+  <rect x="40" y="200" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="223" r="14" fill="${C.rose}"/>
+  <text x="68" y="227.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">4</text>
+  <text x="92" y="219" font-size="11.5" font-weight="700" fill="${C.dark}">Fertilization &amp; Embryo Culture</text>
+  <text x="92" y="235" font-size="10" fill="${C.muted}">Eggs and sperm combined in the lab</text>
+  <rect x="40" y="252" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="275" r="14" fill="${C.rose}"/>
+  <text x="68" y="279.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">5</text>
+  <text x="92" y="271" font-size="11.5" font-weight="700" fill="${C.dark}">Embryo Transfer</text>
+  <text x="92" y="287" font-size="10" fill="${C.muted}">Selected embryo placed into the uterus</text>
+  <rect x="40" y="304" width="720" height="46" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="68" cy="327" r="14" fill="${C.rose}"/>
+  <text x="68" y="331.5" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">6</text>
+  <text x="92" y="323" font-size="11.5" font-weight="700" fill="${C.dark}">Pregnancy Test</text>
+  <text x="92" y="339" font-size="10" fill="${C.muted}">Confirms whether implantation was successful</text>
+</svg>`;
+
+// Blog D6-4 (Azoospermia): "Azoospermia: The Numbers That Matter"
+// Source: Blog paras [5],[11] — real stats stated verbatim, not invented
+const SVG_AZOOSPERMIA_NUMBERS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 190" font-family="${FONT}">
+  <rect width="800" height="190" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="188.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">AZOOSPERMIA: THE NUMBERS THAT MATTER</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="149" y="98" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">~1%</text>
+  <text x="149" y="122" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">of all men have</text>
+  <text x="149" y="138" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">azoospermia</text>
+  <rect x="291" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="400" y="98" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">10–15%</text>
+  <text x="400" y="122" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">of men investigated</text>
+  <text x="400" y="138" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">for infertility</text>
+  <rect x="542" y="48" width="218" height="120" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="651" y="98" text-anchor="middle" font-size="26" font-weight="800" fill="${C.rose}">90%+</text>
+  <text x="651" y="122" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">sperm retrieval success</text>
+  <text x="651" y="138" text-anchor="middle" font-size="10.5" font-weight="600" fill="${C.dark}">in obstructive cases</text>
+</svg>`;
+
+// Blog D6-5 (Preserving hope — cancer fertility preservation): "How Cancer Treatment Affects Fertility"
+// Source: Blog nodes [7],[9],[10] (women) and [12],[13],[14] (men), stated verbatim
+const SVG_CANCER_TREATMENT_FERTILITY_EFFECTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Effects on Women's Fertility</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Premature Menopause</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Ovaries stop producing eggs early</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reduced Egg Quality</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Eggs less viable for fertilization</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Ovarian Failure</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Severe cases stop egg production entirely</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Effects on Men's Fertility</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Reduced Sperm Count</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Harder to conceive naturally</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Abnormal Sperm</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Less motile or abnormal in shape</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Azoospermia</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Severe cases stop sperm production</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -8631,6 +8797,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_PGTA_WHO_SHOULD_CONSIDER,
     title:   "Who Should Consider PGT-A Testing?",
     altText: "Four-panel horizontal infographic. Recurrent IVF Failure: two or more failed cycles. Recurrent Miscarriages: two or more pregnancy losses. Advanced Maternal Age: higher chromosomal abnormality risk. Poor Embryo Development: history of low-quality embryos.",
+  },
+
+  // ── Wave 38: Draft blogs (batch 6) ──────────────────────────────────
+  "postpartum-mental-health-recognizing-baby-blues-and-postpartum-depression": {
+    svg:     SVG_BABY_BLUES_SYMPTOMS_5,
+    title:   "5 Symptoms of Baby Blues",
+    altText: "Five-panel horizontal infographic. Mood Swings. Irritability. Crying Spells: no clear reason. Anxiety. Difficulty Sleeping.",
+  },
+
+  "pregnancy-complications": {
+    svg:     SVG_GESTATIONAL_DIABETES_MANAGEMENT_4,
+    title:   "Managing Gestational Diabetes: 4 Steps",
+    altText: "Four-panel horizontal infographic. Dietary Changes: controlled carb intake. Regular Exercise: regulates blood sugar levels. Blood Sugar Monitoring: regular checks. Medication: insulin if needed.",
+  },
+
+  "preparing-for-your-first-ivf-cycle-tips-and-advice": {
+    svg:     SVG_IVF_PROCESS_6_STEPS,
+    title:   "Understanding the IVF Process: 6 Steps",
+    altText: "Six-row single-column infographic. Step 1 Initial Consultation: comprehensive evaluation to plan your cycle. Step 2 Ovarian Stimulation: gonadotropins and hCG trigger mature the eggs. Step 3 Egg Retrieval: minor procedure to collect mature eggs. Step 4 Fertilization & Embryo Culture: eggs and sperm combined in the lab. Step 5 Embryo Transfer: selected embryo placed into the uterus. Step 6 Pregnancy Test: confirms whether implantation was successful.",
+  },
+
+  "azoospermia-can-you-have-a-baby-with-zero-sperm-count": {
+    svg:     SVG_AZOOSPERMIA_NUMBERS,
+    title:   "Azoospermia: The Numbers That Matter",
+    altText: "Three-panel horizontal stat infographic. ~1% of all men have azoospermia. 10-15% of men investigated for infertility. 90%+ sperm retrieval success in obstructive cases.",
+  },
+
+  "preserving-hope-ivf-and-fertility-preservation-for-cancer-patients": {
+    svg:     SVG_CANCER_TREATMENT_FERTILITY_EFFECTS,
+    title:   "How Cancer Treatment Affects Fertility",
+    altText: "Two-panel comparison. Left (Effects on Women's Fertility): Premature Menopause; Reduced Egg Quality; Ovarian Failure. Right (Effects on Men's Fertility): Reduced Sperm Count; Abnormal Sperm; Azoospermia.",
   },
 };
 
