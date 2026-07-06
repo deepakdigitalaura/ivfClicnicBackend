@@ -5360,6 +5360,164 @@ const SVG_AGE_FEMALE_FERTILITY_EFFECTS_3 = `<svg xmlns="http://www.w3.org/2000/s
   <text x="651" y="138" text-anchor="middle" font-size="10" fill="${C.dark}" font-weight="600">after 40</text>
 </svg>`;
 
+// ── Wave 48 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D16-1 (Ectopic pregnancy): "Ectopic Pregnancy: Symptoms to Watch"
+// Source: Blog nodes [11] (common) and [14] (emergency), stated verbatim
+const SVG_ECTOPIC_PREGNANCY_SYMPTOMS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Common Symptoms</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Abdominal &amp; Pelvic Pain</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Varying intensity, worse with activity</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Vaginal Bleeding</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Ranges from spotting to continuous flow</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Lower Back Pain</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Often accompanies pelvic discomfort</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Emergency Symptoms</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Fainting or Low Blood Pressure</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Signs of internal bleeding</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Shoulder Pain</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Nerve irritation from internal bleeding</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Pale &amp; Sweaty Skin</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Requires immediate medical attention</text>
+</svg>`;
+
+// Blog D16-2 (Do's and Don'ts for fertility): "Fertility: Do's and Don'ts"
+// Source: Blog nodes [6] (do) and [10] (don't), stated verbatim
+const SVG_FERTILITY_DOS_DONTS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <rect x="10" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="10" width="380" height="46" rx="8" fill="${C.rose}"/>
+  <rect x="10" y="44" width="380" height="12" fill="${C.rose}"/>
+  <text x="200" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.white}">Do</text>
+  <rect x="22" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Have Regular Sex</text>
+  <text x="34" y="89" font-size="10.5" fill="${C.muted}">Especially during the fertile window</text>
+  <rect x="22" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Track Ovulation</text>
+  <text x="34" y="137" font-size="10.5" fill="${C.muted}">Use ovulation tests or track your cycle</text>
+  <rect x="22" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="34" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Maintain a Healthy Weight</text>
+  <text x="34" y="185" font-size="10.5" fill="${C.muted}">Under- or over-weight can affect ovulation</text>
+  <rect x="410" y="10" width="380" height="224" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <text x="600" y="38" text-anchor="middle" font-size="13" font-weight="700" fill="${C.dark}">Don't</text>
+  <line x1="418" y1="56" x2="784" y2="56" stroke="${C.border}" stroke-width="1"/>
+  <rect x="422" y="68" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="73.5" font-size="11.5" font-weight="700" fill="${C.dark}">Smoke</text>
+  <text x="434" y="89" font-size="10.5" fill="${C.muted}">Lowers fertility and increases pregnancy risks</text>
+  <rect x="422" y="116" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="121.5" font-size="11.5" font-weight="700" fill="${C.dark}">Drink Excessive Alcohol</text>
+  <text x="434" y="137" font-size="10.5" fill="${C.muted}">Interferes with ovulation and sperm production</text>
+  <rect x="422" y="164" width="5" height="5" rx="1" fill="${C.rose}"/>
+  <text x="434" y="169.5" font-size="11.5" font-weight="700" fill="${C.dark}">Over-Exercise</text>
+  <text x="434" y="185" font-size="10.5" fill="${C.muted}">Strenuous workouts can lower ovulation</text>
+</svg>`;
+
+// Blog D16-3 (Leading IVF Chain by Radio City): "5 Pillars of Bavishi Fertility Institute"
+// Source: Blog node [9], stated verbatim
+const SVG_BFI_FIVE_PILLARS = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 PILLARS OF BAVISHI FERTILITY INSTITUTE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Top Fertility Experts</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Experienced specialists and embryologists</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Cutting-Edge Technology</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Internationally aligned protocols</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">High Success Rates</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">IVF, ICSI, egg donation, fertility preservation</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Personalized Treatment</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Tailored to every couple</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Compassionate Care</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">From consultation to conception</text>
+</svg>`;
+
+// Blog D16-4 (IVF Chain of the Year — 5th win): "IVF Chain of the Year – West: 5th Win"
+// Source: Blog paras [3],[5],[6], stated verbatim
+const SVG_IVF_CHAIN_YEAR_5TH_WIN = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">IVF CHAIN OF THE YEAR – WEST: 5TH WIN</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Award</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">IVF Chain of the Year – West, by Economic Times</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Five Consecutive Years</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Reaffirming excellence in fertility care</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Comprehensive Services</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">IVF, ICSI, egg donation, embryo freezing</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">Built on Trust</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Patient trust and dedicated team efforts</text>
+</svg>`;
+
+// Blog D16-5 (Patient-Centric Hospital Award): "Patient-Centric Hospital Award: Highlights"
+// Source: Blog paras [3],[6], stated verbatim
+const SVG_PATIENT_CENTRIC_AWARD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">PATIENT-CENTRIC HOSPITAL AWARD: HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Award</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Patient-Centric Hospital in Reproductive Health, IHW 2024</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Ceremony</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">December 13, 2024, in New Delhi</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Our Philosophy</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Simple, Safe, Smart and Successful care</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">What It Recognizes</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Customized, compassionate patient-first treatment</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -10645,6 +10803,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_AGE_FEMALE_FERTILITY_EFFECTS_3,
     title:   "3 Effects of Age on Female Fertility",
     altText: "Three-panel horizontal infographic. Diminished Ovarian Reserve: egg supply decreases with age. Poor Egg Quality: higher risk of chromosomal abnormalities. Reduced IVF Success Rates: success declines especially after 40.",
+  },
+
+  // ── Wave 48: Draft blogs (batch 16) ─────────────────────────────────
+  "ectopic-pregnancy": {
+    svg:     SVG_ECTOPIC_PREGNANCY_SYMPTOMS,
+    title:   "Ectopic Pregnancy: Symptoms to Watch",
+    altText: "Two-panel comparison. Left (Common Symptoms): Abdominal & Pelvic Pain; Vaginal Bleeding; Lower Back Pain. Right (Emergency Symptoms): Fainting or Low Blood Pressure; Shoulder Pain; Pale & Sweaty Skin.",
+  },
+
+  "do-and-dont-for-fertility": {
+    svg:     SVG_FERTILITY_DOS_DONTS,
+    title:   "Fertility: Do's and Don'ts",
+    altText: "Two-panel comparison. Left (Do): Have Regular Sex; Track Ovulation; Maintain a Healthy Weight. Right (Don't): Smoke; Drink Excessive Alcohol; Over-Exercise.",
+  },
+
+  "bavishi-fertility-institute-recognized-as-the-leading-ivf-chain-of-gujarat-by-radio-city": {
+    svg:     SVG_BFI_FIVE_PILLARS,
+    title:   "5 Pillars of Bavishi Fertility Institute",
+    altText: "Two-column five-item grid. Items 1-3 (left): Top Fertility Experts; High Success Rates; Compassionate Care. Items 4-5 (right): Cutting-Edge Technology; Personalized Treatment.",
+  },
+
+  "bavishi-fertility-institute-wins-ivf-chain-of-the-year-west-for-5th-time": {
+    svg:     SVG_IVF_CHAIN_YEAR_5TH_WIN,
+    title:   "IVF Chain of the Year – West: 5th Win",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Award: IVF Chain of the Year - West, by Economic Times. Highlight 02 Five Consecutive Years: reaffirming excellence in fertility care. Highlight 03 Comprehensive Services: IVF, ICSI, egg donation, embryo freezing. Highlight 04 Built on Trust: patient trust and dedicated team efforts.",
+  },
+
+  "bavishi-fertility-institute-wins-patient-centric-hospital-award": {
+    svg:     SVG_PATIENT_CENTRIC_AWARD,
+    title:   "Patient-Centric Hospital Award: Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Award: Patient-Centric Hospital in Reproductive Health, IHW 2024. Highlight 02 Ceremony: December 13, 2024 in New Delhi. Highlight 03 Our Philosophy: Simple, Safe, Smart and Successful care. Highlight 04 What It Recognizes: customized, compassionate patient-first treatment.",
   },
 };
 

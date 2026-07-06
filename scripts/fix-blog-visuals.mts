@@ -1055,6 +1055,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "complications-of-delaying-your-ivf-journey": {
     removeBlocks: ["step-by-step process", "key numbers"],
   },
+  // ── Wave 48: Draft blogs (batch 16) ──────────────────────────────────
+  "ectopic-pregnancy": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "do-and-dont-for-fertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "bavishi-fertility-institute-recognized-as-the-leading-ivf-chain-of-gujarat-by-radio-city": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "bavishi-fertility-institute-wins-ivf-chain-of-the-year-west-for-5th-time": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
+  "bavishi-fertility-institute-wins-patient-centric-hospital-award": {
+    removeBlocks: ["key aspects", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────
