@@ -975,6 +975,22 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   "thyroid-disorders-in-early-pregnancy": {
     removeBlocks: ["complete guide", "key numbers"],
   },
+  // ── Wave 43: Draft blogs (batch 11) ──────────────────────────────────
+  "bavishi-fertility-institute-honoured-at-times-healthcare-leaders-awards-2025": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "twin-pregnancy-understanding-common-risks-and-how-doctors-manage-them": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "understanding-endometrial-thickness-a-key-factor-in-female-fertility": {
+    removeBlocks: ["complete guide", "key numbers"],
+  },
+  "understanding-reality-behind-ivf-success-rates": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
+  "understanding-sperm-dna-fragmentation-causes-treatment-and-ivf-options": {
+    removeBlocks: ["step-by-step process", "key numbers"],
+  },
 };
 
 // ── Main ──────────────────────────────────────────────────────────────

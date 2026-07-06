@@ -4492,6 +4492,163 @@ const SVG_THYROID_PREGNANCY_SYMPTOMS_5 = `<svg xmlns="http://www.w3.org/2000/svg
   <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Constipation or Anxiety</text>
 </svg>`;
 
+// ── Wave 43 SVG constants (Draft-blog enrichment continues) ───────────
+
+// Blog D11-1 (Times Healthcare Leaders Awards): "Times Healthcare Leaders Awards 2025: Highlights"
+// Source: Blog nodes [12],[13],[16], stated verbatim
+const SVG_TIMES_HEALTHCARE_AWARD = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 288" font-family="${FONT}">
+  <rect width="800" height="288" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="286.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">TIMES HEALTHCARE LEADERS AWARDS 2025: HIGHLIGHTS</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="44" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="63" font-size="11" font-weight="700" fill="${C.rose}">01</text>
+  <text x="68" y="63" font-size="12" font-weight="700" fill="${C.dark}">The Award</text>
+  <text x="68" y="81" font-size="10.5" fill="${C.muted}">Honoured at Times Healthcare Leaders Awards 2025</text>
+  <rect x="20" y="107" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="107" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="126" font-size="11" font-weight="700" fill="${C.rose}">02</text>
+  <text x="68" y="126" font-size="12" font-weight="700" fill="${C.dark}">Selection Criteria</text>
+  <text x="68" y="144" font-size="10.5" fill="${C.muted}">Innovation, service, patient outcomes, leadership &amp; ethics</text>
+  <rect x="20" y="170" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="170" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="189" font-size="11" font-weight="700" fill="${C.rose}">03</text>
+  <text x="68" y="189" font-size="12" font-weight="700" fill="${C.dark}">Assessment Period</text>
+  <text x="68" y="207" font-size="10.5" fill="${C.muted}">Performance evaluated April 2024 – March 2025</text>
+  <rect x="20" y="233" width="760" height="55" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="20" y="233" width="8" height="55" rx="3" fill="${C.rose}"/>
+  <text x="38" y="252" font-size="11" font-weight="700" fill="${C.rose}">04</text>
+  <text x="68" y="252" font-size="12" font-weight="700" fill="${C.dark}">What It Means</text>
+  <text x="68" y="270" font-size="10.5" fill="${C.muted}">Validates our mission of safe, ethical fertility care</text>
+</svg>`;
+
+// Blog D11-2 (Twin pregnancy risks): "5 Common Risks in Twin Pregnancy"
+// Source: Blog nodes [5]-[9], stated verbatim
+const SVG_TWIN_PREGNANCY_RISKS_5_D11 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 250" font-family="${FONT}">
+  <rect width="800" height="250" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="248.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">5 COMMON RISKS IN TWIN PREGNANCY</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Preterm Labor &amp; Birth</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Twins more likely to arrive early</text>
+  <rect x="10" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="133" r="16" fill="${C.rose}"/>
+  <text x="42" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="67" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Low Birth Weight</text>
+  <text x="67" y="144" font-size="10.5" fill="${C.muted}">Twins may be smaller than single babies</text>
+  <rect x="10" y="164" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="193" r="16" fill="${C.rose}"/>
+  <text x="42" y="198" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="187" font-size="11.5" font-weight="700" fill="${C.dark}">TTTS</text>
+  <text x="67" y="204" font-size="10.5" fill="${C.muted}">One twin gets more blood flow than the other</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Gestational Diabetes</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Higher risk when carrying twins</text>
+  <rect x="410" y="104" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="133" r="16" fill="${C.rose}"/>
+  <text x="442" y="138" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="467" y="127" font-size="11.5" font-weight="700" fill="${C.dark}">Hypertension &amp; Preeclampsia</text>
+  <text x="467" y="144" font-size="10.5" fill="${C.muted}">More common in twin pregnancies</text>
+</svg>`;
+
+// Blog D11-3 (Endometrial thickness): "Endometrial Thickness Through the Cycle"
+// Source: Blog node [9], stated verbatim
+const SVG_ENDOMETRIAL_THICKNESS_CYCLE = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">ENDOMETRIAL THICKNESS THROUGH THE CYCLE</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">MENSTRUATION</text>
+  <text x="149" y="120" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">2–4 mm</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">PROLIFERATIVE</text>
+  <text x="400" y="120" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">5–7 mm</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">LUTEAL PHASE</text>
+  <text x="651" y="120" text-anchor="middle" font-size="22" font-weight="800" fill="${C.rose}">7–14 mm</text>
+</svg>`;
+
+// Blog D11-4 (IVF success rates reality): "3 Stages of IVF 'Success'"
+// Source: Blog node [8], stated verbatim
+const SVG_IVF_SUCCESS_STAGES_3 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 214" font-family="${FONT}">
+  <rect width="800" height="214" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="212.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">3 STAGES OF IVF "SUCCESS"</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="40" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="40" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="149" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">STAGE 1</text>
+  <text x="149" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Positive Pregnancy</text>
+  <text x="149" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Test</text>
+  <text x="149" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Earliest confirmation</text>
+  <rect x="291" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="291" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="291" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="400" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">STAGE 2</text>
+  <text x="400" y="112" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Ongoing</text>
+  <text x="400" y="128" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Pregnancy</text>
+  <text x="400" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">Confirmed heartbeat, 2–3mo</text>
+  <rect x="542" y="48" width="218" height="138" rx="8" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <rect x="542" y="48" width="218" height="36" rx="8" fill="${C.rose}"/>
+  <rect x="542" y="72" width="218" height="12" fill="${C.rose}"/>
+  <text x="651" y="70" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">STAGE 3</text>
+  <text x="651" y="120" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}">Live Birth</text>
+  <text x="651" y="148" text-anchor="middle" font-size="9.5" fill="${C.muted}">A healthy child born</text>
+</svg>`;
+
+// Blog D11-5 (Sperm DNA fragmentation): "6 Causes of High Sperm DNA Fragmentation"
+// Source: Blog nodes [14]-[19], stated verbatim
+const SVG_SPERM_DNA_FRAGMENTATION_CAUSES_6 = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 244" font-family="${FONT}">
+  <rect width="800" height="244" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="242.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">6 CAUSES OF HIGH SPERM DNA FRAGMENTATION</text>
+  <line x1="40" y1="36" x2="760" y2="36" stroke="${C.border}" stroke-width="1"/>
+  <rect x="10" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="73" r="16" fill="${C.rose}"/>
+  <text x="42" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">1</text>
+  <text x="67" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Oxidative Stress</text>
+  <text x="67" y="84" font-size="10.5" fill="${C.muted}">Imbalance between free radicals and antioxidants</text>
+  <rect x="410" y="44" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="73" r="16" fill="${C.rose}"/>
+  <text x="442" y="78" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">2</text>
+  <text x="467" y="67" font-size="11.5" font-weight="700" fill="${C.dark}">Infections</text>
+  <text x="467" y="84" font-size="10.5" fill="${C.muted}">Genital tract infections, prostatitis, epididymitis</text>
+  <rect x="10" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="139" r="16" fill="${C.rose}"/>
+  <text x="42" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">3</text>
+  <text x="67" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Varicocele</text>
+  <text x="67" y="150" font-size="10.5" fill="${C.muted}">Enlargement of veins in the scrotum</text>
+  <rect x="410" y="110" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="139" r="16" fill="${C.rose}"/>
+  <text x="442" y="144" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">4</text>
+  <text x="467" y="133" font-size="11.5" font-weight="700" fill="${C.dark}">Lifestyle Factors</text>
+  <text x="467" y="150" font-size="10.5" fill="${C.muted}">Smoking, alcohol, obesity and stress</text>
+  <rect x="10" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="42" cy="205" r="16" fill="${C.rose}"/>
+  <text x="42" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">5</text>
+  <text x="67" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Aging</text>
+  <text x="67" y="216" font-size="10.5" fill="${C.muted}">Advanced paternal age</text>
+  <rect x="410" y="176" width="380" height="58" rx="6" fill="${C.white}" stroke="${C.border}" stroke-width="1"/>
+  <circle cx="442" cy="205" r="16" fill="${C.rose}"/>
+  <text x="442" y="210" text-anchor="middle" font-size="11" font-weight="700" fill="${C.white}">6</text>
+  <text x="467" y="199" font-size="11.5" font-weight="700" fill="${C.dark}">Environmental Toxins</text>
+  <text x="467" y="216" font-size="10.5" fill="${C.muted}">Pesticides, heavy metals and pollutants</text>
+</svg>`;
+
 // ── Wave 32 SVG constants (FINAL WAVE) ────────────────────────────────
 
 // Blog W32-1 (Male fertility supplements): "4 Key Nutrients for Male Fertility Supplements"
@@ -9622,6 +9779,37 @@ const CONFIGS: Record<string, { svg: string; title: string; altText: string }> =
     svg:     SVG_THYROID_PREGNANCY_SYMPTOMS_5,
     title:   "5 Thyroid Symptoms to Watch in Pregnancy",
     altText: "Two-column five-item grid. Items 1-3 (left): Extreme Fatigue; Unexplained Weight Changes; Rapid Heartbeat or Palpitations. Items 4-5 (right): Heat or Cold Sensitivity; Constipation or Anxiety.",
+  },
+
+  // ── Wave 43: Draft blogs (batch 11) ─────────────────────────────────
+  "bavishi-fertility-institute-honoured-at-times-healthcare-leaders-awards-2025": {
+    svg:     SVG_TIMES_HEALTHCARE_AWARD,
+    title:   "Times Healthcare Leaders Awards 2025: Highlights",
+    altText: "Four-row accent-bar infographic. Highlight 01 The Award: honoured at Times Healthcare Leaders Awards 2025. Highlight 02 Selection Criteria: innovation, service, patient outcomes, leadership and ethics. Highlight 03 Assessment Period: performance evaluated April 2024 to March 2025. Highlight 04 What It Means: validates our mission of safe, ethical fertility care.",
+  },
+
+  "twin-pregnancy-understanding-common-risks-and-how-doctors-manage-them": {
+    svg:     SVG_TWIN_PREGNANCY_RISKS_5_D11,
+    title:   "5 Common Risks in Twin Pregnancy",
+    altText: "Two-column five-item grid. Items 1-3 (left): Preterm Labor & Birth; Low Birth Weight; TTTS. Items 4-5 (right): Gestational Diabetes; Hypertension & Preeclampsia.",
+  },
+
+  "understanding-endometrial-thickness-a-key-factor-in-female-fertility": {
+    svg:     SVG_ENDOMETRIAL_THICKNESS_CYCLE,
+    title:   "Endometrial Thickness Through the Cycle",
+    altText: "Three-panel horizontal stat infographic. Menstruation: 2-4mm. Proliferative phase: 5-7mm. Luteal phase: 7-14mm.",
+  },
+
+  "understanding-reality-behind-ivf-success-rates": {
+    svg:     SVG_IVF_SUCCESS_STAGES_3,
+    title:   "3 Stages of IVF 'Success'",
+    altText: "Three-panel horizontal infographic. Stage 1 Positive Pregnancy Test: earliest confirmation. Stage 2 Ongoing Pregnancy: confirmed heartbeat at 2-3 months. Stage 3 Live Birth: a healthy child born.",
+  },
+
+  "understanding-sperm-dna-fragmentation-causes-treatment-and-ivf-options": {
+    svg:     SVG_SPERM_DNA_FRAGMENTATION_CAUSES_6,
+    title:   "6 Causes of High Sperm DNA Fragmentation",
+    altText: "Two-column six-item grid. Items 1-3 (left): Oxidative Stress; Varicocele; Aging. Items 4-6 (right): Infections; Lifestyle Factors; Environmental Toxins.",
   },
 };
 
