@@ -537,7 +537,7 @@ export const DOCTORS: Doctor[] = [
   }),
   // Anand (IRIS Hospital)
   cityDoctor({
-    slug: "chetna-vyas", name: "Dr. Chetna Vyas", image: "/assets/doctors/Dr.-Chetna-Vyas-221x300.webp",
+    slug: "chetna-vyas", name: "Dr. Chetna Vyas", image: "/assets/doctors/chetna-vyas.webp",
     city: "Anand", citySlug: "anand", locations: ["nanikhodiyar"],
     experienceLabel: "22+ yrs", experienceYears: 22,
     specialty: "Obstetrics, Gynaecology & IVF", role: "Co-founder, Bavishi Fertility Institute — IRIS Hospital",
