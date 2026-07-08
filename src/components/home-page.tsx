@@ -23,6 +23,7 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import type { Review } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
+import { OPEN_COOKIE_PREFERENCES_EVENT } from "@/components/cookie-consent";
 import { cityHref, centresForCity, centreHref } from "@/lib/locations";
 import { resolveIcon } from "@/lib/icon-map";
 import { Editable, EditableImage } from "@/components/editor/Editable";
@@ -794,7 +795,7 @@ const defaultDocs: Doc[] = [
   { img: drHimanshu, n: "Dr. Himanshu Bavishi", deg: "M.D", spec: "Reproductive Medicine & IVF", loc: "Ahmedabad", exp: "35+ yrs", slug: "himanshu-bavishi" },
   { img: drFalguni,  n: "Dr. Falguni Bavishi",  deg: "M.D", spec: "Infertility & Gynaecology", loc: "Ahmedabad", exp: "30+ yrs", slug: "falguni-bavishi" },
   { img: drParth,    n: "Dr. Parth Bavishi",    deg: "M.D", spec: "IVF & Andrology",           loc: "Mumbai",    exp: "15+ yrs", slug: "parth-bavishi" },
-  { img: drJanki,    n: "Dr. Janki Bavishi",    deg: "M.S", spec: "Reproductive Surgery",      loc: "Mumbai",    exp: "12+ yrs", slug: "janki-bavishi" },
+  { img: drJanki,    n: "Dr. Janki Bavishi",    deg: "M.S", spec: "Obstetrics & Gynaecology",  loc: "Ahmedabad", exp: "13+ yrs", slug: "janki-bavishi" },
 ];
 export function Doctors({
   docs = defaultDocs,
@@ -1801,6 +1802,13 @@ export function Footer() {
                 {x.label}
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_PREFERENCES_EVENT))}
+              className="hover:text-[color:var(--rose)]"
+            >
+              Cookie Settings
+            </button>
           </div>
         </div>
       </div>
