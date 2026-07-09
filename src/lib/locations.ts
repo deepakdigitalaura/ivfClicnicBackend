@@ -671,7 +671,20 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Bhuj centre is the best fertility hospital in Kutch, combining state-of-the-art technology with compassionate support for a truly personalised experience. Located at Shivam Nagar near Kutch Orthopaedic Hospital in Mirjapar, it brings advanced IVF, infertility treatment and maternity care within reach of families across the region.",
-    gallery: sharedGallery("Bhuj"),
+    gallery: [
+      { src: "/assets/centres/bhuj-reception.webp", alt: "Bavishi Fertility Institute Bhuj — reception desk & counselling room" },
+      { src: "/assets/centres/bhuj-reception-desk.webp", alt: "Bavishi Fertility Institute Bhuj — reception desk & admin office" },
+      { src: "/assets/centres/bhuj-ivf-ot-entrance.webp", alt: "Bavishi Fertility Institute Bhuj — IVF operation theatre entrance" },
+      { src: "/assets/centres/bhuj-ot-corridor.webp", alt: "Bavishi Fertility Institute Bhuj — operation theatre corridor" },
+      { src: "/assets/centres/bhuj-recovery-room.webp", alt: "Bavishi Fertility Institute Bhuj — recovery room" },
+      { src: "/assets/centres/bhuj-procedure-room.webp", alt: "Bavishi Fertility Institute Bhuj — procedure & examination room" },
+      { src: "/assets/centres/bhuj-patient-prep-room.webp", alt: "Bavishi Fertility Institute Bhuj — patient preparation room" },
+      { src: "/assets/centres/bhuj-embryology-lab-corridor.webp", alt: "Bavishi Fertility Institute Bhuj — corridor past the embryology lab" },
+      { src: "/assets/centres/bhuj-corridor-entrance.webp", alt: "Bavishi Fertility Institute Bhuj — entrance corridor" },
+      { src: "/assets/centres/bhuj-staircase.webp", alt: "Bavishi Fertility Institute Bhuj — staircase" },
+      { src: "/assets/centres/bhuj-achievements-wall.webp", alt: "Bavishi Fertility Institute Bhuj — awards & achievements wall" },
+      { src: "/assets/centres/bhuj-inauguration.webp", alt: "Bavishi Fertility Institute Bhuj — centre inauguration ceremony" },
+    ],
     built: true,
   },
   {
