@@ -693,6 +693,58 @@ export function SuccessStories({
   );
 }
 
+/* ---------- Written Reviews (text) ----------
+ * Text-only Google-review carousel. Used on doctor profiles where real
+ * written reviews exist (src/lib/doctor-reviews.ts). Same MobileCarousel
+ * idiom as SuccessStories, but quote cards instead of video thumbnails.
+ * Auto-scrolls; shows desktop arrows so >3 reviews stay reachable. */
+export function WrittenReviews({
+  reviews,
+  eyebrow = "Patient Reviews",
+  title,
+  subtitle,
+  tone = "white",
+}: {
+  reviews: { name: string; rating: number; date: string; text: string }[];
+  eyebrow?: React.ReactNode;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  tone?: "white" | "tint";
+}) {
+  if (!reviews.length) return null;
+  return (
+    <section className={`${tone === "tint" ? "bg-[color:var(--rose-soft)]/40" : "bg-white"} py-10 md:py-16`}>
+      <div className="container-px mx-auto max-w-[1400px]">
+        <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} align="center" />
+        <MobileCarousel alwaysArrows>
+          <Stagger className="mt-10 flex snap-x snap-mandatory items-start gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
+            {reviews.map((r, i) => (
+              <StaggerItem key={`${r.name}-${i}`} className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+                <article className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
+                  <Quote className="h-8 w-8 text-[color:var(--rose)]/25" aria-hidden />
+                  <div className="mt-3 flex items-center gap-1 text-[color:var(--gold)]">
+                    {Array.from({ length: r.rating }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
+                  </div>
+                  <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">{r.text}</p>
+                  <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-4">
+                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose-soft)] text-sm font-semibold text-[color:var(--rose)]">
+                      {r.name.charAt(0)}
+                    </span>
+                    <div>
+                      <div className="text-sm font-semibold text-[color:var(--plum)]">{r.name}</div>
+                      <div className="text-xs text-muted-foreground">{r.date}</div>
+                    </div>
+                  </div>
+                </article>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </MobileCarousel>
+      </div>
+    </section>
+  );
+}
+
 /* ---------- Video Hub ---------- */
 
 export function VideoHub({

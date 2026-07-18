@@ -7,7 +7,7 @@ import {
 } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Footer, SuccessStories, TreatmentCard, LiteYouTube } from "@/components/home-page";
+import { Footer, SuccessStories, WrittenReviews, TreatmentCard, LiteYouTube } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { SectionHead } from "@/components/ivf-page";
 import { Editable, EditableImage } from "@/components/editor/Editable";
@@ -17,6 +17,7 @@ import { DOCTORS, doctorUrl } from "@/lib/doctors";
 import { treatmentCardData, treatmentRef } from "@/lib/treatments";
 import { centresForLocationSlugs, centreMapUrl, centreHref, cityBySlug } from "@/lib/locations";
 import { testimonialsForDoctor, videosForDoctor } from "@/lib/video-testimonials";
+import { reviewsForDoctor } from "@/lib/doctor-reviews";
 
 /* Maps every free-text `knowsAbout` label to a treatment slug so the "Areas of
  * expertise" chips always deep-link to a dedicated treatment page. Labels that
@@ -88,6 +89,7 @@ const em = (t: string) => `<em ${EM}>${t}</em>`;
 export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
   const editing = !!useEdit()?.editMode;
   const stories = testimonialsForDoctor(d.slug); // only when a video explicitly names this doctor
+  const reviews = reviewsForDoctor(d.slug); // real written Google reviews (text) for this doctor
   const videos = videosForDoctor(d.slug); // doctor's own explainer videos (real ids only)
   const centres = centresForLocationSlugs(d.locations); // full contact details for "Where to meet"
   const pl = d.profileLabels ?? {};
@@ -278,6 +280,17 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
           showCta={false}
           carousel
           stories={stories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
+        />
+      )}
+
+      {/* Written reviews — real Google reviews (text) that name this doctor */}
+      {reviews.length > 0 && (
+        <WrittenReviews
+          tone={stories.length > 0 ? "white" : "tint"}
+          eyebrow="Patient Reviews"
+          title={`What patients say about ${d.name}`}
+          subtitle={`Verified Google reviews from families cared for by ${d.name}.`}
+          reviews={reviews}
         />
       )}
 
