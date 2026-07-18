@@ -289,7 +289,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
           tone={stories.length > 0 ? "white" : "tint"}
           eyebrow="Patient Reviews"
           title={`What patients say about ${d.name}`}
-          subtitle={`Verified Google reviews from families cared for by ${d.name}.`}
+          subtitle={`Real reviews from families cared for by ${d.name}.`}
           reviews={reviews}
         />
       )}

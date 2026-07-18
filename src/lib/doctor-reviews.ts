@@ -16,13 +16,16 @@
  * ===================================================================== */
 
 export type DoctorReview = {
-  /** Reviewer's display name, as shown on Google. */
+  /** Reviewer's display name, as shown on the review. */
   name: string;
-  /** Star rating (1–5). All current reviews are 5★. */
-  rating: number;
-  /** Relative date label as shown on Google, e.g. "7 months ago". */
-  date: string;
-  /** Full review text (patient portion only — no owner reply). */
+  /** Star rating (1–5). Omit for feedback-card reviews with no rating —
+   *  the card then renders without stars rather than inventing one. */
+  rating?: number;
+  /** Date label as shown on the review, e.g. "7 months ago" or
+   *  "2 March 2026". Omit when the review carries no date. */
+  date?: string;
+  /** Full review text (patient portion only — no owner reply). Kept in the
+   *  patient's original language; never translated or paraphrased. */
   text: string;
 };
 
@@ -62,6 +65,41 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       date: "a year ago",
       text:
         "We want to thank Bavishi fertility to help us achieve a long awaited wish to be parents. We were connected with Dr Priyanka Sinha through one of our Gynaecologist Doctor from Borivali. Dr Priyanka understood our situation and helped us in the journey to achieve pregnancy. With her caring and positive attitude she made us feel confident about achieving pregnancy. Also would like to thank Dr. Himanshu Bavishi & his entire Team for their supportive efforts & caring approach. Hoping for the best to get the further delivery process to be smoothly.\n\nThanks & Regards,\nAarvi & Anurag",
+    },
+  ],
+
+  // Bavishi Fertility Institute — Nikol, Ahmedabad. Handwritten patient
+  // feedback cards (no star rating, so `rating` is omitted). Gujarati reviews
+  // are kept in the patient's original language, never translated. Internal
+  // patient IDs on the cards are intentionally NOT displayed.
+  "jaydeep-patel": [
+    {
+      name: "Pratika Chetan Suthar",
+      text:
+        "Very good experience at Bavishi, Nikol. All staff members are very co-operative. And all detailed explanation given by Dr. Jaydeep regarding ultra-sound and every questions. Bavishi team fulfilled our dreams with their great works and always encourage us.\n\nThank you, team.",
+    },
+    {
+      name: "Aakruti Hemang Mistry",
+      date: "2 March 2026",
+      text:
+        "First of all I would like to thanks Bavishi Fertility Institute (BFI) & entire staff members (including doctors & nurse), on today under sonography review I had heard the sound of heartbeat of baby. Due to good effort by Dr. Jaydeep sir & staff of Nikol BFI.\n\nIn addition of that there are lots of ups & downs happen during 12 yrs of marriage journey life and now the dream seems to true.\n\nBy, Aakruti Hemang Mistry",
+    },
+    {
+      name: "Hinaben Nikul Panchal",
+      text:
+        "Hare Krishna\n\nI Hina Nikul Panchal wants to thank whole staff of Bavishi Fertility Center Nikol Branch. Specially thanks to Dr. Mr. Jaydeep Patel for good consult.\n\nWe had started our journey here in December 2025, and today in a day of February I got the chance to be blessed with my little miracle's heartbeat. I am so blessed with god and the whole supportive staff and their worship.\n\nIt is very remarkable experience with the whole staff of Bavishi and Dr. Mr. Jaydeep Patel. They all are available at any time u needed. As a time like on even midnight Dr. is available to consult on any kind of situation.\n\nWe have great experience with Bavishi.\n\nThank you. :)",
+    },
+    {
+      name: "Vinalben Jigarkumar Patel",
+      date: "23 March 2026",
+      text:
+        "હું હૃદયપૂર્વક સમગ્ર ફેસિલિટી ટીમ નો આભાર માનું છું, જેમણે મને સતત પાંચ નિષ્ફળતા પછી ગર્ભધારણ કરવામાં મદદ કરી. આ સફર શારિરીક તથા માનસિક રીતે ઘણું પડકારજનક હતી. પરંતુ, Specially જયદીપ સર ના સતત માર્ગદર્શન, Positive Thoughts થી મને હિંમત મળી. તથા નિખિલ ના સંપૂર્ણ સ્ટાફ, Personally દરેક વ્યક્તિ એ મને ક્યારેય એકલતા અનુભવવા નથી દીધી.\n\nજ્યારે અમે હિંમત હારી ગયા હતા, જયદીપ સર નો અતુલ વિશ્વાસ કે તમને બાળક મળશે જ, તેમની વાત ને માની ને અમે જે પ્રયાસ કર્યો આજે તારીખ: 23/03/2026 Monday ના રોજ અમે અમારા બાળક ના Heartbeat સાંભળ્યા. અમારી ખુશી નો ખરેખર પાર ના રહ્યો કારણકે અમે એક નહીં પરંતુ બે બાળક ની Heartbeat સાંભળવાનો મોકો મળ્યો.\n\nફરી આભાર આ પ્રથમ મારા લાડુ (કાન્હાજી) નો, આભાર માનીશ. મન્દી બેન, હિમાંશુ સર અને Specially જયદીપ સર .. Thank you. તમે માત્ર નિષ્ણાત ડોક્ટર નહીં - પણ સાચા અર્થમાં, ચમત્કાર સર્જનાર છો. Thank you so much.\n\nJigar Patel\nVinal Patel\nA & B patel 🙂",
+    },
+    {
+      name: "Shilpa Dipak Patel",
+      date: "20 June 2026",
+      text:
+        "અમે આજે બાવિશી ફર્ટીલીટી માં સારવાર માટે આવ્યા અને અહીંયા દવા કરાવતા અમને હોસ્પિટલ તરફ થી સારો એવો પ્રોત્સાહ મળ્યો છે.\n\nશ્રી ડૉ. જયદીપ પટેલ અને બાવિશી ફર્ટીલીટી ની પુરી ટીમ ના માર્ગદર્શન હેઠળ અમને સારી અને વિશ્વાસ ભરોસા પાત્ર ટ્રીટમેન્ટ મળી છે. સ્ટાફનો ખુબખુબ આભાર માનીએ છીએ.\n\nઅમે મહિના ઓગસ્ટ - ૨૦૨૫ ના રોજ થી સારવાર ચાલુ કરી હતી અને ત્યાર થી અમને યોગ્ય સારવાર આપવામાં આવી છે.\n\nઆજ રોજ ૨૦/૦૬/૨૦૨૬ ના રોજ અમને સોનોગ્રાફી માટે આવ્યા હતા. સોનોગ્રાફી કરતા અમને બાળક ના હૃદય ના ધબકાર સંભળ્યા અને અમે બન્ને ખુશી થયા અને આ હોસ્પિટલ દ્વારા જે પણ સારવાર મળી છે તેનો અમે ખુબખુબ આભાર માનીએ છીએ.\n\nD. N. Patel\nS. D. Patel",
     },
   ],
 };

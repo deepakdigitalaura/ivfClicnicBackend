@@ -705,7 +705,7 @@ export function WrittenReviews({
   subtitle,
   tone = "white",
 }: {
-  reviews: { name: string; rating: number; date: string; text: string }[];
+  reviews: { name: string; rating?: number; date?: string; text: string }[];
   eyebrow?: React.ReactNode;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -722,9 +722,11 @@ export function WrittenReviews({
               <StaggerItem key={`${r.name}-${i}`} className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
                 <article className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                   <Quote className="h-8 w-8 text-[color:var(--rose)]/25" aria-hidden />
-                  <div className="mt-3 flex items-center gap-1 text-[color:var(--gold)]">
-                    {Array.from({ length: r.rating }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
-                  </div>
+                  {r.rating ? (
+                    <div className="mt-3 flex items-center gap-1 text-[color:var(--gold)]">
+                      {Array.from({ length: r.rating }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
+                    </div>
+                  ) : null}
                   <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">{r.text}</p>
                   <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-4">
                     <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose-soft)] text-sm font-semibold text-[color:var(--rose)]">
@@ -732,7 +734,7 @@ export function WrittenReviews({
                     </span>
                     <div>
                       <div className="text-sm font-semibold text-[color:var(--plum)]">{r.name}</div>
-                      <div className="text-xs text-muted-foreground">{r.date}</div>
+                      {r.date ? <div className="text-xs text-muted-foreground">{r.date}</div> : null}
                     </div>
                   </div>
                 </article>
