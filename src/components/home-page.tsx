@@ -5,7 +5,7 @@ import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
   Stethoscope, Microscope, Baby, Dna, FlaskConical, Activity, MapPin,
   Star, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Quote, Clock, CheckCircle2, Trophy,
-  Video, BookOpen, Calculator, Mail, User, Send,
+  Video, BookOpen, Calculator, Mail, User, Send, X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -694,10 +694,62 @@ export function SuccessStories({
 }
 
 /* ---------- Written Reviews (text) ----------
- * Text-only Google-review carousel. Used on doctor profiles where real
- * written reviews exist (src/lib/doctor-reviews.ts). Same MobileCarousel
- * idiom as SuccessStories, but quote cards instead of video thumbnails.
- * Auto-scrolls; shows desktop arrows so >3 reviews stay reachable. */
+ * Text-review carousel used on doctor profiles where real written reviews
+ * exist (src/lib/doctor-reviews.ts). Compact, uniform-height cards; long
+ * reviews clamp to a few lines with a "Read more" that opens the full text
+ * in a modal. Auto-scrolls one card at a time and pauses on hover / while the
+ * modal is open, so text never slides away while you read. Shared across all
+ * doctor pages. */
+type ReviewItem = { name: string; rating?: number; date?: string; text: string };
+
+const ReviewStars = ({ n }: { n: number }) => (
+  <div className="flex items-center gap-1 text-[color:var(--gold)]">
+    {Array.from({ length: n }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
+  </div>
+);
+
+const ReviewByline = ({ r }: { r: ReviewItem }) => (
+  <div className="flex items-center gap-3">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose-soft)] text-sm font-semibold text-[color:var(--rose)]">
+      {r.name.charAt(0)}
+    </span>
+    <div>
+      <div className="text-sm font-semibold text-[color:var(--plum)]">{r.name}</div>
+      {r.date ? <div className="text-xs text-muted-foreground">{r.date}</div> : null}
+    </div>
+  </div>
+);
+
+function ReviewCard({ r, onOpen }: { r: ReviewItem; onOpen: () => void }) {
+  const pRef = useRef<HTMLParagraphElement>(null);
+  const [clamped, setClamped] = useState(false);
+  useEffect(() => {
+    const el = pRef.current;
+    if (!el) return;
+    const check = () => setClamped(el.scrollHeight > el.clientHeight + 2);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [r.text]);
+  return (
+    <article className="flex h-[340px] flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+      <Quote className="h-7 w-7 shrink-0 text-[color:var(--rose)]/25" aria-hidden />
+      {r.rating ? <div className="mt-2 shrink-0"><ReviewStars n={r.rating} /></div> : null}
+      <p ref={pRef} className="mt-3 line-clamp-6 text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">
+        {r.text}
+      </p>
+      {clamped && (
+        <button type="button" onClick={onOpen} className="mt-1.5 shrink-0 self-start text-sm font-semibold text-[color:var(--rose)] hover:underline">
+          Read more
+        </button>
+      )}
+      <div className="mt-auto border-t border-border/60 pt-4">
+        <ReviewByline r={r} />
+      </div>
+    </article>
+  );
+}
+
 export function WrittenReviews({
   reviews,
   eyebrow = "Patient Reviews",
@@ -705,44 +757,113 @@ export function WrittenReviews({
   subtitle,
   tone = "white",
 }: {
-  reviews: { name: string; rating?: number; date?: string; text: string }[];
+  reviews: ReviewItem[];
   eyebrow?: React.ReactNode;
   title: React.ReactNode;
   subtitle?: React.ReactNode;
   tone?: "white" | "tint";
 }) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
+  const [active, setActive] = useState<ReviewItem | null>(null);
+
+  const stepBy = (dir: -1 | 1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const first = track.firstElementChild as HTMLElement | null;
+    const step = first ? first.getBoundingClientRect().width + 24 : track.clientWidth * 0.9;
+    if (dir === 1 && track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      track.scrollBy({ left: dir * step, behavior: "smooth" });
+    }
+  };
+
+  // Auto-advance one card at a time; halt while hovering or the modal is open.
+  useEffect(() => {
+    if (reviews.length < 2) return;
+    const id = setInterval(() => {
+      if (pausedRef.current || active) return;
+      stepBy(1);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [reviews.length, active]);
+
+  // Esc closes the modal; lock body scroll while it is open.
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setActive(null); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [active]);
+
   if (!reviews.length) return null;
+
   return (
     <section className={`${tone === "tint" ? "bg-[color:var(--rose-soft)]/40" : "bg-white"} py-10 md:py-16`}>
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} align="center" />
-        <MobileCarousel alwaysArrows>
-          <Stagger className="mt-10 flex snap-x snap-mandatory items-start gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden">
+        <div
+          className="relative mt-10"
+          onMouseEnter={() => { pausedRef.current = true; }}
+          onMouseLeave={() => { pausedRef.current = false; }}
+        >
+          <div
+            ref={trackRef}
+            className="flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
+          >
             {reviews.map((r, i) => (
-              <StaggerItem key={`${r.name}-${i}`} className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
-                <article className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
-                  <Quote className="h-8 w-8 text-[color:var(--rose)]/25" aria-hidden />
-                  {r.rating ? (
-                    <div className="mt-3 flex items-center gap-1 text-[color:var(--gold)]">
-                      {Array.from({ length: r.rating }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
-                    </div>
-                  ) : null}
-                  <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">{r.text}</p>
-                  <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-4">
-                    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose-soft)] text-sm font-semibold text-[color:var(--rose)]">
-                      {r.name.charAt(0)}
-                    </span>
-                    <div>
-                      <div className="text-sm font-semibold text-[color:var(--plum)]">{r.name}</div>
-                      {r.date ? <div className="text-xs text-muted-foreground">{r.date}</div> : null}
-                    </div>
-                  </div>
-                </article>
-              </StaggerItem>
+              <div key={`${r.name}-${i}`} className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+                <ReviewCard r={r} onOpen={() => setActive(r)} />
+              </div>
             ))}
-          </Stagger>
-        </MobileCarousel>
+          </div>
+          {reviews.length > 1 && (
+            <div className="pointer-events-none absolute inset-y-0 -inset-x-1 flex items-center justify-between">
+              <button aria-label="Previous review" onClick={() => stepBy(-1)} className="pointer-events-auto z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[color:var(--plum)] shadow-md backdrop-blur transition-transform hover:scale-105 md:h-10 md:w-10">
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button aria-label="Next review" onClick={() => stepBy(1)} className="pointer-events-auto z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[color:var(--plum)] shadow-md backdrop-blur transition-transform hover:scale-105 md:h-10 md:w-10">
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          )}
+        </div>
       </div>
+
+      {/* Full-review modal */}
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+            onClick={() => setActive(null)}
+            role="dialog" aria-modal="true" aria-label={`Review by ${active.name}`}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 8 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-3xl bg-card p-8 shadow-lift"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button aria-label="Close" onClick={() => setActive(null)} className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-[color:var(--rose-soft)] hover:text-[color:var(--rose)]">
+                <X className="h-5 w-5" />
+              </button>
+              <Quote className="h-8 w-8 text-[color:var(--rose)]/25" aria-hidden />
+              {active.rating ? <div className="mt-3"><ReviewStars n={active.rating} /></div> : null}
+              <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">
+                {active.text}
+              </p>
+              <div className="mt-6 border-t border-border/60 pt-5">
+                <ReviewByline r={active} />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
