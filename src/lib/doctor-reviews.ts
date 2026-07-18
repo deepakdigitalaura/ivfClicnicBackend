@@ -131,6 +131,42 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "For the past 14 years, we've dreamt of having a child. Thankfully, thanks to the incredible team of Bavishi Fertility Institute, especially Dr. Nilesh, that dream became reality on the very first attempt! Dr. Nilesh instilled such confidence in us, simply saying to \"trust us and you will see the result,\" we did just that, and now we're holding our beautiful baby boy in our arms.\n\nDr. Nilesh's expertise and reassurance throughout the process were invaluable. We are incredibly grateful for his care, which helped us achieve our dream of parenthood. We wouldn't hesitate to recommend Dr. Nilesh to anyone facing similar challenges. His expertise and compassionate approach made a world of difference for us.\n\nSudhakar / Komati",
     },
   ],
+
+  // Bavishi Fertility Institute — Vadodara (Baroda). Handwritten patient
+  // thank-you notes (no star rating). Gujarati reviews kept in the patient's
+  // original language. Internal patient IDs not displayed.
+  "mita-shah": [
+    {
+      name: "Shirin & Aniket Palkar",
+      date: "8 January 2022",
+      text:
+        "To the entire Bavishi Family & Team, 'Thank You' is a very small word for the huge amount of happiness you have given to us. Our experience at Bavishi Clinic, Baroda has been phenomenal. We started this journey few months back without any knowledge and with general apprehensions that come with IVF treatment. However I am very glad to share that we were thoroughly guided by Dr. Mita and Team throughout the entire process. Finally by the grace of God & untiring efforts by Dr. Bavishi and team, we are expecting our bundle of joy this June 2022. This has been a life changing decision for us and would highly recommend 'Bavishi Fertility Institute' to other couples. Once again we would like to take this opportunity to convey our heartiest 'THANK YOU'.\n\nShirin & Aniket Palkar",
+    },
+    {
+      name: "Aastha Kuntal Shukla",
+      date: "13 March 2023",
+      text:
+        "IVF ની ટ્રીટમેન્ટ ખૂબ સરળતાથી અને સંપૂર્ણ માર્ગદર્શન સાથે સફળતાપૂર્વક પોઝિટિવ પ્રેગ્નેન્સી સાથે થઈ. ડૉ. હિમાંશુ સર અને ટીમ મિતા શાહ તથા સમગ્ર નર્સ ના સંજોગપૂર્વક સાથ થકી સફળતા મળી જે માટે અમે ખૂબ આભારી છીએ. છેલ્લા 7 વર્ષના પ્રયત્નોને અંતે બાવિશી સાહેબના માર્ગદર્શન હેઠળ પ્રથમ પ્રયત્ને IVF માં સફળતા મળી જેનો અમને ખૂબ આનંદ છે. હોસ્પિટલના સ્ટાફ દ્વારા સચોટ ફોલોઅપ અને સહકાર ખૂબ સારો મળ્યો. બાવિશી ફર્ટિલીટી ઇન્સ્ટિટ્યુટ ના દરેક સભ્યનો ખૂબ ખૂબ આભાર.",
+    },
+    {
+      name: "Dr. Khushbu & Dr. Kuldeepsinh Chavda",
+      date: "17 June 2026",
+      text:
+        "Excellent experience. We had been struggling with infertility for a long time & were feeling very stressed. The doctor Mita Madam explained every step of the IVF Procedure clearly & answered all our questions Patiently. The entire staff was Caring, Supportive & Professional throughout the treatment. The procedure was smooth & we always felt comfortable & well informed. We are very grateful for the doctor expertise & Compassionate approach. I highly recommend this clinic to anyone seeking Fertility treatment. Thank you Specially Dr. Mita Madam & all staff.",
+    },
+    {
+      name: "Amita Keyur Patel",
+      date: "19 November 2022",
+      text:
+        "We are very glad that after a long period under the treatment Dr. Himanshu Bavishi, Dr. Mita & Dr. Falguni, i got conceive. I can appreciate the quality of service by the Bavishi Fertility institute. Quite impressed with the hygienic environment and friendly nature of all staff members.\n\nAmita J",
+    },
+    {
+      name: "Vinaben Shailesh Baraiya",
+      date: "25 April 2023",
+      text:
+        "સપ્રેમ નમસ્કાર, હું વિના શૈલેષ બારૈયા. અમને અમારા જીવનની અનમોલ સુખની ક્ષણો ભેટ તરીકે આપી જવા બદલ ખૂબ ખૂબ આભાર. બાવિશી પરીવારના અમે આજીવન ઋણી છીએ. છેલ્લા 4 વર્ષ અને સંતાન પ્રાપ્તિની ઝંખના સાથે ઘણી બધી હોસ્પિટલોના આંટાફેરા કર્યા પરંતુ સફળતા તો શૂન્ય હતી અને જીવનના દ્વારે આવ્યા અને અમારા જીવનમાં ખુશીઓ છવાઈ ગઈ. અમે તમારી લાગણી વ્યક્ત કરવા પૂરા શબ્દો નથી, પણ ખૂબ ખૂબ છીએ. આભાર બાવિશી પરીવાર તથા વડદરા સેન્ટરના તમામ સ્ટાફ ગણ, પૂજ્ય મિના, તેમજ શ્યામના લાગણીશીલ વર્તનને મિશ્રતની નીચે ખૂબ ખૂબ આભાર આપે છે. અને સવિશેષ આભાર હિમાંશુ સાહેબના આપે સાથે કે જેથી માનવ સુખની આશાએ કાર્ય સફળ થયું છે.\n\nઆપના આભાર, વિનાય V.S. બારૈયા",
+    },
+  ],
 };
 
 /** Real written reviews for a doctor profile. Empty → hide the section. */
