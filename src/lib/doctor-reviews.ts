@@ -167,6 +167,25 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "સપ્રેમ નમસ્કાર, હું વિના શૈલેષ બારૈયા. અમને અમારા જીવનની અનમોલ સુખની ક્ષણો ભેટ તરીકે આપી જવા બદલ ખૂબ ખૂબ આભાર. બાવિશી પરીવારના અમે આજીવન ઋણી છીએ. છેલ્લા 4 વર્ષ અને સંતાન પ્રાપ્તિની ઝંખના સાથે ઘણી બધી હોસ્પિટલોના આંટાફેરા કર્યા પરંતુ સફળતા તો શૂન્ય હતી અને જીવનના દ્વારે આવ્યા અને અમારા જીવનમાં ખુશીઓ છવાઈ ગઈ. અમે તમારી લાગણી વ્યક્ત કરવા પૂરા શબ્દો નથી, પણ ખૂબ ખૂબ છીએ. આભાર બાવિશી પરીવાર તથા વડદરા સેન્ટરના તમામ સ્ટાફ ગણ, પૂજ્ય મિના, તેમજ શ્યામના લાગણીશીલ વર્તનને મિશ્રતની નીચે ખૂબ ખૂબ આભાર આપે છે. અને સવિશેષ આભાર હિમાંશુ સાહેબના આપે સાથે કે જેથી માનવ સુખની આશાએ કાર્ય સફળ થયું છે.\n\nઆપના આભાર, વિનાય V.S. બારૈયા",
     },
   ],
+
+  // Bavishi Fertility Institute — Mumbai. Handwritten patient thank-you notes
+  // (no star rating). Words kept as written; the first note was in block
+  // capitals and is shown in sentence case for readability. Internal patient
+  // IDs not displayed.
+  "suman-singh": [
+    {
+      name: "Sanket Phadange & Family",
+      date: "16 November 2026",
+      text:
+        "We thank Dr. Suman Singh for always being there and guiding us through this journey.\n\nThe staff is very caring and courteous.\n\nThe clinic set up is professional designed with customer centricity.\n\nWe wish Bavishi team good luck! And carry on with their services.\n\nWe wish them success in their future endeavours...\n\nThank you...\n\nRegards, Sanket Phadange & Family...",
+    },
+    {
+      name: "Neeta Dhongade",
+      date: "11 April 2024",
+      text:
+        "We would like to thanks Dr. Suman Singh and the entire team of Bavishi Clinik to fulfil our dream come true to becoming Parents on the First attempt after 5 years of married life.\n\nWe are very grateful to Bavishi clinik.\n\nIt is best IVF clinik in my life.\n\nDr. Suman Singh and all staffs are very kind and gives special attention to their petient.\n\nAll Dr. and staffs are experts in their field and they gives 100% efforts in their work only we have to put Trust on them & result is positive.\n\nWe definetly recommend Bavishi clinik to all Those who wants to become Parents.\n\n\"Yes! Dreams Become True, with the help of BAVISHI\"",
+    },
+  ],
 };
 
 /** Real written reviews for a doctor profile. Empty → hide the section. */
