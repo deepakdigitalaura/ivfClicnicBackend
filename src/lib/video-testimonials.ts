@@ -78,16 +78,38 @@ export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
  * Only videos that explicitly name the doctor belong here.
  * ------------------------------------------------------------------- */
 export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
-  // NOTE: Some entries below (Dr Vipul & Dr Vaibhavi, Jigesh & Jinal, the
-  // heartfelt-journey story) don't name Dr. Janki Bavishi in their video title
-  // but were confirmed by the clinic as her patients — do NOT remove them for
-  // failing the "doctor explicitly named" title rule.
+  // NOTE: Many entries below don't name the treating doctor in their video title
+  // but were confirmed by the clinic as that doctor's patients — do NOT remove
+  // them for failing the "doctor explicitly named" title rule.
   "janki-bavishi": [
     { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "The personalised care from Dr. Janki Bavishi made all the difference.", youTubeId: "SP4xuGIFpF4" },
     { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "Personalised care by Dr. Janki Bavishi made our experience truly special.", youTubeId: "Ko_1GCx0kwE" },
     { name: "Dr Vipul & Dr Vaibhavi", doctor: "Dr. Janki Bavishi", quote: "A journey of hope and trust — our IVF experience with Bavishi Fertility Institute.", youTubeId: "hcrTlAG07c8" },
     { name: "Jigesh & Jinal", doctor: "Dr. Janki Bavishi", quote: "From failed treatments elsewhere to parenthood at Bavishi Fertility Institute.", youTubeId: "SbkV-1fSonM" },
     { name: "A Heartfelt Journey to Parenthood", doctor: "Dr. Janki Bavishi", quote: "An inspiring, heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "ag4asJqSUA4" },
+  ],
+
+  "parth-bavishi": [
+    { name: "Rushi & Siddhi", doctor: "Dr. Parth Bavishi", quote: "Our journey to parenthood — blessed with twins at Bavishi Fertility Institute.", youTubeId: "llJJm3TmbCA" },
+    { name: "Chirali & Ritesh", doctor: "Dr. Parth Bavishi", quote: "From an IVF miracle to a natural pregnancy — our journey with Bavishi Fertility Institute.", youTubeId: "lN42_g7G00s" },
+  ],
+
+  "himanshu-bavishi": [
+    { name: "After Years of Waiting", doctor: "Dr. Himanshu Bavishi", quote: "After years of waiting, our dream finally came true at Bavishi Fertility Institute.", youTubeId: "mE28yGOxJlE" },
+    { name: "Acharya Family", doctor: "Dr. Himanshu Bavishi", quote: "From doubts to a miracle — the Acharya family's journey at Bavishi Fertility Institute.", youTubeId: "ApUvVhP1F2s" },
+    { name: "Bhargav Patel", doctor: "Dr. Himanshu Bavishi", quote: "Our dream of having twins came true at Bavishi Fertility Institute.", youTubeId: "n2z95eV60jE" },
+    { name: "Dr Rugvi", doctor: "Dr. Himanshu Bavishi", quote: "A journey of hope and care that gave us a healthy baby.", youTubeId: "mq46CnngGyY" },
+  ],
+
+  "falguni-bavishi": [
+    { name: "Rekha", doctor: "Dr. Falguni Bavishi", quote: "From loss to the blessing of twins — an inspiring IVF journey with Bavishi Fertility Institute.", youTubeId: "KKf6tNrlvoc" },
+    { name: "Vivekanand & Bandna", doctor: "Dr. Falguni Bavishi", quote: "Our journey to parenthood with Bavishi Fertility Institute.", youTubeId: "274_mV_xnfs" },
+    { name: "Dipali Doshi", doctor: "Dr. Falguni Bavishi", quote: "We succeeded in our very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "XGYK6MZD3ak" },
+  ],
+
+  "binal-shah": [
+    { name: "Madhvika & Pranay", doctor: "Dr. Binal Shah", quote: "When dreams blossom against all odds — our story with Bavishi Fertility Institute.", youTubeId: "v2oy6QZjQvs" },
+    { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Binal Shah", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
   ],
 };
 
