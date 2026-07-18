@@ -80,6 +80,15 @@ function MobileCarousel({ children, interval = 2000, alwaysArrows = false }: { c
     return () => { el.removeEventListener("scroll", check); window.removeEventListener("resize", check); };
   }, []);
 
+  // Width of one card + gap, measured from the first two children so it works
+  // regardless of card width / gap. Falls back to the viewport width.
+  const cardStep = (el: HTMLDivElement) => {
+    const first = el.children[0] as HTMLElement | undefined;
+    const second = el.children[1] as HTMLElement | undefined;
+    if (first && second) return second.offsetLeft - first.offsetLeft;
+    return first ? first.getBoundingClientRect().width : el.clientWidth;
+  };
+
   useEffect(() => {
     if (!isMobile) return;
     const el = scrollRef.current;
@@ -90,20 +99,22 @@ function MobileCarousel({ children, interval = 2000, alwaysArrows = false }: { c
       if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
         el.scrollTo({ left: 0, behavior: "smooth" });
       } else {
-        el.scrollBy({ left: el.clientWidth, behavior: "smooth" });
+        el.scrollBy({ left: cardStep(el), behavior: "smooth" }); // advance ONE card
       }
     }, interval);
     const pause = () => { paused = true; };
-    const resume = () => { setTimeout(() => { paused = false; }, interval); };
+    const resume = () => { paused = false; };
     el.addEventListener("touchstart", pause, { passive: true });
     el.addEventListener("touchend", resume, { passive: true });
-    el.addEventListener("mouseenter", pause);
-    el.addEventListener("mouseleave", resume);
-    return () => { clearInterval(tid); el.removeEventListener("touchstart", pause); el.removeEventListener("touchend", resume); el.removeEventListener("mouseenter", pause); el.removeEventListener("mouseleave", resume); };
+    // pointerenter/leave are more reliable than mouseenter while content scrolls.
+    el.addEventListener("pointerenter", pause);
+    el.addEventListener("pointerleave", resume);
+    return () => { clearInterval(tid); el.removeEventListener("touchstart", pause); el.removeEventListener("touchend", resume); el.removeEventListener("pointerenter", pause); el.removeEventListener("pointerleave", resume); };
   }, [isMobile, interval]);
 
   const scroll = (dir: -1 | 1) => {
-    scrollRef.current?.scrollBy({ left: dir * (scrollRef.current.clientWidth * 0.85), behavior: "smooth" });
+    const el = scrollRef.current;
+    if (el) el.scrollBy({ left: dir * cardStep(el), behavior: "smooth" });
   };
 
   return (
