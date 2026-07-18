@@ -276,6 +276,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
           title={lab("profileLabels.storiesTitle", pl.storiesTitle, `Stories from ${em(d.name.split(" ").slice(-1) + "'s patients")}`)}
           subtitle={lab("profileLabels.storiesSubtitle", pl.storiesSubtitle, `Watch families share their journey under the care of ${d.name}.`)}
           showCta={false}
+          carousel
           stories={stories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
         />
       )}

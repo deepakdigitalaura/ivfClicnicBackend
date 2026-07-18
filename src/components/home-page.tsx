@@ -59,7 +59,7 @@ const edTitle = (base: string, h: Heading) => (
 
 /* ---------- Mobile carousel: arrows + auto-scroll ---------- */
 
-function MobileCarousel({ children, interval = 2000 }: { children: React.ReactElement<{ ref?: React.Ref<HTMLDivElement> }>; interval?: number }) {
+function MobileCarousel({ children, interval = 2000, alwaysArrows = false }: { children: React.ReactElement<{ ref?: React.Ref<HTMLDivElement> }>; interval?: number; alwaysArrows?: boolean }) {
   const scrollRef = useRef<HTMLDivElement>(null);
   const [canLeft, setCanLeft] = useState(false);
   const [canRight, setCanRight] = useState(false);
@@ -97,7 +97,9 @@ function MobileCarousel({ children, interval = 2000 }: { children: React.ReactEl
     const resume = () => { setTimeout(() => { paused = false; }, interval); };
     el.addEventListener("touchstart", pause, { passive: true });
     el.addEventListener("touchend", resume, { passive: true });
-    return () => { clearInterval(tid); el.removeEventListener("touchstart", pause); el.removeEventListener("touchend", resume); };
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resume);
+    return () => { clearInterval(tid); el.removeEventListener("touchstart", pause); el.removeEventListener("touchend", resume); el.removeEventListener("mouseenter", pause); el.removeEventListener("mouseleave", resume); };
   }, [isMobile, interval]);
 
   const scroll = (dir: -1 | 1) => {
@@ -108,9 +110,9 @@ function MobileCarousel({ children, interval = 2000 }: { children: React.ReactEl
     <div className="relative">
       {React.cloneElement(children, { ref: scrollRef })}
       {isMobile && (
-        <div className="pointer-events-none absolute inset-y-0 -inset-x-1 flex items-center justify-between md:hidden">
-          <button aria-label="Previous" onClick={() => scroll(-1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity ${canLeft ? "opacity-100" : "opacity-0"}`}><ChevronLeft className="h-4 w-4 text-[color:var(--plum)]" /></button>
-          <button aria-label="Next" onClick={() => scroll(1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity ${canRight ? "opacity-100" : "opacity-0"}`}><ChevronRight className="h-4 w-4 text-[color:var(--plum)]" /></button>
+        <div className={`pointer-events-none absolute inset-y-0 -inset-x-1 flex items-center justify-between ${alwaysArrows ? "" : "md:hidden"}`}>
+          <button aria-label="Previous" onClick={() => scroll(-1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity md:h-10 md:w-10 ${canLeft ? "opacity-100" : "opacity-0"}`}><ChevronLeft className="h-4 w-4 text-[color:var(--plum)] md:h-5 md:w-5" /></button>
+          <button aria-label="Next" onClick={() => scroll(1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity md:h-10 md:w-10 ${canRight ? "opacity-100" : "opacity-0"}`}><ChevronRight className="h-4 w-4 text-[color:var(--plum)] md:h-5 md:w-5" /></button>
         </div>
       )}
     </div>
@@ -631,6 +633,7 @@ export function SuccessStories({
   ctaLabel = "View More Success Stories",
   tone = "white",
   showCta = true,
+  carousel = false,
 }: {
   stories?: { id: string; n: string; q: string; r: number }[];
   eyebrow?: React.ReactNode;
@@ -639,15 +642,22 @@ export function SuccessStories({
   ctaLabel?: React.ReactNode;
   tone?: "white" | "tint";
   showCta?: boolean;
+  /** Keep a horizontal auto-scrolling carousel at all breakpoints (with desktop
+   * arrows) instead of collapsing to a 3-up grid — use when there may be >3 items. */
+  carousel?: boolean;
 } = {}) {
   return (
     <section className={`${tone === "tint" ? "bg-[color:var(--rose-soft)]/40" : "bg-white"} py-10 md:py-16`}>
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
-        <MobileCarousel>
-        <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
-          {stories.map((s) => (
-            <StaggerItem key={s.n} className="w-full shrink-0 snap-start md:w-auto md:shrink">
+        <MobileCarousel alwaysArrows={carousel}>
+        <Stagger className={carousel
+          ? "mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
+          : "mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0"}>
+          {stories.map((s, i) => (
+            <StaggerItem key={`${s.id}-${i}`} className={carousel
+              ? "w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+              : "w-full shrink-0 snap-start md:w-auto md:shrink"}>
               <motion.article
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}

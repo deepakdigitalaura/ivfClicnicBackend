@@ -78,8 +78,16 @@ export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
  * Only videos that explicitly name the doctor belong here.
  * ------------------------------------------------------------------- */
 export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
+  // NOTE: Some entries below (Dr Vipul & Dr Vaibhavi, Jigesh & Jinal, the
+  // heartfelt-journey story) don't name Dr. Janki Bavishi in their video title
+  // but were confirmed by the clinic as her patients — do NOT remove them for
+  // failing the "doctor explicitly named" title rule.
   "janki-bavishi": [
     { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "The personalised care from Dr. Janki Bavishi made all the difference.", youTubeId: "SP4xuGIFpF4" },
+    { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "Personalised care by Dr. Janki Bavishi made our experience truly special.", youTubeId: "Ko_1GCx0kwE" },
+    { name: "Dr Vipul & Dr Vaibhavi", doctor: "Dr. Janki Bavishi", quote: "A journey of hope and trust — our IVF experience with Bavishi Fertility Institute.", youTubeId: "hcrTlAG07c8" },
+    { name: "Jigesh & Jinal", doctor: "Dr. Janki Bavishi", quote: "From failed treatments elsewhere to parenthood at Bavishi Fertility Institute.", youTubeId: "SbkV-1fSonM" },
+    { name: "A Heartfelt Journey to Parenthood", doctor: "Dr. Janki Bavishi", quote: "An inspiring, heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "ag4asJqSUA4" },
   ],
 };
 
@@ -160,7 +168,8 @@ export function testimonialsForCity(citySlug: string, max = 3): VideoTestimonial
   return (CITY_TESTIMONIALS[citySlug] ?? []).slice(0, max);
 }
 
-/** Real testimonials for a doctor page (max 3). Empty → hide the section. */
-export function testimonialsForDoctor(doctorSlug: string, max = 3): VideoTestimonial[] {
+/** Real testimonials for a doctor page. Rendered in an auto-scrolling carousel,
+ * so the cap is generous — more than 3 simply scroll. Empty → hide the section. */
+export function testimonialsForDoctor(doctorSlug: string, max = 12): VideoTestimonial[] {
   return (DOCTOR_TESTIMONIALS[doctorSlug] ?? []).slice(0, max);
 }
