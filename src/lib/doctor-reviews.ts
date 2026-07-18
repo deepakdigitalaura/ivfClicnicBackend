@@ -102,6 +102,35 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "અમે આજે બાવિશી ફર્ટીલીટી માં સારવાર માટે આવ્યા અને અહીંયા દવા કરાવતા અમને હોસ્પિટલ તરફ થી સારો એવો પ્રોત્સાહ મળ્યો છે.\n\nશ્રી ડૉ. જયદીપ પટેલ અને બાવિશી ફર્ટીલીટી ની પુરી ટીમ ના માર્ગદર્શન હેઠળ અમને સારી અને વિશ્વાસ ભરોસા પાત્ર ટ્રીટમેન્ટ મળી છે. સ્ટાફનો ખુબખુબ આભાર માનીએ છીએ.\n\nઅમે મહિના ઓગસ્ટ - ૨૦૨૫ ના રોજ થી સારવાર ચાલુ કરી હતી અને ત્યાર થી અમને યોગ્ય સારવાર આપવામાં આવી છે.\n\nઆજ રોજ ૨૦/૦૬/૨૦૨૬ ના રોજ અમને સોનોગ્રાફી માટે આવ્યા હતા. સોનોગ્રાફી કરતા અમને બાળક ના હૃદય ના ધબકાર સંભળ્યા અને અમે બન્ને ખુશી થયા અને આ હોસ્પિટલ દ્વારા જે પણ સારવાર મળી છે તેનો અમે ખુબખુબ આભાર માનીએ છીએ.\n\nD. N. Patel\nS. D. Patel",
     },
   ],
+
+  // Bavishi Fertility Institute — Ghatkopar, Mumbai. Handwritten patient
+  // thank-you notes (no star rating). Transcribed as written; internal
+  // patient IDs (MCP23-15, MV23-20, etc.) are intentionally NOT displayed.
+  "nilesh-jain": [
+    {
+      name: "Vigneshwari & Ravi C",
+      date: "5 April 2025",
+      text:
+        "Dear Doctor,\n\nWe are greatful that we have girl baby and was possible with Bavishi Team, Dr. Swathi, & Dr. Nilesh.\n\nThank you so much for all the support!\n\nRavi C",
+    },
+    {
+      name: "Sujata Sachin Valunje",
+      date: "20 January 2024",
+      text:
+        "Dear Bavishi Fertility Inst.\n\nIt was a very excellent experience with you for our successful IVF Journey. Special Thanks to Dr. Nilesh Jain & swati Maam they are wonderful people. Team who are working at reception as well as all sisters are very helpful.\n\nI am really thankful to all team members from ghatkopar location, who help us to continue successful IVF Journey.\n\nLast but not least very very special thanks to Bavishi sir, who always have positive approach which helps to make this journey successful\n\nThank you so much Bavishi Team\n\nRegards,\nSujata Sachin Valunje",
+    },
+    {
+      name: "Sadhavi Bhushan Patade",
+      text:
+        "It is really amazing and thrilling journey towards motherhood. every day brings new day and experience for mother. We heartly thank to Dr. Bavishi and his entire team, for enlightened lamp of joy, happiness and parenthood in our life.\n\nFrom :- Salvi Patade",
+    },
+    {
+      name: "Sudhakar & Ramadevi Komati",
+      date: "14 August 2024",
+      text:
+        "For the past 14 years, we've dreamt of having a child. Thankfully, thanks to the incredible team of Bavishi Fertility Institute, especially Dr. Nilesh, that dream became reality on the very first attempt! Dr. Nilesh instilled such confidence in us, simply saying to \"trust us and you will see the result,\" we did just that, and now we're holding our beautiful baby boy in our arms.\n\nDr. Nilesh's expertise and reassurance throughout the process were invaluable. We are incredibly grateful for his care, which helped us achieve our dream of parenthood. We wouldn't hesitate to recommend Dr. Nilesh to anyone facing similar challenges. His expertise and compassionate approach made a world of difference for us.\n\nSudhakar / Komati",
+    },
+  ],
 };
 
 /** Real written reviews for a doctor profile. Empty → hide the section. */
