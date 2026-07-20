@@ -14,6 +14,8 @@ import {
   deleteInquiry,
   saveDoctor,
   deleteDoctor,
+  saveTreatment,
+  deleteTreatment,
   saveTestimonial,
   deleteTestimonial,
   saveHomepage,
@@ -26,6 +28,7 @@ import {
   setBlogStatus,
   type Inquiry,
   type AdminDoctor,
+  type AdminTreatment,
   type AdminTestimonial,
   type AdminHomepage,
   type AdminAbout,
@@ -152,6 +155,28 @@ export async function saveDoctorAction(doc: AdminDoctor): Promise<SaveResult> {
 export async function deleteDoctorAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deleteDoctor(id));
   revalidateDoctorPages();
+  return r;
+}
+
+// ── Treatments ──
+
+/** Revalidate every public surface that renders treatment data (page content
+ *  and the header/footer nav menus, which read the same tagged cache). */
+function revalidateTreatmentPages() {
+  revalidatePath("/treatments/[slug]", "page");
+  revalidatePath("/"); // homepage treatment carousel
+  revalidatePath("/admin-panel/treatments");
+}
+
+export async function saveTreatmentAction(doc: AdminTreatment): Promise<SaveResult> {
+  const r = await guard(() => saveTreatment(doc));
+  revalidateTreatmentPages();
+  return r;
+}
+
+export async function deleteTreatmentAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteTreatment(id));
+  revalidateTreatmentPages();
   return r;
 }
 
