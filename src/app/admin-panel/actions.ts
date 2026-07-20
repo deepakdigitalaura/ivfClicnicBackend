@@ -16,6 +16,8 @@ import {
   deleteDoctor,
   saveTreatment,
   deleteTreatment,
+  saveService,
+  deleteService,
   saveTestimonial,
   deleteTestimonial,
   saveHomepage,
@@ -29,6 +31,7 @@ import {
   type Inquiry,
   type AdminDoctor,
   type AdminTreatment,
+  type AdminService,
   type AdminTestimonial,
   type AdminHomepage,
   type AdminAbout,
@@ -177,6 +180,25 @@ export async function saveTreatmentAction(doc: AdminTreatment): Promise<SaveResu
 export async function deleteTreatmentAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deleteTreatment(id));
   revalidateTreatmentPages();
+  return r;
+}
+
+// ── Services ──
+
+function revalidateServicePages() {
+  revalidatePath("/services/[slug]", "page");
+  revalidatePath("/admin-panel/services");
+}
+
+export async function saveServiceAction(doc: AdminService): Promise<SaveResult> {
+  const r = await guard(() => saveService(doc));
+  revalidateServicePages();
+  return r;
+}
+
+export async function deleteServiceAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteService(id));
+  revalidateServicePages();
   return r;
 }
 

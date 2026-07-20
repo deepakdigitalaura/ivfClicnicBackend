@@ -314,6 +314,81 @@ export async function deleteTreatment(id: string) {
   revalidateTag(TREATMENT_TAG);
 }
 
+// ── Services ──
+// Mirrors the `service` Sanity schema exactly (src/sanity/schemas/service.ts).
+// NOTE the schema's `cta` field is fetched publicly (SERVICE_FIELDS in fetch.ts)
+// but toServiceSource()/resolveService() (src/lib/payload.ts, src/lib/services.ts)
+// never read it — it's dead data today, so it's intentionally NOT exposed here
+// either (a form field that silently does nothing would be worse than no field).
+// Also note the array-item wrapper keys differ from Treatments: badges use
+// `{badge}` and benefit/whoFor items use `{item}`, not `{value}`.
+
+export type AdminService = {
+  _id?: string;
+  slug?: string;
+  hero?: {
+    eyebrow?: string; h1?: string; h1Em?: string; tagline?: string;
+    badges?: { badge?: string }[]; image?: string; imageAlt?: string;
+  };
+  seo?: { metaTitle?: string; metaDescription?: string };
+  overview?: {
+    heading?: HeadingSrc;
+    paragraphs?: TextRow[];
+    aside?: { title?: string; body?: string };
+  };
+  benefits?: { heading?: HeadingSrc; subtitle?: string; items?: { item?: string }[] };
+  whoFor?: { heading?: HeadingSrc; subtitle?: string; items?: { item?: string }[] };
+  process?: {
+    heading?: HeadingSrc; subtitle?: string;
+    steps?: { icon?: string; t?: string; d?: string }[];
+    note?: string;
+  };
+  whyUs?: { heading?: HeadingSrc; items?: { icon?: string; t?: string; d?: string }[] };
+  faqs?: { q?: string; a?: string }[];
+};
+
+const SERVICE_TAG = "sanity-services";
+
+const SERVICE_FIELDS_ADMIN = `
+  _id, slug,
+  hero{ eyebrow, h1, h1Em, tagline, badges, image, imageAlt },
+  seo{ metaTitle, metaDescription },
+  overview{ heading, paragraphs, aside },
+  benefits{ heading, subtitle, items },
+  whoFor{ heading, subtitle, items },
+  process{ heading, subtitle, steps, note },
+  whyUs{ heading, items },
+  faqs
+`;
+
+export async function readAdminServices(): Promise<AdminService[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(`*[_type == "service"] | order(slug asc){ ${SERVICE_FIELDS_ADMIN} }`);
+  } catch {
+    return [];
+  }
+}
+
+export async function saveService(doc: AdminService) {
+  const { _id, ...rest } = doc;
+  const id = _id || `service-${(doc.slug ?? "").trim()}`;
+  // Preserve an existing Studio-uploaded heroPhoto asset (not editable here).
+  const existing = (await writeClient.getDocument(id)) as { hero?: { heroPhoto?: unknown } } | null;
+  await writeClient.createOrReplace({
+    _id: id,
+    _type: "service",
+    ...rest,
+    ...(existing?.hero?.heroPhoto ? { hero: { ...rest.hero, heroPhoto: existing.hero.heroPhoto } } : {}),
+  });
+  revalidateTag(SERVICE_TAG);
+}
+
+export async function deleteService(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(SERVICE_TAG);
+}
+
 // ── Homepage (singleton) ──
 
 export type AdminHomepage = Record<string, unknown>;
