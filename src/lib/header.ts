@@ -375,32 +375,60 @@ function resolveNavItem(n: NavItemSource): HeaderNavItem {
   };
 }
 
-/**
- * Build the "Locations" mega menu from CMS-published cities and centres.
- * Multi-centre cities get a linked heading + one item per centre;
- * single-centre cities get a heading + one "City Centre" item pointing to the city page.
- * Returns undefined when no locations exist (caller falls back to defaults).
- */
-function buildLocationsMega(navLocations: NavLocationItem[]): HeaderMegaCol[] | undefined {
-  if (!navLocations.length) return undefined;
-  const sorted = sortNavLocations(navLocations);
-  return sorted.map((city) => {
-    const cityHref = `/locations/${city.citySlug}`;
-    if (city.centres.length > 1) {
-      return {
-        heading: city.cityName,
-        headingHref: cityHref,
-        items: city.centres.map((c) => ({
-          label: c.name,
-          href: `/locations/${city.citySlug}/${c.slug}`,
-        })),
-      };
-    }
+/** Build one "Locations" mega column from a resolved city + its centres. */
+function cityToMegaCol(city: NavLocationItem): HeaderMegaCol {
+  const cityHref = `/locations/${city.citySlug}`;
+  if (city.centres.length > 1) {
     return {
       heading: city.cityName,
-      items: [{ label: `${city.cityName} Centre`, href: cityHref }],
+      headingHref: cityHref,
+      items: city.centres.map((c) => ({
+        label: c.name,
+        href: `/locations/${city.citySlug}/${c.slug}`,
+      })),
     };
+  }
+  return {
+    heading: city.cityName,
+    items: [{ label: `${city.cityName} Centre`, href: cityHref }],
+  };
+}
+
+/** Default "Locations" columns keyed by city slug, taken verbatim from
+ *  HEADER_DEFAULTS in their original array order — the merge target
+ *  buildLocationsMega() below overlays Sanity-published cities onto. */
+const DEFAULT_LOCATIONS_BY_CITY: ReadonlyMap<string, HeaderMegaCol> = (() => {
+  const locationsNav = HEADER_DEFAULTS.nav.find((n) => n.label === "Locations");
+  const map = new Map<string, HeaderMegaCol>();
+  for (const col of locationsNav?.mega ?? []) {
+    const href = col.headingHref ?? col.items[0]?.href;
+    const citySlug = href?.split("/")[2];
+    if (citySlug) map.set(citySlug, col);
+  }
+  return map;
+})();
+
+/**
+ * Build the "Locations" mega menu by overlaying Sanity-published cities onto
+ * the hardcoded default columns (matched by city slug): a published city
+ * replaces its default column with live centres; a city with no Sanity doc
+ * yet keeps its exact default column; brand-new Sanity-only cities are
+ * appended. This always returns the full column set — byte-identical to
+ * HEADER_DEFAULTS when Sanity has no cities yet, and a single city's data
+ * (added/edited/missing) can never make the rest of the menu disappear.
+ * FIX for the all-or-nothing bug — do not regress to "if any city exists,
+ * use ONLY Sanity cities" (see BFI-Sanity-Fallback-Audit-Phase1-Report.md).
+ */
+function buildLocationsMega(navLocations: NavLocationItem[]): HeaderMegaCol[] {
+  const live = new Map(navLocations.map((c) => [c.citySlug, c]));
+  const known = [...DEFAULT_LOCATIONS_BY_CITY.entries()].map(([citySlug, def]) => {
+    const liveCity = live.get(citySlug);
+    return liveCity ? cityToMegaCol(liveCity) : def;
   });
+  const appended = sortNavLocations(
+    navLocations.filter((c) => !DEFAULT_LOCATIONS_BY_CITY.has(c.citySlug)),
+  ).map(cityToMegaCol);
+  return [...known, ...appended];
 }
 
 /**
@@ -421,29 +449,59 @@ function buildMaternityMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] 
   ];
 }
 
+/** Default {category, order, label} per treatment href, derived once from the
+ *  hardcoded "IVF Treatments" mega columns — the merge target
+ *  buildTreatmentMega() below overlays Sanity-published treatments onto. */
+const DEFAULT_TREATMENT_ITEMS_BY_HREF: ReadonlyMap<string, { category: string; order: number; label: string }> = (() => {
+  const map = new Map<string, { category: string; order: number; label: string }>();
+  const treatmentsNav = HEADER_DEFAULTS.nav.find((n) => n.label === "IVF Treatments");
+  for (const col of treatmentsNav?.mega ?? []) {
+    const category = Object.entries(HEADER_CATEGORY_LABELS).find(([, label]) => label === col.heading)?.[0];
+    if (!category) continue;
+    col.items.forEach((item, i) => map.set(item.href, { category, order: i, label: item.label }));
+  }
+  return map;
+})();
+
 /**
- * Build the "IVF Treatments" mega menu columns from CMS-published treatments.
- * Groups by navCategory in the canonical column order. Returns undefined when
- * no treatments have a navCategory set (caller falls back to defaults).
+ * Build the "IVF Treatments" mega menu columns by overlaying CMS-published
+ * treatments onto the hardcoded default items (matched by href): a Sanity
+ * doc overrides its default item's category/order/label when present; a
+ * treatment with no Sanity doc yet (or one missing navCategory) keeps its
+ * exact default placement; brand-new Sanity-only treatments (a navCategory
+ * set with no default href match) are appended to their column. This always
+ * returns the full column set — byte-identical to HEADER_DEFAULTS when
+ * Sanity has no treatments yet, and a single treatment's data can never make
+ * the rest of the menu disappear. FIX for the all-or-nothing bug — do not
+ * regress to "if any treatment has navCategory, use ONLY Sanity treatments"
+ * (see BFI-Sanity-Fallback-Audit-Phase1-Report.md).
  */
-function buildTreatmentMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] | undefined {
-  if (!navTreatments.length) return undefined;
-  const byCat = new Map<string, NavTreatmentItem[]>();
+function buildTreatmentMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] {
+  const live = new Map(navTreatments.map((t) => [t.href, t]));
+  const byCat = new Map<string, { href: string; label: string; order: number }[]>();
+
+  for (const [href, def] of DEFAULT_TREATMENT_ITEMS_BY_HREF) {
+    const liveItem = live.get(href);
+    const category = liveItem?.navCategory && HEADER_CATEGORY_LABELS[liveItem.navCategory] ? liveItem.navCategory : def.category;
+    const arr = byCat.get(category) ?? [];
+    arr.push({ href, label: liveItem?.name || def.label, order: liveItem?.navOrder ?? def.order });
+    byCat.set(category, arr);
+  }
   for (const t of navTreatments) {
-    if (!HEADER_CATEGORY_LABELS[t.navCategory]) continue;
+    if (DEFAULT_TREATMENT_ITEMS_BY_HREF.has(t.href) || !HEADER_CATEGORY_LABELS[t.navCategory]) continue;
     const arr = byCat.get(t.navCategory) ?? [];
-    arr.push(t);
+    arr.push({ href: t.href, label: t.name, order: t.navOrder });
     byCat.set(t.navCategory, arr);
   }
-  if (!byCat.size) return undefined;
+
   return HEADER_CATEGORY_ORDER
     .filter((cat) => byCat.has(cat))
     .map((cat) => ({
       heading: HEADER_CATEGORY_LABELS[cat],
       ...(HEADER_CATEGORY_HREFS[cat] ? { headingHref: HEADER_CATEGORY_HREFS[cat] } : {}),
       items: byCat.get(cat)!
-        .sort((a, b) => a.navOrder - b.navOrder)
-        .map((t) => ({ label: t.name, href: t.href })),
+        .sort((a, b) => a.order - b.order)
+        .map((x) => ({ label: x.label, href: x.href })),
     }));
 }
 

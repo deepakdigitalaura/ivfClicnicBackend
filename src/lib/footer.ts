@@ -43,36 +43,71 @@ const FOOTER_CATEGORY_ORDER = [
 /** Footer headings that correspond to treatment categories (replaced dynamically). */
 const TREATMENT_HEADINGS = new Set(Object.values(FOOTER_CATEGORY_LABELS));
 
-/** Build treatment FooterGroups from CMS nav treatments, in canonical category order. */
+/**
+ * Build treatment FooterGroups by overlaying CMS-published treatments onto
+ * the hardcoded default items (matched by href) — mirrors
+ * src/lib/header.ts buildTreatmentMega(). A treatment with no Sanity doc yet
+ * keeps its exact default placement; brand-new Sanity-only treatments are
+ * appended to their category group. This always returns the full group set
+ * — byte-identical to FOOTER_DEFAULTS when Sanity has no treatments yet, and
+ * a single treatment's data can never make the rest of a group disappear.
+ * FIX for the all-or-nothing bug — do not regress to "if any treatment has
+ * navCategory, use ONLY Sanity treatments" (see
+ * BFI-Sanity-Fallback-Audit-Phase1-Report.md).
+ */
 function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] {
-  const byCat = new Map<string, NavTreatmentItem[]>();
+  const live = new Map(navTreatments.map((t) => [t.href, t]));
+  const byCat = new Map<string, { href: string; label: string; order: number }[]>();
+
+  for (const [href, def] of DEFAULT_TREATMENT_ITEMS_BY_HREF) {
+    const liveItem = live.get(href);
+    const category = liveItem?.navCategory && FOOTER_CATEGORY_LABELS[liveItem.navCategory] ? liveItem.navCategory : def.category;
+    const arr = byCat.get(category) ?? [];
+    arr.push({ href, label: liveItem?.name || def.label, order: liveItem?.navOrder ?? def.order });
+    byCat.set(category, arr);
+  }
   for (const t of navTreatments) {
-    if (!FOOTER_CATEGORY_LABELS[t.navCategory]) continue;
+    if (DEFAULT_TREATMENT_ITEMS_BY_HREF.has(t.href) || !FOOTER_CATEGORY_LABELS[t.navCategory]) continue;
     const arr = byCat.get(t.navCategory) ?? [];
-    arr.push(t);
+    arr.push({ href: t.href, label: t.name, order: t.navOrder });
     byCat.set(t.navCategory, arr);
   }
+
   return FOOTER_CATEGORY_ORDER
     .filter((cat) => byCat.has(cat))
     .map((cat) => ({
       h: FOOTER_CATEGORY_LABELS[cat],
       l: byCat.get(cat)!
-        .sort((a, b) => a.navOrder - b.navOrder)
-        .map((t) => ({ label: t.name, href: t.href })),
+        .sort((a, b) => a.order - b.order)
+        .map((x) => ({ label: x.label, href: x.href })),
     }));
 }
 
-/** Build the footer "Locations" group — one link per published city. */
-function buildLocationsFooterGroup(navLocations: NavLocationItem[]): FooterGroup | undefined {
-  if (!navLocations.length) return undefined;
-  const ordered = sortNavLocations(navLocations);
-  return {
-    h: "Locations",
-    l: ordered.map((city) => ({
-      label: city.cityName,
-      href: `/locations/${city.citySlug}`,
-    })),
-  };
+/**
+ * Build the footer "Locations" group by overlaying Sanity-published cities
+ * onto FOOTER_DEFAULTS' own "Locations" links (matched by city slug) —
+ * mirrors src/lib/header.ts buildLocationsMega(). A city with no Sanity doc
+ * yet keeps its default link; brand-new Sanity-only cities are appended.
+ * Always returns the full group — byte-identical to FOOTER_DEFAULTS when
+ * Sanity has no cities yet, and a single city can never make the rest
+ * disappear. FIX for the all-or-nothing bug (see
+ * BFI-Sanity-Fallback-Audit-Phase1-Report.md).
+ */
+function buildLocationsFooterGroup(navLocations: NavLocationItem[]): FooterGroup {
+  const defaultGroup = FOOTER_DEFAULTS.groups.find((g) => g.h === "Locations")!;
+  const live = new Map(navLocations.map((c) => [c.citySlug, c]));
+  const knownSlugs = new Set<string>();
+
+  const known = defaultGroup.l.map((link) => {
+    const citySlug = link.href?.split("/")[2];
+    if (citySlug) knownSlugs.add(citySlug);
+    const liveCity = citySlug ? live.get(citySlug) : undefined;
+    return liveCity ? { label: liveCity.cityName, href: `/locations/${liveCity.citySlug}` } : link;
+  });
+  const appended = sortNavLocations(navLocations.filter((c) => !knownSlugs.has(c.citySlug)))
+    .map((c) => ({ label: c.cityName, href: `/locations/${c.citySlug}` }));
+
+  return { h: "Locations", l: [...known, ...appended] };
 }
 
 /** Build the footer "Doctors" group — only senior-specialist doctors are listed
@@ -218,6 +253,27 @@ export const FOOTER_DEFAULTS: FooterData = {
     { label: "Sitemap", href: "/sitemap" },
   ],
 };
+
+/** Default {category, order, label} per treatment href, derived once from
+ *  FOOTER_DEFAULTS' own treatment-category groups — the merge target
+ *  buildTreatmentGroups() above overlays Sanity-published treatments onto.
+ *  (Built from the footer's OWN defaults, not header's — the two hardcoded
+ *  lists aren't identical, e.g. footer alone carries PGT-A/PGT-M and
+ *  Surrogacy, so each file must merge against its own baseline to stay
+ *  byte-identical when Sanity is empty. Declared here, after FOOTER_DEFAULTS,
+ *  so the IIFE below can read it.) */
+const DEFAULT_TREATMENT_ITEMS_BY_HREF: ReadonlyMap<string, { category: string; order: number; label: string }> = (() => {
+  const byLabel = new Map(Object.entries(FOOTER_CATEGORY_LABELS).map(([cat, label]) => [label, cat]));
+  const map = new Map<string, { category: string; order: number; label: string }>();
+  for (const grp of FOOTER_DEFAULTS.groups) {
+    const category = byLabel.get(grp.h);
+    if (!category) continue;
+    grp.l.forEach((link, i) => {
+      if (link.href) map.set(link.href, { category, order: i, label: link.label });
+    });
+  }
+  return map;
+})();
 
 /** The subset of the `footer` global this resolver reads (kept loose so it
  *  stays decoupled from the generated payload-types until they exist). */
