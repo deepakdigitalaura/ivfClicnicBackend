@@ -40,6 +40,7 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   "egg-donation": { slug: "egg-donation", name: "Egg Donation", href: "/egg-donation" },
   "sperm-donation": { slug: "sperm-donation", name: "Sperm Donation", href: "/sperm-donation" },
   "embryo-donation": { slug: "embryo-donation", name: "Embryo Donation", href: "/embryo-donation" },
+  surrogacy: { slug: "surrogacy", name: "Surrogacy", href: "/surrogacy" },
   "male-infertility": { slug: "male-infertility", name: "Male Infertility", href: "/treatments/male-infertility" },
   "female-infertility": { slug: "female-infertility", name: "Female Infertility", href: "/treatments/female-infertility" },
   "fertility-preservation": { slug: "fertility-preservation", name: "Fertility Preservation", href: "/treatments/advanced-fertility-techniques" },
@@ -85,6 +86,7 @@ const TREATMENT_CARD_META: Record<string, { icon: LucideIcon; desc: string }> = 
   "egg-donation": { icon: Egg, desc: "Carefully matched, fully-screened egg-donor programme." },
   "sperm-donation": { icon: Droplets, desc: "Screened, ethical donor-sperm programme." },
   "embryo-donation": { icon: Baby, desc: "A compassionate donor-embryo path to parenthood." },
+  surrogacy: { icon: ShieldCheck, desc: "Ethical, legally-compliant gestational surrogacy care." },
   "male-infertility": { icon: Stethoscope, desc: "Comprehensive evaluation and treatment for male factors." },
   "female-infertility": { icon: HeartPulse, desc: "Personalised pathways for every female fertility concern." },
   "fertility-preservation": { icon: Snowflake, desc: "Egg, sperm and embryo freezing for the future." },
@@ -4114,6 +4116,7 @@ export const TREATMENTS: Treatment[] = [
   eggDonation,
   spermDonation,
   embryoDonation,
+  surrogacy,
   // Male Infertility
   oligospermia,
   asthenospermia,
