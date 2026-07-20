@@ -17,6 +17,7 @@ import {
   saveTestimonial,
   deleteTestimonial,
   saveHomepage,
+  saveAbout,
   saveSiteSettings,
   saveEducationVideo,
   deleteEducationVideo,
@@ -27,6 +28,7 @@ import {
   type AdminDoctor,
   type AdminTestimonial,
   type AdminHomepage,
+  type AdminAbout,
   type AdminSiteSettings,
   type AdminEducationVideo,
   type AdminBlogMeta,
@@ -179,6 +181,15 @@ export async function saveHomepageAction(data: AdminHomepage): Promise<SaveResul
   const r = await guard(() => saveHomepage(data));
   revalidatePath("/");
   revalidatePath("/admin-panel/homepage");
+  return r;
+}
+
+// ── About Page ──
+
+export async function saveAboutAction(data: AdminAbout): Promise<SaveResult> {
+  const r = await guard(() => saveAbout(data));
+  revalidatePath("/about-bfi");
+  revalidatePath("/admin-panel/about");
   return r;
 }
 
