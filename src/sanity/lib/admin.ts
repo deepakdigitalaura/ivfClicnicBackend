@@ -271,6 +271,26 @@ export async function saveSiteSettings(data: AdminSiteSettings) {
   revalidateTag("sanity-site-settings");
 }
 
+// ── About Page (singleton) ──
+
+export type AdminAbout = Record<string, unknown>;
+
+export async function readAbout(): Promise<AdminAbout | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("aboutPage")) as AdminAbout | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveAbout(data: AdminAbout) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "aboutPage", _type: "aboutPage", ...rest });
+  revalidateTag("sanity-about");
+}
+
 // ── Testimonials ──
 
 export type AdminTestimonial = {
