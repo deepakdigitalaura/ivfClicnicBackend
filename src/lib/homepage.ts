@@ -408,7 +408,6 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       { icon: "Stethoscope", t: "Male Infertility", d: "Comprehensive evaluation and treatment for male factors." },
       { icon: "HeartPulse", t: "Female Infertility", d: "Personalised pathways for every female fertility concern." },
       { icon: "Sparkles", t: "Advanced Fertility Techniques", d: "Latest assisted reproduction protocols." },
-      { icon: "Dna", t: "PGT — Genetic Testing", d: "Pre-implantation testing for healthier embryos." },
       { icon: "Activity", t: "IUI", d: "Intrauterine insemination for select fertility profiles." },
       { icon: "FlaskConical", t: "IVF / ICSI / ART", d: "Advanced in-vitro fertilisation with ICSI." },
       { icon: "Microscope", t: "Fertility Preservation", d: "Egg, sperm and embryo freezing for the future." },

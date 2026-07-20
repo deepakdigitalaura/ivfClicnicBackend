@@ -378,7 +378,7 @@ export const ivf: Treatment = {
     "icsi", "iui", "picsi", "imsi", "macs", "spindle-view-icsi",
     "blastocyst-transfer", "laser-hatching", "ivf-failure",
     "male-infertility", "female-infertility", "fertility-preservation",
-    "pgt", "egg-donation", "surrogacy", "recurrent-miscarriage",
+    "egg-donation", "surrogacy", "recurrent-miscarriage",
   ],
   cta: {
     heading: "Ready to begin your",
@@ -3670,7 +3670,7 @@ export const cryopreservation = defineTreatment({
     { q: "Can frozen embryos be used for a sibling later?", a: "Yes. Many couples return to use their stored embryos to try for a second child without repeating a full IVF cycle." },
     { q: "Who should freeze their fertility?", a: "Anyone facing fertility-reducing treatment or surgery, those wishing to delay parenthood, men with declining sperm counts, and couples with surplus embryos after IVF." },
   ],
-  related: ["ivf", "ovarian-reserve", "azoospermia", "surgical-sperm-retrieval", "pgt"],
+  related: ["ivf", "ovarian-reserve", "azoospermia", "surgical-sperm-retrieval"],
   cta: {
     heading: "Thinking about",
     headingEm: "preserving your fertility?",
@@ -4094,7 +4094,7 @@ export const surrogacy = defineTreatment({
     { q: "Will the baby be genetically ours?", a: "If the intended parents' own eggs and sperm are used, yes. Donor eggs or sperm are used only where medically needed. The surrogate is never genetically related to the baby." },
     { q: "Who can be a surrogate?", a: "A surrogate must meet the medical and legal criteria defined under the Act and passes thorough medical and psychological screening before proceeding." },
   ],
-  related: ["ivf-failure", "egg-donation", "embryo-donation", "ivf", "ivf-evaluation"],
+  related: ["ivf-failure", "egg-donation", "embryo-donation", "ivf"],
   cta: {
     heading: "Exploring",
     headingEm: "surrogacy?",

@@ -148,7 +148,7 @@ export const CENTRES: Centre[] = [
       "Pharmacy & sample collection",
     ],
     doctors: ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"],
-    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation", "pgt"],
+    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Paldi IVF centre?", a: "It is at Paldi Cross Roads — opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi, Ahmedabad – 380007. This is Bavishi Fertility Institute's head office and flagship lab, established in 1998." },
       { q: "What are the timings at the Paldi centre?", a: "The Paldi centre is open Monday to Saturday, 9:00 am to 7:00 pm. Appointments are recommended; call +91 97126 22288 to book." },
@@ -332,7 +332,7 @@ export const CENTRES: Centre[] = [
       "Pharmacy & sample collection",
     ],
     doctors: ["suman-singh", "nilesh-jain", "priyanka-sinha"],
-    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation", "pgt"],
+    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Ghatkopar IVF centre?", a: "It is on the 2nd floor of Vallabh Vihar CHS, Mahatma Gandhi Road, opposite Kotak Mahindra Bank, Ghatkopar East, Mumbai – 400077 — minutes from Ghatkopar station." },
       { q: "What are the timings at the Ghatkopar centre?", a: "The Ghatkopar centre is open Monday to Saturday, 9:00 am to 9:00 pm. Appointments are recommended; call +91 93281 90146 to book." },
@@ -567,7 +567,7 @@ export const CENTRES: Centre[] = [
       "Pharmacy & sample collection",
     ],
     doctors: ["mita-shah"],
-    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation", "pgt"],
+    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Vadodara IVF centre?", a: "On the 4th floor of Trisha Square, 2, Jetalpur Road, Sampatrao Colony, Vadodara – 390007 — centrally located near Alkapuri." },
       { q: "What are the timings at the Vadodara centre?", a: "The Vadodara centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 75750 99898 to book an appointment." },
@@ -614,7 +614,7 @@ export const CENTRES: Centre[] = [
       "Pharmacy & sample collection",
     ],
     doctors: ["deep-gajiwala"],
-    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation", "pgt"],
+    treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Surat IVF centre?", a: "On the 9th floor of Param Doctor House, Lal Darwaja Station Road, Lal Darwaja, Surat – 395003 — beside Surat railway station." },
       { q: "What are the timings at the Surat centre?", a: "The Surat centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 98795 72247 to book." },

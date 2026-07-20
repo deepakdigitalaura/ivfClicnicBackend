@@ -91,9 +91,9 @@ export type Doctor = {
  * are listed (so each card links somewhere real). */
 export const ALL_TREATMENT_SLUGS: string[] = [
   // Core ART
-  "ivf", "icsi", "iui", "ivf-evaluation", "ivf-failure",
+  "ivf", "icsi", "iui", "ivf-failure",
   // Advanced lab / embryology
-  "picsi", "imsi", "macs", "spindle-view-icsi", "blastocyst-transfer", "laser-hatching", "pgt", "era-test",
+  "picsi", "imsi", "macs", "spindle-view-icsi", "blastocyst-transfer", "laser-hatching",
   // Male infertility
   "azoospermia", "oligospermia", "asthenospermia", "surgical-sperm-retrieval", "varicocele", "erectile-dysfunction",
   // Female infertility

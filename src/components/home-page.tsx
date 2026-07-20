@@ -554,7 +554,6 @@ const TREATMENT_TITLE_HREFS: Record<string, string> = {
   "IVF / ICSI / ART": "/what-is-ivf",
   "IUI": "/intra-uterine-insemination-iui",
   "Advanced Fertility Techniques": "/treatments/advanced-fertility-techniques",
-  "PGT — Genetic Testing": "/pgt",
   "Fertility Preservation": "/cryopreservation",
   "Sperm Donation": "/sperm-donation",
   "Egg Donation": "/egg-donation",
@@ -570,7 +569,6 @@ const MOBILE_TREATMENT_TITLES = new Set([
   "IVF / ICSI / ART",
   "IUI",
   "Advanced Fertility Techniques",
-  "PGT — Genetic Testing",
   "Fertility Preservation",
 ]);
 

@@ -165,7 +165,6 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Spindle View ICSI", href: "/spindle-view-icsi" },
       { label: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
       { label: "Laser Hatching", href: "/laser-assisted-hatching" },
-      { label: "PGT-A / PGT-M", href: "/pgt" },
     ]},
     { h: "Male Infertility", l: [
       { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
