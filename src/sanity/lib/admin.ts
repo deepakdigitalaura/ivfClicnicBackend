@@ -230,6 +230,90 @@ export async function deleteDoctor(id: string) {
   revalidateDoctors();
 }
 
+// ── Treatments ──
+// Mirrors the `treatment` Sanity schema exactly (src/sanity/schemas/treatment.ts)
+// — only the fields that schema actually exposes are editable here. The
+// resolver (treatment-content.ts) supports more (name, types, timeline, etc.)
+// but those aren't in the schema/Studio either, so they stay code-owned.
+
+type HeadingSrc = { lead?: string; em?: string };
+type ValueRow = { value?: string };
+type TextRow = { text?: string };
+
+export type AdminTreatment = {
+  _id?: string;
+  slug?: string;
+  href?: string;
+  navCategory?: string;
+  navOrder?: number;
+  hero?: {
+    eyebrow?: string; h1?: string; h1Em?: string; tagline?: string;
+    badges?: ValueRow[]; image?: string; imageAlt?: string;
+  };
+  meta?: { title?: string; description?: string; ogImage?: string };
+  whatIs?: {
+    heading?: HeadingSrc;
+    paragraphs?: TextRow[];
+    aside?: { title?: string; body?: string };
+  };
+  benefits?: { heading?: HeadingSrc; subtitle?: string; items?: ValueRow[] };
+  whoNeedsIt?: { heading?: HeadingSrc; subtitle?: string; items?: ValueRow[] };
+  process?: {
+    heading?: HeadingSrc; subtitle?: string;
+    steps?: { icon?: string; n?: string; t?: string; d?: string }[];
+    note?: string;
+  };
+  risks?: {
+    heading?: HeadingSrc; subtitle?: string;
+    items?: { t?: string; d?: string; help?: string }[];
+  };
+  faqs?: { q?: string; a?: string }[];
+  cta?: { heading?: string; headingEm?: string; subtitle?: string };
+};
+
+const TREATMENT_TAG = "sanity-treatments";
+
+const TREATMENT_FIELDS_ADMIN = `
+  _id, slug, href, navCategory, navOrder,
+  hero{ eyebrow, h1, h1Em, tagline, badges, image, imageAlt },
+  meta{ title, description, ogImage },
+  whatIs{ heading, paragraphs, aside },
+  benefits{ heading, subtitle, items },
+  whoNeedsIt{ heading, subtitle, items },
+  process{ heading, subtitle, steps, note },
+  risks{ heading, subtitle, items },
+  faqs, cta
+`;
+
+export async function readAdminTreatments(): Promise<AdminTreatment[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(`*[_type == "treatment"] | order(slug asc){ ${TREATMENT_FIELDS_ADMIN} }`);
+  } catch {
+    return [];
+  }
+}
+
+export async function saveTreatment(doc: AdminTreatment) {
+  const { _id, ...rest } = doc;
+  const id = _id || `treatment-${(doc.slug ?? "").trim()}`;
+  // Preserve an existing Studio-uploaded heroPhoto asset (not editable here — the
+  // admin form only sets hero.image, a plain path/URL string, same as Doctors).
+  const existing = (await writeClient.getDocument(id)) as { hero?: { heroPhoto?: unknown } } | null;
+  await writeClient.createOrReplace({
+    _id: id,
+    _type: "treatment",
+    ...rest,
+    ...(existing?.hero?.heroPhoto ? { hero: { ...rest.hero, heroPhoto: existing.hero.heroPhoto } } : {}),
+  });
+  revalidateTag(TREATMENT_TAG);
+}
+
+export async function deleteTreatment(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(TREATMENT_TAG);
+}
+
 // ── Homepage (singleton) ──
 
 export type AdminHomepage = Record<string, unknown>;
