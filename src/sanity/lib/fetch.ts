@@ -23,7 +23,12 @@ export type RobotsConfig = {
   rawContent?: string;
 };
 
-export type ScriptEntry = { name?: string; enabled?: boolean; code?: string };
+export type ScriptEntry = {
+  name?: string;
+  enabled?: boolean;
+  code?: string;
+  category?: "necessary" | "analytics" | "marketing";
+};
 export type ScriptsConfig = {
   headScripts?: ScriptEntry[];
   bodyScripts?: ScriptEntry[];
@@ -308,24 +313,54 @@ const BLOG_FIELDS = `
   status
 `;
 
-export const getSanityBlogsPage = (page: number, limit: number) =>
+export const getSanityBlogsPage = (page: number, limit: number, categorySlug?: string) =>
   unstable_cache(
     async () => {
       if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return { docs: [], total: 0 };
       const offset = (page - 1) * limit;
+      const filter = categorySlug
+        ? `_type == "blog" && status != "draft" && categorySlug == $categorySlug`
+        : `_type == "blog" && status != "draft"`;
       try {
         const [docs, total] = await Promise.all([
           client.fetch<SanityBlog[]>(
-            `*[_type == "blog" && status != "draft"] | order(publishedAt desc)[${offset}...${offset + limit}]{ ${BLOG_FIELDS} }`,
+            `*[${filter}] | order(publishedAt desc)[${offset}...${offset + limit}]{ ${BLOG_FIELDS} }`,
+            { categorySlug },
           ),
-          client.fetch<number>(`count(*[_type == "blog" && status != "draft"])`),
+          client.fetch<number>(`count(*[${filter}])`, { categorySlug }),
         ]);
         return { docs: docs ?? [], total: total ?? 0 };
       } catch {
         return { docs: [], total: 0 };
       }
     },
-    ["sanity-blogs-page", String(page), String(limit)],
+    ["sanity-blogs-page", String(page), String(limit), categorySlug ?? "all"],
+    { revalidate: 3600, tags: ["sanity-blogs"] },
+  )();
+
+export type BlogCategoryCount = { slug: string; title: string; count: number };
+
+export const getSanityBlogCategories = () =>
+  unstable_cache(
+    async () => {
+      if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
+      try {
+        const rows = await client.fetch<{ categorySlug: string | null; categoryTitle: string | null }[]>(
+          `*[_type == "blog" && status != "draft" && defined(categorySlug)]{ categorySlug, categoryTitle }`,
+        );
+        const counts = new Map<string, BlogCategoryCount>();
+        for (const r of rows) {
+          if (!r.categorySlug) continue;
+          const existing = counts.get(r.categorySlug);
+          if (existing) existing.count++;
+          else counts.set(r.categorySlug, { slug: r.categorySlug, title: r.categoryTitle ?? r.categorySlug, count: 1 });
+        }
+        return [...counts.values()].sort((a, b) => b.count - a.count);
+      } catch {
+        return [];
+      }
+    },
+    ["sanity-blog-categories"],
     { revalidate: 3600, tags: ["sanity-blogs"] },
   )();
 

@@ -3,7 +3,7 @@ import { BlogHub } from "@/components/blog-hub";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema } from "@/lib/seo";
-import { getBlogsPage, getGlobalSafe } from "@/lib/payload";
+import { getBlogsPage, getBlogCategories, getGlobalSafe } from "@/lib/payload";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PAGE_SIZE = 24;
@@ -29,9 +29,9 @@ const FALLBACK = {
 };
 
 export async function generateMetadata(
-  { searchParams }: { searchParams: Promise<{ page?: string }> },
+  { searchParams }: { searchParams: Promise<{ page?: string; category?: string }> },
 ): Promise<Metadata> {
-  const { page: pageParam } = await searchParams;
+  const { page: pageParam, category } = await searchParams;
   const page = Math.max(1, Number(pageParam) || 1);
   const hub = await getGlobalSafe("blog-hub");
   const metaTitle = hub?.seo?.metaTitle ?? FALLBACK.seo.metaTitle;
@@ -40,7 +40,11 @@ export async function generateMetadata(
     hub?.seo && typeof hub.seo.ogImage === "object" && hub.seo.ogImage?.url
       ? hub.seo.ogImage.url
       : DEFAULT_OG_IMAGE;
-  const canonicalPath = page > 1 ? `${PATH}?page=${page}` : PATH;
+  const params = new URLSearchParams();
+  if (category) params.set("category", category);
+  if (page > 1) params.set("page", String(page));
+  const query = params.toString();
+  const canonicalPath = query ? `${PATH}?${query}` : PATH;
   return withPageSeoOverride(PATH, {
     title: page > 1 ? `${metaTitle} — Page ${page}` : metaTitle,
     description: metaDescription,
@@ -56,12 +60,13 @@ export async function generateMetadata(
 }
 
 export default async function Page(
-  { searchParams }: { searchParams: Promise<{ page?: string }> },
+  { searchParams }: { searchParams: Promise<{ page?: string; category?: string }> },
 ) {
-  const { page: pageParam } = await searchParams;
+  const { page: pageParam, category } = await searchParams;
   const page = Math.max(1, Number(pageParam) || 1);
-  const [blogsPage, hub] = await Promise.all([
-    getBlogsPage(page, PAGE_SIZE),
+  const [blogsPage, categories, hub] = await Promise.all([
+    getBlogsPage(page, PAGE_SIZE, category),
+    getBlogCategories(),
     getGlobalSafe("blog-hub"),
   ]);
   const url = abs(PATH);
@@ -98,6 +103,8 @@ export default async function Page(
         totalPages={blogsPage.totalPages}
         hasPrevPage={blogsPage.hasPrevPage}
         hasNextPage={blogsPage.hasNextPage}
+        categories={categories}
+        activeCategory={category}
       />
     </>
   );
