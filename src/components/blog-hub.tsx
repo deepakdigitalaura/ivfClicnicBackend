@@ -9,6 +9,7 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { RichText } from "@/components/rich-text";
 import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
 import type { Blog, Author, Category, Media } from "@/payload-types";
+import type { BlogCategoryCount } from "@/sanity/lib/fetch";
 
 const asObj = <T,>(v: T | number | null | undefined): T | null =>
   v && typeof v === "object" ? (v as T) : null;
@@ -113,7 +114,50 @@ type Hub = {
 const DEFAULT_HERO_DESCRIPTION =
   "Expert, compassionate guidance on fertility, IVF and your journey to parenthood — reviewed by our specialists.";
 
-const pageHref = (n: number) => (n <= 1 ? "/blogs" : `/blogs?page=${n}`);
+function blogsHref(opts: { page?: number; category?: string }): string {
+  const params = new URLSearchParams();
+  if (opts.category) params.set("category", opts.category);
+  if (opts.page && opts.page > 1) params.set("page", String(opts.page));
+  const query = params.toString();
+  return query ? `/blogs?${query}` : "/blogs";
+}
+
+/** Category filter pills — links (full navigation, matching the pagination
+ *  pattern below) so the filtered result is server-rendered, not client-fetched. */
+function CategoryFilter({
+  categories,
+  activeCategory,
+}: {
+  categories: BlogCategoryCount[];
+  activeCategory?: string;
+}) {
+  if (categories.length === 0) return null;
+  const total = categories.reduce((sum, c) => sum + c.count, 0);
+  const pillClass = (active: boolean) =>
+    `inline-flex items-center gap-1.5 whitespace-nowrap rounded-full px-4 py-2 text-sm font-semibold transition-colors ${
+      active
+        ? "bg-[color:var(--rose)] text-white"
+        : "bg-[color:var(--rose)]/8 text-[color:var(--plum)] hover:bg-[color:var(--rose)]/15"
+    }`;
+
+  return (
+    <nav aria-label="Filter blogs by category" className="-mx-4 flex gap-2 overflow-x-auto px-4 pb-2 [scrollbar-width:none] [&::-webkit-scrollbar]:hidden md:mx-0 md:flex-wrap md:overflow-visible md:px-0">
+      <a href={blogsHref({})} aria-current={!activeCategory ? "page" : undefined} className={pillClass(!activeCategory)}>
+        All <span className="opacity-70">({total})</span>
+      </a>
+      {categories.map((c) => (
+        <a
+          key={c.slug}
+          href={blogsHref({ category: c.slug })}
+          aria-current={activeCategory === c.slug ? "page" : undefined}
+          className={pillClass(activeCategory === c.slug)}
+        >
+          {c.title} <span className="opacity-70">({c.count})</span>
+        </a>
+      ))}
+    </nav>
+  );
+}
 
 /** Windowed page-number pagination: first, last, current ±1, with "…" gaps. */
 function Pagination({
@@ -121,11 +165,13 @@ function Pagination({
   totalPages,
   hasPrevPage,
   hasNextPage,
+  category,
 }: {
   page: number;
   totalPages: number;
   hasPrevPage: boolean;
   hasNextPage: boolean;
+  category?: string;
 }) {
   if (totalPages <= 1) return null;
 
@@ -146,7 +192,7 @@ function Pagination({
   return (
     <nav aria-label="Blog pagination" className="mt-4 flex items-center justify-center gap-2">
       <a
-        href={hasPrevPage ? pageHref(page - 1) : undefined}
+        href={hasPrevPage ? blogsHref({ page: page - 1, category }) : undefined}
         aria-disabled={!hasPrevPage}
         className={`${linkClass} ${hasPrevPage ? "text-[color:var(--plum)] hover:bg-[color:var(--rose)]/10" : "pointer-events-none text-muted-foreground/40"}`}
       >
@@ -159,7 +205,7 @@ function Pagination({
         ) : (
           <a
             key={it}
-            href={pageHref(it)}
+            href={blogsHref({ page: it, category })}
             aria-current={it === page ? "page" : undefined}
             className={`${linkClass} ${
               it === page
@@ -173,7 +219,7 @@ function Pagination({
       )}
 
       <a
-        href={hasNextPage ? pageHref(page + 1) : undefined}
+        href={hasNextPage ? blogsHref({ page: page + 1, category }) : undefined}
         aria-disabled={!hasNextPage}
         className={`${linkClass} ${hasNextPage ? "text-[color:var(--plum)] hover:bg-[color:var(--rose)]/10" : "pointer-events-none text-muted-foreground/40"}`}
       >
@@ -191,12 +237,16 @@ export function BlogHub({
   totalPages = 1,
   hasPrevPage = false,
   hasNextPage = false,
+  categories = [],
+  activeCategory,
 }: {
   posts: Blog[];
   page?: number;
   totalPages?: number;
   hasPrevPage?: boolean;
   hasNextPage?: boolean;
+  categories?: BlogCategoryCount[];
+  activeCategory?: string;
 } & Hub) {
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -237,8 +287,14 @@ export function BlogHub({
 
       {/* Grid */}
       <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
+        <div className="mb-10">
+          <CategoryFilter categories={categories} activeCategory={activeCategory} />
+        </div>
+
         {posts.length === 0 ? (
-          <p className="text-center text-muted-foreground">New articles are on the way. Please check back soon.</p>
+          <p className="text-center text-muted-foreground">
+            {activeCategory ? "No articles in this category yet. Please check back soon." : "New articles are on the way. Please check back soon."}
+          </p>
         ) : (
           <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {posts.map((p) => {
@@ -277,7 +333,7 @@ export function BlogHub({
           </Stagger>
         )}
 
-        <Pagination page={page} totalPages={totalPages} hasPrevPage={hasPrevPage} hasNextPage={hasNextPage} />
+        <Pagination page={page} totalPages={totalPages} hasPrevPage={hasPrevPage} hasNextPage={hasNextPage} category={activeCategory} />
       </section>
 
       <Footer />

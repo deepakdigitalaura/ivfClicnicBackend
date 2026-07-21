@@ -33,6 +33,8 @@ import {
   getSanityBlogsByLocationSlug,
   getSanityRelatedBlogs,
   getSanityCMEBlogs,
+  getSanityBlogCategories,
+  type BlogCategoryCount,
   getSanityTreatments,
   getSanityTreatment,
   getSanityServices,
@@ -181,8 +183,8 @@ export const getBlogs = async (_limit = 24): Promise<Blog[]> => {
   return r ? r.docs.map(toBlogDoc) : [];
 };
 
-export const getBlogsPage = async (page = 1, limit = 24): Promise<BlogsPage> => {
-  const r = await getSanityBlogsPage(page, limit);
+export const getBlogsPage = async (page = 1, limit = 24, categorySlug?: string): Promise<BlogsPage> => {
+  const r = await getSanityBlogsPage(page, limit, categorySlug);
   if (!r) return { docs: [], page: 1, totalPages: 1, totalDocs: 0, hasPrevPage: false, hasNextPage: false };
   const totalPages = Math.max(1, Math.ceil(r.total / limit));
   return {
@@ -194,6 +196,8 @@ export const getBlogsPage = async (page = 1, limit = 24): Promise<BlogsPage> => 
     hasNextPage: page < totalPages,
   };
 };
+
+export const getBlogCategories = async (): Promise<BlogCategoryCount[]> => getSanityBlogCategories();
 
 export const getBlogsByTreatmentSlug = async (treatmentSlug: string, _limit = 3): Promise<Blog[]> => {
   const docs = await getSanityBlogsByTreatmentSlug(treatmentSlug);
