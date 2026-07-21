@@ -121,6 +121,12 @@ export function LocationsManager({
   const [activeCitySlug, setActiveCitySlug] = useState<string | null>(null);
   const [editingCity, setEditingCity] = useState<Doc | null>(null);
   const [editingCentre, setEditingCentre] = useState<Doc | null>(null);
+  // Tracks "Add City/Centre" (blank slug, editable) vs editing a row that's
+  // already visible in a list — whether that row is a saved admin doc or a
+  // not-yet-overridden code default, its slug is already known and shown
+  // read-only, and the heading says "Edit"/"Override" instead of "New".
+  const [isNewCity, setIsNewCity] = useState(false);
+  const [isNewCentre, setIsNewCentre] = useState(false);
   const [cityTab, setCityTab] = useState<CityTab>("main");
   const [centreTab, setCentreTab] = useState<CentreTab>("main");
   const { pending, toast, run } = useSave();
@@ -142,6 +148,7 @@ export function LocationsManager({
       helpline: full.helpline, helplineLabel: full.helplineLabel, whatsapp: full.whatsapp,
       intro: full.intro, faqs: full.faqs, womensHealth: full.womensHealth,
     });
+    setIsNewCity(false);
     setCityTab("main");
   };
 
@@ -157,16 +164,17 @@ export function LocationsManager({
       facilities: full.facilities, doctors: full.doctors, treatments: full.treatments, womensHealth: full.womensHealth,
       faqs: full.faqs,
     });
+    setIsNewCentre(false);
     setCentreTab("main");
   };
 
-  const addNewCity = () => { setEditingCity({ ...EMPTY_CITY }); setCityTab("main"); };
-  const addNewCentre = (citySlug: string) => { setEditingCentre(emptyCentre(citySlug)); setCentreTab("main"); };
+  const addNewCity = () => { setEditingCity({ ...EMPTY_CITY }); setIsNewCity(true); setCityTab("main"); };
+  const addNewCentre = (citySlug: string) => { setEditingCentre(emptyCentre(citySlug)); setIsNewCentre(true); setCentreTab("main"); };
 
   const saveCityForm = (e: React.FormEvent) => {
     e.preventDefault();
     if (!editingCity?.slug) return;
-    const wasNew = !editingCity._id;
+    const wasNew = isNewCity;
     run(async () => {
       const res = await saveCityAction(editingCity as AdminCity);
       if (res.ok) {
@@ -226,16 +234,20 @@ export function LocationsManager({
       <form onSubmit={saveCityForm}>
         <div className="admin-card">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-            <h2 className="admin-card-title" style={{ margin: 0 }}>{editingCity._id ? `Edit City — ${editingCity.slug}` : "New City"}</h2>
+            <h2 className="admin-card-title" style={{ margin: 0 }}>
+              {isNewCity ? "New City" : editingCity._id ? `Edit City — ${editingCity.slug}` : `Override — ${editingCity.slug}`}
+            </h2>
             <button type="button" className="admin-btn-ghost" style={{ padding: "7px 10px" }} onClick={() => setEditingCity(null)}><X size={16} /></button>
           </div>
 
-          {!editingCity._id && (
+          {isNewCity ? (
             <div className="admin-field">
               <label className="admin-label">Slug (URL) *</label>
               <p className="admin-hint">e.g. ahmedabad — must be unique. Matching a code slug overrides it.</p>
               <input className="admin-input" required value={editingCity.slug ?? ""} onChange={(e) => setEditingCity((p: Doc) => ({ ...p, slug: e.target.value }))} />
             </div>
+          ) : (
+            <p className="admin-card-desc" style={{ marginTop: -8, marginBottom: 16 }}>Slug: {editingCity.slug}</p>
           )}
 
           <div style={{ display: "flex", gap: 8, marginBottom: 18, flexWrap: "wrap" }}>
@@ -306,12 +318,16 @@ export function LocationsManager({
       <form onSubmit={saveCentreForm}>
         <div className="admin-card">
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
-            <h2 className="admin-card-title" style={{ margin: 0 }}>{editingCentre._id ? `Edit Centre — ${editingCentre.slug}` : "New Centre"}</h2>
+            <h2 className="admin-card-title" style={{ margin: 0 }}>
+              {isNewCentre ? "New Centre" : editingCentre._id ? `Edit Centre — ${editingCentre.slug}` : `Override — ${editingCentre.slug}`}
+            </h2>
             <button type="button" className="admin-btn-ghost" style={{ padding: "7px 10px" }} onClick={() => setEditingCentre(null)}><X size={16} /></button>
           </div>
-          <p className="admin-card-desc" style={{ marginTop: -8, marginBottom: 16 }}>City: {editingCentre.citySlug}</p>
+          <p className="admin-card-desc" style={{ marginTop: -8, marginBottom: 16 }}>
+            City: {editingCentre.citySlug}{!isNewCentre && ` · Slug: ${editingCentre.slug}`}
+          </p>
 
-          {!editingCentre._id && (
+          {isNewCentre && (
             <div className="admin-field">
               <label className="admin-label">Slug (URL) *</label>
               <p className="admin-hint">e.g. paldi — must be unique within this city. Matching a code slug overrides it.</p>
