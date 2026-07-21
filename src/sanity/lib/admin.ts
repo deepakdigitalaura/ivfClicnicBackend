@@ -389,6 +389,123 @@ export async function deleteService(id: string) {
   revalidateTag(SERVICE_TAG);
 }
 
+// ── Locations (Cities + Centres) ──
+// Mirrors `city`/`centre` Sanity schemas exactly (src/sanity/schemas/city.ts,
+// centre.ts). Unlike Doctors/Treatments/Services, heroImage/image are plain
+// string paths (schema type "string", not "image") — no Sanity asset to
+// preserve on save, same as the rest of this pair's fields.
+
+export type AdminCity = {
+  _id?: string;
+  slug?: string;
+  name?: string;
+  region?: string;
+  country?: string;
+  built?: boolean;
+  heroImage?: string;
+  hero360Url?: string;
+  helpline?: string;
+  helplineLabel?: string;
+  whatsapp?: string;
+  intro?: ValueRow[];
+  faqs?: { q?: string; a?: string }[];
+  womensHealth?: ValueRow[];
+};
+
+export type AdminCentre = {
+  _id?: string;
+  slug?: string;
+  citySlug?: string;
+  name?: string;
+  fullName?: string;
+  area?: string;
+  isHeadOffice?: boolean;
+  built?: boolean;
+  image?: string;
+  hero360Url?: string;
+  address?: string;
+  pin?: string;
+  phone?: string;
+  phoneLabel?: string;
+  hours?: string;
+  opening?: { opens?: string; closes?: string; days?: ValueRow[] };
+  geo?: { lat?: number; lng?: number };
+  mapQuery?: string;
+  reviewsKey?: string;
+  sameAs?: ValueRow[];
+  intro?: string;
+  nearby?: ValueRow[];
+  landmarks?: ValueRow[];
+  howToReach?: ValueRow[];
+  gallery?: { src?: string; alt?: string }[];
+  facilities?: ValueRow[];
+  doctors?: ValueRow[];
+  treatments?: ValueRow[];
+  womensHealth?: ValueRow[];
+  faqs?: { q?: string; a?: string }[];
+};
+
+// Reuses the "sanity-locations" tag already wired into getSanityCities/
+// getSanityCity/getSanityCentres/getSanityCentre (src/sanity/lib/fetch.ts) so a
+// save here busts the same cache the public routes + nav read from.
+const LOCATION_TAG = "sanity-locations";
+
+const CITY_FIELDS_ADMIN = `
+  _id, slug, name, region, country, built, heroImage, hero360Url,
+  helpline, helplineLabel, whatsapp, intro, faqs, womensHealth
+`;
+
+export async function readAdminCities(): Promise<AdminCity[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(`*[_type == "city"] | order(slug asc){ ${CITY_FIELDS_ADMIN} }`);
+  } catch {
+    return [];
+  }
+}
+
+export async function saveCity(doc: AdminCity) {
+  const { _id, ...rest } = doc;
+  const id = _id || `city-${(doc.slug ?? "").trim()}`;
+  await writeClient.createOrReplace({ _id: id, _type: "city", ...rest });
+  revalidateTag(LOCATION_TAG);
+}
+
+export async function deleteCity(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(LOCATION_TAG);
+}
+
+const CENTRE_FIELDS_ADMIN = `
+  _id, slug, citySlug, name, fullName, area, isHeadOffice, built, image, hero360Url,
+  address, pin, phone, phoneLabel, hours, opening, geo, mapQuery, reviewsKey, sameAs,
+  intro, nearby, landmarks, howToReach, gallery, facilities, doctors, treatments,
+  womensHealth, faqs
+`;
+
+export async function readAdminCentres(): Promise<AdminCentre[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(`*[_type == "centre"] | order(citySlug asc, slug asc){ ${CENTRE_FIELDS_ADMIN} }`);
+  } catch {
+    return [];
+  }
+}
+
+export async function saveCentre(doc: AdminCentre) {
+  const { _id, ...rest } = doc;
+  // Id includes citySlug — centre slugs aren't globally unique across cities
+  // (e.g. two different cities could each have a centre named "main").
+  const id = _id || `centre-${(doc.citySlug ?? "").trim()}-${(doc.slug ?? "").trim()}`;
+  await writeClient.createOrReplace({ _id: id, _type: "centre", ...rest });
+  revalidateTag(LOCATION_TAG);
+}
+
+export async function deleteCentre(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(LOCATION_TAG);
+}
+
 // ── Homepage (singleton) ──
 
 export type AdminHomepage = Record<string, unknown>;
