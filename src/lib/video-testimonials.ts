@@ -82,7 +82,6 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   // but were confirmed by the clinic as that doctor's patients — do NOT remove
   // them for failing the "doctor explicitly named" title rule.
   "janki-bavishi": [
-    { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "The personalised care from Dr. Janki Bavishi made all the difference.", youTubeId: "SP4xuGIFpF4" },
     { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "Personalised care by Dr. Janki Bavishi made our experience truly special.", youTubeId: "Ko_1GCx0kwE" },
     { name: "Dr Vipul & Dr Vaibhavi", doctor: "Dr. Janki Bavishi", quote: "A journey of hope and trust — our IVF experience with Bavishi Fertility Institute.", youTubeId: "hcrTlAG07c8" },
     { name: "Jigesh & Jinal", doctor: "Dr. Janki Bavishi", quote: "From failed treatments elsewhere to parenthood at Bavishi Fertility Institute.", youTubeId: "SbkV-1fSonM" },
