@@ -18,6 +18,10 @@ import {
   deleteTreatment,
   saveService,
   deleteService,
+  saveCity,
+  deleteCity,
+  saveCentre,
+  deleteCentre,
   saveTestimonial,
   deleteTestimonial,
   saveHomepage,
@@ -32,6 +36,8 @@ import {
   type AdminDoctor,
   type AdminTreatment,
   type AdminService,
+  type AdminCity,
+  type AdminCentre,
   type AdminTestimonial,
   type AdminHomepage,
   type AdminAbout,
@@ -199,6 +205,42 @@ export async function saveServiceAction(doc: AdminService): Promise<SaveResult> 
 export async function deleteServiceAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deleteService(id));
   revalidateServicePages();
+  return r;
+}
+
+// ── Locations (Cities + Centres) ──
+
+/** Revalidate every public surface that renders city/centre data (page
+ *  content and the header/footer nav menus, which read the same tagged
+ *  cache — see getNavLocations() in src/lib/payload.ts). */
+function revalidateLocationPages() {
+  revalidatePath("/locations/[city]", "page");
+  revalidatePath("/locations/[city]/[center]", "page");
+  revalidatePath("/"); // homepage location cards
+  revalidatePath("/admin-panel/locations");
+}
+
+export async function saveCityAction(doc: AdminCity): Promise<SaveResult> {
+  const r = await guard(() => saveCity(doc));
+  revalidateLocationPages();
+  return r;
+}
+
+export async function deleteCityAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteCity(id));
+  revalidateLocationPages();
+  return r;
+}
+
+export async function saveCentreAction(doc: AdminCentre): Promise<SaveResult> {
+  const r = await guard(() => saveCentre(doc));
+  revalidateLocationPages();
+  return r;
+}
+
+export async function deleteCentreAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteCentre(id));
+  revalidateLocationPages();
   return r;
 }
 
