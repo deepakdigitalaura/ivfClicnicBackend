@@ -8,7 +8,7 @@ import { getSitemapConfig } from "@/sanity/lib/fetch";
 
 export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.url;
-  const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blogs"]);
+  const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blogs", "/press"]);
 
   for (const ref of Object.values(TREATMENTS_REGISTRY)) {
     if (ref.href.startsWith("/") && !ref.href.includes("#")) paths.add(ref.href);

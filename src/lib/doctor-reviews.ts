@@ -125,6 +125,18 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "It is really amazing and thrilling journey towards motherhood. every day brings new day and experience for mother. We heartly thank to Dr. Bavishi and his entire team, for enlightened lamp of joy, happiness and parenthood in our life.\n\nFrom :- Salvi Patade",
     },
     {
+      name: "Vidhi & Vikram Main",
+      date: "20 January 2024",
+      text:
+        "Thank you Bavishi Team & Dr. Nilesh Jain for making our dream reality.\n\nSpecial thanks to Dr. Nilesh Jain for his excellent support & guidance.\n\nWe are looking forward to start our exciting journey of parenthood.\n\nLots of love to Bavishi Team\n\nFrom,\nVidhi & Vikram",
+    },
+    {
+      name: "Madhuri & Dinesh Chawla",
+      date: "4 March 2024",
+      text:
+        "आदरणीय,\n\nडॉ. साहब आपका बहुत-बहुत आभार। मेरे घर में किलकारी देकर आपने मेरे को नई जिंदगी दी। मैंने आपके हॉस्पिटल के कर्मचारी से लेकर आप तक जो अनुशासन है वो देखा है, तारीफ लायक है। आपके हॉस्पिटल कि टेक्नोलॉजी दिनोंदिन फले-फूले यही हमारी कामना है।\n\nThank you, धन्यवाद,\nMadhuri Chawla\nDinesh Chawla",
+    },
+    {
       name: "Sudhakar & Ramadevi Komati",
       date: "14 August 2024",
       text:
@@ -184,6 +196,20 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       date: "11 April 2024",
       text:
         "We would like to thanks Dr. Suman Singh and the entire team of Bavishi Clinik to fulfil our dream come true to becoming Parents on the First attempt after 5 years of married life.\n\nWe are very grateful to Bavishi clinik.\n\nIt is best IVF clinik in my life.\n\nDr. Suman Singh and all staffs are very kind and gives special attention to their petient.\n\nAll Dr. and staffs are experts in their field and they gives 100% efforts in their work only we have to put Trust on them & result is positive.\n\nWe definetly recommend Bavishi clinik to all Those who wants to become Parents.\n\n\"Yes! Dreams Become True, with the help of BAVISHI\"",
+    },
+  ],
+
+  // Bavishi Neo Fertility — Varanasi. WhatsApp thank-you message sent to the
+  // doctor (no star rating, and the message carried no date). The sender's name
+  // is not shown in the screenshot we were given, so this is published without
+  // attribution rather than guessing one. The patient typed the doctor's name as
+  // "prannika"; corrected to "Parnnika" so her own name is not misspelled on her
+  // profile page. Every other word is exactly as sent.
+  "parnnika-agarwal": [
+    {
+      name: "A patient of Dr. Parnnika Agarwal",
+      text:
+        "Hello Parnnika ma'am\n\nMy baby turned 8 months old Yesterday and i just wanted to thank you from bottom of my heart. It is such a beautiful blessing which has been possible because of your guidance, expertise and unwavering support. To us ,you are truely god sent. Your role in my parenthood will never be forgotten.\n\nThank you so very much ma'am.\n\nAnd may god bless your little one with best of everything in life. 😊😊🥰",
     },
   ],
 };

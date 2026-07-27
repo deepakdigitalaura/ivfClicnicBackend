@@ -1283,6 +1283,16 @@ function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["
           </Marquee>
         </div>
       </Reveal>
+      <Reveal delay={0.25}>
+        <div className="mt-8 text-center">
+          <a
+            href="/press"
+            className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
+          >
+            Read our press coverage
+          </a>
+        </div>
+      </Reveal>
     </section>
   );
 }

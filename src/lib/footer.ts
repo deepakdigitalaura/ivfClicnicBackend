@@ -231,6 +231,7 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Testimonial Videos", href: "https://ivf-clicnic-backend-weld.vercel.app/testimonial-videos", external: true },
       { label: "Educational Videos", href: "https://ivf-clicnic-backend-weld.vercel.app/education-videos", external: true },
       { label: "CME", href: "https://ivf-clicnic-backend-weld.vercel.app/cme", external: true },
+      { label: "Media & Press", href: "/press" },
     ]},
     { h: "About", l: [
       { label: "Our Story", href: "/about-bfi" },
