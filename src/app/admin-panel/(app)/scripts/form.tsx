@@ -30,6 +30,18 @@ function ScriptList({
           <div className="admin-field" style={{ marginBottom: 10 }}>
             <input className="admin-input" placeholder="Script name (e.g. Google Analytics)" value={it.name ?? ""} onChange={(e) => update(i, { name: e.target.value })} />
           </div>
+          <div className="admin-field" style={{ marginBottom: 10 }}>
+            <label className="admin-label">Cookie category</label>
+            <select
+              className="admin-input"
+              value={it.category ?? "analytics"}
+              onChange={(e) => update(i, { category: e.target.value as ScriptEntry["category"] })}
+            >
+              <option value="necessary">Necessary — always loads</option>
+              <option value="analytics">Analytics — only after visitor accepts cookies</option>
+              <option value="marketing">Marketing — only after visitor accepts cookies</option>
+            </select>
+          </div>
           <textarea className="admin-textarea" placeholder="<script>…</script> or raw JS/HTML" value={it.code ?? ""} onChange={(e) => update(i, { code: e.target.value })} />
         </div>
       ))}

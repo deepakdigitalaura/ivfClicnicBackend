@@ -7,6 +7,7 @@ import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
 import { CookieConsent } from "@/components/cookie-consent";
+import { ConsentScripts } from "@/components/consent-scripts";
 import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -49,8 +50,18 @@ export default async function RootLayout({ children }: { children: React.ReactNo
     getSchemaOrgConfig(),
   ]);
 
-  const headScripts = scripts?.headScripts?.filter((s) => s.enabled && s.code) ?? [];
-  const bodyScripts = scripts?.bodyScripts?.filter((s) => s.enabled && s.code) ?? [];
+  const isLive = (s: { enabled?: boolean; code?: string }) => !!s.enabled && !!s.code;
+  const isNecessary = (s: { category?: string }) => s.category === "necessary";
+
+  const allHead = scripts?.headScripts?.filter(isLive) ?? [];
+  const allBody = scripts?.bodyScripts?.filter(isLive) ?? [];
+
+  // Necessary scripts (site verification, essential tag managers) always render.
+  // Analytics/marketing scripts are only executed client-side once the visitor
+  // accepts cookies — see <ConsentScripts> and src/components/cookie-consent.tsx.
+  const headScripts = allHead.filter(isNecessary);
+  const bodyScripts = allBody.filter(isNecessary);
+  const gatedScripts = [...allHead, ...allBody].filter((s) => !isNecessary(s));
 
   const customSchemas = (schemaOrg?.customSchemas ?? [])
     .filter((s) => s.enabled && s.jsonCode)
@@ -76,6 +87,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
           <FooterProvider value={footer}>{children}</FooterProvider>
         </HeaderProvider>
         <CookieConsent />
+        <ConsentScripts scripts={gatedScripts} />
         {bodyScripts.map((s, i) => (
           <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />
         ))}
