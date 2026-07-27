@@ -969,7 +969,8 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
               {testimonials.map((v, i) => (
                 <StaggerItem key={`${v.name}-${i}`}>
                   <div className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-500 hover:shadow-lift">
-                    <LiteVideo id={v.youTubeId} title={`${t.shortName} testimonial — ${v.name}`} editPath={editing ? `testimonials.${i}.youTubeId` : undefined} />
+                    {/* Treatment testimonials are always YouTube-sourced (videoSrc is a doctor-page-only exception) */}
+                    <LiteVideo id={v.youTubeId!} title={`${t.shortName} testimonial — ${v.name}`} editPath={editing ? `testimonials.${i}.youTubeId` : undefined} />
                     <div className="flex flex-1 flex-col p-5">
                       <Quote className="h-5 w-5 text-[color:var(--rose)]/70" />
                       <p className="mt-2 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`testimonials.${i}.quote`, v.quote)}</p>
