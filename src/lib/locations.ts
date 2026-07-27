@@ -111,9 +111,6 @@ const sharedGallery = (area: string): { src: string; alt: string }[] => [
 const mumbaiGallery = (area: string): { src: string; alt: string }[] => [
   { src: "/assets/centres/mumbai-reception-desk.webp", alt: `Bavishi Fertility Institute ${area} — reception & front desk` },
   { src: "/assets/centres/mumbai-waiting-lounge-1.webp", alt: `Bavishi Fertility Institute ${area} — patient waiting lounge` },
-  { src: "/assets/centres/mumbai-waiting-lounge-2.webp", alt: `Bavishi Fertility Institute ${area} — waiting area seating` },
-  { src: "/assets/centres/mumbai-waiting-lounge-3.webp", alt: `Bavishi Fertility Institute ${area} — reception waiting area` },
-  { src: "/assets/centres/mumbai-patient-lounge.webp", alt: `Bavishi Fertility Institute ${area} — patient lounge & information board` },
   { src: "/assets/centres/mumbai-consultation-room.webp", alt: `Bavishi Fertility Institute ${area} — consultation room` },
   { src: "/assets/centres/mumbai-doctors-cabin.webp", alt: `Bavishi Fertility Institute ${area} — doctor's cabin` },
   { src: "/assets/centres/mumbai-doctors-corridor.webp", alt: `Bavishi Fertility Institute ${area} — corridor with doctor credentials` },
@@ -123,16 +120,11 @@ const mumbaiGallery = (area: string): { src: string; alt: string }[] => [
   { src: "/assets/centres/mumbai-cryopreservation-lab.webp", alt: `Bavishi Fertility Institute ${area} — cryopreservation & embryo freezing lab` },
   { src: "/assets/centres/mumbai-operation-theatre.webp", alt: `Bavishi Fertility Institute ${area} — operation theatre` },
   { src: "/assets/centres/mumbai-ot-twin-beds-1.webp", alt: `Bavishi Fertility Institute ${area} — operation theatre procedure beds` },
-  { src: "/assets/centres/mumbai-ot-twin-beds-2.webp", alt: `Bavishi Fertility Institute ${area} — operation theatre equipment` },
   { src: "/assets/centres/mumbai-procedure-room-1.webp", alt: `Bavishi Fertility Institute ${area} — procedure room` },
   { src: "/assets/centres/mumbai-procedure-room-2.webp", alt: `Bavishi Fertility Institute ${area} — procedure room & examination bed` },
-  { src: "/assets/centres/mumbai-procedure-room-3.webp", alt: `Bavishi Fertility Institute ${area} — procedure room equipment` },
   { src: "/assets/centres/mumbai-procedure-room-4.webp", alt: `Bavishi Fertility Institute ${area} — examination & procedure room` },
   { src: "/assets/centres/mumbai-recovery-room-1.webp", alt: `Bavishi Fertility Institute ${area} — patient recovery room` },
-  { src: "/assets/centres/mumbai-recovery-room-2.webp", alt: `Bavishi Fertility Institute ${area} — recovery ward beds` },
-  { src: "/assets/centres/mumbai-recovery-room-3.webp", alt: `Bavishi Fertility Institute ${area} — post-procedure recovery area` },
   { src: "/assets/centres/mumbai-recovery-room-garden-view-1.webp", alt: `Bavishi Fertility Institute ${area} — recovery room with garden view` },
-  { src: "/assets/centres/mumbai-recovery-room-garden-view-2.webp", alt: `Bavishi Fertility Institute ${area} — recovery room seating` },
   { src: "/assets/centres/mumbai-recovery-washroom-area.webp", alt: `Bavishi Fertility Institute ${area} — patient washroom & changing room` },
 ];
 
