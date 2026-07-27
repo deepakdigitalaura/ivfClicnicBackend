@@ -296,6 +296,7 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Camps", href: "/camps" },
           { label: "CME", href: "/cme" },
           { label: "Media & Press", href: "/press" },
+          { label: "Awards & Achievements", href: "/awards" },
         ]},
       ],
     },
