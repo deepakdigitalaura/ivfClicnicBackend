@@ -43,3 +43,19 @@ public/assets/doctors/finalDoctors/
 
 # Script log/output files
 scripts/import-blogs/fix-tables.log.json
+
+# Playwright MCP debug console logs
+.playwright-mcp/
+
+# Raw source dumps (processed versions already committed under public/assets/centres)
+public/assets/Locations/anand location/
+public/assets/Locations/mumbai location/
+public/assets/Locations/sindhubhawan road location/
+
+# Raw press scans (processed clippings already committed under public/assets/media/press)
+public/assets/media/paper cuts and new news/
+
+# Blog content source zips (raw client docs, not served)
+blogstoaddinbfinewwebsite.zip
+blogstoaddinbfiwebsite.zip
+scratch_blogzips/
