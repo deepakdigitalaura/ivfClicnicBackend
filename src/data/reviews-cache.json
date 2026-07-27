@@ -2,13 +2,21 @@
   "brand": {
     "key": "brand",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:15.453Z",
+    "fetchedAt": "2026-07-27T13:17:00.438Z",
     "mapsUrl": "https://maps.google.com/?cid=6889148050023028782",
     "aggregate": {
       "ratingValue": 4.8,
-      "reviewCount": 2063
+      "reviewCount": 2064
     },
     "reviews": [
+      {
+        "author": "Payal sutariya",
+        "rating": 5,
+        "text": "Good consultation",
+        "publishedAtISO": "2026-07-27T13:04:33.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWoUzKbKUEr6364AxcdiTia7Ny4wmqcEin1faedkhQWiOr4SEeG=s128-c0x00000000-cc-rp-mo"
+      },
       {
         "author": "hasmukh dataniya",
         "rating": 5,
@@ -30,13 +38,21 @@
   "paldi": {
     "key": "paldi",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:16.007Z",
+    "fetchedAt": "2026-07-27T13:17:00.522Z",
     "mapsUrl": "https://maps.google.com/?cid=6889148050023028782",
     "aggregate": {
       "ratingValue": 4.8,
-      "reviewCount": 2063
+      "reviewCount": 2064
     },
     "reviews": [
+      {
+        "author": "Payal sutariya",
+        "rating": 5,
+        "text": "Good consultation",
+        "publishedAtISO": "2026-07-27T13:04:33.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWoUzKbKUEr6364AxcdiTia7Ny4wmqcEin1faedkhQWiOr4SEeG=s128-c0x00000000-cc-rp-mo"
+      },
       {
         "author": "hasmukh dataniya",
         "rating": 5,
@@ -58,7 +74,7 @@
   "sindhu-bhavan-road": {
     "key": "sindhu-bhavan-road",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:16.172Z",
+    "fetchedAt": "2026-07-27T13:17:00.728Z",
     "mapsUrl": "https://maps.google.com/?cid=3683097580986756861",
     "aggregate": {
       "ratingValue": 4.9,
@@ -110,7 +126,7 @@
   "nikol": {
     "key": "nikol",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:16.349Z",
+    "fetchedAt": "2026-07-27T13:17:00.927Z",
     "mapsUrl": "https://maps.google.com/?cid=3953247704933812997",
     "aggregate": {
       "ratingValue": 5,
@@ -138,7 +154,7 @@
   "ghatkopar": {
     "key": "ghatkopar",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:16.517Z",
+    "fetchedAt": "2026-07-27T13:17:01.086Z",
     "mapsUrl": "https://maps.google.com/?cid=18163077388192623716",
     "aggregate": {
       "ratingValue": 4.9,
@@ -190,7 +206,7 @@
   "thane": {
     "key": "thane",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:16.662Z",
+    "fetchedAt": "2026-07-27T13:17:01.250Z",
     "mapsUrl": "https://maps.google.com/?cid=5170319745605625466",
     "aggregate": {
       "ratingValue": 4.6,
@@ -242,14 +258,14 @@
   "vile-parle": {
     "key": "vile-parle",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:16.783Z",
+    "fetchedAt": "2026-07-27T13:17:01.414Z",
     "mapsUrl": "https://maps.google.com/?cid=4959097714672815195",
     "reviews": []
   },
   "jetalpur-road": {
     "key": "jetalpur-road",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:17.116Z",
+    "fetchedAt": "2026-07-27T13:17:01.603Z",
     "mapsUrl": "https://maps.google.com/?cid=12871314865021108200",
     "aggregate": {
       "ratingValue": 4.9,
@@ -285,13 +301,21 @@
   "lal-darwaja": {
     "key": "lal-darwaja",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:17.266Z",
+    "fetchedAt": "2026-07-27T13:17:01.817Z",
     "mapsUrl": "https://maps.google.com/?cid=6658157183140866421",
     "aggregate": {
       "ratingValue": 4.9,
       "reviewCount": 161
     },
     "reviews": [
+      {
+        "author": "Ashfaq Kapadia",
+        "rating": 5,
+        "text": "I am so  much happy n satisfied with bavishi fertility doctors n staff. I recommend to other people specially friends n relatives to go ahead with this Institute. Thank you so much Himanshu sir Deep sir n othae staff. 😍😍",
+        "publishedAtISO": "2026-07-27T08:31:50.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJ_s7TqTKqtGUpyos15RPzaTzVNejTOvoJe3Iw85arRokHDWA=s128-c0x00000000-cc-rp-mo"
+      },
       {
         "author": "Neha Kothari",
         "rating": 5,
@@ -323,21 +347,13 @@
         "publishedAtISO": "2026-06-02T10:43:10.000Z",
         "relativeTime": "a month ago",
         "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWQXU8RVByNJZ7TlvARaH2d_GbgsgF-Oyd8yyGFyDk5GZhEkW0=s128-c0x00000000-cc-rp-mo"
-      },
-      {
-        "author": "Rahul Rahul",
-        "rating": 5,
-        "text": "Amaro ahiya no experiment best che,staff khub j supportive che,khub saro anubhav ryo",
-        "publishedAtISO": "2026-05-14T08:38:18.000Z",
-        "relativeTime": "2 months ago",
-        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJ_fXmAib0aG8-fGoD2xL1Jy85MTLMzQH9n_gunRzJm-QqKwQ=s128-c0x00000000-cc-rp-mo"
       }
     ]
   },
   "mirjapar": {
     "key": "mirjapar",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:17.429Z",
+    "fetchedAt": "2026-07-27T13:17:01.970Z",
     "mapsUrl": "https://maps.google.com/?cid=11197455780448176652",
     "aggregate": {
       "ratingValue": 4.6,
@@ -381,7 +397,7 @@
   "kalubha-road": {
     "key": "kalubha-road",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:17.592Z",
+    "fetchedAt": "2026-07-27T13:17:02.157Z",
     "mapsUrl": "https://maps.google.com/?cid=7599004016042005477",
     "aggregate": {
       "ratingValue": 5,
@@ -401,7 +417,7 @@
   "nanikhodiyar": {
     "key": "nanikhodiyar",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:17.730Z",
+    "fetchedAt": "2026-07-27T13:17:02.310Z",
     "mapsUrl": "https://maps.google.com/?cid=15489029606838412663",
     "aggregate": {
       "ratingValue": 5,
@@ -445,7 +461,7 @@
   "shivpur": {
     "key": "shivpur",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:17.898Z",
+    "fetchedAt": "2026-07-27T13:17:02.463Z",
     "mapsUrl": "https://maps.google.com/?cid=12043124103131173715",
     "aggregate": {
       "ratingValue": 5,
