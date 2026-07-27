@@ -5,9 +5,58 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
-import { HOMEPAGE_DEFAULTS, type AwardItem } from "@/lib/homepage";
+import { PRESS_AWARDS, ACADEMIC_AWARDS, CEREMONY_GALLERY, type AwardEntry } from "@/lib/awards";
 
-export function AwardsPage({ items = HOMEPAGE_DEFAULTS.awards.items }: { items?: AwardItem[] }) {
+function CategoryHeading({ children }: { children: React.ReactNode }) {
+  return (
+    <Reveal>
+      <h2 className="font-display text-2xl font-bold text-[color:var(--plum)] md:text-3xl">{children}</h2>
+    </Reveal>
+  );
+}
+
+function AwardCard({ a, priority }: { a: AwardEntry; priority?: boolean }) {
+  return (
+    <motion.div
+      whileHover={{ y: -6 }}
+      transition={{ duration: 0.5 }}
+      className="h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+    >
+      <div className="aspect-square w-full overflow-hidden bg-white">
+        {a.img ? (
+          <img
+            src={a.img}
+            alt={a.title}
+            loading={priority ? "eager" : "lazy"}
+            className="h-full w-full object-contain"
+          />
+        ) : (
+          <div className="flex h-full w-full items-center justify-center bg-[color:var(--rose-soft)]/40">
+            <Award className="h-10 w-10 text-[color:var(--rose)]/50" />
+          </div>
+        )}
+      </div>
+      <div className="border-t border-border/60 px-5 py-4 text-center">
+        <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">{a.title}</h3>
+        {a.desc && <p className="mt-1 text-sm text-muted-foreground">{a.desc}</p>}
+      </div>
+    </motion.div>
+  );
+}
+
+function AwardsGrid({ items }: { items: AwardEntry[] }) {
+  return (
+    <Stagger className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+      {items.map((a, i) => (
+        <StaggerItem key={`${a.title}-${i}`}>
+          <AwardCard a={a} priority={i < 3} />
+        </StaggerItem>
+      ))}
+    </Stagger>
+  );
+}
+
+export function AwardsPage() {
   return (
     <>
       <SiteHeader />
@@ -36,31 +85,37 @@ export function AwardsPage({ items = HOMEPAGE_DEFAULTS.awards.items }: { items?:
           </div>
         </section>
 
-        {/* Awards grid */}
-        <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
-          <Stagger className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {items.map((a, i) => (
-              <StaggerItem key={`${a.title}-${i}`}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.5 }}
-                  className="h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
-                >
-                  <div className="aspect-video w-full overflow-hidden bg-white">
-                    <img
-                      src={a.img}
-                      alt={a.title}
-                      loading={i < 3 ? "eager" : "lazy"}
-                      className="h-full w-full object-cover"
-                    />
-                  </div>
-                  <div className="border-t border-border/60 px-5 py-4 text-center">
-                    <h2 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">
-                      {a.title}
-                    </h2>
-                    {a.desc && <p className="mt-1 text-sm text-muted-foreground">{a.desc}</p>}
-                  </div>
-                </motion.div>
+        {/* Press & Industry Recognition */}
+        <section className="container-px mx-auto max-w-[1400px] pt-12 md:pt-16">
+          <CategoryHeading>Press &amp; Industry Recognition</CategoryHeading>
+          <AwardsGrid items={PRESS_AWARDS} />
+        </section>
+
+        {/* Academic & Faculty Honours */}
+        <section className="container-px mx-auto max-w-[1400px] pt-14 md:pt-20">
+          <CategoryHeading>Academic &amp; Faculty Honours</CategoryHeading>
+          <p className="mt-2 max-w-2xl text-sm text-muted-foreground">
+            Recognition from national conferences and professional bodies for teaching, faculty
+            contribution and academic leadership in reproductive medicine — spanning more than
+            two decades.
+          </p>
+          <AwardsGrid items={ACADEMIC_AWARDS} />
+        </section>
+
+        {/* Ceremony gallery */}
+        <section className="container-px mx-auto max-w-[1400px] py-14 md:py-20">
+          <CategoryHeading>Moments From Our Award Ceremonies</CategoryHeading>
+          <Stagger className="mt-8 grid grid-cols-2 gap-3 sm:grid-cols-3 md:grid-cols-4">
+            {CEREMONY_GALLERY.map((photo, i) => (
+              <StaggerItem key={photo.src}>
+                <div className="aspect-square overflow-hidden rounded-2xl border border-border/60 bg-white shadow-soft">
+                  <img
+                    src={photo.src}
+                    alt={photo.alt}
+                    loading={i < 4 ? "eager" : "lazy"}
+                    className="h-full w-full object-contain transition-transform duration-500 hover:scale-105"
+                  />
+                </div>
               </StaggerItem>
             ))}
           </Stagger>

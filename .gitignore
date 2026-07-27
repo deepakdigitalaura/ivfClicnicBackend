@@ -64,3 +64,8 @@ scratch_blogzips/
 # public/assets/testimonials/; Google review screenshots transcribed into
 # src/lib/doctor-reviews.ts, not served as images)
 public/assets/DR.Deep videos/
+
+# Raw awards/achievements source dump — real ceremony photos + AI-generated
+# gap-filler renders (processed/renamed copies already committed under
+# public/assets/awards/, see src/lib/awards.ts)
+public/awards and achievment/

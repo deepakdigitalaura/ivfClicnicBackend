@@ -3,7 +3,6 @@ import { AwardsPage } from "@/components/awards-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
-import { getHomepage } from "@/lib/payload";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/awards";
@@ -43,15 +42,12 @@ const graph = [
   ]),
 ];
 
-export default async function Page() {
-  const homepage = await getHomepage();
-  const items = homepage.awards.items;
-
+export default function Page() {
   return (
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <AwardsPage items={items} />
+      <AwardsPage />
     </>
   );
 }
