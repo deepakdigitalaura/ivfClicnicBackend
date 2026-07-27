@@ -1,18 +1,24 @@
 "use client";
 import * as React from "react";
-import { motion, AnimatePresence } from "framer-motion";
-import { Newspaper, X, ChevronLeft, ChevronRight, Maximize2 } from "lucide-react";
+import { motion } from "framer-motion";
+import { Newspaper, ArrowRight } from "lucide-react";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
-import { FloatingCTA, MobileBottomBar, ScrollToTop, useBodyLock } from "@/components/conversion";
+import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
-import { PRESS_CLIPPINGS, pressPublications, type PressClipping } from "@/lib/press";
+import { PRESS_CLIPPINGS, pressHref, type PressClipping } from "@/lib/press";
 
 const ALL = "All coverage";
+const EXCERPT_LENGTH = 220;
+
+function excerpt(clipping: PressClipping): string {
+  const text = clipping.bodyText.join(" ");
+  if (text.length <= EXCERPT_LENGTH) return text;
+  return text.slice(0, EXCERPT_LENGTH).replace(/\s+\S*$/, "") + "…";
+}
 
 export function PressPage({ clippings = PRESS_CLIPPINGS }: { clippings?: PressClipping[] }) {
   const [filter, setFilter] = React.useState<string>(ALL);
-  const [openIndex, setOpenIndex] = React.useState<number | null>(null);
 
   const publications = React.useMemo(
     () => [ALL, ...new Set(clippings.map((c) => c.publication))],
@@ -22,9 +28,6 @@ export function PressPage({ clippings = PRESS_CLIPPINGS }: { clippings?: PressCl
     () => (filter === ALL ? clippings : clippings.filter((c) => c.publication === filter)),
     [clippings, filter],
   );
-
-  // Filtering changes what index N points at, so never keep a stale lightbox open.
-  React.useEffect(() => setOpenIndex(null), [filter]);
 
   return (
     <>
@@ -48,8 +51,8 @@ export function PressPage({ clippings = PRESS_CLIPPINGS }: { clippings?: PressCl
             <Reveal delay={0.2}>
               <p className="mt-5 max-w-2xl text-lg text-[color:var(--plum)]/70">
                 Our specialists are regularly consulted by national and regional press on
-                fertility, IVF and reproductive law. Below are scans of the printed coverage —
-                tap any clipping to read it full size.
+                fertility, IVF and reproductive law. Below is our printed coverage — open any
+                article to read the full scan and text.
               </p>
             </Reveal>
           </div>
@@ -83,13 +86,10 @@ export function PressPage({ clippings = PRESS_CLIPPINGS }: { clippings?: PressCl
 
         {/* Clipping wall */}
         <section className="container-px mx-auto max-w-[1400px] py-10 md:py-14">
-          {/* CSS columns give the wall its newspaper feel across mixed portrait /
-              landscape scans. StaggerItem is the direct column child, so the
-              break-avoid + gutter live there rather than on the card. */}
           <Stagger key={filter} className="columns-1 gap-6 sm:columns-2 lg:columns-3">
             {shown.map((c, i) => (
               <StaggerItem key={c.slug} className="mb-6 break-inside-avoid">
-                <ClippingCard clipping={c} onOpen={() => setOpenIndex(i)} eager={i < 3} />
+                <ClippingCard clipping={c} eager={i < 3} />
               </StaggerItem>
             ))}
           </Stagger>
@@ -123,13 +123,6 @@ export function PressPage({ clippings = PRESS_CLIPPINGS }: { clippings?: PressCl
         </section>
       </main>
 
-      <Lightbox
-        clippings={shown}
-        index={openIndex}
-        onClose={() => setOpenIndex(null)}
-        onNavigate={setOpenIndex}
-      />
-
       <Footer />
       <FloatingCTA />
       <MobileBottomBar />
@@ -140,42 +133,25 @@ export function PressPage({ clippings = PRESS_CLIPPINGS }: { clippings?: PressCl
 
 /* ---------- Card ---------- */
 
-function ClippingCard({
-  clipping: c,
-  onOpen,
-  eager,
-}: {
-  clipping: PressClipping;
-  onOpen: () => void;
-  eager: boolean;
-}) {
+function ClippingCard({ clipping: c, eager }: { clipping: PressClipping; eager: boolean }) {
   return (
-    <motion.article
+    <motion.a
+      href={pressHref(c.slug)}
       whileHover={{ y: -6 }}
       transition={{ duration: 0.5 }}
-      className="break-inside-avoid overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+      className="group block break-inside-avoid overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+      aria-label={`Read full article: ${c.headline}, ${c.publication}`}
     >
-      <button
-        type="button"
-        onClick={onOpen}
-        className="group block w-full text-left"
-        aria-label={`Open full-size clipping: ${c.headline}, ${c.publication}`}
-      >
-        <div className="relative overflow-hidden bg-white">
-          <img
-            src={c.thumb}
-            alt={`${c.publication} clipping — ${c.headline}`}
-            width={c.width}
-            height={c.height}
-            loading={eager ? "eager" : "lazy"}
-            className="w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
-          />
-          <span className="pointer-events-none absolute right-3 top-3 inline-flex items-center gap-1.5 rounded-full bg-[color:var(--plum)]/75 px-3 py-1.5 text-xs font-semibold text-white opacity-0 backdrop-blur-sm transition-opacity duration-300 group-hover:opacity-100">
-            <Maximize2 className="h-3.5 w-3.5" />
-            Read full size
-          </span>
-        </div>
-      </button>
+      <div className="overflow-hidden bg-white">
+        <img
+          src={c.thumb}
+          alt={`${c.publication} clipping — ${c.headline}`}
+          width={c.width}
+          height={c.height}
+          loading={eager ? "eager" : "lazy"}
+          className="w-full object-contain transition-transform duration-500 group-hover:scale-[1.03]"
+        />
+      </div>
 
       <div className="border-t border-border/70 p-5">
         <div className="flex flex-wrap items-center gap-x-2 gap-y-1 text-xs font-bold uppercase tracking-widest text-[color:var(--rose)]">
@@ -196,159 +172,27 @@ function ClippingCard({
           <p className="mt-1.5 text-sm font-medium text-[color:var(--plum)]/60">{c.standfirst}</p>
         ) : null}
 
-        <p className="mt-3 text-sm leading-relaxed text-[color:var(--plum)]/65">{c.summary}</p>
+        <p lang={c.language === "Gujarati" ? "gu" : "en"} className="mt-3 text-sm leading-relaxed text-[color:var(--plum)]/65">
+          {excerpt(c)}
+        </p>
 
-        <div className="mt-4 flex flex-wrap gap-1.5">
-          {c.doctorsQuoted.map((d) => (
-            <span
-              key={d}
-              className="rounded-full bg-[color:var(--rose)]/8 px-2.5 py-1 text-xs font-medium text-[color:var(--rose)]"
-            >
-              {d}
-            </span>
-          ))}
+        <div className="mt-4 flex items-center justify-between gap-3">
+          <div className="flex flex-wrap gap-1.5">
+            {c.doctorsQuoted.map((d) => (
+              <span
+                key={d}
+                className="rounded-full bg-[color:var(--rose)]/8 px-2.5 py-1 text-xs font-medium text-[color:var(--rose)]"
+              >
+                {d}
+              </span>
+            ))}
+          </div>
+          <span className="inline-flex shrink-0 items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+            Read full article
+            <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover:translate-x-0.5" />
+          </span>
         </div>
       </div>
-    </motion.article>
-  );
-}
-
-/* ---------- Lightbox ---------- */
-
-function Lightbox({
-  clippings,
-  index,
-  onClose,
-  onNavigate,
-}: {
-  clippings: PressClipping[];
-  index: number | null;
-  onClose: () => void;
-  onNavigate: (i: number) => void;
-}) {
-  const open = index !== null;
-  useBodyLock(open);
-
-  React.useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") onClose();
-      if (e.key === "ArrowRight") onNavigate((index! + 1) % clippings.length);
-      if (e.key === "ArrowLeft") onNavigate((index! - 1 + clippings.length) % clippings.length);
-    };
-    window.addEventListener("keydown", onKey);
-    return () => window.removeEventListener("keydown", onKey);
-  }, [open, index, clippings.length, onClose, onNavigate]);
-
-  const c = open ? clippings[index!] : null;
-
-  return (
-    <AnimatePresence>
-      {c ? (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          role="dialog"
-          aria-modal="true"
-          aria-label={`${c.publication} — ${c.headline}`}
-          onClick={onClose}
-          className="fixed inset-0 z-[100] flex flex-col bg-[color:var(--plum)]/92 backdrop-blur-sm"
-        >
-          {/* Bar */}
-          <div
-            onClick={(e) => e.stopPropagation()}
-            className="flex shrink-0 items-start justify-between gap-4 px-4 py-4 text-white md:px-8"
-          >
-            <div className="min-w-0">
-              <div className="text-xs font-bold uppercase tracking-widest text-white/60">
-                {c.publication}
-                {c.edition ? ` · ${c.edition}` : ""}
-                {c.date ? ` · ${c.date}` : ""}
-              </div>
-              <div className="mt-1 truncate font-display text-base font-semibold md:text-lg">
-                {c.headline}
-              </div>
-            </div>
-            <div className="flex shrink-0 items-center gap-2">
-              <a
-                href={c.image}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="hidden items-center gap-1.5 rounded-full border border-white/25 px-4 py-2 text-xs font-semibold transition-colors hover:bg-white/10 sm:inline-flex"
-              >
-                <Maximize2 className="h-3.5 w-3.5" />
-                Open full size
-              </a>
-              <button
-                type="button"
-                onClick={onClose}
-                aria-label="Close"
-                className="inline-flex h-10 w-10 items-center justify-center rounded-full border border-white/25 transition-colors hover:bg-white/10"
-              >
-                <X className="h-5 w-5" />
-              </button>
-            </div>
-          </div>
-
-          {/* Image */}
-          <div className="flex min-h-0 flex-1 items-center justify-center px-2 pb-4 md:px-8">
-            <motion.img
-              key={c.slug}
-              initial={{ opacity: 0, scale: 0.98 }}
-              animate={{ opacity: 1, scale: 1 }}
-              transition={{ duration: 0.25 }}
-              src={c.image}
-              alt={`${c.publication} clipping — ${c.headline}`}
-              onClick={(e) => e.stopPropagation()}
-              className="max-h-full max-w-full rounded-lg bg-white object-contain shadow-lift"
-            />
-          </div>
-
-          {/* Nav */}
-          {clippings.length > 1 ? (
-            <>
-              <NavArrow
-                side="left"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onNavigate((index! - 1 + clippings.length) % clippings.length);
-                }}
-              />
-              <NavArrow
-                side="right"
-                onClick={(e) => {
-                  e.stopPropagation();
-                  onNavigate((index! + 1) % clippings.length);
-                }}
-              />
-            </>
-          ) : null}
-        </motion.div>
-      ) : null}
-    </AnimatePresence>
-  );
-}
-
-function NavArrow({
-  side,
-  onClick,
-}: {
-  side: "left" | "right";
-  onClick: (e: React.MouseEvent) => void;
-}) {
-  const Icon = side === "left" ? ChevronLeft : ChevronRight;
-  return (
-    <button
-      type="button"
-      onClick={onClick}
-      aria-label={side === "left" ? "Previous clipping" : "Next clipping"}
-      className={`absolute top-1/2 hidden h-12 w-12 -translate-y-1/2 items-center justify-center rounded-full border border-white/25 text-white transition-colors hover:bg-white/10 md:inline-flex ${
-        side === "left" ? "left-3" : "right-3"
-      }`}
-    >
-      <Icon className="h-6 w-6" />
-    </button>
+    </motion.a>
   );
 }

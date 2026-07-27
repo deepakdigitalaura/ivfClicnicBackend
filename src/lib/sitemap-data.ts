@@ -4,17 +4,19 @@ import { TREATMENTS_REGISTRY } from "@/lib/treatments";
 import { DOCTORS } from "@/lib/doctors";
 import { CITIES, CENTRES, cityHref, centreHref } from "@/lib/locations";
 import { SERVICE_CONTENT } from "@/lib/womens-health";
+import { PRESS_CLIPPINGS, pressHref } from "@/lib/press";
 import { getSitemapConfig } from "@/sanity/lib/fetch";
 
 export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.url;
-  const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blogs", "/press"]);
+  const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blogs", "/press", "/awards"]);
 
   for (const ref of Object.values(TREATMENTS_REGISTRY)) {
     if (ref.href.startsWith("/") && !ref.href.includes("#")) paths.add(ref.href);
   }
   for (const slug of Object.keys(SERVICE_CONTENT)) paths.add(`/services/${slug}`);
   for (const d of DOCTORS) paths.add(`/doctors/${d.slug}`);
+  for (const c of PRESS_CLIPPINGS) paths.add(pressHref(c.slug));
   for (const c of CITIES) {
     if (c.built) {
       const href = cityHref(c.slug);

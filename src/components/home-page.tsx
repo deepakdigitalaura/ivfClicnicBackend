@@ -25,6 +25,7 @@ import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
 import { OPEN_COOKIE_PREFERENCES_EVENT } from "@/components/cookie-consent";
 import { cityHref, centresForCity, centreHref } from "@/lib/locations";
+import { PRESS_CLIPPINGS, pressHref } from "@/lib/press";
 import { resolveIcon } from "@/lib/icon-map";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
@@ -632,6 +633,48 @@ export function LiteYouTube({ id, title, className = "" }: { id: string; title: 
   );
 }
 
+/* ---------- Self-hosted video (lazy facade) ----------
+ * Same click-to-play UX as LiteYouTube, for the rare testimonial that isn't
+ * on the YouTube channel — a local .mp4 in /public instead of a youTubeId.
+ * `preload="metadata"` gives a free first-frame poster without extra assets. */
+
+export function LiteVideoFile({ src, title, className = "" }: { src: string; title: string; className?: string }) {
+  const [play, setPlay] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  return (
+    <div className={`relative overflow-hidden bg-[color:var(--plum)]/5 ${className}`}>
+      <video
+        ref={videoRef}
+        src={src}
+        title={title}
+        controls={play}
+        preload="metadata"
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      {!play && (
+        <button
+          type="button"
+          onClick={() => {
+            setPlay(true);
+            // Call play() synchronously inside the click handler — a browser
+            // only treats unmuted autoplay as user-initiated when it's tied
+            // directly to the gesture, not to a later React re-render.
+            videoRef.current?.play().catch(() => {});
+          }}
+          aria-label={`Play video: ${title}`}
+          className="group/yt absolute inset-0 h-full w-full"
+        >
+          <span className="absolute inset-0 bg-[color:var(--plum)]/15 transition-colors duration-300 group-hover/yt:bg-[color:var(--plum)]/5" />
+          <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[color:var(--rose)] shadow-lift transition-transform duration-300 group-hover/yt:scale-110">
+            <PlayCircle className="h-8 w-8" />
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
+
 /* ---------- Success Stories (real patient videos) ---------- */
 
 export function SuccessStories({
@@ -644,7 +687,8 @@ export function SuccessStories({
   showCta = true,
   carousel = false,
 }: {
-  stories?: { id: string; n: string; q: string; r: number }[];
+  /** Either `id` (YouTube) or `src` (self-hosted .mp4) must be set — never both. */
+  stories?: { id?: string; src?: string; n: string; q: string; r: number }[];
   eyebrow?: React.ReactNode;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -664,7 +708,7 @@ export function SuccessStories({
           ? "mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
           : "mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0"}>
           {stories.map((s, i) => (
-            <StaggerItem key={`${s.id}-${i}`} className={carousel
+            <StaggerItem key={`${s.id ?? s.src}-${i}`} className={carousel
               ? "w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
               : "w-full shrink-0 snap-start md:w-auto md:shrink"}>
               <motion.article
@@ -673,7 +717,11 @@ export function SuccessStories({
                 className="group h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
               >
                 <div className="relative">
-                  <LiteYouTube id={s.id} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
+                  {s.src ? (
+                    <LiteVideoFile src={s.src} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
+                  ) : (
+                    <LiteYouTube id={s.id!} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
+                  )}
                   <div className="pointer-events-none absolute bottom-4 left-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[color:var(--plum)] shadow-soft backdrop-blur">
                     Patient Story
                   </div>
@@ -1255,6 +1303,17 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
         />
 
         <AwardsStage items={content.items} />
+
+        <Reveal delay={0.25}>
+          <div className="mt-8 text-center">
+            <a
+              href="/awards"
+              className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
+            >
+              View all awards &amp; achievements
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
@@ -1263,8 +1322,8 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
 /* ---------- Media ---------- */
 
 function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["media"] } = {}) {
-  const logos = content.logos;
-  const loop = [...logos, ...logos, ...logos, ...logos];
+  const clippings = PRESS_CLIPPINGS;
+  const loop = [...clippings, ...clippings];
   return (
     <section className="container-px mx-auto max-w-[1400px] py-20">
       <SectionHeader
@@ -1275,10 +1334,23 @@ function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["
       <Reveal delay={0.15}>
         <div className="mt-10">
           <Marquee speed={28}>
-            {loop.map((l, i) => (
-              <div key={i} className="flex h-20 w-44 items-center justify-center rounded-xl border border-border/70 bg-card px-6 shadow-soft">
-                <EditableImage path={`media.logos.${i % logos.length}.src`} src={l.src} alt={l.alt} loading="lazy" className="max-h-12 w-auto object-contain transition-transform duration-300 hover:scale-105" />
-              </div>
+            {loop.map((c, i) => (
+              <a
+                key={`${c.slug}-${i}`}
+                href={pressHref(c.slug)}
+                aria-label={`Read: ${c.headline} — ${c.publication}`}
+                className="group block w-40 shrink-0 overflow-hidden rounded-xl border border-border/70 bg-card shadow-soft transition-shadow duration-300 hover:shadow-lift"
+              >
+                <img
+                  src={c.thumb}
+                  alt={`${c.publication} clipping — ${c.headline}`}
+                  loading="lazy"
+                  className="aspect-[3/4] w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+                />
+                <div className="px-3 py-2 text-xs font-bold uppercase tracking-widest text-[color:var(--rose)]">
+                  {c.publication}
+                </div>
+              </a>
             ))}
           </Marquee>
         </div>
@@ -1289,7 +1361,7 @@ function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["
             href="/press"
             className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
           >
-            Read our press coverage
+            View all press coverage
           </a>
         </div>
       </Reveal>
