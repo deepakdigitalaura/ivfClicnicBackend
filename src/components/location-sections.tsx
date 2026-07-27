@@ -211,6 +211,19 @@ export function GoogleReviews({
             ))}
           </div>
         )}
+
+        {listingUrl && (
+          <div className="mt-8 flex justify-center">
+            <a
+              href={listingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-lift"
+            >
+              <GoogleG className="h-5 w-5" /> See all reviews on Google
+            </a>
+          </div>
+        )}
       </div>
     </section>
   );
