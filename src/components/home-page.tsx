@@ -1174,9 +1174,10 @@ function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyCho
 const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
   return (
     <div className="group overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-      {/* Full rectangular award image — fills the card edge-to-edge */}
-      <div className="aspect-video w-full overflow-hidden bg-white">
-        <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-cover" />
+      {/* object-contain — most award photos are portrait trophy/certificate shots;
+       * object-cover was cropping their tops off. */}
+      <div className="aspect-square w-full overflow-hidden bg-white">
+        <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-contain" />
       </div>
       <div className="border-t border-border/60 px-5 py-4 text-center">
         <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">{a.title}</h3>

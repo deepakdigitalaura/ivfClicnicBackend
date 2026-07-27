@@ -22,13 +22,13 @@ function AwardCard({ a, priority }: { a: AwardEntry; priority?: boolean }) {
       transition={{ duration: 0.5 }}
       className="h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
     >
-      <div className="aspect-video w-full overflow-hidden bg-white">
+      <div className="aspect-square w-full overflow-hidden bg-white">
         {a.img ? (
           <img
             src={a.img}
             alt={a.title}
             loading={priority ? "eager" : "lazy"}
-            className="h-full w-full object-cover"
+            className="h-full w-full object-contain"
           />
         ) : (
           <div className="flex h-full w-full items-center justify-center bg-[color:var(--rose-soft)]/40">
@@ -113,7 +113,7 @@ export function AwardsPage() {
                     src={photo.src}
                     alt={photo.alt}
                     loading={i < 4 ? "eager" : "lazy"}
-                    className="h-full w-full object-cover transition-transform duration-500 hover:scale-105"
+                    className="h-full w-full object-contain transition-transform duration-500 hover:scale-105"
                   />
                 </div>
               </StaggerItem>
