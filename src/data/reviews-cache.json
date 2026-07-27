@@ -246,17 +246,6 @@
     "mapsUrl": "https://maps.google.com/?cid=4959097714672815195",
     "reviews": []
   },
-  "borivali": {
-    "key": "borivali",
-    "source": "google-places",
-    "fetchedAt": "2026-07-27T12:48:16.920Z",
-    "mapsUrl": "https://maps.google.com/?cid=7778152148348554506",
-    "aggregate": {
-      "ratingValue": 2,
-      "reviewCount": 2
-    },
-    "reviews": []
-  },
   "jetalpur-road": {
     "key": "jetalpur-road",
     "source": "google-places",
