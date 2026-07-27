@@ -18,6 +18,7 @@ import type { ResolvedCentre } from "@/lib/location-content";
 import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
+import { testimonialsForCentre } from "@/lib/video-testimonials";
 
 /* `<Editable>` is inert on the public site and click-to-edit inside
  * /edit/centres/<city>/<slug>. `path` is the dot-path into the centres-doc
@@ -46,6 +47,11 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
     .filter((d): d is NonNullable<typeof d> => Boolean(d))
     .map(toDoctorCard);
   const reviews = getReviews(centre.reviewsKey ?? centre.slug);
+  // Pooled from doctors who consult at THIS centre (branch-level), falling
+  // back to the city-wide pool only when none of them have a testimonial on
+  // file. Empty → hide the section entirely (same data-honesty rule as
+  // city/doctor/treatment pages).
+  const centreStories = testimonialsForCentre(centre.slug, centre.citySlug);
   // Single-centre cities can name the centre after the city itself (e.g. Bhuj,
   // Anand) — avoid rendering "Bhuj, Bhuj". Multi-centre cities never collide.
   const cityName = city?.name;
@@ -176,7 +182,17 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         />
       )}
 
-      <SuccessStories tone="tint" eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")} title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `${em(centre.area)} success stories`)} subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")} showCta={false} />
+      {centreStories.length > 0 && (
+        <SuccessStories
+          tone="tint"
+          eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")}
+          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `${em(centre.area)} success stories`)}
+          subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
+          showCta={false}
+          carousel={centreStories.length > 3}
+          stories={centreStories.map((v) => ({ id: v.youTubeId, src: v.videoSrc, n: v.name, q: v.quote, r: 5 }))}
+        />
+      )}
 
       {/* Verified reviews only — renders CTA / nothing until Places API supplies data */}
       <div className="bg-white">

@@ -20,6 +20,8 @@
  * never inferred. To extend: add a verified video with its real `youTubeId`.
  * ===================================================================== */
 
+import { doctorsForLocation } from "@/lib/doctors";
+
 export type VideoTestimonial = {
   /** Patient/display name (first name or couple; descriptive when anonymous). */
   name: string;
@@ -215,4 +217,18 @@ export function testimonialsForCity(citySlug: string, max = 3): VideoTestimonial
  * so the cap is generous — more than 3 simply scroll. Empty → hide the section. */
 export function testimonialsForDoctor(doctorSlug: string, max = 12): VideoTestimonial[] {
   return (DOCTOR_TESTIMONIALS[doctorSlug] ?? []).slice(0, max);
+}
+
+/** Real testimonials for a centre page: pooled from the doctors who actually
+ *  consult at that specific centre (Doctor.locations — branch-level, not
+ *  city-level), deduped. Falls back to the city-wide pool only when none of
+ *  those doctors have a testimonial on file. Empty → hide the section. */
+export function testimonialsForCentre(centreSlug: string, citySlug: string, max = 12): VideoTestimonial[] {
+  const centreDoctorSlugs = doctorsForLocation(centreSlug).map((d) => d.slug);
+  const fromDoctors = centreDoctorSlugs.flatMap((slug) => DOCTOR_TESTIMONIALS[slug] ?? []);
+  const deduped = fromDoctors.filter((v, i, arr) =>
+    arr.findIndex((o) => (o.youTubeId ?? o.videoSrc) === (v.youTubeId ?? v.videoSrc)) === i
+  );
+  const pool = deduped.length > 0 ? deduped : CITY_TESTIMONIALS[citySlug] ?? [];
+  return pool.slice(0, max);
 }
