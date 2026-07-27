@@ -3,10 +3,8 @@ import { CampsPage } from "@/components/camps-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
-import { getGlobalSafe } from "@/lib/payload";
+import { getHomepage } from "@/lib/payload";
 import { withPageSeoOverride } from "@/lib/page-seo";
-import type { EventPoster } from "@/lib/homepage";
-import { HOMEPAGE_DEFAULTS } from "@/lib/homepage";
 
 const PATH = "/camps";
 
@@ -45,13 +43,8 @@ const graph = [
 ];
 
 export default async function Page() {
-  const homepage = await getGlobalSafe("homepage");
-  const rawPosters = homepage?.events?.posters;
-  const posters: EventPoster[] = Array.isArray(rawPosters) && rawPosters.length
-    ? rawPosters
-        .filter((p): p is { src: string; alt: string } => !!p?.src)
-        .map((p) => ({ src: p.src, alt: p.alt ?? "" }))
-    : HOMEPAGE_DEFAULTS.events.posters;
+  const homepage = await getHomepage();
+  const posters = homepage.events.posters;
 
   return (
     <>
