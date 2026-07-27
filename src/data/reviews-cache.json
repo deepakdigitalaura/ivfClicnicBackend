@@ -1,1 +1,484 @@
-{}
+{
+  "brand": {
+    "key": "brand",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:15.453Z",
+    "mapsUrl": "https://maps.google.com/?cid=6889148050023028782",
+    "aggregate": {
+      "ratingValue": 4.8,
+      "reviewCount": 2063
+    },
+    "reviews": [
+      {
+        "author": "hasmukh dataniya",
+        "rating": 5,
+        "text": "Good experience, best doctor in bavishi hospital, Dr himanshu bavishi great doctor",
+        "publishedAtISO": "2026-07-27T08:45:53.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjX-RlslHPYjuMYIFxxTJx0_QoTxHp83ETmY5efibVeuC7FBXUQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "rambalak Patel",
+        "rating": 5,
+        "text": "After my first pregnancy failed, I was trying for a long time but still could not get pregnant....then I took medicine from Dr. Parnnika Mam and got pregnant within 1 month. Thank you Parnnika Mam",
+        "publishedAtISO": "2026-07-27T08:45:24.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocIvwHYlTyhEozfAvBPFKzfm2JzZpEjFt2LtZtne8rZp0-Ru7A=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "paldi": {
+    "key": "paldi",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:16.007Z",
+    "mapsUrl": "https://maps.google.com/?cid=6889148050023028782",
+    "aggregate": {
+      "ratingValue": 4.8,
+      "reviewCount": 2063
+    },
+    "reviews": [
+      {
+        "author": "hasmukh dataniya",
+        "rating": 5,
+        "text": "Good experience, best doctor in bavishi hospital, Dr himanshu bavishi great doctor",
+        "publishedAtISO": "2026-07-27T08:45:53.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjX-RlslHPYjuMYIFxxTJx0_QoTxHp83ETmY5efibVeuC7FBXUQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "rambalak Patel",
+        "rating": 5,
+        "text": "After my first pregnancy failed, I was trying for a long time but still could not get pregnant....then I took medicine from Dr. Parnnika Mam and got pregnant within 1 month. Thank you Parnnika Mam",
+        "publishedAtISO": "2026-07-27T08:45:24.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocIvwHYlTyhEozfAvBPFKzfm2JzZpEjFt2LtZtne8rZp0-Ru7A=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "sindhu-bhavan-road": {
+    "key": "sindhu-bhavan-road",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:16.172Z",
+    "mapsUrl": "https://maps.google.com/?cid=3683097580986756861",
+    "aggregate": {
+      "ratingValue": 4.9,
+      "reviewCount": 58
+    },
+    "reviews": [
+      {
+        "author": "Shaheen Parveen",
+        "rating": 5,
+        "text": "Good and knowledgeable staff and easy guidance regarding our treatment",
+        "publishedAtISO": "2026-07-14T08:44:24.000Z",
+        "relativeTime": "a week ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocL0w2cdAEhXgWMTT29QnBBi1bPYwm_pYKxlJzOaumia6pHyeg=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "nikita vyas",
+        "rating": 5,
+        "text": "I had a wonderful experience at Bavishi Hospital. The doctors explain everything clearly and patiently, answering every question in detail. They provide honest and appropriate medical advice, which gives great confidence throughout the treatment.\nThe entire staff is professional, polite, caring, and always ready to help. Their kind behavior and excellent support make every visit comfortable.\nOverall, it is an outstanding hospital with excellent doctors, compassionate staff, and high-quality patient care. I highly recommend Bavishi Hospital to anyone looking for trustworthy fertility treatment and exceptional medical services",
+        "publishedAtISO": "2026-06-30T14:32:15.000Z",
+        "relativeTime": "3 weeks ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocKfgJxL3jrJ7r5iYbXLQ7QGPVPhMiUq1SMa0XDn9C-wGufMBQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Narayan Modi",
+        "rating": 5,
+        "text": "First of all, we are so happy to have met you, as we know that your hard work and understanding will make our dreams come true. The doctors and staff are very courteous; they treat us with utmost care and take great care of our appointments, schedules, and medications. They are always ready to help us by calling or making an appointment.\nSpecial thanks to\nDr. Falguni Bavishi\nDr. Rupshree\nNidhi & Sejal",
+        "publishedAtISO": "2026-06-11T08:07:12.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJTKfyhxVZWmlqWeMhohi01UHiZyHrwNaP1szvhCmf1qeGxxA=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Aasha Sahu",
+        "rating": 5,
+        "text": "Dr falguni mam is very knowledgeable and they explained every step clearly and made me feel comfortable with my issues .The staff is very supportive like dr rupshree, nidhiben,Sejalben is very supportive person.",
+        "publishedAtISO": "2026-06-11T07:55:14.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJNVyvUhOYG7-z8xnw7iy5kbYfxf4S55Vwqt5owKf66zoaOCw=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Niyati Gupta",
+        "rating": 5,
+        "text": "Good experience with dr falguni bavishi mam n with all staff",
+        "publishedAtISO": "2026-06-08T08:08:47.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocKmwsRbqE06PN4q-1OZYI4Eb2TTZU-vjz06ZZ8cBzJb-HuiTw=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "nikol": {
+    "key": "nikol",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:16.349Z",
+    "mapsUrl": "https://maps.google.com/?cid=3953247704933812997",
+    "aggregate": {
+      "ratingValue": 5,
+      "reviewCount": 190
+    },
+    "reviews": [
+      {
+        "author": "Nanda Devipujak",
+        "rating": 5,
+        "text": "Staff khub saro che sari samaj aape che",
+        "publishedAtISO": "2026-07-25T13:51:59.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocLz5O9ETR64iqs5hCfzc_03JbfRoiglQ0JRD6PJeEqILSH4Tw=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Vritika Sharma",
+        "rating": 5,
+        "text": "Good experience, good support staff",
+        "publishedAtISO": "2026-07-23T14:13:51.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjXHFHDPJMdLt93XEvTkzWwPNnnNfBDZk5OTE7HLNPQAHoRX6p_D=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "ghatkopar": {
+    "key": "ghatkopar",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:16.517Z",
+    "mapsUrl": "https://maps.google.com/?cid=18163077388192623716",
+    "aggregate": {
+      "ratingValue": 4.9,
+      "reviewCount": 302
+    },
+    "reviews": [
+      {
+        "author": "Raju Diwakar",
+        "rating": 5,
+        "text": "Nice experience with Dr priyanka sinha",
+        "publishedAtISO": "2026-07-27T07:32:17.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJGj3bFuGCqev6igi3897RrsW68jMUzWrFwVR2RVuLZQ3QTqA=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Sathiya priya",
+        "rating": 5,
+        "text": "The Hospital is neat and good..\nDr. Nilesh jain explained everything clearly, even he go through all the reports and given a clarity about further treatment and both Doctor & staffs are friendly here..\n\nReview on July 2026 -  Had a great experience with bavishi hospitals at ghatkopar. Dr. Nilesh jain and Dr. Swati were kind and explained everything clearly and supported a lot. I want to thank the entire team, from the doctors to nurses, support staff , everyone was professional and caring. It made a huge difference in stressful times and I wanna thank you all. Would definitely recommend and after a long wait, we are expecting baby now. Thank you team and always grateful for this.",
+        "publishedAtISO": "2026-07-26T16:32:37.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJqoSSQoiTYWn46egUTfAiR12eaBmnExFWMIVj6YeVKm59R1g=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Naren Tiwari",
+        "rating": 5,
+        "text": "It was nyc experience with Dr Suman Singh she explained the whole procedure very well and with proper details and\nStaff was very humble and friendly.",
+        "publishedAtISO": "2026-07-25T11:25:24.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJgNGhx3nRFUFtmYJp2kSY2susgitDI7qgQCwglHWW4rUt0qw=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "RUNAL KADAM",
+        "rating": 5,
+        "text": "Dr.Priyanka sinha is Professional, Knowledgeable,\nSupportive staff and clear Communication.",
+        "publishedAtISO": "2026-07-25T07:46:20.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjX1EZzUFO5uUZl9Wxl7l5Y_DigcCffc8PfppwndleZ7IInW6UkW=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Pranita Gogate",
+        "rating": 5,
+        "text": "Dr Priyanka sinha is very supportive doctor",
+        "publishedAtISO": "2026-07-25T07:44:58.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjXelgs6LqlAAfIfWMvgMXGizPO51kmEIdkj3_Mkg_E9WnF6VfLG=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "thane": {
+    "key": "thane",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:16.662Z",
+    "mapsUrl": "https://maps.google.com/?cid=5170319745605625466",
+    "aggregate": {
+      "ratingValue": 4.6,
+      "reviewCount": 19
+    },
+    "reviews": [
+      {
+        "author": "James Bond",
+        "rating": 5,
+        "text": "Visited bavishi clinic. Very good experience with Dr Priyanka Sinha. Very knowledgeable and empathetic experience. We recommend bavishi to anybody who needs genuine guidance in becoming parents.",
+        "publishedAtISO": "2026-04-24T07:59:08.000Z",
+        "relativeTime": "3 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocKTo9SfWWkXAL_w7yxBpnABZiuwZhoh3fAd4r22oVDpx_5GYw=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Arham Kazi",
+        "rating": 5,
+        "text": "Dr Sushma  \"\"  My experience with Dr. Sushma was very good. She spoke very smoothly and made me feel comfortable throughout.”",
+        "publishedAtISO": "2026-03-31T12:41:18.000Z",
+        "relativeTime": "3 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocLYlDDm6wQgjNl3m6jaEeZy8s5SAcHkUHfEMNjEjEDVrtlgKQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Sayli Kotkar",
+        "rating": 5,
+        "text": "“I visited Dr. Suman Sharma today for consultation. My experience was very positive. The doctor listened to my concerns patiently and provided clear guidance. The clinic was clean and well-managed. Overall, I am satisfied with the service.”",
+        "publishedAtISO": "2026-03-21T23:55:14.000Z",
+        "relativeTime": "4 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJIptz0-o4-EVS9XSirj2XlIw58JuqhSmvIVAipm1eWNiYbJA=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Vinayak Parab",
+        "rating": 5,
+        "text": "“I visited Dr. Suman Sharma today and had a very good experience. The doctor was polite, patient, and explained the treatment in detail. Highly recommended.”",
+        "publishedAtISO": "2026-03-21T11:48:14.000Z",
+        "relativeTime": "4 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjUYILwnJobjjHMWrZCXs00yxHmxh-sg7pnzMA19sS3-A2I304mp=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "sandeep shinde",
+        "rating": 5,
+        "text": "Good experience",
+        "publishedAtISO": "2026-03-14T06:21:49.000Z",
+        "relativeTime": "4 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJBp4BucI01uOxTp56Soyp3eVXaAcEvsKFSPLnHBDI2LWJUEA=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "vile-parle": {
+    "key": "vile-parle",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:16.783Z",
+    "mapsUrl": "https://maps.google.com/?cid=4959097714672815195",
+    "reviews": []
+  },
+  "borivali": {
+    "key": "borivali",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:16.920Z",
+    "mapsUrl": "https://maps.google.com/?cid=7778152148348554506",
+    "aggregate": {
+      "ratingValue": 2,
+      "reviewCount": 2
+    },
+    "reviews": []
+  },
+  "jetalpur-road": {
+    "key": "jetalpur-road",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:17.116Z",
+    "mapsUrl": "https://maps.google.com/?cid=12871314865021108200",
+    "aggregate": {
+      "ratingValue": 4.9,
+      "reviewCount": 292
+    },
+    "reviews": [
+      {
+        "author": "Shivangi Sheth",
+        "rating": 5,
+        "text": "An IG add changed my life. From IG add to appointment to consultation to treatment and finally a little miracle in my arms. Throughout the journey of pre natal > pregnancy> antenatal I am grateful to team of Bavishi vadodara for their constant support and giving me hope and faith in my self towards motherhood. I am thankful to Dr Himanshu Bavishi for his detailed Diagnosis and Dr Falguni for their to the root consultation and constant monitoring by Dr Mita. I am very much thankful to all the staff of Bavishi Vadodara.",
+        "publishedAtISO": "2026-07-26T17:30:38.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocIrr_ptf2nE8eEQ4rbGYh2qZQF-60NBY27GFK97f4NkyVXLHQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "PATEL MAYANK",
+        "rating": 4,
+        "text": "Good explanation",
+        "publishedAtISO": "2026-07-25T08:11:32.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocLbxZKDsuk62tFU7FgX5TbDSJiOfnT-ir6uDj-OVxuGacejuQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Zeel Raj",
+        "rating": 5,
+        "text": "Had a great consultation at Bavishi Fertility. No issues at all. The doctor explained everything properly.\nFelt comfortable and well-guided.",
+        "publishedAtISO": "2026-07-23T09:42:15.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjX2eEVqHS86NZyf0qfZCz7wehFftwEE29QxvsmpXI4xnvx9M91c=s128-c0x00000000-cc-rp-mo-ba2"
+      }
+    ]
+  },
+  "lal-darwaja": {
+    "key": "lal-darwaja",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:17.266Z",
+    "mapsUrl": "https://maps.google.com/?cid=6658157183140866421",
+    "aggregate": {
+      "ratingValue": 4.9,
+      "reviewCount": 161
+    },
+    "reviews": [
+      {
+        "author": "Neha Kothari",
+        "rating": 5,
+        "text": "I was very impressed with their nature,\nbehavior and quality of treatment..",
+        "publishedAtISO": "2026-07-24T07:50:44.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocL4JZEt1BzqeMDDu2V1fcSl7wfXtwQrSC803iLfxTpbOUyyXQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Sonu Jain",
+        "rating": 5,
+        "text": "doctor is highly experienced listen carefully and take time to explain every medical detail with genuine care...The nursing and front desk staff are polite empathetic and always ready to assist with a smile..",
+        "publishedAtISO": "2026-07-24T07:13:02.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocIJxtVDeHIoJiJbGS6lm_whZAcjj1-NhKbQhBt8Tu0NryuGSA=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "neeshti Vashi",
+        "rating": 5,
+        "text": "We started our treatment here .The experience is great, the service is superb and I must say the way everyone taking from Doctor to staff is very polite, positive and welcoming.",
+        "publishedAtISO": "2026-06-20T09:32:53.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjX1VaNoSn6tFFKqnBx5bZt6cYJ-bIcmy49Qh60H9qPKoe-n-FQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Tanvi Mahajan",
+        "rating": 5,
+        "text": "Best atmosphere and Dr.Deep Gajiwala sir service also good in this hospital",
+        "publishedAtISO": "2026-06-02T10:43:10.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWQXU8RVByNJZ7TlvARaH2d_GbgsgF-Oyd8yyGFyDk5GZhEkW0=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Rahul Rahul",
+        "rating": 5,
+        "text": "Amaro ahiya no experiment best che,staff khub j supportive che,khub saro anubhav ryo",
+        "publishedAtISO": "2026-05-14T08:38:18.000Z",
+        "relativeTime": "2 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJ_fXmAib0aG8-fGoD2xL1Jy85MTLMzQH9n_gunRzJm-QqKwQ=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "mirjapar": {
+    "key": "mirjapar",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:17.429Z",
+    "mapsUrl": "https://maps.google.com/?cid=11197455780448176652",
+    "aggregate": {
+      "ratingValue": 4.6,
+      "reviewCount": 41
+    },
+    "reviews": [
+      {
+        "author": "sambhav thacker",
+        "rating": 5,
+        "text": "Ak moti safar Purn karel che Jema bahu j moto hath che, Bavishi Team and Dr surabhi madam jene ak hatash Thai gayela parivar ne Asha jagadi ne am navi life api ane Jema Amara Ghare am putra no janam thayo che, ne amara parivar me Gunjto kari Didho che. Thank you 🙏 🙏🙏",
+        "publishedAtISO": "2026-07-26T07:02:09.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocL3fH5wln8UHsLBUmpNS6cETgmbTu_h0ZB5eVkZF6OxAdrI7w=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "HK Ahir",
+        "rating": 5,
+        "text": "I don't know how to thank you.But what was given is the best in the world.",
+        "publishedAtISO": "2026-04-14T11:07:47.000Z",
+        "relativeTime": "3 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjU9JmvtiWMhtB0-Rb6gsJo6r3L6JBD9LiKYHBTNk7yPfVuwN5ka=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Chetan Ahir",
+        "rating": 5,
+        "text": "Wonderful experience for bavishi hospital and positive results and etc\nThank u so much docters and all staff of bavishi hospital for supporting in our new motherhood and fatherhood experience AND Special thanks to Dr surbhi madem for helping in our special and one of our life dreams is complete 10 years😍😍",
+        "publishedAtISO": "2026-04-07T13:52:49.000Z",
+        "relativeTime": "3 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJw_5K0q8QHUje6T-v8vRlK2OFgoe3YxgzfWAAusfHP582GHQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Kishan Chauhan",
+        "rating": 5,
+        "text": "Sari rite samjave chhe and staff pan saro se",
+        "publishedAtISO": "2026-02-19T09:52:45.000Z",
+        "relativeTime": "5 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjW68xKlcp35ergL92qGWXStJXV74ah18-uYFUVe4_zCPyTtOa3a=s128-c0x00000000-cc-rp-mo-ba3"
+      }
+    ]
+  },
+  "kalubha-road": {
+    "key": "kalubha-road",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:17.592Z",
+    "mapsUrl": "https://maps.google.com/?cid=7599004016042005477",
+    "aggregate": {
+      "ratingValue": 5,
+      "reviewCount": 17
+    },
+    "reviews": [
+      {
+        "author": "Chauhan Rajubhai",
+        "rating": 5,
+        "text": "Good Service",
+        "publishedAtISO": "2026-07-22T06:45:45.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWmsAoXIJl5DVsXYyvZc94pCNFcsPancwFmX2T13QUtmeuMc5jO=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "nanikhodiyar": {
+    "key": "nanikhodiyar",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:17.730Z",
+    "mapsUrl": "https://maps.google.com/?cid=15489029606838412663",
+    "aggregate": {
+      "ratingValue": 5,
+      "reviewCount": 36
+    },
+    "reviews": [
+      {
+        "author": "Patel Mahendra",
+        "rating": 5,
+        "text": "Staff is good and All are punctual..",
+        "publishedAtISO": "2026-07-21T05:46:43.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocK4cFPaCGLLMWm9BTT1qDp7Aa3OyBWjt5KqEiEfAMS262lF7Q=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Jignesh Patel",
+        "rating": 5,
+        "text": "Nice",
+        "publishedAtISO": "2026-06-16T06:42:50.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWlclJpKPsHLTKkO2ii5mXwqSsVkNP8ufHvnSJ0hBni5xjl-OE=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Shiv kumar Sharma",
+        "rating": 5,
+        "text": "Staff and doctor are very polite...very good facilities",
+        "publishedAtISO": "2026-06-08T12:01:49.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocLKlGzq2kUNv6jDAn7DiS2BSbBBd1CLH2sD2-FiiIpR7AuiV34t=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Hiral Prajapati",
+        "rating": 5,
+        "text": "Good job 👍",
+        "publishedAtISO": "2026-05-29T06:16:38.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJwsZQz-8viutfNfBPM2Eo8ENBBIZlnxPVV_kwGgbFlqTCjMQ=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  },
+  "shivpur": {
+    "key": "shivpur",
+    "source": "google-places",
+    "fetchedAt": "2026-07-27T12:48:17.898Z",
+    "mapsUrl": "https://maps.google.com/?cid=12043124103131173715",
+    "aggregate": {
+      "ratingValue": 5,
+      "reviewCount": 2
+    },
+    "reviews": [
+      {
+        "author": "Vikas Maurya",
+        "rating": 5,
+        "text": "3Years not ptegnency concive\nBur first time jamuna seva sadan\nDr. Parnnika Agrawal best treatment for\nOne Month concive thanku ma'am",
+        "publishedAtISO": "2026-07-23T06:13:11.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWL9DxcRp2f6SlVDn4WlDX9Q2xa4Jb9m0qNKvI2UjD-U-Wp4KM=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Ritoo Maurya",
+        "rating": 5,
+        "text": "Thank you, Bavishi Neo Fertility in Varanasi.\nI received a very positive response from here. My decision to seek treatment here was a very happy one.\nThank you.",
+        "publishedAtISO": "2026-06-25T08:14:04.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocLbkMjcJKGwetklMY1wfYzBxWr_fkBqPjc96ffhrCIHKzYasQ=s128-c0x00000000-cc-rp-mo"
+      }
+    ]
+  }
+}

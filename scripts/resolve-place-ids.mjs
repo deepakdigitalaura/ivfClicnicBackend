@@ -42,7 +42,7 @@ const CENTRES = {
   thane:              { query: "Bavishi Fertility Institute Thane West" },
   "vile-parle":       { query: "Bavishi Fertility Institute Vile Parle West Mumbai" },
   borivali:           { query: "Bavishi Fertility Institute Borivali West Mumbai" },
-  vashi:              { query: "Bavishi Fertility Institute Vashi Navi Mumbai" },
+  vashi:              { query: "Precision Super Speciality Clinic Diagnostics Sector 17 Vashi Navi Mumbai" },
   "jetalpur-road":    { query: "Bavishi Fertility Institute Jetalpur Road Vadodara" },
   "lal-darwaja":      { query: "Bavishi Fertility Institute Lal Darwaja Surat" },
   mirjapar:           { query: "Bavishi Fertility Institute Bhuj Kutch" },

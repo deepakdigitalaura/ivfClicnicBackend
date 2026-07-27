@@ -5,20 +5,65 @@
   "refreshDays": 7,
   "minRating": 4,
   "sources": {
-    "brand":              { "placeId": "", "listingUrl": "https://www.google.com/maps/search/?api=1&query=Bavishi+Fertility+Institute" },
-    "paldi":              { "placeId": "", "listingUrl": "" },
-    "sindhu-bhavan-road": { "placeId": "", "listingUrl": "" },
-    "nikol":              { "placeId": "", "listingUrl": "" },
-    "ghatkopar":          { "placeId": "", "listingUrl": "" },
-    "thane":              { "placeId": "", "listingUrl": "" },
-    "vile-parle":         { "placeId": "", "listingUrl": "" },
-    "borivali":           { "placeId": "", "listingUrl": "" },
-    "vashi":              { "placeId": "", "listingUrl": "" },
-    "jetalpur-road":      { "placeId": "", "listingUrl": "" },
-    "lal-darwaja":        { "placeId": "", "listingUrl": "" },
-    "mirjapar":           { "placeId": "", "listingUrl": "" },
-    "kalubha-road":       { "placeId": "", "listingUrl": "" },
-    "nanikhodiyar":       { "placeId": "", "listingUrl": "" },
-    "shivpur":            { "placeId": "", "listingUrl": "" }
+    "brand": {
+      "placeId": "ChIJrXYsrgGFXjkRLpiytqYrm18",
+      "listingUrl": "https://www.google.com/maps/search/?api=1&query=Bavishi+Fertility+Institute"
+    },
+    "paldi": {
+      "placeId": "ChIJrXYsrgGFXjkRLpiytqYrm18",
+      "listingUrl": ""
+    },
+    "sindhu-bhavan-road": {
+      "placeId": "ChIJVTinYmmbXjkR_e7Qa7z9HDM",
+      "listingUrl": ""
+    },
+    "nikol": {
+      "placeId": "ChIJaWs1ASaHXjkRBUu1qdfB3DY",
+      "listingUrl": ""
+    },
+    "ghatkopar": {
+      "placeId": "ChIJk9G52y_G5zsRZKwmB6c2EPw",
+      "listingUrl": ""
+    },
+    "thane": {
+      "placeId": "ChIJVVVVlRm55zsReuYCRGqqwEc",
+      "listingUrl": ""
+    },
+    "vile-parle": {
+      "placeId": "ChIJ75oTDy625zsRW0yG2RhB0kQ",
+      "listingUrl": ""
+    },
+    "borivali": {
+      "placeId": "ChIJ3Z_RDOGw5zsRCs1BIyuM8Ws",
+      "listingUrl": ""
+    },
+    "vashi": {
+      "placeId": "",
+      "listingUrl": ""
+    },
+    "jetalpur-road": {
+      "placeId": "ChIJ64-Iya3IXzkR6L_JsawYoLI",
+      "listingUrl": ""
+    },
+    "lal-darwaja": {
+      "placeId": "ChIJAQCwMvdO4DsRdanTf66GZlw",
+      "listingUrl": ""
+    },
+    "mirjapar": {
+      "placeId": "ChIJEehltXQfUTkRDArCpbRaZZs",
+      "listingUrl": ""
+    },
+    "kalubha-road": {
+      "placeId": "ChIJV7wBZ1VbXzkR5VPzLuQVdWk",
+      "listingUrl": ""
+    },
+    "nanikhodiyar": {
+      "placeId": "ChIJ-wSBQKpPXjkRd6Uc71wW9NY",
+      "listingUrl": ""
+    },
+    "shivpur": {
+      "placeId": "ChIJ_xwZwTEtjjkRUxMUiZDFIac",
+      "listingUrl": ""
+    }
   }
 }
