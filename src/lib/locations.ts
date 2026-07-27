@@ -105,6 +105,37 @@ const sharedGallery = (area: string): { src: string; alt: string }[] => [
   { src: "/assets/about-clinic.jpg", alt: `Bavishi Fertility Institute ${area} — treatment room` },
 ];
 
+/** Real interior photos from a Mumbai centre, reused across all Mumbai
+ *  centres (Ghatkopar, Thane, Vile Parle, Borivali, Vashi) until each has
+ *  its own dedicated shoot. */
+const mumbaiGallery = (area: string): { src: string; alt: string }[] => [
+  { src: "/assets/centres/mumbai-reception-desk.webp", alt: `Bavishi Fertility Institute ${area} — reception & front desk` },
+  { src: "/assets/centres/mumbai-waiting-lounge-1.webp", alt: `Bavishi Fertility Institute ${area} — patient waiting lounge` },
+  { src: "/assets/centres/mumbai-waiting-lounge-2.webp", alt: `Bavishi Fertility Institute ${area} — waiting area seating` },
+  { src: "/assets/centres/mumbai-waiting-lounge-3.webp", alt: `Bavishi Fertility Institute ${area} — reception waiting area` },
+  { src: "/assets/centres/mumbai-patient-lounge.webp", alt: `Bavishi Fertility Institute ${area} — patient lounge & information board` },
+  { src: "/assets/centres/mumbai-consultation-room.webp", alt: `Bavishi Fertility Institute ${area} — consultation room` },
+  { src: "/assets/centres/mumbai-doctors-cabin.webp", alt: `Bavishi Fertility Institute ${area} — doctor's cabin` },
+  { src: "/assets/centres/mumbai-doctors-corridor.webp", alt: `Bavishi Fertility Institute ${area} — corridor with doctor credentials` },
+  { src: "/assets/centres/mumbai-embryology-lab.webp", alt: `Bavishi Fertility Institute ${area} — embryology & IVF lab` },
+  { src: "/assets/centres/mumbai-embryology-workstation.webp", alt: `Bavishi Fertility Institute ${area} — embryology lab workstation` },
+  { src: "/assets/centres/mumbai-icsi-workstation.webp", alt: `Bavishi Fertility Institute ${area} — ICSI micromanipulation workstation` },
+  { src: "/assets/centres/mumbai-cryopreservation-lab.webp", alt: `Bavishi Fertility Institute ${area} — cryopreservation & embryo freezing lab` },
+  { src: "/assets/centres/mumbai-operation-theatre.webp", alt: `Bavishi Fertility Institute ${area} — operation theatre` },
+  { src: "/assets/centres/mumbai-ot-twin-beds-1.webp", alt: `Bavishi Fertility Institute ${area} — operation theatre procedure beds` },
+  { src: "/assets/centres/mumbai-ot-twin-beds-2.webp", alt: `Bavishi Fertility Institute ${area} — operation theatre equipment` },
+  { src: "/assets/centres/mumbai-procedure-room-1.webp", alt: `Bavishi Fertility Institute ${area} — procedure room` },
+  { src: "/assets/centres/mumbai-procedure-room-2.webp", alt: `Bavishi Fertility Institute ${area} — procedure room & examination bed` },
+  { src: "/assets/centres/mumbai-procedure-room-3.webp", alt: `Bavishi Fertility Institute ${area} — procedure room equipment` },
+  { src: "/assets/centres/mumbai-procedure-room-4.webp", alt: `Bavishi Fertility Institute ${area} — examination & procedure room` },
+  { src: "/assets/centres/mumbai-recovery-room-1.webp", alt: `Bavishi Fertility Institute ${area} — patient recovery room` },
+  { src: "/assets/centres/mumbai-recovery-room-2.webp", alt: `Bavishi Fertility Institute ${area} — recovery ward beds` },
+  { src: "/assets/centres/mumbai-recovery-room-3.webp", alt: `Bavishi Fertility Institute ${area} — post-procedure recovery area` },
+  { src: "/assets/centres/mumbai-recovery-room-garden-view-1.webp", alt: `Bavishi Fertility Institute ${area} — recovery room with garden view` },
+  { src: "/assets/centres/mumbai-recovery-room-garden-view-2.webp", alt: `Bavishi Fertility Institute ${area} — recovery room seating` },
+  { src: "/assets/centres/mumbai-recovery-washroom-area.webp", alt: `Bavishi Fertility Institute ${area} — patient washroom & changing room` },
+];
+
 /* =====================================================================
  * CENTRES
  * ===================================================================== */
@@ -342,7 +373,7 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Ghatkopar centre is Bavishi Fertility Institute's flagship facility in Mumbai, bringing over three decades of fertility expertise to the city's central and eastern suburbs. Conveniently located on M.G. Road opposite Kotak Mahindra Bank — minutes from Ghatkopar station — it offers the full spectrum of IVF, ICSI, IUI and infertility care under one roof.",
-    gallery: sharedGallery("Ghatkopar"),
+    gallery: mumbaiGallery("Ghatkopar"),
     built: true,
   },
   {
@@ -388,7 +419,7 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Thane centre makes Bavishi Fertility Institute's trusted fertility care accessible to families across Thane and the Ghodbunder Road corridor. Located at Bapat Urology Center in Panch Pakhdi, it offers expert IVF, IUI and infertility consultation backed by our Mumbai team and advanced laboratories.",
-    gallery: sharedGallery("Thane"),
+    gallery: mumbaiGallery("Thane"),
     built: true,
   },
   {
@@ -434,7 +465,7 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Vile Parle centre brings Bavishi Fertility Institute's fertility expertise to Mumbai's western suburbs. Conveniently located on S.V. Road in Irla — close to Vile Parle station and the airport — it offers expert IVF, IUI and infertility consultation for families across Andheri, Santacruz and Juhu.",
-    gallery: sharedGallery("Vile Parle"),
+    gallery: mumbaiGallery("Vile Parle"),
     built: true,
   },
   {
@@ -480,7 +511,7 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Borivali centre extends Bavishi Fertility Institute's trusted fertility care to Mumbai's north-western suburbs. Located at M.M. Medical Center Ankur on L.M. Road, Shivaji Nagar, it offers expert IVF, IUI and infertility consultation for families across Borivali, Dahisar and Kandivali.",
-    gallery: sharedGallery("Borivali"),
+    gallery: mumbaiGallery("Borivali"),
     built: true,
   },
   {
@@ -526,7 +557,7 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Vashi centre brings Bavishi Fertility Institute's advanced fertility care to Navi Mumbai. Located at Mahavir Centre in Sector 17 — minutes from Vashi station — it offers expert IVF, IUI and infertility consultation for families across Vashi, Nerul, Belapur and Kharghar.",
-    gallery: sharedGallery("Vashi"),
+    gallery: mumbaiGallery("Vashi"),
     built: true,
   },
 
@@ -577,7 +608,26 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Vadodara centre on Jetalpur Road is a trusted IVF destination in central Gujarat, offering advanced fertility treatment with cutting-edge technology and compassionate care. Conveniently located in Sampatrao Colony near Alkapuri, it provides IVF, IUI, donor programmes, fertility preservation and complete gynaecology services under one roof.",
-    gallery: sharedGallery("Vadodara"),
+    gallery: [
+      { src: "/assets/centres/vadodara-reception-desk.webp", alt: "Bavishi Fertility Institute Vadodara — reception & front desk" },
+      { src: "/assets/centres/vadodara-waiting-lounge.webp", alt: "Bavishi Fertility Institute Vadodara — patient waiting lounge" },
+      { src: "/assets/centres/vadodara-embryology-lab.webp", alt: "Bavishi Fertility Institute Vadodara — Class 1000 embryology & IVF lab" },
+      { src: "/assets/centres/vadodara-operation-theatre.webp", alt: "Bavishi Fertility Institute Vadodara — operation theatre" },
+      { src: "/assets/centres/vadodara-icsi-workstation.webp", alt: "Bavishi Fertility Institute Vadodara — ICSI micromanipulation workstation" },
+      { src: "/assets/centres/vadodara-cryopreservation-lab.webp", alt: "Bavishi Fertility Institute Vadodara — cryopreservation & embryo freezing lab" },
+      { src: "/assets/centres/vadodara-reception-corridor.webp", alt: "Bavishi Fertility Institute Vadodara — reception counter & patient corridor" },
+      { src: "/assets/centres/vadodara-waiting-area.webp", alt: "Bavishi Fertility Institute Vadodara — patient waiting area & seating" },
+      { src: "/assets/centres/vadodara-entrance-lobby.webp", alt: "Bavishi Fertility Institute Vadodara — entrance lobby at Trisha Square" },
+      { src: "/assets/centres/vadodara-treatment-corridor.webp", alt: "Bavishi Fertility Institute Vadodara — treatment corridor & department signage" },
+      { src: "/assets/centres/vadodara-ot-corridor.webp", alt: "Bavishi Fertility Institute Vadodara — corridor to the operation theatre" },
+      { src: "/assets/centres/vadodara-ot-entrance.webp", alt: "Bavishi Fertility Institute Vadodara — operation theatre entrance & sterile supplies" },
+      { src: "/assets/centres/vadodara-procedure-room.webp", alt: "Bavishi Fertility Institute Vadodara — procedure room & anaesthesia equipment" },
+      { src: "/assets/centres/vadodara-lab-workstation.webp", alt: "Bavishi Fertility Institute Vadodara — laboratory workstation" },
+      { src: "/assets/centres/vadodara-consultation-room.webp", alt: "Bavishi Fertility Institute Vadodara — consultation room" },
+      { src: "/assets/centres/vadodara-doctors-cabin.webp", alt: "Bavishi Fertility Institute Vadodara — doctor's cabin" },
+      { src: "/assets/centres/vadodara-counselling-room.webp", alt: "Bavishi Fertility Institute Vadodara — counselling room" },
+      { src: "/assets/centres/vadodara-admin-office.webp", alt: "Bavishi Fertility Institute Vadodara — administrative office" },
+    ],
     built: true,
   },
   {
@@ -778,7 +828,11 @@ export const CENTRES: Centre[] = [
     sameAs: [],
     intro:
       "Our Anand centre is a trusted IVF destination in the Charotar region, offering advanced fertility treatments with modern technology and compassionate care. Located at IRIS Hospital near Vidyanagar, it provides personalised IVF, IUI and infertility solutions with transparent costs and complete support throughout your parenthood journey.",
-    gallery: sharedGallery("Anand"),
+    gallery: [
+      { src: "/assets/centres/anand-building-exterior.jpeg", alt: "Bavishi Fertility Institute Anand — IRIS Hospital building exterior" },
+      { src: "/assets/centres/anand-reception-lobby.jpeg", alt: "Bavishi Fertility Institute Anand — reception & entrance lobby" },
+      { src: "/assets/centres/anand-waiting-lounge.jpeg", alt: "Bavishi Fertility Institute Anand — patient waiting lounge" },
+    ],
     built: true,
   },
   {
