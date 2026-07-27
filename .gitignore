@@ -59,3 +59,8 @@ public/assets/media/paper cuts and new news/
 blogstoaddinbfinewwebsite.zip
 blogstoaddinbfiwebsite.zip
 scratch_blogzips/
+
+# Raw Dr. Deep video/review source dump (clean copies committed under
+# public/assets/testimonials/; Google review screenshots transcribed into
+# src/lib/doctor-reviews.ts, not served as images)
+public/assets/DR.Deep videos/

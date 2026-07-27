@@ -225,6 +225,142 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
     },
   ],
 
+  // Bavishi Fertility Institute / Ansh Hospital — Surat. First two entries are
+  // handwritten patient thank-you letters that explicitly name Dr. Deep (a
+  // third letter from the same batch, addressed to "Dr. Sejal", does not name
+  // him and is intentionally excluded) — best-effort transcription of cursive
+  // Gujarati handwriting, please verify against the original scans before
+  // treating as final; no star rating since these aren't Google reviews. The
+  // rest are a curated selection of real Google reviews for Dr. Deep Gajiwala
+  // (many more exist on his Google profile; these were picked for variety
+  // across language, date and story). `date` is the label exactly as shown
+  // by Google.
+  "deep-gajiwala": [
+    {
+      name: "Vaishaben Ayagjkumar Patel",
+      text:
+        "હું વર્ષો પહેલ, મારે રહેવાનું નવસારી. મારા મેરેજના પાંચ વર્ષ થયા છે. મેં વળી હોસ્પિટલમાં ટ્રીટમેન્ટ લીધી પણ બધી જગ્યાએથી નિષ્ફળતા જ મળી. પછી અમે અહીં સુરત બાવીશી હોસ્પિટલના સંપર્કમાં આવ્યા. અહીં હોસ્પિટલની પુરી સ્ટાફ, ડૉ. દીપ સર, ડૉ. દિશા મેડમ બધાનો સ્વભાવ ખૂબ જ સારો હતો. પછી ધીમે ધીમે મારી ટ્રીટમેન્ટ ચાલુ થઈ હતી. પહેલી વાર મારુ IVF થયું, પણ તેમાં નિષ્ફળતા મળી. હું ખૂબ નિરાશ થઈ ગઈ હતી. પછી ડૉ. દીપ સરે અમને હિસ્ટ્રોસ્કોપી વિશે જણાવ્યું, અને પછી અમે હિસ્ટ્રોસ્કોપી કરાવ્યું અને પછી બીજી વાર મારુ IVF ટ્રીટમેન્ટ ચાલુ થયું. 10/07/2025 મારું IVF થયું અને 22/07/2025 મારી રિપોર્ટ આવવાનો હતો. હું ખૂબ ટેન્શનમાં હતી કે રિપોર્ટમાં શું આવશે, પછી સાંજે 6 વાગ્યે ડૉ. દિશા મેડમનો ફોન આવ્યો અને તેમને જણાવ્યું કે રિપોર્ટ પોઝિટિવ છે. હું એવું સાંભળીને ખૂબ જ ખુશ થઈ ગઈ. પછી અમને 11/08/2025 ના દિવસે સોનોગ્રાફી માટે બોલાવ્યા. પછી મારી સોનોગ્રાફી થઈ અને પહેલી વાર મારા બાળકના ધબકારા સંભળાવ્યા અને એ સાંભળીને મારી ખુશીનો પાર ના રહ્યો.\n\nમાટે, હું અને મારા પતિ અને મારો આખો પરિવાર બાવીશી હોસ્પિટલને અત્યંત લાગણીપૂર્વક આભાર માનીએ છીએ.\n\nThank you very much.",
+    },
+    {
+      name: "Kanchan Dhanraj Patel",
+      date: "29 January 2026",
+      text:
+        "હું કંચન ધનરાજભાઈ પટેલ. અમારા લગ્નને 5 વર્ષ પુર્ણ થયા હતા અને પછી પણ સંતાન ન હતું. ઘણા ડોક્ટરો બદલ્યા, એક ડોક્ટરે મેડિકલી પ્રેગનેન્સ ન રહી. પછી મને બાવીશી હોસ્પિટલ નું સજેશન આપ્યું. પછી અમે બાવીશી હોસ્પિટલ નું ઉપયોગ કરી ટ્રીટમેન્ટ ચાલુ કરી, ચાલુ કરવાની સાથે 2 મહિનામાં પ્રેગનેંટ છું.\n\nડૉ. દિપ ગજીવાલા સાહેબ શ્રી નું ખૂબ ખૂબ અભિનંદન અને બધા સ્ટાફમેમ્બરનો પણ અભિનંદન. ખૂબ સરસ હોસ્પિટલ અને નર્સિંગ સ્ટાફ, બધાનો ખૂબ વખાણ છે.\n\nબધા નો ખૂબ ખૂબ ધન્યવાદ અને આભાર.",
+    },
+    {
+      name: "Kajal Savaliya",
+      rating: 5,
+      date: "3 months ago",
+      text:
+        "I had really good experince with Bavishi fertility institute staff was really polite and good I had sucess with my first cycle here\nThank you so much Bavishi staff and Dr Deep Gajiwala for making my dream come true.",
+    },
+    {
+      name: "Harshil Naik",
+      rating: 5,
+      date: "8 months ago",
+      text:
+        "We started our treatment here by reference and no doubt the best decision we've ever made. The experience is great, the service is superb and I must say the way everyone taking from Doctor to staff is very polite, positive and welcoming. Everything is explained in detail and Dr. Deep sir and Assistant doctors answers all the queries that we had.\n\nThank You very much for all you do.",
+    },
+    {
+      name: "Hiral Patel",
+      rating: 5,
+      date: "Edited 9 months ago",
+      text:
+        "We are beyond grateful to Dr. Deep Gajiwala and his entire team at Bavishi fertility Surat for making our dream of becoming parents come true. After going through the IVF journey, we are now blessed with a twins, a boy and a girl, and words cannot express the joy we feel.\n\nDr. Deep Gajiwala's expertise, guidance, and compassionate approach gave us immense confidence throughout the treatment. He explained every step with clarity and always encouraged us with positivity. A very special thanks to Pratik sir, Dr.Disha mam and kalpanaben whose constant support, care, and patience made the process so much smoother for us. Their reassuring words and dedication kept us strong in difficult times.\n\nThe entire team worked with so much effort, professionalism, and kindness, and for that, we will always remain thankful. Today, as we hold our little ones in our arms, we know it wouldn't have been possible without them.\n\nFrom the bottom of our hearts, thank you Dr Deep Gajiwala, for helping us start this new chapter of our lives.",
+    },
+    {
+      name: "Ketan Vadodariya",
+      rating: 5,
+      date: "a year ago",
+      text:
+        "This is the best IVF treatment institute in surat with highly professional and experienced doctor Deep Gajiwala.\n\nThe First day of visit, Dr Deep explain process well and clear many unusual doubts. He didn't hide anything about treatment and prepared us very well.\n\nDr Disha explain about cost of treatment and medicine and other stuff of the IVF. By the way she was very good in explanation. I remember one incident with Disha is, After conceive, we called her on midnight 3 am because of my wife was getting pain and she answered call on first try and explain us what to do with situation and she was very clam even when I called her midnight.\n\nOther staff of hospital was very helpful. Never given annoying answers.\n\nI would suggest this institute for the IVF treatment.\n\nMy wife convinced on first try of IVF.",
+    },
+    {
+      name: "Kapana Mistry",
+      rating: 5,
+      date: "10 weeks ago",
+      text:
+        "We were treated at bavishi fertility institute after multiple failed treatments in the USA. Dr. Deep Gajiwala was a delight when it came to treatment options. We finally got the results the way we wanted. Dr. Deep Gajiwala is very knowledgeable and thorough. He takes time with his patients and answers every question you may have. Staff was very supportive and encouraging. Thank you bavishi fertility institute for helping us finally become parents. We had tried for a very long time and given up hope until bavishi hospital helped us succeed. Now we are parents to a baby boy!",
+    },
+    {
+      name: "Piku Vasava",
+      rating: 5,
+      date: "14 weeks ago",
+      text:
+        "\"तीन IVF failures के बाद हम लगभग हार मान चुके थे। बहुत मुश्किल समय था।\nफिर हम बावीशी फर्टिलिटी इंस्टीट्यूट में डॉ. दीप गजीवाला से मिले। उन्होंने बहुत patience से हमारा case evaluate किया।\nइस बार treatment बिल्कुल बढिया तरीके से हुआ।\nऔर finally हमें success मिला।\nIVF में सही doctor और Hospital कितना important होता है यह हमें यहाँ आकर समझ आया।\"\n\n\"हमारी IVF ka Experience यहां बहुत अच्छा रहा है। हमने पहले दो बार IVF कराया था लेकिन दोनों बार fail हो गया।\nहर बार उम्मीद टूट जाती थी।\nफिर हमें किसी ने डॉ. दीप गजीवाला के बारे में बताया और हम बावीशी फर्टिलिटी इंस्टीट्यूट, सूरत आए।\nपहली consultation में ही doctor sir ने हमारी पूरी history ध्यान से सुनी। उन्होंने बहुत honestly बताया कि आगे कैसे proceed करना चाहिए।\nइस बार treatment के दौरान हमें बहुत confidence मिला।\nभगवान की कृपा से IVF successful हुआ।\nहम सच में दिल से thankful हैं।\"",
+    },
+    {
+      name: "Khushi Patel",
+      rating: 5,
+      date: "14 weeks ago",
+      text:
+        "આજે હું મારી IVF ની સફર શેર કરવા માંગુ છું, જેથી જે કપલ્સ ડાળમાં ઝુંઝવામાં છે, તેમને યોગ્ય માર્ગદર્શન મળી શકે.\n\nઆ પહેલા અમે એક બીજા સેન્ટર પર IVF કરાવ્યું હતું. આખા સાયકલમાં માત્ર 1 જ એમ્બ્રિયો બન્યો હતો, અને દુર્ભાગ્યે તે પ્રથમ સફળ ન થયો. તે સમય અમારા માટે ખૂબ જ મુશ્કેલ હતો. અમને લાગતું હતું કે કદાચ અમારી પાસે ખૂબ ઓછા ચાન્સિસ છે.\n\nપછી અમને બાવીશી ફર્ટિલિટી ઇન્સ્ટિટ્યુટ, સુરત વિષે જાણ થઈ. અમે અહીં ડૉ દીપ ગજીવાલા અને ડૉ. દિશાબેન બાવીશી સર સાથે કન્સલ્ટ કરવા આવ્યા. પહેલી જ મુલાકાતમાં ડૉક્ટર સાહેબે અમારી સંપૂર્ણ હિસ્ટ્રી ધ્યાનથી સાંભળી અને જૂની રિપોર્ટ્સ પણ ઝીણવટપૂર્વક તપાસી. તેમણે સમજાવ્યું કે દરેક IVF સેન્ટરના લેબ ક્વોલિટી, પ્રોટોકોલ અને એમ્બ્રિયો કલ્ચર સિસ્ટમ અલગ હોય છે – અને એનો પરિણામ પર મોટો અસર પડે છે.\n\nઅમે અહીં ફરી IVF કરાવવાનો નિર્ણય લીધો. આ વખતે પ્રક્રિયા ખૂબ જ વ્યવસ્થિત અને પારદર્શક હતી. સૌથી મોટો આનંદ ત્યારે થયો જયારે આ સાયકલમાં 4 સારા એમ્બ્રિયો બન્યા. અમને વિશ્વાસ જ ન આવ્યો, કારણ કે પહેલા સેન્ટર માત્ર 1 જ બન્યો હતો.\n\nસૌથી ખુશીની વાત એ છે કે પહેલા ટ્રાયમાં જ રિઝલ્ટ પોઝિટિવ આવ્યો, અને અમારા પાસે હજુ પણ 2 એમ્બ્રિયો ફ્રીઝ કરીને સુરક્ષિત રાખેલા છે, જે ભવિષ્ય માટે આશા અને સુરક્ષા છે.\n\nહું દિલથી કહેવા માંગુ છું –\nIVF માં યોગ્ય સેન્ટર અને યોગ્ય ડૉક્ટર પસંદ કરવું ખૂબ જ મહત્વનું છે.\nમાત્ર સારવાર નહીં, પણ લેબની ગુણવત્તા, પારદર્શિતા અને ડૉક્ટરના અનુભવ પરિણામમાં મોટો ફરક પાડે છે.\n\nઆજે અમે ખૂબ ખુશ છીએ કે અમે યોગ્ય જગ્યાએ વિશ્વાસ મુક્યો.\nજો તમે IVF વિષે વિચારતા હો, તો ઉતાવળમાં નિર્ણય ના લેશો. યોગ્ય માહિતી મેળવો અને સાચું સેન્ટર પસંદ કરો…\nકારણ કે યોગ્ય પસંદગી તમારા જીવનમાં ખુશીઓ લઈ આવી શકે છે.\n\nડૉક્ટર સાહેબ અને તેમની ટીમનો દિલથી આભાર.",
+    },
+    {
+      name: "Dhara Sarkheliy",
+      rating: 5,
+      date: "21 weeks ago",
+      text:
+        "We had a very good experience at Bavishi Hospital. Dr. Deep Sir was extremely kind, patient, and professional throughout the treatment. He explained everything clearly and made us feel comfortable and confident. The hospital staff was also very polite, supportive, and attentive. Overall, we are very satisfied with the care and highly recommend this hospital.",
+    },
+    {
+      name: "Tanisha Tejani",
+      rating: 5,
+      date: "31 weeks ago",
+      text:
+        "We are extremely grateful to Ansh Hospital and especially Dr. Deep Gajiwala for such a beautiful and safe delivery experience. From the first consultation till the birth of our baby, the care, guidance, and positivity we received were exceptional. Dr. Deep Gajiwala's calm nature and expert treatment gave us immense confidence and peace of mind. Because of him and the supportive hospital staff, our baby was born healthy, and I was taken care of with so much love and attention. This journey will always remain special for us. Thank you for everything. We are blessed with a healthy baby girl and a very positive childbirth experience. Forever thankful to Dr. Deep Gajiwala and the entire team.",
+    },
+    {
+      name: "H!tesh Shah",
+      rating: 5,
+      date: "32 weeks ago",
+      text:
+        "I had the privilege of being under the care of Dr. Deep Gajiwala, a truly exceptional physician in the department. What impressed me most was not only their deep expertise in treating my condition, but also their commitment to clear, empathetic communication. Dr. Deep patiently explained all the treatment options, answered every question I had, ensuring I felt fully informed and comfortable with the plan. Their professionalism and genuine concern for my well-being are commendable. Highly recommended.",
+    },
+    {
+      name: "Laxmikant Sarkar",
+      rating: 5,
+      date: "13 May 2025",
+      text:
+        "Ansh hospital, Doctor Mr. Deep Gajiwala\nBahut achha doctor hai,, bahut acha se tritment karta hai, aacha se samjha ta hai,humlog pichle 11 month se is doctor se tritment kara raha tha, or mujhe bina koi tension ka bahut achha response mila hai or mera baby hua hai, or baby bahut achha hai, very very very thx Doctor Mr. Deep Gajiwala sir, hum log husband wife dono khush hai, is doctoro ka tritment se, bahut achha se sajest karta hai or fully responsibility k sat time mentent karta ake cheakup kar jata hai\n\nVery very thx Doctor",
+    },
+    {
+      name: "Riya Patel",
+      rating: 5,
+      date: "16 Nov 2024",
+      text:
+        "We are glad to got tretment of this hospital bavishi fertility institute.\nAll staff members and doctors are very kind and humble in nature .\nSpecial thanks to dr.Deep sir & dr.Disha mem.\nOnce again thank you so much to evey bavishi members.",
+    },
+    {
+      name: "Pandya Pritish",
+      rating: 5,
+      date: "Edited 2 months ago",
+      text:
+        "They say you can't see the GOD..may be they are right..but I can say for sure we've seen their shadow in Dr. Nita Gajiwala and Dr. Deep Gajiwala\nMy wife was pregnant with naturally conceived twins.\nBut she started leaking amniotic fluid from one sac @ 29 weeks.\nNita mam and Deep sir deployed their extensive experience to do everything possible.\nWe stayed at Ansh Hospital for 3 weeks and during this period, we felt we were in the safest places possible.\nTheir staff, including Sangeeta Ben, Triveni Ben and others took extreme care of my wife and both babies. Finally on 21st May, my wife delivered 2 boys, overall healthy, except a bit of low weight due to early delivery @ 31 weeks and 3 days.\nI don't know what would have happened to my wife and both my kids if Nita mam and her entire team wouldnt be there, supporting us at every moment of these crucial 3 weeks.\nToday, both boys are coming home, healthy and fine.\nThere are no words with which I can show my gratitude to Nita mam, Deep sir and the entire team of Ansh Hospital.",
+    },
+    {
+      name: "Raj Nakrani",
+      rating: 5,
+      date: "7 months ago",
+      text:
+        "My experience with Dr. Deep Gajiwala Saheb at Bavishi/Ansh Hospital has been the most trusting and memorable experience of my life.\n\nBefore this, I had tried IVF 4–5 times from outside, but each time I got disappointed. I was very tired mentally more than physically and my hope was almost gone. Then I came to Dr. Deep Gajiwala Saheb. In the very first meeting, his calm nature, patience and clear explanation gave me a lot of confidence.\n\nDr. Saheb started my treatment in a very cooperative and positive manner. He explained every step calmly and never showed any hurry or negativity. With his experienced treatment and the cooperation of the entire team, I finally got success and got pregnant.\n\nMy delivery was done by Caesarean section at Ansh Hospital and the entire process was very smooth. From before to after the operation, Dr. Deep Saheb was constantly present, guided and took great care. Today, both I and my baby are completely healthy.\n\nDr. Deep Gajiwala is not only an excellent doctor, but also a very calm, cooperative and humane doctor who understands the feelings of the patient. For those who have seen many IVF failures, he is a true ray of hope.\n\nI sincerely thank Dr. Deep Gajiwala Sahib and his entire team and recommend him to all couples without hesitation.\n\n(Translated by Google)",
+    },
+    {
+      name: "Alpesh Rathod",
+      rating: 5,
+      date: "a year ago",
+      text:
+        "Dr deep Gajjiwala sir nd dr neeta madem are exceptional Gynecologist whose expertise, compassion and dedication are truly commendable. During my wife consultation, Dr deep sir took the time to listen attentively to my wife concerns and explain my wife antenatal periods problem ,doubt and treatment options in a way that was easy to understand. Their depth of knowledge instilled confidence in me knowing that my wife was in capable hands. A big thanks to Dr deep sir nd Neeta madem ,their guidance and expertise i have experienced significant improvement in my wife health after cesarean operation and quality of life. All staff also very experienced nd humble. I am truly grateful for their outstanding care and would highly recommend Dr deep Gajiwala sir and Ansh hospital to anyone in need of a skilled and compassionate Gynaecologist.",
+    },
+    {
+      name: "Sonu Parmar",
+      rating: 5,
+      date: "29 Jun 2024",
+      text:
+        "Dr deep sir ખુબ સારા છે. બાવીશી માં આવ્યા ને ઘણો સારો અનુભવ થયો છે, સ્ટાફ ના બધા બો સારા છે. ફસ્ટ ટાઈમ માં મને માતૃત્વ ધારણ કર્યુ છે અને બેબી ના હૃદય ના ધબકારા પણ આવી ગયા છે ને એ પણ ખુબ સારુ છે.",
+    },
+  ],
+
   // Bavishi Neo Fertility — Varanasi. WhatsApp thank-you message sent to the
   // doctor (no star rating, and the message carried no date). The sender's name
   // is not shown in the screenshot we were given, so this is published without

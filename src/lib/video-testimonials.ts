@@ -122,6 +122,16 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
     { name: "Patient Testimonial", doctor: "Dr. Deepali Pandya", quote: "Watch this patient share their experience with Dr. Deepali Pandya.", videoSrc: "/assets/testimonials/deepali-pandya-patient-1.mp4" },
     { name: "Patient Testimonial", doctor: "Dr. Deepali Pandya", quote: "Watch this patient share their experience with Dr. Deepali Pandya.", videoSrc: "/assets/testimonials/deepali-pandya-patient-2.mp4" },
   ],
+
+  // Self-hosted (clinic-supplied clips, not on the YouTube channel). Names/quotes
+  // are placeholders pending real transcription except testimonial 4, whose
+  // filename named the patient. Replace with real quotes once transcribed.
+  "deep-gajiwala": [
+    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-1.mp4" },
+    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-2.mp4" },
+    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-3.mp4" },
+    { name: "Archna Shah", doctor: "Dr. Deep Gajiwala", quote: "Watch Archna Shah share her experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-4-archna-shah.mp4" },
+  ],
 };
 
 /* ---------------------------------------------------------------------
