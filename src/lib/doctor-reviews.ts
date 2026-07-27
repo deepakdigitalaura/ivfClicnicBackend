@@ -211,6 +211,20 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "ગામ:- દુર્ગાપુર, તા. માંડવી-કચ્છ\n\nગર્ભધારણ થી લઈને પ્રસૂતિ સમય સુધી ની સફર દરમિયાન બાવીશી ના સ્ટાફ થી લઈ ડોક્ટર ની સેવા ખૂબ જ સુંદર રહી.\n\nઅનેક ઘરો માં ખુશીઓની કિરણ ફેલાવે છે બાવીશી.\n\nસુરભિ બેન નો સાથ સહકાર અમને ક્યારેય ભુલાશે નહિ.\n\nઘણી નિરાશાઓ વચ્ચે આશા જગાવે છે બાવીશી,\nદરેક મુશ્કેલીનું હલ બતાવે છે બાવીશી,\nઅંધકારમાં પણ પ્રકાશ પાથરે છે બાવીશી,\nનવા કુમળા ફૂલ ને પંપાળે છે બાવીશી,\nસુરભિબેન જેવા ડોક્ટર થઈ ખ્યાતિ પામે છે બાવીશી,\n\nઆભાર",
     },
   ],
+
+  // Bavishi Neo Fertility — Varanasi. WhatsApp thank-you message sent to the
+  // doctor (no star rating, and the message carried no date). The sender's name
+  // is not shown in the screenshot we were given, so this is published without
+  // attribution rather than guessing one. The patient typed the doctor's name as
+  // "prannika"; corrected to "Parnnika" so her own name is not misspelled on her
+  // profile page. Every other word is exactly as sent.
+  "parnnika-agarwal": [
+    {
+      name: "A patient of Dr. Parnnika Agarwal",
+      text:
+        "Hello Parnnika ma'am\n\nMy baby turned 8 months old Yesterday and i just wanted to thank you from bottom of my heart. It is such a beautiful blessing which has been possible because of your guidance, expertise and unwavering support. To us ,you are truely god sent. Your role in my parenthood will never be forgotten.\n\nThank you so very much ma'am.\n\nAnd may god bless your little one with best of everything in life. 😊😊🥰",
+    },
+  ],
 };
 
 /** Real written reviews for a doctor profile. Empty → hide the section. */
