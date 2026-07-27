@@ -125,6 +125,18 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "It is really amazing and thrilling journey towards motherhood. every day brings new day and experience for mother. We heartly thank to Dr. Bavishi and his entire team, for enlightened lamp of joy, happiness and parenthood in our life.\n\nFrom :- Salvi Patade",
     },
     {
+      name: "Vidhi & Vikram Main",
+      date: "20 January 2024",
+      text:
+        "Thank you Bavishi Team & Dr. Nilesh Jain for making our dream reality.\n\nSpecial thanks to Dr. Nilesh Jain for his excellent support & guidance.\n\nWe are looking forward to start our exciting journey of parenthood.\n\nLots of love to Bavishi Team\n\nFrom,\nVidhi & Vikram",
+    },
+    {
+      name: "Madhuri & Dinesh Chawla",
+      date: "4 March 2024",
+      text:
+        "आदरणीय,\n\nडॉ. साहब आपका बहुत-बहुत आभार। मेरे घर में किलकारी देकर आपने मेरे को नई जिंदगी दी। मैंने आपके हॉस्पिटल के कर्मचारी से लेकर आप तक जो अनुशासन है वो देखा है, तारीफ लायक है। आपके हॉस्पिटल कि टेक्नोलॉजी दिनोंदिन फले-फूले यही हमारी कामना है।\n\nThank you, धन्यवाद,\nMadhuri Chawla\nDinesh Chawla",
+    },
+    {
       name: "Sudhakar & Ramadevi Komati",
       date: "14 August 2024",
       text:
@@ -186,6 +198,7 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "We would like to thanks Dr. Suman Singh and the entire team of Bavishi Clinik to fulfil our dream come true to becoming Parents on the First attempt after 5 years of married life.\n\nWe are very grateful to Bavishi clinik.\n\nIt is best IVF clinik in my life.\n\nDr. Suman Singh and all staffs are very kind and gives special attention to their petient.\n\nAll Dr. and staffs are experts in their field and they gives 100% efforts in their work only we have to put Trust on them & result is positive.\n\nWe definetly recommend Bavishi clinik to all Those who wants to become Parents.\n\n\"Yes! Dreams Become True, with the help of BAVISHI\"",
     },
   ],
+
   // Bavishi Fertility Institute (with Spandan Hospital) — Bhuj/Kutch.
   // Handwritten patient thank-you notes (no star rating). Gujarati and Hindi
   // reviews kept in the patient's original language, never translated.

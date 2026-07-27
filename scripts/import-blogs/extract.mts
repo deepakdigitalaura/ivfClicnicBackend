@@ -435,9 +435,20 @@ export async function extract(slug: string): Promise<ExtractedPost> {
   const heroImageUrl: string | null = featured?.source_url ?? featured?.media_details?.sizes?.full?.source_url ?? null;
   const heroImageAlt = decodeEntities(String(featured?.alt_text || rawTitle));
 
+  // WordPress's REST API returns a post's categories alphabetically, not in the
+  // order an editor assigned them. On this site "Male Infertility" is cross-tagged
+  // onto many posts about unrelated topics (Maternity, recurrent miscarriage, etc.)
+  // alongside their real category, and "Male Infertility" alphabetically sorts
+  // first — so picking terms[0] silently discarded the post's actual topic on every
+  // post that also carried this tag. Prefer any other category when one is present;
+  // only fall back to it when it's the post's sole category (genuinely male-infertility content).
+  const DEPRIORITIZED_CATEGORIES = new Set(["Male Infertility"]);
   const terms: any[] = (post._embedded?.["wp:term"] ?? []).flat();
-  const category = terms.find((t) => t.taxonomy === "category");
-  const categoryName: string | null = category ? decodeEntities(String(category.name)) : null;
+  const categoryNames = terms
+    .filter((t) => t.taxonomy === "category")
+    .map((t) => decodeEntities(String(t.name)));
+  const categoryName: string | null =
+    categoryNames.find((n) => !DEPRIORITIZED_CATEGORIES.has(n)) ?? categoryNames[0] ?? null;
 
   const inlineImages: { src: string; alt: string }[] = [];
   $article("img").each((_, img) => {

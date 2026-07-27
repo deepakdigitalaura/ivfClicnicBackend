@@ -25,8 +25,12 @@ export type VideoTestimonial = {
   name: string;
   /** Short pull-quote — must stay faithful to what the patient actually said. */
   quote: string;
-  /** Real YouTube video id (required — we never render placeholders). */
-  youTubeId: string;
+  /** Real YouTube video id — required unless `videoSrc` is set instead. */
+  youTubeId?: string;
+  /** Self-hosted .mp4 path (e.g. "/assets/testimonials/foo.mp4") for a real
+   *  testimonial that isn't on the YouTube channel. Alternative to
+   *  `youTubeId` — set exactly one of the two, never both. */
+  videoSrc?: string;
   /** City/centre — set ONLY when the testimonial explicitly states it. */
   location?: string;
   /** Treating doctor — set ONLY when the testimonial explicitly names them. */
@@ -109,6 +113,14 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   "binal-shah": [
     { name: "Madhvika & Pranay", doctor: "Dr. Binal Shah", quote: "When dreams blossom against all odds — our story with Bavishi Fertility Institute.", youTubeId: "v2oy6QZjQvs" },
     { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Binal Shah", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
+  ],
+
+  // Self-hosted (not on the YouTube channel yet) — clinic-supplied WhatsApp
+  // clips. Name/quote are placeholders pending real transcription; per-request,
+  // shipped generic rather than blocked on that. Replace once known.
+  "deepali-pandya": [
+    { name: "Patient Testimonial", doctor: "Dr. Deepali Pandya", quote: "Watch this patient share their experience with Dr. Deepali Pandya.", videoSrc: "/assets/testimonials/deepali-pandya-patient-1.mp4" },
+    { name: "Patient Testimonial", doctor: "Dr. Deepali Pandya", quote: "Watch this patient share their experience with Dr. Deepali Pandya.", videoSrc: "/assets/testimonials/deepali-pandya-patient-2.mp4" },
   ],
 };
 

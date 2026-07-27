@@ -3,7 +3,16 @@ import { useState, useEffect } from "react";
 import Link from "next/link";
 import { X } from "lucide-react";
 
-const COOKIE_KEY = "bfi_cookie_consent";
+export const COOKIE_KEY = "bfi_cookie_consent";
+/** Fired whenever the visitor accepts/declines — analytics/marketing scripts listen for this. */
+export const CONSENT_CHANGE_EVENT = "bfi:cookie-consent-changed";
+/** Fired by the footer's "Cookie Settings" link to let the visitor revisit their choice. */
+export const OPEN_COOKIE_PREFERENCES_EVENT = "bfi:open-cookie-preferences";
+
+export function hasAnalyticsConsent() {
+  if (typeof document === "undefined") return false;
+  return document.cookie.split("; ").includes(`${COOKIE_KEY}=accepted`);
+}
 
 export function CookieConsent() {
   const [visible, setVisible] = useState(false);
@@ -11,19 +20,21 @@ export function CookieConsent() {
   useEffect(() => {
     const stored = localStorage.getItem(COOKIE_KEY);
     if (!stored) setVisible(true);
+
+    const reopen = () => setVisible(true);
+    window.addEventListener(OPEN_COOKIE_PREFERENCES_EVENT, reopen);
+    return () => window.removeEventListener(OPEN_COOKIE_PREFERENCES_EVENT, reopen);
   }, []);
 
-  function accept() {
-    localStorage.setItem(COOKIE_KEY, "accepted");
-    document.cookie = `${COOKIE_KEY}=accepted; max-age=${60 * 60 * 24 * 365}; path=/; SameSite=Lax`;
+  function setConsent(value: "accepted" | "declined") {
+    localStorage.setItem(COOKIE_KEY, value);
+    document.cookie = `${COOKIE_KEY}=${value}; max-age=${60 * 60 * 24 * 365}; path=/; SameSite=Lax`;
     setVisible(false);
+    window.dispatchEvent(new Event(CONSENT_CHANGE_EVENT));
   }
 
-  function decline() {
-    localStorage.setItem(COOKIE_KEY, "declined");
-    document.cookie = `${COOKIE_KEY}=declined; max-age=${60 * 60 * 24 * 365}; path=/; SameSite=Lax`;
-    setVisible(false);
-  }
+  const accept = () => setConsent("accepted");
+  const decline = () => setConsent("declined");
 
   if (!visible) return null;
 

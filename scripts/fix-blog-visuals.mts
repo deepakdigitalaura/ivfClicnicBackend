@@ -251,6 +251,146 @@ const SVG_HIGHRISK_PHASES_LIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewB
   <text x="400" y="239" text-anchor="middle" font-size="9.5" fill="${C.rose}" font-weight="600">With proper management, most women with high-risk conditions achieve healthy outcomes</text>
 </svg>`;
 
+const SVG_AZOOSPERMIA_TYPES_LIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="${FONT}">
+  <rect width="800" height="320" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="318.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">AZOOSPERMIA: THE TWO TYPES EXPLAINED</text>
+  <text x="400" y="42" text-anchor="middle" font-size="9.5" fill="${C.muted}">Understanding your type is the first step to knowing your treatment options</text>
+  <line x1="30" y1="52" x2="770" y2="52" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- Left: Obstructive -->
+  <rect x="28" y="66" width="360" height="230" rx="10" fill="${C.white}" stroke="${C.rose}" stroke-width="1.5"/>
+  <rect x="28" y="66" width="360" height="34" rx="10" fill="${C.rose}"/>
+  <rect x="28" y="86" width="360" height="14" fill="${C.rose}"/>
+  <text x="208" y="88" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">OBSTRUCTIVE AZOOSPERMIA</text>
+
+  <circle cx="105" cy="150" r="30" fill="${C.roseSoft}" stroke="${C.rose}" stroke-width="1.5"/>
+  <text x="105" y="147" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">TESTIS</text>
+  <text x="105" y="159" text-anchor="middle" font-size="7.5" fill="${C.dark}">Sperm made</text>
+  <text x="105" y="169" text-anchor="middle" font-size="7.5" fill="${C.rose}" font-weight="600">✓ normally</text>
+
+  <line x1="140" y1="150" x2="188" y2="150" stroke="${C.rose}" stroke-width="2.5"/>
+  <rect x="180" y="140" width="20" height="20" rx="3" fill="${C.rose}"/>
+  <text x="190" y="154" text-anchor="middle" font-size="10" font-weight="700" fill="${C.white}">✕</text>
+  <text x="248" y="139" text-anchor="middle" font-size="8" font-weight="600" fill="${C.rose}">BLOCKAGE</text>
+  <text x="248" y="151" text-anchor="middle" font-size="7.5" fill="${C.muted}">vas deferens, epididymis</text>
+  <text x="248" y="162" text-anchor="middle" font-size="7.5" fill="${C.muted}">or ejaculatory duct</text>
+
+  <line x1="300" y1="150" x2="345" y2="150" stroke="${C.border}" stroke-width="2" stroke-dasharray="5,4"/>
+
+  <rect x="44" y="196" width="328" height="82" rx="8" fill="${C.roseSoft}" opacity="0.5" stroke="${C.rose}" stroke-width="1"/>
+  <text x="208" y="214" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.rose}">Key Facts — Obstructive</text>
+  <text x="208" y="230" text-anchor="middle" font-size="9.5" fill="${C.dark}">Sperm are being made — they just can't get out</text>
+  <text x="208" y="246" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.rose}">Sperm retrieval success: Over 90%</text>
+  <text x="208" y="262" text-anchor="middle" font-size="9.5" fill="${C.muted}">Common causes: vasectomy, CBAVD,</text>
+  <text x="208" y="273" text-anchor="middle" font-size="9.5" fill="${C.muted}">infection, injury</text>
+
+  <!-- Right: Non-Obstructive -->
+  <rect x="412" y="66" width="360" height="230" rx="10" fill="${C.white}" stroke="${C.line}" stroke-width="1.5"/>
+  <rect x="412" y="66" width="360" height="34" rx="10" fill="${C.dark}"/>
+  <rect x="412" y="86" width="360" height="14" fill="${C.dark}"/>
+  <text x="592" y="88" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">NON-OBSTRUCTIVE AZOOSPERMIA</text>
+
+  <circle cx="489" cy="150" r="30" fill="${C.ivory}" stroke="${C.dark}" stroke-width="1.5" stroke-dasharray="4,3"/>
+  <text x="489" y="145" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.dark}">TESTIS</text>
+  <text x="489" y="156" text-anchor="middle" font-size="7" fill="${C.muted}">Reduced / absent</text>
+  <text x="489" y="166" text-anchor="middle" font-size="7" fill="${C.muted}">production</text>
+
+  <line x1="524" y1="150" x2="640" y2="150" stroke="${C.line}" stroke-width="2" stroke-dasharray="4,4"/>
+  <text x="582" y="141" text-anchor="middle" font-size="7.5" fill="${C.muted}">path open — no sperm</text>
+
+  <circle cx="489" cy="200" r="7" fill="${C.rose}" opacity="0.55"/>
+  <text x="510" y="197" text-anchor="middle" font-size="7.5" fill="${C.dark}" font-weight="600">Focal sperm may exist</text>
+  <text x="510" y="207" text-anchor="middle" font-size="7.5" fill="${C.muted}">in testicular tissue</text>
+
+  <rect x="428" y="196" width="328" height="82" rx="8" fill="${C.ivory}" stroke="${C.line}" stroke-width="1"/>
+  <text x="592" y="214" text-anchor="middle" font-size="10.5" font-weight="700" fill="${C.dark}">Key Facts — Non-Obstructive</text>
+  <text x="592" y="230" text-anchor="middle" font-size="9.5" fill="${C.dark}">Sperm production is impaired or absent</text>
+  <text x="592" y="246" text-anchor="middle" font-size="9.5" font-weight="700" fill="${C.rose}">micro-TESE retrieval success: ~50–60%</text>
+  <text x="592" y="262" text-anchor="middle" font-size="9.5" fill="${C.muted}">Causes: hormonal, genetic (Klinefelter's),</text>
+  <text x="592" y="273" text-anchor="middle" font-size="9.5" fill="${C.muted}">testicular failure</text>
+
+  <!-- Bottom outcome -->
+  <rect x="60" y="292" width="680" height="18" rx="6" fill="${C.rose}" opacity="0.08"/>
+  <text x="400" y="305" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.rose}">Both types have treatment paths. Most men with azoospermia can father biological children.</text>
+</svg>`;
+
+const SVG_SPERM_RETRIEVAL_LIGHT = `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 320" font-family="${FONT}">
+  <rect width="800" height="320" fill="${C.ivory}" rx="12"/>
+  <rect x="0.75" y="0.75" width="798.5" height="318.5" fill="none" stroke="${C.border}" stroke-width="1.5" rx="12"/>
+  <text x="400" y="27" text-anchor="middle" font-size="12" font-weight="700" fill="${C.dark}" letter-spacing="0.5">SURGICAL SPERM RETRIEVAL METHODS</text>
+  <text x="400" y="42" text-anchor="middle" font-size="9.5" fill="${C.muted}">PESA &#183; TESA &#183; MESA &#183; micro-TESE &#8212; understanding your options</text>
+  <line x1="24" y1="52" x2="776" y2="52" stroke="${C.border}" stroke-width="1"/>
+
+  <!-- PESA -->
+  <rect x="20" y="64" width="178" height="220" rx="9" fill="${C.white}" stroke="${C.line}" stroke-width="1.5"/>
+  <rect x="20" y="64" width="178" height="30" rx="9" fill="${C.line}"/>
+  <rect x="20" y="82" width="178" height="12" fill="${C.line}"/>
+  <text x="109" y="84" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.dark}">PESA</text>
+  <text x="109" y="107" text-anchor="middle" font-size="8.5" fill="${C.muted}">Percutaneous Epididymal</text>
+  <text x="109" y="118" text-anchor="middle" font-size="8.5" fill="${C.muted}">Sperm Aspiration</text>
+  <line x1="35" y1="128" x2="183" y2="128" stroke="${C.border}" stroke-width="1"/>
+  <text x="109" y="144" text-anchor="middle" font-size="8.5" fill="${C.dark}">Needle aspiration from</text>
+  <text x="109" y="155" text-anchor="middle" font-size="8.5" fill="${C.dark}">epididymis &#8212; no incision</text>
+  <text x="109" y="166" text-anchor="middle" font-size="8.5" fill="${C.dark}">Day procedure</text>
+  <text x="109" y="186" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Obstructive AZ</text>
+  <text x="109" y="198" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Success: Over 90%</text>
+  <text x="109" y="214" text-anchor="middle" font-size="8" fill="${C.muted}">Lowest invasiveness</text>
+  <text x="109" y="225" text-anchor="middle" font-size="8" fill="${C.muted}">Best first choice for OA</text>
+
+  <!-- TESA -->
+  <rect x="207" y="64" width="178" height="220" rx="9" fill="${C.white}" stroke="${C.roseSoft}" stroke-width="1.5"/>
+  <rect x="207" y="64" width="178" height="30" rx="9" fill="${C.roseSoft}"/>
+  <rect x="207" y="82" width="178" height="12" fill="${C.roseSoft}"/>
+  <text x="296" y="84" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.rose}">TESA</text>
+  <text x="296" y="107" text-anchor="middle" font-size="8.5" fill="${C.muted}">Testicular Sperm</text>
+  <text x="296" y="118" text-anchor="middle" font-size="8.5" fill="${C.muted}">Aspiration</text>
+  <line x1="222" y1="128" x2="370" y2="128" stroke="${C.border}" stroke-width="1"/>
+  <text x="296" y="144" text-anchor="middle" font-size="8.5" fill="${C.dark}">Needle aspiration directly</text>
+  <text x="296" y="155" text-anchor="middle" font-size="8.5" fill="${C.dark}">from testis &#8212; no incision</text>
+  <text x="296" y="166" text-anchor="middle" font-size="8.5" fill="${C.dark}">Day procedure</text>
+  <text x="296" y="186" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Mild NOA / OA</text>
+  <text x="296" y="198" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Success: ~50&#8211;60% (NOA)</text>
+  <text x="296" y="214" text-anchor="middle" font-size="8" fill="${C.muted}">Minimally invasive</text>
+  <text x="296" y="225" text-anchor="middle" font-size="8" fill="${C.muted}">Good first option for NOA</text>
+
+  <!-- MESA -->
+  <rect x="394" y="64" width="178" height="220" rx="9" fill="${C.white}" stroke="${C.roseMid}" stroke-width="1.5"/>
+  <rect x="394" y="64" width="178" height="30" rx="9" fill="${C.roseMid}"/>
+  <rect x="394" y="82" width="178" height="12" fill="${C.roseMid}"/>
+  <text x="483" y="84" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">MESA</text>
+  <text x="483" y="107" text-anchor="middle" font-size="8.5" fill="${C.muted}">Microsurgical Epididymal</text>
+  <text x="483" y="118" text-anchor="middle" font-size="8.5" fill="${C.muted}">Sperm Aspiration</text>
+  <line x1="409" y1="128" x2="557" y2="128" stroke="${C.border}" stroke-width="1"/>
+  <text x="483" y="144" text-anchor="middle" font-size="8.5" fill="${C.dark}">Open microsurgery &#8212;</text>
+  <text x="483" y="155" text-anchor="middle" font-size="8.5" fill="${C.dark}">epididymis visualised</text>
+  <text x="483" y="166" text-anchor="middle" font-size="8.5" fill="${C.dark}">under microscope</text>
+  <text x="483" y="186" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Obstructive AZ</text>
+  <text x="483" y="198" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Highest yield for OA</text>
+  <text x="483" y="214" text-anchor="middle" font-size="8" fill="${C.muted}">Best for banking</text>
+  <text x="483" y="225" text-anchor="middle" font-size="8" fill="${C.muted}">multiple samples</text>
+
+  <!-- micro-TESE (gold standard) -->
+  <rect x="581" y="64" width="199" height="220" rx="9" fill="${C.white}" stroke="${C.rose}" stroke-width="2"/>
+  <rect x="581" y="64" width="199" height="30" rx="9" fill="${C.rose}"/>
+  <rect x="581" y="82" width="199" height="12" fill="${C.rose}"/>
+  <text x="680" y="84" text-anchor="middle" font-size="12.5" font-weight="700" fill="${C.white}">micro-TESE &#9733;</text>
+  <text x="680" y="107" text-anchor="middle" font-size="8.5" fill="${C.muted}">Microsurgical Testicular</text>
+  <text x="680" y="118" text-anchor="middle" font-size="8.5" fill="${C.muted}">Sperm Extraction</text>
+  <line x1="596" y1="128" x2="764" y2="128" stroke="${C.border}" stroke-width="1"/>
+  <text x="680" y="144" text-anchor="middle" font-size="8.5" fill="${C.dark}">Operating microscope maps</text>
+  <text x="680" y="155" text-anchor="middle" font-size="8.5" fill="${C.dark}">seminiferous tubules for</text>
+  <text x="680" y="166" text-anchor="middle" font-size="8.5" fill="${C.dark}">sperm pockets</text>
+  <text x="680" y="186" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Non-Obstructive AZ</text>
+  <text x="680" y="198" text-anchor="middle" font-size="8.5" font-weight="700" fill="${C.rose}">Retrieval rate: ~50&#8211;60%</text>
+  <text x="680" y="214" text-anchor="middle" font-size="8" fill="${C.muted}">Gold standard for NOA</text>
+  <text x="680" y="225" text-anchor="middle" font-size="8" fill="${C.muted}">Best technology available</text>
+
+  <!-- Bottom bar -->
+  <rect x="20" y="294" width="760" height="18" rx="6" fill="${C.rose}" opacity="0.08"/>
+  <text x="400" y="307" text-anchor="middle" font-size="9.5" font-weight="600" fill="${C.rose}">After retrieval, sperm are used in IVF+ICSI &#8212; one viable sperm can fertilise one egg.</text>
+</svg>`;
+
 // ── Per-blog fix config ───────────────────────────────────────────────
 interface FixConfig {
   // Blocks to remove by title substring
@@ -1173,6 +1313,19 @@ const FIX_CONFIGS: Record<string, FixConfig> = {
   },
   "how-does-the-climate-and-lifestyle-in-ahmedabad-affect-fertility": {
     removeBlocks: ["complete guide", "key numbers"],
+  },
+
+  // ── Wave 56: Azoospermia — dark-plum infographics off brand vs. rest of page ──
+  // Both diagrams present data with no live-theme equivalent elsewhere on the
+  // page (the existing comparisonTable block is OA-vs-NOA overview, not the
+  // PESA/TESA/MESA/micro-TESE breakdown) — rebuild both in the light design
+  // system rather than removing.
+  "azoospermia-can-you-have-a-baby-with-zero-sperm-count": {
+    removeBlocks: [],
+    svgUpdates: [
+      ["obstructive vs non-obstructive", SVG_AZOOSPERMIA_TYPES_LIGHT],
+      ["surgical sperm retrieval", SVG_SPERM_RETRIEVAL_LIGHT],
+    ],
   },
 };
 
