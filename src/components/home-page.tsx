@@ -20,7 +20,7 @@ import {
 } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import type { Review } from "@/lib/reviews";
+import type { Review, ReviewData, AggregateRating } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
 import { OPEN_COOKIE_PREFERENCES_EVENT } from "@/components/cookie-consent";
@@ -1406,11 +1406,27 @@ export function Testimonials({
   eyebrow = "Testimonials",
   title = <>Words from <em className="font-display italic text-[color:var(--rose)]">our families.</em></>,
 }: { cms?: Review[]; eyebrow?: React.ReactNode; title?: React.ReactNode } = {}) {
-  const data = getBrandReviews();
-  const googleReviews: Review[] = data?.reviews ?? [];
-  const googleVerified = !!data?.verified;
-  const aggregate = googleVerified ? data?.aggregate : undefined; // rating badge only for real Google data
-  const listingUrl = data?.mapsUrl ?? BRAND_LISTING_URL;
+  const [liveData, setLiveData] = useState<ReviewData | null>(() => getBrandReviews());
+
+  // Upgrade past this build's static snapshot with whatever the admin's
+  // "Refresh Reviews" button has accumulated since, without needing a
+  // redeploy. Only replaces state when there's something to show.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/reviews/brand")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((fresh: { aggregate?: AggregateRating; mapsUrl?: string; reviews?: Review[] } | null) => {
+        if (cancelled || !fresh?.reviews?.length) return;
+        setLiveData({ reviews: fresh.reviews, aggregate: fresh.aggregate, mapsUrl: fresh.mapsUrl, verified: true });
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
+  const googleReviews: Review[] = liveData?.reviews ?? [];
+  const googleVerified = !!liveData?.verified;
+  const aggregate = googleVerified ? liveData?.aggregate : undefined; // rating badge only for real Google data
+  const listingUrl = liveData?.mapsUrl ?? BRAND_LISTING_URL;
 
   // Supplement the live Google reviews with staff-curated CMS testimonials.
   // Google entries keep their verified flag (so only REAL Google data is labelled

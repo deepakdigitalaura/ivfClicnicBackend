@@ -32,6 +32,9 @@ import {
   saveBlog,
   deleteBlog,
   setBlogStatus,
+  refreshAllReviews,
+  readAdminReviews,
+  deleteReview,
   type Inquiry,
   type AdminDoctor,
   type AdminTreatment,
@@ -44,6 +47,8 @@ import {
   type AdminSiteSettings,
   type AdminEducationVideo,
   type AdminBlogMeta,
+  type ReviewRefreshResult,
+  type AdminGoogleReview,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -334,5 +339,26 @@ export async function deleteBlogAction(id: string, slug?: string): Promise<SaveR
 export async function setBlogStatusAction(id: string, status: "published" | "draft", slug?: string): Promise<SaveResult> {
   const r = await guard(() => setBlogStatus(id, status));
   revalidateBlogPages(slug);
+  return r;
+}
+
+// ── Reviews ──
+
+export type RefreshReviewsResult = { ok: boolean; error?: string; results?: ReviewRefreshResult[]; reviews?: AdminGoogleReview[] };
+
+export async function refreshReviewsAction(): Promise<RefreshReviewsResult> {
+  try {
+    const results = await refreshAllReviews();
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, results, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Refresh failed" };
+  }
+}
+
+export async function deleteReviewAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteReview(id));
+  revalidatePath("/admin-panel/reviews");
   return r;
 }

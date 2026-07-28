@@ -2,6 +2,7 @@ import "server-only";
 import { createClient } from "next-sanity";
 import { revalidateTag } from "next/cache";
 import { projectId, dataset } from "./client";
+import reviewSources from "@/data/reviews.sources.json";
 import type {
   RobotsConfig,
   ScriptsConfig,
@@ -701,6 +702,158 @@ export async function deleteBlog(id: string) {
 export async function setBlogStatus(id: string, status: "published" | "draft") {
   await writeClient.patch(id).set({ status }).commit();
   revalidateTag(BLOG_TAG);
+}
+
+// ── Google Reviews (admin-accumulated) ──
+// Reads Place IDs from the existing src/data/reviews.sources.json (same file
+// scripts/sync-reviews.mjs uses). Each refresh pulls Google's up-to-5 "newest"
+// reviews per centre, keeps only 4-5★ reviews between 120-320 characters
+// (substantial, not one-liners), and stores any NOT already saved as new
+// Sanity documents — existing reviews are never touched, so the stored set
+// only ever grows. Ordering by fetchedAt (see REVIEWS_BY_KEY_QUERY) means
+// whatever a refresh just added surfaces above older, previously-saved ones.
+
+export type AdminGoogleReview = {
+  _id: string;
+  centreSlug: string;
+  author: string;
+  rating: number;
+  text: string;
+  publishedAt?: string;
+  relativeTime?: string;
+  profilePhoto?: string;
+  fetchedAt: string;
+};
+
+export type ReviewRefreshResult = {
+  centreSlug: string;
+  fetched: number;
+  added: number;
+  skipped?: "no-placeid";
+  error?: string;
+};
+
+const REVIEW_TAG = "sanity-reviews";
+const REVIEW_MIN_RATING = 4;
+const REVIEW_MIN_TEXT_LEN = 120;
+const REVIEW_MAX_TEXT_LEN = 320;
+
+const slugifyKey = (s: string) => s.toLowerCase().replace(/[^a-z0-9]+/g, "-").replace(/(^-+|-+$)/g, "");
+
+export async function readAdminReviews(): Promise<AdminGoogleReview[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "googleReview"] | order(centreSlug asc, fetchedAt desc){ _id, centreSlug, author, rating, text, publishedAt, relativeTime, profilePhoto, fetchedAt }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function deleteReview(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(REVIEW_TAG);
+}
+
+type GoogleReviewSource = { placeId?: string; listingUrl?: string };
+
+type RawGoogleReview = {
+  author_name?: string;
+  rating?: number;
+  text?: string;
+  time?: number;
+  relative_time_description?: string;
+  profile_photo_url?: string;
+};
+
+/** Fetches every configured centre's Place Details from Google, filters to
+ *  4-5★ reviews of substantial length, and saves any new ones. Never throws —
+ *  a per-centre failure (bad Place ID, API error) is reported in that
+ *  centre's result and does not stop the others. */
+export async function refreshAllReviews(): Promise<ReviewRefreshResult[]> {
+  if (!hasSanity()) throw new Error("Sanity not configured");
+  const apiKey = process.env.GOOGLE_PLACES_API_KEY;
+  if (!apiKey) throw new Error("GOOGLE_PLACES_API_KEY not set");
+
+  const sources = (reviewSources as { sources?: Record<string, GoogleReviewSource> }).sources ?? {};
+  const results: ReviewRefreshResult[] = [];
+
+  for (const [centreSlug, src] of Object.entries(sources)) {
+    if (!src?.placeId) {
+      results.push({ centreSlug, fetched: 0, added: 0, skipped: "no-placeid" });
+      continue;
+    }
+
+    try {
+      const fields = "rating,user_ratings_total,reviews,url,name";
+      const url =
+        `https://maps.googleapis.com/maps/api/place/details/json` +
+        `?place_id=${encodeURIComponent(src.placeId)}&fields=${fields}&reviews_sort=newest&language=en&key=${apiKey}`;
+      const res = await fetch(url, { cache: "no-store" });
+      if (!res.ok) throw new Error(`HTTP ${res.status}`);
+      const json = await res.json();
+      if (json.status !== "OK" || !json.result) {
+        throw new Error(`Places status ${json.status}${json.error_message ? ` — ${json.error_message}` : ""}`);
+      }
+
+      const r = json.result;
+      const rawReviews: RawGoogleReview[] = Array.isArray(r.reviews) ? r.reviews : [];
+      const fetchedAt = new Date().toISOString();
+      let added = 0;
+
+      for (const rv of rawReviews) {
+        const rating = Number(rv.rating);
+        const text = String(rv.text ?? "").trim();
+        if (!Number.isFinite(rating) || rating < REVIEW_MIN_RATING) continue;
+        if (text.length < REVIEW_MIN_TEXT_LEN || text.length > REVIEW_MAX_TEXT_LEN) continue;
+
+        const author = String(rv.author_name ?? "Google user");
+        const time = Number(rv.time) || 0;
+        const id = `googleReview-${centreSlug}-${slugifyKey(author)}-${time}`;
+
+        const existing = await writeClient.getDocument(id);
+        if (existing) continue; // already stored from a previous refresh — leave it in place
+
+        await writeClient.createIfNotExists({
+          _id: id,
+          _type: "googleReview",
+          centreSlug,
+          author,
+          rating,
+          text,
+          publishedAt: time ? new Date(time * 1000).toISOString() : fetchedAt,
+          ...(rv.relative_time_description ? { relativeTime: rv.relative_time_description } : {}),
+          ...(rv.profile_photo_url ? { profilePhoto: rv.profile_photo_url } : {}),
+          fetchedAt,
+        });
+        added++;
+      }
+
+      const aggregate =
+        typeof r.rating === "number" && typeof r.user_ratings_total === "number" && r.user_ratings_total > 0
+          ? { ratingValue: r.rating, reviewCount: r.user_ratings_total }
+          : null;
+      if (aggregate) {
+        await writeClient.createOrReplace({
+          _id: `reviewMeta-${centreSlug}`,
+          _type: "reviewMeta",
+          centreSlug,
+          ratingValue: aggregate.ratingValue,
+          reviewCount: aggregate.reviewCount,
+          ...(r.url || src.listingUrl ? { mapsUrl: r.url || src.listingUrl } : {}),
+          lastRefreshedAt: fetchedAt,
+        });
+      }
+
+      results.push({ centreSlug, fetched: rawReviews.length, added });
+    } catch (e) {
+      results.push({ centreSlug, fetched: 0, added: 0, error: e instanceof Error ? e.message : String(e) });
+    }
+  }
+
+  revalidateTag(REVIEW_TAG);
+  return results;
 }
 
 /** Lightweight counts for the dashboard stat cards. */
