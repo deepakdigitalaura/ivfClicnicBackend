@@ -46,6 +46,7 @@ export const SITE = {
     "National Fertility Award 2023",
     "National Fertility Award 2024",
     "National Fertility Award 2025",
+    "National Fertility Award 2026",
     "Economic Times IVF Chain of the Year — West",
     "Bharat Excellence Award for IVF and Infertility Care",
     "Best Test Tube Baby Clinic — 2004",

@@ -336,7 +336,6 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
           >
             <PrimaryBtn icon={Calendar} href="#book">{hero.ctas[0]}</PrimaryBtn>
             <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate">{hero.ctas[1]}</GhostBtn>
-            <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
           </motion.div>
         </div>
 
