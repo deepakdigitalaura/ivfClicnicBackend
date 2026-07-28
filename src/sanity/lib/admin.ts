@@ -856,6 +856,77 @@ export async function refreshAllReviews(): Promise<ReviewRefreshResult[]> {
   return results;
 }
 
+/** ONE-TIME migration: the pre-existing build-time cache (src/data/reviews-cache.json,
+ *  populated by scripts/sync-reviews.mjs before this admin store existed) already has
+ *  real Google reviews fetched over past weeks. Loads them into the same accumulating
+ *  Sanity store — through the same 4-5★/120-320-char filter — so the admin panel isn't
+ *  starting from zero before the first live "Refresh All Reviews" click. Safe to re-run
+ *  (dedupes exactly like refreshAllReviews). Remove this + its call site once run. */
+export async function backfillLegacyReviewCache(): Promise<ReviewRefreshResult[]> {
+  if (!hasSanity()) throw new Error("Sanity not configured");
+  const { default: legacyCache } = await import("@/data/reviews-cache.json");
+  const results: ReviewRefreshResult[] = [];
+
+  for (const [centreSlug, entry] of Object.entries(legacyCache as Record<string, {
+    fetchedAt?: string;
+    mapsUrl?: string;
+    aggregate?: { ratingValue?: number; reviewCount?: number };
+    reviews?: { author?: string; rating?: number; text?: string; publishedAtISO?: string; relativeTime?: string; profilePhoto?: string }[];
+  }>)) {
+    try {
+      const fetchedAt = new Date().toISOString();
+      let added = 0;
+
+      for (const rv of entry.reviews ?? []) {
+        const rating = Number(rv.rating);
+        const text = String(rv.text ?? "").trim();
+        if (!Number.isFinite(rating) || rating < REVIEW_MIN_RATING) continue;
+        if (text.length < REVIEW_MIN_TEXT_LEN || text.length > REVIEW_MAX_TEXT_LEN) continue;
+
+        const author = String(rv.author ?? "Google user");
+        const time = rv.publishedAtISO ? Math.floor(new Date(rv.publishedAtISO).getTime() / 1000) : 0;
+        const id = `googleReview-${centreSlug}-${slugifyKey(author)}-${time}`;
+
+        const existing = await writeClient.getDocument(id);
+        if (existing) continue;
+
+        await writeClient.createIfNotExists({
+          _id: id,
+          _type: "googleReview",
+          centreSlug,
+          author,
+          rating,
+          text,
+          publishedAt: rv.publishedAtISO || fetchedAt,
+          ...(rv.relativeTime ? { relativeTime: rv.relativeTime } : {}),
+          ...(rv.profilePhoto ? { profilePhoto: rv.profilePhoto } : {}),
+          fetchedAt,
+        });
+        added++;
+      }
+
+      if (entry.aggregate?.reviewCount) {
+        await writeClient.createOrReplace({
+          _id: `reviewMeta-${centreSlug}`,
+          _type: "reviewMeta",
+          centreSlug,
+          ratingValue: entry.aggregate.ratingValue ?? 0,
+          reviewCount: entry.aggregate.reviewCount,
+          ...(entry.mapsUrl ? { mapsUrl: entry.mapsUrl } : {}),
+          lastRefreshedAt: entry.fetchedAt || fetchedAt,
+        });
+      }
+
+      results.push({ centreSlug, fetched: entry.reviews?.length ?? 0, added });
+    } catch (e) {
+      results.push({ centreSlug, fetched: 0, added: 0, error: e instanceof Error ? e.message : String(e) });
+    }
+  }
+
+  revalidateTag(REVIEW_TAG);
+  return results;
+}
+
 /** Lightweight counts for the dashboard stat cards. */
 export async function getDashboardStats() {
   const empty = { redirects: 0, pageSeo: 0, headScripts: 0, bodyScripts: 0, customSchemas: 0, blocked: 0, newInquiries: 0, totalInquiries: 0 };
