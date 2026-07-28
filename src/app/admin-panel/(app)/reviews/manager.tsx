@@ -1,8 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
-import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle } from "lucide-react";
+import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle, Download } from "lucide-react";
 import type { AdminGoogleReview } from "@/sanity/lib/admin";
-import { refreshReviewsAction, deleteReviewAction, type RefreshReviewsResult } from "../../actions";
+import { refreshReviewsAction, backfillLegacyReviewsAction, deleteReviewAction, type RefreshReviewsResult } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 
 type CentreInfo = { centreSlug: string; configured: boolean };
@@ -50,6 +50,18 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
     });
   };
 
+  const backfill = () => {
+    if (!confirm("Import the reviews already sitting in the old build-time cache into this store? Safe to run more than once.")) return;
+    run(async () => {
+      const res = await backfillLegacyReviewsAction();
+      if (res.ok && res.results) {
+        setLastRun(res.results);
+        if (res.reviews) setItems(res.reviews);
+      }
+      return { ok: res.ok, error: res.error };
+    });
+  };
+
   const remove = (r: AdminGoogleReview) => {
     if (!confirm(`Delete this review from ${r.author}?`)) return;
     setItems((prev) => prev.filter((x) => x._id !== r._id));
@@ -79,6 +91,9 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
           </div>
         )}
         <div style={{ flex: 1 }} />
+        <button type="button" className="admin-btn-ghost" onClick={backfill} disabled={pending} title="One-time: import reviews already in the old build-time cache">
+          <Download size={16} /> Import legacy cache
+        </button>
         <button type="button" className="admin-btn" onClick={refresh} disabled={pending}>
           <RefreshCw size={16} className={pending ? "animate-spin" : ""} /> {pending ? "Refreshing…" : "Refresh All Reviews"}
         </button>

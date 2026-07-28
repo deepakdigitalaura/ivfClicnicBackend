@@ -33,6 +33,7 @@ import {
   deleteBlog,
   setBlogStatus,
   refreshAllReviews,
+  backfillLegacyReviewCache,
   readAdminReviews,
   deleteReview,
   type Inquiry,
@@ -354,6 +355,19 @@ export async function refreshReviewsAction(): Promise<RefreshReviewsResult> {
     return { ok: true, results, reviews };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "Refresh failed" };
+  }
+}
+
+/** TEMPORARY — one-time migration of src/data/reviews-cache.json into the new
+ *  Sanity store. Remove this + its button in reviews/manager.tsx once run. */
+export async function backfillLegacyReviewsAction(): Promise<RefreshReviewsResult> {
+  try {
+    const results = await backfillLegacyReviewCache();
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, results, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Backfill failed" };
   }
 }
 
