@@ -2,13 +2,109 @@
   "brand": {
     "key": "brand",
     "source": "google-places",
-    "fetchedAt": "2026-07-27T13:17:00.438Z",
-    "mapsUrl": "https://maps.google.com/?cid=6889148050023028782",
+    "fetchedAt": "2026-07-28T12:06:21.085Z",
+    "mapsUrl": "https://www.google.com/maps/search/?api=1&query=Bavishi+Fertility+Institute",
     "aggregate": {
       "ratingValue": 4.8,
       "reviewCount": 2064
     },
     "reviews": [
+      {
+        "author": "Jignesh Patel",
+        "rating": 5,
+        "text": "Nice",
+        "publishedAtISO": "2026-06-16T06:42:50.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWlclJpKPsHLTKkO2ii5mXwqSsVkNP8ufHvnSJ0hBni5xjl-OE=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Ritoo Maurya",
+        "rating": 5,
+        "text": "Thank you, Bavishi Neo Fertility in Varanasi.\nI received a very positive response from here. My decision to seek treatment here was a very happy one.\nThank you.",
+        "publishedAtISO": "2026-06-25T08:14:04.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocLbkMjcJKGwetklMY1wfYzBxWr_fkBqPjc96ffhrCIHKzYasQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Zeel Raj",
+        "rating": 5,
+        "text": "Had a great consultation at Bavishi Fertility. No issues at all. The doctor explained everything properly.\nFelt comfortable and well-guided.",
+        "publishedAtISO": "2026-07-23T09:42:15.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjX2eEVqHS86NZyf0qfZCz7wehFftwEE29QxvsmpXI4xnvx9M91c=s128-c0x00000000-cc-rp-mo-ba2"
+      },
+      {
+        "author": "Neha Kothari",
+        "rating": 5,
+        "text": "I was very impressed with their nature,\nbehavior and quality of treatment..",
+        "publishedAtISO": "2026-07-24T07:50:44.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocL4JZEt1BzqeMDDu2V1fcSl7wfXtwQrSC803iLfxTpbOUyyXQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "PATEL MAYANK",
+        "rating": 4,
+        "text": "Good explanation",
+        "publishedAtISO": "2026-07-25T08:11:32.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocLbxZKDsuk62tFU7FgX5TbDSJiOfnT-ir6uDj-OVxuGacejuQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Kishan Chauhan",
+        "rating": 5,
+        "text": "Sari rite samjave chhe and staff pan saro se",
+        "publishedAtISO": "2026-02-19T09:52:45.000Z",
+        "relativeTime": "5 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjW68xKlcp35ergL92qGWXStJXV74ah18-uYFUVe4_zCPyTtOa3a=s128-c0x00000000-cc-rp-mo-ba3"
+      },
+      {
+        "author": "sambhav thacker",
+        "rating": 5,
+        "text": "Ak moti safar Purn karel che Jema bahu j moto hath che, Bavishi Team and Dr surabhi madam jene ak hatash Thai gayela parivar ne Asha jagadi ne am navi life api ane Jema Amara Ghare am putra no janam thayo che, ne amara parivar me Gunjto kari Didho che. Thank you 🙏 🙏🙏",
+        "publishedAtISO": "2026-07-26T07:02:09.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocL3fH5wln8UHsLBUmpNS6cETgmbTu_h0ZB5eVkZF6OxAdrI7w=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "nikita vyas",
+        "rating": 5,
+        "text": "I had a wonderful experience at Bavishi Hospital. The doctors explain everything clearly and patiently, answering every question in detail. They provide honest and appropriate medical advice, which gives great confidence throughout the treatment.\nThe entire staff is professional, polite, caring, and always ready to help. Their kind behavior and excellent support make every visit comfortable.\nOverall, it is an outstanding hospital with excellent doctors, compassionate staff, and high-quality patient care. I highly recommend Bavishi Hospital to anyone looking for trustworthy fertility treatment and exceptional medical services",
+        "publishedAtISO": "2026-06-30T14:32:15.000Z",
+        "relativeTime": "3 weeks ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocKfgJxL3jrJ7r5iYbXLQ7QGPVPhMiUq1SMa0XDn9C-wGufMBQ=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Vritika Sharma",
+        "rating": 5,
+        "text": "Good experience, good support staff",
+        "publishedAtISO": "2026-07-23T14:13:51.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjXHFHDPJMdLt93XEvTkzWwPNnnNfBDZk5OTE7HLNPQAHoRX6p_D=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Vinayak Parab",
+        "rating": 5,
+        "text": "“I visited Dr. Suman Sharma today and had a very good experience. The doctor was polite, patient, and explained the treatment in detail. Highly recommended.”",
+        "publishedAtISO": "2026-03-21T11:48:14.000Z",
+        "relativeTime": "4 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjUYILwnJobjjHMWrZCXs00yxHmxh-sg7pnzMA19sS3-A2I304mp=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Narayan Modi",
+        "rating": 5,
+        "text": "First of all, we are so happy to have met you, as we know that your hard work and understanding will make our dreams come true. The doctors and staff are very courteous; they treat us with utmost care and take great care of our appointments, schedules, and medications. They are always ready to help us by calling or making an appointment.\nSpecial thanks to\nDr. Falguni Bavishi\nDr. Rupshree\nNidhi & Sejal",
+        "publishedAtISO": "2026-06-11T08:07:12.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJTKfyhxVZWmlqWeMhohi01UHiZyHrwNaP1szvhCmf1qeGxxA=s128-c0x00000000-cc-rp-mo"
+      },
+      {
+        "author": "Sonu Jain",
+        "rating": 5,
+        "text": "doctor is highly experienced listen carefully and take time to explain every medical detail with genuine care...The nursing and front desk staff are polite empathetic and always ready to assist with a smile..",
+        "publishedAtISO": "2026-07-24T07:13:02.000Z",
+        "relativeTime": "in the last week",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocIJxtVDeHIoJiJbGS6lm_whZAcjj1-NhKbQhBt8Tu0NryuGSA=s128-c0x00000000-cc-rp-mo"
+      },
       {
         "author": "Payal sutariya",
         "rating": 5,
@@ -18,20 +114,20 @@
         "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjWoUzKbKUEr6364AxcdiTia7Ny4wmqcEin1faedkhQWiOr4SEeG=s128-c0x00000000-cc-rp-mo"
       },
       {
-        "author": "hasmukh dataniya",
+        "author": "James Bond",
         "rating": 5,
-        "text": "Good experience, best doctor in bavishi hospital, Dr himanshu bavishi great doctor",
-        "publishedAtISO": "2026-07-27T08:45:53.000Z",
-        "relativeTime": "in the last week",
-        "profilePhoto": "https://lh3.googleusercontent.com/a-/ALV-UjX-RlslHPYjuMYIFxxTJx0_QoTxHp83ETmY5efibVeuC7FBXUQ=s128-c0x00000000-cc-rp-mo"
+        "text": "Visited bavishi clinic. Very good experience with Dr Priyanka Sinha. Very knowledgeable and empathetic experience. We recommend bavishi to anybody who needs genuine guidance in becoming parents.",
+        "publishedAtISO": "2026-04-24T07:59:08.000Z",
+        "relativeTime": "3 months ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocKTo9SfWWkXAL_w7yxBpnABZiuwZhoh3fAd4r22oVDpx_5GYw=s128-c0x00000000-cc-rp-mo"
       },
       {
-        "author": "rambalak Patel",
+        "author": "Hiral Prajapati",
         "rating": 5,
-        "text": "After my first pregnancy failed, I was trying for a long time but still could not get pregnant....then I took medicine from Dr. Parnnika Mam and got pregnant within 1 month. Thank you Parnnika Mam",
-        "publishedAtISO": "2026-07-27T08:45:24.000Z",
-        "relativeTime": "in the last week",
-        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocIvwHYlTyhEozfAvBPFKzfm2JzZpEjFt2LtZtne8rZp0-Ru7A=s128-c0x00000000-cc-rp-mo"
+        "text": "Good job 👍",
+        "publishedAtISO": "2026-05-29T06:16:38.000Z",
+        "relativeTime": "a month ago",
+        "profilePhoto": "https://lh3.googleusercontent.com/a/ACg8ocJwsZQz-8viutfNfBPM2Eo8ENBBIZlnxPVV_kwGgbFlqTCjMQ=s128-c0x00000000-cc-rp-mo"
       }
     ]
   },
