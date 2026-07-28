@@ -234,7 +234,30 @@ const REVIEWS = {
   ],
 };
 
-const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+const FLAT = Object.entries(REVIEWS).flatMap(([centreSlug, reviews]) => reviews.map((r) => ({ centreSlug, ...r })));
+const CONCURRENCY = 12;
+
+async function writeOne(client, item) {
+  const id = `googleReview-manual-${item.centreSlug}-${slugifyKey(item.author)}`;
+  const now = new Date().toISOString();
+  try {
+    await client.createIfNotExists({
+      _id: id,
+      _type: "googleReview",
+      centreSlug: item.centreSlug,
+      author: item.author,
+      rating: item.rating,
+      text: item.text,
+      publishedAt: now,
+      fetchedAt: now,
+      manual: true,
+    });
+    return true;
+  } catch (e) {
+    log(`FAILED ${item.centreSlug} / ${item.author}: ${e?.message ?? e}`);
+    return false;
+  }
+}
 
 async function main() {
   if (!projectId || !token) {
@@ -243,40 +266,22 @@ async function main() {
   }
   const client = createClient({ projectId, dataset, apiVersion: "2024-01-01", useCdn: false, token });
 
-  const total = Object.values(REVIEWS).reduce((n, arr) => n + arr.length, 0);
-  let done = 0, added = 0, failed = 0;
-  for (const [centreSlug, reviews] of Object.entries(REVIEWS)) {
-    for (const r of reviews) {
-      const id = `googleReview-manual-${centreSlug}-${slugifyKey(r.author)}`;
-      const now = new Date().toISOString();
-      // createIfNotExists is itself the idempotency check (atomic on Sanity's
-      // side) — no separate getDocument call needed, which also halves the
-      // request count. Each item is independently try/caught so one failure
-      // (rate limit, transient network error) can never abort the rest of
-      // the batch — that was the bug in the first run of this script.
-      try {
-        await client.createIfNotExists({
-          _id: id,
-          _type: "googleReview",
-          centreSlug,
-          author: r.author,
-          rating: r.rating,
-          text: r.text,
-          publishedAt: now,
-          fetchedAt: now,
-          manual: true,
-        });
-        added++;
-      } catch (e) {
-        failed++;
-        log(`FAILED ${centreSlug} / ${r.author}: ${e?.message ?? e}`);
-      }
-      done++;
-      if (done % 20 === 0 || done === total) log(`progress ${done}/${total}`);
-      await sleep(150); // stay well under any burst rate limit
-    }
+  // First run (fully sequential, 1 req/150ms) only got through a fraction of
+  // 162 items before something cut the prebuild step off — repeated deploys
+  // made monotonic progress (already-written items become fast idempotent
+  // no-ops), consistent with a wall-clock budget rather than random
+  // failures. Writing in concurrent batches instead of one-at-a-time cuts
+  // total wall time by roughly CONCURRENCY×, which should let this finish
+  // in a single run. Each item is still independently try/caught so one
+  // failure can never take down the rest of the batch.
+  let added = 0;
+  for (let i = 0; i < FLAT.length; i += CONCURRENCY) {
+    const batch = FLAT.slice(i, i + CONCURRENCY);
+    const results = await Promise.all(batch.map((item) => writeOne(client, item)));
+    added += results.filter(Boolean).length;
+    log(`progress ${Math.min(i + CONCURRENCY, FLAT.length)}/${FLAT.length}`);
   }
-  log(`Done — ${added}/${total} written (already-existing ones are idempotent no-ops), ${failed} failed.`);
+  log(`Done — ${added}/${FLAT.length} written (already-existing ones are idempotent no-ops).`);
 }
 
 main().catch((e) => { log("ERROR", e?.message ?? e); process.exitCode = 0; /* never fail the build */ });
