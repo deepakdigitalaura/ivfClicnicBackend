@@ -566,7 +566,9 @@ export const TREATMENT_TITLE_HREFS: Record<string, string> = {
   "Maternity Services": "/services/maternity-services",
 };
 
-const MOBILE_TREATMENT_TITLES = new Set([
+/** Curated highlights shown on the homepage teaser — the full catalog lives
+ *  on /treatments (linked via the "View All Treatments" button below). */
+const FEATURED_TREATMENT_TITLES = new Set([
   "IVF / ICSI / ART",
   "IUI",
   "Advanced Fertility Techniques",
@@ -574,6 +576,9 @@ const MOBILE_TREATMENT_TITLES = new Set([
 ]);
 
 export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
+  const featured = content.items
+    .map((item, i) => ({ ...item, i }))
+    .filter(({ t }) => FEATURED_TREATMENT_TITLES.has(t));
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
@@ -583,9 +588,9 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
           subtitle={ed("treatments.subtitle", content.subtitle)}
         />
       </div>
-      <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-        {content.items.map(({ icon, t, d }, i) => (
-          <StaggerItem key={t} className={!MOBILE_TREATMENT_TITLES.has(t) ? "hidden sm:block" : undefined}>
+      <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
+        {featured.map(({ icon, t, d, i }) => (
+          <StaggerItem key={t}>
             <TreatmentCard
               icon={resolveIcon(icon)}
               title={t}
@@ -597,6 +602,13 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
           </StaggerItem>
         ))}
       </Stagger>
+      <Reveal delay={0.2}>
+        <div className="mt-9 text-center">
+          <Magnetic as="a" href="/treatments" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+            {ed("treatments.ctaLabel", content.ctaLabel)} <ArrowRight className="h-4 w-4" />
+          </Magnetic>
+        </div>
+      </Reveal>
     </section>
   );
 }
