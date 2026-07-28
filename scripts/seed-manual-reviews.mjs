@@ -234,6 +234,8 @@ const REVIEWS = {
   ],
 };
 
+const sleep = (ms) => new Promise((res) => setTimeout(res, ms));
+
 async function main() {
   if (!projectId || !token) {
     log("Sanity not configured (missing project id or token) — skipping, safe no-op.");
@@ -241,30 +243,40 @@ async function main() {
   }
   const client = createClient({ projectId, dataset, apiVersion: "2024-01-01", useCdn: false, token });
 
-  let added = 0, skipped = 0;
+  const total = Object.values(REVIEWS).reduce((n, arr) => n + arr.length, 0);
+  let done = 0, added = 0, failed = 0;
   for (const [centreSlug, reviews] of Object.entries(REVIEWS)) {
     for (const r of reviews) {
       const id = `googleReview-manual-${centreSlug}-${slugifyKey(r.author)}`;
-      let existing = null;
-      try { existing = await client.getDocument(id); } catch { /* ignore */ }
-      if (existing) { skipped++; continue; }
-
       const now = new Date().toISOString();
-      await client.createIfNotExists({
-        _id: id,
-        _type: "googleReview",
-        centreSlug,
-        author: r.author,
-        rating: r.rating,
-        text: r.text,
-        publishedAt: now,
-        fetchedAt: now,
-        manual: true,
-      });
-      added++;
+      // createIfNotExists is itself the idempotency check (atomic on Sanity's
+      // side) — no separate getDocument call needed, which also halves the
+      // request count. Each item is independently try/caught so one failure
+      // (rate limit, transient network error) can never abort the rest of
+      // the batch — that was the bug in the first run of this script.
+      try {
+        await client.createIfNotExists({
+          _id: id,
+          _type: "googleReview",
+          centreSlug,
+          author: r.author,
+          rating: r.rating,
+          text: r.text,
+          publishedAt: now,
+          fetchedAt: now,
+          manual: true,
+        });
+        added++;
+      } catch (e) {
+        failed++;
+        log(`FAILED ${centreSlug} / ${r.author}: ${e?.message ?? e}`);
+      }
+      done++;
+      if (done % 20 === 0 || done === total) log(`progress ${done}/${total}`);
+      await sleep(150); // stay well under any burst rate limit
     }
   }
-  log(`Done — added ${added}, skipped ${skipped} (already existed).`);
+  log(`Done — ${added}/${total} written (already-existing ones are idempotent no-ops), ${failed} failed.`);
 }
 
 main().catch((e) => { log("ERROR", e?.message ?? e); process.exitCode = 0; /* never fail the build */ });
