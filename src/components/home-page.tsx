@@ -41,7 +41,6 @@ import {
   type ResourceVideo,
   type AwardItem,
   type AccoladeItem,
-  type HomeAboutContent,
   type Heading,
 } from "@/lib/homepage";
 
@@ -225,7 +224,7 @@ export function HomePage({
         ctaLabel={ed("videoHub.ctaLabel", data.videoHub.ctaLabel)}
       />
     ),
-    about: <About content={data.about} />,
+    about: null,
     doctors: null,
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
@@ -990,53 +989,6 @@ export function VideoHub({
         ))}
       </Stagger>
       </MobileCarousel>
-    </section>
-  );
-}
-
-/* ---------- About ---------- */
-
-function About({ content = HOMEPAGE_DEFAULTS.about }: { content?: HomeAboutContent } = {}) {
-  return (
-    <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
-      <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-        <div className="relative">
-          <Reveal>
-            <div className="overflow-hidden rounded-[2rem] shadow-lift">
-              <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[4/5]" editPath="about.image" />
-            </div>
-          </Reveal>
-          <Float className="absolute -right-6 bottom-10 hidden md:block" amplitude={6}>
-            <div className="glass rounded-2xl p-5 shadow-lift">
-              <div className="font-display text-3xl font-medium text-[color:var(--plum)]"><Editable path="about.sinceValue">{content.sinceValue}</Editable></div>
-              <div className="text-xs text-muted-foreground"><Editable path="about.sinceLabel">{content.sinceLabel}</Editable></div>
-            </div>
-          </Float>
-        </div>
-        <div>
-          <SectionHeader
-            eyebrow={<Editable path="about.eyebrow">{content.eyebrow}</Editable>}
-            title={<><Editable path="about.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="about.heading.em">{content.heading.em}</Editable></em></>}
-            subtitle={<Editable path="about.subtitle">{content.subtitle}</Editable>}
-          />
-          <Stagger className="mt-8 grid grid-cols-2 gap-6" stagger={0.08}>
-            {content.stats.map((x, i) => (
-              <StaggerItem key={x.k}>
-                <div className="border-l-2 border-[color:var(--rose)]/40 pl-4">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground"><Editable path={`about.stats.${i}.k`}>{x.k}</Editable></div>
-                  <div className="mt-1 font-display text-xl text-[color:var(--plum)]"><Editable path={`about.stats.${i}.v`}>{x.v}</Editable></div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-          <Reveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <PrimaryBtn href="/about-bfi"><Editable path="about.primaryCta">{content.primaryCta}</Editable></PrimaryBtn>
-              <GhostBtn href="/about-bfi"><Editable path="about.secondaryCta">{content.secondaryCta}</Editable></GhostBtn>
-            </div>
-          </Reveal>
-        </div>
-      </div>
     </section>
   );
 }
