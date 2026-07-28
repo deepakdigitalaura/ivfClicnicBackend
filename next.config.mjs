@@ -46,6 +46,9 @@ const nextConfig = {
       { source: "/surrogacy",                                                         destination: "/treatments/surrogacy",               permanent: true },
       { source: "/varicocele",                                                        destination: "/treatments/varicocele",              permanent: true },
       { source: "/what-is-ivf",                                                       destination: "/treatments/ivf",                     permanent: true },
+      // Service pages — only one category exists today (maternity services),
+      // so /services points straight at its real hub rather than a thin index.
+      { source: "/services",                                destination: "/services/maternity-services",    permanent: true },
       // Calculator pages
       { source: "/ivf-success-rate-calculator",            destination: "/calculators/ivf-success-rate",   permanent: true },
       { source: "/ivf-cost-calculator",                    destination: "/calculators/ivf-cost",           permanent: true },
