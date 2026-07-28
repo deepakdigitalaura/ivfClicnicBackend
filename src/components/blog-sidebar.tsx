@@ -181,7 +181,7 @@ const TRUST_STATS = [
   { label: "Successful IVF Pregnancies", value: "25,000+" },
   { label: "Fertility Centres", value: "14" },
   { label: "5-Star Google Reviews", value: "1,800+" },
-  { label: "National Fertility Awards", value: "5 Years" },
+  { label: "National Fertility Awards", value: "6 Years" },
 ] as const;
 
 export function TrustSidebarCard() {

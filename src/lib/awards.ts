@@ -13,7 +13,7 @@ export type AwardEntry = { img?: string; title: string; desc: string };
 export type GalleryPhoto = { src: string; alt: string };
 
 export const PRESS_AWARDS: AwardEntry[] = [
-  { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "ET Healthworld National Fertility Awards · 5 years running (2021–2025)" },
+  { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "ET Healthworld National Fertility Awards · 6 years running (2021–2026)" },
   { img: "/assets/awards/patient-centric-award.png", title: "Patient Centric Hospital in Reproductive Health", desc: "IHW Patient First Awards 2024 (Bronze)" },
   { img: "/assets/awards/bharat-excellence-award.png", title: "Bharat Medical Excellence Award", desc: "DNS Talks · Gujarat's Top Doctors, Dr. Parth Bavishi (2025)" },
   { img: "/assets/awards/times-healthcare-award.png", title: "Times Healthcare Leaders", desc: "Certificate of Recognition, 2025" },

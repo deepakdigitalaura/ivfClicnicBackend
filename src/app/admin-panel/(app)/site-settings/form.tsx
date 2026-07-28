@@ -105,7 +105,7 @@ export function SiteSettingsForm({ initial, defaults }: { initial: Doc | null; d
 
             <label className="admin-label" style={{ marginTop: 20, display: "block" }}>Awards (schema)</label>
             <p className="admin-hint">One per line. Leave blank to keep the built-in awards list.</p>
-            <textarea className="admin-textarea" style={{ minHeight: 120 }} value={((doc.awards ?? []) as string[]).join("\n")} placeholder="National Fertility Award 2025&#10;Economic Times IVF Chain of the Year — West" onChange={(e) => set("awards", e.target.value.split("\n").map((s) => s.trim()).filter(Boolean))} />
+            <textarea className="admin-textarea" style={{ minHeight: 120 }} value={((doc.awards ?? []) as string[]).join("\n")} placeholder="National Fertility Award 2026&#10;Economic Times IVF Chain of the Year — West" onChange={(e) => set("awards", e.target.value.split("\n").map((s) => s.trim()).filter(Boolean))} />
           </>
         )}
       </div>

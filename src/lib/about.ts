@@ -100,7 +100,7 @@ export const ABOUT_DEFAULTS: AboutData = {
     { n: "30,000+", l: "Successful pregnancies" },
     { n: "3,000+", l: "IVF cycles every year" },
     { n: "14", l: "Centres across 8 cities" },
-    { n: "5×", l: "National Fertility Award winner (2021–2025)" },
+    { n: "6×", l: "National Fertility Award winner (2021–2026)" },
   ],
   legacy: {
     eyebrow: "30+ Years of Legacy",
@@ -124,12 +124,12 @@ export const ABOUT_DEFAULTS: AboutData = {
     { y: "2018", t: "Surat centre & national awards", d: 'Started the <a href="/locations/surat" style="color:var(--plum)">Surat</a> centre. Received \'Best IVF Clinic Chain in India\' (Mid-Day) and \'Times Health Icon\' award. The book \'Devna Didhela Mangine Lidhela\' was adapted into a TV serial on infertility awareness.' },
     { y: "2019", t: "Best IVF Chain — West", d: 'Awarded \'Best IVF Chain in India – West\' by The Economic Times. Expanded to <a href="/locations/vadodara" style="color:var(--plum)">Vadodara</a>.' },
     { y: "2020", t: "India's No.1 Fertility Clinic", d: 'Ranked No.1 in India by Times of India National Survey. <a href="/locations/bhuj" style="color:var(--plum)">Bhuj</a> clinic started.' },
-    { y: "2021", t: "PGD-HLA Matching breakthrough & National Fertility Award", d: "Introduced PGD-HLA Matching technology for stem-cell donor matching and leukaemia treatment support — a highly specialised capability available in very few centres worldwide. Received the National Fertility Award (year 1 of 5)." },
-    { y: "2022", t: "New Ahmedabad centre & awards", d: 'Opened a new centre at <a href="/locations/ahmedabad/sindhu-bhavan-road" style="color:var(--plum)">Sindhu Bhavan Road, Bodakdev</a>, <a href="/locations/ahmedabad" style="color:var(--plum)">Ahmedabad</a>. Received \'Best IVF Chain in India — West\' (The Economic Times) and the National Fertility Award (year 2 of 5).' },
-    { y: "2023", t: "25 years & awards", d: "Celebrated 25 years of completing families — a quarter century of pioneering IVF, national firsts, and 30,000+ successful pregnancies. Received 'Best IVF Chain in India — West' (The Economic Times) and the National Fertility Award (year 3 of 5)." },
-    { y: "2024", t: "Best IVF Chain — West, fourth time", d: "Received 'Best IVF Chain in India — West' (The Economic Times) for the fourth time. National Fertility Award (year 4 of 5)." },
+    { y: "2021", t: "PGD-HLA Matching breakthrough & National Fertility Award", d: "Introduced PGD-HLA Matching technology for stem-cell donor matching and leukaemia treatment support — a highly specialised capability available in very few centres worldwide. Received the National Fertility Award (year 1 of 6)." },
+    { y: "2022", t: "New Ahmedabad centre & awards", d: 'Opened a new centre at <a href="/locations/ahmedabad/sindhu-bhavan-road" style="color:var(--plum)">Sindhu Bhavan Road, Bodakdev</a>, <a href="/locations/ahmedabad" style="color:var(--plum)">Ahmedabad</a>. Received \'Best IVF Chain in India — West\' (The Economic Times) and the National Fertility Award (year 2 of 6).' },
+    { y: "2023", t: "25 years & awards", d: "Celebrated 25 years of completing families — a quarter century of pioneering IVF, national firsts, and 30,000+ successful pregnancies. Received 'Best IVF Chain in India — West' (The Economic Times) and the National Fertility Award (year 3 of 6)." },
+    { y: "2024", t: "Best IVF Chain — West, fourth time", d: "Received 'Best IVF Chain in India — West' (The Economic Times) for the fourth time. National Fertility Award (year 4 of 6)." },
     { y: "2025", t: "Nikol, Ahmedabad & fifth National Fertility Award", d: 'Opened the <a href="/locations/ahmedabad/nikol" style="color:var(--plum)">Nikol</a> centre in east <a href="/locations/ahmedabad" style="color:var(--plum)">Ahmedabad</a> — making expert fertility care accessible across the city. Received \'Best IVF Chain in India — West\' (The Economic Times) and the National Fertility Award for the fifth consecutive year (2021–2025).' },
-    { y: "2026", t: "Best IVF Chain — West, sixth time", d: "Received the 'Best IVF Chain in India – West' award by The Economic Times for the sixth time (2019, 2022, 2023, 2024, 2025, 2026) — reinforcing Bavishi Fertility Institute's position as the nation's most trusted fertility network." },
+    { y: "2026", t: "Best IVF Chain — West & National Fertility Award, sixth time", d: "Received the 'Best IVF Chain in India – West' award by The Economic Times for the sixth time (2019, 2022, 2023, 2024, 2025, 2026), and the National Fertility Award for the sixth consecutive year (2021–2026) — reinforcing Bavishi Fertility Institute's position as the nation's most trusted fertility network." },
     { y: "Today", t: "14 centres, one family", d: "30,000+ successful pregnancies, 3,000+ IVF cycles every year, and Class 1000 embryology labs across 8 Indian cities." },
   ],
   trust: {
@@ -184,7 +184,7 @@ export const ABOUT_DEFAULTS: AboutData = {
       "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 14 centres. Discover our story, legacy and values.",
     ogTitle: "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1998",
     ogDescription:
-      "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 5 consecutive years (2021–2025). The story of India's pioneering fertility institute.",
+      "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 6 consecutive years (2021–2026). The story of India's pioneering fertility institute.",
     ogImage: "/assets/about-clinic.jpg",
   },
 };
