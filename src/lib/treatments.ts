@@ -228,8 +228,8 @@ export const ivf: Treatment = {
       { icon: FlaskConical, t: "Conventional IVF", d: "Eggs and sperm are combined in the lab and fertilisation happens on its own." },
       { icon: Microscope, t: "ICSI", d: "A single healthy sperm is injected directly into each mature egg — used for all couples at Bavishi Fertility Institute." },
       { icon: Layers, t: "Blastocyst Transfer", d: "Embryos are grown to day 5–6 (blastocyst) before transfer, for stronger selection." },
-      { icon: Snowflake, t: "Frozen Embryo Transfer", d: "Surplus embryos are vitrified and transferred in a later cycle, with close to 100% thaw survival." },
-      { icon: Leaf, t: "Natural IVF Cycle", d: "Uses your body's natural cycle with minimal medication to retrieve a single egg." },
+      { icon: Snowflake, t: "Frozen Embryo Transfer", d: "Electively all or surplus embryos are frozen with vitrification. They are transferred in a later cycle, with close to 100% thaw survival." },
+      { icon: Zap, t: "Needle Free IVF", d: "Needle free injection systems use the same injections. Medications are injected in body without needle by a special device with high pressure through the skin." },
     ],
   },
   whoNeedsIt: {
