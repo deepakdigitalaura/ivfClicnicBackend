@@ -981,6 +981,63 @@ export async function backfillLegacyReviewCache(): Promise<ReviewRefreshResult[]
   return results;
 }
 
+/** Copies a random sample of already-stored reviews from every OTHER centre
+ *  into "brand" (used by the homepage carousel), so it showcases the whole
+ *  network instead of one listing. Each copy keeps its original verified/
+ *  manual status and gets a deterministic id (`...-from-<source _id>`), so
+ *  re-running is safe — a review already copied in just gets skipped, only
+ *  genuinely new picks get added. Never touches or removes existing "brand"
+ *  reviews (same additive rule as the rest of this store). */
+export async function poolBrandReviews(count = 15): Promise<{ added: number; pooled: number }> {
+  if (!hasSanity()) throw new Error("Sanity not configured");
+  const source: {
+    _id: string;
+    author: string;
+    rating: number;
+    text: string;
+    publishedAt?: string;
+    relativeTime?: string;
+    profilePhoto?: string;
+    manual?: boolean;
+  }[] = await writeClient.fetch(
+    `*[_type == "googleReview" && centreSlug != "brand"]{ _id, author, rating, text, publishedAt, relativeTime, profilePhoto, manual }`,
+  );
+  if (source.length === 0) return { added: 0, pooled: 0 };
+
+  const pool = source.slice();
+  for (let i = pool.length - 1; i > 0; i--) {
+    const j = Math.floor(Math.random() * (i + 1));
+    [pool[i], pool[j]] = [pool[j], pool[i]];
+  }
+  const picked = pool.slice(0, Math.min(count, pool.length));
+
+  const fetchedAt = new Date().toISOString();
+  let added = 0;
+  for (const rv of picked) {
+    const id = `googleReview-brand-from-${rv._id.replace(/[^a-zA-Z0-9_-]/g, "-")}`;
+    const existing = await writeClient.getDocument(id);
+    if (existing) continue;
+
+    await writeClient.createIfNotExists({
+      _id: id,
+      _type: "googleReview",
+      centreSlug: "brand",
+      author: rv.author,
+      rating: rv.rating,
+      text: rv.text,
+      publishedAt: rv.publishedAt || fetchedAt,
+      ...(rv.relativeTime ? { relativeTime: rv.relativeTime } : {}),
+      ...(rv.profilePhoto ? { profilePhoto: rv.profilePhoto } : {}),
+      fetchedAt,
+      ...(rv.manual ? { manual: true } : {}),
+    });
+    added++;
+  }
+
+  revalidateTag(REVIEW_TAG);
+  return { added, pooled: picked.length };
+}
+
 /** Lightweight counts for the dashboard stat cards. */
 export async function getDashboardStats() {
   const empty = { redirects: 0, pageSeo: 0, headScripts: 0, bodyScripts: 0, customSchemas: 0, blocked: 0, newInquiries: 0, totalInquiries: 0 };

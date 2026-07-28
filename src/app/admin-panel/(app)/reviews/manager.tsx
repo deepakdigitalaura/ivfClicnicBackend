@@ -1,9 +1,9 @@
 "use client";
 import { useMemo, useState } from "react";
-import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle, Download, Plus, X } from "lucide-react";
+import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle, Download, Plus, X, Shuffle } from "lucide-react";
 import type { AdminGoogleReview, ManualReviewInput } from "@/sanity/lib/admin";
 import {
-  refreshReviewsAction, backfillLegacyReviewsAction, createManualReviewAction, createManualReviewsAction,
+  refreshReviewsAction, backfillLegacyReviewsAction, poolBrandReviewsAction, createManualReviewAction, createManualReviewsAction,
   deleteReviewAction, type RefreshReviewsResult,
 } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
@@ -102,6 +102,19 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
     });
   };
 
+  const [pooled, setPooled] = useState<number | null>(null);
+
+  const poolBrand = () => {
+    run(async () => {
+      const res = await poolBrandReviewsAction(15);
+      if (res.ok) {
+        setPooled(res.added ?? 0);
+        if (res.reviews) setItems(res.reviews);
+      }
+      return { ok: res.ok, error: res.error };
+    });
+  };
+
   const addReview = (e: React.FormEvent) => {
     e.preventDefault();
     if (!form.centreSlug || !form.author.trim() || !form.text.trim()) return;
@@ -163,6 +176,9 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
         </button>
         <button type="button" className="admin-btn-ghost" onClick={backfill} disabled={pending} title="One-time: import reviews already in the old build-time cache">
           <Download size={16} /> Import legacy cache
+        </button>
+        <button type="button" className="admin-btn-ghost" onClick={poolBrand} disabled={pending} title="Copy 15 random reviews from every other centre into &quot;brand&quot; (shown on the homepage). Safe to re-run — only newly-picked reviews get added, existing ones are never touched.">
+          <Shuffle size={16} /> Pool 15 into Brand
         </button>
         <button type="button" className="admin-btn" onClick={refresh} disabled={pending}>
           <RefreshCw size={16} className={pending ? "animate-spin" : ""} /> {pending ? "Refreshing…" : "Refresh All Reviews"}
@@ -242,6 +258,14 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
               </div>
             </form>
           )}
+        </div>
+      )}
+
+      {pooled !== null && (
+        <div className="admin-card" style={{ padding: 16, marginBottom: 18 }}>
+          <div style={{ fontSize: 13 }}>
+            {pooled > 0 ? `Added ${pooled} new review${pooled === 1 ? "" : "s"} to "brand".` : `Nothing new to add — try again for a different random pick, or add more reviews to other centres first.`}
+          </div>
         </div>
       )}
 
