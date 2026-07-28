@@ -782,6 +782,29 @@ export async function createManualReview(input: ManualReviewInput): Promise<void
   revalidateTag(REVIEW_TAG);
 }
 
+/** Same as createManualReview, batched — sequential (not Promise.all) to
+ *  keep writes paced rather than firing a burst of concurrent requests. */
+export async function createManualReviews(inputs: ManualReviewInput[]): Promise<{ added: number }> {
+  if (!hasSanity()) throw new Error("Sanity not configured");
+  const now = new Date().toISOString();
+  let added = 0;
+  for (const input of inputs) {
+    await writeClient.create({
+      _type: "googleReview",
+      centreSlug: input.centreSlug,
+      author: input.author,
+      rating: input.rating,
+      text: input.text,
+      publishedAt: input.publishedAt || now,
+      fetchedAt: now,
+      manual: true,
+    });
+    added++;
+  }
+  revalidateTag(REVIEW_TAG);
+  return { added };
+}
+
 export async function deleteReview(id: string) {
   await writeClient.delete(id);
   revalidateTag(REVIEW_TAG);

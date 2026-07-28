@@ -36,6 +36,7 @@ import {
   backfillLegacyReviewCache,
   readAdminReviews,
   createManualReview,
+  createManualReviews,
   deleteReview,
   type ManualReviewInput,
   type Inquiry,
@@ -387,5 +388,16 @@ export async function createManualReviewAction(input: ManualReviewInput): Promis
     return { ok: true, reviews };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "Add failed" };
+  }
+}
+
+export async function createManualReviewsAction(inputs: ManualReviewInput[]): Promise<RefreshReviewsResult> {
+  try {
+    await createManualReviews(inputs);
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Bulk add failed" };
   }
 }

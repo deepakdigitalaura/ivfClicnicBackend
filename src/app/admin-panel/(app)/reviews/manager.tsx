@@ -2,8 +2,40 @@
 import { useMemo, useState } from "react";
 import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle, Download, Plus, X } from "lucide-react";
 import type { AdminGoogleReview, ManualReviewInput } from "@/sanity/lib/admin";
-import { refreshReviewsAction, backfillLegacyReviewsAction, createManualReviewAction, deleteReviewAction, type RefreshReviewsResult } from "../../actions";
+import {
+  refreshReviewsAction, backfillLegacyReviewsAction, createManualReviewAction, createManualReviewsAction,
+  deleteReviewAction, type RefreshReviewsResult,
+} from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
+
+/** Parses blocks separated by a line of 3+ dashes, each with Author/Rating/Text
+ *  labels — Text captures everything after it (including blank lines) so
+ *  multi-paragraph reviews survive intact. Lenient: skips any block missing
+ *  an author or text rather than erroring the whole paste. */
+function parseBulkReviews(raw: string, centreSlug: string): ManualReviewInput[] {
+  if (!centreSlug || !raw.trim()) return [];
+  const blocks = raw.split(/\n\s*-{3,}\s*\n?/);
+  const out: ManualReviewInput[] = [];
+  for (const block of blocks) {
+    const authorMatch = /(?:^|\n)\s*author\s*:\s*(.+)/i.exec(block);
+    const ratingMatch = /(?:^|\n)\s*rating\s*:\s*(\d)/i.exec(block);
+    const textMatch = /(?:^|\n)\s*text\s*:\s*([\s\S]*)/i.exec(block);
+    const author = authorMatch?.[1]?.trim();
+    const rating = ratingMatch ? Number(ratingMatch[1]) : 5;
+    const text = textMatch?.[1]?.trim();
+    if (author && text) out.push({ centreSlug, author, rating, text });
+  }
+  return out;
+}
+
+const BULK_PLACEHOLDER = `Author: Jane Doe
+Rating: 5
+Text: Wonderful experience, the doctors explained everything clearly.
+---
+Author: John Smith
+Rating: 4
+Text: Good care, would recommend.
+---`;
 
 type CentreInfo = { centreSlug: string; configured: boolean };
 
@@ -24,8 +56,12 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
   const [lastRun, setLastRun] = useState<RefreshReviewsResult["results"] | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
   const [adding, setAdding] = useState(false);
+  const [bulkMode, setBulkMode] = useState(false);
   const [form, setForm] = useState<ManualReviewInput>(EMPTY_FORM);
+  const [bulkText, setBulkText] = useState("");
   const { pending, toast, run } = useSave();
+
+  const bulkParsed = useMemo(() => parseBulkReviews(bulkText, form.centreSlug), [bulkText, form.centreSlug]);
 
   const byCentre = useMemo(() => {
     const map = new Map<string, AdminGoogleReview[]>();
@@ -81,6 +117,18 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
     });
   };
 
+  const addBulk = () => {
+    if (bulkParsed.length === 0) return;
+    run(async () => {
+      const res = await createManualReviewsAction(bulkParsed);
+      if (res.ok && res.reviews) {
+        setItems(res.reviews);
+        setBulkText("");
+      }
+      return { ok: res.ok, error: res.error };
+    });
+  };
+
   const remove = (r: AdminGoogleReview) => {
     if (!confirm(`Delete this review from ${r.author}?`)) return;
     setItems((prev) => prev.filter((x) => x._id !== r._id));
@@ -122,42 +170,79 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
       </div>
 
       {adding && (
-        <form onSubmit={addReview} className="admin-card" style={{ padding: 18, marginBottom: 18 }}>
+        <div className="admin-card" style={{ padding: 18, marginBottom: 18 }}>
           <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
             <h2 className="admin-card-title" style={{ margin: 0 }}>Add a review</h2>
             <button type="button" className="admin-btn-ghost" style={{ padding: "7px 10px" }} onClick={() => setAdding(false)}><X size={16} /></button>
           </div>
           <p style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: -6, marginBottom: 14 }}>
-            For a review you&apos;ve copied from the centre&apos;s actual Google listing. Shown with a neutral
+            For reviews you&apos;ve copied from the centre&apos;s actual Google listing. Shown with a neutral
             &ldquo;Patient review&rdquo; badge (not &ldquo;Google&rdquo;) since it&apos;s hand-entered, not API-verified.
           </p>
-          <div className="admin-row-grid">
-            <div className="admin-field">
-              <label className="admin-label">Centre *</label>
-              <select className="admin-input" required value={form.centreSlug} onChange={(e) => setForm((f) => ({ ...f, centreSlug: e.target.value }))}>
-                <option value="" disabled>Select a centre…</option>
-                {allSlugs.map((slug) => <option key={slug} value={slug}>{slug}</option>)}
-              </select>
-            </div>
-            <div className="admin-field">
-              <label className="admin-label">Author *</label>
-              <input className="admin-input" required value={form.author} onChange={(e) => setForm((f) => ({ ...f, author: e.target.value }))} />
-            </div>
-            <div className="admin-field">
-              <label className="admin-label">Rating</label>
-              <select className="admin-input" value={form.rating} onChange={(e) => setForm((f) => ({ ...f, rating: Number(e.target.value) }))}>
-                {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n} star{n > 1 ? "s" : ""}</option>)}
-              </select>
-            </div>
+
+          <div style={{ display: "flex", gap: 8, marginBottom: 14 }}>
+            <button type="button" onClick={() => setBulkMode(false)} className={!bulkMode ? "admin-btn" : "admin-btn-ghost"} style={{ padding: "7px 16px" }}>One at a time</button>
+            <button type="button" onClick={() => setBulkMode(true)} className={bulkMode ? "admin-btn" : "admin-btn-ghost"} style={{ padding: "7px 16px" }}>Paste multiple</button>
           </div>
+
           <div className="admin-field">
-            <label className="admin-label">Review text *</label>
-            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 80 }} required value={form.text} onChange={(e) => setForm((f) => ({ ...f, text: e.target.value }))} />
+            <label className="admin-label">Centre *</label>
+            <select className="admin-input" required value={form.centreSlug} onChange={(e) => setForm((f) => ({ ...f, centreSlug: e.target.value }))}>
+              <option value="" disabled>Select a centre…</option>
+              {allSlugs.map((slug) => <option key={slug} value={slug}>{slug}</option>)}
+            </select>
           </div>
-          <div className="admin-actions-bar">
-            <button type="submit" className="admin-btn" disabled={pending}>{pending ? "Adding…" : "Add Review"}</button>
-          </div>
-        </form>
+
+          {bulkMode ? (
+            <>
+              <div className="admin-field">
+                <label className="admin-label">Reviews</label>
+                <p className="admin-hint">
+                  One block per review, separated by a line of dashes (<code>---</code>). <code>Text:</code> can span multiple lines/paragraphs.
+                </p>
+                <textarea
+                  className="admin-textarea"
+                  style={{ fontFamily: "monospace", fontSize: 12.5, minHeight: 220 }}
+                  placeholder={BULK_PLACEHOLDER}
+                  value={bulkText}
+                  onChange={(e) => setBulkText(e.target.value)}
+                />
+              </div>
+              <div className="admin-actions-bar" style={{ alignItems: "center", gap: 12 }}>
+                <button type="button" className="admin-btn" disabled={pending || bulkParsed.length === 0} onClick={addBulk}>
+                  {pending ? "Adding…" : `Add ${bulkParsed.length || ""} Review${bulkParsed.length === 1 ? "" : "s"}`}
+                </button>
+                {bulkText.trim() && (
+                  <span style={{ fontSize: 12.5, color: bulkParsed.length ? "var(--muted-foreground)" : "var(--destructive)" }}>
+                    {form.centreSlug ? `${bulkParsed.length} parsed` : "Select a centre first"}
+                  </span>
+                )}
+              </div>
+            </>
+          ) : (
+            <form onSubmit={addReview}>
+              <div className="admin-row-grid">
+                <div className="admin-field">
+                  <label className="admin-label">Author *</label>
+                  <input className="admin-input" required value={form.author} onChange={(e) => setForm((f) => ({ ...f, author: e.target.value }))} />
+                </div>
+                <div className="admin-field">
+                  <label className="admin-label">Rating</label>
+                  <select className="admin-input" value={form.rating} onChange={(e) => setForm((f) => ({ ...f, rating: Number(e.target.value) }))}>
+                    {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n} star{n > 1 ? "s" : ""}</option>)}
+                  </select>
+                </div>
+              </div>
+              <div className="admin-field">
+                <label className="admin-label">Review text *</label>
+                <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 80 }} required value={form.text} onChange={(e) => setForm((f) => ({ ...f, text: e.target.value }))} />
+              </div>
+              <div className="admin-actions-bar">
+                <button type="submit" className="admin-btn" disabled={pending}>{pending ? "Adding…" : "Add Review"}</button>
+              </div>
+            </form>
+          )}
+        </div>
       )}
 
       {lastRun && (
