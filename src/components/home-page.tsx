@@ -1243,9 +1243,9 @@ function AwardsStage({ items }: { items: AwardItem[] }) {
     <>
       <div
         ref={wrapRef}
-        className="relative mx-auto mt-10 flex h-[400px] max-w-5xl items-center justify-center overflow-hidden sm:h-[420px] md:h-[460px]"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        className="relative mx-auto mt-10 flex h-[340px] max-w-5xl items-center justify-center overflow-hidden sm:h-[360px] md:h-[380px]"
+        onPointerEnter={(e) => { if (e.pointerType === "mouse") setPaused(true); }}
+        onPointerLeave={(e) => { if (e.pointerType === "mouse") setPaused(false); }}
         onTouchStart={(e) => { setPaused(true); startX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           const dx = e.changedTouches[0].clientX - startX.current;
