@@ -1174,9 +1174,12 @@ function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyCho
 const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
   return (
     <div className="group overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-      {/* object-contain — most award photos are portrait trophy/certificate shots;
+      {/* Fixed image height (not aspect-square tied to card width) — keeps every
+       * card the same total height regardless of how wide it renders, so the
+       * carousel stage below never has to clip the text off the bottom.
+       * object-contain — most award photos are portrait trophy/certificate shots;
        * object-cover was cropping their tops off. */}
-      <div className="aspect-square w-full overflow-hidden bg-white">
+      <div className="h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
         <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-contain" />
       </div>
       <div className="border-t border-border/60 px-5 py-4 text-center">
@@ -1240,7 +1243,7 @@ function AwardsStage({ items }: { items: AwardItem[] }) {
     <>
       <div
         ref={wrapRef}
-        className="relative mx-auto mt-10 flex h-[360px] max-w-5xl items-center justify-center overflow-hidden md:h-[400px]"
+        className="relative mx-auto mt-10 flex h-[400px] max-w-5xl items-center justify-center overflow-hidden sm:h-[420px] md:h-[460px]"
         onMouseEnter={() => setPaused(true)}
         onMouseLeave={() => setPaused(false)}
         onTouchStart={(e) => { setPaused(true); startX.current = e.touches[0].clientX; }}
