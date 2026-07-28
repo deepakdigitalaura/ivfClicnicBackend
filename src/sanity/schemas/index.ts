@@ -16,6 +16,8 @@ import service from "./service";
 import city from "./city";
 import centre from "./centre";
 import aboutPage from "./aboutPage";
+import googleReview from "./googleReview";
+import reviewMeta from "./reviewMeta";
 
 export const schemas = [
   robotsConfig,
@@ -36,4 +38,6 @@ export const schemas = [
   city,
   centre,
   aboutPage,
+  googleReview,
+  reviewMeta,
 ];

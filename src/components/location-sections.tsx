@@ -9,7 +9,7 @@ import { Editable } from "@/components/editor/Editable";
 import type { Centre } from "@/lib/locations";
 import { cityBySlug } from "@/lib/locations";
 import type { LocationSectionLabels } from "@/lib/location-content";
-import type { Review, ReviewData } from "@/lib/reviews";
+import type { Review, ReviewData, AggregateRating } from "@/lib/reviews";
 import { treatmentCardData } from "@/lib/treatments";
 import { type WomensHealthService, serviceHref } from "@/lib/womens-health";
 
@@ -68,6 +68,7 @@ const FADE_MS = 500;    // fade-out / fade-in duration
 
 export function GoogleReviews({
   data,
+  reviewsKey,
   profileUrl,
   eyebrow = "Google Reviews",
   title,
@@ -75,17 +76,39 @@ export function GoogleReviews({
 }: {
   /** Verified review data from the review service. null → empty state. */
   data: ReviewData | null;
+  /** Centre slug / city slug / "brand" — used to pull the latest
+   *  admin-accumulated reviews client-side, upgrading past this build's
+   *  static snapshot without needing a redeploy. Omit to skip the upgrade. */
+  reviewsKey?: string;
   /** Fallback "read on Google" link when there is no review feed yet. */
   profileUrl?: string;
   eyebrow?: string;
   title?: React.ReactNode;
   subtitle?: string;
 }) {
-  const reviews: Review[] = data?.reviews ?? [];
-  const verified = !!data?.verified;
+  const [liveData, setLiveData] = useState<ReviewData | null>(data);
+
+  useEffect(() => {
+    setLiveData(data);
+    if (!reviewsKey) return;
+    let cancelled = false;
+    fetch(`/api/reviews/${encodeURIComponent(reviewsKey)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((fresh: { aggregate?: AggregateRating; mapsUrl?: string; reviews?: Review[] } | null) => {
+        // Only upgrade when there's something to show — a network hiccup or
+        // an empty admin store should never blank out the static fallback.
+        if (cancelled || !fresh?.reviews?.length) return;
+        setLiveData({ reviews: fresh.reviews, aggregate: fresh.aggregate, mapsUrl: fresh.mapsUrl, verified: true });
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [reviewsKey, data]);
+
+  const reviews: Review[] = liveData?.reviews ?? [];
+  const verified = !!liveData?.verified;
   // Rating badge + Google branding only for verified data; fallback stays neutral.
-  const aggregate = verified ? data?.aggregate : undefined;
-  const listingUrl = data?.mapsUrl ?? profileUrl;
+  const aggregate = verified ? liveData?.aggregate : undefined;
+  const listingUrl = liveData?.mapsUrl ?? profileUrl;
   const displayEyebrow = verified ? eyebrow : "Patient Reviews";
   const displayTitle = verified
     ? (title ?? <>Loved by families on <em className="font-display italic text-[color:var(--rose)]">Google</em></>)

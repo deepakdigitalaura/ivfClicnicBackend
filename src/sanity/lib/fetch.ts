@@ -8,6 +8,7 @@ import {
   SITEMAP_QUERY,
   SCHEMA_ORG_QUERY,
   PAGE_SEO_BY_PATH_QUERY,
+  REVIEWS_BY_KEY_QUERY,
 } from "./queries";
 
 async function sanityFetch<T>(query: string, params?: Record<string, unknown>): Promise<T | null> {
@@ -111,6 +112,45 @@ export const getPageSeo = (path: string) =>
     () => sanityFetch<PageSeo>(PAGE_SEO_BY_PATH_QUERY, { path }),
     ["sanity-page-seo", path],
     { revalidate: 3600, tags: ["sanity-page-seo"] },
+  )();
+
+// ── Reviews (admin-accumulated, keyed by centre slug / "brand") ──
+
+export type SanityReviewData = {
+  aggregate?: { ratingValue: number; reviewCount: number };
+  mapsUrl?: string;
+  reviews: {
+    author: string;
+    rating: number;
+    text: string;
+    publishedAtISO: string;
+    relativeTime?: string;
+    profilePhoto?: string;
+  }[];
+};
+
+/** Public/cached read of the accumulated Google reviews for one key. Busted
+ *  by the admin "Refresh Reviews" button and by manual deletes (both call
+ *  revalidateTag("sanity-reviews")). null → caller falls back to whatever
+ *  build-time data it already has. */
+export const getSanityReviews = (key: string): Promise<SanityReviewData | null> =>
+  unstable_cache(
+    async () => {
+      const data = await sanityFetch<{
+        meta: { ratingValue?: number; reviewCount?: number; mapsUrl?: string } | null;
+        reviews: SanityReviewData["reviews"];
+      }>(REVIEWS_BY_KEY_QUERY, { key });
+      if (!data) return null;
+      return {
+        aggregate: data.meta?.reviewCount
+          ? { ratingValue: data.meta.ratingValue ?? 0, reviewCount: data.meta.reviewCount }
+          : undefined,
+        mapsUrl: data.meta?.mapsUrl,
+        reviews: data.reviews ?? [],
+      };
+    },
+    ["sanity-reviews", key],
+    { revalidate: 300, tags: ["sanity-reviews"] },
   )();
 
 // ── Doctors ──

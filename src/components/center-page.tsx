@@ -198,6 +198,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       <div className="bg-white">
         <GoogleReviews
           data={reviews}
+          reviewsKey={centre.reviewsKey ?? centre.slug}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(centre.mapQuery)}`}
           title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${centre.area} patients ${em("on Google")}`)}
           subtitle={`Read verified reviews from families treated at our ${centre.area} centre.`}
