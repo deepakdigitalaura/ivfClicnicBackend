@@ -57,6 +57,9 @@ export function SiteHeader({
   }, []);
 
   const activeItem = NAV.find((n) => n.label === hover && (n.mega || n.doctors));
+  // When one column in a mega has a heading, blank sibling columns reserve the
+  // same header height (invisible) so item rows stay top-aligned across columns.
+  const activeMegaHasHeadings = activeItem?.mega?.some((c) => c.heading) ?? false;
 
   return (
     <>
@@ -170,12 +173,14 @@ export function SiteHeader({
               <div className="grid gap-x-8 gap-y-7" style={{ gridTemplateColumns: `repeat(${activeItem.megaCols ?? activeItem.mega!.length}, minmax(0, 1fr))` }}>
                 {activeItem.mega!.map((col, ci) => (
                   <div key={col.heading || ci}>
-                    {col.heading && (
+                    {col.heading ? (
                       col.headingHref
                         ? <a href={col.headingHref} className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)] transition-opacity hover:opacity-70">{col.heading}</a>
                         : <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{col.heading}</div>
-                    )}
-                    <ul className={`space-y-2.5 ${col.heading ? "mt-4" : ""}`}>
+                    ) : activeMegaHasHeadings ? (
+                      <div aria-hidden="true" className="invisible text-xs font-semibold uppercase tracking-[0.15em]">&nbsp;</div>
+                    ) : null}
+                    <ul className={`space-y-2.5 ${activeMegaHasHeadings ? "mt-4" : ""}`}>
                       {col.items.map((it) => (
                         it.children ? (
                           <li key={it.label} className="group/sub">
