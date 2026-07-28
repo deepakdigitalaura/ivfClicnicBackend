@@ -41,7 +41,6 @@ import {
   type ResourceVideo,
   type AwardItem,
   type AccoladeItem,
-  type HomeAboutContent,
   type Heading,
 } from "@/lib/homepage";
 
@@ -225,7 +224,7 @@ export function HomePage({
         ctaLabel={ed("videoHub.ctaLabel", data.videoHub.ctaLabel)}
       />
     ),
-    about: <About content={data.about} />,
+    about: null,
     doctors: null,
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
@@ -336,7 +335,6 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
           >
             <PrimaryBtn icon={Calendar} href="#book">{hero.ctas[0]}</PrimaryBtn>
             <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate">{hero.ctas[1]}</GhostBtn>
-            <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
           </motion.div>
         </div>
 
@@ -549,7 +547,7 @@ export function TreatmentCard({
 
 /* ---------- Treatments ---------- */
 
-const TREATMENT_TITLE_HREFS: Record<string, string> = {
+export const TREATMENT_TITLE_HREFS: Record<string, string> = {
   "Male Infertility": "/treatments/male-infertility",
   "Female Infertility": "/treatments/female-infertility",
   "IVF / ICSI / ART": "/what-is-ivf",
@@ -566,7 +564,9 @@ const TREATMENT_TITLE_HREFS: Record<string, string> = {
   "Maternity Services": "/services/maternity-services",
 };
 
-const MOBILE_TREATMENT_TITLES = new Set([
+/** Curated highlights shown on the homepage teaser — the full catalog lives
+ *  on /treatments (linked via the "View All Treatments" button below). */
+const FEATURED_TREATMENT_TITLES = new Set([
   "IVF / ICSI / ART",
   "IUI",
   "Advanced Fertility Techniques",
@@ -574,6 +574,9 @@ const MOBILE_TREATMENT_TITLES = new Set([
 ]);
 
 export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
+  const featured = content.items
+    .map((item, i) => ({ ...item, i }))
+    .filter(({ t }) => FEATURED_TREATMENT_TITLES.has(t));
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
@@ -583,9 +586,9 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
           subtitle={ed("treatments.subtitle", content.subtitle)}
         />
       </div>
-      <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-        {content.items.map(({ icon, t, d }, i) => (
-          <StaggerItem key={t} className={!MOBILE_TREATMENT_TITLES.has(t) ? "hidden sm:block" : undefined}>
+      <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
+        {featured.map(({ icon, t, d, i }) => (
+          <StaggerItem key={t}>
             <TreatmentCard
               icon={resolveIcon(icon)}
               title={t}
@@ -597,6 +600,13 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
           </StaggerItem>
         ))}
       </Stagger>
+      <Reveal delay={0.2}>
+        <div className="mt-9 text-center">
+          <Magnetic as="a" href="/treatments" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+            {ed("treatments.ctaLabel", content.ctaLabel)} <ArrowRight className="h-4 w-4" />
+          </Magnetic>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -979,53 +989,6 @@ export function VideoHub({
         ))}
       </Stagger>
       </MobileCarousel>
-    </section>
-  );
-}
-
-/* ---------- About ---------- */
-
-function About({ content = HOMEPAGE_DEFAULTS.about }: { content?: HomeAboutContent } = {}) {
-  return (
-    <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
-      <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-        <div className="relative">
-          <Reveal>
-            <div className="overflow-hidden rounded-[2rem] shadow-lift">
-              <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[4/5]" editPath="about.image" />
-            </div>
-          </Reveal>
-          <Float className="absolute -right-6 bottom-10 hidden md:block" amplitude={6}>
-            <div className="glass rounded-2xl p-5 shadow-lift">
-              <div className="font-display text-3xl font-medium text-[color:var(--plum)]"><Editable path="about.sinceValue">{content.sinceValue}</Editable></div>
-              <div className="text-xs text-muted-foreground"><Editable path="about.sinceLabel">{content.sinceLabel}</Editable></div>
-            </div>
-          </Float>
-        </div>
-        <div>
-          <SectionHeader
-            eyebrow={<Editable path="about.eyebrow">{content.eyebrow}</Editable>}
-            title={<><Editable path="about.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="about.heading.em">{content.heading.em}</Editable></em></>}
-            subtitle={<Editable path="about.subtitle">{content.subtitle}</Editable>}
-          />
-          <Stagger className="mt-8 grid grid-cols-2 gap-6" stagger={0.08}>
-            {content.stats.map((x, i) => (
-              <StaggerItem key={x.k}>
-                <div className="border-l-2 border-[color:var(--rose)]/40 pl-4">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground"><Editable path={`about.stats.${i}.k`}>{x.k}</Editable></div>
-                  <div className="mt-1 font-display text-xl text-[color:var(--plum)]"><Editable path={`about.stats.${i}.v`}>{x.v}</Editable></div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-          <Reveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <PrimaryBtn href="/about-bfi"><Editable path="about.primaryCta">{content.primaryCta}</Editable></PrimaryBtn>
-              <GhostBtn href="/about-bfi"><Editable path="about.secondaryCta">{content.secondaryCta}</Editable></GhostBtn>
-            </div>
-          </Reveal>
-        </div>
-      </div>
     </section>
   );
 }
