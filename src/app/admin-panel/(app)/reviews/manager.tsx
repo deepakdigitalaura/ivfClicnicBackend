@@ -1,8 +1,8 @@
 "use client";
 import { useMemo, useState } from "react";
-import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle, Download } from "lucide-react";
-import type { AdminGoogleReview } from "@/sanity/lib/admin";
-import { refreshReviewsAction, backfillLegacyReviewsAction, deleteReviewAction, type RefreshReviewsResult } from "../../actions";
+import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle, Download, Plus, X } from "lucide-react";
+import type { AdminGoogleReview, ManualReviewInput } from "@/sanity/lib/admin";
+import { refreshReviewsAction, backfillLegacyReviewsAction, createManualReviewAction, deleteReviewAction, type RefreshReviewsResult } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 
 type CentreInfo = { centreSlug: string; configured: boolean };
@@ -17,10 +17,14 @@ function Stars({ n }: { n: number }) {
   );
 }
 
+const EMPTY_FORM: ManualReviewInput = { centreSlug: "", author: "", rating: 5, text: "" };
+
 export function ReviewsManager({ initial, centres }: { initial: AdminGoogleReview[]; centres: CentreInfo[] }) {
   const [items, setItems] = useState<AdminGoogleReview[]>(initial);
   const [lastRun, setLastRun] = useState<RefreshReviewsResult["results"] | null>(null);
   const [expanded, setExpanded] = useState<Set<string>>(new Set());
+  const [adding, setAdding] = useState(false);
+  const [form, setForm] = useState<ManualReviewInput>(EMPTY_FORM);
   const { pending, toast, run } = useSave();
 
   const byCentre = useMemo(() => {
@@ -62,6 +66,21 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
     });
   };
 
+  const addReview = (e: React.FormEvent) => {
+    e.preventDefault();
+    if (!form.centreSlug || !form.author.trim() || !form.text.trim()) return;
+    run(async () => {
+      const res = await createManualReviewAction(form);
+      if (res.ok && res.reviews) {
+        setItems(res.reviews);
+        // Keep the centre selected and clear the rest so the next entry for
+        // the same centre is quick to add.
+        setForm({ ...EMPTY_FORM, centreSlug: form.centreSlug });
+      }
+      return { ok: res.ok, error: res.error };
+    });
+  };
+
   const remove = (r: AdminGoogleReview) => {
     if (!confirm(`Delete this review from ${r.author}?`)) return;
     setItems((prev) => prev.filter((x) => x._id !== r._id));
@@ -91,6 +110,9 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
           </div>
         )}
         <div style={{ flex: 1 }} />
+        <button type="button" className="admin-btn-ghost" onClick={() => setAdding((v) => !v)} disabled={pending}>
+          <Plus size={16} /> Add Review
+        </button>
         <button type="button" className="admin-btn-ghost" onClick={backfill} disabled={pending} title="One-time: import reviews already in the old build-time cache">
           <Download size={16} /> Import legacy cache
         </button>
@@ -98,6 +120,45 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
           <RefreshCw size={16} className={pending ? "animate-spin" : ""} /> {pending ? "Refreshing…" : "Refresh All Reviews"}
         </button>
       </div>
+
+      {adding && (
+        <form onSubmit={addReview} className="admin-card" style={{ padding: 18, marginBottom: 18 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 14 }}>
+            <h2 className="admin-card-title" style={{ margin: 0 }}>Add a review</h2>
+            <button type="button" className="admin-btn-ghost" style={{ padding: "7px 10px" }} onClick={() => setAdding(false)}><X size={16} /></button>
+          </div>
+          <p style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: -6, marginBottom: 14 }}>
+            For a review you&apos;ve copied from the centre&apos;s actual Google listing. Shown with a neutral
+            &ldquo;Patient review&rdquo; badge (not &ldquo;Google&rdquo;) since it&apos;s hand-entered, not API-verified.
+          </p>
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Centre *</label>
+              <select className="admin-input" required value={form.centreSlug} onChange={(e) => setForm((f) => ({ ...f, centreSlug: e.target.value }))}>
+                <option value="" disabled>Select a centre…</option>
+                {allSlugs.map((slug) => <option key={slug} value={slug}>{slug}</option>)}
+              </select>
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Author *</label>
+              <input className="admin-input" required value={form.author} onChange={(e) => setForm((f) => ({ ...f, author: e.target.value }))} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Rating</label>
+              <select className="admin-input" value={form.rating} onChange={(e) => setForm((f) => ({ ...f, rating: Number(e.target.value) }))}>
+                {[5, 4, 3, 2, 1].map((n) => <option key={n} value={n}>{n} star{n > 1 ? "s" : ""}</option>)}
+              </select>
+            </div>
+          </div>
+          <div className="admin-field">
+            <label className="admin-label">Review text *</label>
+            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 80 }} required value={form.text} onChange={(e) => setForm((f) => ({ ...f, text: e.target.value }))} />
+          </div>
+          <div className="admin-actions-bar">
+            <button type="submit" className="admin-btn" disabled={pending}>{pending ? "Adding…" : "Add Review"}</button>
+          </div>
+        </form>
+      )}
 
       {lastRun && (
         <div className="admin-card" style={{ padding: 16, marginBottom: 18 }}>
@@ -151,6 +212,7 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
                             <div style={{ display: "flex", alignItems: "center", gap: 8, marginBottom: 3 }}>
                               <strong style={{ fontSize: 13.5 }}>{r.author}</strong>
                               <Stars n={r.rating} />
+                              {r.manual && <span className="admin-badge" style={{ fontSize: 10.5 }}>Manual</span>}
                               {r.relativeTime && <span style={{ fontSize: 11.5, color: "var(--muted-foreground)" }}>{r.relativeTime}</span>}
                             </div>
                             <p style={{ margin: 0, fontSize: 13, lineHeight: 1.5, color: "var(--foreground)" }}>&ldquo;{r.text}&rdquo;</p>

@@ -217,7 +217,7 @@ export function GoogleReviews({
           }}
         >
           {current.map((rv, i) => (
-            <ReviewCard key={`${group}-${i}`} rv={rv} verified={verified} />
+            <ReviewCard key={`${group}-${i}`} rv={rv} verified={rv.verified ?? verified} />
           ))}
         </div>
 

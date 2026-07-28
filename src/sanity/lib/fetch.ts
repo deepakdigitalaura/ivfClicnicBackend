@@ -126,6 +126,9 @@ export type SanityReviewData = {
     publishedAtISO: string;
     relativeTime?: string;
     profilePhoto?: string;
+    /** false only for staff-typed entries (manual: true in Sanity) — gates
+     *  the "Google" badge and schema.org output per review, not per batch. */
+    verified?: boolean;
   }[];
 };
 
@@ -138,7 +141,7 @@ export const getSanityReviews = (key: string): Promise<SanityReviewData | null> 
     async () => {
       const data = await sanityFetch<{
         meta: { ratingValue?: number; reviewCount?: number; mapsUrl?: string } | null;
-        reviews: SanityReviewData["reviews"];
+        reviews: (Omit<SanityReviewData["reviews"][number], "verified"> & { manual?: boolean })[];
       }>(REVIEWS_BY_KEY_QUERY, { key });
       if (!data) return null;
       return {
@@ -146,7 +149,7 @@ export const getSanityReviews = (key: string): Promise<SanityReviewData | null> 
           ? { ratingValue: data.meta.ratingValue ?? 0, reviewCount: data.meta.reviewCount }
           : undefined,
         mapsUrl: data.meta?.mapsUrl,
-        reviews: data.reviews ?? [],
+        reviews: (data.reviews ?? []).map(({ manual, ...r }) => ({ ...r, verified: !manual })),
       };
     },
     ["sanity-reviews", key],

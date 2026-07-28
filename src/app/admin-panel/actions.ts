@@ -35,7 +35,9 @@ import {
   refreshAllReviews,
   backfillLegacyReviewCache,
   readAdminReviews,
+  createManualReview,
   deleteReview,
+  type ManualReviewInput,
   type Inquiry,
   type AdminDoctor,
   type AdminTreatment,
@@ -375,4 +377,15 @@ export async function deleteReviewAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deleteReview(id));
   revalidatePath("/admin-panel/reviews");
   return r;
+}
+
+export async function createManualReviewAction(input: ManualReviewInput): Promise<RefreshReviewsResult> {
+  try {
+    await createManualReview(input);
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Add failed" };
+  }
 }

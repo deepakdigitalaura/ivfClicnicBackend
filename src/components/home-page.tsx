@@ -1434,7 +1434,7 @@ export function Testimonials({
   // aggregate badge or schema. When `cms` is empty this is byte-identical to the
   // Google-only render that shipped before the Testimonials collection existed.
   const cards: { r: Review; verified: boolean }[] = [
-    ...googleReviews.map((r) => ({ r, verified: googleVerified })),
+    ...googleReviews.map((r) => ({ r, verified: r.verified ?? googleVerified })),
     ...cms.map((r) => ({ r, verified: false })),
   ];
 

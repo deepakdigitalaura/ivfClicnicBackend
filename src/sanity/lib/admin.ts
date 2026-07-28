@@ -723,6 +723,15 @@ export type AdminGoogleReview = {
   relativeTime?: string;
   profilePhoto?: string;
   fetchedAt: string;
+  manual?: boolean;
+};
+
+export type ManualReviewInput = {
+  centreSlug: string;
+  author: string;
+  rating: number;
+  text: string;
+  publishedAt?: string;
 };
 
 export type ReviewRefreshResult = {
@@ -744,11 +753,33 @@ export async function readAdminReviews(): Promise<AdminGoogleReview[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "googleReview"] | order(centreSlug asc, fetchedAt desc){ _id, centreSlug, author, rating, text, publishedAt, relativeTime, profilePhoto, fetchedAt }`,
+      `*[_type == "googleReview"] | order(centreSlug asc, fetchedAt desc){ _id, centreSlug, author, rating, text, publishedAt, relativeTime, profilePhoto, fetchedAt, manual }`,
     );
   } catch {
     return [];
   }
+}
+
+/** Staff-entered review — e.g. copied from a centre's Google listing directly
+ *  (more are visible in a browser than the free Places API ever returns).
+ *  Stored in the same accumulating list so it shows in the same carousel,
+ *  but flagged `manual: true` so it never gets the "Google" badge or feeds
+ *  AggregateRating/Review schema — only API-fetched reviews get that,
+ *  since we can't automatically verify a hand-typed entry's provenance. */
+export async function createManualReview(input: ManualReviewInput): Promise<void> {
+  if (!hasSanity()) throw new Error("Sanity not configured");
+  const now = new Date().toISOString();
+  await writeClient.create({
+    _type: "googleReview",
+    centreSlug: input.centreSlug,
+    author: input.author,
+    rating: input.rating,
+    text: input.text,
+    publishedAt: input.publishedAt || now,
+    fetchedAt: now,
+    manual: true,
+  });
+  revalidateTag(REVIEW_TAG);
 }
 
 export async function deleteReview(id: string) {

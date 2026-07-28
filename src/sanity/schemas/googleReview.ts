@@ -13,6 +13,7 @@ export default defineType({
     defineField({ name: "relativeTime", title: "Relative time label", description: "e.g. \"in the last week\" — display only, from Google.", type: "string" }),
     defineField({ name: "profilePhoto", title: "Reviewer photo URL", type: "url" }),
     defineField({ name: "fetchedAt", title: "Fetched into admin at", description: "Set automatically when the Refresh button pulls this review in. New fetches sort above older ones.", type: "datetime" }),
+    defineField({ name: "manual", title: "Manually added", description: "True when a staff member typed this in directly (e.g. copied from the Google listing) rather than the automated API fetch. Shown with a neutral \"Patient review\" badge instead of \"Google\", and excluded from AggregateRating/Review schema markup.", type: "boolean", initialValue: false }),
   ],
   orderings: [{ title: "Newest fetched first", name: "fetchedAtDesc", by: [{ field: "fetchedAt", direction: "desc" }] }],
   preview: {
