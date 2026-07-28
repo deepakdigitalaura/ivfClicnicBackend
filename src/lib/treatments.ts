@@ -205,7 +205,7 @@ export const ivf: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for six consecutive years (2021–2026), and is FOGSI-certified — pioneering IVF clinic in India and running Class 1000 embryology labs.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West for 6 consecutive years. It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — pioneering IVF clinic in India.",
     },
   },
   benefits: {
@@ -1660,7 +1660,7 @@ export const eggDonation: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for six consecutive years (2021–2026), and is FOGSI-certified — running Class 1000 embryology labs and well-regulated, ethical donor programmes.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West for 6 consecutive years. It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — with well-regulated, ethical donor programmes.",
     },
   },
   benefits: {
@@ -1827,7 +1827,7 @@ export const spermDonation: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for six consecutive years (2021–2026), and is FOGSI-certified — with a large, well-regulated donor-sperm programme.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West for 6 consecutive years. It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — with a large, well-regulated donor-sperm programme.",
     },
   },
   benefits: {
@@ -1983,7 +1983,7 @@ export const embryoDonation: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for six consecutive years (2021–2026), and is FOGSI-certified — with well-regulated egg, sperm and embryo donor programmes.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West for 6 consecutive years. It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — with well-regulated egg, sperm and embryo donor programmes.",
     },
   },
   benefits: {
@@ -2101,7 +2101,7 @@ export const embryoDonation: Treatment = {
  * ===================================================================== */
 const BFI_ASIDE = {
   title: "About Bavishi Fertility Institute",
-  body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for six consecutive years (2021–2026), and is FOGSI-certified — running Class 1000 embryology labs.",
+  body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West for 6 consecutive years. It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air).",
 };
 
 const DEFAULT_COST = {
