@@ -55,6 +55,7 @@ import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "
 import { TREATMENTS, treatmentBySlug } from "@/lib/treatments";
 import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre, type CitySource, type CentreSource } from "@/lib/location-content";
 import { type ServiceSource } from "@/lib/services";
+import { getLegalPage, LEGAL_PAGE_SLUGS } from "@/lib/legal-pages";
 
 // ---------- Types (kept for callers) ----------
 
@@ -78,9 +79,10 @@ export const payloadClient = async (): Promise<Payload> => {
 
 // ---------- Pages ----------
 
-export const getPageBySlug = async (_slug: string): Promise<Page | null> => null;
+export const getPageBySlug = async (slug: string): Promise<Page | null> =>
+  (getLegalPage(slug) as unknown as Page) ?? null;
 export const getPageBySlugDraft = async (_slug: string): Promise<Page | null> => null;
-export const getPublishedPageSlugs = async (): Promise<string[]> => [];
+export const getPublishedPageSlugs = async (): Promise<string[]> => LEGAL_PAGE_SLUGS;
 
 // ---------- Blog helpers ----------
 

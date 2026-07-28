@@ -549,7 +549,7 @@ export function TreatmentCard({
 
 /* ---------- Treatments ---------- */
 
-const TREATMENT_TITLE_HREFS: Record<string, string> = {
+export const TREATMENT_TITLE_HREFS: Record<string, string> = {
   "Male Infertility": "/treatments/male-infertility",
   "Female Infertility": "/treatments/female-infertility",
   "IVF / ICSI / ART": "/what-is-ivf",
