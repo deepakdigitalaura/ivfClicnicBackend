@@ -34,6 +34,7 @@ import {
   setBlogStatus,
   refreshAllReviews,
   backfillLegacyReviewCache,
+  poolBrandReviews,
   readAdminReviews,
   createManualReview,
   createManualReviews,
@@ -371,6 +372,19 @@ export async function backfillLegacyReviewsAction(): Promise<RefreshReviewsResul
     return { ok: true, results, reviews };
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "Backfill failed" };
+  }
+}
+
+export type PoolBrandReviewsResult = { ok: boolean; error?: string; added?: number; reviews?: AdminGoogleReview[] };
+
+export async function poolBrandReviewsAction(count = 15): Promise<PoolBrandReviewsResult> {
+  try {
+    const { added } = await poolBrandReviews(count);
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, added, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Pool failed" };
   }
 }
 
