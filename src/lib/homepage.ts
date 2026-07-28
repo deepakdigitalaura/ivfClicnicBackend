@@ -309,8 +309,8 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     badge: "Exclusive Program",
     heading: { lead: "Suraksha Kavach —", em: "complete peace of mind." },
     paragraph:
-      "India's most trusted IVF protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
-    features: ["Risk Reduction", "Multiple IVF Cycles", "Priority Care", "Unique Optional Package"],
+      "One of the most trusted IVF protection programme. Reduced financial risk, increased confidence & complete peace of mind.",
+    features: ["All Costs Covered", "Complete Peace of Mind", "Multiple IVF Cycles as Required", "Unique Optional Package"],
     primaryCta: { label: "Explore Suraksha Kavach", href: destinationHref("suraksha-kavach") },
     secondaryCta: { label: "Learn More", href: "#book" },
     image: surakshaImg,
