@@ -359,7 +359,6 @@ export function IvfPage() {
             center
             eyebrow="Advantages"
             title={<>The advantages of <em className="font-display italic text-[color:var(--rose)]">IVF</em></>}
-            subtitle="Beyond helping you conceive, IVF gives your specialist powerful tools to maximise your chances safely."
           />
           <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {advantages.map((t) => (
