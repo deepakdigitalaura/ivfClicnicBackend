@@ -1093,7 +1093,7 @@ export const imsi: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "IMSI?" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1119,7 +1119,7 @@ export const imsi: Treatment = {
   },
   faqs: [
     { q: "Is IMSI safe?", a: "Yes — IMSI is considered safe when performed by experienced specialists, though, as with any procedure, potential risks should be discussed with your doctor." },
-    { q: "Is IMSI suitable for all cases?", a: "IMSI is typically recommended for male-factor infertility, recurrent IVF failures, or previous poor embryo quality, rather than for every couple." },
+    { q: "Is IMSI suitable for all cases?", a: "IMSI is typically recommended for poor sperm morphology, recurrent IVF/ICSI failures, or previous poor embryo quality, rather than for every couple." },
     { q: "Does IMSI guarantee success?", a: "No. IMSI does not guarantee pregnancy; success depends on the underlying causes of infertility and several individual factors." },
     { q: "What is the difference between IMSI and ICSI?", a: "IMSI is a form of ICSI that uses much higher magnification to assess sperm structure in detail before injection, so the embryologist can select the most normal-looking sperm." },
     { q: "Are there any side effects?", a: "No specific adverse effects have been shown, although sperm being outside the body for longer during selection may, in theory, reduce fertilising capacity. This is minimised by careful lab conditions." },
