@@ -294,7 +294,7 @@ export const ivf: Treatment = {
     items: [
       { icon: FlaskConical, t: "Class 1000 IVF Lab", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting embryos at every moment." },
       { icon: Microscope, t: "Body-like Incubators", d: "Next-generation Humid incubators recreate the body's exact environment to grow healthy embryos." },
-      { icon: Snowflake, t: "Vitrification", d: "We achieved India's first live birth with vitrified frozen oocytes." },
+      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of embryos with close to 100% survival on thawing. We achieved first live birth of India with vitrified frozen oocytes." },
       { icon: Dna, t: "ICSI & PGT", d: "Microinjection for every couple, plus pre-implantation genetic testing where indicated." },
     ],
   },
