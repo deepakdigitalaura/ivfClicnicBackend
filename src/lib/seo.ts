@@ -41,7 +41,7 @@ export const SITE = {
     addressCountry: "IN",
   },
   awards: [
-    "National Fertility Award 2021",
+    "National Fertility Award 2019",
     "National Fertility Award 2022",
     "National Fertility Award 2023",
     "National Fertility Award 2024",

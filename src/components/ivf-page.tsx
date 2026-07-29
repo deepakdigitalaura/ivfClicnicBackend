@@ -79,7 +79,7 @@ const whyBfi = [
   { icon: Microscope, t: "ICSI for All", d: "Microinjection for every couple gives the maximum chance of fertilisation and minimises the risk of total fertilisation failure." },
   { icon: Sparkles, t: "Customised Protocols", d: "Tailor-made stimulation and our 'trigger it right' strategy retrieve the best number of best-quality eggs, safely." },
   { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and peace of mind on your journey to parenthood." },
-  { icon: Award, t: "Proven & Awarded", d: "25,000+ pregnancies since 1998 and the National Fertility Award for six consecutive years (2021–2026)." },
+  { icon: Award, t: "Proven & Awarded", d: "25,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
   { icon: HeartPulse, t: "One-Stop Care", d: "Tests, surgery, embryology and treatment under one roof — with safe-stimulation protocols designed to avoid severe OHSS." },
 ];
 
@@ -92,7 +92,7 @@ const faqs = [
   { q: "Is egg retrieval painful?", a: "No. Egg retrieval is a short, painless procedure done through the vagina under light sedation — with no cut and no stitch. Most patients go home within about two hours." },
   { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a consultation for a personalised estimate." },
   { q: "Does Bavishi Fertility Institute offer financial protection for IVF?", a: "Yes — through the Suraksha Kavach programme, which covers multiple IVF cycles and provides financial protection on your fertility journey. Speak to our team to see if you qualify." },
-  { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 25,000+ successful pregnancies and the National Fertility Award for six consecutive years." },
+  { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 25,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
   { q: "What lifestyle changes should I make before starting IVF?", a: "Focus on a healthy lifestyle — a balanced diet, regular exercise, maintaining a healthy weight, and avoiding smoking and excessive alcohol. Your specialist will give you any additional, personalised advice during your consultation." },
   { q: "Are there any dietary recommendations during IVF?", a: "There are no strict restrictions, but a balanced diet rich in fruits, vegetables, whole grains and lean proteins is recommended, along with good hydration. Follow any specific guidance your clinic provides for your treatment." },
   { q: "What is embryo grading?", a: "Embryo grading assesses the quality of embryos based on their appearance and development. Higher-grade embryos are more likely to implant successfully, which is why our embryologists select the best-quality embryo(s) for transfer." },
@@ -344,7 +344,7 @@ export function IvfPage() {
               <p className="mt-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">
                 Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with
                 14 centres across 8 cities. Bavishi Fertility Institute has achieved 25,000+ successful IVF pregnancies, holds the National Fertility
-                Award for six consecutive years (2021–2026), and is FOGSI-certified — pioneering IVF in India and running
+                Award six times (2019–2026), and is FOGSI-certified — pioneering IVF in India and running
                 Class 1000 embryology labs.
               </p>
             </aside>
