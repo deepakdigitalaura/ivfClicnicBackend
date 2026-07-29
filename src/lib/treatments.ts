@@ -255,7 +255,7 @@ export const ivf: Treatment = {
       { icon: Syringe, n: "02", t: "Ovarian Stimulation", d: "After your period, a customised dose of gonadotropin hormones (FSH/HMG) is given as a small daily injection for about 7–12 days to grow multiple mature eggs, with regular ultrasound monitoring. A precise 'trigger' injection then matures the eggs for retrieval." },
       { icon: Microscope, n: "03", t: "Egg Retrieval & Fertilization", d: "34–36 hours after the trigger, eggs are retrieved through the vagina under short sedation — no cut, no stitch, and you go home in about 2 hours. The same day, the best sperm are selected and each mature egg is fertilised by ICSI in our Class 1000 IVF lab." },
       { icon: Dna, n: "04", t: "Embryo Culture & Transfer", d: "Embryos are grown in next-generation incubators that mimic the body. Two to six days later, the best-quality embryo(s) are either gently transferred into the uterus or electively frozen, customised to your condition & response. Surplus embryos can be frozen." },
-      { icon: HeartPulse, n: "05", t: "Pregnancy Test", d: "About 12–19 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–17 days." },
+      { icon: HeartPulse, n: "05", t: "Pregnancy Test", d: "About 13–15 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–19 days." },
     ],
   },
   timeline: {
@@ -812,7 +812,7 @@ export const icsi: Treatment = {
       { icon: Microscope, t: "Micromanipulation Systems", d: "Latest-generation ICSI systems give precision measured in microns." },
       { icon: FlaskConical, t: "Class 1000 IVF Lab", d: "Air purity 10× cleaner than the international Class 10,000 standard." },
       { icon: Beaker, t: "Body-like Incubators", d: "Next-generation incubators recreate the body's exact environment for healthy embryos." },
-      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of surplus embryos with close to 100% survival on thawing." },
+      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of embryos with close to 100% survival on thawing. We achieved first live birth of India with vitrified frozen oocytes." },
     ],
   },
   whyUs: {
