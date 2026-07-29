@@ -790,7 +790,7 @@ export const icsi: Treatment = {
       { icon: Target, t: "PICSI", d: "Selects mature sperm by their natural ability to bind hyaluronic acid." },
       { icon: ScanLine, t: "IMSI", d: "Selects sperm under very high magnification to assess fine morphology." },
       { icon: Magnet, t: "MACS", d: "Magnetically separates apoptotic (damaged) sperm from healthy ones." },
-      { icon: Eye, t: "Spindle View ICSI", d: "Uses a Polscope to visualise the egg's spindle and assess egg quality." },
+      { icon: Eye, t: "Spindle View ICSI", d: "Uses a Polscope to visualise the egg's spindle to assess egg quality and select the best site for sperm injection." },
     ],
   },
   whoNeedsIt: {
