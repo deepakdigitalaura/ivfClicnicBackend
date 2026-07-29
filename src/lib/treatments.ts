@@ -503,8 +503,9 @@ export const ivfFailure: Treatment = {
       { icon: Syringe, n: "01", t: "Stimulation review", d: "We assess the number and quality of eggs recovered, and whether a different protocol — long, short, microdose flare, minimum-stimulation, or dual stimulation 'DuoStim' — may suit you better." },
       { icon: Microscope, n: "02", t: "Fertilisation review", d: "Where fertilisation was poor, sperm DNA fragmentation testing, PICSI and Spindle View ICSI help identify and address the cause." },
       { icon: Layers, n: "03", t: "Embryo selection", d: "Blastocyst culture shows which embryos are genuinely strong, while PGT screens for the genetic abnormalities common even in good-looking embryos." },
-      { icon: ScanLine, n: "04", t: "Uterine evaluation", d: "Hysteroscopy checks the uterine cavity and endometrium, and embryo glue may be used at transfer to support implantation." },
-      { icon: ListChecks, n: "05", t: "Maternal factors", d: "Blood tests for thrombophilia and chromosomal analysis of both partners complete the picture before the next plan is made." },
+      { icon: ScanLine, n: "04", t: "Uterine evaluation", d: "Hysteroscopy checks the uterine cavity and endometrium, CD-138 & PCR based testing identifies uterine infections, and embryo glue may be used at transfer to support implantation." },
+      { icon: ListChecks, n: "05", t: "Maternal factors", d: "Blood tests for thrombophilia, ANA testing and chromosomal analysis of both partners complete the picture before the next plan is made." },
+      { icon: ShieldCheck, n: "06", t: "Immune testing", d: "In very selected cases, uterine BCL-6 testing, HLA testing and comprehensive genetic testing help identify immune or genetic reasons for poor embryo quality and recurrent failure." },
     ],
   },
   whyUs: {
