@@ -1410,8 +1410,8 @@ export const blastocystTransfer: Treatment = {
   whatIs: {
     heading: { lead: "What is a", em: "blastocyst?" },
     paragraphs: [
-      "Not all embryos that look good on day 2 or 3 will continue to develop. If they are cultured for a few more days, only the genuinely good-quality embryos go on to reach the blastocyst stage — the embryo at day 5–6 of development.",
-      "In natural conception, an embryo reaches the uterus at the blastocyst stage, about 4–6 days after fertilisation. Culturing embryos to this stage in the laboratory therefore mimics nature and lets the embryologist select the strongest embryo for transfer. In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
+      "Not all embryos that look good on day 2 or 3 will continue to develop. If they are cultured for a few more days, only the genuinely good-quality embryos go on to reach the blastocyst stage — the embryo at day 5–6 of development. This is when the embryo naturally reaches and implants in the uterus.",
+      "Up until day 3, the embryo grows on maternal genes carried in the egg. On day 3, the embryo undergoes genomic activation and grows further on its own genetic strength. In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
     ],
     aside: {
       title: "Recommended where selection is possible",
@@ -1462,7 +1462,7 @@ export const blastocystTransfer: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "blastocyst transfer" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
