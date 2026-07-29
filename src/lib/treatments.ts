@@ -1816,7 +1816,7 @@ export const spermDonation: Treatment = {
   meta: {
     title: "Donor Sperm Treatment (Sperm Donation) — Bavishi Fertility Institute",
     description:
-      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. Large screened donor pool, no waiting, trusted since 1998.",
+      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. In-depth donor screening, no waiting, trusted since 1998.",
     ogImage: "/assets/donor services/Sperm-dontation.png",
   },
   procedure: {
@@ -1833,16 +1833,16 @@ export const spermDonation: Treatment = {
     h1: "Donor Sperm Treatment",
     h1Em: "at Bavishi Fertility Institute",
     tagline:
-      "When the partner's sperm cannot be used, carefully screened donor sperm offers a clear path to parenthood — through IUI or IVF–ICSI. A large pool of screened frozen donors means minimal waiting, with complete confidentiality.",
-    badges: ["Large Screened Donor Pool", "No Waiting Time", "Since 1998", "ART Act Compliant"],
+      "When the partner's sperm cannot be used, carefully screened donor sperm offers a clear path to parenthood — through IUI or IVF–ICSI. A large pool of screened and premium sperm donors available with our partner sperm (ART) bank means minimal waiting, with complete confidentiality.",
+    badges: ["In-Depth Screening of Donors", "No Waiting Time", "Since 1998", "ART Act Compliant"],
     image: "/assets/donor services/Sperm-dontation.png",
     imageAlt: "Sperm donation (donor sperm treatment) at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "Sperm Donation?" },
     paragraphs: [
-      "Sperm donation is the use of carefully screened donor sperm to achieve pregnancy — through intrauterine insemination (IUI) or through IVF with ICSI. The donor sperm fertilises the female partner's eggs, and the pregnancy is carried by the female partner herself.",
-      "It is considered when the male partner has no usable sperm — such as azoospermia where surgical retrieval is not possible — or has severe male-factor infertility, a high risk of transmitting a genetic condition, or for single women choosing parenthood. At Bavishi Fertility Institute a large pool of frozen, screened donor sperm means minimal waiting.",
+      "Sperm donation is the use of carefully screened donor sperm to achieve pregnancy — through intrauterine insemination (IUI) or through IVF-ICSI. The donor sperm fertilises the female partner's eggs, and the pregnancy is carried by the female partner herself.",
+      "It is considered when the male partner has no usable sperm — such as azoospermia where surgical retrieval is not possible — or has severe male-factor infertility, a high risk of transmitting a genetic condition, or for single women choosing parenthood. At Bavishi Fertility Institute a thorough screening of donors is done. We help you get samples from different backgrounds as per your need.",
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
@@ -1857,7 +1857,6 @@ export const spermDonation: Treatment = {
       "High pregnancy chances even in severe male-factor infertility.",
       "A pathway to parenthood when the partner's sperm cannot be used.",
       "The female partner carries and delivers the pregnancy herself.",
-      "A large pool of frozen donor sperm means minimal waiting.",
       "Donors matched on physical and background characteristics where possible.",
       "Treatment is kept completely confidential.",
     ],
@@ -1866,9 +1865,8 @@ export const spermDonation: Treatment = {
     heading: { lead: "Who needs", em: "Sperm Donation?" },
     subtitle: "Donor sperm is considered when the partner's own sperm cannot achieve a pregnancy.",
     items: [
-      "Azoospermia — no sperm in the ejaculate — where surgical retrieval isn't possible or affordable.",
-      "Severe male-factor infertility — very low count, motility or abnormal morphology.",
-      "100% non-motile sperm or high sperm-DNA fragmentation.",
+      "Azoospermia — no sperm in the semen — where surgical retrieval isn't possible or affordable.",
+      "Severe male-factor infertility — very low count or motility.",
       "Repeated poor fertilisation or embryo formation in previous IVF cycles.",
       "Risk of transmitting a hereditary genetic condition through the sperm.",
       "Single women choosing to become parents.",
@@ -1880,7 +1878,7 @@ export const spermDonation: Treatment = {
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Consultation & Counselling", d: "Your specialist reviews your history, confirms donor sperm is the right option, and explains every step." },
       { icon: Sparkles, n: "02", t: "Donor Selection & Matching", d: "A screened donor is matched on characteristics such as height, build, complexion, ethnicity and education." },
-      { icon: FlaskConical, n: "03", t: "Semen Preparation", d: "Frozen donor semen is thawed and prepared in the laboratory for insemination or fertilisation." },
+      { icon: FlaskConical, n: "03", t: "Semen Preparation", d: "Donor semen is prepared in the laboratory for insemination or fertilisation." },
       { icon: Syringe, n: "04", t: "IUI or IVF–ICSI", d: "Prepared donor sperm is used for intrauterine insemination, or to fertilise eggs by IVF with ICSI." },
       { icon: Baby, n: "05", t: "Pregnancy Test", d: "A pregnancy test confirms the outcome about two weeks after insemination or embryo transfer." },
     ],
@@ -1889,7 +1887,6 @@ export const spermDonation: Treatment = {
   technology: {
     eyebrow: "Donor Screening",
     heading: { lead: "Every donor,", em: "rigorously screened" },
-    subtitle: "Only young donors with normal screening are recruited, and every sample is quarantined and re-checked.",
     items: [
       { icon: Stethoscope, t: "Medical Screening", d: "Complete medical, family and personal history, physical examination and an exhaustive health check-up." },
       { icon: Dna, t: "Genetic Screening", d: "Detailed family-history review and screening for common genetic conditions, with further testing available on request." },
@@ -1901,11 +1898,8 @@ export const spermDonation: Treatment = {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for sperm donation" },
     items: [
       { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
-      { icon: Layers, t: "Large Donor Pool", d: "A large bank of frozen, screened donor sperm ready for use — no long waiting times." },
-      { icon: ShieldCheck, t: "Rigorously Screened Donors", d: "Donors cleared on medical, genetic and psychological screening, with semen analysis and infection testing." },
+      { icon: ShieldCheck, t: "Rigorously Tested Donors", d: "Donors cleared on medical, genetic and psychological screening, with semen analysis and infection testing." },
       { icon: Sparkles, t: "Careful Matching", d: "Matched on height, build, complexion, eye colour, ethnicity and education wherever possible." },
-      { icon: Eye, t: "Complete Confidentiality", d: "Your treatment and donor matching are handled with total privacy at every step." },
-      { icon: ListChecks, t: "Ethical & ART-Compliant", d: "A regulated, ethical process under India's ART Act, protecting the rights of everyone involved." },
     ],
   },
   success: {
@@ -1943,7 +1937,7 @@ export const spermDonation: Treatment = {
     { q: "When is donor sperm needed?", a: "For azoospermia where sperm cannot be retrieved, severe male-factor infertility, a high risk of transmitting a genetic condition, or for single women choosing parenthood." },
     { q: "How are sperm donors screened?", a: "Donors undergo medical, genetic and psychological evaluation along with semen analysis and infection screening before their sperm is used." },
     { q: "How are donors matched to us?", a: "We match on characteristics such as height, build, complexion, eye colour, ethnicity and education wherever possible." },
-    { q: "Is there a waiting time for a donor?", a: "No. Bavishi Fertility Institute maintains a large pool of frozen, screened donor sperm ready for use." },
+    { q: "Is there a waiting time for a donor?", a: "No. Our partner sperm (ART) bank maintains a large pool of screened donor sperm ready for use." },
     { q: "Will the baby be genetically related to us?", a: "The baby will not inherit the male partner's genes, but the female partner contributes through her eggs and carries the pregnancy herself." },
     { q: "Is sperm donation legal in India?", a: "Yes. It is regulated by the ART (Assisted Reproductive Technology) Act, which protects the rights of everyone involved." },
     { q: "What are the success rates with donor sperm?", a: "Success varies from case to case and is generally higher for younger women. It depends on the female partner's age and health, egg and embryo quality and the technique used. Outcomes cannot be guaranteed." },
