@@ -293,19 +293,16 @@ export const ivf: Treatment = {
     subtitle: "World-class infrastructure and embryology that protect your embryos at every step.",
     items: [
       { icon: FlaskConical, t: "Class 1000 IVF Lab", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting embryos at every moment." },
-      { icon: Microscope, t: "Body-like Incubators", d: "Next-generation incubators recreate the body's exact environment to grow healthy embryos." },
-      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of surplus embryos with close to 100% survival on thawing." },
+      { icon: Microscope, t: "Body-like Incubators", d: "Next-generation Humid incubators recreate the body's exact environment to grow healthy embryos." },
+      { icon: Snowflake, t: "Vitrification", d: "We achieved India's first live birth with vitrified frozen oocytes." },
       { icon: Dna, t: "ICSI & PGT", d: "Microinjection for every couple, plus pre-implantation genetic testing where indicated." },
     ],
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "your IVF?" },
     items: [
-      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting your embryos at every moment." },
-      { icon: Microscope, t: "ICSI for All", d: "Microinjection for every couple gives the maximum chance of fertilisation and minimises the risk of total fertilisation failure." },
       { icon: Sparkles, t: "Customised Protocols", d: "Tailor-made stimulation and our 'trigger it right' strategy retrieve the best number of best-quality eggs, safely." },
-      { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and peace of mind on your journey to parenthood." },
-      { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
+      { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award for Best IVF Chain in India-West for 6 consecutive years." },
       { icon: HeartPulse, t: "One-Stop Care", d: "Tests, surgery, embryology and treatment under one roof — with safe-stimulation protocols designed to avoid severe OHSS." },
     ],
   },
