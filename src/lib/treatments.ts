@@ -1328,7 +1328,7 @@ export const spindleViewIcsi: Treatment = {
       { icon: Eye, n: "02", t: "Spindle visualisation", d: "The embryologist studies the spindle's position, length and area as an indicator of egg quality." },
       { icon: Target, n: "03", t: "Alignment", d: "The egg is aligned so the injection avoids the spindle, rather than relying on the polar body as an approximate marker." },
       { icon: Syringe, n: "04", t: "Injection", d: "A single sperm is injected with the spindle protected, supporting better fertilisation." },
-      { icon: Dna, n: "05", t: "Culture & transfer", d: "Fertilised eggs are cultured into embryos, and the best embryo is selected for transfer." },
+      { icon: Dna, n: "05", t: "Culture & transfer", d: "Fertilised eggs are cultured into embryos, and the best embryo is selected for transfer, like any other ICSI cycle." },
     ],
   },
   whyUs: {
