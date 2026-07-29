@@ -251,10 +251,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     subtitle:
       "Premium, transparent and deeply personal. We've redefined what fertility care should feel like.",
     cards: [
-      { icon: "Sparkles", t: "Transparent Treatment Plans", d: "Clear pricing, honest timelines and no hidden costs across every step of your journey." },
-      { icon: "Microscope", t: "Advanced Fertility Technology", d: "State-of-the-art embryology labs, time-lapse imaging and PGT for the highest success rates." },
+      { icon: "HeartPulse", t: "Personalised Care Journey", d: "Every plan is tailored — clinically & emotionally." },
+      { icon: "Microscope", t: "Advanced Fertility Technology", d: "State-of-the-art embryology labs, 10x cleaner lab environment compared to European standards, and PGT for the highest success rates." },
       { icon: "Stethoscope", t: "Experienced IVF Specialists", d: "Led by world-renowned doctors with decades of clinical experience and global training." },
-      { icon: "HeartPulse", t: "Personalised Care Journey", d: "Every plan is tailored — emotionally and clinically — to your unique fertility story." },
+      { icon: "Sparkles", t: "Transparent Treatment Plans", d: "Clear pricing, honest timelines and no hidden costs across every step of your journey." },
     ],
   },
   whyChoose: {
@@ -309,8 +309,8 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     badge: "Exclusive Program",
     heading: { lead: "Suraksha Kavach —", em: "complete peace of mind." },
     paragraph:
-      "India's most trusted IVF protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
-    features: ["Risk Reduction", "Multiple IVF Cycles", "Priority Care", "Unique Optional Package"],
+      "One of the most trusted IVF protection programme. Reduced financial risk, increased confidence & complete peace of mind.",
+    features: ["All Costs Covered", "Complete Peace of Mind", "Multiple IVF Cycles as Required", "Unique Optional Package"],
     primaryCta: { label: "Explore Suraksha Kavach", href: destinationHref("suraksha-kavach") },
     secondaryCta: { label: "Learn More", href: "#book" },
     image: surakshaImg,

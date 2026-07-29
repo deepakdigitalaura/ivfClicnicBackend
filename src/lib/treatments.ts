@@ -273,7 +273,7 @@ export const ivf: Treatment = {
     chips: [
       "Antagonist (Short) protocol",
       "Down-regulation (Long) protocol",
-      "Flare protocol",
+      "Customized protocol",
       "Dual stimulation protocol",
       "Minimum stimulation protocol",
     ],
@@ -294,7 +294,7 @@ export const ivf: Treatment = {
     items: [
       { icon: FlaskConical, t: "Class 1000 IVF Lab", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting embryos at every moment." },
       { icon: Microscope, t: "Body-like Incubators", d: "Next-generation Humid incubators recreate the body's exact environment to grow healthy embryos." },
-      { icon: Snowflake, t: "Vitrification", d: "We achieved India's first live birth with vitrified frozen oocytes." },
+      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of embryos with close to 100% survival on thawing. We achieved first live birth of India with vitrified frozen oocytes." },
       { icon: Dna, t: "ICSI & PGT", d: "Microinjection for every couple, plus pre-implantation genetic testing where indicated." },
     ],
   },
@@ -449,7 +449,7 @@ export const ivfFailure: Treatment = {
     h1Em: "A systematic path forward at Bavishi Fertility Institute",
     tagline:
       "A failed cycle is not the end of the road. At Bavishi Fertility Institute we analyse each stage of the previous cycle to understand what happened — and then build a clearer, more personalised plan for your next attempt.",
-    badges: ["Stage-by-stage analysis", "Since 1998", "Class 1000 Labs", "Advanced diagnostics"],
+    badges: ["Stage-by-stage analysis", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "Advanced diagnostics"],
     image: "/assets/treatments/Ivf-Failure.png",
     imageAlt: "A hopeful couple — moving forward after a failed IVF cycle with Bavishi Fertility Institute",
   },
@@ -607,7 +607,7 @@ export const iui: Treatment = {
     ],
     aside: {
       title: "Simple, and gentle on you",
-      body: "IUI is usually painless — most women describe only mild discomfort, similar to a Pap smear. You rest for about ten minutes afterwards and can resume normal activities the same day. Typically 3–6 cycles are tried, but your doctor will tailor the advice to your situation.",
+      body: "IUI is usually painless — most women describe only mild discomfort. You rest for about ten minutes afterwards and can resume normal activities the same day. Typically 3–4 cycles are tried, but your doctor will tailor the advice to your situation.",
     },
   },
   video: {
@@ -633,8 +633,7 @@ export const iui: Treatment = {
     heading: { lead: "Types of", em: "IUI" },
     items: [
       { icon: Leaf, t: "Natural-cycle IUI", d: "Timed to your own natural ovulation, without stimulation medicines." },
-      { icon: Syringe, t: "Medicated IUI", d: "With tablets or injections to encourage ovulation and improve egg availability." },
-      { icon: Snowflake, t: "Frozen-sample IUI", d: "Using a previously frozen semen sample when the partner is unavailable." },
+      { icon: Syringe, t: "Medicated IUI", d: "With tablets and/or injections to encourage ovulation and improve egg availability." },
       { icon: Baby, t: "Donor-sperm IUI", d: "Using screened donor sperm, for example in cases of azoospermia or for single women." },
     ],
   },
@@ -642,7 +641,7 @@ export const iui: Treatment = {
     heading: { lead: "Who is", em: "IUI suitable for?" },
     subtitle: "Your specialist may suggest IUI in any of the following situations, after a proper evaluation.",
     items: [
-      "Mild male-factor infertility — low count, reduced motility or abnormal morphology",
+      "Mild male-factor infertility — low count or reduced motility",
       "Low semen volume or viscous semen",
       "Use of frozen or donor semen samples",
       "Ejaculation or sexual-function difficulties, or an absent partner",
@@ -697,8 +696,8 @@ export const iui: Treatment = {
   faqs: [
     { q: "How long does the IUI process take?", a: "The IUI visit typically takes about 1 to 2 hours from start to finish; the insemination itself takes only a few minutes." },
     { q: "What is the difference between IUI and IVF?", a: "In IUI, prepared sperm is placed into the uterus near the time of ovulation — suitable for mild male-factor or cervical issues. In IVF, eggs are retrieved and fertilised in the laboratory and the embryo is transferred — used for more complex cases such as blocked tubes or severe male infertility." },
-    { q: "Is IUI painful?", a: "IUI is usually not painful. Most women experience only mild discomfort, often described as similar to a Pap smear." },
-    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 6 cycles of IUI are suggested, but your doctor will tailor the advice based on your specific situation." },
+    { q: "Is IUI painful?", a: "IUI is usually not painful. Most women experience only mild discomfort." },
+    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 4 cycles of IUI are suggested, but your doctor will tailor the advice based on your specific situation." },
     { q: "Can I have sex after an IUI procedure?", a: "Yes. There are generally no specific restrictions against sexual activity following the procedure." },
     { q: "Can I travel after IUI?", a: "Yes, you can travel after IUI, as the procedure does not require prolonged rest." },
     { q: "Can stress affect IUI success?", a: "Stress can affect fertility by influencing hormone levels. Relaxation techniques, yoga, meditation and counselling can help." },
@@ -744,7 +743,7 @@ export const icsi: Treatment = {
     h1Em: "Intracytoplasmic Sperm Injection at Bavishi Fertility Institute",
     tagline:
       "The technique where just one sperm is needed to fertilise one egg. ICSI overcomes male-factor infertility and previous fertilisation failure — performed in our Class 1000 labs by experienced embryologists.",
-    badges: ["One sperm per egg", "Class 1000 Labs", "Since 1998", "Skilled embryology"],
+    badges: ["One sperm per egg", "Class 1000 (10X Clean Air) IVF Labs", "Since 1998", "Skilled embryology"],
     image: "/assets/treatments/ICSI.png",
     imageAlt: "ICSI — a single sperm being microinjected into an egg at Bavishi Fertility Institute",
   },
@@ -903,7 +902,7 @@ export const picsi: Treatment = {
     h1Em: "Physiological ICSI at Bavishi Fertility Institute",
     tagline:
       "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid. Used in selected cases to improve sperm selection and embryo quality.",
-    badges: ["Physiological selection", "Class 1000 Labs", "Used selectively", "Skilled embryology"],
+    badges: ["Physiological selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/PICSI.png",
     imageAlt: "PICSI — physiological sperm selection by hyaluronan binding at Bavishi Fertility Institute",
   },
@@ -1024,7 +1023,7 @@ export const imsi: Treatment = {
     h1Em: "Morphologically Selected Sperm Injection at Bavishi Fertility Institute",
     tagline:
       "A high-magnification refinement of ICSI. By examining sperm in far greater detail, IMSI helps the embryologist select the most structurally normal sperm for fertilisation.",
-    badges: ["High-magnification selection", "Class 1000 Labs", "Used selectively", "Skilled embryology"],
+    badges: ["High-magnification selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/IMSI.png",
     imageAlt: "IMSI — high-magnification sperm selection at Bavishi Fertility Institute",
   },
@@ -1382,7 +1381,7 @@ export const blastocystTransfer: Treatment = {
     h1Em: "Stronger embryo selection at Bavishi Fertility Institute",
     tagline:
       "By growing embryos to day 5–6 — the blastocyst stage — only the strongest continue to develop. This supports better selection and makes single-embryo transfer possible.",
-    badges: ["Day 5–6 culture", "Better selection", "Fewer multiples", "Class 1000 Labs"],
+    badges: ["Day 5–6 culture", "Better selection", "Fewer multiples", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/Blastocyst Transfer.png",
     imageAlt: "Blastocyst culture and transfer — a day-5 embryo at Bavishi Fertility Institute",
   },
@@ -1649,7 +1648,7 @@ export const eggDonation: Treatment = {
     h1Em: "Oocyte Donation at Bavishi Fertility Institute",
     tagline:
       "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1998 — Class 1000 (10× Clean Air) IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
-    badges: ["Young Screened Donors", "Since 1998", "Class 1000 Labs", "ART Act Compliant"],
+    badges: ["Young Screened Donors", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "ART Act Compliant"],
     image: "/assets/donor services/Egg-donation.png",
     imageAlt: "Egg donation (oocyte donation) at Bavishi Fertility Institute — a hopeful mother-to-be",
   },
@@ -3126,7 +3125,7 @@ export const ovarianReserve = defineTreatment({
     h1Em: "/ Low AMH",
     tagline:
       "A low egg count or low AMH means fewer eggs — not no chance. Tailored protocols help us recover and use the best eggs you have, with honest guidance throughout.",
-    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1998", "Class 1000 Labs"],
+    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/conditions/ovarian-reserve.png",
     imageAlt: "Poor ovarian reserve / low AMH treatment at Bavishi Fertility Institute",
   },
@@ -3577,7 +3576,7 @@ export const cryopreservation = defineTreatment({
     h1Em: "(Fertility Preservation)",
     tagline:
       "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline.",
-    badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 Labs"],
+    badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/fertility-preservation.png",
     imageAlt: "Cryopreservation (egg, sperm and embryo freezing) at Bavishi Fertility Institute",
   },
@@ -3919,7 +3918,7 @@ export const pgt = defineTreatment({
     h1Em: "Genetic Testing (PGT)",
     tagline:
       "PGT screens IVF embryos for chromosomal and genetic problems before transfer — helping select the healthiest embryo, improving success and reducing the risk of miscarriage.",
-    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1998", "Class 1000 Labs"],
+    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/pgt.png",
     imageAlt: "Preimplantation genetic testing (PGT) at Bavishi Fertility Institute",
   },

@@ -32,6 +32,14 @@ import {
   saveBlog,
   deleteBlog,
   setBlogStatus,
+  refreshAllReviews,
+  backfillLegacyReviewCache,
+  poolBrandReviews,
+  readAdminReviews,
+  createManualReview,
+  createManualReviews,
+  deleteReview,
+  type ManualReviewInput,
   type Inquiry,
   type AdminDoctor,
   type AdminTreatment,
@@ -44,6 +52,8 @@ import {
   type AdminSiteSettings,
   type AdminEducationVideo,
   type AdminBlogMeta,
+  type ReviewRefreshResult,
+  type AdminGoogleReview,
 } from "@/sanity/lib/admin";
 import type {
   RobotsConfig,
@@ -335,4 +345,73 @@ export async function setBlogStatusAction(id: string, status: "published" | "dra
   const r = await guard(() => setBlogStatus(id, status));
   revalidateBlogPages(slug);
   return r;
+}
+
+// ── Reviews ──
+
+export type RefreshReviewsResult = { ok: boolean; error?: string; results?: ReviewRefreshResult[]; reviews?: AdminGoogleReview[] };
+
+export async function refreshReviewsAction(): Promise<RefreshReviewsResult> {
+  try {
+    const results = await refreshAllReviews();
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, results, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Refresh failed" };
+  }
+}
+
+/** TEMPORARY — one-time migration of src/data/reviews-cache.json into the new
+ *  Sanity store. Remove this + its button in reviews/manager.tsx once run. */
+export async function backfillLegacyReviewsAction(): Promise<RefreshReviewsResult> {
+  try {
+    const results = await backfillLegacyReviewCache();
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, results, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Backfill failed" };
+  }
+}
+
+export type PoolBrandReviewsResult = { ok: boolean; error?: string; added?: number; reviews?: AdminGoogleReview[] };
+
+export async function poolBrandReviewsAction(count = 15): Promise<PoolBrandReviewsResult> {
+  try {
+    const { added } = await poolBrandReviews(count);
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, added, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Pool failed" };
+  }
+}
+
+export async function deleteReviewAction(id: string): Promise<SaveResult> {
+  const r = await guard(() => deleteReview(id));
+  revalidatePath("/admin-panel/reviews");
+  return r;
+}
+
+export async function createManualReviewAction(input: ManualReviewInput): Promise<RefreshReviewsResult> {
+  try {
+    await createManualReview(input);
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Add failed" };
+  }
+}
+
+export async function createManualReviewsAction(inputs: ManualReviewInput[]): Promise<RefreshReviewsResult> {
+  try {
+    await createManualReviews(inputs);
+    const reviews = await readAdminReviews();
+    revalidatePath("/admin-panel/reviews");
+    return { ok: true, reviews };
+  } catch (e) {
+    return { ok: false, error: e instanceof Error ? e.message : "Bulk add failed" };
+  }
 }

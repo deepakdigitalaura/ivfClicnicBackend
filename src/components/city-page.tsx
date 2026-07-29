@@ -211,6 +211,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
       <div className="bg-white">
         <GoogleReviews
           data={reviews}
+          reviewsKey={city.slug}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Bavishi Fertility Institute " + city.name)}`}
           title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${city.name} families ${em("on Google")}`)}
           subtitle={`Read verified reviews from patients across our ${city.name} centres.`}
