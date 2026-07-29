@@ -808,13 +808,14 @@ export const icsi: Treatment = {
   },
   process: {
     heading: { lead: "The ICSI process at", em: "Bavishi Fertility Institute" },
-    subtitle: "From evaluation to embryo transfer, every step is handled with precision and care.",
+    subtitle: "From your first consultation to your pregnancy test, every stage is handled with precision, safety and care.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "Both partners are assessed — semen analysis for the male partner, and hormone tests (FSH, LH, AMH), ultrasound and other investigations for the female partner." },
-      { icon: Egg, n: "02", t: "Egg retrieval", d: "After controlled ovarian stimulation, eggs are retrieved through transvaginal ultrasound-guided aspiration under short sedation." },
-      { icon: Filter, n: "03", t: "Sperm preparation", d: "The semen sample is processed to isolate the most motile, healthy sperm for injection." },
-      { icon: Microscope, n: "04", t: "Microinjection", d: "A skilled embryologist injects a single sperm directly into the cytoplasm of each mature egg. Fertilisation is checked 12–18 hours later." },
-      { icon: Dna, n: "05", t: "Culture & transfer", d: "Embryos are cultured for 3–5 days; the healthiest is transferred via a thin catheter, with progesterone support and a pregnancy test about two weeks later." },
+      { icon: ClipboardCheck, n: "01", t: "Pre-treatment Evaluation", d: "Before starting, both partners are thoroughly evaluated to optimise the outcome — blood tests for husband & wife, semen test, 3D sonography, and if needed, specialised tests like hysteroscopy." },
+      { icon: Syringe, n: "02", t: "Ovarian Stimulation", d: "After your period, a customised dose of gonadotropin hormones (FSH/HMG) is given as a small daily injection for about 7–12 days to grow multiple mature eggs, with regular ultrasound monitoring. A precise 'trigger' injection then matures the eggs for retrieval." },
+      { icon: Egg, n: "03", t: "Egg Retrieval", d: "34–36 hours after the trigger, eggs are retrieved through the vagina under short sedation — no cut, no stitch, and you go home in about 2 hours. The same day, the best sperm are selected for injection." },
+      { icon: Microscope, n: "04", t: "Microinjection", d: "A skilled embryologist injects a single healthy sperm directly into the cytoplasm of each mature egg under high magnification, in our Class 1000 IVF lab. Fertilisation is checked 12–18 hours later." },
+      { icon: Dna, n: "05", t: "Embryo Culture & Transfer", d: "Embryos are grown in next-generation incubators that mimic the body. Two to six days later, the best-quality embryo(s) are either gently transferred into the uterus or electively frozen, customised to your condition & response. Surplus embryos can be frozen." },
+      { icon: HeartPulse, n: "06", t: "Pregnancy Test", d: "About 12–19 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–19 days." },
     ],
   },
   technology: {
