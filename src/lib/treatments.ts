@@ -210,8 +210,6 @@ export const ivf: Treatment = {
   },
   benefits: {
     heading: { lead: "The advantages of", em: "IVF" },
-    subtitle:
-      "Beyond helping you conceive, IVF gives your specialist powerful tools to maximise your chances safely.",
     items: [
       "Know the number and quality of your embryos before transfer.",
       "Select and transfer only the best-quality embryo(s).",
