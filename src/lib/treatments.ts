@@ -191,7 +191,7 @@ export const ivf: Treatment = {
     h1: "IVF Treatment",
     h1Em: "In Vitro Fertilization at Bavishi Fertility Institute",
     tagline:
-      "India's trusted IVF specialists since 1998 — 30,000+ successful pregnancies, Class 1000 IVF labs, and the Suraksha Kavach promise. Personalised, transparent and compassionate fertility care, every step of the way.",
+      "India's trusted IVF specialists since 1998 — 30,000+ successful pregnancies, Class 1000 (10× Clean Air) IVF labs, and the Suraksha Kavach promise. Personalised, transparent and compassionate fertility care, every step of the way.",
     badges: ["30,000+ Pregnancies", "Since 1998", "Class 1000 (10× Clean Air)", "National Fertility Award 6×"],
     image: "/assets/ivf-icsi.png",
     imageAlt:
@@ -1647,7 +1647,7 @@ export const eggDonation: Treatment = {
     h1: "Egg Donation Treatment",
     h1Em: "Oocyte Donation at Bavishi Fertility Institute",
     tagline:
-      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1998 — Class 1000 IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
+      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1998 — Class 1000 (10× Clean Air) IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
     badges: ["Young Screened Donors", "Since 1998", "Class 1000 Labs", "ART Act Compliant"],
     image: "/assets/donor services/Egg-donation.png",
     imageAlt: "Egg donation (oocyte donation) at Bavishi Fertility Institute — a hopeful mother-to-be",
