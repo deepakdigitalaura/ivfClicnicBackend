@@ -166,7 +166,7 @@
           "icon": "ClipboardCheck",
           "n": "01",
           "t": "Pre-treatment Evaluation",
-          "d": "Before starting, both partners are thoroughly evaluated to optimise the outcome — semen analysis and blood tests for the male partner, and consultation, 3D sonography, hormone tests and (if indicated) hysteroscopy for the female partner."
+          "d": "Before starting, both partners are thoroughly evaluated to optimise the outcome — blood tests for husband & wife, semen test, 3D sonography, and if needed, specialised tests like hysteroscopy."
         },
         {
           "icon": "Syringe",
@@ -184,16 +184,15 @@
           "icon": "Dna",
           "n": "04",
           "t": "Embryo Culture & Transfer",
-          "d": "Embryos are grown in next-generation incubators that mimic the body. Two to six days later, the best-quality embryo(s) are gently transferred into the uterus. Surplus embryos can be frozen by vitrification — with close to 100% survival at Bavishi Fertility Institute."
+          "d": "Embryos are grown in next-generation incubators that mimic the body. Two to six days later, the best-quality embryo(s) are either gently transferred into the uterus or electively frozen, customised to your condition & response. Surplus embryos can be frozen."
         },
         {
           "icon": "HeartPulse",
           "n": "05",
           "t": "Pregnancy Test",
-          "d": "About 13–15 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–17 days."
+          "d": "About 12–19 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–17 days."
         }
-      ],
-      "note": "Active treatment — egg formation to embryo transfer — typically takes just 12–17 days."
+      ]
     },
     "timeline": {
       "heading": {
