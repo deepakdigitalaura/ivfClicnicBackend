@@ -1334,7 +1334,7 @@ export const spindleViewIcsi: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "Spindle View ICSI" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1411,8 +1411,8 @@ export const blastocystTransfer: Treatment = {
   whatIs: {
     heading: { lead: "What is a", em: "blastocyst?" },
     paragraphs: [
-      "Not all embryos that look good on day 2 or 3 will continue to develop. If they are cultured for a few more days, only the genuinely good-quality embryos go on to reach the blastocyst stage — the embryo at day 5–6 of development.",
-      "In natural conception, an embryo reaches the uterus at the blastocyst stage, about 4–6 days after fertilisation. Culturing embryos to this stage in the laboratory therefore mimics nature and lets the embryologist select the strongest embryo for transfer. In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
+      "Not all embryos that look good on day 2 or 3 will continue to develop. If they are cultured for a few more days, only the genuinely good-quality embryos go on to reach the blastocyst stage — the embryo at day 5–6 of development. This is when the embryo naturally reaches and implants in the uterus.",
+      "Up until day 3, the embryo grows on maternal genes carried in the egg. On day 3, the embryo undergoes genomic activation and grows further on its own genetic strength. In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
     ],
     aside: {
       title: "Recommended where selection is possible",
@@ -1463,7 +1463,7 @@ export const blastocystTransfer: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "blastocyst transfer" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1598,7 +1598,7 @@ export const laserHatching: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "laser hatching" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1623,13 +1623,13 @@ export const laserHatching: Treatment = {
     ],
   },
   faqs: [
-    { q: "Is LAH safe for all embryo types?", a: "LAH is generally safe for all embryo types, including donor embryos, as long as they are of good quality and suitable for implantation." },
+    { q: "Is LAH safe for all embryo types?", a: "LAH is generally safe for all embryo types, including self & donor embryos, and day 2–3 & day 5 (blastocyst) embryos, as long as they are of good quality and suitable for implantation." },
     { q: "Does LAH increase the risk of birth defects?", a: "Current research and clinical experience suggest that LAH does not increase the risk of birth defects or congenital abnormalities." },
     { q: "How long does the procedure take?", a: "It typically takes only a few minutes per embryo and is done on the same day as the embryo transfer." },
     { q: "Can LAH be performed on day-5 blastocysts?", a: "Yes. LAH can be performed on both day-3 and day-5 (blastocyst) embryos, depending on the clinical indication." },
     { q: "Do I need any special preparation?", a: "No special preparation is needed by the patient, as the procedure is performed entirely in the lab on the embryos." },
     { q: "Can LAH be combined with other techniques?", a: "Yes. LAH is often used alongside advanced techniques such as ICSI and PGT-A to support implantation." },
-    { q: "Does LAH guarantee pregnancy?", a: "No. While LAH can improve implantation chances, it does not guarantee pregnancy. Success also depends on embryo quality and uterine receptivity." },
+    { q: "Does LAH guarantee pregnancy?", a: "No. While LAH can potentially improve implantation chances, it does not guarantee pregnancy. Success also depends on embryo quality and uterine receptivity." },
   ],
   related: ["blastocyst-transfer", "icsi", "ivf", "ivf-failure", "spindle-view-icsi"],
   cta: {
