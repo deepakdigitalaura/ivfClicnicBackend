@@ -812,7 +812,7 @@ export const icsi: Treatment = {
       { icon: Microscope, t: "Micromanipulation Systems", d: "Latest-generation ICSI systems give precision measured in microns." },
       { icon: FlaskConical, t: "Class 1000 IVF Lab", d: "Air purity 10× cleaner than the international Class 10,000 standard." },
       { icon: Beaker, t: "Body-like Incubators", d: "Next-generation incubators recreate the body's exact environment for healthy embryos." },
-      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of surplus embryos with close to 100% survival on thawing." },
+      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of embryos with close to 100% survival on thawing. We achieved first live birth of India with vitrified frozen oocytes." },
     ],
   },
   whyUs: {
