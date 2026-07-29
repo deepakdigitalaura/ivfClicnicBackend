@@ -1664,7 +1664,7 @@ export const eggDonation: Treatment = {
     followup: "A Beta-HCG blood test is performed about 13–15 days after embryo transfer to confirm pregnancy.",
   },
   lastReviewed: "2026-06-01",
-  reviewerSlug: "falguni-bavishi",
+  reviewerSlug: "himanshu-bavishi",
   hero: {
     eyebrow: "Donor Programme",
     h1: "Egg Donation Treatment",
@@ -1695,6 +1695,7 @@ export const eggDonation: Treatment = {
       "Reduced risk of age-related genetic problems in the child.",
       "You carry and deliver the pregnancy yourself — full motherhood bonding.",
       "Your partner contributes genetically through his sperm.",
+      "The uterine environment you provide still influences your baby's epigenetics — which of the donor's genes are expressed.",
       "Surplus good-quality embryos can be frozen for future attempts.",
       "The entire treatment is kept completely confidential.",
     ],
@@ -1705,7 +1706,6 @@ export const eggDonation: Treatment = {
     items: [
       { icon: Eye, t: "Anonymous Donation", d: "The donor's identity is not disclosed. Matching is done by our team on physical and medical characteristics." },
       { icon: Sparkles, t: "Known Donation", d: "A donor known to you — such as a friend or family member — donates eggs, with the same full screening and consent." },
-      { icon: Snowflake, t: "Fresh or Frozen Eggs", d: "Treatment can use fresh donor eggs or vitrified (frozen) eggs from our donor bank for immediate use." },
     ],
   },
   whoNeedsIt: {
@@ -1737,7 +1737,7 @@ export const eggDonation: Treatment = {
   technology: {
     eyebrow: "Donor Screening",
     heading: { lead: "Every donor,", em: "rigorously screened" },
-    subtitle: "Donors are young, married women with at least one healthy child, under 30, and cleared on every screen below.",
+    subtitle: "Donors are young, married women with at least one healthy child, between 23 and 32 years of age, and cleared on every screen below.",
     items: [
       { icon: Stethoscope, t: "Medical Screening", d: "Complete medical, family and personal history, physical examination and an exhaustive health check-up." },
       { icon: Dna, t: "Genetic Screening", d: "Detailed family-history review and screening for common genetic conditions, with further testing available on request." },
@@ -1749,10 +1749,7 @@ export const eggDonation: Treatment = {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for egg donation" },
     items: [
       { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
-      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Advanced embryology labs and ICSI expertise for the best chance with every donor egg." },
       { icon: ShieldCheck, t: "Rigorously Screened Donors", d: "Young donors cleared on medical, genetic, psychological and health screening before matching." },
-      { icon: Layers, t: "Fresh or Frozen Donors", d: "Access to fresh donors and a vitrified donor-egg bank for immediate treatment." },
-      { icon: Eye, t: "Complete Confidentiality", d: "Your treatment and donor matching are handled with total privacy at every step." },
       { icon: ListChecks, t: "Ethical & ART-Compliant", d: "Donor insurance, consent and documentation handled in line with India's ART Act." },
     ],
   },
@@ -1788,8 +1785,8 @@ export const eggDonation: Treatment = {
   },
   faqs: [
     { q: "Are \"ovum donation\" and \"egg donation\" the same?", a: "Yes. \"Ovum\" is simply another word for egg, so the two terms describe exactly the same process." },
-    { q: "What types of egg donation are available?", a: "Anonymous donation, where the donor's identity is not disclosed, and known donation, where a friend or family member donates. Eggs may be fresh or frozen." },
-    { q: "Who can be an egg donor at Bavishi Fertility Institute?", a: "Healthy, married young women under 30 who already have at least one healthy living child and pass full medical, genetic and psychological screening." },
+    { q: "What types of egg donation are available?", a: "Anonymous donation, where the donor's identity is not disclosed, and known donation, where a friend or family member donates." },
+    { q: "Who can be an egg donor at Bavishi Fertility Institute?", a: "Healthy, married women between 23 and 32 years of age who already have at least one healthy living child and pass full medical, genetic and psychological screening." },
     { q: "Will the baby be genetically related to me?", a: "The baby will not inherit your genes, since the eggs come from a donor, but your partner contributes genetically through his sperm, and you carry and deliver the baby yourself." },
     { q: "How are the donor eggs fertilised?", a: "They are fertilised with your partner's sperm in the laboratory, usually using ICSI, and grown into embryos before transfer." },
     { q: "Is egg donation safe?", a: "It is generally considered safe. As with any medical treatment there are small risks, such as medication reactions or pregnancy-related complications, which our team monitors closely." },
