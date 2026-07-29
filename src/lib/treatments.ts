@@ -1455,7 +1455,7 @@ export const blastocystTransfer: Treatment = {
       { icon: Microscope, n: "01", t: "Fertilisation", d: "Eggs are fertilised by IVF or ICSI and the resulting embryos begin to develop in the lab." },
       { icon: Beaker, n: "02", t: "Extended culture", d: "Embryos are cultured in body-like incubators to day 5–6, rather than transferring on day 2–3." },
       { icon: Layers, n: "03", t: "Blastocyst selection", d: "The embryos that reach the blastocyst stage are graded, and the strongest is selected for transfer." },
-      { icon: HeartPulse, n: "04", t: "Transfer", d: "Usually a single blastocyst is transferred into the uterus; surplus blastocysts can be frozen by vitrification." },
+      { icon: HeartPulse, n: "04", t: "Transfer", d: "Usually one or two blastocysts are transferred into the uterus; surplus blastocysts can be frozen by vitrification." },
       { icon: ClipboardCheck, n: "05", t: "Pregnancy test", d: "A pregnancy test follows about 10–14 days later, once the embryo has had time to implant." },
     ],
     note: "In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
