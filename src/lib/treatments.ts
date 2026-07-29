@@ -954,7 +954,6 @@ export const picsi: Treatment = {
     subtitle: "PICSI is specifically indicated where sperm quality is low or compromised.",
     items: [
       "A high percentage of DNA-fragmented sperm (elevated DFI)",
-      "Women over the age of 38",
       "Men over the age of 40",
       "Previous failed ICSI fertilisation cycles",
       "Consistently low-quality embryo development",
