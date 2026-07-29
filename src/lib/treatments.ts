@@ -1297,7 +1297,7 @@ export const spindleViewIcsi: Treatment = {
     ],
     aside: {
       title: "Especially useful when eggs are few",
-      body: "When egg numbers are very low, making the most of each egg matters. By assessing spindle length and area, and aligning the egg to protect the spindle during injection, Spindle View ICSI helps maximise the chance of fertilisation and can also inform decisions about egg quality.",
+      body: "When egg numbers are very low, egg quality is poor, or there is a past history of poor-quality embryos, Spindle View ICSI can help. By assessing spindle length and area, and aligning the egg to protect the spindle during injection, it helps maximise the chance of fertilisation and can also inform decisions about egg quality.",
     },
   },
   benefits: {
@@ -1328,12 +1328,12 @@ export const spindleViewIcsi: Treatment = {
       { icon: Eye, n: "02", t: "Spindle visualisation", d: "The embryologist studies the spindle's position, length and area as an indicator of egg quality." },
       { icon: Target, n: "03", t: "Alignment", d: "The egg is aligned so the injection avoids the spindle, rather than relying on the polar body as an approximate marker." },
       { icon: Syringe, n: "04", t: "Injection", d: "A single sperm is injected with the spindle protected, supporting better fertilisation." },
-      { icon: Dna, n: "05", t: "Culture & transfer", d: "Fertilised eggs are cultured into embryos, and the best embryo is selected for transfer." },
+      { icon: Dna, n: "05", t: "Culture & transfer", d: "Fertilised eggs are cultured into embryos, and the best embryo is selected for transfer, like any other ICSI cycle." },
     ],
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "Spindle View ICSI" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
