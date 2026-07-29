@@ -25,6 +25,14 @@ import { doctorBySlug, reviewerNode, physicianSchema } from "@/lib/doctors";
 
 export type TreatmentRef = { slug: string; name: string; href: string };
 
+/** Treatment pages pulled from the site until their content is corrected.
+ *  "embryo-donation": client flagged the current copy as non-compliant with
+ *  India's ART Act (it implies pre-made donor embryos, which the Act does
+ *  not permit — a full IVF cycle with separate egg + sperm donors is
+ *  required instead). Remove from this set once the page is rewritten.
+ *  Consumers (getTreatment/getTreatments, sitemap) must respect this. */
+export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation"]);
+
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   ivf: { slug: "ivf", name: "IVF", href: "/what-is-ivf" },
@@ -1794,7 +1802,7 @@ export const eggDonation: Treatment = {
     { q: "Can surplus embryos be frozen?", a: "Yes. Good-quality embryos that are not transferred can be vitrified (frozen) for future attempts." },
     { q: "Will my treatment be kept confidential?", a: "Yes. The entire process — including donor matching — is handled with complete confidentiality." },
   ],
-  related: ["ivf", "icsi", "ivf-failure", "embryo-donation", "fertility-preservation"],
+  related: ["ivf", "icsi", "ivf-failure", "sperm-donation", "fertility-preservation"],
   cta: {
     heading: "Considering",
     headingEm: "egg donation?",
@@ -1944,7 +1952,7 @@ export const spermDonation: Treatment = {
     { q: "Can we try with the partner's own sperm first?", a: "Yes. Where the partner's sperm is usable, techniques such as ICSI, IMSI or PICSI, or surgical retrieval (PESA/TESA/TESE), are considered before donor sperm." },
     { q: "Is the process confidential?", a: "Yes. Donor-sperm treatment is kept completely confidential." },
   ],
-  related: ["iui", "icsi", "ivf", "azoospermia", "embryo-donation"],
+  related: ["iui", "icsi", "ivf", "azoospermia", "egg-donation"],
   cta: {
     heading: "Exploring",
     headingEm: "donor sperm options?",
@@ -4107,7 +4115,7 @@ export const surrogacy = defineTreatment({
     { q: "Will the baby be genetically ours?", a: "If the intended parents' own eggs and sperm are used, yes. Donor eggs or sperm are used only where medically needed. The surrogate is never genetically related to the baby." },
     { q: "Who can be a surrogate?", a: "A surrogate must meet the medical and legal criteria defined under the Act and passes thorough medical and psychological screening before proceeding." },
   ],
-  related: ["ivf-failure", "egg-donation", "embryo-donation", "ivf"],
+  related: ["ivf-failure", "egg-donation", "sperm-donation", "ivf"],
   cta: {
     heading: "Exploring",
     headingEm: "surrogacy?",

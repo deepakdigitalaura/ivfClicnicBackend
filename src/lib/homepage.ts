@@ -415,7 +415,6 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       { icon: "Microscope", t: "Fertility Preservation", d: "Egg, sperm and embryo freezing for the future." },
       { icon: "Baby", t: "Sperm Donation", d: "Screened, ethical donor sperm programs." },
       { icon: "Baby", t: "Egg Donation", d: "Carefully matched egg donor programs." },
-      { icon: "Baby", t: "Embryo Donation", d: "A compassionate path to parenthood." },
       { icon: "HeartPulse", t: "Fibroids", d: "Diagnosis and fertility-preserving treatment." },
       { icon: "HeartPulse", t: "Endometriosis", d: "Specialised endometriosis fertility care." },
       { icon: "Sparkles", t: "Ovarian Rejuvenation", d: "Advanced therapy for diminished ovarian reserve." },

@@ -1,6 +1,6 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/seo";
-import { TREATMENTS_REGISTRY } from "@/lib/treatments";
+import { TREATMENTS_REGISTRY, HIDDEN_TREATMENT_SLUGS } from "@/lib/treatments";
 import { DOCTORS } from "@/lib/doctors";
 import { CITIES, CENTRES, cityHref, centreHref } from "@/lib/locations";
 import { SERVICE_CONTENT } from "@/lib/womens-health";
@@ -12,6 +12,7 @@ export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blogs", "/press", "/awards"]);
 
   for (const ref of Object.values(TREATMENTS_REGISTRY)) {
+    if (HIDDEN_TREATMENT_SLUGS.has(ref.slug)) continue;
     if (ref.href.startsWith("/") && !ref.href.includes("#")) paths.add(ref.href);
   }
   for (const slug of Object.keys(SERVICE_CONTENT)) paths.add(`/services/${slug}`);

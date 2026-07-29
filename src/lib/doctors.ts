@@ -101,7 +101,7 @@ export const ALL_TREATMENT_SLUGS: string[] = [
   // Fertility preservation
   "cryopreservation",
   // Third-party reproduction
-  "egg-donation", "sperm-donation", "embryo-donation", "surrogacy",
+  "egg-donation", "sperm-donation", "surrogacy",
 ];
 
 /* Factory for city fertility-team members whose full credentials are still
