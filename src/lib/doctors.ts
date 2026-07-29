@@ -95,7 +95,7 @@ export const ALL_TREATMENT_SLUGS: string[] = [
   // Advanced lab / embryology
   "picsi", "imsi", "macs", "spindle-view-icsi", "blastocyst-transfer", "laser-hatching",
   // Male infertility
-  "azoospermia", "oligospermia", "asthenospermia", "surgical-sperm-retrieval", "varicocele", "erectile-dysfunction",
+  "azoospermia", "oligospermia", "asthenospermia", "surgical-sperm-retrieval", "erectile-dysfunction",
   // Female infertility
   "pcos", "endometriosis", "fibroids", "ovarian-reserve", "ovarian-rejuvenation", "conceive-naturally", "prp-infertility",
   // Fertility preservation
