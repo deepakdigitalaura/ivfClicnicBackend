@@ -607,7 +607,7 @@ export const iui: Treatment = {
     ],
     aside: {
       title: "Simple, and gentle on you",
-      body: "IUI is usually painless — most women describe only mild discomfort, similar to a Pap smear. You rest for about ten minutes afterwards and can resume normal activities the same day. Typically 3–6 cycles are tried, but your doctor will tailor the advice to your situation.",
+      body: "IUI is usually painless — most women describe only mild discomfort. You rest for about ten minutes afterwards and can resume normal activities the same day. Typically 3–4 cycles are tried, but your doctor will tailor the advice to your situation.",
     },
   },
   video: {
@@ -697,8 +697,8 @@ export const iui: Treatment = {
   faqs: [
     { q: "How long does the IUI process take?", a: "The IUI visit typically takes about 1 to 2 hours from start to finish; the insemination itself takes only a few minutes." },
     { q: "What is the difference between IUI and IVF?", a: "In IUI, prepared sperm is placed into the uterus near the time of ovulation — suitable for mild male-factor or cervical issues. In IVF, eggs are retrieved and fertilised in the laboratory and the embryo is transferred — used for more complex cases such as blocked tubes or severe male infertility." },
-    { q: "Is IUI painful?", a: "IUI is usually not painful. Most women experience only mild discomfort, often described as similar to a Pap smear." },
-    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 6 cycles of IUI are suggested, but your doctor will tailor the advice based on your specific situation." },
+    { q: "Is IUI painful?", a: "IUI is usually not painful. Most women experience only mild discomfort." },
+    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 4 cycles of IUI are suggested, but your doctor will tailor the advice based on your specific situation." },
     { q: "Can I have sex after an IUI procedure?", a: "Yes. There are generally no specific restrictions against sexual activity following the procedure." },
     { q: "Can I travel after IUI?", a: "Yes, you can travel after IUI, as the procedure does not require prolonged rest." },
     { q: "Can stress affect IUI success?", a: "Stress can affect fertility by influencing hormone levels. Relaxation techniques, yoga, meditation and counselling can help." },
