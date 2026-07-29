@@ -1297,7 +1297,7 @@ export const spindleViewIcsi: Treatment = {
     ],
     aside: {
       title: "Especially useful when eggs are few",
-      body: "When egg numbers are very low, making the most of each egg matters. By assessing spindle length and area, and aligning the egg to protect the spindle during injection, Spindle View ICSI helps maximise the chance of fertilisation and can also inform decisions about egg quality.",
+      body: "When egg numbers are very low, egg quality is poor, or there is a past history of poor-quality embryos, Spindle View ICSI can help. By assessing spindle length and area, and aligning the egg to protect the spindle during injection, it helps maximise the chance of fertilisation and can also inform decisions about egg quality.",
     },
   },
   benefits: {
