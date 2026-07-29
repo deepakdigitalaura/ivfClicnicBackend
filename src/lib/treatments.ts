@@ -923,7 +923,7 @@ export const picsi: Treatment = {
     h1: "PICSI Treatment",
     h1Em: "Physiological ICSI at Bavishi Fertility Institute",
     tagline:
-      "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid. Used in selected cases to improve sperm selection and embryo quality.",
+      "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid, a molecule resembling the substance found in the cells surrounding the egg. Used in selected cases to improve sperm selection and embryo quality.",
     badges: ["Physiological selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/PICSI.png",
     imageAlt: "PICSI — physiological sperm selection by hyaluronan binding at Bavishi Fertility Institute",
