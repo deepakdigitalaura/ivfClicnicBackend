@@ -633,8 +633,7 @@ export const iui: Treatment = {
     heading: { lead: "Types of", em: "IUI" },
     items: [
       { icon: Leaf, t: "Natural-cycle IUI", d: "Timed to your own natural ovulation, without stimulation medicines." },
-      { icon: Syringe, t: "Medicated IUI", d: "With tablets or injections to encourage ovulation and improve egg availability." },
-      { icon: Snowflake, t: "Frozen-sample IUI", d: "Using a previously frozen semen sample when the partner is unavailable." },
+      { icon: Syringe, t: "Medicated IUI", d: "With tablets and/or injections to encourage ovulation and improve egg availability." },
       { icon: Baby, t: "Donor-sperm IUI", d: "Using screened donor sperm, for example in cases of azoospermia or for single women." },
     ],
   },
@@ -642,7 +641,7 @@ export const iui: Treatment = {
     heading: { lead: "Who is", em: "IUI suitable for?" },
     subtitle: "Your specialist may suggest IUI in any of the following situations, after a proper evaluation.",
     items: [
-      "Mild male-factor infertility — low count, reduced motility or abnormal morphology",
+      "Mild male-factor infertility — low count or reduced motility",
       "Low semen volume or viscous semen",
       "Use of frozen or donor semen samples",
       "Ejaculation or sexual-function difficulties, or an absent partner",
