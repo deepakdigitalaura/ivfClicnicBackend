@@ -412,6 +412,12 @@ const WHY_BAVISHI_FERTILITY_INSTITUTE: IconCard[] = [
   { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
 ];
 
+const WHY_BAVISHI_FERTILITY_INSTITUTE_IUI: IconCard[] = [
+  { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
+  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
+  { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
+];
+
 const WHY_BAVISHI_FERTILITY_INSTITUTE_IVF_FAILURE: IconCard[] = [
   { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
   { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and complete peace of mind even in multiple IVF failure cases." },
@@ -664,7 +670,7 @@ export const iui: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "your IUI?" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_FERTILITY_INSTITUTE_IUI,
   },
   success: {
     factors: [
