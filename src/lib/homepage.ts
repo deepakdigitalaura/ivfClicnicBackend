@@ -241,7 +241,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     { value: "500+", l: "International Patients Per Year" },
   ],
   accolades: [
-    { text: "Best IVF Chain In India (WEST)", source: "The Economic Times — 2019 · 2022 · 2023 · 2024 · 2025 · 2026" },
+    { text: "Best IVF Chain In India (WEST)", source: "The Economic Times — 6 years in a row (2019, 2022, 2023, 2024, 2025, 2026)" },
     { text: "Best IVF Clinic Chain in India", source: "Mid-Day" },
     { text: "All India Ranked #1 Ahmedabad Fertility Institute", source: "TOI National Survey — 2020" },
   ],
