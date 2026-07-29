@@ -336,7 +336,7 @@ export const ivf: Treatment = {
       { t: "Ovarian Hyperstimulation (OHSS)", d: "Fertility medicines can occasionally over-stimulate the ovaries.", help: "Safe-stimulation protocols — with zero severe OHSS in over 10 years." },
       { t: "Ectopic pregnancy", d: "Rarely, an embryo implants outside the uterus.", help: "Early monitoring and Beta-HCG follow-up to detect it promptly." },
       { t: "Egg-retrieval risks", d: "As with any procedure, minor risks exist.", help: "A short, sedated, no-cut/no-stitch procedure by experienced specialists." },
-      { t: "Emotional well-being", d: "Treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
+      { t: "Emotional well-being", d: "IVF treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
       { t: "Cost considerations", d: "IVF is an investment in your family.", help: "Transparent pricing, interest-free EMI and the Suraksha Kavach package." },
     ],
   },
