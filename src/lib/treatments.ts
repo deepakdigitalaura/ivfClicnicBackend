@@ -430,6 +430,15 @@ const WHY_BAVISHI_FERTILITY_INSTITUTE_IVF_FAILURE: IconCard[] = [
   { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
 ];
 
+/** Class 1000 / Skilled Embryology / Proven & Awarded — shared "Why BFI" trio
+ *  used by the micromanipulation & embryology add-on pages (PICSI, IMSI,
+ *  Spindle View ICSI, Blastocyst Transfer, Laser Assisted Hatching). */
+const WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED: IconCard[] = [
+  { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting your embryos at every moment." },
+  { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
+  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
+];
+
 /* ===================================================================== */
 /* 1. IVF Failure                                                         */
 /* ===================================================================== */
@@ -914,7 +923,7 @@ export const picsi: Treatment = {
     h1: "PICSI Treatment",
     h1Em: "Physiological ICSI at Bavishi Fertility Institute",
     tagline:
-      "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid. Used in selected cases to improve sperm selection and embryo quality.",
+      "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid, a molecule resembling the substance found in the cells surrounding the egg. Used in selected cases to improve sperm selection and embryo quality.",
     badges: ["Physiological selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/PICSI.png",
     imageAlt: "PICSI — physiological sperm selection by hyaluronan binding at Bavishi Fertility Institute",
@@ -922,7 +931,7 @@ export const picsi: Treatment = {
   whatIs: {
     heading: { lead: "What is", em: "PICSI?" },
     paragraphs: [
-      "PICSI (Physiological Intracytoplasmic Sperm Injection) is a refinement of ICSI used in assisted reproduction. Instead of selecting sperm by appearance alone, PICSI uses hyaluronic acid — a substance naturally found in the layer surrounding the egg — to identify mature sperm.",
+      "PICSI (Physiological Intracytoplasmic Sperm Injection) is a refinement of ICSI used in assisted reproduction. Instead of selecting sperm by appearance alone, PICSI uses hyaluronic acid — a molecule resembling the substance naturally found in the cells surrounding the egg — to identify mature sperm.",
       "Only a mature, biochemically competent sperm carries the receptors needed to bind hyaluronic acid. Studies suggest that sperm which bind in this way tend to have better morphology, lower chromosomal abnormalities and improved DNA integrity, which is why PICSI is used to improve sperm selection in selected cases.",
     ],
     aside: {
@@ -945,7 +954,7 @@ export const picsi: Treatment = {
     subtitle: "PICSI is specifically indicated where sperm quality is low or compromised.",
     items: [
       "A high percentage of DNA-fragmented sperm (elevated DFI)",
-      "Women over the age of 38",
+      "Men over the age of 40",
       "Previous failed ICSI fertilisation cycles",
       "Consistently low-quality embryo development",
       "A history of multiple miscarriages",
@@ -964,7 +973,7 @@ export const picsi: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PICSI?" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
