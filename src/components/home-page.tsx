@@ -1462,16 +1462,36 @@ export function Testimonials({
           </div>
 
           {pages > 1 && (
-            <div className="mt-10 flex justify-center gap-2">
-              {reviewPages.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setPage(i)}
-                  aria-label={`Go to reviews page ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${i === page ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
-                />
-              ))}
+            <div className="mt-10 flex items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => setPage((p) => (p - 1 + pages) % pages)}
+                aria-label="Previous reviews"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:text-[color:var(--rose)] hover:shadow-lift"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              <div className="flex gap-2">
+                {reviewPages.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setPage(i)}
+                    aria-label={`Go to reviews page ${i + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === page ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setPage((p) => (p + 1) % pages)}
+                aria-label="Next reviews"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:text-[color:var(--rose)] hover:shadow-lift"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
           )}
         </div>
