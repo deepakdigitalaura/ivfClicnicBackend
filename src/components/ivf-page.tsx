@@ -134,7 +134,7 @@ const timeline = [
 const protocols = [
   "Antagonist (Short) protocol",
   "Down-regulation (Long) protocol",
-  "Flare protocol",
+  "Customized protocol",
   "Dual stimulation protocol",
   "Minimum stimulation protocol",
 ];
