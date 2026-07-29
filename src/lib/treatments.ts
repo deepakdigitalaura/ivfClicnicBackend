@@ -1669,7 +1669,7 @@ export const eggDonation: Treatment = {
     h1: "Egg Donation Treatment",
     h1Em: "Oocyte Donation at Bavishi Fertility Institute",
     tagline:
-      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1998 — Class 1000 (10× Clean Air) IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
+      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. At Bavishi Fertility Institute, one of India's trusted fertility clinics since 1998 — rigorously screened donors, and compassionate, fully confidential care help you every step of the way.",
     badges: ["Young Screened Donors", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "ART Act Compliant"],
     image: "/assets/donor services/Egg-donation.png",
     imageAlt: "Egg donation (oocyte donation) at Bavishi Fertility Institute — a hopeful mother-to-be",
