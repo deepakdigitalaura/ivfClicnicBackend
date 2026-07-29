@@ -60,7 +60,7 @@ const SAFETY_FEATURES = [
 
 const STATS = [
   { value: 10, suffix: "+ Years", label: "OHSS Free", sub: "zero severe cases in over a decade" },
-  { value: 1000, suffix: "", label: "Class 1000 Labs", sub: "ten times cleaner than EU standards" },
+  { value: 1000, suffix: "", label: "Class 1000 (10X Clean Air) IVF Labs", sub: "ten times cleaner than EU standards" },
   { value: 2, suffix: "x", label: "Double-Witness", sub: "two professionals at every step" },
   { value: 100, suffix: "%", label: "Infection Screened", sub: "mandatory testing for every patient" },
 ];
@@ -433,7 +433,7 @@ export function SafeTreatmentPage() {
               <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm">
                 {[
                   { icon: HeartPulse, text: "OHSS-Free Clinic" },
-                  { icon: Wind, text: "Class 1000 Labs" },
+                  { icon: Wind, text: "Class 1000 (10X Clean Air) IVF Labs" },
                   { icon: ShieldCheck, text: "Double-Witness Protocol" },
                 ].map((item, i) => (
                   <div key={i} className="flex items-center gap-2 text-white/80">

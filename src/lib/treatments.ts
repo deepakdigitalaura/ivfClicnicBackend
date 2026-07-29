@@ -443,7 +443,7 @@ export const ivfFailure: Treatment = {
     h1Em: "A systematic path forward at Bavishi Fertility Institute",
     tagline:
       "A failed cycle is not the end of the road. At Bavishi Fertility Institute we analyse each stage of the previous cycle to understand what happened — and then build a clearer, more personalised plan for your next attempt.",
-    badges: ["Stage-by-stage analysis", "Since 1998", "Class 1000 Labs", "Advanced diagnostics"],
+    badges: ["Stage-by-stage analysis", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "Advanced diagnostics"],
     image: "/assets/treatments/Ivf-Failure.png",
     imageAlt: "A hopeful couple — moving forward after a failed IVF cycle with Bavishi Fertility Institute",
   },
@@ -737,7 +737,7 @@ export const icsi: Treatment = {
     h1Em: "Intracytoplasmic Sperm Injection at Bavishi Fertility Institute",
     tagline:
       "The technique where just one sperm is needed to fertilise one egg. ICSI overcomes male-factor infertility and previous fertilisation failure — performed in our Class 1000 labs by experienced embryologists.",
-    badges: ["One sperm per egg", "Class 1000 Labs", "Since 1998", "Skilled embryology"],
+    badges: ["One sperm per egg", "Class 1000 (10X Clean Air) IVF Labs", "Since 1998", "Skilled embryology"],
     image: "/assets/treatments/ICSI.png",
     imageAlt: "ICSI — a single sperm being microinjected into an egg at Bavishi Fertility Institute",
   },
@@ -896,7 +896,7 @@ export const picsi: Treatment = {
     h1Em: "Physiological ICSI at Bavishi Fertility Institute",
     tagline:
       "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid. Used in selected cases to improve sperm selection and embryo quality.",
-    badges: ["Physiological selection", "Class 1000 Labs", "Used selectively", "Skilled embryology"],
+    badges: ["Physiological selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/PICSI.png",
     imageAlt: "PICSI — physiological sperm selection by hyaluronan binding at Bavishi Fertility Institute",
   },
@@ -1017,7 +1017,7 @@ export const imsi: Treatment = {
     h1Em: "Morphologically Selected Sperm Injection at Bavishi Fertility Institute",
     tagline:
       "A high-magnification refinement of ICSI. By examining sperm in far greater detail, IMSI helps the embryologist select the most structurally normal sperm for fertilisation.",
-    badges: ["High-magnification selection", "Class 1000 Labs", "Used selectively", "Skilled embryology"],
+    badges: ["High-magnification selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/IMSI.png",
     imageAlt: "IMSI — high-magnification sperm selection at Bavishi Fertility Institute",
   },
@@ -1375,7 +1375,7 @@ export const blastocystTransfer: Treatment = {
     h1Em: "Stronger embryo selection at Bavishi Fertility Institute",
     tagline:
       "By growing embryos to day 5–6 — the blastocyst stage — only the strongest continue to develop. This supports better selection and makes single-embryo transfer possible.",
-    badges: ["Day 5–6 culture", "Better selection", "Fewer multiples", "Class 1000 Labs"],
+    badges: ["Day 5–6 culture", "Better selection", "Fewer multiples", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/Blastocyst Transfer.png",
     imageAlt: "Blastocyst culture and transfer — a day-5 embryo at Bavishi Fertility Institute",
   },
@@ -1642,7 +1642,7 @@ export const eggDonation: Treatment = {
     h1Em: "Oocyte Donation at Bavishi Fertility Institute",
     tagline:
       "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1998 — Class 1000 (10× Clean Air) IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
-    badges: ["Young Screened Donors", "Since 1998", "Class 1000 Labs", "ART Act Compliant"],
+    badges: ["Young Screened Donors", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "ART Act Compliant"],
     image: "/assets/donor services/Egg-donation.png",
     imageAlt: "Egg donation (oocyte donation) at Bavishi Fertility Institute — a hopeful mother-to-be",
   },
@@ -3119,7 +3119,7 @@ export const ovarianReserve = defineTreatment({
     h1Em: "/ Low AMH",
     tagline:
       "A low egg count or low AMH means fewer eggs — not no chance. Tailored protocols help us recover and use the best eggs you have, with honest guidance throughout.",
-    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1998", "Class 1000 Labs"],
+    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/conditions/ovarian-reserve.png",
     imageAlt: "Poor ovarian reserve / low AMH treatment at Bavishi Fertility Institute",
   },
@@ -3570,7 +3570,7 @@ export const cryopreservation = defineTreatment({
     h1Em: "(Fertility Preservation)",
     tagline:
       "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline.",
-    badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 Labs"],
+    badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/fertility-preservation.png",
     imageAlt: "Cryopreservation (egg, sperm and embryo freezing) at Bavishi Fertility Institute",
   },
@@ -3912,7 +3912,7 @@ export const pgt = defineTreatment({
     h1Em: "Genetic Testing (PGT)",
     tagline:
       "PGT screens IVF embryos for chromosomal and genetic problems before transfer — helping select the healthiest embryo, improving success and reducing the risk of miscarriage.",
-    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1998", "Class 1000 Labs"],
+    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/pgt.png",
     imageAlt: "Preimplantation genetic testing (PGT) at Bavishi Fertility Institute",
   },
