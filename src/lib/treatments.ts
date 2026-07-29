@@ -412,6 +412,12 @@ const WHY_BAVISHI_FERTILITY_INSTITUTE: IconCard[] = [
   { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
 ];
 
+const WHY_BAVISHI_FERTILITY_INSTITUTE_IVF_FAILURE: IconCard[] = [
+  { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
+  { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and complete peace of mind even in multiple IVF failure cases." },
+  { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
+];
+
 /* ===================================================================== */
 /* 1. IVF Failure                                                         */
 /* ===================================================================== */
@@ -455,7 +461,7 @@ export const ivfFailure: Treatment = {
     ],
     aside: {
       title: "A meticulous, honest review",
-      body: "Rather than simply repeating the same cycle, our specialists divide a failed cycle into fragments — stimulation, fertilisation, embryo quality, the uterus and maternal factors — and study each one. Where appropriate, advanced techniques such as PICSI, Spindle View ICSI, blastocyst culture, PGT and embryo glue are used to address the specific problem found.",
+      body: "Rather than simply repeating the same cycle, our specialists divide a failed cycle into fragments — stimulation, fertilisation, embryo quality, the uterus and maternal factors — and study each one. Where appropriate, changing the stimulation protocol or using advanced techniques such as PICSI, Spindle View ICSI, blastocyst culture, PGT and embryo glue are used to address the specific problem found.",
     },
   },
   benefits: {
@@ -465,7 +471,7 @@ export const ivfFailure: Treatment = {
       "A clear, stage-by-stage analysis of the previous cycle.",
       "Targeted use of advanced techniques only where they address a real problem.",
       "Better embryo selection through blastocyst culture and PGT, where indicated.",
-      "Additional implantation support such as embryo glue, where indicated.",
+      "Uterine factor is evaluated for potential structure problems, progesterone resistance and endometritis and transfer timings",
       "Assessment of maternal factors such as thrombophilia and chromosomal issues.",
     ],
   },
@@ -510,7 +516,7 @@ export const ivfFailure: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why bring a failed cycle to", em: "Bavishi Fertility Institute" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_FERTILITY_INSTITUTE_IVF_FAILURE,
   },
   success: {
     factors: [
