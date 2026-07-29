@@ -52,7 +52,7 @@ import {
 } from "@/sanity/lib/fetch";
 import type { ContactSource } from "@/lib/contact";
 import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
-import { TREATMENTS, treatmentBySlug } from "@/lib/treatments";
+import { TREATMENTS, treatmentBySlug, HIDDEN_TREATMENT_SLUGS } from "@/lib/treatments";
 import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre, type CitySource, type CentreSource } from "@/lib/location-content";
 import { type ServiceSource } from "@/lib/services";
 import { getLegalPage, LEGAL_PAGE_SLUGS } from "@/lib/legal-pages";
@@ -394,6 +394,7 @@ function toTreatmentSource(d: SanityTreatment | null | undefined): TreatmentSour
 }
 
 export const getTreatment = async (slug: string): Promise<ResolvedTreatment | undefined> => {
+  if (HIDDEN_TREATMENT_SLUGS.has(slug)) return undefined;
   const doc = await getSanityTreatment(slug);
   return resolveTreatment(slug, toTreatmentSource(doc));
 };
@@ -402,6 +403,7 @@ export const getTreatments = async (): Promise<ResolvedTreatment[]> => {
   const docs = await getSanityTreatments();
   const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, d]));
   return TREATMENTS
+    .filter((t) => !HIDDEN_TREATMENT_SLUGS.has(t.slug))
     .map((t) => resolveTreatment(t.slug, toTreatmentSource(bySlug.get(t.slug) ?? null)))
     .filter((t): t is ResolvedTreatment => !!t);
 };
