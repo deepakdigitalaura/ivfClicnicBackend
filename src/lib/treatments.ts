@@ -455,7 +455,7 @@ export const ivfFailure: Treatment = {
     ],
     aside: {
       title: "A meticulous, honest review",
-      body: "Rather than simply repeating the same cycle, our specialists divide a failed cycle into fragments — stimulation, fertilisation, embryo quality, the uterus and maternal factors — and study each one. Where appropriate, advanced techniques such as PICSI, Spindle View ICSI, blastocyst culture, PGT and the ERA test are used to address the specific problem found.",
+      body: "Rather than simply repeating the same cycle, our specialists divide a failed cycle into fragments — stimulation, fertilisation, embryo quality, the uterus and maternal factors — and study each one. Where appropriate, changing the stimulation protocol or using advanced techniques such as PICSI, Spindle View ICSI, blastocyst culture, PGT and the ERA test are used to address the specific problem found.",
     },
   },
   benefits: {
@@ -465,7 +465,7 @@ export const ivfFailure: Treatment = {
       "A clear, stage-by-stage analysis of the previous cycle.",
       "Targeted use of advanced techniques only where they address a real problem.",
       "Better embryo selection through blastocyst culture and PGT, where indicated.",
-      "Improved transfer timing using the ERA test, where indicated.",
+      "Uterine factor is evaluated for potential structure problems, progesterone resistance and endometritis and transfer timings",
       "Assessment of maternal factors such as thrombophilia and chromosomal issues.",
     ],
   },
