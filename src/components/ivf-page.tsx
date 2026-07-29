@@ -92,11 +92,11 @@ const faqs = [
   { q: "Is egg retrieval painful?", a: "No. Egg retrieval is a short, painless procedure done through the vagina under light sedation — with no cut and no stitch. Most patients go home within about two hours." },
   { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a consultation for a personalised estimate." },
   { q: "Does Bavishi Fertility Institute offer financial protection for IVF?", a: "Yes — through the Suraksha Kavach programme, which covers multiple IVF cycles and provides financial protection on your fertility journey. Speak to our team to see if you qualify." },
-  { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 25,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+  { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 25,000+ successful pregnancies and the National Fertility Award six times (2019–2026). Our Ahmedabad institute was ranked the No. 1 fertility clinic in India by Times of India." },
   { q: "What lifestyle changes should I make before starting IVF?", a: "Focus on a healthy lifestyle — a balanced diet, regular exercise, maintaining a healthy weight, and avoiding smoking and excessive alcohol. Your specialist will give you any additional, personalised advice during your consultation." },
   { q: "Are there any dietary recommendations during IVF?", a: "There are no strict restrictions, but a balanced diet rich in fruits, vegetables, whole grains and lean proteins is recommended, along with good hydration. Follow any specific guidance your clinic provides for your treatment." },
   { q: "What is embryo grading?", a: "Embryo grading assesses the quality of embryos based on their appearance and development. Higher-grade embryos are more likely to implant successfully, which is why our embryologists select the best-quality embryo(s) for transfer." },
-  { q: "Can single individuals have a baby through IVF?", a: "Yes. IVF can be used by single individuals — with sperm collection for men, or donor sperm for women — and, where needed, a gestational carrier. Our team will explain the options available to you." },
+  { q: "Can single individuals have a baby through IVF?", a: "Yes, IVF treatment is available for single women in India — with donor sperm, single women can conceive. Our team will explain the options available to you. Unfortunately, single men are not currently eligible for fertility treatments under Indian law." },
 ];
 
 /* ---------- additional content (migrated from the original IVF page) ---------- */
@@ -151,7 +151,7 @@ const risks = [
   { t: "Ovarian Hyperstimulation (OHSS)", d: "Fertility medicines can occasionally over-stimulate the ovaries.", help: "Safe-stimulation protocols — with zero severe OHSS in over 10 years." },
   { t: "Ectopic pregnancy", d: "Rarely, an embryo implants outside the uterus.", help: "Early monitoring and Beta-HCG follow-up to detect it promptly." },
   { t: "Egg-retrieval risks", d: "As with any procedure, minor risks exist.", help: "A short, sedated, no-cut/no-stitch procedure by experienced specialists." },
-  { t: "Emotional well-being", d: "Treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
+  { t: "Emotional well-being", d: "IVF treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
   { t: "Cost considerations", d: "IVF is an investment in your family.", help: "Transparent pricing, interest-free EMI and the Suraksha Kavach package." },
 ];
 
