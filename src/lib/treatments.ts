@@ -656,7 +656,7 @@ export const iui: Treatment = {
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Cycle monitoring", d: "Where needed, tablets and/or injections are used to get better quality follicles. Transvaginal ultrasound tracks the developing follicles." },
       { icon: Syringe, n: "02", t: "Ovulation trigger", d: "An hCG injection triggers final egg maturation and ovulation, so the timing of insemination is precise." },
-      { icon: Filter, n: "03", t: "Sperm preparation", d: "On the day, the semen sample is washed in the lab to remove unwanted material and separate the best motile, normally-shaped sperm." },
+      { icon: Filter, n: "03", t: "Sperm preparation", d: "On the day, the semen sample is washed in the lab to remove unwanted material, separate the best motile sperm, and remove dead sperm and debris." },
       { icon: Activity, n: "04", t: "Insemination", d: "Using a self-retaining speculum and aseptic precautions, the prepared sperm is gently injected into the uterus through a thin, soft cannula." },
       { icon: HeartPulse, n: "05", t: "Rest & pregnancy test", d: "You rest for about ten minutes and resume normal activities. A pregnancy test follows about two weeks later." },
     ],
