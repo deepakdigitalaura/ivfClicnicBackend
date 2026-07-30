@@ -31,12 +31,6 @@ const cards: HubCard[] = [
     icon: Target,
   },
   {
-    title: "Varicocele / Micro Surgery",
-    desc: "Microsurgical repair of fertility-affecting varicocele to restore natural sperm production.",
-    href: "/varicocele",
-    icon: ShieldCheck,
-  },
-  {
     title: "Erectile Dysfunction",
     desc: "Confidential evaluation and treatment for ED with integrated fertility support.",
     href: "/erectile-dysfunction",

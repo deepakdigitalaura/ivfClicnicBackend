@@ -30,8 +30,13 @@ export type TreatmentRef = { slug: string; name: string; href: string };
  *  India's ART Act (it implies pre-made donor embryos, which the Act does
  *  not permit — a full IVF cycle with separate egg + sperm donors is
  *  required instead). Remove from this set once the page is rewritten.
+ *  "varicocele": client wants a full rewrite (currently surgery-first
+ *  throughout — title, hero, benefits, process — but the client does not
+ *  want to promote varicocele surgery; page should present surgery vs
+ *  ART-IVF neutrally, with grades and a subclinical-needs-no-treatment
+ *  note). Client explicitly said skip/hide it until that rewrite is done.
  *  Consumers (getTreatment/getTreatments, sitemap) must respect this. */
-export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation"]);
+export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele"]);
 
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
@@ -2185,7 +2190,7 @@ export const oligospermia = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Oligospermia?" },
     paragraphs: [
-      "Oligospermia means a lower-than-normal number of sperm in the semen — generally fewer than 15 million sperm per millilitre. It is one of the commonest causes of male-factor infertility and is confirmed on a semen analysis.",
+      "Oligospermia means a lower-than-normal number of sperm in the semen — generally fewer than 16 million sperm per millilitre. It is one of the commonest causes of male-factor infertility and is confirmed on a semen analysis.",
       "A low count reduces, but rarely removes, the chance of natural conception. Depending on the cause and severity, treatment ranges from lifestyle and medical therapy to assisted reproduction such as IUI, IVF or ICSI — where even a few healthy sperm can fertilise an egg.",
     ],
     aside: BFI_ASIDE,
@@ -2245,7 +2250,7 @@ export const oligospermia = defineTreatment({
     ],
   },
   faqs: [
-    { q: "What counts as a low sperm count?", a: "Generally fewer than 15 million sperm per millilitre of semen, confirmed on a semen analysis. Counts can vary, so the test is often repeated." },
+    { q: "What counts as a low sperm count?", a: "Generally fewer than 16 million sperm per millilitre of semen, confirmed on a semen analysis. Counts can vary, so the test is often repeated." },
     { q: "Can I still have a baby with a low sperm count?", a: "Often yes. Many couples conceive naturally once the count improves, and assisted reproduction such as IUI, IVF or ICSI can help when it does not." },
     { q: "What causes a low sperm count?", a: "Common causes include varicocele, infection, hormonal problems, undescended testes, certain medication, and lifestyle factors such as smoking, alcohol, heat and stress." },
     { q: "Can a low sperm count be increased naturally?", a: "Treating infection or a varicocele, balancing hormones and improving lifestyle can raise the count in many men. Results take about three months." },
@@ -2291,7 +2296,7 @@ export const asthenospermia = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Asthenospermia?" },
     paragraphs: [
-      "Asthenospermia means reduced sperm motility — too few sperm move forward well enough to reach and fertilise an egg. It is diagnosed when fewer than about 40% of sperm are motile (or under 32% move progressively) on a semen analysis.",
+      "Asthenospermia means reduced sperm motility — too few sperm move forward well enough to reach and fertilise an egg. It is diagnosed when fewer than about 42% of sperm are motile (or under 30% move progressively) on a semen analysis.",
       "Poor motility often occurs alongside a low count or abnormal shape. Where the cause can be treated it is corrected first; otherwise IVF and especially ICSI bypass the problem by placing a healthy sperm directly inside the egg.",
     ],
     aside: BFI_ASIDE,
@@ -2349,10 +2354,10 @@ export const asthenospermia = defineTreatment({
     ],
   },
   faqs: [
-    { q: "What is asthenospermia?", a: "It is reduced sperm motility — too few sperm move well enough to reach the egg, usually defined as under ~40% motile or under ~32% progressively motile on a semen analysis." },
+    { q: "What is asthenospermia?", a: "It is reduced sperm motility — too few sperm move well enough to reach the egg, usually defined as under ~42% motile or under ~30% progressively motile on a semen analysis." },
     { q: "Can poor sperm motility be improved?", a: "Often yes — treating infection or a varicocele, antioxidants and a healthier lifestyle can help. Improvements take around three months." },
     { q: "Can I conceive with low motility?", a: "Yes. Sperm preparation with IUI, or IVF with ICSI, can achieve pregnancy even when motility is low." },
-    { q: "How is ICSI helpful here?", a: "ICSI injects one healthy sperm directly into each egg, so the sperm does not need to swim — making motility largely irrelevant to fertilisation." },
+    { q: "How is ICSI helpful here?", a: "ICSI injects one healthy sperm directly into each egg, so the sperm does not need to swim — making motility largely irrelevant to fertilisation. ICSI can even help when there are 100% non-motile sperm." },
     { q: "Does motility change between tests?", a: "Yes, it can vary with illness, abstinence time and lab handling, so the test is often repeated for accuracy." },
   ],
   related: ["oligospermia", "azoospermia", "icsi", "imsi", "ivf"],
@@ -2372,7 +2377,7 @@ export const azoospermia = defineTreatment({
   meta: {
     title: "Azoospermia (Zero Sperm Count) Treatment — Bavishi Fertility Institute",
     description:
-      "Azoospermia — no sperm in the ejaculate — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1998.",
+      "Azoospermia — no sperm in the semen — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1998.",
     ogImage: "/assets/conditions/azoospermia.png",
   },
   procedure: {
@@ -2387,7 +2392,7 @@ export const azoospermia = defineTreatment({
     h1: "Zero Sperm Count",
     h1Em: "(Azoospermia) Treatment",
     tagline:
-      "No sperm in the ejaculate does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
+      "No sperm in the semen does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
     badges: ["Surgical Sperm Retrieval", "Micro-TESE", "Since 1998", "ICSI"],
     image: "/assets/conditions/azoospermia.png",
     imageAlt: "Azoospermia (zero sperm count) treatment at Bavishi Fertility Institute",
@@ -2395,7 +2400,7 @@ export const azoospermia = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Azoospermia?" },
     paragraphs: [
-      "Azoospermia means no sperm are found in the ejaculate. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
+      "Azoospermia means no sperm are found in the semen. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
       "There are two main types. Obstructive azoospermia means sperm are produced normally but cannot get out due to a blockage. Non-obstructive azoospermia means production itself is very low. In both, sperm can often be retrieved directly from the testes or epididymis and used with ICSI.",
     ],
     aside: BFI_ASIDE,
@@ -2405,6 +2410,7 @@ export const azoospermia = defineTreatment({
     subtitle: "The right work-up tells us whether — and how — your own sperm can be used.",
     items: [
       "Accurate obstructive vs non-obstructive diagnosis guides the whole plan.",
+      "In men with hormone deficiency — pretesticular azoospermia — systematic hormone replacement can start natural sperm production.",
       "Microsurgical retrieval (Micro-TESE) finds sperm in difficult cases.",
       "Even a few sperm are enough for ICSI.",
       "Retrieved sperm can be frozen for future cycles.",
@@ -2415,7 +2421,7 @@ export const azoospermia = defineTreatment({
     heading: { lead: "Who this", em: "is for" },
     subtitle: "Men whose semen analysis shows no sperm, after confirmation.",
     items: [
-      "Two semen analyses confirming no sperm in the ejaculate.",
+      "Two semen analyses confirming no sperm present.",
       "A history of undescended testes, mumps, chemotherapy or radiation.",
       "Previous vasectomy or a suspected blockage in the sperm pathway.",
       "Hormonal or genetic causes of low sperm production.",
@@ -2426,11 +2432,10 @@ export const azoospermia = defineTreatment({
     heading: { lead: "How azoospermia", em: "is managed" },
     subtitle: "Careful diagnosis first, then the least-invasive route to usable sperm.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "History, examination, hormone profile and genetic tests to classify the type." },
-      { icon: ScanLine, n: "02", t: "Imaging", d: "Scrotal and trans-rectal ultrasound to look for blockages or other causes." },
-      { icon: Target, n: "03", t: "Surgical Retrieval", d: "PESA, TESA or microsurgical Micro-TESE to recover sperm from the epididymis or testes." },
-      { icon: Microscope, n: "04", t: "ICSI", d: "Retrieved sperm are injected directly into the eggs in the laboratory." },
-      { icon: Snowflake, n: "05", t: "Freezing", d: "Surplus sperm or embryos are frozen for future attempts." },
+      { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "History, examination, hormone profile, imaging and genetic tests to classify the type." },
+      { icon: Target, n: "02", t: "Surgical Retrieval", d: "PESA, TESA or microsurgical Micro-TESE to recover sperm from the epididymis or testes." },
+      { icon: Microscope, n: "03", t: "ICSI", d: "Retrieved sperm are injected directly into the eggs in the laboratory." },
+      { icon: Snowflake, n: "04", t: "Freezing", d: "Surplus sperm or embryos are frozen for future attempts." },
     ],
     note: "When retrieval is not possible, screened donor sperm offers a reliable alternative.",
   },
@@ -2461,7 +2466,7 @@ export const azoospermia = defineTreatment({
     heading: { lead: "Zero Sperm Count — Azoospermia", em: "NIL count" },
   },
   faqs: [
-    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis and used with ICSI. Where it cannot, donor sperm is an option." },
+    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis and used with ICSI. This gives the option to become a father with your own sperm in azoospermic men. Where it cannot, donor sperm is an option." },
     { q: "What is the difference between obstructive and non-obstructive azoospermia?", a: "Obstructive means sperm are made normally but blocked from getting out; non-obstructive means production itself is very low. The treatment differs accordingly." },
     { q: "What is Micro-TESE?", a: "Microsurgical testicular sperm extraction — using an operating microscope to locate and retrieve the small pockets of sperm production in non-obstructive azoospermia." },
     { q: "Is sperm retrieval painful?", a: "It is done under anaesthesia, so it is not painful during the procedure. Mild soreness afterwards settles quickly." },
@@ -2499,7 +2504,7 @@ export const surgicalSpermRetrieval = defineTreatment({
     h1: "Surgical Sperm Retrieval",
     h1Em: "(PESA / TESA / Micro-TESE)",
     tagline:
-      "When there is no sperm in the ejaculate, these minor procedures recover sperm directly from the testes or epididymis — so your own sperm can still be used with ICSI.",
+      "When there is no sperm in the semen, these minor procedures recover sperm directly from the testes or epididymis — so your own sperm can still be used with ICSI.",
     badges: ["Microsurgery", "Day-care Procedure", "Since 1998", "ICSI-ready"],
     image: "/assets/conditions/surgical-sperm-retrieval.png",
     imageAlt: "Surgical sperm retrieval (PESA, TESA, Micro-TESE) at Bavishi Fertility Institute",
@@ -2773,9 +2778,9 @@ export const erectileDysfunction = defineTreatment({
     ],
   },
   faqs: [
-    { q: "Can I father a child if I have erectile dysfunction?", a: "Yes. ED is usually treatable, and even when natural intercourse stays difficult, IUI or IVF with ICSI offer reliable routes to pregnancy." },
+    { q: "Can I father a child if I have erectile dysfunction?", a: "Yes. ED is treatable in many men, and even when natural intercourse stays difficult, IUI or IVF with ICSI offer reliable routes to pregnancy." },
     { q: "What causes erectile dysfunction?", a: "Often a combination of physical causes (diabetes, blood pressure, hormones, blood-flow problems) and psychological ones such as stress and anxiety." },
-    { q: "Is erectile dysfunction treatable?", a: "In most men, yes — through lifestyle changes, treating the underlying cause, medical therapy and counselling where needed." },
+    { q: "Is erectile dysfunction treatable?", a: "In many men, yes — through lifestyle changes, treating the underlying cause, medical therapy and counselling where needed." },
     { q: "Is the consultation confidential?", a: "Completely. ED is a common medical condition and is handled with full privacy and sensitivity." },
     { q: "How does ED affect fertility treatment?", a: "If collecting a sperm sample or timed intercourse is difficult, our team arranges supportive options so treatment can proceed smoothly." },
   ],

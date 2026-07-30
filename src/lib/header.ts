@@ -211,7 +211,6 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
           { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
           { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
-          { label: "Varicocele / Micro Surgery", href: "/varicocele" },
           { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
         ]},
         { heading: "Female Infertility", headingHref: "/treatments/female-infertility", items: [
