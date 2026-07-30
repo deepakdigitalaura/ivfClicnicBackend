@@ -3322,8 +3322,7 @@ export const ovarianRejuvenation = defineTreatment({
     heading: { lead: "Who may", em: "be considered" },
     subtitle: "Selective use, after full counselling about uncertain benefit.",
     items: [
-      "Very low ovarian reserve or repeatedly poor IVF response.",
-      "Early menopause or premature ovarian insufficiency.",
+      "Very low ovarian reserve (AMH <0.5) or repeatedly poor IVF response.",
       "Perimenopausal women wishing to explore own-egg options.",
       "Women preferring to try before moving to donor eggs.",
       "Selected cases as an adjunct to IVF, after counselling.",
@@ -3339,7 +3338,7 @@ export const ovarianRejuvenation = defineTreatment({
       { icon: Target, n: "04", t: "Ovarian Injection", d: "PRP is injected into the ovaries under ultrasound guidance." },
       { icon: ScanLine, n: "05", t: "Reassessment", d: "AMH, FSH and scans review any response before the next step." },
     ],
-    note: "If there is a response, an IVF cycle is planned to make use of any available eggs.",
+    note: "We feel the best time for ovarian rejuvenation is the month before your IVF stimulation.",
   },
   success: {
     factors: [
@@ -3369,7 +3368,7 @@ export const ovarianRejuvenation = defineTreatment({
   },
   faqs: [
     { q: "What is ovarian rejuvenation?", a: "An emerging therapy, usually ovarian PRP, that aims to reactivate dormant follicles in women with very low reserve or early menopause, to try to improve hormone levels and egg availability." },
-    { q: "Does it really work?", a: "Results are inconsistent and the evidence is still developing. Some women show a response; many do not. We are honest about this before you decide." },
+    { q: "Does it really work?", a: "Results are inconsistent and the evidence is still developing. Some women show a response; some do not. We are honest about this before you decide." },
     { q: "Is it safe?", a: "PRP uses your own blood, so there is no rejection risk, and the procedure is minimally invasive with only minor side-effects." },
     { q: "Who should consider it?", a: "Mainly women with very low reserve, early menopause or repeated poor IVF response who wish to explore own-egg options before donor eggs." },
     { q: "Is it a substitute for IVF or donor eggs?", a: "No. It is an adjunct that may be tried first; IVF and donor eggs remain the more reliable routes and are kept openly in the plan." },
@@ -3452,6 +3451,14 @@ export const fibroids = defineTreatment({
       { icon: FlaskConical, n: "05", t: "Conception Plan", d: "Natural conception or IVF planned once the cavity has healed." },
     ],
     note: "Many fibroids need only monitoring — surgery is advised only when fertility or symptoms justify it.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "fibroid surgery" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: ShieldCheck, t: "Fertility-Preserving Surgeons", d: "Minimally-invasive hysteroscopic and laparoscopic myomectomy that protects the uterus." },
+      { icon: Target, t: "Treat Only What Matters", d: "We operate selectively — only on fibroids that genuinely affect your fertility." },
+    ],
   },
   success: {
     factors: [
@@ -3563,6 +3570,14 @@ export const endometriosis = defineTreatment({
       { icon: FlaskConical, n: "05", t: "IVF", d: "Often the most effective route to pregnancy, with tailored protocols." },
     ],
     note: "We weigh surgery against ovarian reserve carefully — sometimes proceeding straight to IVF is the better choice.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "endometriosis surgery" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: ShieldCheck, t: "Fertility-Sparing Surgeons", d: "Conservative laparoscopic technique that protects ovarian reserve." },
+      { icon: HeartPulse, t: "Surgery-or-IVF Judgement", d: "Honest, individualised advice on when surgery helps and when IVF is the better route." },
+    ],
   },
   success: {
     factors: [
