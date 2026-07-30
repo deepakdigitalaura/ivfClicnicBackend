@@ -588,7 +588,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
               <StaggerItem key={i}>
                 <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`benefits.items.${i}.value`, item)}</span>
+                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{editing ? ed(`benefits.items.${i}.value`, item) : <Linkify text={item} />}</span>
                 </div>
               </StaggerItem>
             ))}
@@ -670,7 +670,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-semibold text-white shadow-sm shadow-[color:var(--rose)]/30 ring-4 ring-[color:var(--rose)]/10">{s.n}</span>
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">{ed(`process.steps.${i}.t`, s.t)}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{ed(`process.steps.${i}.d`, s.d)}</p>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{editing ? ed(`process.steps.${i}.d`, s.d) : <Linkify text={s.d} />}</p>
               </div>
             </StaggerItem>
           ))}
@@ -944,7 +944,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           <SectionHead center eyebrow={ed("labels.faq", labels.faq)} title={<H h={faqsSection} base="faqsSection" />} />
           <div className="mt-9 space-y-3">
             {t.faqs.map((f, i) => (
-              <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />
+              <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={editing ? ed(`faqs.${i}.a`, f.a, false) : <Linkify text={f.a} />} />
             ))}
           </div>
           {reviewer && (

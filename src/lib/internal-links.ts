@@ -57,6 +57,13 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
     published: false,
     fallback: "/#stories",
   },
+  "surgical-sperm-retrieval": {
+    key: "surgical-sperm-retrieval",
+    label: "Surgical Sperm Retrieval",
+    href: "/surgical-sperm-retrieval",
+    published: true,
+    aliases: ["Micro-TESE", "surgical sperm retrieval", "PESA", "TESA"],
+  },
 };
 
 /** Resolve a destination's live href (published page, else fallback). */

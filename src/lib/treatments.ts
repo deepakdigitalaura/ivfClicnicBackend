@@ -690,7 +690,7 @@ export const iui: Treatment = {
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Cycle monitoring", d: "Where needed, tablets and/or injections are used to get better quality follicles. Transvaginal ultrasound tracks the developing follicles." },
       { icon: Syringe, n: "02", t: "Ovulation trigger", d: "An hCG injection triggers final egg maturation and ovulation, so the timing of insemination is precise." },
-      { icon: Filter, n: "03", t: "Sperm preparation", d: "On the day, the semen sample is washed in the lab to remove unwanted material, separate the best motile sperm, and remove dead sperm and debris." },
+      { icon: Filter, n: "03", t: "Sperm preparation", d: "On the day, the semen sample is washed in the lab to remove unwanted material and separate the best motile, normally-shaped sperm." },
       { icon: Activity, n: "04", t: "Insemination", d: "Using a self-retaining speculum and aseptic precautions, the prepared sperm is gently injected into the uterus through a thin, soft cannula." },
       { icon: HeartPulse, n: "05", t: "Rest & pregnancy test", d: "You rest for about ten minutes and resume normal activities. A pregnancy test follows about two weeks later." },
     ],
@@ -728,10 +728,10 @@ export const iui: Treatment = {
     items: STD_PREP,
   },
   faqs: [
-    { q: "How long does the IUI process take?", a: "The IUI visit typically takes about 1 to 2 hours from start to finish; the insemination itself takes only a few minutes. The complete treatment, from start to pregnancy test, takes around one month." },
+    { q: "How long does the IUI process take?", a: "The IUI visit typically takes about 1 to 2 hours from start to finish; the insemination itself takes only a few minutes." },
     { q: "What is the difference between IUI and IVF?", a: "In IUI, prepared sperm is placed into the uterus near the time of ovulation — suitable for mild male-factor or cervical issues. In IVF, eggs are retrieved and fertilised in the laboratory and the embryo is transferred — used for more complex cases such as blocked tubes or severe male infertility." },
     { q: "Is IUI painful?", a: "IUI is usually not painful. Most women experience only mild discomfort." },
-    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 4 cycles of IUI are suggested, with a maximum of 6, but your doctor will tailor the advice based on your specific situation." },
+    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 4 cycles of IUI are suggested, but your doctor will tailor the advice based on your specific situation." },
     { q: "Can I have sex after an IUI procedure?", a: "Yes. There are generally no specific restrictions against sexual activity following the procedure." },
     { q: "Can I travel after IUI?", a: "Yes, you can travel after IUI, as the procedure does not require prolonged rest." },
     { q: "Can stress affect IUI success?", a: "Stress can affect fertility by influencing hormone levels. Relaxation techniques, yoga, meditation and counselling can help." },
@@ -2392,7 +2392,7 @@ export const azoospermia = defineTreatment({
     h1: "Zero Sperm Count",
     h1Em: "(Azoospermia) Treatment",
     tagline:
-      "No sperm in the semen does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
+      "No sperm in the Ejaculate-semen does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
     badges: ["Surgical Sperm Retrieval", "Micro-TESE", "Since 1998", "ICSI"],
     image: "/assets/conditions/azoospermia.png",
     imageAlt: "Azoospermia (zero sperm count) treatment at Bavishi Fertility Institute",
@@ -2400,7 +2400,7 @@ export const azoospermia = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Azoospermia?" },
     paragraphs: [
-      "Azoospermia means no sperm are found in the semen. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
+      "Azoospermia means no sperm are found in the Ejaculate-semen. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
       "There are two main types. Obstructive azoospermia means sperm are produced normally but cannot get out due to a blockage. Non-obstructive azoospermia means production itself is very low. In both, sperm can often be retrieved directly from the testes or epididymis and used with ICSI.",
     ],
     aside: BFI_ASIDE,
@@ -2466,7 +2466,7 @@ export const azoospermia = defineTreatment({
     heading: { lead: "Zero Sperm Count — Azoospermia", em: "NIL count" },
   },
   faqs: [
-    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis and used with ICSI. This gives the option to become a father with your own sperm in azoospermic men. Where it cannot, donor sperm is an option." },
+    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis through surgical sperm retrieval and used with ICSI. This gives the option to become a father with your own sperm in azoospermic men. Where it cannot, donor sperm is an option." },
     { q: "What is the difference between obstructive and non-obstructive azoospermia?", a: "Obstructive means sperm are made normally but blocked from getting out; non-obstructive means production itself is very low. The treatment differs accordingly." },
     { q: "What is Micro-TESE?", a: "Microsurgical testicular sperm extraction — using an operating microscope to locate and retrieve the small pockets of sperm production in non-obstructive azoospermia." },
     { q: "Is sperm retrieval painful?", a: "It is done under anaesthesia, so it is not painful during the procedure. Mild soreness afterwards settles quickly." },
