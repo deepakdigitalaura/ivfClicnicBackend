@@ -19,8 +19,8 @@ const cards: HubCard[] = [
     icon: Droplets,
   },
   {
-    title: "PCOS (Polycystic Ovary Syndrome)",
-    desc: "Ovulation-focused management and fertility treatment tailored to your PCOS profile.",
+    title: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome)",
+    desc: "Ovulation-focused management and fertility treatment tailored to your PMOS-PCOS profile.",
     href: "/pcos",
     icon: Activity,
   },
