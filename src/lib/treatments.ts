@@ -2506,7 +2506,7 @@ export const surgicalSpermRetrieval = defineTreatment({
     h1: "Surgical Sperm Retrieval",
     h1Em: "(PESA / TESA / Micro-TESE)",
     tagline:
-      "When there is no sperm in the semen, these minor procedures recover sperm directly from the testes or epididymis — so your own sperm can still be used with ICSI.",
+      "When there is no sperm in the Ejaculate-semen, these minor procedures recover sperm directly from the testes or epididymis — so your own sperm can still be used with ICSI.",
     badges: ["Microsurgery", "Day-care Procedure", "Since 1998", "ICSI-ready"],
     image: "/assets/conditions/surgical-sperm-retrieval.png",
     imageAlt: "Surgical sperm retrieval (PESA, TESA, Micro-TESE) at Bavishi Fertility Institute",
@@ -2514,10 +2514,19 @@ export const surgicalSpermRetrieval = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Surgical Sperm Retrieval?" },
     paragraphs: [
-      "Surgical sperm retrieval is a group of minor procedures that collect sperm directly from the male reproductive tract when none can be obtained from the ejaculate — most often in azoospermia. The recovered sperm are then used to fertilise eggs through ICSI.",
+      "Surgical sperm retrieval is a group of minor procedures that collect sperm directly from the male reproductive tract when none can be obtained from the Ejaculate-semen — most often in azoospermia. The recovered sperm are then used to fertilise eggs through ICSI.",
       "The right technique depends on the cause. PESA and TESA use a fine needle; TESE takes a small tissue sample; and Micro-TESE uses an operating microscope to find sperm in the most difficult, non-obstructive cases.",
     ],
     aside: BFI_ASIDE,
+  },
+  types: {
+    heading: { lead: "The", em: "four retrieval techniques" },
+    items: [
+      { icon: Syringe, t: "PESA", d: "Percutaneous Epididymal Sperm Aspiration — a fine needle draws sperm from the epididymis. Used for obstructive azoospermia, such as after a vasectomy, where sperm production is normal but blocked from getting out." },
+      { icon: Droplets, t: "TESA", d: "Testicular Sperm Aspiration — a fine needle draws sperm directly from testicular tissue. Used when PESA is unsuccessful or the epididymis cannot be accessed." },
+      { icon: Layers, t: "TESE", d: "Testicular Sperm Extraction — a small tissue biopsy is taken from the testis. Used in non-obstructive azoospermia with low-level sperm production, or when needle aspiration finds nothing." },
+      { icon: Microscope, t: "Micro-TESE", d: "Microsurgical TESE — an operating microscope identifies the small pockets of active sperm production within the testis. Used in the most difficult non-obstructive cases, giving the best chance of finding sperm." },
+    ],
   },
   benefits: {
     heading: { lead: "The advantages of", em: "surgical retrieval" },
@@ -2573,6 +2582,7 @@ export const surgicalSpermRetrieval = defineTreatment({
   },
   faqs: [
     { q: "Which retrieval method will I need?", a: "It depends on the cause. PESA/TESA (needle) suit obstructive cases; TESE and Micro-TESE (microsurgery) are used for non-obstructive azoospermia. Your evaluation guides the choice." },
+    { q: "What are the expected sperm retrieval rates?", a: "Retrieval rates depend on various factors — the underlying cause, prior treatment and the technique used. As a general guide, sperm are found in approximately 40-60% of non-obstructive azoospermia cases, and 95%+ of obstructive azoospermia cases." },
     { q: "Is the procedure painful?", a: "It is performed under anaesthesia, so it is not painful during the procedure. Mild soreness afterwards settles within a few days." },
     { q: "What is Micro-TESE?", a: "Microsurgical TESE uses an operating microscope to identify the tiny areas of active sperm production, giving the best chance of finding sperm in difficult cases." },
     { q: "Can the sperm be frozen?", a: "Yes. Surplus sperm are frozen so future ICSI cycles do not need another procedure." },
