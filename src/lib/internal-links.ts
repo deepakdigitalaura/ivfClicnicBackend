@@ -62,7 +62,7 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
     label: "Surgical Sperm Retrieval",
     href: "/surgical-sperm-retrieval",
     published: true,
-    aliases: ["Micro-TESE", "surgical sperm retrieval"],
+    aliases: ["Micro-TESE", "surgical sperm retrieval", "PESA", "TESA"],
   },
 };
 
