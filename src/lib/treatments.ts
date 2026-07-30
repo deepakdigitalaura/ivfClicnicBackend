@@ -3015,6 +3015,7 @@ export const prpInfertility = defineTreatment({
   },
   faqs: [
     { q: "What is PRP therapy in fertility?", a: "It uses platelet-rich plasma from your own blood, rich in growth factors, injected into the ovaries (for low reserve) or uterus (for a thin lining) to try to improve the chance of conception." },
+    { q: "Is PRP the same as ovarian rejuvenation?", a: "Ovarian PRP is the technique most often referred to as ovarian rejuvenation — platelet-rich plasma injected into the ovaries to try to support follicle activity and egg quality in women with a low ovarian reserve." },
     { q: "Is PRP safe?", a: "Because PRP is made from your own blood, there is no risk of rejection or allergy. The procedure itself is minimally invasive with only minor, short-lived side-effects." },
     { q: "Does PRP guarantee pregnancy?", a: "No. PRP is an emerging therapy with variable results, offered as an adjunct in selected cases. We explain realistic expectations clearly before proceeding." },
     { q: "Who is PRP suitable for?", a: "It is mainly considered for low ovarian reserve, a thin endometrial lining or repeated implantation failure, after a full assessment." },
@@ -3971,6 +3972,14 @@ export const pgt = defineTreatment({
     ],
     aside: BFI_ASIDE,
   },
+  types: {
+    heading: { lead: "Types of", em: "PGT" },
+    items: [
+      { icon: Dna, t: "PGT-A", d: "Checks embryos have the correct number of chromosomes — the commonest cause of failed implantation and miscarriage." },
+      { icon: Microscope, t: "PGT-M", d: "Tests for a specific inherited single-gene disease known to run in the family." },
+      { icon: ScanLine, t: "PGT-SR", d: "Detects chromosomal structural rearrangements, such as translocations, carried by a parent." },
+    ],
+  },
   benefits: {
     heading: { lead: "The advantages of", em: "PGT" },
     subtitle: "Selecting the healthiest embryo before transfer.",
@@ -4005,6 +4014,14 @@ export const pgt = defineTreatment({
       { icon: Baby, n: "05", t: "Healthy-embryo Transfer", d: "A single healthy embryo is transferred in a later frozen cycle." },
     ],
     note: "Because results take time, PGT cycles use a freeze-all approach with a later frozen-embryo transfer.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PGT" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard, protecting every biopsied embryo." },
+      { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every embryo biopsy with precision." },
+    ],
   },
   success: {
     factors: [
@@ -4109,6 +4126,14 @@ export const surrogacy = defineTreatment({
       { icon: Baby, n: "05", t: "Pregnancy & Delivery", d: "Full antenatal care supports the surrogate through to a safe delivery." },
     ],
     note: "Surrogacy in India is altruistic and tightly regulated; we follow the law fully at every stage.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "surrogacy" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: ListChecks, t: "Ethical & Legally Compliant", d: "Every step follows India's Surrogacy (Regulation) Act, with full documentation and support." },
+      { icon: ShieldCheck, t: "Rigorous Surrogate Screening", d: "Surrogates are medically and psychologically screened before matching." },
+    ],
   },
   success: {
     factors: [

@@ -193,6 +193,7 @@ export const HEADER_DEFAULTS: HeaderData = {
         { heading: "Advanced IVF Treatment", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "IVF", href: "/what-is-ivf" },
           { label: "IVF Failure", href: "/ivf-failure" },
+          { label: "Preimplantation Genetic Testing (PGT)", href: "/pgt" },
           { label: "IUI", href: "/intra-uterine-insemination-iui" },
           { label: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
           { label: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
@@ -205,6 +206,7 @@ export const HEADER_DEFAULTS: HeaderData = {
         { heading: "Donor Services", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Egg Donation", href: "/egg-donation" },
           { label: "Sperm Donation", href: "/sperm-donation" },
+          { label: "Surrogacy", href: "/surrogacy" },
         ]},
         { heading: "Male Infertility", headingHref: "/treatments/male-infertility", items: [
           { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
