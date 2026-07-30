@@ -3015,6 +3015,7 @@ export const prpInfertility = defineTreatment({
   },
   faqs: [
     { q: "What is PRP therapy in fertility?", a: "It uses platelet-rich plasma from your own blood, rich in growth factors, injected into the ovaries (for low reserve) or uterus (for a thin lining) to try to improve the chance of conception." },
+    { q: "Is PRP the same as ovarian rejuvenation?", a: "Ovarian PRP is the technique most often referred to as ovarian rejuvenation — platelet-rich plasma injected into the ovaries to try to support follicle activity and egg quality in women with a low ovarian reserve." },
     { q: "Is PRP safe?", a: "Because PRP is made from your own blood, there is no risk of rejection or allergy. The procedure itself is minimally invasive with only minor, short-lived side-effects." },
     { q: "Does PRP guarantee pregnancy?", a: "No. PRP is an emerging therapy with variable results, offered as an adjunct in selected cases. We explain realistic expectations clearly before proceeding." },
     { q: "Who is PRP suitable for?", a: "It is mainly considered for low ovarian reserve, a thin endometrial lining or repeated implantation failure, after a full assessment." },
