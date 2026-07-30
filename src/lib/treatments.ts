@@ -3657,7 +3657,7 @@ export const cryopreservation = defineTreatment({
     heading: { lead: "What is", em: "Cryopreservation?" },
     paragraphs: [
       "Cryopreservation is the freezing and long-term storage of reproductive cells — eggs, sperm or embryos — so they can be used to achieve a pregnancy in the future. Modern vitrification freezes cells so rapidly that damaging ice crystals do not form, giving excellent survival rates on thawing.",
-      "People choose to preserve fertility for many reasons: before cancer treatment, before fertility-reducing surgery, to delay parenthood for personal or professional reasons, or to store surplus embryos from an IVF cycle. Stored samples remain viable for many years.",
+      "People choose to preserve fertility for many reasons: before cancer treatment, before fertility-reducing surgery, to delay parenthood for personal or professional reasons, or to store surplus embryos from an IVF cycle. Stored samples remain viable for many years. Bavishi Fertility Institute achieved India's first childbirth using vitrified frozen oocytes.",
     ],
     aside: BFI_ASIDE,
   },
@@ -3710,6 +3710,14 @@ export const cryopreservation = defineTreatment({
       { icon: FlaskConical, n: "05", t: "Future Use", d: "Thawed and used in IUI, IVF–ICSI or a frozen-embryo transfer when you are ready." },
     ],
     note: "Storage is reviewed periodically, and samples can be kept for many years. For egg freezing, freezing more eggs and at a younger age improves the chance of a future baby.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "fertility preservation" },
+    items: [
+      { icon: Award, t: "India's First Vitrified-Oocyte Birth", d: "Bavishi Fertility Institute achieved India's first childbirth using vitrified frozen oocytes." },
+      { icon: Snowflake, t: "Trained at the Source", d: "Our team trained at the Hiroshima HART Institute, Japan, with Dr. Tetsunori Mukaida — one of the inventors of the vitrification technique." },
+      { icon: ShieldCheck, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+    ],
   },
   success: {
     factors: [
