@@ -226,6 +226,7 @@ export const HEADER_DEFAULTS: HeaderData = {
         ]},
         { heading: "Fertility Preservation", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Cryopreservation", href: "/cryopreservation" },
+          { label: "Egg Freezing", href: "/egg-freezing" },
         ]},
       ],
     },
