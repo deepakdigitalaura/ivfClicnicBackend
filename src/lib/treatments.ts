@@ -3253,6 +3253,7 @@ export const ovarianReserve = defineTreatment({
     heading: { lead: "Low AMH / Poor Ovarian Reserve", em: "Low Egg Count" },
   },
   faqs: [
+    { q: "What causes poor ovarian reserve?", a: "Age is the main factor — reserve begins to decline in the mid-to-late 30s and is often low by the 40s. Your mother's age at menopause is a useful guide to your own likely timeline. Reserve can also decline earlier because of endometriosis (and its surgery), chronic pelvic infections, genetic factors such as the fragile X premutation, ovarian surgery for cysts or teratomas, chemotherapy or radiotherapy, autoimmune conditions, and lifestyle factors such as smoking, stress, obesity or being significantly underweight." },
     { q: "What does a low AMH mean?", a: "AMH reflects the number of eggs remaining. A low value suggests a reduced ovarian reserve, which can affect natural conception and the response to IVF — but it does not measure egg quality or rule out pregnancy." },
     { q: "Can I conceive with low ovarian reserve?", a: "Often yes, especially when egg quality is reasonable. Tailored stimulation and strategies like egg accumulation help, and donor eggs are a successful option if needed." },
     { q: "Does low AMH mean early menopause?", a: "Not necessarily. It indicates a smaller egg pool, but the timeline varies. Your specialist will interpret it alongside your age and other tests." },
