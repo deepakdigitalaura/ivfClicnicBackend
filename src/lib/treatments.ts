@@ -2392,7 +2392,7 @@ export const azoospermia = defineTreatment({
     h1: "Zero Sperm Count",
     h1Em: "(Azoospermia) Treatment",
     tagline:
-      "No sperm in the semen does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
+      "No sperm in the Ejaculate-semen does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
     badges: ["Surgical Sperm Retrieval", "Micro-TESE", "Since 1998", "ICSI"],
     image: "/assets/conditions/azoospermia.png",
     imageAlt: "Azoospermia (zero sperm count) treatment at Bavishi Fertility Institute",
@@ -2400,7 +2400,7 @@ export const azoospermia = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Azoospermia?" },
     paragraphs: [
-      "Azoospermia means no sperm are found in the semen. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
+      "Azoospermia means no sperm are found in the Ejaculate-semen. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
       "There are two main types. Obstructive azoospermia means sperm are produced normally but cannot get out due to a blockage. Non-obstructive azoospermia means production itself is very low. In both, sperm can often be retrieved directly from the testes or epididymis and used with ICSI.",
     ],
     aside: BFI_ASIDE,
