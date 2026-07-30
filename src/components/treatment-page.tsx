@@ -627,7 +627,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* 4. Who needs it */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow={ed("labels.whoNeedsIt", labels.whoNeedsIt)} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
+          <SectionHead eyebrow={ed("labels.whoNeedsIt", t.whoNeedsIt.eyebrow ?? labels.whoNeedsIt)} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
           <Stagger
             className={`mt-9 grid grid-cols-1 gap-4 ${
               t.whoNeedsIt.items.length === 1
