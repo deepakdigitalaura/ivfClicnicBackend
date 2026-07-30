@@ -2466,7 +2466,7 @@ export const azoospermia = defineTreatment({
     heading: { lead: "Zero Sperm Count — Azoospermia", em: "NIL count" },
   },
   faqs: [
-    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis and used with ICSI. This gives the option to become a father with your own sperm in azoospermic men. Where it cannot, donor sperm is an option." },
+    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis through surgical sperm retrieval and used with ICSI. This gives the option to become a father with your own sperm in azoospermic men. Where it cannot, donor sperm is an option." },
     { q: "What is the difference between obstructive and non-obstructive azoospermia?", a: "Obstructive means sperm are made normally but blocked from getting out; non-obstructive means production itself is very low. The treatment differs accordingly." },
     { q: "What is Micro-TESE?", a: "Microsurgical testicular sperm extraction — using an operating microscope to locate and retrieve the small pockets of sperm production in non-obstructive azoospermia." },
     { q: "Is sperm retrieval painful?", a: "It is done under anaesthesia, so it is not painful during the procedure. Mild soreness afterwards settles quickly." },
