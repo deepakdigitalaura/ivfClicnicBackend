@@ -60,6 +60,7 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   endometriosis: { slug: "endometriosis", name: "Endometriosis", href: "/endometriosis" },
   azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
   cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/cryopreservation" },
+  "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/egg-freezing" },
   "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/#treatments" },
   // Male Infertility
   oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
@@ -118,6 +119,7 @@ const TREATMENT_CARD_META: Record<string, { icon: LucideIcon; desc: string }> = 
   "ovarian-rejuvenation": { icon: Sparkles, desc: "Ovarian PRP to support a very low reserve." },
   fibroids: { icon: ShieldCheck, desc: "Fertility-preserving treatment of uterine fibroids." },
   cryopreservation: { icon: Snowflake, desc: "Safe long-term freezing of eggs, sperm and embryos." },
+  "egg-freezing": { icon: Egg, desc: "Freeze younger, healthier eggs to preserve your options." },
   "recurrent-miscarriage": { icon: ShieldCheck, desc: "Evaluation and care for repeated pregnancy loss." },
 };
 
@@ -3648,7 +3650,7 @@ export const cryopreservation = defineTreatment({
     h1: "Cryopreservation",
     h1Em: "(Fertility Preservation)",
     tagline:
-      "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline.",
+      "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline. BFI has achieved the first childbirth of India with vitrified frozen oocytes. Our team trained at the Hiroshima HART Institute, Japan, with Dr. Tetsunori Mukaida — one of the inventors of the vitrification technique.",
     badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/fertility-preservation.png",
     imageAlt: "Cryopreservation (egg, sperm and embryo freezing) at Bavishi Fertility Institute",
@@ -3657,7 +3659,7 @@ export const cryopreservation = defineTreatment({
     heading: { lead: "What is", em: "Cryopreservation?" },
     paragraphs: [
       "Cryopreservation is the freezing and long-term storage of reproductive cells — eggs, sperm or embryos — so they can be used to achieve a pregnancy in the future. Modern vitrification freezes cells so rapidly that damaging ice crystals do not form, giving excellent survival rates on thawing.",
-      "People choose to preserve fertility for many reasons: before cancer treatment, before fertility-reducing surgery, to delay parenthood for personal or professional reasons, or to store surplus embryos from an IVF cycle. Stored samples remain viable for many years.",
+      "People choose to preserve fertility for many reasons: before cancer treatment, before fertility-reducing surgery, to delay parenthood for personal or professional reasons, or to store surplus embryos from an IVF cycle. Stored samples remain viable for many years. Bavishi Fertility Institute achieved India's first childbirth using vitrified frozen oocytes.",
     ],
     aside: BFI_ASIDE,
   },
@@ -3711,6 +3713,14 @@ export const cryopreservation = defineTreatment({
     ],
     note: "Storage is reviewed periodically, and samples can be kept for many years. For egg freezing, freezing more eggs and at a younger age improves the chance of a future baby.",
   },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "fertility preservation" },
+    items: [
+      { icon: Award, t: "India's First Vitrified-Oocyte Birth", d: "Bavishi Fertility Institute achieved India's first childbirth using vitrified frozen oocytes." },
+      { icon: Snowflake, t: "Trained at the Source", d: "Our team trained at the Hiroshima HART Institute, Japan, with Dr. Tetsunori Mukaida — one of the inventors of the vitrification technique." },
+      { icon: ShieldCheck, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+    ],
+  },
   success: {
     factors: [
       "Age at the time of freezing (especially for eggs — the single biggest factor)",
@@ -3751,7 +3761,123 @@ export const cryopreservation = defineTreatment({
   },
 });
 
-/* embryoFreezing, spermFreezing, eggFreezing — MERGED into cryopreservation above */
+/* spermFreezing, embryoFreezing stay covered by the combined Cryopreservation
+ * page above. eggFreezing was un-merged back into its own page below, per
+ * client request — it's the one couples/women search for by name most often
+ * and the doc explicitly asked for it to be separate again. */
+
+export const eggFreezing = defineTreatment({
+  slug: "egg-freezing",
+  name: "Egg Freezing (Oocyte Cryopreservation)",
+  shortName: "Egg Freezing",
+  alternateName: "Oocyte Cryopreservation",
+  reviewerSlug: "falguni-bavishi",
+  meta: {
+    title: "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute",
+    description:
+      "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1998.",
+    ogImage: "/assets/treatments/fertility-preservation.png",
+  },
+  procedure: {
+    procedureType: "https://schema.org/MedicalProcedure",
+    bodyLocation: "Oocytes (eggs)",
+    howPerformed:
+      "After ovarian stimulation, mature eggs are collected and frozen by vitrification, then thawed, fertilised by ICSI and transferred as embryos in a future cycle.",
+    followup: "Frozen eggs are thawed and used in a future IVF cycle when the woman is ready.",
+  },
+  hero: {
+    eyebrow: "Fertility Preservation",
+    h1: "Egg Freezing",
+    h1Em: "(Oocyte Cryopreservation)",
+    tagline:
+      "Freeze younger, healthier eggs now to keep your options open for later — whether for medical reasons or to give yourself time on your own terms.",
+    badges: ["Vitrification", "Freeze Younger Eggs", "Since 1998", "Class 1000 Labs"],
+    image: "/assets/treatments/fertility-preservation.png",
+    imageAlt: "Egg freezing (oocyte cryopreservation) at Bavishi Fertility Institute",
+  },
+  whatIs: {
+    heading: { lead: "What is", em: "Egg Freezing?" },
+    paragraphs: [
+      "Egg freezing, or oocyte cryopreservation, is the collection and freezing of a woman's eggs so they can be used to attempt a pregnancy in the future. Because egg quality declines with age, freezing eggs while younger preserves a better chance for later.",
+      "Women freeze eggs for medical reasons — such as before cancer treatment — or for personal reasons, to give themselves time before starting a family. When she is ready, the eggs are thawed, fertilised by ICSI, and the resulting embryos are transferred.",
+    ],
+    aside: BFI_ASIDE,
+  },
+  benefits: {
+    heading: { lead: "The advantages of", em: "egg freezing" },
+    subtitle: "Preserving younger eggs preserves future possibilities.",
+    items: [
+      "Stores eggs at their current, younger quality.",
+      "Keeps the option of a biological child open for later.",
+      "Protects fertility before cancer treatment or surgery.",
+      "Vitrification gives high egg-survival rates.",
+      "No need for a partner or donor sperm at the time of freezing.",
+      "Reduces time pressure on major life decisions.",
+    ],
+  },
+  whoNeedsIt: {
+    heading: { lead: "Who should", em: "consider it" },
+    subtitle: "Egg freezing suits both medical and personal circumstances.",
+    items: [
+      "Before cancer treatment that can damage the ovaries.",
+      "Women wishing to delay childbearing for personal or career reasons.",
+      "A declining ovarian reserve or family history of early menopause.",
+      "Before surgery that may reduce ovarian function.",
+      "Single women who want to preserve their options.",
+    ],
+  },
+  process: {
+    heading: { lead: "How it", em: "works" },
+    subtitle: "A short IVF-style cycle to collect and freeze eggs.",
+    steps: [
+      { icon: ClipboardCheck, n: "01", t: "Assessment", d: "AMH, antral-follicle count and counselling on likely egg numbers." },
+      { icon: Syringe, n: "02", t: "Ovarian Stimulation", d: "About two weeks of injections to grow multiple eggs, monitored by scan." },
+      { icon: Egg, n: "03", t: "Egg Retrieval", d: "Mature eggs are collected in a short procedure under sedation." },
+      { icon: Snowflake, n: "04", t: "Vitrification", d: "Mature eggs are flash-frozen and stored safely." },
+      { icon: Microscope, n: "05", t: "Future Use", d: "Thawed, fertilised by ICSI and transferred as embryos when ready." },
+    ],
+    note: "Freezing more eggs, and at a younger age, improves the chance of a future baby.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "egg freezing" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: Snowflake, t: "High-Survival Vitrification", d: "Advanced flash-freezing technique gives excellent egg survival on thawing." },
+      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard, protecting every egg." },
+    ],
+  },
+  success: {
+    factors: [
+      "Age at the time of freezing — the single biggest factor",
+      "The number of mature eggs frozen",
+      "Egg quality and survival on thawing",
+      "Laboratory and vitrification expertise",
+      "Uterine health at the time of future transfer",
+    ],
+    note: "Younger age and more eggs improve the odds, but egg freezing preserves a chance — not a guarantee — of a future pregnancy. We give honest, age-based estimates.",
+  },
+  risks: {
+    heading: { lead: "Risks &", em: "considerations" },
+    items: [
+      { t: "Not a guarantee", d: "Frozen eggs improve future chances but cannot promise a baby.", help: "We give realistic, age-based numbers and may advise freezing more eggs." },
+      { t: "Stimulation effects", d: "The stimulation cycle carries a small risk of OHSS and minor side-effects.", help: "Safe, individualised protocols and monitoring keep this risk low." },
+      { t: "Best done younger", d: "Eggs frozen at an older age have lower success.", help: "We advise on the ideal timing so the eggs you store give the best chance." },
+    ],
+  },
+  faqs: [
+    { q: "What is the best age to freeze eggs?", a: "Earlier is better — ideally in your late twenties to early thirties — because egg quality and quantity decline with age. Freezing younger eggs gives the best future chance." },
+    { q: "How many eggs should I freeze?", a: "It varies with age, but more eggs improve the odds. After assessing your reserve, your specialist will advise a target number, sometimes over more than one cycle." },
+    { q: "Is egg freezing painful?", a: "The injections cause minimal discomfort and egg retrieval is done under sedation, so it is not painful. Mild bloating afterwards settles quickly." },
+    { q: "How are frozen eggs used later?", a: "They are thawed, fertilised with sperm by ICSI, and the resulting embryos are transferred to the uterus in an IVF cycle." },
+    { q: "Do frozen eggs survive well?", a: "Vitrification gives high egg-survival rates, though not every egg survives or fertilises — which is why the number frozen matters." },
+  ],
+  related: ["cryopreservation", "ovarian-reserve", "ovarian-rejuvenation", "ivf", "prp-infertility"],
+  cta: {
+    heading: "Thinking about",
+    headingEm: "freezing your eggs?",
+    subtitle: "Get an honest assessment of your reserve and what egg freezing could mean for you — book a consultation.",
+  },
+});
 
 /* ===================================================================== */
 /* IVF FAILURE SOLUTIONS                                                  */
@@ -4231,6 +4357,7 @@ export const TREATMENTS: Treatment[] = [
   endometriosis,
   // Fertility Preservation
   cryopreservation,
+  eggFreezing,
 ];
 export const treatmentBySlug = (slug: string) => TREATMENTS.find((t) => t.slug === slug);
 

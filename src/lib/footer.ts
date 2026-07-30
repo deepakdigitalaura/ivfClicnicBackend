@@ -190,6 +190,7 @@ export const FOOTER_DEFAULTS: FooterData = {
     ]},
     { h: "Fertility Preservation", l: [
       { label: "Cryopreservation", href: "/cryopreservation" },
+      { label: "Egg Freezing", href: "/egg-freezing" },
     ]},
     { h: "Maternity Services", l: [
       { label: "3D/4D Sonography", href: "/services/3d-4d-sonography" },
