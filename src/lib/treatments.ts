@@ -2910,7 +2910,7 @@ export const prpInfertility = defineTreatment({
   meta: {
     title: "PRP (Platelet-Rich Plasma) Therapy in Infertility — Bavishi Fertility Institute",
     description:
-      "PRP therapy in fertility — ovarian PRP for low ovarian reserve and endometrial PRP for thin lining or repeated implantation failure. How it works, who may benefit, since 1998.",
+      "PRP therapy in fertility — ovarian PRP for ovarian rejuvenation and low ovarian reserve, endometrial PRP for thin lining or repeated implantation failure. How it works, who may benefit, since 1998.",
     ogImage: "/assets/conditions/prp-infertility.png",
   },
   procedure: {
@@ -2934,9 +2934,17 @@ export const prpInfertility = defineTreatment({
     heading: { lead: "What is", em: "PRP Therapy?" },
     paragraphs: [
       "Platelet-rich plasma (PRP) is prepared by concentrating the platelets from a small sample of your own blood. These platelets are rich in growth factors that can help stimulate tissue repair and regeneration.",
-      "In fertility, PRP is used in two ways: ovarian PRP, injected into the ovaries to try to improve a low ovarian reserve, and endometrial PRP, instilled into the uterine cavity to improve a thin lining or in repeated implantation failure. It is an emerging therapy offered in carefully selected cases alongside standard treatment.",
+      "In fertility, PRP is used in two ways: ovarian PRP, injected into the ovaries to try to improve a low ovarian reserve — an approach also known as ovarian rejuvenation — and endometrial PRP, instilled into the uterine cavity to improve a thin lining or in repeated implantation failure. It is an emerging therapy offered in carefully selected cases alongside standard treatment.",
     ],
     aside: BFI_ASIDE,
+  },
+  types: {
+    heading: { lead: "Types of", em: "PRP" },
+    items: [
+      { icon: Egg, t: "Ovarian PRP", d: "Injected into the ovaries to support follicle activity and egg quality in women with a low ovarian reserve — used for ovarian rejuvenation." },
+      { icon: Layers, t: "Endometrial PRP", d: "Instilled into the uterine cavity to help thicken a persistently thin endometrial lining." },
+      { icon: Microscope, t: "Hysteroscopic Subendometrial PRP", d: "Delivered just beneath the endometrium under hysteroscopic guidance, in selected cases of repeated implantation failure." },
+    ],
   },
   benefits: {
     heading: { lead: "Potential advantages of", em: "PRP" },
@@ -2951,7 +2959,6 @@ export const prpInfertility = defineTreatment({
   },
   whoNeedsIt: {
     heading: { lead: "Who may", em: "be considered" },
-    subtitle: "PRP is selective — recommended only where evidence suggests it may help.",
     items: [
       "Low ovarian reserve or poor response to stimulation.",
       "A persistently thin endometrial lining despite standard treatment.",
@@ -2971,6 +2978,14 @@ export const prpInfertility = defineTreatment({
       { icon: ScanLine, n: "05", t: "Review", d: "Hormone tests or lining scans assess the response before the next step." },
     ],
     note: "PRP is offered transparently as an adjunct — results vary and it is not a guaranteed solution.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PRP therapy" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: Droplets, t: "Autologous & In-House", d: "Prepared from your own blood in our lab — no risk of rejection or allergy." },
+      { icon: Sparkles, t: "Selective, Evidence-Led", d: "Offered only in carefully selected cases where evidence suggests it may genuinely help." },
+    ],
   },
   success: {
     factors: [
