@@ -157,6 +157,7 @@ export const FOOTER_DEFAULTS: FooterData = {
     { h: "IVF Treatments", l: [
       { label: "IVF", href: "/what-is-ivf" },
       { label: "IVF Failure", href: "/ivf-failure" },
+      { label: "Preimplantation Genetic Testing (PGT)", href: "/pgt" },
       { label: "IUI", href: "/intra-uterine-insemination-iui" },
       { label: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
       { label: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },

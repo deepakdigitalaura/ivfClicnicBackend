@@ -68,6 +68,12 @@ const cards: HubCard[] = [
     icon: ShieldCheck,
   },
   {
+    title: "Preimplantation Genetic Testing (PGT)",
+    desc: "Genetic testing of IVF embryos before transfer to improve success and reduce miscarriage.",
+    href: "/pgt",
+    icon: Dna,
+  },
+  {
     title: "Egg Donation",
     desc: "Carefully matched, fully-screened egg-donor programme with high success rates.",
     href: "/egg-donation",
@@ -78,6 +84,12 @@ const cards: HubCard[] = [
     desc: "Screened, ethical donor-sperm programme following ICMR guidelines.",
     href: "/sperm-donation",
     icon: Droplets,
+  },
+  {
+    title: "Surrogacy",
+    desc: "Ethical, legally-compliant gestational surrogacy for couples who cannot carry a pregnancy.",
+    href: "/surrogacy",
+    icon: Users,
   },
   {
     title: "Cryopreservation (Egg / Sperm / Embryo Freezing)",
