@@ -161,6 +161,8 @@ export type Treatment = {
   benefits: { heading: Heading; subtitle?: string; items: string[] };
   types?: { heading: Heading; subtitle?: string; items: IconCard[] };
   whoNeedsIt: { heading: Heading; subtitle?: string; items: string[] };
+  /** Optional per-page overrides for the fixed section eyebrows (default set in treatment-content.ts). */
+  labels?: { whoNeedsIt?: string };
   process: { heading: Heading; subtitle?: string; steps: { icon: LucideIcon; n: string; t: string; d: string }[]; note?: string };
   timeline?: { heading: Heading; subtitle?: string; items: { day: string; t: string; d: string }[]; chips?: string[]; chipsNote?: string };
   video?: { id: string; title: string; description: string; eyebrow: string; heading: Heading };
@@ -3216,14 +3218,17 @@ export const ovarianReserve = defineTreatment({
       { icon: Snowflake, t: "Embryo Accumulation", d: "Eggs or embryos from successive gentle cycles are frozen and pooled to build a usable number, when required." },
     ],
   },
+  labels: { whoNeedsIt: "Causes" },
   whoNeedsIt: {
-    heading: { lead: "Who this", em: "is for" },
+    heading: { lead: "What causes", em: "poor ovarian reserve?" },
+    subtitle: "A reduced egg supply usually traces back to one or more of these factors.",
     items: [
-      "A low AMH or low antral-follicle count on testing.",
-      "A poor egg yield in a previous IVF cycle.",
-      "Age over 35, or a family history of early menopause.",
-      "Previous ovarian surgery, chemotherapy or radiation.",
-      "Difficulty conceiving with signs of reduced reserve.",
+      "Age — reserve naturally declines from the mid-to-late 30s, and is often low by the 40s.",
+      "Endometriosis, or surgery for endometriosis, which can reduce healthy ovarian tissue.",
+      "Previous ovarian surgery for cysts or teratomas, chemotherapy or radiotherapy.",
+      "Genetic factors, such as the fragile X premutation, or a family history of early menopause.",
+      "Autoimmune conditions affecting the ovaries.",
+      "Lifestyle factors — smoking, chronic stress, obesity or being significantly underweight.",
     ],
   },
   process: {
