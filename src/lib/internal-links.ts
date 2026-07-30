@@ -64,6 +64,13 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
     published: true,
     aliases: ["Micro-TESE", "surgical sperm retrieval", "PESA", "TESA"],
   },
+  "ovarian-rejuvenation": {
+    key: "ovarian-rejuvenation",
+    label: "Ovarian Rejuvenation",
+    href: "/ovarian-rejuvenation",
+    published: true,
+    aliases: ["ovarian rejuvenation"],
+  },
 };
 
 /** Resolve a destination's live href (published page, else fallback). */

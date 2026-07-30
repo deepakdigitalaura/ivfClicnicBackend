@@ -3188,16 +3188,24 @@ export const ovarianReserve = defineTreatment({
     heading: { lead: "How specialised", em: "care helps" },
     subtitle: "The right protocol makes the most of every available egg.",
     items: [
-      "Individualised stimulation tuned to your reserve.",
+      "In house designed custom protocols to maximise egg number & quality.",
       "Egg or embryo accumulation across gentle cycles.",
       "Advanced labs that protect every precious egg and embryo.",
       "Honest assessment of own-egg versus donor-egg chances.",
       "Earlier, focused treatment that does not waste time.",
     ],
   },
+  types: {
+    heading: { lead: "Advanced options for", em: "low ovarian reserve" },
+    subtitle: "Additional approaches discussed alongside standard stimulation — used selectively, based on your case.",
+    items: [
+      { icon: Layers, t: "Duostim (Dual Stimulation)", d: "Two stimulation-and-retrieval cycles in the same menstrual month — one follicular-phase, one luteal-phase — to collect more eggs in less time for a very low reserve." },
+      { icon: Droplets, t: "Ovarian Rejuvenation (PRP)", d: "Platelet-rich plasma injected into the ovaries in selected cases, aiming to support follicle activity and egg quality ahead of stimulation." },
+      { icon: Snowflake, t: "Embryo Accumulation", d: "Eggs or embryos from successive gentle cycles are frozen and pooled to build a usable number, when required." },
+    ],
+  },
   whoNeedsIt: {
     heading: { lead: "Who this", em: "is for" },
-    subtitle: "Women whose tests or history suggest a reduced egg supply.",
     items: [
       "A low AMH or low antral-follicle count on testing.",
       "A poor egg yield in a previous IVF cycle.",
@@ -3212,11 +3220,11 @@ export const ovarianReserve = defineTreatment({
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Assessment", d: "AMH, antral-follicle count and history to gauge your reserve." },
       { icon: Target, n: "02", t: "Tailored Stimulation", d: "An individualised protocol chosen to recover the best-quality eggs." },
-      { icon: Layers, n: "03", t: "Egg / Embryo Accumulation", d: "Collecting and freezing across cycles to build a usable pool." },
-      { icon: Microscope, n: "04", t: "IVF–ICSI", d: "Careful fertilisation and culture in our Class 1000 laboratory." },
+      { icon: Microscope, n: "03", t: "IVF–ICSI", d: "Careful fertilisation and culture in our Class 1000 laboratory." },
+      { icon: Layers, n: "04", t: "Embryo Accumulation", d: "Collecting and freezing across cycles to build a usable pool, when required." },
       { icon: Egg, n: "05", t: "Donor-egg Option", d: "A highly successful alternative discussed honestly where appropriate." },
     ],
-    note: "We focus on egg quality and the right protocol, not just chasing higher numbers.",
+    note: "AT Bavishi our goal is pregnancy with self eggs as far as possible.",
   },
   success: {
     factors: [
@@ -3250,6 +3258,8 @@ export const ovarianReserve = defineTreatment({
     { q: "Does low AMH mean early menopause?", a: "Not necessarily. It indicates a smaller egg pool, but the timeline varies. Your specialist will interpret it alongside your age and other tests." },
     { q: "Can low reserve be increased?", a: "The number of eggs cannot truly be increased, but the right protocol can recover more of the eggs you have, and overall health supports egg quality." },
     { q: "Is donor egg my only option?", a: "No. Donor eggs are one option, but many women with low reserve conceive with their own eggs using individualised treatment. We assess this honestly with you." },
+    { q: "What is Duostim (dual stimulation)?", a: "Duostim is two stimulation-and-egg-retrieval cycles carried out in the same menstrual month — one starting in the follicular phase, the second in the luteal phase straight after. For women with a very low reserve, it collects more eggs in a shorter time than waiting a full month between cycles." },
+    { q: "Can ovarian rejuvenation help with low reserve?", a: "Ovarian rejuvenation — platelet-rich plasma (PRP) injected into the ovaries — is an emerging, selectively-used option that aims to support follicle activity and egg quality ahead of stimulation. It is not for everyone; we discuss honestly whether it is likely to help your specific case." },
   ],
   related: ["ovarian-rejuvenation", "prp-infertility", "egg-donation", "ivf", "female-infertility"],
   cta: {
