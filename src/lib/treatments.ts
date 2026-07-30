@@ -3650,7 +3650,7 @@ export const cryopreservation = defineTreatment({
     h1: "Cryopreservation",
     h1Em: "(Fertility Preservation)",
     tagline:
-      "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline. BFI has achieved the first childbirth of India with vitrified frozen oocytes.",
+      "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline. BFI has achieved the first childbirth of India with vitrified frozen oocytes. Our team trained at the Hiroshima HART Institute, Japan, with Dr. Tetsunori Mukaida — one of the inventors of the vitrification technique.",
     badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/fertility-preservation.png",
     imageAlt: "Cryopreservation (egg, sperm and embryo freezing) at Bavishi Fertility Institute",
