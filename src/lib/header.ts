@@ -218,7 +218,7 @@ export const HEADER_DEFAULTS: HeaderData = {
         { heading: "Female Infertility", headingHref: "/treatments/female-infertility", items: [
           { label: "Conceive Naturally", href: "/conceive-naturally" },
           { label: "PRP Infertility", href: "/prp-infertility" },
-          { label: "PCOS", href: "/pcos" },
+          { label: "PMOS-PCOS", href: "/pcos" },
           { label: "Poor Ovarian Reserve / Low Egg Count / Low AMH", href: "/ovarian-reserve" },
           { label: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
           { label: "Fibroid", href: "/fibroids" },

@@ -70,7 +70,7 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   // Female Infertility
   "conceive-naturally": { slug: "conceive-naturally", name: "Conceive Naturally", href: "/conceive-naturally" },
   "prp-infertility": { slug: "prp-infertility", name: "PRP Infertility", href: "/prp-infertility" },
-  pcos: { slug: "pcos", name: "PCOS", href: "/pcos" },
+  pcos: { slug: "pcos", name: "PMOS-PCOS", href: "/pcos" },
   "ovarian-reserve": { slug: "ovarian-reserve", name: "Poor Ovarian Reserve / Low AMH", href: "/ovarian-reserve" },
   "ovarian-rejuvenation": { slug: "ovarian-rejuvenation", name: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
   fibroids: { slug: "fibroids", name: "Fibroids", href: "/fibroids" },
@@ -113,7 +113,7 @@ const TREATMENT_CARD_META: Record<string, { icon: LucideIcon; desc: string }> = 
   "erectile-dysfunction": { icon: HeartPulse, desc: "Confidential ED care with fertility support." },
   "conceive-naturally": { icon: Leaf, desc: "Timing, lifestyle and support to conceive naturally." },
   "prp-infertility": { icon: Droplets, desc: "Ovarian & endometrial PRP in selected cases." },
-  pcos: { icon: Activity, desc: "Ovulation-focused care for PCOS fertility." },
+  pcos: { icon: Activity, desc: "Ovulation-focused care for PMOS-PCOS fertility." },
   "ovarian-reserve": { icon: Egg, desc: "Tailored protocols for low AMH / low egg count." },
   "ovarian-rejuvenation": { icon: Sparkles, desc: "Ovarian PRP to support a very low reserve." },
   fibroids: { icon: ShieldCheck, desc: "Fertility-preserving treatment of uterine fibroids." },
@@ -3031,56 +3031,53 @@ export const prpInfertility = defineTreatment({
 
 export const pcos = defineTreatment({
   slug: "pcos",
-  name: "PCOS (Polycystic Ovary Syndrome) & Fertility",
-  shortName: "PCOS",
-  alternateName: "Polycystic Ovary Syndrome",
+  name: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome) & Fertility",
+  shortName: "PMOS-PCOS",
+  alternateName: "Polyendocrine Metabolic Ovarian Syndrome",
   reviewerSlug: "falguni-bavishi",
   meta: {
-    title: "PCOS (Polycystic Ovary Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
+    title: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
     description:
-      "PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PCOS is one of the most treatable causes of infertility. Since 1998.",
+      "PMOS-PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PMOS-PCOS is one of the most treatable causes of infertility. Since 1998.",
     ogImage: "/assets/conditions/pcos.png",
   },
   procedure: {
     procedureType: "https://schema.org/TherapeuticProcedure",
     bodyLocation: "Ovaries",
     howPerformed:
-      "PCOS is managed with weight and lifestyle support, insulin-sensitising and ovulation-inducing medication, and, where needed, IUI or IVF with careful protocols to avoid overstimulation.",
+      "PMOS-PCOS is managed with weight and lifestyle support, insulin-sensitising and ovulation-inducing medication, and, where needed, IUI or IVF with careful protocols to avoid overstimulation.",
     followup: "Cycles are monitored by scan and hormone tests to confirm ovulation and guide treatment.",
   },
   hero: {
     eyebrow: "Female Infertility",
-    h1: "PCOS",
+    h1: "PMOS-PCOS",
     h1Em: "& Fertility",
     tagline:
-      "Polycystic ovary syndrome is the commonest hormonal cause of infertility — and one of the most treatable. With the right plan, most women with PCOS go on to conceive.",
+      "Polycystic ovary syndrome — now recognised as PMOS-PCOS — is the commonest hormonal cause of infertility, and one of the most treatable. With the right plan, most women with PMOS-PCOS go on to conceive.",
     badges: ["Hormone Specialists", "Ovulation Induction", "Since 1998", "IUI · IVF"],
     image: "/assets/conditions/pcos.png",
-    imageAlt: "PCOS (polycystic ovary syndrome) treatment and fertility care at Bavishi Fertility Institute",
+    imageAlt: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome) treatment and fertility care at Bavishi Fertility Institute",
   },
   whatIs: {
-    heading: { lead: "What is", em: "PCOS?" },
+    heading: { lead: "What is", em: "PMOS-PCOS?" },
     paragraphs: [
-      "Polycystic ovary syndrome (PCOS) is a common hormonal condition in which the ovaries contain many small follicles and ovulation becomes irregular or absent. It often causes irregular periods, difficulty conceiving, weight gain, acne and excess hair growth.",
-      "PCOS is the most common cause of ovulatory infertility — but it is highly treatable. With weight and lifestyle support, ovulation-inducing medication and, where needed, IUI or IVF, the great majority of women with PCOS are able to conceive.",
+      "Polycystic ovary syndrome (PCOS) is a common hormonal condition in which the ovaries contain many small follicles and ovulation becomes irregular or absent. It often causes irregular periods, difficulty conceiving, weight gain, acne and excess hair growth. As the symptoms not only affect the ovaries but endocrine systems across the body, PCOS is now renamed as PMOS — Polyendocrine Metabolic Ovarian Syndrome.",
+      "PMOS-PCOS is the most common cause of ovulatory infertility — but it is highly treatable. With weight and lifestyle support, ovulation-inducing medication and, where needed, IUI or IVF, the great majority of women with PMOS-PCOS are able to conceive.",
     ],
     aside: BFI_ASIDE,
   },
   benefits: {
-    heading: { lead: "Why treating", em: "PCOS works" },
-    subtitle: "PCOS responds well to a structured, step-by-step approach.",
+    heading: { lead: "Why treating", em: "PMOS-PCOS works" },
     items: [
-      "Restores regular ovulation in most women.",
       "Lifestyle and weight changes alone can re-start cycles.",
       "Ovulation-induction medication is simple and effective.",
       "IUI and IVF achieve high success when needed.",
       "Careful protocols reduce the risk of overstimulation.",
-      "Also improves periods, skin and long-term health.",
     ],
   },
   whoNeedsIt: {
-    heading: { lead: "Signs you", em: "may have PCOS" },
-    subtitle: "PCOS is diagnosed from a combination of symptoms, scans and hormone tests.",
+    heading: { lead: "Signs you", em: "may have PMOS-PCOS" },
+    subtitle: "PMOS-PCOS is diagnosed from a combination of symptoms, scans and hormone tests.",
     items: [
       "Irregular, infrequent or absent menstrual periods.",
       "Difficulty conceiving due to irregular ovulation.",
@@ -3090,16 +3087,24 @@ export const pcos = defineTreatment({
     ],
   },
   process: {
-    heading: { lead: "How PCOS", em: "is treated" },
+    heading: { lead: "How PMOS-PCOS", em: "is treated" },
     subtitle: "A stepwise plan, starting with the simplest effective option.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Diagnosis", d: "History, ultrasound and hormone tests confirm PCOS and rule out other causes." },
+      { icon: ClipboardCheck, n: "01", t: "Diagnosis", d: "History, ultrasound and hormone tests confirm PMOS-PCOS and rule out other causes." },
       { icon: Leaf, n: "02", t: "Lifestyle & Metabolic Care", d: "Weight, nutrition and insulin-sensitising support to restore ovulation." },
       { icon: Activity, n: "03", t: "Ovulation Induction", d: "Tablets or gentle injections to trigger regular ovulation, monitored by scan." },
       { icon: Syringe, n: "04", t: "IUI", d: "Insemination timed to ovulation when natural timing is not enough." },
       { icon: FlaskConical, n: "05", t: "IVF", d: "IVF with safe protocols for those who need it, minimising overstimulation." },
     ],
-    note: "Because PCOS ovaries can over-respond, we use careful, OHSS-aware stimulation protocols.",
+    note: "Because PMOS-PCOS ovaries can over-respond, we use careful, OHSS-aware stimulation protocols. Elective freezing of all embryos markedly reduces the risk of OHSS.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PMOS-PCOS" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: HeartPulse, t: "Hormone & Metabolic Specialists", d: "Care that addresses the endocrine and metabolic side of PMOS-PCOS, not just ovulation." },
+      { icon: ShieldCheck, t: "OHSS-Aware Protocols", d: "Individualised stimulation and elective embryo freezing to keep treatment safe." },
+    ],
   },
   success: {
     factors: [
@@ -3109,36 +3114,36 @@ export const pcos = defineTreatment({
       "Partner's sperm quality",
       "The treatment step used — natural, IUI or IVF",
     ],
-    note: "Most women with PCOS conceive with appropriate treatment, often without IVF. Timelines vary, and outcomes cannot be guaranteed.",
+    note: "Most women with PMOS-PCOS conceive with appropriate treatment, often without IVF. Timelines vary, and outcomes cannot be guaranteed.",
   },
   risks: {
     heading: { lead: "Risks &", em: "considerations" },
     items: [
-      { t: "Ovarian overstimulation", d: "PCOS ovaries can over-respond to fertility medication (OHSS).", help: "We use safe, individualised protocols and close monitoring to prevent severe OHSS." },
-      { t: "Higher miscarriage / metabolic risk", d: "PCOS can carry a slightly higher miscarriage and gestational-diabetes risk.", help: "Pre-pregnancy weight and metabolic care reduce these risks substantially." },
+      { t: "Ovarian overstimulation", d: "PMOS-PCOS ovaries can over-respond to fertility medication (OHSS).", help: "We use safe, individualised protocols and close monitoring to prevent severe OHSS." },
+      { t: "Higher miscarriage / metabolic risk", d: "PMOS-PCOS can carry a slightly higher miscarriage and gestational-diabetes risk.", help: "Pre-pregnancy weight and metabolic care reduce these risks substantially." },
       { t: "Patience needed", d: "It can take a few cycles to find the right ovulation dose.", help: "We adjust carefully and monitor each cycle rather than rushing." },
     ],
   },
   video: {
     id: "cGkVVs8I4ZU",
-    title: "PCOS Treatment — Expert Fertility Care",
+    title: "PMOS-PCOS Treatment — Expert Fertility Care",
     description:
-      "Our experts explain PCOS (polycystic ovary syndrome) and fertility — what causes it, how it affects conception and the treatment options, from lifestyle changes and ovulation induction to IUI and IVF.",
+      "Our experts explain PMOS-PCOS (polycystic ovary syndrome) and fertility — what causes it, how it affects conception and the treatment options, from lifestyle changes and ovulation induction to IUI and IVF.",
     eyebrow: "Watch & Learn",
-    heading: { lead: "PCOS Treatment", em: "Expert Fertility Care" },
+    heading: { lead: "PMOS-PCOS Treatment", em: "Expert Fertility Care" },
   },
   faqs: [
-    { q: "Can I get pregnant with PCOS?", a: "Yes. PCOS is one of the most treatable causes of infertility, and most women conceive with lifestyle changes, ovulation induction or, when needed, IUI or IVF." },
-    { q: "Does losing weight help PCOS fertility?", a: "Often significantly. Even a modest 5–10% weight loss can restore regular ovulation and improve the response to treatment." },
+    { q: "Can I get pregnant with PMOS-PCOS?", a: "Yes. PMOS-PCOS is one of the most treatable causes of infertility, and most women conceive with lifestyle changes, ovulation induction or, when needed, IUI or IVF." },
+    { q: "Does losing weight help PMOS-PCOS fertility?", a: "Often significantly. Even a modest 5–10% weight loss can restore regular ovulation and improve the response to treatment." },
     { q: "What is ovulation induction?", a: "Medication — usually tablets or gentle injections — that encourages the ovaries to release an egg, monitored by ultrasound to time conception." },
-    { q: "Is IVF safe with PCOS?", a: "Yes, with care. PCOS ovaries can over-respond, so we use specific, OHSS-aware protocols and close monitoring to keep IVF safe." },
-    { q: "Will PCOS affect my pregnancy?", a: "PCOS slightly raises some risks such as gestational diabetes, which is why pre-pregnancy health optimisation and good antenatal care matter." },
+    { q: "Is IVF safe with PMOS-PCOS?", a: "Yes, with care. PMOS-PCOS ovaries can over-respond, so we use specific, OHSS-aware protocols and close monitoring to keep IVF safe." },
+    { q: "Will PMOS-PCOS affect my pregnancy?", a: "PMOS-PCOS slightly raises some risks such as gestational diabetes, which is why pre-pregnancy health optimisation and good antenatal care matter." },
   ],
   related: ["ovarian-reserve", "conceive-naturally", "iui", "ivf", "female-infertility"],
   cta: {
     heading: "Trying to conceive",
-    headingEm: "with PCOS?",
-    subtitle: "PCOS is highly treatable — book a consultation for a clear, personalised fertility plan.",
+    headingEm: "with PMOS-PCOS?",
+    subtitle: "PMOS-PCOS is highly treatable — book a consultation for a clear, personalised fertility plan.",
   },
 });
 
