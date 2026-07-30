@@ -185,7 +185,7 @@ export function toResolved(t: Treatment): ResolvedTreatment {
       whatIs: `What is ${t.shortName}`,
       benefits: "Advantages",
       types: `Types of ${t.shortName}`,
-      whoNeedsIt: "Indications",
+      whoNeedsIt: t.labels?.whoNeedsIt ?? "Indications",
       process: "Step by Step",
       timeline: "Treatment Timeline",
       whyUs: "Why Bavishi Fertility Institute",

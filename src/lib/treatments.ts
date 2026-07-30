@@ -160,7 +160,9 @@ export type Treatment = {
   whatIs: { heading: Heading; paragraphs: string[]; aside?: { title: string; body: string } };
   benefits: { heading: Heading; subtitle?: string; items: string[] };
   types?: { heading: Heading; subtitle?: string; items: IconCard[] };
-  whoNeedsIt: { heading: Heading; subtitle?: string; eyebrow?: string; items: string[] };
+  whoNeedsIt: { heading: Heading; subtitle?: string; items: string[] };
+  /** Optional per-page overrides for the fixed section eyebrows (default set in treatment-content.ts). */
+  labels?: { whoNeedsIt?: string };
   process: { heading: Heading; subtitle?: string; steps: { icon: LucideIcon; n: string; t: string; d: string }[]; note?: string };
   timeline?: { heading: Heading; subtitle?: string; items: { day: string; t: string; d: string }[]; chips?: string[]; chipsNote?: string };
   video?: { id: string; title: string; description: string; eyebrow: string; heading: Heading };
@@ -3216,8 +3218,8 @@ export const ovarianReserve = defineTreatment({
       { icon: Snowflake, t: "Embryo Accumulation", d: "Eggs or embryos from successive gentle cycles are frozen and pooled to build a usable number, when required." },
     ],
   },
+  labels: { whoNeedsIt: "Causes" },
   whoNeedsIt: {
-    eyebrow: "Causes",
     heading: { lead: "What causes", em: "poor ovarian reserve?" },
     subtitle: "A reduced egg supply usually traces back to one or more of these factors.",
     items: [
