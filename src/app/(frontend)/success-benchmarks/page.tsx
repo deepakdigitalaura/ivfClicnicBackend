@@ -9,10 +9,10 @@ const PATH = "/success-benchmarks";
 
 export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
-    title: "Success Benchmarks — 20,000+ Successful IVF Pregnancies | Bavishi Fertility Institute",
-    description: "Over 20,000 successful IVF pregnancies with one of the highest success rates in India and the world. Success is not random — it's years of learning, best practices, and technology.",
+    title: "Success Benchmarks — 30,000+ Successful Pregnancies | Bavishi Fertility Institute",
+    description: "Over 30,000 successful pregnancies with one of the highest success rates in India and the world. Success is not random — it's years of learning, best practices, and technology.",
     alternates: { canonical: PATH },
-    openGraph: { title: "Success Benchmarks | Bavishi Fertility Institute", description: "20,000+ successful IVF pregnancies with one of the highest success rates in India.", url: abs(PATH), type: "website" },
+    openGraph: { title: "Success Benchmarks | Bavishi Fertility Institute", description: "30,000+ successful pregnancies with one of the highest success rates in India.", url: abs(PATH), type: "website" },
   });
 }
 
