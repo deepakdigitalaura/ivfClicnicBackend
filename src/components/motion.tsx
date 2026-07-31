@@ -263,7 +263,20 @@ export function Magnetic({
 /* ---------- Animated counter ---------- */
 export function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
   const ref = React.useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inViewport = useInView(ref, { once: true, margin: "-80px" });
+  // useInView's IntersectionObserver can miss an element that's already on
+  // screen the moment it mounts (e.g. a reload that restores scroll position
+  // straight to this section on a short mobile viewport) — verified directly
+  // against getBoundingClientRect as a fallback so the counter doesn't get
+  // stuck at 0 in that case.
+  const [alreadyVisible, setAlreadyVisible] = React.useState(false);
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < viewportHeight && rect.bottom > 0) setAlreadyVisible(true);
+  }, []);
+  const inView = inViewport || alreadyVisible;
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
     if (!inView) return;
