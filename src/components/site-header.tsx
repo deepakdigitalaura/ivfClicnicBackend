@@ -122,7 +122,7 @@ export function SiteHeader({
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden flex-1 items-center justify-center min-[1440px]:flex">
+          <nav className="hidden flex-1 items-center justify-center min-[1350px]:flex">
             <ul className="flex items-center gap-0.5 text-[14px] font-medium text-[color:var(--plum)]">
               {NAV.map((item) => (
                 <li
@@ -151,7 +151,7 @@ export function SiteHeader({
             <button
               type="button"
               onClick={() => setMobile(true)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white/60 text-[color:var(--plum)] min-[1440px]:hidden"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white/60 text-[color:var(--plum)] min-[1350px]:hidden"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
@@ -162,7 +162,7 @@ export function SiteHeader({
         {/* Mega menu panel */}
         {activeItem && (activeItem.mega || activeItem.doctors) && (
           <div
-            className="absolute inset-x-0 top-full hidden border-b border-border/60 bg-white shadow-lift min-[1440px]:block"
+            className="absolute inset-x-0 top-full hidden border-b border-border/60 bg-white shadow-lift min-[1350px]:block"
             onMouseEnter={() => openMega(activeItem.label)}
             onMouseLeave={scheduleClose}
           >
@@ -220,7 +220,7 @@ export function SiteHeader({
 
       {/* Mobile drawer */}
       {mobile && (
-        <div className="fixed inset-0 z-[80] min-[1440px]:hidden">
+        <div className="fixed inset-0 z-[80] min-[1350px]:hidden">
           <div className="absolute inset-0 bg-[color:var(--plum)]/40 backdrop-blur-sm" onClick={() => setMobile(false)} />
           <div className="absolute right-0 top-0 h-full w-[88%] max-w-sm overflow-y-auto bg-white shadow-lift">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
