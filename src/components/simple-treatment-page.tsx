@@ -29,9 +29,9 @@ const STEPS = [
   {
     step: "02",
     icon: Syringe,
-    title: "Treatment",
+    title: "Simple Treatment",
     description:
-      "Focuses on maximizing your comfort by reducing injections and hospital visits to the bare minimum. Only essential injections in minimum dosage. Oral and vaginal drugs preferred. Self-injection encouraged. Sonography at your hometown.",
+      "Focuses on maximizing your comfort by reducing injections and hospital visits to the bare minimum. Only essential injections for optimum response. Oral and vaginal drugs preferred. Self-injection encouraged. Sonography at your hometown.",
     highlights: [
       "Minimum injections & dosage",
       "Oral/vaginal drugs preferred",
@@ -80,7 +80,7 @@ const PHILOSOPHY = [
   {
     icon: Activity,
     title: "Minimum Injections",
-    description: "Only essential injections in minimum dosage — your comfort is our priority.",
+    description: "Only essential injections for optimum response — your comfort is our priority.",
   },
   {
     icon: Stethoscope,
@@ -293,8 +293,8 @@ export function SimpleTreatmentPage() {
               <Reveal delay={0.1}>
                 <blockquote className="mx-auto max-w-3xl text-2xl font-medium leading-snug md:text-3xl lg:text-[2.25rem] text-balance italic">
                   <span className="font-display text-[color:var(--rose-soft)]">&ldquo;</span>
-                  Our goals are aligned with your objectives. We make your IVF simple by using our
-                  expertise, experience, and advanced medicinal techniques.
+                  We believe the hardest journey deserves the simplest path. Decades of expertise &
+                  the most advanced reproductive technology, brought together to make your IVF Simple
                   <span className="font-display text-[color:var(--rose-soft)]">&rdquo;</span>
                 </blockquote>
               </Reveal>
