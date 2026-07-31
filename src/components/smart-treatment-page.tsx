@@ -385,7 +385,7 @@ export function SmartTreatmentPage() {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Parsimonious Cost Packages"
+            eyebrow="Calibrated Cost Packages"
             title={
               <>
                 World-class care,{" "}

@@ -15,7 +15,7 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 /* ---------- Data ---------- */
 
 const HERO_STATS = [
-  { value: 25000, suffix: "+", label: "Successful IVF Pregnancies" },
+  { value: 30000, suffix: "+", label: "Successful Pregnancies" },
   { value: 25, suffix: "+", label: "Years of Excellence" },
   { value: 100, suffix: "+", label: "Years Combined Experience" },
   { value: 14, suffix: "", label: "Centres Across India" },
@@ -26,7 +26,7 @@ const PILLARS = [
     icon: FlaskConical,
     title: "Technology & Medicinal Science",
     description:
-      "We invest in the latest equipment and maintain Class 1000 pure air labs — 10 times cleaner than European standards. ICSI is offered to most patients, and our protocols include Day 5 blastocyst transfers, PGS, laser-assisted hatching, pICSI, and IMSI — giving every embryo the best environment and every couple the best chance.",
+      "We invest in the latest equipment and maintain Class 1000 pure air labs — 10 times cleaner than European standards. ICSI is offered to most patients, and our protocols include Day 5 blastocyst transfers, PGS, laser-assisted hatching, pICSI, and IMSI when indicated — giving every embryo the best environment and every couple the best chance.",
     highlights: [
       "Class 1000 pure air IVF labs",
       "ICSI for maximum fertilisation",
@@ -136,7 +136,7 @@ export function SuccessBenchmarksPage() {
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-              With over 25,000+ successful IVF pregnancies and one of the highest success rates
+              With over 30,000+ successful pregnancies and one of the highest success rates
               across India and the world!
             </p>
           </Reveal>
@@ -256,7 +256,7 @@ export function SuccessBenchmarksPage() {
                     and temperature fluctuations at every critical moment.
                   </p>
                   <p>
-                    Combined with next-generation time-lapse incubators, strict quality-control protocols,
+                    Combined with next-generation incubators, strict quality-control protocols,
                     and a dedicated embryology team, our labs consistently deliver fertilisation and
                     blastocyst rates that rank among the best in the country.
                   </p>
@@ -355,14 +355,14 @@ export function SuccessBenchmarksPage() {
                   <img
                     src="/assets/unique-ivf-packages.png"
                     alt="Happy couple after successful IVF treatment at Bavishi Fertility Institute"
-                    className="aspect-square w-full object-cover"
+                    className="aspect-[2/3] w-full object-cover"
                   />
                 </div>
               </Float>
             </Reveal>
             <div>
               <Reveal>
-                <Eyebrow>Affordable Excellence</Eyebrow>
+                <Eyebrow>Adaptive Excellence</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
@@ -373,8 +373,7 @@ export function SuccessBenchmarksPage() {
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
                   <p>
-                    We believe world-class fertility care should be accessible to everyone. That&#39;s why
-                    we&#39;ve designed packages that remove financial barriers without compromising on quality.
+                    One standard of care. Several ways to reach it.
                   </p>
                 </div>
               </Reveal>
@@ -382,7 +381,7 @@ export function SuccessBenchmarksPage() {
                 <div className="mt-6 space-y-4">
                   {[
                     {
-                      title: "Parsimonious Packages",
+                      title: "Calibrated Packages",
                       desc: "Transparent, all-inclusive pricing tailored to every budget — no hidden costs, no surprises.",
                     },
                     {
@@ -430,14 +429,14 @@ export function SuccessBenchmarksPage() {
           <div className="relative">
             <Reveal>
               <h2 className="mx-auto max-w-3xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-[2.75rem] text-balance">
-                Our goals are aligned with{" "}
-                <em className="font-display italic text-[color:var(--rose-soft)]">your objectives.</em>
+                We believe the hardest journey deserves{" "}
+                <em className="font-display italic text-[color:var(--rose-soft)]">the simplest path.</em>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
                 We make your fertility treatment journey with us simple, safe, smart, and
-                successful. Your dream of parenthood is our commitment.
+                successful. Your dream of parenthood becomes ours the moment you walk in.
               </p>
             </Reveal>
             <Reveal delay={0.18}>
