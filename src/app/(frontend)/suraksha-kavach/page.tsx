@@ -11,12 +11,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
     description:
-      "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Fully transferable package. Complete financial peace of mind — only at Bavishi Fertility Institute.",
+      "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind — only at Bavishi Fertility Institute.",
     alternates: { canonical: PATH },
     openGraph: {
       title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
       description:
-        "India's only IVF protection program. Multiple IVF cycles covered. Fully transferable package. Complete financial peace of mind at Bavishi Fertility Institute.",
+        "India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind at Bavishi Fertility Institute.",
       url: abs(PATH),
       type: "website",
       images: ["/assets/suraksha-parenthood.png"],
@@ -31,7 +31,7 @@ const graph = [
     url: abs(PATH),
     name: "Suraksha Kavach — India's Only IVF Protection Program",
     description:
-      "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Fully transferable package at Bavishi Fertility Institute.",
+      "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered at Bavishi Fertility Institute.",
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORG_ID },
   },
@@ -42,7 +42,7 @@ const graph = [
   faqSchema([
     {
       q: "What is the Suraksha Kavach Package?",
-      a: "Suraksha Kavach is Bavishi Fertility Institute's exclusive IVF protection program — the only one of its kind in the world. Multiple IVF cycles are covered with priority care, and if medical circumstances prevent your success, the package is fully transferable to someone you know.",
+      a: "Suraksha Kavach is Bavishi Fertility Institute's exclusive IVF protection program — the only one of its kind in the world. Multiple IVF cycles are covered under a single package.",
     },
     {
       q: "Who is eligible for Suraksha Kavach?",
@@ -54,11 +54,11 @@ const graph = [
     },
     {
       q: "What happens if the treatment is not successful for me?",
-      a: "If medical reasons prevent your treatment from succeeding, your Suraksha Kavach package can be transferred to a family member, friend, or loved one.",
+      a: "If medical reasons prevent your treatment from succeeding, our team will discuss the best next steps and options available to you as part of your Suraksha Kavach enrolment.",
     },
     {
       q: "What does the package include?",
-      a: "The package includes consultations, diagnostics, medications, ovarian stimulation, egg retrieval, ICSI/IVF procedure, embryology, embryo transfer, pregnancy monitoring, and post-treatment support. No hidden charges.",
+      a: "The package includes consultations, diagnostics, medications, ovarian stimulation, egg retrieval, ICSI/IVF procedure, embryology, embryo transfer, and post-treatment support. No hidden charges.",
     },
     {
       q: "What kind of results has Suraksha Kavach achieved?",
@@ -67,10 +67,6 @@ const graph = [
     {
       q: "How do I enrol in Suraksha Kavach?",
       a: "Book a consultation at any of our 15 centres across India. After your initial evaluation, if eligible, our team will walk you through the enrolment process and package details.",
-    },
-    {
-      q: "Can I transfer my package to someone else?",
-      a: "Yes. If your treatment journey doesn't lead to success due to medical reasons, the Suraksha Kavach package is fully transferable to a family member, friend, or anyone who could benefit from fertility treatment at Bavishi Fertility Institute.",
     },
   ]),
 ];

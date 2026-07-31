@@ -2,7 +2,7 @@
 import { useState } from "react";
 import {
   ArrowRight, Calendar, MessageCircle, Shield, CheckCircle2,
-  Heart, Baby, RefreshCcw, IndianRupee, Stethoscope, ChevronDown,
+  Heart, Baby, RefreshCcw, Stethoscope, ChevronDown,
   Clock, Users, Award, ShieldCheck,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -18,17 +18,12 @@ const BENEFITS = [
   {
     icon: ShieldCheck,
     title: "Financial Peace of Mind",
-    description: "Your investment is protected. The program covers multiple cycles — and if your journey takes a different path, your package can be transferred to a loved one.",
+    description: "Your investment is protected. The program covers multiple cycles, giving you the best possible chance of success.",
   },
   {
     icon: RefreshCcw,
     title: "Multiple IVF Cycles",
     description: "The package covers multiple IVF/ICSI cycles, giving you the best possible chance of success without additional financial burden.",
-  },
-  {
-    icon: Heart,
-    title: "Priority Care & Attention",
-    description: "Suraksha Kavach patients receive priority scheduling, dedicated coordinators, and direct access to senior fertility specialists at Bavishi Fertility Institute.",
   },
   {
     icon: Stethoscope,
@@ -39,11 +34,6 @@ const BENEFITS = [
     icon: Baby,
     title: "Dedicated to Your Dream",
     description: "Our commitment is to support you through every step of your fertility journey — with expert care, advanced science, and unwavering dedication.",
-  },
-  {
-    icon: IndianRupee,
-    title: "Transferable Package",
-    description: "If medical circumstances prevent your success, your package can be transferred to a family member, friend, or loved one — so your investment continues to support the gift of parenthood.",
   },
 ];
 
@@ -76,12 +66,12 @@ const STEPS = [
   {
     step: "06",
     title: "A Baby Is Born",
-    description: "The program supports you through multiple cycles to maximise your chances. If additional cycles are needed, they're covered. And if medical reasons prevent your success, your package can be transferred to someone you know.",
+    description: "The program supports you through multiple cycles to maximise your chances. If additional cycles are needed, they're covered.",
   },
 ];
 
 const STATS = [
-  { value: 25000, suffix: "+", label: "Successful IVF Pregnancies", sub: "across all Bavishi Fertility Institute centres" },
+  { value: 30000, suffix: "+", label: "Successful Pregnancies", sub: "across all Bavishi Fertility Institute centres" },
   { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
   { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
   { value: 1998, suffix: "", label: "Est.", sub: "pioneering fertility care" },
@@ -90,7 +80,7 @@ const STATS = [
 const FAQS: { q: string; a: string }[] = [
   {
     q: "What is the Suraksha Kavach Package?",
-    a: "Suraksha Kavach is Bavishi Fertility Institute's exclusive IVF protection program — the only one of its kind in the world. Your investment covers multiple IVF cycles with priority care, and if medical circumstances prevent your success, the package can be transferred to someone you know — a family member, friend, or loved one.",
+    a: "Suraksha Kavach is Bavishi Fertility Institute's exclusive IVF protection program — the only one of its kind in the world. Your investment covers multiple IVF cycles.",
   },
   {
     q: "Who is eligible for Suraksha Kavach?",
@@ -102,11 +92,11 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What happens if the treatment is not successful for me?",
-    a: "If medical reasons prevent your treatment from succeeding, your Suraksha Kavach package doesn't go to waste. You can transfer the package to someone you know — a relative, friend, or anyone who needs fertility treatment.",
+    a: "If medical reasons prevent your treatment from succeeding, our team will discuss the best next steps and options available to you as part of your Suraksha Kavach enrolment.",
   },
   {
     q: "What does the package include?",
-    a: "The package is comprehensive: consultations, diagnostic investigations, medications, ovarian stimulation, egg retrieval, ICSI/IVF procedure, embryology and lab work, embryo transfer, pregnancy monitoring, and post-treatment support. There are no hidden charges.",
+    a: "The package is comprehensive: consultations, diagnostic investigations, medications, ovarian stimulation, egg retrieval, ICSI/IVF procedure, embryology and lab work, embryo transfer, and post-treatment support. There are no hidden charges.",
   },
   {
     q: "What kind of results has Suraksha Kavach achieved?",
@@ -115,10 +105,6 @@ const FAQS: { q: string; a: string }[] = [
   {
     q: "How do I enrol in Suraksha Kavach?",
     a: "Start by booking a consultation at any of our 14 centres across India. After your initial evaluation, if you are eligible, our team will walk you through the enrolment process, package details, and answer any questions you may have.",
-  },
-  {
-    q: "Can I transfer my package to someone else?",
-    a: "Yes. If your treatment journey doesn't lead to success due to medical reasons, the Suraksha Kavach package is fully transferable. You can pass it on to a family member, friend, or anyone who could benefit from fertility treatment at Bavishi Fertility Institute. This ensures your investment always helps bring a new life into the world.",
   },
 ];
 
@@ -209,7 +195,7 @@ export function SurakshaKavachPage() {
                   <Award className="h-6 w-6 text-[color:var(--rose)]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-semibold text-[color:var(--plum)]">25,000+ Happy Families</div>
+                  <div className="text-2xl font-semibold text-[color:var(--plum)]">30,000+ Happy Families</div>
                   <div className="text-sm text-[color:var(--plum)]/60">trusted Bavishi Fertility Institute for their parenthood journey</div>
                 </div>
               </div>
@@ -279,8 +265,6 @@ export function SurakshaKavachPage() {
                   <p>
                     Suraksha Kavach is our revolutionary protection program — the only one of its kind in the
                     entire world. It covers <strong className="text-[color:var(--plum)]">multiple IVF cycles with complete financial protection</strong>.
-                    And if medical circumstances prevent your success, the package is fully
-                    transferable to a loved one — so your investment continues to support the dream of parenthood.
                   </p>
                   <p>
                     Backed by over 25 years of expertise and thousands of successful pregnancies,
@@ -373,7 +357,10 @@ export function SurakshaKavachPage() {
         </div>
       </section>
 
-      {/* ==================== PROMISE BANNER ==================== */}
+      {/* ==================== PROMISE BANNER ====================
+          Hidden for now per doctor's request. Content preserved below
+          in case it needs to come back later. */}
+      {false && (
       <section className="py-20 lg:py-28">
         <div className="container-px mx-auto max-w-[1400px]">
           <div className="relative overflow-hidden rounded-[2.5rem] bg-[color:var(--plum)] px-8 py-16 text-center text-white noise md:px-16 md:py-20">
@@ -416,6 +403,7 @@ export function SurakshaKavachPage() {
           </div>
         </div>
       </section>
+      )}
 
       {/* ==================== FAQ ==================== */}
       <section className="bg-[color:var(--ivory)] py-20 lg:py-28">
