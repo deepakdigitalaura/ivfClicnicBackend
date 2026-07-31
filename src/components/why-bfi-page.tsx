@@ -16,7 +16,7 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 /* ---------- Data ---------- */
 
 const STATS = [
-  { value: 25000, suffix: "+", label: "Successful IVF Pregnancies", sub: "and counting" },
+  { value: 30000, suffix: "+", label: "Successful Pregnancies", sub: "and counting" },
   { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
   { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
   { value: 1998, suffix: "", label: "Est.", sub: "pioneering fertility care" },
@@ -31,27 +31,15 @@ const REASONS = [
   },
   {
     icon: Baby,
-    title: "25,000+ Successful IVF Pregnancies",
+    title: "30,000+ Successful Pregnancies",
     description:
-      "Over 25,000 happy families and counting. Thousands of couples who entrusted us with their dream have welcomed healthy babies through our proven protocols.",
+      "Over 30,000 happy families and counting. Thousands of couples who entrusted us with their dream have welcomed healthy babies through our proven protocols.",
   },
   {
     icon: Lightbulb,
     title: "Path-Breaking Innovations",
     description:
       "India’s first live birth with frozen eggs, first international surrogacy, first Suraksha Kavach program — we don’t follow trends, we set them.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Expert Team",
-    description:
-      "Experienced infertility gynaecologists, internationally accredited embryologists, and competent midwives — a multidisciplinary team dedicated to your success.",
-  },
-  {
-    icon: Building2,
-    title: "All Under One Roof",
-    description:
-      "A true one-stop clinic: surgeries, IUI, IVF, ICSI, laser-assisted hatching, PGT, donor services, surrogacy, and counselling — everything you need, in one place.",
   },
   {
     icon: Sparkles,
@@ -64,6 +52,18 @@ const REASONS = [
     title: "Ethics — Your Eggs, Your Sperm",
     description:
       "Fully dedicated to ethical practice. Your eggs and your sperm are guaranteed — we follow a strict code of Availability, Adequacy, Affordability, and Adaptability.",
+  },
+  {
+    icon: Building2,
+    title: "All Under One Roof",
+    description:
+      "A true one-stop clinic: surgeries, IUI, IVF, ICSI, laser-assisted hatching, PGT, donor services, surrogacy, and counselling — everything you need, in one place.",
+  },
+  {
+    icon: Stethoscope,
+    title: "Expert Team",
+    description:
+      "Experienced infertility gynaecologists, internationally accredited embryologists, and competent midwives — a multidisciplinary team dedicated to your success.",
   },
   {
     icon: Eye,
