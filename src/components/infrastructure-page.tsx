@@ -84,7 +84,7 @@ const STATS = [
   { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
   { value: 10, suffix: "x", label: "Superior Air Quality", sub: "Class 1000 vs Class 10,000" },
   { value: 25, suffix: "+", label: "Years of Excellence", sub: "pioneering IVF since 1998" },
-  { value: 25000, suffix: "+", label: "Successful Pregnancies", sub: "across all centres" },
+  { value: 30000, suffix: "+", label: "Successful Pregnancies", sub: "across all centres" },
 ];
 
 /* ---------- Page ---------- */
