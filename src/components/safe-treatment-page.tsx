@@ -74,7 +74,6 @@ const PROTOCOLS = [
   "AI-integrated trigas incubators with smart alarms",
   "Continuous 37°C temperature monitoring",
   "Regular equipment maintenance and calibration",
-  "Bacterial contamination monitoring",
   "Elective personalized embryo transfer (ET) protocol",
   "Strict patient data confidentiality measures",
 ];
