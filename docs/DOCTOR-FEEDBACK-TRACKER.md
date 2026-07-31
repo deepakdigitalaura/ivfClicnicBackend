@@ -34,16 +34,14 @@ Matches `public/bugs/new website 2 treatment pages changes.docx`.
 
 ## Tab 4 — "About BFI Page" — ⚠️ ENTIRELY PENDING (no items marked Done)
 
-### About BFI (`/about-bfi`)
-- [ ] Confirm heading "Built on technology & trust"
-- [ ] Confirm intro para (world-class fertility care / 3,000+ IVF cycles/yr)
-- [ ] Confirm "single clinic → multi-centre institute" para incl. Dr. Parth Bavishi & Dr. Janki Bavishi as 2nd generation
-- [ ] "Vighnadod" — unclear fragment in the doc, needs clarification from doctor before acting
-- [ ] Confirm "Simple, Safe, Smart, and Successful approach" paragraph
-- [ ] Replace "time-lapse imaging" → "Latest gen ICSI" (appears 2×)
-- [ ] Confirm "Advanced fertilization techniques" / PGT section
-- [ ] Confirm "In outcomes that matter" section
-- [ ] "Keep all 6 firsts only" — pull from ivfclinic.com/unique-achievement/: first vitrified · first European surrogacy · First IMA award · First-of-its-kind IVF babies meet · Founder president · First TV series & unique books
+### About BFI (`/about-bfi`) — ✅ DONE, merged to main (`9d7c980`)
+- [x] Hero heading: "built on hope" → "built on technology & trust"
+- [x] Founding paragraph reworded (screenshot revealed highlighted phrasing not visible in plain text)
+- [x] Clinic-history paragraph reworded; book title fixed "Viknadog" → "Vighnadod" (per doctor)
+- [x] "Values" card body replaced with doctor-provided copy
+- [x] "time-lapse imaging" → "Latest gen ICSI" (Infrastructure card + World-Class Technology trust pillar, 2 locations)
+- [x] Treatment tags renamed: "Advanced Reproductive Techniques" → "Advanced fertilization techniques"; "Preimplantation Genetic Testing (PGT / PGD)" → "Preimplantation Genetic Testing (PGT)"
+- [x] "Keep all 6 firsts only" — removed "No.1 Western India", "Ranked All India No.1", "6x National Award" cards; added First IMA Award, First of Its Kind IVF Babies Meet, First TV Series & Unique Books (copy sourced from ivfclinic.com/unique-achievement/); kept Vitrified Frozen Oocyte Baby, First European Surrogacy, Founded INSTAR as-is
 
 ### Why BFI (`/why-bfi`)
 - [ ] **Needs doctor discussion**: keep the timeline on this page at all?
