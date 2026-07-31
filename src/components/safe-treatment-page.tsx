@@ -40,15 +40,15 @@ const SAFETY_FEATURES = [
   },
   {
     icon: Baby,
-    title: "Single Embryo Transfer (eSET)",
+    title: "Personalised Embryo Transfer",
     description:
-      "We follow the elective Single Embryo Transfer protocol to maximise healthy outcomes and prevent higher-order multiple pregnancies — prioritising the safety of both mother and child.",
+      "Your ET is personalized not prescribed. Single embryo transfer, where it protects you best. A two-embryo transfer, where it's clinically sound and clearly understood. Every decision made with you, in full light.",
   },
   {
     icon: Microscope,
-    title: "Pandemic Safety",
+    title: "Clinical Safety",
     description:
-      "Full PPE protocols, vaccinated staff, and comprehensive safety measures ensure your treatment environment remains safe and sterile — even during pandemic conditions.",
+      "National Accreditation Board for Hospitals, an apex organization to accredit, has strict criteria for infrastructure and protocols and SOPs for patient safety. Our centers are NABH accredited or under plan to get accreditation.",
   },
   {
     icon: Lock,
@@ -75,8 +75,7 @@ const PROTOCOLS = [
   "Continuous 37°C temperature monitoring",
   "Regular equipment maintenance and calibration",
   "Bacterial contamination monitoring",
-  "Elective single embryo transfer (eSET) protocol",
-  "Full PPE and vaccinated staff protocols",
+  "Elective personalized embryo transfer (ET) protocol",
   "Strict patient data confidentiality measures",
 ];
 
@@ -131,7 +130,7 @@ export function SafeTreatmentPage() {
           <Reveal delay={0.18}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
               At Bavishi Fertility Institute, safety isn&#39;t a feature — it&#39;s the foundation of everything we do.
-              From OHSS-free protocols to Class 1000 labs, every detail is engineered to protect you and your future child.
+              Double witnessing, 24x7 cloud monitoring of IVF labs, OHSS free protocol, Class 1000 labs and much more, every detail is engineered to protect you and your future child.
             </p>
           </Reveal>
           <Reveal delay={0.25}>
