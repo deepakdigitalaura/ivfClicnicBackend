@@ -10,7 +10,7 @@ const PATH = "/easy-emi";
 export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title: "Easy EMI at 0% Interest — Affordable IVF Treatment | Bavishi Fertility Institute",
-    description: "Making IVF affordable for all. 0% interest EMI, smart payment options, value-based packages, and Suraksha Kavach — parsimonious cost packages at Bavishi Fertility Institute.",
+    description: "Making IVF affordable for all. 0% interest EMI, smart payment options, value-based packages, and Suraksha Kavach — calibrated cost packages at Bavishi Fertility Institute.",
     alternates: { canonical: PATH },
     openGraph: { title: "Easy EMI & Affordable IVF | Bavishi Fertility Institute", description: "0% interest EMI, smart packages, digital payments — IVF made affordable for everyone.", url: abs(PATH), type: "website" },
   });

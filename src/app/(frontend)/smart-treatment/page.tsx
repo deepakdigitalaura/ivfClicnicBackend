@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title:
       "Smart IVF Treatment — Intelligent Care, Optimal Results | Bavishi Fertility Institute",
     description:
-      "Smart treatments and steady care at Bavishi Fertility Institute. Smart use of technology, smart monitoring, smart diagnosis, and parsimonious cost package options.",
+      "Smart treatments and steady care at Bavishi Fertility Institute. Smart use of technology, smart monitoring, smart diagnosis, and calibrated cost package options.",
     alternates: { canonical: PATH },
     openGraph: {
       title: "Smart IVF Treatment | Bavishi Fertility Institute",

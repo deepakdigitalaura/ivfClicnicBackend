@@ -73,9 +73,9 @@ const PILLARS = [
     icon: IndianRupee,
     title: "Unique IVF Packages",
     description:
-      "World-class fertility care should not be a privilege. We offer parsimonious packages for every pocket — from our three-cycle package that maximises your chances over multiple attempts to the Suraksha Kavach Package that gives you complete financial peace of mind.",
+      "World-class fertility care should not be a privilege. We offer calibrated packages for every pocket — from our three-cycle package that maximises your chances over multiple attempts to the Suraksha Kavach Package that gives you complete financial peace of mind.",
     highlights: [
-      "Parsimonious packages for every budget",
+      "Calibrated packages for every budget",
       "Three-cycle package for maximum chances",
       "Suraksha Kavach — complete peace of mind",
     ],
