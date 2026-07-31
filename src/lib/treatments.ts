@@ -2552,9 +2552,9 @@ export const surgicalSpermRetrieval = defineTreatment({
     heading: { lead: "How it", em: "works" },
     subtitle: "Each technique targets a different cause of azoospermia — from a simple needle aspiration to microsurgery.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Assessment", d: "Hormone profile, examination and history confirm whether the azoospermia is obstructive or non-obstructive, and the best retrieval method." },
-      { icon: Syringe, n: "02", t: "PESA / TESA", d: "PESA draws sperm from the epididymis with a fine needle — used for obstructive azoospermia, such as after a vasectomy. TESA draws sperm directly from testicular tissue instead, when PESA is unsuccessful or the epididymis cannot be accessed." },
-      { icon: Target, n: "03", t: "TESE / Micro-TESE", d: "TESE takes a small tissue biopsy from the testis, used in non-obstructive azoospermia with low-level sperm production. Micro-TESE adds an operating microscope to find sperm in the most difficult non-obstructive cases." },
+      { icon: ClipboardCheck, n: "01", t: "Assessment", d: "Hormone profile, examination and history confirm the azoospermia type and the best retrieval method." },
+      { icon: Syringe, n: "02", t: "PESA / TESA", d: "PESA needle-aspirates sperm from the epididymis, for obstructive cases like a prior vasectomy. TESA aspirates from testicular tissue instead, when PESA doesn't succeed." },
+      { icon: Target, n: "03", t: "TESE / Micro-TESE", d: "TESE takes a small testicular biopsy for non-obstructive, low-production cases. Micro-TESE adds an operating microscope for the most difficult cases." },
       { icon: Microscope, n: "04", t: "ICSI", d: "Recovered sperm are injected directly into the partner's eggs." },
       { icon: Snowflake, n: "05", t: "Freezing", d: "Extra sperm are frozen so future cycles need no repeat surgery." },
     ],
