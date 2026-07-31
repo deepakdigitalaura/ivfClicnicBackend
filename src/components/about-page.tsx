@@ -155,7 +155,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><Star className="h-6 w-6" /></div>
                 <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Values</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground"><strong className="text-[color:var(--plum)]"><a href="/simple-treatment" className="text-[color:var(--plum)]">Simple</a>, <a href="/safe-treatment" className="text-[color:var(--plum)]">Safe</a>, <a href="/smart-treatment" className="text-[color:var(--plum)]">Smart</a> and <a href="/success-benchmarks" className="text-[color:var(--plum)]">Successful</a>!</strong> The qualified, experienced, skilled and dedicated team delivers the best outcomes. Every decision is guided by evidence, every interaction by empathy — making your fertility journey as smooth as possible.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground"><strong className="text-[color:var(--plum)]"><a href="/simple-treatment" className="text-[color:var(--plum)]">Simple</a>, <a href="/safe-treatment" className="text-[color:var(--plum)]">Safe</a>, <a href="/smart-treatment" className="text-[color:var(--plum)]">Smart</a> and <a href="/success-benchmarks" className="text-[color:var(--plum)]">Successful</a>!</strong> At Bavishi Fertility Institute, we follow a Simple, Safe, Smart, and Successful approach, making fertility treatment accessible and effective. With world-class technology and compassionate care, we continue to redefine success in assisted reproduction, making your fertility journey as smooth as possible.</p>
               </div>
             </StaggerItem>
           </Stagger>
@@ -177,7 +177,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
                 <h3 className="text-xl font-semibold text-[color:var(--plum)]">Infrastructure</h3>
               </div>
               <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">We have a highly automated and optimised environment. For the past 35+ years, we continue to research and innovate to ensure that treatments are done in the best possible environment.</p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">Our <strong className="text-[color:var(--plum)]">Class 1000 <a href="/what-is-ivf" style={{color: "var(--plum)"}}>IVF</a> labs</strong> — 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with time-lapse imaging, <a href="/cryopreservation" className="text-[color:var(--plum)] underline">vitrification</a>, and advanced preimplantation genetic testing (PGT).</p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground">Our <strong className="text-[color:var(--plum)]">Class 1000 <a href="/what-is-ivf" style={{color: "var(--plum)"}}>IVF</a> labs</strong> — 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with Latest gen ICSI, <a href="/cryopreservation" className="text-[color:var(--plum)] underline">vitrification</a>, and advanced preimplantation genetic testing (PGT).</p>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
@@ -206,11 +206,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
             {([
               { t: "Male & Female Infertility", href: "/treatments/male-infertility" },
               { t: "IVF – ICSI – ART", href: "/what-is-ivf" },
-              { t: "Advanced Reproductive Techniques", href: "/treatments/advanced-fertility-techniques" },
+              { t: "Advanced fertilization techniques", href: "/treatments/advanced-fertility-techniques" },
               { t: "Egg Donation", href: "/egg-donation" },
               { t: "Surrogacy", href: null },
               { t: "Fertility Preservation – Egg / Embryo Freezing", href: "/cryopreservation" },
-              { t: "Preimplantation Genetic Testing (PGT / PGD)", href: null },
+              { t: "Preimplantation Genetic Testing (PGT)", href: null },
               { t: "IUI (Intrauterine Insemination)", href: "/intra-uterine-insemination-iui" },
               { t: "Laparoscopy / Hysteroscopy", href: null },
               { t: "Ovary Rejuvenation – PRP / Stem Cell", href: "/ovarian-rejuvenation" },
@@ -285,10 +285,10 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
           {([
             { Icon: Trophy, year: "2009", t: "India's First — Vitrified Frozen Oocyte Baby", d: "Bavishi Fertility Institute achieved the first live birth in India with a vitrified frozen egg — a landmark milestone that reshaped Indian reproductive medicine and opened a new era of <a href='/cryopreservation' style='color:var(--plum);text-decoration:underline'>fertility preservation</a>." },
             { Icon: Globe, year: "2009", t: "First European Surrogacy in India", d: "First surrogacy for a European couple — a testament to the institute's world-class capabilities, ethical standards, and international trust built over decades." },
-            { Icon: Star, year: "2016–2020", t: "No. 1 in Western India — 5 Consecutive Years", d: "Ranked No. 1 fertility clinic in Western India for five consecutive years by the Times of India national survey (2016, 2017, 2018, 2019, 2020)." },
-            { Icon: Trophy, year: "2020", t: "Ranked All India No. 1", d: "Ranked All India No. 1 in 2020 by the Times of India National Survey of fertility clinics — the highest national recognition for clinical excellence." },
+            { Icon: Star, year: "2017", t: "First IMA Award", d: "First IVF specialist to receive the prestigious 'Excellence in the Field of Medicine' award from the Indian Medical Association (IMA)." },
+            { Icon: Heart, year: "2004", t: "First of Its Kind IVF Babies Meet", d: "A unique gathering of more than 100 IVF babies conceived at Bavishi Fertility Institute, Ahmedabad — a path-breaking effort to spread awareness at a time when IVF was surrounded by misconceptions and stigma." },
             { Icon: Award, year: "2014", t: "Founded INSTAR", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in <a href='/egg-donation' style='color:var(--plum);text-decoration:underline'>egg donation</a>, <a href='/sperm-donation' style='color:var(--plum);text-decoration:underline'>sperm donation</a> and surrogacy programmes across India." },
-            { Icon: Award, year: "6 Times", t: "National Award — 6 Consecutive Years", d: "Received the 'Best IVF Chain in India – West' award by The Economic Times for six consecutive years — reinforcing BFI's position as the nation's most trusted fertility network." },
+            { Icon: Newspaper, year: "2011–2018", t: "First TV Series & Unique Books", d: "India's first TV serial by a fertility institute — 'Devna Didhela, Mangine Lidhela' — featuring real-life stories of 26 successful couples, later published as a book sharing the stories of 222 IVF families." },
           ] as { Icon: LucideIcon, year: string, t: string, d: string }[]).map(({ Icon, year, t, d }, i) => (
             <StaggerItem key={i}>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
