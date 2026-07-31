@@ -25,7 +25,7 @@ import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
 import { OPEN_COOKIE_PREFERENCES_EVENT } from "@/components/cookie-consent";
 import { cityHref, centresForCity, centreHref } from "@/lib/locations";
-import { PRESS_CLIPPINGS, pressHref } from "@/lib/press";
+import { PRESS_CLIPPINGS, pressHref, type PressClipping } from "@/lib/press";
 import { resolveIcon } from "@/lib/icon-map";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
@@ -1130,6 +1130,128 @@ function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyCho
   );
 }
 
+/* ---------- Shared "stage" carousel ----------
+ * One centered card at a time, with off-stage neighbours peeking at reduced
+ * scale/opacity; autoplay, pause-on-hover, swipe, and dot pagination.
+ * Used by both Awards & Achievements and Media Coverage below — the card
+ * markup differs but the rotation mechanics are identical. */
+function CarouselStage<T>({
+  items,
+  renderCard,
+  cardWidthClass = "w-[clamp(280px,82vw,400px)]",
+  stageHeightClass = "h-[340px] sm:h-[360px] md:h-[380px]",
+  autoplayMs = 3800,
+  dotLabel = "slide",
+}: {
+  items: T[];
+  renderCard: (item: T) => React.ReactNode;
+  cardWidthClass?: string;
+  stageHeightClass?: string;
+  autoplayMs?: number;
+  dotLabel?: string;
+}) {
+  const [active, setActive] = useState(0);
+  const [paused, setPaused] = useState(false);
+  const wrapRef = useRef<HTMLDivElement>(null);
+  const [shift, setShift] = useState(300);
+  const startX = useRef(0);
+
+  // Repeat the items so there are always enough off-stage "buffer" cards for a
+  // seamless infinite loop (a small loop would otherwise teleport across centre).
+  const dotCount = items.length;
+  const slides = useMemo(
+    () =>
+      dotCount < 5
+        ? Array.from({ length: Math.ceil(6 / dotCount) }, () => items).flat()
+        : items,
+    [items, dotCount],
+  );
+  const L = slides.length;
+
+  useEffect(() => {
+    const measure = () => {
+      const w = wrapRef.current?.offsetWidth ?? 0;
+      setShift(Math.min(Math.max(w * 0.34, 150), 360));
+    };
+    measure();
+    window.addEventListener("resize", measure);
+    return () => window.removeEventListener("resize", measure);
+  }, []);
+
+  useEffect(() => {
+    if (paused) return;
+    const id = window.setInterval(() => setActive((a) => (a + 1) % L), autoplayMs);
+    return () => window.clearInterval(id);
+  }, [paused, L, autoplayMs]);
+
+  const go = (dir: number) => setActive((a) => (a + dir + L) % L);
+  const relPos = (i: number) => {
+    let d = i - active;
+    if (d > L / 2) d -= L;
+    if (d < -L / 2) d += L;
+    return d;
+  };
+
+  const activeDot = ((active % dotCount) + dotCount) % dotCount;
+  const goToDot = (i: number) =>
+    setActive((a) => a - (((a % dotCount) + dotCount) % dotCount) + i);
+
+  return (
+    <>
+      <div
+        ref={wrapRef}
+        className={`relative mx-auto mt-10 flex max-w-5xl items-center justify-center overflow-hidden ${stageHeightClass}`}
+        onPointerEnter={(e) => { if (e.pointerType === "mouse") setPaused(true); }}
+        onPointerLeave={(e) => { if (e.pointerType === "mouse") setPaused(false); }}
+        onTouchStart={(e) => { setPaused(true); startX.current = e.touches[0].clientX; }}
+        onTouchEnd={(e) => {
+          const dx = e.changedTouches[0].clientX - startX.current;
+          if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
+          setPaused(false);
+        }}
+      >
+        {slides.map((item, i) => {
+          const p = relPos(i);
+          const visible = Math.abs(p) <= 1;
+          return (
+            <div
+              key={i}
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none ${cardWidthClass}`}
+              style={{ zIndex: p === 0 ? 30 : 20 - Math.abs(p), pointerEvents: visible ? "auto" : "none" }}
+              aria-hidden={p !== 0}
+            >
+              <motion.div
+                initial={false}
+                animate={{
+                  x: p * shift,
+                  scale: p === 0 ? 1 : 0.86,
+                  opacity: visible ? (p === 0 ? 1 : 0.55) : 0,
+                }}
+                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
+              >
+                {renderCard(item)}
+              </motion.div>
+            </div>
+          );
+        })}
+      </div>
+
+      {/* Dots */}
+      <div className="mt-8 flex justify-center gap-2">
+        {items.map((_, i) => (
+          <button
+            key={i}
+            type="button"
+            onClick={() => goToDot(i)}
+            aria-label={`Go to ${dotLabel} ${i + 1}`}
+            className={`h-2 rounded-full transition-all duration-300 ${i === activeDot ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
+          />
+        ))}
+      </div>
+    </>
+  );
+}
+
 /* ---------- Awards & Achievements (carousel) ---------- */
 
 // A single award card. Memoized + keyed so its <img> never reloads between
@@ -1156,106 +1278,7 @@ const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
 // Only this inner component holds the rotating state, so slide changes never
 // re-render the section header or CTA — just the transform-animated cards.
 function AwardsStage({ items }: { items: AwardItem[] }) {
-  const [active, setActive] = useState(0);
-  const [paused, setPaused] = useState(false);
-  const wrapRef = useRef<HTMLDivElement>(null);
-  const [shift, setShift] = useState(300);
-  const startX = useRef(0);
-
-  // Repeat the awards so there are always enough off-stage "buffer" cards for a
-  // seamless infinite loop (a 3-item loop would otherwise teleport across centre).
-  const dotCount = items.length;
-  const slides = useMemo(
-    () =>
-      dotCount < 5
-        ? Array.from({ length: Math.ceil(6 / dotCount) }, () => items).flat()
-        : items,
-    [items, dotCount],
-  );
-  const L = slides.length;
-
-  useEffect(() => {
-    const measure = () => {
-      const w = wrapRef.current?.offsetWidth ?? 0;
-      setShift(Math.min(Math.max(w * 0.34, 150), 360));
-    };
-    measure();
-    window.addEventListener("resize", measure);
-    return () => window.removeEventListener("resize", measure);
-  }, []);
-
-  useEffect(() => {
-    if (paused) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % L), 3800);
-    return () => window.clearInterval(id);
-  }, [paused, L]);
-
-  const go = (dir: number) => setActive((a) => (a + dir + L) % L);
-  const relPos = (i: number) => {
-    let d = i - active;
-    if (d > L / 2) d -= L;
-    if (d < -L / 2) d += L;
-    return d;
-  };
-
-  const activeDot = ((active % dotCount) + dotCount) % dotCount;
-  const goToDot = (i: number) =>
-    setActive((a) => a - (((a % dotCount) + dotCount) % dotCount) + i);
-
-  return (
-    <>
-      <div
-        ref={wrapRef}
-        className="relative mx-auto mt-10 flex h-[340px] max-w-5xl items-center justify-center overflow-hidden sm:h-[360px] md:h-[380px]"
-        onPointerEnter={(e) => { if (e.pointerType === "mouse") setPaused(true); }}
-        onPointerLeave={(e) => { if (e.pointerType === "mouse") setPaused(false); }}
-        onTouchStart={(e) => { setPaused(true); startX.current = e.touches[0].clientX; }}
-        onTouchEnd={(e) => {
-          const dx = e.changedTouches[0].clientX - startX.current;
-          if (Math.abs(dx) > 40) go(dx < 0 ? 1 : -1);
-          setPaused(false);
-        }}
-      >
-        {slides.map((a, i) => {
-          const p = relPos(i);
-          const visible = Math.abs(p) <= 1;
-          return (
-            <div
-              key={i}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[clamp(280px,82vw,400px)] select-none"
-              style={{ zIndex: p === 0 ? 30 : 20 - Math.abs(p), pointerEvents: visible ? "auto" : "none" }}
-              aria-hidden={p !== 0}
-            >
-              <motion.div
-                initial={false}
-                animate={{
-                  x: p * shift,
-                  scale: p === 0 ? 1 : 0.86,
-                  opacity: visible ? (p === 0 ? 1 : 0.55) : 0,
-                }}
-                transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
-              >
-                <AwardCard a={a} />
-              </motion.div>
-            </div>
-          );
-        })}
-      </div>
-
-      {/* Dots */}
-      <div className="mt-8 flex justify-center gap-2">
-        {items.map((_, i) => (
-          <button
-            key={i}
-            type="button"
-            onClick={() => goToDot(i)}
-            aria-label={`Go to award ${i + 1}`}
-            className={`h-2 rounded-full transition-all duration-300 ${i === activeDot ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
-          />
-        ))}
-      </div>
-    </>
-  );
+  return <CarouselStage items={items} renderCard={(a) => <AwardCard a={a} />} dotLabel="award" />;
 }
 
 export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content?: HomepageData["awards"] } = {}) {
@@ -1286,11 +1309,45 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
   );
 }
 
-/* ---------- Media ---------- */
+/* ---------- Media Coverage (stage carousel) ---------- */
+
+// A single press-clipping card — same card "shell" as AwardCard, but linking
+// through to the full article and keeping the clipping's native portrait scan.
+const PressCard = memo(function PressCard({ c }: { c: PressClipping }) {
+  return (
+    <a
+      href={pressHref(c.slug)}
+      aria-label={`Read: ${c.headline} — ${c.publication}`}
+      className="group block overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift"
+    >
+      <div className="aspect-[3/4] w-full overflow-hidden bg-white">
+        <img
+          src={c.thumb}
+          alt={`${c.publication} clipping — ${c.headline}`}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+        />
+      </div>
+      <div className="border-t border-border/60 px-4 py-3 text-center">
+        <div className="text-xs font-bold uppercase tracking-widest text-[color:var(--rose)]">{c.publication}</div>
+      </div>
+    </a>
+  );
+});
+
+function PressStage({ items }: { items: PressClipping[] }) {
+  return (
+    <CarouselStage
+      items={items}
+      renderCard={(c) => <PressCard c={c} />}
+      cardWidthClass="w-[clamp(220px,62vw,280px)]"
+      stageHeightClass="h-[380px] sm:h-[400px] md:h-[420px]"
+      dotLabel="press clipping"
+    />
+  );
+}
 
 function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["media"] } = {}) {
-  const clippings = PRESS_CLIPPINGS;
-  const loop = [...clippings, ...clippings];
   return (
     <section className="container-px mx-auto max-w-[1400px] py-20">
       <SectionHeader
@@ -1298,30 +1355,7 @@ function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["
         title={edTitle("media", content.heading)}
         align="center"
       />
-      <Reveal delay={0.15}>
-        <div className="mt-10">
-          <Marquee speed={28}>
-            {loop.map((c, i) => (
-              <a
-                key={`${c.slug}-${i}`}
-                href={pressHref(c.slug)}
-                aria-label={`Read: ${c.headline} — ${c.publication}`}
-                className="group block w-40 shrink-0 overflow-hidden rounded-xl border border-border/70 bg-card shadow-soft transition-shadow duration-300 hover:shadow-lift"
-              >
-                <img
-                  src={c.thumb}
-                  alt={`${c.publication} clipping — ${c.headline}`}
-                  loading="lazy"
-                  className="aspect-[3/4] w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
-                />
-                <div className="px-3 py-2 text-xs font-bold uppercase tracking-widest text-[color:var(--rose)]">
-                  {c.publication}
-                </div>
-              </a>
-            ))}
-          </Marquee>
-        </div>
-      </Reveal>
+      <PressStage items={PRESS_CLIPPINGS} />
       <Reveal delay={0.25}>
         <div className="mt-8 text-center">
           <a
