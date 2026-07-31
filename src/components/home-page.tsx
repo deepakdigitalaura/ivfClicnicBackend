@@ -1438,9 +1438,17 @@ export function Testimonials({
     ...cms.map((r) => ({ r, verified: false })),
   ];
 
+  // Client requirement: never end a page on a partial batch — only show reviews
+  // in full groups of 3 (3, 6, 9…). Trim any remainder off the tail once there's
+  // at least one full batch; a lone page under 3 total still renders as-is since
+  // there's no second page for it to look uneven against (same edge case the
+  // location-page GoogleReviews carousel already special-cases).
+  const usableCount = cards.length >= 3 ? Math.floor(cards.length / 3) * 3 : cards.length;
+  const trimmedCards = cards.slice(0, usableCount);
+
   const reviewPages = Array.from(
-    { length: Math.max(1, Math.ceil(cards.length / 3)) },
-    (_, p) => cards.slice(p * 3, p * 3 + 3),
+    { length: Math.max(1, Math.ceil(trimmedCards.length / 3)) },
+    (_, p) => trimmedCards.slice(p * 3, p * 3 + 3),
   );
   const pages = reviewPages.length;
   const [page, setPage] = useState(0);
