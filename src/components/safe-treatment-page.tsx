@@ -317,16 +317,23 @@ export function SafeTreatmentPage() {
             subtitle="These are not aspirational goals — they are non-negotiable protocols followed in every procedure, every day, at every Bavishi Fertility Institute centre."
           />
           <Stagger className="mx-auto mt-12 grid max-w-4xl gap-4 sm:grid-cols-2">
-            {PROTOCOLS.map((p, i) => (
-              <StaggerItem key={i}>
-                <div className="flex items-start gap-3 rounded-xl border border-border/70 bg-card px-5 py-4 shadow-soft">
-                  <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)] font-medium">
-                    {p}
-                  </span>
-                </div>
-              </StaggerItem>
-            ))}
+            {PROTOCOLS.map((p, i) => {
+              const isDanglingLast = i === PROTOCOLS.length - 1 && PROTOCOLS.length % 2 !== 0;
+              return (
+                <StaggerItem key={i} className={isDanglingLast ? "sm:col-span-2" : undefined}>
+                  <div
+                    className={`flex items-start gap-3 rounded-xl border border-border/70 bg-card px-5 py-4 shadow-soft ${
+                      isDanglingLast ? "sm:mx-auto sm:max-w-[calc(50%-0.5rem)]" : ""
+                    }`}
+                  >
+                    <CheckCircle2 className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--rose)]" />
+                    <span className="text-[15px] leading-relaxed text-[color:var(--plum)] font-medium">
+                      {p}
+                    </span>
+                  </div>
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>
