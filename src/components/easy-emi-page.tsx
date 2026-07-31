@@ -1,8 +1,8 @@
 "use client";
 import {
   ArrowRight, Calendar, MessageCircle, IndianRupee, Wallet,
-  CheckCircle2, CreditCard, Smartphone, Shield, Package,
-  Calculator, Heart, Percent, BadgeCheck, Repeat, Gift,
+  CheckCircle2, CreditCard, Smartphone, Package,
+  Calculator, Heart, Percent, BadgeCheck,
   ChevronDown,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
@@ -41,18 +41,18 @@ const ZERO_EMI_BENEFITS = [
 const PAYMENT_OPTIONS = [
   {
     icon: Smartphone,
-    title: "UPI & Digital Wallets",
-    description: "Pay seamlessly through Google Pay, PhonePe, Paytm, and all major UPI apps. Instant, secure, and convenient.",
+    title: "UPI & Net Banking",
+    description: "Pay seamlessly through Google Pay, PhonePe, Paytm, and all major UPI apps, or via secure online transfers from all major banks — from the comfort of your home with bank-level encryption.",
   },
   {
     icon: CreditCard,
     title: "Credit & Debit Cards",
-    description: "All major credit and debit cards accepted — Visa, Mastercard, RuPay, and American Express. EMI options available on select cards.",
+    description: "All major credit and debit cards accepted — Visa, Mastercard, and RuPay.",
   },
   {
-    icon: Wallet,
-    title: "Net Banking",
-    description: "Secure online transfers from all major banks. Pay from the comfort of your home with bank-level encryption and safety.",
+    icon: Percent,
+    title: "0% Interest EMI",
+    description: "Split your treatment cost into easy, zero-interest instalments on select cards — no extra charges, no hidden fees.",
   },
   {
     icon: IndianRupee,
@@ -92,19 +92,8 @@ const SMART_PACKAGES = [
     ],
   },
   {
-    title: "Multi-Cycle Package",
-    highlight: true,
-    description: "Best value for couples who want to maximise their chances. Multiple cycles at significantly reduced per-cycle cost.",
-    features: [
-      "Multiple IVF/ICSI cycles at reduced cost",
-      "Priority scheduling & care",
-      "Dedicated coordinator assigned",
-      "Substantial savings over individual cycles",
-    ],
-  },
-  {
     title: "Three-Cycle Package",
-    highlight: false,
+    highlight: true,
     description: "Triple your chances of success. Our three-cycle package gives you the highest probability of achieving pregnancy at the most competitive pricing.",
     features: [
       "Three complete IVF/ICSI cycles",
@@ -112,6 +101,18 @@ const SMART_PACKAGES = [
       "Extended support & monitoring",
       "Best success probability",
     ],
+  },
+  {
+    title: "Suraksha Kavach Package",
+    highlight: false,
+    description: "India's only IVF protection program. Multiple IVF cycles covered under a single package with complete financial peace of mind.",
+    features: [
+      "Multiple IVF/ICSI cycles covered",
+      "Complete financial protection",
+      "One package, one price",
+      "No hidden costs",
+    ],
+    href: "/suraksha-kavach",
   },
 ];
 
@@ -130,7 +131,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What payment methods do you accept?",
-    a: "We accept all major payment modes — cash, cheque, credit/debit cards (Visa, Mastercard, RuPay, Amex), net banking, UPI (Google Pay, PhonePe, Paytm), and digital wallets. You can choose the method most convenient for you.",
+    a: "We accept all major payment modes — cash, cheque, credit/debit cards (Visa, Mastercard, RuPay), net banking, and UPI (Google Pay, PhonePe, Paytm). You can choose the method most convenient for you.",
   },
   {
     q: "Is the pricing transparent? Are there hidden costs?",
@@ -138,7 +139,7 @@ const FAQS: { q: string; a: string }[] = [
   },
   {
     q: "What is Suraksha Kavach and how is it different?",
-    a: "Suraksha Kavach is our exclusive IVF protection program — the only one of its kind in the world. It covers multiple IVF cycles and promises at least one healthy baby. If medical circumstances prevent success, the package is fully transferable. It goes beyond affordability to offer complete peace of mind.",
+    a: "Suraksha Kavach is our exclusive IVF protection program — the only one of its kind in the world. It covers multiple IVF cycles. It goes beyond affordability to offer complete peace of mind.",
   },
 ];
 
@@ -321,7 +322,7 @@ export function EasyEmiPage() {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Value-Based Packages"
+            eyebrow="Calibrated Packages"
             title={<>Best treatment at <em className="font-display italic text-[color:var(--rose)]">optimal pricing</em></>}
             subtitle="Economy of scale means we deliver the highest quality products and treatments at the most competitive cost — without ever compromising on care."
           />
@@ -378,82 +379,20 @@ export function EasyEmiPage() {
                     ))}
                   </ul>
                   <div className="mt-6">
-                    <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
-                      <Calendar className="h-4 w-4" /> Enquire Now
-                    </Magnetic>
+                    {pkg.href ? (
+                      <Magnetic as="a" href={pkg.href} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
+                        Learn More <ArrowRight className="h-4 w-4" />
+                      </Magnetic>
+                    ) : (
+                      <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
+                        <Calendar className="h-4 w-4" /> Enquire Now
+                      </Magnetic>
+                    )}
                   </div>
                 </div>
               </StaggerItem>
             ))}
           </Stagger>
-        </div>
-      </section>
-
-      {/* ==================== SURAKSHA KAVACH LINK ==================== */}
-      <section className="bg-[color:var(--ivory)] py-20 lg:py-28">
-        <div className="container-px mx-auto max-w-[1400px]">
-          <div className="relative overflow-hidden rounded-[2.5rem] bg-[color:var(--plum)] px-8 py-16 text-white noise md:px-16 md:py-20">
-            <div className="pointer-events-none absolute inset-0 overflow-hidden">
-              <div className="absolute -top-20 left-1/3 h-72 w-72 rounded-full bg-[color:var(--rose)]/20 blur-3xl" />
-              <div className="absolute -bottom-20 right-1/4 h-72 w-72 rounded-full bg-[color:var(--gold)]/15 blur-3xl" />
-            </div>
-            <div className="relative mx-auto grid max-w-5xl grid-cols-1 items-center gap-10 lg:grid-cols-[1fr_auto]">
-              <div>
-                <Reveal>
-                  <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-                    <Shield className="h-3.5 w-3.5" /> Complete Peace of Mind
-                  </span>
-                </Reveal>
-                <Reveal delay={0.05}>
-                  <h2 className="mt-5 text-3xl font-medium leading-[1.1] md:text-4xl text-balance">
-                    Suraksha Kavach <em className="font-display italic text-[color:var(--rose-soft)]">Package</em>
-                  </h2>
-                </Reveal>
-                <Reveal delay={0.12}>
-                  <div className="mt-5 space-y-3 text-[17px] leading-relaxed text-white/70">
-                    <p>
-                      India&#39;s only IVF protection program. Multiple cycles covered under a single package.
-                      If medical circumstances prevent success, the entire package is fully transferable to
-                      a family member or loved one.
-                    </p>
-                    <p>
-                      Multiple IVF cycles covered with complete financial protection — for you, or transferable to someone you choose.
-                    </p>
-                  </div>
-                </Reveal>
-                <Reveal delay={0.2}>
-                  <div className="mt-6 flex flex-wrap gap-6 text-sm">
-                    {[
-                      { icon: Repeat, text: "Multiple Cycles Covered" },
-                      { icon: Gift, text: "Fully Transferable" },
-                      { icon: Shield, text: "25,000+ Happy Families" },
-                    ].map((item, i) => (
-                      <div key={i} className="flex items-center gap-2 text-white/80">
-                        <item.icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {item.text}
-                      </div>
-                    ))}
-                  </div>
-                </Reveal>
-                <Reveal delay={0.25}>
-                  <div className="mt-8 flex flex-wrap gap-3">
-                    <Magnetic as="a" href="/suraksha-kavach" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                      Learn About Suraksha Kavach <ArrowRight className="h-4 w-4" />
-                    </Magnetic>
-                    <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
-                      <Calendar className="h-4 w-4" /> Book Consultation
-                    </Magnetic>
-                  </div>
-                </Reveal>
-              </div>
-              <Reveal delay={0.15}>
-                <Float amplitude={8}>
-                  <div className="grid h-40 w-40 place-items-center rounded-full bg-white/10 ring-2 ring-white/10 lg:h-52 lg:w-52">
-                    <Shield className="h-20 w-20 text-[color:var(--rose-soft)] lg:h-24 lg:w-24" />
-                  </div>
-                </Float>
-              </Reveal>
-            </div>
-          </div>
         </div>
       </section>
 
