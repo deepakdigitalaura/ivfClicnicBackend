@@ -241,7 +241,7 @@ export function HistoryPage() {
                     India&apos;s No. 1 Fertility Institute
                   </h2>
                   <p className="mt-4 text-[17px] leading-relaxed text-muted-foreground">
-                    Today, Bavishi Fertility Institute has achieved <strong className="text-[color:var(--plum)]">25,000+ successful IVF pregnancies</strong> across
+                    Today, Bavishi Fertility Institute has achieved <strong className="text-[color:var(--plum)]">30,000+ successful pregnancies</strong> across
                     14 centres in 8 cities. Our commitment remains the same as day one: excellence in service
                     quality, cutting-edge reproductive technology, and unconditional patient support at every
                     step of the journey.
@@ -359,7 +359,7 @@ export function HistoryPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              35+ years of trust, 25,000+ successful pregnancies, and counting. Book a consultation
+              35+ years of trust, 30,000+ successful pregnancies, and counting. Book a consultation
               to start your own family&apos;s story with Bavishi Fertility Institute.
             </p>
           </Reveal>
