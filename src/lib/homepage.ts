@@ -161,10 +161,14 @@ export const HOME_SECTION_LABELS: Record<HomeSection, string> = {
   finalCta: "Closing Call-to-Action",
 };
 
-/** The canonical layout — every section, in order, visible. Used as the
- *  byte-identical fallback whenever the CMS layout is empty. */
+/** The canonical layout — every section, in order. Used as the fallback
+ *  whenever the CMS layout is empty. `blogs` ("Knowledge & Resources") is
+ *  hidden by default: it duplicated the `videoHub` ("Education") section
+ *  (same YouTube-card layout, just a different video list), so it's turned
+ *  off rather than deleted — its data/schema/admin field are untouched and
+ *  it can be re-enabled from the admin section builder if ever needed. */
 export const DEFAULT_HOME_LAYOUT: HomeSectionLayout[] = HOME_SECTIONS.map(
-  (section) => ({ section, visible: true }),
+  (section) => ({ section, visible: section !== "blogs" }),
 );
 
 /** Client-ready, fully-resolved homepage content. */
