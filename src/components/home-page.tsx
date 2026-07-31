@@ -690,7 +690,7 @@ export function LiteVideoFile({ src, title, className = "" }: { src: string; tit
 export function SuccessStories({
   stories = HOMEPAGE_DEFAULTS.videos.stories,
   eyebrow = "Success Stories",
-  title = <>25,000+ couples. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
+  title = <>30,000+ couples. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
   subtitle = "Real stories from real families who began their parenthood journey with us.",
   ctaLabel = "View More Success Stories",
   tone = "white",

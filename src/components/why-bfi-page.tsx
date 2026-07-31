@@ -131,7 +131,7 @@ const JOURNEY = [
       { year: "2015", icon: Trophy, items: ["Named a “Power Brand” by IVF India (India Today Group)."] },
       { year: "2016", icon: MapPin, items: ["Established Bavishi Pratiksha Fertility Institute in Kolkata."] },
       { year: "2017", icon: Award, items: ["Won the “Excellence in IVF” award from My FM.", "Received the “Rose of Paracelsus” award from the European Medical Association.", "Published “Aapnu Adbhut Sarjan” (Gujarati) and “Your Miracle in Making” (English) for expectant mothers."] },
-      { year: "2018", icon: Award, items: ["Opened in Surat.", "“Devna Didhela Mangine Lidhela” adapted into a TV serial.", "Awarded “Best IVF Clinic Chain in India” by Midday.", "Achieved 25,000+ successful IVF pregnancies milestone."] },
+      { year: "2018", icon: Award, items: ["Opened in Surat.", "“Devna Didhela Mangine Lidhela” adapted into a TV serial.", "Awarded “Best IVF Clinic Chain in India” by Midday.", "Achieved 30,000+ successful pregnancies milestone."] },
       { year: "2019", icon: Trophy, items: ["Awarded “Best IVF Chain in India – West” by The Economic Times.", "Opened in Vadodara."] },
       { year: "2020", icon: Star, items: ["Ranked the #1 fertility clinic in All India by the Times of India National Survey.", "Ranked #1 in West India for the 5th consecutive year running (2016–2020).", "Opened in Bhuj."] },
     ],

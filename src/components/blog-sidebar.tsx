@@ -178,7 +178,7 @@ export function CtaSidebarCard() {
 /* ── Trust stats card ───────────────────────────────────────── */
 /* Stats sourced from ivfclinic.com homepage (verified June 2026). */
 const TRUST_STATS = [
-  { label: "Successful IVF Pregnancies", value: "25,000+" },
+  { label: "Successful Pregnancies", value: "30,000+" },
   { label: "Fertility Centres", value: "14" },
   { label: "5-Star Google Reviews", value: "1,800+" },
   { label: "National Fertility Awards", value: "6 Years" },

@@ -11,12 +11,12 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title: "Why Choose Bavishi Fertility Institute | Best IVF Clinic in India",
     description:
-      "25+ years of pioneering IVF in India. 25,000+ successful IVF pregnancies. Class 1000 labs, OHSS-free clinic, ethical practice — discover why families trust Bavishi Fertility Institute.",
+      "25+ years of pioneering IVF in India. 30,000+ successful pregnancies. Class 1000 labs, OHSS-free clinic, ethical practice — discover why families trust Bavishi Fertility Institute.",
     alternates: { canonical: PATH },
     openGraph: {
       title: "Why Choose Bavishi Fertility Institute | Best IVF Clinic in India",
       description:
-        "Pioneers of IVF since 1998. 25,000+ successful IVF pregnancies, 15 centres across India. Ethical, transparent, and affordable fertility care.",
+        "Pioneers of IVF since 1998. 30,000+ successful pregnancies, 15 centres across India. Ethical, transparent, and affordable fertility care.",
       url: abs(PATH),
       type: "website",
     },
