@@ -8,7 +8,7 @@ import {
 } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Footer, Locations, Calculators, TreatmentCard, InquiryForm } from "@/components/home-page";
+import { Footer, Locations, Calculators, TreatmentCard, InquiryForm, Suraksha } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { SectionHead, Faq } from "@/components/ivf-page";
 import { MedicalReviewer } from "@/components/medical-reviewer";
@@ -571,7 +571,33 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
         </div>
       </section>
 
-      {/* 3. Benefits */}
+      {/* 3. Who needs it — moved up so first-time visitors can self-identify
+       *  relevance before reading benefits/technique details. */}
+      <section className={`${band()} py-8 md:py-14`}>
+        <div className="container-px mx-auto max-w-[1400px]">
+          <SectionHead eyebrow={ed("labels.whoNeedsIt", labels.whoNeedsIt)} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
+          <Stagger
+            className={`mt-9 grid grid-cols-1 gap-4 ${
+              t.whoNeedsIt.items.length === 1
+                ? "max-w-sm mx-auto"
+                : t.whoNeedsIt.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {t.whoNeedsIt.items.map((item, i) => (
+              <StaggerItem key={i}>
+                <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
+                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
+                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`whoNeedsIt.items.${i}.value`, item)}</span>
+                </div>
+              </StaggerItem>
+            ))}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* 4. Benefits */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow={ed("labels.benefits", labels.benefits)} title={<H h={t.benefits.heading} base="benefits.heading" />} subtitle={t.benefits.subtitle && ed("benefits.subtitle", t.benefits.subtitle)} />
@@ -623,31 +649,6 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           </div>
         </section>
       )}
-
-      {/* 4. Who needs it */}
-      <section className={`${band()} py-8 md:py-14`}>
-        <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow={ed("labels.whoNeedsIt", labels.whoNeedsIt)} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
-          <Stagger
-            className={`mt-9 grid grid-cols-1 gap-4 ${
-              t.whoNeedsIt.items.length === 1
-                ? "max-w-sm mx-auto"
-                : t.whoNeedsIt.items.length === 2
-                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
-                  : "sm:grid-cols-2 lg:grid-cols-3"
-            }`}
-          >
-            {t.whoNeedsIt.items.map((item, i) => (
-              <StaggerItem key={i}>
-                <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`whoNeedsIt.items.${i}.value`, item)}</span>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
 
       {/* 5. Process */}
       <section className={`${band()} py-8 md:py-14`}>
@@ -862,6 +863,11 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
         </div>
       </section>
 
+      {/* Suraksha Kavach — positioned right after cost, addressing cost fear
+       *  and repeated-cycle anxiety exactly where patients are weighing the
+       *  investment. Reuses the homepage's Suraksha section as-is. */}
+      <Suraksha />
+
       {/* Risks */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
@@ -972,7 +978,12 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                     {/* Treatment testimonials are always YouTube-sourced (videoSrc is a doctor-page-only exception) */}
                     <LiteVideo id={v.youTubeId!} title={`${t.shortName} testimonial — ${v.name}`} editPath={editing ? `testimonials.${i}.youTubeId` : undefined} />
                     <div className="flex flex-1 flex-col p-5">
-                      <Quote className="h-5 w-5 text-[color:var(--rose)]/70" />
+                      <div className="flex items-center justify-between gap-2">
+                        <Quote className="h-5 w-5 text-[color:var(--rose)]/70" />
+                        {v.tag && (
+                          <span className="rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 text-[11px] font-semibold text-[color:var(--rose)]">{v.tag}</span>
+                        )}
+                      </div>
                       <p className="mt-2 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`testimonials.${i}.quote`, v.quote)}</p>
                       <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[color:var(--plum)]">
                         {ed(`testimonials.${i}.name`, v.name)}
