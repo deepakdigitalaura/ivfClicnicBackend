@@ -66,7 +66,7 @@ const graph = [
     },
     {
       q: "How do I enrol in Suraksha Kavach?",
-      a: "Book a consultation at any of our 15 centres across India. After your initial evaluation, if eligible, our team will walk you through the enrolment process and package details.",
+      a: "Book a consultation at any of our 14 centres across India. After your initial evaluation, if eligible, our team will walk you through the enrolment process and package details.",
     },
   ]),
 ];
