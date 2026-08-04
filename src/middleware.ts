@@ -1,13 +1,18 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
 
-// Sanity-managed redirects — fetched from CDN and cached for 1 hour.
+// Sanity-managed redirects — fetched from CDN and cached briefly in-memory.
 // Existing treatment/calculator redirects are baked into next.config.mjs.
+//
+// NOTE: this cache is a plain module-level variable, not Next's fetch-tag
+// cache — saveRedirects()'s revalidateTag() call does NOT reach it. Keep
+// CACHE_TTL short so admin-panel edits take effect quickly rather than
+// relying on invalidation that doesn't exist for this cache.
 
 type SanityRule = { source: string; destination: string; permanent: boolean };
 
 let ruleCache: { at: number; rules: SanityRule[] } | null = null;
-const CACHE_TTL = 3_600_000; // 1 hour
+const CACHE_TTL = 60_000; // 1 minute
 
 async function loadSanityRules(): Promise<SanityRule[]> {
   if (ruleCache && Date.now() - ruleCache.at < CACHE_TTL) return ruleCache.rules;
