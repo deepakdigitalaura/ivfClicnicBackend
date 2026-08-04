@@ -4,8 +4,9 @@ import Image from "next/image";
 import {
   ArrowRight, Phone, MessageCircle, Calendar, CheckCircle2, Clock, Star,
   Sparkles, ShieldCheck, PlayCircle, MapPin, Stethoscope, Quote, BookOpen,
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, ChevronDown,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer, Locations, Calculators, TreatmentCard, InquiryForm, Suraksha } from "@/components/home-page";
@@ -17,7 +18,7 @@ import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Heading, Treatment } from "@/lib/treatments";
 import { treatmentCardData, treatmentBySlug } from "@/lib/treatments";
-import { resolveIcon } from "@/lib/icon-map";
+import { resolveIcon, type IconName } from "@/lib/icon-map";
 import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
 import { doctorsForTreatment, doctorUrl, doctorBySlug } from "@/lib/doctors";
@@ -49,6 +50,27 @@ function H({ h, base }: { h: Heading; base?: string }) {
       ) : null}
     </>
   );
+}
+
+/* ---------- "Who needs it" icon picker ----------
+ * Turns a plain indication string into a relevant icon so the section reads
+ * as a scannable infographic instead of a checklist. Keyword match against
+ * the curated ICON_MAP; falls back to a generic checkmark when nothing
+ * matches — never breaks, just less specific. Order matters (first match wins). */
+const WHO_NEEDS_ICON_RULES: [RegExp, IconName][] = [
+  [/tube|fallopian|hydrosalpinx/i, "Activity"],
+  [/endometriosis|chocolate cyst/i, "HeartPulse"],
+  [/ovarian reserve|egg count|maternal age|\bamh\b/i, "Egg"],
+  [/sperm|motility|azoospermia|male factor|tesa|pesa|micro-tese/i, "Dna"],
+  [/\biui\b|ovulation.induction/i, "Syringe"],
+  [/donor|surrogacy/i, "Users"],
+  [/genetic|thalassemia|\bpgt\b|chromosomal/i, "Dna"],
+  [/freez|cryopreserv|vitrif/i, "Snowflake"],
+  [/recurrent|repeated|failure|miscarriage/i, "ShieldCheck"],
+  [/unexplained/i, "Target"],
+];
+function whoNeedsIcon(text: string): IconName {
+  return WHO_NEEDS_ICON_RULES.find(([re]) => re.test(text))?.[1] ?? "ClipboardCheck";
 }
 
 /* ---------- lazy YouTube facade ----------
@@ -390,6 +412,9 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
   // the SEO gate checks). For those we keep the exact public render and only swap
   // in <Editable> inside the editor — so the live site stays byte-identical.
   const editing = !!useEdit()?.editMode;
+  // "What is X" reads as one short answer + optional detail behind Read More,
+  // instead of every paragraph landing on the page at once.
+  const [whatIsExpanded, setWhatIsExpanded] = useState(false);
 
   // New section-heading fields live on ResolvedTreatment (CMS path) only.
   // Fall back to shortName-derived strings for the legacy/code path.
@@ -550,9 +575,37 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           <div>
             <SectionHead eyebrow={ed("labels.whatIs", labels.whatIs)} title={<H h={t.whatIs.heading} base="whatIs.heading" />} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
-              {t.whatIs.paragraphs.map((p, i) => (
-                <Reveal key={i} delay={i * 0.05}><p>{ed(`whatIs.paragraphs.${i}.text`, p)}</p></Reveal>
-              ))}
+              {t.whatIs.paragraphs.length > 0 && (
+                <Reveal><p>{ed("whatIs.paragraphs.0.text", t.whatIs.paragraphs[0])}</p></Reveal>
+              )}
+              {t.whatIs.paragraphs.length > 1 && (
+                <>
+                  {/* Full text always renders in the DOM (crawlable, byte-identical
+                   *  content) — only visually clipped via max-height when collapsed,
+                   *  never conditionally unmounted. */}
+                  <motion.div
+                    initial={false}
+                    animate={{ maxHeight: whatIsExpanded || editing ? 999 : 0, opacity: whatIsExpanded || editing ? 1 : 0 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="space-y-5 overflow-hidden"
+                  >
+                    {t.whatIs.paragraphs.slice(1).map((p, i) => (
+                      <p key={i + 1}>{ed(`whatIs.paragraphs.${i + 1}.text`, p)}</p>
+                    ))}
+                  </motion.div>
+                  {!editing && (
+                    <button
+                      type="button"
+                      onClick={() => setWhatIsExpanded((v) => !v)}
+                      aria-expanded={whatIsExpanded}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)] transition-colors hover:text-[color:var(--rose)]/80"
+                    >
+                      {whatIsExpanded ? "Show less" : "Read more"}
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${whatIsExpanded ? "rotate-180" : ""}`} />
+                    </button>
+                  )}
+                </>
+              )}
             </div>
             {reviewer && (
               <div className="mt-8">
@@ -585,14 +638,19 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                   : "sm:grid-cols-2 lg:grid-cols-3"
             }`}
           >
-            {t.whoNeedsIt.items.map((item, i) => (
+            {t.whoNeedsIt.items.map((item, i) => {
+              const ItemIcon = resolveIcon(whoNeedsIcon(item));
+              return (
               <StaggerItem key={i}>
-                <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`whoNeedsIt.items.${i}.value`, item)}</span>
+                <div className="flex h-full items-start gap-3.5 rounded-2xl border border-border/70 bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
+                    <ItemIcon className="h-4 w-4" />
+                  </div>
+                  <span className="mt-1.5 text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`whoNeedsIt.items.${i}.value`, item)}</span>
                 </div>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
         </div>
       </section>
