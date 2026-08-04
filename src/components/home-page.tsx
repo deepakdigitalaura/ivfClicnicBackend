@@ -437,7 +437,7 @@ function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }
 
 /* ---------- Suraksha ---------- */
 
-function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: SurakshaContent } = {}) {
+export function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: SurakshaContent } = {}) {
   return (
     <section id="suraksha" className="relative overflow-hidden bg-[color:var(--plum)] text-white noise scroll-mt-24">
       <div className="pointer-events-none absolute inset-0">

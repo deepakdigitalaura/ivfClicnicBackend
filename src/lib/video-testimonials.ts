@@ -37,6 +37,9 @@ export type VideoTestimonial = {
   location?: string;
   /** Treating doctor — set ONLY when the testimonial explicitly names them. */
   doctor?: string;
+  /** Situation tag (e.g. "Years of Trying") — set ONLY when directly
+   *  supported by the quote text, never inferred. */
+  tag?: string;
 };
 
 /* ---------------------------------------------------------------------
@@ -46,9 +49,9 @@ export type VideoTestimonial = {
  * ------------------------------------------------------------------- */
 export const TREATMENT_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   ivf: [
-    { name: "After 25 Years of Waiting", quote: "25 years of waiting, and one miracle finally completed our family.", youTubeId: "tfc645Tz3vw" },
-    { name: "Dipali Doshi", quote: "We succeeded in our very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "XGYK6MZD3ak" },
-    { name: "Naina & Deepak", quote: "After 20 years of hope, Bavishi Fertility Institute made us parents.", youTubeId: "IK1sZLDAito" },
+    { name: "After 25 Years of Waiting", quote: "25 years of waiting, and one miracle finally completed our family.", youTubeId: "tfc645Tz3vw", tag: "Years of Trying" },
+    { name: "Dipali Doshi", quote: "We succeeded in our very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "XGYK6MZD3ak", tag: "First-Cycle Success" },
+    { name: "Naina & Deepak", quote: "After 20 years of hope, Bavishi Fertility Institute made us parents.", youTubeId: "IK1sZLDAito", tag: "Years of Trying" },
   ],
 
   "ivf-failure": [
