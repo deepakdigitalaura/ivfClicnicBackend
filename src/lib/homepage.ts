@@ -81,7 +81,7 @@ export type EventPoster = { src: string; alt: string };
 /** Patient success-story video (id + name + quote + star rating). */
 export type VideoStory = { id: string; n: string; q: string; r: number; tag?: string };
 /** Educational video (id + title + description). */
-export type EduVideo = { id: string; t: string; d: string };
+export type EduVideo = { id: string; t: string; d: string; c?: string };
 /** Resource video (id + category + title + byline). */
 export type ResourceVideo = { id: string; c: string; t: string; date: string };
 
@@ -370,10 +370,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       { id: "SbkV-1fSonM", n: "Jigesh & Jinal", q: "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", r: 5, tag: "Repeated Treatment Failure" },
     ],
     edu: [
-      { id: "hLwH-BNpmzI", t: "5 Reasons Embryo Implantation Fails", d: "Dr. Parth Bavishi explains why an embryo may not stick — and what to do about it." },
-      { id: "319LcXY6D8I", t: "Can You Get Pregnant After Periods Stop?", d: "Dr. Himanshu Bavishi answers this common fertility question." },
-      { id: "_jEgFL09spA", t: "5 Ways to Improve Embryo Implantation Chances", d: "Practical, science-backed tips from Dr. Parth Bavishi." },
-      { id: "zoNpyKlxHKk", t: "What to Expect After Embryo Transfer", d: "Dr. Parth Bavishi walks through what you may feel next." },
+      { id: "hLwH-BNpmzI", t: "5 Reasons Embryo Implantation Fails", d: "Dr. Parth Bavishi explains why an embryo may not stick — and what to do about it.", c: "IVF Failure" },
+      { id: "319LcXY6D8I", t: "Can You Get Pregnant After Periods Stop?", d: "Dr. Himanshu Bavishi answers this common fertility question.", c: "Fertility Basics" },
+      { id: "_jEgFL09spA", t: "5 Ways to Improve Embryo Implantation Chances", d: "Practical, science-backed tips from Dr. Parth Bavishi.", c: "Embryo Transfer" },
+      { id: "zoNpyKlxHKk", t: "What to Expect After Embryo Transfer", d: "Dr. Parth Bavishi walks through what you may feel next.", c: "Embryo Transfer" },
     ],
     resources: [
       { id: "AO_J6jKeCck", c: "IVF Guide", t: "How Many Eggs Are Actually Needed for IVF?", date: "Dr. Parth Bavishi" },

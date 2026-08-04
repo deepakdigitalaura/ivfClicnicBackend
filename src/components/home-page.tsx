@@ -996,6 +996,9 @@ export function VideoHub({
                 </span>
               </div>
               <div className="p-5">
+                {v.c && (
+                  <span className="mb-2 inline-block rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 text-xs font-semibold text-[color:var(--rose)]">{v.c}</span>
+                )}
                 <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)]">{v.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.d}</p>
               </div>
