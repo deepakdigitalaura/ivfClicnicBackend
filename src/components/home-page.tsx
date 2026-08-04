@@ -713,7 +713,7 @@ export function SuccessStories({
   carousel = false,
 }: {
   /** Either `id` (YouTube) or `src` (self-hosted .mp4) must be set — never both. */
-  stories?: { id?: string; src?: string; n: string; q: string; r: number }[];
+  stories?: { id?: string; src?: string; n: string; q: string; r: number; tag?: string }[];
   eyebrow?: React.ReactNode;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
@@ -748,7 +748,7 @@ export function SuccessStories({
                     <LiteYouTube id={s.id!} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
                   )}
                   <div className="pointer-events-none absolute bottom-4 left-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[color:var(--plum)] shadow-soft backdrop-blur">
-                    Patient Story
+                    {s.tag ?? "Patient Story"}
                   </div>
                 </div>
                 <div className="p-6">

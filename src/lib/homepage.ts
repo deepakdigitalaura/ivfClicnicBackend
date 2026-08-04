@@ -79,7 +79,7 @@ export type AwardItem = { img: string; title: string; desc: string };
 export type EventPoster = { src: string; alt: string };
 
 /** Patient success-story video (id + name + quote + star rating). */
-export type VideoStory = { id: string; n: string; q: string; r: number };
+export type VideoStory = { id: string; n: string; q: string; r: number; tag?: string };
 /** Educational video (id + title + description). */
 export type EduVideo = { id: string; t: string; d: string };
 /** Resource video (id + category + title + byline). */
@@ -365,9 +365,9 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   },
   videos: {
     stories: [
-      { id: "6bH_RnV-_2Y", n: "Anita Thakkar", q: "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", r: 5 },
-      { id: "KKf6tNrlvoc", n: "Rekha's Journey", q: "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", r: 5 },
-      { id: "SbkV-1fSonM", n: "Jigesh & Jinal", q: "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", r: 5 },
+      { id: "6bH_RnV-_2Y", n: "Anita Thakkar", q: "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", r: 5, tag: "IVF Failed Elsewhere" },
+      { id: "KKf6tNrlvoc", n: "Rekha's Journey", q: "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", r: 5, tag: "Pregnancy Loss & Twins" },
+      { id: "SbkV-1fSonM", n: "Jigesh & Jinal", q: "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", r: 5, tag: "Repeated Treatment Failure" },
     ],
     edu: [
       { id: "hLwH-BNpmzI", t: "5 Reasons Embryo Implantation Fails", d: "Dr. Parth Bavishi explains why an embryo may not stick — and what to do about it." },
