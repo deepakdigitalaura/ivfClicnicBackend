@@ -386,11 +386,11 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     heading: { lead: "Answers to your", em: "first questions." },
     items: [
       { q: "What is IVF and how does it work?", a: "IVF (In-Vitro Fertilisation) is a process where an egg is fertilised by sperm outside the body. The resulting embryo is then transferred to the uterus. The process involves ovarian stimulation, egg retrieval, fertilisation, embryo culture and transfer." },
-      { q: "What are the success rates at Bavishi Fertility Centre?", a: "Our success rates are among the highest in India — typically 55–70% per cycle for women under 35, with rates personalised based on age, diagnosis and treatment plan." },
+      { q: "What are the success rates at Bavishi Fertility Centre?", a: "Our success rates are among the highest in India — typically 55–70% per cycle for women under 35, based on our internal clinical data. Rates are personalised based on age, diagnosis and treatment plan — ask us for detailed, up-to-date statistics during your consultation." },
       { q: "How much does IVF cost?", a: "IVF costs vary based on the protocol, medication and additional procedures required. Use our IVF Cost Calculator for a transparent estimate or speak to our team for a personalised quote." },
       { q: "Is fertility treatment painful?", a: "Most fertility treatments cause minimal discomfort. Egg retrieval is performed under sedation. Our team prioritises your comfort at every step." },
       { q: "How do I get started?", a: "Begin with a consultation at any of our 14 centres. Our specialists will review your history and design a personalised plan." },
-      { q: "What is the Suraksha Kavach program?", a: "Suraksha Kavach is our pioneering protection program designed to give you peace of mind on your fertility journey. It includes multiple IVF cycles, risk reduction and priority care. Terms and conditions apply." },
+      { q: "What is the Suraksha Kavach program?", a: "Suraksha Kavach is our pioneering protection program designed to give you peace of mind on your fertility journey. Eligible patients receive multiple IVF cycles as needed, with financial protection if a clinical pregnancy is not achieved. Eligibility criteria and full terms are explained during your consultation." },
     ],
   },
   finalCta: {
