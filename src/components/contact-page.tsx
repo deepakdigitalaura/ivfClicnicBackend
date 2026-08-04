@@ -22,7 +22,7 @@ const ICONS: Record<string, LucideIcon> = { Phone, MessageCircle, Mail, Clock, M
 type Card = { icon: string; t: string; v: string; href?: string | null; note?: string | null };
 
 const DEFAULT_CARDS: Card[] = [
-  { icon: "Phone", t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 patient helpline" },
+  { icon: "Phone", t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 phone support — clinic visiting hours vary by centre" },
   { icon: "MessageCircle", t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712622288", note: "Quick replies, every day" },
   { icon: "Mail", t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
 ];
@@ -139,7 +139,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
 
       {/* Locations directory */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "14 fertility centres across 8 Indian cities — world-class care, close to home.")} />
+        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "14 fertility centres across 8 Indian cities — world-class care, close to home. Phone & WhatsApp support is available 24×7; centre visiting hours are listed below.")} />
 
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {centreList.map((c) => (
