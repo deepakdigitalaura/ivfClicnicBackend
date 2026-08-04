@@ -115,7 +115,13 @@ const faqs: HubFaq[] = [
   },
 ];
 
-export function MaternityServicesHub() {
+type ExtraServiceCard = { title: string; desc: string; href: string };
+
+export function MaternityServicesHub({ extraCards = [] }: { extraCards?: ExtraServiceCard[] }) {
+  const allCards: HubCard[] = [
+    ...cards,
+    ...extraCards.map((c) => ({ ...c, icon: HeartPulse })),
+  ];
   return (
     <CategoryHubPage
       eyebrow="Maternity Services"
@@ -123,7 +129,7 @@ export function MaternityServicesHub() {
       titleAccent="Pregnancy & Delivery"
       subtitle="From your first scan to the moment you hold your baby — Bavishi Fertility & Birthing provides complete maternity care with experienced obstetricians, modern labour suites, and a focus on your comfort and safety."
       breadcrumbLabel="Maternity Services"
-      cards={cards}
+      cards={allCards}
       cardsSectionTitle="Our Maternity Services"
       cardsSectionSubtitle="Click on any service below to learn what it involves, who it's for, and how our team delivers the best possible care."
       stats={stats}
