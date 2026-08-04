@@ -162,13 +162,16 @@ export const HOME_SECTION_LABELS: Record<HomeSection, string> = {
 };
 
 /** The canonical layout — every section, in order. Used as the fallback
- *  whenever the CMS layout is empty. `blogs` ("Knowledge & Resources") is
- *  hidden by default: it duplicated the `videoHub` ("Education") section
- *  (same YouTube-card layout, just a different video list), so it's turned
- *  off rather than deleted — its data/schema/admin field are untouched and
- *  it can be re-enabled from the admin section builder if ever needed. */
+ *  whenever the CMS layout is empty. Two sections are hidden by default:
+ *  `blogs` ("Knowledge & Resources") duplicated the `videoHub` ("Education")
+ *  section (same YouTube-card layout, just a different video list); `whyBavishi`
+ *  ("Why Bavishi Cards") covered the same ground — trust, tech, expertise,
+ *  transparency — as `whyChoose` ("Why Choose Pillars") a few sections later,
+ *  making the page feel repetitive. Both are turned off rather than deleted —
+ *  their data/schema/admin fields are untouched and either can be re-enabled
+ *  from the admin section builder if ever needed. */
 export const DEFAULT_HOME_LAYOUT: HomeSectionLayout[] = HOME_SECTIONS.map(
-  (section) => ({ section, visible: section !== "blogs" }),
+  (section) => ({ section, visible: section !== "blogs" && section !== "whyBavishi" }),
 );
 
 /** Client-ready, fully-resolved homepage content. */
