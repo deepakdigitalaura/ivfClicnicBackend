@@ -517,8 +517,8 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
  * card becomes a link (and "Learn more" stays a span to keep valid HTML);
  * without `href` it renders exactly as the original homepage card. */
 export function TreatmentCard({
-  icon: Icon, title, desc, href, titleNode, descNode,
-}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode }) {
+  icon: Icon, title, desc, href, titleNode, descNode, tag,
+}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode; tag?: React.ReactNode }) {
   const body = (
     <motion.div
       whileHover={{ y: -6 }}
@@ -531,6 +531,11 @@ export function TreatmentCard({
           <Icon className="h-5 w-5" />
         </div>
         <div>
+          {tag && (
+            <span className="mb-1.5 inline-block text-xs font-semibold uppercase tracking-wide text-[color:var(--rose)]">
+              {tag}
+            </span>
+          )}
           <h3 className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</h3>
           <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{descNode ?? desc}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--rose)]">
@@ -573,6 +578,15 @@ const FEATURED_TREATMENT_TITLES = new Set([
   "Fertility Preservation",
 ]);
 
+/** Problem-first framing shown above each featured card — patients search by
+ *  what's wrong before they know the treatment name. */
+const FEATURED_TREATMENT_TAGS: Record<string, string> = {
+  "IUI": "Trying for years?",
+  "IVF / ICSI / ART": "IVF failed before?",
+  "Advanced Fertility Techniques": "Low sperm count or PCOS?",
+  "Fertility Preservation": "Not ready yet, but want options later?",
+};
+
 export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
   const featured = content.items
     .map((item, i) => ({ ...item, i }))
@@ -596,6 +610,7 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
               href={TREATMENT_TITLE_HREFS[t]}
               titleNode={ed(`treatments.items.${i}.t`, t)}
               descNode={ed(`treatments.items.${i}.d`, d)}
+              tag={FEATURED_TREATMENT_TAGS[t]}
             />
           </StaggerItem>
         ))}
