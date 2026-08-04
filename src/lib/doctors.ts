@@ -185,7 +185,7 @@ export const DOCTORS: Doctor[] = [
       "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
     bio: [
       "Dr. Himanshu Bavishi founded Bavishi Fertility Institute in 1998 and has since helped pioneer assisted reproduction in India. He has led the institute's growth into a national network credited with 30,000+ pregnancies.",
-      "A pioneer and leader in infertility and IVF, he is widely respected for the reputation of a doctor with a 'golden hand' — bringing positive results in the most difficult cases — and treats couples from across India and overseas with excellent outcomes.",
+      "A pioneer and leader in infertility and IVF, he has earned a reputation as a doctor with a 'golden hand' — bringing positive results in the most difficult cases — and treats couples from across India and overseas with excellent outcomes.",
       "His clinical focus spans customised ovarian-stimulation protocols, ICSI, and safe-stimulation strategies designed to avoid severe OHSS. He is a frequent speaker, invited faculty at national and regional conferences, and an educator on responsible, transparent fertility care.",
     ],
     knowsAbout: [

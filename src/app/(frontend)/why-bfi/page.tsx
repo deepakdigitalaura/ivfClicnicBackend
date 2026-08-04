@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     openGraph: {
       title: "Why Choose Bavishi Fertility Institute | Best IVF Clinic in India",
       description:
-        "Pioneers of IVF since 1998. 30,000+ successful pregnancies, 15 centres across India. Ethical, transparent, and affordable fertility care.",
+        "Pioneers of IVF since 1998. 30,000+ successful pregnancies, 14 centres across India. Ethical, transparent, and affordable fertility care.",
       url: abs(PATH),
       type: "website",
     },
@@ -30,7 +30,7 @@ const graph = [
     url: abs(PATH),
     name: "Why Choose Bavishi Fertility Institute",
     description:
-      "25+ years of pioneering IVF in India. 30,000+ success stories. Class 1000 labs, ethical practice, and value-based services across 15 centres.",
+      "25+ years of pioneering IVF in India. 30,000+ success stories. Class 1000 labs, ethical practice, and value-based services across 14 centres.",
     isPartOf: { "@id": WEBSITE_ID },
     about: { "@id": ORG_ID },
   },

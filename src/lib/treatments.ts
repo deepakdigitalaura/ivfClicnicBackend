@@ -2441,7 +2441,7 @@ export const azoospermia = defineTreatment({
     heading: { lead: "How azoospermia", em: "is managed" },
     subtitle: "Careful diagnosis first, then the least-invasive route to usable sperm.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "History, examination, hormone profile, imaging and genetic tests to classify the type." },
+      { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "History, examination, hormone profile and genetic tests to classify the type." },
       { icon: Target, n: "02", t: "Surgical Retrieval", d: "PESA, TESA or microsurgical Micro-TESE to recover sperm from the epididymis or testes." },
       { icon: Microscope, n: "03", t: "ICSI", d: "Retrieved sperm are injected directly into the eggs in the laboratory." },
       { icon: Snowflake, n: "04", t: "Freezing", d: "Surplus sperm or embryos are frozen for future attempts." },

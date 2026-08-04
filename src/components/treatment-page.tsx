@@ -1022,11 +1022,13 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
             subtitle={ed("blogSection.subtitle", blogSection.subtitle)}
           />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {blogs.map((b) => (
+            {blogs.map((b) => {
+              const CardTag = b.published ? "a" : "div";
+              return (
               <StaggerItem key={b.slug}>
-                <a
-                  href={b.href}
-                  className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift"
+                <CardTag
+                  {...(b.published ? { href: b.href } : {})}
+                  className={`group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-500 ${b.published ? "hover:-translate-y-1.5 hover:shadow-lift" : "cursor-default opacity-80"}`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">
@@ -1042,13 +1044,16 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                     {b.title}
                   </h3>
                   <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted-foreground">{b.excerpt}</p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
-                    Read article
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </span>
-                </a>
+                  {b.published && (
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
+                      Read article
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
+                  )}
+                </CardTag>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
           <div className="mt-8 text-center">
             <a href={destinationHref("blog")} className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)] hover:text-[color:var(--rose)]">
