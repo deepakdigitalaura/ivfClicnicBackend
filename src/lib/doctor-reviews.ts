@@ -258,12 +258,6 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
   // page Bavishi-only. `date` is the label exactly as shown by Google.
   "deep-gajiwala": [
     {
-      name: "Pratiben Vasantbhai Patel",
-      date: "21 February 2024",
-      text:
-        "સાદર પ્રણામ,\nડો. સાહિબ શ્રી,\n\nઅમારી સફળતા બદલ આભાર,\nપ્રથમ સાઇકલમાં અમને સફળતા મળી\nઅને પ્રેગનેન્સીમાં ગર્ભનો વિકાસ સરસ છે.\nગર્ભમાં ધબકારા સરસ ચાલે છે. જે મને\nડોક્ટર સાહિબે બતાવ્યું તે જોઈ મને\nખૂબ આનંદ થયો છે.\n\nથેંક્યુ ડોક્ટર,\n\nપી. વી. પટેલ\nવી. એમ. પટેલ",
-    },
-    {
       name: "Vaishaben Ayagjkumar Patel",
       text:
         "હું વર્ષો પહેલ, મારે રહેવાનું નવસારી. મારા મેરેજના પાંચ વર્ષ થયા છે. મેં વળી હોસ્પિટલમાં ટ્રીટમેન્ટ લીધી પણ બધી જગ્યાએથી નિષ્ફળતા જ મળી. પછી અમે અહીં સુરત બાવીશી હોસ્પિટલના સંપર્કમાં આવ્યા. અહીં હોસ્પિટલની પુરી સ્ટાફ, ડૉ. દીપ સર, ડૉ. દિશા મેડમ બધાનો સ્વભાવ ખૂબ જ સારો હતો. પછી ધીમે ધીમે મારી ટ્રીટમેન્ટ ચાલુ થઈ હતી. પહેલી વાર મારુ IVF થયું, પણ તેમાં નિષ્ફળતા મળી. હું ખૂબ નિરાશ થઈ ગઈ હતી. પછી ડૉ. દીપ સરે અમને હિસ્ટ્રોસ્કોપી વિશે જણાવ્યું, અને પછી અમે હિસ્ટ્રોસ્કોપી કરાવ્યું અને પછી બીજી વાર મારુ IVF ટ્રીટમેન્ટ ચાલુ થયું. 10/07/2025 મારું IVF થયું અને 22/07/2025 મારી રિપોર્ટ આવવાનો હતો. હું ખૂબ ટેન્શનમાં હતી કે રિપોર્ટમાં શું આવશે, પછી સાંજે 6 વાગ્યે ડૉ. દિશા મેડમનો ફોન આવ્યો અને તેમને જણાવ્યું કે રિપોર્ટ પોઝિટિવ છે. હું એવું સાંભળીને ખૂબ જ ખુશ થઈ ગઈ. પછી અમને 11/08/2025 ના દિવસે સોનોગ્રાફી માટે બોલાવ્યા. પછી મારી સોનોગ્રાફી થઈ અને પહેલી વાર મારા બાળકના ધબકારા સંભળાવ્યા અને એ સાંભળીને મારી ખુશીનો પાર ના રહ્યો.\n\nમાટે, હું અને મારા પતિ અને મારો આખો પરિવાર બાવીશી હોસ્પિટલને અત્યંત લાગણીપૂર્વક આભાર માનીએ છીએ.\n\nThank you very much.",
@@ -282,25 +276,11 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "I had really good experince with Bavishi fertility institute staff was really polite and good I had sucess with my first cycle here\nThank you so much Bavishi staff and Dr Deep Gajiwala for making my dream come true.",
     },
     {
-      name: "Harshil Naik",
-      rating: 5,
-      date: "8 months ago",
-      text:
-        "We started our treatment here by reference and no doubt the best decision we've ever made. The experience is great, the service is superb and I must say the way everyone taking from Doctor to staff is very polite, positive and welcoming. Everything is explained in detail and Dr. Deep sir and Assistant doctors answers all the queries that we had.\n\nThank You very much for all you do.",
-    },
-    {
       name: "Hiral Patel",
       rating: 5,
       date: "Edited 9 months ago",
       text:
         "We are beyond grateful to Dr. Deep Gajiwala and his entire team at Bavishi fertility Surat for making our dream of becoming parents come true. After going through the IVF journey, we are now blessed with a twins, a boy and a girl, and words cannot express the joy we feel.\n\nDr. Deep Gajiwala's expertise, guidance, and compassionate approach gave us immense confidence throughout the treatment. He explained every step with clarity and always encouraged us with positivity. A very special thanks to Pratik sir, Dr.Disha mam and kalpanaben whose constant support, care, and patience made the process so much smoother for us. Their reassuring words and dedication kept us strong in difficult times.\n\nThe entire team worked with so much effort, professionalism, and kindness, and for that, we will always remain thankful. Today, as we hold our little ones in our arms, we know it wouldn't have been possible without them.\n\nFrom the bottom of our hearts, thank you Dr Deep Gajiwala, for helping us start this new chapter of our lives.",
-    },
-    {
-      name: "Ketan Vadodariya",
-      rating: 5,
-      date: "a year ago",
-      text:
-        "This is the best IVF treatment institute in surat with highly professional and experienced doctor Deep Gajiwala.\n\nThe First day of visit, Dr Deep explain process well and clear many unusual doubts. He didn't hide anything about treatment and prepared us very well.\n\nDr Disha explain about cost of treatment and medicine and other stuff of the IVF. By the way she was very good in explanation. I remember one incident with Disha is, After conceive, we called her on midnight 3 am because of my wife was getting pain and she answered call on first try and explain us what to do with situation and she was very clam even when I called her midnight.\n\nOther staff of hospital was very helpful. Never given annoying answers.\n\nI would suggest this institute for the IVF treatment.\n\nMy wife convinced on first try of IVF.",
     },
     {
       name: "Kapana Mistry",
@@ -329,13 +309,6 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       date: "21 weeks ago",
       text:
         "We had a very good experience at Bavishi Hospital. Dr. Deep Sir was extremely kind, patient, and professional throughout the treatment. He explained everything clearly and made us feel comfortable and confident. The hospital staff was also very polite, supportive, and attentive. Overall, we are very satisfied with the care and highly recommend this hospital.",
-    },
-    {
-      name: "H!tesh Shah",
-      rating: 5,
-      date: "32 weeks ago",
-      text:
-        "I had the privilege of being under the care of Dr. Deep Gajiwala, a truly exceptional physician in the department. What impressed me most was not only their deep expertise in treating my condition, but also their commitment to clear, empathetic communication. Dr. Deep patiently explained all the treatment options, answered every question I had, ensuring I felt fully informed and comfortable with the plan. Their professionalism and genuine concern for my well-being are commendable. Highly recommended.",
     },
     {
       name: "Riya Patel",
