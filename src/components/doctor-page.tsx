@@ -336,7 +336,7 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                   {centres[0] && (
                     <a href={`tel:+${centres[0].phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call {centres[0].phoneLabel}</a>
                   )}
-                  <a href="/#locations" className="group inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-5 py-2.5 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]">View all centres <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
+                  <a href="/locations" className="group inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-5 py-2.5 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]">View all centres <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
                 </div>
               </div>
             </Reveal>

@@ -61,7 +61,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#locations" className="hover:text-[color:var(--rose)]">Locations</a>
+          <a href="/locations" className="hover:text-[color:var(--rose)]">Locations</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{city.name}</span>
         </nav>

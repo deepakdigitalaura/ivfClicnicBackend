@@ -766,7 +766,7 @@ export function serviceGraph(s: ServiceGraphInput): Record<string, unknown>[] {
     },
     breadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Maternity Services", url: "/#treatments" },
+      { name: "Maternity Services", url: "/services/maternity-services" },
       { name: s.breadcrumbName, url: WOMENS_HEALTH_SERVICES[s.key]?.href ?? `/services/${s.slug}` },
     ]),
     faqSchema(s.faqs),

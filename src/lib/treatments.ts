@@ -64,7 +64,7 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
   cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/cryopreservation" },
   "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/egg-freezing" },
-  "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/#treatments" },
+  "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/treatments" },
   // Male Infertility
   oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
   asthenospermia: { slug: "asthenospermia", name: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
@@ -81,7 +81,7 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
 };
 
 export const treatmentRef = (slug: string): TreatmentRef =>
-  TREATMENTS_REGISTRY[slug] ?? { slug, name: slug, href: "/#treatments" };
+  TREATMENTS_REGISTRY[slug] ?? { slug, name: slug, href: "/treatments" };
 
 /* ---------- Treatment cards (homepage-style card data) ----------
  * Icon + one-line description per treatment slug, so the homepage card design
@@ -4420,7 +4420,7 @@ export function treatmentGraph(t: TreatmentGraphInput): Record<string, unknown>[
     },
     breadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Treatments", url: "/#treatments" },
+      { name: "Treatments", url: "/treatments" },
       { name: t.breadcrumbName, url: t.href },
     ]),
     faqSchema(t.faqs),

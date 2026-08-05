@@ -477,7 +477,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
+          <a href="/treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{t.breadcrumbName}</span>
         </nav>
