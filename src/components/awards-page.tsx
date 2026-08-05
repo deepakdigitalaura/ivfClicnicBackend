@@ -129,7 +129,7 @@ export function AwardsPage() {
                 Experience India&rsquo;s most awarded fertility chain.
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm text-[color:var(--plum)]/65">
-                Speak with our fertility experts today — confidential, compassionate and complimentary.
+                Speak with our fertility experts today — confidential, compassionate and personalised.
               </p>
               <a
                 href="/contact#book"

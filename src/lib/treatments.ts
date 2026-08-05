@@ -401,7 +401,7 @@ export const ivf: Treatment = {
   cta: {
     heading: "Ready to begin your",
     headingEm: "IVF journey?",
-    subtitle: "Speak with our fertility experts today — confidential, compassionate and complimentary.",
+    subtitle: "Speak with our fertility experts today — confidential, compassionate and personalised.",
   },
 };
 
@@ -604,7 +604,7 @@ export const ivfFailure: Treatment = {
   cta: {
     heading: "Ready for a clearer",
     headingEm: "next step?",
-    subtitle: "Bring your previous reports to a confidential, complimentary review with our fertility experts.",
+    subtitle: "Bring your previous reports to a confidential, personalised review with our fertility experts.",
   },
 };
 
@@ -912,7 +912,7 @@ export const icsi: Treatment = {
   cta: {
     heading: "Ready to talk about",
     headingEm: "ICSI?",
-    subtitle: "Speak with our fertility experts today — confidential, compassionate and complimentary.",
+    subtitle: "Speak with our fertility experts today — confidential, compassionate and personalised.",
   },
 };
 

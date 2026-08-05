@@ -21,17 +21,17 @@ const FALLBACK = {
       "Have a question or ready to begin? Reach out — confidentially and without obligation. Our fertility counsellors are here to guide your very first step.",
   },
   seo: {
-    metaTitle: "Contact Bavishi Fertility Institute — Book a Free IVF Consultation",
+    metaTitle: "Contact Bavishi Fertility Institute — Book an IVF Consultation",
     metaDescription:
-      "Contact Bavishi Fertility Institute — call +91 97126 22288, WhatsApp or email drbavishi@ivfclinic.com. Book a free fertility consultation across 14 centres in 8 Indian cities.",
-    ogTitle: "Contact Bavishi Fertility Institute — Book a Free IVF Consultation",
+      "Contact Bavishi Fertility Institute — call +91 97126 22288, WhatsApp or email drbavishi@ivfclinic.com. Book a fertility consultation across 14 centres in 8 Indian cities.",
+    ogTitle: "Contact Bavishi Fertility Institute — Book an IVF Consultation",
     ogDescription:
-      "Call, WhatsApp or message us to begin your fertility journey. 14 centres across 8 cities. Free initial consultation, online consultations available.",
+      "Call, WhatsApp or message us to begin your fertility journey. 14 centres across 8 cities. Online consultations available.",
   },
   faqs: [
     { question: "How do I book an appointment at Bavishi Fertility Institute?", answer: "Fill in the enquiry form on this page, call us on +91 97126 22288, or message us on WhatsApp. Our team will help you choose the nearest centre and a convenient time." },
     { question: "Which Bavishi Fertility Institute centre is nearest to me?", answer: "We have 14 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
-    { question: "Is the first consultation free?", answer: "We offer a free initial consultation so you can understand your options with no obligation. Diagnostic tests and treatments are quoted transparently, with EMI options available." },
+    { question: "Do you offer free consultations?", answer: "We understand that choosing the right fertility clinic is an important decision. To ensure every couple receives dedicated time, expert guidance, and a personalised evaluation, our consultations are not offered free of charge. However, we periodically offer special free consultation slots as part of limited-time programs. Please contact us to check current availability." },
     { question: "Do you treat international patients?", answer: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including treatment planning and coordination across our 14 centres." },
   ],
 };
