@@ -197,6 +197,20 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       text:
         "We would like to thanks Dr. Suman Singh and the entire team of Bavishi Clinik to fulfil our dream come true to becoming Parents on the First attempt after 5 years of married life.\n\nWe are very grateful to Bavishi clinik.\n\nIt is best IVF clinik in my life.\n\nDr. Suman Singh and all staffs are very kind and gives special attention to their petient.\n\nAll Dr. and staffs are experts in their field and they gives 100% efforts in their work only we have to put Trust on them & result is positive.\n\nWe definetly recommend Bavishi clinik to all Those who wants to become Parents.\n\n\"Yes! Dreams Become True, with the help of BAVISHI\"",
     },
+    {
+      name: "Jignesh Patel",
+      rating: 5,
+      date: "Edited 6 months ago",
+      text:
+        "Very very special thanks to Dr suman singh for her excellent treatment and follow up care. She is so much experienced and just a one call and message away for any concern.She was very friendly and supportive throughout our journey and thanks to Dr swati also who helped us so much.\nWe highly recommend Dr suman singh and Dr swati at bavishi fertility institute.",
+    },
+    {
+      name: "Meghna Budhrani",
+      rating: 5,
+      date: "4 months ago",
+      text:
+        "special thanks to Dr suman singh for her excellent treatment and follow up care. She is so much experienced and just a one call and message away for any concern.She was very friendly and supportive throughout our journey and thanks to Dr swati also who helped us so much.🥰",
+    },
   ],
 
   // Bavishi Fertility Institute (with Spandan Hospital) — Bhuj/Kutch.

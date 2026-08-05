@@ -118,6 +118,7 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   "binal-shah": [
     { name: "Madhvika & Pranay", doctor: "Dr. Binal Shah", quote: "When dreams blossom against all odds — our story with Bavishi Fertility Institute.", youTubeId: "v2oy6QZjQvs" },
     { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Binal Shah", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
+    { name: "Ankita Himanshukumar Dave", doctor: "Dr. Binal Shah", quote: "Watch Ankita Himanshukumar Dave share her fertility treatment journey with Bavishi Fertility Institute.", youTubeId: "ber4YBT5Yno" },
   ],
 
   // Self-hosted (not on the YouTube channel yet) — clinic-supplied WhatsApp
