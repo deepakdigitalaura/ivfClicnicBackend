@@ -400,7 +400,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     eyebrow: "Begin Today",
     heading: { lead: "Ready to begin your", em: "parenthood journey?" },
     paragraph:
-      "Speak with our fertility experts today — confidential, compassionate and complimentary.",
+      "Speak with our fertility experts today — confidential, compassionate and personalised.",
     stats: [
       { v: 30000, s: "+", l: "Happy Families" },
       { v: 30, s: "+", l: "Years" },
@@ -468,7 +468,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   inquiry: {
     eyebrow: "Book an Appointment",
     heading: { lead: "Start your", em: "parenthood journey." },
-    subtitle: "Share a few details and our fertility counsellor will call you back — confidential, compassionate and complimentary.",
+    subtitle: "Share a few details and our fertility counsellor will call you back — confidential, compassionate and personalised.",
     contacts: [
       { h: "Call us", d: "+91 97126 22288" },
       { h: "WhatsApp", d: "Chat with our team 24×7" },

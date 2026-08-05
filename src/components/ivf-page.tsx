@@ -732,7 +732,7 @@ export function IvfPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/75">
-              Speak with our fertility experts today — confidential, compassionate and complimentary.
+              Speak with our fertility experts today — confidential, compassionate and personalised.
             </p>
           </Reveal>
           <Reveal delay={0.2}>

@@ -42,6 +42,11 @@ export type Doctor = {
   cities: string[];
   /** Location slugs (city or area) for internal links + areaServed. */
   locations: string[];
+  /** This doctor's own consultation-hours override per centre slug, shown
+   *  alongside (not instead of) the centre's general institute hours — e.g.
+   *  "Mon/Wed/Fri · 9:30 AM–12:30 PM". Centres not listed here show only the
+   *  institute hours. */
+  consultationTimings?: Record<string, string>;
   /** Treatment slugs the doctor practises — drives Doctor↔Treatment links. */
   treatments: string[];
   shortBio: string;
@@ -122,6 +127,8 @@ function cityDoctor(opts: {
   experienceYears?: number;
   /** Centre slugs the doctor consults at (powers the contact cards). */
   locations?: string[];
+  /** Per-centre consultation-hours override, keyed by centre slug. */
+  consultationTimings?: Record<string, string>;
   medicalSpecialty?: string[];
   shortBio?: string;
   bio?: string[];
@@ -147,6 +154,7 @@ function cityDoctor(opts: {
     experienceYears: opts.experienceYears,
     cities: [opts.city],
     locations: opts.locations ?? [opts.citySlug],
+    consultationTimings: opts.consultationTimings,
     treatments: opts.treatments ?? ALL_TREATMENT_SLUGS,
     shortBio:
       opts.shortBio ??
@@ -229,7 +237,10 @@ export const DOCTORS: Doctor[] = [
     experienceLabel: "34+ yrs",
     experienceYears: 34,
     cities: ["Ahmedabad"],
-    locations: ["paldi", "sindhu-bhavan-road"],
+    locations: ["paldi", "sindhu-bhavan-road", "nikol"],
+    consultationTimings: {
+      nikol: "Every Wednesday · 11:00 AM–1:00 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
       "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
@@ -268,6 +279,9 @@ export const DOCTORS: Doctor[] = [
     experienceYears: 13,
     cities: ["Ahmedabad"],
     locations: ["paldi", "sindhu-bhavan-road"],
+    consultationTimings: {
+      paldi: "Mon–Sat · 10:00 AM–4:00 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
       "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
@@ -363,7 +377,11 @@ export const DOCTORS: Doctor[] = [
   // Ahmedabad
   cityDoctor({
     slug: "binal-shah", name: "Dr. Binal Shah", image: "/assets/doctors/binal-shah.webp",
-    city: "Ahmedabad", citySlug: "ahmedabad", locations: ["paldi"],
+    city: "Ahmedabad", citySlug: "ahmedabad", locations: ["paldi", "sindhu-bhavan-road"],
+    consultationTimings: {
+      paldi: "Mon, Tue, Thu, Fri, Sat · 10:00 AM–5:30 PM · Wed · 10:00 AM–3:00 PM",
+      "sindhu-bhavan-road": "Wed · 3:30 PM–5:30 PM",
+    },
     credentials: "MBBS, DGO", experienceLabel: "30+ yrs", experienceYears: 30,
     specialty: "Obstetrics, Gynaecology & IVF",
     role: "IVF Specialist · Chief Quality Control & NABH Nodal Officer",
@@ -408,6 +426,10 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "suman-singh", name: "Dr. Suman Singh", image: "/assets/doctors/Dr.-Suman-Singh.webp",
     city: "Mumbai", citySlug: "mumbai", locations: ["thane", "ghatkopar"],
+    consultationTimings: {
+      thane: "Mon–Sat · 10:00 AM–1:00 PM",
+      ghatkopar: "Mon–Sat · 2:00 PM–5:00 PM",
+    },
     credentials: "MBBS, DGO", experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Fertility & IVF", role: "IVF Specialist",
     shortBio: "Fertility specialist with over 20 years of experience in Mumbai and abroad, helping couples conceive naturally, through planned relationships and through IVF.",
@@ -420,6 +442,9 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "nilesh-jain", name: "Dr. Nilesh Jain", image: "/assets/doctors/Dr.-Nilesh-Jain-221x300.webp",
     city: "Mumbai", citySlug: "mumbai", locations: ["ghatkopar", "vashi"],
+    consultationTimings: {
+      ghatkopar: "Mon, Wed, Fri · 9:30 AM–5:00 PM · Tue, Thu, Sat · 9:30 AM–2:30 PM",
+    },
     credentials: "MBBS, DGO, DNB (Obstetrics & Gynaecology)", experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Infertility & IVF", role: "Fertility Consultant",
     shortBio: "Fertility consultant with more than 20 years of experience in infertility treatment, consulting at the Ghatkopar and Vashi centres in Mumbai.",
@@ -525,6 +550,9 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "surbhi-vegad", name: "Dr. Surbhi Vegad", image: "/assets/doctors/surbhi-vegad.webp",
     city: "Bhuj", citySlug: "bhuj", locations: ["mirjapar"],
+    consultationTimings: {
+      mirjapar: "Mon–Sat · 10:00 AM–4:00 PM",
+    },
     experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Gynaecology, IVF & 3D Laparoscopy", role: "IVF Specialist & 3D Laparoscopic Surgeon",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
@@ -539,6 +567,9 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "chetna-vyas", name: "Dr. Chetna Vyas", image: "/assets/doctors/chetna-vyas.webp",
     city: "Anand", citySlug: "anand", locations: ["nanikhodiyar"],
+    consultationTimings: {
+      nanikhodiyar: "Mon, Wed, Fri · 9:30 AM–12:30 PM · evening by appointment",
+    },
     experienceLabel: "22+ yrs", experienceYears: 22,
     specialty: "Obstetrics, Gynaecology & IVF", role: "Co-founder, Bavishi Fertility Institute — IRIS Hospital",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
@@ -560,6 +591,9 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "rakhee-patel", name: "Dr. Rakhee Patel", image: "/assets/doctors/rakhee-patel.webp",
     city: "Anand", citySlug: "anand", locations: ["nanikhodiyar"],
+    consultationTimings: {
+      nanikhodiyar: "Tue, Thu, Sat · 9:30 AM–12:30 PM · evening by appointment",
+    },
     credentials: "MBBS, MD", experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Obstetrics, Gynaecology & IVF", role: "Co-founder, Bavishi Fertility Institute — IRIS Hospital · Minimal Access Surgeon",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
@@ -630,6 +664,9 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "parnnika-agarwal", name: "Dr. Parnnika Agarwal", image: "/assets/doctors/Dr.-Parnnika-Agarwal-221x300.webp",
     city: "Varanasi", citySlug: "varanasi", locations: ["shivpur"],
+    consultationTimings: {
+      shivpur: "Mon–Sat · 10:00 AM–4:00 PM",
+    },
     credentials: "MBBS, MS, FMAS, FRM",
     experienceLabel: "6+ yrs", experienceYears: 6,
     specialty: "Fertility, IVF & Gynaecological Laparoscopy", role: "Chief Consultant, Bavishi Neo Fertility Varanasi",

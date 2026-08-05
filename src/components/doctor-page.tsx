@@ -360,7 +360,16 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                   <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
                     <li className="flex items-start gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {c.address}</li>
                     <li className="flex items-start gap-2.5"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> <a href={`tel:+${c.phone}`} className="font-medium text-[color:var(--plum)] hover:text-[color:var(--rose)]">{c.phoneLabel}</a></li>
-                    <li className="flex items-start gap-2.5"><Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {c.hours}</li>
+                    {d.consultationTimings?.[c.slug] && (
+                      <li className="flex items-start gap-2.5">
+                        <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+                        <span><span className="font-medium text-[color:var(--plum)]">Consultation:</span> {d.consultationTimings[c.slug]}</span>
+                      </li>
+                    )}
+                    <li className="flex items-start gap-2.5">
+                      <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+                      <span>{d.consultationTimings?.[c.slug] && <span className="font-medium text-[color:var(--plum)]">Institute: </span>}{c.hours}</span>
+                    </li>
                   </ul>
                   <div className="mt-6 flex flex-wrap gap-2.5 pt-1">
                     <a href={`tel:+${c.phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call</a>
