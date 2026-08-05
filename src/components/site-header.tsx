@@ -118,7 +118,7 @@ export function SiteHeader({
       >
         <div className="container-px mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-6">
           <a href="/" className="flex shrink-0 items-center gap-3">
-            <img src={finalLogoSrc} alt={finalLogoAlt} className="h-12 w-auto" />
+            <img src={finalLogoSrc} alt={finalLogoAlt} className="h-16 w-auto" />
           </a>
 
           {/* Desktop nav */}
@@ -224,7 +224,7 @@ export function SiteHeader({
           <div className="absolute inset-0 bg-[color:var(--plum)]/40 backdrop-blur-sm" onClick={() => setMobile(false)} />
           <div className="absolute right-0 top-0 h-full w-[88%] max-w-sm overflow-y-auto bg-white shadow-lift">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <img src={finalLogoSrc} alt={finalLogoAlt} className="h-11 w-auto" />
+              <img src={finalLogoSrc} alt={finalLogoAlt} className="h-14 w-auto" />
               <button type="button" onClick={() => setMobile(false)} aria-label="Close menu" className="grid h-9 w-9 place-items-center rounded-full border border-border text-[color:var(--plum)]">
                 <X className="h-4 w-4" />
               </button>
