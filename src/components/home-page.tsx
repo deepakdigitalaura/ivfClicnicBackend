@@ -977,24 +977,12 @@ export function VideoHub({
       <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-4">
         {videos.map((v) => (
           <StaggerItem key={v.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
-            <motion.a
-              href={`https://www.youtube.com/watch?v=${v.id}`}
-              target="_blank" rel="noopener noreferrer"
+            <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.5 }}
-              className="group block h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+              className="h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
-              <div className="relative aspect-video overflow-hidden bg-[color:var(--plum)]/5">
-                <img
-                  src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`}
-                  alt={v.t} loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <span className="absolute inset-0 bg-[color:var(--plum)]/15 transition-colors duration-300 group-hover:bg-[color:var(--plum)]/5" />
-                <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[color:var(--rose)] shadow-lift transition-transform duration-300 group-hover:scale-110">
-                  <PlayCircle className="h-7 w-7" />
-                </span>
-              </div>
+              <LiteYouTube id={v.id} title={v.t} className="aspect-video" />
               <div className="p-5">
                 {v.c && (
                   <span className="mb-2 inline-block rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 text-xs font-semibold text-[color:var(--rose)]">{v.c}</span>
@@ -1002,7 +990,7 @@ export function VideoHub({
                 <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)]">{v.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.d}</p>
               </div>
-            </motion.a>
+            </motion.div>
           </StaggerItem>
         ))}
       </Stagger>
@@ -1632,23 +1620,12 @@ function Blogs({
         <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
           {videos.map((p) => (
             <StaggerItem key={p.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
-              <motion.a
-                href={`https://www.youtube.com/watch?v=${p.id}`}
-                target="_blank" rel="noopener noreferrer"
+              <motion.div
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.5 }}
-                className="group block h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+                className="h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--plum)]/5">
-                  <img
-                    src={`https://img.youtube.com/vi/${p.id}/hqdefault.jpg`}
-                    alt={p.t} loading="lazy"
-                    className="h-full w-full object-cover brightness-125 contrast-105 saturate-[1.3] transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[color:var(--rose)] shadow-lift transition-transform duration-300 group-hover:scale-110">
-                    <PlayCircle className="h-7 w-7" />
-                  </span>
-                </div>
+                <LiteYouTube id={p.id} title={p.t} className="aspect-[16/10]" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 text-xs">
                     <span className="rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 font-semibold text-[color:var(--rose)]">{p.c}</span>
@@ -1657,11 +1634,8 @@ function Blogs({
                     </span>
                   </div>
                   <h3 className="mt-4 text-xl font-semibold leading-snug text-[color:var(--plum)] text-pretty">{p.t}</h3>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                    Watch on YouTube <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-                  </span>
                 </div>
-              </motion.a>
+              </motion.div>
             </StaggerItem>
           ))}
         </Stagger>

@@ -1,6 +1,8 @@
 import type { Metadata } from "next";
 import { HomePage } from "@/components/home-page";
 import { PageSeoSchema } from "@/components/page-seo-schema";
+import { JsonLd } from "@/components/json-ld";
+import { faqSchema } from "@/lib/seo";
 import { getHomepage, getGlobalSafe, getTestimonials } from "@/lib/payload";
 import { HOMEPAGE_DEFAULTS } from "@/lib/homepage";
 import { withPageSeoOverride } from "@/lib/page-seo";
@@ -37,6 +39,7 @@ export default async function Page() {
   return (
     <>
       <PageSeoSchema path="/" />
+      {data.faq.items.length > 0 && <JsonLd graph={[faqSchema(data.faq.items)]} />}
       <HomePage data={data} testimonials={testimonials} />
     </>
   );
