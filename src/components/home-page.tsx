@@ -273,6 +273,8 @@ export function HomePage({
 
 function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
   const editing = !!useEdit()?.editMode;
+  const brandReviews = getBrandReviews();
+  const agg = brandReviews?.aggregate;
   return (
     <section className="gradient-warm noise relative overflow-hidden">
       <GradientField />
@@ -336,6 +338,24 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             <PrimaryBtn icon={Calendar} href="#book">{hero.ctas[0]}</PrimaryBtn>
             <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate">{hero.ctas[1]}</GhostBtn>
           </motion.div>
+
+          {agg && (
+            <motion.a
+              href={BRAND_LISTING_URL || undefined}
+              target={BRAND_LISTING_URL ? "_blank" : undefined}
+              rel={BRAND_LISTING_URL ? "noopener noreferrer" : undefined}
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.3 }}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--plum)]"
+            >
+              <span className="flex items-center gap-0.5 text-[color:var(--gold)]">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" />
+                ))}
+              </span>
+              <span>{agg.ratingValue.toFixed(1)} on Google · {agg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+            </motion.a>
+          )}
         </div>
 
         <div className="relative lg:col-span-5">
@@ -1820,6 +1840,7 @@ const inquiryLocations = [
 
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
   const contactIcons = [Phone, MessageCircle, Clock];
+  const formAgg = getBrandReviews()?.aggregate;
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
@@ -1921,6 +1942,17 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </button>
               </div>
             ) : (
+              <>
+              {formAgg && (
+                <div className="mb-5 flex items-center gap-2 text-sm font-medium text-[color:var(--plum)]">
+                  <span className="flex items-center gap-0.5 text-[color:var(--gold)]">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </span>
+                  <span>{formAgg.ratingValue.toFixed(1)} on Google · {formAgg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+                </div>
+              )}
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
@@ -1991,6 +2023,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   Your details are kept strictly confidential. We never share your information.
                 </p>
               </form>
+              </>
             )}
           </div>
         </Reveal>
