@@ -100,6 +100,8 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   "parth-bavishi": [
     { name: "Rushi & Siddhi", doctor: "Dr. Parth Bavishi", quote: "Our journey to parenthood — blessed with twins at Bavishi Fertility Institute.", youTubeId: "llJJm3TmbCA" },
     { name: "Chirali & Ritesh", doctor: "Dr. Parth Bavishi", quote: "From an IVF miracle to a natural pregnancy — our journey with Bavishi Fertility Institute.", youTubeId: "lN42_g7G00s" },
+    { name: "Mrudangi", doctor: "Dr. Parth Bavishi", quote: "Mrudangi's fertility treatment journey, from Canada, with Bavishi Fertility Institute.", youTubeId: "dUC9eTcyjbI" },
+    { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Parth Bavishi", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
   ],
 
   "himanshu-bavishi": [
