@@ -373,6 +373,20 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       text:
         "Hello Parnnika ma'am\n\nMy baby turned 8 months old Yesterday and i just wanted to thank you from bottom of my heart. It is such a beautiful blessing which has been possible because of your guidance, expertise and unwavering support. To us ,you are truely god sent. Your role in my parenthood will never be forgotten.\n\nThank you so very much ma'am.\n\nAnd may god bless your little one with best of everything in life. 😊😊🥰",
     },
+    {
+      name: "Vikas Maurya",
+      rating: 5,
+      date: "a week ago",
+      text:
+        "3Years not ptegnency concive\nBur first time jamuna seva sadan\nDr. Parnnika Agrawal best treatment for\nOne Month concive thanku ma'am",
+    },
+    {
+      name: "Dr. Awadhesh Kumar",
+      rating: 5,
+      date: "a day ago",
+      text:
+        "We are incredibly grateful to Dr.Parnika Agrawal (Bavishi Neo Fertility Varanasi) for guiding us through one of the most important journeys of our lives. Thanks to her expert treatment, compassionate care, and constant encouragement, we have been blessed with a healthy baby. She was always patient, attentive, and willing to answer all our questions, making us feel confident and supported at every step. Her professionalism, experience, and genuine concern for her patients make her an exceptional gynaecologist. We wholeheartedly recommend her to anyone seeking the best care for pregnancy and women's health. Thank you, Doctor, for making our dream of becoming parents come true!",
+    },
   ],
 };
 
