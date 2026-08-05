@@ -14,10 +14,11 @@ const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ivfclinic.com"),
-  title: {
-    default: "Bavishi Fertility Centre — India's Trusted IVF Experts",
-    template: "%s · Bavishi Fertility Centre",
-  },
+  // No `template` here: every page already sets its own fully-branded title
+  // ("... — Bavishi Fertility Institute"). A template would double-append
+  // branding on top of that (e.g. "...Institute · Bavishi Fertility Centre").
+  // `default` only fires for the rare page that sets no title at all.
+  title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
   description:
     "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI, and personalised treatment plans by leading specialists.",
   openGraph: {
