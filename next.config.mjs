@@ -60,7 +60,10 @@ const nextConfig = {
     ];
   },
 
-  images: { unoptimized: true },
+  // No remotePatterns needed — every next/image src on this site is a local
+  // /assets or /media path (no Sanity CDN image builder or external image
+  // host is used anywhere in the codebase).
+  images: {},
 };
 
 export default nextConfig;
