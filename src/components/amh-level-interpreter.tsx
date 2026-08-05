@@ -179,7 +179,7 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#tools" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>

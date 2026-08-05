@@ -61,7 +61,7 @@ function calcGraph(cms: CalculatorCmsData) {
     },
     breadcrumbSchema([
       { name: "Home",        url: "/" },
-      { name: "Calculators", url: "/#tools" },
+      { name: "Calculators", url: "/calculators" },
       { name: cms.title,     url: path },
     ]),
   ];

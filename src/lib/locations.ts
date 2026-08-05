@@ -1180,7 +1180,7 @@ export const locationRef = (slug: string): LocationRef => {
       built,
     };
   }
-  return { slug, name: slug, city: slug, href: "/#locations", type: "city", built: false };
+  return { slug, name: slug, city: slug, href: "/locations", type: "city", built: false };
 };
 
 export const cityLocations = (): LocationRef[] =>
@@ -1285,7 +1285,7 @@ export function centerGraph(c: CentreGraphInput): Record<string, unknown>[] {
     centerClinicSchema(c),
     breadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Locations", url: "/#locations" },
+      { name: "Locations", url: "/locations" },
       // Single-centre cities have no hub page — omit that breadcrumb level.
       ...(cityHasOwnPage(c.citySlug) ? [{ name: cityName, url: cityUrl(c.citySlug) }] : []),
       { name: `${c.name}, ${cityName}`, url: centreHref(c) },
@@ -1313,7 +1313,7 @@ export function cityGraph(city: CityGraphInput): Record<string, unknown>[] {
     ...centresForCity(city.slug).map((c) => centerClinicSchema(c)),
     breadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Locations", url: "/#locations" },
+      { name: "Locations", url: "/locations" },
       { name: city.name, url: cityUrl(city.slug) },
     ]),
     faqSchema(city.faqs),

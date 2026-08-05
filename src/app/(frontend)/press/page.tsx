@@ -47,7 +47,7 @@ const graph = [
   },
   breadcrumbSchema([
     { name: "Home", url: "/" },
-    { name: "Resources", url: "/#resources" },
+    { name: "Resources", url: "/blogs" },
     { name: "Media & Press", url: PATH },
   ]),
 ];

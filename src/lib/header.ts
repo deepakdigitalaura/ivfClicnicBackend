@@ -165,6 +165,7 @@ export const HEADER_DEFAULTS: HeaderData = {
   nav: [
     {
       label: "About",
+      href: "/about-bfi",
       mega: [
         { heading: "", items: [
           { label: "About Bavishi Fertility Institute", href: "/about-bfi" },
@@ -189,6 +190,7 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     {
       label: "IVF Treatments",
+      href: "/treatments",
       mega: [
         { heading: "Advanced IVF Treatment", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "IVF", href: "/what-is-ivf" },
@@ -248,6 +250,7 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     {
       label: "Locations",
+      href: "/locations",
       megaCols: 4,
       mega: [
         { heading: "Ahmedabad", headingHref: "/locations/ahmedabad", items: [
@@ -272,6 +275,7 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     {
       label: "Calculators",
+      href: "/calculators",
       mega: [
         { heading: "Fertility & IVF", items: [
           { label: "IVF Success Rate Calculator", href: "/ivf-success-rate-calculator", desc: "Estimate your personalised IVF success probability" },
@@ -289,6 +293,7 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     {
       label: "Resources",
+      href: destinationHref("blog"),
       mega: [
         { heading: "Learn", items: [
           { label: "Blogs", href: destinationHref("blog") },
