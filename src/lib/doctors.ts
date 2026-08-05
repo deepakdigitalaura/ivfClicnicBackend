@@ -780,7 +780,8 @@ export function doctorMenuData(): { senior: DoctorMenuEntry[]; specialists: Doct
   });
   const specialists = DOCTORS
     .filter((d) => !CORE_DOCTOR_SLUGS.includes(d.slug))
-    .map((d) => ({ name: d.name, href: doctorUrl(d.slug), city: d.cities[0] ?? "" }));
+    .map((d) => ({ name: d.name, href: doctorUrl(d.slug), city: d.cities[0] ?? "" }))
+    .sort((a, b) => a.name.localeCompare(b.name));
   return { senior, specialists };
 }
 
