@@ -22,10 +22,10 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function SectionHead({ eyebrow, title, subtitle, center }: { eyebrow: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; center?: boolean }) {
+export function SectionHead({ eyebrow, title, subtitle, center }: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; center?: boolean }) {
   return (
     <div className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>
+      {eyebrow && <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>}
       <Reveal delay={0.05}>
         <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl lg:text-[2.75rem] text-balance">{title}</h2>
       </Reveal>

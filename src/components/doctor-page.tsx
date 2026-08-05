@@ -300,7 +300,6 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
           <SectionHead
             center
-            eyebrow={lab("profileLabels.consultsEyebrow", pl.consultsEyebrow, "Consults at")}
             title={lab("profileLabels.consultsTitle", pl.consultsTitle, `Where to meet ${em(d.name)}`)}
             subtitle={lab(
               "profileLabels.consultsSubtitle",
