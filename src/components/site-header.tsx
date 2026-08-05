@@ -118,7 +118,7 @@ export function SiteHeader({
       >
         <div className="container-px mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-6">
           <a href="/" className="flex shrink-0 items-center gap-3">
-            <img src={finalLogoSrc} alt={finalLogoAlt} className="h-16 w-auto" />
+            <img src={finalLogoSrc} alt={finalLogoAlt} className="h-12 w-auto" />
           </a>
 
           {/* Desktop nav */}
