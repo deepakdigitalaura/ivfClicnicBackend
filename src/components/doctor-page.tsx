@@ -85,6 +85,45 @@ const lab = (path: string, value: string | undefined, fallback: string, rich = t
 const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const em = (t: string) => `<em ${EM}>${t}</em>`;
 
+/* ---------- Shared centre contact card (per-centre "Where to meet" card) ---------- */
+function CentreCard({ c, d }: { c: ReturnType<typeof centresForLocationSlugs>[number]; d: Doctor }) {
+  return (
+    <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
+      <div className="flex items-start gap-3.5">
+        <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
+          <MapPin className="h-5 w-5" />
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Bavishi Fertility Institute</p>
+          <h3 className="text-lg font-semibold leading-snug text-[color:var(--plum)]">
+            {c.name}{cityBySlug(c.citySlug)?.name && c.name !== cityBySlug(c.citySlug)?.name ? `, ${cityBySlug(c.citySlug)?.name}` : ""}
+            {c.isHeadOffice && <span className="ml-2 align-middle text-[11px] font-medium text-[color:var(--rose)]">· Head Office</span>}
+          </h3>
+        </div>
+      </div>
+      <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
+        <li className="flex items-start gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {c.address}</li>
+        <li className="flex items-start gap-2.5"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> <a href={`tel:+${c.phone}`} className="font-medium text-[color:var(--plum)] hover:text-[color:var(--rose)]">{c.phoneLabel}</a></li>
+        {d.consultationTimings?.[c.slug] && (
+          <li className="flex items-start gap-2.5">
+            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+            <span><span className="font-medium text-[color:var(--plum)]">Consultation:</span> {d.consultationTimings[c.slug]}</span>
+          </li>
+        )}
+        <li className="flex items-start gap-2.5">
+          <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+          <span>{d.consultationTimings?.[c.slug] && <span className="font-medium text-[color:var(--plum)]">Institute: </span>}{c.hours}</span>
+        </li>
+      </ul>
+      <div className="mt-6 flex flex-wrap gap-2.5 pt-1">
+        <a href={`tel:+${c.phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call</a>
+        <a href={centreMapUrl(c)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]"><Navigation className="h-4 w-4" /> Directions</a>
+        <a href={centreHref(c)} className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-[color:var(--rose)]">View centre <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
+      </div>
+    </div>
+  );
+}
+
 /* ---------- /doctors/[slug] — single profile ---------- */
 export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
   const editing = !!useEdit()?.editMode;
@@ -310,18 +349,26 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
             )}
           />
           {d.visitsAllCentres ? (
+            <>
+              {centres[0] && (
+                <Stagger className="mt-10 flex flex-wrap justify-center gap-6">
+                  <StaggerItem key={centres[0].slug} className="w-full max-w-md">
+                    <CentreCard c={centres[0]} d={d} />
+                  </StaggerItem>
+                </Stagger>
+              )}
             <Reveal>
-              <div className="mx-auto mt-10 w-full max-w-2xl rounded-3xl border border-border/70 bg-card p-8 text-center shadow-soft">
+              <div className="mx-auto mt-6 w-full max-w-2xl rounded-3xl border border-border/70 bg-card p-8 text-center shadow-soft">
                 <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Bavishi Fertility Institute</p>
-                <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{lab("profileLabels.visitsHeading", pl.visitsHeading, `Visits across ${d.cities.length} cities`)}</h3>
+                <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{lab("profileLabels.visitsHeading", pl.visitsHeading, `Also keeps visiting ${d.cities.length} cities`)}</h3>
                 <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
                   {lab(
                     "profileLabels.visitsParagraph",
                     pl.visitsParagraph,
-                    `As the founder and senior IVF specialist, ${d.name} consults at Bavishi Fertility Institute centres across India on a rotating schedule. Call to confirm when he is visiting your nearest centre.`,
+                    `Beyond ${centres[0]?.name ?? "the centre above"}, ${d.name} also consults at Bavishi Fertility Institute centres across India on a rotating schedule. Call to confirm when he is visiting your nearest centre.`,
                   )}
                 </p>
                 <div className="mt-5 flex flex-wrap justify-center gap-2">
@@ -332,50 +379,16 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                   ))}
                 </div>
                 <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-                  {centres[0] && (
-                    <a href={`tel:+${centres[0].phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call {centres[0].phoneLabel}</a>
-                  )}
                   <a href="/locations" className="group inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-5 py-2.5 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]">View all centres <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
                 </div>
               </div>
             </Reveal>
+            </>
           ) : (
           <Stagger className="mt-10 flex flex-wrap justify-center gap-6">
             {centres.map((c) => (
               <StaggerItem key={c.slug} className="w-full max-w-md">
-                <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="flex items-start gap-3.5">
-                    <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Bavishi Fertility Institute</p>
-                      <h3 className="text-lg font-semibold leading-snug text-[color:var(--plum)]">
-                        {c.name}{cityBySlug(c.citySlug)?.name && c.name !== cityBySlug(c.citySlug)?.name ? `, ${cityBySlug(c.citySlug)?.name}` : ""}
-                        {c.isHeadOffice && <span className="ml-2 align-middle text-[11px] font-medium text-[color:var(--rose)]">· Head Office</span>}
-                      </h3>
-                    </div>
-                  </div>
-                  <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                    <li className="flex items-start gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {c.address}</li>
-                    <li className="flex items-start gap-2.5"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> <a href={`tel:+${c.phone}`} className="font-medium text-[color:var(--plum)] hover:text-[color:var(--rose)]">{c.phoneLabel}</a></li>
-                    {d.consultationTimings?.[c.slug] && (
-                      <li className="flex items-start gap-2.5">
-                        <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                        <span><span className="font-medium text-[color:var(--plum)]">Consultation:</span> {d.consultationTimings[c.slug]}</span>
-                      </li>
-                    )}
-                    <li className="flex items-start gap-2.5">
-                      <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                      <span>{d.consultationTimings?.[c.slug] && <span className="font-medium text-[color:var(--plum)]">Institute: </span>}{c.hours}</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6 flex flex-wrap gap-2.5 pt-1">
-                    <a href={`tel:+${c.phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call</a>
-                    <a href={centreMapUrl(c)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]"><Navigation className="h-4 w-4" /> Directions</a>
-                    <a href={centreHref(c)} className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-[color:var(--rose)]">View centre <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
-                  </div>
-                </div>
+                <CentreCard c={c} d={d} />
               </StaggerItem>
             ))}
           </Stagger>
