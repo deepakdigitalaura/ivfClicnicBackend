@@ -122,7 +122,7 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
     {
       name: "Sadhavi Bhushan Patade",
       text:
-        "It is really amazing and thrilling journey towards motherhood. every day brings new day and experience for mother. We heartly thank to Dr. Bavishi and his entire team, for enlightened lamp of joy, happiness and parenthood in our life.\n\nFrom :- Salvi Patade",
+        "It is really amazing and thrilling journey towards motherhood. every day brings new day and experience for mother. We heartly thank to Dr. Bavishi, Dr. Nilesh and Bavishi Fertility Institute's entire team, for enlightened lamp of joy, happiness and parenthood in our life.\n\nFrom :- Salvi Patade",
     },
     {
       name: "Vidhi & Vikram Main",
