@@ -1835,7 +1835,7 @@ const inquiryTreatments = [
   "Donor Services", "Fertility Preservation", "Maternity Services", "Not sure yet",
 ];
 const inquiryLocations = [
-  "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
+  "Any", "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
 
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
