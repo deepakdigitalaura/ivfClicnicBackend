@@ -1841,7 +1841,7 @@ const inquiryLocations = [
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
   const contactIcons = [Phone, MessageCircle, Clock];
   const formAgg = getBrandReviews()?.aggregate;
-  const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "", message: "" });
+  const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -1935,7 +1935,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </p>
                 <button
                   type="button"
-                  onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "", message: "" }); }}
+                  onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" }); }}
                   className="mt-6 text-sm font-semibold text-[color:var(--rose)] hover:underline"
                 >
                   Submit another inquiry
