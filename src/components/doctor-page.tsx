@@ -13,7 +13,7 @@ import { SectionHead } from "@/components/ivf-page";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Doctor } from "@/lib/doctors";
-import { DOCTORS, doctorUrl } from "@/lib/doctors";
+import { DOCTORS, doctorUrl, CORE_DOCTOR_SLUGS } from "@/lib/doctors";
 import { treatmentCardData, treatmentRef } from "@/lib/treatments";
 import { centresForLocationSlugs, centreMapUrl, centreHref, cityBySlug } from "@/lib/locations";
 import { testimonialsForDoctor, videosForDoctor } from "@/lib/video-testimonials";
@@ -447,6 +447,14 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
 /* `doctors` is supplied by the server route (CMS-resolved, in code order); the
  * DOCTORS default keeps the component reusable/standalone. */
 export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
+  // The four Bavishi family doctors lead, in their fixed order; every other
+  // specialist follows alphabetically by name (not grouped by city).
+  const sorted = [...doctors].sort((a, b) => {
+    const coreA = CORE_DOCTOR_SLUGS.indexOf(a.slug);
+    const coreB = CORE_DOCTOR_SLUGS.indexOf(b.slug);
+    if (coreA !== -1 || coreB !== -1) return (coreA === -1 ? 99 : coreA) - (coreB === -1 ? 99 : coreB);
+    return a.name.localeCompare(b.name);
+  });
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -467,7 +475,7 @@ export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
           subtitle="A family of fertility experts trusted by generations — credentialed, experienced and committed to honest, compassionate care."
         />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {doctors.map((d) => (
+          {sorted.map((d) => (
             <StaggerItem key={d.slug}>
               <a href={doctorUrl(d.slug)} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                 <div className="relative aspect-[3/4] overflow-hidden bg-[color:var(--rose-soft)]/40">

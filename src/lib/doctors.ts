@@ -710,7 +710,7 @@ export const doctorsForLocation = (locationSlug: string) =>
   DOCTORS.filter((d) => d.locations.includes(locationSlug));
 
 /** The four Bavishi promoter doctors — always shown first (visible on load). */
-const CORE_DOCTOR_SLUGS = ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"];
+export const CORE_DOCTOR_SLUGS = ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"];
 
 /** Every Bavishi doctor is a fertility specialist, so the treatment carousel
  *  showcases the whole team and lets users slide through them. Ordering:
