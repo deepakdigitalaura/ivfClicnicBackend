@@ -276,11 +276,25 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
         "I had really good experince with Bavishi fertility institute staff was really polite and good I had sucess with my first cycle here\nThank you so much Bavishi staff and Dr Deep Gajiwala for making my dream come true.",
     },
     {
+      name: "Harshil Naik",
+      rating: 5,
+      date: "8 months ago",
+      text:
+        "We started our treatment here by reference and no doubt the best decision we've ever made. The experience is great, the service is superb and I must say the way everyone taking from Doctor to staff is very polite, positive and welcoming. Everything is explained in detail and Dr. Deep sir and Assistant doctors answers all the queries that we had.\n\nThank You very much for all you do.",
+    },
+    {
       name: "Hiral Patel",
       rating: 5,
       date: "Edited 9 months ago",
       text:
         "We are beyond grateful to Dr. Deep Gajiwala and his entire team at Bavishi fertility Surat for making our dream of becoming parents come true. After going through the IVF journey, we are now blessed with a twins, a boy and a girl, and words cannot express the joy we feel.\n\nDr. Deep Gajiwala's expertise, guidance, and compassionate approach gave us immense confidence throughout the treatment. He explained every step with clarity and always encouraged us with positivity. A very special thanks to Pratik sir, Dr.Disha mam and kalpanaben whose constant support, care, and patience made the process so much smoother for us. Their reassuring words and dedication kept us strong in difficult times.\n\nThe entire team worked with so much effort, professionalism, and kindness, and for that, we will always remain thankful. Today, as we hold our little ones in our arms, we know it wouldn't have been possible without them.\n\nFrom the bottom of our hearts, thank you Dr Deep Gajiwala, for helping us start this new chapter of our lives.",
+    },
+    {
+      name: "Ketan Vadodariya",
+      rating: 5,
+      date: "a year ago",
+      text:
+        "This is the best IVF treatment institute in surat with highly professional and experienced doctor Deep Gajiwala.\n\nThe First day of visit, Dr Deep explain process well and clear many unusual doubts. He didn't hide anything about treatment and prepared us very well.\n\nDr Disha explain about cost of treatment and medicine and other stuff of the IVF. By the way she was very good in explanation. I remember one incident with Disha is, After conceive, we called her on midnight 3 am because of my wife was getting pain and she answered call on first try and explain us what to do with situation and she was very clam even when I called her midnight.\n\nOther staff of hospital was very helpful. Never given annoying answers.\n\nI would suggest this institute for the IVF treatment.\n\nMy wife convinced on first try of IVF.",
     },
     {
       name: "Kapana Mistry",
@@ -309,6 +323,13 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       date: "21 weeks ago",
       text:
         "We had a very good experience at Bavishi Hospital. Dr. Deep Sir was extremely kind, patient, and professional throughout the treatment. He explained everything clearly and made us feel comfortable and confident. The hospital staff was also very polite, supportive, and attentive. Overall, we are very satisfied with the care and highly recommend this hospital.",
+    },
+    {
+      name: "H!tesh Shah",
+      rating: 5,
+      date: "32 weeks ago",
+      text:
+        "I had the privilege of being under the care of Dr. Deep Gajiwala, a truly exceptional physician in the department. What impressed me most was not only their deep expertise in treating my condition, but also their commitment to clear, empathetic communication. Dr. Deep patiently explained all the treatment options, answered every question I had, ensuring I felt fully informed and comfortable with the plan. Their professionalism and genuine concern for my well-being are commendable. Highly recommended.",
     },
     {
       name: "Riya Patel",
