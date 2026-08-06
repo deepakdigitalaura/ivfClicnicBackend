@@ -962,6 +962,7 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     languages: rows(src.languages) ?? def.languages,
     sameAs: rows(src.sameAs) ?? def.sameAs,
     verified: src.verified ?? def.verified,
+    consultationTimings: def.consultationTimings,
     ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
     profileLabels: profileLabels(src.profileLabels),
   };
