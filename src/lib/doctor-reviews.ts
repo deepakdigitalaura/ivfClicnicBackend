@@ -218,6 +218,13 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       text:
         "special thanks to Dr suman singh for her excellent treatment and follow up care. She is so much experienced and just a one call and message away for any concern.She was very friendly and supportive throughout our journey and thanks to Dr swati also who helped us so much.🥰",
     },
+    {
+      name: "Ayushi Goswami",
+      rating: 5,
+      date: "4 days ago",
+      text:
+        "We had a wonderful experience at Bavishi Fertility Centre. Dr. Suman's consultation was crisp, clear, and to the point. She explained everything patiently and guided us with confidence, making us feel comfortable throughout the process. Thanks to her expertise and positive approach, we had a great experience and achieved a positive result. We are truly grateful for the care and support we received.\n\nStaff support and also Dr. Swati were very cooperative.\nHighly recommended to anyone looking for professional and compassionate fertility care.",
+    },
   ],
 
   // Bavishi Fertility Institute (with Spandan Hospital) — Bhuj/Kutch.
