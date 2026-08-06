@@ -164,7 +164,7 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       name: "Dr. Khushbu & Dr. Kuldeepsinh Chavda",
       date: "17 June 2026",
       text:
-        "Excellent experience. We had been struggling with infertility for a long time & were feeling very stressed. The doctor Mita Madam explained every step of the IVF Procedure clearly & answered all our questions Patiently. The entire staff was Caring, Supportive & Professional throughout the treatment. The procedure was smooth & we always felt comfortable & well informed. We are very grateful for the doctor expertise & Compassionate approach. I highly recommend this clinic to anyone seeking Fertility treatment. Thank you Specially Dr. Mita Madam & all staff.",
+        "Excellent experience. We had been struggling with infertility for a long time & were feeling very stressed. The doctor Mita Madam explained every step of the IVF procedure clearly & answered all our questions patiently. The entire staff was caring, supportive & professional throughout the treatment. The procedure was smooth & we always felt comfortable & well informed. We are very grateful for the doctor's expertise & compassionate approach. I highly recommend this clinic to anyone seeking fertility treatment. Thank you specially to Dr. Mita Madam & all staff.",
     },
     {
       name: "Amita Keyur Patel",
