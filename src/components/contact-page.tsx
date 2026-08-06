@@ -47,7 +47,7 @@ const directory: Centre[] = [
   { name: "Bhuj", address: "Spandan Maternity Home, 13-28 Shivam Nagar, near Uma Nagar, Mirzapar Highway, Bhuj – 370040", phone: "919687188550", phoneLabel: "+91 96871 88550", hours: "Mon–Sat · 9:00 am – 6:00 pm · Emergency 24x7", href: "/locations/bhuj/mirjapar" },
   { name: "Bhavnagar", address: "Hema Women's Hospital, 203-205 Sai Ganga, Kalubha Road, Bhavnagar – 364001", phone: "917069314040", phoneLabel: "+91 70693 14040", hours: "Mon–Sat · 10:00 am – 2:00 pm & 5:00 pm – 9:00 pm · Emergency 24x7", href: "/locations/bhavnagar/kalubha-road" },
   { name: "Anand", address: "Unit 2, IRIS Hospital, Nanikhodiyar, Anand – 388001", phone: "917069034565", phoneLabel: "+91 70690 34565", hours: "Mon–Sat · 9:30 am – 12:30 pm · Emergency 24x7", href: "/locations/anand/nanikhodiyar" },
-  { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", hours: "Mon–Sat · 9:00 am – 6:00 pm · Emergency 24x7", href: "/locations/varanasi/shivpur" },
+  { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", hours: "Mon–Sat · 9:00 am – 7:00 pm · Emergency 24x7", href: "/locations/varanasi/shivpur" },
 ];
 
 type Faq = { q: string; a: string };

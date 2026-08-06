@@ -837,8 +837,8 @@ export const CENTRES: Centre[] = [
     pin: "221003",
     phone: "919506081979",
     phoneLabel: "+91 95060 81979",
-    hours: "Mon–Sat · 9:00 am – 6:00 pm · Emergency 24x7",
-    opening: { opens: "09:00", closes: "18:00" },
+    hours: "Mon–Sat · 9:00 am – 7:00 pm · Emergency 24x7",
+    opening: { opens: "09:00", closes: "19:00" },
     mapQuery: "Bavishi Fertility Institute Shivpur Varanasi",
     image: "/assets/Locations/Varanasi.png",
     nearby: ["Shivpur", "Panchkoshi Road", "Cantonment", "Sigra", "Maldahiya", "Bhojubeer", "Pandeypur", "Lahartara", "Sarnath", "Chandua", "Varanasi"],
@@ -864,7 +864,7 @@ export const CENTRES: Centre[] = [
     treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Varanasi IVF centre?", a: "At S-15/47, Jamuna Sewa Sadan Hospital, Panchkoshi Road, Shivpur, Varanasi – 221003." },
-      { q: "What are the timings at the Varanasi centre?", a: "The Varanasi centre is open Monday to Saturday, 9:00 am to 6:00 pm, with emergency care available 24x7. Call +91 95060 81979 to book." },
+      { q: "What are the timings at the Varanasi centre?", a: "The Varanasi centre is open Monday to Saturday, 9:00 am to 7:00 pm, with emergency care available 24x7. Call +91 95060 81979 to book." },
       { q: "Which areas does the Varanasi centre serve?", a: "Shivpur, the Cantonment, Sigra, Maldahiya, Pandeypur, Sarnath and families across the Purvanchal region of Uttar Pradesh." },
       { q: "What treatments are available in Varanasi?", a: "Advanced fertility care — IVF, ICSI, IUI, male and female infertility solutions and fertility preservation — with expert guidance and end-to-end support." },
     ],
@@ -1070,7 +1070,7 @@ export const CITIES: City[] = [
     faqs: [
       { q: "Which is the best IVF centre in Varanasi?", a: "Bavishi Fertility Institute is among Varanasi's most trusted fertility centres — part of a FOGSI-certified network with advanced labs, experienced specialists and 30,000+ successful pregnancies nationwide." },
       { q: "Where is the Bavishi Fertility Institute Varanasi centre located?", a: "At S-15/47, Jamuna Sewa Sadan Hospital, Panchkoshi Road, Shivpur, Varanasi – 221003." },
-      { q: "What are the consultation timings in Varanasi?", a: "The Varanasi centre is open Monday to Saturday, 9:00 am to 6:00 pm, with emergency care available 24x7. Call +91 95060 81979 to book." },
+      { q: "What are the consultation timings in Varanasi?", a: "The Varanasi centre is open Monday to Saturday, 9:00 am to 7:00 pm, with emergency care available 24x7. Call +91 95060 81979 to book." },
       { q: "What fertility treatments are available in Varanasi?", a: "Advanced fertility care — IVF, ICSI, IUI, male and female infertility solutions and fertility preservation — with expert guidance and end-to-end support." },
       { q: "Do you offer IVF cost EMI and Suraksha Kavach in Varanasi?", a: "Yes. The Varanasi centre offers transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package." },
     ],
