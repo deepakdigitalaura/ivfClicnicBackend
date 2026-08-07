@@ -35,8 +35,10 @@ export type TreatmentRef = { slug: string; name: string; href: string };
  *  want to promote varicocele surgery; page should present surgery vs
  *  ART-IVF neutrally, with grades and a subclinical-needs-no-treatment
  *  note). Client explicitly said skip/hide it until that rewrite is done.
+ *  "surrogacy": client flagged current copy as not legally/factually
+ *  correct; hidden until content is corrected, then can be unhidden.
  *  Consumers (getTreatment/getTreatments, sitemap) must respect this. */
-export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele"]);
+export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele", "surrogacy"]);
 
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
