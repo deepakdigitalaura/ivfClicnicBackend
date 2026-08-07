@@ -122,7 +122,7 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
     {
       name: "Sadhavi Bhushan Patade",
       text:
-        "It is really amazing and thrilling journey towards motherhood. every day brings new day and experience for mother. We heartly thank to Dr. Bavishi and his entire team, for enlightened lamp of joy, happiness and parenthood in our life.\n\nFrom :- Salvi Patade",
+        "It is really amazing and thrilling journey towards motherhood. every day brings new day and experience for mother. We heartly thank to Dr. Bavishi, Dr. Nilesh and Bavishi Fertility Institute's entire team, for enlightened lamp of joy, happiness and parenthood in our life.\n\nFrom :- Salvi Patade",
     },
     {
       name: "Vidhi & Vikram Main",
@@ -134,7 +134,7 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       name: "Madhuri & Dinesh Chawla",
       date: "4 March 2024",
       text:
-        "आदरणीय,\n\nडॉ. Nilesh साहब आपका बहुत-बहुत आभार। मेरे घर में किलकारी देकर आपने मेरे को नई जिंदगी दी। मैंने आपके bavishi fertility हॉस्पिटल के कर्मचारी से लेकर आप तक जो अनुशासन है वो देखा है, तारीफ लायक है। आपके हॉस्पिटल कि टेक्नोलॉजी दिनोंदिन फले-फूले यही हमारी कामना है।\n\nThank you, धन्यवाद,\nMadhuri Chawla\nDinesh Chawla",
+        "आदरणीय,\n\nडॉ. निलेश साहब आपका बहुत-बहुत आभार। मेरे घर में किलकारी देकर आपने मेरे को नई जिंदगी दी। मैंने आपके बावीशी फर्टिलिटी हॉस्पिटल के कर्मचारी से लेकर आप तक जो अनुशासन है वो देखा है, तारीफ लायक है। आपके हॉस्पिटल कि टेक्नोलॉजी दिनोंदिन फले-फूले यही हमारी कामना है।\n\nThank you, धन्यवाद,\nMadhuri Chawla\nDinesh Chawla",
     },
     {
       name: "Sudhakar & Ramadevi Komati",
@@ -164,7 +164,7 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       name: "Dr. Khushbu & Dr. Kuldeepsinh Chavda",
       date: "17 June 2026",
       text:
-        "Excellent experience. We had been struggling with infertility for a long time & were feeling very stressed. The doctor Mita Madam explained every step of the IVF Procedure clearly & answered all our questions Patiently. The entire staff was Caring, Supportive & Professional throughout the treatment. The procedure was smooth & we always felt comfortable & well informed. We are very grateful for the doctor expertise & Compassionate approach. I highly recommend this clinic to anyone seeking Fertility treatment. Thank you Specially Dr. Mita Madam & all staff.",
+        "Excellent experience. We had been struggling with infertility for a long time & were feeling very stressed. The doctor Mita Madam explained every step of the IVF procedure clearly & answered all our questions patiently. The entire staff was caring, supportive & professional throughout the treatment. The procedure was smooth & we always felt comfortable & well informed. We are very grateful for the doctor's expertise & compassionate approach. I highly recommend this clinic to anyone seeking fertility treatment. Thank you specially to Dr. Mita Madam & all staff.",
     },
     {
       name: "Amita Keyur Patel",
@@ -176,7 +176,7 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       name: "Vinaben Shailesh Baraiya",
       date: "25 April 2023",
       text:
-        "સપ્રેમ નમસ્કાર, હું વિના શૈલેષ બારૈયા. અમને અમારા જીવનની અનમોલ સુખની ક્ષણો ભેટ સ્વરૂપે આપવા બદલ બાવિશી પરિવારનો હૃદયપૂર્વક ખૂબ ખૂબ આભાર. અમે બાવિશી પરિવારના આજીવન ઋણી રહીશું. છેલ્લા 4 વર્ષથી સંતાન પ્રાપ્તિની ઝંખના સાથે ઘણી હોસ્પિટલોના આંટાફેરા કર્યા, પરંતુ સફળતા શૂન્ય હતી. ત્યારબાદ અમે બાવિશી પરિવારના દ્વારે આવ્યા અને અમારા જીવનમાં ખુશીઓ છવાઈ ગઈ. અમારી લાગણી વ્યક્ત કરવા માટે અમારી પાસે પૂરતા શબ્દો નથી, પરંતુ દિલથી ખૂબ ખૂબ આભાર વ્યક્ત કરીએ છીએ. બાવિશી પરિવાર તથા વડોદરા સેન્ટરના તમામ સ્ટાફગણનો હૃદયપૂર્વક આભાર. ખાસ કરીને પૂજ્ય મીના મેડમ તેમજ શ્યામભાઈના લાગણીસભર અને સહયોગી વર્તન બદલ અમે ખૂબ ખૂબ આભારી છીએ. અને સવિશેષ આભાર હિમાંશુ સાહેબનો, જેમના માર્ગદર્શન અને સહયોગથી અમારા જીવનના સુખનું આ સ્વપ્ન સાકાર થયું છે. આપના આભારી, વિના V. S. બારૈયા",
+        "સપ્રેમ નમસ્કાર, હું વિના શૈલેષ બારૈયા. અમને અમારા જીવનની અનમોલ સુખની ક્ષણો ભેટ સ્વરૂપે આપવા બદલ બાવિશી પરિવારનો હૃદયપૂર્વક ખૂબ ખૂબ આભાર. અમે બાવિશી પરિવારના આજીવન ઋણી રહીશું. છેલ્લા 4 વર્ષથી સંતાન પ્રાપ્તિની ઝંખના સાથે ઘણી હોસ્પિટલોના આંટાફેરા કર્યા, પરંતુ સફળતા શૂન્ય હતી. ત્યારબાદ અમે બાવિશી પરિવારના દ્વારે આવ્યા અને અમારા જીવનમાં ખુશીઓ છવાઈ ગઈ. અમારી લાગણી વ્યક્ત કરવા માટે અમારી પાસે પૂરતા શબ્દો નથી, પરંતુ દિલથી ખૂબ ખૂબ આભાર વ્યક્ત કરીએ છીએ. બાવિશી પરિવાર તથા વડોદરા સેન્ટરના તમામ સ્ટાફગણનો હૃદયપૂર્વક આભાર. ખાસ કરીને પૂજ્ય મીના મેડમ તેમજ શ્યામભાઈના લાગણીસભર અને સહયોગી વર્તન બદલ અમે ખૂબ ખૂબ આભારી છીએ. અને સવિશેષ આભાર હિમાંશુ સાહેબનો, જેમના માર્ગદર્શન અને સહયોગથી અમારા જીવનના સુખનું આ સ્વપ્ન સાકાર થયું છે. આપના આભારી, વિના શૈલેષ બારૈયા",
     },
   ],
 
@@ -218,6 +218,13 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       text:
         "special thanks to Dr suman singh for her excellent treatment and follow up care. She is so much experienced and just a one call and message away for any concern.She was very friendly and supportive throughout our journey and thanks to Dr swati also who helped us so much.🥰",
     },
+    {
+      name: "Ayushi Goswami",
+      rating: 5,
+      date: "4 days ago",
+      text:
+        "We had a wonderful experience at Bavishi Fertility Centre. Dr. Suman's consultation was crisp, clear, and to the point. She explained everything patiently and guided us with confidence, making us feel comfortable throughout the process. Thanks to her expertise and positive approach, we had a great experience and achieved a positive result. We are truly grateful for the care and support we received.\n\nStaff support and also Dr. Swati were very cooperative.\nHighly recommended to anyone looking for professional and compassionate fertility care.",
+    },
   ],
 
   // Bavishi Fertility Institute (with Spandan Hospital) — Bhuj/Kutch.
@@ -257,12 +264,6 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
   // Reviews naming "Ansh Hospital" are deliberately excluded to keep this
   // page Bavishi-only. `date` is the label exactly as shown by Google.
   "deep-gajiwala": [
-    {
-      name: "Pratiben Vasantbhai Patel",
-      date: "21 February 2024",
-      text:
-        "સાદર પ્રણામ,\nડો. સાહિબ શ્રી,\n\nઅમારી સફળતા બદલ આભાર,\nપ્રથમ સાઇકલમાં અમને સફળતા મળી\nઅને પ્રેગનેન્સીમાં ગર્ભનો વિકાસ સરસ છે.\nગર્ભમાં ધબકારા સરસ ચાલે છે. જે મને\nડોક્ટર સાહિબે બતાવ્યું તે જોઈ મને\nખૂબ આનંદ થયો છે.\n\nથેંક્યુ ડોક્ટર,\n\nપી. વી. પટેલ\nવી. એમ. પટેલ",
-    },
     {
       name: "Vaishaben Ayagjkumar Patel",
       text:
@@ -413,6 +414,13 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       date: "a day ago",
       text:
         "We are incredibly grateful to Dr.Parnika Agrawal (Bavishi Neo Fertility Varanasi) for guiding us through one of the most important journeys of our lives. Thanks to her expert treatment, compassionate care, and constant encouragement, we have been blessed with a healthy baby. She was always patient, attentive, and willing to answer all our questions, making us feel confident and supported at every step. Her professionalism, experience, and genuine concern for her patients make her an exceptional gynaecologist. We wholeheartedly recommend her to anyone seeking the best care for pregnancy and women's health. Thank you, Doctor, for making our dream of becoming parents come true!",
+    },
+    {
+      name: "Supriya Verma",
+      rating: 5,
+      date: "7 August 2026",
+      text:
+        "I had a wonderful experience with Dr. Parnnika Agrawal at Bavishi Hospital. She is such an adorable, caring, supportive, and knowledgeable doctor. ❤️\n\nI conceived my first baby with her guidance, and I am now consulting her again for my second baby journey. As an IVF specialist, she is extremely professional and explains everything patiently, which makes you feel comfortable and confident throughout the treatment.\n\nI am truly grateful for her care and guidance. I highly recommend Dr. Parnnika Agrawal and Bavishi Hospital to anyone looking for a compassionate and experienced fertility specialist. 💕✨\n\nThank you, Doctor, for always being so supportive! 🌸",
     },
   ],
 };
