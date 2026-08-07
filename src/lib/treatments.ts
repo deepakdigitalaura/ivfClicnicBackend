@@ -518,7 +518,7 @@ export const ivfFailure: Treatment = {
       "A clear, stage-by-stage analysis of the previous cycle.",
       "Targeted use of advanced techniques only where they address a real problem.",
       "Better embryo selection through blastocyst culture and PGT, where indicated.",
-      "Uterine factor is evaluated for potential structure problems, progesterone resistance and endometritis and transfer timings",
+      "Uterine factor is evaluated for potential structure problems, progesterone resistance, endometritis and transfer timings",
       "Assessment of maternal factors such as thrombophilia and chromosomal issues.",
     ],
   },
