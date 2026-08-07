@@ -224,7 +224,7 @@ export function SiteHeader({
           <div className="absolute inset-0 bg-[color:var(--plum)]/40 backdrop-blur-sm" onClick={() => setMobile(false)} />
           <div className="absolute right-0 top-0 h-full w-[88%] max-w-sm overflow-y-auto bg-white shadow-lift">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <img src={finalLogoSrc} alt={finalLogoAlt} className="h-11 w-auto" />
+              <img src={finalLogoSrc} alt={finalLogoAlt} className="h-14 w-auto" />
               <button type="button" onClick={() => setMobile(false)} aria-label="Close menu" className="grid h-9 w-9 place-items-center rounded-full border border-border text-[color:var(--plum)]">
                 <X className="h-4 w-4" />
               </button>
@@ -350,9 +350,9 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
   const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   return (
     <div className="container-px mx-auto max-w-[1400px] py-7">
-      {/* Senior Specialists */}
+      {/* Senior IVF Specialists */}
       <div className="flex items-center gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Senior Specialists</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Senior IVF Specialists</span>
         <span className="h-px flex-1 bg-border/60" />
       </div>
       <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
@@ -409,7 +409,7 @@ function MobileDoctorsItem({ onNavigate, menu }: { onNavigate: () => void; menu?
       <div className="grid transition-[grid-template-rows] duration-200 ease-out" style={{ gridTemplateRows: open ? "1fr" : "0fr" }}>
         <div className="overflow-hidden">
           <div className="px-5 py-2">
-            <div className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">Senior Specialists</div>
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">Senior IVF Specialists</div>
             <ul className="mt-1">{senior.map(row)}</ul>
             <div className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">All IVF Specialists</div>
             <ul className="mt-1">{specialists.map(row)}</ul>

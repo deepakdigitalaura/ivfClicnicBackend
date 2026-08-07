@@ -49,6 +49,10 @@ export type Doctor = {
   consultationTimings?: Record<string, string>;
   /** Treatment slugs the doctor practises — drives Doctor↔Treatment links. */
   treatments: string[];
+  /** Maternity/women's-health service KEYS (from WOMENS_HEALTH_SERVICES) the
+   *  doctor performs — obstetricians/gynaecologists list these ahead of
+   *  `treatments` on the "Treatments X performs" grid. */
+  services?: string[];
   shortBio: string;
   bio: string[];
   knowsAbout: string[];
@@ -139,6 +143,8 @@ function cityDoctor(opts: {
   training?: string[];
   publications?: string[];
   treatments?: string[];
+  /** Maternity/women's-health service KEYS the doctor performs. */
+  services?: string[];
   languages?: string[];
   verified?: boolean;
 }): Doctor {
@@ -156,6 +162,7 @@ function cityDoctor(opts: {
     locations: opts.locations ?? [opts.citySlug],
     consultationTimings: opts.consultationTimings,
     treatments: opts.treatments ?? ALL_TREATMENT_SLUGS,
+    services: opts.services,
     shortBio:
       opts.shortBio ??
       `${opts.name} is part of the Bavishi Fertility Institute fertility team in ${opts.city}.`,
@@ -400,7 +407,8 @@ export const DOCTORS: Doctor[] = [
       "Dr. Binal Shah is an experienced obstetrician and IVF specialist with over three decades of practice in managing normal and IVF pregnancies, including complex cases such as twin pregnancies and high-risk deliveries.",
       "She serves as the Chief Quality Control Officer and NABH Nodal Officer at Bavishi Fertility Institute, helping uphold the institute's clinical quality and accreditation standards.",
     ],
-    knowsAbout: ["In Vitro Fertilization", "High-Risk Pregnancy", "Twin Pregnancy", "Female Infertility"],
+    knowsAbout: ["High-Risk Pregnancy Care", "Twin Pregnancy Care", "In Vitro Fertilization", "Female Infertility"],
+    services: ["high-risk-pregnancy-care", "twin-pregnancy-care", "normal-delivery", "painless-delivery", "fetal-medicine", "3d-4d-sonography"],
   }),
   cityDoctor({
     slug: "jaydeep-patel", name: "Dr. Jaydeep Patel", image: "/assets/doctors/jaydeep-patel.webp",

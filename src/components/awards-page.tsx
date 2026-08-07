@@ -82,6 +82,12 @@ export function AwardsPage() {
                 leading publications, industry bodies and government institutions.
               </p>
             </Reveal>
+            <Reveal delay={0.28}>
+              <p className="mt-4 inline-flex items-center gap-2 rounded-full bg-white/70 px-4 py-2 text-sm font-semibold text-[color:var(--plum)] shadow-soft">
+                <Award className="h-4 w-4 text-[color:var(--rose)]" />
+                First live birth in India with vitrified frozen oocytes
+              </p>
+            </Reveal>
           </div>
         </section>
 
@@ -126,7 +132,7 @@ export function AwardsPage() {
           <Reveal>
             <div className="rounded-3xl bg-[color:var(--rose-soft)]/50 p-10 text-center">
               <h2 className="font-display text-2xl font-bold text-[color:var(--plum)] md:text-3xl">
-                Experience India&rsquo;s most awarded fertility chain.
+                Experience one of the most awarded fertility chains of India.
               </h2>
               <p className="mx-auto mt-3 max-w-xl text-sm text-[color:var(--plum)]/65">
                 Speak with our fertility experts today — confidential, compassionate and personalised.

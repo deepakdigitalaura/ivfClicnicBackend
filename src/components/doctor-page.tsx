@@ -13,8 +13,9 @@ import { SectionHead } from "@/components/ivf-page";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Doctor } from "@/lib/doctors";
-import { DOCTORS, doctorUrl } from "@/lib/doctors";
+import { DOCTORS, doctorUrl, CORE_DOCTOR_SLUGS } from "@/lib/doctors";
 import { treatmentCardData, treatmentRef } from "@/lib/treatments";
+import { WOMENS_HEALTH_SERVICES, serviceHref } from "@/lib/womens-health";
 import { centresForLocationSlugs, centreMapUrl, centreHref, cityBySlug } from "@/lib/locations";
 import { testimonialsForDoctor, videosForDoctor } from "@/lib/video-testimonials";
 import { reviewsForDoctor } from "@/lib/doctor-reviews";
@@ -44,14 +45,27 @@ const EXPERTISE_TREATMENT_SLUG: Record<string, string> = {
   "IUI": "iui",
   "PCOS": "pcos",
   "Poor Ovarian Reserve": "ovarian-reserve",
-  "High-Risk Pregnancy": "ivf-evaluation",
-  "Twin Pregnancy": "ivf-evaluation",
 };
 
-/** Treatment-page href for an expertise label. Falls back to the homepage
- *  treatments section only for unmapped future labels, so a chip is never a
- *  dead, unclickable capsule. */
+/* Obstetric/maternity expertise labels deep-link to their dedicated maternity
+ * service page (not a fertility-treatment page) — these are Dr. Binal Shah's
+ * (and other OB-GYNs') pregnancy-care specialities, distinct from IVF/infertility. */
+const EXPERTISE_SERVICE_KEY: Record<string, string> = {
+  "High-Risk Pregnancy": "high-risk-pregnancy-care",
+  "High-Risk Pregnancy Care": "high-risk-pregnancy-care",
+  "Twin Pregnancy": "twin-pregnancy-care",
+  "Twin Pregnancy Care": "twin-pregnancy-care",
+};
+
+/** Treatment/service-page href for an expertise label. Falls back to the
+ *  homepage treatments section only for unmapped future labels, so a chip is
+ *  never a dead, unclickable capsule. */
 function expertiseHref(label: string): string {
+  const serviceKey = EXPERTISE_SERVICE_KEY[label];
+  if (serviceKey) {
+    const service = WOMENS_HEALTH_SERVICES[serviceKey];
+    if (service) return serviceHref(service);
+  }
   const slug = EXPERTISE_TREATMENT_SLUG[label];
   return slug ? treatmentRef(slug).href : "/#treatments";
 }
@@ -84,6 +98,45 @@ const lab = (path: string, value: string | undefined, fallback: string, rich = t
 // HTML helper for the italic rose accent word used in section headings.
 const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const em = (t: string) => `<em ${EM}>${t}</em>`;
+
+/* ---------- Shared centre contact card (per-centre "Where to meet" card) ---------- */
+function CentreCard({ c, d }: { c: ReturnType<typeof centresForLocationSlugs>[number]; d: Doctor }) {
+  return (
+    <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
+      <div className="flex items-start gap-3.5">
+        <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
+          <MapPin className="h-5 w-5" />
+        </div>
+        <div>
+          <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Bavishi Fertility Institute</p>
+          <h3 className="text-lg font-semibold leading-snug text-[color:var(--plum)]">
+            {c.name}{cityBySlug(c.citySlug)?.name && c.name !== cityBySlug(c.citySlug)?.name ? `, ${cityBySlug(c.citySlug)?.name}` : ""}
+            {c.isHeadOffice && <span className="ml-2 align-middle text-[11px] font-medium text-[color:var(--rose)]">· Head Office</span>}
+          </h3>
+        </div>
+      </div>
+      <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
+        <li className="flex items-start gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {c.address}</li>
+        <li className="flex items-start gap-2.5"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> <a href={`tel:+${c.phone}`} className="font-medium text-[color:var(--plum)] hover:text-[color:var(--rose)]">{c.phoneLabel}</a></li>
+        {d.consultationTimings?.[c.slug] && (
+          <li className="flex items-start gap-2.5">
+            <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+            <span><span className="font-medium text-[color:var(--plum)]">Consultation:</span> {d.consultationTimings[c.slug]}</span>
+          </li>
+        )}
+        <li className="flex items-start gap-2.5">
+          <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+          <span>{d.consultationTimings?.[c.slug] && <span className="font-medium text-[color:var(--plum)]">Institute: </span>}{c.hours}</span>
+        </li>
+      </ul>
+      <div className="mt-6 flex flex-wrap gap-2.5 pt-1">
+        <a href={`tel:+${c.phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call</a>
+        <a href={centreMapUrl(c)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]"><Navigation className="h-4 w-4" /> Directions</a>
+        <a href={centreHref(c)} className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-[color:var(--rose)]">View centre <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
+      </div>
+    </div>
+  );
+}
 
 /* ---------- /doctors/[slug] — single profile ---------- */
 export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
@@ -251,12 +304,22 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
         </div>
       </section>
 
-      {/* Treatments performed — entity links as cards */}
-      {d.treatments.length > 0 && (
+      {/* Treatments performed — entity links as cards. Obstetric/maternity
+       *  services (if any) lead, followed by infertility treatments. */}
+      {(d.services?.length || d.treatments.length > 0) && (
         <section className="bg-white py-8 md:py-14">
           <div className="container-px mx-auto max-w-[1400px]">
             <SectionHead center eyebrow={lab("profileLabels.treatmentsEyebrow", pl.treatmentsEyebrow, "Treatments")} title={lab("profileLabels.treatmentsTitle", pl.treatmentsTitle, `Treatments ${em(d.name + " performs")}`)} />
             <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
+              {d.services?.map((key) => {
+                const service = WOMENS_HEALTH_SERVICES[key];
+                if (!service) return null;
+                return (
+                  <StaggerItem key={`service-${key}`}>
+                    <TreatmentCard icon={service.icon} title={service.name} desc={service.desc} href={serviceHref(service)} />
+                  </StaggerItem>
+                );
+              })}
               {d.treatments.map((slug) => {
                 const card = treatmentCardData(slug);
                 return (
@@ -300,7 +363,6 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
           <SectionHead
             center
-            eyebrow={lab("profileLabels.consultsEyebrow", pl.consultsEyebrow, "Consults at")}
             title={lab("profileLabels.consultsTitle", pl.consultsTitle, `Where to meet ${em(d.name)}`)}
             subtitle={lab(
               "profileLabels.consultsSubtitle",
@@ -311,18 +373,26 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
             )}
           />
           {d.visitsAllCentres ? (
+            <>
+              {centres[0] && (
+                <Stagger className="mt-10 flex flex-wrap justify-center gap-6">
+                  <StaggerItem key={centres[0].slug} className="w-full max-w-md">
+                    <CentreCard c={centres[0]} d={d} />
+                  </StaggerItem>
+                </Stagger>
+              )}
             <Reveal>
-              <div className="mx-auto mt-10 w-full max-w-2xl rounded-3xl border border-border/70 bg-card p-8 text-center shadow-soft">
+              <div className="mx-auto mt-6 w-full max-w-2xl rounded-3xl border border-border/70 bg-card p-8 text-center shadow-soft">
                 <div className="mx-auto inline-flex h-14 w-14 items-center justify-center rounded-2xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
                   <MapPin className="h-6 w-6" />
                 </div>
                 <p className="mt-4 text-[11px] font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Bavishi Fertility Institute</p>
-                <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{lab("profileLabels.visitsHeading", pl.visitsHeading, `Visits across ${d.cities.length} cities`)}</h3>
+                <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{lab("profileLabels.visitsHeading", pl.visitsHeading, `Also keeps visiting ${d.cities.length} cities`)}</h3>
                 <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-muted-foreground">
                   {lab(
                     "profileLabels.visitsParagraph",
                     pl.visitsParagraph,
-                    `As the founder and senior IVF specialist, ${d.name} consults at Bavishi Fertility Institute centres across India on a rotating schedule. Call to confirm when he is visiting your nearest centre.`,
+                    `Beyond ${centres[0]?.name ?? "the centre above"}, ${d.name} also consults at Bavishi Fertility Institute centres across India on a rotating schedule. Call to confirm when he is visiting your nearest centre.`,
                   )}
                 </p>
                 <div className="mt-5 flex flex-wrap justify-center gap-2">
@@ -333,50 +403,16 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
                   ))}
                 </div>
                 <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-                  {centres[0] && (
-                    <a href={`tel:+${centres[0].phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call {centres[0].phoneLabel}</a>
-                  )}
                   <a href="/locations" className="group inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-5 py-2.5 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]">View all centres <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
                 </div>
               </div>
             </Reveal>
+            </>
           ) : (
           <Stagger className="mt-10 flex flex-wrap justify-center gap-6">
             {centres.map((c) => (
               <StaggerItem key={c.slug} className="w-full max-w-md">
-                <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="flex items-start gap-3.5">
-                    <div className="inline-flex h-12 w-12 shrink-0 items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
-                      <MapPin className="h-5 w-5" />
-                    </div>
-                    <div>
-                      <p className="text-[11px] font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Bavishi Fertility Institute</p>
-                      <h3 className="text-lg font-semibold leading-snug text-[color:var(--plum)]">
-                        {c.name}{cityBySlug(c.citySlug)?.name && c.name !== cityBySlug(c.citySlug)?.name ? `, ${cityBySlug(c.citySlug)?.name}` : ""}
-                        {c.isHeadOffice && <span className="ml-2 align-middle text-[11px] font-medium text-[color:var(--rose)]">· Head Office</span>}
-                      </h3>
-                    </div>
-                  </div>
-                  <ul className="mt-5 space-y-3 text-sm leading-relaxed text-muted-foreground">
-                    <li className="flex items-start gap-2.5"><MapPin className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> {c.address}</li>
-                    <li className="flex items-start gap-2.5"><Phone className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" /> <a href={`tel:+${c.phone}`} className="font-medium text-[color:var(--plum)] hover:text-[color:var(--rose)]">{c.phoneLabel}</a></li>
-                    {d.consultationTimings?.[c.slug] && (
-                      <li className="flex items-start gap-2.5">
-                        <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                        <span><span className="font-medium text-[color:var(--plum)]">Consultation:</span> {d.consultationTimings[c.slug]}</span>
-                      </li>
-                    )}
-                    <li className="flex items-start gap-2.5">
-                      <Clock className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                      <span>{d.consultationTimings?.[c.slug] && <span className="font-medium text-[color:var(--plum)]">Institute: </span>}{c.hours}</span>
-                    </li>
-                  </ul>
-                  <div className="mt-6 flex flex-wrap gap-2.5 pt-1">
-                    <a href={`tel:+${c.phone}`} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-sm font-semibold text-white shadow-glow transition-transform hover:scale-[1.03]"><Phone className="h-4 w-4" /> Call</a>
-                    <a href={centreMapUrl(c)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-semibold text-[color:var(--plum)] transition-colors hover:border-[color:var(--rose)]/50 hover:text-[color:var(--rose)]"><Navigation className="h-4 w-4" /> Directions</a>
-                    <a href={centreHref(c)} className="group inline-flex items-center gap-1.5 rounded-full px-4 py-2 text-sm font-semibold text-[color:var(--rose)]">View centre <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" /></a>
-                  </div>
-                </div>
+                <CentreCard c={c} d={d} />
               </StaggerItem>
             ))}
           </Stagger>
@@ -435,6 +471,14 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
 /* `doctors` is supplied by the server route (CMS-resolved, in code order); the
  * DOCTORS default keeps the component reusable/standalone. */
 export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
+  // The four Bavishi family doctors lead, in their fixed order; every other
+  // specialist follows alphabetically by name (not grouped by city).
+  const sorted = [...doctors].sort((a, b) => {
+    const coreA = CORE_DOCTOR_SLUGS.indexOf(a.slug);
+    const coreB = CORE_DOCTOR_SLUGS.indexOf(b.slug);
+    if (coreA !== -1 || coreB !== -1) return (coreA === -1 ? 99 : coreA) - (coreB === -1 ? 99 : coreB);
+    return a.name.localeCompare(b.name);
+  });
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -455,7 +499,7 @@ export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
           subtitle="A family of fertility experts trusted by generations — credentialed, experienced and committed to honest, compassionate care."
         />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-          {doctors.map((d) => (
+          {sorted.map((d) => (
             <StaggerItem key={d.slug}>
               <a href={doctorUrl(d.slug)} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                 <div className="relative aspect-[3/4] overflow-hidden bg-[color:var(--rose-soft)]/40">

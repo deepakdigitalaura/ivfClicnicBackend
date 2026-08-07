@@ -100,6 +100,8 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   "parth-bavishi": [
     { name: "Rushi & Siddhi", doctor: "Dr. Parth Bavishi", quote: "Our journey to parenthood — blessed with twins at Bavishi Fertility Institute.", youTubeId: "llJJm3TmbCA" },
     { name: "Chirali & Ritesh", doctor: "Dr. Parth Bavishi", quote: "From an IVF miracle to a natural pregnancy — our journey with Bavishi Fertility Institute.", youTubeId: "lN42_g7G00s" },
+    { name: "Mrudangi", doctor: "Dr. Parth Bavishi", quote: "Mrudangi's fertility treatment journey, from Canada, with Bavishi Fertility Institute.", youTubeId: "dUC9eTcyjbI" },
+    { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Parth Bavishi", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
   ],
 
   "himanshu-bavishi": [
@@ -113,11 +115,13 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
     { name: "Rekha", doctor: "Dr. Falguni Bavishi", quote: "From loss to the blessing of twins — an inspiring IVF journey with Bavishi Fertility Institute.", youTubeId: "KKf6tNrlvoc" },
     { name: "Vivekanand & Bandna", doctor: "Dr. Falguni Bavishi", quote: "Our journey to parenthood with Bavishi Fertility Institute.", youTubeId: "274_mV_xnfs" },
     { name: "Dipali Doshi", doctor: "Dr. Falguni Bavishi", quote: "We succeeded in our very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "XGYK6MZD3ak" },
+    { name: "Bindiya & Mehul Mervana", doctor: "Dr. Falguni Bavishi", quote: "Bindiya and Mehul Mervana's remarkable journey to parenthood with Bavishi Fertility Institute.", youTubeId: "-jM7ly3AOFI" },
   ],
 
   "binal-shah": [
     { name: "Madhvika & Pranay", doctor: "Dr. Binal Shah", quote: "When dreams blossom against all odds — our story with Bavishi Fertility Institute.", youTubeId: "v2oy6QZjQvs" },
     { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Binal Shah", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
+    { name: "Ankita Himanshukumar Dave", doctor: "Dr. Binal Shah", quote: "Watch Ankita Himanshukumar Dave share her fertility treatment journey with Bavishi Fertility Institute.", youTubeId: "ber4YBT5Yno" },
   ],
 
   // Self-hosted (not on the YouTube channel yet) — clinic-supplied WhatsApp
@@ -128,14 +132,10 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
     { name: "Patient Testimonial", doctor: "Dr. Deepali Pandya", quote: "Watch this patient share their experience with Dr. Deepali Pandya.", videoSrc: "/assets/testimonials/deepali-pandya-patient-2.mp4" },
   ],
 
-  // Self-hosted (clinic-supplied clips, not on the YouTube channel). Names/quotes
-  // are placeholders pending real transcription except testimonial 4, whose
-  // filename named the patient. Replace with real quotes once transcribed.
+  // Self-hosted (clinic-supplied clip, not on the YouTube channel). Placeholder
+  // name/quote pending real transcription of the patient's spoken testimonial.
   "deep-gajiwala": [
-    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-1.mp4" },
-    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-2.mp4" },
-    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-3.mp4" },
-    { name: "Archna Shah", doctor: "Dr. Deep Gajiwala", quote: "Watch Archna Shah share her experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-4-archna-shah.mp4" },
+    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-5.mp4" },
   ],
 };
 
