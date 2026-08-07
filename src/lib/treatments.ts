@@ -452,7 +452,7 @@ const WHY_BAVISHI_FERTILITY_INSTITUTE_ICSI: IconCard[] = [
 
 const WHY_BAVISHI_FERTILITY_INSTITUTE_IVF_FAILURE: IconCard[] = [
   { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
-  { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and complete peace of mind even in multiple IVF failure cases." },
+  { icon: ShieldCheck, t: "Suraksha Kavach", d: "One of India's trusted IVF protection programmes — financial assurance and complete peace of mind even in multiple IVF failure cases." },
   { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
 ];
 
