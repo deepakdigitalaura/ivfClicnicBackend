@@ -415,6 +415,13 @@ export const DOCTOR_TEXT_REVIEWS: Record<string, DoctorReview[]> = {
       text:
         "We are incredibly grateful to Dr.Parnika Agrawal (Bavishi Neo Fertility Varanasi) for guiding us through one of the most important journeys of our lives. Thanks to her expert treatment, compassionate care, and constant encouragement, we have been blessed with a healthy baby. She was always patient, attentive, and willing to answer all our questions, making us feel confident and supported at every step. Her professionalism, experience, and genuine concern for her patients make her an exceptional gynaecologist. We wholeheartedly recommend her to anyone seeking the best care for pregnancy and women's health. Thank you, Doctor, for making our dream of becoming parents come true!",
     },
+    {
+      name: "Supriya Verma",
+      rating: 5,
+      date: "7 August 2026",
+      text:
+        "I had a wonderful experience with Dr. Parnnika Agrawal at Bavishi Hospital. She is such an adorable, caring, supportive, and knowledgeable doctor. ❤️\n\nI conceived my first baby with her guidance, and I am now consulting her again for my second baby journey. As an IVF specialist, she is extremely professional and explains everything patiently, which makes you feel comfortable and confident throughout the treatment.\n\nI am truly grateful for her care and guidance. I highly recommend Dr. Parnnika Agrawal and Bavishi Hospital to anyone looking for a compassionate and experienced fertility specialist. 💕✨\n\nThank you, Doctor, for always being so supportive! 🌸",
+    },
   ],
 };
 
