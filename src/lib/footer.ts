@@ -186,7 +186,6 @@ export const FOOTER_DEFAULTS: FooterData = {
     { h: "Donor Services", l: [
       { label: "Egg Donation", href: "/egg-donation" },
       { label: "Sperm Donation", href: "/sperm-donation" },
-      { label: "Surrogacy", href: "/surrogacy" },
     ]},
     { h: "Fertility Preservation", l: [
       { label: "Cryopreservation", href: "/cryopreservation" },

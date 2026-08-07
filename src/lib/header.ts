@@ -208,7 +208,6 @@ export const HEADER_DEFAULTS: HeaderData = {
         { heading: "Donor Services", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Egg Donation", href: "/egg-donation" },
           { label: "Sperm Donation", href: "/sperm-donation" },
-          { label: "Surrogacy", href: "/surrogacy" },
         ]},
         { heading: "Male Infertility", headingHref: "/treatments/male-infertility", items: [
           { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
@@ -528,7 +527,7 @@ function buildDoctorMenu(navDoctors: NavDoctorItem[]): DoctorMenuData | undefine
     .map((d) => ({ name: d.name, href: d.href, city: d.city, meta: d.experienceLabel || undefined }));
   const specialists = navDoctors
     .filter((d) => d.navRole === "specialist")
-    .sort((a, b) => a.navOrder - b.navOrder)
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((d) => ({ name: d.name, href: d.href, city: d.city }));
   if (!senior.length && !specialists.length) return undefined;
   return { senior, specialists };

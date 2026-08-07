@@ -2,7 +2,7 @@
 import {
   FlaskConical, Microscope, Activity, Filter, Eye, Magnet, ScanLine,
   Layers, Zap, ShieldCheck, Egg, Droplets, Snowflake,
-  Award, MapPin, Stethoscope, Users, Clock, Dna,
+  Award, MapPin, Stethoscope, Clock, Dna,
 } from "lucide-react";
 import { CategoryHubPage, type HubCard, type HubStat, type HubFaq, type HubWhyPoint } from "@/components/category-hub-page";
 
@@ -84,12 +84,6 @@ const cards: HubCard[] = [
     desc: "Screened, ethical donor-sperm programme following ICMR guidelines.",
     href: "/sperm-donation",
     icon: Droplets,
-  },
-  {
-    title: "Surrogacy",
-    desc: "Ethical, legally-compliant gestational surrogacy for couples who cannot carry a pregnancy.",
-    href: "/surrogacy",
-    icon: Users,
   },
   {
     title: "Cryopreservation (Egg / Sperm / Embryo Freezing)",
