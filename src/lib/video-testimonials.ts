@@ -135,7 +135,7 @@ export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   // Self-hosted (clinic-supplied clip, not on the YouTube channel). Placeholder
   // name/quote pending real transcription of the patient's spoken testimonial.
   "deep-gajiwala": [
-    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-1.mp4" },
+    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-5.mp4" },
   ],
 };
 
