@@ -15,6 +15,7 @@ import { useEdit } from "@/components/editor/edit-context";
 import type { Doctor } from "@/lib/doctors";
 import { DOCTORS, doctorUrl, CORE_DOCTOR_SLUGS } from "@/lib/doctors";
 import { treatmentCardData, treatmentRef } from "@/lib/treatments";
+import { WOMENS_HEALTH_SERVICES, serviceHref } from "@/lib/womens-health";
 import { centresForLocationSlugs, centreMapUrl, centreHref, cityBySlug } from "@/lib/locations";
 import { testimonialsForDoctor, videosForDoctor } from "@/lib/video-testimonials";
 import { reviewsForDoctor } from "@/lib/doctor-reviews";
@@ -44,14 +45,27 @@ const EXPERTISE_TREATMENT_SLUG: Record<string, string> = {
   "IUI": "iui",
   "PCOS": "pcos",
   "Poor Ovarian Reserve": "ovarian-reserve",
-  "High-Risk Pregnancy": "ivf-evaluation",
-  "Twin Pregnancy": "ivf-evaluation",
 };
 
-/** Treatment-page href for an expertise label. Falls back to the homepage
- *  treatments section only for unmapped future labels, so a chip is never a
- *  dead, unclickable capsule. */
+/* Obstetric/maternity expertise labels deep-link to their dedicated maternity
+ * service page (not a fertility-treatment page) — these are Dr. Binal Shah's
+ * (and other OB-GYNs') pregnancy-care specialities, distinct from IVF/infertility. */
+const EXPERTISE_SERVICE_KEY: Record<string, string> = {
+  "High-Risk Pregnancy": "high-risk-pregnancy-care",
+  "High-Risk Pregnancy Care": "high-risk-pregnancy-care",
+  "Twin Pregnancy": "twin-pregnancy-care",
+  "Twin Pregnancy Care": "twin-pregnancy-care",
+};
+
+/** Treatment/service-page href for an expertise label. Falls back to the
+ *  homepage treatments section only for unmapped future labels, so a chip is
+ *  never a dead, unclickable capsule. */
 function expertiseHref(label: string): string {
+  const serviceKey = EXPERTISE_SERVICE_KEY[label];
+  if (serviceKey) {
+    const service = WOMENS_HEALTH_SERVICES[serviceKey];
+    if (service) return serviceHref(service);
+  }
   const slug = EXPERTISE_TREATMENT_SLUG[label];
   return slug ? treatmentRef(slug).href : "/#treatments";
 }

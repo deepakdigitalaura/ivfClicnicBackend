@@ -400,7 +400,7 @@ export const DOCTORS: Doctor[] = [
       "Dr. Binal Shah is an experienced obstetrician and IVF specialist with over three decades of practice in managing normal and IVF pregnancies, including complex cases such as twin pregnancies and high-risk deliveries.",
       "She serves as the Chief Quality Control Officer and NABH Nodal Officer at Bavishi Fertility Institute, helping uphold the institute's clinical quality and accreditation standards.",
     ],
-    knowsAbout: ["In Vitro Fertilization", "High-Risk Pregnancy", "Twin Pregnancy", "Female Infertility"],
+    knowsAbout: ["High-Risk Pregnancy Care", "Twin Pregnancy Care", "In Vitro Fertilization", "Female Infertility"],
   }),
   cityDoctor({
     slug: "jaydeep-patel", name: "Dr. Jaydeep Patel", image: "/assets/doctors/jaydeep-patel.webp",
