@@ -304,12 +304,22 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
         </div>
       </section>
 
-      {/* Treatments performed — entity links as cards */}
-      {d.treatments.length > 0 && (
+      {/* Treatments performed — entity links as cards. Obstetric/maternity
+       *  services (if any) lead, followed by infertility treatments. */}
+      {(d.services?.length || d.treatments.length > 0) && (
         <section className="bg-white py-8 md:py-14">
           <div className="container-px mx-auto max-w-[1400px]">
             <SectionHead center eyebrow={lab("profileLabels.treatmentsEyebrow", pl.treatmentsEyebrow, "Treatments")} title={lab("profileLabels.treatmentsTitle", pl.treatmentsTitle, `Treatments ${em(d.name + " performs")}`)} />
             <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
+              {d.services?.map((key) => {
+                const service = WOMENS_HEALTH_SERVICES[key];
+                if (!service) return null;
+                return (
+                  <StaggerItem key={`service-${key}`}>
+                    <TreatmentCard icon={service.icon} title={service.name} desc={service.desc} href={serviceHref(service)} />
+                  </StaggerItem>
+                );
+              })}
               {d.treatments.map((slug) => {
                 const card = treatmentCardData(slug);
                 return (
