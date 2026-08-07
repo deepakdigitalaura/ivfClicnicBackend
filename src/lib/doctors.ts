@@ -188,6 +188,9 @@ export const DOCTORS: Doctor[] = [
     // Founder & visiting senior IVF specialist — consults across every BFI city.
     cities: ["Ahmedabad", "Mumbai", "Vadodara", "Surat", "Bhuj", "Bhavnagar", "Anand", "Varanasi"],
     locations: ["paldi", "nikol", "mumbai", "vadodara", "surat", "bhuj", "bhavnagar", "anand", "varanasi"],
+    consultationTimings: {
+      paldi: "Mon–Sat · 11:00 AM–5:00 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
       "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
@@ -239,7 +242,9 @@ export const DOCTORS: Doctor[] = [
     cities: ["Ahmedabad"],
     locations: ["paldi", "sindhu-bhavan-road", "nikol"],
     consultationTimings: {
-      nikol: "Every Wednesday · 11:00 AM–1:00 PM",
+      "sindhu-bhavan-road": "Mon, Tue, Thu, Fri · 11:30 AM–2:00 PM",
+      paldi: "Mon, Fri · 2:00 PM–4:30 PM",
+      nikol: "Every Wednesday · 11:30 AM–1:00 PM",
     },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
@@ -281,6 +286,7 @@ export const DOCTORS: Doctor[] = [
     locations: ["paldi", "sindhu-bhavan-road"],
     consultationTimings: {
       paldi: "Mon–Sat · 10:00 AM–4:00 PM",
+      "sindhu-bhavan-road": "Mon–Sat · 4:00 PM–7:00 PM",
     },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
@@ -334,6 +340,9 @@ export const DOCTORS: Doctor[] = [
     experienceYears: 13,
     cities: ["Ahmedabad"],
     locations: ["paldi"],
+    consultationTimings: {
+      paldi: "Mon–Sat · 10:00 AM–5:00 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
       "Co-director of Bavishi Fertility Institute, focused on comprehensive fertility evaluation, individualised stimulation protocols and recurrent-IVF-failure management.",
@@ -710,7 +719,7 @@ export const doctorsForLocation = (locationSlug: string) =>
   DOCTORS.filter((d) => d.locations.includes(locationSlug));
 
 /** The four Bavishi promoter doctors — always shown first (visible on load). */
-const CORE_DOCTOR_SLUGS = ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"];
+export const CORE_DOCTOR_SLUGS = ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"];
 
 /** Every Bavishi doctor is a fertility specialist, so the treatment carousel
  *  showcases the whole team and lets users slide through them. Ordering:
@@ -780,7 +789,8 @@ export function doctorMenuData(): { senior: DoctorMenuEntry[]; specialists: Doct
   });
   const specialists = DOCTORS
     .filter((d) => !CORE_DOCTOR_SLUGS.includes(d.slug))
-    .map((d) => ({ name: d.name, href: doctorUrl(d.slug), city: d.cities[0] ?? "" }));
+    .map((d) => ({ name: d.name, href: doctorUrl(d.slug), city: d.cities[0] ?? "" }))
+    .sort((a, b) => a.name.localeCompare(b.name));
   return { senior, specialists };
 }
 
@@ -961,6 +971,7 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     languages: rows(src.languages) ?? def.languages,
     sameAs: rows(src.sameAs) ?? def.sameAs,
     verified: src.verified ?? def.verified,
+    consultationTimings: def.consultationTimings,
     ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
     profileLabels: profileLabels(src.profileLabels),
   };
