@@ -1294,7 +1294,7 @@ export const spindleViewIcsi: Treatment = {
     title: "Spindle View ICSI (Polscope) — Bavishi Fertility Institute",
     description:
       "What is Spindle View ICSI? Using a Polscope to visualise the egg's meiotic spindle for better fertilisation and egg-quality assessment, in selected cases at Bavishi Fertility Institute.",
-    ogImage: "/assets/treatments/spindle-view-icsi-oocyte-comparison.png",
+    ogImage: "/assets/treatments/spindle-view-icsi-polscope-oocyte-comparison.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -1312,7 +1312,7 @@ export const spindleViewIcsi: Treatment = {
     tagline:
       "An advanced form of ICSI that lets the embryologist see the egg's meiotic spindle. This helps achieve better fertilisation and gives a more detailed assessment of egg quality.",
     badges: ["Polscope-guided", "Better egg assessment", "Used selectively", "Skilled embryology"],
-    image: "/assets/treatments/spindle-view-icsi-oocyte-comparison.png",
+    image: "/assets/treatments/spindle-view-icsi-polscope-oocyte-comparison.png",
     imageAlt: "Real Polscope microscopy — oocyte with displaced spindle versus oocyte with aligned spindle, at Bavishi Fertility Institute",
   },
   whatIs: {
