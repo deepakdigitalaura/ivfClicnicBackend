@@ -32,7 +32,7 @@ type Centre = { name: string; address: string; phone: string; phoneLabel: string
 // Full Bavishi Fertility Institute centre directory — real addresses, phones and GMB hours.
 const directory: Centre[] = [
   // Ahmedabad
-  { name: "Ahmedabad — Paldi", address: "Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi – 380007", phone: "919712622288", phoneLabel: "+91 97126 22288", hours: "Mon–Sat · 9:00 am – 7:00 pm", href: "/locations/ahmedabad/paldi" },
+  { name: "Ahmedabad — Paldi", address: "Opp. Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi Cross Roads, Paldi – 380007", phone: "919712622288", phoneLabel: "+91 97126 22288", hours: "Mon–Sat · 9:00 am – 7:00 pm · Emergency 24x7", href: "/locations/ahmedabad/paldi" },
   { name: "Ahmedabad — Sindhu Bhavan Road", address: "SF-213, Stellar, Sindhu Bhavan Marg, near Pakvan Cross Roads, Bodakdev – 380059", phone: "919712622288", phoneLabel: "+91 97126 22288", hours: "Mon–Sat · 10:30 am – 7:00 pm", href: "/locations/ahmedabad/sindhu-bhavan-road" },
   { name: "Ahmedabad — Nikol", address: "Hill Town Plaza, 501, near Amar Jawan Circle, Nikol – 380049", phone: "919227114040", phoneLabel: "+91 92271 14040", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/ahmedabad/nikol" },
   // Mumbai
@@ -44,10 +44,10 @@ const directory: Centre[] = [
   // Other cities
   { name: "Vadodara", address: "4th Floor, Trisha Square-2, Sampatrao Colony, Jetalpur Road, Alkapuri – 390007", phone: "917575099898", phoneLabel: "+91 75750 99898", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/vadodara/jetalpur-road" },
   { name: "Surat", address: "9th Floor, Param Doctor House, Lal Darwaja, Station Road, Surat", phone: "919879572247", phoneLabel: "+91 98795 72247", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/surat/lal-darwaja" },
-  { name: "Bhuj", address: "Spandan Maternity Home, 13-28 Shivam Nagar, near Uma Nagar, Mirzapar Highway, Bhuj – 370040", phone: "919687188550", phoneLabel: "+91 96871 88550", hours: "Mon–Fri · 8:00 am – 7:00 pm · Sat till 1:00 pm", href: "/locations/bhuj/mirjapar" },
-  { name: "Bhavnagar", address: "Hema Women's Hospital, 203-205 Sai Ganga, Kalubha Road, Bhavnagar – 364001", phone: "917069314040", phoneLabel: "+91 70693 14040", hours: "Mon–Sat · 10:00 am – 2:00 pm & 4:00 pm – 8:00 pm", href: "/locations/bhavnagar/kalubha-road" },
-  { name: "Anand", address: "Unit 2, IRIS Hospital, Nanikhodiyar, Anand – 388001", phone: "917069034565", phoneLabel: "+91 70690 34565", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/anand/nanikhodiyar" },
-  { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", hours: "Mon–Sat · 10:00 am – 7:00 pm", href: "/locations/varanasi/shivpur" },
+  { name: "Bhuj", address: "Spandan Maternity Home, 13-28 Shivam Nagar, near Uma Nagar, Mirzapar Highway, Bhuj – 370040", phone: "919687188550", phoneLabel: "+91 96871 88550", hours: "Mon–Sat · 9:00 am – 6:00 pm · Emergency 24x7", href: "/locations/bhuj/mirjapar" },
+  { name: "Bhavnagar", address: "Hema Women's Hospital, 203-205 Sai Ganga, Kalubha Road, Bhavnagar – 364001", phone: "917069314040", phoneLabel: "+91 70693 14040", hours: "Mon–Sat · 10:00 am – 2:00 pm & 5:00 pm – 9:00 pm · Emergency 24x7", href: "/locations/bhavnagar/kalubha-road" },
+  { name: "Anand", address: "Unit 2, IRIS Hospital, Nanikhodiyar, Anand – 388001", phone: "917069034565", phoneLabel: "+91 70690 34565", hours: "Mon–Sat · 9:30 am – 12:30 pm · Emergency 24x7", href: "/locations/anand/nanikhodiyar" },
+  { name: "Varanasi", address: "S15/47, Panchkosi Road, behind Thana, Shivpur, Varanasi – 221003", phone: "919506081979", phoneLabel: "+91 95060 81979", hours: "Mon–Sat · 9:00 am – 7:00 pm · Emergency 24x7", href: "/locations/varanasi/shivpur" },
 ];
 
 type Faq = { q: string; a: string };
