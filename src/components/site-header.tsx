@@ -364,7 +364,7 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
         ))}
       </div>
 
-      {/* All IVF Specialists */}
+      {/* Senior IVF Specialists */}
       <div className="mt-6 flex items-center gap-3">
         <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Senior IVF Specialists</span>
         <span className="h-px flex-1 bg-border/60" />
