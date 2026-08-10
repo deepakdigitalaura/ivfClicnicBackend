@@ -383,7 +383,7 @@ function DoctorCarousel({ docs, label }: { docs: Doctor[]; label: string }) {
 function toView(c: ResolvedTreatment): Treatment {
   return {
     ...c,
-    ...(c.types ? { types: { ...c.types, items: c.types.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
+    ...(c.types ? { types: { ...c.types, items: c.types.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d, ...(x.href ? { href: x.href } : {}) })) } } : {}),
     process: { ...c.process, steps: c.process.steps.map((s) => ({ icon: resolveIcon(s.icon), n: s.n, t: s.t, d: s.d })) },
     ...(c.technology ? { technology: { ...c.technology, items: c.technology.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
     ...(c.whyUs ? { whyUs: { ...c.whyUs, items: c.whyUs.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
@@ -694,15 +694,26 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                   : "sm:grid-cols-2 lg:grid-cols-3"
             }`}
           >
-            {t.types.items.map((x, i) => (
-              <StaggerItem key={i}>
-                <div className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><x.icon className="h-6 w-6" /></div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{ed(`types.items.${i}.t`, x.t)}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`types.items.${i}.d`, x.d)}</p>
-                </div>
-              </StaggerItem>
-            ))}
+            {t.types.items.map((x, i) => {
+              const Card = x.href ? "a" : "div";
+              return (
+                <StaggerItem key={i}>
+                  <Card
+                    {...(x.href ? { href: x.href } : {})}
+                    className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift"
+                  >
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><x.icon className="h-6 w-6" /></div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{ed(`types.items.${i}.t`, x.t)}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`types.items.${i}.d`, x.d)}</p>
+                    {x.href && (
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
+                        Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    )}
+                  </Card>
+                </StaggerItem>
+              );
+            })}
           </Stagger>
           </div>
         </section>
