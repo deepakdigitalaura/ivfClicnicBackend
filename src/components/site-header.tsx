@@ -116,14 +116,14 @@ export function SiteHeader({
         className="sticky top-0 z-50 border-b border-border/60 bg-[color:var(--ivory)]/90 backdrop-blur-xl"
         onMouseLeave={scheduleClose}
       >
-        <div className="container-px mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-6">
+        <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-4 px-6 md:px-10 min-[1280px]:px-12 min-[1440px]:px-20">
           <a href="/" className="flex shrink-0 items-center gap-3">
             <img src={finalLogoSrc} alt={finalLogoAlt} className="h-12 w-auto" />
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden flex-1 items-center justify-center min-[1280px]:flex">
-            <ul className="flex items-center gap-0.5 text-[14px] font-medium text-[color:var(--plum)]">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center min-[1280px]:flex">
+            <ul className="flex items-center gap-0 text-[13.5px] font-medium text-[color:var(--plum)] min-[1400px]:gap-0.5 min-[1400px]:text-[14px]">
               {NAV.map((item) => (
                 <li
                   key={item.label}
@@ -132,7 +132,7 @@ export function SiteHeader({
                   <a
                     href={item.href || (item.doctors ? "/doctors" : "#")}
                     {...(item.openInNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 transition-colors hover:bg-white/60 hover:text-[color:var(--rose)] ${hover === item.label ? "text-[color:var(--rose)]" : ""}`}
+                    className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 transition-colors hover:bg-white/60 hover:text-[color:var(--rose)] min-[1400px]:px-2.5 ${hover === item.label ? "text-[color:var(--rose)]" : ""}`}
                   >
                     {item.label}
                     {(item.mega || item.doctors) && <ChevronDown className={`h-3 w-3 transition-transform ${hover === item.label ? "rotate-180" : ""}`} />}
@@ -144,7 +144,7 @@ export function SiteHeader({
 
           {/* Right cluster */}
           <div className="flex shrink-0 items-center gap-2">
-            <a href={cta.href} className="hidden items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-semibold text-white shadow-soft hover:brightness-110 transition md:inline-flex">
+            <a href={cta.href} className="hidden items-center gap-2 rounded-full bg-[color:var(--rose)] px-4 py-2.5 text-sm font-semibold text-white shadow-soft hover:brightness-110 transition md:inline-flex min-[1440px]:px-5">
               <Calendar className="h-4 w-4" /> {cta.label}
             </a>
 
