@@ -1703,7 +1703,7 @@ export const eggDonation: Treatment = {
   whatIs: {
     heading: { lead: "What is", em: "Egg Donation?" },
     paragraphs: [
-      "Egg donation — also called oocyte donation — is an assisted-reproduction technique in which the eggs come from a healthy, screened young donor instead of the patient. The donor's eggs are fertilised in the laboratory with the partner's sperm, and the resulting embryo is transferred to the recipient's uterus. The recipient carries and delivers the pregnancy herself.",
+      "Egg donation — also called oocyte donation — is an assisted-reproduction technique in which the eggs come from a healthy, screened young donor instead of the patient's. The donor's eggs are fertilised in the laboratory with the partner's sperm, and the resulting embryo is transferred to the recipient's uterus. The recipient carries and delivers the pregnancy herself.",
       "It is recommended when a woman cannot conceive with her own eggs — for example after menopause, with very low ovarian reserve or poor egg quality, after repeated IVF failure, or when there is a risk of passing on a genetic condition. Because the eggs come from young donors, donor-egg treatment offers some of the highest success rates in fertility care.",
     ],
     aside: {
@@ -2212,7 +2212,7 @@ export const oligospermia = defineTreatment({
     heading: { lead: "Why treat", em: "a low sperm count" },
     subtitle: "Finding and correcting the cause restores the best possible chance of conceiving.",
     items: [
-      "An accurate cause is identified, not just the low number.",
+      "An accurate cause may be identified, not just the low number.",
       "Reversible causes — infection, hormones, varicocele, lifestyle — can be corrected.",
       "Many couples conceive naturally once the count improves.",
       "When needed, IUI, IVF or ICSI overcome a persistently low count.",
@@ -2557,10 +2557,11 @@ export const surgicalSpermRetrieval = defineTreatment({
     subtitle: "Each technique targets a different cause of azoospermia — from a simple needle aspiration to microsurgery.",
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Assessment", d: "Hormone profile, examination and history confirm the azoospermia type and the best retrieval method." },
-      { icon: Syringe, n: "02", t: "PESA / TESA", d: "PESA needle-aspirates sperm from the epididymis, for obstructive cases like a prior vasectomy. TESA aspirates from testicular tissue instead, when PESA doesn't succeed." },
-      { icon: Target, n: "03", t: "TESE / Micro-TESE", d: "TESE takes a small testicular biopsy for non-obstructive, low-production cases. Micro-TESE adds an operating microscope for the most difficult cases." },
-      { icon: Microscope, n: "04", t: "ICSI", d: "A single viable sperm is injected directly into each egg with a fine glass needle — even a small surgically retrieved sample is enough for fertilisation." },
-      { icon: Snowflake, n: "05", t: "Freezing", d: "Any sperm not used immediately are frozen and stored, so future ICSI cycles can go ahead without repeating the retrieval procedure." },
+      { icon: Syringe, n: "02", t: "PESA", d: "PESA needle-aspirates sperm from the epididymis through the skin without any cut. It is used for obstructive cases like a prior vasectomy, infective block or absence of transport system from birth." },
+      { icon: Target, n: "03", t: "TESA / TESE", d: "TESA needle-aspirates sperm from the testes through the skin without any cut. While in TESE a very small cut is made on testis to get more tissue to find sperm." },
+      { icon: Eye, n: "04", t: "Micro-TESE", d: "Micro-TESE systematically explores the entire testis under a microscope to identify best sperm-producing areas while preserving blood supply. Despite a larger incision, complication rates are similar to TESE, making it the best sperm retrieval technique for non-obstructive azoospermia (NOA)." },
+      { icon: Microscope, n: "05", t: "ICSI", d: "A single viable sperm is injected directly into each egg with a fine needle — even a small surgically retrieved sample is enough for fertilisation." },
+      { icon: Snowflake, n: "06", t: "Freezing", d: "Any sperm not used immediately are frozen and stored, so future ICSI cycles can go ahead without repeating the retrieval procedure." },
     ],
     note: "Retrieval is often timed with the female partner's egg collection so fresh sperm can be used.",
   },
