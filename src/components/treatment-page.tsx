@@ -550,7 +550,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           </div>
           <div className="lg:col-span-5">
             <Reveal delay={0.15}>
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
+              <div className={`relative w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5`} style={{ aspectRatio: t.hero.heroAspect || "4/5" }}>
                 {editing ? (
                   <EditableImage path="hero.image" src={t.hero.image} alt={t.hero.imageAlt} className={`absolute inset-0 h-full w-full ${t.hero.imageFit === "contain" ? "object-contain" : "object-cover object-top"}`} />
                 ) : (
