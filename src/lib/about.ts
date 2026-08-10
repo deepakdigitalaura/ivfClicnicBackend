@@ -108,7 +108,7 @@ export const ABOUT_DEFAULTS: AboutData = {
   },
   milestones: [
     { y: "1998", t: "Bavishi Fertility Institute begins", d: '<a href="/doctors/himanshu-bavishi" style="color:var(--plum)">Dr. Himanshu</a> &amp; <a href="/doctors/falguni-bavishi" style="color:var(--plum)">Dr. Falguni Bavishi</a> establish Bavishi Fertility Institute (Test Tube Baby Clinic) in <a href="/locations/ahmedabad" style="color:var(--plum)">Ahmedabad</a>.' },
-    { y: "2002", t: "Preimplantation Genetic Diagnosis (PGD)", d: "Preimplantation Genetic Diagnosis (PGD) also launched the same year — bringing advanced genetic screening to Indian fertility care from the very start." },
+    { y: "2002", t: "Preimplantation Genetic Diagnosis (PGD)", d: "Preimplantation Genetic Diagnosis (PGD) launched — bringing advanced genetic screening to Indian fertility care from the very start." },
     { y: "2004", t: "Test Tube Baby Fair", d: "Organised 'Testtube Balakono Melavado 2004' — a landmark gathering celebrating test-tube baby families and spreading awareness about IVF across Gujarat." },
     { y: "2005", t: "Full-service fertility institute", d: 'Established a comprehensive fertility institute which is the current HQ with complete facilities in <a href="/locations/ahmedabad" style="color:var(--plum)">Ahmedabad</a>.' },
     { y: "2006", t: "Endoscopy Institute", d: "Launched a dedicated Endoscopy Institute, expanding male infertility and minimally invasive diagnostics." },
