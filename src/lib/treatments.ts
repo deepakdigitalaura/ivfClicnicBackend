@@ -163,7 +163,7 @@ export type Treatment = {
   };
   lastReviewed: string;
   reviewerSlug: string;
-  hero: { eyebrow: string; h1: string; h1Em: string; tagline: string; badges: string[]; image: string; imageAlt: string };
+  hero: { eyebrow: string; h1: string; h1Em: string; tagline: string; badges: string[]; image: string; imageAlt: string; imageFit?: "cover" | "contain" };
   whatIs: { heading: Heading; paragraphs: string[]; aside?: { title: string; body: string } };
   benefits: { heading: Heading; subtitle?: string; items: string[] };
   types?: { heading: Heading; subtitle?: string; items: IconCard[] };
@@ -1314,6 +1314,7 @@ export const spindleViewIcsi: Treatment = {
     badges: ["Polscope-guided", "Better egg assessment", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/spindle-view-icsi-polscope-oocyte-comparison.png",
     imageAlt: "Real Polscope microscopy — oocyte with displaced spindle versus oocyte with aligned spindle, at Bavishi Fertility Institute",
+    imageFit: "contain",
   },
   whatIs: {
     heading: { lead: "What is", em: "Spindle View ICSI?" },
