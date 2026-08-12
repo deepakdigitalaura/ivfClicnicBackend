@@ -10,6 +10,7 @@ import {
   SCHEMA_ORG_QUERY,
   PAGE_SEO_BY_PATH_QUERY,
   REVIEWS_BY_KEY_QUERY,
+  PAGE_FAQS_QUERY,
 } from "./queries";
 
 async function sanityFetch<T>(query: string, params?: Record<string, unknown>): Promise<T | null> {
@@ -63,6 +64,10 @@ export type SchemaOrgConfig = {
   customSchemas?: { name?: string; enabled?: boolean; jsonCode?: string }[];
 };
 
+export type PageFaqEntry = { q?: string; a?: string };
+export type PageFaqsPage = { pageKey?: string; faqs?: PageFaqEntry[] };
+export type PageFaqsConfig = { pages?: PageFaqsPage[] };
+
 export type PageSeo = {
   pagePath?: string;
   pageName?: string;
@@ -96,6 +101,22 @@ export const getCampsConfig = () =>
     ["sanity-camps"],
     { revalidate: 3600, tags: ["sanity-camps"] },
   )();
+
+export const getPageFaqsConfig = () =>
+  unstable_cache(
+    () => sanityFetch<PageFaqsConfig>(PAGE_FAQS_QUERY),
+    ["sanity-page-faqs"],
+    { revalidate: 3600, tags: ["sanity-page-faqs"] },
+  )();
+
+/** Looks up a page's CMS FAQs by key; returns null if unset so callers can fall back to code defaults. */
+export async function getPageFaqs(pageKey: string): Promise<{ q: string; a: string }[] | null> {
+  const config = await getPageFaqsConfig();
+  const page = config?.pages?.find((p) => p.pageKey === pageKey);
+  const faqs = (page?.faqs ?? [])
+    .filter((f): f is { q: string; a: string } => Boolean(f.q && f.a));
+  return faqs.length > 0 ? faqs : null;
+}
 
 export const getRedirectsConfig = () =>
   unstable_cache(
@@ -279,6 +300,7 @@ export type SanitySiteSettings = {
   socialLinks?: string[];
   awards?: string[];
   knowsAbout?: string[];
+  navLabels?: { category?: string; headerLabel?: string; footerLabel?: string; order?: number }[];
 } | null;
 
 /** The site-settings singleton (cached + tagged). Null when unset, so identity /

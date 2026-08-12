@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images,
+  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, HelpCircle,
 } from "lucide-react";
 import { logoutAction } from "../../actions";
 
@@ -21,6 +21,7 @@ const CONTENT_NAV = [
   { href: "/admin-panel/doctors", label: "Doctors", icon: Stethoscope },
   { href: "/admin-panel/testimonials", label: "Testimonials", icon: Star },
   { href: "/admin-panel/camps", label: "Camp Posters", icon: Images },
+  { href: "/admin-panel/page-faqs", label: "Page FAQs", icon: HelpCircle },
   { href: "/admin-panel/reviews", label: "Google Reviews", icon: MessageSquareQuote },
   { href: "/admin-panel/education-videos", label: "Education Videos", icon: Video },
   { href: "/admin-panel/blogs", label: "Blogs", icon: BookOpen },

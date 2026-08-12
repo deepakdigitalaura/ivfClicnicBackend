@@ -11,6 +11,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { DEFAULT_FAQS } from "@/lib/suraksha-kavach-faqs";
 
 /* ---------- Data ---------- */
 
@@ -77,37 +78,6 @@ const STATS = [
   { value: 1998, suffix: "", label: "Est.", sub: "pioneering fertility care" },
 ];
 
-const FAQS: { q: string; a: string }[] = [
-  {
-    q: "What is the Suraksha Kavach Package?",
-    a: "Suraksha Kavach is Bavishi Fertility Institute's exclusive IVF protection program — the only one of its kind in the world. Your investment covers multiple IVF cycles.",
-  },
-  {
-    q: "Who is eligible for Suraksha Kavach?",
-    a: "Eligibility is determined after an initial consultation and medical evaluation by our senior fertility specialists. Factors such as age, medical history, ovarian reserve, and overall health are assessed. Our doctors will recommend whether Suraksha Kavach is the right fit for your situation.",
-  },
-  {
-    q: "How many IVF cycles are included?",
-    a: "The Suraksha Kavach package covers multiple IVF/ICSI cycles as needed. The exact number depends on your personalised treatment plan. The program continues until a healthy live birth is achieved or all agreed-upon cycles are completed.",
-  },
-  {
-    q: "What happens if the treatment is not successful for me?",
-    a: "If medical reasons prevent your treatment from succeeding, our team will discuss the best next steps and options available to you as part of your Suraksha Kavach enrolment.",
-  },
-  {
-    q: "What does the package include?",
-    a: "The package is comprehensive: consultations, diagnostic investigations, medications, ovarian stimulation, egg retrieval, ICSI/IVF procedure, embryology and lab work, embryo transfer, and post-treatment support. There are no hidden charges.",
-  },
-  {
-    q: "What kind of results has Suraksha Kavach achieved?",
-    a: "Suraksha Kavach patients at Bavishi Fertility Institute have achieved excellent outcomes. We are transparent about our results and can share detailed statistics during your consultation — success depends on individual factors such as age, diagnosis and medical history.",
-  },
-  {
-    q: "How do I enrol in Suraksha Kavach?",
-    a: "Start by booking a consultation at any of our 14 centres across India. After your initial evaluation, if you are eligible, our team will walk you through the enrolment process, package details, and answer any questions you may have.",
-  },
-];
-
 /* ---------- FAQ Accordion ---------- */
 
 function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean; onToggle: () => void }) {
@@ -140,8 +110,9 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 
 /* ---------- Page ---------- */
 
-export function SurakshaKavachPage() {
+export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string; a: string }[] } = {}) {
   const [openFaq, setOpenFaq] = useState(0);
+  const FAQS = faqsOverride && faqsOverride.length > 0 ? faqsOverride : DEFAULT_FAQS;
 
   return (
     <div className="min-h-screen bg-background text-foreground">

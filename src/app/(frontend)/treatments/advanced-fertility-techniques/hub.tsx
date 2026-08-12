@@ -164,7 +164,7 @@ const faqs: HubFaq[] = [
   },
 ];
 
-export function AdvancedFertilityHub() {
+export function AdvancedFertilityHub({ faqs: faqsOverride }: { faqs?: HubFaq[] } = {}) {
   return (
     <CategoryHubPage
       eyebrow="Advanced Fertility Techniques"
@@ -208,7 +208,7 @@ export function AdvancedFertilityHub() {
       whyTitle="Why Choose Bavishi for"
       whyTitleAccent="Advanced Fertility?"
       whyPoints={whyPoints}
-      faqs={faqs}
+      faqs={faqsOverride && faqsOverride.length > 0 ? faqsOverride : faqs}
       heroImage="/assets/ivf-icsi.png"
       heroImageAlt="IVF and ICSI advanced fertility treatment"
       ctaHeading="Start Your Journey Today"

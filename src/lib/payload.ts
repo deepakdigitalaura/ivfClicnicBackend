@@ -611,16 +611,30 @@ export const getFooter = async (): Promise<FooterData> => {
     getNavDoctors(),
     getNavLocations(),
   ]);
-  return resolveFooter(null as unknown as FooterSource, resolveContactValues(toContactSource(settings)), navTreatments, navDoctors, navLocations);
+  return resolveFooter(
+    null as unknown as FooterSource,
+    resolveContactValues(toContactSource(settings)),
+    navTreatments,
+    navDoctors,
+    navLocations,
+    settings?.navLabels ?? [],
+  );
 };
 
 export const getHeader = async (): Promise<HeaderData> => {
-  const [navTreatments, navDoctors, navLocations] = await Promise.all([
+  const [settings, navTreatments, navDoctors, navLocations] = await Promise.all([
+    getSanitySiteSettings(),
     getNavTreatments(),
     getNavDoctors(),
     getNavLocations(),
   ]);
-  return resolveHeader(null as unknown as HeaderSource, navTreatments, navDoctors, navLocations);
+  return resolveHeader(
+    null as unknown as HeaderSource,
+    navTreatments,
+    navDoctors,
+    navLocations,
+    settings?.navLabels ?? [],
+  );
 };
 
 /** Map the Sanity homepage doc → the HomepageSource shape resolveHomepage

@@ -3,6 +3,20 @@ import { useState } from "react";
 import { Trash2 } from "lucide-react";
 import { saveSiteSettingsAction } from "../../actions";
 import { useSave, Toast, SaveBar } from "../_components/save-kit";
+import { Repeater } from "../_components/repeater";
+
+type NavLabel = { category?: string; headerLabel?: string; footerLabel?: string; order?: number };
+
+/** Category keys used across the header mega menu / footer link columns — shown
+ *  as placeholders so admins know which keys are meaningful. */
+const NAV_CATEGORIES = [
+  "advanced-ivf",
+  "donor-services",
+  "male-infertility",
+  "female-infertility",
+  "fertility-preservation",
+  "maternity-services",
+];
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
@@ -12,12 +26,13 @@ type Defaults = {
   address: Record<string, string>; socialLinks: string[];
 };
 
-type Tab = "general" | "contact" | "address" | "social";
+type Tab = "general" | "contact" | "address" | "social" | "navigation";
 const TABS: { id: Tab; label: string }[] = [
   { id: "general", label: "General" },
   { id: "contact", label: "Contact Info" },
   { id: "address", label: "Address" },
   { id: "social", label: "Social & Awards" },
+  { id: "navigation", label: "Navigation" },
 ];
 
 function Field({ label, hint, value, placeholder, onChange }: { label: string; hint?: string; value: string; placeholder?: string; onChange: (v: string) => void }) {
@@ -40,6 +55,7 @@ export function SiteSettingsForm({ initial, defaults }: { initial: Doc | null; d
   const addr = (doc.address ?? {}) as Record<string, string>;
   const setAddr = (k: string, val: string) => set("address", { ...addr, [k]: val });
   const social = (doc.socialLinks ?? []) as string[];
+  const navLabels = (doc.navLabels ?? []) as NavLabel[];
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -106,6 +122,32 @@ export function SiteSettingsForm({ initial, defaults }: { initial: Doc | null; d
             <label className="admin-label" style={{ marginTop: 20, display: "block" }}>Awards (schema)</label>
             <p className="admin-hint">One per line. Leave blank to keep the built-in awards list.</p>
             <textarea className="admin-textarea" style={{ minHeight: 120 }} value={((doc.awards ?? []) as string[]).join("\n")} placeholder="National Fertility Award 2026&#10;Economic Times IVF Chain of the Year — West" onChange={(e) => set("awards", e.target.value.split("\n").map((s) => s.trim()).filter(Boolean))} />
+          </>
+        )}
+
+        {tab === "navigation" && (
+          <>
+            <label className="admin-label">Navigation category labels</label>
+            <p className="admin-hint">
+              Rename or reorder the header mega-menu and footer link column headings. The
+              category key must match one used by treatments (e.g. {NAV_CATEGORIES.join(", ")}).
+              Leave a field blank to keep the site's default label/order for that category.
+            </p>
+            <Repeater
+              items={navLabels}
+              onChange={(next) => set("navLabels", next)}
+              newItem={() => ({ category: "", headerLabel: "", footerLabel: "", order: undefined })}
+              addLabel="+ Add category override"
+              rowLabel={(i) => navLabels[i]?.category || `Category ${i + 1}`}
+              renderItem={(row, i, update) => (
+                <div className="admin-row-grid">
+                  <Field label="Category key" value={row.category ?? ""} placeholder={NAV_CATEGORIES[i] ?? "female-infertility"} onChange={(x) => update({ category: x })} />
+                  <Field label="Header label" value={row.headerLabel ?? ""} placeholder="Female Infertility" onChange={(x) => update({ headerLabel: x })} />
+                  <Field label="Footer label" value={row.footerLabel ?? ""} placeholder="Female Infertility" onChange={(x) => update({ footerLabel: x })} />
+                  <Field label="Display order" value={row.order != null ? String(row.order) : ""} placeholder="0" onChange={(x) => update({ order: x === "" ? undefined : Number(x) })} />
+                </div>
+              )}
+            />
           </>
         )}
       </div>

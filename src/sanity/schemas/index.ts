@@ -19,6 +19,7 @@ import centre from "./centre";
 import aboutPage from "./aboutPage";
 import googleReview from "./googleReview";
 import reviewMeta from "./reviewMeta";
+import pageFaqsConfig from "./pageFaqsConfig";
 
 export const schemas = [
   robotsConfig,
@@ -42,4 +43,5 @@ export const schemas = [
   aboutPage,
   googleReview,
   reviewMeta,
+  pageFaqsConfig,
 ];

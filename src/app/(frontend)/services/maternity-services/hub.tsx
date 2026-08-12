@@ -117,7 +117,7 @@ const faqs: HubFaq[] = [
 
 type ExtraServiceCard = { title: string; desc: string; href: string };
 
-export function MaternityServicesHub({ extraCards = [] }: { extraCards?: ExtraServiceCard[] }) {
+export function MaternityServicesHub({ extraCards = [], faqs: faqsOverride }: { extraCards?: ExtraServiceCard[]; faqs?: HubFaq[] }) {
   const allCards: HubCard[] = [
     ...cards,
     ...extraCards.map((c) => ({ ...c, icon: HeartPulse })),
@@ -165,7 +165,7 @@ export function MaternityServicesHub({ extraCards = [] }: { extraCards?: ExtraSe
       whyTitle="Why Choose Bavishi"
       whyTitleAccent="Fertility & Birthing?"
       whyPoints={whyPoints}
-      faqs={faqs}
+      faqs={faqsOverride && faqsOverride.length > 0 ? faqsOverride : faqs}
       heroImage="/assets/hero-mother-baby1.png"
       heroImageAlt="Happy pregnant mother — Bavishi Fertility & Birthing maternity care"
       ctaHeading="Plan Your Maternity Journey"

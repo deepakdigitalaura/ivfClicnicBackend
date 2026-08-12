@@ -121,7 +121,7 @@ const faqs: HubFaq[] = [
   },
 ];
 
-export function FemaleInfertilityHub() {
+export function FemaleInfertilityHub({ faqs: faqsOverride }: { faqs?: HubFaq[] } = {}) {
   return (
     <CategoryHubPage
       eyebrow="Female Infertility"
@@ -165,7 +165,7 @@ export function FemaleInfertilityHub() {
       whyTitle="Why Choose Bavishi"
       whyTitleAccent="Fertility Institute?"
       whyPoints={whyPoints}
-      faqs={faqs}
+      faqs={faqsOverride && faqsOverride.length > 0 ? faqsOverride : faqs}
       heroImage="/assets/conditions/conceive-naturally.png"
       heroImageAlt="Female fertility care and diagnosis illustration"
       ctaHeading="Your Fertility, Your Plan"
