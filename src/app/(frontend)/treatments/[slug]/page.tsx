@@ -21,14 +21,18 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   const t = await getTreatment(slug);
   if (!t) return {};
-  return withPageSeoOverride(t.href, {
+  // The canonical/OG URL is always this page's own route, not `t.href`
+  // (a nav-link-destination override that can point at an old pre-migration
+  // URL for some treatments — SEO audit finding, 2026-08-12).
+  const canonicalPath = `/treatments/${slug}`;
+  return withPageSeoOverride(canonicalPath, {
     title: t.meta.title,
     description: t.meta.description,
-    alternates: { canonical: t.href },
+    alternates: { canonical: canonicalPath },
     openGraph: {
       title: t.meta.title,
       description: t.meta.description,
-      url: t.href,
+      url: canonicalPath,
       type: "article",
       images: [t.meta.ogImage],
     },
