@@ -43,7 +43,7 @@ export function SiteSettingsForm({ initial, defaults }: { initial: Doc | null; d
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
-    run(() => saveSiteSettingsAction(doc));
+    run(() => saveSiteSettingsAction(doc), { tags: ["sanity-site-settings"], paths: ["/"] });
   };
 
   return (

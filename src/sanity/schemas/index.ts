@@ -1,5 +1,6 @@
 import robotsConfig from "./robotsConfig";
 import scriptsConfig from "./scriptsConfig";
+import campsConfig from "./campsConfig";
 import redirectsConfig from "./redirectsConfig";
 import sitemapConfig from "./sitemapConfig";
 import schemaOrgConfig from "./schemaOrgConfig";
@@ -22,6 +23,7 @@ import reviewMeta from "./reviewMeta";
 export const schemas = [
   robotsConfig,
   scriptsConfig,
+  campsConfig,
   redirectsConfig,
   sitemapConfig,
   schemaOrgConfig,

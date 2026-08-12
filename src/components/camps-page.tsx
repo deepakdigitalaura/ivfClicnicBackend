@@ -7,32 +7,13 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import type { EventPoster } from "@/lib/homepage";
 
-const DEFAULT_POSTERS: EventPoster[] = [
-  {
-    src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/dr.-visit_2.jpg-768x960.jpeg",
-    alt: "Doctor visit — Bavishi Fertility Institute upcoming camp",
-  },
-  {
-    src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/General-camp-2.jpg-768x960.jpeg",
-    alt: "General fertility camp — Bavishi Fertility Institute",
-  },
-  {
-    src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/Camps-2.jpg-768x960.jpeg",
-    alt: "Camps — Bavishi Fertility Institute upcoming event",
-  },
-  {
-    src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/OPD_-1.jpg-768x960.jpeg",
-    alt: "OPD — Bavishi Fertility Institute outreach event",
-  },
-];
-
 const WHAT_TO_EXPECT = [
   { icon: Calendar, title: "Consultations", desc: "Meet our specialists face-to-face during camp days." },
   { icon: MapPin, title: "Multiple Cities", desc: "We bring fertility care to your city — camps held across Gujarat and India." },
   { icon: Phone, title: "Follow-Up Support", desc: "Camp attendees receive priority scheduling for follow-up appointments." },
 ];
 
-export function CampsPage({ posters = DEFAULT_POSTERS }: { posters?: EventPoster[] }) {
+export function CampsPage({ posters = [] }: { posters?: EventPoster[] }) {
   return (
     <>
       <SiteHeader />
@@ -76,24 +57,31 @@ export function CampsPage({ posters = DEFAULT_POSTERS }: { posters?: EventPoster
               <em className="font-display italic text-[color:var(--rose)]">our specialists.</em>
             </h2>
           </Reveal>
-          <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-4">
-            {posters.map((poster, i) => (
-              <StaggerItem key={poster.src}>
-                <motion.div
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.5 }}
-                  className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
-                >
-                  <img
-                    src={poster.src}
-                    alt={poster.alt}
-                    loading={i < 2 ? "eager" : "lazy"}
-                    className="aspect-[3/4] w-full object-cover"
-                  />
-                </motion.div>
-              </StaggerItem>
-            ))}
-          </Stagger>
+          {posters.length > 0 ? (
+            <Stagger className="grid grid-cols-2 gap-4 sm:grid-cols-4">
+              {posters.map((poster, i) => (
+                <StaggerItem key={poster.src}>
+                  <motion.div
+                    whileHover={{ y: -6 }}
+                    transition={{ duration: 0.5 }}
+                    className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+                  >
+                    <img
+                      src={poster.src}
+                      alt={poster.alt}
+                      loading={i < 2 ? "eager" : "lazy"}
+                      className="aspect-[3/4] w-full object-cover"
+                    />
+                  </motion.div>
+                </StaggerItem>
+              ))}
+            </Stagger>
+          ) : (
+            <p className="text-center text-muted-foreground">
+              No upcoming camps right now — check back soon, or call us on{" "}
+              <a href="tel:+919712622288" className="font-semibold text-[color:var(--rose)]">+91 97126 22288</a>.
+            </p>
+          )}
         </section>
 
         {/* What to Expect */}

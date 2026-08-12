@@ -23,7 +23,7 @@ type Card = { icon: string; t: string; v: string; href?: string | null; note?: s
 
 const DEFAULT_CARDS: Card[] = [
   { icon: "Phone", t: "Call Us", v: "+91 97126 22288", href: "tel:+919712622288", note: "24×7 phone support — clinic visiting hours vary by centre" },
-  { icon: "MessageCircle", t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712622288", note: "Quick replies, every day" },
+  { icon: "MessageCircle", t: "WhatsApp", v: "Chat with our team", href: "https://wa.me/919712522289", note: "Quick replies, every day" },
   { icon: "Mail", t: "Email", v: "drbavishi@ivfclinic.com", href: "mailto:drbavishi@ivfclinic.com", note: "We reply within 24 hours" },
 ];
 
@@ -219,7 +219,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><Phone className="h-4 w-4" /> +91 97126 22288</Magnetic>
-              <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
+              <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
             </div>
           </Reveal>
         </div>

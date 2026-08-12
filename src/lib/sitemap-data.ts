@@ -5,11 +5,19 @@ import { DOCTORS } from "@/lib/doctors";
 import { CITIES, CENTRES, cityHref, centreHref } from "@/lib/locations";
 import { SERVICE_CONTENT } from "@/lib/womens-health";
 import { PRESS_CLIPPINGS, pressHref } from "@/lib/press";
-import { getSitemapConfig } from "@/sanity/lib/fetch";
+import { CALCULATOR_SLUGS } from "@/lib/calculators";
+import { getSitemapConfig, getSanityPublishedBlogSlugs } from "@/sanity/lib/fetch";
+
+const STATIC_PATHS = [
+  "/", "/about-bfi", "/contact", "/doctors", "/blogs", "/press", "/awards",
+  "/locations", "/calculators", "/camps", "/cme", "/education-videos", "/testimonial-videos",
+  "/suraksha-kavach", "/why-bfi", "/services/maternity-services",
+  "/privacy-policy", "/refund-policy", "/terms-of-service", "/cookie-policy",
+];
 
 export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const base = SITE.url;
-  const paths = new Set<string>(["/", "/about-bfi", "/contact", "/doctors", "/blogs", "/press", "/awards"]);
+  const paths = new Set<string>(STATIC_PATHS);
 
   for (const ref of Object.values(TREATMENTS_REGISTRY)) {
     if (HIDDEN_TREATMENT_SLUGS.has(ref.slug)) continue;
@@ -18,6 +26,7 @@ export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   for (const slug of Object.keys(SERVICE_CONTENT)) paths.add(`/services/${slug}`);
   for (const d of DOCTORS) paths.add(`/doctors/${d.slug}`);
   for (const c of PRESS_CLIPPINGS) paths.add(pressHref(c.slug));
+  for (const slug of CALCULATOR_SLUGS) paths.add(`/calculators/${slug}`);
   for (const c of CITIES) {
     if (c.built) {
       const href = cityHref(c.slug);
@@ -27,6 +36,12 @@ export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   for (const c of CENTRES) {
     if (c.built) paths.add(centreHref(c));
   }
+  try {
+    const blogSlugs = await getSanityPublishedBlogSlugs();
+    for (const b of blogSlugs) {
+      if (b.slug) paths.add(`/blogs/${b.slug}`);
+    }
+  } catch { /* best-effort — sitemap still returns everything else */ }
 
   const sitemapCfg = await getSitemapConfig();
   const excluded = new Set(sitemapCfg?.excludePaths ?? []);

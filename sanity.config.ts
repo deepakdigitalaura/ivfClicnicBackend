@@ -47,6 +47,9 @@ export default defineConfig({
               .title("📜 Script Injection")
               .child(S.document().schemaType("scriptsConfig").documentId("scriptsConfig")),
             S.listItem()
+              .title("🏕️ Camp Posters")
+              .child(S.document().schemaType("campsConfig").documentId("campsConfig")),
+            S.listItem()
               .title("↩️ Redirects")
               .child(S.document().schemaType("redirectsConfig").documentId("redirectsConfig")),
             S.listItem()
