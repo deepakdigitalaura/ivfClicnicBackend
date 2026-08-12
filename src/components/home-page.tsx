@@ -1587,6 +1587,7 @@ export function Testimonials({
 /* ---------- Events ---------- */
 
 function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData["events"] } = {}) {
+  if (content.posters.length === 0) return null;
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
@@ -2075,7 +2076,7 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               {content.ctas.map((label, i) => {
                 const Icon = ctaIcons[i] ?? Calendar;
-                const hrefs = ["#book", "https://wa.me/919712622288", "tel:+919712622288"];
+                const hrefs = ["#book", "https://wa.me/919712522289", "tel:+919712622288"];
                 const isExternal = i === 1;
                 const cls =
                   i === 0

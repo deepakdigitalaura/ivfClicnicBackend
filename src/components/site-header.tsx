@@ -71,7 +71,7 @@ export function SiteHeader({
           </div>
           <div className="flex items-center gap-5">
             <a href="tel:+919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><Phone className="h-3 w-3" /> +91 97126 22288</a>
-            <a href="https://wa.me/919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
+            <a href="https://wa.me/919712522289" className="flex items-center gap-1.5 text-white/80 hover:text-white"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
             <a href="/contact#book" className="flex items-center gap-1.5 text-white/80 hover:text-white">24×7 Care</a>
             {LANGUAGE_SWITCHER_ENABLED && (
               <>
@@ -259,7 +259,7 @@ export function SiteHeader({
               </a>
               <div className="grid grid-cols-2 gap-2">
                 <a href="tel:+919712622288" className="flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-[color:var(--plum)]"><Phone className="h-4 w-4" /> Call</a>
-                <a href="https://wa.me/919712622288" className="flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-[color:var(--plum)]"><MessageCircle className="h-4 w-4 text-[#25D366]" /> WhatsApp</a>
+                <a href="https://wa.me/919712522289" className="flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-[color:var(--plum)]"><MessageCircle className="h-4 w-4 text-[#25D366]" /> WhatsApp</a>
               </div>
             </div>
           </div>

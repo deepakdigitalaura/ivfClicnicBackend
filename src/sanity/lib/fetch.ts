@@ -4,6 +4,7 @@ import { client } from "./client";
 import {
   ROBOTS_QUERY,
   SCRIPTS_QUERY,
+  CAMPS_QUERY,
   REDIRECTS_QUERY,
   SITEMAP_QUERY,
   SCHEMA_ORG_QUERY,
@@ -34,6 +35,9 @@ export type ScriptsConfig = {
   headScripts?: ScriptEntry[];
   bodyScripts?: ScriptEntry[];
 };
+
+export type CampPoster = { src?: string; alt?: string };
+export type CampsConfig = { posters?: CampPoster[] };
 
 export type RedirectRule = { source: string; destination: string; permanent: boolean; enabled: boolean };
 export type RedirectsConfig = { rules?: RedirectRule[] };
@@ -84,6 +88,13 @@ export const getScriptsConfig = () =>
     () => sanityFetch<ScriptsConfig>(SCRIPTS_QUERY),
     ["sanity-scripts"],
     { revalidate: 3600, tags: ["sanity-scripts"] },
+  )();
+
+export const getCampsConfig = () =>
+  unstable_cache(
+    () => sanityFetch<CampsConfig>(CAMPS_QUERY),
+    ["sanity-camps"],
+    { revalidate: 3600, tags: ["sanity-camps"] },
   )();
 
 export const getRedirectsConfig = () =>

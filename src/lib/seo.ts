@@ -26,7 +26,7 @@ export const SITE = {
   telephoneDisplay: "+91 97126 22288",
   email: "drbavishi@ivfclinic.com",
   /** WhatsApp digits for wa.me links. */
-  whatsapp: "919712622288",
+  whatsapp: "919712522289",
   sameAs: [
     "https://www.instagram.com/bavishifertility/",
     "https://www.facebook.com/BavishiFertilityInstitute/",

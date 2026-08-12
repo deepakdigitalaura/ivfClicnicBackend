@@ -15,7 +15,7 @@ import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
-import { getSanityHomepage } from "@/sanity/lib/fetch";
+import { getSanityHomepage, getCampsConfig } from "@/sanity/lib/fetch";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
@@ -640,8 +640,14 @@ function mapHomepageSource(doc: Record<string, unknown> | null): HomepageSource 
 }
 
 export const getHomepage = async (): Promise<HomepageData> => {
-  const doc = await getSanityHomepage();
-  return resolveHomepage(mapHomepageSource(doc));
+  const [doc, camps] = await Promise.all([getSanityHomepage(), getCampsConfig()]);
+  const data = resolveHomepage(mapHomepageSource(doc));
+  if (camps?.posters?.length) {
+    data.events.posters = camps.posters
+      .filter((p) => p.src)
+      .map((p) => ({ src: p.src!, alt: p.alt ?? "" }));
+  }
+  return data;
 };
 
 export const getAbout = async (): Promise<AboutData> => {

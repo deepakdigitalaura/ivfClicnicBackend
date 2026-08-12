@@ -159,7 +159,7 @@ export function SuccessBenchmarksPage() {
               </Magnetic>
               <Magnetic
                 as="a"
-                href="https://wa.me/919712622288"
+                href="https://wa.me/919712522289"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]"
@@ -459,7 +459,7 @@ export function SuccessBenchmarksPage() {
                 </Magnetic>
                 <Magnetic
                   as="a"
-                  href="https://wa.me/919712622288"
+                  href="https://wa.me/919712522289"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white"

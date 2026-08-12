@@ -359,12 +359,11 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   events: {
     eyebrow: "Upcoming Events",
     heading: { lead: "Learn directly from", em: "our specialists." },
-    posters: [
-      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/dr.-visit_2.jpg-768x960.jpeg", alt: "Doctor visit — Bavishi Fertility Institute upcoming camp" },
-      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/General-camp-2.jpg-768x960.jpeg", alt: "General fertility camp — Bavishi Fertility Institute" },
-      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/Camps-2.jpg-768x960.jpeg", alt: "Camps — Bavishi Fertility Institute upcoming event" },
-      { src: "https://cdn-kimil.nitrocdn.com/ZfwaLbMfzSTsqBVBQJtCqQvqiiILUUQF/assets/images/optimized/rev-d7cf290/ivfclinic.com/wp-content/uploads/2026/06/OPD_-1.jpg-768x960.jpeg", alt: "OPD — Bavishi Fertility Institute outreach event" },
-    ],
+    // Camp posters are managed entirely via Admin Panel → Camp Posters (Sanity
+    // campsConfig, see getHomepage() in src/lib/payload.ts). No hardcoded
+    // fallback here on purpose — if all posters are removed in the CMS, the
+    // section should show nothing rather than silently reverting to stale images.
+    posters: [] as EventPoster[],
   },
   videos: {
     stories: [

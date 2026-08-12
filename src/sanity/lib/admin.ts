@@ -6,6 +6,7 @@ import reviewSources from "@/data/reviews.sources.json";
 import type {
   RobotsConfig,
   ScriptsConfig,
+  CampsConfig,
   RedirectsConfig,
   SitemapConfig,
   SchemaOrgConfig,
@@ -52,7 +53,13 @@ async function readSingleton<T>(id: string): Promise<T | null> {
   }
 }
 
-/** Create-or-replace a singleton document, then bust its public cache tag. */
+/**
+ * Create-or-replace a singleton document, then bust its public cache tag.
+ * NOTE: on this self-hosted deployment, revalidateTag() here doesn't
+ * reliably propagate to statically-rendered routes on its own — the client
+ * (see save-kit.tsx's useSave) additionally calls /api/revalidate after a
+ * successful save as a proven-reliable fallback.
+ */
 async function saveSingleton(id: string, type: string, data: Record<string, unknown>, tag: string) {
   await writeClient.createOrReplace({ _id: id, _type: type, ...data });
   revalidateTag(tag);
@@ -62,6 +69,7 @@ async function saveSingleton(id: string, type: string, data: Record<string, unkn
 export const IDS = {
   robots: "robotsConfig",
   scripts: "scriptsConfig",
+  camps: "campsConfig",
   redirects: "redirectsConfig",
   sitemap: "sitemapConfig",
   schema: "schemaOrgConfig",
@@ -76,6 +84,11 @@ export const saveRobots = (data: RobotsConfig) =>
 export const readScripts = () => readSingleton<ScriptsConfig>(IDS.scripts);
 export const saveScripts = (data: ScriptsConfig) =>
   saveSingleton(IDS.scripts, "scriptsConfig", data as Record<string, unknown>, "sanity-scripts");
+
+// ── Camp Posters ──
+export const readCamps = () => readSingleton<CampsConfig>(IDS.camps);
+export const saveCamps = (data: CampsConfig) =>
+  saveSingleton(IDS.camps, "campsConfig", data as Record<string, unknown>, "sanity-camps");
 
 // ── Redirects ──
 export const readRedirects = () => readSingleton<RedirectsConfig>(IDS.redirects);

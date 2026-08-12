@@ -5,6 +5,7 @@ import { verifyCredentials, createSession, destroySession, credsConfigured } fro
 import {
   saveRobots,
   saveScripts,
+  saveCamps,
   saveRedirects,
   saveSitemap,
   saveSchema,
@@ -58,6 +59,7 @@ import {
 import type {
   RobotsConfig,
   ScriptsConfig,
+  CampsConfig,
   RedirectsConfig,
   SitemapConfig,
   SchemaOrgConfig,
@@ -106,6 +108,14 @@ export async function saveRobotsAction(data: RobotsConfig): Promise<SaveResult> 
 export async function saveScriptsAction(data: ScriptsConfig): Promise<SaveResult> {
   const r = await guard(() => saveScripts(data));
   revalidatePath("/admin-panel/scripts");
+  return r;
+}
+
+export async function saveCampsAction(data: CampsConfig): Promise<SaveResult> {
+  const r = await guard(() => saveCamps(data));
+  revalidatePath("/admin-panel/camps");
+  revalidatePath("/");
+  revalidatePath("/camps");
   return r;
 }
 
