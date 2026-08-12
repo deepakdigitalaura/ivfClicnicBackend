@@ -47,6 +47,11 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
   for (const rule of rules) {
     if (!rule.source || !rule.destination) continue;
     if (norm(rule.source) !== pathname) continue;
+    // A rule whose destination normalizes to the same path as its source
+    // (e.g. "/x/" -> "/x") is a self-redirect once trailing slashes are
+    // normalized on both sides above — Next's own trailing-slash handling
+    // already covers that case, so skip it here instead of looping forever.
+    if (!/^https?:\/\//i.test(rule.destination) && norm(rule.destination) === pathname) continue;
 
     if (/^https?:\/\//i.test(rule.destination)) {
       return NextResponse.redirect(rule.destination, { status: rule.permanent ? 301 : 302 });
