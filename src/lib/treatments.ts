@@ -4394,11 +4394,17 @@ export const treatmentBySlug = (slug: string) => TREATMENTS.find((t) => t.slug =
  *  code `Treatment`. Both are structurally assignable. */
 export type TreatmentGraphInput = Pick<
   Treatment,
-  "href" | "name" | "alternateName" | "meta" | "procedure" | "breadcrumbName" | "lastReviewed" | "reviewerSlug" | "faqs" | "video"
+  "slug" | "name" | "alternateName" | "meta" | "procedure" | "breadcrumbName" | "lastReviewed" | "reviewerSlug" | "faqs" | "video"
 >;
 
 export function treatmentGraph(t: TreatmentGraphInput): Record<string, unknown>[] {
-  const url = abs(t.href);
+  // The page's own canonical URL is always its actual route — never `href`,
+  // which is a nav-link-destination override that can (and does, for some
+  // legacy-seeded treatments) point at an old pre-migration URL. Using it
+  // here caused canonical/OG/JSON-LD to advertise a 301-redirected URL
+  // instead of the page's real self address (SEO audit finding, 2026-08-12).
+  const canonicalPath = `/treatments/${t.slug}`;
+  const url = abs(canonicalPath);
   const reviewer = doctorBySlug(t.reviewerSlug);
 
   const nodes: Record<string, unknown>[] = [
@@ -4426,7 +4432,7 @@ export function treatmentGraph(t: TreatmentGraphInput): Record<string, unknown>[
     breadcrumbSchema([
       { name: "Home", url: "/" },
       { name: "Treatments", url: "/treatments" },
-      { name: t.breadcrumbName, url: t.href },
+      { name: t.breadcrumbName, url: canonicalPath },
     ]),
     faqSchema(t.faqs),
   ];
