@@ -105,7 +105,7 @@ const faqs: HubFaq[] = [
   },
 ];
 
-export function MaleInfertilityHub() {
+export function MaleInfertilityHub({ faqs: faqsOverride }: { faqs?: HubFaq[] } = {}) {
   return (
     <CategoryHubPage
       eyebrow="Male Infertility"
@@ -149,7 +149,7 @@ export function MaleInfertilityHub() {
       whyTitle="Why Choose Bavishi"
       whyTitleAccent="Fertility Institute?"
       whyPoints={whyPoints}
-      faqs={faqs}
+      faqs={faqsOverride && faqsOverride.length > 0 ? faqsOverride : faqs}
       heroImage="/assets/male infertility/ChatGPT Image Jun 4, 2026, 04_12_19 PM.png"
       heroImageAlt="Male infertility diagnosis and treatment illustration"
       ctaHeading="Expert Male Fertility Care, One Call Away"

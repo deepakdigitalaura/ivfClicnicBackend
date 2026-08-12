@@ -59,6 +59,41 @@ const HEADER_CATEGORY_ORDER = [
   "fertility-preservation",
 ];
 
+/** CMS override for a nav category's header/footer label + display order —
+ *  sourced from siteSettings.navLabels. Falls back per-category when a field
+ *  is unset, so an empty/partial override list changes nothing. */
+export type NavLabelOverride = { category?: string; headerLabel?: string; footerLabel?: string; order?: number };
+
+/** Relabel + reorder a set of headed items (mega columns / footer groups) using
+ *  CMS navLabels overrides, matched against each item's DEFAULT label. Items
+ *  with no matching category, or no override, keep their original heading and
+ *  relative order — safe no-op when navLabels is empty. */
+export function applyNavLabelOverrides<T>(
+  items: T[],
+  getHeading: (item: T) => string,
+  setHeading: (item: T, heading: string) => T,
+  defaultLabels: Record<string, string>,
+  navLabels: NavLabelOverride[] | undefined,
+  labelField: "headerLabel" | "footerLabel",
+): T[] {
+  if (!navLabels?.length) return items;
+  const catByLabel = new Map(Object.entries(defaultLabels).map(([cat, label]) => [label, cat]));
+  const overrideByCat = new Map(navLabels.filter((n) => n.category).map((n) => [n.category as string, n]));
+  return items
+    .map((item, i) => {
+      const cat = catByLabel.get(getHeading(item));
+      const override = cat ? overrideByCat.get(cat) : undefined;
+      const overrideLabel = override?.[labelField];
+      return {
+        item: overrideLabel ? setHeading(item, overrideLabel) : item,
+        order: override?.order ?? i,
+        i,
+      };
+    })
+    .sort((a, b) => (a.order - b.order) || (a.i - b.i))
+    .map((x) => x.item);
+}
+
 /**
  * Lightweight location descriptor for building the Locations mega menu and footer
  * group dynamically from Payload (no hardcoded lists needed).
@@ -547,6 +582,7 @@ export function resolveHeader(
   navTreatments: NavTreatmentItem[] = [],
   navDoctors: NavDoctorItem[] = [],
   navLocations: NavLocationItem[] = [],
+  navLabels: NavLabelOverride[] = [],
 ): HeaderData {
   const branding: HeaderBranding = {
     logoUrl: g?.branding?.logoUrl || HEADER_DEFAULTS.branding.logoUrl,
@@ -564,8 +600,16 @@ export function resolveHeader(
     styleVariant: g?.cta?.styleVariant || HEADER_DEFAULTS.cta.styleVariant,
   };
 
-  // Treatments mega — replace "IVF Treatments" columns with DB-driven ones.
-  const treatmentMega = buildTreatmentMega(navTreatments);
+  // Treatments mega — replace "IVF Treatments" columns with DB-driven ones,
+  // then apply any CMS label/order overrides from Site Settings.
+  const treatmentMega = applyNavLabelOverrides(
+    buildTreatmentMega(navTreatments),
+    (col) => col.heading,
+    (col, heading) => ({ ...col, heading }),
+    HEADER_CATEGORY_LABELS,
+    navLabels,
+    "headerLabel",
+  );
   // Maternity mega — replace "Maternity Services" columns with DB-driven ones.
   const maternityMega = buildMaternityMega(navTreatments);
   // Doctors mega — replace hardcoded panel data with DB-driven one.

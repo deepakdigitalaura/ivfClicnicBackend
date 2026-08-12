@@ -11,6 +11,7 @@ import type {
   SitemapConfig,
   SchemaOrgConfig,
   PageSeo,
+  PageFaqsConfig,
 } from "./fetch";
 
 export const hasSanity = () => Boolean(projectId && process.env.SANITY_API_TOKEN);
@@ -73,6 +74,7 @@ export const IDS = {
   redirects: "redirectsConfig",
   sitemap: "sitemapConfig",
   schema: "schemaOrgConfig",
+  pageFaqs: "pageFaqsConfig",
 } as const;
 
 // ── Robots ──
@@ -89,6 +91,11 @@ export const saveScripts = (data: ScriptsConfig) =>
 export const readCamps = () => readSingleton<CampsConfig>(IDS.camps);
 export const saveCamps = (data: CampsConfig) =>
   saveSingleton(IDS.camps, "campsConfig", data as Record<string, unknown>, "sanity-camps");
+
+// ── Page FAQs ──
+export const readPageFaqs = () => readSingleton<PageFaqsConfig>(IDS.pageFaqs);
+export const savePageFaqs = (data: PageFaqsConfig) =>
+  saveSingleton(IDS.pageFaqs, "pageFaqsConfig", data as Record<string, unknown>, "sanity-page-faqs");
 
 // ── Redirects ──
 export const readRedirects = () => readSingleton<RedirectsConfig>(IDS.redirects);

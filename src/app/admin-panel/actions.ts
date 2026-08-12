@@ -6,6 +6,7 @@ import {
   saveRobots,
   saveScripts,
   saveCamps,
+  savePageFaqs,
   saveRedirects,
   saveSitemap,
   saveSchema,
@@ -60,6 +61,7 @@ import type {
   RobotsConfig,
   ScriptsConfig,
   CampsConfig,
+  PageFaqsConfig,
   RedirectsConfig,
   SitemapConfig,
   SchemaOrgConfig,
@@ -116,6 +118,17 @@ export async function saveCampsAction(data: CampsConfig): Promise<SaveResult> {
   revalidatePath("/admin-panel/camps");
   revalidatePath("/");
   revalidatePath("/camps");
+  return r;
+}
+
+export async function savePageFaqsAction(data: PageFaqsConfig): Promise<SaveResult> {
+  const r = await guard(() => savePageFaqs(data));
+  revalidatePath("/admin-panel/page-faqs");
+  revalidatePath("/treatments/female-infertility");
+  revalidatePath("/treatments/male-infertility");
+  revalidatePath("/treatments/advanced-fertility-techniques");
+  revalidatePath("/services/maternity-services");
+  revalidatePath("/suraksha-kavach");
   return r;
 }
 

@@ -9,6 +9,7 @@ export default defineType({
     { name: "contact", title: "Contact" },
     { name: "social", title: "Social & Awards" },
     { name: "address", title: "Address" },
+    { name: "navigation", title: "Navigation" },
   ],
   fields: [
     // General
@@ -50,6 +51,27 @@ export default defineType({
     }),
     defineField({ name: "awards", title: "Awards (schema)", type: "array", of: [{ type: "string" }], group: "social" }),
     defineField({ name: "knowsAbout", title: "Areas of Expertise (schema knowsAbout)", type: "array", of: [{ type: "string" }], group: "social" }),
+
+    // Navigation
+    defineField({
+      name: "navLabels",
+      title: "Navigation Category Labels",
+      description: "Labels and display order for the header mega-menu and footer link columns. Leave empty to use the site's default labels.",
+      type: "array",
+      group: "navigation",
+      of: [{
+        type: "object",
+        fields: [
+          defineField({ name: "category", title: "Category key (e.g. female-infertility)", type: "string", validation: (Rule) => Rule.required() }),
+          defineField({ name: "headerLabel", title: "Header Label", type: "string" }),
+          defineField({ name: "footerLabel", title: "Footer Label", type: "string" }),
+          defineField({ name: "order", title: "Display Order", type: "number" }),
+        ],
+        preview: {
+          select: { title: "category", subtitle: "footerLabel" },
+        },
+      }],
+    }),
   ],
   preview: { prepare: () => ({ title: "Site Settings" }) },
 });

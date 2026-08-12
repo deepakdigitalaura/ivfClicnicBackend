@@ -56,6 +56,9 @@ export default defineConfig({
               .title("🗺️ Sitemap")
               .child(S.document().schemaType("sitemapConfig").documentId("sitemapConfig")),
             S.listItem()
+              .title("❓ Page FAQs")
+              .child(S.document().schemaType("pageFaqsConfig").documentId("pageFaqsConfig")),
+            S.listItem()
               .title("📊 Structured Data (JSON-LD)")
               .child(S.document().schemaType("schemaOrgConfig").documentId("schemaOrgConfig")),
             S.divider(),

@@ -17,8 +17,8 @@ import {
   type ContactChannel,
   type ContactValues,
 } from "@/lib/contact";
-import type { NavTreatmentItem, NavDoctorItem, NavLocationItem } from "@/lib/header";
-import { sortNavLocations } from "@/lib/header";
+import type { NavTreatmentItem, NavDoctorItem, NavLocationItem, NavLabelOverride } from "@/lib/header";
+import { sortNavLocations, applyNavLabelOverrides } from "@/lib/header";
 
 /** Footer heading for each navCategory value. */
 const FOOTER_CATEGORY_LABELS: Record<string, string> = {
@@ -322,6 +322,7 @@ export function resolveFooter(
   navTreatments: NavTreatmentItem[] = [],
   navDoctors: NavDoctorItem[] = [],
   navLocations: NavLocationItem[] = [],
+  navLabels: NavLabelOverride[] = [],
 ): FooterData {
   const branding =
     g?.branding && (g.branding.logoUrl || g.branding.description)
@@ -386,6 +387,16 @@ export function resolveFooter(
   const legal = g?.legalLinks?.length
     ? g.legalLinks.filter((link) => !link.hidden).map((link) => resolveLink(link, contact))
     : FOOTER_DEFAULTS.legal;
+
+  // Apply any CMS label/order overrides from Site Settings to the resolved groups.
+  groups = applyNavLabelOverrides(
+    groups,
+    (grp) => grp.h,
+    (grp, h) => ({ ...grp, h }),
+    FOOTER_CATEGORY_LABELS,
+    navLabels,
+    "footerLabel",
+  );
 
   return {
     ...(branding ? { branding } : {}),
