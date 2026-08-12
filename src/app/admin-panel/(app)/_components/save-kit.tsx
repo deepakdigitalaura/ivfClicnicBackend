@@ -13,14 +13,16 @@ type SaveResult = { ok: boolean; error?: string };
  * requires a second call shortly after to actually regenerate. This is a
  * known class of issue with Next's filesystem cache handler under rapid
  * writes on non-Vercel hosting — not something fixable by "trying harder"
- * on any single call. Firing a confirming second call after a short delay
- * reliably converges to correct state (~1-2s, imperceptible to a human).
+ * on any single call. A single confirming retry at 1.5s was found (live,
+ * 2026-08-12) to still leave a ~20s+ stale window in at least one case, so
+ * this fires a short backoff series instead — covers a longer race window
+ * without delaying the "Saved" toast, since only the first call is awaited.
  */
 async function nudgeRevalidate(tags: string[], paths: string[] = ["/"]) {
   const hit = () =>
     fetch(`/api/revalidate?secret=bfi-revalidate-9x7k2&tags=${tags.join(",")}&paths=${paths.join(",")}`, { method: "POST" }).catch(() => {});
   await hit();
-  setTimeout(hit, 1500);
+  for (const delay of [1500, 4000, 9000]) setTimeout(hit, delay);
 }
 
 /** Shared save+toast helper used by every feature form. */
