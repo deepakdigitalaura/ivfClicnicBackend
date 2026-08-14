@@ -5,6 +5,7 @@ node_modules
 *.log
 .env*
 !.env.local.example
+!.env.vps.example
 *.md
 docs
 scripts

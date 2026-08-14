@@ -1,916 +1,703 @@
-/* =====================================================================
- * Server-side Payload access (local API) + caching.
- * ---------------------------------------------------------------------
- * `import "server-only"` makes the bundler FAIL the build if this module is
- * ever pulled into a client bundle — protecting the client/server boundary the
- * templates depend on (seo.ts stays Payload-free).
+/**
+ * Payload CMS has been replaced with Sanity. This file keeps the same exported
+ * function signatures so every existing page/component continues to compile and
+ * render — all functions return the code-defined static fallback values that the
+ * resolver layers (doctors, treatments, services, etc.) already produce when no
+ * CMS data is present.
  *
- * Reads go through `unstable_cache` (cross-request Data Cache + cache TAGS) so
- * the revalidation hooks (src/lib/revalidate.ts) can invalidate exactly the
- * affected routes on Node — without making any route dynamic, so static
- * generation is preserved. React `cache()` adds per-render dedup.
- * ===================================================================== */
-import "server-only";
-import { getPayload, type Payload } from "payload";
-import { unstable_cache } from "next/cache";
-import { cache as reactCache } from "react";
-import config from "@payload-config";
-import type { Page, Blog, Config } from "@/payload-types";
+ * SEO features (robots, sitemap, scripts, redirects, JSON-LD, per-page SEO) are
+ * now managed via Sanity — see src/sanity/.
+ */
+import type { Payload } from "payload";
+import type { Page, Blog, Author, Category, Media, Config } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
-import { cacheTags } from "@/lib/cache-tags";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
-// NavTreatmentItem / NavDoctorItem / NavLocationItem imported from header.ts (pure module shared by header + footer resolvers)
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
+import { getSanityHomepage, getCampsConfig } from "@/sanity/lib/fetch";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
-import { resolveTestimonials, type TestimonialSource } from "@/lib/testimonials";
+import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
-import { resolveService, type ResolvedService, type ServiceSource } from "@/lib/services";
-import { resolveDoctor, DOCTORS, type Doctor, type DoctorSource } from "@/lib/doctors";
-import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
-import { TREATMENTS } from "@/lib/treatments";
+import { resolveService, type ResolvedService } from "@/lib/services";
+import { resolveDoctor, DOCTORS, doctorUrl, defaultDoctorNavRole, defaultDoctorNavOrder, type Doctor, type DoctorSource } from "@/lib/doctors";
 import {
-  resolveCity,
-  resolveCentre,
-  type ResolvedCity,
-  type ResolvedCentre,
-  type CitySource,
-  type CentreSource,
-} from "@/lib/location-content";
+  getSanityDoctors,
+  getSanityTestimonials,
+  getSanitySiteSettings,
+  getSanityEducationVideos,
+  getSanityBlogsPage,
+  getSanityBlogBySlug,
+  getSanityPublishedBlogSlugs,
+  getSanityBlogsByTreatmentSlug,
+  getSanityBlogsByLocationSlug,
+  getSanityRelatedBlogs,
+  getSanityCMEBlogs,
+  getSanityBlogCategories,
+  type BlogCategoryCount,
+  getSanityTreatments,
+  getSanityTreatment,
+  getSanityServices,
+  getSanityService,
+  getSanityCities,
+  getSanityCity,
+  getSanityCentres,
+  getSanityCentre,
+  getSanityAbout,
+  type SanityDoctor,
+  type SanitySiteSettings,
+  type SanityBlog,
+  type SanityTreatment,
+  type SanityCentre as SanityCentreDoc,
+} from "@/sanity/lib/fetch";
+import type { ContactSource } from "@/lib/contact";
+import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
+import { TREATMENTS, treatmentBySlug, HIDDEN_TREATMENT_SLUGS } from "@/lib/treatments";
+import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre, type CitySource, type CentreSource } from "@/lib/location-content";
+import { type ServiceSource } from "@/lib/services";
+import { getLegalPage, LEGAL_PAGE_SLUGS } from "@/lib/legal-pages";
 
-let cached: Promise<Payload> | null = null;
+// ---------- Types (kept for callers) ----------
 
-export function payloadClient(): Promise<Payload> {
-  if (!cached) cached = getPayload({ config });
-  return cached;
+export type EducationVideoItem = { id: string; title: string; desc: string; tab: string };
+export type TestimonialVideoItem = { id: string; name: string; quote: string; stars: number };
+export type BlogsPage = {
+  docs: Blog[];
+  page: number;
+  totalPages: number;
+  totalDocs: number;
+  hasPrevPage: boolean;
+  hasNextPage: boolean;
+};
+
+// ---------- Legacy compatibility (payloadClient used by some editor routes) ----------
+
+/** @deprecated Payload removed. Always throws — callers have try/catch fallbacks. */
+export const payloadClient = async (): Promise<Payload> => {
+  throw new Error("Payload CMS has been removed. Use Sanity instead.");
+};
+
+// ---------- Pages ----------
+
+export const getPageBySlug = async (slug: string): Promise<Page | null> =>
+  (getLegalPage(slug) as unknown as Page) ?? null;
+export const getPageBySlugDraft = async (_slug: string): Promise<Page | null> => null;
+export const getPublishedPageSlugs = async (): Promise<string[]> => LEGAL_PAGE_SLUGS;
+
+// ---------- Blog helpers ----------
+
+function makeMedia(url: string | null | undefined, alt: string): Media | null {
+  if (!url) return null;
+  return { id: 0, alt, url, updatedAt: "", createdAt: "" };
 }
 
-/** Run a Payload query and return `fallback` on any error (missing table, no DB, etc.). */
-async function safeQuery<T>(fn: (p: Payload) => Promise<T>, fallback: T): Promise<T> {
-  try {
-    const payload = await payloadClient();
-    return await fn(payload);
-  } catch {
-    return fallback;
-  }
+function makeAuthor(
+  name: string | null | undefined,
+  slug: string | null | undefined,
+  role: string | null | undefined,
+  credentials: string | null | undefined,
+  avatarUrl: string | null | undefined,
+  bio: string | null | undefined,
+): Author | null {
+  if (!name) return null;
+  return {
+    id: 0,
+    name,
+    slug: slug ?? "",
+    role: role ?? null,
+    credentials: credentials ?? null,
+    avatar: makeMedia(avatarUrl, name),
+    bio: bio ?? null,
+    sameAs: null,
+    updatedAt: "",
+    createdAt: "",
+  };
 }
 
-/**
- * Fetch a single Page by slug (published-only for the public, via collection
- * access control). Cached + tagged: `pages`, `pages:<slug>`. Returns null if
- * not found (caller decides the fallback).
- */
-export const getPageBySlug = reactCache(
-  (slug: string): Promise<Page | null> =>
-    unstable_cache(
-      () => safeQuery(
-        async (payload) => {
-          const res = await payload.find({
-            collection: "pages",
-            where: { slug: { equals: slug } },
-            limit: 1,
-            depth: 1,
-          });
-          return (res.docs[0] ?? null) as Page | null;
-        },
-        null,
-      ),
-      ["page-by-slug", slug],
-      { tags: [cacheTags.collectionList("pages"), cacheTags.collectionItem("pages", slug)] },
-    )(),
-);
-
-/**
- * Uncached, draft-aware page fetch — for Draft Mode preview ONLY. Reads the
- * latest draft (overrideAccess) and is never cached, so editors see live edits.
- * Not used on the public render path (which stays static + published-only).
- */
-export async function getPageBySlugDraft(slug: string): Promise<Page | null> {
-  return safeQuery(async (payload) => {
-    const res = await payload.find({
-      collection: "pages",
-      where: { slug: { equals: slug } },
-      limit: 1,
-      depth: 1,
-      draft: true,
-      overrideAccess: true,
-    });
-    return (res.docs[0] ?? null) as Page | null;
-  }, null);
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function safeJSON(s: string | null | undefined): any {
+  if (!s) return null;
+  try { return JSON.parse(s); } catch { return null; }
 }
 
-/* ---------- Blogs (Phase 3) ---------- */
+function toBlogDoc(b: SanityBlog): Blog {
+  const author = makeAuthor(
+    b.authorName, b.authorSlug, b.authorRole, b.authorCredentials, b.authorAvatarUrl, b.authorBioText,
+  ) ?? { id: 0, name: "", slug: "", updatedAt: "", createdAt: "" };
 
-/** Single published blog by slug. Cached + tagged `blogs`, `blogs:<slug>`.
- *  depth 2 resolves author/reviewedBy/category + nested avatar + ogImage. */
-export const getBlogBySlug = reactCache(
-  (slug: string): Promise<Blog | null> =>
-    unstable_cache(
-      () => safeQuery(
-        async (payload) => {
-          const res = await payload.find({
-            collection: "blogs",
-            where: { slug: { equals: slug } },
-            limit: 1,
-            depth: 2,
-          });
-          return (res.docs[0] ?? null) as Blog | null;
-        },
-        null,
-      ),
-      ["blog-by-slug", slug],
-      { tags: [cacheTags.collectionList("blogs"), cacheTags.collectionItem("blogs", slug)] },
-    )(),
-);
+  const reviewer = makeAuthor(
+    b.reviewerName, b.reviewerSlug, b.reviewerRole, b.reviewerCredentials, b.reviewerAvatarUrl, null,
+  );
 
-/** Published blogs for the hub (newest first). Cached + tagged `blogs`. */
-export const getBlogs = reactCache(
-  (limit = 24): Promise<Blog[]> =>
-    unstable_cache(
-      () => safeQuery(
-        async (payload) => {
-          const res = await payload.find({
-            collection: "blogs",
-            limit,
-            sort: "-publishedAt",
-            depth: 1,
-          });
-          return res.docs as Blog[];
-        },
-        [],
-      ),
-      ["blogs-list", String(limit)],
-      { tags: [cacheTags.collectionList("blogs")] },
-    )(),
-);
-
-/** Published blog slugs for generateStaticParams. Cached + tagged `blogs`. */
-export const getPublishedBlogSlugs = reactCache(
-  (): Promise<string[]> =>
-    unstable_cache(
-      () => safeQuery(
-        async (payload) => {
-          const res = await payload.find({
-            collection: "blogs",
-            limit: 1000,
-            depth: 0,
-            select: { slug: true },
-          });
-          return res.docs.map((d) => d.slug).filter(Boolean) as string[];
-        },
-        [],
-      ),
-      ["blog-slugs"],
-      { tags: [cacheTags.collectionList("blogs")] },
-    )(),
-);
-
-/** Uncached, draft-aware single blog — Draft Mode preview only. */
-export async function getBlogBySlugDraft(slug: string): Promise<Blog | null> {
-  return safeQuery(async (payload) => {
-    const res = await payload.find({
-      collection: "blogs",
-      where: { slug: { equals: slug } },
-      limit: 1,
-      depth: 2,
-      draft: true,
-      overrideAccess: true,
-    });
-    return (res.docs[0] ?? null) as Blog | null;
-  }, null);
-}
-
-/* ---------- Services (Phase 4.1) ---------- */
-
-/**
- * Resolve a maternity service for `/services/[slug]`: the `services` doc shaped
- * into the plain, serialisable `ResolvedService` the <ServicePage> renders and
- * serviceGraph() turns into JSON-LD. Cached + tagged `services`, `services:<slug>`.
- * Falls back PER-SECTION to the code defaults (src/lib/services.ts) — so an
- * empty, partial, or unavailable CMS (e.g. table not yet pushed) renders
- * byte-identically. React-cached per render. Returns undefined for a slug with
- * no template/registry behind it (caller → notFound).
- */
-export const getService = reactCache(
-  (slug: string): Promise<ResolvedService | undefined> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "services",
-            where: { slug: { equals: slug } },
-            limit: 1,
-            depth: 1, // resolve seo.ogImage upload relation + heroPhoto
-          });
-          // Cast includes `name` so resolveService can build a page for DB-only services
-          return resolveService(slug, res.docs[0] as ServiceSource & { name?: string });
-        } catch {
-          // Table not pushed yet / read error → typed code fallback.
-          return resolveService(slug, null);
-        }
-      },
-      ["service-by-slug", slug],
-      { tags: [cacheTags.collectionList("services"), cacheTags.collectionItem("services", slug)] },
-    )(),
-);
-
-/**
- * Returns all published service slugs from the DB — used by the services route
- * generateStaticParams so new services added in admin are pre-rendered at build
- * time (the page still renders on-demand for any slug not in the static set).
- */
-export const getPublishedServiceSlugs = reactCache(
-  (): Promise<string[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "services",
-            limit: 300,
-            depth: 0,
-            where: { _status: { equals: "published" } },
-            select: { slug: true },
-          });
-          return (res.docs as Array<Record<string, unknown>>)
-            .map((d) => d.slug as string)
-            .filter(Boolean);
-        } catch {
-          return [];
-        }
-      },
-      ["service-slugs"],
-      { tags: [cacheTags.collectionList("services")] },
-    )(),
-);
-
-/* ---------- Doctors (Wave 4.3) ---------- */
-
-/**
- * Resolve a single doctor for `/doctors/[slug]`: the `doctors` doc shaped into
- * the typed `Doctor` model the <DoctorProfile> renders and physicianSchema turns
- * into JSON-LD. Cached + tagged `doctors`, `doctors:<slug>`. Falls back PER FIELD
- * to the code default (src/lib/doctors.ts `DOCTORS`) — so an empty, partial, or
- * unavailable CMS (e.g. table not yet pushed) renders byte-identically. React-
- * cached per render. Returns undefined for a slug with no code entry (→ notFound).
- */
-export const getDoctor = reactCache(
-  (slug: string): Promise<Doctor | undefined> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "doctors",
-            where: { slug: { equals: slug } },
-            limit: 1,
-            depth: 1, // resolve the optional `photo` upload override
-          });
-          return resolveDoctor(slug, res.docs[0] as DoctorSource);
-        } catch {
-          // Table not pushed yet / read error → typed code fallback.
-          return resolveDoctor(slug, null);
-        }
-      },
-      ["doctor-by-slug", slug],
-      { tags: [cacheTags.collectionList("doctors"), cacheTags.collectionItem("doctors", slug)] },
-    )(),
-);
-
-/**
- * All doctors for the `/doctors` index, in the INTENTIONAL code order (founders/
- * core first). Order is owned by the `DOCTORS` array — never Payload's query
- * order: we fetch every doc, key it by slug, then map over `DOCTORS` overlaying
- * each one via resolveDoctor (per-field fallback). An unavailable CMS degrades to
- * the code defaults (byte-identical). Cached + tagged `doctors`. React-cached.
- */
-/**
- * All doctors for the `/doctors` index, DB-first.
- *
- * Strategy:
- *  1. Fetch every published doctor from Payload DB.
- *  2. Resolve each through resolveDoctor() — overlays DB data onto code defaults
- *     per-field; handles DB-only doctors (no code entry) for admin-created ones.
- *  3. Order: code-known doctors in DOCTORS array order first; DB-only doctors
- *     (added from admin) appended, sorted by navOrder then name.
- *  4. Falls back to DOCTORS code defaults when DB is unavailable.
- */
-export const getDoctors = reactCache(
-  (): Promise<Doctor[]> =>
-    unstable_cache(
-      async () => {
-        let dbDocs: Array<{ slug: string; src: DoctorSource }> = [];
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "doctors",
-            limit: DOCTORS.length + 200,
-            depth: 1,
-          });
-          dbDocs = res.docs.map((d) => ({
-            slug: (d as { slug: string }).slug,
-            src: d as DoctorSource,
-          }));
-        } catch {
-          // DB unavailable → full code fallback below.
-        }
-
-        if (!dbDocs.length) {
-          return DOCTORS.map((d) => resolveDoctor(d.slug, null)!);
-        }
-
-        const bySlug = new Map(dbDocs.map((d) => [d.slug, d.src]));
-        const codeSlugs = new Set(DOCTORS.map((d) => d.slug));
-
-        // Code-known doctors in canonical DOCTORS array order.
-        const resolved: Doctor[] = DOCTORS
-          .map((d) => resolveDoctor(d.slug, bySlug.get(d.slug) ?? null))
-          .filter((d): d is Doctor => !!d);
-
-        // DB-only doctors (admin-created, not in DOCTORS array).
-        const dbOnly = dbDocs
-          .filter((d) => !codeSlugs.has(d.slug))
-          .sort((a, b) => {
-            const aOrder = (a.src as { navOrder?: number | null })?.navOrder ?? 999;
-            const bOrder = (b.src as { navOrder?: number | null })?.navOrder ?? 999;
-            return aOrder !== bOrder ? aOrder - bOrder : (a.slug < b.slug ? -1 : 1);
-          });
-        for (const d of dbOnly) {
-          const doctor = resolveDoctor(d.slug, d.src);
-          if (doctor) resolved.push(doctor);
-        }
-
-        return resolved;
-      },
-      ["doctors-list"],
-      { tags: [cacheTags.collectionList("doctors")] },
-    )(),
-);
-
-/**
- * Lightweight doctor nav data for building header/footer menus dynamically.
- * Fetches only doctors with navRole set. React-cached + tagged `doctors`.
- */
-const getNavDoctorsInternal = reactCache(
-  (): Promise<NavDoctorItem[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "doctors",
-            where: { navRole: { exists: true } },
-            limit: 200,
-            depth: 0,
-          });
-          return res.docs
-            .filter((d) => (d as { navRole?: string | null }).navRole)
-            .map((d) => {
-              const doc = d as {
-                slug: string;
-                name: string;
-                href?: string | null;
-                navRole: "senior-specialist" | "specialist";
-                navOrder?: number | null;
-                cities?: { value: string }[] | null;
-                experienceLabel?: string | null;
-              };
-              return {
-                slug: doc.slug,
-                name: doc.name,
-                href: doc.href || `/doctors/${doc.slug}`,
-                navRole: doc.navRole,
-                navOrder: typeof doc.navOrder === "number" ? doc.navOrder : 0,
-                city: doc.cities?.[0]?.value ?? "",
-                experienceLabel: doc.experienceLabel ?? undefined,
-              };
-            });
-        } catch {
-          return [];
-        }
-      },
-      ["doctors-nav"],
-      { tags: [cacheTags.collectionList("doctors")] },
-    )(),
-);
-
-/* ---------- Treatments (Wave 4.4) ---------- */
-
-/**
- * Resolve a single treatment for a `/treatment` route: the `treatments` doc
- * shaped into the plain, serialisable `ResolvedTreatment` the <TreatmentPage>
- * renders and treatmentGraph() turns into JSON-LD. Cached + tagged `treatments`,
- * `treatments:<slug>`. Falls back PER-SECTION to the code defaults
- * (src/lib/treatment-content.ts → treatmentBySlug) — so an empty, partial, or
- * unavailable CMS (e.g. table not yet pushed) renders byte-identically. React-
- * cached per render. Returns undefined for a slug with no template/registry
- * behind it (caller → notFound).
- */
-export const getTreatment = reactCache(
-  (slug: string): Promise<ResolvedTreatment | undefined> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "treatments",
-            where: { slug: { equals: slug } },
-            limit: 1,
-            depth: 1, // resolve the optional hero `heroPhoto` upload override
-          });
-          return resolveTreatment(slug, res.docs[0] as TreatmentSource);
-        } catch {
-          // Table not pushed yet / read error → typed code fallback.
-          return resolveTreatment(slug, null);
-        }
-      },
-      ["treatment-by-slug", slug],
-      { tags: [cacheTags.collectionList("treatments"), cacheTags.collectionItem("treatments", slug)] },
-    )(),
-);
-
-/**
- * All treatments in the INTENTIONAL code order (the `TREATMENTS` array order —
- * never Payload's query order): we fetch every doc, key it by slug, then map
- * over `TREATMENTS` overlaying each one via resolveTreatment (per-section
- * fallback). An unavailable CMS degrades to the code defaults (byte-identical).
- * Cached + tagged `treatments`. React-cached.
- */
-export const getTreatments = reactCache(
-  (): Promise<ResolvedTreatment[]> =>
-    unstable_cache(
-      async () => {
-        let bySlug = new Map<string, TreatmentSource>();
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "treatments",
-            limit: TREATMENTS.length + 50,
-            depth: 1, // resolve the optional hero `heroPhoto` upload override
-          });
-          bySlug = new Map(res.docs.map((d) => [(d as { slug: string }).slug, d as TreatmentSource]));
-        } catch {
-          // Table not pushed yet / read error → all code defaults.
-        }
-        return TREATMENTS.map((t) => resolveTreatment(t.slug, bySlug.get(t.slug) ?? null)!);
-      },
-      ["treatments-list"],
-      { tags: [cacheTags.collectionList("treatments")] },
-    )(),
-);
-
-/* ---------- Locations (Wave 4.5) ---------- */
-
-/**
- * Resolve a single city for `/locations/[city]`: the `cities` doc shaped into the
- * plain, serialisable `ResolvedCity` the <CityPage> renders and cityGraph() turns
- * into JSON-LD. Cached + tagged `cities`, `cities:<slug>`. Falls back PER-SECTION
- * to the code defaults (src/lib/location-content.ts → cityBySlug) — so an empty,
- * partial, or unavailable CMS (e.g. table not yet pushed) renders byte-identically.
- * React-cached per render. Returns undefined for a slug with no code default
- * behind it (caller → notFound). Class-A structural fields (slug, built,
- * womensHealth) stay code-authoritative in the resolver (ADR-0001 Option A).
- */
-export const getCity = reactCache(
-  (slug: string): Promise<ResolvedCity | undefined> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "cities",
-            where: { slug: { equals: slug } },
-            limit: 1,
-            depth: 0,
-          });
-          return resolveCity(slug, res.docs[0] as CitySource);
-        } catch {
-          // Table not pushed yet / read error → typed code fallback.
-          return resolveCity(slug, null);
-        }
-      },
-      ["city-by-slug", slug],
-      { tags: [cacheTags.collectionList("cities"), cacheTags.collectionItem("cities", slug)] },
-    )(),
-);
-
-/**
- * Resolve a single centre for `/locations/[city]/[center]`: the `centres` doc
- * shaped into the plain, serialisable `ResolvedCentre` the <CenterPage> renders
- * and centerGraph() turns into JSON-LD. Cached + tagged `centres`, `centres:<slug>`.
- * Falls back PER-SECTION to the code defaults (src/lib/location-content.ts →
- * centreBySlug) — so an empty, partial, or unavailable CMS renders byte-identically.
- * React-cached per render. Returns undefined for an unknown centre with no code
- * default (caller → notFound).
- *
- * Centre slugs are unique only WITHIN a city (ADR-0001 Option A slug-string
- * `citySlug` parent link, not a Payload relationship), so the query keys on the
- * COMPOUND (citySlug, slug) and the cache key carries both. The item cache TAG is
- * the bare `centres:<slug>` to match the revalidateCollection hook (which only
- * sees doc.slug); with no cross-city slug collisions today this is exact — if a
- * slug is ever reused across cities, that tag would over-bust (same trade-off the
- * index-only DB uniqueness accepts, WAVE-4.5-PLAN §13).
- */
-export const getCentre = reactCache(
-  (citySlug: string, slug: string): Promise<ResolvedCentre | undefined> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "centres",
-            where: { and: [{ citySlug: { equals: citySlug } }, { slug: { equals: slug } }] },
-            limit: 1,
-            depth: 0,
-          });
-          return resolveCentre(citySlug, slug, res.docs[0] as CentreSource);
-        } catch {
-          // Table not pushed yet / read error → typed code fallback.
-          return resolveCentre(citySlug, slug, null);
-        }
-      },
-      ["centre-by-city-slug", citySlug, slug],
-      { tags: [cacheTags.collectionList("centres"), cacheTags.collectionItem("centres", slug)] },
-    )(),
-);
-
-/**
- * All published city slugs — used by the city route generateStaticParams so
- * new cities added in admin are pre-rendered at build time.
- */
-export const getPublishedCitySlugs = reactCache(
-  (): Promise<string[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "cities",
-            limit: 100,
-            depth: 0,
-            where: { _status: { equals: "published" } },
-            select: { slug: true },
-          });
-          return (res.docs as Array<Record<string, unknown>>)
-            .map((d) => d.slug as string)
-            .filter(Boolean);
-        } catch {
-          return [];
-        }
-      },
-      ["city-slugs"],
-      { tags: [cacheTags.collectionList("cities")] },
-    )(),
-);
-
-/**
- * All published centre (city + center slug pairs) — used by the centre route
- * generateStaticParams so new centres added in admin are pre-rendered.
- */
-export const getPublishedCentreParams = reactCache(
-  (): Promise<{ city: string; center: string }[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "centres",
-            limit: 300,
-            depth: 0,
-            where: { _status: { equals: "published" } },
-            select: { slug: true, citySlug: true },
-          });
-          return (res.docs as Array<Record<string, unknown>>)
-            .filter((d) => d.slug && d.citySlug)
-            .map((d) => ({
-              city: (d.citySlug as string).toLowerCase().trim(),
-              center: d.slug as string,
-            }));
-        } catch {
-          return [];
-        }
-      },
-      ["centre-params"],
-      { tags: [cacheTags.collectionList("centres")] },
-    )(),
-);
-
-/**
- * Published centres for a specific city — used by the city hub page to detect
- * whether a DB-only city has multiple centres (determines hub vs. single-centre
- * rendering) and to resolve the sole centre slug for single-centre cities.
- */
-export const getPublishedCentresForCity = reactCache(
-  (citySlug: string): Promise<{ slug: string; name: string }[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "centres",
-            limit: 50,
-            depth: 0,
-            where: { and: [{ citySlug: { equals: citySlug } }, { _status: { equals: "published" } }] },
-            select: { slug: true, name: true },
-          });
-          return (res.docs as Array<Record<string, unknown>>)
-            .filter((d) => d.slug && d.name)
-            .map((d) => ({ slug: d.slug as string, name: d.name as string }));
-        } catch {
-          return [];
-        }
-      },
-      ["centres-for-city", citySlug],
-      { tags: [cacheTags.collectionList("centres")] },
-    )(),
-);
-
-/**
- * Fetch a global by slug. Cached + tagged `global:<slug>`. Returns null on any
- * error (e.g. table not yet pushed) so callers fall back to typed defaults —
- * keeps the site rendering during the migration.
- */
-export function getGlobalSafe<S extends keyof Config["globals"]>(
-  slug: S,
-): Promise<Config["globals"][S] | null> {
-  return unstable_cache(
-    async () => {
-      try {
-        const payload = await payloadClient();
-        return (await payload.findGlobal({ slug })) as Config["globals"][S];
-      } catch {
-        return null;
+  const category: Category | null = b.categorySlug
+    ? {
+        id: b.categorySlug as unknown as number,
+        title: b.categoryTitle ?? b.categorySlug,
+        slug: b.categorySlug,
+        updatedAt: "",
+        createdAt: "",
       }
+    : null;
+
+  return {
+    id: b.pgId ?? 0,
+    title: b.title ?? "",
+    slug: b.slug ?? "",
+    excerpt: b.excerpt ?? null,
+    heroImage: makeMedia(b.heroImageUrl, b.heroImageAlt ?? ""),
+    heroTextDark: b.heroTextDark ?? null,
+    heroImagePosition: b.heroImagePosition as Blog["heroImagePosition"] ?? null,
+    content: safeJSON(b.contentRaw),
+    author,
+    reviewedBy: reviewer,
+    category,
+    readMins: b.readMins ?? null,
+    publishedAt: b.publishedAt ?? null,
+    lastUpdatedAt: b.lastUpdatedAt ?? null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    treatmentSlugs: b.treatmentSlugs?.map((slug) => ({ slug: slug as any, id: null })) ?? null,
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    locationSlugs: b.locationSlugs?.map((slug) => ({ slug: slug as any, id: null })) ?? null,
+    faqs: b.faqs?.map((f, i) => ({ question: f.question, answer: f.answer, id: String(i) })) ?? null,
+    seo: {
+      metaTitle: b.seoMetaTitle ?? null,
+      metaDescription: b.seoMetaDescription ?? null,
+      ogTitle: b.seoOgTitle ?? null,
+      ogDescription: b.seoOgDescription ?? null,
+      ogImage: makeMedia(b.seoOgImageUrl, ""),
     },
-    ["global", String(slug)],
-    { tags: [cacheTags.global(String(slug))] },
-  )();
+    updatedAt: b.lastUpdatedAt ?? b.publishedAt ?? new Date().toISOString(),
+    createdAt: b.publishedAt ?? new Date().toISOString(),
+    _status: (b.status === "draft" ? "draft" : "published") as Blog["_status"],
+  };
 }
 
+// ---------- Blogs ----------
+
+export const getBlogBySlug = async (slug: string): Promise<Blog | null> => {
+  const b = await getSanityBlogBySlug(slug);
+  return b ? toBlogDoc(b) : null;
+};
+
+export const getBlogBySlugDraft = async (_slug: string): Promise<Blog | null> => null;
+export const getBlogs = async (_limit = 24): Promise<Blog[]> => {
+  const r = await getSanityBlogsPage(1, _limit);
+  return r ? r.docs.map(toBlogDoc) : [];
+};
+
+export const getBlogsPage = async (page = 1, limit = 24, categorySlug?: string): Promise<BlogsPage> => {
+  const r = await getSanityBlogsPage(page, limit, categorySlug);
+  if (!r) return { docs: [], page: 1, totalPages: 1, totalDocs: 0, hasPrevPage: false, hasNextPage: false };
+  const totalPages = Math.max(1, Math.ceil(r.total / limit));
+  return {
+    docs: r.docs.map(toBlogDoc),
+    page,
+    totalPages,
+    totalDocs: r.total,
+    hasPrevPage: page > 1,
+    hasNextPage: page < totalPages,
+  };
+};
+
+export const getBlogCategories = async (): Promise<BlogCategoryCount[]> => getSanityBlogCategories();
+
+export const getBlogsByTreatmentSlug = async (treatmentSlug: string, _limit = 3): Promise<Blog[]> => {
+  const docs = await getSanityBlogsByTreatmentSlug(treatmentSlug);
+  return docs.slice(0, _limit).map(toBlogDoc);
+};
+
+export const getBlogsByLocationSlug = async (locationSlug: string, _limit = 3): Promise<Blog[]> => {
+  const docs = await getSanityBlogsByLocationSlug(locationSlug);
+  return docs.slice(0, _limit).map(toBlogDoc);
+};
+
+export const getRelatedBlogs = async (
+  slug: string,
+  _treatmentSlugs: string[],
+  categoryId: number | string | null,
+  limit = 3,
+): Promise<Blog[]> => {
+  const categorySlug = categoryId != null ? String(categoryId) : null;
+  const docs = await getSanityRelatedBlogs(slug, categorySlug);
+  return docs.slice(0, limit).map(toBlogDoc);
+};
+
+export const getCMEBlogs = async (): Promise<Blog[]> => {
+  const docs = await getSanityCMEBlogs();
+  return docs.map(toBlogDoc);
+};
+
+export const getPublishedBlogSlugs = async (): Promise<string[]> => {
+  const docs = await getSanityPublishedBlogSlugs();
+  return docs.map((d) => d.slug).filter(Boolean) as string[];
+};
+
+// ---------- Videos ----------
+
+export const getEducationVideos = async (): Promise<EducationVideoItem[]> => {
+  const docs = await getSanityEducationVideos();
+  return docs
+    .filter((v) => v.youtubeId && v.title)
+    .map((v) => ({
+      id: v.youtubeId as string,
+      title: v.title as string,
+      desc: v.description ?? "",
+      tab: v.category ?? "",
+    }));
+};
+
+/** Video testimonials (those with a YouTube ID) for /testimonial-videos. */
+export const getTestimonialVideos = async (): Promise<TestimonialVideoItem[]> => {
+  const docs = await getSanityTestimonials();
+  return docs
+    .filter((t) => t.youtubeId && t.author && t.quote)
+    .map((t) => ({
+      id: t.youtubeId as string,
+      name: t.author as string,
+      quote: t.quote as string,
+      stars: typeof t.rating === "number" ? t.rating : 5,
+    }));
+};
+
+// ---------- Services ----------
+
+/** Map a Sanity service doc to the ServiceSource shape resolveService overlays. */
+function toServiceSource(d: Awaited<ReturnType<typeof getSanityService>>): ServiceSource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    hero: d.hero ? {
+      eyebrow: d.hero.eyebrow ?? null,
+      h1: d.hero.h1 ?? null,
+      h1Em: d.hero.h1Em ?? null,
+      tagline: d.hero.tagline ?? null,
+      badges: d.hero.badges ?? null,
+      image: d.hero.image ?? null,
+      imageAlt: d.hero.imageAlt ?? null,
+      heroPhoto: d.hero.heroPhoto?.asset?.url
+        ? { url: d.hero.heroPhoto.asset.url }
+        : undefined,
+    } : null,
+    seo: d.seo ? { metaTitle: d.seo.metaTitle ?? null, metaDescription: d.seo.metaDescription ?? null } : null,
+    overview: d.overview ?? null,
+    benefits: d.benefits ?? null,
+    whoFor: d.whoFor ?? null,
+    process: d.process ?? null,
+    whyUs: d.whyUs ?? null,
+    faqs: d.faqs ?? null,
+  };
+}
+
+export const getService = async (slug: string): Promise<ResolvedService | undefined> => {
+  const doc = await getSanityService(slug);
+  return resolveService(slug, toServiceSource(doc));
+};
+
+export const getPublishedServiceSlugs = async (): Promise<string[]> => {
+  const docs = await getSanityServices();
+  return docs.filter((d) => d.slug).map((d) => d.slug as string);
+};
+
+// ---------- Doctors (Sanity-backed, code fallback) ----------
+
+const toRows = (a?: string[] | null) => (a && a.length ? a.map((value) => ({ value })) : undefined);
+
+/** Map a Sanity doctor doc to the DoctorSource shape resolveDoctor overlays. */
+function toDoctorSource(d: SanityDoctor): DoctorSource {
+  return {
+    name: d.name ?? null,
+    credentials: d.credentials ?? null,
+    specialty: d.specialty ?? null,
+    role: d.role ?? null,
+    image: d.photoUrl ?? d.imageUrl ?? null,
+    experienceLabel: d.experienceLabel ?? null,
+    experienceYears: d.experienceYears ?? null,
+    cities: toRows(d.cities),
+    locations: toRows(d.locations),
+    treatments: toRows(d.treatments),
+    shortBio: d.shortBio ?? null,
+    bio: toRows(d.bio),
+    knowsAbout: toRows(d.knowsAbout),
+    alumniOf: toRows(d.alumniOf),
+    memberOf: toRows(d.memberOf),
+    awards: toRows(d.awards),
+    training: toRows(d.training),
+    publications: toRows(d.publications),
+    languages: toRows(d.languages),
+    sameAs: toRows(d.sameAs),
+    verified: d.verified ?? null,
+    visitsAllCentres: d.visitsAllCentres ?? null,
+    navRole: d.navRole ?? null,
+    navOrder: d.navOrder ?? null,
+  };
+}
+
+export const getDoctor = async (slug: string): Promise<Doctor | undefined> => {
+  const docs = await getSanityDoctors();
+  const found = docs.find((d) => d.slug === slug);
+  return resolveDoctor(slug, found ? toDoctorSource(found) : null);
+};
+
 /**
- * Map the `site-settings` global to the pure SiteIdentity shape the schema
- * builders consume. Returns undefined if unavailable, so siteGraph() falls back
- * to the SITE constant (byte-identical output). React-cached for per-render dedup.
+ * All doctors, code order first (founders/core), then any Sanity-only doctors
+ * (admin-created) appended by navOrder. Falls back to the code DOCTORS list when
+ * Sanity is empty/unavailable — byte-identical to before.
  */
-export const getSiteIdentity = reactCache(async (): Promise<SiteIdentity | undefined> => {
-  const s = await getGlobalSafe("site-settings");
+export const getDoctors = async (): Promise<Doctor[]> => {
+  const docs = await getSanityDoctors();
+  const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, toDoctorSource(d)]));
+  const codeSlugs = new Set(DOCTORS.map((d) => d.slug));
+
+  const resolved: Doctor[] = DOCTORS
+    .map((d) => resolveDoctor(d.slug, bySlug.get(d.slug) ?? null))
+    .filter((d): d is Doctor => !!d);
+
+  const dbOnly = docs
+    .filter((d) => d.slug && !codeSlugs.has(d.slug))
+    .sort((a, b) => (a.navOrder ?? 999) - (b.navOrder ?? 999) || (a.slug! < b.slug! ? -1 : 1));
+  for (const d of dbOnly) {
+    const doc = resolveDoctor(d.slug as string, toDoctorSource(d));
+    if (doc) resolved.push(doc);
+  }
+  return resolved;
+};
+
+// ---------- Treatments ----------
+
+/** Map a Sanity treatment doc to the TreatmentSource shape resolveTreatment overlays. */
+function toTreatmentSource(d: SanityTreatment | null | undefined): TreatmentSource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    href: d.href ?? null,
+    hero: d.hero ? {
+      eyebrow: d.hero.eyebrow ?? null,
+      h1: d.hero.h1 ?? null,
+      h1Em: d.hero.h1Em ?? null,
+      tagline: d.hero.tagline ?? null,
+      badges: d.hero.badges ?? null,
+      image: d.hero.image ?? null,
+      imageAlt: d.hero.imageAlt ?? null,
+      heroPhoto: d.hero.heroPhoto?.asset?.url
+        ? { url: d.hero.heroPhoto.asset.url }
+        : undefined,
+    } : null,
+    meta: d.meta ?? null,
+    whatIs: d.whatIs ?? null,
+    benefits: d.benefits ?? null,
+    whoNeedsIt: d.whoNeedsIt ?? null,
+    process: d.process ?? null,
+    risks: d.risks ?? null,
+    faqs: d.faqs ?? null,
+    cta: d.cta ?? null,
+  };
+}
+
+export const getTreatment = async (slug: string): Promise<ResolvedTreatment | undefined> => {
+  if (HIDDEN_TREATMENT_SLUGS.has(slug)) return undefined;
+  const doc = await getSanityTreatment(slug);
+  return resolveTreatment(slug, toTreatmentSource(doc));
+};
+
+export const getTreatments = async (): Promise<ResolvedTreatment[]> => {
+  const docs = await getSanityTreatments();
+  const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, d]));
+  return TREATMENTS
+    .filter((t) => !HIDDEN_TREATMENT_SLUGS.has(t.slug))
+    .map((t) => resolveTreatment(t.slug, toTreatmentSource(bySlug.get(t.slug) ?? null)))
+    .filter((t): t is ResolvedTreatment => !!t);
+};
+
+// ---------- Locations ----------
+
+function toCitySource(d: Awaited<ReturnType<typeof getSanityCity>>): CitySource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    name: d.name ?? null,
+    region: d.region ?? null,
+    country: d.country ?? null,
+    helpline: d.helpline ?? null,
+    helplineLabel: d.helplineLabel ?? null,
+    whatsapp: d.whatsapp ?? null,
+    heroImage: d.heroImage ?? null,
+    hero360Url: d.hero360Url ?? null,
+    built: d.built ?? null,
+    intro: d.intro ?? null,
+    faqs: d.faqs ?? null,
+    womensHealth: d.womensHealth ?? null,
+  };
+}
+
+function toCentreSource(d: SanityCentreDoc | null | undefined): CentreSource {
+  if (!d) return null;
+  return {
+    slug: d.slug ?? null,
+    citySlug: d.citySlug ?? null,
+    name: d.name ?? null,
+    fullName: d.fullName ?? null,
+    isHeadOffice: d.isHeadOffice ?? null,
+    area: d.area ?? null,
+    built: d.built ?? null,
+    address: d.address ?? null,
+    pin: d.pin ?? null,
+    phone: d.phone ?? null,
+    phoneLabel: d.phoneLabel ?? null,
+    hours: d.hours ?? null,
+    opening: d.opening ? { opens: d.opening.opens ?? null, closes: d.opening.closes ?? null, days: d.opening.days ?? null } : null,
+    geo: d.geo ? { lat: d.geo.lat ?? null, lng: d.geo.lng ?? null } : null,
+    mapQuery: d.mapQuery ?? null,
+    image: d.image ?? null,
+    hero360Url: d.hero360Url ?? null,
+    nearby: d.nearby ?? null,
+    landmarks: d.landmarks ?? null,
+    howToReach: d.howToReach ?? null,
+    facilities: d.facilities ?? null,
+    doctors: d.doctors ?? null,
+    treatments: d.treatments ?? null,
+    faqs: d.faqs ?? null,
+    reviewsKey: d.reviewsKey ?? null,
+    sameAs: d.sameAs ?? null,
+    intro: d.intro ?? null,
+    gallery: d.gallery ?? null,
+    womensHealth: d.womensHealth ?? null,
+  };
+}
+
+export const getCity = async (slug: string): Promise<ResolvedCity | undefined> => {
+  const doc = await getSanityCity(slug);
+  return resolveCity(slug, toCitySource(doc));
+};
+
+export const getCentre = async (citySlug: string, slug: string): Promise<ResolvedCentre | undefined> => {
+  const doc = await getSanityCentre(citySlug, slug);
+  return resolveCentre(citySlug, slug, toCentreSource(doc));
+};
+
+export const getPublishedCitySlugs = async (): Promise<string[]> => {
+  const docs = await getSanityCities();
+  return docs.filter((d) => d.slug && d.built !== false).map((d) => d.slug as string);
+};
+
+export const getPublishedCentreParams = async (): Promise<{ city: string; center: string }[]> => {
+  const docs = await getSanityCentres();
+  return docs
+    .filter((d) => d.slug && d.citySlug && d.built !== false)
+    .map((d) => ({ city: d.citySlug as string, center: d.slug as string }));
+};
+
+export const getPublishedCentresForCity = async (citySlug: string): Promise<{ slug: string; name: string }[]> => {
+  const docs = await getSanityCentres();
+  return docs
+    .filter((d) => d.citySlug === citySlug && d.slug && d.built !== false)
+    .map((d) => ({ slug: d.slug as string, name: d.name ?? d.slug ?? "" }));
+};
+
+// ---------- Globals ----------
+
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export function getGlobalSafe<S extends keyof Config["globals"]>(
+  _slug: S,
+): Promise<Config["globals"][S] | null> {
+  return Promise.resolve(null);
+}
+
+/** Map the Sanity site-settings doc → ContactSource (phone/email/WhatsApp). */
+function toContactSource(s: SanitySiteSettings): ContactSource {
+  if (!s) return null;
+  return {
+    telephone: s.telephone ?? null,
+    telephoneDisplay: s.telephoneDisplay ?? null,
+    email: s.email ?? null,
+    whatsapp: s.whatsapp ?? null,
+  };
+}
+
+/** Map the Sanity site-settings doc → SiteIdentity (schema/identity). Returns
+ *  undefined when unset so siteGraph() falls back to the SITE constant. */
+export const getSiteIdentity = async (): Promise<SiteIdentity | undefined> => {
+  const s = await getSanitySiteSettings();
   if (!s) return undefined;
   return {
-    name: s.brandName,
-    alternateName: s.alternateName,
-    legalName: s.legalName,
-    logo: s.logoUrl,
-    foundingDate: s.foundingDate,
-    telephone: s.telephone,
-    email: s.email,
+    name: s.brandName ?? null,
+    alternateName: s.alternateName ?? null,
+    legalName: s.legalName ?? null,
+    logo: s.logoUrl ?? null,
+    foundingDate: s.foundingDate ?? null,
+    telephone: s.telephone ?? null,
+    email: s.email ?? null,
     address: s.address ?? null,
-    awards: s.awards?.map((a) => a.award).filter(Boolean) ?? null,
-    knowsAbout: s.knowsAbout?.map((k) => k.topic).filter(Boolean) ?? null,
-    sameAs: s.socialLinks?.map((l) => l.url).filter(Boolean) ?? null,
+    awards: s.awards?.length ? s.awards : null,
+    knowsAbout: s.knowsAbout?.length ? s.knowsAbout : null,
+    sameAs: s.socialLinks?.length ? s.socialLinks : null,
   };
-});
+};
+
+/** Build NavTreatmentItem list from Sanity treatment docs + code fallback hrefs. */
+async function getNavTreatments(): Promise<NavTreatmentItem[]> {
+  const docs = await getSanityTreatments();
+  return docs
+    .filter((d) => d.slug && d.navCategory)
+    .map((d) => {
+      const codeDef = treatmentBySlug(d.slug as string);
+      return {
+        slug: d.slug as string,
+        name: (codeDef?.name ?? d.slug) as string,
+        href: d.href || codeDef?.href || `/treatments/${d.slug}`,
+        navCategory: d.navCategory as string,
+        navOrder: d.navOrder ?? 0,
+      };
+    });
+}
 
 /**
- * Nav-only treatment data: name, href, navCategory, navOrder for published
- * treatments that have a navCategory set. Powers the dynamic header mega menu
- * and footer treatment groups. Cached + tagged `treatments` (busted on any
- * treatment publish/update). Returns [] on any error (CMS unavailable / table
- * not yet pushed) so header + footer fall back to their hardcoded defaults.
- * Type is defined in src/lib/header.ts (pure module) to keep payload.ts free of
- * type definitions that other pure modules also need.
+ * Build NavDoctorItem list, code doctors first (with their per-field Sanity
+ * overlay applied, falling back to a default navRole/navOrder when an admin
+ * hasn't set one), then any Sanity-only (admin-created) doctors appended.
+ * An admin editing/adding one doctor must never make the rest disappear from
+ * the nav menu — each doctor resolves independently, like getDoctors().
  */
-const getTreatmentsForNavInternal = reactCache(
-  (): Promise<NavTreatmentItem[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "treatments",
-            limit: 300,
-            depth: 0,
-            sort: "navOrder",
-            select: { slug: true, name: true, shortName: true, href: true, navCategory: true, navOrder: true },
-          });
-          return (res.docs as Array<Record<string, unknown>>)
-            .filter((d) => d.navCategory && d.slug && (d.shortName || d.name))
-            .map((d) => ({
-              slug: d.slug as string,
-              name: (d.shortName as string) || (d.name as string),
-              href: (d.href as string) || `/treatments/${d.slug as string}`,
-              navCategory: d.navCategory as string,
-              navOrder: typeof d.navOrder === "number" ? d.navOrder : 0,
-            }));
-        } catch {
-          return [];
-        }
-      },
-      ["treatments-nav"],
-      { tags: [cacheTags.collectionList("treatments")] },
-    )(),
-);
+async function getNavDoctors(): Promise<NavDoctorItem[]> {
+  const docs = await getSanityDoctors();
+  const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, d]));
+  const codeSlugs = new Set(DOCTORS.map((d) => d.slug));
 
-/**
- * Nav-only service data: name, href for published maternity services from the
- * `services` collection. Injected as navCategory "maternity-services" so the
- * existing header/footer resolvers pick them up automatically. Cached + tagged
- * `services` (busted on any service publish/update). Returns [] on any error.
- */
-const getServicesForNavInternal = reactCache(
-  (): Promise<NavTreatmentItem[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "services",
-            limit: 300,
-            depth: 0,
-            where: { _status: { equals: "published" } },
-            select: { slug: true, name: true, shortName: true, href: true },
-          });
-          return (res.docs as Array<Record<string, unknown>>)
-            .filter((d) => d.slug && (d.shortName || d.name))
-            .map((d, i) => ({
-              slug: d.slug as string,
-              name: (d.shortName as string) || (d.name as string),
-              href: (d.href as string) || `/services/${d.slug as string}`,
-              navCategory: "maternity-services",
-              navOrder: i,
-            }));
-        } catch {
-          return [];
-        }
-      },
-      ["services-nav"],
-      { tags: [cacheTags.collectionList("services")] },
-    )(),
-);
+  const fromCode: NavDoctorItem[] = DOCTORS.map((d) => {
+    const sanityDoc = bySlug.get(d.slug);
+    return {
+      slug: d.slug,
+      name: sanityDoc?.name || d.name,
+      href: doctorUrl(d.slug),
+      navRole: sanityDoc?.navRole ?? defaultDoctorNavRole(d.slug),
+      navOrder: sanityDoc?.navOrder ?? defaultDoctorNavOrder(d.slug),
+      city: sanityDoc?.cities?.[0] ?? d.cities[0] ?? "",
+      experienceLabel: sanityDoc?.experienceLabel || d.experienceLabel || undefined,
+    };
+  });
 
-/**
- * Nav-only location data: published centres grouped by city for the dynamic
- * Locations mega menu (header) and footer Locations group. Queries both the
- * `centres` and `cities` collections. Cached + tagged so publishing a new
- * centre or city auto-busts the nav cache. Returns [] on any error so
- * header + footer fall back to their hardcoded defaults.
- */
-const getLocationsForNavInternal = reactCache(
-  (): Promise<NavLocationItem[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const [centresRes, citiesRes] = await Promise.all([
-            payload.find({
-              collection: "centres",
-              limit: 300,
-              depth: 0,
-              where: { _status: { equals: "published" } },
-              select: { slug: true, name: true, citySlug: true },
-            }),
-            payload.find({
-              collection: "cities",
-              limit: 100,
-              depth: 0,
-              where: { _status: { equals: "published" } },
-              select: { slug: true, name: true },
-            }),
-          ]);
+  const dbOnly: NavDoctorItem[] = docs
+    .filter((d): d is SanityDoctor & { slug: string; name: string; navRole: "senior-specialist" | "specialist" } =>
+      !!d.slug && !!d.name && !!d.navRole && !codeSlugs.has(d.slug))
+    .map((d) => ({
+      slug: d.slug,
+      name: d.name,
+      href: doctorUrl(d.slug),
+      navRole: d.navRole,
+      navOrder: d.navOrder ?? 0,
+      city: d.cities?.[0] ?? "",
+      experienceLabel: d.experienceLabel || undefined,
+    }));
 
-          const cityNames = new Map<string, string>();
-          for (const c of citiesRes.docs as Array<Record<string, unknown>>) {
-            if (c.slug && c.name)
-              cityNames.set((c.slug as string).toLowerCase().trim(), c.name as string);
-          }
+  return [...fromCode, ...dbOnly];
+}
 
-          const byCitySlug = new Map<string, { slug: string; name: string }[]>();
-          for (const c of centresRes.docs as Array<Record<string, unknown>>) {
-            if (!c.slug || !c.citySlug || !c.name) continue;
-            const key = (c.citySlug as string).toLowerCase().trim();
-            const arr = byCitySlug.get(key) ?? [];
-            arr.push({ slug: c.slug as string, name: c.name as string });
-            byCitySlug.set(key, arr);
-          }
+/** Build NavLocationItem list (one entry per city, each carrying its live centres). */
+async function getNavLocations(): Promise<NavLocationItem[]> {
+  const [cities, centres] = await Promise.all([getSanityCities(), getSanityCentres()]);
+  const liveCities = cities.filter((c) => c.slug && c.built !== false);
+  return liveCities.map((c) => ({
+    citySlug: c.slug as string,
+    cityName: c.name || (c.slug as string),
+    centres: centres
+      .filter((cn) => cn.citySlug === c.slug && cn.slug && cn.built !== false)
+      .map((cn) => ({ slug: cn.slug as string, name: cn.name || (cn.slug as string) })),
+  }));
+}
 
-          if (!byCitySlug.size) return [];
-
-          return Array.from(byCitySlug.entries()).map(([citySlug, centres]) => {
-            const rawName = cityNames.get(citySlug) || citySlug;
-            const cityName = rawName.charAt(0).toUpperCase() + rawName.slice(1);
-            // Deduplicate centres by slug in case of any DB duplicates.
-            const unique = Array.from(
-              new Map(centres.map((c) => [c.slug, c])).values(),
-            );
-            return { citySlug, cityName, centres: unique };
-          });
-        } catch {
-          return [];
-        }
-      },
-      ["locations-nav"],
-      { tags: [cacheTags.collectionList("centres"), cacheTags.collectionList("cities")] },
-    )(),
-);
-
-/**
- * Resolve the sitewide footer: the `footer` global shaped into the plain
- * `FooterData` the client <Footer> renders, with contact links resolved from
- * `site-settings` (Item 1) so numbers live in one place. Treatment groups in
- * the footer are now built dynamically from published Payload treatments that
- * have a `navCategory` set — so adding a treatment in the admin automatically
- * reflects in the footer. Falls back to FOOTER_DEFAULTS when no CMS data. React-
- * cached per render.
- */
-export const getFooter = reactCache(async (): Promise<FooterData> => {
-  const [footer, settings, navTreatments, navServices, navDoctors, navLocations] = await Promise.all([
-    getGlobalSafe("footer"),
-    getGlobalSafe("site-settings"),
-    getTreatmentsForNavInternal(),
-    getServicesForNavInternal(),
-    getNavDoctorsInternal(),
-    getLocationsForNavInternal(),
+export const getFooter = async (): Promise<FooterData> => {
+  const [settings, navTreatments, navDoctors, navLocations] = await Promise.all([
+    getSanitySiteSettings(),
+    getNavTreatments(),
+    getNavDoctors(),
+    getNavLocations(),
   ]);
-  return resolveFooter(footer as FooterSource, resolveContactValues(settings), [...navTreatments, ...navServices], navDoctors, navLocations);
-});
+  return resolveFooter(
+    null as unknown as FooterSource,
+    resolveContactValues(toContactSource(settings)),
+    navTreatments,
+    navDoctors,
+    navLocations,
+    settings?.navLabels ?? [],
+  );
+};
 
-/**
- * Resolve the sitewide header: the `header` global shaped into the plain
- * `HeaderData` the client <SiteHeader> renders (logo, navigation, CTA). Both
- * the "IVF Treatments" mega menu columns and the Doctors panel are built
- * dynamically from CMS data. Falls back to HEADER_DEFAULTS when no CMS data.
- * React-cached per render.
- */
-export const getHeader = reactCache(async (): Promise<HeaderData> => {
-  const [header, navTreatments, navServices, navDoctors, navLocations] = await Promise.all([
-    getGlobalSafe("header"),
-    getTreatmentsForNavInternal(),
-    getServicesForNavInternal(),
-    getNavDoctorsInternal(),
-    getLocationsForNavInternal(),
+export const getHeader = async (): Promise<HeaderData> => {
+  const [settings, navTreatments, navDoctors, navLocations] = await Promise.all([
+    getSanitySiteSettings(),
+    getNavTreatments(),
+    getNavDoctors(),
+    getNavLocations(),
   ]);
-  return resolveHeader(header as HeaderSource, [...navTreatments, ...navServices], navDoctors, navLocations);
-});
+  return resolveHeader(
+    null as unknown as HeaderSource,
+    navTreatments,
+    navDoctors,
+    navLocations,
+    settings?.navLabels ?? [],
+  );
+};
 
-/**
- * Resolve the homepage's editorial content: the `homepage` global shaped into
- * the plain, serialisable `HomepageData` the client <HomePage> sections render
- * (hero, stats, both "Why" blocks, Suraksha, awards, events, video IDs, FAQs,
- * final CTA). Read through getGlobalSafe (cached + tagged `global:homepage`), so
- * an empty or unavailable CMS falls back to HOMEPAGE_DEFAULTS — byte-identical
- * output. Calculators, dynamic Doctors/Treatments, review aggregation and the
- * blog listing stay code-owned. React-cached per render.
- */
-export const getHomepage = reactCache(async (): Promise<HomepageData> => {
-  const homepage = await getGlobalSafe("homepage");
-  return resolveHomepage(homepage as HomepageSource);
-});
+/** Map the Sanity homepage doc → the HomepageSource shape resolveHomepage
+ *  overlays. Converts string[] badge/feature lists to the {text}[] form the
+ *  source expects; everything else passes through. Unknown/empty → resolver
+ *  uses HOMEPAGE_DEFAULTS per-section (byte-identical). */
+function mapHomepageSource(doc: Record<string, unknown> | null): HomepageSource {
+  if (!doc) return null;
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const d = doc as any;
+  const textRows = (a?: string[] | null) => (Array.isArray(a) ? a.filter(Boolean).map((text) => ({ text })) : undefined);
+  return {
+    ...d,
+    hero: d.hero ? { ...d.hero, badges: textRows(d.hero.badges) } : undefined,
+    suraksha: d.suraksha ? { ...d.suraksha, features: textRows(d.suraksha.features) } : undefined,
+  } as HomepageSource;
+}
 
-/**
- * Resolve the /about-bfi page's structured editorial content: the `about-page`
- * global shaped into the plain, serialisable `AboutData` the client <AboutPage>
- * renders (hero copy, stat grids, legacy timeline, trust pillars, city network,
- * network/final-CTA headings + CTA labels). Read through getGlobalSafe (cached +
- * tagged `global:about-page`), so an empty or unavailable CMS falls back to
- * ABOUT_DEFAULTS — byte-identical output. The inline-<strong> prose, decorative
- * <em> titles, JSON-LD graph and reused Doctors/AwardsCarousel sections stay
- * code-owned. React-cached per render.
- */
-export const getAbout = reactCache(async (): Promise<AboutData> => {
-  const about = await getGlobalSafe("about-page");
-  return resolveAbout(about as AboutSource);
-});
+export const getHomepage = async (): Promise<HomepageData> => {
+  const [doc, camps] = await Promise.all([getSanityHomepage(), getCampsConfig()]);
+  const data = resolveHomepage(mapHomepageSource(doc));
+  if (camps?.posters?.length) {
+    data.events.posters = camps.posters
+      .filter((p) => p.src)
+      .map((p) => ({ src: p.src!, alt: p.alt ?? "" }));
+  }
+  return data;
+};
 
-/**
- * Published patient testimonials (Phase B.4) for the homepage's Testimonials
- * section, mapped to the display `Review` shape. SUPPLEMENTS the live Google
- * reviews — these render as "Patient review" alongside Google data and never
- * feed review schema. Cached + tagged `testimonials` (busted by the collection's
- * revalidateRelated hook). On any error (e.g. table not pushed yet) returns [] so
- * the homepage shows Google-only — byte-identical to before this collection
- * existed. React-cached per render.
- */
-export const getTestimonials = reactCache(
-  (): Promise<Review[]> =>
-    unstable_cache(
-      async () => {
-        try {
-          const payload = await payloadClient();
-          const res = await payload.find({
-            collection: "testimonials",
-            where: { published: { equals: true } },
-            sort: "order",
-            limit: 50,
-            depth: 0,
-          });
-          return resolveTestimonials(res.docs as TestimonialSource[]);
-        } catch {
-          // Table not pushed yet / read error → no supplement (Google-only).
-          return [];
-        }
-      },
-      ["testimonials-list"],
-      { tags: [cacheTags.collectionList("testimonials")] },
-    )(),
-);
+export const getAbout = async (): Promise<AboutData> => {
+  const doc = await getSanityAbout();
+  if (!doc) return resolveAbout(null);
+  return resolveAbout({
+    hero: doc.hero ?? null,
+    story: doc.story ?? null,
+    atAGlance: doc.atAGlance ?? null,
+    legacy: doc.legacy ?? null,
+    milestones: doc.milestones ?? null,
+    trust: doc.trust ?? null,
+    trustPillars: doc.trustPillars ?? null,
+    patientFirst: doc.patientFirst ?? null,
+    patientStats: doc.patientStats ?? null,
+    meetSpecialists: doc.meetSpecialists ?? null,
+    network: doc.network ?? null,
+    finalCta: doc.finalCta ?? null,
+    seo: doc.seo ?? null,
+  } as AboutSource);
+};
+
+/** Text testimonials (no YouTube ID) for the homepage "Patient review" cards. */
+export const getTestimonials = async (): Promise<Review[]> => {
+  const docs = await getSanityTestimonials();
+  return resolveTestimonials(
+    docs
+      .filter((t) => !t.youtubeId)
+      .map((t) => ({
+        author: t.author ?? null,
+        rating: t.rating ?? null,
+        quote: t.quote ?? null,
+        role: t.role ?? null,
+        published: t.published ?? null,
+        order: t.order ?? null,
+        createdAt: t.createdAt ?? null,
+      })),
+  );
+};

@@ -4,11 +4,12 @@ import Image from "next/image";
 import {
   ArrowRight, Phone, MessageCircle, Calendar, CheckCircle2, Clock, Star,
   Sparkles, ShieldCheck, PlayCircle, MapPin, Stethoscope, Quote, BookOpen,
-  ChevronLeft, ChevronRight,
+  ChevronLeft, ChevronRight, ChevronDown,
 } from "lucide-react";
+import { motion } from "framer-motion";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Footer, Locations, Calculators, TreatmentCard } from "@/components/home-page";
+import { Footer, Locations, Calculators, TreatmentCard, InquiryForm, Suraksha } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { SectionHead, Faq } from "@/components/ivf-page";
 import { MedicalReviewer } from "@/components/medical-reviewer";
@@ -17,11 +18,11 @@ import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Heading, Treatment } from "@/lib/treatments";
 import { treatmentCardData, treatmentBySlug } from "@/lib/treatments";
-import { resolveIcon } from "@/lib/icon-map";
+import { resolveIcon, type IconName } from "@/lib/icon-map";
 import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
 import { doctorsForTreatment, doctorUrl, doctorBySlug } from "@/lib/doctors";
-import { blogsForTreatment } from "@/lib/blogs";
+import { blogsForTreatment, type BlogPost } from "@/lib/blogs";
 import { testimonialsForTreatment, type VideoTestimonial } from "@/lib/video-testimonials";
 import { destinationHref } from "@/lib/internal-links";
 
@@ -49,6 +50,27 @@ function H({ h, base }: { h: Heading; base?: string }) {
       ) : null}
     </>
   );
+}
+
+/* ---------- "Who needs it" icon picker ----------
+ * Turns a plain indication string into a relevant icon so the section reads
+ * as a scannable infographic instead of a checklist. Keyword match against
+ * the curated ICON_MAP; falls back to a generic checkmark when nothing
+ * matches — never breaks, just less specific. Order matters (first match wins). */
+const WHO_NEEDS_ICON_RULES: [RegExp, IconName][] = [
+  [/tube|fallopian|hydrosalpinx/i, "Activity"],
+  [/endometriosis|chocolate cyst/i, "HeartPulse"],
+  [/ovarian reserve|egg count|maternal age|\bamh\b/i, "Egg"],
+  [/sperm|motility|azoospermia|male factor|tesa|pesa|micro-tese/i, "Dna"],
+  [/\biui\b|ovulation.induction/i, "Syringe"],
+  [/donor|surrogacy/i, "Users"],
+  [/genetic|thalassemia|\bpgt\b|chromosomal/i, "Dna"],
+  [/freez|cryopreserv|vitrif/i, "Snowflake"],
+  [/recurrent|repeated|failure|miscarriage/i, "ShieldCheck"],
+  [/unexplained/i, "Target"],
+];
+function whoNeedsIcon(text: string): IconName {
+  return WHO_NEEDS_ICON_RULES.find(([re]) => re.test(text))?.[1] ?? "ClipboardCheck";
 }
 
 /* ---------- lazy YouTube facade ----------
@@ -144,7 +166,7 @@ function DoctorCard({ d }: { d: Doctor }) {
             <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
           </a>
           <a
-            href="/#book"
+            href="#book"
             className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full bg-[color:var(--rose)] px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-[color:var(--rose)]/20 transition-all duration-300 hover:bg-[color:var(--rose)]/90 hover:shadow-md hover:shadow-[color:var(--rose)]/30 active:scale-[0.97]"
           >
             <Calendar className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:-translate-y-0.5" />
@@ -361,7 +383,7 @@ function DoctorCarousel({ docs, label }: { docs: Doctor[]; label: string }) {
 function toView(c: ResolvedTreatment): Treatment {
   return {
     ...c,
-    ...(c.types ? { types: { ...c.types, items: c.types.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
+    ...(c.types ? { types: { ...c.types, items: c.types.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d, ...(x.href ? { href: x.href } : {}) })) } } : {}),
     process: { ...c.process, steps: c.process.steps.map((s) => ({ icon: resolveIcon(s.icon), n: s.n, t: s.t, d: s.d })) },
     ...(c.technology ? { technology: { ...c.technology, items: c.technology.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
     ...(c.whyUs ? { whyUs: { ...c.whyUs, items: c.whyUs.items.map((x) => ({ icon: resolveIcon(x.icon), t: x.t, d: x.d })) } } : {}),
@@ -376,7 +398,7 @@ function toView(c: ResolvedTreatment): Treatment {
  * Keeping lucide icon *components* out of the props (functions aren't
  * serializable) is why the CMS path passes names and re-resolves them in toView.
  * The route still builds JSON-LD + metadata server-side from the same data. */
-export function TreatmentPage({ slug, content, editTestimonials }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[] }) {
+export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[]; cmsBlogs?: BlogPost[] }) {
   const t = content ? toView(content) : slug ? treatmentBySlug(slug) : undefined;
   if (!t) return null;
   const reviewer = doctorBySlug(t.reviewerSlug);
@@ -384,12 +406,15 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
   // editTestimonials is provided by TreatmentEditor (from the draft); the public
   // site always uses the code-owned defaults so it remains byte-identical.
   const testimonials = editTestimonials ?? testimonialsForTreatment(t.slug);
-  const blogs = blogsForTreatment(t.slug, t.shortName);
+  const blogs = blogsForTreatment(t.slug, t.shortName, 3, cmsBlogs);
   // Inline-editor flag: a few fields render through a transform on the public
   // site (e.g. <Linkify> auto-links the hero tagline, which emits the <a> links
   // the SEO gate checks). For those we keep the exact public render and only swap
   // in <Editable> inside the editor — so the live site stays byte-identical.
   const editing = !!useEdit()?.editMode;
+  // "What is X" reads as one short answer + optional detail behind Read More,
+  // instead of every paragraph landing on the page at once.
+  const [whatIsExpanded, setWhatIsExpanded] = useState(false);
 
   // New section-heading fields live on ResolvedTreatment (CMS path) only.
   // Fall back to shortName-derived strings for the legacy/code path.
@@ -452,7 +477,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
+          <a href="/treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{t.breadcrumbName}</span>
         </nav>
@@ -507,10 +532,10 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
             )}
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation
+                <Magnetic as="a" href="#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                  <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
-                <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
+                <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                   <MessageCircle className="h-4 w-4 text-[#25D366]" /> Chat on WhatsApp
                 </Magnetic>
               </div>
@@ -525,9 +550,9 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
           </div>
           <div className="lg:col-span-5">
             <Reveal delay={0.15}>
-              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
+              <div className={`relative w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5`} style={{ aspectRatio: t.hero.heroAspect || "4/5" }}>
                 {editing ? (
-                  <EditableImage path="hero.image" src={t.hero.image} alt={t.hero.imageAlt} className="absolute inset-0 h-full w-full object-cover object-top" />
+                  <EditableImage path="hero.image" src={t.hero.image} alt={t.hero.imageAlt} className={`absolute inset-0 h-full w-full ${t.hero.imageFit === "contain" ? "object-contain" : "object-cover object-top"}`} />
                 ) : (
                   <Image
                     src={t.hero.image}
@@ -535,7 +560,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
                     fill
                     priority
                     sizes="(max-width: 1024px) 100vw, 40vw"
-                    className="object-cover"
+                    className={t.hero.imageFit === "contain" ? "object-contain" : "object-cover"}
                   />
                 )}
               </div>
@@ -550,9 +575,37 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
           <div>
             <SectionHead eyebrow={ed("labels.whatIs", labels.whatIs)} title={<H h={t.whatIs.heading} base="whatIs.heading" />} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
-              {t.whatIs.paragraphs.map((p, i) => (
-                <Reveal key={i} delay={i * 0.05}><p>{ed(`whatIs.paragraphs.${i}.text`, p)}</p></Reveal>
-              ))}
+              {t.whatIs.paragraphs.length > 0 && (
+                <Reveal><p>{ed("whatIs.paragraphs.0.text", t.whatIs.paragraphs[0])}</p></Reveal>
+              )}
+              {t.whatIs.paragraphs.length > 1 && (
+                <>
+                  {/* Full text always renders in the DOM (crawlable, byte-identical
+                   *  content) — only visually clipped via max-height when collapsed,
+                   *  never conditionally unmounted. */}
+                  <motion.div
+                    initial={false}
+                    animate={{ maxHeight: whatIsExpanded || editing ? 999 : 0, opacity: whatIsExpanded || editing ? 1 : 0 }}
+                    transition={{ duration: 0.35, ease: [0.22, 1, 0.36, 1] }}
+                    className="space-y-5 overflow-hidden"
+                  >
+                    {t.whatIs.paragraphs.slice(1).map((p, i) => (
+                      <p key={i + 1}>{ed(`whatIs.paragraphs.${i + 1}.text`, p)}</p>
+                    ))}
+                  </motion.div>
+                  {!editing && (
+                    <button
+                      type="button"
+                      onClick={() => setWhatIsExpanded((v) => !v)}
+                      aria-expanded={whatIsExpanded}
+                      className="inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)] transition-colors hover:text-[color:var(--rose)]/80"
+                    >
+                      {whatIsExpanded ? "Show less" : "Read more"}
+                      <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${whatIsExpanded ? "rotate-180" : ""}`} />
+                    </button>
+                  )}
+                </>
+              )}
             </div>
             {reviewer && (
               <div className="mt-8">
@@ -571,7 +624,38 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
         </div>
       </section>
 
-      {/* 3. Benefits */}
+      {/* 3. Who needs it — moved up so first-time visitors can self-identify
+       *  relevance before reading benefits/technique details. */}
+      <section className={`${band()} py-8 md:py-14`}>
+        <div className="container-px mx-auto max-w-[1400px]">
+          <SectionHead eyebrow={ed("labels.whoNeedsIt", labels.whoNeedsIt)} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
+          <Stagger
+            className={`mt-9 grid grid-cols-1 gap-4 ${
+              t.whoNeedsIt.items.length === 1
+                ? "max-w-sm mx-auto"
+                : t.whoNeedsIt.items.length === 2
+                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
+                  : "sm:grid-cols-2 lg:grid-cols-3"
+            }`}
+          >
+            {t.whoNeedsIt.items.map((item, i) => {
+              const ItemIcon = resolveIcon(whoNeedsIcon(item));
+              return (
+              <StaggerItem key={i}>
+                <div className="flex h-full items-start gap-3.5 rounded-2xl border border-border/70 bg-card p-5 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                  <div className="inline-flex h-9 w-9 shrink-0 items-center justify-center rounded-xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
+                    <ItemIcon className="h-4 w-4" />
+                  </div>
+                  <span className="mt-1.5 text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`whoNeedsIt.items.${i}.value`, item)}</span>
+                </div>
+              </StaggerItem>
+              );
+            })}
+          </Stagger>
+        </div>
+      </section>
+
+      {/* 4. Benefits */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow={ed("labels.benefits", labels.benefits)} title={<H h={t.benefits.heading} base="benefits.heading" />} subtitle={t.benefits.subtitle && ed("benefits.subtitle", t.benefits.subtitle)} />
@@ -588,7 +672,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
               <StaggerItem key={i}>
                 <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`benefits.items.${i}.value`, item)}</span>
+                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{editing ? ed(`benefits.items.${i}.value`, item) : <Linkify text={item} />}</span>
                 </div>
               </StaggerItem>
             ))}
@@ -610,44 +694,30 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
                   : "sm:grid-cols-2 lg:grid-cols-3"
             }`}
           >
-            {t.types.items.map((x, i) => (
-              <StaggerItem key={i}>
-                <div className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-                  <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><x.icon className="h-6 w-6" /></div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{ed(`types.items.${i}.t`, x.t)}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`types.items.${i}.d`, x.d)}</p>
-                </div>
-              </StaggerItem>
-            ))}
+            {t.types.items.map((x, i) => {
+              const Card = x.href ? "a" : "div";
+              return (
+                <StaggerItem key={i}>
+                  <Card
+                    {...(x.href ? { href: x.href } : {})}
+                    className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift"
+                  >
+                    <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><x.icon className="h-6 w-6" /></div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{ed(`types.items.${i}.t`, x.t)}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`types.items.${i}.d`, x.d)}</p>
+                    {x.href && (
+                      <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
+                        Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                      </span>
+                    )}
+                  </Card>
+                </StaggerItem>
+              );
+            })}
           </Stagger>
           </div>
         </section>
       )}
-
-      {/* 4. Who needs it */}
-      <section className={`${band()} py-8 md:py-14`}>
-        <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow={ed("labels.whoNeedsIt", labels.whoNeedsIt)} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
-          <Stagger
-            className={`mt-9 grid grid-cols-1 gap-4 ${
-              t.whoNeedsIt.items.length === 1
-                ? "max-w-sm mx-auto"
-                : t.whoNeedsIt.items.length === 2
-                  ? "sm:grid-cols-2 max-w-3xl mx-auto"
-                  : "sm:grid-cols-2 lg:grid-cols-3"
-            }`}
-          >
-            {t.whoNeedsIt.items.map((item, i) => (
-              <StaggerItem key={i}>
-                <div className="flex h-full items-center gap-3 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
-                  <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)]" />
-                  <span className="text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`whoNeedsIt.items.${i}.value`, item)}</span>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-        </div>
-      </section>
 
       {/* 5. Process */}
       <section className={`${band()} py-8 md:py-14`}>
@@ -670,7 +740,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
                   <span className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-semibold text-white shadow-sm shadow-[color:var(--rose)]/30 ring-4 ring-[color:var(--rose)]/10">{s.n}</span>
                 </div>
                 <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">{ed(`process.steps.${i}.t`, s.t)}</h3>
-                <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{ed(`process.steps.${i}.d`, s.d)}</p>
+                <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{editing ? ed(`process.steps.${i}.d`, s.d) : <Linkify text={s.d} />}</p>
               </div>
             </StaggerItem>
           ))}
@@ -853,7 +923,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
                 ))}
               </ul>
               <div className="mt-auto pt-6">
-                <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
+                <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
                   Get a personalised estimate <ArrowRight className="h-4 w-4" />
                 </Magnetic>
               </div>
@@ -861,6 +931,11 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
           </Reveal>
         </div>
       </section>
+
+      {/* Suraksha Kavach — positioned right after cost, addressing cost fear
+       *  and repeated-cycle anxiety exactly where patients are weighing the
+       *  investment. Reuses the homepage's Suraksha section as-is. */}
+      <Suraksha />
 
       {/* Risks */}
       <section className={`${band()} py-8 md:py-14`}>
@@ -944,7 +1019,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
           <SectionHead center eyebrow={ed("labels.faq", labels.faq)} title={<H h={faqsSection} base="faqsSection" />} />
           <div className="mt-9 space-y-3">
             {t.faqs.map((f, i) => (
-              <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />
+              <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={editing ? ed(`faqs.${i}.a`, f.a, false) : <Linkify text={f.a} />} />
             ))}
           </div>
           {reviewer && (
@@ -969,9 +1044,15 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
               {testimonials.map((v, i) => (
                 <StaggerItem key={`${v.name}-${i}`}>
                   <div className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-500 hover:shadow-lift">
-                    <LiteVideo id={v.youTubeId} title={`${t.shortName} testimonial — ${v.name}`} editPath={editing ? `testimonials.${i}.youTubeId` : undefined} />
+                    {/* Treatment testimonials are always YouTube-sourced (videoSrc is a doctor-page-only exception) */}
+                    <LiteVideo id={v.youTubeId!} title={`${t.shortName} testimonial — ${v.name}`} editPath={editing ? `testimonials.${i}.youTubeId` : undefined} />
                     <div className="flex flex-1 flex-col p-5">
-                      <Quote className="h-5 w-5 text-[color:var(--rose)]/70" />
+                      <div className="flex items-center justify-between gap-2">
+                        <Quote className="h-5 w-5 text-[color:var(--rose)]/70" />
+                        {v.tag && (
+                          <span className="rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 text-[11px] font-semibold text-[color:var(--rose)]">{v.tag}</span>
+                        )}
+                      </div>
                       <p className="mt-2 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90">{ed(`testimonials.${i}.quote`, v.quote)}</p>
                       <div className="mt-4 flex items-center gap-1.5 text-sm font-semibold text-[color:var(--plum)]">
                         {ed(`testimonials.${i}.name`, v.name)}
@@ -1021,11 +1102,13 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
             subtitle={ed("blogSection.subtitle", blogSection.subtitle)}
           />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {blogs.map((b) => (
+            {blogs.map((b) => {
+              const CardTag = b.published ? "a" : "div";
+              return (
               <StaggerItem key={b.slug}>
-                <a
-                  href={b.href}
-                  className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-500 hover:-translate-y-1.5 hover:shadow-lift"
+                <CardTag
+                  {...(b.published ? { href: b.href } : {})}
+                  className={`group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-500 ${b.published ? "hover:-translate-y-1.5 hover:shadow-lift" : "cursor-default opacity-80"}`}
                 >
                   <div className="flex items-center justify-between gap-2">
                     <span className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">
@@ -1041,13 +1124,16 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
                     {b.title}
                   </h3>
                   <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted-foreground">{b.excerpt}</p>
-                  <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
-                    Read article
-                    <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
-                  </span>
-                </a>
+                  {b.published && (
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
+                      Read article
+                      <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
+                    </span>
+                  )}
+                </CardTag>
               </StaggerItem>
-            ))}
+              );
+            })}
           </Stagger>
           <div className="mt-8 text-center">
             <a href={destinationHref("blog")} className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)] hover:text-[color:var(--rose)]">
@@ -1077,13 +1163,13 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
           )}
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Free Consultation
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
+                <Calendar className="h-4 w-4" /> Book Consultation
               </Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                 <Phone className="h-4 w-4" /> +91 97126 22288
               </Magnetic>
-              <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
+              <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us
               </Magnetic>
             </div>
@@ -1092,6 +1178,7 @@ export function TreatmentPage({ slug, content, editTestimonials }: { slug?: stri
         </div>
       </section>
 
+      <InquiryForm />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

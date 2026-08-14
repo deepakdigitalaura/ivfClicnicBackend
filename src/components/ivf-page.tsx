@@ -3,8 +3,8 @@ import { useState } from "react";
 import {
   ArrowRight, Phone, MessageCircle, Calendar, CheckCircle2, ChevronDown,
   ClipboardCheck, Syringe, Microscope, Dna, HeartPulse, ShieldCheck,
-  FlaskConical, Sparkles, Clock, Award, Star,
-  Layers, Snowflake, Leaf, Baby, Users, PlayCircle,
+  FlaskConical, Sparkles, Award, Star,
+  Layers, Snowflake, Zap, Baby, Users, PlayCircle,
 } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
@@ -22,10 +22,10 @@ export function Eyebrow({ children }: { children: React.ReactNode }) {
   );
 }
 
-export function SectionHead({ eyebrow, title, subtitle, center }: { eyebrow: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; center?: boolean }) {
+export function SectionHead({ eyebrow, title, subtitle, center }: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; center?: boolean }) {
   return (
     <div className={center ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
-      <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>
+      {eyebrow && <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>}
       <Reveal delay={0.05}>
         <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl lg:text-[2.75rem] text-balance">{title}</h2>
       </Reveal>
@@ -54,7 +54,7 @@ const indications = [
 const steps = [
   {
     icon: ClipboardCheck, n: "01", t: "Pre-treatment Evaluation",
-    d: "Before starting, both partners are thoroughly evaluated to optimise the outcome — semen analysis and blood tests for the male partner, and consultation, 3D sonography, hormone tests and (if indicated) hysteroscopy for the female partner.",
+    d: "Before starting, both partners are thoroughly evaluated to optimise the outcome — blood tests for husband & wife, semen test, 3D sonography, and if needed, specialised tests like hysteroscopy.",
   },
   {
     icon: Syringe, n: "02", t: "Ovarian Stimulation",
@@ -66,11 +66,11 @@ const steps = [
   },
   {
     icon: Dna, n: "04", t: "Embryo Culture & Transfer",
-    d: "Embryos are grown in next-generation incubators that mimic the body. Two to six days later, the best-quality embryo(s) are gently transferred into the uterus. Surplus embryos can be frozen by vitrification — with close to 100% survival at Bavishi Fertility Institute.",
+    d: "Embryos are grown in next-generation incubators that mimic the body. Two to six days later, the best-quality embryo(s) are either gently transferred into the uterus or electively frozen, customised to your condition & response. Surplus embryos can be frozen.",
   },
   {
     icon: HeartPulse, n: "05", t: "Pregnancy Test",
-    d: "About 13–15 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–17 days.",
+    d: "About 13–15 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–19 days.",
   },
 ];
 
@@ -79,7 +79,7 @@ const whyBfi = [
   { icon: Microscope, t: "ICSI for All", d: "Microinjection for every couple gives the maximum chance of fertilisation and minimises the risk of total fertilisation failure." },
   { icon: Sparkles, t: "Customised Protocols", d: "Tailor-made stimulation and our 'trigger it right' strategy retrieve the best number of best-quality eggs, safely." },
   { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and peace of mind on your journey to parenthood." },
-  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1984 and the National Fertility Award for five consecutive years (2021–2025)." },
+  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
   { icon: HeartPulse, t: "One-Stop Care", d: "Tests, surgery, embryology and treatment under one roof — with safe-stimulation protocols designed to avoid severe OHSS." },
 ];
 
@@ -90,13 +90,13 @@ const faqs = [
   { q: "How does age affect IVF success?", a: "Age is the single biggest factor — younger women generally have higher success rates. For older patients, options such as donor eggs, previously-frozen embryos or advanced IVF techniques can improve the chances." },
   { q: "How long does one IVF cycle take?", a: "From the start of stimulation to embryo transfer, the active treatment usually takes about 12–17 days, plus the pre-treatment evaluation beforehand." },
   { q: "Is egg retrieval painful?", a: "No. Egg retrieval is a short, painless procedure done through the vagina under light sedation — with no cut and no stitch. Most patients go home within about two hours." },
-  { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a free consultation for a personalised estimate." },
-  { q: "Does Bavishi Fertility Institute offer a money-back guarantee for IVF?", a: "Yes — through the Suraksha Kavach programme, which provides financial protection and assurance on your fertility journey. Speak to our team to see if you qualify." },
-  { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1984 across 15 centres in 8 cities, with 30,000+ successful pregnancies and the National Fertility Award for five consecutive years." },
+  { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a consultation for a personalised estimate." },
+  { q: "Does Bavishi Fertility Institute offer financial protection for IVF?", a: "Yes — through the Suraksha Kavach programme, which covers multiple IVF cycles and provides financial protection on your fertility journey. Speak to our team to see if you qualify." },
+  { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 30,000+ successful pregnancies and the National Fertility Award six times (2019–2026). Our Ahmedabad institute was ranked the No. 1 fertility clinic in India by Times of India." },
   { q: "What lifestyle changes should I make before starting IVF?", a: "Focus on a healthy lifestyle — a balanced diet, regular exercise, maintaining a healthy weight, and avoiding smoking and excessive alcohol. Your specialist will give you any additional, personalised advice during your consultation." },
   { q: "Are there any dietary recommendations during IVF?", a: "There are no strict restrictions, but a balanced diet rich in fruits, vegetables, whole grains and lean proteins is recommended, along with good hydration. Follow any specific guidance your clinic provides for your treatment." },
   { q: "What is embryo grading?", a: "Embryo grading assesses the quality of embryos based on their appearance and development. Higher-grade embryos are more likely to implant successfully, which is why our embryologists select the best-quality embryo(s) for transfer." },
-  { q: "Can single individuals have a baby through IVF?", a: "Yes. IVF can be used by single individuals — with sperm collection for men, or donor sperm for women — and, where needed, a gestational carrier. Our team will explain the options available to you." },
+  { q: "Can single individuals have a baby through IVF?", a: "Yes, IVF treatment is available for single women in India — with donor sperm, single women can conceive. Our team will explain the options available to you. Unfortunately, single men are not currently eligible for fertility treatments under Indian law." },
 ];
 
 /* ---------- additional content (migrated from the original IVF page) ---------- */
@@ -112,8 +112,8 @@ const ivfTypes = [
   { icon: FlaskConical, t: "Conventional IVF", d: "Eggs and sperm are combined in the lab and fertilisation happens on its own." },
   { icon: Microscope, t: "ICSI", d: "A single healthy sperm is injected directly into each mature egg — used for all couples at Bavishi Fertility Institute." },
   { icon: Layers, t: "Blastocyst Transfer", d: "Embryos are grown to day 5–6 (blastocyst) before transfer, for stronger selection." },
-  { icon: Snowflake, t: "Frozen Embryo Transfer", d: "Surplus embryos are vitrified and transferred in a later cycle, with close to 100% thaw survival." },
-  { icon: Leaf, t: "Natural IVF Cycle", d: "Uses your body's natural cycle with minimal medication to retrieve a single egg." },
+  { icon: Snowflake, t: "Frozen Embryo Transfer", d: "Electively all or surplus embryos are frozen with vitrification. They are transferred in a later cycle, with close to 100% thaw survival." },
+  { icon: Zap, t: "Needle Free IVF", d: "Needle free injection systems use the same injections. Medications are injected in body without needle by a special device with high pressure through the skin." },
 ];
 
 const otherApplications = [
@@ -134,7 +134,7 @@ const timeline = [
 const protocols = [
   "Antagonist (Short) protocol",
   "Down-regulation (Long) protocol",
-  "Flare protocol",
+  "Customized protocol",
   "Dual stimulation protocol",
   "Minimum stimulation protocol",
 ];
@@ -151,7 +151,7 @@ const risks = [
   { t: "Ovarian Hyperstimulation (OHSS)", d: "Fertility medicines can occasionally over-stimulate the ovaries.", help: "Safe-stimulation protocols — with zero severe OHSS in over 10 years." },
   { t: "Ectopic pregnancy", d: "Rarely, an embryo implants outside the uterus.", help: "Early monitoring and Beta-HCG follow-up to detect it promptly." },
   { t: "Egg-retrieval risks", d: "As with any procedure, minor risks exist.", help: "A short, sedated, no-cut/no-stitch procedure by experienced specialists." },
-  { t: "Emotional well-being", d: "Treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
+  { t: "Emotional well-being", d: "IVF treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
   { t: "Cost considerations", d: "IVF is an investment in your family.", help: "Transparent pricing, interest-free EMI and the Suraksha Kavach package." },
 ];
 
@@ -256,7 +256,7 @@ export function IvfPage() {
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
+          <a href="/treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">IVF Treatment</span>
         </nav>
@@ -278,24 +278,24 @@ export function IvfPage() {
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-                India's trusted IVF specialists since 1984 — 30,000+ successful pregnancies,
+                India's trusted IVF specialists since 1998 — 30,000+ successful pregnancies,
                 Class 1000 IVF labs, and the Suraksha Kavach promise. Personalised, transparent
                 and compassionate fertility care, every step of the way.
               </p>
             </Reveal>
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation
+                <Magnetic as="a" href="/contact#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                  <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
-                <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
+                <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                   <MessageCircle className="h-4 w-4 text-[#25D366]" /> Chat on WhatsApp
                 </Magnetic>
               </div>
             </Reveal>
             <Reveal delay={0.3}>
               <div className="mt-8 flex flex-wrap gap-x-6 gap-y-3 text-sm font-medium text-[color:var(--plum)]">
-                {["30,000+ Pregnancies", "Since 1984", "Class 1000 Labs", "National Fertility Award 5×"].map((c) => (
+                {["30,000+ Pregnancies", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "National Fertility Award 6×"].map((c) => (
                   <span key={c} className="inline-flex items-center gap-1.5"><CheckCircle2 className="h-4 w-4 text-[color:var(--rose)]" /> {c}</span>
                 ))}
               </div>
@@ -342,9 +342,9 @@ export function IvfPage() {
             <aside className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 p-6">
               <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">About Bavishi Fertility Institute</div>
               <p className="mt-3 text-[15px] leading-relaxed text-[color:var(--plum)]/90">
-                Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with
-                15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility
-                Award for five consecutive years (2021–2025), and is FOGSI-certified — pioneering IVF in India and running
+                Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with
+                14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful pregnancies, holds the National Fertility
+                Award six times (2019–2026), and is FOGSI-certified — pioneering IVF in India and running
                 Class 1000 embryology labs.
               </p>
             </aside>
@@ -359,7 +359,6 @@ export function IvfPage() {
             center
             eyebrow="Advantages"
             title={<>The advantages of <em className="font-display italic text-[color:var(--rose)]">IVF</em></>}
-            subtitle="Beyond helping you conceive, IVF gives your specialist powerful tools to maximise your chances safely."
           />
           <Stagger className="mt-9 grid grid-cols-1 gap-4 sm:grid-cols-2 lg:grid-cols-3">
             {advantages.map((t) => (
@@ -462,11 +461,6 @@ export function IvfPage() {
             </StaggerItem>
           ))}
         </Stagger>
-        <Reveal delay={0.1}>
-          <div className="mt-8 flex items-center justify-center gap-2 text-sm text-muted-foreground">
-            <Clock className="h-4 w-4 text-[color:var(--rose)]" /> Active treatment — egg formation to embryo transfer — typically takes just 12–17 days.
-          </div>
-        </Reveal>
       </section>
 
       {/* Treatment timeline (day-by-day) + protocols */}
@@ -518,8 +512,8 @@ export function IvfPage() {
               next step with clarity and confidence.
             </p>
             <div className="mt-7 flex flex-wrap gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                <Calendar className="h-4 w-4" /> Book Free Consultation
+              <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                <Calendar className="h-4 w-4" /> Book Consultation
               </Magnetic>
               <Magnetic as="a" href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                 <PlayCircle className="h-4 w-4" /> More Videos
@@ -628,7 +622,7 @@ export function IvfPage() {
                 ))}
               </ul>
               <div className="mt-auto pt-6">
-                <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
+                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
                   Get a personalised estimate <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <p className="mt-4 text-[13px] italic leading-relaxed text-muted-foreground">
@@ -738,18 +732,18 @@ export function IvfPage() {
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-5 max-w-xl text-lg leading-relaxed text-white/75">
-              Speak with our fertility experts today — confidential, compassionate and complimentary.
+              Speak with our fertility experts today — confidential, compassionate and personalised.
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Free Consultation
+              <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
+                <Calendar className="h-4 w-4" /> Book Consultation
               </Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                 <Phone className="h-4 w-4" /> +91 97126 22288
               </Magnetic>
-              <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
+              <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                 <MessageCircle className="h-4 w-4" /> WhatsApp Us
               </Magnetic>
             </div>

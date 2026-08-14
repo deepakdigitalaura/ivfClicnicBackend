@@ -20,17 +20,26 @@
  * never inferred. To extend: add a verified video with its real `youTubeId`.
  * ===================================================================== */
 
+import { doctorsForLocation } from "@/lib/doctors";
+
 export type VideoTestimonial = {
   /** Patient/display name (first name or couple; descriptive when anonymous). */
   name: string;
   /** Short pull-quote — must stay faithful to what the patient actually said. */
   quote: string;
-  /** Real YouTube video id (required — we never render placeholders). */
-  youTubeId: string;
+  /** Real YouTube video id — required unless `videoSrc` is set instead. */
+  youTubeId?: string;
+  /** Self-hosted .mp4 path (e.g. "/assets/testimonials/foo.mp4") for a real
+   *  testimonial that isn't on the YouTube channel. Alternative to
+   *  `youTubeId` — set exactly one of the two, never both. */
+  videoSrc?: string;
   /** City/centre — set ONLY when the testimonial explicitly states it. */
   location?: string;
   /** Treating doctor — set ONLY when the testimonial explicitly names them. */
   doctor?: string;
+  /** Situation tag (e.g. "Years of Trying") — set ONLY when directly
+   *  supported by the quote text, never inferred. */
+  tag?: string;
 };
 
 /* ---------------------------------------------------------------------
@@ -40,9 +49,9 @@ export type VideoTestimonial = {
  * ------------------------------------------------------------------- */
 export const TREATMENT_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
   ivf: [
-    { name: "After 25 Years of Waiting", quote: "25 years of waiting, and one miracle finally completed our family.", youTubeId: "tfc645Tz3vw" },
-    { name: "Dipali Doshi", quote: "We succeeded in our very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "XGYK6MZD3ak" },
-    { name: "Naina & Deepak", quote: "After 20 years of hope, Bavishi Fertility Institute made us parents.", youTubeId: "IK1sZLDAito" },
+    { name: "After 25 Years of Waiting", quote: "25 years of waiting, and one miracle finally completed our family.", youTubeId: "tfc645Tz3vw", tag: "Years of Trying" },
+    { name: "Dipali Doshi", quote: "We succeeded in our very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "XGYK6MZD3ak", tag: "First-Cycle Success" },
+    { name: "Naina & Deepak", quote: "After 20 years of hope, Bavishi Fertility Institute made us parents.", youTubeId: "IK1sZLDAito", tag: "Years of Trying" },
   ],
 
   "ivf-failure": [
@@ -78,8 +87,55 @@ export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
  * Only videos that explicitly name the doctor belong here.
  * ------------------------------------------------------------------- */
 export const DOCTOR_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
+  // NOTE: Many entries below don't name the treating doctor in their video title
+  // but were confirmed by the clinic as that doctor's patients — do NOT remove
+  // them for failing the "doctor explicitly named" title rule.
   "janki-bavishi": [
-    { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "The personalised care from Dr. Janki Bavishi made all the difference.", youTubeId: "SP4xuGIFpF4" },
+    { name: "Shilled Oza", doctor: "Dr. Janki Bavishi", quote: "Personalised care by Dr. Janki Bavishi made our experience truly special.", youTubeId: "Ko_1GCx0kwE" },
+    { name: "Dr Vipul & Dr Vaibhavi", doctor: "Dr. Janki Bavishi", quote: "A journey of hope and trust — our IVF experience with Bavishi Fertility Institute.", youTubeId: "hcrTlAG07c8" },
+    { name: "Jigesh & Jinal", doctor: "Dr. Janki Bavishi", quote: "From failed treatments elsewhere to parenthood at Bavishi Fertility Institute.", youTubeId: "SbkV-1fSonM" },
+    { name: "A Heartfelt Journey to Parenthood", doctor: "Dr. Janki Bavishi", quote: "An inspiring, heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "ag4asJqSUA4" },
+  ],
+
+  "parth-bavishi": [
+    { name: "Rushi & Siddhi", doctor: "Dr. Parth Bavishi", quote: "Our journey to parenthood — blessed with twins at Bavishi Fertility Institute.", youTubeId: "llJJm3TmbCA" },
+    { name: "Chirali & Ritesh", doctor: "Dr. Parth Bavishi", quote: "From an IVF miracle to a natural pregnancy — our journey with Bavishi Fertility Institute.", youTubeId: "lN42_g7G00s" },
+    { name: "Mrudangi", doctor: "Dr. Parth Bavishi", quote: "Mrudangi's fertility treatment journey, from Canada, with Bavishi Fertility Institute.", youTubeId: "dUC9eTcyjbI" },
+    { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Parth Bavishi", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
+  ],
+
+  "himanshu-bavishi": [
+    { name: "After Years of Waiting", doctor: "Dr. Himanshu Bavishi", quote: "After years of waiting, our dream finally came true at Bavishi Fertility Institute.", youTubeId: "mE28yGOxJlE" },
+    { name: "Acharya Family", doctor: "Dr. Himanshu Bavishi", quote: "From doubts to a miracle — the Acharya family's journey at Bavishi Fertility Institute.", youTubeId: "ApUvVhP1F2s" },
+    { name: "Bhargav Patel", doctor: "Dr. Himanshu Bavishi", quote: "Our dream of having twins came true at Bavishi Fertility Institute.", youTubeId: "n2z95eV60jE" },
+    { name: "Dr Rugvi", doctor: "Dr. Himanshu Bavishi", quote: "A journey of hope and care that gave us a healthy baby.", youTubeId: "mq46CnngGyY" },
+  ],
+
+  "falguni-bavishi": [
+    { name: "Rekha", doctor: "Dr. Falguni Bavishi", quote: "From loss to the blessing of twins — an inspiring IVF journey with Bavishi Fertility Institute.", youTubeId: "KKf6tNrlvoc" },
+    { name: "Vivekanand & Bandna", doctor: "Dr. Falguni Bavishi", quote: "Our journey to parenthood with Bavishi Fertility Institute.", youTubeId: "274_mV_xnfs" },
+    { name: "Dipali Doshi", doctor: "Dr. Falguni Bavishi", quote: "We succeeded in our very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "XGYK6MZD3ak" },
+    { name: "Bindiya & Mehul Mervana", doctor: "Dr. Falguni Bavishi", quote: "Bindiya and Mehul Mervana's remarkable journey to parenthood with Bavishi Fertility Institute.", youTubeId: "-jM7ly3AOFI" },
+  ],
+
+  "binal-shah": [
+    { name: "Madhvika & Pranay", doctor: "Dr. Binal Shah", quote: "When dreams blossom against all odds — our story with Bavishi Fertility Institute.", youTubeId: "v2oy6QZjQvs" },
+    { name: "Dr Mayank & Dr Prakruti", doctor: "Dr. Binal Shah", quote: "A heartfelt journey to parenthood with Bavishi Fertility Institute.", youTubeId: "yNKg1p38lOY" },
+    { name: "Ankita Himanshukumar Dave", doctor: "Dr. Binal Shah", quote: "Watch Ankita Himanshukumar Dave share her fertility treatment journey with Bavishi Fertility Institute.", youTubeId: "ber4YBT5Yno" },
+  ],
+
+  // Self-hosted (not on the YouTube channel yet) — clinic-supplied WhatsApp
+  // clips. Name/quote are placeholders pending real transcription; per-request,
+  // shipped generic rather than blocked on that. Replace once known.
+  "deepali-pandya": [
+    { name: "Patient Testimonial", doctor: "Dr. Deepali Pandya", quote: "Watch this patient share their experience with Dr. Deepali Pandya.", videoSrc: "/assets/testimonials/deepali-pandya-patient-1.mp4" },
+    { name: "Patient Testimonial", doctor: "Dr. Deepali Pandya", quote: "Watch this patient share their experience with Dr. Deepali Pandya.", videoSrc: "/assets/testimonials/deepali-pandya-patient-2.mp4" },
+  ],
+
+  // Self-hosted (clinic-supplied clip, not on the YouTube channel). Placeholder
+  // name/quote pending real transcription of the patient's spoken testimonial.
+  "deep-gajiwala": [
+    { name: "Patient Testimonial", doctor: "Dr. Deep Gajiwala", quote: "Watch this patient share their experience with Dr. Deep Gajiwala.", videoSrc: "/assets/testimonials/deep-gajiwala-testimonial-5.mp4" },
   ],
 };
 
@@ -160,7 +216,22 @@ export function testimonialsForCity(citySlug: string, max = 3): VideoTestimonial
   return (CITY_TESTIMONIALS[citySlug] ?? []).slice(0, max);
 }
 
-/** Real testimonials for a doctor page (max 3). Empty → hide the section. */
-export function testimonialsForDoctor(doctorSlug: string, max = 3): VideoTestimonial[] {
+/** Real testimonials for a doctor page. Rendered in an auto-scrolling carousel,
+ * so the cap is generous — more than 3 simply scroll. Empty → hide the section. */
+export function testimonialsForDoctor(doctorSlug: string, max = 12): VideoTestimonial[] {
   return (DOCTOR_TESTIMONIALS[doctorSlug] ?? []).slice(0, max);
+}
+
+/** Real testimonials for a centre page: pooled from the doctors who actually
+ *  consult at that specific centre (Doctor.locations — branch-level, not
+ *  city-level), deduped. Falls back to the city-wide pool only when none of
+ *  those doctors have a testimonial on file. Empty → hide the section. */
+export function testimonialsForCentre(centreSlug: string, citySlug: string, max = 12): VideoTestimonial[] {
+  const centreDoctorSlugs = doctorsForLocation(centreSlug).map((d) => d.slug);
+  const fromDoctors = centreDoctorSlugs.flatMap((slug) => DOCTOR_TESTIMONIALS[slug] ?? []);
+  const deduped = fromDoctors.filter((v, i, arr) =>
+    arr.findIndex((o) => (o.youTubeId ?? o.videoSrc) === (v.youTubeId ?? v.videoSrc)) === i
+  );
+  const pool = deduped.length > 0 ? deduped : CITY_TESTIMONIALS[citySlug] ?? [];
+  return pool.slice(0, max);
 }

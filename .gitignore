@@ -10,3 +10,62 @@ out
 # Payload uploaded media (local dev)
 public/media
 supabase-schema.sql
+.vercel
+.env*
+!.env.vps.example
+!.env.local.example
+bfi-pregnancy-calculator.zip
+tmp/check.json
+tmp/commit-msg.txt
+ultimate-pregnancy-ovulation-calculator.zip
+scripts/import-blogs/check-progress.mjs
+scripts/import-blogs/prod-missing.log
+scripts/import-blogs/prod-patch.log
+scripts/import-blogs/prod-pilot.log
+scripts/import-blogs/prod-runall.log
+scripts/import-blogs/run-all.log.json
+scripts/import-blogs/verify-slug-values.mjs
+tmp/commit-msg-3.txt
+tmp/commit-msg-4.txt
+tmp/commit-msg-5.txt
+tmp/pilot-1-top.png
+tmp/pilot-2-cards.png
+tmp/pilot-3-decision.png
+tmp/pilot-4-icsi.png
+scripts/replace-hero-images.mjs
+scripts/_unlock-admin.mjs
+scripts/_ref-blog-content.json
+scripts/_hero-images-progress.json
+scripts/_enrich-quality-progress.json
+
+# Doctor source files (originals already converted to WebP and committed)
+public/assets/doctors/finalDoctors/
+
+# Script log/output files
+scripts/import-blogs/fix-tables.log.json
+
+# Playwright MCP debug console logs
+.playwright-mcp/
+
+# Raw source dumps (processed versions already committed under public/assets/centres)
+public/assets/Locations/anand location/
+public/assets/Locations/mumbai location/
+public/assets/Locations/sindhubhawan road location/
+
+# Raw press scans (processed clippings already committed under public/assets/media/press)
+public/assets/media/paper cuts and new news/
+
+# Blog content source zips (raw client docs, not served)
+blogstoaddinbfinewwebsite.zip
+blogstoaddinbfiwebsite.zip
+scratch_blogzips/
+
+# Raw Dr. Deep video/review source dump (clean copies committed under
+# public/assets/testimonials/; Google review screenshots transcribed into
+# src/lib/doctor-reviews.ts, not served as images)
+public/assets/DR.Deep videos/
+
+# Raw awards/achievements source dump — real ceremony photos + AI-generated
+# gap-filler renders (processed/renamed copies already committed under
+# public/assets/awards/, see src/lib/awards.ts)
+public/awards and achievment/

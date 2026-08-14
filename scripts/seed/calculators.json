@@ -1,0 +1,146 @@
+[
+  {
+    "slug": "ivf-success-rate",
+    "title": "IVF Success Rate Calculator",
+    "subtitle": "Get a personalised estimate of your IVF success probability based on your age, diagnosis, embryo type, treatment history, and egg source. Results are generated using evidence-based data from thousands of IVF cycles.",
+    "disclaimer": "This calculator provides an estimate only and is not a medical diagnosis. Individual results vary. Please consult a fertility specialist at Bavishi Fertility Institute for a personalised assessment.",
+    "faqs": [
+      { "question": "How accurate is the IVF success rate calculator?", "answer": "The calculator uses evidence-based probability models derived from large IVF outcome datasets. It gives a useful estimate, but actual results depend on many individual factors that only a fertility specialist can assess after examining your full medical history." },
+      { "question": "What age has the highest IVF success rate?", "answer": "Women under 30 typically have the highest IVF success rates, often 60–70% per cycle. Success rates decline with age, particularly after 38. However, with personalised protocols and advanced techniques like ICSI and PGT, success is possible at older ages too." },
+      { "question": "Does the number of previous IVF attempts affect success?", "answer": "Yes. The first two to three IVF cycles generally have the highest success rates. After multiple failed cycles, your specialist may recommend additional tests or modified protocols to improve outcomes." },
+      { "question": "Can PCOS affect IVF success rates?", "answer": "PCOS can actually lead to higher egg counts during IVF, which can be an advantage. However, careful stimulation protocols are needed to avoid Ovarian Hyperstimulation Syndrome (OHSS). Overall, IVF success rates for women with PCOS are generally comparable to or slightly better than average." }
+    ],
+    "seo": {
+      "metaTitle": "IVF Success Rate Calculator — Personalised IVF Success Probability | Bavishi",
+      "metaDescription": "Free, evidence-based IVF Success Rate Calculator by Bavishi Fertility Institute. Estimate your personalised IVF success probability based on age, diagnosis, embryo type, treatment history, and egg source.",
+      "ogTitle": "IVF Success Rate Calculator — Personalised IVF Success Probability",
+      "ogDescription": "Estimate your IVF success probability instantly. Evidence-based calculator by India's #1 fertility specialists — Bavishi Fertility Institute."
+    }
+  },
+  {
+    "slug": "ivf-cost",
+    "title": "IVF Cost Calculator",
+    "subtitle": "Get a transparent, personalised estimate of your IVF treatment cost in India. Includes base procedure costs, medication estimates, and optional add-on treatments — so you can plan your fertility journey with confidence.",
+    "disclaimer": "Cost estimates are indicative and based on typical treatment packages at Bavishi Fertility Institute. Final costs depend on your personalised treatment plan, medication response, and any additional procedures recommended by your specialist. All figures are in Indian Rupees (INR).",
+    "faqs": [
+      { "question": "What is the average cost of IVF in India?", "answer": "IVF costs in India typically range from ₹1,20,000 to ₹2,50,000 per cycle depending on the protocol, clinic, and add-ons like ICSI or PGT. At Bavishi Fertility Institute, we offer transparent pricing with no hidden charges." },
+      { "question": "Does the IVF cost include medications?", "answer": "Our base IVF cost covers the procedure, monitoring, and lab charges. Fertility medications (injections and hormones) are usually estimated separately as they vary based on your response to stimulation." },
+      { "question": "Is EMI available for IVF treatment?", "answer": "Yes. Bavishi Fertility Institute offers EMI options to make fertility treatment more accessible. Our counsellors can walk you through financing options during your consultation." },
+      { "question": "Are there packages that cover multiple IVF cycles?", "answer": "Yes — our Suraksha Kavach programme covers multiple IVF cycles with a single upfront cost, reducing financial risk if the first cycle is unsuccessful. Ask our team for current package details." }
+    ],
+    "seo": {
+      "metaTitle": "IVF Cost Calculator India 2026 — Estimate Your Treatment Cost | Bavishi",
+      "metaDescription": "Free IVF Cost Calculator for India. Get a transparent, personalised estimate of IVF treatment cost including medications and add-ons at Bavishi Fertility Institute.",
+      "ogTitle": "IVF Cost Calculator India — Estimate Your IVF Treatment Cost",
+      "ogDescription": "Transparent IVF cost estimates for India. Calculate your personalised IVF cost including medications and optional add-ons — by Bavishi Fertility Institute."
+    }
+  },
+  {
+    "slug": "ovulation",
+    "title": "Ovulation Calculator",
+    "subtitle": "Find your most fertile days of the month. Enter the first day of your last period and your average cycle length to calculate your ovulation window and the best days to try to conceive.",
+    "disclaimer": "This calculator provides estimated fertile window dates based on a typical cycle. Ovulation timing can vary due to stress, illness, hormonal conditions, and cycle irregularity. For personalised guidance, consult a fertility specialist.",
+    "faqs": [
+      { "question": "How do I know when I am ovulating?", "answer": "Common signs of ovulation include a slight rise in basal body temperature, clearer and stretchy cervical mucus (like raw egg white), mild pelvic pain (mittelschmerz), and increased libido. Ovulation predictor kits (OPKs) can also detect the LH surge that triggers ovulation." },
+      { "question": "How many days after my period do I ovulate?", "answer": "For a standard 28-day cycle, ovulation typically occurs around day 14 (two weeks after the first day of your period). For shorter or longer cycles, ovulation timing shifts accordingly — this calculator adjusts for your cycle length." },
+      { "question": "Can I get pregnant outside my fertile window?", "answer": "The chances of conception are highest during the fertile window (approximately 5 days before ovulation and the day of ovulation itself). However, sperm can survive for up to 5 days in the reproductive tract, so having intercourse before ovulation is also effective." },
+      { "question": "What if my cycle is irregular?", "answer": "Irregular cycles (varying by more than 7–9 days) make ovulation prediction harder. If you have irregular periods, consult a fertility specialist who can use ultrasound monitoring to track ovulation precisely." }
+    ],
+    "seo": {
+      "metaTitle": "Ovulation Calculator — Find Your Most Fertile Days | Bavishi Fertility",
+      "metaDescription": "Free Ovulation Calculator by Bavishi Fertility Institute. Find your ovulation date and most fertile days based on your cycle length to maximise your chances of conception.",
+      "ogTitle": "Ovulation Calculator — Find Your Most Fertile Days",
+      "ogDescription": "Calculate your ovulation date and fertile window instantly. Free tool by India's trusted fertility specialists — Bavishi Fertility Institute."
+    }
+  },
+  {
+    "slug": "natural-pregnancy",
+    "title": "Natural Pregnancy Calculator",
+    "subtitle": "Estimate your chances of conceiving naturally each month based on your age, lifestyle factors, and reproductive health. Use this as a starting point to understand where you stand before deciding on next steps.",
+    "disclaimer": "This calculator provides a statistical estimate only. Natural conception rates vary widely between individuals. If you have been trying to conceive for 12 months (or 6 months if over 35) without success, consult a fertility specialist.",
+    "faqs": [
+      { "question": "What is a normal monthly chance of conceiving naturally?", "answer": "For a healthy couple under 30, the chance of conception in any given month is approximately 20–25%. This decreases with age — to around 15% in the mid-30s and lower beyond 40." },
+      { "question": "How long should I try naturally before seeing a doctor?", "answer": "If you are under 35, try for 12 months before seeking specialist advice. If you are 35–39, try for 6 months. If you are 40 or older, consult a fertility specialist as soon as you decide to try." },
+      { "question": "Does male factor affect natural pregnancy chances?", "answer": "Yes — male factor infertility accounts for approximately 40–50% of all infertility cases. A semen analysis is one of the first tests recommended and gives a clear picture of sperm count, motility, and morphology." },
+      { "question": "Can lifestyle changes improve natural conception rates?", "answer": "Yes. Maintaining a healthy weight, stopping smoking, limiting alcohol, reducing stress, and taking folic acid can all positively influence fertility for both partners." }
+    ],
+    "seo": {
+      "metaTitle": "Natural Pregnancy Calculator — Estimate Your Conception Chances | Bavishi",
+      "metaDescription": "Free Natural Pregnancy Calculator by Bavishi Fertility Institute. Estimate your monthly chances of conceiving naturally based on age, lifestyle, and reproductive health.",
+      "ogTitle": "Natural Pregnancy Calculator — Estimate Your Chances of Conceiving",
+      "ogDescription": "How likely are you to conceive naturally each month? Get a personalised estimate based on your age and health — by Bavishi Fertility Institute."
+    }
+  },
+  {
+    "slug": "fertile-period",
+    "title": "Fertile Period Calculator",
+    "subtitle": "Calculate your fertile window — the days each month when you are most likely to conceive. Enter your last period date and average cycle length to get your personalised fertility calendar.",
+    "disclaimer": "Fertile period estimates are based on average cycle patterns. Individual cycles vary. This tool is for informational purposes only and is not a substitute for medical advice or contraception.",
+    "faqs": [
+      { "question": "What is the fertile window?", "answer": "The fertile window is the period during which conception is most likely — typically the 5 days before ovulation and the day of ovulation itself (6 days total). This is when intercourse is most likely to result in pregnancy." },
+      { "question": "How long does the fertile window last?", "answer": "The biological fertile window spans about 6 days per cycle. Sperm can survive in the female reproductive tract for up to 5 days, and an egg survives for 12–24 hours after ovulation. Timing intercourse within this window maximises your chances." },
+      { "question": "Can I use this calculator as contraception?", "answer": "No. The fertile period calculator is a tool to help with conception, not contraception. Cycle lengths can vary and ovulation can be unpredictable, making calendar-based methods unreliable for preventing pregnancy." },
+      { "question": "What if my cycle length changes each month?", "answer": "If your cycle varies by more than a week from month to month, standard calendar calculations become less reliable. In this case, ovulation predictor kits or ultrasound monitoring from a fertility specialist give more accurate results." }
+    ],
+    "seo": {
+      "metaTitle": "Fertile Period Calculator — Find Your Fertility Window | Bavishi Fertility",
+      "metaDescription": "Free Fertile Period Calculator by Bavishi Fertility Institute. Find the days you are most likely to conceive each month based on your cycle.",
+      "ogTitle": "Fertile Period Calculator — Find Your Best Days to Conceive",
+      "ogDescription": "Calculate your fertile window and best days to try for a baby. Free tool by Bavishi Fertility Institute, India's trusted fertility specialists."
+    }
+  },
+  {
+    "slug": "amh-level",
+    "title": "AMH Level Interpreter",
+    "subtitle": "Enter your Anti-Müllerian Hormone (AMH) test result to understand what it means for your ovarian reserve and fertility. Get a clear interpretation of your AMH level alongside guidance on next steps.",
+    "disclaimer": "AMH interpretation is for informational purposes only. AMH is one indicator of ovarian reserve among many and should be interpreted alongside other tests (AFC, FSH, clinical history) by a qualified fertility specialist. A low AMH does not necessarily mean you cannot conceive.",
+    "faqs": [
+      { "question": "What is AMH and why does it matter?", "answer": "AMH (Anti-Müllerian Hormone) is produced by follicles in the ovaries. It is the most reliable single blood test for estimating ovarian reserve — how many eggs you have remaining. It helps fertility specialists plan the right treatment protocol and medication doses for IVF." },
+      { "question": "What is a normal AMH level?", "answer": "Normal AMH levels for women of reproductive age typically range from 1.0 to 3.5 ng/mL, though this varies by age and laboratory. Levels below 1.0 ng/mL suggest diminished ovarian reserve; levels above 3.5 ng/mL may indicate PCOS." },
+      { "question": "Can I still get pregnant with a low AMH?", "answer": "Yes. AMH reflects egg quantity, not egg quality. Many women with low AMH conceive successfully with IVF using personalised stimulation protocols. A fertility specialist at Bavishi Fertility Institute can advise on the best approach for your specific results." },
+      { "question": "Does AMH level change over time?", "answer": "AMH naturally declines with age as ovarian reserve reduces. It can also be temporarily lowered by stress, certain medications, or recent surgery near the ovaries. It is worth retesting if a result seems unexpectedly low." }
+    ],
+    "seo": {
+      "metaTitle": "AMH Level Interpreter — Understand Your Ovarian Reserve | Bavishi Fertility",
+      "metaDescription": "Free AMH Level Interpreter by Bavishi Fertility Institute. Enter your AMH test result to understand what it means for your ovarian reserve and fertility options.",
+      "ogTitle": "AMH Level Interpreter — What Does Your AMH Result Mean?",
+      "ogDescription": "Understand your AMH (ovarian reserve) test result instantly. Free interpretation tool by Bavishi Fertility Institute, India's trusted IVF specialists."
+    }
+  },
+  {
+    "slug": "semen-analysis",
+    "title": "Semen Analysis Calculator",
+    "subtitle": "Enter the key values from your semen analysis report to see how they compare to WHO reference ranges and understand what your results mean for your fertility. Get clear, jargon-free explanations.",
+    "disclaimer": "This tool compares your results to WHO 2021 reference values and is for educational purposes only. A single semen analysis may not fully reflect fertility potential. Always discuss your results with a fertility or andrology specialist.",
+    "faqs": [
+      { "question": "What parameters are checked in a semen analysis?", "answer": "A standard semen analysis measures sperm count (total and concentration), motility (percentage of moving sperm and movement quality), morphology (percentage of normally shaped sperm), semen volume, and pH. Together these give a picture of male fertility potential." },
+      { "question": "What is a normal sperm count?", "answer": "According to WHO 2021 guidelines, a normal sperm concentration is ≥16 million sperm per mL, and a normal total sperm count is ≥39 million per ejaculate. Below these thresholds is called oligospermia and may affect natural fertility." },
+      { "question": "Can abnormal results be treated?", "answer": "Yes. Many cases of abnormal semen analysis are treatable. Depending on the issue, options include lifestyle changes, medication, surgical treatment (e.g., varicocele repair), or assisted reproduction techniques like IUI or ICSI. A fertility specialist can advise the most appropriate path." },
+      { "question": "Should I repeat the semen analysis if results are abnormal?", "answer": "Yes. Semen parameters can vary significantly between samples. If your first analysis is abnormal, a repeat test 2–3 months later (after a full sperm production cycle) is recommended before making treatment decisions." }
+    ],
+    "seo": {
+      "metaTitle": "Semen Analysis Calculator — Interpret Your Sperm Test Results | Bavishi",
+      "metaDescription": "Free Semen Analysis Calculator by Bavishi Fertility Institute. Enter your semen analysis results to compare with WHO standards and understand what they mean for your fertility.",
+      "ogTitle": "Semen Analysis Calculator — What Do Your Sperm Test Results Mean?",
+      "ogDescription": "Understand your semen analysis report instantly. Free tool comparing your results to WHO standards — by Bavishi Fertility Institute, India's male fertility experts."
+    }
+  },
+  {
+    "slug": "miscarriage-risk",
+    "title": "Risk of Repeat Miscarriage Calculator",
+    "subtitle": "If you have experienced one or more pregnancy losses, this calculator estimates your risk of a further miscarriage based on your age and history. Understanding your risk helps guide conversations with your specialist about next steps.",
+    "disclaimer": "This calculator provides a statistical risk estimate based on published research data. It does not account for all individual clinical factors. The risk of miscarriage is not a certainty — many people with elevated statistical risk go on to have successful pregnancies. Please consult a specialist for personalised medical advice.",
+    "faqs": [
+      { "question": "What counts as recurrent miscarriage?", "answer": "Recurrent miscarriage is typically defined as two or more consecutive pregnancy losses before 20 weeks of gestation. It affects approximately 1% of couples and warrants investigation to identify any underlying causes." },
+      { "question": "What causes repeat miscarriages?", "answer": "Common causes include chromosomal abnormalities in the embryo, uterine structural issues (e.g., septum or fibroids), blood clotting disorders (antiphospholipid syndrome), hormonal imbalances, and occasionally immunological factors. In about 50% of cases, no specific cause is found even after investigation." },
+      { "question": "Can PGT (Preimplantation Genetic Testing) help reduce miscarriage risk?", "answer": "Yes. For couples with recurrent miscarriage where embryo chromosomal abnormalities are suspected, PGT-A (testing embryos before transfer) can significantly reduce miscarriage rates by selecting chromosomally normal embryos for transfer." },
+      { "question": "Does age affect recurrent miscarriage risk?", "answer": "Yes significantly. The risk of miscarriage increases with maternal age, primarily because older eggs have a higher chance of chromosomal abnormalities. Women over 40 have a miscarriage rate of 50% or more per pregnancy, compared to approximately 10% for women under 30." }
+    ],
+    "seo": {
+      "metaTitle": "Repeat Miscarriage Risk Calculator — Understand Your Risk | Bavishi Fertility",
+      "metaDescription": "Free Repeat Miscarriage Risk Calculator by Bavishi Fertility Institute. Estimate your risk of a further pregnancy loss based on your age and miscarriage history.",
+      "ogTitle": "Repeat Miscarriage Risk Calculator — Know Your Risk, Plan Your Next Steps",
+      "ogDescription": "Estimate your risk of repeat miscarriage based on your history and age. Free tool by Bavishi Fertility Institute — with compassionate guidance on next steps."
+    }
+  }
+]

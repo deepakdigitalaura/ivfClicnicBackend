@@ -1,14 +1,14 @@
 import { NextResponse, type NextRequest } from "next/server";
-import { payloadClient } from "@/lib/payload";
+import nodemailer from "nodemailer";
+import { createInquiry } from "@/sanity/lib/admin";
 
 /* =====================================================================
  * Public lead intake  ( POST /inquiry ).
  * ---------------------------------------------------------------------
- * The homepage / contact `<InquiryForm>` posts here. We validate, then write
- * the lead through the Payload LOCAL API with `overrideAccess` so the public
- * never touches the REST create directly (the `inquiries` collection keeps
- * create staff-only). Mounted at /inquiry — NOT under /api/* — to avoid
- * colliding with Payload's /api catch-all (same reason as /preview).
+ * The homepage / contact `<InquiryForm>` posts here. We validate, then (a) email
+ * the clinic via SMTP and (b) store the lead in Sanity. Both are best-effort;
+ * the lead is confirmed to the visitor if EITHER path succeeds, so a transient
+ * backend issue never loses a lead or shows a false error.
  *
  * Spam: a hidden honeypot field (`company`) — real users leave it empty; bots
  * fill every field. A filled honeypot returns a success-looking response
@@ -21,6 +21,86 @@ const emailOk = (v: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
 /** Trim + cap an incoming string field (defends against oversized payloads). */
 const clean = (v: unknown, max = 2000): string =>
   (typeof v === "string" ? v : "").trim().slice(0, max);
+
+function buildEmailHtml(fields: {
+  name: string;
+  phone: string;
+  email: string;
+  treatment: string;
+  location: string;
+  message: string;
+  source: string;
+}) {
+  const row = (label: string, value: string) =>
+    value
+      ? `<tr><td style="padding:8px 12px;font-weight:600;white-space:nowrap;color:#555;border-bottom:1px solid #f0f0f0">${label}</td><td style="padding:8px 12px;border-bottom:1px solid #f0f0f0">${value}</td></tr>`
+      : "";
+
+  return `<!DOCTYPE html>
+<html>
+<head><meta charset="utf-8"/></head>
+<body style="margin:0;padding:0;background:#f5f5f5;font-family:Arial,sans-serif">
+  <table width="100%" cellpadding="0" cellspacing="0" style="background:#f5f5f5;padding:32px 0">
+    <tr><td align="center">
+      <table width="560" cellpadding="0" cellspacing="0" style="background:#fff;border-radius:8px;overflow:hidden;box-shadow:0 2px 8px rgba(0,0,0,.08)">
+        <tr><td style="background:#1a6b3f;padding:24px 32px">
+          <h1 style="margin:0;color:#fff;font-size:20px">New Inquiry — BFI IVF Clinic</h1>
+          <p style="margin:4px 0 0;color:rgba(255,255,255,.8);font-size:14px">Submitted via website contact form</p>
+        </td></tr>
+        <tr><td style="padding:24px 32px">
+          <table width="100%" cellpadding="0" cellspacing="0" style="font-size:15px;color:#333">
+            ${row("Name", fields.name)}
+            ${row("Phone", fields.phone)}
+            ${row("Email", fields.email)}
+            ${row("Treatment", fields.treatment)}
+            ${row("Preferred Centre", fields.location)}
+            ${row("Message", fields.message.replace(/\n/g, "<br/>"))}
+            ${row("Source page", fields.source)}
+          </table>
+        </td></tr>
+        <tr><td style="background:#f9f9f9;padding:16px 32px;font-size:13px;color:#888;border-top:1px solid #eee">
+          View all inquiries in the <a href="https://ivfclinic.com/admin-panel/inquiries" style="color:#1a6b3f">admin panel</a>.
+        </td></tr>
+      </table>
+    </td></tr>
+  </table>
+</body>
+</html>`;
+}
+
+async function sendNotificationEmail(fields: {
+  name: string;
+  phone: string;
+  email: string;
+  treatment: string;
+  location: string;
+  message: string;
+  source: string;
+}) {
+  const user = process.env.SMTP_USER;
+  const pass = process.env.SMTP_PASS;
+  if (!user || !pass) {
+    console.error("[inquiry] SMTP_USER/SMTP_PASS not set — email skipped");
+    return;
+  }
+
+  const transporter = nodemailer.createTransport({
+    host: process.env.SMTP_HOST || "smtp.gmail.com",
+    port: Number(process.env.SMTP_PORT) || 465,
+    secure: true,
+    auth: { user, pass },
+  });
+
+  const to = process.env.INQUIRY_TO_EMAIL || user;
+  const info = await transporter.sendMail({
+    from: `BFI IVF Clinic <${user}>`,
+    to,
+    subject: `New Inquiry from ${fields.name} — BFI IVF Clinic`,
+    html: buildEmailHtml(fields),
+  });
+
+  console.log("[inquiry] email sent, id:", info.messageId);
+}
 
 export async function POST(req: NextRequest) {
   let body: Record<string, unknown>;
@@ -48,27 +128,39 @@ export async function POST(req: NextRequest) {
   if (email && !emailOk(email))
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 422 });
 
+  // Store the lead in Sanity (best-effort).
+  let stored = false;
   try {
-    const payload = await payloadClient();
-    await payload.create({
-      collection: "inquiries",
-      data: {
-        name,
-        phone,
-        email: email || undefined,
-        treatment: treatment || undefined,
-        location: location || undefined,
-        message: message || undefined,
-        source: source || undefined,
-        status: "new",
-      },
-      overrideAccess: true,
+    await createInquiry({
+      name,
+      phone,
+      email: email || undefined,
+      treatment: treatment || undefined,
+      location: location || undefined,
+      message: message || undefined,
+      source: source || undefined,
+      status: "new",
+      createdAt: new Date().toISOString(),
     });
-    return NextResponse.json({ ok: true });
-  } catch {
-    return NextResponse.json(
-      { error: "Something went wrong. Please call us on +91 97126 22288." },
-      { status: 500 },
-    );
+    stored = true;
+  } catch (err) {
+    console.error("[inquiry] Sanity store failed:", err);
   }
+
+  // Email the clinic (best-effort). Independent of storage so a lead is never lost.
+  let emailed = false;
+  try {
+    await sendNotificationEmail({ name, phone, email, treatment, location, message, source });
+    emailed = true;
+  } catch (err) {
+    console.error("[inquiry] email notification failed:", err);
+  }
+
+  // Confirm to the visitor if either path captured the lead.
+  if (stored || emailed) return NextResponse.json({ ok: true });
+
+  return NextResponse.json(
+    { error: "Something went wrong. Please call us on +91 97126 22288." },
+    { status: 500 },
+  );
 }

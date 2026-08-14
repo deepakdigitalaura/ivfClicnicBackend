@@ -42,8 +42,17 @@ export type Doctor = {
   cities: string[];
   /** Location slugs (city or area) for internal links + areaServed. */
   locations: string[];
+  /** This doctor's own consultation-hours override per centre slug, shown
+   *  alongside (not instead of) the centre's general institute hours — e.g.
+   *  "Mon/Wed/Fri · 9:30 AM–12:30 PM". Centres not listed here show only the
+   *  institute hours. */
+  consultationTimings?: Record<string, string>;
   /** Treatment slugs the doctor practises — drives Doctor↔Treatment links. */
   treatments: string[];
+  /** Maternity/women's-health service KEYS (from WOMENS_HEALTH_SERVICES) the
+   *  doctor performs — obstetricians/gynaecologists list these ahead of
+   *  `treatments` on the "Treatments X performs" grid. */
+  services?: string[];
   shortBio: string;
   bio: string[];
   knowsAbout: string[];
@@ -91,17 +100,17 @@ export type Doctor = {
  * are listed (so each card links somewhere real). */
 export const ALL_TREATMENT_SLUGS: string[] = [
   // Core ART
-  "ivf", "icsi", "iui", "ivf-evaluation", "ivf-failure",
+  "ivf", "icsi", "iui", "ivf-failure",
   // Advanced lab / embryology
-  "picsi", "imsi", "macs", "spindle-view-icsi", "blastocyst-transfer", "laser-hatching", "pgt", "era-test",
+  "picsi", "imsi", "macs", "spindle-view-icsi", "blastocyst-transfer", "laser-hatching",
   // Male infertility
-  "azoospermia", "oligospermia", "asthenospermia", "surgical-sperm-retrieval", "varicocele", "erectile-dysfunction",
+  "azoospermia", "oligospermia", "asthenospermia", "surgical-sperm-retrieval", "erectile-dysfunction",
   // Female infertility
   "pcos", "endometriosis", "fibroids", "ovarian-reserve", "ovarian-rejuvenation", "conceive-naturally", "prp-infertility",
   // Fertility preservation
-  "egg-freezing", "sperm-freezing", "embryo-freezing", "cryopreservation",
+  "cryopreservation", "egg-freezing",
   // Third-party reproduction
-  "egg-donation", "sperm-donation", "embryo-donation", "surrogacy",
+  "egg-donation", "sperm-donation", "surrogacy", "pgt",
 ];
 
 /* Factory for city fertility-team members whose full credentials are still
@@ -122,6 +131,8 @@ function cityDoctor(opts: {
   experienceYears?: number;
   /** Centre slugs the doctor consults at (powers the contact cards). */
   locations?: string[];
+  /** Per-centre consultation-hours override, keyed by centre slug. */
+  consultationTimings?: Record<string, string>;
   medicalSpecialty?: string[];
   shortBio?: string;
   bio?: string[];
@@ -132,6 +143,8 @@ function cityDoctor(opts: {
   training?: string[];
   publications?: string[];
   treatments?: string[];
+  /** Maternity/women's-health service KEYS the doctor performs. */
+  services?: string[];
   languages?: string[];
   verified?: boolean;
 }): Doctor {
@@ -147,12 +160,14 @@ function cityDoctor(opts: {
     experienceYears: opts.experienceYears,
     cities: [opts.city],
     locations: opts.locations ?? [opts.citySlug],
+    consultationTimings: opts.consultationTimings,
     treatments: opts.treatments ?? ALL_TREATMENT_SLUGS,
+    services: opts.services,
     shortBio:
       opts.shortBio ??
       `${opts.name} is part of the Bavishi Fertility Institute fertility team in ${opts.city}.`,
     bio: opts.bio ?? [
-      `${opts.name} is a fertility specialist with Bavishi Fertility Institute in ${opts.city}, supporting couples through evaluation and assisted-reproduction care backed by the institute's four-decade expertise.`,
+      `${opts.name} is a fertility specialist with Bavishi Fertility Institute in ${opts.city}, supporting couples through evaluation and assisted-reproduction care backed by the institute's 25-year expertise.`,
     ],
     knowsAbout: opts.knowsAbout ?? ["In Vitro Fertilization", "Fertility Treatment"],
     alumniOf: opts.alumniOf ?? [],
@@ -171,29 +186,34 @@ export const DOCTORS: Doctor[] = [
     slug: "himanshu-bavishi",
     name: "Dr. Himanshu Bavishi",
     credentials: "MBBS, MD (Obstetrics & Gynaecology)",
-    specialty: "Reproductive Medicine & IVF",
-    medicalSpecialty: ["ReproductiveMedicine", "Fertility"],
+    specialty: "Infertility, IVF & Genetics",
+    medicalSpecialty: ["ReproductiveMedicine", "Fertility", "MedicalGenetics"],
     role: "Founder & Chief IVF Specialist",
     image: "/assets/doctors/himanshu.webp",
-    experienceLabel: "35+ yrs",
-    experienceYears: 35,
+    experienceLabel: "43+ yrs",
+    experienceYears: 43,
     // Founder & visiting senior IVF specialist — consults across every BFI city.
     cities: ["Ahmedabad", "Mumbai", "Vadodara", "Surat", "Bhuj", "Bhavnagar", "Anand", "Varanasi"],
     locations: ["paldi", "nikol", "mumbai", "vadodara", "surat", "bhuj", "bhavnagar", "anand", "varanasi"],
+    consultationTimings: {
+      paldi: "Daily · 12:00 PM–5:00 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
-      "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with more than three decades guiding couples to parenthood.",
+      "Founder of Bavishi Fertility Institute and a pioneer of IVF in India, with 43 years guiding couples to parenthood — including India's first live birth from frozen eggs and the country's first international-patient surrogacy case.",
     bio: [
-      "Dr. Himanshu Bavishi founded Bavishi Fertility Institute in 1984 and has since helped pioneer assisted reproduction in India. He has led the institute's growth into a national network credited with 30,000+ pregnancies.",
-      "A pioneer and leader in infertility and IVF, he is widely respected for the reputation of a doctor with a 'golden hand' — bringing positive results in the most difficult cases — and treats couples from across India and overseas with excellent outcomes.",
-      "His clinical focus spans customised ovarian-stimulation protocols, ICSI, and safe-stimulation strategies designed to avoid severe OHSS. He is a frequent speaker, invited faculty at national and regional conferences, and an educator on responsible, transparent fertility care.",
+      "Dr. Himanshu Bavishi founded Bavishi Fertility Institute in 1998, having set out in the 1990s — when India lacked world-class fertility care — to bring internationally benchmarked IVF, ICSI and related technologies to Indian couples and put India on the map as a preferred fertility-treatment destination. Over 43 years in medicine, he has led the institute's growth into a national network credited with 30,000+ pregnancies.",
+      "He led BFI's team to India's first live birth using frozen (vitrified) eggs and pioneered surrogacy in India, including the country's first international-patient surrogacy case — the institute remains a leader in ethical surrogacy treatment. He also pioneered HLA-matched 'saviour sibling' IVF for families with a Thalassemia-affected child and has helped prevent rare genetic disorders in high-risk couples through advanced genetic screening.",
+      "His clinical focus spans customised, minimum-stimulation protocols with embryo accumulation and genetic testing for poor-prognosis patients, male-factor infertility, and fertility preservation — egg, sperm, testicular tissue and embryo freezing. He pioneered the institute's 'Zero Error Embryo Transfer (ZEET)' technique and hysteroscopic surgery using scissors instead of electrical energy sources to minimise tissue damage. 'When success is a chance, we leave nothing to chance' is the philosophy behind BFI's Simple, Safe, Smart and Successful approach to treatment.",
+      "He is invited faculty at international, national, state and local conferences and CMEs, has delivered keynote orations and demonstrated live surgeries at surgical workshops, and is a FOGSI-recognised trainer who has pioneered training programmes for consultants in infertility and IVF.",
     ],
     knowsAbout: [
       "In Vitro Fertilization",
-      "Intracytoplasmic Sperm Injection",
-      "Ovarian Stimulation Protocols",
+      "Reproductive Genetics & PGT",
+      "HLA-Matched Saviour Sibling IVF",
       "Male Infertility",
-      "Fertility Preservation",
+      "Fertility Preservation & Egg Freezing",
+      "Zero Error Embryo Transfer (ZEET)",
     ],
     alumniOf: [
       "MBBS — B.J. Medical College, Ahmedabad (1983)",
@@ -203,13 +223,36 @@ export const DOCTORS: Doctor[] = [
       "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
       "Indian Society for Assisted Reproduction (ISAR)",
       "Indian Fertility Society (IFS)",
+      "Indian Medical Association (IMA) — Former President, Bavla Branch",
+      "American Medical Association (AMA)",
+      "Society of Obstetricians & Gynaecologists of Gujarat (SOGOG)",
       "Indian Society of Third Party Assisted Reproduction (INSTAR) — Founder President",
+      "Organizing Secretary — National Conference of the Indian Association of Gynaecological Endoscopists (IAGE), 2007",
     ],
     awards: [
       "Excellence in the Field of Medicine — Indian Medical Association, Gujarat (2004); the only infertility specialist in Gujarat to receive it",
       "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat",
+      "Organizing Chairperson / National Coordinator — multiple national, state and local IVF conferences and CMEs",
     ],
-    languages: ["English", "Hindi", "Gujarati"],
+    training: [
+      "Advanced training in fertility & menopause — Diamond Institute, New Jersey, USA",
+    ],
+    publications: [
+      "Co-author — 'A Practical Guide to Intrauterine Insemination' (IUI handbook for consultants; 1st ed. 2001, 2nd ed. 2007, 3rd ed. 2010)",
+      "Author — 'Devna Didhela, Mangine Lidhela...' (Gujarati, 2011)",
+      "Author — 'Vighn Daud' (Gujarati & Hindi)",
+      "Co-author — 'Your Miracle in Making' / 'આપનું અદભૂત સર્જન' / 'आपका अद्भुत सृजन' — pregnancy-care guide (English, Gujarati, Hindi)",
+      "Author — 'PCO' patient booklet (Gujarati & Hindi)",
+      "Author — 'Santan Prapti (Samanya Samaj)' patient booklet (Hindi)",
+      "Author — 'IVF Mahiti Pushtika' patient booklet (Gujarati)",
+      "Author — 'Matrutva Zankhna ni Erane' patient booklet (Gujarati)",
+      "Study comparing two recombinant FSH preparations (Foligraf vs Gonal-f) in controlled ovarian stimulation for ART — International Journal of Infertility & Fetal Medicine",
+      "Clinical study comparing human menopausal gonadotropin preparations in IVF — published via NIH / PubMed",
+      "Correlation between mature eggs retrieved and IVF live-birth rate — International Journal of Reproduction, Contraception, Obstetrics & Gynaecology",
+      "Laparoscopic cerclage in cervical incompetence — Journal of Clinical Gynaecology & Obstetrics",
+      "Comparative analysis of morula vs blastocyst transfer outcomes — The Onco-Fertility Journal",
+    ],
+    languages: ["English", "Hindi", "Gujarati", "Marathi"],
     sameAs: [],
     verified: true,
     visitsAllCentres: true,
@@ -218,35 +261,68 @@ export const DOCTORS: Doctor[] = [
     slug: "falguni-bavishi",
     name: "Dr. Falguni Bavishi",
     credentials: "MBBS, MD (Obstetrics & Gynaecology)",
-    specialty: "Infertility & Gynaecology",
-    medicalSpecialty: ["Gynecology", "ReproductiveMedicine"],
+    specialty: "Infertility, IVF & Genetics",
+    medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "MedicalGenetics"],
     role: "Co-founder & Senior Fertility Specialist",
     image: "/assets/doctors/falguni.webp",
-    experienceLabel: "34+ yrs",
-    experienceYears: 34,
+    experienceLabel: "42+ yrs",
+    experienceYears: 42,
     cities: ["Ahmedabad"],
-    locations: ["paldi", "sindhu-bhavan-road"],
+    locations: ["paldi", "sindhu-bhavan-road", "nikol"],
+    consultationTimings: {
+      "sindhu-bhavan-road": "Mon–Fri · 12:00 PM–1:30 PM",
+      paldi: "Mon–Fri · 2:00 PM–5:00 PM",
+      nikol: "Every Wednesday · 12:00 PM–1:30 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
-      "Co-founder of Bavishi Fertility Institute, specialising in female infertility, reproductive gynaecology and compassionate patient counselling.",
+      "Co-founder of Bavishi Fertility Institute, with 42 years in reproductive gynaecology, infertility and genetics — known for mastering complex genetic cases, including HLA-matched saviour-sibling IVF for Thalassemia-affected families.",
     bio: [
-      "Dr. Falguni Bavishi co-founded Bavishi Fertility Institute and has over three decades of experience in reproductive gynaecology and female infertility.",
-      "She is known for thorough diagnostic evaluation, individualised treatment planning and the warm, honest counselling that defines the institute's approach.",
+      "Dr. Falguni Bavishi co-founded Bavishi Fertility Institute and has over 42 years of experience in reproductive gynaecology, infertility and genetics. Creating lives from microscopic gametes — and using technology and science to help nature's miracles along — has always fascinated her; the precise, delicate handling of tiny lives in the IVF lab is a source of deep professional satisfaction.",
+      "She and the BFI team are known for mastering complex genetic cases: couples with a previous Thalassemia-affected child have gone on to have their own disease-free child through HLA-matched 'saviour sibling' IVF, and the team has helped prevent rare genetic disorders — including trichosis, polycystic kidney disease and metabolic disorders — in high-risk couples through advanced genetic screening.",
+      "Her clinical focus includes minimum-stimulation protocols with embryo accumulation and genetic testing for poor-prognosis patients, fertility preservation — egg, sperm, testicular tissue, ovary and embryo freezing — and the institute's 'Zero Error Embryo Transfer (ZEET)' technique. A hardcore IVF-lab embryology expert, she has treated the most difficult sperm, eggs, embryos and blastocysts, and has also pioneered hysteroscopic surgery using scissors instead of electrical energy sources to minimise tissue damage, along with ICSI and embryo biopsy. 'Technology and trust are the two fundamentals on which we help our patients achieve success,' she says — 'the IVF lab is the heart and soul of the IVF clinic.'",
+      "She is a FOGSI-recognised trainer who has pioneered training programmes for consultants across infertility and IVF, and is invited faculty at international, national, state and local conferences, workshops and CMEs.",
     ],
     knowsAbout: [
-      "Female Infertility",
       "In Vitro Fertilization",
-      "Endometriosis",
-      "Reproductive Gynaecology",
-      "Fertility Preservation",
+      "Reproductive Genetics & PGT",
+      "HLA-Matched Saviour Sibling IVF",
+      "Fertility Preservation & Egg Freezing",
+      "Zero Error Embryo Transfer (ZEET)",
+      "Advanced IVF Lab Techniques",
     ],
-    alumniOf: ["MBBS, MD — Obstetrics & Gynaecology"],
+    alumniOf: [
+      "MBBS — B.J. Medical College, Ahmedabad (1984)",
+      "MD, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (1987)",
+    ],
     memberOf: [
       "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
       "Indian Society for Assisted Reproduction (ISAR)",
+      "Indian Fertility Society (IFS)",
+      "Indian Medical Association (IMA)",
+      "American Medical Association (AMA)",
+      "Society of Obstetricians & Gynaecologists of Gujarat (SOGOG)",
+      "Indian Society of Third Party Assisted Reproduction (INSTAR)",
     ],
     awards: [
+      "Excellence in the Field of Medicine — Indian Medical Association",
       "'Shresth' Award in Infertility & IVF — Chief Minister of Gujarat",
+    ],
+    training: [
+      "Advanced training in fertility & menopause — Diamond Institute, New Jersey, USA",
+    ],
+    publications: [
+      "Co-author — 'A Practical Guide to Intrauterine Insemination' (IUI handbook for consultants; 1st ed. 2001, 2nd ed. 2007, 3rd ed. 2010)",
+      "Co-author — 'Devna Didhela, Mangine Lidhela...' (Gujarati, 2011)",
+      "Co-author — 'Vighn Daud' (Gujarati & Hindi)",
+      "Co-author — 'Your Miracle in Making' / 'આપનું અદભૂત સર્જન' / 'आपका अद्भुत सृजन' — pregnancy-care guide (English, Gujarati, Hindi)",
+      "Author — 'PCO' patient booklet (Gujarati & Hindi)",
+      "Author — 'Santan Prapti (Samanya Samaj)' patient booklet (Hindi)",
+      "Author — 'IVF Mahiti Pushtika' patient booklet (Gujarati)",
+      "Author — 'Matrutva Zankhna ni Erane' patient booklet (Gujarati)",
+      "Correlation between mature eggs retrieved and IVF live-birth rate — International Journal of Reproduction, Contraception, Obstetrics & Gynaecology",
+      "Laparoscopic cerclage in cervical incompetence — Journal of Clinical Gynaecology & Obstetrics",
+      "Comparative analysis of morula vs blastocyst transfer outcomes — The Onco-Fertility Journal",
     ],
     languages: ["English", "Hindi", "Gujarati"],
     sameAs: [],
@@ -264,6 +340,10 @@ export const DOCTORS: Doctor[] = [
     experienceYears: 13,
     cities: ["Ahmedabad"],
     locations: ["paldi", "sindhu-bhavan-road"],
+    consultationTimings: {
+      paldi: "Mon–Sat · 10:00 AM–4:00 PM",
+      "sindhu-bhavan-road": "Mon–Sat · 4:00 PM–7:00 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
       "Co-director of Bavishi Fertility Institute and IVF specialist focused on male-factor infertility, advanced sperm retrieval and repeated-IVF-failure cases.",
@@ -297,7 +377,8 @@ export const DOCTORS: Doctor[] = [
       "Advanced reproductive techniques — HART Institute, Japan",
     ],
     publications: [
-      "Author — 'Your Miracle in Making: A Couple's Guide to Pregnancy'",
+      "Author — 'Aapnu Adbhut Sarjan' (Gujarati, 2017)",
+      "Author — 'Your Miracle in Making: A Couple's Guide to Pregnancy' (English, 2017)",
     ],
     languages: ["English", "Hindi", "Gujarati"],
     sameAs: [],
@@ -307,40 +388,45 @@ export const DOCTORS: Doctor[] = [
     slug: "janki-bavishi",
     name: "Dr. Janki Bavishi",
     credentials: "MBBS, MS (Obstetrics & Gynaecology)",
-    specialty: "Reproductive Surgery & IVF",
+    specialty: "Obstetrics & Gynaecology",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine"],
-    role: "Co-director & Reproductive Surgeon",
+    role: "Co-director & Obstetrician-Gynaecologist",
     image: "/assets/doctors/janki.webp",
-    experienceLabel: "12+ yrs",
-    experienceYears: 12,
+    experienceLabel: "13+ yrs",
+    experienceYears: 13,
     cities: ["Ahmedabad"],
     locations: ["paldi"],
+    consultationTimings: {
+      paldi: "Mon–Sat · 10:00 AM–5:00 PM",
+    },
     treatments: ALL_TREATMENT_SLUGS,
     shortBio:
-      "Co-director of Bavishi Fertility Institute and reproductive surgeon specialising in hysteroscopy, laparoscopy and fertility-enhancing surgery.",
+      "Co-director of Bavishi Fertility Institute, focused on comprehensive fertility evaluation, individualised stimulation protocols and recurrent-IVF-failure management.",
     bio: [
-      "Dr. Janki Bavishi is a co-director of the Bavishi Fertility Institute chain and a reproductive surgeon experienced in minimally invasive hysteroscopic and laparoscopic procedures that improve fertility outcomes. She has been part of 10,000+ infertility procedures and is known for thorough counselling and accurate results.",
-      "She trained further at the Diamond Institute (New Jersey, USA) and the HART Institute (Japan), and co-authored the patient guide 'Your Miracle in Making'. Her work supports the IVF programme by optimising the uterine and pelvic environment before treatment.",
+      "Dr. Janki Bavishi is a co-director of the Bavishi Fertility Institute chain and an obstetrician-gynaecologist with 13 years of experience in reproductive health and fertility care, consulting at the Ahmedabad (Paldi) centre.",
+      "Her clinical focus spans comprehensive fertility evaluation of both partners, individualised ovarian-stimulation protocols and the management of recurrent IVF failure, alongside patient education and counselling throughout the parenthood journey. She believes fertility and pregnancy care are profound emotional milestones as much as clinical processes, and combines evidence-based reproductive medicine with empathetic, individualised support at every step.",
     ],
     knowsAbout: [
-      "Reproductive Surgery",
-      "Hysteroscopy",
-      "Laparoscopy",
-      "Endometriosis",
+      "Fertility Evaluation",
+      "Ovarian Stimulation Protocols",
+      "Recurrent IVF Failure",
       "Female Infertility",
+      "Patient Counselling",
     ],
-    alumniOf: ["MBBS, MS — Obstetrics & Gynaecology"],
-    memberOf: ["Federation of Obstetric and Gynaecological Societies of India (FOGSI)"],
+    alumniOf: [
+      "MBBS — B.J. Medical College, Ahmedabad (2010)",
+      "MS, Obstetrics & Gynaecology — B.J. Medical College, Ahmedabad (2013)",
+    ],
+    memberOf: [
+      "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+      "Indian Society for Assisted Reproduction (ISAR)",
+      "Indian Fertility Society (IFS)",
+      "Indian College of Obstetricians and Gynaecologists (ICOG)",
+    ],
     awards: [
-      "Gujarat Gaurav Icon — Midday Group",
-      "'Nari Tu Narayani' Award for leading gynaecologist — Bulletin India Group",
-    ],
-    training: [
-      "Advanced ART training — Diamond Institute, New Jersey, USA",
-      "Advanced reproductive techniques — HART Institute, Japan",
-    ],
-    publications: [
-      "Co-author — 'Your Miracle in Making: A Couple's Guide to Pregnancy'",
+      "Gujarat Gaurav Icon Award — Midday Group (2018)",
+      "Women Empowerment Award — Bulletin India Group (2022)",
+      "Excellence in IVF Hospital Chain — Times Healthcare Leaders (2025)",
     ],
     languages: ["English", "Hindi", "Gujarati"],
     sameAs: [],
@@ -355,36 +441,61 @@ export const DOCTORS: Doctor[] = [
    * no reviewer badge, but their full profile still renders). */
   // Ahmedabad
   cityDoctor({
-    slug: "binal-shah", name: "Dr. Binal Shah", image: "/assets/doctors/binal-shah.png",
-    city: "Ahmedabad", citySlug: "ahmedabad", locations: ["paldi"],
-    credentials: "MBBS, DGO", experienceLabel: "25+ yrs", experienceYears: 25,
+    slug: "binal-shah", name: "Dr. Binal Shah", image: "/assets/doctors/binal-shah.webp",
+    city: "Ahmedabad", citySlug: "ahmedabad", locations: ["paldi", "sindhu-bhavan-road"],
+    consultationTimings: {
+      paldi: "Mon, Tue, Thu, Fri, Sat · 10:00 AM–5:30 PM · Wed · 10:00 AM–3:00 PM",
+      "sindhu-bhavan-road": "Wed · 3:30 PM–5:30 PM",
+    },
+    credentials: "MBBS, DGO", experienceLabel: "30+ yrs", experienceYears: 30,
     specialty: "Obstetrics, Gynaecology & IVF",
     role: "IVF Specialist · Chief Quality Control & NABH Nodal Officer",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
     shortBio: "Experienced obstetrician and IVF specialist managing normal and IVF pregnancies, and Chief Quality Control & NABH Nodal Officer at Bavishi Fertility Institute.",
     bio: [
-      "Dr. Binal Shah is an experienced obstetrician and IVF specialist with over two decades of practice in managing normal and IVF pregnancies, including complex cases such as twin pregnancies and high-risk deliveries.",
+      "Dr. Binal Shah is an experienced obstetrician and IVF specialist with over three decades of practice in managing normal and IVF pregnancies, including complex cases such as twin pregnancies and high-risk deliveries.",
       "She serves as the Chief Quality Control Officer and NABH Nodal Officer at Bavishi Fertility Institute, helping uphold the institute's clinical quality and accreditation standards.",
     ],
-    knowsAbout: ["In Vitro Fertilization", "High-Risk Pregnancy", "Twin Pregnancy", "Female Infertility"],
+    knowsAbout: ["High-Risk Pregnancy Care", "Twin Pregnancy Care", "In Vitro Fertilization", "Female Infertility"],
+    services: ["high-risk-pregnancy-care", "twin-pregnancy-care", "normal-delivery", "painless-delivery", "fetal-medicine", "3d-4d-sonography"],
   }),
   cityDoctor({
-    slug: "jaydeep-patel", name: "Dr. Jaydeep Patel", image: "/assets/doctors/jaydeep-patel.png",
+    slug: "jaydeep-patel", name: "Dr. Jaydeep Patel", image: "/assets/doctors/jaydeep-patel.webp",
     city: "Ahmedabad", citySlug: "ahmedabad", locations: ["nikol"],
-    experienceLabel: "8+ yrs", experienceYears: 8,
+    credentials: "MBBS, DGO",
+    experienceLabel: "10+ yrs", experienceYears: 10,
     specialty: "Obstetrics & IVF", role: "IVF Specialist",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
-    shortBio: "Obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, experienced in infertility management and normal & IVF pregnancy care.",
+    shortBio: "IVF specialist at Bavishi Fertility Institute Nikol, Ahmedabad, with 10+ years of experience in PCOS infertility, male factor, poor endometrium and high-risk pregnancy management.",
     bio: [
-      "Dr. Jaydeep Patel is an experienced obstetrician and IVF specialist at the Bavishi Fertility Institute Nikol centre, with vast experience in infertility management and normal & IVF pregnancy care and delivery.",
-      "He has treated thousands of patients successfully, including those with unexplained infertility and high-risk pregnancies.",
+      "Dr. Jaydeep Patel is an IVF specialist at the Bavishi Fertility Institute Nikol centre in Ahmedabad, with over ten years of experience in infertility management and high-risk pregnancy care.",
+      "He focuses on couples with PCOS, male factor infertility, poor endometrium, and bad obstetric history — including those with multiple prior IVF failures. His treatment philosophy: \"Self Egg, Self Sperm, Own Baby.\"",
     ],
-    knowsAbout: ["In Vitro Fertilization", "High-Risk Pregnancy", "Female Infertility"],
+    knowsAbout: [
+      "In Vitro Fertilization", "PCOS", "Male Factor Infertility",
+      "High-Risk Pregnancy", "Poor Endometrium", "Bad Obstetric History",
+    ],
+    alumniOf: [
+      "MBBS — B.J. Medical College, Ahmedabad (2013)",
+      "DGO — The College of Physicians & Surgeons of Mumbai (2018)",
+    ],
+    languages: ["Hindi", "English", "Gujarati"],
+    training: [
+      "Invited Faculty — SOGOG Conference (2022)",
+      "Invited Faculty — JIC Conference (2023)",
+      "Speaker — Ahmedabad Women Doctor's Federation CME (2025)",
+      "Speaker — New Vastral General Practitioners CME (2025)",
+    ],
+    verified: true,
   }),
   // Mumbai
   cityDoctor({
     slug: "suman-singh", name: "Dr. Suman Singh", image: "/assets/doctors/Dr.-Suman-Singh.webp",
     city: "Mumbai", citySlug: "mumbai", locations: ["thane", "ghatkopar"],
+    consultationTimings: {
+      thane: "Mon–Sat · 10:00 AM–1:00 PM",
+      ghatkopar: "Mon–Sat · 2:00 PM–5:00 PM",
+    },
     credentials: "MBBS, DGO", experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Fertility & IVF", role: "IVF Specialist",
     shortBio: "Fertility specialist with over 20 years of experience in Mumbai and abroad, helping couples conceive naturally, through planned relationships and through IVF.",
@@ -397,6 +508,9 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "nilesh-jain", name: "Dr. Nilesh Jain", image: "/assets/doctors/Dr.-Nilesh-Jain-221x300.webp",
     city: "Mumbai", citySlug: "mumbai", locations: ["ghatkopar", "vashi"],
+    consultationTimings: {
+      ghatkopar: "Mon, Wed, Fri · 9:30 AM–5:00 PM · Tue, Thu, Sat · 9:30 AM–2:30 PM",
+    },
     credentials: "MBBS, DGO, DNB (Obstetrics & Gynaecology)", experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Infertility & IVF", role: "Fertility Consultant",
     shortBio: "Fertility consultant with more than 20 years of experience in infertility treatment, consulting at the Ghatkopar and Vashi centres in Mumbai.",
@@ -407,21 +521,44 @@ export const DOCTORS: Doctor[] = [
     knowsAbout: ["In Vitro Fertilization", "IUI", "Male Infertility", "Female Infertility"],
   }),
   cityDoctor({
-    slug: "priyanka-sinha", name: "Dr. Priyanka Sinha", image: "/assets/doctors/Dr.-Priyanka-Sinha-221x300.webp",
+    slug: "priyanka-sinha", name: "Dr. Priyanka Sinha", image: "/assets/doctors/priyanka-sinha.webp",
     city: "Mumbai", citySlug: "mumbai", locations: ["borivali", "vile-parle"],
-    credentials: "MBBS, MD, Fellowship in Reproductive Medicine (USA)", experienceLabel: "15+ yrs", experienceYears: 15,
-    specialty: "Reproductive Medicine & IVF", role: "IVF Specialist",
+    credentials: "MBBS, MD, Fellowship in Reproductive Medicine (USA)", experienceLabel: "20+ yrs", experienceYears: 20,
+    specialty: "Reproductive Medicine & IVF", role: "Senior IVF Consultant",
     medicalSpecialty: ["ReproductiveMedicine", "Gynecology", "Fertility"],
-    shortBio: "Reproductive medicine physician with over 15 years of experience, offering IVF, ICSI, PGT and fertility preservation at the Borivali and Vile Parle centres.",
+    shortBio: "Senior IVF Consultant with 20 years of experience and US fellowship training, consulting at the Borivali and Vile Parle centres in Mumbai, with special focus on low AMH, recurrent IVF failure and PCOS.",
     bio: [
-      "Dr. Priyanka Sinha is a reproductive medicine physician with over 15 years of clinical practice, holding an MD and a Fellowship in Reproductive Medicine from the USA.",
-      "She provides comprehensive infertility care including IVF, ICSI, PGT, egg and embryo freezing, and the management of both male and female infertility at the institute's Borivali and Vile Parle centres.",
+      "Dr. Priyanka Sinha is a Senior IVF Consultant with 20 years of experience in reproductive medicine. She consults Monday to Saturday at the Borivali (10 AM–1 PM) and Vile Parle (2 PM–5 PM) centres of Bavishi Fertility Institute in Mumbai, and at the Ghatkopar centre by appointment. Video consultations are also available.",
+      "She completed her MBBS at Patna Medical College (2004) and her MD in Obstetrics & Gynaecology at RIMS, Ranchi (2010), followed by a Fellowship in Reproductive Medicine and Infertility at the West Texas Fertility Center, Texas, USA, and ART & andrology training at the Cleveland Clinic, USA. She is a member of FOGSI, ISAR and the American Society for Reproductive Medicine (ASRM).",
+      "Her clinical focus spans customised ovarian-stimulation protocols, recurrent IVF failure, poor ovarian reserve and low AMH, PCOS and ovulation disorders, fertility preservation (egg freezing) and male-factor infertility — including complex cases such as recurrent implantation failure, recurrent miscarriage, endometriosis and advanced maternal age. She is known for personalised, evidence-based treatment with strong patient counselling and continuity of care.",
+      "\"I chose fertility medicine because it combines advanced science with the opportunity to help people achieve their dream of parenthood. Every patient is unique and deserves an individualised treatment plan, honest communication and compassionate care.\" — Dr. Priyanka Sinha",
     ],
-    knowsAbout: ["In Vitro Fertilization", "Intracytoplasmic Sperm Injection", "Fertility Preservation", "Male Infertility", "Female Infertility"],
+    knowsAbout: [
+      "Customised Ovarian Stimulation Protocols",
+      "Recurrent IVF Failure",
+      "Poor Ovarian Reserve & Low AMH",
+      "PCOS & Ovulation Disorders",
+      "Fertility Preservation (Egg Freezing)",
+      "Male Factor Infertility",
+      "Recurrent Pregnancy Loss",
+      "Endometriosis",
+    ],
+    alumniOf: [
+      "MBBS — Patna Medical College, Patna (2004)",
+      "MD, Obstetrics & Gynaecology — Rajendra Institute of Medical Sciences (RIMS), Ranchi (2010)",
+      "Fellowship in Reproductive Medicine and Infertility — West Texas Fertility Center, Texas, USA",
+    ],
     memberOf: [
       "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
       "Indian Society for Assisted Reproduction (ISAR)",
+      "American Society for Reproductive Medicine (ASRM)",
     ],
+    training: [
+      "Fellowship in Reproductive Medicine and Infertility — West Texas Fertility Center, Texas, USA",
+      "ART and Andrology Training — Cleveland Clinic, USA",
+    ],
+    languages: ["Hindi", "English"],
+    verified: true,
   }),
   // Surat
   cityDoctor({
@@ -444,42 +581,44 @@ export const DOCTORS: Doctor[] = [
   }),
   // Vadodara
   cityDoctor({
-    slug: "mita-shah", name: "Dr. Mita Shah", image: "/assets/doctors/Dr.-Mita-Shah-221x300.webp",
+    slug: "mita-shah", name: "Dr. Mita Shah", image: "/assets/doctors/mita-shah.webp",
     city: "Vadodara", citySlug: "vadodara", locations: ["jetalpur-road"],
-    experienceLabel: "20+ yrs", experienceYears: 20,
-    specialty: "Fertility & IVF", role: "Fertility & IVF Consultant",
-    shortBio: "Fertility and IVF consultant in Vadodara with over 20 years of experience, known for an empathetic, patient-centred approach.",
+    credentials: "MBBS, DGO",
+    experienceLabel: "22+ yrs", experienceYears: 22,
+    specialty: "Obstetrics, Gynaecology & Fertility", role: "Consultant Fertility Specialist",
+    medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
+    shortBio: "Consultant Fertility Specialist at Bavishi Fertility Institute Vadodara with 22 years of experience, known for individualised, evidence-based care for complex fertility challenges including PGT-M, recurrent IVF failure and uterine anomalies.",
     bio: [
-      "Dr. Mita Shah is a fertility and IVF consultant at the Bavishi Fertility Institute Vadodara centre, with more than 20 years of total experience in helping couples struggling with infertility.",
-      "Known for her empathetic attitude towards patients, she offers advanced treatments such as IVF, ICSI and egg freezing.",
+      "Dr. Mita A. Shah is a Consultant Fertility Specialist at the Bavishi Fertility Institute Vadodara centre with 22 years of experience in obstetrics, gynaecology and fertility medicine.",
+      "She specialises in individualised ovarian stimulation protocols, PGT-A and PGT-M, fertility preservation, third-party reproduction (gamete donation and gestational surrogacy), and the management of diminished ovarian reserve, recurrent IVF failure and recurrent pregnancy loss. Her approach combines evidence-based medicine with empathy, patience and honest communication — ensuring patients understand every step of their treatment.",
     ],
-    knowsAbout: ["In Vitro Fertilization", "Intracytoplasmic Sperm Injection", "Fertility Preservation", "Female Infertility"],
-  }),
-  cityDoctor({
-    slug: "jayna-unadkat", name: "Dr. Jayna Unadkat", image: "/assets/doctors/Dr.-Jayna-Unadkat-221x300.webp",
-    city: "Vadodara", citySlug: "vadodara", locations: ["jetalpur-road"],
-    credentials: "MBBS, DGO, FRM (Fellowship in Reproductive Medicine)", experienceLabel: "8+ yrs", experienceYears: 8,
-    specialty: "Reproductive Medicine & IVF", role: "IVF Specialist",
-    medicalSpecialty: ["ReproductiveMedicine", "Gynecology", "Fertility"],
-    shortBio: "Reproductive medicine specialist in Vadodara with a patient-centred, scientifically-grounded approach to complex infertility cases.",
-    bio: [
-      "Dr. Jayna Unadkat is a reproductive medicine specialist recognised for her patient-centred and scientifically-grounded approach to infertility management.",
-      "She has particular expertise in complex cases including PCOS, endometriosis, diminished ovarian reserve and unsuccessful IVF cycles, alongside advanced donor and fertility-preservation procedures.",
+    knowsAbout: [
+      "In Vitro Fertilization", "Intracytoplasmic Sperm Injection",
+      "Preimplantation Genetic Testing", "Fertility Preservation",
+      "Diminished Ovarian Reserve", "Recurrent Pregnancy Loss",
+      "Male Factor Infertility", "Gestational Surrogacy", "Gamete Donation",
     ],
-    knowsAbout: ["In Vitro Fertilization", "PCOS", "Endometriosis", "Poor Ovarian Reserve", "Fertility Preservation"],
+    alumniOf: [
+      "MBBS — Govt. Medical College, Surat (2001)",
+      "DGO — Govt. Medical College, Surat (2003)",
+    ],
     memberOf: [
       "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
-      "Indian Fertility Society (IFS)",
-      "European Society of Human Reproduction and Embryology (ESHRE)",
+      "Indian Medical Association (IMA)",
     ],
-    training: [
-      "Certificate Course in Ultrasound in Pregnancy — FOGSI in association with the Fetal Medicine Foundation, India",
+    awards: [
+      "Times Power Brand Award for Excellence in Genetics & IVF Treatment — Times Group, powered by Baroda Times (March 2026)",
     ],
+    languages: ["English", "Gujarati", "Hindi"],
+    verified: true,
   }),
   // Bhuj
   cityDoctor({
-    slug: "surbhi-vegad", name: "Dr. Surbhi Vegad", image: "/assets/doctors/Dr.-Surbhi-Vegad-221x300.webp",
+    slug: "surbhi-vegad", name: "Dr. Surbhi Vegad", image: "/assets/doctors/surbhi-vegad.webp",
     city: "Bhuj", citySlug: "bhuj", locations: ["mirjapar"],
+    consultationTimings: {
+      mirjapar: "Mon–Sat · 10:00 AM–4:00 PM",
+    },
     experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Gynaecology, IVF & 3D Laparoscopy", role: "IVF Specialist & 3D Laparoscopic Surgeon",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
@@ -492,8 +631,11 @@ export const DOCTORS: Doctor[] = [
   }),
   // Anand (IRIS Hospital)
   cityDoctor({
-    slug: "chetna-vyas", name: "Dr. Chetna Vyas", image: "/assets/doctors/Dr.-Chetna-Vyas-221x300.webp",
+    slug: "chetna-vyas", name: "Dr. Chetna Vyas", image: "/assets/doctors/chetna-vyas.webp",
     city: "Anand", citySlug: "anand", locations: ["nanikhodiyar"],
+    consultationTimings: {
+      nanikhodiyar: "Mon, Wed, Fri · 9:30 AM–12:30 PM · evening by appointment",
+    },
     experienceLabel: "22+ yrs", experienceYears: 22,
     specialty: "Obstetrics, Gynaecology & IVF", role: "Co-founder, Bavishi Fertility Institute — IRIS Hospital",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
@@ -513,8 +655,11 @@ export const DOCTORS: Doctor[] = [
     ],
   }),
   cityDoctor({
-    slug: "rakhee-patel", name: "Dr. Rakhee Patel", image: "/assets/doctors/Dr.-Rakhee-Patel-221x300.webp",
+    slug: "rakhee-patel", name: "Dr. Rakhee Patel", image: "/assets/doctors/rakhee-patel.webp",
     city: "Anand", citySlug: "anand", locations: ["nanikhodiyar"],
+    consultationTimings: {
+      nanikhodiyar: "Tue, Thu, Sat · 9:30 AM–12:30 PM · evening by appointment",
+    },
     credentials: "MBBS, MD", experienceLabel: "20+ yrs", experienceYears: 20,
     specialty: "Obstetrics, Gynaecology & IVF", role: "Co-founder, Bavishi Fertility Institute — IRIS Hospital · Minimal Access Surgeon",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
@@ -541,45 +686,85 @@ export const DOCTORS: Doctor[] = [
   cityDoctor({
     slug: "deepali-pandya", name: "Dr. Deepali Pandya", image: "/assets/doctors/Dr.-Deepali-Pandya-1-1.webp",
     city: "Bhavnagar", citySlug: "bhavnagar", locations: ["kalubha-road"],
-    credentials: "MS (Obstetrics & Gynaecology), FIAMS, FRM",
-    specialty: "Reproductive Medicine & Endoscopic Surgery", role: "IVF Specialist & Endoscopic Surgeon",
+    credentials: "MS (Obstetrics & Gynaecology), FMAS, FRM — Gold Medalist",
+    experienceLabel: "12+ yrs", experienceYears: 12,
+    specialty: "Reproductive Medicine & Laparoscopic Surgery", role: "Chief IVF Specialist, Bavishi Fertility Institute Bhavnagar",
     medicalSpecialty: ["Gynecology", "ReproductiveMedicine", "Fertility"],
-    shortBio: "Fertility specialist and endoscopic surgeon with comprehensive training in reproductive medicine, consulting at the Bavishi Fertility Institute Bhavnagar centre.",
+    shortBio: "Gold Medalist MS (OBG) and Chief IVF Specialist at Bavishi Fertility Institute Bhavnagar, with 12 years of experience in recurrent implantation failure, PGT-A, endometriosis-related infertility and high-risk obstetrics.",
     bio: [
-      "Dr. Deepali Pandya is a fertility specialist and endoscopic surgeon with comprehensive training in reproductive medicine and minimally invasive gynaecological surgery.",
-      "She combines clinical expertise with personalised patient care to address infertility and gynaecological concerns at the Bavishi Fertility Institute Bhavnagar centre.",
+      "Dr. Deepali D. Pandya is a Gold Medalist MS (Obstetrics & Gynaecology) and Chief IVF Specialist at the Bavishi Fertility Institute Bhavnagar centre, with 12 years of experience in fertility medicine and laparoscopic surgery.",
+      "She is also the Founder of Hema Women's Health, Bhavnagar, and Visiting Consultant at Ram Mantra Seva Trust and Nirma Colony Hospital. Her clinical focus is on recurrent implantation failure, PGT-A, infertility in endometriosis and complex laparoscopy. Her philosophy: \"Give your 100% to your patient, never give up on them.\"",
     ],
-    knowsAbout: ["In Vitro Fertilization", "Laparoscopy", "Hysteroscopy", "Female Infertility"],
+    knowsAbout: [
+      "In Vitro Fertilization", "Recurrent Implantation Failure",
+      "Preimplantation Genetic Testing", "Endometriosis",
+      "Laparoscopy", "High-Risk Pregnancy",
+    ],
     alumniOf: [
-      "MS, Obstetrics & Gynaecology — Smt. N.H.L. Municipal Medical College & Sheth V.S. General Hospital, Ahmedabad",
-      "FIAMS — Jogal Women's Hospital",
-      "FRM (Fellowship in Reproductive Medicine) — 21st Century Hospital, Surat",
+      "MS, Obstetrics & Gynaecology — V.S. General Hospital, Ahmedabad",
+      "FMAS — Jogal Women's Hospital, Bhuj",
+      "FRM (Fellowship in Reproductive Medicine) — Nimayaa Training Academy",
+    ],
+    memberOf: [
+      "Indian Association of Gynaecological Endoscopists (IAGE)",
+      "Indian Society for Assisted Reproduction (ISAR)",
+      "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+    ],
+    awards: [
+      "Pride of Bhavnagar Award — Divya Bhaskar Group (2026)",
+      "Gold Medal — Gujarat University (2022)",
+    ],
+    publications: [
+      "'Role of USG in First Trimester Bleeding PV' — International Journal of Gynaecology (2020)",
+      "'Fetomaternal Outcomes in Pregnant Women in COVID Positive Patients' — International Journal of Gynaecology (2022)",
+      "'Role of Colour Doppler in High Risk Pregnancy' (2022)",
+      "'Role of PGT-A in Recurrent IVF Failure Patients' — Indian Fertility Society (IFS) (2023)",
     ],
     training: [
-      "Infertility & IVF training — Bavishi Fertility Institute, Ahmedabad",
+      "IVF training — Bavishi Fertility Institute, Paldi, Ahmedabad",
     ],
+    languages: ["Gujarati", "Hindi", "English"],
+    verified: true,
   }),
   // Varanasi
   cityDoctor({
     slug: "parnnika-agarwal", name: "Dr. Parnnika Agarwal", image: "/assets/doctors/Dr.-Parnnika-Agarwal-221x300.webp",
     city: "Varanasi", citySlug: "varanasi", locations: ["shivpur"],
+    consultationTimings: {
+      shivpur: "Mon–Sat · 10:00 AM–4:00 PM",
+    },
+    credentials: "MBBS, MS, FMAS, FRM",
     experienceLabel: "6+ yrs", experienceYears: 6,
-    specialty: "Fertility & Gynaec Laparoscopy", role: "Fertility Expert & Laparoscopic Surgeon",
+    specialty: "Fertility, IVF & Gynaecological Laparoscopy", role: "Chief Consultant, Bavishi Neo Fertility Varanasi",
     medicalSpecialty: ["ReproductiveMedicine", "Gynecology", "Fertility"],
-    shortBio: "Fertility expert and gynaec laparoscopic surgeon in Varanasi with an evidence-based, patient-centric approach to male and female infertility.",
+    shortBio: "Gold Medalist MBBS & MS and Chief Consultant at Bavishi Neo Fertility Varanasi, specialising in fertility-enhancing laparoscopy, hysteroscopy and tailored IVF protocols with empathy at the core.",
     bio: [
-      "Dr. Parnnika Agarwal is a fertility expert and gynaec laparoscopic surgeon with over six years of experience treating male and female infertility through evidence-based, patient-centric care.",
-      "She combines advanced surgical training with expertise in IVF and reproductive medicine — including PCOS, endometriosis, poor ovarian reserve and recurrent IVF failure — and regularly presents research at national conferences.",
+      "Dr. Parnnika Agarwal is the Chief Consultant at Bavishi Neo Fertility Varanasi, holding MBBS and MS degrees from Rohilkhand Medical College & Hospital, Bareilly (Gold Medalist in both), along with fellowships in ART and minimally invasive gynaecological surgery (FMAS, FRM).",
+      "A former Assistant Professor at Rohilkhand Medical College and continuing Consultant Gynaecologist at Jamuna Sewa Sadan Hospital, Varanasi, she believes that a scientific approach and genuine empathy must go hand in hand — understanding a couple's emotional journey is as essential as the clinical plan.",
     ],
-    knowsAbout: ["In Vitro Fertilization", "IUI", "PCOS", "Endometriosis", "Fertility Preservation"],
+    knowsAbout: [
+      "In Vitro Fertilization", "Fertility-Enhancing Laparoscopy",
+      "Hysteroscopy", "Tailored IVF Protocols",
+      "PCOS", "Endometriosis", "Fertility Preservation",
+    ],
+    alumniOf: [
+      "MBBS — Rohilkhand Medical College & Hospital, Bareilly, UP (2015) — Gold Medalist",
+      "MS (Obstetrics & Gynaecology) — Rohilkhand Medical College & Hospital, Bareilly, UP (2019) — Gold Medalist",
+      "FMAS, FRM — Fellowship in ART and Minimally Invasive Gynaecological Surgery",
+    ],
     memberOf: [
       "Federation of Obstetric and Gynaecological Societies of India (FOGSI)",
+      "Indian Society for Assisted Reproduction (ISAR)",
       "Indian Fertility Society (IFS)",
+      "European Society of Human Reproduction and Embryology (ESHRE)",
     ],
-    awards: ["Gold Medalist — medical studies"],
-    training: [
-      "Advanced training in IVF & laparoscopic gynaecological surgery — reputed centres, New Delhi",
+    awards: [
+      "Gold Medalist — MBBS, Rohilkhand Medical College & Hospital (2015)",
+      "Gold Medalist — MS (Obstetrics & Gynaecology), Rohilkhand Medical College & Hospital (2019)",
+      "Prizes in paper and poster presentations at national and international conferences",
     ],
+    languages: ["Hindi", "English"],
+    verified: true,
   }),
 ];
 
@@ -591,7 +776,7 @@ export const doctorsForLocation = (locationSlug: string) =>
   DOCTORS.filter((d) => d.locations.includes(locationSlug));
 
 /** The four Bavishi promoter doctors — always shown first (visible on load). */
-const CORE_DOCTOR_SLUGS = ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"];
+export const CORE_DOCTOR_SLUGS = ["himanshu-bavishi", "falguni-bavishi", "parth-bavishi", "janki-bavishi"];
 
 /** Every Bavishi doctor is a fertility specialist, so the treatment carousel
  *  showcases the whole team and lets users slide through them. Ordering:
@@ -640,6 +825,20 @@ export const doctorUrl = (slug: string) => `/doctors/${slug}`;
  * as a muted secondary label. Stays in sync as the DOCTORS array grows. */
 export type DoctorMenuEntry = { name: string; href: string; city: string; meta?: string };
 
+/** Default nav role/order for a code-defined doctor — same tiering as
+ *  doctorMenuData() below, so the merge in getNavDoctors() (payload.ts) can
+ *  fall back per-doctor instead of all-or-nothing when only some doctors
+ *  have an admin-set navRole in Sanity. */
+export function defaultDoctorNavRole(slug: string): "senior-specialist" | "specialist" {
+  return CORE_DOCTOR_SLUGS.includes(slug) ? "senior-specialist" : "specialist";
+}
+
+export function defaultDoctorNavOrder(slug: string): number {
+  const core = CORE_DOCTOR_SLUGS.indexOf(slug);
+  if (core !== -1) return core;
+  return DOCTORS.findIndex((d) => d.slug === slug);
+}
+
 export function doctorMenuData(): { senior: DoctorMenuEntry[]; specialists: DoctorMenuEntry[] } {
   const senior = CORE_DOCTOR_SLUGS.map((slug) => {
     const d = doctorBySlug(slug)!;
@@ -647,7 +846,8 @@ export function doctorMenuData(): { senior: DoctorMenuEntry[]; specialists: Doct
   });
   const specialists = DOCTORS
     .filter((d) => !CORE_DOCTOR_SLUGS.includes(d.slug))
-    .map((d) => ({ name: d.name, href: doctorUrl(d.slug), city: d.cities[0] ?? "" }));
+    .map((d) => ({ name: d.name, href: doctorUrl(d.slug), city: d.cities[0] ?? "" }))
+    .sort((a, b) => a.name.localeCompare(b.name));
   return { senior, specialists };
 }
 
@@ -828,6 +1028,7 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     languages: rows(src.languages) ?? def.languages,
     sameAs: rows(src.sameAs) ?? def.sameAs,
     verified: src.verified ?? def.verified,
+    consultationTimings: def.consultationTimings,
     ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
     profileLabels: profileLabels(src.profileLabels),
   };

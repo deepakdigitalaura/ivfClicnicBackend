@@ -13,6 +13,7 @@ import { fileURLToPath } from "url";
 import { buildConfig } from "payload";
 import { postgresAdapter } from "@payloadcms/db-postgres";
 import { lexicalEditor } from "@payloadcms/richtext-lexical";
+import { vercelBlobStorage } from "@payloadcms/storage-vercel-blob";
 import sharp from "sharp";
 
 import { Users } from "./collections/Users";
@@ -29,6 +30,9 @@ import { Centres } from "./collections/Centres";
 import { Inquiries } from "./collections/Inquiries";
 import { Testimonials } from "./collections/Testimonials";
 import { Redirects } from "./collections/Redirects";
+import { Calculators } from "./collections/Calculators";
+import { EducationVideos } from "./collections/EducationVideos";
+import { TestimonialVideos } from "./collections/TestimonialVideos";
 import { SiteSettings } from "./globals/SiteSettings";
 import { ContactInfo } from "./globals/ContactInfo";
 import { BlogHub } from "./globals/BlogHub";
@@ -68,8 +72,28 @@ export default buildConfig({
       },
     },
   },
-  collections: [Inquiries, Testimonials, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Redirects, Media, Users],
+  collections: [Inquiries, Testimonials, TestimonialVideos, EducationVideos, Pages, Blogs, Authors, Categories, Services, Doctors, Treatments, Cities, Centres, Calculators, Redirects, Media, Users],
   globals: [SiteSettings, ContactInfo, BlogHub, Footer, Header, Homepage, About, SeoSettings],
+  // Vercel's serverless functions have a read-only filesystem (only /tmp is
+  // writable) — writing uploads to Media's local `staticDir` 500s in production
+  // (ENOENT mkdir '/vercel'). Route uploads to Vercel Blob instead when a store
+  // is connected (BLOB_READ_WRITE_TOKEN present).
+  //
+  // IMPORTANT: the plugin call itself must always run, even when the token is
+  // absent (e.g. local dev) — it self-disables via its own `!token` check, but
+  // still always registers its client component in the import map. Wrapping
+  // this call in an `if (token)` (as an earlier version of this file did)
+  // causes `payload generate:importmap` to omit that component when run
+  // without the token locally, producing a prod-only "PayloadComponent not
+  // found in importMap" admin-panel blank-screen — see the plugin's own
+  // initClientUploads comment ("always part of the import map, to avoid
+  // import map discrepancies between dev and prod").
+  plugins: [
+    vercelBlobStorage({
+      collections: { media: true },
+      token: process.env.BLOB_READ_WRITE_TOKEN || "",
+    }),
+  ],
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {

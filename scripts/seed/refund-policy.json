@@ -1,0 +1,97 @@
+{
+  "title": "Refund Policy",
+  "slug": "refund-policy",
+  "_status": "published",
+  "hero": {
+    "lead": "Refund &",
+    "em": "Cancellation Policy",
+    "subtitle": "Our refund and cancellation policy for services at Bavishi Fertility Institute."
+  },
+  "content": {
+    "root": {
+      "type": "root",
+      "format": "",
+      "indent": 0,
+      "version": 1,
+      "children": [
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Refund Processing Timeline", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Refunds typically take 5–7 working days to process. Once we approve your refund request, we will initiate the process, and you will receive a confirmation email with the relevant details.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Please allow this timeframe for funds to appear in your account after approval.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Customer Support", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "For assistance with refunds or cancellations, our customer service team is available to help. You can reach us through the following channels:", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "ul",
+          "type": "list",
+          "start": 1,
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {"type": "listitem", "value": 1, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Email: ", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1},
+              {"mode": "normal", "text": "drbavishi@ivfclinic.com", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1}
+            ], "direction": "ltr"},
+            {"type": "listitem", "value": 2, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Phone: ", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1},
+              {"mode": "normal", "text": "+91 97126 22288", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1}
+            ], "direction": "ltr"}
+          ],
+          "listType": "bullet",
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Our team is available to answer your questions and provide further assistance regarding refund requests.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        }
+      ],
+      "direction": "ltr"
+    }
+  },
+  "seo": {
+    "metaTitle": "Refund & Cancellation Policy — Bavishi Fertility Institute",
+    "metaDescription": "Refund and cancellation policy for Bavishi Fertility Institute. Refunds are processed within 5-7 working days. Contact us for assistance.",
+    "ogTitle": "Refund & Cancellation Policy — Bavishi Fertility Institute",
+    "ogDescription": "Learn about our refund processing timeline and how to request a cancellation at Bavishi Fertility Institute."
+  }
+}

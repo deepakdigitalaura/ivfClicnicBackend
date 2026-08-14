@@ -1,0 +1,211 @@
+{
+  "title": "Cookie Policy",
+  "slug": "cookie-policy",
+  "_status": "published",
+  "hero": {
+    "lead": "Cookie",
+    "em": "Policy",
+    "subtitle": "How Bavishi Fertility Institute uses cookies and similar technologies on our website."
+  },
+  "content": {
+    "root": {
+      "type": "root",
+      "format": "",
+      "indent": 0,
+      "version": 1,
+      "children": [
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "What Are Cookies?", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Cookies are downloaded files enabling websites to store and retrieve user browsing information. They occupy minimal memory and do not harm computers. Most session cookies delete automatically when browser sessions end.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Consent Requirements", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Without your express consent — by activating cookies in your browser — we will not link the stored data with your personal data.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Cookie Classification", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "tag": "h3",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "By Manager", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "tag": "ul",
+          "type": "list",
+          "start": 1,
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {"type": "listitem", "value": 1, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Own cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — from the institute's domain", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"},
+            {"type": "listitem", "value": 2, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Third-party cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — from external entities", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"}
+          ],
+          "listType": "bullet",
+          "direction": "ltr"
+        },
+        {
+          "tag": "h3",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "By Duration", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "tag": "ul",
+          "type": "list",
+          "start": 1,
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {"type": "listitem", "value": 1, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Session cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — temporary, deleted after browsing", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"},
+            {"type": "listitem", "value": 2, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Persistent cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — stored long-term on hard drive", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"}
+          ],
+          "listType": "bullet",
+          "direction": "ltr"
+        },
+        {
+          "tag": "h3",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "By Function", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "tag": "ul",
+          "type": "list",
+          "start": 1,
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [
+            {"type": "listitem", "value": 1, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Technical cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — enable website navigation", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"},
+            {"type": "listitem", "value": 2, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Personalization cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — customize user experience", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"},
+            {"type": "listitem", "value": 3, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Analysis cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — measure user statistics", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"},
+            {"type": "listitem", "value": 4, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Advertising cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — manage ad spaces", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"},
+            {"type": "listitem", "value": 5, "format": "", "indent": 0, "version": 1, "children": [
+              {"mode": "normal", "text": "Behavioral advertising cookies", "type": "text", "style": "", "detail": 0, "format": 1, "version": 1},
+              {"mode": "normal", "text": " — track browsing patterns", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}
+            ], "direction": "ltr"}
+          ],
+          "listType": "bullet",
+          "direction": "ltr"
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Managing Cookies", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "You can manage cookies through your browser settings. Most browsers allow you to block or delete cookies. Please note that blocking cookies may not allow full use of all website functionalities.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "You can configure cookie settings in the following browsers: Internet Explorer, Firefox, Chrome, Safari, and Opera. Please refer to your browser's help documentation for specific instructions.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        },
+        {
+          "tag": "h2",
+          "type": "heading",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "Policy Updates", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr"
+        },
+        {
+          "type": "paragraph",
+          "format": "",
+          "indent": 0,
+          "version": 1,
+          "children": [{"mode": "normal", "text": "The institute may update this cookie policy periodically. We recommend reviewing this policy regularly upon visiting the website.", "type": "text", "style": "", "detail": 0, "format": 0, "version": 1}],
+          "direction": "ltr", "textStyle": "", "textFormat": 0
+        }
+      ],
+      "direction": "ltr"
+    }
+  },
+  "seo": {
+    "metaTitle": "Cookie Policy — Bavishi Fertility Institute",
+    "metaDescription": "Learn about the types of cookies used on the Bavishi Fertility Institute website and how to manage your cookie preferences.",
+    "ogTitle": "Cookie Policy — Bavishi Fertility Institute",
+    "ogDescription": "Information about cookies used on our website, their types, and how to manage your preferences."
+  }
+}

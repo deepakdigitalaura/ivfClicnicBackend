@@ -161,14 +161,6 @@
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes. We offer video consultations for patients across India and abroad, so you can begin your fertility journey from the comfort of home before visiting a centre."
-              },
-              "name": "Can I have an online (video) consultation?"
-            },
-            {
-              "@type": "Question",
-              "acceptedAnswer": {
-                "@type": "Answer",
                 "text": "We have 15 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one."
               },
               "name": "Which Bavishi Fertility Institute centre is nearest to me?"
@@ -185,7 +177,7 @@
               "@type": "Question",
               "acceptedAnswer": {
                 "@type": "Answer",
-                "text": "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including pre-arrival video consultations and treatment planning."
+                "text": "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including treatment planning and coordination across our 14 centres."
               },
               "name": "Do you treat international patients?"
             }

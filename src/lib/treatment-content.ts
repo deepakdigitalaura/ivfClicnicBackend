@@ -31,7 +31,7 @@ import { testimonialsForTreatment, type VideoTestimonial } from "@/lib/video-tes
 
 /* ---------- Resolved (serialisable) model — mirrors Treatment 1:1, with the
  * Lucide component fields replaced by icon NAMES. ---------- */
-export type ResolvedIconCard = { icon: IconName; t: string; d: string };
+export type ResolvedIconCard = { icon: IconName; t: string; d: string; href?: string };
 export type ResolvedStep = { icon: IconName; n: string; t: string; d: string };
 
 export type ResolvedTreatment = {
@@ -107,7 +107,7 @@ export function toResolved(t: Treatment): ResolvedTreatment {
           types: {
             heading: t.types.heading,
             ...(t.types.subtitle ? { subtitle: t.types.subtitle } : {}),
-            items: t.types.items.map((x) => ({ icon: iconKey(x.icon), t: x.t, d: x.d })),
+            items: t.types.items.map((x) => ({ icon: iconKey(x.icon), t: x.t, d: x.d, ...(x.href ? { href: x.href } : {}) })),
           },
         }
       : {}),
@@ -185,7 +185,7 @@ export function toResolved(t: Treatment): ResolvedTreatment {
       whatIs: `What is ${t.shortName}`,
       benefits: "Advantages",
       types: `Types of ${t.shortName}`,
-      whoNeedsIt: "Indications",
+      whoNeedsIt: t.labels?.whoNeedsIt ?? "Indications",
       process: "Step by Step",
       timeline: "Treatment Timeline",
       whyUs: "Why Bavishi Fertility Institute",
