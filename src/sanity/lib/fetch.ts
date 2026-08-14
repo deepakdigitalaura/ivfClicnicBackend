@@ -394,9 +394,12 @@ export const getSanityBlogsPage = (page: number, limit: number, categorySlug?: s
     async () => {
       if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return { docs: [], total: 0 };
       const offset = (page - 1) * limit;
-      const filter = categorySlug
+      // CME posts have their own dedicated hub at /cme (see getSanityCMEBlogs)
+      // and are excluded from the general blog hub here, even if "cme" is
+      // requested as a category filter.
+      const filter = categorySlug && categorySlug !== "cme"
         ? `_type == "blog" && status != "draft" && categorySlug == $categorySlug`
-        : `_type == "blog" && status != "draft"`;
+        : `_type == "blog" && status != "draft" && categorySlug != "cme"`;
       try {
         const [docs, total] = await Promise.all([
           client.fetch<SanityBlog[]>(
@@ -426,7 +429,8 @@ export const getSanityBlogCategories = () =>
         );
         const counts = new Map<string, BlogCategoryCount>();
         for (const r of rows) {
-          if (!r.categorySlug) continue;
+          // CME posts live only on the dedicated /cme hub, not the blog hub's category chips.
+          if (!r.categorySlug || r.categorySlug === "cme") continue;
           const existing = counts.get(r.categorySlug);
           if (existing) existing.count++;
           else counts.set(r.categorySlug, { slug: r.categorySlug, title: r.categoryTitle ?? r.categorySlug, count: 1 });
