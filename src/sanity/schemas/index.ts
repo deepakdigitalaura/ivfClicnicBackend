@@ -20,6 +20,7 @@ import aboutPage from "./aboutPage";
 import googleReview from "./googleReview";
 import reviewMeta from "./reviewMeta";
 import pageFaqsConfig from "./pageFaqsConfig";
+import press from "./press";
 
 export const schemas = [
   robotsConfig,
@@ -44,4 +45,5 @@ export const schemas = [
   googleReview,
   reviewMeta,
   pageFaqsConfig,
+  press,
 ];
