@@ -503,7 +503,8 @@ export function BlogArticle({
                 <img
                   src={heroUrl}
                   alt={hero?.alt ?? blog.title}
-                  className="absolute inset-0 h-full w-full object-cover object-right"
+                  className="absolute inset-0 h-full w-full object-cover"
+                  style={{ objectPosition: `right ${blog.heroImagePosition?.split(" ")[1] ?? "center"}` }}
                   loading="eager"
                 />
                 {/* directional gradient to make left area readable */}
