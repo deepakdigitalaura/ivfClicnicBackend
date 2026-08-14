@@ -31,6 +31,8 @@ import {
   saveSiteSettings,
   saveEducationVideo,
   deleteEducationVideo,
+  savePress,
+  deletePress,
   saveBlog,
   deleteBlog,
   setBlogStatus,
@@ -53,6 +55,7 @@ import {
   type AdminAbout,
   type AdminSiteSettings,
   type AdminEducationVideo,
+  type AdminPress,
   type AdminBlogMeta,
   type ReviewRefreshResult,
   type AdminGoogleReview,
@@ -341,6 +344,27 @@ export async function saveEducationVideoAction(doc: AdminEducationVideo): Promis
 export async function deleteEducationVideoAction(id: string): Promise<SaveResult> {
   const r = await guard(() => deleteEducationVideo(id));
   revalidateEducationVideoPages();
+  return r;
+}
+
+// ── Press ──
+
+function revalidatePressPages(slug?: string) {
+  revalidateTag("sanity-press");
+  revalidatePath("/press");
+  revalidatePath("/admin-panel/press");
+  if (slug) revalidatePath(`/press/${slug}`);
+}
+
+export async function savePressAction(doc: AdminPress): Promise<SaveResult> {
+  const r = await guard(() => savePress(doc));
+  revalidatePressPages(doc.slug);
+  return r;
+}
+
+export async function deletePressAction(id: string, slug?: string): Promise<SaveResult> {
+  const r = await guard(() => deletePress(id));
+  revalidatePressPages(slug);
   return r;
 }
 

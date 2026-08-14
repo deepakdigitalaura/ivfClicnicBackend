@@ -669,6 +669,59 @@ export async function deleteEducationVideo(id: string) {
   revalidateTag(EDU_VIDEO_TAG);
 }
 
+// ── Press ──
+
+export type AdminPress = {
+  _id?: string;
+  slug?: string;
+  headline?: string;
+  headlineOriginal?: string;
+  standfirst?: string;
+  publication?: string;
+  edition?: string;
+  date?: string;
+  byline?: string;
+  language?: "English" | "Gujarati";
+  summary?: string;
+  bodyText?: string[];
+  doctorsQuoted?: string[];
+  image?: string;
+  thumb?: string;
+  width?: number;
+  height?: number;
+  order?: number;
+  published?: boolean;
+};
+
+const PRESS_TAG = "sanity-press";
+
+export async function readAdminPress(): Promise<AdminPress[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "press"] | order(order asc){ _id, "slug": slug.current, headline, headlineOriginal, standfirst, publication, edition, date, byline, language, summary, bodyText, doctorsQuoted, image, thumb, width, height, order, published }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function savePress(doc: AdminPress) {
+  const { _id, slug, ...rest } = doc;
+  const body = { ...rest, slug: { _type: "slug", current: slug } };
+  if (_id) {
+    await writeClient.createOrReplace({ _id, _type: "press", ...body });
+  } else {
+    await writeClient.create({ _type: "press", ...body });
+  }
+  revalidateTag(PRESS_TAG);
+}
+
+export async function deletePress(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(PRESS_TAG);
+}
+
 // ── Blogs ──
 
 const BLOG_TAG = "sanity-blogs";

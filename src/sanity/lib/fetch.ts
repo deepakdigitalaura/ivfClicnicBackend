@@ -335,6 +335,43 @@ export const getSanityEducationVideos = () =>
     { revalidate: 3600, tags: ["sanity-education-videos"] },
   )();
 
+// ── Press ──
+
+export type SanityPress = {
+  _id: string;
+  slug?: string;
+  headline?: string;
+  headlineOriginal?: string | null;
+  standfirst?: string | null;
+  publication?: string;
+  edition?: string | null;
+  date?: string | null;
+  byline?: string | null;
+  language?: "English" | "Gujarati";
+  summary?: string;
+  bodyText?: string[];
+  doctorsQuoted?: string[];
+  image?: string;
+  thumb?: string;
+  width?: number;
+  height?: number;
+  order?: number;
+  published?: boolean;
+};
+
+const PRESS_QUERY = `*[_type == "press" && published != false] | order(order asc){
+  _id, "slug": slug.current, headline, headlineOriginal, standfirst, publication,
+  edition, date, byline, language, summary, bodyText, doctorsQuoted, image, thumb,
+  width, height, order, published
+}`;
+
+export const getSanityPress = () =>
+  unstable_cache(
+    async () => (await sanityFetch<SanityPress[]>(PRESS_QUERY)) ?? [],
+    ["sanity-press"],
+    { revalidate: 3600, tags: ["sanity-press"] },
+  )();
+
 // ── Blogs ──
 
 export type SanityBlog = {
