@@ -4,11 +4,12 @@ import { defineType, defineField } from "sanity";
  * Press clippings (Media & Press coverage — /press hub + /press/<slug>).
  * ---------------------------------------------------------------------
  * Mirrors the PressClipping type in src/lib/press.ts field-for-field.
- * `image`/`thumb` stay as plain string paths for the migrated legacy
- * clippings (guarantees byte-identical URLs against the pre-migration
- * hardcoded array); `imageAsset`/`thumbAsset` are for new clippings added
- * via the admin panel going forward — the fetch-layer mapper prefers the
- * asset URL when present, else falls back to the string path.
+ * `image`/`thumb` are plain string URLs for BOTH the migrated legacy
+ * clippings (their exact current public-folder path, to guarantee
+ * byte-identical URLs against the pre-migration hardcoded array) AND new
+ * clippings added via the admin panel (a Sanity CDN URL, uploaded through
+ * the same /api/admin/upload-image endpoint the rest of the admin panel
+ * uses — see src/app/admin-panel/(app)/_components/image-upload.tsx).
  *
  * DATA HONESTY (same rules as src/lib/press.ts): headline/bodyText must be
  * faithfully transcribed from the real clipping, never invented or
@@ -70,29 +71,17 @@ export default defineType({
     }),
     defineField({
       name: "image",
-      title: "Full-Resolution Scan (legacy path)",
+      title: "Full-Resolution Scan",
       type: "string",
-      description: "Public-folder path for migrated clippings (e.g. /assets/media/press/foo.jpg). Leave set for legacy rows; new rows should use the Image Upload field below instead.",
+      description: "Image URL — either a legacy /assets/media/press/... public path, or a Sanity CDN URL uploaded via the admin panel.",
+      validation: (R) => R.required(),
     }),
     defineField({
       name: "thumb",
-      title: "Grid Thumbnail (legacy path)",
+      title: "Grid Thumbnail",
       type: "string",
-      description: "Public-folder path for migrated clippings. Leave set for legacy rows; new rows should use the Thumbnail Upload field below instead.",
-    }),
-    defineField({
-      name: "imageAsset",
-      title: "Full-Resolution Scan (upload)",
-      type: "image",
-      options: { hotspot: true },
-      description: "For new clippings added via the admin panel — takes precedence over the legacy path above when set.",
-    }),
-    defineField({
-      name: "thumbAsset",
-      title: "Grid Thumbnail (upload)",
-      type: "image",
-      options: { hotspot: true },
-      description: "For new clippings added via the admin panel — takes precedence over the legacy path above when set.",
+      description: "Image URL — either a legacy /assets/media/press/... public path, or a Sanity CDN URL uploaded via the admin panel.",
+      validation: (R) => R.required(),
     }),
     defineField({ name: "width", title: "Image Width (px)", type: "number" }),
     defineField({ name: "height", title: "Image Height (px)", type: "number" }),
