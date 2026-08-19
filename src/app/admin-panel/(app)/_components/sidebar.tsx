@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, HelpCircle, Newspaper,
+  FileText, ExternalLink, LogOut, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, HelpCircle, Newspaper, ShieldCheck, Building2, Sparkles, Award,
 } from "lucide-react";
 import { logoutAction } from "../../actions";
 
@@ -15,6 +15,14 @@ const NAV = [
 const CONTENT_NAV = [
   { href: "/admin-panel/homepage", label: "Homepage Editor", icon: Home },
   { href: "/admin-panel/about", label: "About Page", icon: Info },
+  { href: "/admin-panel/history", label: "History", icon: BookOpen },
+  { href: "/admin-panel/infrastructure", label: "Infrastructure", icon: Building2 },
+  { href: "/admin-panel/why-bfi", label: "Why BFI", icon: Star },
+  { href: "/admin-panel/simple-treatment", label: "Simple Treatment", icon: Sparkles },
+  { href: "/admin-panel/safe-treatment", label: "Safe Treatment", icon: ShieldCheck },
+  { href: "/admin-panel/smart-treatment", label: "Smart Treatment", icon: BarChart3 },
+  { href: "/admin-panel/success-benchmarks", label: "Success Benchmarks", icon: Award },
+  { href: "/admin-panel/suraksha-kavach", label: "Suraksha Kavach", icon: ShieldCheck },
   { href: "/admin-panel/treatments", label: "Treatments", icon: Syringe },
   { href: "/admin-panel/services", label: "Maternity Services", icon: HeartPulse },
   { href: "/admin-panel/locations", label: "Locations", icon: MapPin },
@@ -30,7 +38,7 @@ const CONTENT_NAV = [
 
 const SEO_NAV = [
   { href: "/admin-panel/robots", label: "Robots.txt", icon: Bot },
-  { href: "/admin-panel/scripts", label: "Script Injection", icon: Code2 },
+  { href: "/admin-panel/scripts", label: "Add Script", icon: Code2 },
   { href: "/admin-panel/redirects", label: "Redirects", icon: CornerUpRight },
   { href: "/admin-panel/sitemap", label: "Sitemap", icon: Map },
   { href: "/admin-panel/schema", label: "Structured Data", icon: BarChart3 },
@@ -76,9 +84,6 @@ export function Sidebar() {
         </Link>
 
         <div className="admin-nav-section">Advanced</div>
-        <Link href="/studio" target="_blank">
-          <Database /> Sanity Studio
-        </Link>
         <Link href="/" target="_blank" className="admin-live">
           <ExternalLink /> View Live Site
         </Link>

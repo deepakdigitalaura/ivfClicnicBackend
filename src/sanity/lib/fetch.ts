@@ -833,3 +833,67 @@ export const getSanityAbout = () =>
     ["sanity-about"],
     { revalidate: 3600, tags: ["sanity-about"] },
   )();
+
+export const getSanitySurakshaKavach = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "surakshaKavach"][0]`),
+    ["sanity-suraksha-kavach"],
+    { revalidate: 3600, tags: ["sanity-suraksha-kavach"] },
+  )();
+
+export const getSanityHistoryPage = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "historyPage"][0]`),
+    ["sanity-history-page"],
+    { revalidate: 3600, tags: ["sanity-history-page"] },
+  )();
+
+export const getSanityInfrastructurePage = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "infrastructurePage"][0]`),
+    ["sanity-infrastructure-page"],
+    { revalidate: 3600, tags: ["sanity-infrastructure-page"] },
+  )();
+
+export const getSanityWhyBfiPage = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "whyBfiPage"][0]`),
+    ["sanity-why-bfi-page"],
+    { revalidate: 3600, tags: ["sanity-why-bfi-page"] },
+  )();
+
+export const getSanitySimpleTreatmentPage = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "simpleTreatmentPage"][0]`),
+    ["sanity-simple-treatment-page"],
+    { revalidate: 3600, tags: ["sanity-simple-treatment-page"] },
+  )();
+
+export const getSanitySafeTreatmentPage = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "safeTreatmentPage"][0]`),
+    ["sanity-safe-treatment-page"],
+    { revalidate: 3600, tags: ["sanity-safe-treatment-page"] },
+  )();
+
+export const getSanitySmartTreatmentPage = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "smartTreatmentPage"][0]`),
+    ["sanity-smart-treatment-page"],
+    { revalidate: 3600, tags: ["sanity-smart-treatment-page"] },
+  )();
+
+export const getSanitySuccessBenchmarksPage = () =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "successBenchmarksPage"][0]`),
+    ["sanity-success-benchmarks-page"],
+    { revalidate: 3600, tags: ["sanity-success-benchmarks-page"] },
+  )();

@@ -9,7 +9,6 @@ import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
 import { Repeater } from "../_components/repeater";
 
-type CodeService = { slug: string; name: string; href: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
 
@@ -62,14 +61,11 @@ function Field({ label, hint, value, textarea, onChange }: { label: string; hint
  * tab either: the schema has a `cta` field but resolveService()/toServiceSource()
  * never read it, so it would be a dead field with no effect on the live page.
  */
-export function ServicesManager({ initial, codeServices }: { initial: AdminService[]; codeServices: CodeService[] }) {
+export function ServicesManager({ initial }: { initial: AdminService[] }) {
   const [docs, setDocs] = useState<AdminService[]>(initial);
   const [editing, setEditing] = useState<Doc | null>(null);
   const [tab, setTab] = useState<Tab>("hero");
   const { pending, toast, run } = useSave();
-
-  const savedSlugs = new Set(docs.map((d) => d.slug));
-  const overridableCode = codeServices.filter((c) => !savedSlugs.has(c.slug));
 
   const setIn = (path: string[], val: unknown) => {
     setEditing((prev) => {
@@ -131,7 +127,7 @@ export function ServicesManager({ initial, codeServices }: { initial: AdminServi
 
   const remove = (d: AdminService) => {
     if (!d._id) return;
-    if (!confirm(`Delete this override for "${d.slug}"? The code default returns (if one exists), or the page 404s if it doesn't.`)) return;
+    if (!confirm(`Delete "${d.slug}"? This removes the page permanently — /services/${d.slug} will 404.`)) return;
     run(async () => {
       const res = await deleteServiceAction(d._id!);
       if (res.ok) setDocs(docs.filter((x) => x._id !== d._id));
@@ -337,13 +333,13 @@ export function ServicesManager({ initial, codeServices }: { initial: AdminServi
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div>
             <h2 className="admin-card-title" style={{ margin: 0 }}>Maternity Services</h2>
-            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} edited in admin · {codeServices.length} built-in</p>
+            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} services</p>
           </div>
           <button type="button" className="admin-btn" onClick={addNew}><Plus size={16} /> Add Service</button>
         </div>
 
         {docs.length === 0 ? (
-          <div className="admin-empty">No admin services yet. Add a new one, or override a built-in service below.</div>
+          <div className="admin-empty">No services yet. Add one to get started.</div>
         ) : (
           <div className="admin-divider-list">
             {docs.map((d) => (
@@ -364,24 +360,6 @@ export function ServicesManager({ initial, codeServices }: { initial: AdminServi
           </div>
         )}
       </div>
-
-      {overridableCode.length > 0 && (
-        <div className="admin-card">
-          <h2 className="admin-card-title">Built-in Services</h2>
-          <p className="admin-card-desc">These come from the site code. Click Override to edit one in the admin (your changes win; the rest stays as-is).</p>
-          <div className="admin-divider-list">
-            {overridableCode.map((c) => (
-              <div key={c.slug} className="admin-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 0 }}>
-                <div>
-                  <div style={{ fontWeight: 600 }}>{c.name}</div>
-                  <div style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: 2 }}>{c.href}</div>
-                </div>
-                <button type="button" className="admin-btn-ghost" onClick={() => startEdit(c.slug, null)}><Pencil size={14} /> Override</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <Toast toast={toast} />
     </>
   );

@@ -28,6 +28,14 @@ import {
   deleteTestimonial,
   saveHomepage,
   saveAbout,
+  saveSurakshaKavach,
+  saveHistoryPage,
+  saveInfrastructurePage,
+  saveWhyBfiPage,
+  saveSimpleTreatmentPage,
+  saveSafeTreatmentPage,
+  saveSmartTreatmentPage,
+  saveSuccessBenchmarksPage,
   saveSiteSettings,
   saveEducationVideo,
   deleteEducationVideo,
@@ -53,6 +61,14 @@ import {
   type AdminTestimonial,
   type AdminHomepage,
   type AdminAbout,
+  type AdminSurakshaKavach,
+  type AdminHistoryPage,
+  type AdminInfrastructurePage,
+  type AdminWhyBfiPage,
+  type AdminSimpleTreatmentPage,
+  type AdminSafeTreatmentPage,
+  type AdminSmartTreatmentPage,
+  type AdminSuccessBenchmarksPage,
   type AdminSiteSettings,
   type AdminEducationVideo,
   type AdminPress,
@@ -316,6 +332,62 @@ export async function saveAboutAction(data: AdminAbout): Promise<SaveResult> {
   const r = await guard(() => saveAbout(data));
   revalidatePath("/about-bfi");
   revalidatePath("/admin-panel/about");
+  return r;
+}
+
+export async function saveSurakshaKavachAction(data: AdminSurakshaKavach): Promise<SaveResult> {
+  const r = await guard(() => saveSurakshaKavach(data));
+  revalidatePath("/suraksha-kavach");
+  revalidatePath("/admin-panel/suraksha-kavach");
+  return r;
+}
+
+export async function saveHistoryPageAction(data: AdminHistoryPage): Promise<SaveResult> {
+  const r = await guard(() => saveHistoryPage(data));
+  revalidatePath("/history");
+  revalidatePath("/admin-panel/history");
+  return r;
+}
+
+export async function saveInfrastructurePageAction(data: AdminInfrastructurePage): Promise<SaveResult> {
+  const r = await guard(() => saveInfrastructurePage(data));
+  revalidatePath("/infrastructure");
+  revalidatePath("/admin-panel/infrastructure");
+  return r;
+}
+
+export async function saveWhyBfiPageAction(data: AdminWhyBfiPage): Promise<SaveResult> {
+  const r = await guard(() => saveWhyBfiPage(data));
+  revalidatePath("/why-bfi");
+  revalidatePath("/admin-panel/why-bfi");
+  return r;
+}
+
+export async function saveSimpleTreatmentPageAction(data: AdminSimpleTreatmentPage): Promise<SaveResult> {
+  const r = await guard(() => saveSimpleTreatmentPage(data));
+  revalidatePath("/simple-treatment");
+  revalidatePath("/admin-panel/simple-treatment");
+  return r;
+}
+
+export async function saveSafeTreatmentPageAction(data: AdminSafeTreatmentPage): Promise<SaveResult> {
+  const r = await guard(() => saveSafeTreatmentPage(data));
+  revalidatePath("/safe-treatment");
+  revalidatePath("/admin-panel/safe-treatment");
+  return r;
+}
+
+export async function saveSmartTreatmentPageAction(data: AdminSmartTreatmentPage): Promise<SaveResult> {
+  const r = await guard(() => saveSmartTreatmentPage(data));
+  revalidatePath("/smart-treatment");
+  revalidatePath("/admin-panel/smart-treatment");
+  return r;
+}
+
+export async function saveSuccessBenchmarksPageAction(data: AdminSuccessBenchmarksPage): Promise<SaveResult> {
+  const r = await guard(() => saveSuccessBenchmarksPage(data));
+  revalidatePath("/success-benchmarks");
+  revalidatePath("/admin-panel/success-benchmarks");
   return r;
 }
 

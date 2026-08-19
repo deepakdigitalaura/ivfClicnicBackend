@@ -8,7 +8,7 @@ export default async function ScriptsPage() {
   return (
     <>
       <div className="admin-page-head">
-        <h1 className="admin-h1">Script Injection</h1>
+        <h1 className="admin-h1">Add Script</h1>
         <p className="admin-sub">Add analytics, tag managers, chat widgets & tracking pixels.</p>
       </div>
       <ScriptsForm initial={data} />

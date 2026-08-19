@@ -588,6 +588,150 @@ export async function saveAbout(data: AdminAbout) {
   revalidateTag("sanity-about");
 }
 
+export type AdminSurakshaKavach = Record<string, unknown>;
+
+export async function readSurakshaKavach(): Promise<AdminSurakshaKavach | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("surakshaKavach")) as AdminSurakshaKavach | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSurakshaKavach(data: AdminSurakshaKavach) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "surakshaKavach", _type: "surakshaKavach", ...rest });
+  revalidateTag("sanity-suraksha-kavach");
+}
+
+export type AdminHistoryPage = Record<string, unknown>;
+
+export async function readHistoryPage(): Promise<AdminHistoryPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("historyPage")) as AdminHistoryPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveHistoryPage(data: AdminHistoryPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "historyPage", _type: "historyPage", ...rest });
+  revalidateTag("sanity-history-page");
+}
+
+export type AdminInfrastructurePage = Record<string, unknown>;
+
+export async function readInfrastructurePage(): Promise<AdminInfrastructurePage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("infrastructurePage")) as AdminInfrastructurePage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveInfrastructurePage(data: AdminInfrastructurePage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "infrastructurePage", _type: "infrastructurePage", ...rest });
+  revalidateTag("sanity-infrastructure-page");
+}
+
+export type AdminWhyBfiPage = Record<string, unknown>;
+
+export async function readWhyBfiPage(): Promise<AdminWhyBfiPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("whyBfiPage")) as AdminWhyBfiPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveWhyBfiPage(data: AdminWhyBfiPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "whyBfiPage", _type: "whyBfiPage", ...rest });
+  revalidateTag("sanity-why-bfi-page");
+}
+
+export type AdminSimpleTreatmentPage = Record<string, unknown>;
+
+export async function readSimpleTreatmentPage(): Promise<AdminSimpleTreatmentPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("simpleTreatmentPage")) as AdminSimpleTreatmentPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSimpleTreatmentPage(data: AdminSimpleTreatmentPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "simpleTreatmentPage", _type: "simpleTreatmentPage", ...rest });
+  revalidateTag("sanity-simple-treatment-page");
+}
+
+export type AdminSafeTreatmentPage = Record<string, unknown>;
+
+export async function readSafeTreatmentPage(): Promise<AdminSafeTreatmentPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("safeTreatmentPage")) as AdminSafeTreatmentPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSafeTreatmentPage(data: AdminSafeTreatmentPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "safeTreatmentPage", _type: "safeTreatmentPage", ...rest });
+  revalidateTag("sanity-safe-treatment-page");
+}
+
+export type AdminSmartTreatmentPage = Record<string, unknown>;
+
+export async function readSmartTreatmentPage(): Promise<AdminSmartTreatmentPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("smartTreatmentPage")) as AdminSmartTreatmentPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSmartTreatmentPage(data: AdminSmartTreatmentPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "smartTreatmentPage", _type: "smartTreatmentPage", ...rest });
+  revalidateTag("sanity-smart-treatment-page");
+}
+
+export type AdminSuccessBenchmarksPage = Record<string, unknown>;
+
+export async function readSuccessBenchmarksPage(): Promise<AdminSuccessBenchmarksPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("successBenchmarksPage")) as AdminSuccessBenchmarksPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSuccessBenchmarksPage(data: AdminSuccessBenchmarksPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "successBenchmarksPage", _type: "successBenchmarksPage", ...rest });
+  revalidateTag("sanity-success-benchmarks-page");
+}
+
 // ── Testimonials ──
 
 export type AdminTestimonial = {

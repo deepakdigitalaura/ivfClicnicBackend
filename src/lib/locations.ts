@@ -1086,6 +1086,19 @@ export const cityBySlug = (slug: string) => CITIES.find((c) => c.slug === slug);
 export const centreBySlug = (citySlug: string, slug: string) =>
   CENTRES.find((c) => c.citySlug === citySlug && c.slug === slug);
 export const centresForCity = (citySlug: string) => CENTRES.filter((c) => c.citySlug === citySlug);
+export const centreBySlugAny = (slug: string) => CENTRES.find((c) => c.slug === slug);
+
+/** "Ghatkopar, Mumbai" for a bare centre slug, falling back to a
+ *  capitalized slug (e.g. "Some-Slug" → "Some Slug") for slugs that
+ *  aren't (yet) in CENTRES — admin lists show slugs before they're wired up. */
+export const centreLabel = (slug: string): string => {
+  const centre = centreBySlugAny(slug);
+  if (centre) {
+    const city = cityBySlug(centre.citySlug);
+    return city ? `${centre.name}, ${city.name}` : centre.name;
+  }
+  return slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+};
 
 /* ---------------------------------------------------------------------
  * Single-centre cities collapse onto their one centre page.

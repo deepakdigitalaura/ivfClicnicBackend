@@ -9,7 +9,6 @@ import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
 import { Repeater } from "../_components/repeater";
 
-type CodeTreatment = { slug: string; name: string; shortName: string; href: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
 
@@ -72,14 +71,11 @@ function Field({ label, hint, value, textarea, onChange }: { label: string; hint
  * Page form. This guarantees a save never submits a half-empty section that
  * would blank out its untouched siblings on the live page.
  */
-export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminTreatment[]; codeTreatments: CodeTreatment[] }) {
+export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
   const [docs, setDocs] = useState<AdminTreatment[]>(initial);
   const [editing, setEditing] = useState<Doc | null>(null);
   const [tab, setTab] = useState<Tab>("hero");
   const { pending, toast, run } = useSave();
-
-  const savedSlugs = new Set(docs.map((d) => d.slug));
-  const overridableCode = codeTreatments.filter((c) => !savedSlugs.has(c.slug));
 
   const setIn = (path: string[], val: unknown) => {
     setEditing((prev) => {
@@ -144,7 +140,7 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
 
   const remove = (d: AdminTreatment) => {
     if (!d._id) return;
-    if (!confirm(`Delete this override for "${d.slug}"? The code default returns (if one exists), or the page 404s if it doesn't.`)) return;
+    if (!confirm(`Delete "${d.slug}"? This removes the page permanently — /treatments/${d.slug} will 404.`)) return;
     run(async () => {
       const res = await deleteTreatmentAction(d._id!);
       if (res.ok) setDocs(docs.filter((x) => x._id !== d._id));
@@ -380,13 +376,13 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div>
             <h2 className="admin-card-title" style={{ margin: 0 }}>Treatments</h2>
-            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} edited in admin · {codeTreatments.length} built-in</p>
+            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} treatments</p>
           </div>
           <button type="button" className="admin-btn" onClick={addNew}><Plus size={16} /> Add Treatment</button>
         </div>
 
         {docs.length === 0 ? (
-          <div className="admin-empty">No admin treatments yet. Add a new one, or override a built-in treatment below.</div>
+          <div className="admin-empty">No treatments yet. Add one to get started.</div>
         ) : (
           <div className="admin-divider-list">
             {docs.map((d) => (
@@ -407,24 +403,6 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           </div>
         )}
       </div>
-
-      {overridableCode.length > 0 && (
-        <div className="admin-card">
-          <h2 className="admin-card-title">Built-in Treatments</h2>
-          <p className="admin-card-desc">These come from the site code. Click Override to edit one in the admin (your changes win; the rest stays as-is).</p>
-          <div className="admin-divider-list">
-            {overridableCode.map((c) => (
-              <div key={c.slug} className="admin-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 0 }}>
-                <div>
-                  <div style={{ fontWeight: 600 }}>{c.name}</div>
-                  <div style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: 2 }}>{c.href}</div>
-                </div>
-                <button type="button" className="admin-btn-ghost" onClick={() => startEdit(c.slug, null)}><Pencil size={14} /> Override</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <Toast toast={toast} />
     </>
   );
