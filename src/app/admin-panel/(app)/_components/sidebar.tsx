@@ -3,8 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, Newspaper, ShieldCheck, Building2, Sparkles, Award, LayoutGrid,
+  FileText, ExternalLink, LogOut, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, Newspaper, ShieldCheck, Building2, Sparkles, Award, LayoutGrid, Users,
 } from "lucide-react";
+import type { Role } from "@/lib/admin-auth";
 import { logoutAction } from "../../actions";
 
 const NAV = [
@@ -45,10 +46,12 @@ const SEO_NAV = [
   { href: "/admin-panel/page-seo", label: "Page SEO", icon: FileText },
 ];
 
-export function Sidebar() {
+export function Sidebar({ role }: { role: Role }) {
   const pathname = usePathname();
+  const isSuperadmin = role === "superadmin";
   const isActive = (href: string, exact?: boolean) =>
     exact ? pathname === href : pathname === href || pathname.startsWith(href + "/");
+  const seoNav = isSuperadmin ? SEO_NAV : SEO_NAV.filter((item) => item.href !== "/admin-panel/scripts");
 
   return (
     <aside className="admin-sidebar">
@@ -72,7 +75,7 @@ export function Sidebar() {
         ))}
 
         <div className="admin-nav-section">SEO &amp; Technical</div>
-        {SEO_NAV.map(({ href, label, icon: Icon }) => (
+        {seoNav.map(({ href, label, icon: Icon }) => (
           <Link key={href} href={href} className={isActive(href) ? "active" : ""}>
             <Icon /> {label}
           </Link>
@@ -82,6 +85,11 @@ export function Sidebar() {
         <Link href="/admin-panel/site-settings" className={isActive("/admin-panel/site-settings") ? "active" : ""}>
           <Settings /> Site Settings
         </Link>
+        {isSuperadmin && (
+          <Link href="/admin-panel/users" className={isActive("/admin-panel/users") ? "active" : ""}>
+            <Users /> Team &amp; Access
+          </Link>
+        )}
 
         <div className="admin-nav-section">Advanced</div>
         <Link href="/" target="_blank" className="admin-live">

@@ -1,7 +1,8 @@
 "use server";
 import { redirect } from "next/navigation";
 import { revalidatePath, revalidateTag } from "next/cache";
-import { verifyCredentials, createSession, destroySession, credsConfigured } from "@/lib/admin-auth";
+import { verifyCredentials, createSession, destroySession, credsConfigured, getSession, hashPassword, type AdminUser } from "@/lib/admin-auth";
+import { saveAdminUser, deleteAdminUser } from "@/sanity/lib/admin";
 import {
   saveRobots,
   saveScripts,
@@ -90,15 +91,16 @@ import type {
 // ── Auth ──
 
 export async function loginAction(_prev: { error?: string } | null, formData: FormData) {
-  if (!credsConfigured()) {
-    return { error: "Login is not configured. Set ADMIN_EMAIL and ADMIN_PASSWORD in Vercel, then redeploy." };
-  }
   const email = String(formData.get("email") ?? "");
   const password = String(formData.get("password") ?? "");
-  if (!verifyCredentials(email, password)) {
+  const session = await verifyCredentials(email, password);
+  if (!session) {
+    if (!credsConfigured()) {
+      return { error: "Login is not configured. Set ADMIN_EMAIL and ADMIN_PASSWORD in Vercel, then redeploy, or ask a superadmin to create your account." };
+    }
     return { error: "Incorrect email or password." };
   }
-  await createSession();
+  await createSession(session);
   redirect("/admin-panel");
 }
 
@@ -118,6 +120,24 @@ async function guard<T>(fn: () => Promise<T>): Promise<SaveResult> {
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "Save failed" };
   }
+}
+
+/** Same as guard(), but blocks the "seo" role from destructive actions. */
+async function guardDelete<T>(fn: () => Promise<T>): Promise<SaveResult> {
+  const session = await getSession();
+  if (session?.role !== "superadmin") {
+    return { ok: false, error: "Only a superadmin can delete this." };
+  }
+  return guard(fn);
+}
+
+/** Blocks anyone but a superadmin from an action entirely (Team & Access). */
+async function guardSuperadmin<T>(fn: () => Promise<T>): Promise<SaveResult> {
+  const session = await getSession();
+  if (session?.role !== "superadmin") {
+    return { ok: false, error: "Only a superadmin can do this." };
+  }
+  return guard(fn);
 }
 
 export async function saveRobotsAction(data: RobotsConfig): Promise<SaveResult> {
@@ -165,7 +185,7 @@ export async function savePageSeoAction(doc: PageSeo & { _id?: string }): Promis
 }
 
 export async function deletePageSeoAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deletePageSeo(id));
+  const r = await guardDelete(() => deletePageSeo(id));
   revalidatePath("/admin-panel/page-seo");
   return r;
 }
@@ -180,7 +200,7 @@ export async function setInquiryStatusAction(id: string, status: Inquiry["status
 }
 
 export async function deleteInquiryAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteInquiry(id));
+  const r = await guardDelete(() => deleteInquiry(id));
   revalidatePath("/admin-panel/inquiries");
   revalidatePath("/admin-panel");
   return r;
@@ -203,7 +223,7 @@ export async function saveDoctorAction(doc: AdminDoctor): Promise<SaveResult> {
 }
 
 export async function deleteDoctorAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteDoctor(id));
+  const r = await guardDelete(() => deleteDoctor(id));
   revalidateDoctorPages();
   return r;
 }
@@ -226,7 +246,7 @@ export async function saveTreatmentAction(doc: AdminTreatment): Promise<SaveResu
 }
 
 export async function deleteTreatmentAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteTreatment(id));
+  const r = await guardDelete(() => deleteTreatment(id));
   revalidateTreatmentPages();
   return r;
 }
@@ -245,7 +265,7 @@ export async function saveServiceAction(doc: AdminService): Promise<SaveResult> 
 }
 
 export async function deleteServiceAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteService(id));
+  const r = await guardDelete(() => deleteService(id));
   revalidateServicePages();
   return r;
 }
@@ -269,7 +289,7 @@ export async function saveCityAction(doc: AdminCity): Promise<SaveResult> {
 }
 
 export async function deleteCityAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteCity(id));
+  const r = await guardDelete(() => deleteCity(id));
   revalidateLocationPages();
   return r;
 }
@@ -281,7 +301,7 @@ export async function saveCentreAction(doc: AdminCentre): Promise<SaveResult> {
 }
 
 export async function deleteCentreAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteCentre(id));
+  const r = await guardDelete(() => deleteCentre(id));
   revalidateLocationPages();
   return r;
 }
@@ -301,7 +321,7 @@ export async function saveTestimonialAction(doc: AdminTestimonial): Promise<Save
 }
 
 export async function deleteTestimonialAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteTestimonial(id));
+  const r = await guardDelete(() => deleteTestimonial(id));
   revalidateTestimonialPages();
   return r;
 }
@@ -418,7 +438,7 @@ export async function saveEducationVideoAction(doc: AdminEducationVideo): Promis
 }
 
 export async function deleteEducationVideoAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteEducationVideo(id));
+  const r = await guardDelete(() => deleteEducationVideo(id));
   revalidateEducationVideoPages();
   return r;
 }
@@ -439,7 +459,7 @@ export async function savePressAction(doc: AdminPress): Promise<SaveResult> {
 }
 
 export async function deletePressAction(id: string, slug?: string): Promise<SaveResult> {
-  const r = await guard(() => deletePress(id));
+  const r = await guardDelete(() => deletePress(id));
   revalidatePressPages(slug);
   return r;
 }
@@ -460,7 +480,7 @@ export async function saveBlogAction(doc: AdminBlogMeta): Promise<SaveResult> {
 }
 
 export async function deleteBlogAction(id: string, slug?: string): Promise<SaveResult> {
-  const r = await guard(() => deleteBlog(id));
+  const r = await guardDelete(() => deleteBlog(id));
   revalidateBlogPages(slug);
   return r;
 }
@@ -513,7 +533,7 @@ export async function poolBrandReviewsAction(count = 15): Promise<PoolBrandRevie
 }
 
 export async function deleteReviewAction(id: string): Promise<SaveResult> {
-  const r = await guard(() => deleteReview(id));
+  const r = await guardDelete(() => deleteReview(id));
   revalidatePath("/admin-panel/reviews");
   return r;
 }
@@ -538,4 +558,20 @@ export async function createManualReviewsAction(inputs: ManualReviewInput[]): Pr
   } catch (e) {
     return { ok: false, error: e instanceof Error ? e.message : "Bulk add failed" };
   }
+}
+
+// ── Team & Access (Admin Users / RBAC) — superadmin only ──
+
+export async function createAdminUserAction(email: string, password: string, role: AdminUser["role"]): Promise<SaveResult> {
+  const r = await guardSuperadmin(() =>
+    saveAdminUser({ email: email.trim(), passwordHash: hashPassword(password), role, createdAt: new Date().toISOString() }),
+  );
+  revalidatePath("/admin-panel/users");
+  return r;
+}
+
+export async function deleteAdminUserAction(id: string): Promise<SaveResult> {
+  const r = await guardSuperadmin(() => deleteAdminUser(id));
+  revalidatePath("/admin-panel/users");
+  return r;
 }

@@ -1295,3 +1295,38 @@ export async function getDashboardStats() {
     return empty;
   }
 }
+
+// ── Admin Users (Team & Access / RBAC) ──
+// Password hashes are only ever read via this write-capable client — never
+// exposed through the public/anonymous read API.
+
+export type AdminUser = {
+  _id?: string;
+  email: string;
+  passwordHash: string;
+  role: "superadmin" | "seo";
+  createdAt?: string;
+};
+
+export async function readAdminUsers(): Promise<AdminUser[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "adminUser"] | order(createdAt asc){ _id, email, passwordHash, role, createdAt }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function saveAdminUser(doc: AdminUser) {
+  const { _id, ...rest } = doc;
+  const id = _id || `adminUser-${doc.email.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+  await writeClient.createOrReplace({ _id: id, _type: "adminUser", ...rest });
+  revalidateTag("sanity-admin-users");
+}
+
+export async function deleteAdminUser(id: string) {
+  await writeClient.delete(id);
+  revalidateTag("sanity-admin-users");
+}

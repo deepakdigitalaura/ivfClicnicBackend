@@ -29,6 +29,7 @@ import googleReview from "./googleReview";
 import reviewMeta from "./reviewMeta";
 import press from "./press";
 import categoryHubPage from "./categoryHubPage";
+import adminUser from "./adminUser";
 
 export const schemas = [
   robotsConfig,
@@ -62,4 +63,5 @@ export const schemas = [
   reviewMeta,
   press,
   categoryHubPage,
+  adminUser,
 ];
