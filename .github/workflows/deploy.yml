@@ -5,10 +5,48 @@ on:
     branches: [main]
 
 jobs:
-  deploy:
+  build-and-deploy:
     runs-on: ubuntu-latest
     steps:
-      - name: Deploy via SSH
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 20
+
+      - name: Set up SSH
+        run: |
+          mkdir -p ~/.ssh
+          echo "${{ secrets.CLOUDWAYS_SSH_KEY }}" > ~/.ssh/deploy_key
+          chmod 600 ~/.ssh/deploy_key
+          ssh-keyscan -H ${{ secrets.CLOUDWAYS_HOST }} >> ~/.ssh/known_hosts
+
+      # Production env vars (Sanity project/token, admin creds, SMTP, etc.)
+      # live only in the server's .env, never in this repo — pull it down so
+      # the build baked here matches what the server would have produced.
+      - name: Fetch production .env
+        run: scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.CLOUDWAYS_USER }}@${{ secrets.CLOUDWAYS_HOST }}:applications/execjqbwvu/private_html/.env .env
+
+      - name: Install dependencies
+        run: npm ci
+
+      # The server's ~3.8GB RAM is shared with mysql/security-scanning/varnish
+      # and has no headroom left for `next build` — build here instead, where
+      # RAM is plentiful, then ship only the finished build to the server.
+      - name: Build
+        run: npm run build
+
+      - name: Upload build to server (staging path)
+        run: |
+          SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+          REMOTE="${{ secrets.CLOUDWAYS_USER }}@${{ secrets.CLOUDWAYS_HOST }}"
+          ssh $SSH_OPTS "$REMOTE" "rm -rf applications/execjqbwvu/private_html/.deploy-incoming && mkdir -p applications/execjqbwvu/private_html/.deploy-incoming"
+          DEST="$REMOTE:applications/execjqbwvu/private_html/.deploy-incoming"
+          scp $SSH_OPTS -r .next/standalone "$DEST/standalone"
+          scp $SSH_OPTS -r .next/static "$DEST/static"
+          scp $SSH_OPTS -r public "$DEST/public"
+
+      - name: Apply build + restart (via SSH)
         uses: appleboy/ssh-action@v1.0.3
         with:
           host: ${{ secrets.CLOUDWAYS_HOST }}
@@ -19,4 +57,4 @@ jobs:
             cd /home/1259033.cloudwaysapps.com/execjqbwvu/private_html
             git fetch origin main
             git reset --hard origin/main
-            /home/master/refresh-reviews.sh
+            /home/master/apply-build.sh
