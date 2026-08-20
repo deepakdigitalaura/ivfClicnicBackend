@@ -27,8 +27,8 @@ import smartTreatmentPage from "./smartTreatmentPage";
 import successBenchmarksPage from "./successBenchmarksPage";
 import googleReview from "./googleReview";
 import reviewMeta from "./reviewMeta";
-import pageFaqsConfig from "./pageFaqsConfig";
 import press from "./press";
+import categoryHubPage from "./categoryHubPage";
 
 export const schemas = [
   robotsConfig,
@@ -60,6 +60,6 @@ export const schemas = [
   successBenchmarksPage,
   googleReview,
   reviewMeta,
-  pageFaqsConfig,
   press,
+  categoryHubPage,
 ];

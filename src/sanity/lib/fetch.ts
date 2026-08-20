@@ -64,10 +64,6 @@ export type SchemaOrgConfig = {
   customSchemas?: { name?: string; enabled?: boolean; jsonCode?: string }[];
 };
 
-export type PageFaqEntry = { q?: string; a?: string };
-export type PageFaqsPage = { pageKey?: string; faqs?: PageFaqEntry[] };
-export type PageFaqsConfig = { pages?: PageFaqsPage[] };
-
 export type PageSeo = {
   pagePath?: string;
   pageName?: string;
@@ -102,21 +98,6 @@ export const getCampsConfig = () =>
     { revalidate: 3600, tags: ["sanity-camps"] },
   )();
 
-export const getPageFaqsConfig = () =>
-  unstable_cache(
-    () => sanityFetch<PageFaqsConfig>(PAGE_FAQS_QUERY),
-    ["sanity-page-faqs"],
-    { revalidate: 3600, tags: ["sanity-page-faqs"] },
-  )();
-
-/** Looks up a page's CMS FAQs by key; returns null if unset so callers can fall back to code defaults. */
-export async function getPageFaqs(pageKey: string): Promise<{ q: string; a: string }[] | null> {
-  const config = await getPageFaqsConfig();
-  const page = config?.pages?.find((p) => p.pageKey === pageKey);
-  const faqs = (page?.faqs ?? [])
-    .filter((f): f is { q: string; a: string } => Boolean(f.q && f.a));
-  return faqs.length > 0 ? faqs : null;
-}
 
 export const getRedirectsConfig = () =>
   unstable_cache(
@@ -896,4 +877,12 @@ export const getSanitySuccessBenchmarksPage = () =>
     () => sanityFetch<any>(`*[_type == "successBenchmarksPage"][0]`),
     ["sanity-success-benchmarks-page"],
     { revalidate: 3600, tags: ["sanity-success-benchmarks-page"] },
+  )();
+
+export const getSanityCategoryHub = (slug: string) =>
+  unstable_cache(
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    () => sanityFetch<any>(`*[_type == "categoryHubPage" && slug == $slug][0]`, { slug }),
+    ["sanity-category-hub", slug],
+    { revalidate: 3600, tags: [`sanity-category-hub-${slug}`] },
   )();

@@ -11,7 +11,6 @@ import type {
   SitemapConfig,
   SchemaOrgConfig,
   PageSeo,
-  PageFaqsConfig,
 } from "./fetch";
 
 export const hasSanity = () => Boolean(projectId && process.env.SANITY_API_TOKEN);
@@ -74,7 +73,6 @@ export const IDS = {
   redirects: "redirectsConfig",
   sitemap: "sitemapConfig",
   schema: "schemaOrgConfig",
-  pageFaqs: "pageFaqsConfig",
 } as const;
 
 // ── Robots ──
@@ -91,11 +89,6 @@ export const saveScripts = (data: ScriptsConfig) =>
 export const readCamps = () => readSingleton<CampsConfig>(IDS.camps);
 export const saveCamps = (data: CampsConfig) =>
   saveSingleton(IDS.camps, "campsConfig", data as Record<string, unknown>, "sanity-camps");
-
-// ── Page FAQs ──
-export const readPageFaqs = () => readSingleton<PageFaqsConfig>(IDS.pageFaqs);
-export const savePageFaqs = (data: PageFaqsConfig) =>
-  saveSingleton(IDS.pageFaqs, "pageFaqsConfig", data as Record<string, unknown>, "sanity-page-faqs");
 
 // ── Redirects ──
 export const readRedirects = () => readSingleton<RedirectsConfig>(IDS.redirects);
@@ -730,6 +723,26 @@ export async function saveSuccessBenchmarksPage(data: AdminSuccessBenchmarksPage
   void _id; void _type; void _rev; void _createdAt; void _updatedAt;
   await writeClient.createOrReplace({ _id: "successBenchmarksPage", _type: "successBenchmarksPage", ...rest });
   revalidateTag("sanity-success-benchmarks-page");
+}
+
+// ── Category hub pages (4 docs, one per slug) ──
+
+export type AdminCategoryHub = Record<string, unknown>;
+
+export async function readCategoryHub(slug: string): Promise<AdminCategoryHub | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument(`categoryHubPage.${slug}`)) as AdminCategoryHub | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveCategoryHub(slug: string, data: AdminCategoryHub) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: `categoryHubPage.${slug}`, _type: "categoryHubPage", slug, ...rest });
+  revalidateTag(`sanity-category-hub-${slug}`);
 }
 
 // ── Testimonials ──

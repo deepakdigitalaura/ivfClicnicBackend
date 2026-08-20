@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AdvancedFertilityHub } from "./hub";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { withPageSeoOverride } from "@/lib/page-seo";
-import { getPageFaqs } from "@/sanity/lib/fetch";
+import { getCategoryHub } from "@/lib/payload";
 
 const PATH = "/treatments/advanced-fertility-techniques";
 
@@ -23,11 +23,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const faqs = await getPageFaqs("advanced-fertility-techniques");
+  const data = await getCategoryHub("advanced-fertility-techniques");
   return (
     <>
       <PageSeoSchema path={PATH} />
-      <AdvancedFertilityHub faqs={faqs ?? undefined} />
+      <AdvancedFertilityHub data={data} />
     </>
   );
 }

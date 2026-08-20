@@ -15,7 +15,8 @@ import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
-import { getSanityHomepage, getCampsConfig, getSanitySurakshaKavach, getSanityHistoryPage, getSanityInfrastructurePage, getSanityWhyBfiPage, getSanitySimpleTreatmentPage, getSanitySafeTreatmentPage, getSanitySmartTreatmentPage, getSanitySuccessBenchmarksPage } from "@/sanity/lib/fetch";
+import { getSanityHomepage, getCampsConfig, getSanitySurakshaKavach, getSanityHistoryPage, getSanityInfrastructurePage, getSanityWhyBfiPage, getSanitySimpleTreatmentPage, getSanitySafeTreatmentPage, getSanitySmartTreatmentPage, getSanitySuccessBenchmarksPage, getSanityCategoryHub } from "@/sanity/lib/fetch";
+import { resolveCategoryHub, type HubSlug, type CategoryHubData } from "@/lib/category-hub";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveSurakshaKavach, type SurakshaKavachData } from "@/lib/suraksha-kavach";
 import { resolveHistory, type HistoryData } from "@/lib/history";
@@ -696,6 +697,11 @@ export const getAbout = async (): Promise<AboutData> => {
 export const getSurakshaKavach = async (): Promise<SurakshaKavachData> => {
   const doc = await getSanitySurakshaKavach();
   return resolveSurakshaKavach(doc ?? null);
+};
+
+export const getCategoryHub = async (slug: HubSlug): Promise<CategoryHubData> => {
+  const doc = await getSanityCategoryHub(slug);
+  return resolveCategoryHub(slug, doc ?? null);
 };
 
 export const getHistoryPage = async (): Promise<HistoryData & { legacy: AboutSectionHeading; milestones: Milestone[] }> => {

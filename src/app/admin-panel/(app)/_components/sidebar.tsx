@@ -3,7 +3,7 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, HelpCircle, Newspaper, ShieldCheck, Building2, Sparkles, Award,
+  FileText, ExternalLink, LogOut, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, Newspaper, ShieldCheck, Building2, Sparkles, Award, LayoutGrid,
 } from "lucide-react";
 import { logoutAction } from "../../actions";
 
@@ -29,7 +29,7 @@ const CONTENT_NAV = [
   { href: "/admin-panel/doctors", label: "Doctors", icon: Stethoscope },
   { href: "/admin-panel/testimonials", label: "Testimonials", icon: Star },
   { href: "/admin-panel/camps", label: "Camp Posters", icon: Images },
-  { href: "/admin-panel/page-faqs", label: "Page FAQs", icon: HelpCircle },
+  { href: "/admin-panel/category-hubs", label: "Category Hub Pages", icon: LayoutGrid },
   { href: "/admin-panel/reviews", label: "Google Reviews", icon: MessageSquareQuote },
   { href: "/admin-panel/education-videos", label: "Education Videos", icon: Video },
   { href: "/admin-panel/press", label: "Media & Press", icon: Newspaper },

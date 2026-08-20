@@ -6,7 +6,6 @@ import {
   saveRobots,
   saveScripts,
   saveCamps,
-  savePageFaqs,
   saveRedirects,
   saveSitemap,
   saveSchema,
@@ -29,6 +28,7 @@ import {
   saveHomepage,
   saveAbout,
   saveSurakshaKavach,
+  saveCategoryHub,
   saveHistoryPage,
   saveInfrastructurePage,
   saveWhyBfiPage,
@@ -62,6 +62,7 @@ import {
   type AdminHomepage,
   type AdminAbout,
   type AdminSurakshaKavach,
+  type AdminCategoryHub,
   type AdminHistoryPage,
   type AdminInfrastructurePage,
   type AdminWhyBfiPage,
@@ -80,7 +81,6 @@ import type {
   RobotsConfig,
   ScriptsConfig,
   CampsConfig,
-  PageFaqsConfig,
   RedirectsConfig,
   SitemapConfig,
   SchemaOrgConfig,
@@ -137,17 +137,6 @@ export async function saveCampsAction(data: CampsConfig): Promise<SaveResult> {
   revalidatePath("/admin-panel/camps");
   revalidatePath("/");
   revalidatePath("/camps");
-  return r;
-}
-
-export async function savePageFaqsAction(data: PageFaqsConfig): Promise<SaveResult> {
-  const r = await guard(() => savePageFaqs(data));
-  revalidatePath("/admin-panel/page-faqs");
-  revalidatePath("/treatments/female-infertility");
-  revalidatePath("/treatments/male-infertility");
-  revalidatePath("/treatments/advanced-fertility-techniques");
-  revalidatePath("/services/maternity-services");
-  revalidatePath("/suraksha-kavach");
   return r;
 }
 
@@ -339,6 +328,21 @@ export async function saveSurakshaKavachAction(data: AdminSurakshaKavach): Promi
   const r = await guard(() => saveSurakshaKavach(data));
   revalidatePath("/suraksha-kavach");
   revalidatePath("/admin-panel/suraksha-kavach");
+  return r;
+}
+
+const CATEGORY_HUB_PATHS: Record<string, string> = {
+  "advanced-fertility-techniques": "/treatments/advanced-fertility-techniques",
+  "male-infertility": "/treatments/male-infertility",
+  "female-infertility": "/treatments/female-infertility",
+  "maternity-services": "/services/maternity-services",
+};
+
+export async function saveCategoryHubAction(slug: string, data: AdminCategoryHub): Promise<SaveResult> {
+  const r = await guard(() => saveCategoryHub(slug, data));
+  const path = CATEGORY_HUB_PATHS[slug];
+  if (path) revalidatePath(path);
+  revalidatePath(`/admin-panel/category-hubs/${slug}`);
   return r;
 }
 
