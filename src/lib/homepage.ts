@@ -50,6 +50,8 @@ export type HeroContent = {
 
 export type StatItem = { value: string; l: string };
 
+export type AccoladeItem = { text: string; source: string };
+
 /** A Lucide-icon "Why Bavishi" card (icon carried as a curated NAME). */
 export type WhyCard = { icon: IconName; t: string; d: string };
 
@@ -77,9 +79,9 @@ export type AwardItem = { img: string; title: string; desc: string };
 export type EventPoster = { src: string; alt: string };
 
 /** Patient success-story video (id + name + quote + star rating). */
-export type VideoStory = { id: string; n: string; q: string; r: number };
+export type VideoStory = { id: string; n: string; q: string; r: number; tag?: string };
 /** Educational video (id + title + description). */
-export type EduVideo = { id: string; t: string; d: string };
+export type EduVideo = { id: string; t: string; d: string; c?: string };
 /** Resource video (id + category + title + byline). */
 export type ResourceVideo = { id: string; c: string; t: string; date: string };
 
@@ -127,7 +129,7 @@ export type HomepageSeo = {
  * renders byte-identically. Adding a section to the page = unhiding it; removing
  * = hiding it; dragging a row = reordering. */
 export const HOME_SECTIONS = [
-  "hero", "stats", "whyBavishi", "suraksha", "treatments", "successStories",
+  "hero", "stats", "accolades", "whyBavishi", "suraksha", "treatments", "successStories",
   "videoHub", "about", "doctors", "whyChoose", "awards", "media", "testimonials",
   "events", "blogs", "locations", "faq", "calculators", "inquiry", "finalCta",
 ] as const;
@@ -138,6 +140,7 @@ export type HomeSectionLayout = { section: HomeSection; visible: boolean };
 export const HOME_SECTION_LABELS: Record<HomeSection, string> = {
   hero: "Top Banner",
   stats: "Stats Strip",
+  accolades: "Awards & Accolades Ticker",
   whyBavishi: "Why Bavishi Cards",
   suraksha: "Suraksha Kavach",
   treatments: "Treatments Grid",
@@ -158,10 +161,17 @@ export const HOME_SECTION_LABELS: Record<HomeSection, string> = {
   finalCta: "Closing Call-to-Action",
 };
 
-/** The canonical layout — every section, in order, visible. Used as the
- *  byte-identical fallback whenever the CMS layout is empty. */
+/** The canonical layout — every section, in order. Used as the fallback
+ *  whenever the CMS layout is empty. Two sections are hidden by default:
+ *  `blogs` ("Knowledge & Resources") duplicated the `videoHub` ("Education")
+ *  section (same YouTube-card layout, just a different video list); `whyBavishi`
+ *  ("Why Bavishi Cards") covered the same ground — trust, tech, expertise,
+ *  transparency — as `whyChoose` ("Why Choose Pillars") a few sections later,
+ *  making the page feel repetitive. Both are turned off rather than deleted —
+ *  their data/schema/admin fields are untouched and either can be re-enabled
+ *  from the admin section builder if ever needed. */
 export const DEFAULT_HOME_LAYOUT: HomeSectionLayout[] = HOME_SECTIONS.map(
-  (section) => ({ section, visible: true }),
+  (section) => ({ section, visible: section !== "blogs" && section !== "whyBavishi" }),
 );
 
 /** Client-ready, fully-resolved homepage content. */
@@ -170,6 +180,7 @@ export type HomepageData = {
   layout?: HomeSectionLayout[];
   hero: HeroContent;
   stats: StatItem[];
+  accolades: AccoladeItem[];
   whyBavishi: { eyebrow: string; heading: Heading; subtitle: string; cards: WhyCard[] };
   whyChoose: { eyebrow: string; heading: Heading; subtitle: string; blocks: WhyChooseBlock[] };
   suraksha: SurakshaContent;
@@ -188,8 +199,8 @@ export type HomepageData = {
   blogs: { eyebrow: string; heading: Heading; ctaLabel: string };
   testimonials: { eyebrow: string; heading: Heading };
   media: { eyebrow: string; heading: Heading; logos: { src: string; alt: string }[] };
-  /** City cards: name (c), centre count (n), slug (s, the link target). */
-  locations: { eyebrow: string; heading: Heading; subtitle: string; cities: { c: string; n: number; s: string }[] };
+  /** City cards: name (c), centre count (n), slug (s, the link target), optional centre area names for multi-centre cities. */
+  locations: { eyebrow: string; heading: Heading; subtitle: string; cities: { c: string; n: number; s: string; centres?: string[] }[] };
   calculators: { eyebrow: string; heading: Heading; subtitle: string; items: string[] };
   /** Contact rows carry editable text only — the icon stays code-owned (it maps
    *  to the contact method, by index). */
@@ -215,29 +226,31 @@ const whyIcons = {
  */
 export const HOMEPAGE_DEFAULTS: HomepageData = {
   hero: {
-    eyebrow: "Trusted Since 1983",
-    headline: "India's Trusted Fertility Center for 40+ Years",
+    eyebrow: "Trusted Since 1998",
+    headline: "India's Trusted Fertility Center for 30+ Years",
     headlineItalic: "Fertility",
     paragraph:
       "Helping families achieve parenthood through advanced fertility treatments, compassionate care, and personalised IVF programs.",
     badges: [
-      "30,000+ Successful Pregnancies",
-      "40+ Years Experience",
-      "14 Fertility Centres",
+      "30,000+ Happy Families",
+      "30+ Years Experience",
+      "14 Centres",
       "Leading IVF Specialists",
     ],
-    ctas: ["Book Consultation", "Check IVF Eligibility", "Video Consultation"],
-    floatingBadge: "National Fertility Award · 5× Winner",
+    ctas: ["Book Consultation", "Check IVF Eligibility"],
+    floatingBadge: "National Fertility Award · 6× Winner (2019–2026)",
     image: heroImg,
   },
   stats: [
-    { value: "30,000+", l: "Successful Pregnancies" },
-    { value: "40+", l: "Years Legacy" },
-    { value: "15+", l: "Locations" },
-    { value: "100+", l: "Experts" },
-    { value: "5× Winner", l: "National Fertility Award" },
-    { value: "Rank #1", l: "Best IVF Center in India" },
-    { value: "300+", l: "International Patients" },
+    { value: "30,000+", l: "Happy Couples" },
+    { value: "30+", l: "Years Legacy" },
+    { value: "14", l: "Fertility Centres" },
+    { value: "500+", l: "International Patients Per Year" },
+  ],
+  accolades: [
+    { text: "Best IVF Chain In India (WEST)", source: "The Economic Times — 6 years in a row (2019, 2022, 2023, 2024, 2025, 2026)" },
+    { text: "Best IVF Clinic Chain in India", source: "Mid-Day" },
+    { text: "All India Ranked #1 Ahmedabad Fertility Institute", source: "TOI National Survey — 2020" },
   ],
   whyBavishi: {
     eyebrow: "Why Bavishi Fertility Center",
@@ -245,10 +258,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     subtitle:
       "Premium, transparent and deeply personal. We've redefined what fertility care should feel like.",
     cards: [
-      { icon: "Sparkles", t: "Transparent Treatment Plans", d: "Clear pricing, honest timelines and no hidden costs across every step of your journey." },
-      { icon: "Microscope", t: "Advanced Fertility Technology", d: "State-of-the-art embryology labs, time-lapse imaging and PGT for the highest success rates." },
+      { icon: "HeartPulse", t: "Personalised Care Journey", d: "Every plan is tailored — clinically & emotionally." },
+      { icon: "Microscope", t: "Advanced Fertility Technology", d: "State-of-the-art embryology labs, 10x cleaner lab environment compared to European standards, and PGT for the highest success rates." },
       { icon: "Stethoscope", t: "Experienced IVF Specialists", d: "Led by world-renowned doctors with decades of clinical experience and global training." },
-      { icon: "HeartPulse", t: "Personalised Care Journey", d: "Every plan is tailored — emotionally and clinically — to your unique fertility story." },
+      { icon: "Sparkles", t: "Transparent Treatment Plans", d: "Clear pricing, honest timelines and no hidden costs across every step of your journey." },
     ],
   },
   whyChoose: {
@@ -291,22 +304,22 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
         icon: whyIcons.successful, alt: "Successful IVF outcomes",
         title: "Successful", subtitle: "Proven IVF Excellence",
         points: [
-          { h: "20,000+ IVF Success Stories", d: "Families who trusted us with parenthood." },
+          { h: "30,000+ Happy Families", d: "Families who trusted us with parenthood." },
           { h: "100+ Years of Combined Expertise", d: "A family of seasoned fertility specialists." },
           { h: "Safe & Healthy Pregnancy Focus", d: "Care that extends beyond conception." },
-          { h: "Unique IVF Packages", d: "Suraksha Kavach benefits & refund protection." },
+          { h: "Unique IVF Packages", d: "Suraksha Kavach benefits & protection." },
         ],
       },
     ],
   },
   suraksha: {
     badge: "Exclusive Program",
-    heading: { lead: "Suraksha Kavach —", em: "peace of mind, guaranteed." },
+    heading: { lead: "Suraksha Kavach —", em: "complete peace of mind." },
     paragraph:
-      "India's most trusted IVF refund & protection program. Reduce financial risk, increase confidence, and focus on what truly matters — your journey to parenthood.",
-    features: ["Refund Guarantee", "Risk Reduction", "Multiple IVF Cycles", "Priority Care"],
+      "One of the most trusted IVF protection programme. Reduced financial risk, increased confidence & complete peace of mind.",
+    features: ["All Costs Covered", "Complete Peace of Mind", "Multiple IVF Cycles as Required", "Unique Optional Package"],
     primaryCta: { label: "Explore Suraksha Kavach", href: destinationHref("suraksha-kavach") },
-    secondaryCta: { label: "Learn More", href: "/#book" },
+    secondaryCta: { label: "Learn More", href: "#book" },
     image: surakshaImg,
     imageAlt: "Expecting parents — the journey to parenthood, protected",
   },
@@ -314,16 +327,16 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     eyebrow: "About the Institute",
     heading: { lead: "A legacy of", em: "life-changing care." },
     subtitle:
-      "For over four decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
+      "For over three decades, Bavishi Fertility Institute has stood at the forefront of reproductive medicine in India — pioneering IVF, leading clinical research, and building one of the country's most respected fertility networks.",
     stats: [
-      { k: "Legacy", v: "40+ Years" },
+      { k: "Legacy", v: "30+ Years" },
       { k: "Recognition", v: "Award-Winning" },
       { k: "Patient Care", v: "Personalised" },
       { k: "IVF Leadership", v: "India's First" },
     ],
     primaryCta: "Read More",
     secondaryCta: "Our Story",
-    sinceValue: "Since 1983",
+    sinceValue: "Since 1998",
     sinceLabel: "Pioneering fertility care",
     image: aboutImg,
     imageAlt: "Bavishi Fertility Institute",
@@ -333,31 +346,36 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     heading: { lead: "Our Awards &", em: "Achievements." },
     subtitle: "Awarded for Excellence in IVF & Fertility Care.",
     items: [
-      { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "Economic Times Healthworld · 2025" },
-      { img: "/assets/awards/patient-centric-award.png", title: "Patient Centric Hospital Award", desc: "IHW Patient First Awards" },
-      { img: "/assets/awards/bharat-excellence-award.png", title: "Bharat Excellence Award", desc: "For IVF & Infertility Care" },
-      { img: "/assets/awards/times-healthcare-award.png", title: "Times Healthcare Leaders Award", desc: "Times Healthcare · 2025" },
+      { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "ET Healthworld National Fertility Awards · 6× winner (2019–2026)" },
+      { img: "/assets/awards/patient-centric-award.png", title: "Patient Centric Hospital in Reproductive Health", desc: "IHW Patient First Awards 2024 (Bronze)" },
+      { img: "/assets/awards/bharat-excellence-award.png", title: "Bharat Medical Excellence Award", desc: "DNS Talks · Gujarat's Top Doctors, Dr. Parth Bavishi (2025)" },
+      { img: "/assets/awards/times-healthcare-award.png", title: "Times Healthcare Leaders", desc: "Certificate of Recognition, 2025" },
+      { img: "/assets/awards/news18-gujarati-shreshtha-award-2018.jpg", title: "Shreshtha Award", desc: "News18 Gujarati · presented by the Gujarat Chief Minister (2018)" },
+      { img: "/assets/awards/gaurav-icons-2018.jpg", title: "Best IVF Clinic Chain in India", desc: "Gaurav Icons Awards, 2018" },
+      { img: "/assets/awards/myfm-excellence-ivf-technology-2017.jpg", title: "Excellence in IVF Technology", desc: "MY FM Ahmedabad Entrepreneur & Excellence Awards, 2017" },
+      { img: "/assets/awards/dynergic-golden-aim-2025.jpg", title: "Most Trusted IVF Chain of the Year – West India", desc: "Dynergic Golden Aim Awards, 2025" },
     ],
   },
   events: {
     eyebrow: "Upcoming Events",
     heading: { lead: "Learn directly from", em: "our specialists." },
-    posters: [
-      { src: "/assets/events/event-1.webp", alt: "Special Consultation with Dr. Himanshu Bavishi — upcoming visit schedule" },
-      { src: "/assets/events/event-2.webp", alt: "Bavishi Fertility — upcoming events & visit plan" },
-    ],
+    // Camp posters are managed entirely via Admin Panel → Camp Posters (Sanity
+    // campsConfig, see getHomepage() in src/lib/payload.ts). No hardcoded
+    // fallback here on purpose — if all posters are removed in the CMS, the
+    // section should show nothing rather than silently reverting to stale images.
+    posters: [] as EventPoster[],
   },
   videos: {
     stories: [
-      { id: "6bH_RnV-_2Y", n: "Anita Thakkar", q: "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", r: 5 },
-      { id: "KKf6tNrlvoc", n: "Rekha's Journey", q: "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", r: 5 },
-      { id: "SbkV-1fSonM", n: "Jigesh & Jinal", q: "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", r: 5 },
+      { id: "6bH_RnV-_2Y", n: "Anita Thakkar", q: "15 years of waiting and a failed IVF elsewhere — then our miracle finally happened at Bavishi Fertility Institute.", r: 5, tag: "IVF Failed Elsewhere" },
+      { id: "KKf6tNrlvoc", n: "Rekha's Journey", q: "From loss to a twin blessing — an inspiring IVF journey with the Bavishi Fertility Institute team by our side.", r: 5, tag: "Pregnancy Loss & Twins" },
+      { id: "SbkV-1fSonM", n: "Jigesh & Jinal", q: "After failed treatments everywhere else, Bavishi Fertility Institute's personal care made us parents at last.", r: 5, tag: "Repeated Treatment Failure" },
     ],
     edu: [
-      { id: "22xqpk3-z2I", t: "How to Increase Sperm Count", d: "Practical, science-backed advice from our specialists." },
-      { id: "eON_mr8bz-A", t: "Egg Freezing vs Embryo Freezing", d: "Dr. Parth Bavishi explains which option suits you." },
-      { id: "Pzbwv2EZlrM", t: "Ovarian Cyst Before IVF — What to Do", d: "Do you need to remove a cyst before starting IVF?" },
-      { id: "bNZiMbg4Wkw", t: "Natural Pregnancy After 40?", d: "Understanding your real chances and options." },
+      { id: "hLwH-BNpmzI", t: "5 Reasons Embryo Implantation Fails", d: "Dr. Parth Bavishi explains why an embryo may not stick — and what to do about it.", c: "IVF Failure" },
+      { id: "319LcXY6D8I", t: "Can You Get Pregnant After Periods Stop?", d: "Dr. Himanshu Bavishi answers this common fertility question.", c: "Fertility Basics" },
+      { id: "_jEgFL09spA", t: "5 Ways to Improve Embryo Implantation Chances", d: "Practical, science-backed tips from Dr. Parth Bavishi.", c: "Embryo Transfer" },
+      { id: "zoNpyKlxHKk", t: "What to Expect After Embryo Transfer", d: "Dr. Parth Bavishi walks through what you may feel next.", c: "Embryo Transfer" },
     ],
     resources: [
       { id: "AO_J6jKeCck", c: "IVF Guide", t: "How Many Eggs Are Actually Needed for IVF?", date: "Dr. Parth Bavishi" },
@@ -370,23 +388,22 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     heading: { lead: "Answers to your", em: "first questions." },
     items: [
       { q: "What is IVF and how does it work?", a: "IVF (In-Vitro Fertilisation) is a process where an egg is fertilised by sperm outside the body. The resulting embryo is then transferred to the uterus. The process involves ovarian stimulation, egg retrieval, fertilisation, embryo culture and transfer." },
-      { q: "What are the success rates at Bavishi Fertility Centre?", a: "Our success rates are among the highest in India — typically 55–70% per cycle for women under 35, with rates personalised based on age, diagnosis and treatment plan." },
+      { q: "What are the success rates at Bavishi Fertility Centre?", a: "Our success rates are among the highest in India — typically 55–70% per cycle for women under 35, based on our internal clinical data. Rates are personalised based on age, diagnosis and treatment plan — ask us for detailed, up-to-date statistics during your consultation." },
       { q: "How much does IVF cost?", a: "IVF costs vary based on the protocol, medication and additional procedures required. Use our IVF Cost Calculator for a transparent estimate or speak to our team for a personalised quote." },
       { q: "Is fertility treatment painful?", a: "Most fertility treatments cause minimal discomfort. Egg retrieval is performed under sedation. Our team prioritises your comfort at every step." },
-      { q: "How do I get started?", a: "Begin with a consultation — in-person or by video. Our specialists will review your history and design a personalised plan." },
-      { q: "Do you offer video consultations?", a: "Yes. Secure video consultations are available with all our senior specialists, across India and internationally." },
-      { q: "What is the Suraksha Kavach refund program?", a: "Suraksha Kavach is our pioneering refund-and-protection program: eligible patients pay only for success, with a refund guarantee if treatment outcomes are not achieved." },
+      { q: "How do I get started?", a: "Begin with a consultation at any of our 14 centres. Our specialists will review your history and design a personalised plan." },
+      { q: "What is the Suraksha Kavach program?", a: "Suraksha Kavach is our pioneering protection program designed to give you peace of mind on your fertility journey. Eligible patients receive multiple IVF cycles as needed, with financial protection if a clinical pregnancy is not achieved. Eligibility criteria and full terms are explained during your consultation." },
     ],
   },
   finalCta: {
     eyebrow: "Begin Today",
     heading: { lead: "Ready to begin your", em: "parenthood journey?" },
     paragraph:
-      "Speak with our fertility experts today — confidential, compassionate and complimentary.",
+      "Speak with our fertility experts today — confidential, compassionate and personalised.",
     stats: [
-      { v: 30000, s: "+", l: "Pregnancies" },
-      { v: 40, s: "+", l: "Years" },
-      { v: 15, s: "+", l: "Centres" },
+      { v: 30000, s: "+", l: "Happy Families" },
+      { v: 30, s: "+", l: "Years" },
+      { v: 14, s: "", l: "Centres" },
     ],
     ctas: ["Book Consultation", "WhatsApp Now", "Call Now"],
   },
@@ -399,13 +416,11 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
       { icon: "Stethoscope", t: "Male Infertility", d: "Comprehensive evaluation and treatment for male factors." },
       { icon: "HeartPulse", t: "Female Infertility", d: "Personalised pathways for every female fertility concern." },
       { icon: "Sparkles", t: "Advanced Fertility Techniques", d: "Latest assisted reproduction protocols." },
-      { icon: "Dna", t: "PGT — Genetic Testing", d: "Pre-implantation testing for healthier embryos." },
       { icon: "Activity", t: "IUI", d: "Intrauterine insemination for select fertility profiles." },
       { icon: "FlaskConical", t: "IVF / ICSI / ART", d: "Advanced in-vitro fertilisation with ICSI." },
       { icon: "Microscope", t: "Fertility Preservation", d: "Egg, sperm and embryo freezing for the future." },
       { icon: "Baby", t: "Sperm Donation", d: "Screened, ethical donor sperm programs." },
       { icon: "Baby", t: "Egg Donation", d: "Carefully matched egg donor programs." },
-      { icon: "Baby", t: "Embryo Donation", d: "A compassionate path to parenthood." },
       { icon: "HeartPulse", t: "Fibroids", d: "Diagnosis and fertility-preserving treatment." },
       { icon: "HeartPulse", t: "Endometriosis", d: "Specialised endometriosis fertility care." },
       { icon: "Sparkles", t: "Ovarian Rejuvenation", d: "Advanced therapy for diminished ovarian reserve." },
@@ -415,7 +430,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   },
   successStories: {
     eyebrow: "Success Stories",
-    heading: { lead: "30,000+ journeys.", em: "One promise kept." },
+    heading: { lead: "30,000+ couples.", em: "One promise kept." },
     subtitle: "Real stories from real families who began their parenthood journey with us.",
     ctaLabel: "View More Success Stories",
   },
@@ -452,7 +467,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   inquiry: {
     eyebrow: "Book an Appointment",
     heading: { lead: "Start your", em: "parenthood journey." },
-    subtitle: "Share a few details and our fertility counsellor will call you back — confidential, compassionate and complimentary.",
+    subtitle: "Share a few details and our fertility counsellor will call you back — confidential, compassionate and personalised.",
     contacts: [
       { h: "Call us", d: "+91 97126 22288" },
       { h: "WhatsApp", d: "Chat with our team 24×7" },
@@ -462,10 +477,10 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   locations: {
     eyebrow: "Our Locations",
     heading: { lead: "Find a Bavishi Fertility Institute Centre", em: "near you." },
-    subtitle: "15 centres across 8 cities — premium fertility care, close to home wherever you are.",
+    subtitle: "14 centres across 8 cities — premium fertility care, close to home wherever you are.",
     cities: [
-      { c: "Ahmedabad", n: 3, s: "ahmedabad" },
-      { c: "Mumbai", n: 5, s: "mumbai" },
+      { c: "Ahmedabad", n: 3, s: "ahmedabad", centres: ["Paldi", "Sindhu Bhavan", "Nikol"] },
+      { c: "Mumbai", n: 5, s: "mumbai", centres: ["Ghatkopar", "Thane", "Vile Parle", "Borivali", "Vashi"] },
       { c: "Vadodara", n: 1, s: "vadodara" },
       { c: "Surat", n: 1, s: "surat" },
       { c: "Bhuj", n: 1, s: "bhuj" },
@@ -490,12 +505,12 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
     ],
   },
   seo: {
-    metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 40+ Years",
+    metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 30+ Years",
     metaDescription:
-      "Premium fertility care across 15 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
+      "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
     ogTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     ogDescription:
-      "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 30+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     ogImage: heroImg,
   },
 };
@@ -723,6 +738,14 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     l: s?.label ?? def?.l ?? "",
   }));
 
+  const accolades: AccoladeItem[] = mergeList(
+    (src as any).accolades, d.accolades,
+    (a: any, def: AccoladeItem | undefined) => ({
+      text: a?.text ?? def?.text ?? "",
+      source: a?.source ?? def?.source ?? "",
+    }),
+  );
+
   const whyBavishi = src.whyBavishi?.cards?.length
     ? {
         eyebrow: src.whyBavishi.eyebrow ?? d.whyBavishi.eyebrow,
@@ -927,6 +950,7 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
       c: x?.c ?? def?.c ?? "",
       n: x?.n ?? def?.n ?? 1,
       s: x?.s ?? def?.s ?? "",
+      centres: def?.centres,
     })),
   };
   const calculators = {
@@ -946,7 +970,7 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     ogImage: d.seo.ogImage,
   };
 
-  return { layout, hero, stats, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, locations, calculators, seo };
+  return { layout, hero, stats, accolades, whyBavishi, whyChoose, suraksha, about, treatments, awards, events, videos, faq, finalCta, successStories, videoHub, doctors, blogs, testimonials, media, inquiry, locations, calculators, seo };
 }
 
 /**

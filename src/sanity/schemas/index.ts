@@ -1,0 +1,67 @@
+import robotsConfig from "./robotsConfig";
+import scriptsConfig from "./scriptsConfig";
+import campsConfig from "./campsConfig";
+import redirectsConfig from "./redirectsConfig";
+import sitemapConfig from "./sitemapConfig";
+import schemaOrgConfig from "./schemaOrgConfig";
+import pageSeo from "./pageSeo";
+import inquiry from "./inquiry";
+import doctor from "./doctor";
+import testimonial from "./testimonial";
+import homepage from "./homepage";
+import siteSettings from "./siteSettings";
+import educationVideo from "./educationVideo";
+import blog from "./blog";
+import treatment from "./treatment";
+import service from "./service";
+import city from "./city";
+import centre from "./centre";
+import aboutPage from "./aboutPage";
+import surakshaKavach from "./surakshaKavach";
+import historyPage from "./history";
+import infrastructurePage from "./infrastructurePage";
+import whyBfiPage from "./whyBfiPage";
+import simpleTreatmentPage from "./simpleTreatmentPage";
+import safeTreatmentPage from "./safeTreatmentPage";
+import smartTreatmentPage from "./smartTreatmentPage";
+import successBenchmarksPage from "./successBenchmarksPage";
+import googleReview from "./googleReview";
+import reviewMeta from "./reviewMeta";
+import press from "./press";
+import categoryHubPage from "./categoryHubPage";
+import adminUser from "./adminUser";
+
+export const schemas = [
+  robotsConfig,
+  scriptsConfig,
+  campsConfig,
+  redirectsConfig,
+  sitemapConfig,
+  schemaOrgConfig,
+  pageSeo,
+  inquiry,
+  doctor,
+  testimonial,
+  homepage,
+  siteSettings,
+  educationVideo,
+  blog,
+  treatment,
+  service,
+  city,
+  centre,
+  aboutPage,
+  surakshaKavach,
+  historyPage,
+  infrastructurePage,
+  whyBfiPage,
+  simpleTreatmentPage,
+  safeTreatmentPage,
+  smartTreatmentPage,
+  successBenchmarksPage,
+  googleReview,
+  reviewMeta,
+  press,
+  categoryHubPage,
+  adminUser,
+];

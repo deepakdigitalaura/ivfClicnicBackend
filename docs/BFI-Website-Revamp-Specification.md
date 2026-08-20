@@ -198,7 +198,7 @@ Ahmedabad hub → Paldi, Sindhu Bhavan Road, Nikol · Mumbai hub → Ghatkopar, 
 ## 6. PAGE SPECS (highlights)
 
 ### Homepage (17 sections, top→bottom)
-1. Hero (full-viewport, animated pink→white gradient). H1 = "India's Most Trusted Fertility Institute". Subhead emphasizes 30,000+ babies, 40 years, Suraksha Kavach guarantee. Two CTAs (Book Free Consultation / Watch Success Stories). Floating sticky header.
+1. Hero (full-viewport, animated pink→white gradient). H1 = "India's Most Trusted Fertility Institute". Subhead emphasizes 30,000+ babies, 40 years, Suraksha Kavach guarantee. Two CTAs (Book Consultation / Watch Success Stories). Floating sticky header.
 2. Live trust ticker (animated marquee)
 3. Stats (4 animated counters): 30,000+ pregnancies · 15 centers · 40 years (since 1984) · 1,800+ five-star reviews
 4. Suraksha Kavach section (prominent)
@@ -379,7 +379,7 @@ Targets: LCP <2.0s, CLS <0.05, INP <150ms, FCP <1.5s, TTFB <200ms. Next `<Image>
 - Accreditation: **FOGSI Certified Fertility Training Center**
 
 ## APPENDIX B: BRAND VOICE
-Warm, expert, hopeful — never clinical/cold/fear-based. The trusted doctor friend. Do: "Your dream of becoming a parent is possible. Here's how we help." Don't: "Infertility is a complex medical condition." Headlines specific/benefit-led/emotional. CTAs action-oriented ("Book Your Free Consultation", not "Submit").
+Warm, expert, hopeful — never clinical/cold/fear-based. The trusted doctor friend. Do: "Your dream of becoming a parent is possible. Here's how we help." Don't: "Infertility is a complex medical condition." Headlines specific/benefit-led/emotional. CTAs action-oriented ("Book Your Consultation", not "Submit").
 
 ## APPENDIX C: COMPETITORS
 Nova IVF, Cloudnine Fertility, Bloom IVF, Oasis Fertility, Indira IVF. BFI's unique edge vs all: **Suraksha Kavach** money-back guarantee (no competitor offers at scale) — primary differentiator in all content/CTAs.

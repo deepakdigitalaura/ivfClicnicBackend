@@ -69,6 +69,8 @@ export interface Config {
   collections: {
     inquiries: Inquiry;
     testimonials: Testimonial;
+    'testimonial-videos': TestimonialVideo;
+    'education-videos': EducationVideo;
     pages: Page;
     blogs: Blog;
     authors: Author;
@@ -78,6 +80,7 @@ export interface Config {
     treatments: Treatment;
     cities: City;
     centres: Centre;
+    calculators: Calculator;
     redirects: Redirect;
     media: Media;
     users: User;
@@ -90,6 +93,8 @@ export interface Config {
   collectionsSelect: {
     inquiries: InquiriesSelect<false> | InquiriesSelect<true>;
     testimonials: TestimonialsSelect<false> | TestimonialsSelect<true>;
+    'testimonial-videos': TestimonialVideosSelect<false> | TestimonialVideosSelect<true>;
+    'education-videos': EducationVideosSelect<false> | EducationVideosSelect<true>;
     pages: PagesSelect<false> | PagesSelect<true>;
     blogs: BlogsSelect<false> | BlogsSelect<true>;
     authors: AuthorsSelect<false> | AuthorsSelect<true>;
@@ -99,6 +104,7 @@ export interface Config {
     treatments: TreatmentsSelect<false> | TreatmentsSelect<true>;
     cities: CitiesSelect<false> | CitiesSelect<true>;
     centres: CentresSelect<false> | CentresSelect<true>;
+    calculators: CalculatorsSelect<false> | CalculatorsSelect<true>;
     redirects: RedirectsSelect<false> | RedirectsSelect<true>;
     media: MediaSelect<false> | MediaSelect<true>;
     users: UsersSelect<false> | UsersSelect<true>;
@@ -221,6 +227,76 @@ export interface Testimonial {
   createdAt: string;
 }
 /**
+ * Patient-story YouTube videos shown on the Testimonial Videos page. Add a video by pasting its YouTube ID, the patient's name and a short quote.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial-videos".
+ */
+export interface TestimonialVideo {
+  id: number;
+  /**
+   * Shown under the quote, e.g. 'Anita Thakkar' or 'Rekha's Journey'.
+   */
+  patientName: string;
+  /**
+   * How many stars to show, from 1 to 5.
+   */
+  rating: number;
+  /**
+   * The ID after watch?v= in a YouTube URL. e.g. for youtube.com/watch?v=6bH_RnV-_2Y the ID is '6bH_RnV-_2Y'.
+   */
+  youtubeId: string;
+  /**
+   * A short line in the patient's words, shown on the card.
+   */
+  quote: string;
+  /**
+   * Untick to hide this video without deleting it.
+   */
+  published?: boolean | null;
+  /**
+   * Lower numbers show first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
+ * Educational YouTube videos shown on the Education Videos page. Add a video by pasting its YouTube ID and a short description.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "education-videos".
+ */
+export interface EducationVideo {
+  id: number;
+  /**
+   * The heading shown on the video card.
+   */
+  title: string;
+  /**
+   * Groups the video under a filter tab, e.g. 'IVF', 'IVF Cost', 'Male Infertility'.
+   */
+  category: string;
+  /**
+   * The ID after watch?v= in a YouTube URL. e.g. for youtube.com/watch?v=lovYgHlbZoE the ID is 'lovYgHlbZoE'.
+   */
+  youtubeId: string;
+  /**
+   * One or two sentences shown under the title on the card.
+   */
+  description?: string | null;
+  /**
+   * Untick to hide this video without deleting it.
+   */
+  published?: boolean | null;
+  /**
+   * Lower numbers show first.
+   */
+  order?: number | null;
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages".
  */
@@ -334,6 +410,8 @@ export interface Blog {
    */
   excerpt?: string | null;
   heroImage?: (number | null) | Media;
+  heroTextDark?: boolean | null;
+  heroImagePosition?: ('center center' | 'right center' | 'left center' | 'right top' | 'center top' | 'center bottom') | null;
   content?: {
     root: {
       type: string;
@@ -367,11 +445,65 @@ export interface Blog {
    */
   publishedAt?: string | null;
   /**
-   * Treatment page IDs this article links to (drives the Related Articles list). Ask the website team if unsure of the exact IDs.
+   * Shown as 'Last updated' on the article and used for the search-engine dateModified signal. Leave blank to use the Published Date.
+   */
+  lastUpdatedAt?: string | null;
+  /**
+   * Treatment pages this article links to (drives the Related Articles list on those pages). Click 'Add Related Treatment' and pick from the list.
    */
   treatmentSlugs?:
     | {
-        slug: string;
+        slug:
+          | 'ivf'
+          | 'icsi'
+          | 'iui'
+          | 'picsi'
+          | 'imsi'
+          | 'macs'
+          | 'spindle-view-icsi'
+          | 'blastocyst-transfer'
+          | 'laser-hatching'
+          | 'ivf-failure'
+          | 'egg-donation'
+          | 'sperm-donation'
+          | 'embryo-donation'
+          | 'male-infertility'
+          | 'female-infertility'
+          | 'fertility-preservation'
+          | 'endometriosis'
+          | 'azoospermia'
+          | 'cryopreservation'
+          | 'recurrent-miscarriage'
+          | 'oligospermia'
+          | 'asthenospermia'
+          | 'surgical-sperm-retrieval'
+          | 'varicocele'
+          | 'erectile-dysfunction'
+          | 'conceive-naturally'
+          | 'prp-infertility'
+          | 'pcos'
+          | 'ovarian-reserve'
+          | 'ovarian-rejuvenation'
+          | 'fibroids';
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * City pages this article links to (drives the Related Articles list on those pages). Click 'Add Related Location' and pick from the list.
+   */
+  locationSlugs?:
+    | {
+        slug: 'ahmedabad' | 'mumbai' | 'vadodara' | 'surat' | 'bhuj' | 'bhavnagar' | 'anand' | 'varanasi';
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Optional. Adds an FAQ accordion to the article and FAQPage search-engine markup.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
         id?: string | null;
       }[]
     | null;
@@ -442,7 +574,7 @@ export interface Author {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: number;
+  id: number | string;
   title: string;
   /**
    * The web address for this category. Changing it breaks existing links, so set it once and leave it.
@@ -2059,6 +2191,70 @@ export interface Centre {
   _status?: ('draft' | 'published') | null;
 }
 /**
+ * Manage the 8 fertility calculator pages — edit titles, descriptions, FAQs and SEO.
+ *
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "calculators".
+ */
+export interface Calculator {
+  id: number;
+  /**
+   * Which calculator this page represents. Set once — do not change.
+   */
+  slug:
+    | 'ivf-success-rate'
+    | 'ivf-cost'
+    | 'ovulation'
+    | 'natural-pregnancy'
+    | 'fertile-period'
+    | 'amh-level'
+    | 'semen-analysis'
+    | 'miscarriage-risk';
+  /**
+   * The main heading shown at the top of the calculator page.
+   */
+  title: string;
+  /**
+   * One or two sentences shown below the page title to explain what the calculator does.
+   */
+  subtitle?: string | null;
+  /**
+   * Disclaimer text shown below the calculator results. E.g. 'Results are estimates only…'
+   */
+  disclaimer?: string | null;
+  /**
+   * Questions and answers shown in the FAQ section below the calculator.
+   */
+  faqs?:
+    | {
+        question: string;
+        answer: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Controls how this page appears in Google search results.
+   */
+  seo?: {
+    /**
+     * Title shown in Google results (50–60 chars).
+     */
+    metaTitle?: string | null;
+    /**
+     * Description shown in Google results (120–160 chars).
+     */
+    metaDescription?: string | null;
+    ogTitle?: string | null;
+    ogDescription?: string | null;
+    /**
+     * Image shown when sharing this page on WhatsApp, Facebook, etc. (1200×630px ideal).
+     */
+    ogImage?: (number | null) | Media;
+  };
+  updatedAt: string;
+  createdAt: string;
+}
+/**
  * Send an old or changed web address to a new one (e.g. after renaming a page) so visitors and search engines never hit a dead link.
  *
  * This interface was referenced by `Config`'s JSON-Schema
@@ -2151,6 +2347,14 @@ export interface PayloadLockedDocument {
         value: number | Testimonial;
       } | null)
     | ({
+        relationTo: 'testimonial-videos';
+        value: number | TestimonialVideo;
+      } | null)
+    | ({
+        relationTo: 'education-videos';
+        value: number | EducationVideo;
+      } | null)
+    | ({
         relationTo: 'pages';
         value: number | Page;
       } | null)
@@ -2185,6 +2389,10 @@ export interface PayloadLockedDocument {
     | ({
         relationTo: 'centres';
         value: number | Centre;
+      } | null)
+    | ({
+        relationTo: 'calculators';
+        value: number | Calculator;
       } | null)
     | ({
         relationTo: 'redirects';
@@ -2273,6 +2481,34 @@ export interface TestimonialsSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "testimonial-videos_select".
+ */
+export interface TestimonialVideosSelect<T extends boolean = true> {
+  patientName?: T;
+  rating?: T;
+  youtubeId?: T;
+  quote?: T;
+  published?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "education-videos_select".
+ */
+export interface EducationVideosSelect<T extends boolean = true> {
+  title?: T;
+  category?: T;
+  youtubeId?: T;
+  description?: T;
+  published?: T;
+  order?: T;
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "pages_select".
  */
 export interface PagesSelect<T extends boolean = true> {
@@ -2322,16 +2558,31 @@ export interface BlogsSelect<T extends boolean = true> {
   slug?: T;
   excerpt?: T;
   heroImage?: T;
+  heroTextDark?: T;
   content?: T;
   author?: T;
   reviewedBy?: T;
   category?: T;
   readMins?: T;
   publishedAt?: T;
+  lastUpdatedAt?: T;
   treatmentSlugs?:
     | T
     | {
         slug?: T;
+        id?: T;
+      };
+  locationSlugs?:
+    | T
+    | {
+        slug?: T;
+        id?: T;
+      };
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
         id?: T;
       };
   seo?:
@@ -3291,6 +3542,34 @@ export interface CentresSelect<T extends boolean = true> {
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "calculators_select".
+ */
+export interface CalculatorsSelect<T extends boolean = true> {
+  slug?: T;
+  title?: T;
+  subtitle?: T;
+  disclaimer?: T;
+  faqs?:
+    | T
+    | {
+        question?: T;
+        answer?: T;
+        id?: T;
+      };
+  seo?:
+    | T
+    | {
+        metaTitle?: T;
+        metaDescription?: T;
+        ogTitle?: T;
+        ogDescription?: T;
+        ogImage?: T;
+      };
+  updatedAt?: T;
+  createdAt?: T;
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
  * via the `definition` "redirects_select".
  */
 export interface RedirectsSelect<T extends boolean = true> {
@@ -3400,7 +3679,7 @@ export interface SiteSetting {
    */
   logoUrl?: string | null;
   /**
-   * Year, e.g. 1984.
+   * Year, e.g. 1998.
    */
   foundingDate?: string | null;
   /**
@@ -3775,6 +4054,7 @@ export interface Homepage {
         section:
           | 'hero'
           | 'stats'
+          | 'accolades'
           | 'whyBavishi'
           | 'suraksha'
           | 'treatments'
@@ -4028,7 +4308,7 @@ export interface Homepage {
     imageAlt?: string | null;
   };
   /**
-   * The homepage's 'About the Institute' summary section (its own copy — separate from the full About BFI page).
+   * The homepage's 'About the Institute' summary section (its own copy — separate from the full About Bavishi Fertility Institute page).
    */
   about?: {
     eyebrow?: string | null;
@@ -4056,7 +4336,7 @@ export interface Homepage {
            */
           k: string;
           /**
-           * Value, e.g. '40+ Years'.
+           * Value, e.g. '30+ Years'.
            */
           v: string;
           id?: string | null;
@@ -4065,7 +4345,7 @@ export interface Homepage {
     primaryCta?: string | null;
     secondaryCta?: string | null;
     /**
-     * e.g. 'Since 1983'.
+     * e.g. 'Since 1998'.
      */
     sinceValue?: string | null;
     /**
@@ -4710,7 +4990,7 @@ export interface AboutPage {
       }[]
     | null;
   /**
-   * The '40+ Years of Legacy' section heading. Leave empty to use the default.
+   * The '30+ Years of Legacy' section heading. Leave empty to use the default.
    */
   legacy?: {
     eyebrow?: string | null;
@@ -4734,7 +5014,7 @@ export interface AboutPage {
   milestones?:
     | {
         /**
-         * Year or label, e.g. '1984' or 'Today'.
+         * Year or label, e.g. '1998' or 'Today'.
          */
         y: string;
         /**
@@ -5783,6 +6063,307 @@ export interface CollectionsWidget {
     [k: string]: unknown;
   };
   width: 'full';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "StatStripBlock".
+ */
+export interface StatStripBlock {
+  items?:
+    | {
+        /**
+         * Short, e.g. '8 Types' or '15 min'.
+         */
+        value: string;
+        /**
+         * Caption under the value.
+         */
+        label: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'statStrip';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ComparisonTableBlock".
+ */
+export interface ComparisonTableBlock {
+  /**
+   * Header for the left-most label column.
+   */
+  rowHeader?: string | null;
+  columns?:
+    | {
+        header: string;
+        id?: string | null;
+      }[]
+    | null;
+  rows?:
+    | {
+        rowLabel: string;
+        cells?:
+          | {
+              value: string;
+              id?: string | null;
+            }[]
+          | null;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'comparisonTable';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "HighlightCardBlock".
+ */
+export interface HighlightCardBlock {
+  /**
+   * e.g. 'CONVENTIONAL IVF'
+   */
+  badge: string;
+  /**
+   * One line next to the badge.
+   */
+  tagline?: string | null;
+  /**
+   * Shown in a medallion on the card — pick whatever best represents this option.
+   */
+  icon?:
+    | (
+        | 'ScanLine'
+        | 'Feather'
+        | 'Baby'
+        | 'Stethoscope'
+        | 'ShieldCheck'
+        | 'Users'
+        | 'HeartPulse'
+        | 'Activity'
+        | 'ClipboardList'
+        | 'CalendarCheck'
+        | 'Eye'
+        | 'Clock'
+        | 'Microscope'
+        | 'Sparkles'
+        | 'Hand'
+        | 'FlaskConical'
+        | 'Filter'
+        | 'Magnet'
+        | 'Layers'
+        | 'Zap'
+        | 'Egg'
+        | 'Droplets'
+        | 'Snowflake'
+        | 'Dna'
+        | 'Beaker'
+        | 'Target'
+        | 'Leaf'
+        | 'ListChecks'
+        | 'ClipboardCheck'
+        | 'Syringe'
+        | 'Award'
+      )
+    | null;
+  color?: ('plum' | 'rose' | 'gold') | null;
+  /**
+   * Optional small facts row (label + value), e.g. 'Best for / Male factor infertility'.
+   */
+  facts?:
+    | {
+        label: string;
+        value: string;
+        id?: string | null;
+      }[]
+    | null;
+  /**
+   * Highlighted callout text — who this option fits.
+   */
+  bestSuitedFor: string;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'highlightCard';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "DecisionListBlock".
+ */
+export interface DecisionListBlock {
+  heading?: string | null;
+  intro?: string | null;
+  items?:
+    | {
+        icon?:
+          | (
+              | 'ScanLine'
+              | 'Feather'
+              | 'Baby'
+              | 'Stethoscope'
+              | 'ShieldCheck'
+              | 'Users'
+              | 'HeartPulse'
+              | 'Activity'
+              | 'ClipboardList'
+              | 'CalendarCheck'
+              | 'Eye'
+              | 'Clock'
+              | 'Microscope'
+              | 'Sparkles'
+              | 'Hand'
+              | 'FlaskConical'
+              | 'Filter'
+              | 'Magnet'
+              | 'Layers'
+              | 'Zap'
+              | 'Egg'
+              | 'Droplets'
+              | 'Snowflake'
+              | 'Dna'
+              | 'Beaker'
+              | 'Target'
+              | 'Leaf'
+              | 'ListChecks'
+              | 'ClipboardCheck'
+              | 'Syringe'
+              | 'Award'
+            )
+          | null;
+        situation: string;
+        recommendation: string;
+        id?: string | null;
+      }[]
+    | null;
+  note?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'decisionList';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ConclusionPanelBlock".
+ */
+export interface ConclusionPanelBlock {
+  /**
+   * e.g. 'Key Takeaways'
+   */
+  headline?: string | null;
+  points?:
+    | {
+        icon?:
+          | (
+              | 'ScanLine'
+              | 'Feather'
+              | 'Baby'
+              | 'Stethoscope'
+              | 'ShieldCheck'
+              | 'Users'
+              | 'HeartPulse'
+              | 'Activity'
+              | 'ClipboardList'
+              | 'CalendarCheck'
+              | 'Eye'
+              | 'Clock'
+              | 'Microscope'
+              | 'Sparkles'
+              | 'Hand'
+              | 'FlaskConical'
+              | 'Filter'
+              | 'Magnet'
+              | 'Layers'
+              | 'Zap'
+              | 'Egg'
+              | 'Droplets'
+              | 'Snowflake'
+              | 'Dna'
+              | 'Beaker'
+              | 'Target'
+              | 'Leaf'
+              | 'ListChecks'
+              | 'ClipboardCheck'
+              | 'Syringe'
+              | 'Award'
+            )
+          | null;
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'conclusionPanel';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InfographicBlock".
+ */
+export interface InfographicBlock {
+  /**
+   * Optional label shown above the graphic.
+   */
+  title?: string | null;
+  /**
+   * Raw inline SVG markup (must start with <svg). Set by the editorial team only.
+   */
+  svgContent: string;
+  /**
+   * Descriptive text for screen readers.
+   */
+  altText: string;
+  /**
+   * Optional caption displayed below the graphic.
+   */
+  caption?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'infographic';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "InlineCtaBlock".
+ */
+export interface InlineCtaBlock {
+  /**
+   * Short question or hook, e.g. 'Not sure which treatment is right for you?'
+   */
+  headline: string;
+  /**
+   * One supporting sentence.
+   */
+  subtext?: string | null;
+  buttons?:
+    | {
+        label: string;
+        url: string;
+        variant?: ('primary' | 'secondary') | null;
+        id?: string | null;
+      }[]
+    | null;
+  accent?: ('rose' | 'plum' | 'gold') | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'inlineCta';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ExternalImageBlock".
+ */
+export interface ExternalImageBlock {
+  /**
+   * Full CDN URL (Pexels/Unsplash). Set by editorial team only.
+   */
+  url: string;
+  alt: string;
+  caption?: string | null;
+  /**
+   * e.g. 'Photo: Pexels / Tima Miroshnichenko'
+   */
+  credit?: string | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'externalImage';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema

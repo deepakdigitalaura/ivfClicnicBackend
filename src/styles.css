@@ -123,6 +123,13 @@
       radial-gradient(50% 40% at 0% 100%, color-mix(in oklab, var(--gold) 18%, transparent), transparent 60%),
       linear-gradient(180deg, var(--plum), oklch(0.18 0.07 305));
   }
+  /* Dark-purple wash over a hero photo: solid enough on the left/bottom for
+     white text, sheer enough on the right to keep the image readable. */
+  .gradient-dark-overlay {
+    background:
+      linear-gradient(100deg, color-mix(in oklab, var(--plum) 95%, transparent) 0%, color-mix(in oklab, var(--plum) 88%, transparent) 35%, color-mix(in oklab, var(--plum) 55%, transparent) 65%, color-mix(in oklab, var(--plum) 38%, transparent) 100%),
+      linear-gradient(180deg, color-mix(in oklab, oklch(0.18 0.07 305) 35%, transparent) 0%, transparent 35%, transparent 65%, color-mix(in oklab, oklch(0.18 0.07 305) 65%, transparent) 100%);
+  }
 
   .text-balance { text-wrap: balance; }
   .text-pretty  { text-wrap: pretty; }
