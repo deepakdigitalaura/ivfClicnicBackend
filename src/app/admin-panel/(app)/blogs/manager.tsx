@@ -9,6 +9,7 @@ const BLOG_HERO_IMAGE_POSITIONS = [
   "right top", "center top", "center bottom",
 ] as const;
 import { ImageUpload } from "../_components/image-upload";
+import { RichTextEditor } from "../_components/rich-text-editor";
 import { useSave, Toast } from "../_components/save-kit";
 
 type Tab = "published" | "drafts";
@@ -101,9 +102,9 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
           </div>
 
           <p className="admin-hint" style={{ marginBottom: 14 }}>
-            This sets the title, summary &amp; metadata only. The article body, FAQs and SEO fields
-            are written in <a href="/studio" target="_blank" style={{ color: "var(--rose)" }}>Sanity Studio</a> —
-            new posts save as a draft so you can finish the body there before publishing.
+            Title, summary, metadata and article body are all set here. FAQs and advanced SEO fields
+            still go through <a href="/studio" target="_blank" style={{ color: "var(--rose)" }}>Sanity Studio</a>.
+            New posts save as a draft until you publish them.
           </p>
 
           <div className="admin-row-grid">
@@ -168,6 +169,11 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
                 <option key={pos} value={pos}>{HERO_POSITION_LABELS[pos]}</option>
               ))}
             </select>
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Article Body</label>
+            <RichTextEditor value={editing.contentRaw} onChange={(json) => set({ contentRaw: json })} />
           </div>
 
           <div className="admin-actions-bar">

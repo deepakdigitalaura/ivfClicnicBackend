@@ -24,10 +24,12 @@ export default defineType({
         ),
       },
     }),
-    // Article body — stored as raw Lexical JSON; rendered by rich-text.tsx
+    // Article body — stored as raw Lexical JSON; authored via the admin
+    // panel's RichTextEditor, rendered by rich-text.tsx. Read-only here
+    // since hand-editing JSON in a plain text box is unsafe.
     defineField({
       name: "contentRaw",
-      title: "Article Body (raw JSON — do not edit manually)",
+      title: "Article Body (raw JSON — edit from /admin-panel/blogs, not here)",
       type: "text",
       readOnly: true,
     }),
