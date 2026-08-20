@@ -127,12 +127,18 @@
 }
 .admin-toggle:checked::after { left: 21px; }
 
-/* Buttons */
-.admin-btn {
+/* Buttons — .admin-btn-ghost/.admin-btn-danger are used standalone
+   throughout the admin panel (not combined with .admin-btn), so they
+   carry the full base styling themselves rather than only overriding
+   colour on top of a class that isn't present. */
+.admin-btn, .admin-btn-ghost, .admin-btn-danger {
   display: inline-flex; align-items: center; gap: 8px;
-  background: var(--rose); color: #fff; border: none;
   padding: 10px 20px; border-radius: 10px; font-size: 14px; font-weight: 600;
-  cursor: pointer; transition: filter .12s, opacity .12s; font-family: inherit;
+  cursor: pointer; transition: filter .12s, opacity .12s, background .12s, border-color .12s;
+  font-family: inherit;
+}
+.admin-btn {
+  background: var(--rose); color: #fff; border: none;
 }
 .admin-btn:hover { filter: brightness(1.05); }
 .admin-btn:disabled { opacity: .6; cursor: not-allowed; }
@@ -142,6 +148,7 @@
 .admin-btn-ghost:hover { background: var(--muted); filter: none; }
 .admin-btn-danger { background: #fff; color: var(--destructive); border: 1px solid var(--border); }
 .admin-btn-danger:hover { background: #fef2f2; border-color: var(--destructive); filter: none; }
+.admin-btn-ghost:disabled, .admin-btn-danger:disabled { opacity: .6; cursor: not-allowed; }
 
 .admin-actions-bar {
   display: flex; align-items: center; gap: 12px; margin-top: 22px;
