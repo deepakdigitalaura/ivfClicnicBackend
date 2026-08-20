@@ -302,3 +302,13 @@
   .admin-editor-body { grid-template-columns: 1fr; grid-template-rows: 1fr 1fr; }
   .admin-editor-forms { border-right: none; border-bottom: 1px solid var(--border); }
 }
+
+.admin-rte-p { margin: 0 0 10px; }
+.admin-rte-h2 { font-size: 20px; font-weight: 600; margin: 18px 0 8px; }
+.admin-rte-h3 { font-size: 17px; font-weight: 600; margin: 16px 0 8px; }
+.admin-rte-h4 { font-size: 15px; font-weight: 600; margin: 14px 0 6px; }
+.admin-rte-quote { border-left: 3px solid var(--rose); padding: 4px 0 4px 12px; margin: 10px 0; color: var(--muted-foreground); font-style: italic; }
+.admin-rte-ul, .admin-rte-ol { margin: 0 0 10px 22px; }
+.admin-rte-link { color: var(--rose); text-decoration: underline; }
+.admin-rte-bold { font-weight: 700; }
+.admin-rte-italic { font-style: italic; }

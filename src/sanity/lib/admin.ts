@@ -898,22 +898,24 @@ export type AdminBlogMeta = {
   status?: string | null;
   publishedAt?: string | null;
   lastUpdatedAt?: string | null;
+  contentRaw?: string | null;
 };
 
 export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt }`,
+      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt, contentRaw }`,
     );
   } catch {
     return [];
   }
 }
 
-/** Quick-add / meta-edit from the admin panel. Article body (contentRaw) and
- *  SEO/FAQs are intentionally left untouched here — those still go through
- *  Sanity Studio. New posts default to draft until someone publishes them. */
+/** Quick-add / meta-edit from the admin panel, including the article body
+ *  (contentRaw — Lexical JSON authored via the RichTextEditor component).
+ *  FAQs and SEO fields still go through Sanity Studio. New posts default
+ *  to draft until someone publishes them. */
 export async function saveBlog(doc: AdminBlogMeta) {
   const { _id, ...rest } = doc;
   if (_id) {
