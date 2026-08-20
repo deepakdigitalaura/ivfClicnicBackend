@@ -69,3 +69,7 @@ public/assets/DR.Deep videos/
 # gap-filler renders (processed/renamed copies already committed under
 # public/assets/awards/, see src/lib/awards.ts)
 public/awards and achievment/
+
+# Staging path for CI-built deploys landing on the Cloudways server (jailed
+# SFTP scope means it must live inside the app dir, not /home/master)
+.deploy-incoming/
