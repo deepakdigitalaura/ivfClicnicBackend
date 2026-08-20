@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getHistoryPage } from "@/lib/payload";
 
 const PATH = "/history";
 
@@ -21,6 +22,7 @@ const graph = [
   breadcrumbSchema([ { name: "Home", url: "/" }, { name: "History", url: PATH } ]),
 ];
 
-export default function Page() {
-  return (<><JsonLd graph={graph} /><PageSeoSchema path={PATH} /><HistoryPage /></>);
+export default async function Page() {
+  const data = await getHistoryPage();
+  return (<><JsonLd graph={graph} /><PageSeoSchema path={PATH} /><HistoryPage data={data} /></>);
 }

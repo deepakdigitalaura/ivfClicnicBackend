@@ -17,10 +17,19 @@ import service from "./service";
 import city from "./city";
 import centre from "./centre";
 import aboutPage from "./aboutPage";
+import surakshaKavach from "./surakshaKavach";
+import historyPage from "./history";
+import infrastructurePage from "./infrastructurePage";
+import whyBfiPage from "./whyBfiPage";
+import simpleTreatmentPage from "./simpleTreatmentPage";
+import safeTreatmentPage from "./safeTreatmentPage";
+import smartTreatmentPage from "./smartTreatmentPage";
+import successBenchmarksPage from "./successBenchmarksPage";
 import googleReview from "./googleReview";
 import reviewMeta from "./reviewMeta";
-import pageFaqsConfig from "./pageFaqsConfig";
 import press from "./press";
+import categoryHubPage from "./categoryHubPage";
+import adminUser from "./adminUser";
 
 export const schemas = [
   robotsConfig,
@@ -42,8 +51,17 @@ export const schemas = [
   city,
   centre,
   aboutPage,
+  surakshaKavach,
+  historyPage,
+  infrastructurePage,
+  whyBfiPage,
+  simpleTreatmentPage,
+  safeTreatmentPage,
+  smartTreatmentPage,
+  successBenchmarksPage,
   googleReview,
   reviewMeta,
-  pageFaqsConfig,
   press,
+  categoryHubPage,
+  adminUser,
 ];
