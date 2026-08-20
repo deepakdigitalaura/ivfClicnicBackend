@@ -36,15 +36,31 @@ jobs:
       - name: Build
         run: npm run build
 
+      # Assemble the final runtime layout locally (standalone output needs
+      # static/public copied in per Next.js docs), then ship it as ONE
+      # tarball over a single SSH stream. Per-file scp/sftp on this account
+      # is jailed and painfully slow for a tree with thousands of small
+      # node_modules files (a prior attempt took over an hour and was still
+      # crawling) — piping a single tar through the plain SSH exec channel
+      # (not SFTP) avoids that overhead entirely.
+      - name: Package build
+        run: |
+          rm -rf deploy-package
+          mkdir -p deploy-package
+          cp -r .next/standalone/. deploy-package/
+          rm -rf deploy-package/.next/static
+          cp -r .next/static deploy-package/.next/static
+          rm -rf deploy-package/public
+          cp -r public deploy-package/public
+          cp .env deploy-package/.env
+          tar -C deploy-package -czf deploy-package.tar.gz .
+
       - name: Upload build to server (staging path)
         run: |
           SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
           REMOTE="${{ secrets.CLOUDWAYS_USER }}@${{ secrets.CLOUDWAYS_HOST }}"
-          ssh $SSH_OPTS "$REMOTE" "rm -rf applications/execjqbwvu/private_html/.deploy-incoming && mkdir -p applications/execjqbwvu/private_html/.deploy-incoming"
-          DEST="$REMOTE:applications/execjqbwvu/private_html/.deploy-incoming"
-          scp $SSH_OPTS -r .next/standalone "$DEST/standalone"
-          scp $SSH_OPTS -r .next/static "$DEST/static"
-          scp $SSH_OPTS -r public "$DEST/public"
+          ssh $SSH_OPTS "$REMOTE" "rm -rf applications/execjqbwvu/private_html/.deploy-incoming.tar.gz"
+          cat deploy-package.tar.gz | ssh $SSH_OPTS "$REMOTE" "cat > applications/execjqbwvu/private_html/.deploy-incoming.tar.gz"
 
       - name: Apply build + restart (via SSH)
         uses: appleboy/ssh-action@v1.0.3
