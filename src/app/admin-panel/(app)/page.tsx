@@ -14,7 +14,7 @@ export default async function Dashboard() {
   const cards = [
     { num: stats.newInquiries, label: "New Inquiries", icon: Inbox, bg: "#dcfce7", fg: "#166534" },
     { num: stats.redirects, label: "Redirects", icon: CornerUpRight, bg: "#ede9fe", fg: "var(--plum)" },
-    { num: stats.headScripts + stats.bodyScripts, label: "Scripts Injected", icon: Code2, bg: "#fef3c7", fg: "#b45309" },
+    { num: stats.headScripts + stats.bodyScripts, label: "Scripts Added", icon: Code2, bg: "#fef3c7", fg: "#b45309" },
   ];
 
   const quick = [
