@@ -1,11 +1,13 @@
 "use client";
 import { useState, useTransition } from "react";
+import { Plus, X } from "lucide-react";
 import { createAdminUserAction, deleteAdminUserAction } from "../../actions";
 
 type UserRow = { _id: string; email: string; role: "superadmin" | "seo" };
 
 export function UsersManager({ initial, currentEmail }: { initial: UserRow[]; currentEmail: string }) {
   const [items, setItems] = useState(initial);
+  const [adding, setAdding] = useState(false);
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [role, setRole] = useState<"superadmin" | "seo">("seo");
@@ -43,26 +45,37 @@ export function UsersManager({ initial, currentEmail }: { initial: UserRow[]; cu
     <div>
       {toast && <div className="admin-toast">{toast}</div>}
 
-      <div className="admin-card" style={{ marginBottom: 24 }}>
-        <h2 className="admin-h2" style={{ marginBottom: 16 }}>Add Account</h2>
-        <div className="admin-form-grid">
-          <label className="admin-label">Email
-            <input className="admin-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
-          </label>
-          <label className="admin-label">Password (min 8 characters)
-            <input className="admin-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
-          </label>
-          <label className="admin-label">Role
-            <select className="admin-input" value={role} onChange={(e) => setRole(e.target.value as "superadmin" | "seo")}>
-              <option value="seo">SEO — can edit, can't delete</option>
-              <option value="superadmin">Superadmin — full access</option>
-            </select>
-          </label>
+      {!adding && (
+        <div style={{ marginBottom: 24 }}>
+          <button type="button" className="admin-btn" onClick={() => setAdding(true)}><Plus size={16} /> Add User</button>
         </div>
-        <div style={{ marginTop: 16 }}>
-          <button className="admin-btn" onClick={add} disabled={pending}>{pending ? "Adding…" : "+ Add Account"}</button>
+      )}
+
+      {adding && (
+        <div className="admin-card" style={{ marginBottom: 24 }}>
+          <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
+            <h2 className="admin-h2" style={{ margin: 0 }}>Add Account</h2>
+            <button type="button" className="admin-btn-ghost" style={{ padding: "7px 10px" }} onClick={() => setAdding(false)}><X size={16} /></button>
+          </div>
+          <div className="admin-form-grid">
+            <label className="admin-label">Email
+              <input className="admin-input" type="email" value={email} onChange={(e) => setEmail(e.target.value)} />
+            </label>
+            <label className="admin-label">Password (min 8 characters)
+              <input className="admin-input" type="password" value={password} onChange={(e) => setPassword(e.target.value)} />
+            </label>
+            <label className="admin-label">Role
+              <select className="admin-input" value={role} onChange={(e) => setRole(e.target.value as "superadmin" | "seo")}>
+                <option value="seo">SEO — can edit, can't delete</option>
+                <option value="superadmin">Superadmin — full access</option>
+              </select>
+            </label>
+          </div>
+          <div style={{ marginTop: 16 }}>
+            <button type="button" className="admin-btn" onClick={add} disabled={pending}>{pending ? "Adding…" : "+ Add Account"}</button>
+          </div>
         </div>
-      </div>
+      )}
 
       <div style={{ display: "grid", gap: 10 }}>
         {items.map((u) => (
