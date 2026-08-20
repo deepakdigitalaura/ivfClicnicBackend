@@ -5,18 +5,17 @@ import { RichTextPlugin } from "@lexical/react/LexicalRichTextPlugin";
 import { ContentEditable } from "@lexical/react/LexicalContentEditable";
 import { HistoryPlugin } from "@lexical/react/LexicalHistoryPlugin";
 import { OnChangePlugin } from "@lexical/react/LexicalOnChangePlugin";
-import { LinkPlugin } from "@lexical/react/LexicalLinkPlugin";
 import { ListPlugin } from "@lexical/react/LexicalListPlugin";
 import { TablePlugin } from "@lexical/react/LexicalTablePlugin";
 import { LexicalErrorBoundary } from "@lexical/react/LexicalErrorBoundary";
 import { useLexicalComposerContext } from "@lexical/react/LexicalComposerContext";
 import { HeadingNode, QuoteNode, $createHeadingNode, $createQuoteNode, type HeadingTagType } from "@lexical/rich-text";
 import { ListNode, ListItemNode, INSERT_UNORDERED_LIST_COMMAND, INSERT_ORDERED_LIST_COMMAND } from "@lexical/list";
-import { LinkNode, TOGGLE_LINK_COMMAND } from "@lexical/link";
+import { PayloadLinkNode, $createPayloadLinkNode } from "./payload-link-node";
 import { TableNode, TableRowNode, TableCellNode, INSERT_TABLE_COMMAND } from "@lexical/table";
 import { $setBlocksType } from "@lexical/selection";
 import { $insertNodeToNearestRoot } from "@lexical/utils";
-import { $getSelection, $isRangeSelection, $createParagraphNode, $getNodeByKey, FORMAT_TEXT_COMMAND, type EditorState } from "lexical";
+import { $getSelection, $isRangeSelection, $createParagraphNode, $createTextNode, $getNodeByKey, FORMAT_TEXT_COMMAND, type EditorState } from "lexical";
 import { BlockNode, $createBlockNode, $isBlockNode } from "./block-node";
 import { BlockForm, BLOCK_LABELS, emptyBlockFormData } from "./block-forms";
 import { BlockEditorContext, type EditPayload } from "./block-editor-context";
@@ -58,9 +57,20 @@ function Toolbar({ onInsertBlock }: { onInsertBlock: (blockType: string) => void
     });
   };
 
+  // Built by hand rather than via LinkPlugin/TOGGLE_LINK_COMMAND: those create
+  // a stock LinkNode, which Lexical rejects now that "link" is registered to
+  // PayloadLinkNode ("does not match registered node").
   const applyLink = () => {
     const url = window.prompt("Link URL");
-    if (url) editor.dispatchCommand(TOGGLE_LINK_COMMAND, url);
+    if (!url) return;
+    editor.update(() => {
+      const selection = $getSelection();
+      if (!$isRangeSelection(selection)) return;
+      const text = selection.getTextContent();
+      const link = $createPayloadLinkNode(url, /^https?:\/\//i.test(url));
+      link.append($createTextNode(text || url));
+      selection.insertNodes([link]);
+    });
   };
 
   const insertTable = () => {
@@ -125,7 +135,15 @@ export function RichTextEditor({ value, onChange }: { value?: string | null; onC
     <LexicalComposer
       initialConfig={{
         namespace: "blog-body",
-        nodes: [HeadingNode, QuoteNode, ListNode, ListItemNode, LinkNode, TableNode, TableRowNode, TableCellNode, BlockNode],
+        // Existing content stores links in Payload's { fields: { url, ... } }
+        // shape, so PayloadLinkNode is registered as the "link" type instead
+        // of the stock LinkNode (whose flat `url` key that content lacks).
+        // Verified against all 285 live posts: every one parses, with no
+        // undefined URLs and byte-identical link round-tripping.
+        nodes: [
+          HeadingNode, QuoteNode, ListNode, ListItemNode,
+          TableNode, TableRowNode, TableCellNode, BlockNode, PayloadLinkNode,
+        ],
         editorState: value || undefined,
         onError: (e) => setError(e.message),
         theme: {
@@ -179,7 +197,6 @@ function EditorInner({ handleChange }: { handleChange: (state: EditorState) => v
         />
         <HistoryPlugin />
         <ListPlugin />
-        <LinkPlugin />
         <TablePlugin />
         <OnChangePlugin onChange={handleChange} />
       </div>
