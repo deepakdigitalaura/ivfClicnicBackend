@@ -37,7 +37,7 @@ const badgeStyle: Record<string, { bg: string; fg: string }> = {
 
 function fmt(iso?: string) {
   if (!iso) return "";
-  try { return new Date(iso).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short" }); }
+  try { return new Date(iso).toLocaleString("en-IN", { dateStyle: "medium", timeStyle: "short", timeZone: "Asia/Kolkata" }); }
   catch { return iso; }
 }
 

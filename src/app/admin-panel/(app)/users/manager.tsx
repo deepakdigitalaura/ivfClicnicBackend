@@ -84,7 +84,7 @@ export function UsersManager({ initial, currentEmail }: { initial: UserRow[]; cu
               <div style={{ fontWeight: 600, fontSize: 14 }}>{u.email}</div>
               <div style={{ fontSize: 12, color: "var(--muted-foreground)" }}>{u.role === "superadmin" ? "Superadmin" : "SEO"}</div>
             </div>
-            <button className="admin-btn-ghost" style={{ fontSize: 12, color: "var(--destructive)" }} onClick={() => del(u._id, u.email)}>Delete</button>
+            <button className="admin-btn-ghost" style={{ fontSize: 12, color: "var(--destructive)" }} onClick={() => del(u._id, u.email)} disabled={pending}>Delete</button>
           </div>
         ))}
         {items.length === 0 && <p className="admin-sub">No accounts yet — the legacy ADMIN_EMAIL/ADMIN_PASSWORD login still works until you add one.</p>}
