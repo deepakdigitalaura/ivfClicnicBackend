@@ -25,20 +25,13 @@ import { doctorBySlug, reviewerNode, physicianSchema } from "@/lib/doctors";
 
 export type TreatmentRef = { slug: string; name: string; href: string };
 
-/** Treatment pages pulled from the site until their content is corrected.
- *  "embryo-donation": client flagged the current copy as non-compliant with
- *  India's ART Act (it implies pre-made donor embryos, which the Act does
- *  not permit — a full IVF cycle with separate egg + sperm donors is
- *  required instead). Remove from this set once the page is rewritten.
- *  "varicocele": client wants a full rewrite (currently surgery-first
- *  throughout — title, hero, benefits, process — but the client does not
- *  want to promote varicocele surgery; page should present surgery vs
- *  ART-IVF neutrally, with grades and a subclinical-needs-no-treatment
- *  note). Client explicitly said skip/hide it until that rewrite is done.
- *  "surrogacy": client flagged current copy as not legally/factually
- *  correct; hidden until content is corrected, then can be unhidden.
- *  Consumers (getTreatment/getTreatments, sitemap) must respect this. */
-export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele", "surrogacy"]);
+/** Treatment pages awaiting client sign-off on corrected copy (ART Act
+ *  compliance for embryo-donation, legal accuracy for surrogacy, and a
+ *  surgery-vs-ART-IVF rewrite for varicocele). The pages themselves render
+ *  and stay in the sitemap — the client is reviewing them via direct link —
+ *  but they're kept out of the /treatments hub grid, related-treatment
+ *  cards, and header/footer nav until each is approved and unhidden. */
+export const UNLISTED_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele", "surrogacy"]);
 
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {

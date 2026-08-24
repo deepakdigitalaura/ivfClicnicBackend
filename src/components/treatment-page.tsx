@@ -17,7 +17,7 @@ import { Linkify } from "@/components/linkify";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Heading, Treatment } from "@/lib/treatments";
-import { treatmentCardData, treatmentBySlug } from "@/lib/treatments";
+import { treatmentCardData, treatmentBySlug, UNLISTED_TREATMENT_SLUGS } from "@/lib/treatments";
 import { resolveIcon, type IconName } from "@/lib/icon-map";
 import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
@@ -1079,7 +1079,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow={ed("labels.exploreMore", labels.exploreMore)} title={<H h={relatedSection} base="relatedSection" />} />
           <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-            {t.related.map((slug) => {
+            {t.related.filter((slug) => !UNLISTED_TREATMENT_SLUGS.has(slug)).map((slug) => {
               const c = treatmentCardData(slug);
               return (
                 <StaggerItem key={slug}>
