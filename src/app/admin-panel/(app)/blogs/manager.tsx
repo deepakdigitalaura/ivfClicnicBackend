@@ -59,7 +59,7 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
         setEditing(null);
       }
       return res;
-    });
+    }, { tags: ["sanity-blogs"], paths: ["/blogs", "/cme", ...(editing.slug ? [`/blogs/${editing.slug}`] : [])] });
   };
 
   const del = async (id: string, slug?: string) => {
