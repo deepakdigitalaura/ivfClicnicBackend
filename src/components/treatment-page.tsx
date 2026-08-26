@@ -1094,7 +1094,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       </section>
 
       {/* Related blogs — treatment-specific, data-driven (placeholders until published) */}
-      {blogs.length > 0 && t.slug !== "surrogacy" && (
+      {blogs.length > 0 && t.slug !== "surrogacy" && t.slug !== "embryo-donation" && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
