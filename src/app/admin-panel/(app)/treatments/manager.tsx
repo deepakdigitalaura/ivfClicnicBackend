@@ -8,6 +8,7 @@ import { saveTreatmentAction, deleteTreatmentAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
 import { Repeater } from "../_components/repeater";
+import { LinkTextarea } from "../_components/link-textarea";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
@@ -23,8 +24,6 @@ const NAV_CATEGORIES = [
   { value: "fertility-preservation", label: "Fertility Preservation" },
   { value: "maternity-services", label: "Maternity Services" },
 ];
-
-const HTML_HINT = "HTML allowed (e.g. <a href=\"/doctors/x\">name</a>) — matches the existing site copy.";
 
 type Tab = "hero" | "seo" | "whatIs" | "benefits" | "whoNeedsIt" | "process" | "risks" | "faqs" | "cta" | "nav";
 const TABS: { id: Tab; label: string }[] = [
@@ -47,13 +46,20 @@ const fromLinesV = (s: string) => s.split("\n").map((x) => x.trim()).filter(Bool
 const toLinesT = (a?: { text?: string }[]) => (a ?? []).map((x) => x.text ?? "").join("\n");
 const fromLinesT = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean).map((text) => ({ text }));
 
-function Field({ label, hint, value, textarea, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; onChange: (v: string) => void }) {
+// `noLink`: fields the public page renders through <Linkify> (phrase auto-link)
+// instead of raw HTML (hero.tagline), or that feed a <meta> tag (meta.description)
+// — an inserted <a> tag would show up as literal text/markup there, not a link.
+function Field({ label, hint, value, textarea, noLink, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; noLink?: boolean; onChange: (v: string) => void }) {
   return (
     <div className="admin-field">
       <label className="admin-label">{label}</label>
       {hint && <p className="admin-hint">{hint}</p>}
       {textarea ? (
-        <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={value} onChange={(e) => onChange(e.target.value)} />
+        noLink ? (
+          <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={value} onChange={(e) => onChange(e.target.value)} />
+        ) : (
+          <LinkTextarea value={value} onChange={onChange} minHeight={70} />
+        )
       ) : (
         <input className="admin-input" value={value} onChange={(e) => onChange(e.target.value)} />
       )}
@@ -177,7 +183,7 @@ export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
               <Field label="Eyebrow" value={get(["hero", "eyebrow"])} onChange={(v) => setIn(["hero", "eyebrow"], v)} />
               <Field label="Heading" value={get(["hero", "h1"])} onChange={(v) => setIn(["hero", "h1"], v)} />
               <Field label="Highlighted word" value={get(["hero", "h1Em"])} onChange={(v) => setIn(["hero", "h1Em"], v)} />
-              <Field label="Tagline" value={get(["hero", "tagline"])} onChange={(v) => setIn(["hero", "tagline"], v)} textarea />
+              <Field label="Tagline" value={get(["hero", "tagline"])} onChange={(v) => setIn(["hero", "tagline"], v)} textarea noLink />
               <div className="admin-field">
                 <label className="admin-label">Badges</label>
                 <p className="admin-hint">One per line.</p>
@@ -194,7 +200,7 @@ export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
           {tab === "seo" && (
             <>
               <Field label="Page title" value={get(["meta", "title"])} onChange={(v) => setIn(["meta", "title"], v)} />
-              <Field label="Meta description" value={get(["meta", "description"])} onChange={(v) => setIn(["meta", "description"], v)} textarea />
+              <Field label="Meta description" value={get(["meta", "description"])} onChange={(v) => setIn(["meta", "description"], v)} textarea noLink />
               <Field label="OG image path" hint="Overrides the hero image for social sharing." value={get(["meta", "ogImage"])} onChange={(v) => setIn(["meta", "ogImage"], v)} />
             </>
           )}
@@ -207,11 +213,14 @@ export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
               </div>
               <div className="admin-field">
                 <label className="admin-label">Paragraphs</label>
-                <p className="admin-hint">One paragraph per line. {HTML_HINT}</p>
-                <textarea className="admin-textarea" style={{ minHeight: 100 }} value={toLinesT(editing.whatIs?.paragraphs)} onChange={(e) => setIn(["whatIs", "paragraphs"], fromLinesT(e.target.value))} />
+                <p className="admin-hint">One paragraph per line.</p>
+                <LinkTextarea value={toLinesT(editing.whatIs?.paragraphs)} onChange={(v) => setIn(["whatIs", "paragraphs"], fromLinesT(v))} minHeight={100} />
               </div>
               <Field label="Callout box title (optional)" value={get(["whatIs", "aside", "title"])} onChange={(v) => setIn(["whatIs", "aside", "title"], v)} />
-              <Field label="Callout box body" value={get(["whatIs", "aside", "body"])} onChange={(v) => setIn(["whatIs", "aside", "body"], v)} textarea />
+              <div className="admin-field">
+                <label className="admin-label">Callout box body</label>
+                <LinkTextarea value={get(["whatIs", "aside", "body"])} onChange={(v) => setIn(["whatIs", "aside", "body"], v)} minHeight={70} />
+              </div>
             </>
           )}
 
@@ -302,8 +311,8 @@ export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
                   renderItem={(row, i, update) => (
                     <div>
                       <input className="admin-input" placeholder="Risk title" value={row.t ?? ""} onChange={(e) => update({ t: e.target.value })} />
-                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder={`Description ${i + 1}`} value={row.d ?? ""} onChange={(e) => update({ d: e.target.value })} />
-                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder="How we help" value={row.help ?? ""} onChange={(e) => update({ help: e.target.value })} />
+                      <div style={{ marginTop: 6 }}><LinkTextarea value={row.d ?? ""} onChange={(v) => update({ d: v })} minHeight={50} /></div>
+                      <div style={{ marginTop: 6 }}><LinkTextarea value={row.help ?? ""} onChange={(v) => update({ help: v })} minHeight={50} /></div>
                     </div>
                   )}
                 />
