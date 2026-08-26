@@ -65,10 +65,9 @@ const nextConfig = {
     ];
   },
 
-  // No remotePatterns needed — every next/image src on this site is a local
-  // /assets or /media path (no Sanity CDN image builder or external image
-  // host is used anywhere in the codebase).
-  images: {},
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
+  },
 };
 
 export default nextConfig;
