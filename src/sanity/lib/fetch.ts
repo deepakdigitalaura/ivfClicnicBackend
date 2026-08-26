@@ -586,6 +586,7 @@ const TREATMENT_FIELDS = `
   meta { title, description, ogImage },
   whatIs { heading, paragraphs, aside },
   benefits { heading, subtitle, items },
+  types { heading, subtitle, items },
   whoNeedsIt { heading, subtitle, items },
   process { heading, subtitle, steps, note },
   risks { heading, subtitle, items },
