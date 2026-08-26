@@ -914,6 +914,7 @@ export type DoctorSource =
       cities?: ValueRow[] | null;
       locations?: ValueRow[] | null;
       treatments?: ValueRow[] | null;
+      services?: ValueRow[] | null;
       shortBio?: string | null;
       bio?: ValueRow[] | null;
       knowsAbout?: ValueRow[] | null;
@@ -981,6 +982,7 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
       cities: rows(src.cities) ?? [],
       locations: rows(src.locations) ?? [],
       treatments: rows(src.treatments) ?? [],
+      services: rows(src.services) ?? [],
       shortBio: src.shortBio ?? "",
       bio: rows(src.bio) ?? [],
       knowsAbout: rows(src.knowsAbout) ?? [],
@@ -1011,6 +1013,7 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     cities: rows(src.cities) ?? def.cities,
     locations: rows(src.locations) ?? def.locations,
     treatments: rows(src.treatments) ?? def.treatments,
+    services: rows(src.services) ?? def.services,
     shortBio: src.shortBio || def.shortBio,
     bio: rows(src.bio) ?? def.bio,
     knowsAbout: rows(src.knowsAbout) ?? def.knowsAbout,
