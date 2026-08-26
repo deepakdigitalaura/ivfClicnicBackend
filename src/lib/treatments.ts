@@ -4268,7 +4268,7 @@ export const surrogacy = defineTreatment({
       "Parenthood when the uterus is absent or pregnancy is unsafe.",
       "A genetic link where the parents' own eggs/sperm are used.",
       "Care coordinated medically and legally under the Act.",
-      "Rigorous surrogate screening and support.",
+      "Support throughout the entire journey: legal work, IVF, pregnancy , delivery and beyond.",
       "Full antenatal care through to a safe delivery.",
     ],
   },
