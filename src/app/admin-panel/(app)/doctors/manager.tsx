@@ -5,6 +5,7 @@ import type { AdminDoctor } from "@/sanity/lib/admin";
 import { saveDoctorAction, deleteDoctorAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
+import { LinkTextarea } from "../_components/link-textarea";
 
 const EMPTY: AdminDoctor = { slug: "", name: "", verified: false, navOrder: 0 };
 
@@ -98,7 +99,7 @@ export function DoctorsManager({ initial }: { initial: AdminDoctor[] }) {
           <div className="admin-field">
             <label className="admin-label">Bio paragraphs</label>
             <p className="admin-hint">One paragraph per line.</p>
-            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 90 }} value={toLines(editing.bio)} onChange={(e) => set({ bio: fromLines(e.target.value) })} />
+            <LinkTextarea value={toLines(editing.bio)} onChange={(v) => set({ bio: fromLines(v) })} minHeight={90} />
           </div>
 
           <div className="admin-row-grid">
