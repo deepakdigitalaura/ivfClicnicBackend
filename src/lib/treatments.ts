@@ -4229,7 +4229,7 @@ export const surrogacy = defineTreatment({
   name: "Surrogacy Treatment",
   shortName: "Surrogacy",
   alternateName: "Gestational Surrogacy",
-  reviewerSlug: "falguni-bavishi",
+  reviewerSlug: "himanshu-bavishi",
   meta: {
     title: "Surrogacy Treatment — Gestational Surrogacy — Bavishi Fertility Institute",
     description:
@@ -4256,7 +4256,7 @@ export const surrogacy = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Surrogacy?" },
     paragraphs: [
-      "In gestational surrogacy, an embryo created through IVF — using the intended parents' or donor eggs and sperm — is carried by another woman, the gestational surrogate. She carries and delivers the baby but has no genetic relationship to the child.",
+      "In gestational surrogacy, an embryo created through IVF — using the intended parents' or donor eggs or donor sperm — is carried by another woman, the gestational surrogate. She carries and delivers the baby but has no genetic relationship to the child.",
       "Surrogacy is considered when a woman cannot carry a pregnancy herself — for example after hysterectomy, with a severe uterine problem, or where pregnancy would be medically dangerous. In India it is governed by the Surrogacy (Regulation) Act, and we support intended parents through the entire medical and legal process.",
     ],
     aside: BFI_ASIDE,
