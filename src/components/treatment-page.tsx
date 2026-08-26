@@ -402,7 +402,9 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
   const t = content ? toView(content) : slug ? treatmentBySlug(slug) : undefined;
   if (!t) return null;
   const reviewer = doctorBySlug(t.reviewerSlug);
-  const docs = doctorsForTreatment(t.slug);
+  const docs = t.slug === "surrogacy"
+    ? doctorsForTreatment(t.slug).filter((d) => d.locations.includes("paldi") || d.citySlug === "mumbai" || d.citySlug === "bhuj")
+    : doctorsForTreatment(t.slug);
   // editTestimonials is provided by TreatmentEditor (from the draft); the public
   // site always uses the code-owned defaults so it remains byte-identical.
   const testimonials = editTestimonials ?? testimonialsForTreatment(t.slug);
@@ -935,7 +937,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* Suraksha Kavach — positioned right after cost, addressing cost fear
        *  and repeated-cycle anxiety exactly where patients are weighing the
        *  investment. Reuses the homepage's Suraksha section as-is. */}
-      <Suraksha />
+      {t.slug !== "surrogacy" && <Suraksha />}
 
       {/* Risks */}
       <section className={`${band()} py-8 md:py-14`}>
@@ -1092,7 +1094,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       </section>
 
       {/* Related blogs — treatment-specific, data-driven (placeholders until published) */}
-      {blogs.length > 0 && (
+      {blogs.length > 0 && t.slug !== "surrogacy" && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead

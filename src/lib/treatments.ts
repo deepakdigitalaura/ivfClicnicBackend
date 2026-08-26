@@ -4288,8 +4288,8 @@ export const surrogacy = defineTreatment({
     subtitle: "A carefully coordinated medical and legal journey.",
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Eligibility & Counselling", d: "We confirm medical need and eligibility under the Surrogacy Act, with counselling." },
-      { icon: ListChecks, n: "02", t: "Legal Process", d: "The required approvals, consents and documentation are completed." },
-      { icon: ShieldCheck, n: "03", t: "Surrogate Screening", d: "The gestational surrogate is medically and psychologically screened." },
+      { icon: ShieldCheck, n: "02", t: "Surrogate Fitness", d: "The gestational surrogate is evaluated for medical and psychological fitness to carry pregnancy." },
+      { icon: ListChecks, n: "03", t: "Legal Process", d: "The required approvals, consents and documentation are completed." },
       { icon: FlaskConical, n: "04", t: "IVF & Embryo Transfer", d: "An embryo from the parents' or donor gametes is transferred to the surrogate." },
       { icon: Baby, n: "05", t: "Pregnancy & Delivery", d: "Full antenatal care supports the surrogate through to a safe delivery." },
     ],
@@ -4300,7 +4300,7 @@ export const surrogacy = defineTreatment({
     items: [
       { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
       { icon: ListChecks, t: "Ethical & Legally Compliant", d: "Every step follows India's Surrogacy (Regulation) Act, with full documentation and support." },
-      { icon: ShieldCheck, t: "Rigorous Surrogate Screening", d: "Surrogates are medically and psychologically screened before matching." },
+      { icon: ShieldCheck, t: "One Team From Start to Finish", d: "IVF, pregnancy care and delivery all steps handled by one team for seamless experience." },
     ],
   },
   success: {
@@ -4322,7 +4322,7 @@ export const surrogacy = defineTreatment({
     ],
   },
   faqs: [
-    { q: "What is gestational surrogacy?", a: "An embryo created by IVF from the intended parents' or donor eggs and sperm is carried by a surrogate, who has no genetic link to the baby she delivers." },
+    { q: "What is gestational surrogacy?", a: "An embryo created by IVF from the intended parents' or donor eggs or donor sperm is carried by a surrogate, who has no genetic link to the baby she delivers." },
     { q: "When is surrogacy needed?", a: "Mainly when a woman cannot safely carry a pregnancy — for example absence of the uterus, a severely damaged uterus, or a medical condition that makes pregnancy dangerous." },
     { q: "Is surrogacy legal in India?", a: "Yes, under the Surrogacy (Regulation) Act, which permits altruistic surrogacy with specific eligibility and legal requirements. We follow these fully." },
     { q: "Will the baby be genetically ours?", a: "If the intended parents' own eggs and sperm are used, yes. Donor eggs or sperm are used only where medically needed. The surrogate is never genetically related to the baby." },
