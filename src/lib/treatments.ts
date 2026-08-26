@@ -2025,10 +2025,8 @@ export const embryoDonation: Treatment = {
     subtitle: "A single donor pathway when both eggs and sperm are needed.",
     items: [
       "A pathway to pregnancy when both eggs and sperm are needed.",
-      "Embryos created from young, screened, genetically tested donors.",
+      "Embryos created from young, screened donors.",
       "You carry and deliver the pregnancy yourself.",
-      "Often simpler and more affordable than two separate donor programmes.",
-      "Ready donor embryos mean minimal waiting.",
       "The entire treatment is kept completely confidential.",
     ],
   },
@@ -2040,7 +2038,7 @@ export const embryoDonation: Treatment = {
       "The woman has a healthy uterus and can carry a pregnancy but cannot produce viable eggs.",
       "Poor egg quality combined with severe male-factor infertility or azoospermia.",
       "Repeated IVF failures with own or single-donor gametes.",
-      "Couples who prefer a ready donor-embryo pathway.",
+      "Couples at high risk of genetic disease who are not willing for PGT or PGT is not possible.",
     ],
   },
   process: {
@@ -2048,7 +2046,7 @@ export const embryoDonation: Treatment = {
     subtitle: "A clear, supported pathway — much like a frozen embryo transfer.",
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Consultation & Counselling", d: "Your specialist confirms embryo donation is right for you and obtains informed consent from both partners." },
-      { icon: Sparkles, n: "02", t: "Embryo Selection & Matching", d: "A screened donor embryo is matched to you from embryos created with donor eggs and donor sperm." },
+      { icon: Sparkles, n: "02", t: "Sperm and egg donor recruitment", d: "Both sperm and egg donor are recruited as per match with both partners. Egg donor stimulation and egg collection is done. IVF – ICSI is done with donor sperm." },
       { icon: Activity, n: "03", t: "Uterine Preparation", d: "Your uterine lining is prepared with medication to create the ideal environment for implantation." },
       { icon: Baby, n: "04", t: "Embryo Transfer", d: "The selected donor embryo is transferred into your uterus in a simple, painless procedure." },
       { icon: HeartPulse, n: "05", t: "Pregnancy Test", d: "A Beta-HCG blood test about two weeks later confirms the outcome." },
@@ -2071,10 +2069,7 @@ export const embryoDonation: Treatment = {
     items: [
       { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
       { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Advanced embryology labs where donor embryos are cultured and transferred with precision." },
-      { icon: ShieldCheck, t: "Screened Donor Embryos", d: "Embryos from healthy, genetically tested and medically screened egg and sperm donors." },
-      { icon: Layers, t: "Ready Donor Pathway", d: "An established donor programme means donor embryos are generally available without long waits." },
       { icon: Eye, t: "Complete Confidentiality", d: "Your treatment and donor matching are handled with total privacy at every step." },
-      { icon: ListChecks, t: "Ethical & ART-Compliant", d: "Informed consent from both partners and full compliance with India's ART Act." },
     ],
   },
   success: {
@@ -2092,7 +2087,7 @@ export const embryoDonation: Treatment = {
     includes: [
       "Specialist consultation and counselling",
       "Informed-consent and documentation process",
-      "Donor-embryo selection and matching",
+      "Donor selection and matching",
       "Uterine-preparation medication",
       "Embryo transfer procedure",
       "Pregnancy test and follow-up",
@@ -2113,7 +2108,7 @@ export const embryoDonation: Treatment = {
     { q: "How is it different from egg or sperm donation?", a: "Egg or sperm donation replaces only one gamete; embryo donation uses donor eggs and donor sperm together." },
     { q: "Will the baby be genetically related to us?", a: "No. The baby will not inherit either partner's genes, but the mother carries and delivers the baby herself." },
     { q: "How are the donor embryos screened?", a: "They are created from young egg and sperm donors who pass full medical, genetic and psychological screening." },
-    { q: "Is there a waiting time?", a: "Bavishi Fertility Institute's established donor programme means donor embryos are generally available without long waits." },
+    { q: "Is there a waiting time?", a: "Bavishi Fertility Institute's established donor programme means embryo donation is generally available without long waits." },
     { q: "Does the procedure differ from normal IVF?", a: "No. The uterus is prepared, a donor embryo is transferred, and a pregnancy test follows — much like a frozen embryo transfer." },
     { q: "Is embryo donation legal in India?", a: "Yes. It requires informed consent from both partners and follows the ART Act." },
     { q: "What are the chances of success?", a: "Success depends on the recipient's uterine health and age, embryo quality and other factors. Outcomes are individual and cannot be guaranteed." },
@@ -2618,8 +2613,8 @@ export const varicocele = defineTreatment({
     h1: "Varicocele Treatment",
     h1Em: "& Microsurgery",
     tagline:
-      "A varicocele — enlarged veins in the scrotum — is one of the commonest and most correctable causes of male infertility. Microsurgery can improve sperm quality and natural fertility.",
-    badges: ["Microsurgical Repair", "Day-care Surgery", "Since 1998", "Fertility-focused"],
+      "A varicocele — enlarged veins in the scrotum — is one of the commonest and most correctable causes of male infertility. Microsurgery or IVF-ICSI can help fertility. Which of these two is more suitable for you depends on many factors.",
+    badges: ["Microsurgical Repair", "Microsurgery vs IVF-ICSI", "Since 1998", "Fertility-focused"],
     image: "/assets/conditions/varicocele.png",
     imageAlt: "Varicocele treatment and microsurgery at Bavishi Fertility Institute",
   },
@@ -2627,13 +2622,13 @@ export const varicocele = defineTreatment({
     heading: { lead: "What is a", em: "Varicocele?" },
     paragraphs: [
       "A varicocele is an enlargement of the veins within the scrotum, similar to a varicose vein in the leg. It is found in about 15% of all men and in up to 40% of men with infertility, and it can raise testicular temperature and impair sperm production.",
-      "Not every varicocele needs treatment. When it is linked to a low sperm count, poor motility, abnormal shape or testicular discomfort, microsurgical varicocelectomy can improve sperm quality and, in many couples, the chance of natural conception.",
+      "Not every varicocele needs treatment. When repair is likely to help, couples usually have two paths: microsurgical varicocelectomy to treat the underlying cause, or IVF with ICSI to work around it directly. Both can lead to a pregnancy — the right one depends on the varicocele grade, current sperm parameters, the female partner's age and fertility, and how much time you have to try naturally.",
     ],
     aside: BFI_ASIDE,
   },
   benefits: {
     heading: { lead: "The advantages of", em: "varicocele repair" },
-    subtitle: "Correcting a significant varicocele addresses a treatable, underlying cause.",
+    subtitle: "Correcting a significant varicocele addresses the underlying cause — an alternative to going straight to IVF-ICSI.",
     items: [
       "Can improve sperm count, motility and morphology.",
       "May raise the chance of natural conception.",
@@ -2644,7 +2639,7 @@ export const varicocele = defineTreatment({
   },
   whoNeedsIt: {
     heading: { lead: "Who may", em: "benefit" },
-    subtitle: "Treatment is considered when a varicocele is affecting fertility or comfort.",
+    subtitle: "Repair is one option among several — here's when it's usually considered over going straight to IVF-ICSI.",
     items: [
       "A palpable varicocele with abnormal semen parameters.",
       "Male infertility with no other clear cause.",
@@ -2654,26 +2649,27 @@ export const varicocele = defineTreatment({
     ],
   },
   process: {
-    heading: { lead: "How it", em: "is treated" },
-    subtitle: "Careful selection, then precise microsurgical correction.",
+    heading: { lead: "What to expect in", em: "varicocele repair" },
+    subtitle: "From evaluation to choosing between repair and IVF-ICSI.",
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "Examination plus scrotal Doppler ultrasound to confirm and grade the varicocele." },
-      { icon: Beaker, n: "02", t: "Semen Analysis", d: "Sperm parameters are measured to decide whether repair is likely to help." },
-      { icon: Target, n: "03", t: "Microsurgical Varicocelectomy", d: "The affected veins are tied off through a small incision under magnification." },
-      { icon: Leaf, n: "04", t: "Recovery", d: "A quick, day-care recovery with simple aftercare and minimal downtime." },
-      { icon: FlaskConical, n: "05", t: "Reassessment", d: "Repeat semen analysis at three months guides the next step if needed." },
+      { icon: Beaker, n: "02", t: "Semen Analysis", d: "Sperm parameters are measured to see how much repair could help." },
+      { icon: ListChecks, n: "03", t: "Choosing Your Path", d: "Grade, sperm parameters, the female partner's age and your timeline decide between microsurgical repair and going straight to IVF-ICSI." },
+      { icon: Target, n: "04", t: "Microsurgical Varicocelectomy", d: "If repair is chosen, the affected veins are tied off through a small incision under magnification." },
+      { icon: Leaf, n: "05", t: "Recovery", d: "A quick, day-care recovery with simple aftercare and minimal downtime." },
+      { icon: FlaskConical, n: "06", t: "Reassessment", d: "Repeat semen analysis at three months; if parameters haven't improved enough, IVF-ICSI remains the fallback." },
     ],
-    note: "Microsurgery preserves the artery and lymphatics, lowering the risk of recurrence and complications.",
+    note: "Microsurgery preserves the artery and lymphatics, lowering recurrence risk — but when time matters or parameters stay low, IVF-ICSI gives a direct route to pregnancy without waiting on repair to work.",
   },
   success: {
     factors: [
+      "Whether microsurgical repair or IVF-ICSI is the better fit for you",
       "Varicocele grade and whether it is one- or two-sided",
-      "Baseline sperm parameters",
-      "The female partner's age and fertility",
-      "Surgical technique — microsurgery gives the best results",
-      "Time allowed for sperm to recover after surgery",
+      "Baseline sperm parameters — repair helps more when parameters aren't severely low",
+      "The female partner's age and fertility — often the deciding factor toward IVF-ICSI",
+      "How much time you have before IVF-ICSI becomes the more time-efficient choice",
     ],
-    note: "Many men see improved sperm parameters after microsurgery, though results vary and a pregnancy cannot be guaranteed.",
+    note: "There's no universally 'better' option — microsurgery treats the underlying cause and may help future cycles too, while IVF-ICSI works around it directly. We give you an honest comparison for your specific case, not a one-size-fits-all recommendation.",
   },
   risks: {
     heading: { lead: "Risks &", em: "considerations" },
@@ -2684,17 +2680,18 @@ export const varicocele = defineTreatment({
     ],
   },
   faqs: [
+    { q: "Should I choose microsurgery or go straight to IVF-ICSI?", a: "It depends on the varicocele grade, your current sperm parameters, the female partner's age and fertility, and how much time you have. Repair treats the underlying cause and can help natural conception and future cycles; IVF-ICSI works around the problem directly and is often the faster route when the female partner's age is a factor. We'll give you a specific recommendation after evaluation." },
     { q: "Does every varicocele need surgery?", a: "No. Treatment is advised mainly when a varicocele is linked to abnormal semen parameters, infertility or pain. Small, symptomless varicoceles often need no treatment." },
-    { q: "Will surgery improve my fertility?", a: "Microsurgical repair improves sperm count, motility or morphology in many men and can raise the chance of natural conception, though results vary." },
+    { q: "Will surgery improve my fertility?", a: "Microsurgical repair improves sperm count, motility or morphology in many men and can raise the chance of natural conception, though results vary — some men still need IVF-ICSI afterward if parameters don't improve enough." },
     { q: "What is microsurgical varicocelectomy?", a: "A precise, microscope-assisted operation that ties off the enlarged veins while preserving the testicular artery and lymphatics, giving high success and low recurrence." },
     { q: "How long is recovery?", a: "It is a day-care procedure. Most men return to routine activities within a few days, avoiding strenuous activity for a short period." },
-    { q: "When will I know if it worked?", a: "A repeat semen analysis at about three months — a full sperm-production cycle — shows the improvement." },
+    { q: "When will I know if it worked?", a: "A repeat semen analysis at about three months — a full sperm-production cycle — shows the improvement. If it hasn't helped enough, IVF-ICSI remains the fallback." },
   ],
   related: ["oligospermia", "asthenospermia", "azoospermia", "icsi", "ivf"],
   cta: {
     heading: "Diagnosed with a",
     headingEm: "varicocele?",
-    subtitle: "Find out whether microsurgical repair can improve your fertility — book a consultation with our andrology team.",
+    subtitle: "Find out whether microsurgical repair or IVF-ICSI is the better route for your fertility — book a consultation with our andrology team.",
   },
 });
 
