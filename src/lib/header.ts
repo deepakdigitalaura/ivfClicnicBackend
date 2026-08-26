@@ -208,7 +208,7 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Simple Treatment", href: "/simple-treatment" },
           { label: "Safe Treatment", href: "/safe-treatment" },
           { label: "Smart Treatment", href: "/smart-treatment" },
-          { label: "Success Treatment", href: "/success-benchmarks" },
+          { label: "Successful Treatment", href: "/success-benchmarks" },
         ]},
         { heading: "", items: [
           { label: "History", href: "/history" },
