@@ -233,7 +233,7 @@ export async function deleteDoctorAction(id: string): Promise<SaveResult> {
 /** Revalidate every public surface that renders treatment data (page content
  *  and the header/footer nav menus, which read the same tagged cache). */
 function revalidateTreatmentPages() {
-  revalidateTag("sanity-treatments"); // bust the unstable_cache backing getSanityTreatment(s)
+  revalidateTag("sanity-treatments"); // no-op now (fetch.ts uses time-based revalidate, not tags) — kept harmless in case a tag-based cache returns
   revalidatePath("/treatments/[slug]", "page");
   revalidatePath("/"); // homepage treatment carousel
   revalidatePath("/admin-panel/treatments");

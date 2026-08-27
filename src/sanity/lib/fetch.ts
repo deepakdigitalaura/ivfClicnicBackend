@@ -1,5 +1,4 @@
 import "server-only";
-import { unstable_cache } from "next/cache";
 import { client } from "./client";
 import {
   ROBOTS_QUERY,
@@ -13,10 +12,15 @@ import {
   PAGE_FAQS_QUERY,
 } from "./queries";
 
+// ponytail: time-based revalidate, not revalidateTag — sidesteps the disk
+// fetch-cache tag-busting bug on the PM2/Cloudways deploy, and keeps Sanity
+// CDN request volume bounded (free-tier quota) instead of fetching on every hit.
+const SANITY_CACHE = { next: { revalidate: 60 } } as const;
+
 async function sanityFetch<T>(query: string, params?: Record<string, unknown>): Promise<T | null> {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return null;
   try {
-    return await client.fetch<T>(query, params ?? {});
+    return await client.fetch<T>(query, params ?? {}, SANITY_CACHE);
   } catch {
     return null;
   }
@@ -77,55 +81,19 @@ export type PageSeo = {
   customSchemaJson?: string;
 };
 
-export const getRobotsConfig = () =>
-  unstable_cache(
-    () => sanityFetch<RobotsConfig>(ROBOTS_QUERY),
-    ["sanity-robots"],
-    { revalidate: 3600, tags: ["sanity-robots"] },
-  )();
+export const getRobotsConfig = () => sanityFetch<RobotsConfig>(ROBOTS_QUERY);
 
-export const getScriptsConfig = () =>
-  unstable_cache(
-    () => sanityFetch<ScriptsConfig>(SCRIPTS_QUERY),
-    ["sanity-scripts"],
-    { revalidate: 3600, tags: ["sanity-scripts"] },
-  )();
+export const getScriptsConfig = () => sanityFetch<ScriptsConfig>(SCRIPTS_QUERY);
 
-export const getCampsConfig = () =>
-  unstable_cache(
-    () => sanityFetch<CampsConfig>(CAMPS_QUERY),
-    ["sanity-camps"],
-    { revalidate: 3600, tags: ["sanity-camps"] },
-  )();
+export const getCampsConfig = () => sanityFetch<CampsConfig>(CAMPS_QUERY);
 
+export const getRedirectsConfig = () => sanityFetch<RedirectsConfig>(REDIRECTS_QUERY);
 
-export const getRedirectsConfig = () =>
-  unstable_cache(
-    () => sanityFetch<RedirectsConfig>(REDIRECTS_QUERY),
-    ["sanity-redirects"],
-    { revalidate: 3600, tags: ["sanity-redirects"] },
-  )();
+export const getSitemapConfig = () => sanityFetch<SitemapConfig>(SITEMAP_QUERY);
 
-export const getSitemapConfig = () =>
-  unstable_cache(
-    () => sanityFetch<SitemapConfig>(SITEMAP_QUERY),
-    ["sanity-sitemap"],
-    { revalidate: 3600, tags: ["sanity-sitemap"] },
-  )();
+export const getSchemaOrgConfig = () => sanityFetch<SchemaOrgConfig>(SCHEMA_ORG_QUERY);
 
-export const getSchemaOrgConfig = () =>
-  unstable_cache(
-    () => sanityFetch<SchemaOrgConfig>(SCHEMA_ORG_QUERY),
-    ["sanity-schema-org"],
-    { revalidate: 3600, tags: ["sanity-schema-org"] },
-  )();
-
-export const getPageSeo = (path: string) =>
-  unstable_cache(
-    () => sanityFetch<PageSeo>(PAGE_SEO_BY_PATH_QUERY, { path }),
-    ["sanity-page-seo", path],
-    { revalidate: 3600, tags: ["sanity-page-seo"] },
-  )();
+export const getPageSeo = (path: string) => sanityFetch<PageSeo>(PAGE_SEO_BY_PATH_QUERY, { path });
 
 // ── Reviews (admin-accumulated, keyed by centre slug / "brand") ──
 
@@ -149,25 +117,20 @@ export type SanityReviewData = {
  *  by the admin "Refresh Reviews" button and by manual deletes (both call
  *  revalidateTag("sanity-reviews")). null → caller falls back to whatever
  *  build-time data it already has. */
-export const getSanityReviews = (key: string): Promise<SanityReviewData | null> =>
-  unstable_cache(
-    async () => {
-      const data = await sanityFetch<{
-        meta: { ratingValue?: number; reviewCount?: number; mapsUrl?: string } | null;
-        reviews: (Omit<SanityReviewData["reviews"][number], "verified"> & { manual?: boolean })[];
-      }>(REVIEWS_BY_KEY_QUERY, { key });
-      if (!data) return null;
-      return {
-        aggregate: data.meta?.reviewCount
-          ? { ratingValue: data.meta.ratingValue ?? 0, reviewCount: data.meta.reviewCount }
-          : undefined,
-        mapsUrl: data.meta?.mapsUrl,
-        reviews: (data.reviews ?? []).map(({ manual, ...r }) => ({ ...r, verified: !manual })),
-      };
-    },
-    ["sanity-reviews", key],
-    { revalidate: 300, tags: ["sanity-reviews"] },
-  )();
+export const getSanityReviews = async (key: string): Promise<SanityReviewData | null> => {
+  const data = await sanityFetch<{
+    meta: { ratingValue?: number; reviewCount?: number; mapsUrl?: string } | null;
+    reviews: (Omit<SanityReviewData["reviews"][number], "verified"> & { manual?: boolean })[];
+  }>(REVIEWS_BY_KEY_QUERY, { key });
+  if (!data) return null;
+  return {
+    aggregate: data.meta?.reviewCount
+      ? { ratingValue: data.meta.ratingValue ?? 0, reviewCount: data.meta.reviewCount }
+      : undefined,
+    mapsUrl: data.meta?.mapsUrl,
+    reviews: (data.reviews ?? []).map(({ manual, ...r }) => ({ ...r, verified: !manual })),
+  };
+};
 
 // ── Doctors ──
 
@@ -212,12 +175,7 @@ const DOCTORS_QUERY = `*[_type == "doctor"]{
 
 /** All doctors from Sanity (cached + tagged). Empty array when none/unconfigured,
  *  so the resolver falls back to the code DOCTORS list byte-identically. */
-export const getSanityDoctors = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityDoctor[]>(DOCTORS_QUERY)) ?? [],
-    ["sanity-doctors"],
-    { revalidate: 3600, tags: ["sanity-doctors"] },
-  )();
+export const getSanityDoctors = async () => (await sanityFetch<SanityDoctor[]>(DOCTORS_QUERY)) ?? [];
 
 // ── Testimonials (text + video) ──
 
@@ -238,12 +196,7 @@ const TESTIMONIALS_QUERY = `*[_type == "testimonial" && published != false] | or
 
 /** All visible testimonials from Sanity (cached + tagged). Empty when none, so
  *  the homepage/testimonial pages fall back to their built-in defaults. */
-export const getSanityTestimonials = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityTestimonial[]>(TESTIMONIALS_QUERY)) ?? [],
-    ["sanity-testimonials"],
-    { revalidate: 3600, tags: ["sanity-testimonials"] },
-  )();
+export const getSanityTestimonials = async () => (await sanityFetch<SanityTestimonial[]>(TESTIMONIALS_QUERY)) ?? [];
 
 // ── Homepage (singleton) ──
 
@@ -252,12 +205,7 @@ export type SanityHomepage = Record<string, unknown> | null;
 
 /** The homepage singleton from Sanity (cached + tagged). Null when unset, so the
  *  homepage falls back to HOMEPAGE_DEFAULTS byte-identically. */
-export const getSanityHomepage = () =>
-  unstable_cache(
-    () => sanityFetch<SanityHomepage>(`*[_type == "homepage"][0]`),
-    ["sanity-homepage"],
-    { revalidate: 3600, tags: ["sanity-homepage"] },
-  )();
+export const getSanityHomepage = () => sanityFetch<SanityHomepage>(`*[_type == "homepage"][0]`);
 
 // ── Site Settings (singleton — shared across every page) ──
 
@@ -286,12 +234,7 @@ export type SanitySiteSettings = {
 
 /** The site-settings singleton (cached + tagged). Null when unset, so identity /
  *  contact fall back to the SITE constant byte-identically. */
-export const getSanitySiteSettings = () =>
-  unstable_cache(
-    () => sanityFetch<SanitySiteSettings>(`*[_type == "siteSettings"][0]`),
-    ["sanity-site-settings"],
-    { revalidate: 3600, tags: ["sanity-site-settings"] },
-  )();
+export const getSanitySiteSettings = () => sanityFetch<SanitySiteSettings>(`*[_type == "siteSettings"][0]`);
 
 // ── Education Videos ──
 
@@ -309,12 +252,7 @@ const EDUCATION_VIDEOS_QUERY = `*[_type == "educationVideo" && published != fals
   _id, title, category, youtubeId, description, published, order
 }`;
 
-export const getSanityEducationVideos = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityEducationVideo[]>(EDUCATION_VIDEOS_QUERY)) ?? [],
-    ["sanity-education-videos"],
-    { revalidate: 3600, tags: ["sanity-education-videos"] },
-  )();
+export const getSanityEducationVideos = async () => (await sanityFetch<SanityEducationVideo[]>(EDUCATION_VIDEOS_QUERY)) ?? [];
 
 // ── Press ──
 
@@ -346,12 +284,7 @@ const PRESS_QUERY = `*[_type == "press" && published != false] | order(order asc
   width, height, order, published
 }`;
 
-export const getSanityPress = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityPress[]>(PRESS_QUERY)) ?? [],
-    ["sanity-press"],
-    { revalidate: 3600, tags: ["sanity-press"] },
-  )();
+export const getSanityPress = async () => (await sanityFetch<SanityPress[]>(PRESS_QUERY)) ?? [];
 
 // ── Blogs ──
 
@@ -407,134 +340,100 @@ const BLOG_FIELDS = `
   status
 `;
 
-export const getSanityBlogsPage = (page: number, limit: number, categorySlug?: string) =>
-  unstable_cache(
-    async () => {
-      if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return { docs: [], total: 0 };
-      const offset = (page - 1) * limit;
-      // CME posts have their own dedicated hub at /cme (see getSanityCMEBlogs)
-      // and are excluded from the general blog hub here, even if "cme" is
-      // requested as a category filter.
-      const filter = categorySlug && categorySlug !== "cme"
-        ? `_type == "blog" && status != "draft" && categorySlug == $categorySlug`
-        : `_type == "blog" && status != "draft" && categorySlug != "cme"`;
-      try {
-        const [docs, total] = await Promise.all([
-          client.fetch<SanityBlog[]>(
-            `*[${filter}] | order(publishedAt desc)[${offset}...${offset + limit}]{ ${BLOG_FIELDS} }`,
-            { categorySlug },
-          ),
-          client.fetch<number>(`count(*[${filter}])`, { categorySlug }),
-        ]);
-        return { docs: docs ?? [], total: total ?? 0 };
-      } catch {
-        return { docs: [], total: 0 };
-      }
-    },
-    ["sanity-blogs-page", String(page), String(limit), categorySlug ?? "all"],
-    { revalidate: 3600, tags: ["sanity-blogs"] },
-  )();
+export const getSanityBlogsPage = async (page: number, limit: number, categorySlug?: string) => {
+  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return { docs: [], total: 0 };
+  const offset = (page - 1) * limit;
+  // CME posts have their own dedicated hub at /cme (see getSanityCMEBlogs)
+  // and are excluded from the general blog hub here, even if "cme" is
+  // requested as a category filter.
+  const filter = categorySlug && categorySlug !== "cme"
+    ? `_type == "blog" && status != "draft" && categorySlug == $categorySlug`
+    : `_type == "blog" && status != "draft" && categorySlug != "cme"`;
+  try {
+    const [docs, total] = await Promise.all([
+      client.fetch<SanityBlog[]>(
+        `*[${filter}] | order(publishedAt desc)[${offset}...${offset + limit}]{ ${BLOG_FIELDS} }`,
+        { categorySlug },
+        SANITY_CACHE,
+      ),
+      client.fetch<number>(`count(*[${filter}])`, { categorySlug }, SANITY_CACHE),
+    ]);
+    return { docs: docs ?? [], total: total ?? 0 };
+  } catch {
+    return { docs: [], total: 0 };
+  }
+};
 
 export type BlogCategoryCount = { slug: string; title: string; count: number };
 
-export const getSanityBlogCategories = () =>
-  unstable_cache(
-    async () => {
-      if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
-      try {
-        const rows = await client.fetch<{ categorySlug: string | null; categoryTitle: string | null }[]>(
-          `*[_type == "blog" && status != "draft" && defined(categorySlug)]{ categorySlug, categoryTitle }`,
-        );
-        const counts = new Map<string, BlogCategoryCount>();
-        for (const r of rows) {
-          // CME posts live only on the dedicated /cme hub, not the blog hub's category chips.
-          if (!r.categorySlug || r.categorySlug === "cme") continue;
-          const existing = counts.get(r.categorySlug);
-          if (existing) existing.count++;
-          else counts.set(r.categorySlug, { slug: r.categorySlug, title: r.categoryTitle ?? r.categorySlug, count: 1 });
-        }
-        return [...counts.values()].sort((a, b) => b.count - a.count);
-      } catch {
-        return [];
-      }
-    },
-    ["sanity-blog-categories"],
-    { revalidate: 3600, tags: ["sanity-blogs"] },
-  )();
+export const getSanityBlogCategories = async () => {
+  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
+  try {
+    const rows = await client.fetch<{ categorySlug: string | null; categoryTitle: string | null }[]>(
+      `*[_type == "blog" && status != "draft" && defined(categorySlug)]{ categorySlug, categoryTitle }`,
+      {},
+      SANITY_CACHE,
+    );
+    const counts = new Map<string, BlogCategoryCount>();
+    for (const r of rows) {
+      // CME posts live only on the dedicated /cme hub, not the blog hub's category chips.
+      if (!r.categorySlug || r.categorySlug === "cme") continue;
+      const existing = counts.get(r.categorySlug);
+      if (existing) existing.count++;
+      else counts.set(r.categorySlug, { slug: r.categorySlug, title: r.categoryTitle ?? r.categorySlug, count: 1 });
+    }
+    return [...counts.values()].sort((a, b) => b.count - a.count);
+  } catch {
+    return [];
+  }
+};
 
 export const getSanityBlogBySlug = (slug: string) =>
-  unstable_cache(
-    async () => sanityFetch<SanityBlog>(`*[_type == "blog" && slug == $slug][0]{ ${BLOG_FIELDS} }`, { slug }),
-    ["sanity-blog-slug", slug],
-    { revalidate: 3600, tags: ["sanity-blogs", `sanity-blog-${slug}`] },
-  )();
+  sanityFetch<SanityBlog>(`*[_type == "blog" && slug == $slug][0]{ ${BLOG_FIELDS} }`, { slug });
 
-export const getSanityPublishedBlogSlugs = () =>
-  unstable_cache(
-    async () =>
-      (await sanityFetch<{ slug: string }[]>(`*[_type == "blog" && status != "draft"]{ slug }`)) ?? [],
-    ["sanity-blog-slugs"],
-    { revalidate: 3600, tags: ["sanity-blogs"] },
-  )();
+export const getSanityPublishedBlogSlugs = async () =>
+  (await sanityFetch<{ slug: string }[]>(`*[_type == "blog" && status != "draft"]{ slug }`)) ?? [];
 
-export const getSanityBlogsByTreatmentSlug = (treatmentSlug: string) =>
-  unstable_cache(
-    async () =>
-      (await sanityFetch<SanityBlog[]>(
-        `*[_type == "blog" && status != "draft" && $slug in treatmentSlugs] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
-        { slug: treatmentSlug },
-      )) ?? [],
-    ["sanity-blogs-treatment", treatmentSlug],
-    { revalidate: 3600, tags: ["sanity-blogs"] },
-  )();
+export const getSanityBlogsByTreatmentSlug = async (treatmentSlug: string) =>
+  (await sanityFetch<SanityBlog[]>(
+    `*[_type == "blog" && status != "draft" && $slug in treatmentSlugs] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+    { slug: treatmentSlug },
+  )) ?? [];
 
-export const getSanityBlogsByLocationSlug = (locationSlug: string) =>
-  unstable_cache(
-    async () =>
-      (await sanityFetch<SanityBlog[]>(
-        `*[_type == "blog" && status != "draft" && $slug in locationSlugs] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
-        { slug: locationSlug },
-      )) ?? [],
-    ["sanity-blogs-location", locationSlug],
-    { revalidate: 3600, tags: ["sanity-blogs"] },
-  )();
+export const getSanityBlogsByLocationSlug = async (locationSlug: string) =>
+  (await sanityFetch<SanityBlog[]>(
+    `*[_type == "blog" && status != "draft" && $slug in locationSlugs] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+    { slug: locationSlug },
+  )) ?? [];
 
-export const getSanityRelatedBlogs = (currentSlug: string, categorySlug: string | null) =>
-  unstable_cache(
-    async () => {
-      if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
-      try {
-        if (categorySlug) {
-          return (
-            (await client.fetch<SanityBlog[]>(
-              `*[_type == "blog" && status != "draft" && slug != $currentSlug && categorySlug == $categorySlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
-              { currentSlug, categorySlug },
-            )) ?? []
-          );
-        }
-        return (
-          (await client.fetch<SanityBlog[]>(
-            `*[_type == "blog" && status != "draft" && slug != $currentSlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
-            { currentSlug },
-          )) ?? []
-        );
-      } catch {
-        return [];
-      }
-    },
-    ["sanity-blogs-related", currentSlug, categorySlug ?? "none"],
-    { revalidate: 3600, tags: ["sanity-blogs"] },
-  )();
+export const getSanityRelatedBlogs = async (currentSlug: string, categorySlug: string | null) => {
+  if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
+  try {
+    if (categorySlug) {
+      return (
+        (await client.fetch<SanityBlog[]>(
+          `*[_type == "blog" && status != "draft" && slug != $currentSlug && categorySlug == $categorySlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+          { currentSlug, categorySlug },
+          SANITY_CACHE,
+        )) ?? []
+      );
+    }
+    return (
+      (await client.fetch<SanityBlog[]>(
+        `*[_type == "blog" && status != "draft" && slug != $currentSlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
+        { currentSlug },
+        SANITY_CACHE,
+      )) ?? []
+    );
+  } catch {
+    return [];
+  }
+};
 
-export const getSanityCMEBlogs = () =>
-  unstable_cache(
-    async () =>
-      (await sanityFetch<SanityBlog[]>(
-        `*[_type == "blog" && status != "draft" && categorySlug == "cme"] | order(publishedAt desc){ ${BLOG_FIELDS} }`,
-      )) ?? [],
-    ["sanity-blogs-cme"],
-    { revalidate: 3600, tags: ["sanity-blogs"] },
-  )();
+export const getSanityCMEBlogs = async () =>
+  (await sanityFetch<SanityBlog[]>(
+    `*[_type == "blog" && status != "draft" && categorySlug == "cme"] | order(publishedAt desc){ ${BLOG_FIELDS} }`,
+  )) ?? [];
 
 // ── Treatments ──
 
@@ -593,19 +492,11 @@ const TREATMENT_FIELDS = `
   faqs, cta
 `;
 
-export const getSanityTreatments = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityTreatment[]>(`*[_type == "treatment"]{ ${TREATMENT_FIELDS} }`)) ?? [],
-    ["sanity-treatments"],
-    { revalidate: 3600, tags: ["sanity-treatments"] },
-  )();
+export const getSanityTreatments = async () =>
+  (await sanityFetch<SanityTreatment[]>(`*[_type == "treatment"]{ ${TREATMENT_FIELDS} }`)) ?? [];
 
 export const getSanityTreatment = (slug: string) =>
-  unstable_cache(
-    () => sanityFetch<SanityTreatment>(`*[_type == "treatment" && slug == $slug][0]{ ${TREATMENT_FIELDS} }`, { slug }),
-    ["sanity-treatment", slug],
-    { revalidate: 3600, tags: ["sanity-treatments"] },
-  )();
+  sanityFetch<SanityTreatment>(`*[_type == "treatment" && slug == $slug][0]{ ${TREATMENT_FIELDS} }`, { slug });
 
 // ── Services ──
 
@@ -659,19 +550,11 @@ const SERVICE_FIELDS = `
   faqs, cta
 `;
 
-export const getSanityServices = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityService[]>(`*[_type == "service"]{ ${SERVICE_FIELDS} }`)) ?? [],
-    ["sanity-services"],
-    { revalidate: 3600, tags: ["sanity-services"] },
-  )();
+export const getSanityServices = async () =>
+  (await sanityFetch<SanityService[]>(`*[_type == "service"]{ ${SERVICE_FIELDS} }`)) ?? [];
 
 export const getSanityService = (slug: string) =>
-  unstable_cache(
-    () => sanityFetch<SanityService>(`*[_type == "service" && slug == $slug][0]{ ${SERVICE_FIELDS} }`, { slug }),
-    ["sanity-service", slug],
-    { revalidate: 3600, tags: ["sanity-services"] },
-  )();
+  sanityFetch<SanityService>(`*[_type == "service" && slug == $slug][0]{ ${SERVICE_FIELDS} }`, { slug });
 
 // ── Cities ──
 
@@ -693,19 +576,11 @@ export type SanityCity = {
 
 const CITY_FIELDS = `slug, name, region, country, helpline, helplineLabel, whatsapp, heroImage, hero360Url, built, intro, faqs, womensHealth`;
 
-export const getSanityCities = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityCity[]>(`*[_type == "city"]{ ${CITY_FIELDS} }`)) ?? [],
-    ["sanity-cities"],
-    { revalidate: 3600, tags: ["sanity-locations"] },
-  )();
+export const getSanityCities = async () =>
+  (await sanityFetch<SanityCity[]>(`*[_type == "city"]{ ${CITY_FIELDS} }`)) ?? [];
 
 export const getSanityCity = (slug: string) =>
-  unstable_cache(
-    () => sanityFetch<SanityCity>(`*[_type == "city" && slug == $slug][0]{ ${CITY_FIELDS} }`, { slug }),
-    ["sanity-city", slug],
-    { revalidate: 3600, tags: ["sanity-locations"] },
-  )();
+  sanityFetch<SanityCity>(`*[_type == "city" && slug == $slug][0]{ ${CITY_FIELDS} }`, { slug });
 
 // ── Centres ──
 
@@ -751,22 +626,14 @@ const CENTRE_FIELDS = `
   faqs, reviewsKey, sameAs, intro, gallery, womensHealth
 `;
 
-export const getSanityCentres = () =>
-  unstable_cache(
-    async () => (await sanityFetch<SanityCentre[]>(`*[_type == "centre"]{ ${CENTRE_FIELDS} }`)) ?? [],
-    ["sanity-centres"],
-    { revalidate: 3600, tags: ["sanity-locations"] },
-  )();
+export const getSanityCentres = async () =>
+  (await sanityFetch<SanityCentre[]>(`*[_type == "centre"]{ ${CENTRE_FIELDS} }`)) ?? [];
 
 export const getSanityCentre = (citySlug: string, slug: string) =>
-  unstable_cache(
-    () => sanityFetch<SanityCentre>(
-      `*[_type == "centre" && citySlug == $citySlug && slug == $slug][0]{ ${CENTRE_FIELDS} }`,
-      { citySlug, slug },
-    ),
-    ["sanity-centre", citySlug, slug],
-    { revalidate: 3600, tags: ["sanity-locations"] },
-  )();
+  sanityFetch<SanityCentre>(
+    `*[_type == "centre" && citySlug == $citySlug && slug == $slug][0]{ ${CENTRE_FIELDS} }`,
+    { citySlug, slug },
+  );
 
 // ── About Page (singleton) ──
 
@@ -809,81 +676,32 @@ export type SanityAbout = {
   } | null;
 };
 
-export const getSanityAbout = () =>
-  unstable_cache(
-    () => sanityFetch<SanityAbout>(`*[_type == "aboutPage"][0]`),
-    ["sanity-about"],
-    { revalidate: 3600, tags: ["sanity-about"] },
-  )();
+export const getSanityAbout = () => sanityFetch<SanityAbout>(`*[_type == "aboutPage"][0]`);
 
-export const getSanitySurakshaKavach = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "surakshaKavach"][0]`),
-    ["sanity-suraksha-kavach"],
-    { revalidate: 3600, tags: ["sanity-suraksha-kavach"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanitySurakshaKavach = () => sanityFetch<any>(`*[_type == "surakshaKavach"][0]`);
 
-export const getSanityHistoryPage = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "historyPage"][0]`),
-    ["sanity-history-page"],
-    { revalidate: 3600, tags: ["sanity-history-page"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanityHistoryPage = () => sanityFetch<any>(`*[_type == "historyPage"][0]`);
 
-export const getSanityInfrastructurePage = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "infrastructurePage"][0]`),
-    ["sanity-infrastructure-page"],
-    { revalidate: 3600, tags: ["sanity-infrastructure-page"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanityInfrastructurePage = () => sanityFetch<any>(`*[_type == "infrastructurePage"][0]`);
 
-export const getSanityWhyBfiPage = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "whyBfiPage"][0]`),
-    ["sanity-why-bfi-page"],
-    { revalidate: 3600, tags: ["sanity-why-bfi-page"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanityWhyBfiPage = () => sanityFetch<any>(`*[_type == "whyBfiPage"][0]`);
 
-export const getSanitySimpleTreatmentPage = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "simpleTreatmentPage"][0]`),
-    ["sanity-simple-treatment-page"],
-    { revalidate: 3600, tags: ["sanity-simple-treatment-page"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanitySimpleTreatmentPage = () => sanityFetch<any>(`*[_type == "simpleTreatmentPage"][0]`);
 
-export const getSanitySafeTreatmentPage = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "safeTreatmentPage"][0]`),
-    ["sanity-safe-treatment-page"],
-    { revalidate: 3600, tags: ["sanity-safe-treatment-page"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanitySafeTreatmentPage = () => sanityFetch<any>(`*[_type == "safeTreatmentPage"][0]`);
 
-export const getSanitySmartTreatmentPage = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "smartTreatmentPage"][0]`),
-    ["sanity-smart-treatment-page"],
-    { revalidate: 3600, tags: ["sanity-smart-treatment-page"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanitySmartTreatmentPage = () => sanityFetch<any>(`*[_type == "smartTreatmentPage"][0]`);
 
-export const getSanitySuccessBenchmarksPage = () =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "successBenchmarksPage"][0]`),
-    ["sanity-success-benchmarks-page"],
-    { revalidate: 3600, tags: ["sanity-success-benchmarks-page"] },
-  )();
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+export const getSanitySuccessBenchmarksPage = () => sanityFetch<any>(`*[_type == "successBenchmarksPage"][0]`);
 
 export const getSanityCategoryHub = (slug: string) =>
-  unstable_cache(
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    () => sanityFetch<any>(`*[_type == "categoryHubPage" && slug == $slug][0]`, { slug }),
-    ["sanity-category-hub", slug],
-    { revalidate: 3600, tags: [`sanity-category-hub-${slug}`] },
-  )();
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  sanityFetch<any>(`*[_type == "categoryHubPage" && slug == $slug][0]`, { slug });
