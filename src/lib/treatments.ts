@@ -25,13 +25,14 @@ import { doctorBySlug, reviewerNode, physicianSchema } from "@/lib/doctors";
 
 export type TreatmentRef = { slug: string; name: string; href: string };
 
-/** Treatment pages awaiting client sign-off on corrected copy (ART Act
- *  compliance for embryo-donation, legal accuracy for surrogacy, and a
- *  surgery-vs-ART-IVF rewrite for varicocele). The pages themselves render
- *  and stay in the sitemap — the client is reviewing them via direct link —
- *  but they're kept out of the /treatments hub grid, related-treatment
- *  cards, and header/footer nav until each is approved and unhidden. */
-export const UNLISTED_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele", "surrogacy"]);
+/** Treatment pages awaiting client sign-off on corrected copy (a
+ *  surgery-vs-ART-IVF rewrite for varicocele). The page itself renders
+ *  and stays in the sitemap — the client is reviewing it via direct link —
+ *  but it's kept out of the /treatments hub grid, related-treatment
+ *  cards, and header/footer nav until approved and unhidden.
+ *  embryo-donation and surrogacy were approved 2026-08-29 (doctor feedback)
+ *  and are no longer unlisted. */
+export const UNLISTED_TREATMENT_SLUGS = new Set(["varicocele"]);
 
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
