@@ -64,6 +64,7 @@ import type { ContactSource } from "@/lib/contact";
 import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
 import { TREATMENTS, treatmentBySlug, UNLISTED_TREATMENT_SLUGS } from "@/lib/treatments";
 import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre, type CitySource, type CentreSource } from "@/lib/location-content";
+import { CENTRES } from "@/lib/locations";
 import { type ServiceSource } from "@/lib/services";
 import { getLegalPage, LEGAL_PAGE_SLUGS } from "@/lib/legal-pages";
 
@@ -481,6 +482,15 @@ export const getCity = async (slug: string): Promise<ResolvedCity | undefined> =
 export const getCentre = async (citySlug: string, slug: string): Promise<ResolvedCentre | undefined> => {
   const doc = await getSanityCentre(citySlug, slug);
   return resolveCentre(citySlug, slug, toCentreSource(doc));
+};
+
+/** Every built centre, admin-override applied — used by the Contact page directory
+ * so it never falls back to a hardcoded list that drifts from what's saved in /admin-panel. */
+export const getAllResolvedCentres = async (): Promise<ResolvedCentre[]> => {
+  const resolved = await Promise.all(
+    CENTRES.filter((c) => c.built).map((c) => getCentre(c.citySlug, c.slug)),
+  );
+  return resolved.filter((c): c is ResolvedCentre => !!c);
 };
 
 export const getPublishedCitySlugs = async (): Promise<string[]> => {

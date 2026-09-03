@@ -3,7 +3,7 @@ import { ContactPage } from "@/components/contact-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
-import { getPageBySlug, getGlobalSafe, payloadClient } from "@/lib/payload";
+import { getPageBySlug, getGlobalSafe, getAllResolvedCentres } from "@/lib/payload";
 import { resolveContactValues, resolveCardChannel, type ContactChannel } from "@/lib/contact";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
@@ -80,25 +80,17 @@ async function loadContact() {
   // lag behind the schema until the next generate:types run).
   const sectionLabels = (page as { sectionLabels?: { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null } | null } | null)?.sectionLabels ?? undefined;
 
-  // Centres directory — pulled live from the CMS so edits in /admin/collections/centres
-  // are reflected immediately without any code change.
-  let directory: { name: string; address: string; phone: string; phoneLabel: string; hours?: string; href?: string }[] | undefined;
-  try {
-    const payload = await payloadClient();
-    const res = await payload.find({ collection: "centres", limit: 100, depth: 0, sort: "citySlug" });
-    if (res.docs.length > 0) {
-      directory = (res.docs as unknown as Array<Record<string, string | null | undefined>>).map((c) => ({
-        name: c.fullName ?? `${c.citySlug ?? ""} — ${c.name ?? ""}`,
-        address: c.address ?? "",
-        phone: c.phone ?? "",
-        phoneLabel: c.phoneLabel ?? "",
-        hours: c.hours ?? undefined,
-        href: `/locations/${c.citySlug}/${c.slug}`,
-      }));
-    }
-  } catch {
-    // Fall back to hardcoded directory in ContactPage
-  }
+  // Centres directory — pulled live from Sanity (admin-panel overrides applied)
+  // so edits in /admin-panel/locations are reflected immediately without any code change.
+  const resolvedCentres = await getAllResolvedCentres();
+  const directory = resolvedCentres.map((c) => ({
+    name: c.fullName || `${c.citySlug} — ${c.name}`,
+    address: c.address,
+    phone: c.phone,
+    phoneLabel: c.phoneLabel,
+    hours: c.hours,
+    href: `/locations/${c.citySlug}/${c.slug}`,
+  }));
 
   return { hero, seo, faqs, ogImage, cards, contact, sectionLabels, directory };
 }
