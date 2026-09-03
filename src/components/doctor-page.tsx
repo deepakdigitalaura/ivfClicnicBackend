@@ -16,7 +16,7 @@ import type { Doctor } from "@/lib/doctors";
 import { DOCTORS, doctorUrl, CORE_DOCTOR_SLUGS } from "@/lib/doctors";
 import { treatmentCardData, treatmentRef } from "@/lib/treatments";
 import { WOMENS_HEALTH_SERVICES, serviceHref } from "@/lib/womens-health";
-import { centresForLocationSlugs, centreMapUrl, centreHref, cityBySlug } from "@/lib/locations";
+import { centreMapUrl, centreHref, cityBySlug, type Centre } from "@/lib/locations";
 import { testimonialsForDoctor, videosForDoctor } from "@/lib/video-testimonials";
 import { reviewsForDoctor } from "@/lib/doctor-reviews";
 
@@ -100,7 +100,7 @@ const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const em = (t: string) => `<em ${EM}>${t}</em>`;
 
 /* ---------- Shared centre contact card (per-centre "Where to meet" card) ---------- */
-function CentreCard({ c, d }: { c: ReturnType<typeof centresForLocationSlugs>[number]; d: Doctor }) {
+function CentreCard({ c, d }: { c: Centre; d: Doctor }) {
   return (
     <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
       <div className="flex items-start gap-3.5">
@@ -139,12 +139,11 @@ function CentreCard({ c, d }: { c: ReturnType<typeof centresForLocationSlugs>[nu
 }
 
 /* ---------- /doctors/[slug] — single profile ---------- */
-export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
+export function DoctorProfile({ doctor: d, centres }: { doctor: Doctor; centres: Centre[] }) {
   const editing = !!useEdit()?.editMode;
   const stories = testimonialsForDoctor(d.slug); // only when a video explicitly names this doctor
   const reviews = reviewsForDoctor(d.slug); // real written Google reviews (text) for this doctor
   const videos = videosForDoctor(d.slug); // doctor's own explainer videos (real ids only)
-  const centres = centresForLocationSlugs(d.locations); // full contact details for "Where to meet"
   const pl = d.profileLabels ?? {};
   return (
     <div className="min-h-screen bg-background text-foreground">

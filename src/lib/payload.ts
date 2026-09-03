@@ -493,6 +493,26 @@ export const getAllResolvedCentres = async (): Promise<ResolvedCentre[]> => {
   return resolved.filter((c): c is ResolvedCentre => !!c);
 };
 
+/** Same slug-resolution rules as centresForLocationSlugs() in @/lib/locations
+ * (centre slug direct, city slug → head office / first built centre, deduped,
+ * order-preserving) but returns admin-override-applied centres — used on the
+ * doctor profile page's "Where to meet" cards. */
+export const getResolvedCentresForLocationSlugs = async (slugs: string[]): Promise<ResolvedCentre[]> => {
+  const all = await getAllResolvedCentres();
+  const out: ResolvedCentre[] = [];
+  const seen = new Set<string>();
+  const push = (c?: ResolvedCentre) => {
+    if (c && !seen.has(c.slug)) { seen.add(c.slug); out.push(c); }
+  };
+  for (const slug of slugs) {
+    const centre = all.find((c) => c.slug === slug);
+    if (centre) { push(centre); continue; }
+    const inCity = all.filter((c) => c.citySlug === slug);
+    push(inCity.find((c) => c.isHeadOffice) ?? inCity[0]);
+  }
+  return out;
+};
+
 export const getPublishedCitySlugs = async (): Promise<string[]> => {
   const docs = await getSanityCities();
   return docs.filter((d) => d.slug && d.built !== false).map((d) => d.slug as string);
