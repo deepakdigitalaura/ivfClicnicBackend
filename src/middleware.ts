@@ -41,7 +41,8 @@ async function loadSanityRules(): Promise<SanityRule[]> {
 const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  if (request.nextUrl.hostname === "www.ivfclinic.com") {
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  if (host === "www.ivfclinic.com") {
     const url = request.nextUrl.clone();
     url.hostname = "ivfclinic.com";
     return NextResponse.redirect(url, 301);
