@@ -41,14 +41,10 @@ async function loadSanityRules(): Promise<SanityRule[]> {
 const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  // www.ivfclinic.com and ivfclinic.com currently serve identical content
-  // with no redirect between them — Google treats this as duplicate content,
-  // and the site's own canonical tag already declares non-www as correct.
-  const host = request.headers.get("host") ?? "";
-  if (host.startsWith("www.")) {
+  if (request.nextUrl.hostname === "www.ivfclinic.com") {
     const url = request.nextUrl.clone();
-    url.host = host.slice(4);
-    return NextResponse.redirect(url, 308);
+    url.hostname = "ivfclinic.com";
+    return NextResponse.redirect(url, 301);
   }
 
   const rawPathname = request.nextUrl.pathname;
