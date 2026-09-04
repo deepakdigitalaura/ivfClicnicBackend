@@ -36,44 +36,44 @@ export const UNLISTED_TREATMENT_SLUGS = new Set(["varicocele"]);
 
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
-  ivf: { slug: "ivf", name: "IVF", href: "/what-is-ivf" },
-  icsi: { slug: "icsi", name: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
-  iui: { slug: "iui", name: "IUI", href: "/intra-uterine-insemination-iui" },
-  picsi: { slug: "picsi", name: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
-  imsi: { slug: "imsi", name: "IMSI", href: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi" },
-  macs: { slug: "macs", name: "MACS", href: "/magnetic-activated-cell-sorting-macs" },
-  "spindle-view-icsi": { slug: "spindle-view-icsi", name: "Spindle View ICSI", href: "/spindle-view-icsi" },
-  "blastocyst-transfer": { slug: "blastocyst-transfer", name: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
-  "laser-hatching": { slug: "laser-hatching", name: "Laser Assisted Hatching", href: "/laser-assisted-hatching" },
-  "ivf-failure": { slug: "ivf-failure", name: "IVF Failure", href: "/ivf-failure" },
-  "ivf-evaluation": { slug: "ivf-evaluation", name: "IVF Evaluation", href: "/ivf-evaluation" },
-  "era-test": { slug: "era-test", name: "ERA Test", href: "/era-test" },
-  "egg-donation": { slug: "egg-donation", name: "Egg Donation", href: "/egg-donation" },
-  "sperm-donation": { slug: "sperm-donation", name: "Sperm Donation", href: "/sperm-donation" },
-  "embryo-donation": { slug: "embryo-donation", name: "Embryo Donation", href: "/embryo-donation" },
-  surrogacy: { slug: "surrogacy", name: "Surrogacy", href: "/surrogacy" },
-  pgt: { slug: "pgt", name: "PGT", href: "/pgt" },
+  ivf: { slug: "ivf", name: "IVF", href: "/treatments/ivf" },
+  icsi: { slug: "icsi", name: "ICSI", href: "/treatments/icsi" },
+  iui: { slug: "iui", name: "IUI", href: "/treatments/iui" },
+  picsi: { slug: "picsi", name: "PICSI", href: "/treatments/picsi" },
+  imsi: { slug: "imsi", name: "IMSI", href: "/treatments/imsi" },
+  macs: { slug: "macs", name: "MACS", href: "/treatments/macs" },
+  "spindle-view-icsi": { slug: "spindle-view-icsi", name: "Spindle View ICSI", href: "/treatments/spindle-view-icsi" },
+  "blastocyst-transfer": { slug: "blastocyst-transfer", name: "Blastocyst Transfer", href: "/treatments/blastocyst-transfer" },
+  "laser-hatching": { slug: "laser-hatching", name: "Laser Assisted Hatching", href: "/treatments/laser-hatching" },
+  "ivf-failure": { slug: "ivf-failure", name: "IVF Failure", href: "/treatments/ivf-failure" },
+  "ivf-evaluation": { slug: "ivf-evaluation", name: "IVF Evaluation", href: "/treatments/ivf-evaluation" },
+  "era-test": { slug: "era-test", name: "ERA Test", href: "/treatments/era-test" },
+  "egg-donation": { slug: "egg-donation", name: "Egg Donation", href: "/treatments/egg-donation" },
+  "sperm-donation": { slug: "sperm-donation", name: "Sperm Donation", href: "/treatments/sperm-donation" },
+  "embryo-donation": { slug: "embryo-donation", name: "Embryo Donation", href: "/treatments/embryo-donation" },
+  surrogacy: { slug: "surrogacy", name: "Surrogacy", href: "/treatments/surrogacy" },
+  pgt: { slug: "pgt", name: "PGT", href: "/treatments/pgt" },
   "male-infertility": { slug: "male-infertility", name: "Male Infertility", href: "/treatments/male-infertility" },
   "female-infertility": { slug: "female-infertility", name: "Female Infertility", href: "/treatments/female-infertility" },
   "fertility-preservation": { slug: "fertility-preservation", name: "Fertility Preservation", href: "/treatments/advanced-fertility-techniques" },
-  endometriosis: { slug: "endometriosis", name: "Endometriosis", href: "/endometriosis" },
-  azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
-  cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/cryopreservation" },
-  "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/egg-freezing" },
+  endometriosis: { slug: "endometriosis", name: "Endometriosis", href: "/treatments/endometriosis" },
+  azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/treatments/azoospermia" },
+  cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/treatments/cryopreservation" },
+  "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/treatments/egg-freezing" },
   "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/treatments" },
   // Male Infertility
-  oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
-  asthenospermia: { slug: "asthenospermia", name: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
-  "surgical-sperm-retrieval": { slug: "surgical-sperm-retrieval", name: "Surgical Sperm Retrieval", href: "/surgical-sperm-retrieval" },
-  varicocele: { slug: "varicocele", name: "Varicocele", href: "/varicocele" },
-  "erectile-dysfunction": { slug: "erectile-dysfunction", name: "Erectile Dysfunction", href: "/erectile-dysfunction" },
+  oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/treatments/oligospermia" },
+  asthenospermia: { slug: "asthenospermia", name: "Low Sperm Motility (Asthenospermia)", href: "/treatments/asthenospermia" },
+  "surgical-sperm-retrieval": { slug: "surgical-sperm-retrieval", name: "Surgical Sperm Retrieval", href: "/treatments/surgical-sperm-retrieval" },
+  varicocele: { slug: "varicocele", name: "Varicocele", href: "/treatments/varicocele" },
+  "erectile-dysfunction": { slug: "erectile-dysfunction", name: "Erectile Dysfunction", href: "/treatments/erectile-dysfunction" },
   // Female Infertility
-  "conceive-naturally": { slug: "conceive-naturally", name: "Conceive Naturally", href: "/conceive-naturally" },
-  "prp-infertility": { slug: "prp-infertility", name: "PRP Infertility", href: "/prp-infertility" },
-  pcos: { slug: "pcos", name: "PMOS-PCOS", href: "/pcos" },
-  "ovarian-reserve": { slug: "ovarian-reserve", name: "Poor Ovarian Reserve / Low AMH", href: "/ovarian-reserve" },
-  "ovarian-rejuvenation": { slug: "ovarian-rejuvenation", name: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
-  fibroids: { slug: "fibroids", name: "Fibroids", href: "/fibroids" },
+  "conceive-naturally": { slug: "conceive-naturally", name: "Conceive Naturally", href: "/treatments/conceive-naturally" },
+  "prp-infertility": { slug: "prp-infertility", name: "PRP Infertility", href: "/treatments/prp-infertility" },
+  pcos: { slug: "pcos", name: "PMOS-PCOS", href: "/treatments/pcos" },
+  "ovarian-reserve": { slug: "ovarian-reserve", name: "Poor Ovarian Reserve / Low AMH", href: "/treatments/ovarian-reserve" },
+  "ovarian-rejuvenation": { slug: "ovarian-rejuvenation", name: "Ovarian Rejuvenation", href: "/treatments/ovarian-rejuvenation" },
+  fibroids: { slug: "fibroids", name: "Fibroids", href: "/treatments/fibroids" },
 };
 
 export const treatmentRef = (slug: string): TreatmentRef =>
@@ -184,7 +184,7 @@ export type Treatment = {
 
 export const ivf: Treatment = {
   slug: "ivf",
-  href: "/what-is-ivf",
+  href: "/treatments/ivf",
   name: "IVF Treatment",
   shortName: "IVF",
   alternateName: "Test Tube Baby",
@@ -465,7 +465,7 @@ const WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED: IconCard[] = [
 
 export const ivfFailure: Treatment = {
   slug: "ivf-failure",
-  href: "/ivf-failure",
+  href: "/treatments/ivf-failure",
   name: "IVF Failure — Diagnosis & Treatment",
   shortName: "IVF Failure",
   breadcrumbName: "IVF Failure",
@@ -610,7 +610,7 @@ export const ivfFailure: Treatment = {
 
 export const iui: Treatment = {
   slug: "iui",
-  href: "/intra-uterine-insemination-iui",
+  href: "/treatments/iui",
   name: "IUI Treatment (Intrauterine Insemination)",
   shortName: "IUI",
   alternateName: "Artificial Insemination",
@@ -758,7 +758,7 @@ export const iui: Treatment = {
 
 export const icsi: Treatment = {
   slug: "icsi",
-  href: "/icsi-treatment-intracytoplasmic-sperm-injection",
+  href: "/treatments/icsi",
   name: "ICSI Treatment (Intracytoplasmic Sperm Injection)",
   shortName: "ICSI",
   alternateName: "Intracytoplasmic Sperm Injection",
@@ -918,7 +918,7 @@ export const icsi: Treatment = {
 
 export const picsi: Treatment = {
   slug: "picsi",
-  href: "/physiological-intracytoplasmic-sperm-injection-picsi",
+  href: "/treatments/picsi",
   name: "PICSI (Physiological Intracytoplasmic Sperm Injection)",
   shortName: "PICSI",
   alternateName: "Physiological ICSI",
@@ -1039,7 +1039,7 @@ export const picsi: Treatment = {
 
 export const imsi: Treatment = {
   slug: "imsi",
-  href: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+  href: "/treatments/imsi",
   name: "IMSI (Intracytoplasmic Morphologically Selected Sperm Injection)",
   shortName: "IMSI",
   alternateName: "Morphologically Selected Sperm Injection",
@@ -1160,7 +1160,7 @@ export const imsi: Treatment = {
 
 export const macs: Treatment = {
   slug: "macs",
-  href: "/magnetic-activated-cell-sorting-macs",
+  href: "/treatments/macs",
   name: "MACS (Magnetic-Activated Cell Sorting)",
   shortName: "MACS",
   alternateName: "Magnetic-Activated Cell Sorting",
@@ -1279,7 +1279,7 @@ export const macs: Treatment = {
 
 export const spindleViewIcsi: Treatment = {
   slug: "spindle-view-icsi",
-  href: "/spindle-view-icsi",
+  href: "/treatments/spindle-view-icsi",
   name: "Spindle View ICSI (Polscope)",
   shortName: "Spindle View ICSI",
   alternateName: "Polscope ICSI",
@@ -1399,7 +1399,7 @@ export const spindleViewIcsi: Treatment = {
 
 export const blastocystTransfer: Treatment = {
   slug: "blastocyst-transfer",
-  href: "/blastocyst-culture-blastocyst-transfer",
+  href: "/treatments/blastocyst-transfer",
   name: "Blastocyst Culture & Transfer",
   shortName: "Blastocyst Transfer",
   alternateName: "Blastocyst Culture",
@@ -1534,7 +1534,7 @@ export const blastocystTransfer: Treatment = {
 
 export const laserHatching: Treatment = {
   slug: "laser-hatching",
-  href: "/laser-assisted-hatching",
+  href: "/treatments/laser-hatching",
   name: "Laser-Assisted Hatching",
   shortName: "Laser Hatching",
   alternateName: "Assisted Hatching",
@@ -1666,7 +1666,7 @@ export const laserHatching: Treatment = {
 
 export const eggDonation: Treatment = {
   slug: "egg-donation",
-  href: "/egg-donation",
+  href: "/treatments/egg-donation",
   name: "Egg Donation Treatment",
   shortName: "Egg Donation",
   alternateName: "Oocyte Donation",
@@ -1830,7 +1830,7 @@ export const eggDonation: Treatment = {
 
 export const spermDonation: Treatment = {
   slug: "sperm-donation",
-  href: "/sperm-donation",
+  href: "/treatments/sperm-donation",
   name: "Sperm Donation Treatment",
   shortName: "Sperm Donation",
   alternateName: "Donor Sperm Treatment",
@@ -1980,7 +1980,7 @@ export const spermDonation: Treatment = {
 
 export const embryoDonation: Treatment = {
   slug: "embryo-donation",
-  href: "/embryo-donation",
+  href: "/treatments/embryo-donation",
   name: "Embryo Donation Treatment",
   shortName: "Embryo Donation",
   alternateName: "Donor Embryo Treatment",
