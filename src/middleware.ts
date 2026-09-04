@@ -41,7 +41,18 @@ async function loadSanityRules(): Promise<SanityRule[]> {
 const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  const pathname = norm(request.nextUrl.pathname);
+  // www.ivfclinic.com and ivfclinic.com currently serve identical content
+  // with no redirect between them — Google treats this as duplicate content,
+  // and the site's own canonical tag already declares non-www as correct.
+  const host = request.headers.get("host") ?? "";
+  if (host.startsWith("www.")) {
+    const url = request.nextUrl.clone();
+    url.host = host.slice(4);
+    return NextResponse.redirect(url, 308);
+  }
+
+  const rawPathname = request.nextUrl.pathname;
+  const pathname = norm(rawPathname);
   const rules = await loadSanityRules();
 
   for (const rule of rules) {
@@ -49,7 +60,7 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     if (norm(rule.source) !== pathname) continue;
     // A rule whose destination normalizes to the same path as its source
     // (e.g. "/x/" -> "/x") is a self-redirect once trailing slashes are
-    // normalized on both sides above — Next's own trailing-slash handling
+    // normalized on both sides above — the trailing-slash fallback below
     // already covers that case, so skip it here instead of looping forever.
     if (!/^https?:\/\//i.test(rule.destination) && norm(rule.destination) === pathname) continue;
 
@@ -59,6 +70,17 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     const url = request.nextUrl.clone();
     url.pathname = rule.destination;
     return NextResponse.redirect(url, { status: rule.permanent ? 301 : 302 });
+  }
+
+  // No redirect rule matched. With `skipTrailingSlashRedirect` set in
+  // next.config.mjs, Next no longer strips a trailing slash on our behalf —
+  // this replaces that behaviour for everything else, so a request like
+  // "/some-real-page/" still canonicalises to "/some-real-page" in one hop,
+  // exactly as before. Root "/" is untouched (norm() already leaves it alone).
+  if (rawPathname !== pathname) {
+    const url = request.nextUrl.clone();
+    url.pathname = pathname;
+    return NextResponse.redirect(url, 308);
   }
 
   const res = NextResponse.next();
