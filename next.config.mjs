@@ -5,6 +5,16 @@ const nextConfig = {
   reactStrictMode: true,
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
+  // Let middleware see the raw (trailing-slash) request instead of Next's own
+  // built-in slash-redirect firing first. Without this, an old URL requested
+  // with a trailing slash (e.g. "/old-page/") gets redirected to "/old-page"
+  // by Next itself BEFORE middleware ever runs — then middleware issues a
+  // SECOND redirect to the real destination, producing a two-hop chain
+  // instead of one direct 301. middleware.ts now owns the trailing-slash
+  // fallback for paths with no matching redirect rule, so behaviour for
+  // ordinary pages is unchanged — only the redirect-rule case collapses
+  // from two hops to one.
+  skipTrailingSlashRedirect: true,
   // NOTE: cpus:1 + webpackMemoryOptimizations were set when the build ran
   // directly on the RAM-constrained Cloudways server. The build now runs on
   // GitHub Actions (ample RAM, see deploy.yml) and this restriction was
