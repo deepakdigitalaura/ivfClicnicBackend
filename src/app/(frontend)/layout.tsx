@@ -6,21 +6,25 @@ import { siteGraph } from "@/lib/seo";
 import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
+import { CookieConsent } from "@/components/cookie-consent";
+import { ConsentScripts } from "@/components/consent-scripts";
+import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ivfclinic.com"),
-  title: {
-    default: "Bavishi Fertility Centre — India's Trusted IVF Experts",
-    template: "%s · Bavishi Fertility Centre",
-  },
+  // No `template` here: every page already sets its own fully-branded title
+  // ("... — Bavishi Fertility Institute"). A template would double-append
+  // branding on top of that (e.g. "...Institute · Bavishi Fertility Centre").
+  // `default` only fires for the rare page that sets no title at all.
+  title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
   description:
-    "Premium fertility care across 15 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI, and personalised treatment plans by leading specialists.",
+    "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI, and personalised treatment plans by leading specialists.",
   openGraph: {
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
-      "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 30+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     type: "website",
     images: [OG_IMAGE],
   },
@@ -28,7 +32,7 @@ export const metadata: Metadata = {
     card: "summary_large_image",
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
-      "30,000+ pregnancies. 40+ years of legacy. 15 centres. Personalised, transparent and compassionate fertility care.",
+      "30,000+ pregnancies. 30+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
     images: [OG_IMAGE],
   },
 };
@@ -38,31 +42,56 @@ export const viewport: Viewport = {
   initialScale: 1,
 };
 
-export default async function RootLayout({
-  children,
-}: {
-  children: React.ReactNode;
-}) {
-  // Identity comes from the CMS `site-settings` global; falls back to the SITE
-  // constant when unavailable so the entity graph is never empty. The header and
-  // footer are resolved once here and carried to <SiteHeader> / <Footer>
-  // (rendered inside the per-page client components) via context — all stay
-  // static (cached + tagged reads).
-  const [identity, header, footer] = await Promise.all([
+export default async function RootLayout({ children }: { children: React.ReactNode }) {
+  const [identity, header, footer, scripts, schemaOrg] = await Promise.all([
     getSiteIdentity(),
     getHeader(),
     getFooter(),
+    getScriptsConfig(),
+    getSchemaOrgConfig(),
   ]);
+
+  const isLive = (s: { enabled?: boolean; code?: string }) => !!s.enabled && !!s.code;
+  const isNecessary = (s: { category?: string }) => s.category === "necessary";
+
+  const allHead = scripts?.headScripts?.filter(isLive) ?? [];
+  const allBody = scripts?.bodyScripts?.filter(isLive) ?? [];
+
+  // Necessary scripts (site verification, essential tag managers) always render.
+  // Analytics/marketing scripts are only executed client-side once the visitor
+  // accepts cookies — see <ConsentScripts> and src/components/cookie-consent.tsx.
+  const headScripts = allHead.filter(isNecessary);
+  const bodyScripts = allBody.filter(isNecessary);
+  const gatedScripts = [...allHead, ...allBody].filter((s) => !isNecessary(s));
+
+  const customSchemas = (schemaOrg?.customSchemas ?? [])
+    .filter((s) => s.enabled && s.jsonCode)
+    .map((s) => {
+      try { return JSON.parse(s.jsonCode!); } catch { return null; }
+    })
+    .filter(Boolean);
+
   return (
     <html lang="en">
+      <head>
+        {headScripts.map((s, i) => (
+          <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />
+        ))}
+      </head>
       <body>
-        {/* Sitewide entity graph — #organization + #website are referenced by
-            every page's per-page schema so all facts merge into one entity. */}
         <JsonLd graph={siteGraph(identity)} />
+        {customSchemas.map((schema, i) => (
+          <script key={`cs-${i}`} type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(schema) }} />
+        ))}
         <ScrollProgress />
         <HeaderProvider value={header}>
           <FooterProvider value={footer}>{children}</FooterProvider>
         </HeaderProvider>
+        <CookieConsent />
+        <ConsentScripts scripts={gatedScripts} />
+        {bodyScripts.map((s, i) => (
+          <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />
+        ))}
       </body>
     </html>
   );

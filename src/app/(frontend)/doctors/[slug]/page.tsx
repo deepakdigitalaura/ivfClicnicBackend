@@ -2,27 +2,20 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { DoctorProfile } from "@/components/doctor-page";
 import { JsonLd } from "@/components/json-ld";
-import { DOCTORS, physicianSchema } from "@/lib/doctors";
-import { getDoctor, payloadClient } from "@/lib/payload";
+import { PageSeoSchema } from "@/components/page-seo-schema";
+import { physicianSchema } from "@/lib/doctors";
+import { getDoctor, getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
-/** DB-first: union of Payload-published slugs + code-known DOCTORS slugs. */
+/** ISR: re-render every hour so admin edits go live without a full redeploy. */
+export const revalidate = 3600;
+
+/** Union of code-known + Sanity doctor slugs (getDoctors merges both). New
+ *  admin-created doctors not in this set still render on-demand (dynamicParams). */
 export async function generateStaticParams() {
-  const codeSlugs = DOCTORS.map((d) => d.slug);
-  try {
-    const payload = await payloadClient();
-    const res = await payload.find({
-      collection: "doctors",
-      limit: codeSlugs.length + 200,
-      depth: 0,
-      select: { slug: true },
-    });
-    const dbSlugs = res.docs.map((d) => (d as { slug: string }).slug);
-    const all = [...new Set([...codeSlugs, ...dbSlugs])];
-    return all.map((slug) => ({ slug }));
-  } catch {
-    return codeSlugs.map((slug) => ({ slug }));
-  }
+  const doctors = await getDoctors();
+  return doctors.map((d) => ({ slug: d.slug }));
 }
 
 export async function generateMetadata(
@@ -32,7 +25,7 @@ export async function generateMetadata(
   const d = await getDoctor(slug);
   if (!d) return {};
   const title = `${d.name} — ${d.specialty} | Bavishi Fertility Institute`;
-  return {
+  return withPageSeoOverride(`/doctors/${d.slug}`, {
     title,
     description: d.shortBio,
     alternates: { canonical: `/doctors/${d.slug}` },
@@ -43,7 +36,7 @@ export async function generateMetadata(
       type: "profile",
       images: [d.image],
     },
-  };
+  });
 }
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
@@ -63,6 +56,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={`/doctors/${d.slug}`} />
       <DoctorProfile doctor={d} />
     </>
   );

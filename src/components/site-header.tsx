@@ -17,6 +17,9 @@ const LANGS = [
   { code: "mr", label: "मराठी" },
 ];
 
+// Site only has English content today — switcher re-enables once translations ship.
+const LANGUAGE_SWITCHER_ENABLED = false;
+
 export function SiteHeader({
   logoSrc,
   logoAlt,
@@ -54,6 +57,9 @@ export function SiteHeader({
   }, []);
 
   const activeItem = NAV.find((n) => n.label === hover && (n.mega || n.doctors));
+  // When one column in a mega has a heading, blank sibling columns reserve the
+  // same header height (invisible) so item rows stay top-aligned across columns.
+  const activeMegaHasHeadings = activeItem?.mega?.some((c) => c.heading) ?? false;
 
   return (
     <>
@@ -61,40 +67,44 @@ export function SiteHeader({
       <div className="hidden border-b border-border/60 bg-[color:var(--plum)] text-white lg:block">
         <div className="container-px mx-auto flex h-9 max-w-[1400px] items-center justify-between text-xs">
           <div className="flex items-center gap-5 text-white/70">
-            <span>India's Trusted Fertility Experts · Since 1983</span>
+            <span>India's Trusted Fertility Experts · Since 1998</span>
           </div>
           <div className="flex items-center gap-5">
             <a href="tel:+919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><Phone className="h-3 w-3" /> +91 97126 22288</a>
-            <a href="https://wa.me/919712622288" className="flex items-center gap-1.5 text-white/80 hover:text-white"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
-            <a href="/#book" className="flex items-center gap-1.5 text-white/80 hover:text-white">24×7 Care</a>
-            <span className="h-3 w-px bg-white/20" />
-            {/* Language */}
-            <div className="relative" data-lang>
-              <button
-                type="button"
-                onClick={(e) => { e.stopPropagation(); setLangOpen((v) => !v); }}
-                className="flex items-center gap-1.5 text-white/80 hover:text-white"
-              >
-                <Globe className="h-3 w-3" />
-                {LANGS.find((l) => l.code === lang)?.label}
-                <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
-              </button>
-              {langOpen && (
-                <div className="absolute right-0 z-[70] mt-2 w-40 overflow-hidden rounded-xl border border-border bg-white shadow-lift">
-                  {LANGS.map((l) => (
-                    <button
-                      key={l.code}
-                      type="button"
-                      onClick={() => { setLang(l.code); setLangOpen(false); }}
-                      className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition-colors hover:bg-[color:var(--ivory)] ${lang === l.code ? "text-[color:var(--rose)] font-semibold" : "text-[color:var(--plum)]"}`}
-                    >
-                      {l.label}
-                      {lang === l.code && <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--rose)]" />}
-                    </button>
-                  ))}
+            <a href="https://wa.me/919712522289" className="flex items-center gap-1.5 text-white/80 hover:text-white"><MessageCircle className="h-3 w-3" /> WhatsApp</a>
+            <a href="/contact#book" className="flex items-center gap-1.5 text-white/80 hover:text-white">24×7 Care</a>
+            {LANGUAGE_SWITCHER_ENABLED && (
+              <>
+                <span className="h-3 w-px bg-white/20" />
+                {/* Language */}
+                <div className="relative" data-lang>
+                  <button
+                    type="button"
+                    onClick={(e) => { e.stopPropagation(); setLangOpen((v) => !v); }}
+                    className="flex items-center gap-1.5 text-white/80 hover:text-white"
+                  >
+                    <Globe className="h-3 w-3" />
+                    {LANGS.find((l) => l.code === lang)?.label}
+                    <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
+                  </button>
+                  {langOpen && (
+                    <div className="absolute right-0 z-[70] mt-2 w-40 overflow-hidden rounded-xl border border-border bg-white shadow-lift">
+                      {LANGS.map((l) => (
+                        <button
+                          key={l.code}
+                          type="button"
+                          onClick={() => { setLang(l.code); setLangOpen(false); }}
+                          className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition-colors hover:bg-[color:var(--ivory)] ${lang === l.code ? "text-[color:var(--rose)] font-semibold" : "text-[color:var(--plum)]"}`}
+                        >
+                          {l.label}
+                          {lang === l.code && <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--rose)]" />}
+                        </button>
+                      ))}
+                    </div>
+                  )}
                 </div>
-              )}
-            </div>
+              </>
+            )}
           </div>
         </div>
       </div>
@@ -106,14 +116,14 @@ export function SiteHeader({
         className="sticky top-0 z-50 border-b border-border/60 bg-[color:var(--ivory)]/90 backdrop-blur-xl"
         onMouseLeave={scheduleClose}
       >
-        <div className="container-px mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-6">
+        <div className="mx-auto flex h-[72px] max-w-[1400px] items-center justify-between gap-4 px-6 md:px-10 min-[1280px]:px-12 min-[1440px]:px-20">
           <a href="/" className="flex shrink-0 items-center gap-3">
             <img src={finalLogoSrc} alt={finalLogoAlt} className="h-12 w-auto" />
           </a>
 
           {/* Desktop nav */}
-          <nav className="hidden flex-1 items-center justify-center xl:flex">
-            <ul className="flex items-center gap-0.5 text-[14px] font-medium text-[color:var(--plum)]">
+          <nav className="hidden min-w-0 flex-1 items-center justify-center min-[1280px]:flex">
+            <ul className="flex items-center gap-0 text-[13.5px] font-medium text-[color:var(--plum)] min-[1400px]:gap-0.5 min-[1400px]:text-[14px]">
               {NAV.map((item) => (
                 <li
                   key={item.label}
@@ -122,7 +132,7 @@ export function SiteHeader({
                   <a
                     href={item.href || (item.doctors ? "/doctors" : "#")}
                     {...(item.openInNewTab ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                    className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2.5 py-2 transition-colors hover:bg-white/60 hover:text-[color:var(--rose)] ${hover === item.label ? "text-[color:var(--rose)]" : ""}`}
+                    className={`inline-flex items-center gap-1 whitespace-nowrap rounded-full px-2 py-2 transition-colors hover:bg-white/60 hover:text-[color:var(--rose)] min-[1400px]:px-2.5 ${hover === item.label ? "text-[color:var(--rose)]" : ""}`}
                   >
                     {item.label}
                     {(item.mega || item.doctors) && <ChevronDown className={`h-3 w-3 transition-transform ${hover === item.label ? "rotate-180" : ""}`} />}
@@ -134,14 +144,14 @@ export function SiteHeader({
 
           {/* Right cluster */}
           <div className="flex shrink-0 items-center gap-2">
-            <a href={cta.href} className="hidden items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-semibold text-white shadow-soft hover:brightness-110 transition md:inline-flex">
+            <a href={cta.href} className="hidden items-center gap-2 rounded-full bg-[color:var(--rose)] px-4 py-2.5 text-sm font-semibold text-white shadow-soft hover:brightness-110 transition md:inline-flex min-[1440px]:px-5">
               <Calendar className="h-4 w-4" /> {cta.label}
             </a>
 
             <button
               type="button"
               onClick={() => setMobile(true)}
-              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white/60 text-[color:var(--plum)] xl:hidden"
+              className="grid h-10 w-10 place-items-center rounded-full border border-border bg-white/60 text-[color:var(--plum)] min-[1280px]:hidden"
               aria-label="Open menu"
             >
               <Menu className="h-5 w-5" />
@@ -152,7 +162,7 @@ export function SiteHeader({
         {/* Mega menu panel */}
         {activeItem && (activeItem.mega || activeItem.doctors) && (
           <div
-            className="absolute inset-x-0 top-full hidden border-b border-border/60 bg-white shadow-lift xl:block"
+            className="absolute inset-x-0 top-full hidden border-b border-border/60 bg-white shadow-lift min-[1280px]:block"
             onMouseEnter={() => openMega(activeItem.label)}
             onMouseLeave={scheduleClose}
           >
@@ -163,17 +173,19 @@ export function SiteHeader({
               <div className="grid gap-x-8 gap-y-7" style={{ gridTemplateColumns: `repeat(${activeItem.megaCols ?? activeItem.mega!.length}, minmax(0, 1fr))` }}>
                 {activeItem.mega!.map((col, ci) => (
                   <div key={col.heading || ci}>
-                    {col.heading && (
+                    {col.heading ? (
                       col.headingHref
                         ? <a href={col.headingHref} className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)] transition-opacity hover:opacity-70">{col.heading}</a>
                         : <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{col.heading}</div>
-                    )}
-                    <ul className={`space-y-2.5 ${col.heading ? "mt-4" : ""}`}>
+                    ) : activeMegaHasHeadings ? (
+                      <div aria-hidden="true" className="invisible text-xs font-semibold uppercase tracking-[0.15em]">&nbsp;</div>
+                    ) : null}
+                    <ul className={`space-y-2.5 ${activeMegaHasHeadings ? "mt-4" : ""}`}>
                       {col.items.map((it) => (
                         it.children ? (
                           <li key={it.label} className="group/sub">
                             <a href={it.href} className="block">
-                              <span className="text-sm font-semibold text-[color:var(--plum)] transition-colors group-hover/sub:text-[color:var(--rose)]">{it.label}</span>
+                              <span className="text-sm font-semibold capitalize text-[color:var(--plum)] transition-colors group-hover/sub:text-[color:var(--rose)]">{it.label}</span>
                             </a>
                             <div className="grid grid-rows-[0fr] transition-[grid-template-rows] duration-200 ease-out group-hover/sub:grid-rows-[1fr] group-focus-within/sub:grid-rows-[1fr]">
                               <div className="overflow-hidden">
@@ -190,7 +202,7 @@ export function SiteHeader({
                         ) : (
                           <li key={it.label}>
                             <a href={it.href} className="group block">
-                              <div className="text-sm font-semibold text-[color:var(--plum)] group-hover:text-[color:var(--rose)] transition-colors">{it.label}</div>
+                              <div className="text-sm font-semibold capitalize text-[color:var(--plum)] group-hover:text-[color:var(--rose)] transition-colors">{it.label}</div>
                               {it.desc && <div className="text-xs text-muted-foreground">{it.desc}</div>}
                             </a>
                           </li>
@@ -208,30 +220,32 @@ export function SiteHeader({
 
       {/* Mobile drawer */}
       {mobile && (
-        <div className="fixed inset-0 z-[80] xl:hidden">
+        <div className="fixed inset-0 z-[80] min-[1280px]:hidden">
           <div className="absolute inset-0 bg-[color:var(--plum)]/40 backdrop-blur-sm" onClick={() => setMobile(false)} />
           <div className="absolute right-0 top-0 h-full w-[88%] max-w-sm overflow-y-auto bg-white shadow-lift">
             <div className="flex items-center justify-between border-b border-border px-5 py-4">
-              <img src={finalLogoSrc} alt={finalLogoAlt} className="h-11 w-auto" />
+              <img src={finalLogoSrc} alt={finalLogoAlt} className="h-14 w-auto" />
               <button type="button" onClick={() => setMobile(false)} aria-label="Close menu" className="grid h-9 w-9 place-items-center rounded-full border border-border text-[color:var(--plum)]">
                 <X className="h-4 w-4" />
               </button>
             </div>
 
-            <div className="px-5 py-4">
-              <div className="flex items-center gap-2 rounded-full border border-border bg-[color:var(--ivory)] p-1">
-                {LANGS.map((l) => (
-                  <button
-                    key={l.code}
-                    type="button"
-                    onClick={() => setLang(l.code)}
-                    className={`flex-1 rounded-full px-2 py-1.5 text-xs font-semibold transition ${lang === l.code ? "bg-white text-[color:var(--rose)] shadow-soft" : "text-[color:var(--plum)]/70"}`}
-                  >
-                    {l.label}
-                  </button>
-                ))}
+            {LANGUAGE_SWITCHER_ENABLED && (
+              <div className="px-5 py-4">
+                <div className="flex items-center gap-2 rounded-full border border-border bg-[color:var(--ivory)] p-1">
+                  {LANGS.map((l) => (
+                    <button
+                      key={l.code}
+                      type="button"
+                      onClick={() => setLang(l.code)}
+                      className={`flex-1 rounded-full px-2 py-1.5 text-xs font-semibold transition ${lang === l.code ? "bg-white text-[color:var(--rose)] shadow-soft" : "text-[color:var(--plum)]/70"}`}
+                    >
+                      {l.label}
+                    </button>
+                  ))}
+                </div>
               </div>
-            </div>
+            )}
 
             <nav className="px-2 pb-6">
               {NAV.map((item) => (
@@ -245,7 +259,7 @@ export function SiteHeader({
               </a>
               <div className="grid grid-cols-2 gap-2">
                 <a href="tel:+919712622288" className="flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-[color:var(--plum)]"><Phone className="h-4 w-4" /> Call</a>
-                <a href="https://wa.me/919712622288" className="flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-[color:var(--plum)]"><MessageCircle className="h-4 w-4 text-[#25D366]" /> WhatsApp</a>
+                <a href="https://wa.me/919712522289" className="flex items-center justify-center gap-2 rounded-full border border-border px-4 py-2.5 text-sm font-semibold text-[color:var(--plum)]"><MessageCircle className="h-4 w-4 text-[#25D366]" /> WhatsApp</a>
               </div>
             </div>
           </div>
@@ -292,7 +306,7 @@ function MobileNavItem({ item, onNavigate }: { item: HeaderNavItem; onNavigate: 
                       <MobileSubItem key={it.label} item={it} onNavigate={onNavigate} />
                     ) : (
                       <li key={it.label}>
-                        <a href={it.href} onClick={onNavigate} className="block py-1.5 text-sm text-[color:var(--plum)]/80 hover:text-[color:var(--rose)]">{it.label}</a>
+                        <a href={it.href} onClick={onNavigate} className="block py-1.5 text-sm capitalize text-[color:var(--plum)]/80 hover:text-[color:var(--rose)]">{it.label}</a>
                       </li>
                     )
                   ))}
@@ -336,9 +350,9 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
   const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   return (
     <div className="container-px mx-auto max-w-[1400px] py-7">
-      {/* Senior Specialists */}
+      {/* Senior IVF Specialists */}
       <div className="flex items-center gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Senior Specialists</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Promoter Doctors</span>
         <span className="h-px flex-1 bg-border/60" />
       </div>
       <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
@@ -350,9 +364,9 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
         ))}
       </div>
 
-      {/* All IVF Specialists */}
+      {/* Senior IVF Specialists */}
       <div className="mt-6 flex items-center gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">All IVF Specialists</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Senior IVF Specialists</span>
         <span className="h-px flex-1 bg-border/60" />
       </div>
       <div className="mt-3 grid grid-cols-2 gap-x-6 gap-y-0.5 lg:grid-cols-3">
@@ -367,8 +381,8 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
       {/* Browse */}
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 text-sm">
         <a href="/doctors" className="inline-flex items-center gap-1 font-semibold text-[color:var(--rose)] transition-opacity hover:opacity-70">All Doctors <ArrowRight className="h-3.5 w-3.5" /></a>
-        <a href="/#locations" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">By Location</a>
-        <a href="/#book" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">Book Consultation</a>
+        <a href="/locations" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">By Location</a>
+        <a href="/contact#book" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">Book Consultation</a>
       </div>
     </div>
   );
@@ -395,9 +409,9 @@ function MobileDoctorsItem({ onNavigate, menu }: { onNavigate: () => void; menu?
       <div className="grid transition-[grid-template-rows] duration-200 ease-out" style={{ gridTemplateRows: open ? "1fr" : "0fr" }}>
         <div className="overflow-hidden">
           <div className="px-5 py-2">
-            <div className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">Senior Specialists</div>
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">Promoter Doctors</div>
             <ul className="mt-1">{senior.map(row)}</ul>
-            <div className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">All IVF Specialists</div>
+            <div className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">Senior IVF Specialists</div>
             <ul className="mt-1">{specialists.map(row)}</ul>
             <a href="/doctors" onClick={onNavigate} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">All Doctors <ArrowRight className="h-3.5 w-3.5" /></a>
           </div>

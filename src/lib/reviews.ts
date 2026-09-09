@@ -23,6 +23,10 @@ export type Review = {
   publishedAtISO: string;    // ISO date → schema datePublished
   relativeTime?: string;     // display only
   profilePhoto?: string;
+  /** Per-review override for the client-fetched Sanity path — false only for
+   *  staff-typed entries. Undefined (the static-cache/fallback path) defers
+   *  to the batch-level ReviewData.verified, as before. */
+  verified?: boolean;
 };
 
 export type AggregateRating = {
@@ -122,8 +126,11 @@ export function reviewNodes(data: ReviewData | null | undefined): {
 } {
   if (!isVerified(data)) return {};
   const agg = aggregateRatingSchema(data.aggregate);
+  // Per-review verified overrides the batch flag (staff-typed manual entries
+  // never feed structured data, even inside an otherwise-verified batch).
+  const verifiedReviews = data.reviews.filter((r) => r.verified !== false);
   return {
     ...(agg ? { aggregateRating: agg } : {}),
-    ...(data.reviews.length ? { review: data.reviews.map(reviewSchema) } : {}),
+    ...(verifiedReviews.length ? { review: verifiedReviews.map(reviewSchema) } : {}),
   };
 }

@@ -8,14 +8,15 @@ import "./editor.css";
 
 const PAGES: { label: string; desc: string; href: string; ready: boolean }[] = [
   { label: "Home", desc: "Hero, sections, stats, FAQs, closing CTA", href: "/edit/home", ready: true },
-  { label: "About BFI", desc: "Story, legacy, trust pillars, network", href: "/edit/about-bfi", ready: true },
+  { label: "About Bavishi Fertility Institute", desc: "Story, legacy, trust pillars, network", href: "/edit/about-bfi", ready: true },
   { label: "Doctors", desc: "Doctor profiles & index", href: "/edit/doctors", ready: true },
   { label: "Treatments", desc: "Treatment pages", href: "/edit/treatments", ready: true },
   { label: "Services", desc: "Maternity service pages", href: "/edit/services", ready: true },
   { label: "Cities", desc: "City hub pages (multi-centre cities)", href: "/edit/locations", ready: true },
   { label: "Centres", desc: "Individual clinic pages", href: "/edit/centres", ready: true },
   { label: "Contact", desc: "Contact page", href: "/edit/contact", ready: true },
-  { label: "Blog", desc: "Blog articles (title, excerpt, hero image)", href: "/edit/blog", ready: true },
+  { label: "Blog", desc: "Blog articles — title, excerpt, hero image, drafts", href: "/admin-panel/blogs", ready: true },
+  { label: "Calculators", desc: "Calculator pages (title, subtitle, disclaimer, FAQs)", href: "/edit/calculators", ready: true },
 ];
 
 export function PagesLauncher() {

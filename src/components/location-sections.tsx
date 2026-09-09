@@ -9,7 +9,7 @@ import { Editable } from "@/components/editor/Editable";
 import type { Centre } from "@/lib/locations";
 import { cityBySlug } from "@/lib/locations";
 import type { LocationSectionLabels } from "@/lib/location-content";
-import type { Review, ReviewData } from "@/lib/reviews";
+import type { Review, ReviewData, AggregateRating } from "@/lib/reviews";
 import { treatmentCardData } from "@/lib/treatments";
 import { type WomensHealthService, serviceHref } from "@/lib/womens-health";
 
@@ -68,6 +68,7 @@ const FADE_MS = 500;    // fade-out / fade-in duration
 
 export function GoogleReviews({
   data,
+  reviewsKey,
   profileUrl,
   eyebrow = "Google Reviews",
   title,
@@ -75,17 +76,39 @@ export function GoogleReviews({
 }: {
   /** Verified review data from the review service. null → empty state. */
   data: ReviewData | null;
+  /** Centre slug / city slug / "brand" — used to pull the latest
+   *  admin-accumulated reviews client-side, upgrading past this build's
+   *  static snapshot without needing a redeploy. Omit to skip the upgrade. */
+  reviewsKey?: string;
   /** Fallback "read on Google" link when there is no review feed yet. */
   profileUrl?: string;
   eyebrow?: string;
   title?: React.ReactNode;
   subtitle?: string;
 }) {
-  const reviews: Review[] = data?.reviews ?? [];
-  const verified = !!data?.verified;
+  const [liveData, setLiveData] = useState<ReviewData | null>(data);
+
+  useEffect(() => {
+    setLiveData(data);
+    if (!reviewsKey) return;
+    let cancelled = false;
+    fetch(`/api/reviews/${encodeURIComponent(reviewsKey)}`)
+      .then((r) => (r.ok ? r.json() : null))
+      .then((fresh: { aggregate?: AggregateRating; mapsUrl?: string; reviews?: Review[] } | null) => {
+        // Only upgrade when there's something to show — a network hiccup or
+        // an empty admin store should never blank out the static fallback.
+        if (cancelled || !fresh?.reviews?.length) return;
+        setLiveData({ reviews: fresh.reviews, aggregate: fresh.aggregate, mapsUrl: fresh.mapsUrl, verified: true });
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, [reviewsKey, data]);
+
+  const reviews: Review[] = liveData?.reviews ?? [];
+  const verified = !!liveData?.verified;
   // Rating badge + Google branding only for verified data; fallback stays neutral.
-  const aggregate = verified ? data?.aggregate : undefined;
-  const listingUrl = data?.mapsUrl ?? profileUrl;
+  const aggregate = verified ? liveData?.aggregate : undefined;
+  const listingUrl = liveData?.mapsUrl ?? profileUrl;
   const displayEyebrow = verified ? eyebrow : "Patient Reviews";
   const displayTitle = verified
     ? (title ?? <>Loved by families on <em className="font-display italic text-[color:var(--rose)]">Google</em></>)
@@ -194,7 +217,7 @@ export function GoogleReviews({
           }}
         >
           {current.map((rv, i) => (
-            <ReviewCard key={`${group}-${i}`} rv={rv} verified={verified} />
+            <ReviewCard key={`${group}-${i}`} rv={rv} verified={rv.verified ?? verified} />
           ))}
         </div>
 
@@ -209,6 +232,19 @@ export function GoogleReviews({
                 className={`h-2 rounded-full transition-all duration-300 ${i === group ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
               />
             ))}
+          </div>
+        )}
+
+        {listingUrl && (
+          <div className="mt-8 flex justify-center">
+            <a
+              href={listingUrl}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-lift"
+            >
+              <GoogleG className="h-5 w-5" /> See all reviews on Google
+            </a>
           </div>
         )}
       </div>
@@ -491,7 +527,7 @@ export function ContactInfo({
                   <a href={`https://wa.me/${c.phone}`} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--plum)]/15 px-4 py-2 text-xs font-semibold text-[color:var(--plum)] transition hover:bg-[color:var(--plum)]/5">
                     <MessageCircle className="h-3.5 w-3.5" /> WhatsApp
                   </a>
-                  <a href="/#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">
+                  <a href="#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">
                     <Calendar className="h-3.5 w-3.5" /> Book
                   </a>
                 </div>

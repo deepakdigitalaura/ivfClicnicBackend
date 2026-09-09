@@ -1,9 +1,9 @@
 "use client";
 import Image from "next/image";
-import { ArrowRight, Calendar, MessageCircle, Phone, MapPin, Clock, Navigation, Award, FlaskConical, HeartPulse, Building2, Rotate3d } from "lucide-react";
+import { ArrowRight, Calendar, MessageCircle, Phone, MapPin, Clock, Navigation, Award, FlaskConical, HeartPulse, Building2, Rotate3d, BookOpen } from "lucide-react";
 import { Reveal, Stagger, StaggerItem, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer } from "@/components/home-page";
+import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
@@ -16,9 +16,10 @@ import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
 import { testimonialsForCity } from "@/lib/video-testimonials";
+import { blogsForLocation, type BlogPost } from "@/lib/blogs";
 
 const trust = [
-  { icon: Award, t: "Trusted since 1984", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for four decades." },
+  { icon: Award, t: "Trusted since 1998", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for over three decades." },
   { icon: FlaskConical, t: "Class 1000 IVF labs", d: "Embryology labs 10× cleaner than the international standard, with vitrification." },
   { icon: HeartPulse, t: "Senior promoter doctors", d: "Consult experienced fertility specialists across convenient locations." },
   { icon: Building2, t: "One-stop fertility care", d: "Tests, sonography, andrology, surgery and IVF — everything under one roof." },
@@ -38,8 +39,9 @@ const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const EMS = 'class="font-display italic text-[color:var(--rose-soft)]"';
 const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
 
-export function CityPage({ city }: { city: City | ResolvedCity }) {
+export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity; cmsBlogs?: BlogPost[]; stats?: { value: string; l: string }[] }) {
   const sl = (city as ResolvedCity).sectionLabels ?? {};
+  const blogs = blogsForLocation(city.slug, city.name, 3, cmsBlogs);
   const editing = !!useEdit()?.editMode;
   const centres = centresForCity(city.slug);
   const docs = doctorSlugsForCity(city.slug)
@@ -59,7 +61,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#locations" className="hover:text-[color:var(--rose)]">Locations</a>
+          <a href="/locations" className="hover:text-[color:var(--rose)]">Locations</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{city.name}</span>
         </nav>
@@ -86,7 +88,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
             )}
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Free Consultation</Magnetic>
+                <Magnetic as="a" href="#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
                 <Magnetic as="a" href={`tel:+${city.helpline}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white"><Phone className="h-4 w-4" /> {city.helplineLabel}</Magnetic>
               </div>
             </Reveal>
@@ -119,7 +121,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         </div>
       </section>
 
-      <StatsStrip />
+      <StatsStrip stats={stats} />
 
       {/* Overview */}
       {city.intro.length > 0 && (
@@ -152,7 +154,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
                         <a href={centreUrl(c.citySlug, c.slug)} className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">View Centre <ArrowRight className="h-3.5 w-3.5" /></a>
                       )}
                       <a href={centreMapUrl(c)} target="_blank" rel="noopener noreferrer" className="inline-flex items-center gap-1.5 rounded-full border border-[color:var(--plum)]/15 px-4 py-2 text-xs font-semibold text-[color:var(--plum)] transition hover:bg-[color:var(--plum)]/5"><Navigation className="h-3.5 w-3.5" /> Directions</a>
-                      {!c.built && <a href="/#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110"><Calendar className="h-3.5 w-3.5" /> Book</a>}
+                      {!c.built && <a href="#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110"><Calendar className="h-3.5 w-3.5" /> Book</a>}
                     </div>
                   </div>
                 </StaggerItem>
@@ -209,6 +211,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
       <div className="bg-white">
         <GoogleReviews
           data={reviews}
+          reviewsKey={city.slug}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Bavishi Fertility Institute " + city.name)}`}
           title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${city.name} families ${em("on Google")}`)}
           subtitle={`Read verified reviews from patients across our ${city.name} centres.`}
@@ -253,6 +256,51 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         </section>
       )}
 
+      {/* Related Articles — location-specific, data-driven (placeholders until published) */}
+      {blogs.length > 0 && (
+        <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
+          <SectionHead
+            center
+            eyebrow="Blog"
+            title={<>{city.name} <em className="font-display italic text-[color:var(--rose)]">Articles &amp; Guides</em></>}
+            subtitle={`Fertility guidance written for patients in ${city.name}.`}
+          />
+          <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+            {blogs.map((b) => {
+              const CardTag = b.published ? "a" : "div";
+              return (
+              <StaggerItem key={b.slug}>
+                <CardTag
+                  {...(b.published ? { href: b.href } : {})}
+                  className={`group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-500 ${b.published ? "hover:-translate-y-1.5 hover:shadow-lift" : "cursor-default opacity-80"}`}
+                >
+                  <div className="flex items-center justify-between gap-2">
+                    <span className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)]/10 px-3 py-1 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">
+                      <BookOpen className="h-3 w-3" /> {b.category}
+                    </span>
+                    {!b.published && (
+                      <span className="rounded-full bg-[color:var(--plum)]/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--plum)]/50">
+                        Coming soon
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-4 text-lg font-semibold leading-snug text-[color:var(--plum)] transition-colors group-hover:text-[color:var(--rose)]">
+                    {b.title}
+                  </h3>
+                  <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted-foreground">{b.excerpt}</p>
+                  {b.published && (
+                    <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
+                      Read article
+                    </span>
+                  )}
+                </CardTag>
+              </StaggerItem>
+              );
+            })}
+          </Stagger>
+        </section>
+      )}
+
       {/* CTA */}
       <section className="container-px mx-auto max-w-[1400px] pb-8 md:pb-14">
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
@@ -263,7 +311,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Free Consultation</Magnetic>
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
               <Magnetic as="a" href={`tel:+${city.helpline}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><Phone className="h-4 w-4" /> {city.helplineLabel}</Magnetic>
               <Magnetic as="a" href={`https://wa.me/${city.whatsapp}`} target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
             </div>
@@ -271,6 +319,7 @@ export function CityPage({ city }: { city: City | ResolvedCity }) {
         </div>
       </section>
 
+      <InquiryForm />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

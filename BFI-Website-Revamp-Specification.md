@@ -412,7 +412,7 @@ Extracted from logo — primary brand color is **Hot Pink / Magenta**.
 - Pink (#E91E8C) used for: CTAs, headings at large size, icons, borders, accents
 
 **CTA Hierarchy:**
-- **Primary CTA:** Pink background (#E91E8C), white text, rounded-full, bold — "Book Free Consultation"
+- **Primary CTA:** Pink background (#E91E8C), white text, rounded-full, bold — "Book Consultation"
 - **Secondary CTA:** White background, pink border, pink text — "Learn More"
 - **Tertiary CTA:** Text link with pink underline + arrow icon
 - **WhatsApp CTA:** Green (#25D366), white text, WhatsApp icon — "Chat on WhatsApp"
@@ -691,7 +691,7 @@ Contact Us
    - Full-viewport height, animated gradient background (soft pink to white)
    - Left: H1 headline — "India's Most Trusted Fertility Institute" (NOT "YOUR PARENTHOOD JOURNEY STARTS HERE" — too generic)
    - Subhead: "30,000+ babies born. 40 years of hope. The Suraksha Kavach guarantee — we don't stop until you hold your baby."
-   - Two CTAs: [Book Free Consultation — Pink] [Watch Success Stories — Secondary]
+   - Two CTAs: [Book Consultation — Pink] [Watch Success Stories — Secondary]
    - Right: Animated illustration or video reel of happy families (NOT stock photos)
    - Below fold trigger: scroll indicator
    - **Floating Sticky Header:** Logo + Nav + Phone + "Book Now" pill — appears after hero scrolls
@@ -716,7 +716,7 @@ Contact Us
    - Hover: card lifts, pink border appears
 
 6. **Patient Journey Steps (3-step)**
-   - Step 1: Book Free Consultation → Step 2: Personalized Treatment Plan → Step 3: Your Baby in Your Arms
+   - Step 1: Book Consultation → Step 2: Personalized Treatment Plan → Step 3: Your Baby in Your Arms
    - Simple, emotional, not clinical
 
 7. **Doctors Section (Top 4 promoter doctors)**
@@ -758,7 +758,7 @@ Contact Us
 16. **Final CTA Banner**
     - "Your journey to parenthood starts with one call."
     - Pink background, white text
-    - [Book Free Consultation] [Call +91 9712622288] [WhatsApp Us]
+    - [Book Consultation] [Call +91 9712622288] [WhatsApp Us]
 
 17. **Footer**
     - 4 columns: About BFI | Treatments | Locations | Resources
@@ -1762,7 +1762,7 @@ All blog content must map to a stage in the fertility patient journey:
 **Stage 2 — Consideration (MOFU):** "What treatment do I need?"
 - Titles: "IUI vs IVF: Which Treatment is Right for You?," "When Should You Move from IUI to IVF?," "What to Expect in Your First IVF Cycle"
 - Goal: Position BFI as the expert guide
-- CTA: "Book a free consultation with our doctors"
+- CTA: "Book a consultation with our doctors"
 
 **Stage 3 — Decision (BOFU):** "Which clinic should I choose?"
 - Titles: "13 Best IVF Clinics in Mumbai," "Why BFI Patients Have a 98% Success Rate," "What is the Suraksha Kavach Guarantee?"
@@ -2344,7 +2344,7 @@ All existing URLs that are changing must have 301 redirects:
 
 **CTAs should be:** Action-oriented, low-friction, specific  
 - Bad: "Submit" / "Contact Us"  
-- Good: "Book Your Free Consultation" / "Talk to a Fertility Expert Today"  
+- Good: "Book Your Consultation" / "Talk to a Fertility Expert Today"  
 
 ---
 

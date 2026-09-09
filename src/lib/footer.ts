@@ -17,7 +17,8 @@ import {
   type ContactChannel,
   type ContactValues,
 } from "@/lib/contact";
-import type { NavTreatmentItem, NavDoctorItem, NavLocationItem } from "@/lib/header";
+import type { NavTreatmentItem, NavDoctorItem, NavLocationItem, NavLabelOverride } from "@/lib/header";
+import { sortNavLocations, applyNavLabelOverrides } from "@/lib/header";
 
 /** Footer heading for each navCategory value. */
 const FOOTER_CATEGORY_LABELS: Record<string, string> = {
@@ -42,39 +43,71 @@ const FOOTER_CATEGORY_ORDER = [
 /** Footer headings that correspond to treatment categories (replaced dynamically). */
 const TREATMENT_HEADINGS = new Set(Object.values(FOOTER_CATEGORY_LABELS));
 
-/** Build treatment FooterGroups from CMS nav treatments, in canonical category order. */
+/**
+ * Build treatment FooterGroups by overlaying CMS-published treatments onto
+ * the hardcoded default items (matched by href) — mirrors
+ * src/lib/header.ts buildTreatmentMega(). A treatment with no Sanity doc yet
+ * keeps its exact default placement; brand-new Sanity-only treatments are
+ * appended to their category group. This always returns the full group set
+ * — byte-identical to FOOTER_DEFAULTS when Sanity has no treatments yet, and
+ * a single treatment's data can never make the rest of a group disappear.
+ * FIX for the all-or-nothing bug — do not regress to "if any treatment has
+ * navCategory, use ONLY Sanity treatments" (see
+ * BFI-Sanity-Fallback-Audit-Phase1-Report.md).
+ */
 function buildTreatmentGroups(navTreatments: NavTreatmentItem[]): FooterGroup[] {
-  const byCat = new Map<string, NavTreatmentItem[]>();
+  const live = new Map(navTreatments.map((t) => [t.href, t]));
+  const byCat = new Map<string, { href: string; label: string; order: number }[]>();
+
+  for (const [href, def] of DEFAULT_TREATMENT_ITEMS_BY_HREF) {
+    const liveItem = live.get(href);
+    const category = liveItem?.navCategory && FOOTER_CATEGORY_LABELS[liveItem.navCategory] ? liveItem.navCategory : def.category;
+    const arr = byCat.get(category) ?? [];
+    arr.push({ href, label: liveItem?.name || def.label, order: liveItem?.navOrder ?? def.order });
+    byCat.set(category, arr);
+  }
   for (const t of navTreatments) {
-    if (!FOOTER_CATEGORY_LABELS[t.navCategory]) continue;
+    if (DEFAULT_TREATMENT_ITEMS_BY_HREF.has(t.href) || !FOOTER_CATEGORY_LABELS[t.navCategory]) continue;
     const arr = byCat.get(t.navCategory) ?? [];
-    arr.push(t);
+    arr.push({ href: t.href, label: t.name, order: t.navOrder });
     byCat.set(t.navCategory, arr);
   }
+
   return FOOTER_CATEGORY_ORDER
     .filter((cat) => byCat.has(cat))
     .map((cat) => ({
       h: FOOTER_CATEGORY_LABELS[cat],
       l: byCat.get(cat)!
-        .sort((a, b) => a.navOrder - b.navOrder)
-        .map((t) => ({ label: t.name, href: t.href })),
+        .sort((a, b) => a.order - b.order)
+        .map((x) => ({ label: x.label, href: x.href })),
     }));
 }
 
-/** Build the footer "Locations" group — one link per published city plus an "All Centres" link. */
-function buildLocationsFooterGroup(navLocations: NavLocationItem[]): FooterGroup | undefined {
-  if (!navLocations.length) return undefined;
-  const totalCentres = navLocations.reduce((sum, c) => sum + c.centres.length, 0);
-  return {
-    h: "Locations",
-    l: [
-      ...navLocations.map((city) => ({
-        label: city.cityName,
-        href: `/locations/${city.citySlug}`,
-      })),
-      { label: `All ${totalCentres} Centres`, href: "/#locations" },
-    ],
-  };
+/**
+ * Build the footer "Locations" group by overlaying Sanity-published cities
+ * onto FOOTER_DEFAULTS' own "Locations" links (matched by city slug) —
+ * mirrors src/lib/header.ts buildLocationsMega(). A city with no Sanity doc
+ * yet keeps its default link; brand-new Sanity-only cities are appended.
+ * Always returns the full group — byte-identical to FOOTER_DEFAULTS when
+ * Sanity has no cities yet, and a single city can never make the rest
+ * disappear. FIX for the all-or-nothing bug (see
+ * BFI-Sanity-Fallback-Audit-Phase1-Report.md).
+ */
+function buildLocationsFooterGroup(navLocations: NavLocationItem[]): FooterGroup {
+  const defaultGroup = FOOTER_DEFAULTS.groups.find((g) => g.h === "Locations")!;
+  const live = new Map(navLocations.map((c) => [c.citySlug, c]));
+  const knownSlugs = new Set<string>();
+
+  const known = defaultGroup.l.map((link) => {
+    const citySlug = link.href?.split("/")[2];
+    if (citySlug) knownSlugs.add(citySlug);
+    const liveCity = citySlug ? live.get(citySlug) : undefined;
+    return liveCity ? { label: liveCity.cityName, href: `/locations/${liveCity.citySlug}` } : link;
+  });
+  const appended = sortNavLocations(navLocations.filter((c) => !knownSlugs.has(c.citySlug)))
+    .map((c) => ({ label: c.cityName, href: `/locations/${c.citySlug}` }));
+
+  return { h: "Locations", l: [...known, ...appended] };
 }
 
 /** Build the footer "Doctors" group — only senior-specialist doctors are listed
@@ -91,7 +124,7 @@ function buildDoctorFooterGroup(navDoctors: NavDoctorItem[]): FooterGroup | unde
     l: [
       ...senior.map((d) => ({ label: d.name, href: d.href })),
       { label: "All Doctors", href: "/doctors" },
-      { label: "Book Consultation", href: "/#book" },
+      { label: "Book Consultation", href: "/contact#book" },
     ],
   };
 }
@@ -124,6 +157,7 @@ export const FOOTER_DEFAULTS: FooterData = {
     { h: "IVF Treatments", l: [
       { label: "IVF", href: "/what-is-ivf" },
       { label: "IVF Failure", href: "/ivf-failure" },
+      { label: "Preimplantation Genetic Testing (PGT)", href: "/pgt" },
       { label: "IUI", href: "/intra-uterine-insemination-iui" },
       { label: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
       { label: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
@@ -132,20 +166,18 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Spindle View ICSI", href: "/spindle-view-icsi" },
       { label: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
       { label: "Laser Hatching", href: "/laser-assisted-hatching" },
-      { label: "PGT-A / PGT-M", href: "/pgt" },
     ]},
     { h: "Male Infertility", l: [
       { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
       { label: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
       { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
       { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
-      { label: "Varicocele / Micro Surgery", href: "/varicocele" },
       { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
     ]},
     { h: "Female Infertility", l: [
       { label: "Conceive Naturally", href: "/conceive-naturally" },
       { label: "PRP Infertility", href: "/prp-infertility" },
-      { label: "PCOS", href: "/pcos" },
+      { label: "PMOS-PCOS", href: "/pcos" },
       { label: "Poor Ovarian Reserve / Low Egg Count / Low AMH", href: "/ovarian-reserve" },
       { label: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
       { label: "Fibroid", href: "/fibroids" },
@@ -154,11 +186,10 @@ export const FOOTER_DEFAULTS: FooterData = {
     { h: "Donor Services", l: [
       { label: "Egg Donation", href: "/egg-donation" },
       { label: "Sperm Donation", href: "/sperm-donation" },
-      { label: "Embryo Donation", href: "/embryo-donation" },
-      { label: "Surrogacy", href: "/surrogacy" },
     ]},
     { h: "Fertility Preservation", l: [
       { label: "Cryopreservation", href: "/cryopreservation" },
+      { label: "Egg Freezing", href: "/egg-freezing" },
     ]},
     { h: "Maternity Services", l: [
       { label: "3D/4D Sonography", href: "/services/3d-4d-sonography" },
@@ -174,7 +205,7 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Dr. Parth Bavishi", href: "/doctors/parth-bavishi" },
       { label: "Dr. Janki Bavishi", href: "/doctors/janki-bavishi" },
       { label: "All Doctors", href: "/doctors" },
-      { label: "Book Consultation", href: "/#book" },
+      { label: "Book Consultation", href: "/contact#book" },
     ]},
     { h: "Locations", l: [
       { label: "Ahmedabad", href: "/locations/ahmedabad" },
@@ -183,48 +214,66 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Vadodara", href: "/locations/vadodara" },
       { label: "Bhuj", href: "/locations/bhuj" },
       { label: "Varanasi", href: "/locations/varanasi" },
-      { label: "All 15 Centres", href: "/#locations" },
     ]},
     { h: "Calculators", l: [
-      { label: "IVF Success Rate", href: "/#tools" },
-      { label: "IVF Cost Estimate", href: "/#tools" },
-      { label: "AMH Interpreter", href: "/#tools" },
-      { label: "Ovulation Calculator", href: "/#tools" },
-      { label: "Fertile Period", href: "/#tools" },
-      { label: "Semen Analysis", href: "/#tools" },
-      { label: "Natural Pregnancy", href: "/#tools" },
-      { label: "Miscarriage Risk", href: "/#tools" },
+      { label: "IVF Success Rate", href: "/calculators/ivf-success-rate" },
+      { label: "IVF Cost Estimate", href: "/calculators/ivf-cost" },
+      { label: "AMH Interpreter", href: "/calculators/amh-level" },
+      { label: "Ovulation Calculator", href: "/calculators/ovulation" },
+      { label: "Fertile Period", href: "/calculators/fertile-period" },
+      { label: "Semen Analysis", href: "/calculators/semen-analysis" },
+      { label: "Natural Pregnancy", href: "/calculators/natural-pregnancy" },
+      { label: "Miscarriage Risk", href: "/calculators/miscarriage-risk" },
     ]},
     { h: "Resources", l: [
       { label: "Blog", href: destinationHref("blog") },
-      { label: "Success Stories", href: "/#stories" },
-      { label: "Patient Videos", href: "/#videos" },
-      { label: "Events & Webinars", href: "/#events" },
+      { label: "Testimonial Videos", href: "/testimonial-videos" },
+      { label: "Educational Videos", href: "/education-videos" },
+      { label: "CME", href: "/cme" },
+      { label: "Media & Press", href: "/press" },
+      { label: "Awards & Achievements", href: "/awards" },
     ]},
     { h: "About", l: [
       { label: "Our Story", href: "/about-bfi" },
       { label: "Suraksha Kavach", href: destinationHref("suraksha-kavach") },
-      { label: "Why Bavishi Fertility Institute", href: "/#about" },
+      { label: "Why Bavishi Fertility Institute", href: "/why-bfi" },
     ]},
     { h: "Contact", l: [
-      { label: "Book Appointment", href: "/#book" },
-      { label: "Video Consultation", href: "/#book" },
-      { label: "WhatsApp Chat", href: "https://wa.me/919712622288", external: true },
+      { label: "Book Appointment", href: "/contact#book" },
       { label: "Call +91 97126 22288", href: "tel:+919712622288", external: true },
-      { label: "Find a Centre", href: "/#locations" },
-      { label: "Patient Support", href: "/contact" },
     ]},
   ],
   social: [],
   copyrightText: DEFAULT_COPYRIGHT,
   legal: [
-    { label: "Privacy Policy", href: "#" },
-    { label: "Terms of Service", href: "#" },
-    { label: "Refund Policy", href: "#" },
-    { label: "Cookie Policy", href: "#" },
-    { label: "Sitemap", href: "#" },
+    { label: "Privacy Policy", href: "/privacy-policy" },
+    { label: "Terms of Service", href: "/terms-of-service" },
+    { label: "Refund Policy", href: "/refund-policy" },
+    { label: "Cookie Policy", href: "/cookie-policy" },
+    { label: "Sitemap", href: "/sitemap" },
   ],
 };
+
+/** Default {category, order, label} per treatment href, derived once from
+ *  FOOTER_DEFAULTS' own treatment-category groups — the merge target
+ *  buildTreatmentGroups() above overlays Sanity-published treatments onto.
+ *  (Built from the footer's OWN defaults, not header's — the two hardcoded
+ *  lists aren't identical, e.g. footer alone carries PGT-A/PGT-M and
+ *  Surrogacy, so each file must merge against its own baseline to stay
+ *  byte-identical when Sanity is empty. Declared here, after FOOTER_DEFAULTS,
+ *  so the IIFE below can read it.) */
+const DEFAULT_TREATMENT_ITEMS_BY_HREF: ReadonlyMap<string, { category: string; order: number; label: string }> = (() => {
+  const byLabel = new Map(Object.entries(FOOTER_CATEGORY_LABELS).map(([cat, label]) => [label, cat]));
+  const map = new Map<string, { category: string; order: number; label: string }>();
+  for (const grp of FOOTER_DEFAULTS.groups) {
+    const category = byLabel.get(grp.h);
+    if (!category) continue;
+    grp.l.forEach((link, i) => {
+      if (link.href) map.set(link.href, { category, order: i, label: link.label });
+    });
+  }
+  return map;
+})();
 
 /** The subset of the `footer` global this resolver reads (kept loose so it
  *  stays decoupled from the generated payload-types until they exist). */
@@ -273,6 +322,7 @@ export function resolveFooter(
   navTreatments: NavTreatmentItem[] = [],
   navDoctors: NavDoctorItem[] = [],
   navLocations: NavLocationItem[] = [],
+  navLabels: NavLabelOverride[] = [],
 ): FooterData {
   const branding =
     g?.branding && (g.branding.logoUrl || g.branding.description)
@@ -337,6 +387,16 @@ export function resolveFooter(
   const legal = g?.legalLinks?.length
     ? g.legalLinks.filter((link) => !link.hidden).map((link) => resolveLink(link, contact))
     : FOOTER_DEFAULTS.legal;
+
+  // Apply any CMS label/order overrides from Site Settings to the resolved groups.
+  groups = applyNavLabelOverrides(
+    groups,
+    (grp) => grp.h,
+    (grp, h) => ({ ...grp, h }),
+    FOOTER_CATEGORY_LABELS,
+    navLabels,
+    "footerLabel",
+  );
 
   return {
     ...(branding ? { branding } : {}),

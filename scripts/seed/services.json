@@ -10,7 +10,7 @@
     "schemaType": "MedicalTest",
     "shortName": "3D/4D sonography",
     "breadcrumbName": "3D/4D Sonography",
-    "reviewerSlug": "falguni-bavishi",
+    "reviewerSlug": "binal-shah",
     "lastReviewed": "2026-06-01",
     "hero": {
       "eyebrow": "Maternity Services",
@@ -225,7 +225,7 @@
     "schemaType": "MedicalProcedure",
     "shortName": "painless delivery",
     "breadcrumbName": "Painless Delivery",
-    "reviewerSlug": "falguni-bavishi",
+    "reviewerSlug": "binal-shah",
     "lastReviewed": "2026-06-01",
     "hero": {
       "eyebrow": "Maternity Services",
@@ -425,7 +425,7 @@
     "schemaType": "MedicalProcedure",
     "shortName": "normal delivery",
     "breadcrumbName": "Normal Delivery",
-    "reviewerSlug": "falguni-bavishi",
+    "reviewerSlug": "binal-shah",
     "lastReviewed": "2026-06-01",
     "hero": {
       "eyebrow": "Maternity Services",
@@ -626,7 +626,7 @@
     "schemaType": "MedicalTest",
     "shortName": "fetal medicine",
     "breadcrumbName": "Fetal Medicine",
-    "reviewerSlug": "falguni-bavishi",
+    "reviewerSlug": "binal-shah",
     "lastReviewed": "2026-06-01",
     "hero": {
       "eyebrow": "Maternity Services",
@@ -826,7 +826,7 @@
     "schemaType": "MedicalProcedure",
     "shortName": "high-risk pregnancy care",
     "breadcrumbName": "High Risk Pregnancy Care",
-    "reviewerSlug": "falguni-bavishi",
+    "reviewerSlug": "binal-shah",
     "lastReviewed": "2026-06-01",
     "hero": {
       "eyebrow": "Maternity Services",
@@ -1026,7 +1026,7 @@
     "schemaType": "MedicalProcedure",
     "shortName": "twin pregnancy care",
     "breadcrumbName": "Twin Pregnancy Care",
-    "reviewerSlug": "falguni-bavishi",
+    "reviewerSlug": "binal-shah",
     "lastReviewed": "2026-06-01",
     "hero": {
       "eyebrow": "Maternity Services",

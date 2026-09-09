@@ -38,16 +38,16 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
   "suraksha-kavach": {
     key: "suraksha-kavach",
     label: "Suraksha Kavach",
-    href: "/suraksha-kavach", // future dedicated page
-    published: false,
+    href: "/suraksha-kavach",
+    published: true,
     fallback: "/#suraksha",
     aliases: ["Suraksha Kavach Package", "Suraksha Kavach programme", "Suraksha Kavach program"],
   },
   blog: {
     key: "blog",
     label: "Blog",
-    href: "/blog",
-    published: true, // Phase 3: /blog hub is live.
+    href: "/blogs",
+    published: true, // Phase 3: /blogs hub is live.
     fallback: "/#blogs",
   },
   "success-stories": {
@@ -56,6 +56,20 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
     href: "/success-stories",
     published: false,
     fallback: "/#stories",
+  },
+  "surgical-sperm-retrieval": {
+    key: "surgical-sperm-retrieval",
+    label: "Surgical Sperm Retrieval",
+    href: "/surgical-sperm-retrieval",
+    published: true,
+    aliases: ["Micro-TESE", "surgical sperm retrieval", "PESA", "TESA"],
+  },
+  "ovarian-rejuvenation": {
+    key: "ovarian-rejuvenation",
+    label: "Ovarian Rejuvenation",
+    href: "/ovarian-rejuvenation",
+    published: true,
+    aliases: ["ovarian rejuvenation"],
   },
 };
 

@@ -1,11 +1,11 @@
 "use client";
-import { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
+import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
   Stethoscope, Microscope, Baby, Dna, FlaskConical, Activity, MapPin,
-  Star, ArrowRight, ChevronDown, Quote, Clock, CheckCircle2,
-  Video, BookOpen, Calculator, Mail, User, Send,
+  Star, ArrowRight, ChevronDown, ChevronLeft, ChevronRight, Quote, Clock, CheckCircle2, Trophy,
+  Video, BookOpen, Calculator, Mail, User, Send, X,
 } from "lucide-react";
 import type { LucideIcon } from "lucide-react";
 
@@ -20,10 +20,12 @@ import {
 } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import type { Review } from "@/lib/reviews";
+import type { Review, ReviewData, AggregateRating } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
 import { useFooter } from "@/components/footer-provider";
-import { cityHref } from "@/lib/locations";
+import { OPEN_COOKIE_PREFERENCES_EVENT } from "@/components/cookie-consent";
+import { cityHref, centresForCity, centreHref } from "@/lib/locations";
+import { PRESS_CLIPPINGS, pressHref, type PressClipping } from "@/lib/press";
 import { resolveIcon } from "@/lib/icon-map";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
@@ -38,7 +40,7 @@ import {
   type EduVideo,
   type ResourceVideo,
   type AwardItem,
-  type HomeAboutContent,
+  type AccoladeItem,
   type Heading,
 } from "@/lib/homepage";
 
@@ -54,6 +56,79 @@ const edTitle = (base: string, h: Heading) => (
     <em className="font-display italic text-[color:var(--rose)]">{ed(`${base}.heading.em`, h.em)}</em>
   </>
 );
+
+/* ---------- Mobile carousel: arrows + auto-scroll ---------- */
+
+function MobileCarousel({ children, interval = 2000, alwaysArrows = false }: { children: React.ReactElement<{ ref?: React.Ref<HTMLDivElement> }>; interval?: number; alwaysArrows?: boolean }) {
+  const scrollRef = useRef<HTMLDivElement>(null);
+  const [canLeft, setCanLeft] = useState(false);
+  const [canRight, setCanRight] = useState(false);
+  const [isMobile, setIsMobile] = useState(false);
+
+  useEffect(() => {
+    const el = scrollRef.current;
+    if (!el) return;
+    const check = () => {
+      const scrollable = el.scrollWidth > el.clientWidth + 4;
+      setIsMobile(scrollable);
+      setCanLeft(el.scrollLeft > 4);
+      setCanRight(el.scrollLeft + el.clientWidth < el.scrollWidth - 4);
+    };
+    check();
+    el.addEventListener("scroll", check, { passive: true });
+    window.addEventListener("resize", check);
+    return () => { el.removeEventListener("scroll", check); window.removeEventListener("resize", check); };
+  }, []);
+
+  // Width of one card + gap, measured from the first two children so it works
+  // regardless of card width / gap. Falls back to the viewport width.
+  const cardStep = (el: HTMLDivElement) => {
+    const first = el.children[0] as HTMLElement | undefined;
+    const second = el.children[1] as HTMLElement | undefined;
+    if (first && second) return second.offsetLeft - first.offsetLeft;
+    return first ? first.getBoundingClientRect().width : el.clientWidth;
+  };
+
+  useEffect(() => {
+    if (!isMobile) return;
+    const el = scrollRef.current;
+    if (!el) return;
+    let paused = false;
+    const tid = setInterval(() => {
+      if (paused) return;
+      if (el.scrollLeft + el.clientWidth >= el.scrollWidth - 4) {
+        el.scrollTo({ left: 0, behavior: "smooth" });
+      } else {
+        el.scrollBy({ left: cardStep(el), behavior: "smooth" }); // advance ONE card
+      }
+    }, interval);
+    const pause = () => { paused = true; };
+    const resume = () => { paused = false; };
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("touchend", resume, { passive: true });
+    // pointerenter/leave are more reliable than mouseenter while content scrolls.
+    el.addEventListener("pointerenter", pause);
+    el.addEventListener("pointerleave", resume);
+    return () => { clearInterval(tid); el.removeEventListener("touchstart", pause); el.removeEventListener("touchend", resume); el.removeEventListener("pointerenter", pause); el.removeEventListener("pointerleave", resume); };
+  }, [isMobile, interval]);
+
+  const scroll = (dir: -1 | 1) => {
+    const el = scrollRef.current;
+    if (el) el.scrollBy({ left: dir * cardStep(el), behavior: "smooth" });
+  };
+
+  return (
+    <div className="relative">
+      {React.cloneElement(children, { ref: scrollRef })}
+      {isMobile && (
+        <div className={`pointer-events-none absolute inset-y-0 -inset-x-1 flex items-center justify-between ${alwaysArrows ? "" : "md:hidden"}`}>
+          <button aria-label="Previous" onClick={() => scroll(-1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity md:h-10 md:w-10 ${canLeft ? "opacity-100" : "opacity-0"}`}><ChevronLeft className="h-4 w-4 text-[color:var(--plum)] md:h-5 md:w-5" /></button>
+          <button aria-label="Next" onClick={() => scroll(1)} className={`pointer-events-auto z-10 flex h-8 w-8 items-center justify-center rounded-full bg-white/90 shadow-md backdrop-blur transition-opacity md:h-10 md:w-10 ${canRight ? "opacity-100" : "opacity-0"}`}><ChevronRight className="h-4 w-4 text-[color:var(--plum)] md:h-5 md:w-5" /></button>
+        </div>
+      )}
+    </div>
+  );
+}
 
 /* ---------- Primitives ---------- */
 
@@ -126,7 +201,8 @@ export function HomePage({
   // key is never serialised to HTML).
   const sections: Record<HomeSection, React.ReactNode> = {
     hero: <Hero hero={data.hero} />,
-    stats: <StatsStrip stats={data.stats} />,
+    stats: <StatsStrip stats={data.stats} accolades={data.accolades} />,
+    accolades: null,
     whyBavishi: <WhyBavishiFertilityInstitute content={data.whyBavishi} />,
     suraksha: <Suraksha content={data.suraksha} />,
     treatments: <Treatments content={data.treatments} />,
@@ -148,15 +224,8 @@ export function HomePage({
         ctaLabel={ed("videoHub.ctaLabel", data.videoHub.ctaLabel)}
       />
     ),
-    about: <About content={data.about} />,
-    doctors: (
-      <Doctors
-        eyebrow={ed("doctors.eyebrow", data.doctors.eyebrow)}
-        title={edTitle("doctors", data.doctors.heading)}
-        subtitle={ed("doctors.subtitle", data.doctors.subtitle)}
-        ctaLabel={ed("doctors.ctaLabel", data.doctors.ctaLabel)}
-      />
-    ),
+    about: null,
+    doctors: null,
     whyChoose: <WhyChooseBavishiFertilityInstitute content={data.whyChoose} />,
     awards: <AwardsCarousel content={data.awards} />,
     media: <Media content={data.media} />,
@@ -204,6 +273,8 @@ export function HomePage({
 
 function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
   const editing = !!useEdit()?.editMode;
+  const brandReviews = getBrandReviews();
+  const agg = brandReviews?.aggregate;
   return (
     <section className="gradient-warm noise relative overflow-hidden">
       <GradientField />
@@ -264,10 +335,27 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <PrimaryBtn icon={Calendar} href="/#book">{hero.ctas[0]}</PrimaryBtn>
-            <GhostBtn icon={Sparkles}>{hero.ctas[1]}</GhostBtn>
-            <GhostBtn icon={Video}>{hero.ctas[2]}</GhostBtn>
+            <PrimaryBtn icon={Calendar} href="#book">{hero.ctas[0]}</PrimaryBtn>
+            <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate">{hero.ctas[1]}</GhostBtn>
           </motion.div>
+
+          {agg && (
+            <motion.a
+              href={BRAND_LISTING_URL || undefined}
+              target={BRAND_LISTING_URL ? "_blank" : undefined}
+              rel={BRAND_LISTING_URL ? "noopener noreferrer" : undefined}
+              initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 1.3 }}
+              className="mt-6 inline-flex items-center gap-2 text-sm font-medium text-[color:var(--plum)]"
+            >
+              <span className="flex items-center gap-0.5 text-[color:var(--gold)]">
+                {Array.from({ length: 5 }).map((_, i) => (
+                  <Star key={i} className="h-4 w-4 fill-current" />
+                ))}
+              </span>
+              <span>{agg.ratingValue.toFixed(1)} on Google · {agg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+            </motion.a>
+          )}
         </div>
 
         <div className="relative lg:col-span-5">
@@ -294,15 +382,42 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
   );
 }
 
-/* ---------- Stats strip with counters ---------- */
-export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats }: { stats?: { value: string; l: string }[] } = {}) {
+/* ---------- Stats + Accolades unified strip ---------- */
+const STRIP_CARD = "flex h-24 w-[300px] shrink-0 items-center gap-4 rounded-[20px] border border-[color:var(--plum)]/[0.06] bg-white px-5 shadow-[0_1px_3px_rgba(0,0,0,0.04),0_4px_12px_rgba(0,0,0,0.02)] md:w-[330px]";
+const STRIP_ICON = "flex h-11 w-11 shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[color:var(--plum)]/[0.08] to-[color:var(--rose)]/[0.06]";
+
+export function StatsStrip({ stats = HOMEPAGE_DEFAULTS.stats, accolades = HOMEPAGE_DEFAULTS.accolades }: { stats?: { value: string; l: string }[]; accolades?: AccoladeItem[] } = {}) {
   return (
-    <section className="border-y border-border/60 bg-white py-7 md:py-9">
-      <Marquee speed={45}>
+    <section className="border-y border-border/40 bg-[linear-gradient(180deg,_#fafafa_0%,_#fff_100%)] py-5 md:py-7">
+      <Marquee speed={50}>
         {stats.map((s, i) => (
-          <div key={s.l} className="px-6 text-center">
-            <div className="whitespace-nowrap font-display text-3xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-4xl"><Editable path={`stats.${i}.value`}>{s.value}</Editable></div>
-            <div className="mt-1.5 whitespace-nowrap text-sm uppercase tracking-wider text-muted-foreground"><Editable path={`stats.${i}.label`}>{s.l}</Editable></div>
+          <div key={`s-${i}`} className={STRIP_CARD}>
+            <div className={STRIP_ICON}>
+              <Star className="h-[18px] w-[18px] text-[color:var(--plum)]/80" />
+            </div>
+            <div className="min-w-0">
+              <div className="whitespace-nowrap font-display text-[28px] font-bold leading-none text-[color:var(--plum)] md:text-[32px]">
+                <Editable path={`stats.${i}.value`}>{s.value}</Editable>
+              </div>
+              <div className="mt-1 text-[11px] uppercase tracking-[0.12em] text-muted-foreground/70 md:text-xs">
+                <Editable path={`stats.${i}.label`}>{s.l}</Editable>
+              </div>
+            </div>
+          </div>
+        ))}
+        {accolades.map((item, i) => (
+          <div key={`a-${i}`} className={STRIP_CARD}>
+            <div className={STRIP_ICON}>
+              <Trophy className="h-[18px] w-[18px] text-[color:var(--plum)]/80" />
+            </div>
+            <div className="min-w-0 py-1">
+              <div className="font-display text-sm font-semibold leading-snug text-[color:var(--plum)] md:text-[15px]">
+                <Editable path={`accolades.${i}.text`}>{item.text}</Editable>
+              </div>
+              <div className="mt-0.5 text-[11px] leading-snug tracking-wide text-muted-foreground/70 md:text-xs">
+                <Editable path={`accolades.${i}.source`}>{item.source}</Editable>
+              </div>
+            </div>
           </div>
         ))}
       </Marquee>
@@ -331,9 +446,6 @@ function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }
               </Float>
               <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`whyBavishi.cards.${i}.t`}>{t}</Editable></h3>
               <p className="mt-3 text-sm leading-relaxed text-muted-foreground"><Editable path={`whyBavishi.cards.${i}.d`}>{d}</Editable></p>
-              <div className="mt-6 inline-flex translate-y-1 items-center gap-1 text-sm font-medium text-[color:var(--rose)] opacity-0 transition-all duration-500 group-hover:translate-y-0 group-hover:opacity-100">
-                Learn more <ArrowRight className="h-4 w-4" />
-              </div>
             </LiftCard>
           </StaggerItem>
           );
@@ -345,7 +457,7 @@ function WhyBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyBavishi }
 
 /* ---------- Suraksha ---------- */
 
-function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: SurakshaContent } = {}) {
+export function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: SurakshaContent } = {}) {
   return (
     <section id="suraksha" className="relative overflow-hidden bg-[color:var(--plum)] text-white noise scroll-mt-24">
       <div className="pointer-events-none absolute inset-0">
@@ -391,10 +503,8 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
               <Magnetic as="a" href={content.primaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
                 {content.primaryCta.label} <ArrowRight className="h-4 w-4" />
               </Magnetic>
-              <Magnetic as="a" href={content.secondaryCta.href} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                {content.secondaryCta.label}
-              </Magnetic>
             </div>
+            <p className="mt-3 text-xs text-white/40">* Terms and conditions apply.</p>
           </Reveal>
         </div>
 
@@ -427,8 +537,8 @@ function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: Suraksha
  * card becomes a link (and "Learn more" stays a span to keep valid HTML);
  * without `href` it renders exactly as the original homepage card. */
 export function TreatmentCard({
-  icon: Icon, title, desc, href, titleNode, descNode,
-}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode }) {
+  icon: Icon, title, desc, href, titleNode, descNode, tag,
+}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode; tag?: React.ReactNode }) {
   const body = (
     <motion.div
       whileHover={{ y: -6 }}
@@ -441,6 +551,11 @@ export function TreatmentCard({
           <Icon className="h-5 w-5" />
         </div>
         <div>
+          {tag && (
+            <span className="mb-1.5 inline-block text-xs font-semibold uppercase tracking-wide text-[color:var(--rose)]">
+              {tag}
+            </span>
+          )}
           <h3 className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</h3>
           <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{descNode ?? desc}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--rose)]">
@@ -457,7 +572,45 @@ export function TreatmentCard({
 
 /* ---------- Treatments ---------- */
 
+export const TREATMENT_TITLE_HREFS: Record<string, string> = {
+  "Male Infertility": "/treatments/male-infertility",
+  "Female Infertility": "/treatments/female-infertility",
+  "IVF / ICSI / ART": "/what-is-ivf",
+  "IUI": "/intra-uterine-insemination-iui",
+  "Advanced Fertility Techniques": "/treatments/advanced-fertility-techniques",
+  "Fertility Preservation": "/cryopreservation",
+  "Sperm Donation": "/sperm-donation",
+  "Egg Donation": "/egg-donation",
+  "Embryo Donation": "/embryo-donation",
+  "Fibroids": "/fibroids",
+  "Endometriosis": "/endometriosis",
+  "Ovarian Rejuvenation": "/ovarian-rejuvenation",
+  "High Risk Obstetrics": "/services/high-risk-pregnancy-care",
+  "Maternity Services": "/services/maternity-services",
+};
+
+/** Curated highlights shown on the homepage teaser — the full catalog lives
+ *  on /treatments (linked via the "View All Treatments" button below). */
+const FEATURED_TREATMENT_TITLES = new Set([
+  "IVF / ICSI / ART",
+  "IUI",
+  "Advanced Fertility Techniques",
+  "Fertility Preservation",
+]);
+
+/** Problem-first framing shown above each featured card — patients search by
+ *  what's wrong before they know the treatment name. */
+const FEATURED_TREATMENT_TAGS: Record<string, string> = {
+  "IUI": "Trying for years?",
+  "IVF / ICSI / ART": "IVF failed before?",
+  "Advanced Fertility Techniques": "Low sperm count or PCOS?",
+  "Fertility Preservation": "Not ready yet, but want options later?",
+};
+
 export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
+  const featured = content.items
+    .map((item, i) => ({ ...item, i }))
+    .filter(({ t }) => FEATURED_TREATMENT_TITLES.has(t));
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
@@ -466,21 +619,29 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
           title={edTitle("treatments", content.heading)}
           subtitle={ed("treatments.subtitle", content.subtitle)}
         />
-        <Reveal delay={0.1}><GhostBtn icon={ArrowRight}>{ed("treatments.ctaLabel", content.ctaLabel)}</GhostBtn></Reveal>
       </div>
-      <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-        {content.items.map(({ icon, t, d }, i) => (
+      <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
+        {featured.map(({ icon, t, d, i }) => (
           <StaggerItem key={t}>
             <TreatmentCard
               icon={resolveIcon(icon)}
               title={t}
               desc={d}
+              href={TREATMENT_TITLE_HREFS[t]}
               titleNode={ed(`treatments.items.${i}.t`, t)}
               descNode={ed(`treatments.items.${i}.d`, d)}
+              tag={FEATURED_TREATMENT_TAGS[t]}
             />
           </StaggerItem>
         ))}
       </Stagger>
+      <Reveal delay={0.2}>
+        <div className="mt-9 text-center">
+          <Magnetic as="a" href="/treatments" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+            {ed("treatments.ctaLabel", content.ctaLabel)} <ArrowRight className="h-4 w-4" />
+          </Magnetic>
+        </div>
+      </Reveal>
     </section>
   );
 }
@@ -517,41 +678,97 @@ export function LiteYouTube({ id, title, className = "" }: { id: string; title: 
   );
 }
 
+/* ---------- Self-hosted video (lazy facade) ----------
+ * Same click-to-play UX as LiteYouTube, for the rare testimonial that isn't
+ * on the YouTube channel — a local .mp4 in /public instead of a youTubeId.
+ * `preload="metadata"` gives a free first-frame poster without extra assets. */
+
+export function LiteVideoFile({ src, title, className = "" }: { src: string; title: string; className?: string }) {
+  const [play, setPlay] = useState(false);
+  const videoRef = useRef<HTMLVideoElement>(null);
+  return (
+    <div className={`relative overflow-hidden bg-[color:var(--plum)]/5 ${className}`}>
+      <video
+        ref={videoRef}
+        src={src}
+        title={title}
+        controls={play}
+        preload="metadata"
+        playsInline
+        className="absolute inset-0 h-full w-full object-cover"
+      />
+      {!play && (
+        <button
+          type="button"
+          onClick={() => {
+            setPlay(true);
+            // Call play() synchronously inside the click handler — a browser
+            // only treats unmuted autoplay as user-initiated when it's tied
+            // directly to the gesture, not to a later React re-render.
+            videoRef.current?.play().catch(() => {});
+          }}
+          aria-label={`Play video: ${title}`}
+          className="group/yt absolute inset-0 h-full w-full"
+        >
+          <span className="absolute inset-0 bg-[color:var(--plum)]/15 transition-colors duration-300 group-hover/yt:bg-[color:var(--plum)]/5" />
+          <span className="absolute left-1/2 top-1/2 flex h-14 w-14 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[color:var(--rose)] shadow-lift transition-transform duration-300 group-hover/yt:scale-110">
+            <PlayCircle className="h-8 w-8" />
+          </span>
+        </button>
+      )}
+    </div>
+  );
+}
+
 /* ---------- Success Stories (real patient videos) ---------- */
 
 export function SuccessStories({
   stories = HOMEPAGE_DEFAULTS.videos.stories,
   eyebrow = "Success Stories",
-  title = <>30,000+ journeys. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
+  title = <>30,000+ couples. <em className="font-display italic text-[color:var(--rose)]">One promise kept.</em></>,
   subtitle = "Real stories from real families who began their parenthood journey with us.",
   ctaLabel = "View More Success Stories",
   tone = "white",
   showCta = true,
+  carousel = false,
 }: {
-  stories?: { id: string; n: string; q: string; r: number }[];
+  /** Either `id` (YouTube) or `src` (self-hosted .mp4) must be set — never both. */
+  stories?: { id?: string; src?: string; n: string; q: string; r: number; tag?: string }[];
   eyebrow?: React.ReactNode;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
   ctaLabel?: React.ReactNode;
   tone?: "white" | "tint";
   showCta?: boolean;
+  /** Keep a horizontal auto-scrolling carousel at all breakpoints (with desktop
+   * arrows) instead of collapsing to a 3-up grid — use when there may be >3 items. */
+  carousel?: boolean;
 } = {}) {
   return (
     <section className={`${tone === "tint" ? "bg-[color:var(--rose-soft)]/40" : "bg-white"} py-10 md:py-16`}>
       <div className="container-px mx-auto max-w-[1400px]">
         <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
-        <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
-          {stories.map((s) => (
-            <StaggerItem key={s.n}>
+        <MobileCarousel alwaysArrows={carousel}>
+        <Stagger className={carousel
+          ? "mt-10 flex snap-x snap-mandatory gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
+          : "mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0"}>
+          {stories.map((s, i) => (
+            <StaggerItem key={`${s.id ?? s.src}-${i}`} className={carousel
+              ? "w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]"
+              : "w-full shrink-0 snap-start md:w-auto md:shrink"}>
               <motion.article
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
                 className="group h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
               >
                 <div className="relative">
-                  <LiteYouTube id={s.id} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
+                  {s.src ? (
+                    <LiteVideoFile src={s.src} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
+                  ) : (
+                    <LiteYouTube id={s.id!} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
+                  )}
                   <div className="pointer-events-none absolute bottom-4 left-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[color:var(--plum)] shadow-soft backdrop-blur">
-                    Patient Story
+                    {s.tag ?? "Patient Story"}
                   </div>
                 </div>
                 <div className="p-6">
@@ -565,14 +782,190 @@ export function SuccessStories({
             </StaggerItem>
           ))}
         </Stagger>
+        </MobileCarousel>
         {showCta && (
           <Reveal delay={0.2}>
             <div className="mt-9 text-center">
-              <GhostBtn icon={ArrowRight}>{ctaLabel}</GhostBtn>
+              <GhostBtn icon={ArrowRight} href="https://www.youtube.com/watch?v=BSvvQfn4JlE&list=PLOzw9MwGVZn0KItOeJJUX0siXp2Itqs1k" target="_blank">{ctaLabel}</GhostBtn>
             </div>
           </Reveal>
         )}
       </div>
+    </section>
+  );
+}
+
+/* ---------- Written Reviews (text) ----------
+ * Text-review carousel used on doctor profiles where real written reviews
+ * exist (src/lib/doctor-reviews.ts). Compact, uniform-height cards; long
+ * reviews clamp to a few lines with a "Read more" that opens the full text
+ * in a modal. Auto-scrolls one card at a time and pauses on hover / while the
+ * modal is open, so text never slides away while you read. Shared across all
+ * doctor pages. */
+type ReviewItem = { name: string; rating?: number; date?: string; text: string };
+
+const ReviewStars = ({ n }: { n: number }) => (
+  <div className="flex items-center gap-1 text-[color:var(--gold)]">
+    {Array.from({ length: n }).map((_, j) => <Star key={j} className="h-4 w-4 fill-current" />)}
+  </div>
+);
+
+const ReviewByline = ({ r }: { r: ReviewItem }) => (
+  <div className="flex items-center gap-3">
+    <span className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose-soft)] text-sm font-semibold text-[color:var(--rose)]">
+      {r.name.charAt(0)}
+    </span>
+    <div>
+      <div className="text-sm font-semibold text-[color:var(--plum)]">{r.name}</div>
+      {r.date ? <div className="text-xs text-muted-foreground">{r.date}</div> : null}
+    </div>
+  </div>
+);
+
+function ReviewCard({ r, onOpen }: { r: ReviewItem; onOpen: () => void }) {
+  const pRef = useRef<HTMLParagraphElement>(null);
+  const [clamped, setClamped] = useState(false);
+  useEffect(() => {
+    const el = pRef.current;
+    if (!el) return;
+    const check = () => setClamped(el.scrollHeight > el.clientHeight + 2);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [r.text]);
+  return (
+    <article className="flex h-[340px] flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
+      <Quote className="h-7 w-7 shrink-0 text-[color:var(--rose)]/25" aria-hidden />
+      {r.rating ? <div className="mt-2 shrink-0"><ReviewStars n={r.rating} /></div> : null}
+      <p ref={pRef} className="mt-3 line-clamp-6 text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">
+        {r.text}
+      </p>
+      {clamped && (
+        <button type="button" onClick={onOpen} className="mt-1.5 shrink-0 self-start text-sm font-semibold text-[color:var(--rose)] hover:underline">
+          Read more
+        </button>
+      )}
+      <div className="mt-auto border-t border-border/60 pt-4">
+        <ReviewByline r={r} />
+      </div>
+    </article>
+  );
+}
+
+export function WrittenReviews({
+  reviews,
+  eyebrow = "Patient Reviews",
+  title,
+  subtitle,
+  tone = "white",
+}: {
+  reviews: ReviewItem[];
+  eyebrow?: React.ReactNode;
+  title: React.ReactNode;
+  subtitle?: React.ReactNode;
+  tone?: "white" | "tint";
+}) {
+  const trackRef = useRef<HTMLDivElement>(null);
+  const pausedRef = useRef(false);
+  const [active, setActive] = useState<ReviewItem | null>(null);
+
+  const stepBy = (dir: -1 | 1) => {
+    const track = trackRef.current;
+    if (!track) return;
+    const first = track.firstElementChild as HTMLElement | null;
+    const step = first ? first.getBoundingClientRect().width + 24 : track.clientWidth * 0.9;
+    if (dir === 1 && track.scrollLeft + track.clientWidth >= track.scrollWidth - 4) {
+      track.scrollTo({ left: 0, behavior: "smooth" });
+    } else {
+      track.scrollBy({ left: dir * step, behavior: "smooth" });
+    }
+  };
+
+  // Auto-advance one card at a time; halt while hovering or the modal is open.
+  useEffect(() => {
+    if (reviews.length < 2) return;
+    const id = setInterval(() => {
+      if (pausedRef.current || active) return;
+      stepBy(1);
+    }, 4000);
+    return () => clearInterval(id);
+  }, [reviews.length, active]);
+
+  // Esc closes the modal; lock body scroll while it is open.
+  useEffect(() => {
+    if (!active) return;
+    const onKey = (e: KeyboardEvent) => { if (e.key === "Escape") setActive(null); };
+    document.addEventListener("keydown", onKey);
+    const prev = document.body.style.overflow;
+    document.body.style.overflow = "hidden";
+    return () => { document.removeEventListener("keydown", onKey); document.body.style.overflow = prev; };
+  }, [active]);
+
+  if (!reviews.length) return null;
+
+  return (
+    <section className={`${tone === "tint" ? "bg-[color:var(--rose-soft)]/40" : "bg-white"} py-10 md:py-16`}>
+      <div className="container-px mx-auto max-w-[1400px]">
+        <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} align="center" />
+        <div
+          className="relative mt-10"
+          onMouseEnter={() => { pausedRef.current = true; }}
+          onMouseLeave={() => { pausedRef.current = false; }}
+        >
+          <div
+            ref={trackRef}
+            className="flex snap-x snap-mandatory items-stretch gap-6 overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden"
+          >
+            {reviews.map((r, i) => (
+              <div key={`${r.name}-${i}`} className="w-[85%] shrink-0 snap-start sm:w-[calc((100%-1.5rem)/2)] lg:w-[calc((100%-3rem)/3)]">
+                <ReviewCard r={r} onOpen={() => setActive(r)} />
+              </div>
+            ))}
+          </div>
+          {reviews.length > 1 && (
+            <div className="pointer-events-none absolute inset-y-0 -inset-x-1 flex items-center justify-between">
+              <button aria-label="Previous review" onClick={() => stepBy(-1)} className="pointer-events-auto z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[color:var(--plum)] shadow-md backdrop-blur transition-transform hover:scale-105 md:h-10 md:w-10">
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+              <button aria-label="Next review" onClick={() => stepBy(1)} className="pointer-events-auto z-10 flex h-9 w-9 items-center justify-center rounded-full bg-white/90 text-[color:var(--plum)] shadow-md backdrop-blur transition-transform hover:scale-105 md:h-10 md:w-10">
+                <ChevronRight className="h-5 w-5" />
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+
+      {/* Full-review modal */}
+      <AnimatePresence>
+        {active && (
+          <motion.div
+            initial={{ opacity: 0 }} animate={{ opacity: 1 }} exit={{ opacity: 0 }}
+            transition={{ duration: 0.2 }}
+            className="fixed inset-0 z-[100] flex items-center justify-center bg-black/50 p-4 backdrop-blur-sm"
+            onClick={() => setActive(null)}
+            role="dialog" aria-modal="true" aria-label={`Review by ${active.name}`}
+          >
+            <motion.div
+              initial={{ opacity: 0, scale: 0.96, y: 8 }} animate={{ opacity: 1, scale: 1, y: 0 }} exit={{ opacity: 0, scale: 0.96, y: 8 }}
+              transition={{ duration: 0.22, ease: [0.22, 1, 0.36, 1] }}
+              className="relative max-h-[85vh] w-full max-w-lg overflow-y-auto rounded-3xl bg-card p-8 shadow-lift"
+              onClick={(e) => e.stopPropagation()}
+            >
+              <button aria-label="Close" onClick={() => setActive(null)} className="absolute right-4 top-4 flex h-9 w-9 items-center justify-center rounded-full text-muted-foreground transition-colors hover:bg-[color:var(--rose-soft)] hover:text-[color:var(--rose)]">
+                <X className="h-5 w-5" />
+              </button>
+              <Quote className="h-8 w-8 text-[color:var(--rose)]/25" aria-hidden />
+              {active.rating ? <div className="mt-3"><ReviewStars n={active.rating} /></div> : null}
+              <p className="mt-4 whitespace-pre-line text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">
+                {active.text}
+              </p>
+              <div className="mt-6 border-t border-border/60 pt-5">
+                <ReviewByline r={active} />
+              </div>
+            </motion.div>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </section>
   );
 }
@@ -600,82 +993,28 @@ export function VideoHub({
           <GhostBtn icon={Video} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ctaLabel}</GhostBtn>
         </Reveal>
       </div>
-      <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-4">
+      <MobileCarousel>
+      <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-2 md:gap-6 md:overflow-visible md:pb-0 lg:grid-cols-4">
         {videos.map((v) => (
-          <StaggerItem key={v.id}>
-            <motion.a
-              href={`https://www.youtube.com/watch?v=${v.id}`}
-              target="_blank" rel="noopener noreferrer"
+          <StaggerItem key={v.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
+            <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.5 }}
-              className="group block h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+              className="h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
-              <div className="relative aspect-video overflow-hidden bg-[color:var(--plum)]/5">
-                <img
-                  src={`https://img.youtube.com/vi/${v.id}/hqdefault.jpg`}
-                  alt={v.t} loading="lazy"
-                  className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                />
-                <span className="absolute inset-0 bg-[color:var(--plum)]/15 transition-colors duration-300 group-hover:bg-[color:var(--plum)]/5" />
-                <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[color:var(--rose)] shadow-lift transition-transform duration-300 group-hover:scale-110">
-                  <PlayCircle className="h-7 w-7" />
-                </span>
-              </div>
+              <LiteYouTube id={v.id} title={v.t} className="aspect-video" />
               <div className="p-5">
+                {v.c && (
+                  <span className="mb-2 inline-block rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 text-xs font-semibold text-[color:var(--rose)]">{v.c}</span>
+                )}
                 <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)]">{v.t}</h3>
                 <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{v.d}</p>
               </div>
-            </motion.a>
+            </motion.div>
           </StaggerItem>
         ))}
       </Stagger>
-    </section>
-  );
-}
-
-/* ---------- About ---------- */
-
-function About({ content = HOMEPAGE_DEFAULTS.about }: { content?: HomeAboutContent } = {}) {
-  return (
-    <section className="bg-[color:var(--rose-soft)]/40 py-10 md:py-16">
-      <div className="container-px mx-auto grid max-w-[1400px] grid-cols-1 items-center gap-14 lg:grid-cols-2 lg:gap-20">
-        <div className="relative">
-          <Reveal>
-            <div className="overflow-hidden rounded-[2rem] shadow-lift">
-              <ParallaxImage src={content.image} alt={content.imageAlt} ratio="aspect-[4/5]" editPath="about.image" />
-            </div>
-          </Reveal>
-          <Float className="absolute -right-6 bottom-10 hidden md:block" amplitude={6}>
-            <div className="glass rounded-2xl p-5 shadow-lift">
-              <div className="font-display text-3xl font-medium text-[color:var(--plum)]"><Editable path="about.sinceValue">{content.sinceValue}</Editable></div>
-              <div className="text-xs text-muted-foreground"><Editable path="about.sinceLabel">{content.sinceLabel}</Editable></div>
-            </div>
-          </Float>
-        </div>
-        <div>
-          <SectionHeader
-            eyebrow={<Editable path="about.eyebrow">{content.eyebrow}</Editable>}
-            title={<><Editable path="about.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="about.heading.em">{content.heading.em}</Editable></em></>}
-            subtitle={<Editable path="about.subtitle">{content.subtitle}</Editable>}
-          />
-          <Stagger className="mt-8 grid grid-cols-2 gap-6" stagger={0.08}>
-            {content.stats.map((x, i) => (
-              <StaggerItem key={x.k}>
-                <div className="border-l-2 border-[color:var(--rose)]/40 pl-4">
-                  <div className="text-xs uppercase tracking-wider text-muted-foreground"><Editable path={`about.stats.${i}.k`}>{x.k}</Editable></div>
-                  <div className="mt-1 font-display text-xl text-[color:var(--plum)]"><Editable path={`about.stats.${i}.v`}>{x.v}</Editable></div>
-                </div>
-              </StaggerItem>
-            ))}
-          </Stagger>
-          <Reveal delay={0.3}>
-            <div className="mt-10 flex flex-wrap gap-3">
-              <PrimaryBtn><Editable path="about.primaryCta">{content.primaryCta}</Editable></PrimaryBtn>
-              <GhostBtn><Editable path="about.secondaryCta">{content.secondaryCta}</Editable></GhostBtn>
-            </div>
-          </Reveal>
-        </div>
-      </div>
+      </MobileCarousel>
     </section>
   );
 }
@@ -687,7 +1026,7 @@ const defaultDocs: Doc[] = [
   { img: drHimanshu, n: "Dr. Himanshu Bavishi", deg: "M.D", spec: "Reproductive Medicine & IVF", loc: "Ahmedabad", exp: "35+ yrs", slug: "himanshu-bavishi" },
   { img: drFalguni,  n: "Dr. Falguni Bavishi",  deg: "M.D", spec: "Infertility & Gynaecology", loc: "Ahmedabad", exp: "30+ yrs", slug: "falguni-bavishi" },
   { img: drParth,    n: "Dr. Parth Bavishi",    deg: "M.D", spec: "IVF & Andrology",           loc: "Mumbai",    exp: "15+ yrs", slug: "parth-bavishi" },
-  { img: drJanki,    n: "Dr. Janki Bavishi",    deg: "M.S", spec: "Reproductive Surgery",      loc: "Mumbai",    exp: "12+ yrs", slug: "janki-bavishi" },
+  { img: drJanki,    n: "Dr. Janki Bavishi",    deg: "M.S", spec: "Obstetrics & Gynaecology",  loc: "Ahmedabad", exp: "13+ yrs", slug: "janki-bavishi" },
 ];
 export function Doctors({
   docs = defaultDocs,
@@ -746,7 +1085,7 @@ export function Doctors({
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
                   </a>
                   <a
-                    href="/#book"
+                    href="/contact#book"
                     className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full bg-[color:var(--rose)] px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-[color:var(--rose)]/20 transition-all duration-300 hover:bg-[color:var(--rose)]/90 hover:shadow-md hover:shadow-[color:var(--rose)]/30 active:scale-[0.97]"
                   >
                     <Calendar className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:-translate-y-0.5" />
@@ -817,36 +1156,34 @@ function WhyChooseBavishiFertilityInstitute({ content = HOMEPAGE_DEFAULTS.whyCho
   );
 }
 
-/* ---------- Awards & Achievements (carousel) ---------- */
-
-// A single award card. Memoized + keyed so its <img> never reloads between
-// slide changes — only the cheap transform values (x/scale/opacity) update.
-const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
-  return (
-    <div className="group overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
-      {/* Full rectangular award image — fills the card edge-to-edge */}
-      <div className="aspect-video w-full overflow-hidden bg-white">
-        <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-cover" />
-      </div>
-      <div className="border-t border-border/60 px-5 py-4 text-center">
-        <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">{a.title}</h3>
-        {a.desc && <p className="mt-1 text-sm text-muted-foreground">{a.desc}</p>}
-      </div>
-    </div>
-  );
-});
-
-// Only this inner component holds the rotating state, so slide changes never
-// re-render the section header or CTA — just the transform-animated cards.
-function AwardsStage({ items }: { items: AwardItem[] }) {
+/* ---------- Shared "stage" carousel ----------
+ * One centered card at a time, with off-stage neighbours peeking at reduced
+ * scale/opacity; autoplay, pause-on-hover, swipe, and dot pagination.
+ * Used by both Awards & Achievements and Media Coverage below — the card
+ * markup differs but the rotation mechanics are identical. */
+function CarouselStage<T>({
+  items,
+  renderCard,
+  cardWidthClass = "w-[clamp(280px,82vw,400px)]",
+  stageHeightClass = "h-[340px] sm:h-[360px] md:h-[380px]",
+  autoplayMs = 3800,
+  dotLabel = "slide",
+}: {
+  items: T[];
+  renderCard: (item: T) => React.ReactNode;
+  cardWidthClass?: string;
+  stageHeightClass?: string;
+  autoplayMs?: number;
+  dotLabel?: string;
+}) {
   const [active, setActive] = useState(0);
   const [paused, setPaused] = useState(false);
   const wrapRef = useRef<HTMLDivElement>(null);
   const [shift, setShift] = useState(300);
   const startX = useRef(0);
 
-  // Repeat the awards so there are always enough off-stage "buffer" cards for a
-  // seamless infinite loop (a 3-item loop would otherwise teleport across centre).
+  // Repeat the items so there are always enough off-stage "buffer" cards for a
+  // seamless infinite loop (a small loop would otherwise teleport across centre).
   const dotCount = items.length;
   const slides = useMemo(
     () =>
@@ -869,9 +1206,9 @@ function AwardsStage({ items }: { items: AwardItem[] }) {
 
   useEffect(() => {
     if (paused) return;
-    const id = window.setInterval(() => setActive((a) => (a + 1) % L), 3800);
+    const id = window.setInterval(() => setActive((a) => (a + 1) % L), autoplayMs);
     return () => window.clearInterval(id);
-  }, [paused, L]);
+  }, [paused, L, autoplayMs]);
 
   const go = (dir: number) => setActive((a) => (a + dir + L) % L);
   const relPos = (i: number) => {
@@ -889,9 +1226,9 @@ function AwardsStage({ items }: { items: AwardItem[] }) {
     <>
       <div
         ref={wrapRef}
-        className="relative mx-auto mt-10 flex h-[360px] max-w-5xl items-center justify-center overflow-hidden md:h-[400px]"
-        onMouseEnter={() => setPaused(true)}
-        onMouseLeave={() => setPaused(false)}
+        className={`relative mx-auto mt-10 flex max-w-5xl items-center justify-center overflow-hidden ${stageHeightClass}`}
+        onPointerEnter={(e) => { if (e.pointerType === "mouse") setPaused(true); }}
+        onPointerLeave={(e) => { if (e.pointerType === "mouse") setPaused(false); }}
         onTouchStart={(e) => { setPaused(true); startX.current = e.touches[0].clientX; }}
         onTouchEnd={(e) => {
           const dx = e.changedTouches[0].clientX - startX.current;
@@ -899,13 +1236,13 @@ function AwardsStage({ items }: { items: AwardItem[] }) {
           setPaused(false);
         }}
       >
-        {slides.map((a, i) => {
+        {slides.map((item, i) => {
           const p = relPos(i);
           const visible = Math.abs(p) <= 1;
           return (
             <div
               key={i}
-              className="absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 w-[clamp(280px,82vw,400px)] select-none"
+              className={`absolute left-1/2 top-1/2 -translate-x-1/2 -translate-y-1/2 select-none ${cardWidthClass}`}
               style={{ zIndex: p === 0 ? 30 : 20 - Math.abs(p), pointerEvents: visible ? "auto" : "none" }}
               aria-hidden={p !== 0}
             >
@@ -918,7 +1255,7 @@ function AwardsStage({ items }: { items: AwardItem[] }) {
                 }}
                 transition={{ duration: 0.7, ease: [0.22, 1, 0.36, 1] }}
               >
-                <AwardCard a={a} />
+                {renderCard(item)}
               </motion.div>
             </div>
           );
@@ -932,13 +1269,42 @@ function AwardsStage({ items }: { items: AwardItem[] }) {
             key={i}
             type="button"
             onClick={() => goToDot(i)}
-            aria-label={`Go to award ${i + 1}`}
+            aria-label={`Go to ${dotLabel} ${i + 1}`}
             className={`h-2 rounded-full transition-all duration-300 ${i === activeDot ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
           />
         ))}
       </div>
     </>
   );
+}
+
+/* ---------- Awards & Achievements (carousel) ---------- */
+
+// A single award card. Memoized + keyed so its <img> never reloads between
+// slide changes — only the cheap transform values (x/scale/opacity) update.
+const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
+  return (
+    <div className="group overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+      {/* Fixed image height (not aspect-square tied to card width) — keeps every
+       * card the same total height regardless of how wide it renders, so the
+       * carousel stage below never has to clip the text off the bottom.
+       * object-contain — most award photos are portrait trophy/certificate shots;
+       * object-cover was cropping their tops off. */}
+      <div className="h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
+        <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-contain" />
+      </div>
+      <div className="border-t border-border/60 px-5 py-4 text-center">
+        <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">{a.title}</h3>
+        {a.desc && <p className="mt-1 text-sm text-muted-foreground">{a.desc}</p>}
+      </div>
+    </div>
+  );
+});
+
+// Only this inner component holds the rotating state, so slide changes never
+// re-render the section header or CTA — just the transform-animated cards.
+function AwardsStage({ items }: { items: AwardItem[] }) {
+  return <CarouselStage items={items} renderCard={(a) => <AwardCard a={a} />} dotLabel="award" />;
 }
 
 export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content?: HomepageData["awards"] } = {}) {
@@ -954,22 +1320,60 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
 
         <AwardsStage items={content.items} />
 
-        {/* CTA */}
-        <div className="mt-10 text-center">
-          <Magnetic as="a" href="#awards" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-            View More <ArrowRight className="h-4 w-4" />
-          </Magnetic>
-        </div>
+        <Reveal delay={0.25}>
+          <div className="mt-8 text-center">
+            <a
+              href="/awards"
+              className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
+            >
+              View all awards &amp; achievements
+            </a>
+          </div>
+        </Reveal>
       </div>
     </section>
   );
 }
 
-/* ---------- Media ---------- */
+/* ---------- Media Coverage (stage carousel) ---------- */
+
+// A single press-clipping card — same card "shell" as AwardCard, but linking
+// through to the full article and keeping the clipping's native portrait scan.
+const PressCard = memo(function PressCard({ c }: { c: PressClipping }) {
+  return (
+    <a
+      href={pressHref(c.slug)}
+      aria-label={`Read: ${c.headline} — ${c.publication}`}
+      className="group block overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift"
+    >
+      <div className="aspect-[3/4] w-full overflow-hidden bg-white">
+        <img
+          src={c.thumb}
+          alt={`${c.publication} clipping — ${c.headline}`}
+          loading="lazy"
+          className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-[1.04]"
+        />
+      </div>
+      <div className="border-t border-border/60 px-4 py-3 text-center">
+        <div className="text-xs font-bold uppercase tracking-widest text-[color:var(--rose)]">{c.publication}</div>
+      </div>
+    </a>
+  );
+});
+
+function PressStage({ items }: { items: PressClipping[] }) {
+  return (
+    <CarouselStage
+      items={items}
+      renderCard={(c) => <PressCard c={c} />}
+      cardWidthClass="w-[clamp(220px,62vw,280px)]"
+      stageHeightClass="h-[380px] sm:h-[400px] md:h-[420px]"
+      dotLabel="press clipping"
+    />
+  );
+}
 
 function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["media"] } = {}) {
-  const logos = content.logos;
-  const loop = [...logos, ...logos, ...logos, ...logos];
   return (
     <section className="container-px mx-auto max-w-[1400px] py-20">
       <SectionHeader
@@ -977,15 +1381,15 @@ function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["
         title={edTitle("media", content.heading)}
         align="center"
       />
-      <Reveal delay={0.15}>
-        <div className="mt-10">
-          <Marquee speed={28}>
-            {loop.map((l, i) => (
-              <div key={i} className="flex h-20 w-44 items-center justify-center rounded-xl border border-border/70 bg-card px-6 shadow-soft">
-                <EditableImage path={`media.logos.${i % logos.length}.src`} src={l.src} alt={l.alt} loading="lazy" className="max-h-12 w-auto object-contain transition-transform duration-300 hover:scale-105" />
-              </div>
-            ))}
-          </Marquee>
+      <PressStage items={PRESS_CLIPPINGS} />
+      <Reveal delay={0.25}>
+        <div className="mt-8 text-center">
+          <a
+            href="/press"
+            className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
+          >
+            View all press coverage
+          </a>
         </div>
       </Reveal>
     </section>
@@ -1028,11 +1432,27 @@ export function Testimonials({
   eyebrow = "Testimonials",
   title = <>Words from <em className="font-display italic text-[color:var(--rose)]">our families.</em></>,
 }: { cms?: Review[]; eyebrow?: React.ReactNode; title?: React.ReactNode } = {}) {
-  const data = getBrandReviews();
-  const googleReviews: Review[] = data?.reviews ?? [];
-  const googleVerified = !!data?.verified;
-  const aggregate = googleVerified ? data?.aggregate : undefined; // rating badge only for real Google data
-  const listingUrl = data?.mapsUrl ?? BRAND_LISTING_URL;
+  const [liveData, setLiveData] = useState<ReviewData | null>(() => getBrandReviews());
+
+  // Upgrade past this build's static snapshot with whatever the admin's
+  // "Refresh Reviews" button has accumulated since, without needing a
+  // redeploy. Only replaces state when there's something to show.
+  useEffect(() => {
+    let cancelled = false;
+    fetch("/api/reviews/brand")
+      .then((r) => (r.ok ? r.json() : null))
+      .then((fresh: { aggregate?: AggregateRating; mapsUrl?: string; reviews?: Review[] } | null) => {
+        if (cancelled || !fresh?.reviews?.length) return;
+        setLiveData({ reviews: fresh.reviews, aggregate: fresh.aggregate, mapsUrl: fresh.mapsUrl, verified: true });
+      })
+      .catch(() => {});
+    return () => { cancelled = true; };
+  }, []);
+
+  const googleReviews: Review[] = liveData?.reviews ?? [];
+  const googleVerified = !!liveData?.verified;
+  const aggregate = googleVerified ? liveData?.aggregate : undefined; // rating badge only for real Google data
+  const listingUrl = liveData?.mapsUrl ?? BRAND_LISTING_URL;
 
   // Supplement the live Google reviews with staff-curated CMS testimonials.
   // Google entries keep their verified flag (so only REAL Google data is labelled
@@ -1040,13 +1460,21 @@ export function Testimonials({
   // aggregate badge or schema. When `cms` is empty this is byte-identical to the
   // Google-only render that shipped before the Testimonials collection existed.
   const cards: { r: Review; verified: boolean }[] = [
-    ...googleReviews.map((r) => ({ r, verified: googleVerified })),
+    ...googleReviews.map((r) => ({ r, verified: r.verified ?? googleVerified })),
     ...cms.map((r) => ({ r, verified: false })),
   ];
 
+  // Client requirement: never end a page on a partial batch — only show reviews
+  // in full groups of 3 (3, 6, 9…). Trim any remainder off the tail once there's
+  // at least one full batch; a lone page under 3 total still renders as-is since
+  // there's no second page for it to look uneven against (same edge case the
+  // location-page GoogleReviews carousel already special-cases).
+  const usableCount = cards.length >= 3 ? Math.floor(cards.length / 3) * 3 : cards.length;
+  const trimmedCards = cards.slice(0, usableCount);
+
   const reviewPages = Array.from(
-    { length: Math.max(1, Math.ceil(cards.length / 3)) },
-    (_, p) => cards.slice(p * 3, p * 3 + 3),
+    { length: Math.max(1, Math.ceil(trimmedCards.length / 3)) },
+    (_, p) => trimmedCards.slice(p * 3, p * 3 + 3),
   );
   const pages = reviewPages.length;
   const [page, setPage] = useState(0);
@@ -1106,26 +1534,48 @@ export function Testimonials({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, y: -14 }}
                 transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }}
-                className="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3"
+                className="flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden sm:grid sm:grid-cols-2 sm:gap-6 sm:overflow-visible sm:pb-0 lg:grid-cols-3"
               >
                 {reviewPages[page].map((c, i) => (
-                  <ReviewTestimonialCard key={`${c.r.author}-${i}`} r={c.r} verified={c.verified} />
+                  <div key={`${c.r.author}-${i}`} className="w-full shrink-0 snap-start sm:w-auto sm:shrink">
+                    <ReviewTestimonialCard r={c.r} verified={c.verified} />
+                  </div>
                 ))}
               </motion.div>
             </AnimatePresence>
           </div>
 
           {pages > 1 && (
-            <div className="mt-10 flex justify-center gap-2">
-              {reviewPages.map((_, i) => (
-                <button
-                  key={i}
-                  type="button"
-                  onClick={() => setPage(i)}
-                  aria-label={`Go to reviews page ${i + 1}`}
-                  className={`h-2 rounded-full transition-all duration-300 ${i === page ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
-                />
-              ))}
+            <div className="mt-10 flex items-center justify-center gap-4">
+              <button
+                type="button"
+                onClick={() => setPage((p) => (p - 1 + pages) % pages)}
+                aria-label="Previous reviews"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:text-[color:var(--rose)] hover:shadow-lift"
+              >
+                <ChevronLeft className="h-5 w-5" />
+              </button>
+
+              <div className="flex gap-2">
+                {reviewPages.map((_, i) => (
+                  <button
+                    key={i}
+                    type="button"
+                    onClick={() => setPage(i)}
+                    aria-label={`Go to reviews page ${i + 1}`}
+                    className={`h-2 rounded-full transition-all duration-300 ${i === page ? "w-6 bg-[color:var(--rose)]" : "w-2 bg-[color:var(--plum)]/20 hover:bg-[color:var(--plum)]/40"}`}
+                  />
+                ))}
+              </div>
+
+              <button
+                type="button"
+                onClick={() => setPage((p) => (p + 1) % pages)}
+                aria-label="Next reviews"
+                className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-white text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:text-[color:var(--rose)] hover:shadow-lift"
+              >
+                <ChevronRight className="h-5 w-5" />
+              </button>
             </div>
           )}
         </div>
@@ -1137,6 +1587,7 @@ export function Testimonials({
 /* ---------- Events ---------- */
 
 function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData["events"] } = {}) {
+  if (content.posters.length === 0) return null;
   return (
     <section className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
@@ -1144,7 +1595,7 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
         title={<><Editable path="events.heading.lead">{content.heading.lead}</Editable> <em className="font-display italic text-[color:var(--rose)]"><Editable path="events.heading.em">{content.heading.em}</Editable></em></>}
         align="center"
       />
-      <Stagger className="mx-auto mt-10 grid max-w-3xl grid-cols-1 gap-6 sm:grid-cols-2">
+      <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-4">
         {content.posters.map((e, i) => (
           <StaggerItem key={e.src}>
             <motion.div
@@ -1152,14 +1603,14 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
               transition={{ duration: 0.5 }}
               className="overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
-              <EditableImage path={`events.posters.${i}.src`} src={e.src} alt={e.alt} loading="lazy" className="aspect-[4/5] w-full object-cover" />
+              <EditableImage path={`events.posters.${i}.src`} src={e.src} alt={e.alt} loading="lazy" className="aspect-[3/4] w-full object-cover" />
             </motion.div>
           </StaggerItem>
         ))}
       </Stagger>
       <Reveal delay={0.2}>
         <div className="mt-9 text-center">
-          <Magnetic as="a" href="#contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+          <Magnetic as="a" href="/camps" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
             View More Events <ArrowRight className="h-4 w-4" />
           </Magnetic>
         </div>
@@ -1186,27 +1637,16 @@ function Blogs({
             <GhostBtn icon={BookOpen} href="https://www.youtube.com/@BavishiFertilityInstitute/videos" target="_blank">{ed("blogs.ctaLabel", content.ctaLabel)}</GhostBtn>
           </Reveal>
         </div>
-        <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
+        <MobileCarousel>
+        <Stagger className="mt-10 flex snap-x snap-mandatory overflow-x-auto pb-2 [scrollbar-width:none] [-webkit-overflow-scrolling:touch] [&::-webkit-scrollbar]:hidden md:grid md:grid-cols-3 md:gap-6 md:overflow-visible md:pb-0">
           {videos.map((p) => (
-            <StaggerItem key={p.id}>
-              <motion.a
-                href={`https://www.youtube.com/watch?v=${p.id}`}
-                target="_blank" rel="noopener noreferrer"
+            <StaggerItem key={p.id} className="w-full shrink-0 snap-start md:w-auto md:shrink">
+              <motion.div
                 whileHover={{ y: -8 }}
                 transition={{ duration: 0.5 }}
-                className="group block h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
+                className="h-full overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-shadow duration-500 hover:shadow-lift"
               >
-                <div className="relative aspect-[16/10] overflow-hidden bg-[color:var(--plum)]/5">
-                  <img
-                    src={`https://img.youtube.com/vi/${p.id}/hqdefault.jpg`}
-                    alt={p.t} loading="lazy"
-                    className="h-full w-full object-cover transition-transform duration-700 group-hover:scale-105"
-                  />
-                  <span className="absolute inset-0 bg-[color:var(--plum)]/15 transition-colors duration-300 group-hover:bg-[color:var(--plum)]/5" />
-                  <span className="absolute left-1/2 top-1/2 flex h-12 w-12 -translate-x-1/2 -translate-y-1/2 items-center justify-center rounded-full bg-white/90 text-[color:var(--rose)] shadow-lift transition-transform duration-300 group-hover:scale-110">
-                    <PlayCircle className="h-7 w-7" />
-                  </span>
-                </div>
+                <LiteYouTube id={p.id} title={p.t} className="aspect-[16/10]" />
                 <div className="p-6">
                   <div className="flex items-center gap-3 text-xs">
                     <span className="rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 font-semibold text-[color:var(--rose)]">{p.c}</span>
@@ -1215,14 +1655,12 @@ function Blogs({
                     </span>
                   </div>
                   <h3 className="mt-4 text-xl font-semibold leading-snug text-[color:var(--plum)] text-pretty">{p.t}</h3>
-                  <span className="mt-4 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                    Watch on YouTube <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-                  </span>
                 </div>
-              </motion.a>
+              </motion.div>
             </StaggerItem>
           ))}
         </Stagger>
+        </MobileCarousel>
       </div>
     </section>
   );
@@ -1246,39 +1684,37 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
         {cities.map((c, i) => {
-          const href = cityHref(c.s) ?? `/locations/${c.s}`;
-          const inner = (
-            <>
-              <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
-              <h3 className="mt-4 text-xl font-semibold text-[color:var(--plum)]"><Editable path={`locations.cities.${i}.c`}>{c.c}</Editable></h3>
-              <p className="text-sm text-muted-foreground">{c.n} {c.n > 1 ? "centres" : "centre"}</p>
-              {editing ? (
-                <a href={href} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-                </a>
-              ) : (
-                <div className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-                </div>
-              )}
-            </>
-          );
+          const cityUrl = cityHref(c.s) ?? `/locations/${c.s}`;
+          const builtCentres = centresForCity(c.s).filter((ct) => ct.built);
           return (
             <StaggerItem key={c.c}>
-              {editing ? (
-                <div className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift">
-                  {inner}
-                </div>
-              ) : (
-                <motion.a
-                  href={href}
-                  whileHover={{ y: -6 }}
-                  transition={{ duration: 0.4 }}
-                  className="group block h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
-                >
-                  {inner}
-                </motion.a>
-              )}
+              <motion.div
+                whileHover={{ y: -6 }}
+                transition={{ duration: 0.4 }}
+                className="group h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
+              >
+                <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
+                <a href={cityUrl} className="mt-4 block">
+                  <h3 className="text-xl font-semibold text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">
+                    <Editable path={`locations.cities.${i}.c`}>{c.c}</Editable>
+                  </h3>
+                </a>
+                {builtCentres.length > 1 ? (
+                  <p className="mt-1 flex flex-wrap gap-x-1 text-xs text-muted-foreground">
+                    {builtCentres.map((ct, ci) => (
+                      <span key={ct.slug}>
+                        <a href={centreHref(ct)} className="hover:text-[color:var(--rose)] hover:underline transition-colors">{ct.name}</a>
+                        {ci < builtCentres.length - 1 && <span className="mx-0.5">·</span>}
+                      </span>
+                    ))}
+                  </p>
+                ) : c.centres && c.centres.length > 0 ? (
+                  <p className="mt-1 text-xs text-muted-foreground">{c.centres.join(" · ")}</p>
+                ) : null}
+                <a href={cityUrl} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                </a>
+              </motion.div>
             </StaggerItem>
           );
         })}
@@ -1340,6 +1776,19 @@ function FAQ({ content = HOMEPAGE_DEFAULTS.faq }: { content?: HomepageData["faq"
 
 /* ---------- Calculators ---------- */
 
+// Calculator name -> live page href. Cards without a matching entry stay
+// inert (no real tool built yet) so we never link to a 404.
+const CALCULATOR_HREFS: Record<string, string> = {
+  "IVF Success Rate Calculator": "/ivf-success-rate-calculator",
+  "Fertile Period Calculator": "/fertile-period-calculator",
+  "Risk of Repeat Miscarriage Calculator": "/risk-of-repeat-miscarriage-calculator",
+  "Natural Pregnancy Calculator": "/natural-pregnancy-calculator",
+  "IVF Cost Calculator": "/ivf-cost-calculator",
+  "AMH Level Interpreter": "/amh-level-interpreter",
+  "Ovulation Calculator": "/ovulation-calculator",
+  "Semen Analysis Calculator": "/semen-analysis-calculator",
+};
+
 export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
   const calcs = content.items;
   return (
@@ -1350,8 +1799,9 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
         subtitle={ed("calculators.subtitle", content.subtitle)}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
-        {calcs.map((c, i) => (
-          <StaggerItem key={c}>
+        {calcs.map((c, i) => {
+          const href = CALCULATOR_HREFS[c];
+          const card = (
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.4 }}
@@ -1361,12 +1811,17 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
                 <Calculator className="h-5 w-5" />
               </Float>
               <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
-              <a className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                 Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
-              </a>
+              </span>
             </motion.div>
+          );
+          return (
+          <StaggerItem key={c}>
+            {href ? <a href={href} className="block h-full">{card}</a> : card}
           </StaggerItem>
-        ))}
+          );
+        })}
       </Stagger>
     </section>
   );
@@ -1386,7 +1841,8 @@ const inquiryLocations = [
 
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
   const contactIcons = [Phone, MessageCircle, Clock];
-  const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "", message: "" });
+  const formAgg = getBrandReviews()?.aggregate;
+  const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" });
   const [errors, setErrors] = useState<Record<string, string>>({});
   const [submitted, setSubmitted] = useState(false);
   const [sending, setSending] = useState(false);
@@ -1480,13 +1936,24 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </p>
                 <button
                   type="button"
-                  onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "", message: "" }); }}
+                  onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" }); }}
                   className="mt-6 text-sm font-semibold text-[color:var(--rose)] hover:underline"
                 >
                   Submit another inquiry
                 </button>
               </div>
             ) : (
+              <>
+              {formAgg && (
+                <div className="mb-5 flex items-center gap-2 text-sm font-medium text-[color:var(--plum)]">
+                  <span className="flex items-center gap-0.5 text-[color:var(--gold)]">
+                    {Array.from({ length: 5 }).map((_, i) => (
+                      <Star key={i} className="h-4 w-4 fill-current" />
+                    ))}
+                  </span>
+                  <span>{formAgg.ratingValue.toFixed(1)} on Google · {formAgg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+                </div>
+              )}
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
@@ -1557,6 +2024,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   Your details are kept strictly confidential. We never share your information.
                 </p>
               </form>
+              </>
             )}
           </div>
         </Reveal>
@@ -1593,13 +2061,13 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
             </p>
           </Reveal>
 
-          <Stagger className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-6" delay={0.3}>
+          <Stagger className="mx-auto mt-10 grid max-w-2xl grid-cols-3 gap-2 sm:gap-6" delay={0.3}>
             {content.stats.map((x, i) => (
-              <StaggerItem key={x.l} className="text-center">
-                <div className="font-display text-3xl font-medium md:text-4xl">
+              <StaggerItem key={x.l} className="text-center min-w-0">
+                <div className="font-display text-lg font-medium whitespace-nowrap sm:text-2xl md:text-3xl lg:text-4xl">
                   <Counter to={x.v} suffix={x.s} />
                 </div>
-                <div className="mt-1 text-xs uppercase tracking-wider text-white/60"><Editable path={`finalCta.stats.${i}.l`}>{x.l}</Editable></div>
+                <div className="mt-1 text-[10px] uppercase tracking-wider text-white/60 sm:text-xs"><Editable path={`finalCta.stats.${i}.l`}>{x.l}</Editable></div>
               </StaggerItem>
             ))}
           </Stagger>
@@ -1608,12 +2076,14 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
             <div className="mt-10 flex flex-wrap justify-center gap-3">
               {content.ctas.map((label, i) => {
                 const Icon = ctaIcons[i] ?? Calendar;
+                const hrefs = ["#book", "https://wa.me/919712522289", "tel:+919712622288"];
+                const isExternal = i === 1;
                 const cls =
                   i === 0
                     ? "btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"
                     : "btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white";
                 return (
-                  <Magnetic key={label} className={cls}>
+                  <Magnetic key={label} as="a" href={hrefs[i]} className={cls} {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
                     <Icon className="h-4 w-4" /> {label}
                   </Magnetic>
                 );
@@ -1651,12 +2121,12 @@ export function Footer() {
                       <a
                         href={x.href}
                         {...(x.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-                        className="transition-colors hover:text-[color:var(--rose)]"
+                        className="capitalize transition-colors hover:text-[color:var(--rose)]"
                       >
                         {x.label}
                       </a>
                     ) : (
-                      <span className="cursor-default text-muted-foreground/70">{x.label}</span>
+                      <span className="capitalize cursor-default text-muted-foreground/70">{x.label}</span>
                     )}
                   </li>
                 ))}
@@ -1679,6 +2149,13 @@ export function Footer() {
                 {x.label}
               </a>
             ))}
+            <button
+              type="button"
+              onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_PREFERENCES_EVENT))}
+              className="hover:text-[color:var(--rose)]"
+            >
+              Cookie Settings
+            </button>
           </div>
         </div>
       </div>

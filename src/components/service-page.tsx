@@ -79,7 +79,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#treatments" className="hover:text-[color:var(--rose)]">Maternity Services</a>
+          <a href="/services/maternity-services" className="hover:text-[color:var(--rose)]">Maternity Services</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{s.breadcrumbName}</span>
         </nav>
@@ -134,10 +134,10 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
             )}
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation
+                <Magnetic as="a" href="/contact#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                  <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
-                <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
+                <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                   <MessageCircle className="h-4 w-4 text-[#25D366]" /> Chat on WhatsApp
                 </Magnetic>
               </div>
@@ -345,6 +345,34 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
         </div>
       </section>
 
+      {/* Maternity specialists */}
+      <section className={`${band()} py-8 md:py-14`}>
+        <div className="container-px mx-auto max-w-[1400px]">
+          <SectionHead center eyebrow="Meet the Specialists" title={<>Your maternity <em className="font-display italic text-[color:var(--rose)]">care team</em></>} />
+          <div className="mx-auto mt-9 grid max-w-2xl grid-cols-1 gap-6 sm:grid-cols-2">
+            {(["binal-shah", "parth-bavishi"] as const).map((slug) => {
+              const doc = doctorBySlug(slug);
+              if (!doc) return null;
+              return (
+                <a key={slug} href={doctorUrl(doc.slug)} className="group flex flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+                  <div className="relative aspect-[3/4] overflow-hidden bg-[color:var(--rose-soft)]/40">
+                    {/* eslint-disable-next-line @next/next/no-img-element */}
+                    <img src={doc.image} alt={`${doc.name} — ${doc.specialty}`} loading="lazy" className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
+                    <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
+                    {doc.experienceLabel && <span className="absolute top-3 right-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--rose)] backdrop-blur">{doc.experienceLabel}</span>}
+                  </div>
+                  <div className="p-5">
+                    <h3 className="text-lg font-semibold text-[color:var(--plum)] group-hover:text-[color:var(--rose)]">{doc.name}</h3>
+                    <p className="text-sm text-muted-foreground">{[doc.credentials, doc.specialty].filter(Boolean).join(" · ")}</p>
+                    <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[color:var(--rose)]">View profile <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span>
+                  </div>
+                </a>
+              );
+            })}
+          </div>
+        </div>
+      </section>
+
       {/* Related maternity services — REAL internal links */}
       {related.length > 0 && (
         <section className={`${band()} py-8 md:py-14`}>
@@ -426,13 +454,13 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
             </Reveal>
             <Reveal delay={0.2}>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Free Consultation
+                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
+                  <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
                 <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                   <Phone className="h-4 w-4" /> +91 97126 22288
                 </Magnetic>
-                <Magnetic as="a" href="https://wa.me/919712622288" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
+                <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                   <MessageCircle className="h-4 w-4" /> WhatsApp Us
                 </Magnetic>
               </div>

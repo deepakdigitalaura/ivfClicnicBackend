@@ -55,24 +55,20 @@ export function Reveal({
 }
 
 /* ---------- Stagger ---------- */
-export function Stagger({
-  children,
-  className,
-  stagger = 0.08,
-  delay = 0,
-}: {
+export const Stagger = React.forwardRef<HTMLDivElement, {
   children: React.ReactNode;
   className?: string;
   stagger?: number;
   delay?: number;
-}) {
+}>(function Stagger({ children, className, stagger = 0.08, delay = 0 }, ref) {
   // See Reveal: static in the editor so a re-render can't strand off-screen cards
   // at opacity:0. Public unchanged (byte-identical).
   if (useEdit()?.editMode) {
-    return <div className={className}>{children}</div>;
+    return <div ref={ref} className={className}>{children}</div>;
   }
   return (
     <motion.div
+      ref={ref}
       initial="hidden"
       whileInView="show"
       viewport={{ once: true, margin: "-60px" }}
@@ -85,7 +81,7 @@ export function Stagger({
       {children}
     </motion.div>
   );
-}
+});
 
 const childVariants: Variants = {
   hidden: { opacity: 0, y: 24, filter: "blur(6px)" },
@@ -267,7 +263,20 @@ export function Magnetic({
 /* ---------- Animated counter ---------- */
 export function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?: string; duration?: number }) {
   const ref = React.useRef<HTMLSpanElement>(null);
-  const inView = useInView(ref, { once: true, margin: "-80px" });
+  const inViewport = useInView(ref, { once: true, margin: "-80px" });
+  // useInView's IntersectionObserver can miss an element that's already on
+  // screen the moment it mounts (e.g. a reload that restores scroll position
+  // straight to this section on a short mobile viewport) — verified directly
+  // against getBoundingClientRect as a fallback so the counter doesn't get
+  // stuck at 0 in that case.
+  const [alreadyVisible, setAlreadyVisible] = React.useState(false);
+  React.useEffect(() => {
+    if (!ref.current) return;
+    const rect = ref.current.getBoundingClientRect();
+    const viewportHeight = window.innerHeight || document.documentElement.clientHeight;
+    if (rect.top < viewportHeight && rect.bottom > 0) setAlreadyVisible(true);
+  }, []);
+  const inView = inViewport || alreadyVisible;
   const [val, setVal] = React.useState(0);
   React.useEffect(() => {
     if (!inView) return;
@@ -283,7 +292,7 @@ export function Counter({ to, suffix = "", duration = 2 }: { to: number; suffix?
     return () => cancelAnimationFrame(raf);
   }, [inView, to, duration]);
   return (
-    <span ref={ref}>
+    <span ref={ref} className="whitespace-nowrap">
       {val.toLocaleString()}
       {suffix}
     </span>
@@ -295,11 +304,14 @@ export function Marquee({
   children,
   speed = 40,
   className,
+  fadeColor,
 }: {
   children: React.ReactNode;
   speed?: number;
   className?: string;
+  fadeColor?: string;
 }) {
+  const from = fadeColor ?? "var(--ivory)";
   return (
     <div className={`relative overflow-hidden ${className ?? ""}`}>
       <div
@@ -309,8 +321,8 @@ export function Marquee({
         <div className="flex shrink-0 items-center gap-12">{children}</div>
         <div className="flex shrink-0 items-center gap-12" aria-hidden>{children}</div>
       </div>
-      <div className="pointer-events-none absolute inset-y-0 left-0 w-24 bg-gradient-to-r from-[var(--ivory)] to-transparent" />
-      <div className="pointer-events-none absolute inset-y-0 right-0 w-24 bg-gradient-to-l from-[var(--ivory)] to-transparent" />
+      <div className="pointer-events-none absolute inset-y-0 left-0 w-24" style={{ background: `linear-gradient(to right, ${from}, transparent)` }} />
+      <div className="pointer-events-none absolute inset-y-0 right-0 w-24" style={{ background: `linear-gradient(to left, ${from}, transparent)` }} />
     </div>
   );
 }

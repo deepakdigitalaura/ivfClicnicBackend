@@ -25,6 +25,21 @@ import { doctorBySlug, reviewerNode, physicianSchema } from "@/lib/doctors";
 
 export type TreatmentRef = { slug: string; name: string; href: string };
 
+/** Treatment pages pulled from the site until their content is corrected.
+ *  "embryo-donation": client flagged the current copy as non-compliant with
+ *  India's ART Act (it implies pre-made donor embryos, which the Act does
+ *  not permit — a full IVF cycle with separate egg + sperm donors is
+ *  required instead). Remove from this set once the page is rewritten.
+ *  "varicocele": client wants a full rewrite (currently surgery-first
+ *  throughout — title, hero, benefits, process — but the client does not
+ *  want to promote varicocele surgery; page should present surgery vs
+ *  ART-IVF neutrally, with grades and a subclinical-needs-no-treatment
+ *  note). Client explicitly said skip/hide it until that rewrite is done.
+ *  "surrogacy": client flagged current copy as not legally/factually
+ *  correct; hidden until content is corrected, then can be unhidden.
+ *  Consumers (getTreatment/getTreatments, sitemap) must respect this. */
+export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele", "surrogacy"]);
+
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   ivf: { slug: "ivf", name: "IVF", href: "/what-is-ivf" },
@@ -37,16 +52,21 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   "blastocyst-transfer": { slug: "blastocyst-transfer", name: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
   "laser-hatching": { slug: "laser-hatching", name: "Laser Assisted Hatching", href: "/laser-assisted-hatching" },
   "ivf-failure": { slug: "ivf-failure", name: "IVF Failure", href: "/ivf-failure" },
+  "ivf-evaluation": { slug: "ivf-evaluation", name: "IVF Evaluation", href: "/ivf-evaluation" },
+  "era-test": { slug: "era-test", name: "ERA Test", href: "/era-test" },
   "egg-donation": { slug: "egg-donation", name: "Egg Donation", href: "/egg-donation" },
   "sperm-donation": { slug: "sperm-donation", name: "Sperm Donation", href: "/sperm-donation" },
   "embryo-donation": { slug: "embryo-donation", name: "Embryo Donation", href: "/embryo-donation" },
-  "male-infertility": { slug: "male-infertility", name: "Male Infertility", href: "/#treatments" },
-  "female-infertility": { slug: "female-infertility", name: "Female Infertility", href: "/#treatments" },
-  "fertility-preservation": { slug: "fertility-preservation", name: "Fertility Preservation", href: "/#treatments" },
+  surrogacy: { slug: "surrogacy", name: "Surrogacy", href: "/surrogacy" },
+  pgt: { slug: "pgt", name: "PGT", href: "/pgt" },
+  "male-infertility": { slug: "male-infertility", name: "Male Infertility", href: "/treatments/male-infertility" },
+  "female-infertility": { slug: "female-infertility", name: "Female Infertility", href: "/treatments/female-infertility" },
+  "fertility-preservation": { slug: "fertility-preservation", name: "Fertility Preservation", href: "/treatments/advanced-fertility-techniques" },
   endometriosis: { slug: "endometriosis", name: "Endometriosis", href: "/endometriosis" },
   azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
   cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/cryopreservation" },
-  "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/#treatments" },
+  "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/egg-freezing" },
+  "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/treatments" },
   // Male Infertility
   oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
   asthenospermia: { slug: "asthenospermia", name: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
@@ -56,14 +76,14 @@ export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
   // Female Infertility
   "conceive-naturally": { slug: "conceive-naturally", name: "Conceive Naturally", href: "/conceive-naturally" },
   "prp-infertility": { slug: "prp-infertility", name: "PRP Infertility", href: "/prp-infertility" },
-  pcos: { slug: "pcos", name: "PCOS", href: "/pcos" },
+  pcos: { slug: "pcos", name: "PMOS-PCOS", href: "/pcos" },
   "ovarian-reserve": { slug: "ovarian-reserve", name: "Poor Ovarian Reserve / Low AMH", href: "/ovarian-reserve" },
   "ovarian-rejuvenation": { slug: "ovarian-rejuvenation", name: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
   fibroids: { slug: "fibroids", name: "Fibroids", href: "/fibroids" },
 };
 
 export const treatmentRef = (slug: string): TreatmentRef =>
-  TREATMENTS_REGISTRY[slug] ?? { slug, name: slug, href: "/#treatments" };
+  TREATMENTS_REGISTRY[slug] ?? { slug, name: slug, href: "/treatments" };
 
 /* ---------- Treatment cards (homepage-style card data) ----------
  * Icon + one-line description per treatment slug, so the homepage card design
@@ -82,9 +102,12 @@ const TREATMENT_CARD_META: Record<string, { icon: LucideIcon; desc: string }> = 
   "blastocyst-transfer": { icon: Layers, desc: "Day-5 blastocyst culture for stronger implantation." },
   "laser-hatching": { icon: Zap, desc: "Laser-assisted hatching to aid embryo implantation." },
   "ivf-failure": { icon: ShieldCheck, desc: "Specialised work-up and a fresh plan after failed IVF." },
+  "ivf-evaluation": { icon: ClipboardCheck, desc: "A structured review of a failed cycle to find the real cause." },
+  "era-test": { icon: ScanLine, desc: "Personalised embryo-transfer timing via endometrial receptivity analysis." },
   "egg-donation": { icon: Egg, desc: "Carefully matched, fully-screened egg-donor programme." },
   "sperm-donation": { icon: Droplets, desc: "Screened, ethical donor-sperm programme." },
   "embryo-donation": { icon: Baby, desc: "A compassionate donor-embryo path to parenthood." },
+  surrogacy: { icon: ShieldCheck, desc: "Ethical, legally-compliant gestational surrogacy care." },
   "male-infertility": { icon: Stethoscope, desc: "Comprehensive evaluation and treatment for male factors." },
   "female-infertility": { icon: HeartPulse, desc: "Personalised pathways for every female fertility concern." },
   "fertility-preservation": { icon: Snowflake, desc: "Egg, sperm and embryo freezing for the future." },
@@ -98,11 +121,12 @@ const TREATMENT_CARD_META: Record<string, { icon: LucideIcon; desc: string }> = 
   "erectile-dysfunction": { icon: HeartPulse, desc: "Confidential ED care with fertility support." },
   "conceive-naturally": { icon: Leaf, desc: "Timing, lifestyle and support to conceive naturally." },
   "prp-infertility": { icon: Droplets, desc: "Ovarian & endometrial PRP in selected cases." },
-  pcos: { icon: Activity, desc: "Ovulation-focused care for PCOS fertility." },
+  pcos: { icon: Activity, desc: "Ovulation-focused care for PMOS-PCOS fertility." },
   "ovarian-reserve": { icon: Egg, desc: "Tailored protocols for low AMH / low egg count." },
   "ovarian-rejuvenation": { icon: Sparkles, desc: "Ovarian PRP to support a very low reserve." },
   fibroids: { icon: ShieldCheck, desc: "Fertility-preserving treatment of uterine fibroids." },
   cryopreservation: { icon: Snowflake, desc: "Safe long-term freezing of eggs, sperm and embryos." },
+  "egg-freezing": { icon: Egg, desc: "Freeze younger, healthier eggs to preserve your options." },
   "recurrent-miscarriage": { icon: ShieldCheck, desc: "Evaluation and care for repeated pregnancy loss." },
 };
 
@@ -120,7 +144,7 @@ export const treatmentCardData = (slug: string): TreatmentCardData => {
 /* ---------- Framework types ---------- */
 
 export type Heading = { lead: string; em?: string };
-export type IconCard = { icon: LucideIcon; t: string; d: string };
+export type IconCard = { icon: LucideIcon; t: string; d: string; href?: string };
 
 export type Treatment = {
   slug: string;
@@ -139,11 +163,13 @@ export type Treatment = {
   };
   lastReviewed: string;
   reviewerSlug: string;
-  hero: { eyebrow: string; h1: string; h1Em: string; tagline: string; badges: string[]; image: string; imageAlt: string };
+  hero: { eyebrow: string; h1: string; h1Em: string; tagline: string; badges: string[]; image: string; imageAlt: string; imageFit?: "cover" | "contain"; heroAspect?: string };
   whatIs: { heading: Heading; paragraphs: string[]; aside?: { title: string; body: string } };
   benefits: { heading: Heading; subtitle?: string; items: string[] };
   types?: { heading: Heading; subtitle?: string; items: IconCard[] };
   whoNeedsIt: { heading: Heading; subtitle?: string; items: string[] };
+  /** Optional per-page overrides for the fixed section eyebrows (default set in treatment-content.ts). */
+  labels?: { whoNeedsIt?: string };
   process: { heading: Heading; subtitle?: string; steps: { icon: LucideIcon; n: string; t: string; d: string }[]; note?: string };
   timeline?: { heading: Heading; subtitle?: string; items: { day: string; t: string; d: string }[]; chips?: string[]; chipsNote?: string };
   video?: { id: string; title: string; description: string; eyebrow: string; heading: Heading };
@@ -172,7 +198,7 @@ export const ivf: Treatment = {
   meta: {
     title: "IVF Treatment (In Vitro Fertilization) — Bavishi Fertility Institute",
     description:
-      "What is IVF? Learn how In Vitro Fertilization works step by step, who needs it, success factors and costs. India's trusted IVF specialists since 1984 — 30,000+ pregnancies, Class 1000 labs.",
+      "What is IVF? Learn how In Vitro Fertilization works step by step, who needs it, success factors and costs. India's trusted IVF specialists since 1998 — 30,000+ pregnancies, Class 1000 labs.",
     ogImage: "/assets/hero-mother-baby1.png",
   },
   procedure: {
@@ -189,8 +215,8 @@ export const ivf: Treatment = {
     h1: "IVF Treatment",
     h1Em: "In Vitro Fertilization at Bavishi Fertility Institute",
     tagline:
-      "India's trusted IVF specialists since 1984 — 30,000+ successful pregnancies, Class 1000 IVF labs, and the Suraksha Kavach promise. Personalised, transparent and compassionate fertility care, every step of the way.",
-    badges: ["30,000+ Pregnancies", "Since 1984", "Class 1000 Labs", "National Fertility Award 5×"],
+      "India's trusted IVF specialists since 1998 — 30,000+ successful pregnancies, Class 1000 (10× Clean Air) IVF labs, and the Suraksha Kavach promise. Personalised, transparent and compassionate fertility care, every step of the way.",
+    badges: ["30,000+ Pregnancies", "Since 1998", "Class 1000 (10× Clean Air)", "National Fertility Award 6×"],
     image: "/assets/ivf-icsi.png",
     imageAlt:
       "IVF / ICSI — sperm microinjection into an egg under the microscope at Bavishi Fertility Institute",
@@ -203,13 +229,11 @@ export const ivf: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — pioneering IVF clinic in India and running Class 1000 embryology labs.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West, won 6 times (2019–2026). It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — pioneering IVF clinic in India.",
     },
   },
   benefits: {
     heading: { lead: "The advantages of", em: "IVF" },
-    subtitle:
-      "Beyond helping you conceive, IVF gives your specialist powerful tools to maximise your chances safely.",
     items: [
       "Know the number and quality of your embryos before transfer.",
       "Select and transfer only the best-quality embryo(s).",
@@ -226,8 +250,8 @@ export const ivf: Treatment = {
       { icon: FlaskConical, t: "Conventional IVF", d: "Eggs and sperm are combined in the lab and fertilisation happens on its own." },
       { icon: Microscope, t: "ICSI", d: "A single healthy sperm is injected directly into each mature egg — used for all couples at Bavishi Fertility Institute." },
       { icon: Layers, t: "Blastocyst Transfer", d: "Embryos are grown to day 5–6 (blastocyst) before transfer, for stronger selection." },
-      { icon: Snowflake, t: "Frozen Embryo Transfer", d: "Surplus embryos are vitrified and transferred in a later cycle, with close to 100% thaw survival." },
-      { icon: Leaf, t: "Natural IVF Cycle", d: "Uses your body's natural cycle with minimal medication to retrieve a single egg." },
+      { icon: Snowflake, t: "Frozen Embryo Transfer", d: "Electively all or surplus embryos are frozen with vitrification. They are transferred in a later cycle, with close to 100% thaw survival." },
+      { icon: Zap, t: "Needle Free IVF", d: "Needle free injection systems use the same injections. Medications are injected in body without needle by a special device with high pressure through the skin." },
     ],
   },
   whoNeedsIt: {
@@ -251,13 +275,12 @@ export const ivf: Treatment = {
     subtitle:
       "From your first consultation to your pregnancy test, every stage is handled with precision, safety and care.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Pre-treatment Evaluation", d: "Before starting, both partners are thoroughly evaluated to optimise the outcome — semen analysis and blood tests for the male partner, and consultation, 3D sonography, hormone tests and (if indicated) hysteroscopy for the female partner." },
+      { icon: ClipboardCheck, n: "01", t: "Pre-treatment Evaluation", d: "Before starting, both partners are thoroughly evaluated to optimise the outcome — blood tests for husband & wife, semen test, 3D sonography, and if needed, specialised tests like hysteroscopy." },
       { icon: Syringe, n: "02", t: "Ovarian Stimulation", d: "After your period, a customised dose of gonadotropin hormones (FSH/HMG) is given as a small daily injection for about 7–12 days to grow multiple mature eggs, with regular ultrasound monitoring. A precise 'trigger' injection then matures the eggs for retrieval." },
       { icon: Microscope, n: "03", t: "Egg Retrieval & Fertilization", d: "34–36 hours after the trigger, eggs are retrieved through the vagina under short sedation — no cut, no stitch, and you go home in about 2 hours. The same day, the best sperm are selected and each mature egg is fertilised by ICSI in our Class 1000 IVF lab." },
-      { icon: Dna, n: "04", t: "Embryo Culture & Transfer", d: "Embryos are grown in next-generation incubators that mimic the body. Two to six days later, the best-quality embryo(s) are gently transferred into the uterus. Surplus embryos can be frozen by vitrification — with close to 100% survival at Bavishi Fertility Institute." },
-      { icon: HeartPulse, n: "05", t: "Pregnancy Test", d: "About 13–15 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–17 days." },
+      { icon: Dna, n: "04", t: "Embryo Culture & Transfer", d: "Embryos are grown in next-generation humid incubators that mimic the body. Two to six days later, the best-quality embryo(s) are either gently transferred into the uterus or electively frozen, customised to your condition & response. Surplus embryos can be frozen." },
+      { icon: HeartPulse, n: "05", t: "Pregnancy Test", d: "About 13–15 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–19 days." },
     ],
-    note: "Active treatment — egg formation to embryo transfer — typically takes just 12–17 days.",
   },
   timeline: {
     heading: { lead: "Your IVF cycle,", em: "day by day" },
@@ -274,7 +297,7 @@ export const ivf: Treatment = {
     chips: [
       "Antagonist (Short) protocol",
       "Down-regulation (Long) protocol",
-      "Flare protocol",
+      "Customized protocol",
       "Dual stimulation protocol",
       "Minimum stimulation protocol",
     ],
@@ -294,19 +317,16 @@ export const ivf: Treatment = {
     subtitle: "World-class infrastructure and embryology that protect your embryos at every step.",
     items: [
       { icon: FlaskConical, t: "Class 1000 IVF Lab", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting embryos at every moment." },
-      { icon: Microscope, t: "Body-like Incubators", d: "Next-generation incubators recreate the body's exact environment to grow healthy embryos." },
-      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of surplus embryos with close to 100% survival on thawing." },
+      { icon: Microscope, t: "Body-like Incubators", d: "Next-generation Humid incubators recreate the body's exact environment to grow healthy embryos." },
+      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of embryos with close to 100% survival on thawing. We achieved first live birth of India with vitrified frozen oocytes." },
       { icon: Dna, t: "ICSI & PGT", d: "Microinjection for every couple, plus pre-implantation genetic testing where indicated." },
     ],
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "your IVF?" },
     items: [
-      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting your embryos at every moment." },
-      { icon: Microscope, t: "ICSI for All", d: "Microinjection for every couple gives the maximum chance of fertilisation and minimises the risk of total fertilisation failure." },
       { icon: Sparkles, t: "Customised Protocols", d: "Tailor-made stimulation and our 'trigger it right' strategy retrieve the best number of best-quality eggs, safely." },
-      { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and peace of mind on your journey to parenthood." },
-      { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1984 and the National Fertility Award for five consecutive years (2021–2025)." },
+      { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award for Best IVF Chain in India-West for 6 consecutive years." },
       { icon: HeartPulse, t: "One-Stop Care", d: "Tests, surgery, embryology and treatment under one roof — with safe-stimulation protocols designed to avoid severe OHSS." },
     ],
   },
@@ -340,7 +360,7 @@ export const ivf: Treatment = {
       { t: "Ovarian Hyperstimulation (OHSS)", d: "Fertility medicines can occasionally over-stimulate the ovaries.", help: "Safe-stimulation protocols — with zero severe OHSS in over 10 years." },
       { t: "Ectopic pregnancy", d: "Rarely, an embryo implants outside the uterus.", help: "Early monitoring and Beta-HCG follow-up to detect it promptly." },
       { t: "Egg-retrieval risks", d: "As with any procedure, minor risks exist.", help: "A short, sedated, no-cut/no-stitch procedure by experienced specialists." },
-      { t: "Emotional well-being", d: "Treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
+      { t: "Emotional well-being", d: "IVF treatment can be an emotional journey.", help: "Counselling and compassionate support at every step." },
       { t: "Cost considerations", d: "IVF is an investment in your family.", help: "Transparent pricing, interest-free EMI and the Suraksha Kavach package." },
     ],
   },
@@ -359,29 +379,31 @@ export const ivf: Treatment = {
   },
   faqs: [
     { q: "What is IVF (In Vitro Fertilization)?", a: "IVF is an assisted-reproduction technique in which eggs are retrieved from the ovaries, fertilised by sperm in a laboratory, and the resulting embryo is transferred into the uterus to achieve pregnancy." },
+    { q: "I've done IUI but I'm still not pregnant — is IVF my next step?", a: "Often, yes. IUI is usually tried for 3–4 cycles; if pregnancy hasn't happened by then, or if there's a diagnosis like blocked tubes, low ovarian reserve or significant male-factor infertility, IVF gives a meaningfully higher chance per cycle because fertilisation and early embryo development happen under direct observation in the lab. Your specialist will review your IUI history and test results to confirm whether it's time to move to IVF." },
+    { q: "My previous IVF cycle failed — what would be different this time?", a: "A failed cycle is thoroughly reviewed before starting again — embryo quality, lab conditions, and your stimulation protocol are all re-evaluated. At Bavishi Fertility Institute this means Class 1000 (10× clean air) labs, a personalised protocol adjusted to your prior response, and PGT where indicated to select the healthiest embryo. We also offer a second-opinion consultation to walk through exactly what happened last time and what we'd change." },
     { q: "How long should a couple try before considering IVF?", a: "Generally about one year of trying if the woman is under 35, or six months if she is 35 or older. With known fertility issues — or if the woman is over 40 — it is wise to consult a specialist sooner." },
     { q: "What is the difference between IVF and ICSI?", a: "In conventional IVF, eggs and sperm are mixed in a dish. In ICSI, a single healthy sperm is injected directly into each egg. ICSI is preferred for male-factor infertility or previous fertilisation failure — at Bavishi Fertility Institute we use ICSI for all couples." },
     { q: "How does age affect IVF success?", a: "Age is the single biggest factor — younger women generally have higher success rates. For older patients, options such as donor eggs, previously-frozen embryos or advanced IVF techniques can improve the chances." },
     { q: "How long does one IVF cycle take?", a: "From the start of stimulation to embryo transfer, the active treatment usually takes about 12–17 days, plus the pre-treatment evaluation beforehand." },
     { q: "Is egg retrieval painful?", a: "No. Egg retrieval is a short, painless procedure done through the vagina under light sedation — with no cut and no stitch. Most patients go home within about two hours." },
-    { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a free consultation for a personalised estimate." },
-    { q: "Does Bavishi Fertility Institute offer a money-back guarantee for IVF?", a: "Yes — through the Suraksha Kavach programme, which provides financial protection and assurance on your fertility journey. Speak to our team to see if you qualify." },
-    { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1984 across 15 centres in 8 cities, with 30,000+ successful pregnancies and the National Fertility Award for five consecutive years." },
+    { q: "How much does IVF cost at Bavishi Fertility Institute?", a: "Cost depends on your diagnosis, the protocol and any add-ons such as ICSI, PGT or donor programmes. Bavishi Fertility Institute offers transparent pricing with no hidden costs, easy / interest-free EMI and the Suraksha Kavach package. Book a consultation for a personalised estimate." },
+    { q: "Does Bavishi Fertility Institute offer financial protection for IVF?", a: "Yes — through the Suraksha Kavach programme, which covers multiple IVF cycles and provides financial protection on your fertility journey. Speak to our team to see if you qualify." },
+    { q: "Which is the best IVF centre in India?", a: "Bavishi Fertility Institute is one of India's most trusted IVF chains — operating since 1998 across 14 centres in 8 cities, with 30,000+ successful pregnancies and the National Fertility Award six times (2019–2026). Our Ahmedabad institute was ranked the No. 1 fertility clinic in India by Times of India." },
     { q: "What lifestyle changes should I make before starting IVF?", a: "Focus on a healthy lifestyle — a balanced diet, regular exercise, maintaining a healthy weight, and avoiding smoking and excessive alcohol. Your specialist will give you any additional, personalised advice during your consultation." },
     { q: "Are there any dietary recommendations during IVF?", a: "There are no strict restrictions, but a balanced diet rich in fruits, vegetables, whole grains and lean proteins is recommended, along with good hydration. Follow any specific guidance your clinic provides for your treatment." },
     { q: "What is embryo grading?", a: "Embryo grading assesses the quality of embryos based on their appearance and development. Higher-grade embryos are more likely to implant successfully, which is why our embryologists select the best-quality embryo(s) for transfer." },
-    { q: "Can single individuals have a baby through IVF?", a: "Yes. IVF can be used by single individuals — with sperm collection for men, or donor sperm for women — and, where needed, a gestational carrier. Our team will explain the options available to you." },
+    { q: "Can single individuals have a baby through IVF?", a: "Yes, IVF treatment is available for single women in India — with donor sperm, single women can conceive. Our team will explain the options available to you. Unfortunately, single men are not currently eligible for fertility treatments under Indian law." },
   ],
   related: [
     "icsi", "iui", "picsi", "imsi", "macs", "spindle-view-icsi",
     "blastocyst-transfer", "laser-hatching", "ivf-failure",
     "male-infertility", "female-infertility", "fertility-preservation",
-    "pgt", "egg-donation", "surrogacy", "recurrent-miscarriage",
+    "egg-donation", "surrogacy", "recurrent-miscarriage",
   ],
   cta: {
     heading: "Ready to begin your",
     headingEm: "IVF journey?",
-    subtitle: "Speak with our fertility experts today — confidential, compassionate and complimentary.",
+    subtitle: "Speak with our fertility experts today — confidential, compassionate and personalised.",
   },
 };
 
@@ -410,10 +432,37 @@ const STD_PREP = [
 const WHY_BAVISHI_FERTILITY_INSTITUTE: IconCard[] = [
   { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting your embryos at every moment." },
   { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
-  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1984 and the National Fertility Award for five consecutive years (2021–2025)." },
+  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
   { icon: ShieldCheck, t: "Suraksha Kavach", d: "India's trusted IVF protection programme — financial assurance and peace of mind on your journey." },
   { icon: HeartPulse, t: "One-Stop Care", d: "Tests, surgery, embryology and treatment under one roof, with transparent, honest counselling." },
   { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
+];
+
+const WHY_BAVISHI_FERTILITY_INSTITUTE_IUI: IconCard[] = [
+  { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
+  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
+  { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
+];
+
+const WHY_BAVISHI_FERTILITY_INSTITUTE_ICSI: IconCard[] = [
+  { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting your embryos at every moment." },
+  { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
+  { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
+];
+
+const WHY_BAVISHI_FERTILITY_INSTITUTE_IVF_FAILURE: IconCard[] = [
+  { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
+  { icon: ShieldCheck, t: "Suraksha Kavach", d: "One of India's trusted IVF protection programmes — financial assurance and complete peace of mind even in multiple IVF failure cases." },
+  { icon: Sparkles, t: "Personalised Plans", d: "Tailor-made protocols and add-on techniques recommended only when they genuinely help you." },
+];
+
+/** Class 1000 / Skilled Embryology / Proven & Awarded — shared "Why BFI" trio
+ *  used by the micromanipulation & embryology add-on pages (PICSI, IMSI,
+ *  Spindle View ICSI, Blastocyst Transfer, Laser Assisted Hatching). */
+const WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED: IconCard[] = [
+  { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard — protecting your embryos at every moment." },
+  { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every micro-manipulation with precision." },
+  { icon: Award, t: "Proven & Awarded", d: "30,000+ pregnancies since 1998 and the National Fertility Award six times (2019–2026)." },
 ];
 
 /* ===================================================================== */
@@ -447,7 +496,7 @@ export const ivfFailure: Treatment = {
     h1Em: "A systematic path forward at Bavishi Fertility Institute",
     tagline:
       "A failed cycle is not the end of the road. At Bavishi Fertility Institute we analyse each stage of the previous cycle to understand what happened — and then build a clearer, more personalised plan for your next attempt.",
-    badges: ["Stage-by-stage analysis", "Since 1984", "Class 1000 Labs", "Advanced diagnostics"],
+    badges: ["Stage-by-stage analysis", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "Advanced diagnostics"],
     image: "/assets/treatments/Ivf-Failure.png",
     imageAlt: "A hopeful couple — moving forward after a failed IVF cycle with Bavishi Fertility Institute",
   },
@@ -459,7 +508,7 @@ export const ivfFailure: Treatment = {
     ],
     aside: {
       title: "A meticulous, honest review",
-      body: "Rather than simply repeating the same cycle, our specialists divide a failed cycle into fragments — stimulation, fertilisation, embryo quality, the uterus and maternal factors — and study each one. Where appropriate, advanced techniques such as PICSI, Spindle View ICSI, blastocyst culture, PGT and the ERA test are used to address the specific problem found.",
+      body: "Rather than simply repeating the same cycle, our specialists divide a failed cycle into fragments — stimulation, fertilisation, embryo quality, the uterus and maternal factors — and study each one. Where appropriate, changing the stimulation protocol or using advanced techniques such as PICSI, Spindle View ICSI, blastocyst culture, PGT and embryo glue are used to address the specific problem found.",
     },
   },
   benefits: {
@@ -469,19 +518,19 @@ export const ivfFailure: Treatment = {
       "A clear, stage-by-stage analysis of the previous cycle.",
       "Targeted use of advanced techniques only where they address a real problem.",
       "Better embryo selection through blastocyst culture and PGT, where indicated.",
-      "Improved transfer timing using the ERA test, where indicated.",
+      "Uterine factor is evaluated for potential structure problems, progesterone resistance, endometritis and transfer timings",
       "Assessment of maternal factors such as thrombophilia and chromosomal issues.",
     ],
   },
   types: {
-    heading: { lead: "Tools we use to", em: "investigate failure" },
+    heading: { lead: "Tools we use to", em: "investigate and treat IVF failure" },
     subtitle: "Each is applied selectively, based on what the analysis of your previous cycle reveals.",
     items: [
       { icon: Target, t: "PICSI", d: "Selects sperm able to naturally bind the egg's outer surface, for cases of poor fertilisation." },
       { icon: Eye, t: "Spindle View ICSI", d: "A Polscope assesses egg quality and helps achieve better fertilisation." },
       { icon: Layers, t: "Blastocyst Culture", d: "Extended culture to day 5–6 helps select the strongest embryos for transfer." },
       { icon: Dna, t: "PGT", d: "Screens embryos for genetic abnormalities that commonly cause failed implantation or miscarriage." },
-      { icon: ScanLine, t: "ERA Test", d: "Studies the endometrium's gene expression to find the best time for embryo transfer." },
+      { icon: Droplets, t: "Embryo Glue", d: "Embryo glue is a viscous solution that potentially helps embryo implant." },
       { icon: Stethoscope, t: "Hysteroscopy", d: "Directly inspects the uterine cavity and endometrium for any correctable problem." },
     ],
   },
@@ -490,13 +539,13 @@ export const ivfFailure: Treatment = {
     subtitle: "Failure usually has an identifiable cause. A thorough review aims to find which factors applied in your case.",
     items: [
       "Genetic abnormalities in the embryos",
-      "Poor embryo quality or arrested development",
-      "Uterine abnormalities or endometrial receptivity issues",
       "Sub-optimal stimulation or very low egg yield",
+      "Early, late or suboptimal trigger compromising egg number and quality",
+      "Poor embryo quality or arrested development",
       "Poor fertilisation despite ICSI",
-      "Sperm DNA fragmentation",
+      "Uterine abnormalities or endometrial receptivity issues",
+      "Poor egg quality & high sperm DFI",
       "Thrombophilia (blood-clotting disorders)",
-      "Chromosomal imbalances in either parent",
       "Lifestyle and general health factors",
     ],
   },
@@ -507,13 +556,14 @@ export const ivfFailure: Treatment = {
       { icon: Syringe, n: "01", t: "Stimulation review", d: "We assess the number and quality of eggs recovered, and whether a different protocol — long, short, microdose flare, minimum-stimulation, or dual stimulation 'DuoStim' — may suit you better." },
       { icon: Microscope, n: "02", t: "Fertilisation review", d: "Where fertilisation was poor, sperm DNA fragmentation testing, PICSI and Spindle View ICSI help identify and address the cause." },
       { icon: Layers, n: "03", t: "Embryo selection", d: "Blastocyst culture shows which embryos are genuinely strong, while PGT screens for the genetic abnormalities common even in good-looking embryos." },
-      { icon: ScanLine, n: "04", t: "Uterine evaluation", d: "Hysteroscopy checks the uterine cavity and endometrium, and the ERA test helps determine the best time for transfer." },
-      { icon: ListChecks, n: "05", t: "Maternal factors", d: "Blood tests for thrombophilia and chromosomal analysis of both partners complete the picture before the next plan is made." },
+      { icon: ScanLine, n: "04", t: "Uterine evaluation", d: "Hysteroscopy checks the uterine cavity and endometrium, CD-138 & PCR based testing identifies uterine infections, and embryo glue may be used at transfer to support implantation." },
+      { icon: ListChecks, n: "05", t: "Maternal factors", d: "Blood tests for thrombophilia, ANA testing and chromosomal analysis of both partners complete the picture before the next plan is made." },
+      { icon: ShieldCheck, n: "06", t: "Immune testing", d: "In very selected cases, uterine BCL-6 testing, HLA testing and comprehensive genetic testing help identify immune or genetic reasons for poor embryo quality and recurrent failure." },
     ],
   },
   whyUs: {
     heading: { lead: "Why bring a failed cycle to", em: "Bavishi Fertility Institute" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_FERTILITY_INSTITUTE_IVF_FAILURE,
   },
   success: {
     factors: [
@@ -546,7 +596,7 @@ export const ivfFailure: Treatment = {
     { q: "What are the common reasons for IVF failure?", a: "IVF failure can be attributed to various factors including genetic abnormalities, uterine abnormalities, poor embryo quality, endometrial receptivity issues, lifestyle and health factors, and immunological issues." },
     { q: "How does Bavishi Fertility Institute investigate a failed cycle?", a: "Bavishi Fertility Institute investigates failed IVF cycles by meticulously analysing each stage of the cycle — from stimulation and fertilisation to embryo quality and implantation — so the next plan addresses the specific problem found." },
     { q: "Which techniques can improve egg and embryo quality?", a: "Depending on the findings, Bavishi Fertility Institute may use Spindle View ICSI, PICSI and Preimplantation Genetic Testing (PGT), along with blastocyst culture for better embryo selection." },
-    { q: "How important is embryo transfer timing?", a: "The timing of embryo transfer is important for implantation. Where indicated, it can be refined using the Endometrial Receptivity Array (ERA) test." },
+    { q: "How important is embryo transfer timing?", a: "The timing of embryo transfer is important for implantation. Where indicated, it can be refined using the Endometrial Receptivity Array (ERA) test, although studies are inconclusive on its actual effectiveness." },
     { q: "What is the role of genetic testing?", a: "Genetic testing helps identify and select genetically normal embryos, which can reduce the risk of miscarriage and improve implantation rates." },
     { q: "When can couples start another IVF cycle?", a: "Couples can consider starting another cycle as soon as they are ready and the review of the previous cycle is complete." },
     { q: "How can counselling help after a failed cycle?", a: "Infertility counselling provides a safe space for expressing emotions and developing coping strategies during what can be a difficult time." },
@@ -556,7 +606,7 @@ export const ivfFailure: Treatment = {
   cta: {
     heading: "Ready for a clearer",
     headingEm: "next step?",
-    subtitle: "Bring your previous reports to a confidential, complimentary review with our fertility experts.",
+    subtitle: "Bring your previous reports to a confidential, personalised review with our fertility experts.",
   },
 };
 
@@ -574,7 +624,7 @@ export const iui: Treatment = {
   meta: {
     title: "IUI Treatment (Intrauterine Insemination) — Bavishi Fertility Institute",
     description:
-      "What is IUI? Learn how intrauterine insemination works, who it suits, success rates and what to expect. A simple, less invasive fertility treatment at Bavishi Fertility Institute, trusted since 1984.",
+      "What is IUI? Learn how intrauterine insemination works, who it suits, success rates and what to expect. A simple, less invasive fertility treatment at Bavishi Fertility Institute, trusted since 1998.",
     ogImage: "/assets/hero-mother-baby1.png",
   },
   procedure: {
@@ -592,7 +642,7 @@ export const iui: Treatment = {
     h1Em: "Intrauterine Insemination at Bavishi Fertility Institute",
     tagline:
       "A simple, less invasive and more affordable fertility treatment. At the time of ovulation, specially prepared sperm is placed directly into the uterus to improve the chance of conception.",
-    badges: ["Simple & non-surgical", "Since 1984", "Less invasive than IVF", "Personalised care"],
+    badges: ["Simple & non-surgical", "Since 1998", "Less invasive than IVF", "Personalised care"],
     image: "/assets/treatments/IUI.png",
     imageAlt: "Intrauterine insemination (IUI) at Bavishi Fertility Institute",
   },
@@ -604,7 +654,7 @@ export const iui: Treatment = {
     ],
     aside: {
       title: "Simple, and gentle on you",
-      body: "IUI is usually painless — most women describe only mild discomfort, similar to a Pap smear. You rest for about ten minutes afterwards and can resume normal activities the same day. Typically 3–6 cycles are tried, but your doctor will tailor the advice to your situation.",
+      body: "IUI is usually painless — most women describe only mild discomfort. You rest for about ten minutes afterwards and can resume normal activities the same day. Typically 3–4 cycles are tried, but your doctor will tailor the advice to your situation.",
     },
   },
   video: {
@@ -630,8 +680,7 @@ export const iui: Treatment = {
     heading: { lead: "Types of", em: "IUI" },
     items: [
       { icon: Leaf, t: "Natural-cycle IUI", d: "Timed to your own natural ovulation, without stimulation medicines." },
-      { icon: Syringe, t: "Medicated IUI", d: "With tablets or injections to encourage ovulation and improve egg availability." },
-      { icon: Snowflake, t: "Frozen-sample IUI", d: "Using a previously frozen semen sample when the partner is unavailable." },
+      { icon: Syringe, t: "Medicated IUI", d: "With tablets and/or injections to encourage ovulation and improve egg availability." },
       { icon: Baby, t: "Donor-sperm IUI", d: "Using screened donor sperm, for example in cases of azoospermia or for single women." },
     ],
   },
@@ -639,7 +688,7 @@ export const iui: Treatment = {
     heading: { lead: "Who is", em: "IUI suitable for?" },
     subtitle: "Your specialist may suggest IUI in any of the following situations, after a proper evaluation.",
     items: [
-      "Mild male-factor infertility — low count, reduced motility or abnormal morphology",
+      "Mild male-factor infertility — low count or reduced motility",
       "Low semen volume or viscous semen",
       "Use of frozen or donor semen samples",
       "Ejaculation or sexual-function difficulties, or an absent partner",
@@ -652,9 +701,9 @@ export const iui: Treatment = {
     heading: { lead: "The IUI process at", em: "Bavishi Fertility Institute" },
     subtitle: "A straightforward, same-day procedure with careful timing.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Cycle monitoring", d: "Where needed, tablets or injections encourage ovulation. Transvaginal ultrasound tracks the developing follicles." },
+      { icon: ClipboardCheck, n: "01", t: "Cycle monitoring", d: "Where needed, tablets and/or injections are used to get better quality follicles. Transvaginal ultrasound tracks the developing follicles." },
       { icon: Syringe, n: "02", t: "Ovulation trigger", d: "An hCG injection triggers final egg maturation and ovulation, so the timing of insemination is precise." },
-      { icon: Filter, n: "03", t: "Sperm preparation", d: "On the day, the semen sample is washed in the lab to remove unwanted material and separate the best motile, normally-shaped sperm." },
+      { icon: Filter, n: "03", t: "Sperm preparation", d: "On the day, the semen sample is washed in the lab to separate the best motile sperms and remove dead sperms and debris." },
       { icon: Activity, n: "04", t: "Insemination", d: "Using a self-retaining speculum and aseptic precautions, the prepared sperm is gently injected into the uterus through a thin, soft cannula." },
       { icon: HeartPulse, n: "05", t: "Rest & pregnancy test", d: "You rest for about ten minutes and resume normal activities. A pregnancy test follows about two weeks later." },
     ],
@@ -662,7 +711,7 @@ export const iui: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "your IUI?" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_FERTILITY_INSTITUTE_IUI,
   },
   success: {
     factors: [
@@ -692,10 +741,10 @@ export const iui: Treatment = {
     items: STD_PREP,
   },
   faqs: [
-    { q: "How long does the IUI process take?", a: "The IUI visit typically takes about 1 to 2 hours from start to finish; the insemination itself takes only a few minutes." },
+    { q: "How long does the IUI process take?", a: "The IUI visit itself typically takes about 1 to 2 hours from start to finish; the insemination takes only a few minutes. The complete treatment — from cycle monitoring to your pregnancy test — takes around one month." },
     { q: "What is the difference between IUI and IVF?", a: "In IUI, prepared sperm is placed into the uterus near the time of ovulation — suitable for mild male-factor or cervical issues. In IVF, eggs are retrieved and fertilised in the laboratory and the embryo is transferred — used for more complex cases such as blocked tubes or severe male infertility." },
-    { q: "Is IUI painful?", a: "IUI is usually not painful. Most women experience only mild discomfort, often described as similar to a Pap smear." },
-    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 6 cycles of IUI are suggested, but your doctor will tailor the advice based on your specific situation." },
+    { q: "Is IUI painful?", a: "IUI is usually not painful. Most women experience only mild discomfort." },
+    { q: "How many IUI cycles should I try before IVF?", a: "Typically 3 to 4 cycles of IUI are suggested, up to a maximum of 6, but your doctor will tailor the advice based on your specific situation." },
     { q: "Can I have sex after an IUI procedure?", a: "Yes. There are generally no specific restrictions against sexual activity following the procedure." },
     { q: "Can I travel after IUI?", a: "Yes, you can travel after IUI, as the procedure does not require prolonged rest." },
     { q: "Can stress affect IUI success?", a: "Stress can affect fertility by influencing hormone levels. Relaxation techniques, yoga, meditation and counselling can help." },
@@ -723,7 +772,7 @@ export const icsi: Treatment = {
   meta: {
     title: "ICSI Treatment (Intracytoplasmic Sperm Injection) — Bavishi Fertility Institute",
     description:
-      "What is ICSI? Learn how a single sperm is injected into an egg to overcome male-factor infertility and fertilisation failure. Performed in Class 1000 labs at Bavishi Fertility Institute since 1984.",
+      "What is ICSI? Learn how a single sperm is injected into an egg to overcome male-factor infertility and fertilisation failure. Performed in Class 1000 labs at Bavishi Fertility Institute since 1998.",
     ogImage: "/assets/ivf-icsi.png",
   },
   procedure: {
@@ -741,7 +790,7 @@ export const icsi: Treatment = {
     h1Em: "Intracytoplasmic Sperm Injection at Bavishi Fertility Institute",
     tagline:
       "The technique where just one sperm is needed to fertilise one egg. ICSI overcomes male-factor infertility and previous fertilisation failure — performed in our Class 1000 labs by experienced embryologists.",
-    badges: ["One sperm per egg", "Class 1000 Labs", "Since 1984", "Skilled embryology"],
+    badges: ["One sperm per egg", "Class 1000 (10X Clean Air) IVF Labs", "Since 1998", "Skilled embryology"],
     image: "/assets/treatments/ICSI.png",
     imageAlt: "ICSI — a single sperm being microinjected into an egg at Bavishi Fertility Institute",
   },
@@ -782,7 +831,7 @@ export const icsi: Treatment = {
       { icon: Target, t: "PICSI", d: "Selects mature sperm by their natural ability to bind hyaluronic acid." },
       { icon: ScanLine, t: "IMSI", d: "Selects sperm under very high magnification to assess fine morphology." },
       { icon: Magnet, t: "MACS", d: "Magnetically separates apoptotic (damaged) sperm from healthy ones." },
-      { icon: Eye, t: "Spindle View ICSI", d: "Uses a Polscope to visualise the egg's spindle and assess egg quality." },
+      { icon: Eye, t: "Spindle View ICSI", d: "Uses a Polscope to visualise the egg's spindle to assess egg quality and select the best site for sperm injection." },
     ],
   },
   whoNeedsIt: {
@@ -800,13 +849,14 @@ export const icsi: Treatment = {
   },
   process: {
     heading: { lead: "The ICSI process at", em: "Bavishi Fertility Institute" },
-    subtitle: "From evaluation to embryo transfer, every step is handled with precision and care.",
+    subtitle: "From your first consultation to your pregnancy test, every stage is handled with precision, safety and care.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "Both partners are assessed — semen analysis for the male partner, and hormone tests (FSH, LH, AMH), ultrasound and other investigations for the female partner." },
-      { icon: Egg, n: "02", t: "Egg retrieval", d: "After controlled ovarian stimulation, eggs are retrieved through transvaginal ultrasound-guided aspiration under short sedation." },
-      { icon: Filter, n: "03", t: "Sperm preparation", d: "The semen sample is processed to isolate the most motile, healthy sperm for injection." },
-      { icon: Microscope, n: "04", t: "Microinjection", d: "A skilled embryologist injects a single sperm directly into the cytoplasm of each mature egg. Fertilisation is checked 12–18 hours later." },
-      { icon: Dna, n: "05", t: "Culture & transfer", d: "Embryos are cultured for 3–5 days; the healthiest is transferred via a thin catheter, with progesterone support and a pregnancy test about two weeks later." },
+      { icon: ClipboardCheck, n: "01", t: "Pre-treatment Evaluation", d: "Before starting, both partners are thoroughly evaluated to optimise the outcome — blood tests for husband & wife, semen test, 3D sonography, and if needed, specialised tests like hysteroscopy." },
+      { icon: Syringe, n: "02", t: "Ovarian Stimulation", d: "After your period, a customised dose of gonadotropin hormones (FSH/HMG) is given as a small daily injection for about 7–12 days to grow multiple mature eggs, with regular ultrasound monitoring. A precise 'trigger' injection then matures the eggs for retrieval." },
+      { icon: Egg, n: "03", t: "Egg Retrieval", d: "34–36 hours after the trigger, eggs are retrieved through the vagina under short sedation — no cut, no stitch, and you go home in about 2 hours. The same day, the best sperm are selected for injection." },
+      { icon: Microscope, n: "04", t: "Microinjection", d: "A skilled embryologist injects a single healthy sperm directly into the cytoplasm of each mature egg under high magnification, in our Class 1000 IVF lab. Fertilisation is checked 12–18 hours later." },
+      { icon: Dna, n: "05", t: "Embryo Culture & Transfer", d: "Embryos are grown in next-generation humid incubators that mimic the body. Two to six days later, the best-quality embryo(s) are either gently transferred into the uterus or electively frozen, customised to your condition & response. Surplus embryos can be frozen." },
+      { icon: HeartPulse, n: "06", t: "Pregnancy Test", d: "About 12–19 days after embryo transfer, a Beta-HCG blood test confirms pregnancy. From egg formation to transfer, the active treatment usually takes just 12–19 days." },
     ],
   },
   technology: {
@@ -815,13 +865,13 @@ export const icsi: Treatment = {
     items: [
       { icon: Microscope, t: "Micromanipulation Systems", d: "Latest-generation ICSI systems give precision measured in microns." },
       { icon: FlaskConical, t: "Class 1000 IVF Lab", d: "Air purity 10× cleaner than the international Class 10,000 standard." },
-      { icon: Beaker, t: "Body-like Incubators", d: "Next-generation incubators recreate the body's exact environment for healthy embryos." },
-      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of surplus embryos with close to 100% survival on thawing." },
+      { icon: Beaker, t: "Body-like Incubators", d: "Next-gen humid incubators recreate the body's exact environment for healthy embryos." },
+      { icon: Snowflake, t: "Vitrification", d: "Ultra-fast freezing of embryos with close to 100% survival on thawing. We achieved first live birth of India with vitrified frozen oocytes." },
     ],
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "your ICSI?" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_FERTILITY_INSTITUTE_ICSI,
   },
   success: {
     factors: [
@@ -864,7 +914,7 @@ export const icsi: Treatment = {
   cta: {
     heading: "Ready to talk about",
     headingEm: "ICSI?",
-    subtitle: "Speak with our fertility experts today — confidential, compassionate and complimentary.",
+    subtitle: "Speak with our fertility experts today — confidential, compassionate and personalised.",
   },
 };
 
@@ -899,15 +949,15 @@ export const picsi: Treatment = {
     h1: "PICSI Treatment",
     h1Em: "Physiological ICSI at Bavishi Fertility Institute",
     tagline:
-      "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid. Used in selected cases to improve sperm selection and embryo quality.",
-    badges: ["Physiological selection", "Class 1000 Labs", "Used selectively", "Skilled embryology"],
+      "An advanced refinement of ICSI that selects sperm the way nature does — by their ability to bind hyaluronic acid, a molecule resembling the substance found in the cells surrounding the egg. Used in selected cases to improve sperm selection and embryo quality.",
+    badges: ["Physiological selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/PICSI.png",
     imageAlt: "PICSI — physiological sperm selection by hyaluronan binding at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "PICSI?" },
     paragraphs: [
-      "PICSI (Physiological Intracytoplasmic Sperm Injection) is a refinement of ICSI used in assisted reproduction. Instead of selecting sperm by appearance alone, PICSI uses hyaluronic acid — a substance naturally found in the layer surrounding the egg — to identify mature sperm.",
+      "PICSI (Physiological Intracytoplasmic Sperm Injection) is a refinement of ICSI used in assisted reproduction. Instead of selecting sperm by appearance alone, PICSI uses hyaluronic acid — a molecule resembling the substance naturally found in the cells surrounding the egg — to identify mature sperm.",
       "Only a mature, biochemically competent sperm carries the receptors needed to bind hyaluronic acid. Studies suggest that sperm which bind in this way tend to have better morphology, lower chromosomal abnormalities and improved DNA integrity, which is why PICSI is used to improve sperm selection in selected cases.",
     ],
     aside: {
@@ -930,7 +980,7 @@ export const picsi: Treatment = {
     subtitle: "PICSI is specifically indicated where sperm quality is low or compromised.",
     items: [
       "A high percentage of DNA-fragmented sperm (elevated DFI)",
-      "Women over the age of 38",
+      "Men over the age of 40",
       "Previous failed ICSI fertilisation cycles",
       "Consistently low-quality embryo development",
       "A history of multiple miscarriages",
@@ -949,7 +999,7 @@ export const picsi: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PICSI?" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1021,7 +1071,7 @@ export const imsi: Treatment = {
     h1Em: "Morphologically Selected Sperm Injection at Bavishi Fertility Institute",
     tagline:
       "A high-magnification refinement of ICSI. By examining sperm in far greater detail, IMSI helps the embryologist select the most structurally normal sperm for fertilisation.",
-    badges: ["High-magnification selection", "Class 1000 Labs", "Used selectively", "Skilled embryology"],
+    badges: ["High-magnification selection", "Class 1000 (10X Clean Air) IVF Labs", "Used selectively", "Skilled embryology"],
     image: "/assets/treatments/IMSI.png",
     imageAlt: "IMSI — high-magnification sperm selection at Bavishi Fertility Institute",
   },
@@ -1069,7 +1119,7 @@ export const imsi: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "IMSI?" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1095,7 +1145,7 @@ export const imsi: Treatment = {
   },
   faqs: [
     { q: "Is IMSI safe?", a: "Yes — IMSI is considered safe when performed by experienced specialists, though, as with any procedure, potential risks should be discussed with your doctor." },
-    { q: "Is IMSI suitable for all cases?", a: "IMSI is typically recommended for male-factor infertility, recurrent IVF failures, or previous poor embryo quality, rather than for every couple." },
+    { q: "Is IMSI suitable for all cases?", a: "IMSI is typically recommended for poor sperm morphology, recurrent IVF/ICSI failures, or previous poor embryo quality, rather than for every couple." },
     { q: "Does IMSI guarantee success?", a: "No. IMSI does not guarantee pregnancy; success depends on the underlying causes of infertility and several individual factors." },
     { q: "What is the difference between IMSI and ICSI?", a: "IMSI is a form of ICSI that uses much higher magnification to assess sperm structure in detail before injection, so the embryologist can select the most normal-looking sperm." },
     { q: "Are there any side effects?", a: "No specific adverse effects have been shown, although sperm being outside the body for longer during selection may, in theory, reduce fertilising capacity. This is minimised by careful lab conditions." },
@@ -1244,7 +1294,7 @@ export const spindleViewIcsi: Treatment = {
     title: "Spindle View ICSI (Polscope) — Bavishi Fertility Institute",
     description:
       "What is Spindle View ICSI? Using a Polscope to visualise the egg's meiotic spindle for better fertilisation and egg-quality assessment, in selected cases at Bavishi Fertility Institute.",
-    ogImage: "/assets/ivf-icsi.png",
+    ogImage: "/assets/treatments/spindle-view-icsi-polscope-oocyte-comparison.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -1262,8 +1312,10 @@ export const spindleViewIcsi: Treatment = {
     tagline:
       "An advanced form of ICSI that lets the embryologist see the egg's meiotic spindle. This helps achieve better fertilisation and gives a more detailed assessment of egg quality.",
     badges: ["Polscope-guided", "Better egg assessment", "Used selectively", "Skilled embryology"],
-    image: "/assets/treatments/Spindle-Icsi.png",
-    imageAlt: "Spindle View ICSI — visualising the egg's meiotic spindle with a Polscope at Bavishi Fertility Institute",
+    image: "/assets/treatments/spindle-view-icsi-polscope-oocyte-comparison.png",
+    imageAlt: "Real Polscope microscopy — oocyte with displaced spindle versus oocyte with aligned spindle, at Bavishi Fertility Institute",
+    imageFit: "cover",
+    heroAspect: "424/647",
   },
   whatIs: {
     heading: { lead: "What is", em: "Spindle View ICSI?" },
@@ -1273,7 +1325,7 @@ export const spindleViewIcsi: Treatment = {
     ],
     aside: {
       title: "Especially useful when eggs are few",
-      body: "When egg numbers are very low, making the most of each egg matters. By assessing spindle length and area, and aligning the egg to protect the spindle during injection, Spindle View ICSI helps maximise the chance of fertilisation and can also inform decisions about egg quality.",
+      body: "When egg numbers are very low, egg quality is poor, or there is a past history of poor-quality embryos, Spindle View ICSI can help. By assessing spindle length and area, and aligning the egg to protect the spindle during injection, it helps maximise the chance of fertilisation and can also inform decisions about egg quality.",
     },
   },
   benefits: {
@@ -1304,12 +1356,12 @@ export const spindleViewIcsi: Treatment = {
       { icon: Eye, n: "02", t: "Spindle visualisation", d: "The embryologist studies the spindle's position, length and area as an indicator of egg quality." },
       { icon: Target, n: "03", t: "Alignment", d: "The egg is aligned so the injection avoids the spindle, rather than relying on the polar body as an approximate marker." },
       { icon: Syringe, n: "04", t: "Injection", d: "A single sperm is injected with the spindle protected, supporting better fertilisation." },
-      { icon: Dna, n: "05", t: "Culture & transfer", d: "Fertilised eggs are cultured into embryos, and the best embryo is selected for transfer." },
+      { icon: Dna, n: "05", t: "Culture & transfer", d: "Fertilised eggs are cultured into embryos, and the best embryo is selected for transfer, like any other ICSI cycle." },
     ],
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "Spindle View ICSI" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1379,15 +1431,15 @@ export const blastocystTransfer: Treatment = {
     h1Em: "Stronger embryo selection at Bavishi Fertility Institute",
     tagline:
       "By growing embryos to day 5–6 — the blastocyst stage — only the strongest continue to develop. This supports better selection and makes single-embryo transfer possible.",
-    badges: ["Day 5–6 culture", "Better selection", "Fewer multiples", "Class 1000 Labs"],
+    badges: ["Day 5–6 culture", "Better selection", "Fewer multiples", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/treatments/Blastocyst Transfer.png",
     imageAlt: "Blastocyst culture and transfer — a day-5 embryo at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is a", em: "blastocyst?" },
     paragraphs: [
-      "Not all embryos that look good on day 2 or 3 will continue to develop. If they are cultured for a few more days, only the genuinely good-quality embryos go on to reach the blastocyst stage — the embryo at day 5–6 of development.",
-      "In natural conception, an embryo reaches the uterus at the blastocyst stage, about 4–6 days after fertilisation. Culturing embryos to this stage in the laboratory therefore mimics nature and lets the embryologist select the strongest embryo for transfer. In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
+      "Not all embryos that look good on day 2 or 3 will continue to develop. If they are cultured for a few more days, only the genuinely good-quality embryos go on to reach the blastocyst stage — the embryo at day 5–6 of development. This is when the embryo naturally reaches and implants in the uterus.",
+      "Up until day 3, the embryo grows on maternal genes carried in the egg. On day 3, the embryo undergoes genomic activation and grows further on its own genetic strength. In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
     ],
     aside: {
       title: "Recommended where selection is possible",
@@ -1431,14 +1483,14 @@ export const blastocystTransfer: Treatment = {
       { icon: Microscope, n: "01", t: "Fertilisation", d: "Eggs are fertilised by IVF or ICSI and the resulting embryos begin to develop in the lab." },
       { icon: Beaker, n: "02", t: "Extended culture", d: "Embryos are cultured in body-like incubators to day 5–6, rather than transferring on day 2–3." },
       { icon: Layers, n: "03", t: "Blastocyst selection", d: "The embryos that reach the blastocyst stage are graded, and the strongest is selected for transfer." },
-      { icon: HeartPulse, n: "04", t: "Transfer", d: "Usually a single blastocyst is transferred into the uterus; surplus blastocysts can be frozen by vitrification." },
+      { icon: HeartPulse, n: "04", t: "Transfer", d: "Usually one or two blastocysts are transferred into the uterus; surplus blastocysts can be frozen by vitrification." },
       { icon: ClipboardCheck, n: "05", t: "Pregnancy test", d: "A pregnancy test follows about 10–14 days later, once the embryo has had time to implant." },
     ],
     note: "In general, about 30–60% of embryos develop into blastocysts, depending on age and other factors.",
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "blastocyst transfer" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1573,7 +1625,7 @@ export const laserHatching: Treatment = {
   },
   whyUs: {
     heading: { lead: "Why choose Bavishi Fertility Institute for", em: "laser hatching" },
-    items: WHY_BAVISHI_FERTILITY_INSTITUTE,
+    items: WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED,
   },
   success: {
     factors: [
@@ -1598,13 +1650,13 @@ export const laserHatching: Treatment = {
     ],
   },
   faqs: [
-    { q: "Is LAH safe for all embryo types?", a: "LAH is generally safe for all embryo types, including donor embryos, as long as they are of good quality and suitable for implantation." },
+    { q: "Is LAH safe for all embryo types?", a: "LAH is generally safe for all embryo types, including self & donor embryos, and day 2–3 & day 5 (blastocyst) embryos, as long as they are of good quality and suitable for implantation." },
     { q: "Does LAH increase the risk of birth defects?", a: "Current research and clinical experience suggest that LAH does not increase the risk of birth defects or congenital abnormalities." },
     { q: "How long does the procedure take?", a: "It typically takes only a few minutes per embryo and is done on the same day as the embryo transfer." },
     { q: "Can LAH be performed on day-5 blastocysts?", a: "Yes. LAH can be performed on both day-3 and day-5 (blastocyst) embryos, depending on the clinical indication." },
     { q: "Do I need any special preparation?", a: "No special preparation is needed by the patient, as the procedure is performed entirely in the lab on the embryos." },
     { q: "Can LAH be combined with other techniques?", a: "Yes. LAH is often used alongside advanced techniques such as ICSI and PGT-A to support implantation." },
-    { q: "Does LAH guarantee pregnancy?", a: "No. While LAH can improve implantation chances, it does not guarantee pregnancy. Success also depends on embryo quality and uterine receptivity." },
+    { q: "Does LAH guarantee pregnancy?", a: "No. While LAH can potentially improve implantation chances, it does not guarantee pregnancy. Success also depends on embryo quality and uterine receptivity." },
   ],
   related: ["blastocyst-transfer", "icsi", "ivf", "ivf-failure", "spindle-view-icsi"],
   cta: {
@@ -1628,7 +1680,7 @@ export const eggDonation: Treatment = {
   meta: {
     title: "Egg Donation Treatment (Oocyte Donation) — Bavishi Fertility Institute",
     description:
-      "What is egg donation? How oocyte donation works, who needs it, donor screening and success factors. Young screened donors, Class 1000 labs, India's trusted fertility specialists since 1984.",
+      "What is egg donation? How oocyte donation works, who needs it, donor screening and success factors. Young screened donors, Class 1000 labs, India's trusted fertility specialists since 1998.",
     ogImage: "/assets/donor services/Egg-donation.png",
   },
   procedure: {
@@ -1639,26 +1691,26 @@ export const eggDonation: Treatment = {
     followup: "A Beta-HCG blood test is performed about 13–15 days after embryo transfer to confirm pregnancy.",
   },
   lastReviewed: "2026-06-01",
-  reviewerSlug: "falguni-bavishi",
+  reviewerSlug: "himanshu-bavishi",
   hero: {
     eyebrow: "Donor Programme",
     h1: "Egg Donation Treatment",
     h1Em: "Oocyte Donation at Bavishi Fertility Institute",
     tagline:
-      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. India's trusted fertility specialists since 1984 — Class 1000 IVF labs, rigorously screened donors, and compassionate, fully confidential care.",
-    badges: ["Young Screened Donors", "Since 1984", "Class 1000 Labs", "ART Act Compliant"],
+      "When your own eggs can no longer help you conceive, eggs from a healthy, screened young donor can. At Bavishi Fertility Institute, one of India's trusted fertility clinics since 1998 — rigorously screened donors, and compassionate, fully confidential care help you every step of the way.",
+    badges: ["Young Screened Donors", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs", "ART Act Compliant"],
     image: "/assets/donor services/Egg-donation.png",
     imageAlt: "Egg donation (oocyte donation) at Bavishi Fertility Institute — a hopeful mother-to-be",
   },
   whatIs: {
     heading: { lead: "What is", em: "Egg Donation?" },
     paragraphs: [
-      "Egg donation — also called oocyte donation — is an assisted-reproduction technique in which the eggs come from a healthy, screened young donor instead of the patient. The donor's eggs are fertilised in the laboratory with the partner's sperm, and the resulting embryo is transferred to the recipient's uterus. The recipient carries and delivers the pregnancy herself.",
+      "Egg donation — also called oocyte donation — is an assisted-reproduction technique in which the eggs come from a healthy, screened young donor instead of the patient's. The donor's eggs are fertilised in the laboratory with the partner's sperm, and the resulting embryo is transferred to the recipient's uterus. The recipient carries and delivers the pregnancy herself.",
       "It is recommended when a woman cannot conceive with her own eggs — for example after menopause, with very low ovarian reserve or poor egg quality, after repeated IVF failure, or when there is a risk of passing on a genetic condition. Because the eggs come from young donors, donor-egg treatment offers some of the highest success rates in fertility care.",
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — running Class 1000 embryology labs and well-regulated, ethical donor programmes.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West, won 6 times (2019–2026). It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — with well-regulated, ethical donor programmes.",
     },
   },
   benefits: {
@@ -1670,6 +1722,7 @@ export const eggDonation: Treatment = {
       "Reduced risk of age-related genetic problems in the child.",
       "You carry and deliver the pregnancy yourself — full motherhood bonding.",
       "Your partner contributes genetically through his sperm.",
+      "The uterine environment you provide still influences your baby's epigenetics — which of the donor's genes are expressed.",
       "Surplus good-quality embryos can be frozen for future attempts.",
       "The entire treatment is kept completely confidential.",
     ],
@@ -1680,7 +1733,6 @@ export const eggDonation: Treatment = {
     items: [
       { icon: Eye, t: "Anonymous Donation", d: "The donor's identity is not disclosed. Matching is done by our team on physical and medical characteristics." },
       { icon: Sparkles, t: "Known Donation", d: "A donor known to you — such as a friend or family member — donates eggs, with the same full screening and consent." },
-      { icon: Snowflake, t: "Fresh or Frozen Eggs", d: "Treatment can use fresh donor eggs or vitrified (frozen) eggs from our donor bank for immediate use." },
     ],
   },
   whoNeedsIt: {
@@ -1712,7 +1764,7 @@ export const eggDonation: Treatment = {
   technology: {
     eyebrow: "Donor Screening",
     heading: { lead: "Every donor,", em: "rigorously screened" },
-    subtitle: "Donors are young, married women with at least one healthy child, under 30, and cleared on every screen below.",
+    subtitle: "Donors are young, married women with at least one healthy child, between 23 and 32 years of age, and cleared on every screen below.",
     items: [
       { icon: Stethoscope, t: "Medical Screening", d: "Complete medical, family and personal history, physical examination and an exhaustive health check-up." },
       { icon: Dna, t: "Genetic Screening", d: "Detailed family-history review and screening for common genetic conditions, with further testing available on request." },
@@ -1723,11 +1775,8 @@ export const eggDonation: Treatment = {
   whyUs: {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for egg donation" },
     items: [
-      { icon: Award, t: "Trusted Since 1984", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
-      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Advanced embryology labs and ICSI expertise for the best chance with every donor egg." },
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
       { icon: ShieldCheck, t: "Rigorously Screened Donors", d: "Young donors cleared on medical, genetic, psychological and health screening before matching." },
-      { icon: Layers, t: "Fresh or Frozen Donors", d: "Access to fresh donors and a vitrified donor-egg bank for immediate treatment." },
-      { icon: Eye, t: "Complete Confidentiality", d: "Your treatment and donor matching are handled with total privacy at every step." },
       { icon: ListChecks, t: "Ethical & ART-Compliant", d: "Donor insurance, consent and documentation handled in line with India's ART Act." },
     ],
   },
@@ -1763,9 +1812,9 @@ export const eggDonation: Treatment = {
   },
   faqs: [
     { q: "Are \"ovum donation\" and \"egg donation\" the same?", a: "Yes. \"Ovum\" is simply another word for egg, so the two terms describe exactly the same process." },
-    { q: "What types of egg donation are available?", a: "Anonymous donation, where the donor's identity is not disclosed, and known donation, where a friend or family member donates. Eggs may be fresh or frozen." },
-    { q: "Who can be an egg donor at Bavishi Fertility Institute?", a: "Healthy, married young women under 30 who already have at least one healthy living child and pass full medical, genetic and psychological screening." },
-    { q: "Will the baby be genetically related to me?", a: "The baby will not inherit your genes, since the eggs come from a donor, but your partner contributes genetically through his sperm, and you carry and deliver the baby yourself." },
+    { q: "What types of egg donation are available?", a: "Anonymous donation, where the donor's identity is not disclosed, and known donation, where a friend or family member donates." },
+    { q: "Who can be an egg donor at Bavishi Fertility Institute?", a: "Healthy, married women between 23 and 32 years of age who already have at least one healthy living child and pass full medical, genetic and psychological screening." },
+    { q: "Will the baby be genetically related to me?", a: "The baby will not inherit your genes, since the eggs come from a donor, but your partner contributes genetically through his sperm, and you carry and deliver the baby yourself. The uterine environment you provide also influences epigenetics — meaning which genes will be expressed." },
     { q: "How are the donor eggs fertilised?", a: "They are fertilised with your partner's sperm in the laboratory, usually using ICSI, and grown into embryos before transfer." },
     { q: "Is egg donation safe?", a: "It is generally considered safe. As with any medical treatment there are small risks, such as medication reactions or pregnancy-related complications, which our team monitors closely." },
     { q: "What are the success rates with donor eggs?", a: "Because donor eggs come from young donors, success rates are relatively high, but they still depend on factors such as your age, uterine health, sperm quality and embryo quality. No clinic can guarantee pregnancy." },
@@ -1773,7 +1822,7 @@ export const eggDonation: Treatment = {
     { q: "Can surplus embryos be frozen?", a: "Yes. Good-quality embryos that are not transferred can be vitrified (frozen) for future attempts." },
     { q: "Will my treatment be kept confidential?", a: "Yes. The entire process — including donor matching — is handled with complete confidentiality." },
   ],
-  related: ["ivf", "icsi", "ivf-failure", "embryo-donation", "fertility-preservation"],
+  related: ["ivf", "icsi", "ivf-failure", "sperm-donation", "fertility-preservation"],
   cta: {
     heading: "Considering",
     headingEm: "egg donation?",
@@ -1795,7 +1844,7 @@ export const spermDonation: Treatment = {
   meta: {
     title: "Donor Sperm Treatment (Sperm Donation) — Bavishi Fertility Institute",
     description:
-      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. Large screened donor pool, no waiting, trusted since 1984.",
+      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. In-depth donor screening, no waiting, trusted since 1998.",
     ogImage: "/assets/donor services/Sperm-dontation.png",
   },
   procedure: {
@@ -1812,20 +1861,20 @@ export const spermDonation: Treatment = {
     h1: "Donor Sperm Treatment",
     h1Em: "at Bavishi Fertility Institute",
     tagline:
-      "When the partner's sperm cannot be used, carefully screened donor sperm offers a clear path to parenthood — through IUI or IVF–ICSI. A large pool of screened frozen donors means minimal waiting, with complete confidentiality.",
-    badges: ["Large Screened Donor Pool", "No Waiting Time", "Since 1984", "ART Act Compliant"],
+      "When the partner's sperm cannot be used, carefully screened donor sperm offers a clear path to parenthood — through IUI or IVF–ICSI. A large pool of screened and premium sperm donors available with our partner sperm (ART) bank means minimal waiting, with complete confidentiality.",
+    badges: ["In-Depth Screening of Donors", "No Waiting Time", "Since 1998", "ART Act Compliant"],
     image: "/assets/donor services/Sperm-dontation.png",
     imageAlt: "Sperm donation (donor sperm treatment) at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "Sperm Donation?" },
     paragraphs: [
-      "Sperm donation is the use of carefully screened donor sperm to achieve pregnancy — through intrauterine insemination (IUI) or through IVF with ICSI. The donor sperm fertilises the female partner's eggs, and the pregnancy is carried by the female partner herself.",
-      "It is considered when the male partner has no usable sperm — such as azoospermia where surgical retrieval is not possible — or has severe male-factor infertility, a high risk of transmitting a genetic condition, or for single women choosing parenthood. At Bavishi Fertility Institute a large pool of frozen, screened donor sperm means minimal waiting.",
+      "Sperm donation is the use of carefully screened donor sperm to achieve pregnancy — through intrauterine insemination (IUI) or through IVF-ICSI. The donor sperm fertilises the female partner's eggs, and the pregnancy is carried by the female partner herself.",
+      "It is considered when the male partner has no usable sperm — such as azoospermia where surgical retrieval is not possible — or has severe male-factor infertility, a high risk of transmitting a genetic condition, or for single women choosing parenthood. At Bavishi Fertility Institute a thorough screening of donors is done. We help you get samples from different backgrounds as per your need.",
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — with a large, well-regulated donor-sperm programme.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West, won 6 times (2019–2026). It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — with a large, well-regulated donor-sperm programme.",
     },
   },
   benefits: {
@@ -1836,7 +1885,6 @@ export const spermDonation: Treatment = {
       "High pregnancy chances even in severe male-factor infertility.",
       "A pathway to parenthood when the partner's sperm cannot be used.",
       "The female partner carries and delivers the pregnancy herself.",
-      "A large pool of frozen donor sperm means minimal waiting.",
       "Donors matched on physical and background characteristics where possible.",
       "Treatment is kept completely confidential.",
     ],
@@ -1845,9 +1893,8 @@ export const spermDonation: Treatment = {
     heading: { lead: "Who needs", em: "Sperm Donation?" },
     subtitle: "Donor sperm is considered when the partner's own sperm cannot achieve a pregnancy.",
     items: [
-      "Azoospermia — no sperm in the ejaculate — where surgical retrieval isn't possible or affordable.",
-      "Severe male-factor infertility — very low count, motility or abnormal morphology.",
-      "100% non-motile sperm or high sperm-DNA fragmentation.",
+      "Azoospermia — no sperm in the semen — where surgical retrieval isn't possible or affordable.",
+      "Severe male-factor infertility — very low count or motility.",
       "Repeated poor fertilisation or embryo formation in previous IVF cycles.",
       "Risk of transmitting a hereditary genetic condition through the sperm.",
       "Single women choosing to become parents.",
@@ -1859,7 +1906,7 @@ export const spermDonation: Treatment = {
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Consultation & Counselling", d: "Your specialist reviews your history, confirms donor sperm is the right option, and explains every step." },
       { icon: Sparkles, n: "02", t: "Donor Selection & Matching", d: "A screened donor is matched on characteristics such as height, build, complexion, ethnicity and education." },
-      { icon: FlaskConical, n: "03", t: "Semen Preparation", d: "Frozen donor semen is thawed and prepared in the laboratory for insemination or fertilisation." },
+      { icon: FlaskConical, n: "03", t: "Semen Preparation", d: "Donor semen is prepared in the laboratory for insemination or fertilisation." },
       { icon: Syringe, n: "04", t: "IUI or IVF–ICSI", d: "Prepared donor sperm is used for intrauterine insemination, or to fertilise eggs by IVF with ICSI." },
       { icon: Baby, n: "05", t: "Pregnancy Test", d: "A pregnancy test confirms the outcome about two weeks after insemination or embryo transfer." },
     ],
@@ -1868,7 +1915,6 @@ export const spermDonation: Treatment = {
   technology: {
     eyebrow: "Donor Screening",
     heading: { lead: "Every donor,", em: "rigorously screened" },
-    subtitle: "Only young donors with normal screening are recruited, and every sample is quarantined and re-checked.",
     items: [
       { icon: Stethoscope, t: "Medical Screening", d: "Complete medical, family and personal history, physical examination and an exhaustive health check-up." },
       { icon: Dna, t: "Genetic Screening", d: "Detailed family-history review and screening for common genetic conditions, with further testing available on request." },
@@ -1879,12 +1925,9 @@ export const spermDonation: Treatment = {
   whyUs: {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for sperm donation" },
     items: [
-      { icon: Award, t: "Trusted Since 1984", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
-      { icon: Layers, t: "Large Donor Pool", d: "A large bank of frozen, screened donor sperm ready for use — no long waiting times." },
-      { icon: ShieldCheck, t: "Rigorously Screened Donors", d: "Donors cleared on medical, genetic and psychological screening, with semen analysis and infection testing." },
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: ShieldCheck, t: "Rigorously Tested Donors", d: "Donors cleared on medical, genetic and psychological screening, with semen analysis and infection testing." },
       { icon: Sparkles, t: "Careful Matching", d: "Matched on height, build, complexion, eye colour, ethnicity and education wherever possible." },
-      { icon: Eye, t: "Complete Confidentiality", d: "Your treatment and donor matching are handled with total privacy at every step." },
-      { icon: ListChecks, t: "Ethical & ART-Compliant", d: "A regulated, ethical process under India's ART Act, protecting the rights of everyone involved." },
     ],
   },
   success: {
@@ -1922,14 +1965,14 @@ export const spermDonation: Treatment = {
     { q: "When is donor sperm needed?", a: "For azoospermia where sperm cannot be retrieved, severe male-factor infertility, a high risk of transmitting a genetic condition, or for single women choosing parenthood." },
     { q: "How are sperm donors screened?", a: "Donors undergo medical, genetic and psychological evaluation along with semen analysis and infection screening before their sperm is used." },
     { q: "How are donors matched to us?", a: "We match on characteristics such as height, build, complexion, eye colour, ethnicity and education wherever possible." },
-    { q: "Is there a waiting time for a donor?", a: "No. Bavishi Fertility Institute maintains a large pool of frozen, screened donor sperm ready for use." },
+    { q: "Is there a waiting time for a donor?", a: "No. Our partner sperm (ART) bank maintains a large pool of screened donor sperm ready for use." },
     { q: "Will the baby be genetically related to us?", a: "The baby will not inherit the male partner's genes, but the female partner contributes through her eggs and carries the pregnancy herself." },
     { q: "Is sperm donation legal in India?", a: "Yes. It is regulated by the ART (Assisted Reproductive Technology) Act, which protects the rights of everyone involved." },
     { q: "What are the success rates with donor sperm?", a: "Success varies from case to case and is generally higher for younger women. It depends on the female partner's age and health, egg and embryo quality and the technique used. Outcomes cannot be guaranteed." },
     { q: "Can we try with the partner's own sperm first?", a: "Yes. Where the partner's sperm is usable, techniques such as ICSI, IMSI or PICSI, or surgical retrieval (PESA/TESA/TESE), are considered before donor sperm." },
     { q: "Is the process confidential?", a: "Yes. Donor-sperm treatment is kept completely confidential." },
   ],
-  related: ["iui", "icsi", "ivf", "azoospermia", "embryo-donation"],
+  related: ["iui", "icsi", "ivf", "azoospermia", "egg-donation"],
   cta: {
     heading: "Exploring",
     headingEm: "donor sperm options?",
@@ -1951,7 +1994,7 @@ export const embryoDonation: Treatment = {
   meta: {
     title: "Embryo Donation Treatment (Donor Embryo) — Bavishi Fertility Institute",
     description:
-      "What is embryo donation? How donor-embryo treatment works when both eggs and sperm are needed, who needs it, donor screening and success factors. Trusted fertility specialists since 1984.",
+      "What is embryo donation? How donor-embryo treatment works when both eggs and sperm are needed, who needs it, donor screening and success factors. Trusted fertility specialists since 1998.",
     ogImage: "/assets/donor services/Embryo-dontation.png",
   },
   procedure: {
@@ -1969,7 +2012,7 @@ export const embryoDonation: Treatment = {
     h1Em: "Donor Embryos at Bavishi Fertility Institute",
     tagline:
       "When both eggs and sperm are needed, embryo donation offers a single, compassionate path to pregnancy. Embryos created from young, screened donors — and you carry and deliver your baby yourself.",
-    badges: ["Screened Donor Embryos", "Carry Your Own Pregnancy", "Since 1984", "ART Act Compliant"],
+    badges: ["Screened Donor Embryos", "Carry Your Own Pregnancy", "Since 1998", "ART Act Compliant"],
     image: "/assets/donor services/Embryo-dontation.png",
     imageAlt: "Embryo donation (donor embryo treatment) at Bavishi Fertility Institute",
   },
@@ -1981,7 +2024,7 @@ export const embryoDonation: Treatment = {
     ],
     aside: {
       title: "About Bavishi Fertility Institute",
-      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — with well-regulated egg, sperm and embryo donor programmes.",
+      body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West, won 6 times (2019–2026). It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air) — with well-regulated egg, sperm and embryo donor programmes.",
     },
   },
   benefits: {
@@ -2033,7 +2076,7 @@ export const embryoDonation: Treatment = {
   whyUs: {
     heading: { lead: "Why choose", em: "Bavishi Fertility Institute for embryo donation" },
     items: [
-      { icon: Award, t: "Trusted Since 1984", d: "30,000+ successful pregnancies and the National Fertility Award five years running (2021–2025)." },
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
       { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Advanced embryology labs where donor embryos are cultured and transferred with precision." },
       { icon: ShieldCheck, t: "Screened Donor Embryos", d: "Embryos from healthy, genetically tested and medically screened egg and sperm donors." },
       { icon: Layers, t: "Ready Donor Pathway", d: "An established donor programme means donor embryos are generally available without long waits." },
@@ -2099,7 +2142,7 @@ export const embryoDonation: Treatment = {
  * ===================================================================== */
 const BFI_ASIDE = {
   title: "About Bavishi Fertility Institute",
-  body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1984 with 15 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies, holds the National Fertility Award for five consecutive years (2021–2025), and is FOGSI-certified — running Class 1000 embryology labs.",
+  body: "Bavishi Fertility Institute is one of India's leading fertility clinic chains, operating since 1998 with 14 centres across 8 cities. Bavishi Fertility Institute has achieved 30,000+ successful IVF pregnancies. Holds the National Fertility Award for Best IVF Chain in India – West, won 6 times (2019–2026). It is a FOGSI-certified infertility training centre running all Class 1000 IVF labs (10× clean air).",
 };
 
 const DEFAULT_COST = {
@@ -2139,7 +2182,7 @@ export const oligospermia = defineTreatment({
   meta: {
     title: "Low Sperm Count (Oligospermia) Treatment — Bavishi Fertility Institute",
     description:
-      "What causes a low sperm count (oligospermia), how it is diagnosed and treated — from lifestyle and medical therapy to IUI, IVF and ICSI. Expert male-fertility care since 1984.",
+      "What causes a low sperm count (oligospermia), how it is diagnosed and treated — from lifestyle and medical therapy to IUI, IVF and ICSI. Expert male-fertility care since 1998.",
     ogImage: "/assets/conditions/oligospermia.png",
   },
   procedure: {
@@ -2155,14 +2198,14 @@ export const oligospermia = defineTreatment({
     h1Em: "(Oligospermia) Treatment",
     tagline:
       "A low sperm count is one of the most common — and most treatable — causes of male infertility. With accurate diagnosis and the right plan, most couples can still conceive.",
-    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1984", "IUI · IVF · ICSI"],
+    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1998", "IUI · IVF · ICSI"],
     image: "/assets/conditions/oligospermia.png",
     imageAlt: "Low sperm count (oligospermia) treatment at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "Oligospermia?" },
     paragraphs: [
-      "Oligospermia means a lower-than-normal number of sperm in the semen — generally fewer than 15 million sperm per millilitre. It is one of the commonest causes of male-factor infertility and is confirmed on a semen analysis.",
+      "Oligospermia means a lower-than-normal number of sperm in the semen — generally fewer than 16 million sperm per millilitre. It is one of the commonest causes of male-factor infertility and is confirmed on a semen analysis.",
       "A low count reduces, but rarely removes, the chance of natural conception. Depending on the cause and severity, treatment ranges from lifestyle and medical therapy to assisted reproduction such as IUI, IVF or ICSI — where even a few healthy sperm can fertilise an egg.",
     ],
     aside: BFI_ASIDE,
@@ -2171,7 +2214,7 @@ export const oligospermia = defineTreatment({
     heading: { lead: "Why treat", em: "a low sperm count" },
     subtitle: "Finding and correcting the cause restores the best possible chance of conceiving.",
     items: [
-      "An accurate cause is identified, not just the low number.",
+      "An accurate cause may be identified, not just the low number.",
       "Reversible causes — infection, hormones, varicocele, lifestyle — can be corrected.",
       "Many couples conceive naturally once the count improves.",
       "When needed, IUI, IVF or ICSI overcome a persistently low count.",
@@ -2222,7 +2265,7 @@ export const oligospermia = defineTreatment({
     ],
   },
   faqs: [
-    { q: "What counts as a low sperm count?", a: "Generally fewer than 15 million sperm per millilitre of semen, confirmed on a semen analysis. Counts can vary, so the test is often repeated." },
+    { q: "What counts as a low sperm count?", a: "Generally fewer than 16 million sperm per millilitre of semen, confirmed on a semen analysis. Counts can vary, so the test is often repeated." },
     { q: "Can I still have a baby with a low sperm count?", a: "Often yes. Many couples conceive naturally once the count improves, and assisted reproduction such as IUI, IVF or ICSI can help when it does not." },
     { q: "What causes a low sperm count?", a: "Common causes include varicocele, infection, hormonal problems, undescended testes, certain medication, and lifestyle factors such as smoking, alcohol, heat and stress." },
     { q: "Can a low sperm count be increased naturally?", a: "Treating infection or a varicocele, balancing hormones and improving lifestyle can raise the count in many men. Results take about three months." },
@@ -2245,7 +2288,7 @@ export const asthenospermia = defineTreatment({
   meta: {
     title: "Low Sperm Motility (Asthenospermia) Treatment — Bavishi Fertility Institute",
     description:
-      "Asthenospermia (poor sperm motility) explained — causes, diagnosis and treatment, from correcting the cause to IUI, IVF and ICSI. Expert male-fertility care since 1984.",
+      "Asthenospermia (poor sperm motility) explained — causes, diagnosis and treatment, from correcting the cause to IUI, IVF and ICSI. Expert male-fertility care since 1998.",
     ogImage: "/assets/conditions/asthenospermia.png",
   },
   procedure: {
@@ -2261,14 +2304,14 @@ export const asthenospermia = defineTreatment({
     h1Em: "(Asthenospermia) Treatment",
     tagline:
       "When sperm cannot swim well, they struggle to reach and fertilise the egg. Identifying why — and using the right technique — restores the chance of conception.",
-    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1984", "IVF · ICSI"],
+    badges: ["Andrology Specialists", "Advanced Semen Lab", "Since 1998", "IVF · ICSI"],
     image: "/assets/conditions/asthenospermia.png",
     imageAlt: "Low sperm motility (asthenospermia) treatment at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "Asthenospermia?" },
     paragraphs: [
-      "Asthenospermia means reduced sperm motility — too few sperm move forward well enough to reach and fertilise an egg. It is diagnosed when fewer than about 40% of sperm are motile (or under 32% move progressively) on a semen analysis.",
+      "Asthenospermia means reduced sperm motility — too few sperm move forward well enough to reach and fertilise an egg. It is diagnosed when fewer than about 42% of sperm are motile (or under 30% move progressively) on a semen analysis.",
       "Poor motility often occurs alongside a low count or abnormal shape. Where the cause can be treated it is corrected first; otherwise IVF and especially ICSI bypass the problem by placing a healthy sperm directly inside the egg.",
     ],
     aside: BFI_ASIDE,
@@ -2326,10 +2369,10 @@ export const asthenospermia = defineTreatment({
     ],
   },
   faqs: [
-    { q: "What is asthenospermia?", a: "It is reduced sperm motility — too few sperm move well enough to reach the egg, usually defined as under ~40% motile or under ~32% progressively motile on a semen analysis." },
+    { q: "What is asthenospermia?", a: "It is reduced sperm motility — too few sperm move well enough to reach the egg, usually defined as under ~42% motile or under ~30% progressively motile on a semen analysis." },
     { q: "Can poor sperm motility be improved?", a: "Often yes — treating infection or a varicocele, antioxidants and a healthier lifestyle can help. Improvements take around three months." },
     { q: "Can I conceive with low motility?", a: "Yes. Sperm preparation with IUI, or IVF with ICSI, can achieve pregnancy even when motility is low." },
-    { q: "How is ICSI helpful here?", a: "ICSI injects one healthy sperm directly into each egg, so the sperm does not need to swim — making motility largely irrelevant to fertilisation." },
+    { q: "How is ICSI helpful here?", a: "ICSI injects one healthy sperm directly into each egg, so the sperm does not need to swim — making motility largely irrelevant to fertilisation. ICSI can even help when there are 100% non-motile sperm." },
     { q: "Does motility change between tests?", a: "Yes, it can vary with illness, abstinence time and lab handling, so the test is often repeated for accuracy." },
   ],
   related: ["oligospermia", "azoospermia", "icsi", "imsi", "ivf"],
@@ -2349,7 +2392,7 @@ export const azoospermia = defineTreatment({
   meta: {
     title: "Azoospermia (Zero Sperm Count) Treatment — Bavishi Fertility Institute",
     description:
-      "Azoospermia — no sperm in the ejaculate — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1984.",
+      "Azoospermia — no sperm in the semen — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1998.",
     ogImage: "/assets/conditions/azoospermia.png",
   },
   procedure: {
@@ -2364,15 +2407,15 @@ export const azoospermia = defineTreatment({
     h1: "Zero Sperm Count",
     h1Em: "(Azoospermia) Treatment",
     tagline:
-      "No sperm in the ejaculate does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
-    badges: ["Surgical Sperm Retrieval", "Micro-TESE", "Since 1984", "ICSI"],
+      "No sperm in the Ejaculate-semen does not always mean no biological child. In many men, sperm can be found in the testes and used with ICSI to achieve a pregnancy.",
+    badges: ["Surgical Sperm Retrieval", "Micro-TESE", "Since 1998", "ICSI"],
     image: "/assets/conditions/azoospermia.png",
     imageAlt: "Azoospermia (zero sperm count) treatment at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "Azoospermia?" },
     paragraphs: [
-      "Azoospermia means no sperm are found in the ejaculate. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
+      "Azoospermia means no sperm are found in the Ejaculate-semen. It is confirmed when two separate semen samples, examined after centrifugation, show no sperm at all. It affects about 1% of men and up to 10–15% of infertile men.",
       "There are two main types. Obstructive azoospermia means sperm are produced normally but cannot get out due to a blockage. Non-obstructive azoospermia means production itself is very low. In both, sperm can often be retrieved directly from the testes or epididymis and used with ICSI.",
     ],
     aside: BFI_ASIDE,
@@ -2382,6 +2425,7 @@ export const azoospermia = defineTreatment({
     subtitle: "The right work-up tells us whether — and how — your own sperm can be used.",
     items: [
       "Accurate obstructive vs non-obstructive diagnosis guides the whole plan.",
+      "In men with hormone deficiency — pretesticular azoospermia — systematic hormone replacement can start natural sperm production.",
       "Microsurgical retrieval (Micro-TESE) finds sperm in difficult cases.",
       "Even a few sperm are enough for ICSI.",
       "Retrieved sperm can be frozen for future cycles.",
@@ -2392,7 +2436,7 @@ export const azoospermia = defineTreatment({
     heading: { lead: "Who this", em: "is for" },
     subtitle: "Men whose semen analysis shows no sperm, after confirmation.",
     items: [
-      "Two semen analyses confirming no sperm in the ejaculate.",
+      "Two semen analyses confirming no sperm present.",
       "A history of undescended testes, mumps, chemotherapy or radiation.",
       "Previous vasectomy or a suspected blockage in the sperm pathway.",
       "Hormonal or genetic causes of low sperm production.",
@@ -2404,10 +2448,9 @@ export const azoospermia = defineTreatment({
     subtitle: "Careful diagnosis first, then the least-invasive route to usable sperm.",
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "History, examination, hormone profile and genetic tests to classify the type." },
-      { icon: ScanLine, n: "02", t: "Imaging", d: "Scrotal and trans-rectal ultrasound to look for blockages or other causes." },
-      { icon: Target, n: "03", t: "Surgical Retrieval", d: "PESA, TESA or microsurgical Micro-TESE to recover sperm from the epididymis or testes." },
-      { icon: Microscope, n: "04", t: "ICSI", d: "Retrieved sperm are injected directly into the eggs in the laboratory." },
-      { icon: Snowflake, n: "05", t: "Freezing", d: "Surplus sperm or embryos are frozen for future attempts." },
+      { icon: Target, n: "02", t: "Surgical Retrieval", d: "PESA, TESA or microsurgical Micro-TESE to recover sperm from the epididymis or testes." },
+      { icon: Microscope, n: "03", t: "ICSI", d: "Retrieved sperm are injected directly into the eggs in the laboratory." },
+      { icon: Snowflake, n: "04", t: "Freezing", d: "Surplus sperm or embryos are frozen for future attempts." },
     ],
     note: "When retrieval is not possible, screened donor sperm offers a reliable alternative.",
   },
@@ -2438,7 +2481,7 @@ export const azoospermia = defineTreatment({
     heading: { lead: "Zero Sperm Count — Azoospermia", em: "NIL count" },
   },
   faqs: [
-    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis and used with ICSI. Where it cannot, donor sperm is an option." },
+    { q: "Does azoospermia mean I can never have a child?", a: "No. In many men sperm can be retrieved directly from the testes or epididymis through surgical sperm retrieval and used with ICSI. This gives the option to become a father with your own sperm in azoospermic men. Where it cannot, donor sperm is an option." },
     { q: "What is the difference between obstructive and non-obstructive azoospermia?", a: "Obstructive means sperm are made normally but blocked from getting out; non-obstructive means production itself is very low. The treatment differs accordingly." },
     { q: "What is Micro-TESE?", a: "Microsurgical testicular sperm extraction — using an operating microscope to locate and retrieve the small pockets of sperm production in non-obstructive azoospermia." },
     { q: "Is sperm retrieval painful?", a: "It is done under anaesthesia, so it is not painful during the procedure. Mild soreness afterwards settles quickly." },
@@ -2461,7 +2504,7 @@ export const surgicalSpermRetrieval = defineTreatment({
   meta: {
     title: "Surgical Sperm Retrieval — PESA, TESA, TESE & Micro-TESE — Bavishi Fertility Institute",
     description:
-      "Surgical sperm retrieval explained — PESA, TESA, TESE and microsurgical Micro-TESE for azoospermia, used with ICSI. Experienced andrology surgeons, trusted since 1984.",
+      "Surgical sperm retrieval explained — PESA, TESA, TESE and microsurgical Micro-TESE for azoospermia, used with ICSI. Experienced andrology surgeons, trusted since 1998.",
     ogImage: "/assets/conditions/surgical-sperm-retrieval.png",
   },
   procedure: {
@@ -2476,15 +2519,15 @@ export const surgicalSpermRetrieval = defineTreatment({
     h1: "Surgical Sperm Retrieval",
     h1Em: "(PESA / TESA / Micro-TESE)",
     tagline:
-      "When there is no sperm in the ejaculate, these minor procedures recover sperm directly from the testes or epididymis — so your own sperm can still be used with ICSI.",
-    badges: ["Microsurgery", "Day-care Procedure", "Since 1984", "ICSI-ready"],
+      "When there is no sperm in the Ejaculate-semen, these minor procedures recover sperm directly from the testes or epididymis — so your own sperm can still be used with ICSI.",
+    badges: ["Microsurgery", "Day-care Procedure", "Since 1998", "ICSI-ready"],
     image: "/assets/conditions/surgical-sperm-retrieval.png",
     imageAlt: "Surgical sperm retrieval (PESA, TESA, Micro-TESE) at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "Surgical Sperm Retrieval?" },
     paragraphs: [
-      "Surgical sperm retrieval is a group of minor procedures that collect sperm directly from the male reproductive tract when none can be obtained from the ejaculate — most often in azoospermia. The recovered sperm are then used to fertilise eggs through ICSI.",
+      "Surgical sperm retrieval is a group of minor procedures that collect sperm directly from the male reproductive tract when none can be obtained from the Ejaculate-semen — most often in azoospermia. The recovered sperm are then used to fertilise eggs through ICSI.",
       "The right technique depends on the cause. PESA and TESA use a fine needle; TESE takes a small tissue sample; and Micro-TESE uses an operating microscope to find sperm in the most difficult, non-obstructive cases.",
     ],
     aside: BFI_ASIDE,
@@ -2507,19 +2550,20 @@ export const surgicalSpermRetrieval = defineTreatment({
       "Obstructive azoospermia — including after vasectomy or a blockage.",
       "Non-obstructive azoospermia with very low sperm production.",
       "Failed ejaculation or absence of the vas deferens.",
-      "Ejaculate that repeatedly contains no, or no usable, sperm.",
+      "Ejaculate-semen that repeatedly contains no, or no usable, sperm.",
       "Couples planning ICSI who wish to use the man's own sperm.",
     ],
   },
   process: {
     heading: { lead: "How it", em: "works" },
-    subtitle: "A short, well-planned procedure timed with the IVF cycle.",
+    subtitle: "Each technique targets a different cause of azoospermia — from a simple needle aspiration to microsurgery.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Assessment", d: "Evaluation confirms the type of azoospermia and the best retrieval method." },
-      { icon: Syringe, n: "02", t: "PESA / TESA", d: "A fine needle aspirates sperm from the epididymis or testis under anaesthesia." },
-      { icon: Target, n: "03", t: "TESE / Micro-TESE", d: "A small biopsy, or microscope-guided extraction, recovers sperm in harder cases." },
-      { icon: Microscope, n: "04", t: "ICSI", d: "Recovered sperm are injected directly into the partner's eggs." },
-      { icon: Snowflake, n: "05", t: "Freezing", d: "Extra sperm are frozen so future cycles need no repeat surgery." },
+      { icon: ClipboardCheck, n: "01", t: "Assessment", d: "Hormone profile, examination and history confirm the azoospermia type and the best retrieval method." },
+      { icon: Syringe, n: "02", t: "PESA", d: "PESA needle-aspirates sperm from the epididymis through the skin without any cut. It is used for obstructive cases like a prior vasectomy, infective block or absence of transport system from birth." },
+      { icon: Target, n: "03", t: "TESA / TESE", d: "TESA needle-aspirates sperm from the testes through the skin without any cut. While in TESE a very small cut is made on testis to get more tissue to find sperm." },
+      { icon: Eye, n: "04", t: "Micro-TESE", d: "Micro-TESE systematically explores the entire testis under a microscope to identify best sperm-producing areas while preserving blood supply. Despite a larger incision, complication rates are similar to TESE, making it the best sperm retrieval technique for non-obstructive azoospermia (NOA)." },
+      { icon: Microscope, n: "05", t: "ICSI", d: "A single viable sperm is injected directly into each egg with a fine needle — even a small surgically retrieved sample is enough for fertilisation." },
+      { icon: Snowflake, n: "06", t: "Freezing", d: "Any sperm not used immediately are frozen and stored, so future ICSI cycles can go ahead without repeating the retrieval procedure." },
     ],
     note: "Retrieval is often timed with the female partner's egg collection so fresh sperm can be used.",
   },
@@ -2543,6 +2587,7 @@ export const surgicalSpermRetrieval = defineTreatment({
   },
   faqs: [
     { q: "Which retrieval method will I need?", a: "It depends on the cause. PESA/TESA (needle) suit obstructive cases; TESE and Micro-TESE (microsurgery) are used for non-obstructive azoospermia. Your evaluation guides the choice." },
+    { q: "What are the expected sperm retrieval rates?", a: "Retrieval rates depend on various factors — the underlying cause, prior treatment and the technique used. As a general guide, sperm are found in approximately 40-60% of non-obstructive azoospermia cases, and 95%+ of obstructive azoospermia cases." },
     { q: "Is the procedure painful?", a: "It is performed under anaesthesia, so it is not painful during the procedure. Mild soreness afterwards settles within a few days." },
     { q: "What is Micro-TESE?", a: "Microsurgical TESE uses an operating microscope to identify the tiny areas of active sperm production, giving the best chance of finding sperm in difficult cases." },
     { q: "Can the sperm be frozen?", a: "Yes. Surplus sperm are frozen so future ICSI cycles do not need another procedure." },
@@ -2565,7 +2610,7 @@ export const varicocele = defineTreatment({
   meta: {
     title: "Varicocele Treatment & Microsurgery — Bavishi Fertility Institute",
     description:
-      "Varicocele and male infertility — how enlarged scrotal veins affect sperm, when treatment helps, and microsurgical varicocelectomy. Expert andrology care since 1984.",
+      "Varicocele and male infertility — how enlarged scrotal veins affect sperm, when treatment helps, and microsurgical varicocelectomy. Expert andrology care since 1998.",
     ogImage: "/assets/conditions/varicocele.png",
   },
   procedure: {
@@ -2581,7 +2626,7 @@ export const varicocele = defineTreatment({
     h1Em: "& Microsurgery",
     tagline:
       "A varicocele — enlarged veins in the scrotum — is one of the commonest and most correctable causes of male infertility. Microsurgery can improve sperm quality and natural fertility.",
-    badges: ["Microsurgical Repair", "Day-care Surgery", "Since 1984", "Fertility-focused"],
+    badges: ["Microsurgical Repair", "Day-care Surgery", "Since 1998", "Fertility-focused"],
     image: "/assets/conditions/varicocele.png",
     imageAlt: "Varicocele treatment and microsurgery at Bavishi Fertility Institute",
   },
@@ -2669,7 +2714,7 @@ export const erectileDysfunction = defineTreatment({
   meta: {
     title: "Erectile Dysfunction Treatment — Bavishi Fertility Institute",
     description:
-      "Erectile dysfunction and fertility — causes, evaluation and treatment options, plus how couples can still conceive through assisted reproduction. Confidential care since 1984.",
+      "Erectile dysfunction and fertility — causes, evaluation and treatment options, plus how couples can still conceive through assisted reproduction. Confidential care since 1998.",
     ogImage: "/assets/conditions/erectile-dysfunction.png",
   },
   procedure: {
@@ -2685,7 +2730,7 @@ export const erectileDysfunction = defineTreatment({
     h1Em: "Treatment",
     tagline:
       "Erectile dysfunction is common, treatable and rarely a barrier to parenthood. With the right support — and assisted reproduction when needed — couples can still conceive.",
-    badges: ["Confidential Care", "Holistic Evaluation", "Since 1984", "Fertility Support"],
+    badges: ["Confidential Care", "Holistic Evaluation", "Since 1998", "Fertility Support"],
     image: "/assets/conditions/erectile-dysfunction.png",
     imageAlt: "Erectile dysfunction treatment and fertility support at Bavishi Fertility Institute",
   },
@@ -2750,9 +2795,9 @@ export const erectileDysfunction = defineTreatment({
     ],
   },
   faqs: [
-    { q: "Can I father a child if I have erectile dysfunction?", a: "Yes. ED is usually treatable, and even when natural intercourse stays difficult, IUI or IVF with ICSI offer reliable routes to pregnancy." },
+    { q: "Can I father a child if I have erectile dysfunction?", a: "Yes. ED is treatable in many men, and even when natural intercourse stays difficult, IUI or IVF with ICSI offer reliable routes to pregnancy." },
     { q: "What causes erectile dysfunction?", a: "Often a combination of physical causes (diabetes, blood pressure, hormones, blood-flow problems) and psychological ones such as stress and anxiety." },
-    { q: "Is erectile dysfunction treatable?", a: "In most men, yes — through lifestyle changes, treating the underlying cause, medical therapy and counselling where needed." },
+    { q: "Is erectile dysfunction treatable?", a: "In many men, yes — through lifestyle changes, treating the underlying cause, medical therapy and counselling where needed." },
     { q: "Is the consultation confidential?", a: "Completely. ED is a common medical condition and is handled with full privacy and sensitivity." },
     { q: "How does ED affect fertility treatment?", a: "If collecting a sperm sample or timed intercourse is difficult, our team arranges supportive options so treatment can proceed smoothly." },
   ],
@@ -2777,7 +2822,7 @@ export const conceiveNaturally = defineTreatment({
   meta: {
     title: "Conceive Naturally — Natural Fertility Care — Bavishi Fertility Institute",
     description:
-      "Improve your chances of conceiving naturally — fertile-window timing, lifestyle, simple evaluation and ovulation support, before considering advanced treatment. Trusted since 1984.",
+      "Improve your chances of conceiving naturally — fertile-window timing, lifestyle, simple evaluation and ovulation support, before considering advanced treatment. Trusted since 1998.",
     ogImage: "/assets/conditions/conceive-naturally.png",
   },
   procedure: {
@@ -2793,7 +2838,7 @@ export const conceiveNaturally = defineTreatment({
     h1Em: "Naturally",
     tagline:
       "Many couples can conceive naturally with the right timing, simple evaluation and small lifestyle changes — before any advanced treatment is needed. We help you start there.",
-    badges: ["Fertility Evaluation", "Ovulation Support", "Since 1984", "Personalised Plan"],
+    badges: ["Fertility Evaluation", "Ovulation Support", "Since 1998", "Personalised Plan"],
     image: "/assets/conditions/conceive-naturally.png",
     imageAlt: "Natural conception and fertility care at Bavishi Fertility Institute",
   },
@@ -2882,7 +2927,7 @@ export const prpInfertility = defineTreatment({
   meta: {
     title: "PRP (Platelet-Rich Plasma) Therapy in Infertility — Bavishi Fertility Institute",
     description:
-      "PRP therapy in fertility — ovarian PRP for low ovarian reserve and endometrial PRP for thin lining or repeated implantation failure. How it works, who may benefit, since 1984.",
+      "PRP therapy in fertility — ovarian PRP for ovarian rejuvenation and low ovarian reserve, endometrial PRP for thin lining or repeated implantation failure. How it works, who may benefit, since 1998.",
     ogImage: "/assets/conditions/prp-infertility.png",
   },
   procedure: {
@@ -2898,7 +2943,7 @@ export const prpInfertility = defineTreatment({
     h1Em: "in Infertility",
     tagline:
       "Platelet-rich plasma uses your body's own growth factors to support a low ovarian reserve or a thin uterine lining — an emerging option in carefully selected cases.",
-    badges: ["Autologous (Your Own Blood)", "Ovarian & Endometrial PRP", "Since 1984", "Selective Use"],
+    badges: ["Autologous (Your Own Blood)", "Ovarian & Endometrial PRP", "Since 1998", "Selective Use"],
     image: "/assets/conditions/prp-infertility.png",
     imageAlt: "PRP (platelet-rich plasma) therapy in infertility at Bavishi Fertility Institute",
   },
@@ -2906,9 +2951,17 @@ export const prpInfertility = defineTreatment({
     heading: { lead: "What is", em: "PRP Therapy?" },
     paragraphs: [
       "Platelet-rich plasma (PRP) is prepared by concentrating the platelets from a small sample of your own blood. These platelets are rich in growth factors that can help stimulate tissue repair and regeneration.",
-      "In fertility, PRP is used in two ways: ovarian PRP, injected into the ovaries to try to improve a low ovarian reserve, and endometrial PRP, instilled into the uterine cavity to improve a thin lining or in repeated implantation failure. It is an emerging therapy offered in carefully selected cases alongside standard treatment.",
+      "In fertility, PRP is used in two ways: ovarian PRP, injected into the ovaries to try to improve a low ovarian reserve — an approach also known as ovarian rejuvenation — and endometrial PRP, instilled into the uterine cavity to improve a thin lining or in repeated implantation failure. It is an emerging therapy offered in carefully selected cases alongside standard treatment.",
     ],
     aside: BFI_ASIDE,
+  },
+  types: {
+    heading: { lead: "Types of", em: "PRP" },
+    items: [
+      { icon: Egg, t: "Ovarian PRP", d: "Injected into the ovaries to support follicle activity and egg quality in women with a low ovarian reserve — used for ovarian rejuvenation." },
+      { icon: Layers, t: "Endometrial PRP", d: "Instilled into the uterine cavity to help thicken a persistently thin endometrial lining." },
+      { icon: Microscope, t: "Hysteroscopic Subendometrial PRP", d: "Delivered just beneath the endometrium under hysteroscopic guidance, in selected cases of repeated implantation failure." },
+    ],
   },
   benefits: {
     heading: { lead: "Potential advantages of", em: "PRP" },
@@ -2923,7 +2976,6 @@ export const prpInfertility = defineTreatment({
   },
   whoNeedsIt: {
     heading: { lead: "Who may", em: "be considered" },
-    subtitle: "PRP is selective — recommended only where evidence suggests it may help.",
     items: [
       "Low ovarian reserve or poor response to stimulation.",
       "A persistently thin endometrial lining despite standard treatment.",
@@ -2943,6 +2995,14 @@ export const prpInfertility = defineTreatment({
       { icon: ScanLine, n: "05", t: "Review", d: "Hormone tests or lining scans assess the response before the next step." },
     ],
     note: "PRP is offered transparently as an adjunct — results vary and it is not a guaranteed solution.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PRP therapy" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: Droplets, t: "Autologous & In-House", d: "Prepared from your own blood in our lab — no risk of rejection or allergy." },
+      { icon: Sparkles, t: "Selective, Evidence-Led", d: "Offered only in carefully selected cases where evidence suggests it may genuinely help." },
+    ],
   },
   success: {
     factors: [
@@ -2972,6 +3032,7 @@ export const prpInfertility = defineTreatment({
   },
   faqs: [
     { q: "What is PRP therapy in fertility?", a: "It uses platelet-rich plasma from your own blood, rich in growth factors, injected into the ovaries (for low reserve) or uterus (for a thin lining) to try to improve the chance of conception." },
+    { q: "Is PRP the same as ovarian rejuvenation?", a: "Ovarian PRP is the technique most often referred to as ovarian rejuvenation — platelet-rich plasma injected into the ovaries to try to support follicle activity and egg quality in women with a low ovarian reserve." },
     { q: "Is PRP safe?", a: "Because PRP is made from your own blood, there is no risk of rejection or allergy. The procedure itself is minimally invasive with only minor, short-lived side-effects." },
     { q: "Does PRP guarantee pregnancy?", a: "No. PRP is an emerging therapy with variable results, offered as an adjunct in selected cases. We explain realistic expectations clearly before proceeding." },
     { q: "Who is PRP suitable for?", a: "It is mainly considered for low ovarian reserve, a thin endometrial lining or repeated implantation failure, after a full assessment." },
@@ -2987,56 +3048,53 @@ export const prpInfertility = defineTreatment({
 
 export const pcos = defineTreatment({
   slug: "pcos",
-  name: "PCOS (Polycystic Ovary Syndrome) & Fertility",
-  shortName: "PCOS",
-  alternateName: "Polycystic Ovary Syndrome",
+  name: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome) & Fertility",
+  shortName: "PMOS-PCOS",
+  alternateName: "Polyendocrine Metabolic Ovarian Syndrome",
   reviewerSlug: "falguni-bavishi",
   meta: {
-    title: "PCOS (Polycystic Ovary Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
+    title: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
     description:
-      "PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PCOS is one of the most treatable causes of infertility. Since 1984.",
+      "PMOS-PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PMOS-PCOS is one of the most treatable causes of infertility. Since 1998.",
     ogImage: "/assets/conditions/pcos.png",
   },
   procedure: {
     procedureType: "https://schema.org/TherapeuticProcedure",
     bodyLocation: "Ovaries",
     howPerformed:
-      "PCOS is managed with weight and lifestyle support, insulin-sensitising and ovulation-inducing medication, and, where needed, IUI or IVF with careful protocols to avoid overstimulation.",
+      "PMOS-PCOS is managed with weight and lifestyle support, insulin-sensitising and ovulation-inducing medication, and, where needed, IUI or IVF with careful protocols to avoid overstimulation.",
     followup: "Cycles are monitored by scan and hormone tests to confirm ovulation and guide treatment.",
   },
   hero: {
     eyebrow: "Female Infertility",
-    h1: "PCOS",
+    h1: "PMOS-PCOS",
     h1Em: "& Fertility",
     tagline:
-      "Polycystic ovary syndrome is the commonest hormonal cause of infertility — and one of the most treatable. With the right plan, most women with PCOS go on to conceive.",
-    badges: ["Hormone Specialists", "Ovulation Induction", "Since 1984", "IUI · IVF"],
+      "Polycystic ovary syndrome — now recognised as PMOS-PCOS — is the commonest hormonal cause of infertility, and one of the most treatable. With the right plan, most women with PMOS-PCOS go on to conceive.",
+    badges: ["Hormone Specialists", "Ovulation Induction", "Since 1998", "IUI · IVF"],
     image: "/assets/conditions/pcos.png",
-    imageAlt: "PCOS (polycystic ovary syndrome) treatment and fertility care at Bavishi Fertility Institute",
+    imageAlt: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome) treatment and fertility care at Bavishi Fertility Institute",
   },
   whatIs: {
-    heading: { lead: "What is", em: "PCOS?" },
+    heading: { lead: "What is", em: "PMOS-PCOS?" },
     paragraphs: [
-      "Polycystic ovary syndrome (PCOS) is a common hormonal condition in which the ovaries contain many small follicles and ovulation becomes irregular or absent. It often causes irregular periods, difficulty conceiving, weight gain, acne and excess hair growth.",
-      "PCOS is the most common cause of ovulatory infertility — but it is highly treatable. With weight and lifestyle support, ovulation-inducing medication and, where needed, IUI or IVF, the great majority of women with PCOS are able to conceive.",
+      "Polycystic ovary syndrome (PCOS) is a common hormonal condition in which the ovaries contain many small follicles and ovulation becomes irregular or absent. It often causes irregular periods, difficulty conceiving, weight gain, acne and excess hair growth. As the symptoms not only affect the ovaries but endocrine systems across the body, PCOS is now renamed as PMOS — Polyendocrine Metabolic Ovarian Syndrome.",
+      "PMOS-PCOS is the most common cause of ovulatory infertility — but it is highly treatable. With weight and lifestyle support, ovulation-inducing medication and, where needed, IUI or IVF, the great majority of women with PMOS-PCOS are able to conceive.",
     ],
     aside: BFI_ASIDE,
   },
   benefits: {
-    heading: { lead: "Why treating", em: "PCOS works" },
-    subtitle: "PCOS responds well to a structured, step-by-step approach.",
+    heading: { lead: "Why treating", em: "PMOS-PCOS works" },
     items: [
-      "Restores regular ovulation in most women.",
       "Lifestyle and weight changes alone can re-start cycles.",
       "Ovulation-induction medication is simple and effective.",
       "IUI and IVF achieve high success when needed.",
       "Careful protocols reduce the risk of overstimulation.",
-      "Also improves periods, skin and long-term health.",
     ],
   },
   whoNeedsIt: {
-    heading: { lead: "Signs you", em: "may have PCOS" },
-    subtitle: "PCOS is diagnosed from a combination of symptoms, scans and hormone tests.",
+    heading: { lead: "Signs you", em: "may have PMOS-PCOS" },
+    subtitle: "PMOS-PCOS is diagnosed from a combination of symptoms, scans and hormone tests.",
     items: [
       "Irregular, infrequent or absent menstrual periods.",
       "Difficulty conceiving due to irregular ovulation.",
@@ -3046,16 +3104,24 @@ export const pcos = defineTreatment({
     ],
   },
   process: {
-    heading: { lead: "How PCOS", em: "is treated" },
+    heading: { lead: "How PMOS-PCOS", em: "is treated" },
     subtitle: "A stepwise plan, starting with the simplest effective option.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Diagnosis", d: "History, ultrasound and hormone tests confirm PCOS and rule out other causes." },
+      { icon: ClipboardCheck, n: "01", t: "Diagnosis", d: "History, ultrasound and hormone tests confirm PMOS-PCOS and rule out other causes." },
       { icon: Leaf, n: "02", t: "Lifestyle & Metabolic Care", d: "Weight, nutrition and insulin-sensitising support to restore ovulation." },
       { icon: Activity, n: "03", t: "Ovulation Induction", d: "Tablets or gentle injections to trigger regular ovulation, monitored by scan." },
       { icon: Syringe, n: "04", t: "IUI", d: "Insemination timed to ovulation when natural timing is not enough." },
       { icon: FlaskConical, n: "05", t: "IVF", d: "IVF with safe protocols for those who need it, minimising overstimulation." },
     ],
-    note: "Because PCOS ovaries can over-respond, we use careful, OHSS-aware stimulation protocols.",
+    note: "Because PMOS-PCOS ovaries can over-respond, we use careful, OHSS-aware stimulation protocols. Elective freezing of all embryos markedly reduces the risk of OHSS.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PMOS-PCOS" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: HeartPulse, t: "Hormone & Metabolic Specialists", d: "Care that addresses the endocrine and metabolic side of PMOS-PCOS, not just ovulation." },
+      { icon: ShieldCheck, t: "OHSS-Aware Protocols", d: "Individualised stimulation and elective embryo freezing to keep treatment safe." },
+    ],
   },
   success: {
     factors: [
@@ -3065,36 +3131,36 @@ export const pcos = defineTreatment({
       "Partner's sperm quality",
       "The treatment step used — natural, IUI or IVF",
     ],
-    note: "Most women with PCOS conceive with appropriate treatment, often without IVF. Timelines vary, and outcomes cannot be guaranteed.",
+    note: "Most women with PMOS-PCOS conceive with appropriate treatment, often without IVF. Timelines vary, and outcomes cannot be guaranteed.",
   },
   risks: {
     heading: { lead: "Risks &", em: "considerations" },
     items: [
-      { t: "Ovarian overstimulation", d: "PCOS ovaries can over-respond to fertility medication (OHSS).", help: "We use safe, individualised protocols and close monitoring to prevent severe OHSS." },
-      { t: "Higher miscarriage / metabolic risk", d: "PCOS can carry a slightly higher miscarriage and gestational-diabetes risk.", help: "Pre-pregnancy weight and metabolic care reduce these risks substantially." },
+      { t: "Ovarian overstimulation", d: "PMOS-PCOS ovaries can over-respond to fertility medication (OHSS).", help: "We use safe, individualised protocols and close monitoring to prevent severe OHSS." },
+      { t: "Higher miscarriage / metabolic risk", d: "PMOS-PCOS can carry a slightly higher miscarriage and gestational-diabetes risk.", help: "Pre-pregnancy weight and metabolic care reduce these risks substantially." },
       { t: "Patience needed", d: "It can take a few cycles to find the right ovulation dose.", help: "We adjust carefully and monitor each cycle rather than rushing." },
     ],
   },
   video: {
     id: "cGkVVs8I4ZU",
-    title: "PCOS Treatment — Expert Fertility Care",
+    title: "PMOS-PCOS Treatment — Expert Fertility Care",
     description:
-      "Our experts explain PCOS (polycystic ovary syndrome) and fertility — what causes it, how it affects conception and the treatment options, from lifestyle changes and ovulation induction to IUI and IVF.",
+      "Our experts explain PMOS-PCOS (polycystic ovary syndrome) and fertility — what causes it, how it affects conception and the treatment options, from lifestyle changes and ovulation induction to IUI and IVF.",
     eyebrow: "Watch & Learn",
-    heading: { lead: "PCOS Treatment", em: "Expert Fertility Care" },
+    heading: { lead: "PMOS-PCOS Treatment", em: "Expert Fertility Care" },
   },
   faqs: [
-    { q: "Can I get pregnant with PCOS?", a: "Yes. PCOS is one of the most treatable causes of infertility, and most women conceive with lifestyle changes, ovulation induction or, when needed, IUI or IVF." },
-    { q: "Does losing weight help PCOS fertility?", a: "Often significantly. Even a modest 5–10% weight loss can restore regular ovulation and improve the response to treatment." },
+    { q: "Can I get pregnant with PMOS-PCOS?", a: "Yes. PMOS-PCOS is one of the most treatable causes of infertility, and most women conceive with lifestyle changes, ovulation induction or, when needed, IUI or IVF." },
+    { q: "Does losing weight help PMOS-PCOS fertility?", a: "Often significantly. Even a modest 5–10% weight loss can restore regular ovulation and improve the response to treatment." },
     { q: "What is ovulation induction?", a: "Medication — usually tablets or gentle injections — that encourages the ovaries to release an egg, monitored by ultrasound to time conception." },
-    { q: "Is IVF safe with PCOS?", a: "Yes, with care. PCOS ovaries can over-respond, so we use specific, OHSS-aware protocols and close monitoring to keep IVF safe." },
-    { q: "Will PCOS affect my pregnancy?", a: "PCOS slightly raises some risks such as gestational diabetes, which is why pre-pregnancy health optimisation and good antenatal care matter." },
+    { q: "Is IVF safe with PMOS-PCOS?", a: "Yes, with care. PMOS-PCOS ovaries can over-respond, so we use specific, OHSS-aware protocols and close monitoring to keep IVF safe." },
+    { q: "Will PMOS-PCOS affect my pregnancy?", a: "PMOS-PCOS slightly raises some risks such as gestational diabetes, which is why pre-pregnancy health optimisation and good antenatal care matter." },
   ],
   related: ["ovarian-reserve", "conceive-naturally", "iui", "ivf", "female-infertility"],
   cta: {
     heading: "Trying to conceive",
-    headingEm: "with PCOS?",
-    subtitle: "PCOS is highly treatable — book a consultation for a clear, personalised fertility plan.",
+    headingEm: "with PMOS-PCOS?",
+    subtitle: "PMOS-PCOS is highly treatable — book a consultation for a clear, personalised fertility plan.",
   },
 });
 
@@ -3107,7 +3173,7 @@ export const ovarianReserve = defineTreatment({
   meta: {
     title: "Poor Ovarian Reserve / Low AMH Treatment — Bavishi Fertility Institute",
     description:
-      "Low ovarian reserve and low AMH explained — what the numbers mean, how it is assessed, and tailored IVF protocols that make the most of the eggs you have. Trusted since 1984.",
+      "Low ovarian reserve and low AMH explained — what the numbers mean, how it is assessed, and tailored IVF protocols that make the most of the eggs you have. Trusted since 1998.",
     ogImage: "/assets/conditions/ovarian-reserve.png",
   },
   procedure: {
@@ -3123,7 +3189,7 @@ export const ovarianReserve = defineTreatment({
     h1Em: "/ Low AMH",
     tagline:
       "A low egg count or low AMH means fewer eggs — not no chance. Tailored protocols help us recover and use the best eggs you have, with honest guidance throughout.",
-    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1984", "Class 1000 Labs"],
+    badges: ["Individualised Protocols", "Egg Accumulation", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
     image: "/assets/conditions/ovarian-reserve.png",
     imageAlt: "Poor ovarian reserve / low AMH treatment at Bavishi Fertility Institute",
   },
@@ -3139,22 +3205,33 @@ export const ovarianReserve = defineTreatment({
     heading: { lead: "How specialised", em: "care helps" },
     subtitle: "The right protocol makes the most of every available egg.",
     items: [
-      "Individualised stimulation tuned to your reserve.",
+      "In house designed custom protocols to maximise egg number & quality.",
       "Egg or embryo accumulation across gentle cycles.",
       "Advanced labs that protect every precious egg and embryo.",
       "Honest assessment of own-egg versus donor-egg chances.",
       "Earlier, focused treatment that does not waste time.",
     ],
   },
-  whoNeedsIt: {
-    heading: { lead: "Who this", em: "is for" },
-    subtitle: "Women whose tests or history suggest a reduced egg supply.",
+  types: {
+    heading: { lead: "Advanced options for", em: "low ovarian reserve" },
+    subtitle: "Additional approaches discussed alongside standard stimulation — used selectively, based on your case.",
     items: [
-      "A low AMH or low antral-follicle count on testing.",
-      "A poor egg yield in a previous IVF cycle.",
-      "Age over 35, or a family history of early menopause.",
-      "Previous ovarian surgery, chemotherapy or radiation.",
-      "Difficulty conceiving with signs of reduced reserve.",
+      { icon: Layers, t: "Duostim (Dual Stimulation)", d: "Two stimulation-and-retrieval cycles in the same menstrual month — one follicular-phase, one luteal-phase — to collect more eggs in less time for a very low reserve." },
+      { icon: Droplets, t: "Ovarian Rejuvenation (PRP)", d: "Platelet-rich plasma injected into the ovaries in selected cases, aiming to support follicle activity and egg quality ahead of stimulation.", href: "/ovarian-rejuvenation" },
+      { icon: Snowflake, t: "Embryo Accumulation", d: "Eggs or embryos from successive gentle cycles are frozen and pooled to build a usable number, when required." },
+    ],
+  },
+  labels: { whoNeedsIt: "Causes" },
+  whoNeedsIt: {
+    heading: { lead: "What causes", em: "poor ovarian reserve?" },
+    subtitle: "A reduced egg supply usually traces back to one or more of these factors.",
+    items: [
+      "Age — reserve naturally declines from the mid-to-late 30s, and is often low by the 40s.",
+      "Endometriosis, or surgery for endometriosis, which can reduce healthy ovarian tissue.",
+      "Previous ovarian surgery for cysts or teratomas, chemotherapy or radiotherapy.",
+      "Genetic factors, such as the fragile X premutation, or a family history of early menopause.",
+      "Autoimmune conditions affecting the ovaries.",
+      "Lifestyle factors — smoking, chronic stress, obesity or being significantly underweight.",
     ],
   },
   process: {
@@ -3163,11 +3240,11 @@ export const ovarianReserve = defineTreatment({
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Assessment", d: "AMH, antral-follicle count and history to gauge your reserve." },
       { icon: Target, n: "02", t: "Tailored Stimulation", d: "An individualised protocol chosen to recover the best-quality eggs." },
-      { icon: Layers, n: "03", t: "Egg / Embryo Accumulation", d: "Collecting and freezing across cycles to build a usable pool." },
-      { icon: Microscope, n: "04", t: "IVF–ICSI", d: "Careful fertilisation and culture in our Class 1000 laboratory." },
+      { icon: Microscope, n: "03", t: "IVF–ICSI", d: "Careful fertilisation and culture in our Class 1000 laboratory." },
+      { icon: Layers, n: "04", t: "Embryo Accumulation", d: "Collecting and freezing across cycles to build a usable pool, when required." },
       { icon: Egg, n: "05", t: "Donor-egg Option", d: "A highly successful alternative discussed honestly where appropriate." },
     ],
-    note: "We focus on egg quality and the right protocol, not just chasing higher numbers.",
+    note: "AT Bavishi our goal is pregnancy with self eggs as far as possible.",
   },
   success: {
     factors: [
@@ -3196,11 +3273,14 @@ export const ovarianReserve = defineTreatment({
     heading: { lead: "Low AMH / Poor Ovarian Reserve", em: "Low Egg Count" },
   },
   faqs: [
+    { q: "What causes poor ovarian reserve?", a: "Age is the main factor — reserve begins to decline in the mid-to-late 30s and is often low by the 40s. Your mother's age at menopause is a useful guide to your own likely timeline. Reserve can also decline earlier because of endometriosis (and its surgery), chronic pelvic infections, genetic factors such as the fragile X premutation, ovarian surgery for cysts or teratomas, chemotherapy or radiotherapy, autoimmune conditions, and lifestyle factors such as smoking, stress, obesity or being significantly underweight." },
     { q: "What does a low AMH mean?", a: "AMH reflects the number of eggs remaining. A low value suggests a reduced ovarian reserve, which can affect natural conception and the response to IVF — but it does not measure egg quality or rule out pregnancy." },
     { q: "Can I conceive with low ovarian reserve?", a: "Often yes, especially when egg quality is reasonable. Tailored stimulation and strategies like egg accumulation help, and donor eggs are a successful option if needed." },
     { q: "Does low AMH mean early menopause?", a: "Not necessarily. It indicates a smaller egg pool, but the timeline varies. Your specialist will interpret it alongside your age and other tests." },
     { q: "Can low reserve be increased?", a: "The number of eggs cannot truly be increased, but the right protocol can recover more of the eggs you have, and overall health supports egg quality." },
     { q: "Is donor egg my only option?", a: "No. Donor eggs are one option, but many women with low reserve conceive with their own eggs using individualised treatment. We assess this honestly with you." },
+    { q: "What is Duostim (dual stimulation)?", a: "Duostim is two stimulation-and-egg-retrieval cycles carried out in the same menstrual month — one starting in the follicular phase, the second in the luteal phase straight after. For women with a very low reserve, it collects more eggs in a shorter time than waiting a full month between cycles." },
+    { q: "Can ovarian rejuvenation help with low reserve?", a: "Ovarian rejuvenation — platelet-rich plasma (PRP) injected into the ovaries — is an emerging, selectively-used option that aims to support follicle activity and egg quality ahead of stimulation. It is not for everyone; we discuss honestly whether it is likely to help your specific case." },
   ],
   related: ["ovarian-rejuvenation", "prp-infertility", "egg-donation", "ivf", "female-infertility"],
   cta: {
@@ -3219,7 +3299,7 @@ export const ovarianRejuvenation = defineTreatment({
   meta: {
     title: "Ovarian Rejuvenation Therapy — Bavishi Fertility Institute",
     description:
-      "Ovarian rejuvenation explained — an emerging option using ovarian PRP to support follicle activity in low reserve or early menopause. Who may benefit, honestly assessed. Since 1984.",
+      "Ovarian rejuvenation explained — an emerging option using ovarian PRP to support follicle activity in low reserve or early menopause. Who may benefit, honestly assessed. Since 1998.",
     ogImage: "/assets/conditions/ovarian-rejuvenation.png",
   },
   procedure: {
@@ -3235,7 +3315,7 @@ export const ovarianRejuvenation = defineTreatment({
     h1Em: "Rejuvenation",
     tagline:
       "An emerging therapy that uses your own platelet-rich plasma to try to reactivate ovarian activity — offered selectively, with honest expectations, for low reserve or early menopause.",
-    badges: ["Ovarian PRP", "Autologous", "Since 1984", "Selective Use"],
+    badges: ["Ovarian PRP", "Autologous", "Since 1998", "Selective Use"],
     image: "/assets/conditions/ovarian-rejuvenation.png",
     imageAlt: "Ovarian rejuvenation therapy at Bavishi Fertility Institute",
   },
@@ -3262,8 +3342,7 @@ export const ovarianRejuvenation = defineTreatment({
     heading: { lead: "Who may", em: "be considered" },
     subtitle: "Selective use, after full counselling about uncertain benefit.",
     items: [
-      "Very low ovarian reserve or repeatedly poor IVF response.",
-      "Early menopause or premature ovarian insufficiency.",
+      "Very low ovarian reserve (AMH <0.5) or repeatedly poor IVF response.",
       "Perimenopausal women wishing to explore own-egg options.",
       "Women preferring to try before moving to donor eggs.",
       "Selected cases as an adjunct to IVF, after counselling.",
@@ -3279,7 +3358,7 @@ export const ovarianRejuvenation = defineTreatment({
       { icon: Target, n: "04", t: "Ovarian Injection", d: "PRP is injected into the ovaries under ultrasound guidance." },
       { icon: ScanLine, n: "05", t: "Reassessment", d: "AMH, FSH and scans review any response before the next step." },
     ],
-    note: "If there is a response, an IVF cycle is planned to make use of any available eggs.",
+    note: "We feel the best time for ovarian rejuvenation is the month before your IVF stimulation.",
   },
   success: {
     factors: [
@@ -3309,7 +3388,7 @@ export const ovarianRejuvenation = defineTreatment({
   },
   faqs: [
     { q: "What is ovarian rejuvenation?", a: "An emerging therapy, usually ovarian PRP, that aims to reactivate dormant follicles in women with very low reserve or early menopause, to try to improve hormone levels and egg availability." },
-    { q: "Does it really work?", a: "Results are inconsistent and the evidence is still developing. Some women show a response; many do not. We are honest about this before you decide." },
+    { q: "Does it really work?", a: "Results are inconsistent and the evidence is still developing. Some women show a response; some do not. We are honest about this before you decide." },
     { q: "Is it safe?", a: "PRP uses your own blood, so there is no rejection risk, and the procedure is minimally invasive with only minor side-effects." },
     { q: "Who should consider it?", a: "Mainly women with very low reserve, early menopause or repeated poor IVF response who wish to explore own-egg options before donor eggs." },
     { q: "Is it a substitute for IVF or donor eggs?", a: "No. It is an adjunct that may be tried first; IVF and donor eggs remain the more reliable routes and are kept openly in the plan." },
@@ -3331,7 +3410,7 @@ export const fibroids = defineTreatment({
   meta: {
     title: "Fibroids & Fertility — Uterine Fibroid Treatment — Bavishi Fertility Institute",
     description:
-      "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1984.",
+      "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1998.",
     ogImage: "/assets/conditions/fibroids.png",
   },
   procedure: {
@@ -3347,7 +3426,7 @@ export const fibroids = defineTreatment({
     h1Em: "& Fertility",
     tagline:
       "Not all fibroids affect fertility — but those that distort the uterine cavity can. Fertility-preserving surgery removes the problem while protecting your chance of pregnancy.",
-    badges: ["Reproductive Surgery", "Fertility-preserving", "Since 1984", "Minimally Invasive"],
+    badges: ["Reproductive Surgery", "Fertility-preserving", "Since 1998", "Minimally Invasive"],
     image: "/assets/conditions/fibroids.png",
     imageAlt: "Uterine fibroids and fertility treatment at Bavishi Fertility Institute",
   },
@@ -3392,6 +3471,14 @@ export const fibroids = defineTreatment({
       { icon: FlaskConical, n: "05", t: "Conception Plan", d: "Natural conception or IVF planned once the cavity has healed." },
     ],
     note: "Many fibroids need only monitoring — surgery is advised only when fertility or symptoms justify it.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "fibroid surgery" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: ShieldCheck, t: "Fertility-Preserving Surgeons", d: "Minimally-invasive hysteroscopic and laparoscopic myomectomy that protects the uterus." },
+      { icon: Target, t: "Treat Only What Matters", d: "We operate selectively — only on fibroids that genuinely affect your fertility." },
+    ],
   },
   success: {
     factors: [
@@ -3442,7 +3529,7 @@ export const endometriosis = defineTreatment({
   meta: {
     title: "Endometriosis & Fertility Treatment — Bavishi Fertility Institute",
     description:
-      "Endometriosis and infertility — symptoms, diagnosis and fertility-focused treatment, from laparoscopic surgery to IVF. Compassionate, expert reproductive care since 1984.",
+      "Endometriosis and infertility — symptoms, diagnosis and fertility-focused treatment, from laparoscopic surgery to IVF. Compassionate, expert reproductive care since 1998.",
     ogImage: "/assets/conditions/endometriosis.png",
   },
   procedure: {
@@ -3458,7 +3545,7 @@ export const endometriosis = defineTreatment({
     h1Em: "& Fertility",
     tagline:
       "Endometriosis can cause pain and affect fertility — but with the right combination of surgery and IVF, many women with endometriosis go on to have a baby.",
-    badges: ["Reproductive Surgery", "Endometriosis & IVF", "Since 1984", "Compassionate Care"],
+    badges: ["Reproductive Surgery", "Endometriosis & IVF", "Since 1998", "Compassionate Care"],
     image: "/assets/conditions/endometriosis.png",
     imageAlt: "Endometriosis and fertility treatment at Bavishi Fertility Institute",
   },
@@ -3503,6 +3590,14 @@ export const endometriosis = defineTreatment({
       { icon: FlaskConical, n: "05", t: "IVF", d: "Often the most effective route to pregnancy, with tailored protocols." },
     ],
     note: "We weigh surgery against ovarian reserve carefully — sometimes proceeding straight to IVF is the better choice.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "endometriosis surgery" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: ShieldCheck, t: "Fertility-Sparing Surgeons", d: "Conservative laparoscopic technique that protects ovarian reserve." },
+      { icon: HeartPulse, t: "Surgery-or-IVF Judgement", d: "Honest, individualised advice on when surgery helps and when IVF is the better route." },
+    ],
   },
   success: {
     factors: [
@@ -3558,8 +3653,8 @@ export const cryopreservation = defineTreatment({
   meta: {
     title: "Cryopreservation — Egg, Sperm & Embryo Freezing — Bavishi Fertility Institute",
     description:
-      "Cryopreservation explained — vitrification of eggs, sperm and embryos to preserve fertility for medical or personal reasons. Class 1000 labs, high survival rates, since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
+      "Cryopreservation explained — vitrification of eggs, sperm and embryos to preserve fertility for medical or personal reasons. Class 1000 labs, high survival rates, since 1998.",
+    ogImage: "/assets/treatments/fertility-preservation.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -3573,16 +3668,16 @@ export const cryopreservation = defineTreatment({
     h1: "Cryopreservation",
     h1Em: "(Fertility Preservation)",
     tagline:
-      "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline.",
-    badges: ["Vitrification", "High Survival Rates", "Since 1984", "Class 1000 Labs"],
-    image: "/assets/about-clinic.jpg",
+      "Freeze your eggs, sperm or embryos today to protect your chance of parenthood tomorrow — whether for medical reasons or to plan your family on your own timeline. BFI has achieved the first childbirth of India with vitrified frozen oocytes. Our team trained at the Hiroshima HART Institute, Japan, with Dr. Tetsunori Mukaida — one of the inventors of the vitrification technique.",
+    badges: ["Vitrification", "High Survival Rates", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
+    image: "/assets/treatments/fertility-preservation.png",
     imageAlt: "Cryopreservation (egg, sperm and embryo freezing) at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is", em: "Cryopreservation?" },
     paragraphs: [
       "Cryopreservation is the freezing and long-term storage of reproductive cells — eggs, sperm or embryos — so they can be used to achieve a pregnancy in the future. Modern vitrification freezes cells so rapidly that damaging ice crystals do not form, giving excellent survival rates on thawing.",
-      "People choose to preserve fertility for many reasons: before cancer treatment, before fertility-reducing surgery, to delay parenthood for personal or professional reasons, or to store surplus embryos from an IVF cycle. Stored samples remain viable for many years.",
+      "People choose to preserve fertility for many reasons: before cancer treatment, before fertility-reducing surgery, to delay parenthood for personal or professional reasons, or to store surplus embryos from an IVF cycle. Stored samples remain viable for many years. Bavishi Fertility Institute achieved India's first childbirth using vitrified frozen oocytes.",
     ],
     aside: BFI_ASIDE,
   },
@@ -3593,60 +3688,90 @@ export const cryopreservation = defineTreatment({
       "Protects fertility before chemotherapy, radiation or surgery.",
       "Lets you plan parenthood on your own timeline.",
       "Vitrification gives high survival rates on thawing.",
-      "Stores surplus IVF embryos for later attempts.",
+      "Stores surplus IVF embryos for later attempts without repeating full stimulation.",
       "Frozen embryo transfers can be as successful as fresh.",
       "Samples remain viable for many years in secure storage.",
+      "Stores eggs at their current, younger quality — no need for a partner at the time of freezing.",
+      "A reliable backup for IVF and IUI cycles — avoids the pressure of producing a sample on the day.",
+    ],
+  },
+  types: {
+    heading: { lead: "Types of", em: "cryopreservation" },
+    subtitle: "Three forms of fertility freezing — each suited to different circumstances.",
+    items: [
+      { icon: Egg, t: "Egg Freezing (Oocyte Cryopreservation)", d: "Mature eggs are collected after ovarian stimulation and vitrified. Ideal for women wishing to delay childbearing, those facing cancer treatment or surgery, or anyone who wants to preserve younger, healthier eggs. When ready, eggs are thawed, fertilised by ICSI, and transferred as embryos." },
+      { icon: Baby, t: "Embryo Freezing (Embryo Cryopreservation)", d: "Good-quality embryos created during IVF are vitrified and stored for future frozen-embryo transfer (FET). Lets couples try again — or plan a sibling — without repeating stimulation and egg retrieval. FET success can match or exceed fresh transfer." },
+      { icon: Beaker, t: "Sperm Freezing (Sperm Banking)", d: "A semen sample is analysed, frozen and stored in liquid nitrogen. Simple, quick and reliable — ideal before cancer treatment, vasectomy, declining counts, or as a backup so a sample is always available on the day of IVF or IUI." },
     ],
   },
   whoNeedsIt: {
     heading: { lead: "Who should", em: "consider it" },
     subtitle: "Cryopreservation suits a wide range of medical and personal situations.",
     items: [
-      "Before cancer treatment that can harm fertility.",
+      "Before cancer treatment that can harm fertility (eggs, sperm or embryos).",
       "Before surgery that may reduce ovarian or testicular function.",
       "Women wishing to delay childbearing while preserving younger eggs.",
-      "Men who will be unavailable on the day of an IVF procedure.",
+      "Men who will be unavailable on the day of an IVF procedure, or with a low or falling sperm count.",
       "Couples with surplus good-quality embryos after IVF.",
+      "Before a vasectomy, as a safeguard.",
+      "Anyone undergoing PGT, where embryos are frozen pending results.",
+      "Single women who want to preserve their options.",
+      "Couples wishing to space pregnancies or plan a sibling.",
     ],
   },
   process: {
     heading: { lead: "How freezing", em: "works" },
     subtitle: "A safe, well-established process from collection to storage.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Consultation", d: "We discuss your goals and which cells to preserve — eggs, sperm or embryos." },
-      { icon: Egg, n: "02", t: "Collection", d: "Egg retrieval after stimulation, a sperm sample, or embryos created by IVF." },
-      { icon: Snowflake, n: "03", t: "Vitrification", d: "Cells are flash-frozen by vitrification to avoid ice-crystal damage." },
-      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Samples are stored safely in monitored liquid-nitrogen tanks." },
-      { icon: FlaskConical, n: "05", t: "Future Use", d: "Thawed and used in IUI, IVF or a frozen-embryo transfer when you are ready." },
+      { icon: ClipboardCheck, n: "01", t: "Consultation & Assessment", d: "We discuss your goals and which cells to preserve — eggs, sperm or embryos. For egg freezing, AMH and antral-follicle count are assessed." },
+      { icon: Syringe, n: "02", t: "Collection / Stimulation", d: "Egg retrieval after ~2 weeks of ovarian stimulation, a same-day sperm sample, or embryos created by IVF and cultured to the best stage." },
+      { icon: Snowflake, n: "03", t: "Vitrification", d: "Cells or embryos are flash-frozen by vitrification to avoid ice-crystal damage." },
+      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Samples are stored safely in monitored liquid-nitrogen tanks for years." },
+      { icon: FlaskConical, n: "05", t: "Future Use", d: "Thawed and used in IUI, IVF–ICSI or a frozen-embryo transfer when you are ready." },
     ],
-    note: "Storage is reviewed periodically, and samples can be kept for many years.",
+    note: "Storage is reviewed periodically, and samples can be kept for many years. For egg freezing, freezing more eggs and at a younger age improves the chance of a future baby.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "fertility preservation" },
+    items: [
+      { icon: Award, t: "India's First Vitrified-Oocyte Birth", d: "Bavishi Fertility Institute achieved India's first childbirth using vitrified frozen oocytes." },
+      { icon: Snowflake, t: "Trained at the Source", d: "Our team trained at the Hiroshima HART Institute, Japan, with Dr. Tetsunori Mukaida — one of the inventors of the vitrification technique." },
+      { icon: ShieldCheck, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+    ],
   },
   success: {
     factors: [
-      "Age at the time of freezing (especially for eggs)",
-      "The number of eggs or embryos stored",
-      "Cell quality before freezing",
+      "Age at the time of freezing (especially for eggs — the single biggest factor)",
+      "The number of eggs, embryos or sperm vials stored",
+      "Cell or embryo quality before freezing",
       "Laboratory and vitrification expertise",
-      "Uterine health at the time of future transfer",
+      "Endometrial preparation and uterine health at the time of future transfer",
+      "The fertility treatment used later (IUI vs IVF–ICSI)",
     ],
-    note: "Survival after thawing is high with vitrification, but a future pregnancy depends on many factors and cannot be guaranteed. Younger age at freezing improves outcomes.",
+    note: "Survival after thawing is high with vitrification, but a future pregnancy depends on many factors and cannot be guaranteed. Younger age at freezing improves outcomes. Even low-count sperm samples can be used effectively with ICSI.",
   },
   risks: {
     heading: { lead: "Risks &", em: "considerations" },
     items: [
       { t: "Not a guarantee", d: "Freezing preserves cells but does not guarantee a future baby.", help: "We give realistic, age-based expectations so you can plan with clarity." },
-      { t: "Some loss on thawing", d: "Not every frozen cell survives the freeze–thaw process.", help: "Vitrification gives high survival, and we advise on numbers to store accordingly." },
+      { t: "Some loss on thawing", d: "Not every frozen cell or embryo survives the freeze–thaw process.", help: "Vitrification gives high survival, and we advise on numbers to store accordingly." },
+      { t: "Stimulation effects (egg freezing)", d: "The stimulation cycle carries a small risk of OHSS and minor side-effects.", help: "Safe, individualised protocols and monitoring keep this risk low." },
+      { t: "Best done younger (egg freezing)", d: "Eggs frozen at an older age have lower success.", help: "We advise on ideal timing so the eggs you store give the best chance." },
       { t: "Ongoing storage", d: "Stored samples need continued, secure storage over time.", help: "Our monitored facility and clear storage agreements keep samples safe." },
     ],
   },
   faqs: [
     { q: "What can be frozen?", a: "Eggs, sperm and embryos can all be cryopreserved. Which is right for you depends on your situation, relationship status and goals." },
     { q: "What is vitrification?", a: "An ultra-rapid freezing method that turns cells to a glass-like state without forming ice crystals, giving much higher survival rates than older slow-freezing." },
-    { q: "How long can samples be stored?", a: "For many years. Cells frozen by vitrification remain viable over long periods when stored correctly in liquid nitrogen." },
-    { q: "Is frozen as good as fresh?", a: "For embryos, frozen-embryo transfers can be as successful as fresh. Egg and sperm outcomes depend on age and quality at freezing." },
-    { q: "Who should freeze their fertility?", a: "Anyone facing fertility-reducing treatment or surgery, those wishing to delay parenthood, and couples with surplus embryos after IVF." },
+    { q: "How long can samples be stored?", a: "For many years. Cells frozen by vitrification remain viable over long periods when stored correctly in liquid nitrogen, with no clear reduction in quality over time." },
+    { q: "Is frozen as good as fresh?", a: "For embryos, frozen-embryo transfers can be as successful as — and sometimes more successful than — fresh transfers, because the lining can be optimally prepared. Egg and sperm outcomes depend on age and quality at freezing." },
+    { q: "What is the best age to freeze eggs?", a: "Earlier is better — ideally in your late twenties to early thirties — because egg quality and quantity decline with age. Freezing younger eggs gives the best future chance." },
+    { q: "How many eggs should I freeze?", a: "It varies with age, but more eggs improve the odds. After assessing your reserve, your specialist will advise a target number, sometimes over more than one cycle." },
+    { q: "Does freezing affect sperm quality?", a: "Motility can fall slightly after thawing, but stored sperm works well for IUI and especially IVF–ICSI, which needs only a few healthy sperm." },
+    { q: "Can frozen embryos be used for a sibling later?", a: "Yes. Many couples return to use their stored embryos to try for a second child without repeating a full IVF cycle." },
+    { q: "Who should freeze their fertility?", a: "Anyone facing fertility-reducing treatment or surgery, those wishing to delay parenthood, men with declining sperm counts, and couples with surplus embryos after IVF." },
   ],
-  related: ["egg-freezing", "sperm-freezing", "embryo-freezing", "ivf", "fertility-preservation"],
+  related: ["ivf", "ovarian-reserve", "azoospermia", "surgical-sperm-retrieval"],
   cta: {
     heading: "Thinking about",
     headingEm: "preserving your fertility?",
@@ -3654,215 +3779,10 @@ export const cryopreservation = defineTreatment({
   },
 });
 
-export const embryoFreezing = defineTreatment({
-  slug: "embryo-freezing",
-  name: "Embryo Freezing (Embryo Cryopreservation)",
-  shortName: "Embryo Freezing",
-  alternateName: "Embryo Cryopreservation",
-  reviewerSlug: "falguni-bavishi",
-  meta: {
-    title: "Embryo Freezing (Embryo Cryopreservation) — Bavishi Fertility Institute",
-    description:
-      "Embryo freezing explained — how surplus IVF embryos are vitrified and stored for frozen-embryo transfer, who benefits, and success factors. High survival rates, since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
-  },
-  procedure: {
-    procedureType: "https://schema.org/MedicalProcedure",
-    bodyLocation: "Embryos",
-    howPerformed:
-      "Good-quality embryos from an IVF cycle are frozen by vitrification and stored, then thawed and transferred to the uterus in a later frozen-embryo-transfer (FET) cycle.",
-    followup: "A pregnancy test follows the frozen-embryo transfer about two weeks later.",
-  },
-  hero: {
-    eyebrow: "Fertility Preservation",
-    h1: "Embryo",
-    h1Em: "Freezing",
-    tagline:
-      "Surplus embryos from an IVF cycle can be safely frozen and stored — giving you further chances of pregnancy without repeating full stimulation and egg collection.",
-    badges: ["Vitrification", "Frozen-Embryo Transfer", "Since 1984", "High Survival"],
-    image: "/assets/about-clinic.jpg",
-    imageAlt: "Embryo freezing (embryo cryopreservation) at Bavishi Fertility Institute",
-  },
-  whatIs: {
-    heading: { lead: "What is", em: "Embryo Freezing?" },
-    paragraphs: [
-      "Embryo freezing is the cryopreservation of embryos created during IVF. After fertilisation, good-quality embryos that are not transferred in the fresh cycle are frozen by vitrification and stored for future use.",
-      "It is one of the most established and successful forms of fertility preservation. A frozen-embryo transfer (FET) in a later cycle can be as successful as a fresh transfer, and lets couples try for further pregnancies — or a sibling — without repeating stimulation and egg retrieval.",
-    ],
-    aside: BFI_ASIDE,
-  },
-  benefits: {
-    heading: { lead: "The advantages of", em: "embryo freezing" },
-    subtitle: "More chances of pregnancy from a single IVF cycle.",
-    items: [
-      "Extra attempts without repeating full IVF stimulation.",
-      "Frozen-embryo transfers can match fresh-cycle success.",
-      "Allows a planned, optimal transfer in a natural-like cycle.",
-      "Lets the body recover before transfer, reducing OHSS risk.",
-      "Enables PGT, where the embryo is frozen while results return.",
-      "Supports planning for a future sibling.",
-    ],
-  },
-  whoNeedsIt: {
-    heading: { lead: "Who benefits", em: "from it" },
-    subtitle: "Embryo freezing is part of most modern IVF journeys.",
-    items: [
-      "Couples with surplus good-quality embryos after IVF.",
-      "Those advised a freeze-all cycle to avoid OHSS.",
-      "Anyone undergoing PGT, where embryos are frozen pending results.",
-      "Couples wishing to space pregnancies or plan a sibling.",
-      "Before treatment or surgery that may affect fertility.",
-    ],
-  },
-  process: {
-    heading: { lead: "How it", em: "works" },
-    subtitle: "From IVF to storage and a future frozen transfer.",
-    steps: [
-      { icon: FlaskConical, n: "01", t: "IVF & Fertilisation", d: "Eggs are collected and fertilised, and embryos are cultured in the lab." },
-      { icon: Microscope, n: "02", t: "Embryo Selection", d: "Good-quality embryos suitable for freezing are identified." },
-      { icon: Snowflake, n: "03", t: "Vitrification", d: "Selected embryos are flash-frozen to preserve them safely." },
-      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Embryos are stored in monitored liquid-nitrogen tanks." },
-      { icon: Baby, n: "05", t: "Frozen-Embryo Transfer", d: "Thawed and transferred in a prepared cycle when you are ready." },
-    ],
-    note: "FET timing can be optimised to the lining, often improving the chance of implantation.",
-  },
-  success: {
-    factors: [
-      "Embryo quality and stage at freezing",
-      "The woman's age when the embryos were created",
-      "Endometrial preparation for the transfer",
-      "Laboratory and vitrification expertise",
-      "Overall uterine and general health",
-    ],
-    note: "Vitrified embryos have high survival rates and FET success can equal fresh transfer, though a pregnancy still cannot be guaranteed.",
-  },
-  risks: {
-    heading: { lead: "Risks &", em: "considerations" },
-    items: [
-      { t: "Some loss on thawing", d: "A small proportion of embryos may not survive thawing.", help: "Vitrification gives high survival, and surviving embryos are assessed before transfer." },
-      { t: "No guarantee of pregnancy", d: "A frozen embryo is a chance of pregnancy, not a certainty.", help: "We give realistic expectations based on embryo quality and your age." },
-      { t: "Storage decisions", d: "Stored embryos involve ongoing storage and future choices.", help: "Clear consent and storage agreements cover these from the start." },
-    ],
-  },
-  faqs: [
-    { q: "How long can embryos stay frozen?", a: "For many years. Vitrified embryos remain viable over long periods when stored correctly, with no clear reduction in quality over time." },
-    { q: "Is a frozen-embryo transfer as good as fresh?", a: "Yes — frozen-embryo transfers can be as successful as, and sometimes more successful than, fresh transfers, because the lining can be optimally prepared." },
-    { q: "Do all embryos survive freezing?", a: "Most do. Vitrification gives high survival rates, though a small number may not survive thawing." },
-    { q: "Why might a freeze-all cycle be advised?", a: "To avoid OHSS, to allow PGT results, or to transfer into a better-prepared lining — all of which can improve safety and success." },
-    { q: "Can frozen embryos be used for a sibling later?", a: "Yes. Many couples return to use their stored embryos to try for a second child without repeating a full IVF cycle." },
-  ],
-  related: ["cryopreservation", "egg-freezing", "ivf", "pgt", "fertility-preservation"],
-  cta: {
-    heading: "Considering",
-    headingEm: "embryo freezing?",
-    subtitle: "Learn how freezing your embryos can give you more chances from one IVF cycle — book a consultation.",
-  },
-});
-
-export const spermFreezing = defineTreatment({
-  slug: "sperm-freezing",
-  name: "Sperm Freezing (Sperm Banking)",
-  shortName: "Sperm Freezing",
-  alternateName: "Sperm Banking / Sperm Cryopreservation",
-  reviewerSlug: "parth-bavishi",
-  meta: {
-    title: "Sperm Freezing (Sperm Banking) — Bavishi Fertility Institute",
-    description:
-      "Sperm freezing explained — preserving sperm before cancer treatment, surgery or vasectomy, or as a backup for IVF. Simple, safe and long-lasting. Trusted since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
-  },
-  procedure: {
-    procedureType: "https://schema.org/MedicalProcedure",
-    bodyLocation: "Sperm",
-    howPerformed:
-      "A semen sample is analysed, frozen by cryopreservation and stored in liquid nitrogen, then thawed for use in IUI or IVF–ICSI in the future.",
-    followup: "Stored sperm is thawed and used in a future fertility-treatment cycle as required.",
-  },
-  hero: {
-    eyebrow: "Fertility Preservation",
-    h1: "Sperm Freezing",
-    h1Em: "(Sperm Banking)",
-    tagline:
-      "A simple, reliable way to preserve fertility — before cancer treatment or surgery, or as a backup for IVF — so your sperm is ready whenever you need it.",
-    badges: ["Simple & Quick", "Long-term Storage", "Since 1984", "IUI · IVF–ICSI"],
-    image: "/assets/about-clinic.jpg",
-    imageAlt: "Sperm freezing (sperm banking) at Bavishi Fertility Institute",
-  },
-  whatIs: {
-    heading: { lead: "What is", em: "Sperm Freezing?" },
-    paragraphs: [
-      "Sperm freezing, or sperm banking, is the collection, freezing and storage of a man's sperm so it can be used to achieve a pregnancy in the future. It is a simple, quick and well-established method of preserving male fertility.",
-      "Men freeze sperm before cancer treatment or surgery that can affect fertility, before a vasectomy, when sperm counts are declining, or as a backup so a sample is always available on the day of an IVF or IUI procedure. Frozen sperm remains usable for many years.",
-    ],
-    aside: BFI_ASIDE,
-  },
-  benefits: {
-    heading: { lead: "Why bank", em: "your sperm" },
-    subtitle: "A small step now that protects your options later.",
-    items: [
-      "Preserves fertility before chemotherapy, radiation or surgery.",
-      "A reliable backup for IVF and IUI cycles.",
-      "Useful when sperm counts are low or declining.",
-      "Avoids the pressure of producing a sample on the day.",
-      "Simple, quick and minimally invasive.",
-      "Stored samples remain usable for many years.",
-    ],
-  },
-  whoNeedsIt: {
-    heading: { lead: "Who should", em: "consider it" },
-    subtitle: "Sperm banking suits many medical and practical situations.",
-    items: [
-      "Before cancer treatment or fertility-affecting surgery.",
-      "Before a vasectomy, as a safeguard.",
-      "Men with a low or falling sperm count.",
-      "Those who may be travelling or unavailable for an IVF cycle.",
-      "Before surgical sperm retrieval, to store surplus sperm.",
-    ],
-  },
-  process: {
-    heading: { lead: "How it", em: "works" },
-    subtitle: "A straightforward, same-day process.",
-    steps: [
-      { icon: ClipboardCheck, n: "01", t: "Consultation & Screening", d: "A brief consultation and routine infection screening before storage." },
-      { icon: Beaker, n: "02", t: "Sample & Analysis", d: "A semen sample is provided and analysed for count and quality." },
-      { icon: Snowflake, n: "03", t: "Freezing", d: "The sample is cryopreserved and divided into storage vials." },
-      { icon: ShieldCheck, n: "04", t: "Secure Storage", d: "Vials are stored safely in monitored liquid-nitrogen tanks." },
-      { icon: FlaskConical, n: "05", t: "Future Use", d: "Thawed and used for IUI or IVF–ICSI whenever needed." },
-    ],
-    note: "Where possible, banking before cancer treatment is arranged quickly so it does not delay care.",
-  },
-  success: {
-    factors: [
-      "Sperm count and quality before freezing",
-      "The number of vials stored",
-      "The fertility treatment used later (IUI vs IVF–ICSI)",
-      "The female partner's age and fertility",
-      "Laboratory and storage standards",
-    ],
-    note: "Sperm survives freezing well, and even samples with a low count can be used effectively with ICSI. A future pregnancy still depends on many factors.",
-  },
-  risks: {
-    heading: { lead: "Risks &", em: "considerations" },
-    items: [
-      { t: "Some loss on thawing", d: "Motility can drop a little after thawing.", help: "We store enough vials and can use ICSI, which needs very few sperm." },
-      { t: "Time before treatment", d: "Banking is best done before fertility-reducing treatment starts.", help: "We arrange urgent storage quickly so it does not delay cancer care." },
-      { t: "Ongoing storage", d: "Stored sperm needs continued secure storage.", help: "Clear storage agreements and a monitored facility keep samples safe." },
-    ],
-  },
-  faqs: [
-    { q: "Why should I freeze my sperm?", a: "Common reasons are before cancer treatment or surgery that can affect fertility, before a vasectomy, a declining sperm count, or as a backup for IVF/IUI." },
-    { q: "How long can sperm be stored?", a: "For many years. Properly frozen sperm remains viable over long periods in liquid-nitrogen storage." },
-    { q: "Does freezing affect sperm quality?", a: "Motility can fall slightly after thawing, but stored sperm works well for IUI and especially IVF–ICSI, which needs only a few healthy sperm." },
-    { q: "Is sperm banking before cancer treatment urgent?", a: "Ideally it is done before chemotherapy or radiation begins. We arrange storage quickly so it does not delay your cancer treatment." },
-    { q: "Can low-count samples be banked?", a: "Yes. Even low-count samples are worth freezing, as ICSI can achieve fertilisation with very few sperm." },
-  ],
-  related: ["cryopreservation", "azoospermia", "surgical-sperm-retrieval", "ivf", "fertility-preservation"],
-  cta: {
-    heading: "Need to",
-    headingEm: "bank your sperm?",
-    subtitle: "Arrange simple, secure sperm freezing — book a confidential appointment with our team.",
-  },
-});
+/* spermFreezing, embryoFreezing stay covered by the combined Cryopreservation
+ * page above. eggFreezing was un-merged back into its own page below, per
+ * client request — it's the one couples/women search for by name most often
+ * and the doc explicitly asked for it to be separate again. */
 
 export const eggFreezing = defineTreatment({
   slug: "egg-freezing",
@@ -3873,8 +3793,8 @@ export const eggFreezing = defineTreatment({
   meta: {
     title: "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute",
     description:
-      "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
+      "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1998.",
+    ogImage: "/assets/treatments/fertility-preservation.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -3889,8 +3809,8 @@ export const eggFreezing = defineTreatment({
     h1Em: "(Oocyte Cryopreservation)",
     tagline:
       "Freeze younger, healthier eggs now to keep your options open for later — whether for medical reasons or to give yourself time on your own terms.",
-    badges: ["Vitrification", "Freeze Younger Eggs", "Since 1984", "Class 1000 Labs"],
-    image: "/assets/about-clinic.jpg",
+    badges: ["Vitrification", "Freeze Younger Eggs", "Since 1998", "Class 1000 Labs"],
+    image: "/assets/treatments/fertility-preservation.png",
     imageAlt: "Egg freezing (oocyte cryopreservation) at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -3936,6 +3856,14 @@ export const eggFreezing = defineTreatment({
     ],
     note: "Freezing more eggs, and at a younger age, improves the chance of a future baby.",
   },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "egg freezing" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: Snowflake, t: "High-Survival Vitrification", d: "Advanced flash-freezing technique gives excellent egg survival on thawing." },
+      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard, protecting every egg." },
+    ],
+  },
   success: {
     factors: [
       "Age at the time of freezing — the single biggest factor",
@@ -3961,7 +3889,7 @@ export const eggFreezing = defineTreatment({
     { q: "How are frozen eggs used later?", a: "They are thawed, fertilised with sperm by ICSI, and the resulting embryos are transferred to the uterus in an IVF cycle." },
     { q: "Do frozen eggs survive well?", a: "Vitrification gives high egg-survival rates, though not every egg survives or fertilises — which is why the number frozen matters." },
   ],
-  related: ["cryopreservation", "embryo-freezing", "ovarian-reserve", "ivf", "fertility-preservation"],
+  related: ["cryopreservation", "ovarian-reserve", "ovarian-rejuvenation", "ivf", "prp-infertility"],
   cta: {
     heading: "Thinking about",
     headingEm: "freezing your eggs?",
@@ -3982,8 +3910,8 @@ export const ivfEvaluation = defineTreatment({
   meta: {
     title: "IVF Failure Evaluation — Why IVF Failed & What Next — Bavishi Fertility Institute",
     description:
-      "A thorough evaluation after failed IVF — analysing eggs, sperm, embryos, the uterus and implantation to find the real reason, and building a smarter next plan. Trusted since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
+      "A thorough evaluation after failed IVF — analysing eggs, sperm, embryos, the uterus and implantation to find the real reason, and building a smarter next plan. Trusted since 1998.",
+    ogImage: "/assets/treatments/ivf-evaluation.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -3998,8 +3926,8 @@ export const ivfEvaluation = defineTreatment({
     h1Em: "Evaluation",
     tagline:
       "A failed cycle is not the end — it is information. A meticulous evaluation of every step tells us why IVF did not work, so the next attempt is smarter, not just another try.",
-    badges: ["Root-cause Analysis", "Personalised Re-plan", "Since 1984", "Second-opinion Friendly"],
-    image: "/assets/about-clinic.jpg",
+    badges: ["Root-cause Analysis", "Personalised Re-plan", "Since 1998", "Second-opinion Friendly"],
+    image: "/assets/treatments/ivf-evaluation.png",
     imageAlt: "IVF failure evaluation at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -4087,8 +4015,8 @@ export const eraTest = defineTreatment({
   meta: {
     title: "ERA Test (Endometrial Receptivity Analysis) — Bavishi Fertility Institute",
     description:
-      "The ERA test explained — how endometrial receptivity analysis personalises embryo-transfer timing to find your window of implantation, especially after repeated failure. Since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
+      "The ERA test explained — how endometrial receptivity analysis personalises embryo-transfer timing to find your window of implantation, especially after repeated failure. Since 1998.",
+    ogImage: "/assets/treatments/era-test.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalTest",
@@ -4103,8 +4031,8 @@ export const eraTest = defineTreatment({
     h1Em: "(Endometrial Receptivity Analysis)",
     tagline:
       "Even a perfect embryo needs the right moment to implant. The ERA test finds your personal window of implantation, so the transfer is timed precisely for you.",
-    badges: ["Personalised Timing", "For Recurrent Failure", "Since 1984", "Genomic Test"],
-    image: "/assets/about-clinic.jpg",
+    badges: ["Personalised Timing", "For Recurrent Failure", "Since 1998", "Genomic Test"],
+    image: "/assets/treatments/era-test.png",
     imageAlt: "ERA test (endometrial receptivity analysis) at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -4191,8 +4119,8 @@ export const pgt = defineTreatment({
   meta: {
     title: "Preimplantation Genetic Testing (PGT-A / PGT-M / PGT-SR) — Bavishi Fertility Institute",
     description:
-      "PGT explained — testing IVF embryos for chromosomal and genetic conditions before transfer, to improve success and reduce miscarriage. PGT-A, PGT-M and PGT-SR, since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
+      "PGT explained — testing IVF embryos for chromosomal and genetic conditions before transfer, to improve success and reduce miscarriage. PGT-A, PGT-M and PGT-SR, since 1998.",
+    ogImage: "/assets/treatments/pgt.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalTest",
@@ -4207,8 +4135,8 @@ export const pgt = defineTreatment({
     h1Em: "Genetic Testing (PGT)",
     tagline:
       "PGT screens IVF embryos for chromosomal and genetic problems before transfer — helping select the healthiest embryo, improving success and reducing the risk of miscarriage.",
-    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1984", "Class 1000 Labs"],
-    image: "/assets/about-clinic.jpg",
+    badges: ["PGT-A · PGT-M · PGT-SR", "Healthy-embryo Selection", "Since 1998", "Class 1000 (10X Clean Air) IVF Labs"],
+    image: "/assets/treatments/pgt.png",
     imageAlt: "Preimplantation genetic testing (PGT) at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -4218,6 +4146,14 @@ export const pgt = defineTreatment({
       "There are three types: PGT-A checks for the correct number of chromosomes (the commonest cause of failed implantation and miscarriage); PGT-M tests for a specific inherited single-gene disease; and PGT-SR detects chromosomal structural rearrangements. PGT improves the chance of choosing an embryo that can lead to a healthy baby.",
     ],
     aside: BFI_ASIDE,
+  },
+  types: {
+    heading: { lead: "Types of", em: "PGT" },
+    items: [
+      { icon: Dna, t: "PGT-A", d: "Checks embryos have the correct number of chromosomes — the commonest cause of failed implantation and miscarriage." },
+      { icon: Microscope, t: "PGT-M", d: "Tests for a specific inherited single-gene disease known to run in the family." },
+      { icon: ScanLine, t: "PGT-SR", d: "Detects chromosomal structural rearrangements, such as translocations, carried by a parent." },
+    ],
   },
   benefits: {
     heading: { lead: "The advantages of", em: "PGT" },
@@ -4253,6 +4189,14 @@ export const pgt = defineTreatment({
       { icon: Baby, n: "05", t: "Healthy-embryo Transfer", d: "A single healthy embryo is transferred in a later frozen cycle." },
     ],
     note: "Because results take time, PGT cycles use a freeze-all approach with a later frozen-embryo transfer.",
+  },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "PGT" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Air purity 10× cleaner than the international Class 10,000 standard, protecting every biopsied embryo." },
+      { icon: Microscope, t: "Skilled Embryology", d: "An in-house team of experienced embryologists performs every embryo biopsy with precision." },
+    ],
   },
   success: {
     factors: [
@@ -4296,8 +4240,8 @@ export const surrogacy = defineTreatment({
   meta: {
     title: "Surrogacy Treatment — Gestational Surrogacy — Bavishi Fertility Institute",
     description:
-      "Gestational surrogacy explained — when it is needed, how the process works, and India's legal framework under the Surrogacy Act. Ethical, fully-supported care since 1984.",
-    ogImage: "/assets/about-clinic.jpg",
+      "Gestational surrogacy explained — when it is needed, how the process works, and India's legal framework under the Surrogacy Act. Ethical, fully-supported care since 1998.",
+    ogImage: "/assets/treatments/surrogacy.png",
   },
   procedure: {
     procedureType: "https://schema.org/MedicalProcedure",
@@ -4312,8 +4256,8 @@ export const surrogacy = defineTreatment({
     h1Em: "Treatment",
     tagline:
       "When carrying a pregnancy is not possible, gestational surrogacy offers a path to parenthood — handled ethically, legally and with complete support at every step.",
-    badges: ["Gestational Surrogacy", "Surrogacy Act Compliant", "Since 1984", "Full Support"],
-    image: "/assets/about-clinic.jpg",
+    badges: ["Gestational Surrogacy", "Surrogacy Act Compliant", "Since 1998", "Full Support"],
+    image: "/assets/treatments/surrogacy.png",
     imageAlt: "Surrogacy treatment at Bavishi Fertility Institute",
   },
   whatIs: {
@@ -4358,6 +4302,14 @@ export const surrogacy = defineTreatment({
     ],
     note: "Surrogacy in India is altruistic and tightly regulated; we follow the law fully at every stage.",
   },
+  whyUs: {
+    heading: { lead: "Why choose Bavishi Fertility Institute for", em: "surrogacy" },
+    items: [
+      { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
+      { icon: ListChecks, t: "Ethical & Legally Compliant", d: "Every step follows India's Surrogacy (Regulation) Act, with full documentation and support." },
+      { icon: ShieldCheck, t: "Rigorous Surrogate Screening", d: "Surrogates are medically and psychologically screened before matching." },
+    ],
+  },
   success: {
     factors: [
       "Embryo quality from the intended parents or donors",
@@ -4383,7 +4335,7 @@ export const surrogacy = defineTreatment({
     { q: "Will the baby be genetically ours?", a: "If the intended parents' own eggs and sperm are used, yes. Donor eggs or sperm are used only where medically needed. The surrogate is never genetically related to the baby." },
     { q: "Who can be a surrogate?", a: "A surrogate must meet the medical and legal criteria defined under the Act and passes thorough medical and psychological screening before proceeding." },
   ],
-  related: ["ivf-failure", "egg-donation", "embryo-donation", "ivf", "ivf-evaluation"],
+  related: ["ivf-failure", "egg-donation", "sperm-donation", "ivf"],
   cta: {
     heading: "Exploring",
     headingEm: "surrogacy?",
@@ -4394,6 +4346,8 @@ export const surrogacy = defineTreatment({
 export const TREATMENTS: Treatment[] = [
   ivf,
   ivfFailure,
+  ivfEvaluation,
+  eraTest,
   iui,
   icsi,
   picsi,
@@ -4405,6 +4359,8 @@ export const TREATMENTS: Treatment[] = [
   eggDonation,
   spermDonation,
   embryoDonation,
+  surrogacy,
+  pgt,
   // Male Infertility
   oligospermia,
   asthenospermia,
@@ -4422,6 +4378,7 @@ export const TREATMENTS: Treatment[] = [
   endometriosis,
   // Fertility Preservation
   cryopreservation,
+  eggFreezing,
 ];
 export const treatmentBySlug = (slug: string) => TREATMENTS.find((t) => t.slug === slug);
 
@@ -4437,11 +4394,17 @@ export const treatmentBySlug = (slug: string) => TREATMENTS.find((t) => t.slug =
  *  code `Treatment`. Both are structurally assignable. */
 export type TreatmentGraphInput = Pick<
   Treatment,
-  "href" | "name" | "alternateName" | "meta" | "procedure" | "breadcrumbName" | "lastReviewed" | "reviewerSlug" | "faqs" | "video"
+  "slug" | "name" | "alternateName" | "meta" | "procedure" | "breadcrumbName" | "lastReviewed" | "reviewerSlug" | "faqs" | "video"
 >;
 
 export function treatmentGraph(t: TreatmentGraphInput): Record<string, unknown>[] {
-  const url = abs(t.href);
+  // The page's own canonical URL is always its actual route — never `href`,
+  // which is a nav-link-destination override that can (and does, for some
+  // legacy-seeded treatments) point at an old pre-migration URL. Using it
+  // here caused canonical/OG/JSON-LD to advertise a 301-redirected URL
+  // instead of the page's real self address (SEO audit finding, 2026-08-12).
+  const canonicalPath = `/treatments/${t.slug}`;
+  const url = abs(canonicalPath);
   const reviewer = doctorBySlug(t.reviewerSlug);
 
   const nodes: Record<string, unknown>[] = [
@@ -4468,8 +4431,8 @@ export function treatmentGraph(t: TreatmentGraphInput): Record<string, unknown>[
     },
     breadcrumbSchema([
       { name: "Home", url: "/" },
-      { name: "Treatments", url: "/#treatments" },
-      { name: t.breadcrumbName, url: t.href },
+      { name: "Treatments", url: "/treatments" },
+      { name: t.breadcrumbName, url: canonicalPath },
     ]),
     faqSchema(t.faqs),
   ];

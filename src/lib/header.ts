@@ -39,6 +39,15 @@ const HEADER_CATEGORY_LABELS: Record<string, string> = {
   "female-infertility": "Female Infertility",
   "fertility-preservation": "Fertility Preservation",
 };
+
+/** Hub page URL for each navCategory column heading link. */
+const HEADER_CATEGORY_HREFS: Record<string, string> = {
+  "advanced-ivf": "/treatments/advanced-fertility-techniques",
+  "donor-services": "/treatments/advanced-fertility-techniques",
+  "male-infertility": "/treatments/male-infertility",
+  "female-infertility": "/treatments/female-infertility",
+  "fertility-preservation": "/treatments/advanced-fertility-techniques",
+};
 // Note: "maternity-services" is intentionally excluded from the IVF Treatments header column.
 
 /** Canonical column order in the "IVF Treatments" mega menu. */
@@ -50,6 +59,41 @@ const HEADER_CATEGORY_ORDER = [
   "fertility-preservation",
 ];
 
+/** CMS override for a nav category's header/footer label + display order —
+ *  sourced from siteSettings.navLabels. Falls back per-category when a field
+ *  is unset, so an empty/partial override list changes nothing. */
+export type NavLabelOverride = { category?: string; headerLabel?: string; footerLabel?: string; order?: number };
+
+/** Relabel + reorder a set of headed items (mega columns / footer groups) using
+ *  CMS navLabels overrides, matched against each item's DEFAULT label. Items
+ *  with no matching category, or no override, keep their original heading and
+ *  relative order — safe no-op when navLabels is empty. */
+export function applyNavLabelOverrides<T>(
+  items: T[],
+  getHeading: (item: T) => string,
+  setHeading: (item: T, heading: string) => T,
+  defaultLabels: Record<string, string>,
+  navLabels: NavLabelOverride[] | undefined,
+  labelField: "headerLabel" | "footerLabel",
+): T[] {
+  if (!navLabels?.length) return items;
+  const catByLabel = new Map(Object.entries(defaultLabels).map(([cat, label]) => [label, cat]));
+  const overrideByCat = new Map(navLabels.filter((n) => n.category).map((n) => [n.category as string, n]));
+  return items
+    .map((item, i) => {
+      const cat = catByLabel.get(getHeading(item));
+      const override = cat ? overrideByCat.get(cat) : undefined;
+      const overrideLabel = override?.[labelField];
+      return {
+        item: overrideLabel ? setHeading(item, overrideLabel) : item,
+        order: override?.order ?? i,
+        i,
+      };
+    })
+    .sort((a, b) => (a.order - b.order) || (a.i - b.i))
+    .map((x) => x.item);
+}
+
 /**
  * Lightweight location descriptor for building the Locations mega menu and footer
  * group dynamically from Payload (no hardcoded lists needed).
@@ -60,6 +104,35 @@ export type NavLocationItem = {
   cityName: string;
   centres: { slug: string; name: string }[];
 };
+
+/** Cities in chronological opening order — drives nav + footer sort. */
+const CITY_NAV_ORDER = ["ahmedabad", "vadodara", "surat", "bhuj", "mumbai", "bhavnagar", "anand", "varanasi"];
+
+/** Centre slugs in opening order for multi-centre cities. */
+const CENTRE_NAV_ORDER: Record<string, string[]> = {
+  ahmedabad: ["paldi", "sindhu-bhavan-road", "nikol"],
+  mumbai: ["ghatkopar", "thane", "vile-parle", "borivali", "vashi"],
+};
+
+/** Sort cities by opening order and centres within each city by the same order. */
+export function sortNavLocations(items: NavLocationItem[]): NavLocationItem[] {
+  return [...items]
+    .sort((a, b) => {
+      const ai = CITY_NAV_ORDER.indexOf(a.citySlug);
+      const bi = CITY_NAV_ORDER.indexOf(b.citySlug);
+      return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+    })
+    .map((city) => {
+      const order = CENTRE_NAV_ORDER[city.citySlug];
+      if (!order || city.centres.length <= 1) return city;
+      const sorted = [...city.centres].sort((a, b) => {
+        const ai = order.indexOf(a.slug);
+        const bi = order.indexOf(b.slug);
+        return (ai === -1 ? 999 : ai) - (bi === -1 ? 999 : bi);
+      });
+      return { ...city, centres: sorted };
+    });
+}
 
 /**
  * Lightweight doctor descriptor for building the header mega panel and footer
@@ -127,21 +200,22 @@ export const HEADER_DEFAULTS: HeaderData = {
   nav: [
     {
       label: "About",
+      href: "/about-bfi",
       mega: [
         { heading: "", items: [
           { label: "About Bavishi Fertility Institute", href: "/about-bfi" },
-          { label: "Why Bavishi Fertility Institute", href: "/#about" },
-          { label: "Simple Treatment", href: "/#about" },
-          { label: "Safe Treatment", href: "/#about" },
-          { label: "Smart Treatment", href: "/#about" },
-          { label: "Success Benchmarks", href: "/#about" },
+          { label: "Why Bavishi Fertility Institute", href: "/why-bfi" },
+          { label: "Simple Treatment", href: "/simple-treatment" },
+          { label: "Safe Treatment", href: "/safe-treatment" },
+          { label: "Smart Treatment", href: "/smart-treatment" },
+          { label: "Success Treatment", href: "/success-benchmarks" },
         ]},
         { heading: "", items: [
-          { label: "History", href: "/#about" },
-          { label: "Our Team", href: "/#doctors" },
-          { label: "Infrastructure", href: "/#about" },
+          { label: "History", href: "/history" },
+          { label: "Our Doctors", href: "/doctors" },
+          { label: "Infrastructure", href: "/infrastructure" },
           { label: "Suraksha Kavach Package", href: destinationHref("suraksha-kavach") },
-          { label: "Easy / Interest Free EMI", href: "/#about" },
+          { label: "Easy / Interest Free EMI", href: "/easy-emi" },
         ]},
       ],
     },
@@ -151,10 +225,12 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     {
       label: "IVF Treatments",
+      href: "/treatments",
       mega: [
-        { heading: "Advanced IVF Treatment", items: [
+        { heading: "Advanced IVF Treatment", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "IVF", href: "/what-is-ivf" },
           { label: "IVF Failure", href: "/ivf-failure" },
+          { label: "Preimplantation Genetic Testing (PGT)", href: "/pgt" },
           { label: "IUI", href: "/intra-uterine-insemination-iui" },
           { label: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
           { label: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
@@ -164,35 +240,35 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
           { label: "Laser Hatching", href: "/laser-assisted-hatching" },
         ]},
-        { heading: "Donor Services", items: [
+        { heading: "Donor Services", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Egg Donation", href: "/egg-donation" },
           { label: "Sperm Donation", href: "/sperm-donation" },
-          { label: "Embryo Donation", href: "/embryo-donation" },
         ]},
-        { heading: "Male Infertility", items: [
+        { heading: "Male Infertility", headingHref: "/treatments/male-infertility", items: [
           { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
           { label: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
           { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
           { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
-          { label: "Varicocele / Micro Surgery", href: "/varicocele" },
           { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
         ]},
-        { heading: "Female Infertility", items: [
+        { heading: "Female Infertility", headingHref: "/treatments/female-infertility", items: [
           { label: "Conceive Naturally", href: "/conceive-naturally" },
           { label: "PRP Infertility", href: "/prp-infertility" },
-          { label: "PCOS", href: "/pcos" },
+          { label: "PMOS-PCOS", href: "/pcos" },
           { label: "Poor Ovarian Reserve / Low Egg Count / Low AMH", href: "/ovarian-reserve" },
           { label: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
           { label: "Fibroid", href: "/fibroids" },
           { label: "Endometriosis", href: "/endometriosis" },
         ]},
-        { heading: "Fertility Preservation", items: [
+        { heading: "Fertility Preservation", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Cryopreservation", href: "/cryopreservation" },
+          { label: "Egg Freezing", href: "/egg-freezing" },
         ]},
       ],
     },
     {
       label: "Maternity Services",
+      href: "/services/maternity-services",
       mega: [
         { heading: "", items: [
           { label: "3D/4D Sonography", href: "/services/3d-4d-sonography" },
@@ -208,6 +284,7 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     {
       label: "Locations",
+      href: "/locations",
       megaCols: 4,
       mega: [
         { heading: "Ahmedabad", headingHref: "/locations/ahmedabad", items: [
@@ -232,39 +309,42 @@ export const HEADER_DEFAULTS: HeaderData = {
     },
     {
       label: "Calculators",
+      href: "/calculators",
       mega: [
         { heading: "Fertility & IVF", items: [
-          { label: "IVF Success Rate Calculator", href: "/#tools" },
-          { label: "IVF Cost Calculator", href: "/#tools" },
-          { label: "AMH Level Interpreter", href: "/#tools" },
-          { label: "Sperm Analysis Calculator", href: "/#tools" },
+          { label: "IVF Success Rate Calculator", href: "/ivf-success-rate-calculator", desc: "Estimate your personalised IVF success probability" },
+          { label: "IVF Cost Calculator", href: "/ivf-cost-calculator", desc: "Plan your treatment budget across cycle types" },
+          { label: "AMH Level Interpreter", href: "/amh-level-interpreter", desc: "Understand your ovarian reserve result" },
+          { label: "Sperm Analysis Calculator", href: "/semen-analysis-calculator", desc: "Interpret your semen analysis against WHO 2021" },
         ]},
         { heading: "Conception & Pregnancy", items: [
-          { label: "Ovulation Calculator", href: "/#tools" },
-          { label: "Fertile Period Calculator", href: "/#tools" },
-          { label: "Natural Pregnancy Calculator", href: "/#tools" },
-          { label: "Miscarriage Risk Calculator", href: "/#tools" },
+          { label: "Ovulation Calculator", href: "/ovulation-calculator", desc: "Find your fertile window and ovulation date" },
+          { label: "Fertile Period Calculator", href: "/fertile-period-calculator", desc: "Track your fertile days and next period" },
+          { label: "Natural Pregnancy Calculator", href: "/natural-pregnancy-calculator", desc: "Estimate your natural conception probability" },
+          { label: "Miscarriage Risk Calculator", href: "/risk-of-repeat-miscarriage-calculator", desc: "Assess your RPL risk profile" },
         ]},
       ],
     },
     {
       label: "Resources",
+      href: destinationHref("blog"),
       mega: [
         { heading: "Learn", items: [
-          { label: "Blog", href: destinationHref("blog") },
-          { label: "Success Stories", href: "/#stories" },
-          { label: "Videos", href: "/#videos" },
-          { label: "Events & Webinars", href: "/#events" },
+          { label: "Blogs", href: destinationHref("blog") },
+          { label: "Testimonial Videos", href: "/testimonial-videos" },
+          { label: "Education Videos", href: "/education-videos" },
+          { label: "Camps", href: "/camps" },
         ]},
-        { heading: "Tools", items: [
-          { label: "Fertility Calculators", href: "/#tools" },
-          { label: "Check IVF Eligibility", href: "/#book" },
+        { heading: "", items: [
+          { label: "CME", href: "/cme" },
+          { label: "Media & Press", href: "/press" },
+          { label: "Awards & Achievements", href: "/awards" },
         ]},
       ],
     },
     { label: "Contact", href: "/contact" },
   ],
-  cta: { label: "Book Appointment", href: "/#book", styleVariant: "primary" },
+  cta: { label: "Book Appointment", href: "/contact#book", styleVariant: "primary" },
 };
 
 /* The subset of the `header` global this resolver reads (kept loose so it stays
@@ -299,6 +379,8 @@ export type HeaderSource =
     }
   | null
   | undefined;
+
+const toTitleCase = (s: string) => s.replace(/\b\w/g, (c) => c.toUpperCase());
 
 /** Map a stored mega item → rendered item, dropping empty optional fields so
  *  the resolved object matches the hand-written defaults shape. */
@@ -337,31 +419,60 @@ function resolveNavItem(n: NavItemSource): HeaderNavItem {
   };
 }
 
-/**
- * Build the "Locations" mega menu from CMS-published cities and centres.
- * Multi-centre cities get a linked heading + one item per centre;
- * single-centre cities get a heading + one "City Centre" item pointing to the city page.
- * Returns undefined when no locations exist (caller falls back to defaults).
- */
-function buildLocationsMega(navLocations: NavLocationItem[]): HeaderMegaCol[] | undefined {
-  if (!navLocations.length) return undefined;
-  return navLocations.map((city) => {
-    const cityHref = `/locations/${city.citySlug}`;
-    if (city.centres.length > 1) {
-      return {
-        heading: city.cityName,
-        headingHref: cityHref,
-        items: city.centres.map((c) => ({
-          label: c.name,
-          href: `/locations/${city.citySlug}/${c.slug}`,
-        })),
-      };
-    }
+/** Build one "Locations" mega column from a resolved city + its centres. */
+function cityToMegaCol(city: NavLocationItem): HeaderMegaCol {
+  const cityHref = `/locations/${city.citySlug}`;
+  if (city.centres.length > 1) {
     return {
       heading: city.cityName,
-      items: [{ label: `${city.cityName} Centre`, href: cityHref }],
+      headingHref: cityHref,
+      items: city.centres.map((c) => ({
+        label: c.name,
+        href: `/locations/${city.citySlug}/${c.slug}`,
+      })),
     };
+  }
+  return {
+    heading: city.cityName,
+    items: [{ label: `${city.cityName} Centre`, href: cityHref }],
+  };
+}
+
+/** Default "Locations" columns keyed by city slug, taken verbatim from
+ *  HEADER_DEFAULTS in their original array order — the merge target
+ *  buildLocationsMega() below overlays Sanity-published cities onto. */
+const DEFAULT_LOCATIONS_BY_CITY: ReadonlyMap<string, HeaderMegaCol> = (() => {
+  const locationsNav = HEADER_DEFAULTS.nav.find((n) => n.label === "Locations");
+  const map = new Map<string, HeaderMegaCol>();
+  for (const col of locationsNav?.mega ?? []) {
+    const href = col.headingHref ?? col.items[0]?.href;
+    const citySlug = href?.split("/")[2];
+    if (citySlug) map.set(citySlug, col);
+  }
+  return map;
+})();
+
+/**
+ * Build the "Locations" mega menu by overlaying Sanity-published cities onto
+ * the hardcoded default columns (matched by city slug): a published city
+ * replaces its default column with live centres; a city with no Sanity doc
+ * yet keeps its exact default column; brand-new Sanity-only cities are
+ * appended. This always returns the full column set — byte-identical to
+ * HEADER_DEFAULTS when Sanity has no cities yet, and a single city's data
+ * (added/edited/missing) can never make the rest of the menu disappear.
+ * FIX for the all-or-nothing bug — do not regress to "if any city exists,
+ * use ONLY Sanity cities" (see BFI-Sanity-Fallback-Audit-Phase1-Report.md).
+ */
+function buildLocationsMega(navLocations: NavLocationItem[]): HeaderMegaCol[] {
+  const live = new Map(navLocations.map((c) => [c.citySlug, c]));
+  const known = [...DEFAULT_LOCATIONS_BY_CITY.entries()].map(([citySlug, def]) => {
+    const liveCity = live.get(citySlug);
+    return liveCity ? cityToMegaCol(liveCity) : def;
   });
+  const appended = sortNavLocations(
+    navLocations.filter((c) => !DEFAULT_LOCATIONS_BY_CITY.has(c.citySlug)),
+  ).map(cityToMegaCol);
+  return [...known, ...appended];
 }
 
 /**
@@ -373,7 +484,7 @@ function buildMaternityMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] 
   const items = navTreatments
     .filter((t) => t.navCategory === "maternity-services")
     .sort((a, b) => a.navOrder - b.navOrder)
-    .map((t) => ({ label: t.name, href: t.href }));
+    .map((t) => ({ label: toTitleCase(t.name), href: t.href }));
   if (!items.length) return undefined;
   const mid = Math.ceil(items.length / 2);
   return [
@@ -382,28 +493,59 @@ function buildMaternityMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] 
   ];
 }
 
+/** Default {category, order, label} per treatment href, derived once from the
+ *  hardcoded "IVF Treatments" mega columns — the merge target
+ *  buildTreatmentMega() below overlays Sanity-published treatments onto. */
+const DEFAULT_TREATMENT_ITEMS_BY_HREF: ReadonlyMap<string, { category: string; order: number; label: string }> = (() => {
+  const map = new Map<string, { category: string; order: number; label: string }>();
+  const treatmentsNav = HEADER_DEFAULTS.nav.find((n) => n.label === "IVF Treatments");
+  for (const col of treatmentsNav?.mega ?? []) {
+    const category = Object.entries(HEADER_CATEGORY_LABELS).find(([, label]) => label === col.heading)?.[0];
+    if (!category) continue;
+    col.items.forEach((item, i) => map.set(item.href, { category, order: i, label: item.label }));
+  }
+  return map;
+})();
+
 /**
- * Build the "IVF Treatments" mega menu columns from CMS-published treatments.
- * Groups by navCategory in the canonical column order. Returns undefined when
- * no treatments have a navCategory set (caller falls back to defaults).
+ * Build the "IVF Treatments" mega menu columns by overlaying CMS-published
+ * treatments onto the hardcoded default items (matched by href): a Sanity
+ * doc overrides its default item's category/order/label when present; a
+ * treatment with no Sanity doc yet (or one missing navCategory) keeps its
+ * exact default placement; brand-new Sanity-only treatments (a navCategory
+ * set with no default href match) are appended to their column. This always
+ * returns the full column set — byte-identical to HEADER_DEFAULTS when
+ * Sanity has no treatments yet, and a single treatment's data can never make
+ * the rest of the menu disappear. FIX for the all-or-nothing bug — do not
+ * regress to "if any treatment has navCategory, use ONLY Sanity treatments"
+ * (see BFI-Sanity-Fallback-Audit-Phase1-Report.md).
  */
-function buildTreatmentMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] | undefined {
-  if (!navTreatments.length) return undefined;
-  const byCat = new Map<string, NavTreatmentItem[]>();
+function buildTreatmentMega(navTreatments: NavTreatmentItem[]): HeaderMegaCol[] {
+  const live = new Map(navTreatments.map((t) => [t.href, t]));
+  const byCat = new Map<string, { href: string; label: string; order: number }[]>();
+
+  for (const [href, def] of DEFAULT_TREATMENT_ITEMS_BY_HREF) {
+    const liveItem = live.get(href);
+    const category = liveItem?.navCategory && HEADER_CATEGORY_LABELS[liveItem.navCategory] ? liveItem.navCategory : def.category;
+    const arr = byCat.get(category) ?? [];
+    arr.push({ href, label: liveItem?.name || def.label, order: liveItem?.navOrder ?? def.order });
+    byCat.set(category, arr);
+  }
   for (const t of navTreatments) {
-    if (!HEADER_CATEGORY_LABELS[t.navCategory]) continue;
+    if (DEFAULT_TREATMENT_ITEMS_BY_HREF.has(t.href) || !HEADER_CATEGORY_LABELS[t.navCategory]) continue;
     const arr = byCat.get(t.navCategory) ?? [];
-    arr.push(t);
+    arr.push({ href: t.href, label: t.name, order: t.navOrder });
     byCat.set(t.navCategory, arr);
   }
-  if (!byCat.size) return undefined;
+
   return HEADER_CATEGORY_ORDER
     .filter((cat) => byCat.has(cat))
     .map((cat) => ({
       heading: HEADER_CATEGORY_LABELS[cat],
+      ...(HEADER_CATEGORY_HREFS[cat] ? { headingHref: HEADER_CATEGORY_HREFS[cat] } : {}),
       items: byCat.get(cat)!
-        .sort((a, b) => a.navOrder - b.navOrder)
-        .map((t) => ({ label: t.name, href: t.href })),
+        .sort((a, b) => a.order - b.order)
+        .map((x) => ({ label: x.label, href: x.href })),
     }));
 }
 
@@ -420,7 +562,7 @@ function buildDoctorMenu(navDoctors: NavDoctorItem[]): DoctorMenuData | undefine
     .map((d) => ({ name: d.name, href: d.href, city: d.city, meta: d.experienceLabel || undefined }));
   const specialists = navDoctors
     .filter((d) => d.navRole === "specialist")
-    .sort((a, b) => a.navOrder - b.navOrder)
+    .sort((a, b) => a.name.localeCompare(b.name))
     .map((d) => ({ name: d.name, href: d.href, city: d.city }));
   if (!senior.length && !specialists.length) return undefined;
   return { senior, specialists };
@@ -440,6 +582,7 @@ export function resolveHeader(
   navTreatments: NavTreatmentItem[] = [],
   navDoctors: NavDoctorItem[] = [],
   navLocations: NavLocationItem[] = [],
+  navLabels: NavLabelOverride[] = [],
 ): HeaderData {
   const branding: HeaderBranding = {
     logoUrl: g?.branding?.logoUrl || HEADER_DEFAULTS.branding.logoUrl,
@@ -457,8 +600,16 @@ export function resolveHeader(
     styleVariant: g?.cta?.styleVariant || HEADER_DEFAULTS.cta.styleVariant,
   };
 
-  // Treatments mega — replace "IVF Treatments" columns with DB-driven ones.
-  const treatmentMega = buildTreatmentMega(navTreatments);
+  // Treatments mega — replace "IVF Treatments" columns with DB-driven ones,
+  // then apply any CMS label/order overrides from Site Settings.
+  const treatmentMega = applyNavLabelOverrides(
+    buildTreatmentMega(navTreatments),
+    (col) => col.heading,
+    (col, heading) => ({ ...col, heading }),
+    HEADER_CATEGORY_LABELS,
+    navLabels,
+    "headerLabel",
+  );
   // Maternity mega — replace "Maternity Services" columns with DB-driven ones.
   const maternityMega = buildMaternityMega(navTreatments);
   // Doctors mega — replace hardcoded panel data with DB-driven one.
@@ -468,9 +619,18 @@ export function resolveHeader(
 
   const finalNav = nav.map((item) => {
     if (item.label === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
-    if (item.label === "Maternity Services" && maternityMega) return { ...item, mega: maternityMega };
+    if (item.label === "Maternity Services" && maternityMega) return { ...item, href: item.href || "/services/maternity-services", mega: maternityMega };
     if (item.label === "Locations" && locationsMega) return { ...item, mega: locationsMega };
     if (item.doctors && doctorMenu) return { ...item, doctorMenu };
+    if (item.label === "Resources" && item.mega) {
+      return {
+        ...item,
+        mega: item.mega.map((col) => ({
+          ...col,
+          items: col.items.map((it) => it.label === "Blog" ? { ...it, label: "Blogs" } : it),
+        })),
+      };
+    }
     return item;
   });
 

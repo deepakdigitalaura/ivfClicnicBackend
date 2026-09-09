@@ -1,9 +1,11 @@
 import type { Metadata } from "next";
 import { ContactPage } from "@/components/contact-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { getPageBySlug, getGlobalSafe, payloadClient } from "@/lib/payload";
 import { resolveContactValues, resolveCardChannel, type ContactChannel } from "@/lib/contact";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/contact";
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -19,19 +21,18 @@ const FALLBACK = {
       "Have a question or ready to begin? Reach out — confidentially and without obligation. Our fertility counsellors are here to guide your very first step.",
   },
   seo: {
-    metaTitle: "Contact Bavishi Fertility Institute — Book a Free IVF Consultation",
+    metaTitle: "Contact Bavishi Fertility Institute — Book an IVF Consultation",
     metaDescription:
-      "Contact Bavishi Fertility Institute — call +91 97126 22288, WhatsApp or email drbavishi@ivfclinic.com. Book a free fertility consultation across 15 centres in 8 Indian cities.",
-    ogTitle: "Contact Bavishi Fertility Institute — Book a Free IVF Consultation",
+      "Contact Bavishi Fertility Institute — call +91 97126 22288, WhatsApp or email drbavishi@ivfclinic.com. Book a fertility consultation across 14 centres in 8 Indian cities.",
+    ogTitle: "Contact Bavishi Fertility Institute — Book an IVF Consultation",
     ogDescription:
-      "Call, WhatsApp or message us to begin your fertility journey. 15 centres across 8 cities. Free initial consultation, online consultations available.",
+      "Call, WhatsApp or message us to begin your fertility journey. 14 centres across 8 cities. Online consultations available.",
   },
   faqs: [
     { question: "How do I book an appointment at Bavishi Fertility Institute?", answer: "Fill in the enquiry form on this page, call us on +91 97126 22288, or message us on WhatsApp. Our team will help you choose the nearest centre and a convenient time." },
-    { question: "Can I have an online (video) consultation?", answer: "Yes. We offer video consultations for patients across India and abroad, so you can begin your fertility journey from the comfort of home before visiting a centre." },
-    { question: "Which Bavishi Fertility Institute centre is nearest to me?", answer: "We have 15 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
-    { question: "Is the first consultation free?", answer: "We offer a free initial consultation so you can understand your options with no obligation. Diagnostic tests and treatments are quoted transparently, with EMI options available." },
-    { question: "Do you treat international patients?", answer: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including pre-arrival video consultations and treatment planning." },
+    { question: "Which Bavishi Fertility Institute centre is nearest to me?", answer: "We have 14 centres across 8 cities — Ahmedabad, Mumbai, Vadodara, Surat, Bhuj, Bhavnagar, Anand and Varanasi. Tell us your city and we'll connect you to the closest one." },
+    { question: "Do you offer free consultations?", answer: "We understand that choosing the right fertility clinic is an important decision. To ensure every couple receives dedicated time, expert guidance, and a personalised evaluation, our consultations are not offered free of charge. However, we periodically offer special free consultation slots as part of limited-time programs. Please contact us to check current availability." },
+    { question: "Do you treat international patients?", answer: "Yes — 300+ international patients choose Bavishi Fertility Institute every year. We provide end-to-end support including treatment planning and coordination across our 14 centres." },
   ],
 };
 
@@ -81,7 +82,7 @@ async function loadContact() {
 
   // Centres directory — pulled live from the CMS so edits in /admin/collections/centres
   // are reflected immediately without any code change.
-  let directory: { name: string; address: string; phone: string; phoneLabel: string; href?: string }[] | undefined;
+  let directory: { name: string; address: string; phone: string; phoneLabel: string; hours?: string; href?: string }[] | undefined;
   try {
     const payload = await payloadClient();
     const res = await payload.find({ collection: "centres", limit: 100, depth: 0, sort: "citySlug" });
@@ -91,6 +92,7 @@ async function loadContact() {
         address: c.address ?? "",
         phone: c.phone ?? "",
         phoneLabel: c.phoneLabel ?? "",
+        hours: c.hours ?? undefined,
         href: `/locations/${c.citySlug}/${c.slug}`,
       }));
     }
@@ -103,7 +105,7 @@ async function loadContact() {
 
 export async function generateMetadata(): Promise<Metadata> {
   const { seo, ogImage } = await loadContact();
-  return {
+  return withPageSeoOverride(PATH, {
     title: seo.metaTitle,
     description: seo.metaDescription,
     alternates: { canonical: PATH },
@@ -114,7 +116,7 @@ export async function generateMetadata(): Promise<Metadata> {
       type: "website",
       images: [ogImage],
     },
-  };
+  });
 }
 
 export default async function Page() {
@@ -148,6 +150,7 @@ export default async function Page() {
   return (
     <>
       <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
       <ContactPage hero={hero} faqs={faqs} cards={cards} sectionLabels={sectionLabels} directory={directory} />
     </>
   );

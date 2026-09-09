@@ -1,0 +1,56 @@
+import type { Metadata } from "next";
+import { CampsPage } from "@/components/camps-page";
+import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
+import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { getHomepage } from "@/lib/payload";
+import { withPageSeoOverride } from "@/lib/page-seo";
+
+const PATH = "/camps";
+
+export async function generateMetadata(): Promise<Metadata> {
+  return withPageSeoOverride(PATH, {
+    title: "Fertility Camps & Outreach Events — Bavishi Fertility Institute",
+    description:
+      "Bavishi Fertility Institute organises free fertility camps and outreach events across India. Find upcoming camps near you and register your interest.",
+    alternates: { canonical: PATH },
+    openGraph: {
+      title: "Fertility Camps & Outreach Events — Bavishi Fertility Institute",
+      description:
+        "Free fertility camps by BFI specialists across India. Expert consultations, awareness sessions and priority follow-up support.",
+      url: abs(PATH),
+      type: "website",
+      images: ["/assets/hero-mother-baby1.png"],
+    },
+  });
+}
+
+const graph = [
+  {
+    "@type": "WebPage",
+    "@id": `${abs(PATH)}#webpage`,
+    url: abs(PATH),
+    name: "Fertility Camps & Outreach Events — Bavishi Fertility Institute",
+    description: "Free fertility camps and outreach events organised by Bavishi Fertility Institute across India.",
+    isPartOf: { "@id": WEBSITE_ID },
+    about: { "@id": ORG_ID },
+  },
+  breadcrumbSchema([
+    { name: "Home", url: "/" },
+    { name: "Resources", url: "/blogs" },
+    { name: "Camps", url: PATH },
+  ]),
+];
+
+export default async function Page() {
+  const homepage = await getHomepage();
+  const posters = homepage.events.posters;
+
+  return (
+    <>
+      <JsonLd graph={graph} />
+      <PageSeoSchema path={PATH} />
+      <CampsPage posters={posters} />
+    </>
+  );
+}

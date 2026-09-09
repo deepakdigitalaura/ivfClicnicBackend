@@ -4,18 +4,18 @@
     { "label": "About", "columns": [
       { "heading": "", "items": [
         { "label": "About Bavishi Fertility Institute", "url": "/about-bfi" },
-        { "label": "Why Bavishi Fertility Institute", "url": "/#about" },
-        { "label": "Simple Treatment", "url": "/#about" },
-        { "label": "Safe Treatment", "url": "/#about" },
-        { "label": "Smart Treatment", "url": "/#about" },
-        { "label": "Success Benchmarks", "url": "/#about" }
+        { "label": "Why Bavishi Fertility Institute", "url": "/why-bfi" },
+        { "label": "Simple Treatment", "url": "/simple-treatment" },
+        { "label": "Safe Treatment", "url": "/safe-treatment" },
+        { "label": "Smart Treatment", "url": "/smart-treatment" },
+        { "label": "Success Benchmarks", "url": "/success-benchmarks" }
       ]},
       { "heading": "", "items": [
-        { "label": "History", "url": "/#about" },
+        { "label": "History", "url": "/history" },
         { "label": "Our Team", "url": "/#doctors" },
-        { "label": "Infrastructure", "url": "/#about" },
-        { "label": "Suraksha Kavach Package", "url": "/#suraksha" },
-        { "label": "Easy / Interest Free EMI", "url": "/#about" }
+        { "label": "Infrastructure", "url": "/infrastructure" },
+        { "label": "Suraksha Kavach Package", "url": "/suraksha-kavach" },
+        { "label": "Easy / Interest Free EMI", "url": "/easy-emi" }
       ]}
     ]},
     { "label": "Doctors", "doctors": true },
@@ -92,29 +92,25 @@
     ]},
     { "label": "Calculators", "columns": [
       { "heading": "Fertility & IVF", "items": [
-        { "label": "IVF Success Rate Calculator", "url": "/#tools" },
-        { "label": "IVF Cost Calculator", "url": "/#tools" },
-        { "label": "AMH Level Interpreter", "url": "/#tools" },
-        { "label": "Sperm Analysis Calculator", "url": "/#tools" }
+        { "label": "IVF Success Rate Calculator", "url": "/ivf-success-rate-calculator", "desc": "Estimate your personalised IVF success probability" },
+        { "label": "IVF Cost Calculator", "url": "/ivf-cost-calculator", "desc": "Plan your treatment budget across cycle types" },
+        { "label": "AMH Level Interpreter", "url": "/amh-level-interpreter", "desc": "Understand your ovarian reserve result" },
+        { "label": "Sperm Analysis Calculator", "url": "/semen-analysis-calculator", "desc": "Interpret your semen analysis against WHO 2021" }
       ]},
       { "heading": "Conception & Pregnancy", "items": [
-        { "label": "Ovulation Calculator", "url": "/#tools" },
-        { "label": "Fertile Period Calculator", "url": "/#tools" },
-        { "label": "Natural Pregnancy Calculator", "url": "/#tools" },
-        { "label": "Miscarriage Risk Calculator", "url": "/#tools" }
+        { "label": "Ovulation Calculator", "url": "/ovulation-calculator", "desc": "Find your fertile window and ovulation date" },
+        { "label": "Fertile Period Calculator", "url": "/fertile-period-calculator", "desc": "Track your fertile days and next period" },
+        { "label": "Natural Pregnancy Calculator", "url": "/natural-pregnancy-calculator", "desc": "Estimate your natural conception probability" },
+        { "label": "Miscarriage Risk Calculator", "url": "/risk-of-repeat-miscarriage-calculator", "desc": "Assess your RPL risk profile" }
       ]}
     ]},
     { "label": "Resources", "columns": [
       { "heading": "Learn", "items": [
-        { "label": "Blog", "url": "/blog" },
+        { "label": "Blogs", "url": "/blog" },
         { "label": "Success Stories", "url": "/#stories" },
         { "label": "Videos", "url": "/#videos" },
         { "label": "Events & Webinars", "url": "/#events" }
       ]},
-      { "heading": "Tools", "items": [
-        { "label": "Fertility Calculators", "url": "/#tools" },
-        { "label": "Check IVF Eligibility", "url": "/#book" }
-      ]}
     ]},
     { "label": "Contact", "url": "/contact" }
   ],

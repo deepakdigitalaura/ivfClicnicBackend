@@ -3,7 +3,7 @@ import Image from "next/image";
 import { Calendar, MessageCircle, Phone, MapPin, Clock, Rotate3d } from "lucide-react";
 import { Reveal, Magnetic } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
-import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer } from "@/components/home-page";
+import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import {
@@ -18,6 +18,7 @@ import type { ResolvedCentre } from "@/lib/location-content";
 import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
+import { testimonialsForCentre } from "@/lib/video-testimonials";
 
 /* `<Editable>` is inert on the public site and click-to-edit inside
  * /edit/centres/<city>/<slug>. `path` is the dot-path into the centres-doc
@@ -35,7 +36,7 @@ const em = (t: string, soft = false) => `<em ${soft ? EMS : EM}>${t}</em>`;
  * One Centre object renders the entire page: NAP, map, geo, hours,
  * facilities, treatments, doctors, areas served, landmarks, how-to-reach,
  * FAQs and verified reviews. Reused by every centre, every city. */
-export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
+export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre; stats?: { value: string; l: string }[] }) {
   const editing = !!useEdit()?.editMode;
   const sl = (centre as ResolvedCentre).sectionLabels ?? {};
   const city = cityBySlug(centre.citySlug);
@@ -46,6 +47,11 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
     .filter((d): d is NonNullable<typeof d> => Boolean(d))
     .map(toDoctorCard);
   const reviews = getReviews(centre.reviewsKey ?? centre.slug);
+  // Pooled from doctors who consult at THIS centre (branch-level), falling
+  // back to the city-wide pool only when none of them have a testimonial on
+  // file. Empty → hide the section entirely (same data-honesty rule as
+  // city/doctor/treatment pages).
+  const centreStories = testimonialsForCentre(centre.slug, centre.citySlug);
   // Single-centre cities can name the centre after the city itself (e.g. Bhuj,
   // Anand) — avoid rendering "Bhuj, Bhuj". Multi-centre cities never collide.
   const cityName = city?.name;
@@ -61,7 +67,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
           <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
           <span>/</span>
-          <a href="/#locations" className="hover:text-[color:var(--rose)]">Locations</a>
+          <a href="/locations" className="hover:text-[color:var(--rose)]">Locations</a>
           <span>/</span>
           {cityHasOwnPage(centre.citySlug) ? (
             <>
@@ -106,7 +112,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
             </Reveal>
             <Reveal delay={0.24}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Free Consultation</Magnetic>
+                <Magnetic as="a" href="#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
                 <Magnetic as="a" href={`tel:+${centre.phone}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white"><Phone className="h-4 w-4" /> {centre.phoneLabel}</Magnetic>
               </div>
             </Reveal>
@@ -139,7 +145,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
         </div>
       </section>
 
-      <StatsStrip />
+      <StatsStrip stats={stats} />
 
       {/* Overview */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
@@ -176,12 +182,23 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
         />
       )}
 
-      <SuccessStories tone="tint" eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")} title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `${em(centre.area)} success stories`)} subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")} showCta={false} />
+      {centreStories.length > 0 && (
+        <SuccessStories
+          tone="tint"
+          eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")}
+          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `${em(centre.area)} success stories`)}
+          subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
+          showCta={false}
+          carousel={centreStories.length > 3}
+          stories={centreStories.map((v) => ({ id: v.youTubeId, src: v.videoSrc, n: v.name, q: v.quote, r: 5 }))}
+        />
+      )}
 
       {/* Verified reviews only — renders CTA / nothing until Places API supplies data */}
       <div className="bg-white">
         <GoogleReviews
           data={reviews}
+          reviewsKey={centre.reviewsKey ?? centre.slug}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(centre.mapQuery)}`}
           title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${centre.area} patients ${em("on Google")}`)}
           subtitle={`Read verified reviews from families treated at our ${centre.area} centre.`}
@@ -222,7 +239,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Free Consultation</Magnetic>
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
               <Magnetic as="a" href={`tel:+${centre.phone}`} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><Phone className="h-4 w-4" /> {centre.phoneLabel}</Magnetic>
               <Magnetic as="a" href={`https://wa.me/${centre.phone}`} target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
             </div>
@@ -230,6 +247,7 @@ export function CenterPage({ centre }: { centre: Centre | ResolvedCentre }) {
         </div>
       </section>
 
+      <InquiryForm />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

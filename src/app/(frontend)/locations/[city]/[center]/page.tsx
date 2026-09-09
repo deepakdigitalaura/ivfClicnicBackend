@@ -2,9 +2,11 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { CenterPage } from "@/components/center-page";
 import { JsonLd } from "@/components/json-ld";
+import { PageSeoSchema } from "@/components/page-seo-schema";
 import { cityBySlug, centerGraph, builtCentreParams, cityHasOwnPage } from "@/lib/locations";
-import { getCentre, getPublishedCentreParams, getPublishedCentresForCity } from "@/lib/payload";
+import { getCentre, getPublishedCentreParams, getPublishedCentresForCity, getHomepage } from "@/lib/payload";
 import { abs } from "@/lib/seo";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 /** Pre-render every built centre from both code defaults and DB. */
 export async function generateStaticParams() {
@@ -37,23 +39,25 @@ export async function generateMetadata(
   const cityName = cityBySlug(city)?.name ?? c.citySlug;
   const place = cityName && cityName !== c.area ? `${c.area}, ${cityName}` : c.area;
   const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-  const description = `${c.fullName} — IVF, ICSI & IUI with senior doctors since 1984. ${c.address}. Book a free consultation.`;
-  return {
+  const description = `${c.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${c.address}. Book a consultation.`;
+  return withPageSeoOverride(`/locations/${c.citySlug}/${c.slug}`, {
     title,
     description,
     alternates: { canonical: `/locations/${c.citySlug}/${c.slug}` },
     openGraph: { title, description, url: abs(`/locations/${c.citySlug}/${c.slug}`), type: "website", images: [c.image] },
-  };
+  });
 }
 
 export default async function Page({ params }: { params: Promise<{ city: string; center: string }> }) {
   const { city, center } = await params;
   const c = await getCentre(city, center);
   if (!c || !c.built || !await cityIsMultiCentre(city)) notFound();
+  const homepageData = await getHomepage();
   return (
     <>
       <JsonLd graph={centerGraph(c)} />
-      <CenterPage centre={c} />
+      <PageSeoSchema path={`/locations/${c.citySlug}/${c.slug}`} />
+      <CenterPage centre={c} stats={homepageData.stats} />
     </>
   );
 }

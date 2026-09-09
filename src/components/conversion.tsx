@@ -43,9 +43,9 @@ export function ScrollToTop() {
    leftward on hover/focus to reveal its label — pure CSS (no state,
    no re-renders), GPU-/width-friendly transitions only. */
 const ctaActions = [
-  { href: "https://wa.me/919712622288", label: "WhatsApp Us", Icon: MessageCircle, bg: "bg-[#25D366]", external: true },
+  { href: "https://wa.me/919712522289", label: "WhatsApp Us", Icon: MessageCircle, bg: "bg-[#25D366]", external: true },
   { href: "tel:+919712622288", label: "Call Now", Icon: Phone, bg: "bg-[color:var(--plum)]", external: false },
-  { href: "#book", label: "Book Consultation", Icon: Calendar, bg: "bg-[color:var(--rose)]", external: false },
+  { href: "/contact#book", label: "Book Consultation", Icon: Calendar, bg: "bg-[color:var(--rose)]", external: false },
 ];
 
 export function FloatingCTA() {
@@ -81,10 +81,10 @@ export function MobileBottomBar() {
         <a href="tel:+919712622288" className="flex flex-col items-center gap-1 py-3 text-[11px] font-semibold text-[color:var(--plum)] active:bg-[color:var(--ivory)]">
           <Phone className="h-5 w-5 text-[color:var(--rose)]" /> Call
         </a>
-        <a href="https://wa.me/919712622288" className="flex flex-col items-center gap-1 py-3 text-[11px] font-semibold text-[color:var(--plum)] active:bg-[color:var(--ivory)]">
+        <a href="https://wa.me/919712522289" className="flex flex-col items-center gap-1 py-3 text-[11px] font-semibold text-[color:var(--plum)] active:bg-[color:var(--ivory)]">
           <MessageCircle className="h-5 w-5 text-[#25D366]" /> WhatsApp
         </a>
-        <a href="#book" className="flex flex-col items-center gap-1 bg-[color:var(--rose)] py-3 text-[11px] font-semibold text-white active:brightness-110">
+        <a href="/contact#book" className="flex flex-col items-center gap-1 bg-[color:var(--rose)] py-3 text-[11px] font-semibold text-white active:brightness-110">
           <Calendar className="h-5 w-5" /> Book Now
         </a>
       </div>
