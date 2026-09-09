@@ -56,9 +56,9 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     if (!rule.source || !rule.destination) continue;
     if (norm(rule.source) !== pathname) continue;
     // A rule whose destination normalizes to the same path as its source
-    // (e.g. "/x/" -> "/x") is a self-redirect once trailing slashes are
-    // normalized on both sides above — the trailing-slash fallback below
-    // already covers that case, so skip it here instead of looping forever.
+    // (e.g. "/x/" -> "/x") would just redirect a page to itself once
+    // trailing slashes are normalized on both sides above — skip it rather
+    // than issuing a pointless (and potentially looping) redirect.
     if (!/^https?:\/\//i.test(rule.destination) && norm(rule.destination) === pathname) continue;
 
     if (/^https?:\/\//i.test(rule.destination)) {
@@ -69,17 +69,19 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     return NextResponse.redirect(url, { status: rule.permanent ? 301 : 302 });
   }
 
-  // No redirect rule matched. With `skipTrailingSlashRedirect` set in
-  // next.config.mjs, Next no longer strips a trailing slash on our behalf —
-  // this replaces that behaviour for everything else, so a request like
-  // "/some-real-page/" still canonicalises to "/some-real-page" in one hop,
-  // exactly as before. Root "/" is untouched (norm() already leaves it alone).
-  if (rawPathname !== pathname) {
-    const url = request.nextUrl.clone();
-    url.pathname = pathname;
-    return NextResponse.redirect(url, 308);
-  }
-
+  // No redirect rule matched. We used to 308 a trailing-slash request (e.g.
+  // "/some-real-page/") to its slash-less form here — but the hosting layer
+  // in front of this app has its own trailing-slash handling that conflicts
+  // with that redirect, turning it into a self-redirect loop
+  // ("/x/" -> "/x/" -> "/x/" ...), which made the slash form of every page
+  // unreachable. Since we don't control that layer, we no longer redirect
+  // for this case: both "/some-real-page" and "/some-real-page/" now render
+  // the same page directly (Next's router already resolves either form to
+  // the same route). The page's own <link rel="canonical"> tag (already
+  // present sitewide, pointing at the slash-less form) tells search engines
+  // which URL is authoritative, so this doesn't reintroduce a duplicate-
+  // content problem — it just stops depending on a redirect that was being
+  // broken outside this app.
   const res = NextResponse.next();
   res.headers.set("x-pathname", pathname);
   return res;
