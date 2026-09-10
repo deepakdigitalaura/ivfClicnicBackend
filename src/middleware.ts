@@ -42,7 +42,8 @@ const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : 
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
-  if (host === "www.ivfclinic.com") {
+  const proto = request.headers.get("x-forwarded-proto");
+  if (host === "www.ivfclinic.com" || proto === "http") {
     // Build the destination from scratch with a hardcoded public origin —
     // do NOT clone request.nextUrl and just swap the hostname. Behind the
     // Cloudways reverse proxy, request.nextUrl's protocol/port reflect what
@@ -51,6 +52,9 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     // dev port, completely unreachable publicly) rather than the public
     // "https://ivfclinic.com" visitors actually use. Only the path and query
     // string come from the request; the origin is always the real one.
+    // Same fix also covers plain-http requests (x-forwarded-proto: http) —
+    // ivfclinic.com was serving full pages over http:// with no redirect
+    // and no HSTS header.
     const url = new URL(request.nextUrl.pathname + request.nextUrl.search, "https://ivfclinic.com");
     return NextResponse.redirect(url, 301);
   }
