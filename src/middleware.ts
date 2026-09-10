@@ -43,8 +43,15 @@ const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
   if (host === "www.ivfclinic.com") {
-    const url = request.nextUrl.clone();
-    url.hostname = "ivfclinic.com";
+    // Build the destination from scratch with a hardcoded public origin —
+    // do NOT clone request.nextUrl and just swap the hostname. Behind the
+    // Cloudways reverse proxy, request.nextUrl's protocol/port reflect what
+    // the app itself was reached on internally (confirmed live: redirects
+    // were pointing at "http://ivfclinic.com:3000", the container's internal
+    // dev port, completely unreachable publicly) rather than the public
+    // "https://ivfclinic.com" visitors actually use. Only the path and query
+    // string come from the request; the origin is always the real one.
+    const url = new URL(request.nextUrl.pathname + request.nextUrl.search, "https://ivfclinic.com");
     return NextResponse.redirect(url, 301);
   }
 
