@@ -229,6 +229,12 @@ export function BlogsManager({ initial, doctors }: { initial: AdminBlogMeta[]; d
           </div>
 
           <div className="admin-field">
+            <label className="admin-label">Hero Image Alt Text</label>
+            <p className="admin-hint">Describes the image for screen readers and Google. Required for accessibility/SEO.</p>
+            <input className="admin-input" value={editing.heroImageAlt ?? ""} onChange={(e) => set({ heroImageAlt: e.target.value })} />
+          </div>
+
+          <div className="admin-field">
             <label className="admin-label">Hero Image Position</label>
             <p className="admin-hint">Controls which part of the image stays visible when it's cropped to fit the banner.</p>
             <select
