@@ -892,6 +892,14 @@ export type AdminBlogMeta = {
   categoryTitle?: string | null;
   categorySlug?: string | null;
   authorName?: string | null;
+  authorRole?: string | null;
+  authorCredentials?: string | null;
+  authorAvatarUrl?: string | null;
+  authorBioText?: string | null;
+  reviewerName?: string | null;
+  reviewerRole?: string | null;
+  reviewerCredentials?: string | null;
+  reviewerAvatarUrl?: string | null;
   heroImageUrl?: string | null;
   heroImageAlt?: string | null;
   heroImagePosition?: string | null;
@@ -899,13 +907,18 @@ export type AdminBlogMeta = {
   publishedAt?: string | null;
   lastUpdatedAt?: string | null;
   contentRaw?: string | null;
+  seoMetaTitle?: string | null;
+  seoMetaDescription?: string | null;
+  seoOgTitle?: string | null;
+  seoOgDescription?: string | null;
+  seoOgImageUrl?: string | null;
 };
 
 export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt, contentRaw }`,
+      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, authorRole, authorCredentials, authorAvatarUrl, authorBioText, reviewerName, reviewerRole, reviewerCredentials, reviewerAvatarUrl, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt, contentRaw, seoMetaTitle, seoMetaDescription, seoOgTitle, seoOgDescription, seoOgImageUrl }`,
     );
   } catch {
     return [];
