@@ -43,7 +43,14 @@ const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
   const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
   const proto = request.headers.get("x-forwarded-proto");
-  if (host === "www.ivfclinic.com" || proto === "http") {
+  // ponytail: proto === "http" force-redirect is disabled — on this
+  // Cloudways Nginx->Varnish->Node chain, Varnish does not reliably forward
+  // X-Forwarded-Proto: https through to Node, so every already-https request
+  // was seen as "http" here and redirected to itself forever (outage
+  // 2026-09-11). Re-enable only once Varnish's VCL is confirmed to forward
+  // the header, or replace with a check that doesn't loop when the header
+  // is simply wrong on this stack.
+  if (host === "www.ivfclinic.com") {
     // Build the destination from scratch with a hardcoded public origin —
     // do NOT clone request.nextUrl and just swap the hostname. Behind the
     // Cloudways reverse proxy, request.nextUrl's protocol/port reflect what
