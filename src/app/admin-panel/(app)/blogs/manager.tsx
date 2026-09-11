@@ -28,7 +28,9 @@ const HERO_POSITION_LABELS: Record<string, string> = {
   "center bottom": "Bottom",
 };
 
-export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
+type DoctorOption = { slug: string; name: string; role: string; credentials: string; avatarUrl: string };
+
+export function BlogsManager({ initial, doctors }: { initial: AdminBlogMeta[]; doctors: DoctorOption[] }) {
   const [items, setItems] = useState(initial);
   const [search, setSearch] = useState("");
   const [tab, setTab] = useState<Tab>("published");
@@ -148,7 +150,20 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
             </div>
             <div className="admin-field">
               <label className="admin-label">Author Name</label>
-              <input className="admin-input" value={editing.authorName ?? ""} onChange={(e) => set({ authorName: e.target.value })} />
+              <select
+                className="admin-input"
+                style={{ marginBottom: 6 }}
+                value=""
+                onChange={(e) => {
+                  const d = doctors.find((x) => x.slug === e.target.value);
+                  if (!d) return;
+                  set({ authorName: d.name, authorSlug: d.slug, authorRole: d.role, authorCredentials: d.credentials, authorAvatarUrl: d.avatarUrl });
+                }}
+              >
+                <option value="">Pick a doctor (links name to their profile) — or type below</option>
+                {doctors.map((d) => <option key={d.slug} value={d.slug}>{d.name}</option>)}
+              </select>
+              <input className="admin-input" value={editing.authorName ?? ""} onChange={(e) => set({ authorName: e.target.value, authorSlug: null })} />
             </div>
           </div>
 
@@ -176,7 +191,20 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
           <div className="admin-row-grid">
             <div className="admin-field">
               <label className="admin-label">Medically Reviewed By</label>
-              <input className="admin-input" placeholder="Reviewing doctor's name" value={editing.reviewerName ?? ""} onChange={(e) => set({ reviewerName: e.target.value })} />
+              <select
+                className="admin-input"
+                style={{ marginBottom: 6 }}
+                value=""
+                onChange={(e) => {
+                  const d = doctors.find((x) => x.slug === e.target.value);
+                  if (!d) return;
+                  set({ reviewerName: d.name, reviewerSlug: d.slug, reviewerRole: d.role, reviewerCredentials: d.credentials, reviewerAvatarUrl: d.avatarUrl });
+                }}
+              >
+                <option value="">Pick a doctor (links name to their profile) — or type below</option>
+                {doctors.map((d) => <option key={d.slug} value={d.slug}>{d.name}</option>)}
+              </select>
+              <input className="admin-input" placeholder="Reviewing doctor's name" value={editing.reviewerName ?? ""} onChange={(e) => set({ reviewerName: e.target.value, reviewerSlug: null })} />
             </div>
             <div className="admin-field">
               <label className="admin-label">Reviewer Role</label>
