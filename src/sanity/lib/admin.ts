@@ -906,6 +906,7 @@ export type AdminBlogMeta = {
   status?: string | null;
   publishedAt?: string | null;
   lastUpdatedAt?: string | null;
+  readMins?: number | null;
   contentRaw?: string | null;
   seoMetaTitle?: string | null;
   seoMetaDescription?: string | null;
@@ -918,23 +919,51 @@ export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, authorRole, authorCredentials, authorAvatarUrl, authorBioText, reviewerName, reviewerRole, reviewerCredentials, reviewerAvatarUrl, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt, contentRaw, seoMetaTitle, seoMetaDescription, seoOgTitle, seoOgDescription, seoOgImageUrl }`,
+      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, authorRole, authorCredentials, authorAvatarUrl, authorBioText, reviewerName, reviewerRole, reviewerCredentials, reviewerAvatarUrl, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt, readMins, contentRaw, seoMetaTitle, seoMetaDescription, seoOgTitle, seoOgDescription, seoOgImageUrl }`,
     );
   } catch {
     return [];
   }
 }
 
+/** Word count from Lexical JSON (contentRaw): walk every node, sum "text" fields. */
+function wordCount(contentRaw: string | null | undefined): number {
+  if (!contentRaw) return 0;
+  let text = "";
+  const walk = (node: unknown): void => {
+    if (!node || typeof node !== "object") return;
+    const n = node as { text?: string; children?: unknown[] };
+    if (typeof n.text === "string") text += " " + n.text;
+    if (Array.isArray(n.children)) n.children.forEach(walk);
+  };
+  try {
+    walk(JSON.parse(contentRaw).root);
+  } catch {
+    return 0;
+  }
+  return text.trim() ? text.trim().split(/\s+/).length : 0;
+}
+
 /** Quick-add / meta-edit from the admin panel, including the article body
  *  (contentRaw — Lexical JSON authored via the RichTextEditor component).
  *  FAQs and SEO fields still go through Sanity Studio. New posts default
- *  to draft until someone publishes them. */
+ *  to draft until someone publishes them.
+ *  publishedAt/lastUpdatedAt/readMins have no admin form fields — they're
+ *  derived here so every saved post shows a byline date + read time without
+ *  the editor having to enter them manually. */
 export async function saveBlog(doc: AdminBlogMeta) {
   const { _id, ...rest } = doc;
+  const now = new Date().toISOString();
+  const words = wordCount(doc.contentRaw);
+  const derived = {
+    ...rest,
+    lastUpdatedAt: now,
+    readMins: words ? Math.max(1, Math.round(words / 200)) : (rest.readMins ?? null),
+  };
   if (_id) {
-    await writeClient.patch(_id).set(rest).commit();
+    await writeClient.patch(_id).set(derived).setIfMissing({ publishedAt: now }).commit();
   } else {
-    await writeClient.create({ _type: "blog", status: "draft", ...rest });
+    await writeClient.create({ _type: "blog", status: "draft", publishedAt: now, ...derived });
   }
   revalidateTag(BLOG_TAG);
 }
