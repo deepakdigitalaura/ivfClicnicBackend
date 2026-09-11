@@ -102,7 +102,7 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
           </div>
 
           <p className="admin-hint" style={{ marginBottom: 14 }}>
-            Title, summary, metadata and article body are all set here. FAQs and advanced SEO fields
+            Title, summary, author bio, reviewer, on-page SEO and article body are all set here. FAQs
             still go through <a href="/studio" target="_blank" style={{ color: "var(--rose)" }}>Sanity Studio</a>.
             New posts save as a draft until you publish them.
           </p>
@@ -152,6 +152,49 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
             </div>
           </div>
 
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Author Role</label>
+              <input className="admin-input" placeholder="e.g. Fertility Specialist" value={editing.authorRole ?? ""} onChange={(e) => set({ authorRole: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Author Credentials</label>
+              <input className="admin-input" placeholder="e.g. MD, FRCOG" value={editing.authorCredentials ?? ""} onChange={(e) => set({ authorCredentials: e.target.value })} />
+            </div>
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Author Photo</label>
+            <ImageUpload value={editing.authorAvatarUrl ?? ""} onChange={(url) => set({ authorAvatarUrl: url })} label="author photo" />
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Author Bio</label>
+            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={editing.authorBioText ?? ""} onChange={(e) => set({ authorBioText: e.target.value })} />
+          </div>
+
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Medically Reviewed By</label>
+              <input className="admin-input" placeholder="Reviewing doctor's name" value={editing.reviewerName ?? ""} onChange={(e) => set({ reviewerName: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Reviewer Role</label>
+              <input className="admin-input" placeholder="e.g. IVF Consultant" value={editing.reviewerRole ?? ""} onChange={(e) => set({ reviewerRole: e.target.value })} />
+            </div>
+          </div>
+
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Reviewer Credentials</label>
+              <input className="admin-input" placeholder="e.g. MD, DGO" value={editing.reviewerCredentials ?? ""} onChange={(e) => set({ reviewerCredentials: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Reviewer Photo</label>
+              <ImageUpload value={editing.reviewerAvatarUrl ?? ""} onChange={(url) => set({ reviewerAvatarUrl: url })} label="reviewer photo" />
+            </div>
+          </div>
+
           <div className="admin-field">
             <label className="admin-label">Hero Image</label>
             <ImageUpload value={editing.heroImageUrl ?? ""} onChange={(url) => set({ heroImageUrl: url })} label="hero image" />
@@ -169,6 +212,35 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
                 <option key={pos} value={pos}>{HERO_POSITION_LABELS[pos]}</option>
               ))}
             </select>
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">SEO Meta Title</label>
+            <p className="admin-hint">Shown in Google search results. Defaults to the post title if left blank.</p>
+            <input className="admin-input" value={editing.seoMetaTitle ?? ""} onChange={(e) => set({ seoMetaTitle: e.target.value })} />
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">SEO Meta Description</label>
+            <p className="admin-hint">Shown in Google search results. Defaults to the excerpt if left blank.</p>
+            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.seoMetaDescription ?? ""} onChange={(e) => set({ seoMetaDescription: e.target.value })} />
+          </div>
+
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Social Share Title</label>
+              <p className="admin-hint">Used when shared on Facebook/WhatsApp. Defaults to SEO title.</p>
+              <input className="admin-input" value={editing.seoOgTitle ?? ""} onChange={(e) => set({ seoOgTitle: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Social Share Image</label>
+              <ImageUpload value={editing.seoOgImageUrl ?? ""} onChange={(url) => set({ seoOgImageUrl: url })} label="social share image" />
+            </div>
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Social Share Description</label>
+            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.seoOgDescription ?? ""} onChange={(e) => set({ seoOgDescription: e.target.value })} />
           </div>
 
           <div className="admin-field">
