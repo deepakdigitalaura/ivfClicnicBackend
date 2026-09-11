@@ -87,7 +87,7 @@ function AboutAuthor({ author }: { author: Author }) {
           <img
             src={avatar.url}
             alt={avatar.alt ?? author.name}
-            className="h-20 w-20 shrink-0 rounded-full object-cover ring-4 ring-[color:var(--rose)]/15"
+            className="h-20 w-20 shrink-0 rounded-full object-cover object-top ring-4 ring-[color:var(--rose)]/15"
           />
         ) : (
           <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10">
@@ -158,7 +158,7 @@ function ReviewedByCard({ reviewer }: { reviewer: Author }) {
           <img
             src={avatar.url}
             alt={avatar.alt ?? reviewer.name}
-            className="h-16 w-16 shrink-0 rounded-full object-cover ring-4 ring-[color:var(--plum)]/15"
+            className="h-16 w-16 shrink-0 rounded-full object-cover object-top ring-4 ring-[color:var(--plum)]/15"
           />
         ) : (
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[color:var(--plum)]/10">
@@ -420,7 +420,7 @@ export function BlogArticle({
                       <img
                         src={av.url}
                         alt={author.name}
-                        className="h-9 w-9 rounded-full object-cover ring-2 ring-white/20"
+                        className="h-9 w-9 rounded-full object-cover object-top ring-2 ring-white/20"
                       />
                     )}
                     <span>
