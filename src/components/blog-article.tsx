@@ -412,6 +412,8 @@ export function BlogArticle({
               {/* Author avatar + name */}
               {author && (() => {
                 const av = asObj<Media>(author.avatar ?? undefined);
+                const authorUrl = author.sameAs?.[0]?.url ? localizeUrl(author.sameAs[0].url) : null;
+                const NameTag = authorUrl ? "a" : "span";
                 return (
                   <span className="inline-flex items-center gap-2.5">
                     {av?.url && (
@@ -422,7 +424,12 @@ export function BlogArticle({
                       />
                     )}
                     <span>
-                      <span className="font-semibold text-white">{author.name}</span>
+                      <NameTag
+                        {...(authorUrl ? { href: authorUrl } : {})}
+                        className="font-semibold text-white hover:underline"
+                      >
+                        {author.name}
+                      </NameTag>
                       {author.role && (
                         <span className="ml-1.5 text-white/45">· {author.role}</span>
                       )}
@@ -466,20 +473,27 @@ export function BlogArticle({
                   ))}
                 </span>
               )}
+            </div>
 
-              {reviewedBy && (
-                <span className="inline-flex items-center gap-1.5">
+            {reviewedBy && (() => {
+              const reviewerUrl = reviewedBy.sameAs?.[0]?.url ? localizeUrl(reviewedBy.sameAs[0].url) : null;
+              const ReviewerTag = reviewerUrl ? "a" : "span";
+              return (
+                <div className="mt-2 flex items-center gap-1.5 text-sm text-white/55">
                   <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--gold)]" />
                   <span>
                     Reviewed by{" "}
-                    <span className="font-medium text-white/80">
+                    <ReviewerTag
+                      {...(reviewerUrl ? { href: reviewerUrl } : {})}
+                      className="font-medium text-white/80 hover:underline"
+                    >
                       {reviewedBy.name}
                       {reviewedBy.credentials ? `, ${reviewedBy.credentials}` : ""}
-                    </span>
+                    </ReviewerTag>
                   </span>
-                </span>
-              )}
-            </div>
+                </div>
+              );
+            })()}
           </Reveal>
         </div>
       </section>
