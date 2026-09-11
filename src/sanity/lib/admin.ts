@@ -957,13 +957,14 @@ export async function saveBlog(doc: AdminBlogMeta) {
   const words = wordCount(doc.contentRaw);
   const derived = {
     ...rest,
+    publishedAt: rest.publishedAt || now,
     lastUpdatedAt: now,
     readMins: words ? Math.max(1, Math.round(words / 200)) : (rest.readMins ?? null),
   };
   if (_id) {
-    await writeClient.patch(_id).set(derived).setIfMissing({ publishedAt: now }).commit();
+    await writeClient.patch(_id).set(derived).commit();
   } else {
-    await writeClient.create({ _type: "blog", status: "draft", publishedAt: now, ...derived });
+    await writeClient.create({ _type: "blog", status: "draft", ...derived });
   }
   revalidateTag(BLOG_TAG);
 }
