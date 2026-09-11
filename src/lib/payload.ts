@@ -119,7 +119,7 @@ function makeAuthor(
     credentials: credentials ?? null,
     avatar: makeMedia(avatarUrl, name),
     bio: bio ?? null,
-    sameAs: null,
+    sameAs: slug ? [{ url: doctorUrl(slug) }] : null,
     updatedAt: "",
     createdAt: "",
   };

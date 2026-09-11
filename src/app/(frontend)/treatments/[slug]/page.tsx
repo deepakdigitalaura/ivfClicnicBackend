@@ -12,6 +12,8 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+export const revalidate = 21600;
+
 export async function generateStaticParams() {
   const treatments = await getTreatments();
   return treatments.map((t) => ({ slug: t.slug }));

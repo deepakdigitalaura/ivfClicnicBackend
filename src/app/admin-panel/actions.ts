@@ -470,6 +470,7 @@ function revalidateBlogPages(slug?: string) {
   revalidatePath("/blogs");
   revalidatePath("/cme");
   revalidatePath("/admin-panel/blogs");
+  revalidatePath("/treatments/[slug]", "page"); // treatment pages show related blogs
   if (slug) revalidatePath(`/blogs/${slug}`);
 }
 
