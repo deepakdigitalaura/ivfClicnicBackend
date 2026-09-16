@@ -493,6 +493,7 @@ export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
       <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
         <SectionHead
           center
+          as="h1"
           eyebrow="Our Fertility Specialists"
           title={<>Meet our <em className="font-display italic text-[color:var(--rose)]">promoter doctors & specialists</em></>}
           subtitle="A family of fertility experts trusted by generations — credentialed, experienced and committed to honest, compassionate care."

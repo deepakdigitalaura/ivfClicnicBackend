@@ -60,6 +60,7 @@ export default function Page() {
         <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
           <SectionHead
             center
+            as="h1"
             eyebrow={eyebrow}
             title={<>{heading.lead} <em className="font-display italic text-[color:var(--rose)]">{heading.em}</em></>}
             subtitle={subtitle}

@@ -142,15 +142,15 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 function SectionHeader({
-  eyebrow, title, subtitle, align = "left",
-}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center" }) {
+  eyebrow, title, subtitle, align = "left", as: Heading = "h2",
+}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center"; as?: "h1" | "h2" }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       {eyebrow && <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>}
       <Reveal delay={0.05}>
-        <h2 className="mt-4 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] text-balance">
+        <Heading className="mt-4 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] text-balance">
           {title}
-        </h2>
+        </Heading>
       </Reveal>
       {subtitle && (
         <Reveal delay={0.12}>
@@ -1668,7 +1668,7 @@ function Blogs({
 
 /* ---------- Locations ---------- */
 
-export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?: HomepageData["locations"] } = {}) {
+export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { content?: HomepageData["locations"]; as?: "h1" | "h2" } = {}) {
   const cities = content.cities;
   // In the editor the whole card must NOT be a link — clicking the editable city
   // name would otherwise navigate away mid-edit. So while editing we render the
@@ -1681,6 +1681,7 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
         eyebrow={ed("locations.eyebrow", content.eyebrow)}
         title={edTitle("locations", content.heading)}
         subtitle={ed("locations.subtitle", content.subtitle)}
+        as={as}
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
         {cities.map((c, i) => {
@@ -1789,7 +1790,7 @@ const CALCULATOR_HREFS: Record<string, string> = {
   "Semen Analysis Calculator": "/semen-analysis-calculator",
 };
 
-export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
+export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { content?: HomepageData["calculators"]; as?: "h1" | "h2" } = {}) {
   const calcs = content.items;
   return (
     <section id="tools" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
@@ -1797,6 +1798,7 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
         eyebrow={ed("calculators.eyebrow", content.eyebrow)}
         title={edTitle("calculators", content.heading)}
         subtitle={ed("calculators.subtitle", content.subtitle)}
+        as={as}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
         {calcs.map((c, i) => {
