@@ -151,6 +151,28 @@ export function DoctorsManager({ initial }: { initial: AdminDoctor[] }) {
             </div>
           </div>
 
+          <details style={{ marginTop: 8 }}>
+            <summary style={{ cursor: "pointer", fontWeight: 600, fontSize: 14, marginBottom: 12 }}>SEO</summary>
+            <div className="admin-field">
+              <label className="admin-label">Meta title</label>
+              <input className="admin-input" value={editing.metaTitle ?? ""} onChange={(e) => set({ metaTitle: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Meta description</label>
+              <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.metaDescription ?? ""} onChange={(e) => set({ metaDescription: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">OG title</label>
+              <p className="admin-hint">Used when shared on Facebook/WhatsApp. Defaults to Meta title.</p>
+              <input className="admin-input" value={editing.ogTitle ?? ""} onChange={(e) => set({ ogTitle: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">OG description</label>
+              <p className="admin-hint">Defaults to Meta description.</p>
+              <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.ogDescription ?? ""} onChange={(e) => set({ ogDescription: e.target.value })} />
+            </div>
+          </details>
+
           <div className="admin-toggle-row" style={{ marginTop: 6 }}>
             <input type="checkbox" className="admin-toggle" checked={editing.verified ?? false} onChange={(e) => set({ verified: e.target.checked })} />
             <span style={{ fontSize: 13.5 }}>Verified (degrees & experience confirmed)</span>

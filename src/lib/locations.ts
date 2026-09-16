@@ -55,6 +55,10 @@ export type Centre = {
    *  omit/empty to hide the section. */
   womensHealth?: string[];
   built: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export type City = {
@@ -75,6 +79,10 @@ export type City = {
    *  available across this city's centres. Drives <AvailableServicesSection>. */
   womensHealth?: string[];
   built: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 /* ---------- URLs ---------- */

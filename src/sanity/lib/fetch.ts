@@ -161,6 +161,10 @@ export type SanityDoctor = {
   visitsAllCentres?: boolean;
   navRole?: "senior-specialist" | "specialist";
   navOrder?: number;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 const DOCTORS_QUERY = `*[_type == "doctor"]{
@@ -170,7 +174,8 @@ const DOCTORS_QUERY = `*[_type == "doctor"]{
   cities, treatments, locations,
   shortBio, bio,
   knowsAbout, alumniOf, memberOf, awards, training, publications, languages, sameAs,
-  verified, visitsAllCentres, navRole, navOrder
+  verified, visitsAllCentres, navRole, navOrder,
+  metaTitle, metaDescription, ogTitle, ogDescription
 }`;
 
 /** All doctors from Sanity (cached + tagged). Empty array when none/unconfigured,
@@ -572,9 +577,13 @@ export type SanityCity = {
   intro?: { value?: string | null }[] | null;
   faqs?: { q?: string | null; a?: string | null }[] | null;
   womensHealth?: { value?: string | null }[] | null;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  ogTitle?: string | null;
+  ogDescription?: string | null;
 };
 
-const CITY_FIELDS = `slug, name, region, country, helpline, helplineLabel, whatsapp, heroImage, hero360Url, built, intro, faqs, womensHealth`;
+const CITY_FIELDS = `slug, name, region, country, helpline, helplineLabel, whatsapp, heroImage, hero360Url, built, intro, faqs, womensHealth, metaTitle, metaDescription, ogTitle, ogDescription`;
 
 export const getSanityCities = async () =>
   (await sanityFetch<SanityCity[]>(`*[_type == "city"]{ ${CITY_FIELDS} }`)) ?? [];
@@ -614,6 +623,10 @@ export type SanityCentre = {
   gallery?: { src?: string | null; alt?: string | null }[] | null;
   womensHealth?: { value?: string | null }[] | null;
   built?: boolean | null;
+  metaTitle?: string | null;
+  metaDescription?: string | null;
+  ogTitle?: string | null;
+  ogDescription?: string | null;
 };
 
 const CENTRE_FIELDS = `
@@ -623,7 +636,8 @@ const CENTRE_FIELDS = `
   geo { lat, lng },
   mapQuery, image, hero360Url,
   nearby, landmarks, howToReach, facilities, doctors, treatments,
-  faqs, reviewsKey, sameAs, intro, gallery, womensHealth
+  faqs, reviewsKey, sameAs, intro, gallery, womensHealth,
+  metaTitle, metaDescription, ogTitle, ogDescription
 `;
 
 export const getSanityCentres = async () =>

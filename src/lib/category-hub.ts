@@ -62,6 +62,10 @@ export type CategoryHubData = {
   heroImageAlt: string;
   ctaHeading: string;
   ctaSubtitle: string;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const HUB_DEFAULTS: Record<HubSlug, CategoryHubData> = {
@@ -396,6 +400,7 @@ export type CategoryHubSource =
       whyPoints?: { icon?: string; title?: string; desc?: string }[] | null;
       faqs?: { q?: string; a?: string }[] | null;
       heroImage?: string; heroImageAlt?: string; ctaHeading?: string; ctaSubtitle?: string;
+      metaTitle?: string; metaDescription?: string; ogTitle?: string; ogDescription?: string;
     }
   | null
   | undefined;
@@ -434,6 +439,10 @@ export function resolveCategoryHub(slug: HubSlug, src: CategoryHubSource): Categ
     heroImageAlt: src.heroImageAlt ?? d.heroImageAlt,
     ctaHeading: src.ctaHeading || d.ctaHeading,
     ctaSubtitle: src.ctaSubtitle || d.ctaSubtitle,
+    metaTitle: src.metaTitle || d.metaTitle,
+    metaDescription: src.metaDescription || d.metaDescription,
+    ogTitle: src.ogTitle || d.ogTitle,
+    ogDescription: src.ogDescription || d.ogDescription,
   };
 }
 
@@ -467,5 +476,9 @@ export function materializeCategoryHubSource(slug: HubSlug, src: CategoryHubSour
     heroImageAlt: r.heroImageAlt,
     ctaHeading: r.ctaHeading,
     ctaSubtitle: r.ctaSubtitle,
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }

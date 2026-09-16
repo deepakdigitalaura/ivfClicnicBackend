@@ -200,6 +200,10 @@ export type AdminDoctor = {
   visitsAllCentres?: boolean;
   navRole?: "senior-specialist" | "specialist";
   navOrder?: number;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 const DOCTOR_TAG = "sanity-doctors";
@@ -212,7 +216,7 @@ export async function readAdminDoctors(): Promise<AdminDoctor[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "doctor"] | order(navOrder asc, name asc){ _id, slug, name, credentials, specialty, role, imageUrl, "photoUrl": photo.asset->url, experienceLabel, experienceYears, cities, treatments, locations, shortBio, bio, knowsAbout, alumniOf, memberOf, awards, training, publications, languages, sameAs, verified, visitsAllCentres, navRole, navOrder }`,
+      `*[_type == "doctor"] | order(navOrder asc, name asc){ _id, slug, name, credentials, specialty, role, imageUrl, "photoUrl": photo.asset->url, experienceLabel, experienceYears, cities, treatments, locations, shortBio, bio, knowsAbout, alumniOf, memberOf, awards, training, publications, languages, sameAs, verified, visitsAllCentres, navRole, navOrder, metaTitle, metaDescription, ogTitle, ogDescription }`,
     );
   } catch {
     return [];
@@ -424,6 +428,10 @@ export type AdminCity = {
   intro?: ValueRow[];
   faqs?: { q?: string; a?: string }[];
   womensHealth?: ValueRow[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export type AdminCentre = {
@@ -457,6 +465,10 @@ export type AdminCentre = {
   treatments?: ValueRow[];
   womensHealth?: ValueRow[];
   faqs?: { q?: string; a?: string }[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 // Reuses the "sanity-locations" tag already wired into getSanityCities/
@@ -466,7 +478,8 @@ const LOCATION_TAG = "sanity-locations";
 
 const CITY_FIELDS_ADMIN = `
   _id, slug, name, region, country, built, heroImage, hero360Url,
-  helpline, helplineLabel, whatsapp, intro, faqs, womensHealth
+  helpline, helplineLabel, whatsapp, intro, faqs, womensHealth,
+  metaTitle, metaDescription, ogTitle, ogDescription
 `;
 
 export async function readAdminCities(): Promise<AdminCity[]> {
@@ -494,7 +507,7 @@ const CENTRE_FIELDS_ADMIN = `
   _id, slug, citySlug, name, fullName, area, isHeadOffice, built, image, hero360Url,
   address, pin, phone, phoneLabel, hours, opening, geo, mapQuery, reviewsKey, sameAs,
   intro, nearby, landmarks, howToReach, gallery, facilities, doctors, treatments,
-  womensHealth, faqs
+  womensHealth, faqs, metaTitle, metaDescription, ogTitle, ogDescription
 `;
 
 export async function readAdminCentres(): Promise<AdminCentre[]> {

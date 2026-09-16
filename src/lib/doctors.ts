@@ -91,6 +91,10 @@ export type Doctor = {
     consultsTitle?: string;
     doctorSpeakTitle?: string;
   };
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 /* Master treatment list. Every doctor is shown as offering the full range
@@ -947,6 +951,10 @@ export type DoctorSource =
         consultsTitle?: string | null;
         doctorSpeakTitle?: string | null;
       } | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -996,6 +1004,10 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
       verified: src.verified ?? false,
       ...(src.visitsAllCentres ? { visitsAllCentres: true } : {}),
       profileLabels: profileLabels(src.profileLabels),
+      ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+      ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+      ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+      ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
     };
   }
   return {
@@ -1028,6 +1040,10 @@ export function resolveDoctor(slug: string, src: DoctorSource): Doctor | undefin
     consultationTimings: def.consultationTimings,
     ...(((src.visitsAllCentres ?? def.visitsAllCentres) ? { visitsAllCentres: true } : {})),
     profileLabels: profileLabels(src.profileLabels),
+    ...((src.metaTitle || def.metaTitle) ? { metaTitle: src.metaTitle || def.metaTitle } : {}),
+    ...((src.metaDescription || def.metaDescription) ? { metaDescription: src.metaDescription || def.metaDescription } : {}),
+    ...((src.ogTitle || def.ogTitle) ? { ogTitle: src.ogTitle || def.ogTitle } : {}),
+    ...((src.ogDescription || def.ogDescription) ? { ogDescription: src.ogDescription || def.ogDescription } : {}),
   };
 }
 
@@ -1126,5 +1142,9 @@ export function materializeDoctorSource(slug: string, src: DoctorSource): NonNul
       consultsTitle: src?.profileLabels?.consultsTitle ?? "",
       doctorSpeakTitle: src?.profileLabels?.doctorSpeakTitle ?? "",
     },
+    metaTitle: src?.metaTitle ?? def?.metaTitle ?? "",
+    metaDescription: src?.metaDescription ?? def?.metaDescription ?? "",
+    ogTitle: src?.ogTitle ?? def?.ogTitle ?? "",
+    ogDescription: src?.ogDescription ?? def?.ogDescription ?? "",
   };
 }

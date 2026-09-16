@@ -24,14 +24,15 @@ export async function generateMetadata(
   const { slug } = await params;
   const d = await getDoctor(slug);
   if (!d) return {};
-  const title = `${d.name} — ${d.specialty} | Bavishi Fertility Institute`;
+  const title = d.metaTitle || `${d.name} — ${d.specialty} | Bavishi Fertility Institute`;
+  const description = d.metaDescription || d.shortBio;
   return withPageSeoOverride(`/doctors/${d.slug}`, {
     title,
-    description: d.shortBio,
+    description,
     alternates: { canonical: `/doctors/${d.slug}` },
     openGraph: {
-      title,
-      description: d.shortBio,
+      title: d.ogTitle || title,
+      description: d.ogDescription || description,
       url: abs(`/doctors/${d.slug}`),
       type: "profile",
       images: [d.image],

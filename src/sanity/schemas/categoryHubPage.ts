@@ -16,6 +16,7 @@ export default defineType({
     { name: "signs", title: "Signs" },
     { name: "why", title: "Why Choose Us" },
     { name: "faqs", title: "FAQs" },
+    { name: "seo", title: "SEO" },
   ],
   fields: [
     defineField({
@@ -115,6 +116,12 @@ export default defineType({
         ],
       }],
     }),
+
+    // ── SEO ──
+    defineField({ name: "metaTitle", title: "Meta Title", type: "string", group: "seo" }),
+    defineField({ name: "metaDescription", title: "Meta Description", type: "text", rows: 3, group: "seo" }),
+    defineField({ name: "ogTitle", title: "OG Title", description: "Used when shared on Facebook/WhatsApp. Defaults to Meta Title.", type: "string", group: "seo" }),
+    defineField({ name: "ogDescription", title: "OG Description", description: "Defaults to Meta Description.", type: "text", rows: 3, group: "seo" }),
   ],
   preview: {
     select: { title: "slug" },

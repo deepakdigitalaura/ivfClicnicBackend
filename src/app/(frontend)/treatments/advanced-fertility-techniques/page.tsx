@@ -7,15 +7,17 @@ import { getCategoryHub } from "@/lib/payload";
 const PATH = "/treatments/advanced-fertility-techniques";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getCategoryHub("advanced-fertility-techniques");
+  const title = data.metaTitle || "Advanced Fertility Techniques — IVF, ICSI, IUI & More";
+  const description = data.metaDescription ||
+    "Explore advanced assisted reproduction at Bavishi Fertility Institute — IVF, ICSI, IUI, PICSI, IMSI, donor services, cryopreservation, and more. 30,000+ successful pregnancies.";
   return withPageSeoOverride(PATH, {
-    title: "Advanced Fertility Techniques — IVF, ICSI, IUI & More",
-    description:
-      "Explore advanced assisted reproduction at Bavishi Fertility Institute — IVF, ICSI, IUI, PICSI, IMSI, donor services, cryopreservation, and more. 30,000+ successful pregnancies.",
+    title,
+    description,
     alternates: { canonical: PATH },
     openGraph: {
-      title: "Advanced Fertility Techniques — Bavishi Fertility Institute",
-      description:
-        "Explore advanced assisted reproduction — IVF, ICSI, IUI, PICSI, IMSI, donor services, cryopreservation, and more.",
+      title: data.ogTitle || title,
+      description: data.ogDescription || description,
       url: PATH,
       type: "website",
     },

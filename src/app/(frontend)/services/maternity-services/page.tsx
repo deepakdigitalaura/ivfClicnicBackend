@@ -33,15 +33,17 @@ async function getExtraServiceCards() {
 }
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getCategoryHub("maternity-services");
+  const title = data.metaTitle || "Maternity Services — Safe, Caring Pregnancy & Delivery";
+  const description = data.metaDescription ||
+    "Comprehensive maternity care at Bavishi Fertility & Birthing — painless delivery, normal delivery, fetal medicine, high-risk pregnancy care, twin pregnancy care, and 3D/4D sonography.";
   return withPageSeoOverride(PATH, {
-    title: "Maternity Services — Safe, Caring Pregnancy & Delivery",
-    description:
-      "Comprehensive maternity care at Bavishi Fertility & Birthing — painless delivery, normal delivery, fetal medicine, high-risk pregnancy care, twin pregnancy care, and 3D/4D sonography.",
+    title,
+    description,
     alternates: { canonical: PATH },
     openGraph: {
-      title: "Maternity Services — Bavishi Fertility & Birthing",
-      description:
-        "Comprehensive maternity care — painless delivery, normal delivery, fetal medicine, high-risk pregnancy care, and more.",
+      title: data.ogTitle || title,
+      description: data.ogDescription || description,
       url: PATH,
       type: "website",
     },

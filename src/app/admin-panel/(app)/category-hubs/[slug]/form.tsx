@@ -9,7 +9,7 @@ import { Repeater } from "../../_components/repeater";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
 
-type Tab = "hero" | "cards" | "overview" | "signs" | "why" | "faqs";
+type Tab = "hero" | "cards" | "overview" | "signs" | "why" | "faqs" | "seo";
 const TABS: { id: Tab; label: string }[] = [
   { id: "hero", label: "Hero" },
   { id: "cards", label: "Cards" },
@@ -17,6 +17,7 @@ const TABS: { id: Tab; label: string }[] = [
   { id: "signs", label: "Signs" },
   { id: "why", label: "Why Choose Us" },
   { id: "faqs", label: "FAQs" },
+  { id: "seo", label: "SEO" },
 ];
 
 function Field({ label, hint, value, textarea, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; onChange: (v: string) => void }) {
@@ -257,6 +258,15 @@ export function CategoryHubForm({ slug, initial }: { slug: HubSlug; initial: Doc
               )}
             />
           </div>
+        )}
+
+        {tab === "seo" && (
+          <>
+            <Field label="Meta title" value={get(["metaTitle"])} onChange={(v) => setIn(["metaTitle"], v)} />
+            <Field label="Meta description" value={get(["metaDescription"])} onChange={(v) => setIn(["metaDescription"], v)} textarea />
+            <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Meta title." value={get(["ogTitle"])} onChange={(v) => setIn(["ogTitle"], v)} />
+            <Field label="OG description" hint="Defaults to Meta description." value={get(["ogDescription"])} onChange={(v) => setIn(["ogDescription"], v)} textarea />
+          </>
         )}
 
         <SaveBar pending={pending} />

@@ -340,6 +340,10 @@ function toDoctorSource(d: SanityDoctor): DoctorSource {
     visitsAllCentres: d.visitsAllCentres ?? null,
     navRole: d.navRole ?? null,
     navOrder: d.navOrder ?? null,
+    metaTitle: d.metaTitle ?? null,
+    metaDescription: d.metaDescription ?? null,
+    ogTitle: d.ogTitle ?? null,
+    ogDescription: d.ogDescription ?? null,
   };
 }
 
@@ -436,6 +440,10 @@ function toCitySource(d: Awaited<ReturnType<typeof getSanityCity>>): CitySource 
     intro: d.intro ?? null,
     faqs: d.faqs ?? null,
     womensHealth: d.womensHealth ?? null,
+    metaTitle: d.metaTitle ?? null,
+    metaDescription: d.metaDescription ?? null,
+    ogTitle: d.ogTitle ?? null,
+    ogDescription: d.ogDescription ?? null,
   };
 }
 
@@ -471,6 +479,10 @@ function toCentreSource(d: SanityCentreDoc | null | undefined): CentreSource {
     intro: d.intro ?? null,
     gallery: d.gallery ?? null,
     womensHealth: d.womensHealth ?? null,
+    metaTitle: d.metaTitle ?? null,
+    metaDescription: d.metaDescription ?? null,
+    ogTitle: d.ogTitle ?? null,
+    ogDescription: d.ogDescription ?? null,
   };
 }
 
