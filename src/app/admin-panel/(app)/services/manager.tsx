@@ -182,6 +182,8 @@ export function ServicesManager({ initial }: { initial: AdminService[] }) {
             <>
               <Field label="Page title" value={get(["seo", "metaTitle"])} onChange={(v) => setIn(["seo", "metaTitle"], v)} />
               <Field label="Meta description" value={get(["seo", "metaDescription"])} onChange={(v) => setIn(["seo", "metaDescription"], v)} textarea />
+              <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Page title." value={get(["seo", "ogTitle"])} onChange={(v) => setIn(["seo", "ogTitle"], v)} />
+              <Field label="OG description" hint="Defaults to Meta description." value={get(["seo", "ogDescription"])} onChange={(v) => setIn(["seo", "ogDescription"], v)} textarea />
             </>
           )}
 

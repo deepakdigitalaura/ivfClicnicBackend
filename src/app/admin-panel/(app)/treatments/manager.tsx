@@ -201,6 +201,8 @@ export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
             <>
               <Field label="Page title" value={get(["meta", "title"])} onChange={(v) => setIn(["meta", "title"], v)} />
               <Field label="Meta description" value={get(["meta", "description"])} onChange={(v) => setIn(["meta", "description"], v)} textarea noLink />
+              <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Page title." value={get(["meta", "ogTitle"])} onChange={(v) => setIn(["meta", "ogTitle"], v)} />
+              <Field label="OG description" hint="Defaults to Meta description." value={get(["meta", "ogDescription"])} onChange={(v) => setIn(["meta", "ogDescription"], v)} textarea noLink />
               <Field label="OG image path" hint="Overrides the hero image for social sharing." value={get(["meta", "ogImage"])} onChange={(v) => setIn(["meta", "ogImage"], v)} />
             </>
           )}

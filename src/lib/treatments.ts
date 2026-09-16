@@ -147,7 +147,7 @@ export type Treatment = {
   shortName: string;
   alternateName?: string;
   breadcrumbName: string;
-  meta: { title: string; description: string; ogImage: string };
+  meta: { title: string; description: string; ogTitle?: string; ogDescription?: string; ogImage: string };
   /** schema.org MedicalProcedure fields. */
   procedure: {
     procedureType?: string;

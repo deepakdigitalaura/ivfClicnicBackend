@@ -139,7 +139,7 @@ export type ServiceContent = {
   schemaType: "MedicalProcedure" | "MedicalTest" | "MedicalTherapy";
   /** Plain-language label used inside copy ("the scan", "your delivery"…). */
   shortName: string;
-  meta: { title: string; description: string };
+  meta: { title: string; description: string; ogTitle?: string; ogDescription?: string };
   breadcrumbName: string;
   reviewerSlug: string;
   lastReviewed: string;

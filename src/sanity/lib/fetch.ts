@@ -508,7 +508,7 @@ export type SanityService = {
     image?: string | null; imageAlt?: string | null;
     heroPhoto?: { asset?: { url?: string | null } | null } | null;
   } | null;
-  seo?: { metaTitle?: string | null; metaDescription?: string | null } | null;
+  seo?: { metaTitle?: string | null; metaDescription?: string | null; ogTitle?: string | null; ogDescription?: string | null } | null;
   overview?: {
     heading?: { lead?: string | null; em?: string | null } | null;
     paragraphs?: { text?: string | null }[] | null;
@@ -541,7 +541,7 @@ export type SanityService = {
 const SERVICE_FIELDS = `
   slug,
   hero { eyebrow, h1, h1Em, tagline, badges, image, imageAlt, heroPhoto { asset->{ url } } },
-  seo { metaTitle, metaDescription },
+  seo { metaTitle, metaDescription, ogTitle, ogDescription },
   overview { heading, paragraphs, aside },
   benefits { heading, subtitle, items },
   whoFor { heading, subtitle, items },

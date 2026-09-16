@@ -289,7 +289,7 @@ function toServiceSource(d: Awaited<ReturnType<typeof getSanityService>>): Servi
         ? { url: d.hero.heroPhoto.asset.url }
         : undefined,
     } : null,
-    seo: d.seo ? { metaTitle: d.seo.metaTitle ?? null, metaDescription: d.seo.metaDescription ?? null } : null,
+    seo: d.seo ? { metaTitle: d.seo.metaTitle ?? null, metaDescription: d.seo.metaDescription ?? null, ogTitle: d.seo.ogTitle ?? null, ogDescription: d.seo.ogDescription ?? null } : null,
     overview: d.overview ?? null,
     benefits: d.benefits ?? null,
     whoFor: d.whoFor ?? null,
