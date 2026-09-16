@@ -28,6 +28,10 @@ export type SmartTreatmentData = {
   pillars: SmtPillar[];
   features: SmtFeature[];
   packages: SmtPackage[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const SMART_TREATMENT_DEFAULTS: SmartTreatmentData = {
@@ -69,6 +73,10 @@ export type SmartTreatmentSource =
       pillars?: { icon?: string; label?: string }[] | null;
       features?: { icon?: string; title?: string; description?: string; highlights?: { value?: string }[] }[] | null;
       packages?: { icon?: string; title?: string; description?: string }[] | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -101,7 +109,13 @@ export function resolveSmartTreatment(src: SmartTreatmentSource): SmartTreatment
     ? src.packages.map((p) => ({ icon: (p.icon ?? "Sparkles") as IconName, title: p.title ?? "", description: p.description ?? "" }))
     : d.packages;
 
-  return { hero, pillars, features, packages };
+  return {
+    hero, pillars, features, packages,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 export function materializeSmartTreatmentSource(src: SmartTreatmentSource): NonNullable<SmartTreatmentSource> {
@@ -113,5 +127,9 @@ export function materializeSmartTreatmentSource(src: SmartTreatmentSource): NonN
     pillars: r.pillars,
     packages: r.packages,
     features: r.features.map((f) => ({ icon: f.icon, title: f.title, description: f.description, highlights: f.highlights.map((value) => ({ value })) })),
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }

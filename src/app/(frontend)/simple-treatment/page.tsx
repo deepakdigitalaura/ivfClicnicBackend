@@ -9,15 +9,17 @@ import { getSimpleTreatmentPage } from "@/lib/payload";
 const PATH = "/simple-treatment";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getSimpleTreatmentPage();
+  const title = data.metaTitle || "Simple IVF Treatment — Easy to Understand, Plan & Undergo | Bavishi Fertility Institute";
+  const description = data.metaDescription ||
+    "At Bavishi Fertility Institute, we make complex IVF treatment simple — simple to understand, simple to plan, and simple to undergo. Minimum injections, fewer visits, maximum comfort.";
   return withPageSeoOverride(PATH, {
-    title:
-      "Simple IVF Treatment — Easy to Understand, Plan & Undergo | Bavishi Fertility Institute",
-    description:
-      "At Bavishi Fertility Institute, we make complex IVF treatment simple — simple to understand, simple to plan, and simple to undergo. Minimum injections, fewer visits, maximum comfort.",
+    title,
+    description,
     alternates: { canonical: PATH },
     openGraph: {
-      title: "Simple IVF Treatment | Bavishi Fertility Institute",
-      description:
+      title: data.ogTitle || title,
+      description: data.ogDescription ||
         "We make complex IVF treatment simple — minimum injections, fewer visits, maximum comfort.",
       url: abs(PATH),
       type: "website",

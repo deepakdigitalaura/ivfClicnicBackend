@@ -63,6 +63,14 @@ export function HistoryForm({ initial }: { initial: Doc | null }) {
           <Field label="Paragraph" hint="HTML allowed, e.g. <strong>bold</strong>." value={get(["presentDay", "paragraph"])} onChange={(v) => setIn(["presentDay", "paragraph"], v)} textarea />
         </div>
 
+        <div style={{ marginTop: 20, borderTop: "1px solid var(--border)", paddingTop: 16 }}>
+          <div style={{ fontWeight: 700, fontSize: 14.5, marginBottom: 8 }}>SEO</div>
+          <Field label="Meta title" value={get(["metaTitle"])} onChange={(v) => setIn(["metaTitle"], v)} />
+          <Field label="Meta description" value={get(["metaDescription"])} onChange={(v) => setIn(["metaDescription"], v)} textarea />
+          <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Meta title." value={get(["ogTitle"])} onChange={(v) => setIn(["ogTitle"], v)} />
+          <Field label="OG description" hint="Defaults to Meta description." value={get(["ogDescription"])} onChange={(v) => setIn(["ogDescription"], v)} textarea />
+        </div>
+
         <SaveBar pending={pending} />
       </div>
       <Toast toast={toast} />

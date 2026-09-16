@@ -29,6 +29,10 @@ export type SimpleTreatmentData = {
   steps: STStep[];
   quote: STQuote;
   pillars: STPillar[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const SIMPLE_TREATMENT_DEFAULTS: SimpleTreatmentData = {
@@ -69,6 +73,10 @@ export type SimpleTreatmentSource =
       steps?: { step?: string; icon?: string; title?: string; description?: string; highlights?: { value?: string }[] }[] | null;
       quote?: { quote?: string; paragraph?: string } | null;
       pillars?: { icon?: string; title?: string; description?: string }[] | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -106,7 +114,13 @@ export function resolveSimpleTreatment(src: SimpleTreatmentSource): SimpleTreatm
     ? src.pillars.map((p) => ({ icon: (p.icon ?? "Sparkles") as IconName, title: p.title ?? "", description: p.description ?? "" }))
     : d.pillars;
 
-  return { hero, philosophy, steps, quote, pillars };
+  return {
+    hero, philosophy, steps, quote, pillars,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 export function materializeSimpleTreatmentSource(src: SimpleTreatmentSource): NonNullable<SimpleTreatmentSource> {
@@ -119,5 +133,9 @@ export function materializeSimpleTreatmentSource(src: SimpleTreatmentSource): No
     quote: r.quote,
     pillars: r.pillars,
     steps: r.steps.map((st) => ({ step: st.step, icon: st.icon, title: st.title, description: st.description, highlights: st.highlights.map((value) => ({ value })) })),
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }

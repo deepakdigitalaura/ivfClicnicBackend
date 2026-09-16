@@ -9,11 +9,14 @@ import { getHistoryPage } from "@/lib/payload";
 const PATH = "/history";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getHistoryPage();
+  const title = data.metaTitle || "History — 35+ Years of Fertility Care | Bavishi Fertility Institute";
+  const description = data.metaDescription || "From humble beginnings in 1986 to India's No. 1 ranked fertility clinic. Explore the landmark milestones and achievements of Bavishi Fertility Institute.";
   return withPageSeoOverride(PATH, {
-    title: "History — 35+ Years of Fertility Care | Bavishi Fertility Institute",
-    description: "From humble beginnings in 1986 to India's No. 1 ranked fertility clinic. Explore the landmark milestones and achievements of Bavishi Fertility Institute.",
+    title,
+    description,
     alternates: { canonical: PATH },
-    openGraph: { title: "History of Bavishi Fertility Institute", description: "35+ years of landmark achievements in fertility care — from 1986 to present day.", url: abs(PATH), type: "website" },
+    openGraph: { title: data.ogTitle || title, description: data.ogDescription || "35+ years of landmark achievements in fertility care — from 1986 to present day.", url: abs(PATH), type: "website" },
   });
 }
 

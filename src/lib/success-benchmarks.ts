@@ -29,6 +29,10 @@ export type SuccessBenchmarksData = {
   stats: SbStat[];
   pillars: SbPillar[];
   closingBadges: SbBadge[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const SUCCESS_BENCHMARKS_DEFAULTS: SuccessBenchmarksData = {
@@ -66,6 +70,10 @@ export type SuccessBenchmarksSource =
       stats?: { value?: number; suffix?: string; label?: string }[] | null;
       pillars?: { icon?: string; title?: string; description?: string; highlights?: { value?: string }[] }[] | null;
       closingBadges?: { icon?: string; text?: string }[] | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -99,7 +107,13 @@ export function resolveSuccessBenchmarks(src: SuccessBenchmarksSource): SuccessB
     ? src.closingBadges.map((b) => ({ icon: (b.icon ?? "Sparkles") as IconName, text: b.text ?? "" }))
     : d.closingBadges;
 
-  return { hero, stats, pillars, closingBadges };
+  return {
+    hero, stats, pillars, closingBadges,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 export function materializeSuccessBenchmarksSource(src: SuccessBenchmarksSource): NonNullable<SuccessBenchmarksSource> {
@@ -111,5 +125,9 @@ export function materializeSuccessBenchmarksSource(src: SuccessBenchmarksSource)
     stats: r.stats,
     closingBadges: r.closingBadges,
     pillars: r.pillars.map((p) => ({ icon: p.icon, title: p.title, description: p.description, highlights: p.highlights.map((value) => ({ value })) })),
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }

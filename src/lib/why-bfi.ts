@@ -32,6 +32,10 @@ export type WhyBfiData = {
   reasons: WBReason[];
   journey: WBJourneyEra[];
   ethics: WBEthic[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const WHY_BFI_DEFAULTS: WhyBfiData = {
@@ -124,6 +128,10 @@ export type WhyBfiSource =
       reasons?: { icon?: string; title?: string; description?: string }[] | null;
       journey?: { era?: string; eraLabel?: string; entries?: { year?: string; icon?: string; items?: { value?: string }[] }[] }[] | null;
       ethics?: { icon?: string; title?: string; description?: string }[] | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -162,7 +170,13 @@ export function resolveWhyBfi(src: WhyBfiSource): WhyBfiData {
       }))
     : d.journey;
 
-  return { hero, stats, reasons, journey, ethics };
+  return {
+    hero, stats, reasons, journey, ethics,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 export function materializeWhyBfiSource(src: WhyBfiSource): NonNullable<WhyBfiSource> {
@@ -179,5 +193,9 @@ export function materializeWhyBfiSource(src: WhyBfiSource): NonNullable<WhyBfiSo
       eraLabel: era.eraLabel,
       entries: era.entries.map((e) => ({ year: e.year, icon: e.icon, items: e.items.map((value) => ({ value })) })),
     })),
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }

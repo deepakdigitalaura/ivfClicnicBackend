@@ -27,6 +27,10 @@ export type SafeTreatmentData = {
   features: SafeFeature[];
   stats: SafeStat[];
   protocols: string[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const SAFE_TREATMENT_DEFAULTS: SafeTreatmentData = {
@@ -73,6 +77,10 @@ export type SafeTreatmentSource =
       features?: { icon?: string; title?: string; description?: string }[] | null;
       stats?: { value?: number; suffix?: string; label?: string; sub?: string }[] | null;
       protocols?: { value?: string }[] | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -99,11 +107,20 @@ export function resolveSafeTreatment(src: SafeTreatmentSource): SafeTreatmentDat
   const stats = src.stats?.length ? src.stats.map((s) => ({ value: s.value ?? 0, suffix: s.suffix ?? "", label: s.label ?? "", sub: s.sub ?? "" })) : d.stats;
   const protocols = src.protocols?.length ? src.protocols.map((p) => p.value ?? "").filter(Boolean) : d.protocols;
 
-  return { hero, features, stats, protocols };
+  return {
+    hero, features, stats, protocols,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 export function materializeSafeTreatmentSource(src: SafeTreatmentSource): NonNullable<SafeTreatmentSource> {
   const r = resolveSafeTreatment(src);
   const s = (src ?? {}) as NonNullable<SafeTreatmentSource>;
-  return { ...s, hero: r.hero, features: r.features, stats: r.stats, protocols: r.protocols.map((value) => ({ value })) };
+  return {
+    ...s, hero: r.hero, features: r.features, stats: r.stats, protocols: r.protocols.map((value) => ({ value })),
+    metaTitle: r.metaTitle ?? "", metaDescription: r.metaDescription ?? "", ogTitle: r.ogTitle ?? "", ogDescription: r.ogDescription ?? "",
+  };
 }

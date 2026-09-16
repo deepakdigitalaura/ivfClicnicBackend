@@ -9,11 +9,14 @@ import { getInfrastructurePage } from "@/lib/payload";
 const PATH = "/infrastructure";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getInfrastructurePage();
+  const title = data.metaTitle || "World-Class IVF Lab & Infrastructure | Bavishi Fertility Institute";
+  const description = data.metaDescription || "State-of-the-art IVF labs with Class 1000 pure air quality, dedicated andrology and cryology labs, 3D/4D sonography, and advanced endoscopy — all under one roof.";
   return withPageSeoOverride(PATH, {
-    title: "World-Class IVF Lab & Infrastructure | Bavishi Fertility Institute",
-    description: "State-of-the-art IVF labs with Class 1000 pure air quality, dedicated andrology and cryology labs, 3D/4D sonography, and advanced endoscopy — all under one roof.",
+    title,
+    description,
     alternates: { canonical: PATH },
-    openGraph: { title: "World-Class Infrastructure | Bavishi Fertility Institute", description: "Class 1000 IVF labs, advanced equipment, dedicated facilities — world-class fertility care.", url: abs(PATH), type: "website" },
+    openGraph: { title: data.ogTitle || title, description: data.ogDescription || "Class 1000 IVF labs, advanced equipment, dedicated facilities — world-class fertility care.", url: abs(PATH), type: "website" },
   });
 }
 

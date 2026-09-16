@@ -9,14 +9,17 @@ import { getWhyBfiPage } from "@/lib/payload";
 const PATH = "/why-bfi";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getWhyBfiPage();
+  const title = data.metaTitle || "Why Choose Bavishi Fertility Institute | Best IVF Clinic in India";
+  const description = data.metaDescription ||
+    "25+ years of pioneering IVF in India. 30,000+ successful pregnancies. Class 1000 labs, OHSS-free clinic, ethical practice — discover why families trust Bavishi Fertility Institute.";
   return withPageSeoOverride(PATH, {
-    title: "Why Choose Bavishi Fertility Institute | Best IVF Clinic in India",
-    description:
-      "25+ years of pioneering IVF in India. 30,000+ successful pregnancies. Class 1000 labs, OHSS-free clinic, ethical practice — discover why families trust Bavishi Fertility Institute.",
+    title,
+    description,
     alternates: { canonical: PATH },
     openGraph: {
-      title: "Why Choose Bavishi Fertility Institute | Best IVF Clinic in India",
-      description:
+      title: data.ogTitle || title,
+      description: data.ogDescription ||
         "Pioneers of IVF since 1998. 30,000+ successful pregnancies, 14 centres across India. Ethical, transparent, and affordable fertility care.",
       url: abs(PATH),
       type: "website",

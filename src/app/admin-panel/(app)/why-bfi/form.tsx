@@ -9,13 +9,14 @@ import { Repeater } from "../_components/repeater";
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
 
-type Tab = "hero" | "stats" | "reasons" | "journey" | "ethics";
+type Tab = "hero" | "stats" | "reasons" | "journey" | "ethics" | "seo";
 const TABS: { id: Tab; label: string }[] = [
   { id: "hero", label: "Hero" },
   { id: "stats", label: "Stats" },
   { id: "reasons", label: "Reasons" },
   { id: "journey", label: "Journey Timeline" },
   { id: "ethics", label: "Ethics" },
+  { id: "seo", label: "SEO" },
 ];
 
 function Field({ label, hint, value, textarea, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; onChange: (v: string) => void }) {
@@ -205,6 +206,15 @@ export function WhyBfiForm({ initial }: { initial: Doc | null }) {
               }}
             />
           </div>
+        )}
+
+        {tab === "seo" && (
+          <>
+            <Field label="Meta title" value={get(["metaTitle"])} onChange={(v) => setIn(["metaTitle"], v)} />
+            <Field label="Meta description" value={get(["metaDescription"])} onChange={(v) => setIn(["metaDescription"], v)} textarea />
+            <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Meta title." value={get(["ogTitle"])} onChange={(v) => setIn(["ogTitle"], v)} />
+            <Field label="OG description" hint="Defaults to Meta description." value={get(["ogDescription"])} onChange={(v) => setIn(["ogDescription"], v)} textarea />
+          </>
         )}
 
         <SaveBar pending={pending} />

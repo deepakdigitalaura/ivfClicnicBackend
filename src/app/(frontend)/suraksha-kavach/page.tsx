@@ -9,14 +9,17 @@ import { getSurakshaKavach } from "@/lib/payload";
 const PATH = "/suraksha-kavach";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getSurakshaKavach();
+  const title = data.metaTitle || "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute";
+  const description = data.metaDescription ||
+    "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind — only at Bavishi Fertility Institute.";
   return withPageSeoOverride(PATH, {
-    title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
-    description:
-      "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind — only at Bavishi Fertility Institute.",
+    title,
+    description,
     alternates: { canonical: PATH },
     openGraph: {
-      title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
-      description:
+      title: data.ogTitle || title,
+      description: data.ogDescription ||
         "India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind at Bavishi Fertility Institute.",
       url: abs(PATH),
       type: "website",

@@ -29,6 +29,10 @@ export type SurakshaKavachData = {
   stats: SKStat[];
   steps: SKStep[];
   faqs: SKFaq[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const SURAKSHA_KAVACH_DEFAULTS: SurakshaKavachData = {
@@ -91,6 +95,10 @@ export type SurakshaKavachSource =
       stats?: { value?: number; suffix?: string; label?: string; sub?: string }[] | null;
       steps?: { step?: string; title?: string; description?: string }[] | null;
       faqs?: { q?: string; a?: string }[] | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -138,7 +146,13 @@ export function resolveSurakshaKavach(src: SurakshaKavachSource): SurakshaKavach
     ? src.faqs.filter((f) => f.q && f.a).map((f) => ({ q: f.q!, a: f.a! }))
     : d.faqs;
 
-  return { hero, story, benefits, stats, steps, faqs };
+  return {
+    hero, story, benefits, stats, steps, faqs,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 /** Seeds the admin form draft with the full current content (Sanity doc, or
@@ -161,5 +175,9 @@ export function materializeSurakshaKavachSource(src: SurakshaKavachSource): NonN
     stats: r.stats,
     steps: r.steps,
     faqs: r.faqs,
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }

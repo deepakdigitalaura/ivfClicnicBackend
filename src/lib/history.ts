@@ -20,6 +20,10 @@ export type HistoryPresentDay = { heading: string; paragraph: string };
 export type HistoryData = {
   hero: HistoryHero;
   presentDay: HistoryPresentDay;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const HISTORY_DEFAULTS: HistoryData = {
@@ -40,6 +44,10 @@ export type HistorySource =
   | {
       hero?: { eyebrow?: string; headline?: string; headlineEm?: string; paragraph?: string } | null;
       presentDay?: { heading?: string; paragraph?: string } | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -64,11 +72,26 @@ export function resolveHistory(src: HistorySource): HistoryData {
       }
     : d.presentDay;
 
-  return { hero, presentDay };
+  return {
+    hero,
+    presentDay,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 export function materializeHistorySource(src: HistorySource): NonNullable<HistorySource> {
   const r = resolveHistory(src);
   const s = (src ?? {}) as NonNullable<HistorySource>;
-  return { ...s, hero: r.hero, presentDay: r.presentDay };
+  return {
+    ...s,
+    hero: r.hero,
+    presentDay: r.presentDay,
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
+  };
 }

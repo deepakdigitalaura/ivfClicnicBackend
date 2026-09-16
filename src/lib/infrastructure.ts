@@ -28,6 +28,10 @@ export type InfrastructureData = {
   stats: InfraStat[];
   facilities: InfraFacility[];
   techHighlights: InfraTech[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export const INFRASTRUCTURE_DEFAULTS: InfrastructureData = {
@@ -66,6 +70,10 @@ export type InfrastructureSource =
       stats?: { value?: number; suffix?: string; label?: string; sub?: string }[] | null;
       facilities?: { icon?: string; title?: string; description?: string }[] | null;
       techHighlights?: { icon?: string; title?: string; description?: string }[] | null;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -91,11 +99,20 @@ export function resolveInfrastructure(src: InfrastructureSource): Infrastructure
     ? src.techHighlights.map((t) => ({ icon: (t.icon ?? "Sparkles") as IconName, title: t.title ?? "", description: t.description ?? "" }))
     : d.techHighlights;
 
-  return { hero, stats, facilities, techHighlights };
+  return {
+    hero, stats, facilities, techHighlights,
+    ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+    ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+    ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+    ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
+  };
 }
 
 export function materializeInfrastructureSource(src: InfrastructureSource): NonNullable<InfrastructureSource> {
   const r = resolveInfrastructure(src);
   const s = (src ?? {}) as NonNullable<InfrastructureSource>;
-  return { ...s, hero: r.hero, stats: r.stats, facilities: r.facilities, techHighlights: r.techHighlights };
+  return {
+    ...s, hero: r.hero, stats: r.stats, facilities: r.facilities, techHighlights: r.techHighlights,
+    metaTitle: r.metaTitle ?? "", metaDescription: r.metaDescription ?? "", ogTitle: r.ogTitle ?? "", ogDescription: r.ogDescription ?? "",
+  };
 }

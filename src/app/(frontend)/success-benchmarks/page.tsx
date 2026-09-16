@@ -9,11 +9,14 @@ import { getSuccessBenchmarksPage } from "@/lib/payload";
 const PATH = "/success-benchmarks";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getSuccessBenchmarksPage();
+  const title = data.metaTitle || "Success Benchmarks — 30,000+ Successful Pregnancies | Bavishi Fertility Institute";
+  const description = data.metaDescription || "Over 30,000 successful pregnancies with one of the highest success rates in India and the world. Success is not random — it's years of learning, best practices, and technology.";
   return withPageSeoOverride(PATH, {
-    title: "Success Benchmarks — 30,000+ Successful Pregnancies | Bavishi Fertility Institute",
-    description: "Over 30,000 successful pregnancies with one of the highest success rates in India and the world. Success is not random — it's years of learning, best practices, and technology.",
+    title,
+    description,
     alternates: { canonical: PATH },
-    openGraph: { title: "Success Benchmarks | Bavishi Fertility Institute", description: "30,000+ successful pregnancies with one of the highest success rates in India.", url: abs(PATH), type: "website" },
+    openGraph: { title: data.ogTitle || title, description: data.ogDescription || "30,000+ successful pregnancies with one of the highest success rates in India.", url: abs(PATH), type: "website" },
   });
 }
 
