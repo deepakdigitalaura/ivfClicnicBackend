@@ -73,3 +73,6 @@ public/awards and achievment/
 # Staging path for CI-built deploys landing on the Cloudways server (jailed
 # SFTP scope means it must live inside the app dir, not /home/master)
 .deploy-incoming/
+
+# Cookie-less pageview counter log files (server-local, not source)
+data/pageviews/
