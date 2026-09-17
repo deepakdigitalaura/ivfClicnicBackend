@@ -1,17 +1,19 @@
 import Link from "next/link";
 import {
   CornerUpRight, FileText, Code2, BarChart3, Bot, Map,
-  Plus, ExternalLink, Inbox,
+  Plus, ExternalLink, Inbox, Users,
 } from "lucide-react";
 import { getDashboardStats, hasSanity } from "@/sanity/lib/admin";
+import { getPageviewStats } from "@/lib/pageviews";
 
 export const dynamic = "force-dynamic";
 
 export default async function Dashboard() {
-  const stats = await getDashboardStats();
+  const [stats, pageviews] = await Promise.all([getDashboardStats(), getPageviewStats()]);
   const connected = hasSanity();
 
   const cards = [
+    { num: pageviews.today, label: "Visits Today (all traffic, cookie-less)", icon: Users, bg: "#dbeafe", fg: "#1d4ed8" },
     { num: stats.newInquiries, label: "New Inquiries", icon: Inbox, bg: "#dcfce7", fg: "#166534" },
     { num: stats.redirects, label: "Redirects", icon: CornerUpRight, bg: "#ede9fe", fg: "var(--plum)" },
     { num: stats.headScripts + stats.bodyScripts, label: "Scripts Added", icon: Code2, bg: "#fef3c7", fg: "#b45309" },
