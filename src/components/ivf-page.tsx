@@ -1,5 +1,6 @@
 "use client";
 import { useState } from "react";
+import Image from "next/image";
 import {
   ArrowRight, Phone, MessageCircle, Calendar, CheckCircle2, ChevronDown,
   ClipboardCheck, Syringe, Microscope, Dna, HeartPulse, ShieldCheck,
@@ -303,8 +304,8 @@ export function IvfPage() {
           </div>
           <div className="lg:col-span-5">
             <Reveal delay={0.15}>
-              <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
-                <img src={heroImg} alt="IVF / ICSI — sperm microinjection into an egg under the microscope at Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
+              <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
+                <Image src={heroImg} alt="IVF / ICSI — sperm microinjection into an egg under the microscope at Bavishi Fertility Institute" fill priority sizes="(max-width: 1024px) 90vw, 40vw" className="object-cover" />
               </div>
             </Reveal>
           </div>

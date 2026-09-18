@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
+import Image from "next/image";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -1290,8 +1291,8 @@ const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
        * carousel stage below never has to clip the text off the bottom.
        * object-contain — most award photos are portrait trophy/certificate shots;
        * object-cover was cropping their tops off. */}
-      <div className="h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
-        <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-contain" />
+      <div className="relative h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
+        <Image src={a.img} alt={a.title} fill sizes="(max-width: 640px) 90vw, 300px" className="object-contain" />
       </div>
       <div className="border-t border-border/60 px-5 py-4 text-center">
         <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">{a.title}</h3>
