@@ -50,16 +50,27 @@ for (const p of posts) {
     console.log(`  NOT FOUND: ${p.slug}`);
     continue;
   }
-  console.log(`${p.slug}\n  title: "${doc.seoMetaTitle ?? "(empty)"}" -> "${p.title}"`);
+
+  // Only fill fields that are actually empty -- never overwrite an existing
+  // value (some posts may already have one of these 4 fields set).
+  const empty = (v) => v === null || v === undefined || (typeof v === "string" && v.trim() === "");
+  const patch = {};
+  if (empty(doc.seoMetaTitle)) patch.seoMetaTitle = p.title;
+  if (empty(doc.seoMetaDescription)) patch.seoMetaDescription = p.desc;
+  if (empty(doc.seoOgTitle)) patch.seoOgTitle = p.title;
+  if (empty(doc.seoOgDescription)) patch.seoOgDescription = p.desc;
+
+  if (Object.keys(patch).length === 0) {
+    console.log(`${p.slug}\n  all 4 fields already filled -- skipping`);
+    continue;
+  }
+  console.log(`${p.slug}`);
+  for (const [field, value] of Object.entries(patch)) console.log(`  ${field}: (empty) -> "${value}"`);
+
   if (!dryRun) {
-    await client.patch(doc._id).set({
-      seoMetaTitle: p.title,
-      seoMetaDescription: p.desc,
-      seoOgTitle: p.title,
-      seoOgDescription: p.desc,
-    }).commit();
+    await client.patch(doc._id).set(patch).commit();
     changed++;
   }
 }
 
-console.log(dryRun ? `\n[dry-run] No writes performed. ${posts.length} posts would be updated.` : `\nDone. Updated ${changed} posts.`);
+console.log(dryRun ? `\n[dry-run] No writes performed. ${posts.length} posts checked.` : `\nDone. Updated ${changed} posts.`);
