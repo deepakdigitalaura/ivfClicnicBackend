@@ -116,7 +116,7 @@ export interface Config {
   db: {
     defaultIDType: number;
   };
-  fallbackLocale: null;
+  fallbackLocale: ('false' | 'none' | 'null') | false | null | ('en' | 'hi' | 'gu') | ('en' | 'hi' | 'gu')[];
   globals: {
     'site-settings': SiteSetting;
     'contact-info': ContactInfo;
@@ -137,7 +137,7 @@ export interface Config {
     'about-page': AboutPageSelect<false> | AboutPageSelect<true>;
     'seo-settings': SeoSettingsSelect<false> | SeoSettingsSelect<true>;
   };
-  locale: null;
+  locale: 'en' | 'hi' | 'gu';
   widgets: {
     collections: CollectionsWidget;
   };
@@ -326,6 +326,24 @@ export interface Page {
     subtitle?: string | null;
   };
   /**
+   * Main body content for this page (used by policy/legal pages).
+   */
+  content?: {
+    root: {
+      type: string;
+      children: {
+        type: any;
+        version: number;
+        [k: string]: unknown;
+      }[];
+      direction: ('ltr' | 'rtl') | null;
+      format: 'left' | 'start' | 'center' | 'right' | 'end' | 'justify' | '';
+      indent: number;
+      version: number;
+    };
+    [k: string]: unknown;
+  } | null;
+  /**
    * Questions and answers shown on the page.
    */
   faqs?:
@@ -410,8 +428,16 @@ export interface Blog {
    */
   excerpt?: string | null;
   heroImage?: (number | null) | Media;
+  /**
+   * Tick this if the LEFT side of the cover image is LIGHT (cream / white / grey). The in-article title overlay will use dark plum text so it's readable. Leave un-ticked for images that have a dark left side — white text is used instead.
+   */
   heroTextDark?: boolean | null;
-  heroImagePosition?: ('center center' | 'right center' | 'left center' | 'right top' | 'center top' | 'center bottom') | null;
+  /**
+   * Controls which part of the cover image is shown in the blog listing card. Use 'Focus right' when the main subject (person, diagram) sits on the right side of the image — this prevents blank empty space appearing on the left of the card.
+   */
+  heroImagePosition?:
+    | ('center center' | 'right center' | 'left center' | 'right top' | 'center top' | 'center bottom')
+    | null;
   content?: {
     root: {
       type: string;
@@ -574,7 +600,7 @@ export interface Author {
  * via the `definition` "categories".
  */
 export interface Category {
-  id: number | string;
+  id: number;
   title: string;
   /**
    * The web address for this category. Changing it breaks existing links, so set it once and leave it.
@@ -638,6 +664,34 @@ export interface Service {
         | 'ClipboardCheck'
         | 'Syringe'
         | 'Award'
+        | 'RefreshCcw'
+        | 'Building2'
+        | 'Trophy'
+        | 'MapPin'
+        | 'BookOpen'
+        | 'Handshake'
+        | 'Heart'
+        | 'Wind'
+        | 'Thermometer'
+        | 'Database'
+        | 'CheckCircle2'
+        | 'Lightbulb'
+        | 'Scale'
+        | 'HandHeart'
+        | 'ThumbsUp'
+        | 'HeartHandshake'
+        | 'Quote'
+        | 'Shield'
+        | 'Star'
+        | 'Monitor'
+        | 'Lock'
+        | 'Cpu'
+        | 'IndianRupee'
+        | 'CreditCard'
+        | 'Cloud'
+        | 'Wifi'
+        | 'BarChart3'
+        | 'TrendingUp'
       )
     | null;
   /**
@@ -813,7 +867,35 @@ export interface Service {
             | 'ListChecks'
             | 'ClipboardCheck'
             | 'Syringe'
-            | 'Award';
+            | 'Award'
+            | 'RefreshCcw'
+            | 'Building2'
+            | 'Trophy'
+            | 'MapPin'
+            | 'BookOpen'
+            | 'Handshake'
+            | 'Heart'
+            | 'Wind'
+            | 'Thermometer'
+            | 'Database'
+            | 'CheckCircle2'
+            | 'Lightbulb'
+            | 'Scale'
+            | 'HandHeart'
+            | 'ThumbsUp'
+            | 'HeartHandshake'
+            | 'Quote'
+            | 'Shield'
+            | 'Star'
+            | 'Monitor'
+            | 'Lock'
+            | 'Cpu'
+            | 'IndianRupee'
+            | 'CreditCard'
+            | 'Cloud'
+            | 'Wifi'
+            | 'BarChart3'
+            | 'TrendingUp';
           t: string;
           d: string;
           id?: string | null;
@@ -868,7 +950,35 @@ export interface Service {
             | 'ListChecks'
             | 'ClipboardCheck'
             | 'Syringe'
-            | 'Award';
+            | 'Award'
+            | 'RefreshCcw'
+            | 'Building2'
+            | 'Trophy'
+            | 'MapPin'
+            | 'BookOpen'
+            | 'Handshake'
+            | 'Heart'
+            | 'Wind'
+            | 'Thermometer'
+            | 'Database'
+            | 'CheckCircle2'
+            | 'Lightbulb'
+            | 'Scale'
+            | 'HandHeart'
+            | 'ThumbsUp'
+            | 'HeartHandshake'
+            | 'Quote'
+            | 'Shield'
+            | 'Star'
+            | 'Monitor'
+            | 'Lock'
+            | 'Cpu'
+            | 'IndianRupee'
+            | 'CreditCard'
+            | 'Cloud'
+            | 'Wifi'
+            | 'BarChart3'
+            | 'TrendingUp';
           t: string;
           d: string;
           id?: string | null;
@@ -1377,7 +1487,35 @@ export interface Treatment {
             | 'ListChecks'
             | 'ClipboardCheck'
             | 'Syringe'
-            | 'Award';
+            | 'Award'
+            | 'RefreshCcw'
+            | 'Building2'
+            | 'Trophy'
+            | 'MapPin'
+            | 'BookOpen'
+            | 'Handshake'
+            | 'Heart'
+            | 'Wind'
+            | 'Thermometer'
+            | 'Database'
+            | 'CheckCircle2'
+            | 'Lightbulb'
+            | 'Scale'
+            | 'HandHeart'
+            | 'ThumbsUp'
+            | 'HeartHandshake'
+            | 'Quote'
+            | 'Shield'
+            | 'Star'
+            | 'Monitor'
+            | 'Lock'
+            | 'Cpu'
+            | 'IndianRupee'
+            | 'CreditCard'
+            | 'Cloud'
+            | 'Wifi'
+            | 'BarChart3'
+            | 'TrendingUp';
           t: string;
           d: string;
           id?: string | null;
@@ -1451,7 +1589,35 @@ export interface Treatment {
             | 'ListChecks'
             | 'ClipboardCheck'
             | 'Syringe'
-            | 'Award';
+            | 'Award'
+            | 'RefreshCcw'
+            | 'Building2'
+            | 'Trophy'
+            | 'MapPin'
+            | 'BookOpen'
+            | 'Handshake'
+            | 'Heart'
+            | 'Wind'
+            | 'Thermometer'
+            | 'Database'
+            | 'CheckCircle2'
+            | 'Lightbulb'
+            | 'Scale'
+            | 'HandHeart'
+            | 'ThumbsUp'
+            | 'HeartHandshake'
+            | 'Quote'
+            | 'Shield'
+            | 'Star'
+            | 'Monitor'
+            | 'Lock'
+            | 'Cpu'
+            | 'IndianRupee'
+            | 'CreditCard'
+            | 'Cloud'
+            | 'Wifi'
+            | 'BarChart3'
+            | 'TrendingUp';
           /**
            * Step number, e.g. "01".
            */
@@ -1568,7 +1734,35 @@ export interface Treatment {
             | 'ListChecks'
             | 'ClipboardCheck'
             | 'Syringe'
-            | 'Award';
+            | 'Award'
+            | 'RefreshCcw'
+            | 'Building2'
+            | 'Trophy'
+            | 'MapPin'
+            | 'BookOpen'
+            | 'Handshake'
+            | 'Heart'
+            | 'Wind'
+            | 'Thermometer'
+            | 'Database'
+            | 'CheckCircle2'
+            | 'Lightbulb'
+            | 'Scale'
+            | 'HandHeart'
+            | 'ThumbsUp'
+            | 'HeartHandshake'
+            | 'Quote'
+            | 'Shield'
+            | 'Star'
+            | 'Monitor'
+            | 'Lock'
+            | 'Cpu'
+            | 'IndianRupee'
+            | 'CreditCard'
+            | 'Cloud'
+            | 'Wifi'
+            | 'BarChart3'
+            | 'TrendingUp';
           t: string;
           d: string;
           id?: string | null;
@@ -1625,7 +1819,35 @@ export interface Treatment {
             | 'ListChecks'
             | 'ClipboardCheck'
             | 'Syringe'
-            | 'Award';
+            | 'Award'
+            | 'RefreshCcw'
+            | 'Building2'
+            | 'Trophy'
+            | 'MapPin'
+            | 'BookOpen'
+            | 'Handshake'
+            | 'Heart'
+            | 'Wind'
+            | 'Thermometer'
+            | 'Database'
+            | 'CheckCircle2'
+            | 'Lightbulb'
+            | 'Scale'
+            | 'HandHeart'
+            | 'ThumbsUp'
+            | 'HeartHandshake'
+            | 'Quote'
+            | 'Shield'
+            | 'Star'
+            | 'Monitor'
+            | 'Lock'
+            | 'Cpu'
+            | 'IndianRupee'
+            | 'CreditCard'
+            | 'Cloud'
+            | 'Wifi'
+            | 'BarChart3'
+            | 'TrendingUp';
           t: string;
           d: string;
           id?: string | null;
@@ -2522,6 +2744,7 @@ export interface PagesSelect<T extends boolean = true> {
         em?: T;
         subtitle?: T;
       };
+  content?: T;
   faqs?:
     | T
     | {
@@ -2559,6 +2782,7 @@ export interface BlogsSelect<T extends boolean = true> {
   excerpt?: T;
   heroImage?: T;
   heroTextDark?: T;
+  heroImagePosition?: T;
   content?: T;
   author?: T;
   reviewedBy?: T;
@@ -4194,6 +4418,34 @@ export interface Homepage {
                 | 'ClipboardCheck'
                 | 'Syringe'
                 | 'Award'
+                | 'RefreshCcw'
+                | 'Building2'
+                | 'Trophy'
+                | 'MapPin'
+                | 'BookOpen'
+                | 'Handshake'
+                | 'Heart'
+                | 'Wind'
+                | 'Thermometer'
+                | 'Database'
+                | 'CheckCircle2'
+                | 'Lightbulb'
+                | 'Scale'
+                | 'HandHeart'
+                | 'ThumbsUp'
+                | 'HeartHandshake'
+                | 'Quote'
+                | 'Shield'
+                | 'Star'
+                | 'Monitor'
+                | 'Lock'
+                | 'Cpu'
+                | 'IndianRupee'
+                | 'CreditCard'
+                | 'Cloud'
+                | 'Wifi'
+                | 'BarChart3'
+                | 'TrendingUp'
               )
             | null;
           /**
@@ -4419,6 +4671,34 @@ export interface Homepage {
                 | 'ClipboardCheck'
                 | 'Syringe'
                 | 'Award'
+                | 'RefreshCcw'
+                | 'Building2'
+                | 'Trophy'
+                | 'MapPin'
+                | 'BookOpen'
+                | 'Handshake'
+                | 'Heart'
+                | 'Wind'
+                | 'Thermometer'
+                | 'Database'
+                | 'CheckCircle2'
+                | 'Lightbulb'
+                | 'Scale'
+                | 'HandHeart'
+                | 'ThumbsUp'
+                | 'HeartHandshake'
+                | 'Quote'
+                | 'Shield'
+                | 'Star'
+                | 'Monitor'
+                | 'Lock'
+                | 'Cpu'
+                | 'IndianRupee'
+                | 'CreditCard'
+                | 'Cloud'
+                | 'Wifi'
+                | 'BarChart3'
+                | 'TrendingUp'
               )
             | null;
           /**
@@ -5088,6 +5368,34 @@ export interface AboutPage {
               | 'ClipboardCheck'
               | 'Syringe'
               | 'Award'
+              | 'RefreshCcw'
+              | 'Building2'
+              | 'Trophy'
+              | 'MapPin'
+              | 'BookOpen'
+              | 'Handshake'
+              | 'Heart'
+              | 'Wind'
+              | 'Thermometer'
+              | 'Database'
+              | 'CheckCircle2'
+              | 'Lightbulb'
+              | 'Scale'
+              | 'HandHeart'
+              | 'ThumbsUp'
+              | 'HeartHandshake'
+              | 'Quote'
+              | 'Shield'
+              | 'Star'
+              | 'Monitor'
+              | 'Lock'
+              | 'Cpu'
+              | 'IndianRupee'
+              | 'CreditCard'
+              | 'Cloud'
+              | 'Wifi'
+              | 'BarChart3'
+              | 'TrendingUp'
             )
           | null;
         /**
@@ -6166,6 +6474,34 @@ export interface HighlightCardBlock {
         | 'ClipboardCheck'
         | 'Syringe'
         | 'Award'
+        | 'RefreshCcw'
+        | 'Building2'
+        | 'Trophy'
+        | 'MapPin'
+        | 'BookOpen'
+        | 'Handshake'
+        | 'Heart'
+        | 'Wind'
+        | 'Thermometer'
+        | 'Database'
+        | 'CheckCircle2'
+        | 'Lightbulb'
+        | 'Scale'
+        | 'HandHeart'
+        | 'ThumbsUp'
+        | 'HeartHandshake'
+        | 'Quote'
+        | 'Shield'
+        | 'Star'
+        | 'Monitor'
+        | 'Lock'
+        | 'Cpu'
+        | 'IndianRupee'
+        | 'CreditCard'
+        | 'Cloud'
+        | 'Wifi'
+        | 'BarChart3'
+        | 'TrendingUp'
       )
     | null;
   color?: ('plum' | 'rose' | 'gold') | null;
@@ -6229,6 +6565,34 @@ export interface DecisionListBlock {
               | 'ClipboardCheck'
               | 'Syringe'
               | 'Award'
+              | 'RefreshCcw'
+              | 'Building2'
+              | 'Trophy'
+              | 'MapPin'
+              | 'BookOpen'
+              | 'Handshake'
+              | 'Heart'
+              | 'Wind'
+              | 'Thermometer'
+              | 'Database'
+              | 'CheckCircle2'
+              | 'Lightbulb'
+              | 'Scale'
+              | 'HandHeart'
+              | 'ThumbsUp'
+              | 'HeartHandshake'
+              | 'Quote'
+              | 'Shield'
+              | 'Star'
+              | 'Monitor'
+              | 'Lock'
+              | 'Cpu'
+              | 'IndianRupee'
+              | 'CreditCard'
+              | 'Cloud'
+              | 'Wifi'
+              | 'BarChart3'
+              | 'TrendingUp'
             )
           | null;
         situation: string;
@@ -6285,6 +6649,34 @@ export interface ConclusionPanelBlock {
               | 'ClipboardCheck'
               | 'Syringe'
               | 'Award'
+              | 'RefreshCcw'
+              | 'Building2'
+              | 'Trophy'
+              | 'MapPin'
+              | 'BookOpen'
+              | 'Handshake'
+              | 'Heart'
+              | 'Wind'
+              | 'Thermometer'
+              | 'Database'
+              | 'CheckCircle2'
+              | 'Lightbulb'
+              | 'Scale'
+              | 'HandHeart'
+              | 'ThumbsUp'
+              | 'HeartHandshake'
+              | 'Quote'
+              | 'Shield'
+              | 'Star'
+              | 'Monitor'
+              | 'Lock'
+              | 'Cpu'
+              | 'IndianRupee'
+              | 'CreditCard'
+              | 'Cloud'
+              | 'Wifi'
+              | 'BarChart3'
+              | 'TrendingUp'
             )
           | null;
         text: string;
@@ -6364,6 +6756,35 @@ export interface ExternalImageBlock {
   id?: string | null;
   blockName?: string | null;
   blockType: 'externalImage';
+}
+/**
+ * This interface was referenced by `Config`'s JSON-Schema
+ * via the `definition` "ProsConsGridBlock".
+ */
+export interface ProsConsGridBlock {
+  /**
+   * Header text for the pros column, e.g. 'Pros', 'Advantages', 'Benefits'.
+   */
+  prosLabel?: string | null;
+  /**
+   * Header text for the cons column, e.g. 'Cons', 'Disadvantages', 'Risks'.
+   */
+  consLabel?: string | null;
+  pros?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  cons?:
+    | {
+        text: string;
+        id?: string | null;
+      }[]
+    | null;
+  id?: string | null;
+  blockName?: string | null;
+  blockType: 'prosConsGrid';
 }
 /**
  * This interface was referenced by `Config`'s JSON-Schema
