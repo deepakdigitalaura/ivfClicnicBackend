@@ -51,9 +51,12 @@ const treatments = [
   { slug: "ivf", title: "IVF Treatment (In Vitro Fertilization) – Bavishi", desc: "IVF treatment explained — process, success rates, and what to expect at every step, from a team with 30+ years experience." },
 ];
 
-const services = [
-  { slug: "3d-4d-sonography", title: "3D/4D Sonography – Bavishi Fertility Institute", desc: "3D/4D sonography for a clearer, more detailed view of your baby during pregnancy — available at our centres." },
-];
+// 3d-4d-sonography was removed from this list: its existing title
+// ("3D/4D Sonography in Ahmedabad — Bavishi Fertility & Birthing", 60 chars)
+// is already a good, keyword-rich, correctly-sized title -- found during the
+// dry-run that this script would have overwritten it with a weaker generic
+// one that drops the "in Ahmedabad" local-SEO keyword. Left alone.
+const services = [];
 
 const pageSeoEntries = [
   { pagePath: "/", pageName: "Homepage", title: "Bavishi Fertility Institute – Trusted IVF Experts, 30+ Yrs", desc: "India's trusted IVF experts since 1998 — 30,000+ successful pregnancies, 14 centres, personalised fertility care you can rely on." },
