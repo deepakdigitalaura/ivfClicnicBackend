@@ -38,6 +38,8 @@ const CONTENT_NAV = [
   { href: "/admin-panel/education-videos", label: "Education Videos", icon: Video },
   { href: "/admin-panel/press", label: "Media & Press", icon: Newspaper },
   { href: "/admin-panel/blogs", label: "Blogs", icon: BookOpen },
+  { href: "/admin-panel/header-nav", label: "Header & Navigation", icon: Settings },
+  { href: "/admin-panel/footer-nav", label: "Footer", icon: Settings },
 ];
 
 const SEO_NAV = [

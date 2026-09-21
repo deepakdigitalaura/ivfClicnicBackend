@@ -15,7 +15,7 @@ import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
-import { getSanityHomepage, getCampsConfig, getSanitySurakshaKavach, getSanityHistoryPage, getSanityInfrastructurePage, getSanityWhyBfiPage, getSanitySimpleTreatmentPage, getSanitySafeTreatmentPage, getSanitySmartTreatmentPage, getSanitySuccessBenchmarksPage, getSanityCategoryHub } from "@/sanity/lib/fetch";
+import { getSanityHomepage, getCampsConfig, getSanitySurakshaKavach, getSanityHistoryPage, getSanityInfrastructurePage, getSanityWhyBfiPage, getSanitySimpleTreatmentPage, getSanitySafeTreatmentPage, getSanitySmartTreatmentPage, getSanitySuccessBenchmarksPage, getSanityCategoryHub, getSanityHeaderNav, getSanityFooterNav } from "@/sanity/lib/fetch";
 import { resolveCategoryHub, type HubSlug, type CategoryHubData } from "@/lib/category-hub";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
 import { resolveSurakshaKavach, type SurakshaKavachData } from "@/lib/suraksha-kavach";
@@ -656,14 +656,15 @@ async function getNavLocations(): Promise<NavLocationItem[]> {
 }
 
 export const getFooter = async (): Promise<FooterData> => {
-  const [settings, navTreatments, navDoctors, navLocations] = await Promise.all([
+  const [settings, navTreatments, navDoctors, navLocations, footerNav] = await Promise.all([
     getSanitySiteSettings(),
     getNavTreatments(),
     getNavDoctors(),
     getNavLocations(),
+    getSanityFooterNav(),
   ]);
   return resolveFooter(
-    null as unknown as FooterSource,
+    footerNav as unknown as FooterSource,
     resolveContactValues(toContactSource(settings)),
     navTreatments,
     navDoctors,
@@ -673,14 +674,15 @@ export const getFooter = async (): Promise<FooterData> => {
 };
 
 export const getHeader = async (): Promise<HeaderData> => {
-  const [settings, navTreatments, navDoctors, navLocations] = await Promise.all([
+  const [settings, navTreatments, navDoctors, navLocations, headerNav] = await Promise.all([
     getSanitySiteSettings(),
     getNavTreatments(),
     getNavDoctors(),
     getNavLocations(),
+    getSanityHeaderNav(),
   ]);
   return resolveHeader(
-    null as unknown as HeaderSource,
+    headerNav as unknown as HeaderSource,
     navTreatments,
     navDoctors,
     navLocations,

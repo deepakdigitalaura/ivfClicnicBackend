@@ -286,6 +286,53 @@ export type SanityCalculator = {
 export const getSanityCalculator = (slug: string) =>
   sanityFetch<SanityCalculator>(`*[_type == "calculator" && slug == $slug][0]`, { slug });
 
+// ── Header / Footer nav (singletons) ──
+// Shaped to match HeaderSource/FooterSource in src/lib/header.ts /
+// src/lib/footer.ts exactly — those types already specify what
+// resolveHeader/resolveFooter expect, so no new shape is invented here.
+
+export type SanityHeaderNav = {
+  branding?: { logoUrl?: string | null; logoAlt?: string | null } | null;
+  navItems?: {
+    label?: string | null;
+    url?: string | null;
+    openInNewTab?: boolean | null;
+    doctors?: boolean | null;
+    megaCols?: number | null;
+    hidden?: boolean | null;
+    columns?: {
+      heading?: string | null;
+      headingHref?: string | null;
+      hidden?: boolean | null;
+      items?: {
+        label?: string | null;
+        url?: string | null;
+        desc?: string | null;
+        hidden?: boolean | null;
+        children?: { label?: string | null; url?: string | null }[] | null;
+      }[] | null;
+    }[] | null;
+  }[] | null;
+  cta?: { label?: string | null; url?: string | null; styleVariant?: string | null } | null;
+} | null;
+
+/** The header nav singleton. Null when unset, so the header falls back to
+ *  HEADER_DEFAULTS byte-identically. */
+export const getSanityHeaderNav = () => sanityFetch<SanityHeaderNav>(`*[_type == "header"][0]`);
+
+export type SanityFooterLink = { label?: string | null; url?: string | null; external?: boolean | null; channel?: string | null; hidden?: boolean | null };
+export type SanityFooterNav = {
+  branding?: { logoUrl?: string | null; description?: string | null } | null;
+  navGroups?: { title?: string | null; hidden?: boolean | null; links?: SanityFooterLink[] | null }[] | null;
+  social?: { platform?: string | null; url?: string | null }[] | null;
+  copyrightText?: string | null;
+  legalLinks?: SanityFooterLink[] | null;
+} | null;
+
+/** The footer nav singleton. Null when unset, so the footer falls back to
+ *  FOOTER_DEFAULTS byte-identically. */
+export const getSanityFooterNav = () => sanityFetch<SanityFooterNav>(`*[_type == "footer"][0]`);
+
 // ── Education Videos ──
 
 export type SanityEducationVideo = {

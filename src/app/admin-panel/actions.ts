@@ -31,6 +31,8 @@ import {
   saveContactInfo,
   saveTreatmentsHub,
   saveCalculator,
+  saveHeaderNav,
+  saveFooterNav,
   saveSurakshaKavach,
   saveCategoryHub,
   saveHistoryPage,
@@ -68,6 +70,8 @@ import {
   type AdminContactInfo,
   type AdminTreatmentsHub,
   type AdminCalculator,
+  type AdminHeaderNav,
+  type AdminFooterNav,
   type AdminSurakshaKavach,
   type AdminCategoryHub,
   type AdminHistoryPage,
@@ -374,6 +378,22 @@ export async function saveCalculatorPageAction(slug: string, data: AdminCalculat
   const r = await guard(() => saveCalculator(slug, data));
   revalidatePath(`/calculators/${slug}`);
   revalidatePath(`/admin-panel/calculators/${slug}`);
+  return r;
+}
+
+// ── Header / Footer nav ──
+
+export async function saveHeaderNavAction(data: AdminHeaderNav): Promise<SaveResult> {
+  const r = await guard(() => saveHeaderNav(data));
+  revalidatePath("/", "layout");
+  revalidatePath("/admin-panel/header-nav");
+  return r;
+}
+
+export async function saveFooterNavAction(data: AdminFooterNav): Promise<SaveResult> {
+  const r = await guard(() => saveFooterNav(data));
+  revalidatePath("/", "layout");
+  revalidatePath("/admin-panel/footer-nav");
   return r;
 }
 

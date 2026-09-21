@@ -656,6 +656,46 @@ export async function saveCalculator(slug: string, data: AdminCalculator) {
   revalidateTag(`calculator-${slug}`);
 }
 
+// ── Header nav (singleton) ──
+
+export type AdminHeaderNav = Record<string, unknown>;
+
+export async function readHeaderNav(): Promise<AdminHeaderNav | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("header")) as AdminHeaderNav | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveHeaderNav(data: AdminHeaderNav) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "header", _type: "header", ...rest });
+  revalidateTag("sanity-header-nav");
+}
+
+// ── Footer nav (singleton) ──
+
+export type AdminFooterNav = Record<string, unknown>;
+
+export async function readFooterNav(): Promise<AdminFooterNav | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("footer")) as AdminFooterNav | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveFooterNav(data: AdminFooterNav) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "footer", _type: "footer", ...rest });
+  revalidateTag("sanity-footer-nav");
+}
+
 export type AdminSurakshaKavach = Record<string, unknown>;
 
 export async function readSurakshaKavach(): Promise<AdminSurakshaKavach | null> {
