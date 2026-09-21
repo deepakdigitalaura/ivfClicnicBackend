@@ -28,6 +28,7 @@ const CONTENT_NAV = [
   { href: "/admin-panel/treatments-hub", label: "Treatments Hub Page", icon: Syringe },
   { href: "/admin-panel/treatments", label: "Treatments", icon: Syringe },
   { href: "/admin-panel/services", label: "Maternity Services", icon: HeartPulse },
+  { href: "/admin-panel/calculators", label: "Calculators", icon: BarChart3 },
   { href: "/admin-panel/locations", label: "Locations", icon: MapPin },
   { href: "/admin-panel/doctors", label: "Doctors", icon: Stethoscope },
   { href: "/admin-panel/testimonials", label: "Testimonials", icon: Star },

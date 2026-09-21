@@ -269,6 +269,23 @@ export type SanityTreatmentsHub = {
  *  back to HOMEPAGE_DEFAULTS.treatments byte-identically. */
 export const getSanityTreatmentsHub = () => sanityFetch<SanityTreatmentsHub>(`*[_type == "treatmentsHub"][0]`);
 
+// ── Calculators (one doc per slug) ──
+
+export type SanityCalculatorFaq = { question?: string; answer?: string };
+export type SanityCalculator = {
+  slug?: string;
+  title?: string;
+  subtitle?: string;
+  disclaimer?: string;
+  faqs?: SanityCalculatorFaq[];
+  seo?: { metaTitle?: string | null; metaDescription?: string | null; ogTitle?: string | null; ogDescription?: string | null };
+} | null;
+
+/** One calculator's Sanity doc, keyed by slug. Null when unset, so the
+ *  calculator page falls back to CALCULATOR_DEFAULTS byte-identically. */
+export const getSanityCalculator = (slug: string) =>
+  sanityFetch<SanityCalculator>(`*[_type == "calculator" && slug == $slug][0]`, { slug });
+
 // ── Education Videos ──
 
 export type SanityEducationVideo = {

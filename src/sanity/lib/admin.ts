@@ -634,6 +634,28 @@ export async function saveTreatmentsHub(data: AdminTreatmentsHub) {
   revalidateTag("sanity-treatments-hub");
 }
 
+// ── Calculators (one doc per slug) ──
+
+export type AdminCalculator = Record<string, unknown>;
+
+const calculatorDocId = (slug: string) => `calculator-${slug}`;
+
+export async function readCalculator(slug: string): Promise<AdminCalculator | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument(calculatorDocId(slug))) as AdminCalculator | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveCalculator(slug: string, data: AdminCalculator) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: calculatorDocId(slug), _type: "calculator", slug, ...rest });
+  revalidateTag(`calculator-${slug}`);
+}
+
 export type AdminSurakshaKavach = Record<string, unknown>;
 
 export async function readSurakshaKavach(): Promise<AdminSurakshaKavach | null> {

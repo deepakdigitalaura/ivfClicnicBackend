@@ -1,5 +1,6 @@
 import { cache as reactCache } from "react";
 import { unstable_cache } from "next/cache";
+import { getSanityCalculator } from "@/sanity/lib/fetch";
 
 export type CalculatorFaq = { question: string; answer: string };
 
@@ -52,17 +53,27 @@ export const getCalculator = reactCache(
       async () => {
         if (!isCalculatorSlug(slug)) return null;
         const defaults = CALCULATOR_DEFAULTS[slug];
+        const cms = await getSanityCalculator(slug);
+        const faqs = cms?.faqs?.length
+          ? cms.faqs.map((f) => ({ question: f.question ?? "", answer: f.answer ?? "" }))
+          : [];
         return {
           slug,
-          title: defaults?.title ?? slug,
-          subtitle: defaults?.subtitle ?? "",
-          disclaimer: defaults?.disclaimer ?? "",
-          faqs: [],
-          seo: { metaTitle: null, metaDescription: null, ogTitle: null, ogDescription: null, ogImage: null },
+          title: cms?.title || defaults?.title || slug,
+          subtitle: cms?.subtitle || defaults?.subtitle || "",
+          disclaimer: cms?.disclaimer || defaults?.disclaimer || "",
+          faqs,
+          seo: {
+            metaTitle: cms?.seo?.metaTitle ?? null,
+            metaDescription: cms?.seo?.metaDescription ?? null,
+            ogTitle: cms?.seo?.ogTitle ?? null,
+            ogDescription: cms?.seo?.ogDescription ?? null,
+            ogImage: null,
+          },
         };
       },
       ["calculator-by-slug", slug],
-      { revalidate: 86400 },
+      { revalidate: 86400, tags: [`calculator-${slug}`] },
     )(),
 );
 

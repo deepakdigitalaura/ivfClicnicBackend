@@ -30,6 +30,7 @@ import {
   saveAbout,
   saveContactInfo,
   saveTreatmentsHub,
+  saveCalculator,
   saveSurakshaKavach,
   saveCategoryHub,
   saveHistoryPage,
@@ -66,6 +67,7 @@ import {
   type AdminAbout,
   type AdminContactInfo,
   type AdminTreatmentsHub,
+  type AdminCalculator,
   type AdminSurakshaKavach,
   type AdminCategoryHub,
   type AdminHistoryPage,
@@ -363,6 +365,15 @@ export async function saveTreatmentsHubAction(data: AdminTreatmentsHub): Promise
   const r = await guard(() => saveTreatmentsHub(data));
   revalidatePath("/treatments");
   revalidatePath("/admin-panel/treatments-hub");
+  return r;
+}
+
+// ── Calculators ──
+
+export async function saveCalculatorPageAction(slug: string, data: AdminCalculator): Promise<SaveResult> {
+  const r = await guard(() => saveCalculator(slug, data));
+  revalidatePath(`/calculators/${slug}`);
+  revalidatePath(`/admin-panel/calculators/${slug}`);
   return r;
 }
 
