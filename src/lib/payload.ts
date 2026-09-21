@@ -11,6 +11,7 @@
 import type { Payload } from "payload";
 import type { Page, Blog, Author, Category, Media, Config } from "@/payload-types";
 import type { SiteIdentity } from "@/lib/seo";
+import type { Locale } from "@/lib/i18n";
 import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
@@ -698,7 +699,7 @@ function mapHomepageSource(doc: Record<string, unknown> | null): HomepageSource 
   if (!doc) return null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
   const d = doc as any;
-  const textRows = (a?: string[] | null) => (Array.isArray(a) ? a.filter(Boolean).map((text) => ({ text })) : undefined);
+  const textRows = (a?: unknown[] | null) => (Array.isArray(a) ? a.filter(Boolean).map((text) => ({ text })) : undefined);
   return {
     ...d,
     hero: d.hero ? { ...d.hero, badges: textRows(d.hero.badges) } : undefined,
@@ -706,9 +707,9 @@ function mapHomepageSource(doc: Record<string, unknown> | null): HomepageSource 
   } as HomepageSource;
 }
 
-export const getHomepage = async (): Promise<HomepageData> => {
+export const getHomepage = async (locale: Locale = "en"): Promise<HomepageData> => {
   const [doc, camps] = await Promise.all([getSanityHomepage(), getCampsConfig()]);
-  const data = resolveHomepage(mapHomepageSource(doc));
+  const data = resolveHomepage(mapHomepageSource(doc), locale);
   if (camps?.posters?.length) {
     data.events.posters = camps.posters
       .filter((p) => p.src)
@@ -717,9 +718,9 @@ export const getHomepage = async (): Promise<HomepageData> => {
   return data;
 };
 
-export const getAbout = async (): Promise<AboutData> => {
+export const getAbout = async (locale: Locale = "en"): Promise<AboutData> => {
   const doc = await getSanityAbout();
-  if (!doc) return resolveAbout(null);
+  if (!doc) return resolveAbout(null, locale);
   return resolveAbout({
     hero: doc.hero ?? null,
     story: doc.story ?? null,
@@ -734,7 +735,7 @@ export const getAbout = async (): Promise<AboutData> => {
     network: doc.network ?? null,
     finalCta: doc.finalCta ?? null,
     seo: doc.seo ?? null,
-  } as AboutSource);
+  } as AboutSource, locale);
 };
 
 export const getSurakshaKavach = async (): Promise<SurakshaKavachData> => {
