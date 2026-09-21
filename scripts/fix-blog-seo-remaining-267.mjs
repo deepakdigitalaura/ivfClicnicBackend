@@ -295,25 +295,50 @@ const posts = [
   { slug: "dr-himanshu-bavishi-aogs-2026-recurrent-pregnancy-loss-panel", title: "Dr. Himanshu Bavishi on Recurrent Pregnancy Loss", desc: "Dr. Himanshu Bavishi moderates a panel on recurrent pregnancy loss at AOGS 2026." },
 ];
 
+// Only fill fields that are actually empty -- never overwrite an existing
+// value. The dry-run of the original blanket-.set() version of this script
+// found 23 posts already had a non-empty seoMetaTitle (evidently from an
+// earlier bulk-enrichment pass, per the sibling fix-blog-seo-truncation.mjs
+// script's comment) that this would otherwise have silently replaced, some
+// of them already perfectly good. Field-by-field patching avoids that.
+const empty = (v) => v === null || v === undefined || (typeof v === "string" && v.trim() === "");
+
 let changed = 0;
 let notFound = 0;
+let skippedNoop = 0;
 for (const p of posts) {
-  const doc = await client.fetch(`*[_type == "blog" && slug == $slug][0]{_id, seoMetaTitle}`, { slug: p.slug });
+  const doc = await client.fetch(
+    `*[_type == "blog" && slug == $slug][0]{_id, seoMetaTitle, seoMetaDescription, seoOgTitle, seoOgDescription}`,
+    { slug: p.slug },
+  );
   if (!doc) {
     console.log(`  NOT FOUND: ${p.slug}`);
     notFound++;
     continue;
   }
+
+  const patch = {};
+  if (empty(doc.seoMetaTitle)) patch.seoMetaTitle = p.title;
+  if (empty(doc.seoMetaDescription)) patch.seoMetaDescription = p.desc;
+  if (empty(doc.seoOgTitle)) patch.seoOgTitle = p.title;
+  if (empty(doc.seoOgDescription)) patch.seoOgDescription = p.desc;
+
+  if (Object.keys(patch).length === 0) {
+    if (dryRun) console.log(`${p.slug}\n  all 4 fields already filled -- skipping`);
+    skippedNoop++;
+    continue;
+  }
+
   if (dryRun) {
-    console.log(`${p.slug}\n  "${doc.seoMetaTitle ?? "(empty)"}" -> "${p.title}"`);
+    console.log(`${p.slug}`);
+    for (const [field, value] of Object.entries(patch)) {
+      console.log(`  ${field}: (empty) -> "${value}"`);
+    }
+    const kept = ["seoMetaTitle", "seoMetaDescription", "seoOgTitle", "seoOgDescription"].filter((f) => !(f in patch));
+    if (kept.length) console.log(`  kept existing: ${kept.join(", ")}`);
   }
   if (!dryRun) {
-    await client.patch(doc._id).set({
-      seoMetaTitle: p.title,
-      seoMetaDescription: p.desc,
-      seoOgTitle: p.title,
-      seoOgDescription: p.desc,
-    }).commit();
+    await client.patch(doc._id).set(patch).commit();
     changed++;
     if (changed % 25 === 0) console.log(`  ...${changed} done`);
   }
@@ -321,6 +346,6 @@ for (const p of posts) {
 
 console.log(
   dryRun
-    ? `\n[dry-run] No writes performed. ${posts.length - notFound} posts would be updated. ${notFound} not found.`
-    : `\nDone. Updated ${changed} posts. ${notFound} not found.`
+    ? `\n[dry-run] No writes performed. ${posts.length - notFound - skippedNoop} posts would be updated (some fields only, where empty). ${skippedNoop} already fully filled, skipped. ${notFound} not found.`
+    : `\nDone. Updated ${changed} posts (some fields only, where empty). ${skippedNoop} already fully filled, skipped. ${notFound} not found.`
 );
