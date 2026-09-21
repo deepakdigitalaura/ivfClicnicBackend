@@ -69,6 +69,12 @@ const pageSeoEntries = [
   { pagePath: "/doctors", pageName: "Doctors Listing", title: "Our Fertility Doctors – Bavishi Fertility Institute", desc: "Meet our team of fertility specialists across 14 centres — experienced in IVF, ICSI, and complex infertility cases." },
 ];
 
+// Only fill fields that are actually empty -- never overwrite an existing
+// value. Confirmed via dry-run that every page in this script currently has
+// empty target fields, but this is kept field-level (matching the other two
+// scripts in this series) so it stays safe if that ever changes.
+const empty = (v) => v === null || v === undefined || (typeof v === "string" && v.trim() === "");
+
 let changed = 0;
 
 console.log(`\n=== Blogs (${blogs.length}) ===`);
@@ -78,9 +84,17 @@ for (const b of blogs) {
     console.log(`  NOT FOUND: ${b.slug}`);
     continue;
   }
-  console.log(`  ${b.slug}\n    title: "${doc.seoMetaTitle ?? "(empty)"}" -> "${b.title}"\n    desc:  "${(doc.seoMetaDescription ?? "(empty)").slice(0, 40)}..." -> "${b.desc.slice(0, 40)}..."`);
+  const patch = {};
+  if (empty(doc.seoMetaTitle)) patch.seoMetaTitle = b.title;
+  if (empty(doc.seoMetaDescription)) patch.seoMetaDescription = b.desc;
+  if (Object.keys(patch).length === 0) {
+    console.log(`  ${b.slug}\n    already filled -- skipping`);
+    continue;
+  }
+  console.log(`  ${b.slug}`);
+  for (const [field, value] of Object.entries(patch)) console.log(`    ${field}: (empty) -> "${String(value).slice(0, 50)}..."`);
   if (!dryRun) {
-    await client.patch(doc._id).set({ seoMetaTitle: b.title, seoMetaDescription: b.desc }).commit();
+    await client.patch(doc._id).set(patch).commit();
     changed++;
   }
 }
@@ -92,9 +106,17 @@ for (const t of treatments) {
     console.log(`  NOT FOUND: ${t.slug}`);
     continue;
   }
-  console.log(`  ${t.slug}\n    title: "${doc.seo?.metaTitle ?? "(empty)"}" -> "${t.title}"`);
+  const patch = {};
+  if (empty(doc.seo?.metaTitle)) patch["seo.metaTitle"] = t.title;
+  if (empty(doc.seo?.metaDescription)) patch["seo.metaDescription"] = t.desc;
+  if (Object.keys(patch).length === 0) {
+    console.log(`  ${t.slug}\n    already filled -- skipping`);
+    continue;
+  }
+  console.log(`  ${t.slug}`);
+  for (const [field, value] of Object.entries(patch)) console.log(`    ${field}: (empty) -> "${String(value).slice(0, 50)}..."`);
   if (!dryRun) {
-    await client.patch(doc._id).set({ "seo.metaTitle": t.title, "seo.metaDescription": t.desc }).commit();
+    await client.patch(doc._id).set(patch).commit();
     changed++;
   }
 }
@@ -115,11 +137,26 @@ for (const s of services) {
 
 console.log(`\n=== Page SEO overrides (${pageSeoEntries.length}) ===`);
 for (const p of pageSeoEntries) {
-  const doc = await client.fetch(`*[_type == "pageSeo" && pagePath == $pagePath][0]{_id, metaTitle}`, { pagePath: p.pagePath });
-  console.log(`  ${p.pagePath}\n    title: "${doc?.metaTitle ?? "(no pageSeo doc yet)"}" -> "${p.title}"`);
+  const doc = await client.fetch(`*[_type == "pageSeo" && pagePath == $pagePath][0]{_id, metaTitle, metaDescription}`, { pagePath: p.pagePath });
+  if (doc) {
+    const patch = {};
+    if (empty(doc.metaTitle)) patch.metaTitle = p.title;
+    if (empty(doc.metaDescription)) patch.metaDescription = p.desc;
+    if (Object.keys(patch).length === 0) {
+      console.log(`  ${p.pagePath}\n    already filled -- skipping`);
+      continue;
+    }
+    console.log(`  ${p.pagePath}`);
+    for (const [field, value] of Object.entries(patch)) console.log(`    ${field}: (empty) -> "${String(value).slice(0, 50)}..."`);
+  } else {
+    console.log(`  ${p.pagePath}\n    (no pageSeo doc yet) -> "${p.title}"`);
+  }
   if (!dryRun) {
     if (doc) {
-      await client.patch(doc._id).set({ metaTitle: p.title, metaDescription: p.desc }).commit();
+      const patch = {};
+      if (empty(doc.metaTitle)) patch.metaTitle = p.title;
+      if (empty(doc.metaDescription)) patch.metaDescription = p.desc;
+      if (Object.keys(patch).length > 0) await client.patch(doc._id).set(patch).commit();
     } else {
       await client.create({
         _type: "pageSeo",
