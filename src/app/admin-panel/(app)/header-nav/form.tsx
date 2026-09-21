@@ -3,10 +3,12 @@ import { useState } from "react";
 import { saveHeaderNavAction } from "../../actions";
 import { useSave, Toast, SaveBar } from "../_components/save-kit";
 import { Repeater } from "../_components/repeater";
+import { LocaleTabs } from "../_components/locale-tabs";
+import { getLocalized, setLocalized, type Locale, type LocalizedField } from "@/lib/i18n";
 
-type MegaItem = { label?: string; url?: string; desc?: string; hidden?: boolean };
-type MegaCol = { heading?: string; headingHref?: string; hidden?: boolean; items?: MegaItem[] };
-type NavItem = { label?: string; url?: string; openInNewTab?: boolean; doctors?: boolean; hidden?: boolean; columns?: MegaCol[] };
+type MegaItem = { label?: LocalizedField; url?: string; desc?: LocalizedField; hidden?: boolean };
+type MegaCol = { heading?: LocalizedField; headingHref?: string; hidden?: boolean; items?: MegaItem[] };
+type NavItem = { label?: LocalizedField; url?: string; openInNewTab?: boolean; doctors?: boolean; hidden?: boolean; columns?: MegaCol[] };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
@@ -30,10 +32,11 @@ function Checkbox({ label, checked, onChange }: { label: string; checked: boolea
 
 export function HeaderNavForm({ initial }: { initial: Doc | null }) {
   const [doc, setDoc] = useState<Doc>(initial ?? {});
+  const [locale, setLocale] = useState<Locale>("en");
   const { pending, toast, run } = useSave();
-  const branding = (doc.branding ?? {}) as { logoUrl?: string; logoAlt?: string };
+  const branding = (doc.branding ?? {}) as { logoUrl?: string; logoAlt?: LocalizedField };
   const navItems = (doc.navItems ?? []) as NavItem[];
-  const cta = (doc.cta ?? {}) as { label?: string; url?: string };
+  const cta = (doc.cta ?? {}) as { label?: LocalizedField; url?: string };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -42,16 +45,17 @@ export function HeaderNavForm({ initial }: { initial: Doc | null }) {
 
   return (
     <form onSubmit={submit}>
+      <LocaleTabs locale={locale} onChange={setLocale} />
       <div className="admin-card">
         <label className="admin-label" style={{ display: "block", marginBottom: 8 }}>Logo</label>
         <div className="admin-row-grid">
           <Field label="Logo Image URL" value={branding.logoUrl ?? ""} onChange={(x) => setDoc((p) => ({ ...p, branding: { ...branding, logoUrl: x } }))} />
-          <Field label="Logo Alt Text" value={branding.logoAlt ?? ""} onChange={(x) => setDoc((p) => ({ ...p, branding: { ...branding, logoAlt: x } }))} />
+          <Field label="Logo Alt Text" value={getLocalized(branding.logoAlt, locale)} onChange={(x) => setDoc((p) => ({ ...p, branding: { ...branding, logoAlt: setLocalized(branding.logoAlt, locale, x) } }))} />
         </div>
 
         <label className="admin-label" style={{ display: "block", marginTop: 20 }}>Main Button</label>
         <div className="admin-row-grid">
-          <Field label="Button Text" value={cta.label ?? ""} placeholder="Book Appointment" onChange={(x) => setDoc((p) => ({ ...p, cta: { ...cta, label: x } }))} />
+          <Field label="Button Text" value={getLocalized(cta.label, locale)} placeholder="Book Appointment" onChange={(x) => setDoc((p) => ({ ...p, cta: { ...cta, label: setLocalized(cta.label, locale, x) } }))} />
           <Field label="Button Link" value={cta.url ?? ""} placeholder="/#book" onChange={(x) => setDoc((p) => ({ ...p, cta: { ...cta, url: x } }))} />
         </div>
 
@@ -62,11 +66,11 @@ export function HeaderNavForm({ initial }: { initial: Doc | null }) {
           onChange={(next) => setDoc((p) => ({ ...p, navItems: next }))}
           newItem={() => ({ label: "", url: "", columns: [] })}
           addLabel="+ Add menu item"
-          rowLabel={(i) => navItems[i]?.label || `Item ${i + 1}`}
+          rowLabel={(i) => getLocalized(navItems[i]?.label, "en") || `Item ${i + 1}`}
           renderItem={(row, i, update) => (
             <>
               <div className="admin-row-grid">
-                <Field label="Menu Label" value={row.label ?? ""} onChange={(x) => update({ label: x })} />
+                <Field label="Menu Label" value={getLocalized(row.label, locale)} onChange={(x) => update({ label: setLocalized(row.label, locale, x) })} />
                 <Field label="Link URL" value={row.url ?? ""} onChange={(x) => update({ url: x })} />
               </div>
               <div style={{ display: "flex", gap: 20 }}>
@@ -80,11 +84,11 @@ export function HeaderNavForm({ initial }: { initial: Doc | null }) {
                 onChange={(cols) => update({ columns: cols })}
                 newItem={() => ({ heading: "", items: [] })}
                 addLabel="+ Add column"
-                rowLabel={(ci) => (row.columns ?? [])[ci]?.heading || `Column ${ci + 1}`}
+                rowLabel={(ci) => getLocalized((row.columns ?? [])[ci]?.heading, "en") || `Column ${ci + 1}`}
                 renderItem={(col, ci, updateCol) => (
                   <>
                     <div className="admin-row-grid">
-                      <Field label="Column Heading" value={col.heading ?? ""} onChange={(x) => updateCol({ heading: x })} />
+                      <Field label="Column Heading" value={getLocalized(col.heading, locale)} onChange={(x) => updateCol({ heading: setLocalized(col.heading, locale, x) })} />
                       <Field label="Heading Link" value={col.headingHref ?? ""} onChange={(x) => updateCol({ headingHref: x })} />
                     </div>
                     <Repeater
@@ -92,10 +96,10 @@ export function HeaderNavForm({ initial }: { initial: Doc | null }) {
                       onChange={(items) => updateCol({ items })}
                       newItem={() => ({ label: "", url: "" })}
                       addLabel="+ Add link"
-                      rowLabel={(ii) => (col.items ?? [])[ii]?.label || `Link ${ii + 1}`}
+                      rowLabel={(ii) => getLocalized((col.items ?? [])[ii]?.label, "en") || `Link ${ii + 1}`}
                       renderItem={(it, _ii, updateIt) => (
                         <div className="admin-row-grid">
-                          <Field label="Link Text" value={it.label ?? ""} onChange={(x) => updateIt({ label: x })} />
+                          <Field label="Link Text" value={getLocalized(it.label, locale)} onChange={(x) => updateIt({ label: setLocalized(it.label, locale, x) })} />
                           <Field label="Link URL" value={it.url ?? ""} onChange={(x) => updateIt({ url: x })} />
                         </div>
                       )}

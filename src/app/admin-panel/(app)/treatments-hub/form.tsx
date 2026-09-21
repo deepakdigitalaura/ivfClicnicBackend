@@ -2,6 +2,8 @@
 import { useState } from "react";
 import { saveTreatmentsHubAction } from "../../actions";
 import { useSave, Toast, SaveBar } from "../_components/save-kit";
+import { LocaleTabs } from "../_components/locale-tabs";
+import { getLocalized, setLocalized, type Locale, type LocalizedField } from "@/lib/i18n";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
@@ -23,8 +25,9 @@ function Field({ label, hint, value, placeholder, onChange, textarea }: { label:
 
 export function TreatmentsHubForm({ initial, defaults }: { initial: Doc | null; defaults: Defaults }) {
   const [doc, setDoc] = useState<Doc>(initial ?? {});
+  const [locale, setLocale] = useState<Locale>("en");
   const { pending, toast, run } = useSave();
-  const heading = (doc.heading ?? {}) as { lead?: string; em?: string };
+  const heading = (doc.heading ?? {}) as { lead?: LocalizedField; em?: LocalizedField };
 
   const submit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -33,13 +36,14 @@ export function TreatmentsHubForm({ initial, defaults }: { initial: Doc | null; 
 
   return (
     <form onSubmit={submit}>
+      <LocaleTabs locale={locale} onChange={setLocale} />
       <div className="admin-card">
-        <Field label="Small Label Above Heading" value={doc.eyebrow ?? ""} placeholder={defaults.eyebrow} onChange={(x) => setDoc((p) => ({ ...p, eyebrow: x }))} />
+        <Field label="Small Label Above Heading" value={getLocalized(doc.eyebrow, locale)} placeholder={defaults.eyebrow} onChange={(x) => setDoc((p) => ({ ...p, eyebrow: setLocalized(p.eyebrow, locale, x) }))} />
         <div className="admin-row-grid">
-          <Field label="Heading Text" value={heading.lead ?? ""} placeholder={defaults.heading.lead} onChange={(x) => setDoc((p) => ({ ...p, heading: { ...heading, lead: x } }))} />
-          <Field label="Highlighted Word(s)" value={heading.em ?? ""} placeholder={defaults.heading.em} onChange={(x) => setDoc((p) => ({ ...p, heading: { ...heading, em: x } }))} />
+          <Field label="Heading Text" value={getLocalized(heading.lead, locale)} placeholder={defaults.heading.lead} onChange={(x) => setDoc((p) => ({ ...p, heading: { ...heading, lead: setLocalized(heading.lead, locale, x) } }))} />
+          <Field label="Highlighted Word(s)" value={getLocalized(heading.em, locale)} placeholder={defaults.heading.em} onChange={(x) => setDoc((p) => ({ ...p, heading: { ...heading, em: setLocalized(heading.em, locale, x) } }))} />
         </div>
-        <Field label="Sub-heading" textarea value={doc.subtitle ?? ""} placeholder={defaults.subtitle} onChange={(x) => setDoc((p) => ({ ...p, subtitle: x }))} />
+        <Field label="Sub-heading" textarea value={getLocalized(doc.subtitle, locale)} placeholder={defaults.subtitle} onChange={(x) => setDoc((p) => ({ ...p, subtitle: setLocalized(p.subtitle, locale, x) }))} />
       </div>
 
       <SaveBar pending={pending} />

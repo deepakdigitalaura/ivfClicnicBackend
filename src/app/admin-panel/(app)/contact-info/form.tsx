@@ -3,8 +3,10 @@ import { useState } from "react";
 import { saveContactInfoAction } from "../../actions";
 import { useSave, Toast, SaveBar } from "../_components/save-kit";
 import { Repeater } from "../_components/repeater";
+import { LocaleTabs } from "../_components/locale-tabs";
+import { getLocalized, setLocalized, type Locale, type LocalizedField } from "@/lib/i18n";
 
-type Card = { icon?: string; title?: string; channel?: string; value?: string; href?: string; note?: string };
+type Card = { icon?: string; title?: LocalizedField; channel?: string; value?: LocalizedField; href?: string; note?: LocalizedField };
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
@@ -40,6 +42,7 @@ function Select({ label, value, options, onChange }: { label: string; value: str
 
 export function ContactInfoForm({ initial }: { initial: Doc | null }) {
   const [doc, setDoc] = useState<Doc>(initial ?? {});
+  const [locale, setLocale] = useState<Locale>("en");
   const { pending, toast, run } = useSave();
   const cards = (doc.cards ?? []) as Card[];
 
@@ -50,21 +53,22 @@ export function ContactInfoForm({ initial }: { initial: Doc | null }) {
 
   return (
     <form onSubmit={submit}>
+      <LocaleTabs locale={locale} onChange={setLocale} />
       <div className="admin-card">
         <Repeater
           items={cards}
           onChange={(next) => setDoc((p) => ({ ...p, cards: next }))}
           newItem={() => ({ icon: "Phone", title: "", channel: "none", value: "", href: "", note: "" })}
           addLabel="+ Add card"
-          rowLabel={(i) => cards[i]?.title || `Card ${i + 1}`}
+          rowLabel={(i) => getLocalized(cards[i]?.title, "en") || `Card ${i + 1}`}
           renderItem={(row, i, update) => (
             <div className="admin-row-grid">
               <Select label="Icon" value={row.icon ?? "Phone"} options={ICON_OPTIONS.map((v) => ({ value: v, label: v }))} onChange={(x) => update({ icon: x })} />
-              <Field label="Card Title" value={row.title ?? ""} placeholder="Call Us" onChange={(x) => update({ title: x })} />
+              <Field label="Card Title" value={getLocalized(row.title, locale)} placeholder="Call Us" onChange={(x) => update({ title: setLocalized(row.title, locale, x) })} />
               <Select label="Contact Type" value={row.channel ?? "none"} options={CHANNEL_OPTIONS} onChange={(x) => update({ channel: x })} />
-              <Field label="Display Value" hint="Used when Contact Type is Custom (e.g. working hours). Ignored for Phone/Email/WhatsApp." value={row.value ?? ""} onChange={(x) => update({ value: x })} />
+              <Field label="Display Value" hint="Used when Contact Type is Custom (e.g. working hours). Ignored for Phone/Email/WhatsApp." value={getLocalized(row.value, locale)} onChange={(x) => update({ value: setLocalized(row.value, locale, x) })} />
               <Field label="Custom Link" hint="Used when Contact Type is Custom. Ignored otherwise." value={row.href ?? ""} onChange={(x) => update({ href: x })} />
-              <Field label="Sub-line" hint="e.g. '24×7 patient helpline'" value={row.note ?? ""} onChange={(x) => update({ note: x })} />
+              <Field label="Sub-line" hint="e.g. '24×7 patient helpline'" value={getLocalized(row.note, locale)} onChange={(x) => update({ note: setLocalized(row.note, locale, x) })} />
             </div>
           )}
         />

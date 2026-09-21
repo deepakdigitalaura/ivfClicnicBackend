@@ -279,6 +279,13 @@
   width: 34px; height: 30px; border-radius: 7px; color: var(--muted-foreground);
 }
 .admin-editor-devices button.active { background: #fff; color: var(--rose); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
+
+.admin-locale-tabs { display: flex; gap: 4px; background: var(--muted); border-radius: 9px; padding: 3px; margin-bottom: 14px; }
+.admin-locale-tabs button {
+  all: unset; cursor: pointer; flex: 1; text-align: center;
+  padding: 7px 10px; border-radius: 7px; font-size: 13px; font-weight: 600; color: var(--muted-foreground);
+}
+.admin-locale-tabs button.active { background: #fff; color: var(--rose); box-shadow: 0 1px 3px rgba(0,0,0,.08); }
 .admin-editor-actions { display: flex; align-items: center; gap: 8px; }
 .admin-editor-actions .admin-btn-ghost, .admin-editor-actions .admin-btn { padding: 8px 14px; font-size: 13.5px; text-decoration: none; }
 
