@@ -33,8 +33,8 @@ const headingGroup = (description: string): Field => ({
   label: "Heading",
   admin: { description },
   fields: [
-    { name: "lead", type: "text", localized: true, label: "Heading Text", admin: { description: "Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading." } },
-    { name: "em", type: "text", localized: true, label: "Highlighted Word(s)", admin: { description: "The word(s) shown in the cursive accent style at the end of the heading." } },
+    { name: "lead", type: "text", label: "Heading Text", admin: { description: "Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading." } },
+    { name: "em", type: "text", label: "Highlighted Word(s)", admin: { description: "The word(s) shown in the cursive accent style at the end of the heading." } },
   ],
 });
 
@@ -44,7 +44,7 @@ const paragraphsArray = (description: string): Field => ({
   type: "array",
   labels: { singular: "Paragraph", plural: "Paragraphs" },
   admin: { description },
-  fields: [{ name: "value", type: "textarea", localized: true, required: true, label: "Paragraph" }],
+  fields: [{ name: "value", type: "textarea", required: true, label: "Paragraph" }],
 });
 
 /** A { value, label } stat tuple (e.g. "30,000+" / "Happy families"). */
@@ -55,7 +55,7 @@ const statArray = (name: string, description: string): Field => ({
   admin: { description },
   fields: [
     { name: "value", type: "text", required: true, label: "Figure", admin: { description: "Headline figure, e.g. '30,000+'." } },
-    { name: "label", type: "text", localized: true, required: true, label: "Caption", admin: { description: "Caption under the figure." } },
+    { name: "label", type: "text", required: true, label: "Caption", admin: { description: "Caption under the figure." } },
   ],
 });
 
@@ -68,10 +68,10 @@ const ABOUT_FIELDS: Field[] = [
       label: "Top Section",
       admin: { description: "The banner at the top of the About page — text only. The hero image and buttons are managed by the website team." },
       fields: [
-        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading", admin: { description: "Small label above the headline. Leave empty to use the default." } },
-        { name: "headline", type: "text", localized: true, label: "Page Heading", admin: { description: "The main headline. Leave empty to keep the built-in hero." } },
-        { name: "headlineItalic", type: "text", localized: true, label: "Highlighted Word in Heading", admin: { description: "The word(s) in the headline shown in the cursive accent style." } },
-        { name: "paragraph", type: "textarea", localized: true, label: "Intro Paragraph", admin: { description: "The sub-heading paragraph under the headline." } },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading", admin: { description: "Small label above the headline. Leave empty to use the default." } },
+        { name: "headline", type: "text", label: "Page Heading", admin: { description: "The main headline. Leave empty to keep the built-in hero." } },
+        { name: "headlineItalic", type: "text", label: "Highlighted Word in Heading", admin: { description: "The word(s) in the headline shown in the cursive accent style." } },
+        { name: "paragraph", type: "textarea", label: "Intro Paragraph", admin: { description: "The sub-heading paragraph under the headline." } },
         { name: "image", type: "text", label: "Hero Image Path", admin: { description: "Set automatically when the hero photo is replaced from the live editor. Leave empty to keep the default photo." } },
       ],
     },
@@ -81,7 +81,7 @@ const ABOUT_FIELDS: Field[] = [
       label: "Our Story",
       admin: { description: "The 'Our Story' section heading and paragraphs. Leave empty to use the built-in copy." },
       fields: [
-        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
         paragraphsArray("Story paragraphs. Leave empty to use the built-in copy."),
       ],
@@ -93,7 +93,7 @@ const ABOUT_FIELDS: Field[] = [
       label: "Legacy Timeline Heading",
       admin: { description: "The '30+ Years of Legacy' section heading. Leave empty to use the default." },
       fields: [
-        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
       ],
     },
@@ -103,9 +103,9 @@ const ABOUT_FIELDS: Field[] = [
       labels: { singular: "Milestone", plural: "Milestones" },
       admin: { description: "The history timeline. Leave empty to use the built-in milestones." },
       fields: [
-        { name: "y", type: "text", localized: true, required: true, label: "Year", admin: { description: "Year or label, e.g. '1998' or 'Today'." } },
-        { name: "t", type: "text", localized: true, required: true, label: "Title", admin: { description: "Milestone title." } },
-        { name: "d", type: "textarea", localized: true, required: true, label: "Description", admin: { description: "Milestone description." } },
+        { name: "y", type: "text", required: true, label: "Year", admin: { description: "Year or label, e.g. '1998' or 'Today'." } },
+        { name: "t", type: "text", required: true, label: "Title", admin: { description: "Milestone title." } },
+        { name: "d", type: "textarea", required: true, label: "Description", admin: { description: "Milestone description." } },
       ],
     },
     {
@@ -114,7 +114,7 @@ const ABOUT_FIELDS: Field[] = [
       label: "Trust Section Heading",
       admin: { description: "The 'Why families trust' section heading. Leave empty to use the default." },
       fields: [
-        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
       ],
     },
@@ -125,8 +125,8 @@ const ABOUT_FIELDS: Field[] = [
       admin: { description: "The 'Why families trust' cards. Leave empty to use the built-in pillars." },
       fields: [
         { name: "icon", type: "select", options: ICON_OPTIONS, label: "Card Icon", admin: { description: "Pick the icon shown on the card." } },
-        { name: "t", type: "text", localized: true, required: true, label: "Title", admin: { description: "Pillar title." } },
-        { name: "d", type: "textarea", localized: true, required: true, label: "Description", admin: { description: "Pillar description." } },
+        { name: "t", type: "text", required: true, label: "Title", admin: { description: "Pillar title." } },
+        { name: "d", type: "textarea", required: true, label: "Description", admin: { description: "Pillar description." } },
       ],
     },
     {
@@ -135,7 +135,7 @@ const ABOUT_FIELDS: Field[] = [
       label: "Patient First",
       admin: { description: "The 'Patient First' section heading and paragraphs. Leave empty to use the built-in copy." },
       fields: [
-        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
         paragraphsArray("Paragraphs. Leave empty to use the built-in copy."),
       ],
@@ -147,9 +147,9 @@ const ABOUT_FIELDS: Field[] = [
       label: "Meet the Specialists",
       admin: { description: "The 'Meet our doctors' section heading. The doctor cards are managed in Doctors." },
       fields: [
-        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
       ],
     },
     {
@@ -158,17 +158,17 @@ const ABOUT_FIELDS: Field[] = [
       label: "Our Network",
       admin: { description: "'Our Network' — centres across India." },
       fields: [
-        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", label: "Sub-heading" },
         {
           name: "cities",
           type: "array",
           labels: { singular: "City", plural: "Cities" },
           admin: { description: "City cards. These are hand-written marketing counts (not pulled from the Locations data). Leave empty to use the built-in list." },
           fields: [
-            { name: "c", type: "text", localized: true, required: true, label: "City Name", admin: { description: "City name." } },
-            { name: "n", type: "text", localized: true, required: true, label: "Count Label", admin: { description: "Count label, e.g. '3 centres'." } },
+            { name: "c", type: "text", required: true, label: "City Name", admin: { description: "City name." } },
+            { name: "n", type: "text", required: true, label: "Count Label", admin: { description: "Count label, e.g. '3 centres'." } },
           ],
         },
       ],

@@ -48,7 +48,6 @@ export const Calculators: CollectionConfig = {
         {
           name: "title",
           type: "text",
-          localized: true,
           required: true,
           label: "Page Title",
           admin: {
@@ -61,7 +60,6 @@ export const Calculators: CollectionConfig = {
     {
       name: "subtitle",
       type: "textarea",
-      localized: true,
       label: "Subtitle / Intro Text",
       admin: {
         description: "One or two sentences shown below the page title to explain what the calculator does.",
@@ -70,7 +68,6 @@ export const Calculators: CollectionConfig = {
     {
       name: "disclaimer",
       type: "textarea",
-      localized: true,
       label: "Medical Disclaimer",
       admin: {
         description: "Disclaimer text shown below the calculator results. E.g. 'Results are estimates only…'",
@@ -87,8 +84,8 @@ export const Calculators: CollectionConfig = {
         description: "Questions and answers shown in the FAQ section below the calculator.",
       },
       fields: [
-        { name: "question", type: "text", localized: true,     required: true, label: "Question" },
-        { name: "answer",   type: "textarea", localized: true, required: true, label: "Answer" },
+        { name: "question", type: "text",     required: true, label: "Question" },
+        { name: "answer",   type: "textarea", required: true, label: "Answer" },
       ],
     },
 
@@ -102,15 +99,15 @@ export const Calculators: CollectionConfig = {
         {
           type: "row",
           fields: [
-            { name: "metaTitle",       type: "text", localized: true,     label: "Meta Title",       admin: { width: "50%", description: "Title shown in Google results (50–60 chars)." } },
-            { name: "metaDescription", type: "textarea", localized: true, label: "Meta Description", admin: { width: "50%", description: "Description shown in Google results (120–160 chars)." } },
+            { name: "metaTitle",       type: "text",     label: "Meta Title",       admin: { width: "50%", description: "Title shown in Google results (50–60 chars)." } },
+            { name: "metaDescription", type: "textarea", label: "Meta Description", admin: { width: "50%", description: "Description shown in Google results (120–160 chars)." } },
           ],
         },
         {
           type: "row",
           fields: [
-            { name: "ogTitle",       type: "text", localized: true,     label: "Social Share Title",       admin: { width: "50%" } },
-            { name: "ogDescription", type: "textarea", localized: true, label: "Social Share Description", admin: { width: "50%" } },
+            { name: "ogTitle",       type: "text",     label: "Social Share Title",       admin: { width: "50%" } },
+            { name: "ogDescription", type: "textarea", label: "Social Share Description", admin: { width: "50%" } },
           ],
         },
         {

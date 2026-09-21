@@ -39,7 +39,7 @@ const HEADER_FIELDS: Field[] = [
           "Top-level navigation. Empty falls back to the built-in menu. A plain link uses 'Link URL'; a dropdown uses 'Mega columns'; tick 'Doctors panel' to render the auto-generated doctor menu.",
       },
       fields: [
-        { name: "label", type: "text", required: true, localized: true, label: "Menu Label" },
+        { name: "label", type: "text", required: true, label: "Menu Label" },
         { name: "url", type: "text", label: "Link URL", admin: { description: "Where this menu item links to. Leave empty if it opens a dropdown or the Doctors panel instead." } },
         { name: "hidden", type: "checkbox", label: "Hide from menu", admin: { description: "Tick to temporarily hide this whole item from the menu without deleting it. Untick to show it again." } },
         { name: "openInNewTab", type: "checkbox", label: "Open in New Tab", admin: { description: "Open this menu link in a new browser tab." } },
@@ -62,7 +62,7 @@ const HEADER_FIELDS: Field[] = [
           labels: { singular: "Dropdown column", plural: "Dropdown columns" },
           admin: { description: "Columns shown in this item's dropdown menu. Leave empty for a plain link or the Doctors panel." },
           fields: [
-            { name: "heading", type: "text", localized: true, label: "Column Heading", admin: { description: "Heading at the top of the column. Leave empty for an unlabelled column." } },
+            { name: "heading", type: "text", label: "Column Heading", admin: { description: "Heading at the top of the column. Leave empty for an unlabelled column." } },
             { name: "headingHref", type: "text", label: "Heading Link", admin: { description: "Optional link for the heading (e.g. a city page)." } },
             { name: "hidden", type: "checkbox", label: "Hide column", admin: { description: "Tick to hide this whole dropdown column (and its links) without deleting it." } },
             {
@@ -70,17 +70,17 @@ const HEADER_FIELDS: Field[] = [
               type: "array",
               labels: { singular: "Link", plural: "Links" },
               fields: [
-                { name: "label", type: "text", required: true, localized: true, label: "Link Text" },
+                { name: "label", type: "text", required: true, label: "Link Text" },
                 { name: "url", type: "text", label: "Link URL" },
                 { name: "hidden", type: "checkbox", label: "Hide from menu", admin: { description: "Tick to temporarily hide this link from the dropdown without deleting it." } },
-                { name: "desc", type: "text", localized: true, label: "Sub-line", admin: { description: "Optional small line shown under the link." } },
+                { name: "desc", type: "text", label: "Sub-line", admin: { description: "Optional small line shown under the link." } },
                 {
                   name: "children",
                   type: "array",
                   labels: { singular: "Sub-link", plural: "Sub-links" },
                   admin: { description: "Optional nested links shown under this link." },
                   fields: [
-                    { name: "label", type: "text", required: true, localized: true, label: "Link Text" },
+                    { name: "label", type: "text", required: true, label: "Link Text" },
                     { name: "url", type: "text", label: "Link URL" },
                   ],
                 },
@@ -96,7 +96,7 @@ const HEADER_FIELDS: Field[] = [
       label: "Main Button",
       admin: { description: "The main call-to-action button (top bar + mobile menu)." },
       fields: [
-        { name: "label", type: "text", localized: true, label: "Button Text", admin: { description: "Button text. Leave empty to use the default ('Book Appointment')." } },
+        { name: "label", type: "text", label: "Button Text", admin: { description: "Button text. Leave empty to use the default ('Book Appointment')." } },
         { name: "url", type: "text", label: "Button Link", admin: { description: "Where the button goes. Leave empty to use the default ('/#book')." } },
         {
           name: "styleVariant",

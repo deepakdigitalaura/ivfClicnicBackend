@@ -94,11 +94,6 @@ export default buildConfig({
       token: process.env.BLOB_READ_WRITE_TOKEN || "",
     }),
   ],
-  localization: {
-    locales: ["en", "hi", "gu"],
-    defaultLocale: "en",
-    fallback: true,
-  },
   editor: lexicalEditor(),
   secret: process.env.PAYLOAD_SECRET || "",
   typescript: {
