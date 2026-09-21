@@ -15,7 +15,10 @@ export async function LocaleProviders({
   const [header, footer] = await Promise.all([getHeader(locale), getFooter(locale)]);
   return (
     <HeaderProvider value={header}>
-      <FooterProvider value={footer}>{children}</FooterProvider>
+      <FooterProvider value={footer}>
+        {/* lang drives the Indic-script typography overrides in styles.css */}
+        <div lang={locale} className="contents">{children}</div>
+      </FooterProvider>
     </HeaderProvider>
   );
 }
