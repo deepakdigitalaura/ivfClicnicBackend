@@ -28,6 +28,7 @@ import {
   deleteTestimonial,
   saveHomepage,
   saveAbout,
+  saveContactInfo,
   saveSurakshaKavach,
   saveCategoryHub,
   saveHistoryPage,
@@ -62,6 +63,7 @@ import {
   type AdminTestimonial,
   type AdminHomepage,
   type AdminAbout,
+  type AdminContactInfo,
   type AdminSurakshaKavach,
   type AdminCategoryHub,
   type AdminHistoryPage,
@@ -341,6 +343,15 @@ export async function saveAboutAction(data: AdminAbout): Promise<SaveResult> {
   const r = await guard(() => saveAbout(data));
   revalidatePath("/about-bfi");
   revalidatePath("/admin-panel/about");
+  return r;
+}
+
+// ── Contact Info ──
+
+export async function saveContactInfoAction(data: AdminContactInfo): Promise<SaveResult> {
+  const r = await guard(() => saveContactInfo(data));
+  revalidatePath("/contact");
+  revalidatePath("/admin-panel/contact-info");
   return r;
 }
 

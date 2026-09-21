@@ -241,6 +241,22 @@ export type SanitySiteSettings = {
  *  contact fall back to the SITE constant byte-identically. */
 export const getSanitySiteSettings = () => sanityFetch<SanitySiteSettings>(`*[_type == "siteSettings"][0]`);
 
+// ── Contact Info (singleton — the Contact page's card list) ──
+
+export type SanityContactInfoCard = {
+  icon?: string;
+  title?: string;
+  channel?: string;
+  value?: string;
+  href?: string;
+  note?: string;
+};
+export type SanityContactInfo = { cards?: SanityContactInfoCard[] } | null;
+
+/** The contact-info singleton. Null when unset, so the Contact page falls back
+ *  to its own hardcoded card defaults byte-identically. */
+export const getSanityContactInfo = () => sanityFetch<SanityContactInfo>(`*[_type == "contactInfo"][0]`);
+
 // ── Education Videos ──
 
 export type SanityEducationVideo = {

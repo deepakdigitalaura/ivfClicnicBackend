@@ -594,6 +594,26 @@ export async function saveAbout(data: AdminAbout) {
   revalidateTag("sanity-about");
 }
 
+// ── Contact Info (singleton — the Contact page's card list) ──
+
+export type AdminContactInfo = Record<string, unknown>;
+
+export async function readContactInfo(): Promise<AdminContactInfo | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("contactInfo")) as AdminContactInfo | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveContactInfo(data: AdminContactInfo) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "contactInfo", _type: "contactInfo", ...rest });
+  revalidateTag("sanity-contact-info");
+}
+
 export type AdminSurakshaKavach = Record<string, unknown>;
 
 export async function readSurakshaKavach(): Promise<AdminSurakshaKavach | null> {

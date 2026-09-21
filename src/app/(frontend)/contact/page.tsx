@@ -6,6 +6,7 @@ import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo"
 import { getPageBySlug, getGlobalSafe, getAllResolvedCentres } from "@/lib/payload";
 import { resolveContactValues, resolveCardChannel, type ContactChannel } from "@/lib/contact";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getSanityContactInfo } from "@/sanity/lib/fetch";
 
 const PATH = "/contact";
 const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -68,11 +69,11 @@ async function loadContact() {
   // Contact cards from the contact-info global (undefined → component uses its
   // own defaults, preserving the original cards). Each card's value/link is
   // resolved from `contact` by its channel, so cards never duplicate numbers.
-  const ci = await getGlobalSafe("contact-info");
+  const ci = await getSanityContactInfo();
   const cards = ci?.cards?.length
     ? ci.cards.map((c) => {
         const r = resolveCardChannel(c.channel as ContactChannel | null, contact);
-        return { icon: c.icon, t: c.title, v: r.value ?? c.value ?? "", href: r.href ?? c.href, note: c.note };
+        return { icon: c.icon ?? "Phone", t: c.title ?? "", v: r.value ?? c.value ?? "", href: r.href ?? c.href, note: c.note };
       })
     : undefined;
 

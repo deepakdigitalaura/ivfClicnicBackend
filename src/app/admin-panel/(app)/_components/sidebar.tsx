@@ -16,6 +16,7 @@ const NAV = [
 const CONTENT_NAV = [
   { href: "/admin-panel/homepage", label: "Homepage Editor", icon: Home },
   { href: "/admin-panel/about", label: "About Page", icon: Info },
+  { href: "/admin-panel/contact-info", label: "Contact Cards", icon: Inbox },
   { href: "/admin-panel/history", label: "History", icon: BookOpen },
   { href: "/admin-panel/infrastructure", label: "Infrastructure", icon: Building2 },
   { href: "/admin-panel/why-bfi", label: "Why BFI", icon: Star },
