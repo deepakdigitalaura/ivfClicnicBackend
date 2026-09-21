@@ -1961,7 +1961,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
+                    <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Full Name *" /></label>
                     <div className="relative">
                       <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <input id="if-name" type="text" value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your name" className={`${fieldCls("name")} pl-10`} />
@@ -1969,7 +1969,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                     {errors.name && <p className="mt-1 text-xs text-[color:var(--rose)]">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="if-phone" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
+                    <label htmlFor="if-phone" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Phone *" /></label>
                     <div className="relative">
                       <Phone className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <input id="if-phone" type="tel" value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+91 00000 00000" className={`${fieldCls("phone")} pl-10`} />
@@ -1979,7 +1979,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </div>
 
                 <div>
-                  <label htmlFor="if-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
+                  <label htmlFor="if-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Email" /></label>
                   <div className="relative">
                     <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <input id="if-email" type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@example.com" className={`${fieldCls("email")} pl-10`} />
@@ -1989,14 +1989,14 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="if-treatment" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
+                    <label htmlFor="if-treatment" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Treatment of Interest" /></label>
                     <select id="if-treatment" value={form.treatment} onChange={(e) => set("treatment", e.target.value)} className={`${fieldCls("treatment")} appearance-none`}>
                       <option value="">Select an option</option>
                       {inquiryTreatments.map((t) => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="if-location" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
+                    <label htmlFor="if-location" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Preferred Centre" /></label>
                     <select id="if-location" value={form.location} onChange={(e) => set("location", e.target.value)} className={`${fieldCls("location")} appearance-none`}>
                       <option value="">Select a centre</option>
                       {inquiryLocations.map((l) => <option key={l} value={l}>{l}</option>)}
@@ -2005,7 +2005,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </div>
 
                 <div>
-                  <label htmlFor="if-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
+                  <label htmlFor="if-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Message" /></label>
                   <textarea id="if-message" rows={3} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Tell us briefly how we can help…" className={`${fieldCls("message")} resize-none`} />
                 </div>
 
