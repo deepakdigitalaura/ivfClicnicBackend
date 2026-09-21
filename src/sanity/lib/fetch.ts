@@ -11,6 +11,7 @@ import {
   REVIEWS_BY_KEY_QUERY,
   PAGE_FAQS_QUERY,
 } from "./queries";
+import { pickLocale, type Locale, type LocalizedField } from "@/lib/i18n";
 
 // ponytail: time-based revalidate, not revalidateTag — sidesteps the disk
 // fetch-cache tag-busting bug on the PM2/Cloudways deploy, and keeps Sanity
@@ -245,32 +246,66 @@ export const getSanitySiteSettings = () => sanityFetch<SanitySiteSettings>(`*[_t
 
 export type SanityContactInfoCard = {
   icon?: string;
-  title?: string;
+  title?: LocalizedField;
   channel?: string;
-  value?: string;
+  value?: LocalizedField;
   href?: string;
-  note?: string;
+  note?: LocalizedField;
 };
-export type SanityContactInfo = { cards?: SanityContactInfoCard[] } | null;
+export type SanityContactInfoDoc = { cards?: SanityContactInfoCard[] } | null;
+export type SanityContactInfo = { cards?: { icon?: string; title?: string; channel?: string; value?: string; href?: string; note?: string }[] } | null;
 
-/** The contact-info singleton. Null when unset, so the Contact page falls back
- *  to its own hardcoded card defaults byte-identically. */
-export const getSanityContactInfo = () => sanityFetch<SanityContactInfo>(`*[_type == "contactInfo"][0]`);
+/** The contact-info singleton, resolved to the given locale (falls back to
+ *  English). Null when unset, so the Contact page falls back to its own
+ *  hardcoded card defaults byte-identically. */
+export const getSanityContactInfo = async (locale: Locale = "en") => {
+  const doc = await sanityFetch<SanityContactInfoDoc>(`*[_type == "contactInfo"][0]`);
+  if (!doc) return doc;
+  return {
+    cards: doc.cards?.map((c) => ({
+      icon: c.icon,
+      title: pickLocale(c.title, locale),
+      channel: c.channel,
+      value: pickLocale(c.value, locale),
+      href: c.href,
+      note: pickLocale(c.note, locale),
+    })),
+  } as SanityContactInfo;
+};
 
 // ── Treatments Hub (singleton — the /treatments hub page's heading copy) ──
 
-export type SanityTreatmentsHub = {
-  eyebrow?: string;
-  heading?: { lead?: string; em?: string };
-  subtitle?: string;
+export type SanityTreatmentsHubDoc = {
+  eyebrow?: LocalizedField;
+  heading?: { lead?: LocalizedField; em?: LocalizedField };
+  subtitle?: LocalizedField;
 } | null;
+export type SanityTreatmentsHub = { eyebrow?: string; heading?: { lead?: string; em?: string }; subtitle?: string } | null;
 
-/** The treatments-hub singleton. Null when unset, so the /treatments page falls
- *  back to HOMEPAGE_DEFAULTS.treatments byte-identically. */
-export const getSanityTreatmentsHub = () => sanityFetch<SanityTreatmentsHub>(`*[_type == "treatmentsHub"][0]`);
+/** The treatments-hub singleton, resolved to the given locale (falls back to
+ *  English). Null when unset, so the /treatments page falls back to
+ *  HOMEPAGE_DEFAULTS.treatments byte-identically. */
+export const getSanityTreatmentsHub = async (locale: Locale = "en") => {
+  const doc = await sanityFetch<SanityTreatmentsHubDoc>(`*[_type == "treatmentsHub"][0]`);
+  if (!doc) return doc;
+  return {
+    eyebrow: pickLocale(doc.eyebrow, locale),
+    heading: doc.heading ? { lead: pickLocale(doc.heading.lead, locale), em: pickLocale(doc.heading.em, locale) } : undefined,
+    subtitle: pickLocale(doc.subtitle, locale),
+  } as SanityTreatmentsHub;
+};
 
 // ── Calculators (one doc per slug) ──
 
+export type SanityCalculatorFaqDoc = { question?: LocalizedField; answer?: LocalizedField };
+export type SanityCalculatorDoc = {
+  slug?: string;
+  title?: LocalizedField;
+  subtitle?: LocalizedField;
+  disclaimer?: LocalizedField;
+  faqs?: SanityCalculatorFaqDoc[];
+  seo?: { metaTitle?: LocalizedField; metaDescription?: LocalizedField; ogTitle?: LocalizedField; ogDescription?: LocalizedField };
+} | null;
 export type SanityCalculatorFaq = { question?: string; answer?: string };
 export type SanityCalculator = {
   slug?: string;
@@ -281,10 +316,28 @@ export type SanityCalculator = {
   seo?: { metaTitle?: string | null; metaDescription?: string | null; ogTitle?: string | null; ogDescription?: string | null };
 } | null;
 
-/** One calculator's Sanity doc, keyed by slug. Null when unset, so the
- *  calculator page falls back to CALCULATOR_DEFAULTS byte-identically. */
-export const getSanityCalculator = (slug: string) =>
-  sanityFetch<SanityCalculator>(`*[_type == "calculator" && slug == $slug][0]`, { slug });
+/** One calculator's Sanity doc, keyed by slug, resolved to the given locale
+ *  (falls back to English). Null when unset, so the calculator page falls
+ *  back to CALCULATOR_DEFAULTS byte-identically. */
+export const getSanityCalculator = async (slug: string, locale: Locale = "en") => {
+  const doc = await sanityFetch<SanityCalculatorDoc>(`*[_type == "calculator" && slug == $slug][0]`, { slug });
+  if (!doc) return doc;
+  return {
+    slug: doc.slug,
+    title: pickLocale(doc.title, locale),
+    subtitle: pickLocale(doc.subtitle, locale),
+    disclaimer: pickLocale(doc.disclaimer, locale),
+    faqs: doc.faqs?.map((f) => ({ question: pickLocale(f.question, locale), answer: pickLocale(f.answer, locale) })),
+    seo: doc.seo
+      ? {
+          metaTitle: pickLocale(doc.seo.metaTitle, locale) ?? null,
+          metaDescription: pickLocale(doc.seo.metaDescription, locale) ?? null,
+          ogTitle: pickLocale(doc.seo.ogTitle, locale) ?? null,
+          ogDescription: pickLocale(doc.seo.ogDescription, locale) ?? null,
+        }
+      : undefined,
+  } as SanityCalculator;
+};
 
 // ── Header / Footer nav (singletons) ──
 // Shaped to match HeaderSource/FooterSource in src/lib/header.ts /
