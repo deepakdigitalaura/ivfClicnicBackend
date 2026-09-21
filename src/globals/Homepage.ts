@@ -35,8 +35,8 @@ const headingGroup = (description: string): Field => ({
   label: "Heading",
   admin: { description },
   fields: [
-    { name: "lead", type: "text", label: "Heading Text", admin: { description: "Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading." } },
-    { name: "em", type: "text", label: "Highlighted Word(s)", admin: { description: "The word(s) shown in the cursive accent style at the end of the heading." } },
+    { name: "lead", type: "text", localized: true, label: "Heading Text", admin: { description: "Plain heading text before the highlighted word(s). Leave empty to keep the built-in heading." } },
+    { name: "em", type: "text", localized: true, label: "Highlighted Word(s)", admin: { description: "The word(s) shown in the cursive accent style at the end of the heading." } },
   ],
 });
 
@@ -56,10 +56,10 @@ const headerGroup = (
   label,
   admin: { description },
   fields: [
-    { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+    { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
     headingGroup("Section heading. Leave empty to keep the default."),
-    ...(hasSubtitle ? [{ name: "subtitle", type: "textarea", label: "Sub-heading" } as Field] : []),
-    ...(hasCta ? [{ name: "ctaLabel", type: "text", label: "Button Text" } as Field] : []),
+    ...(hasSubtitle ? [{ name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" } as Field] : []),
+    ...(hasCta ? [{ name: "ctaLabel", type: "text", localized: true, label: "Button Text" } as Field] : []),
   ],
 });
 
@@ -102,12 +102,12 @@ const SECTION_FIELDS: Field[] = [
       label: "Top Section",
       admin: { description: "The banner at the very top of the homepage — headline, paragraph, badges and the hero image." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading", admin: { description: "Small label above the headline. Leave empty to use the default." } },
-        { name: "headline", type: "text", label: "Page Heading", admin: { description: "The main headline. Leave empty to keep the built-in hero." } },
-        { name: "headlineItalic", type: "text", label: "Highlighted Word in Heading", admin: { description: "The one word in the headline shown in the cursive accent style." } },
-        { name: "paragraph", type: "textarea", label: "Intro Paragraph", admin: { description: "The sub-heading paragraph under the headline." } },
-        { name: "badges", type: "array", labels: { singular: "Badge", plural: "Badges" }, admin: { description: "Trust badges shown under the paragraph." }, fields: [{ name: "text", type: "text", required: true, label: "Badge Text" }] },
-        { name: "floatingBadge", type: "text", label: "Floating Award Chip", admin: { description: "Text on the small floating award chip over the hero image." } },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading", admin: { description: "Small label above the headline. Leave empty to use the default." } },
+        { name: "headline", type: "text", localized: true, label: "Page Heading", admin: { description: "The main headline. Leave empty to keep the built-in hero." } },
+        { name: "headlineItalic", type: "text", localized: true, label: "Highlighted Word in Heading", admin: { description: "The one word in the headline shown in the cursive accent style." } },
+        { name: "paragraph", type: "textarea", localized: true, label: "Intro Paragraph", admin: { description: "The sub-heading paragraph under the headline." } },
+        { name: "badges", type: "array", labels: { singular: "Badge", plural: "Badges" }, admin: { description: "Trust badges shown under the paragraph." }, fields: [{ name: "text", type: "text", localized: true, required: true, label: "Badge Text" }] },
+        { name: "floatingBadge", type: "text", localized: true, label: "Floating Award Chip", admin: { description: "Text on the small floating award chip over the hero image." } },
         { name: "image", type: "text", label: "Hero Image", admin: { description: "Hero banner image. Easiest to change via the inline editor (Pages & Builder → Home) — click the image → Replace. Or paste an image URL here." } },
       ],
     },
@@ -118,7 +118,7 @@ const SECTION_FIELDS: Field[] = [
       admin: { description: "The scrolling stats strip. Leave empty to use the built-in stats." },
       fields: [
         { name: "value", type: "text", required: true, label: "Figure", admin: { description: "Headline figure, e.g. '30,000+'." } },
-        { name: "label", type: "text", required: true, label: "Caption", admin: { description: "Caption under the figure." } },
+        { name: "label", type: "text", localized: true, required: true, label: "Caption", admin: { description: "Caption under the figure." } },
       ],
     },
     {
@@ -127,9 +127,9 @@ const SECTION_FIELDS: Field[] = [
       label: "Why Bavishi Cards",
       admin: { description: "'Why Bavishi Fertility Center' — the four icon cards." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
         {
           name: "cards",
           type: "array",
@@ -137,8 +137,8 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "Leave empty to use the built-in cards." },
           fields: [
             { name: "icon", type: "select", options: ICON_OPTIONS, label: "Card Icon", admin: { description: "Pick the icon shown on the card." } },
-            { name: "t", type: "text", required: true, label: "Title", admin: { description: "Card title." } },
-            { name: "d", type: "textarea", required: true, label: "Description", admin: { description: "Card description." } },
+            { name: "t", type: "text", localized: true, required: true, label: "Title", admin: { description: "Card title." } },
+            { name: "d", type: "textarea", localized: true, required: true, label: "Description", admin: { description: "Card description." } },
           ],
         },
       ],
@@ -149,9 +149,9 @@ const SECTION_FIELDS: Field[] = [
       label: "Why Choose Us Pillars",
       admin: { description: "'Why Choose Bavishi Fertility Institute?' — the Simple / Safe / Smart / Successful pillars." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
         {
           name: "blocks",
           type: "array",
@@ -160,15 +160,15 @@ const SECTION_FIELDS: Field[] = [
           fields: [
             { name: "icon", type: "text", label: "Pillar Icon Image", admin: { description: "Web address of the pillar icon image, e.g. /assets/Simple-1.png. Ask the website team if unsure." } },
             { name: "alt", type: "text", label: "Icon Alt Text", admin: { description: "Describes the icon for accessibility." } },
-            { name: "title", type: "text", required: true, label: "Pillar Title" },
-            { name: "subtitle", type: "text", label: "Pillar Sub-title" },
+            { name: "title", type: "text", localized: true, required: true, label: "Pillar Title" },
+            { name: "subtitle", type: "text", localized: true, label: "Pillar Sub-title" },
             {
               name: "points",
               type: "array",
               labels: { singular: "Point", plural: "Points" },
               fields: [
-                { name: "h", type: "text", required: true, label: "Point Heading", admin: { description: "Point heading." } },
-                { name: "d", type: "text", required: true, label: "Point Detail", admin: { description: "Point detail." } },
+                { name: "h", type: "text", localized: true, required: true, label: "Point Heading", admin: { description: "Point heading." } },
+                { name: "d", type: "text", localized: true, required: true, label: "Point Detail", admin: { description: "Point detail." } },
               ],
             },
           ],
@@ -181,17 +181,17 @@ const SECTION_FIELDS: Field[] = [
       label: "Suraksha Kavach Section",
       admin: { description: "The Suraksha Kavach section." },
       fields: [
-        { name: "badge", type: "text", label: "Pill Label", admin: { description: "Small pill label above the heading." } },
+        { name: "badge", type: "text", localized: true, label: "Pill Label", admin: { description: "Small pill label above the heading." } },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "paragraph", type: "textarea", label: "Paragraph" },
-        { name: "features", type: "array", labels: { singular: "Feature", plural: "Features" }, fields: [{ name: "text", type: "text", required: true, label: "Feature Text" }] },
+        { name: "paragraph", type: "textarea", localized: true, label: "Paragraph" },
+        { name: "features", type: "array", labels: { singular: "Feature", plural: "Features" }, fields: [{ name: "text", type: "text", localized: true, required: true, label: "Feature Text" }] },
         {
           name: "primaryCta",
           type: "group",
           label: "Main Button",
           admin: { description: "The main button." },
           fields: [
-            { name: "label", type: "text", label: "Button Text" },
+            { name: "label", type: "text", localized: true, label: "Button Text" },
             { name: "href", type: "text", label: "Button Link" },
           ],
         },
@@ -201,7 +201,7 @@ const SECTION_FIELDS: Field[] = [
           label: "Secondary Button",
           admin: { description: "The secondary button." },
           fields: [
-            { name: "label", type: "text", label: "Button Text" },
+            { name: "label", type: "text", localized: true, label: "Button Text" },
             { name: "href", type: "text", label: "Button Link" },
           ],
         },
@@ -215,31 +215,31 @@ const SECTION_FIELDS: Field[] = [
       label: "About the Institute",
       admin: { description: "The homepage's 'About the Institute' summary section (its own copy — separate from the full About Bavishi Fertility Institute page)." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
         {
           name: "stats",
           type: "array",
           labels: { singular: "Highlight", plural: "Highlights" },
           admin: { description: "The four small highlights (label + value). Leave empty to use the built-in set." },
           fields: [
-            { name: "k", type: "text", required: true, label: "Label", admin: { description: "Small caption, e.g. 'Legacy'." } },
-            { name: "v", type: "text", required: true, label: "Value", admin: { description: "Value, e.g. '30+ Years'." } },
+            { name: "k", type: "text", localized: true, required: true, label: "Label", admin: { description: "Small caption, e.g. 'Legacy'." } },
+            { name: "v", type: "text", localized: true, required: true, label: "Value", admin: { description: "Value, e.g. '30+ Years'." } },
           ],
         },
         {
           type: "row",
           fields: [
-            { name: "primaryCta", type: "text", label: "Main Button Text", admin: { width: "50%" } },
-            { name: "secondaryCta", type: "text", label: "Secondary Button Text", admin: { width: "50%" } },
+            { name: "primaryCta", type: "text", localized: true, label: "Main Button Text", admin: { width: "50%" } },
+            { name: "secondaryCta", type: "text", localized: true, label: "Secondary Button Text", admin: { width: "50%" } },
           ],
         },
         {
           type: "row",
           fields: [
-            { name: "sinceValue", type: "text", label: "Floating Chip — Title", admin: { width: "50%", description: "e.g. 'Since 1998'." } },
-            { name: "sinceLabel", type: "text", label: "Floating Chip — Caption", admin: { width: "50%", description: "e.g. 'Pioneering fertility care'." } },
+            { name: "sinceValue", type: "text", localized: true, label: "Floating Chip — Title", admin: { width: "50%", description: "e.g. 'Since 1998'." } },
+            { name: "sinceLabel", type: "text", localized: true, label: "Floating Chip — Caption", admin: { width: "50%", description: "e.g. 'Pioneering fertility care'." } },
           ],
         },
         { name: "image", type: "text", label: "Section Image", admin: { description: "Web address of the section image. Easiest to change via the inline editor — click the image → Replace." } },
@@ -252,10 +252,10 @@ const SECTION_FIELDS: Field[] = [
       label: "Treatments Grid",
       admin: { description: "The homepage 'Treatments' teaser grid (its own short copy — the full treatment pages are managed under Treatments & Services)." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
-        { name: "ctaLabel", type: "text", label: "Button Text" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
+        { name: "ctaLabel", type: "text", localized: true, label: "Button Text" },
         {
           name: "items",
           type: "array",
@@ -263,8 +263,8 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "Leave empty to use the built-in treatment teasers." },
           fields: [
             { name: "icon", type: "select", options: ICON_OPTIONS, label: "Card Icon", admin: { description: "Pick the icon shown on the card." } },
-            { name: "t", type: "text", required: true, label: "Title", admin: { description: "Treatment name." } },
-            { name: "d", type: "textarea", required: true, label: "Short Description", admin: { description: "One-line teaser." } },
+            { name: "t", type: "text", localized: true, required: true, label: "Title", admin: { description: "Treatment name." } },
+            { name: "d", type: "textarea", localized: true, required: true, label: "Short Description", admin: { description: "One-line teaser." } },
           ],
         },
       ],
@@ -275,9 +275,9 @@ const SECTION_FIELDS: Field[] = [
       label: "Awards & Recognition",
       admin: { description: "The Awards & Recognition carousel." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
         {
           name: "items",
           type: "array",
@@ -285,8 +285,8 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "Leave empty to use the built-in awards." },
           fields: [
             { name: "img", type: "text", required: true, label: "Award Image", admin: { description: "Web address of the award image." } },
-            { name: "title", type: "text", required: true, label: "Award Title" },
-            { name: "desc", type: "text", label: "Sub-line", admin: { description: "Small line under the award title." } },
+            { name: "title", type: "text", localized: true, required: true, label: "Award Title" },
+            { name: "desc", type: "text", localized: true, label: "Sub-line", admin: { description: "Small line under the award title." } },
           ],
         },
       ],
@@ -297,7 +297,7 @@ const SECTION_FIELDS: Field[] = [
       label: "Upcoming Events",
       admin: { description: "The Upcoming Events posters." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
         {
           name: "posters",
@@ -324,8 +324,8 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "Success-story videos. Leave empty to use the built-in set." },
           fields: [
             { name: "id", type: "text", required: true, label: "YouTube Video ID", admin: { description: "The ID from the YouTube link (the part after watch?v=)." } },
-            { name: "n", type: "text", required: true, label: "Patient Name", admin: { description: "Patient name." } },
-            { name: "q", type: "textarea", required: true, label: "Quote", admin: { description: "Quote from the patient." } },
+            { name: "n", type: "text", localized: true, required: true, label: "Patient Name", admin: { description: "Patient name." } },
+            { name: "q", type: "textarea", localized: true, required: true, label: "Quote", admin: { description: "Quote from the patient." } },
             { name: "r", type: "number", defaultValue: 5, label: "Star Rating (1–5)", admin: { description: "Star rating from 1 to 5." } },
           ],
         },
@@ -336,8 +336,8 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "Educational videos. Leave empty to use the built-in set." },
           fields: [
             { name: "id", type: "text", required: true, label: "YouTube Video ID", admin: { description: "The ID from the YouTube link (the part after watch?v=)." } },
-            { name: "t", type: "text", required: true, label: "Title", admin: { description: "Video title." } },
-            { name: "d", type: "textarea", required: true, label: "Description", admin: { description: "Video description." } },
+            { name: "t", type: "text", localized: true, required: true, label: "Title", admin: { description: "Video title." } },
+            { name: "d", type: "textarea", localized: true, required: true, label: "Description", admin: { description: "Video description." } },
           ],
         },
         {
@@ -347,9 +347,9 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "Resource videos. Leave empty to use the built-in set." },
           fields: [
             { name: "id", type: "text", required: true, label: "YouTube Video ID", admin: { description: "The ID from the YouTube link (the part after watch?v=)." } },
-            { name: "c", type: "text", required: true, label: "Category Tag", admin: { description: "Short category tag." } },
-            { name: "t", type: "text", required: true, label: "Title", admin: { description: "Video title." } },
-            { name: "date", type: "text", required: true, label: "Byline", admin: { description: "Byline / author." } },
+            { name: "c", type: "text", localized: true, required: true, label: "Category Tag", admin: { description: "Short category tag." } },
+            { name: "t", type: "text", localized: true, required: true, label: "Title", admin: { description: "Video title." } },
+            { name: "date", type: "text", localized: true, required: true, label: "Byline", admin: { description: "Byline / author." } },
           ],
         },
       ],
@@ -360,7 +360,7 @@ const SECTION_FIELDS: Field[] = [
       label: "FAQs",
       admin: { description: "The homepage FAQ accordion." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
         {
           name: "items",
@@ -368,8 +368,8 @@ const SECTION_FIELDS: Field[] = [
           labels: { singular: "FAQ", plural: "FAQs" },
           admin: { description: "Leave empty to use the built-in FAQs." },
           fields: [
-            { name: "q", type: "text", required: true, label: "Question", admin: { description: "The question visitors read before expanding the answer." } },
-            { name: "a", type: "textarea", required: true, label: "Answer", admin: { description: "The answer shown when expanded." } },
+            { name: "q", type: "text", localized: true, required: true, label: "Question", admin: { description: "The question visitors read before expanding the answer." } },
+            { name: "a", type: "textarea", localized: true, required: true, label: "Answer", admin: { description: "The answer shown when expanded." } },
           ],
         },
       ],
@@ -380,9 +380,9 @@ const SECTION_FIELDS: Field[] = [
       label: "Closing Call-to-Action",
       admin: { description: "The closing call-to-action band at the bottom of the homepage." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "paragraph", type: "textarea", label: "Paragraph" },
+        { name: "paragraph", type: "textarea", localized: true, label: "Paragraph" },
         {
           name: "stats",
           type: "array",
@@ -390,8 +390,8 @@ const SECTION_FIELDS: Field[] = [
           admin: { description: "Animated counters. Leave empty to use the built-in counters." },
           fields: [
             { name: "v", type: "number", required: true, label: "Number", admin: { description: "The number it counts up to." } },
-            { name: "s", type: "text", label: "Suffix", admin: { description: "Suffix after the number, e.g. '+'." } },
-            { name: "l", type: "text", required: true, label: "Label", admin: { description: "Caption under the number." } },
+            { name: "s", type: "text", localized: true, label: "Suffix", admin: { description: "Suffix after the number, e.g. '+'." } },
+            { name: "l", type: "text", localized: true, required: true, label: "Label", admin: { description: "Caption under the number." } },
           ],
         },
       ],
@@ -407,7 +407,7 @@ const SECTION_FIELDS: Field[] = [
       label: "Media Coverage",
       admin: { description: "The 'As Featured In' press-logos strip." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
         {
           name: "logos",
@@ -427,17 +427,17 @@ const SECTION_FIELDS: Field[] = [
       label: "Inquiry / Appointment Section",
       admin: { description: "The 'Book an Appointment' band with the callback form. The form fields themselves are fixed; only the copy and contact rows are editable here." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
         {
           name: "contacts",
           type: "array",
           labels: { singular: "Contact Row", plural: "Contact Rows" },
           admin: { description: "The three contact rows beside the form (the icons are fixed). Leave empty to use the built-in rows." },
           fields: [
-            { name: "h", type: "text", required: true, label: "Title", admin: { description: "e.g. 'Call us'." } },
-            { name: "d", type: "text", required: true, label: "Detail", admin: { description: "e.g. '+91 97126 22288'." } },
+            { name: "h", type: "text", localized: true, required: true, label: "Title", admin: { description: "e.g. 'Call us'." } },
+            { name: "d", type: "text", localized: true, required: true, label: "Detail", admin: { description: "e.g. '+91 97126 22288'." } },
           ],
         },
       ],
@@ -448,9 +448,9 @@ const SECTION_FIELDS: Field[] = [
       label: "Locations Grid",
       admin: { description: "The homepage 'Our Locations' city cards." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
         {
           name: "cities",
           type: "array",
@@ -460,7 +460,7 @@ const SECTION_FIELDS: Field[] = [
             {
               type: "row",
               fields: [
-                { name: "c", type: "text", required: true, label: "City Name", admin: { width: "50%" } },
+                { name: "c", type: "text", localized: true, required: true, label: "City Name", admin: { width: "50%" } },
                 { name: "n", type: "number", required: true, defaultValue: 1, label: "Centre Count", admin: { width: "25%", description: "Number of centres." } },
                 { name: "s", type: "text", required: true, label: "Link Slug", admin: { width: "25%", description: "URL slug, e.g. 'ahmedabad'. Changing this changes the card's link." } },
               ],
@@ -475,16 +475,16 @@ const SECTION_FIELDS: Field[] = [
       label: "Fertility Tools",
       admin: { description: "The 'Free calculators' tools grid." },
       fields: [
-        { name: "eyebrow", type: "text", label: "Small Label Above Heading" },
+        { name: "eyebrow", type: "text", localized: true, label: "Small Label Above Heading" },
         headingGroup("Section heading. Leave empty to keep the default."),
-        { name: "subtitle", type: "textarea", label: "Sub-heading" },
+        { name: "subtitle", type: "textarea", localized: true, label: "Sub-heading" },
         {
           name: "items",
           type: "array",
           labels: { singular: "Tool", plural: "Tools" },
           admin: { description: "Calculator names. Leave empty to use the built-in set." },
           fields: [
-            { name: "name", type: "text", required: true, label: "Tool Name" },
+            { name: "name", type: "text", localized: true, required: true, label: "Tool Name" },
           ],
         },
       ],

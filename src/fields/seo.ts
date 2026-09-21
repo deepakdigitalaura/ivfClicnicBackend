@@ -23,24 +23,28 @@ export const seoField: Field = {
     {
       name: "metaTitle",
       type: "text",
+      localized: true,
       label: "Google Page Title",
       admin: { description: "The clickable title shown in Google. Aim for ~55–60 characters so it isn't cut off." },
     },
     {
       name: "metaDescription",
       type: "textarea",
+      localized: true,
       label: "Google Search Description",
       admin: { description: "The grey summary under the title in Google. Aim for ~150–160 characters." },
     },
     {
       name: "ogTitle",
       type: "text",
+      localized: true,
       label: "Social Share Title",
       admin: { description: "Title used when shared on Facebook / WhatsApp / LinkedIn. Leave empty to reuse the Google Page Title." },
     },
     {
       name: "ogDescription",
       type: "textarea",
+      localized: true,
       label: "Social Share Description",
       admin: { description: "Description used when shared on social media. Leave empty to reuse the Google Search Description." },
     },
