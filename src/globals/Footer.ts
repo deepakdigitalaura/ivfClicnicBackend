@@ -27,7 +27,7 @@ const FOOTER_FIELDS: Field[] = [
       admin: { description: "Optional logo + short blurb. Leave empty to keep the footer exactly as it is." },
       fields: [
         { name: "logoUrl", type: "text", label: "Logo Image URL", admin: { description: "Web address of the logo image. Leave empty to hide this block." } },
-        { name: "description", type: "textarea", label: "Blurb", admin: { description: "Short blurb shown under the logo." } },
+        { name: "description", type: "textarea", localized: true, label: "Blurb", admin: { description: "Short blurb shown under the logo." } },
       ],
     },
     {
@@ -36,14 +36,14 @@ const FOOTER_FIELDS: Field[] = [
       labels: { singular: "Footer column", plural: "Footer columns" },
       admin: { description: "The link columns in the footer. Leave empty to keep the built-in columns." },
       fields: [
-        { name: "title", type: "text", required: true, label: "Column Heading", admin: { description: "Heading for this column, e.g. 'IVF Treatments'." } },
+        { name: "title", type: "text", required: true, localized: true, label: "Column Heading", admin: { description: "Heading for this column, e.g. 'IVF Treatments'." } },
         { name: "hidden", type: "checkbox", label: "Hide column", admin: { description: "Tick to hide this whole footer column (and its links) without deleting it." } },
         {
           name: "links",
           type: "array",
           labels: { singular: "Link", plural: "Links" },
           fields: [
-            { name: "label", type: "text", required: true, label: "Link Text" },
+            { name: "label", type: "text", required: true, localized: true, label: "Link Text" },
             { name: "hidden", type: "checkbox", label: "Hide link", admin: { description: "Tick to temporarily hide this link without deleting it." } },
             {
               name: "channel",
@@ -89,6 +89,7 @@ const FOOTER_FIELDS: Field[] = [
     {
       name: "copyrightText",
       type: "text",
+      localized: true,
       label: "Copyright Line",
       admin: { description: "Text shown after '© <year> '. Leave empty to use the built-in default." },
     },
@@ -98,7 +99,7 @@ const FOOTER_FIELDS: Field[] = [
       labels: { singular: "Legal link", plural: "Legal links" },
       admin: { description: "Bottom-row policy links (Privacy, Terms, …). Leave empty to keep the built-in links." },
       fields: [
-        { name: "label", type: "text", required: true, label: "Link Text" },
+        { name: "label", type: "text", required: true, localized: true, label: "Link Text" },
         { name: "url", type: "text", label: "Link URL", admin: { description: "Leave empty to show plain (non-clickable) text." } },
         { name: "hidden", type: "checkbox", label: "Hide link", admin: { description: "Tick to temporarily hide this link without deleting it." } },
         { name: "external", type: "checkbox", label: "Open in New Tab", admin: { description: "Open this link in a new browser tab." } },
