@@ -67,10 +67,23 @@ async function fixHomepage() {
     );
   }
 
+  // 5. seo.*: every generateMetadata() across all locale routes reads these
+  //    RAW off the doc (getGlobalSafe, not resolveHomepage) — never wired
+  //    for locale objects (see homepage.ts:965-966's own comment: "SEO meta
+  //    is consumed by generateMetadata()... intentionally NOT shaped here").
+  //    Localizing it broke metadata generation for every route, including
+  //    plain "/". Revert to plain English.
+  if (doc.seo && typeof doc.seo === "object") {
+    for (const key of ["metaTitle", "metaDescription", "ogTitle", "ogDescription"]) {
+      if (doc.seo[key] != null) doc.seo[key] = asEnglish(doc.seo[key]);
+    }
+  }
+
   console.log("=== homepage fix ===");
   console.log("cities[0]:", JSON.stringify(doc.locations?.cities?.[0]));
   console.log("stats[0]:", JSON.stringify(doc.stats?.[0]));
   console.log("calculators.items[0]:", JSON.stringify(doc.calculators?.items?.[0]));
+  console.log("seo:", JSON.stringify(doc.seo));
 
   if (DRY) return;
   const { _rev, _createdAt, _updatedAt, ...rest } = doc;

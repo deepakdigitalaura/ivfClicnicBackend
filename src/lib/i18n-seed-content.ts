@@ -237,12 +237,9 @@ export const homepageSeed = {
         "ओव्यूलेशन कैलकुलेटर", "वीर्य विश्लेषण कैलकुलेटर",
       ],
     },
-    seo: {
-      metaTitle: "बाविशी फर्टिलिटी सेंटर — 30+ वर्षों से भारत के विश्वसनीय IVF विशेषज्ञ",
-      metaDescription: "भारत में 14 सेंटरों में प्रीमियम फर्टिलिटी देखभाल। 30,000+ सफल गर्भावस्थाएं, उन्नत IVF, ICSI, IUI, और अग्रणी विशेषज्ञों द्वारा व्यक्तिगत उपचार योजनाएं।",
-      ogTitle: "बाविशी फर्टिलिटी सेंटर — भारत के विश्वसनीय IVF विशेषज्ञ",
-      ogDescription: "30,000+ गर्भावस्थाएं। 30+ वर्षों की विरासत। 14 सेंटर। व्यक्तिगत, पारदर्शी और संवेदनशील फर्टिलिटी देखभाल।",
-    },
+    // seo intentionally omitted: every generateMetadata() reads doc.seo raw
+    // (getGlobalSafe, not resolveHomepage) — not locale-aware, see
+    // homepage.ts:965-966. Localizing it broke metadata for every route.
   },
   gu: {
     hero: {
@@ -473,12 +470,7 @@ export const homepageSeed = {
         "ઓવ્યુલેશન કેલ્ક્યુલેટર", "સીમેન એનાલિસિસ કેલ્ક્યુલેટર",
       ],
     },
-    seo: {
-      metaTitle: "બાવીશી ફર્ટિલિટી સેન્ટર — 30+ વર્ષોથી ભારતના વિશ્વસનીય IVF નિષ્ણાતો",
-      metaDescription: "ભારતમાં 14 સેન્ટરોમાં પ્રીમિયમ ફર્ટિલિટી સંભાળ. 30,000+ સફળ ગર્ભાવસ્થાઓ, અદ્યતન IVF, ICSI, IUI, અને અગ્રણી નિષ્ણાતો દ્વારા વ્યક્તિગત સારવાર યોજનાઓ.",
-      ogTitle: "બાવીશી ફર્ટિલિટી સેન્ટર — ભારતના વિશ્વસનીય IVF નિષ્ણાતો",
-      ogDescription: "30,000+ ગર્ભાવસ્થાઓ. 30+ વર્ષોનો વારસો. 14 સેન્ટર. વ્યક્તિગત, પારદર્શક અને સહાનુભૂતિપૂર્ણ ફર્ટિલિટી સંભાળ.",
-    },
+    // seo intentionally omitted — see hi.seo comment above.
   },
 };
 
