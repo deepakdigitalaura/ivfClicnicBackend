@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
 import Image from "next/image";
+import { T, useT } from "@/components/ui-strings-provider";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -505,7 +506,7 @@ export function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: S
                 {content.primaryCta.label} <ArrowRight className="h-4 w-4" />
               </Magnetic>
             </div>
-            <p className="mt-3 text-xs text-white/40">* Terms and conditions apply.</p>
+            <p className="mt-3 text-xs text-white/40"><T k="* Terms and conditions apply." /></p>
           </Reveal>
         </div>
 
@@ -560,7 +561,7 @@ export function TreatmentCard({
           <h3 className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</h3>
           <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{descNode ?? desc}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--rose)]">
-            Learn more <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+            <T k="Learn more" /> <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
           </span>
         </div>
       </div>
@@ -769,7 +770,7 @@ export function SuccessStories({
                     <LiteYouTube id={s.id!} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
                   )}
                   <div className="pointer-events-none absolute bottom-4 left-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[color:var(--plum)] shadow-soft backdrop-blur">
-                    {s.tag ?? "Patient Story"}
+                    {s.tag ?? <T k="Patient Story" />}
                   </div>
                 </div>
                 <div className="p-6">
@@ -1327,7 +1328,7 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
               href="/awards"
               className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
             >
-              View all awards &amp; achievements
+              <T k="View all awards & achievements" />
             </a>
           </div>
         </Reveal>
@@ -1421,7 +1422,7 @@ function ReviewTestimonialCard({ r, verified }: { r: Review; verified: boolean }
         </div>
         <div>
           <div className="text-sm font-semibold text-[color:var(--plum)]">{r.author}</div>
-          <div className="text-xs text-muted-foreground">{verified ? "Google review" : "Patient review"}{r.relativeTime ? ` · ${r.relativeTime}` : ""}</div>
+          <div className="text-xs text-muted-foreground"><T k={verified ? "Google review" : "Patient review"} />{r.relativeTime ? ` · ${r.relativeTime}` : ""}</div>
         </div>
       </div>
     </blockquote>
@@ -1612,7 +1613,7 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
       <Reveal delay={0.2}>
         <div className="mt-9 text-center">
           <Magnetic as="a" href="/camps" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-            View More Events <ArrowRight className="h-4 w-4" />
+            <T k="View More Events" /> <ArrowRight className="h-4 w-4" />
           </Magnetic>
         </div>
       </Reveal>
@@ -1714,7 +1715,7 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { conte
                   <p className="mt-1 text-xs text-muted-foreground">{c.centres.join(" · ")}</p>
                 ) : null}
                 <a href={cityUrl} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                  <T k="View Centre" /> <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
                 </a>
               </motion.div>
             </StaggerItem>
@@ -1815,7 +1816,7 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { c
               </Float>
               <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
               <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                <T k="Use Calculator" /> <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </span>
             </motion.div>
           );
@@ -1960,7 +1961,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Full Name *</label>
+                    <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
                     <div className="relative">
                       <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <input id="if-name" type="text" value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your name" className={`${fieldCls("name")} pl-10`} />
@@ -1968,7 +1969,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                     {errors.name && <p className="mt-1 text-xs text-[color:var(--rose)]">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="if-phone" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Phone *</label>
+                    <label htmlFor="if-phone" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
                     <div className="relative">
                       <Phone className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <input id="if-phone" type="tel" value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+91 00000 00000" className={`${fieldCls("phone")} pl-10`} />
@@ -1978,7 +1979,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </div>
 
                 <div>
-                  <label htmlFor="if-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Email</label>
+                  <label htmlFor="if-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
                   <div className="relative">
                     <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <input id="if-email" type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@example.com" className={`${fieldCls("email")} pl-10`} />
@@ -1988,14 +1989,14 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="if-treatment" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Treatment of Interest</label>
+                    <label htmlFor="if-treatment" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
                     <select id="if-treatment" value={form.treatment} onChange={(e) => set("treatment", e.target.value)} className={`${fieldCls("treatment")} appearance-none`}>
                       <option value="">Select an option</option>
                       {inquiryTreatments.map((t) => <option key={t} value={t}>{t}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="if-location" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Preferred Centre</label>
+                    <label htmlFor="if-location" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
                     <select id="if-location" value={form.location} onChange={(e) => set("location", e.target.value)} className={`${fieldCls("location")} appearance-none`}>
                       <option value="">Select a centre</option>
                       {inquiryLocations.map((l) => <option key={l} value={l}>{l}</option>)}
@@ -2004,7 +2005,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </div>
 
                 <div>
-                  <label htmlFor="if-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Message</label>
+                  <label htmlFor="if-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="" /></label>
                   <textarea id="if-message" rows={3} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Tell us briefly how we can help…" className={`${fieldCls("message")} resize-none`} />
                 </div>
 
@@ -2021,7 +2022,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 )}
 
                 <button type="submit" disabled={sending} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70">
-                  <Send className="h-4 w-4" /> {sending ? "Sending…" : "Request a Callback"}
+                  <Send className="h-4 w-4" /> <T k={sending ? "Sending…" : "Request a Callback"} />
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
                   Your details are kept strictly confidential. We never share your information.
