@@ -1,6 +1,7 @@
 import { cache as reactCache } from "react";
 import { unstable_cache } from "next/cache";
 import { getSanityCalculator } from "@/sanity/lib/fetch";
+import type { Locale } from "@/lib/i18n";
 
 export type CalculatorFaq = { question: string; answer: string };
 
@@ -48,12 +49,12 @@ const CALCULATOR_DEFAULTS: Record<string, Pick<CalculatorCmsData, "title" | "sub
 };
 
 export const getCalculator = reactCache(
-  (slug: string): Promise<CalculatorCmsData | null> =>
+  (slug: string, locale: Locale = "en"): Promise<CalculatorCmsData | null> =>
     unstable_cache(
       async () => {
         if (!isCalculatorSlug(slug)) return null;
         const defaults = CALCULATOR_DEFAULTS[slug];
-        const cms = await getSanityCalculator(slug);
+        const cms = await getSanityCalculator(slug, locale);
         const faqs = cms?.faqs?.length
           ? cms.faqs.map((f) => ({ question: f.question ?? "", answer: f.answer ?? "" }))
           : [];
@@ -72,7 +73,7 @@ export const getCalculator = reactCache(
           },
         };
       },
-      ["calculator-by-slug", slug],
+      ["calculator-by-slug", slug, locale],
       { revalidate: 86400, tags: [`calculator-${slug}`] },
     )(),
 );

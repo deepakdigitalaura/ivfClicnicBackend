@@ -9,10 +9,6 @@ import { withPageSeoOverride } from "@/lib/page-seo";
 
 const PATH = "/about-bfi";
 
-/* The page's <head> metadata is CMS-managed via the `about-page` global's SEO
- * group (Wave 4.5, Phase E). Falls back to the original hardcoded copy so the
- * route is byte-identical when the global is empty (same pattern as the homepage
- * and Blog Hub). The static AboutPage JSON-LD graph below stays code-owned. */
 export async function generateMetadata(): Promise<Metadata> {
   const about = await getGlobalSafe("about-page");
   const d = ABOUT_DEFAULTS.seo;
@@ -34,8 +30,6 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-// The full MedicalOrganization entity lives sitewide (layout). Here we only
-// reference it via @id, and mark this page as the org's primary About page.
 const graph = [
   {
     "@type": "AboutPage",
@@ -53,7 +47,7 @@ const graph = [
 ];
 
 export default async function Page() {
-  const data = await getAbout();
+  const data = await getAbout("gu");
   return (
     <>
       <JsonLd graph={graph} />

@@ -3,11 +3,11 @@ import { ContactPage } from "@/components/contact-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
-import { withPageSeoOverride } from "@/lib/page-seo";
 import { loadContact, PATH } from "@/lib/contact-page-data";
+import { withPageSeoOverride } from "@/lib/page-seo";
 
 export async function generateMetadata(): Promise<Metadata> {
-  const { seo, ogImage } = await loadContact();
+  const { seo, ogImage } = await loadContact("gu");
   return withPageSeoOverride(PATH, {
     title: seo.metaTitle,
     description: seo.metaDescription,
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { hero, faqs, cards, contact, sectionLabels, directory } = await loadContact();
+  const { hero, faqs, cards, contact, sectionLabels, directory } = await loadContact("gu");
 
   const graph = [
     {
@@ -33,7 +33,6 @@ export default async function Page() {
       name: "Contact Bavishi Fertility Institute",
       isPartOf: { "@id": WEBSITE_ID },
       about: { "@id": ORG_ID },
-      // A page-level ContactPoint that references the sitewide organization.
       mainEntity: {
         "@type": "ContactPoint",
         telephone: contact.telephone,
