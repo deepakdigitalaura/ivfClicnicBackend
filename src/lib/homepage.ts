@@ -561,7 +561,7 @@ export type HomepageSource =
         primaryCta?: { label?: LocalizedField; href?: string | null } | null;
         secondaryCta?: { label?: LocalizedField; href?: string | null } | null;
         image?: string | null;
-        imageAlt?: string | null;
+        imageAlt?: LocalizedField;
       } | null;
       about?: {
         eyebrow?: LocalizedField;
@@ -573,7 +573,7 @@ export type HomepageSource =
         sinceValue?: LocalizedField;
         sinceLabel?: LocalizedField;
         image?: string | null;
-        imageAlt?: string | null;
+        imageAlt?: LocalizedField;
       } | null;
       awards?: {
         eyebrow?: LocalizedField;
@@ -743,8 +743,8 @@ export function resolveHomepage(src: HomepageSource, locale: Locale = "en"): Hom
   const accolades: AccoladeItem[] = mergeList(
     (src as any).accolades, d.accolades,
     (a: any, def: AccoladeItem | undefined) => ({
-      text: a?.text ?? def?.text ?? "",
-      source: a?.source ?? def?.source ?? "",
+      text: L(a?.text) ?? def?.text ?? "",
+      source: L(a?.source) ?? def?.source ?? "",
     }),
   );
 
@@ -794,7 +794,7 @@ export function resolveHomepage(src: HomepageSource, locale: Locale = "en"): Hom
           href: src.suraksha.secondaryCta?.href || d.suraksha.secondaryCta.href,
         },
         image: src.suraksha.image || d.suraksha.image,
-        imageAlt: src.suraksha.imageAlt ?? d.suraksha.imageAlt,
+        imageAlt: L(src.suraksha.imageAlt) ?? d.suraksha.imageAlt,
       }
     : d.suraksha;
 
@@ -812,7 +812,7 @@ export function resolveHomepage(src: HomepageSource, locale: Locale = "en"): Hom
         sinceValue: L(src.about.sinceValue) ?? d.about.sinceValue,
         sinceLabel: L(src.about.sinceLabel) ?? d.about.sinceLabel,
         image: src.about.image || d.about.image,
-        imageAlt: src.about.imageAlt ?? d.about.imageAlt,
+        imageAlt: L(src.about.imageAlt) ?? d.about.imageAlt,
       }
     : d.about;
 
