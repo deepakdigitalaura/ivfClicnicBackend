@@ -614,6 +614,26 @@ export async function saveContactInfo(data: AdminContactInfo) {
   revalidateTag("sanity-contact-info");
 }
 
+// ── Treatments Hub (singleton — the /treatments hub page's heading copy) ──
+
+export type AdminTreatmentsHub = Record<string, unknown>;
+
+export async function readTreatmentsHub(): Promise<AdminTreatmentsHub | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("treatmentsHub")) as AdminTreatmentsHub | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveTreatmentsHub(data: AdminTreatmentsHub) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "treatmentsHub", _type: "treatmentsHub", ...rest });
+  revalidateTag("sanity-treatments-hub");
+}
+
 export type AdminSurakshaKavach = Record<string, unknown>;
 
 export async function readSurakshaKavach(): Promise<AdminSurakshaKavach | null> {

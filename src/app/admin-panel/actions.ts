@@ -29,6 +29,7 @@ import {
   saveHomepage,
   saveAbout,
   saveContactInfo,
+  saveTreatmentsHub,
   saveSurakshaKavach,
   saveCategoryHub,
   saveHistoryPage,
@@ -64,6 +65,7 @@ import {
   type AdminHomepage,
   type AdminAbout,
   type AdminContactInfo,
+  type AdminTreatmentsHub,
   type AdminSurakshaKavach,
   type AdminCategoryHub,
   type AdminHistoryPage,
@@ -352,6 +354,15 @@ export async function saveContactInfoAction(data: AdminContactInfo): Promise<Sav
   const r = await guard(() => saveContactInfo(data));
   revalidatePath("/contact");
   revalidatePath("/admin-panel/contact-info");
+  return r;
+}
+
+// ── Treatments Hub ──
+
+export async function saveTreatmentsHubAction(data: AdminTreatmentsHub): Promise<SaveResult> {
+  const r = await guard(() => saveTreatmentsHub(data));
+  revalidatePath("/treatments");
+  revalidatePath("/admin-panel/treatments-hub");
   return r;
 }
 

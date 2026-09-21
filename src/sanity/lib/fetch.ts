@@ -257,6 +257,18 @@ export type SanityContactInfo = { cards?: SanityContactInfoCard[] } | null;
  *  to its own hardcoded card defaults byte-identically. */
 export const getSanityContactInfo = () => sanityFetch<SanityContactInfo>(`*[_type == "contactInfo"][0]`);
 
+// ── Treatments Hub (singleton — the /treatments hub page's heading copy) ──
+
+export type SanityTreatmentsHub = {
+  eyebrow?: string;
+  heading?: { lead?: string; em?: string };
+  subtitle?: string;
+} | null;
+
+/** The treatments-hub singleton. Null when unset, so the /treatments page falls
+ *  back to HOMEPAGE_DEFAULTS.treatments byte-identically. */
+export const getSanityTreatmentsHub = () => sanityFetch<SanityTreatmentsHub>(`*[_type == "treatmentsHub"][0]`);
+
 // ── Education Videos ──
 
 export type SanityEducationVideo = {

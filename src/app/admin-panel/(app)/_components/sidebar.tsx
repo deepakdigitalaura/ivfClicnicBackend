@@ -25,6 +25,7 @@ const CONTENT_NAV = [
   { href: "/admin-panel/smart-treatment", label: "Smart Treatment", icon: BarChart3 },
   { href: "/admin-panel/success-benchmarks", label: "Success Benchmarks", icon: Award },
   { href: "/admin-panel/suraksha-kavach", label: "Suraksha Kavach", icon: ShieldCheck },
+  { href: "/admin-panel/treatments-hub", label: "Treatments Hub Page", icon: Syringe },
   { href: "/admin-panel/treatments", label: "Treatments", icon: Syringe },
   { href: "/admin-panel/services", label: "Maternity Services", icon: HeartPulse },
   { href: "/admin-panel/locations", label: "Locations", icon: MapPin },

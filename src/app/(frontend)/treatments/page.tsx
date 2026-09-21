@@ -9,6 +9,7 @@ import { SectionHead } from "@/components/ivf-page";
 import { HOMEPAGE_DEFAULTS } from "@/lib/homepage";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getSanityTreatmentsHub } from "@/sanity/lib/fetch";
 
 const URL = "/treatments";
 
@@ -27,8 +28,13 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function Page() {
-  const { eyebrow, heading, subtitle, items } = HOMEPAGE_DEFAULTS.treatments;
+export default async function Page() {
+  const cms = await getSanityTreatmentsHub();
+  const defaults = HOMEPAGE_DEFAULTS.treatments;
+  const eyebrow = cms?.eyebrow || defaults.eyebrow;
+  const heading = cms?.heading?.lead || cms?.heading?.em ? { lead: cms.heading?.lead || "", em: cms.heading?.em || "" } : defaults.heading;
+  const subtitle = cms?.subtitle || defaults.subtitle;
+  const { items } = defaults;
   const graph = [
     {
       "@type": "CollectionPage",
