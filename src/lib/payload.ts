@@ -656,7 +656,7 @@ async function getNavLocations(): Promise<NavLocationItem[]> {
   }));
 }
 
-export const getFooter = async (): Promise<FooterData> => {
+export const getFooter = async (locale: Locale = "en"): Promise<FooterData> => {
   const [settings, navTreatments, navDoctors, navLocations, footerNav] = await Promise.all([
     getSanitySiteSettings(),
     getNavTreatments(),
@@ -671,10 +671,11 @@ export const getFooter = async (): Promise<FooterData> => {
     navDoctors,
     navLocations,
     settings?.navLabels ?? [],
+    locale,
   );
 };
 
-export const getHeader = async (): Promise<HeaderData> => {
+export const getHeader = async (locale: Locale = "en"): Promise<HeaderData> => {
   const [settings, navTreatments, navDoctors, navLocations, headerNav] = await Promise.all([
     getSanitySiteSettings(),
     getNavTreatments(),
@@ -688,6 +689,7 @@ export const getHeader = async (): Promise<HeaderData> => {
     navDoctors,
     navLocations,
     settings?.navLabels ?? [],
+    locale,
   );
 };
 

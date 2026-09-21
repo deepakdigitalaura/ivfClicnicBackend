@@ -16,6 +16,7 @@
  * client <SiteHeader>.
  * ===================================================================== */
 import { destinationHref } from "@/lib/internal-links";
+import { pickLocale, type Locale, type LocalizedField } from "@/lib/i18n";
 
 /**
  * Lightweight treatment descriptor used to build the header mega menu and footer
@@ -352,20 +353,20 @@ export const HEADER_DEFAULTS: HeaderData = {
 /* The subset of the `header` global this resolver reads (kept loose so it stays
  * decoupled from the generated payload-types). */
 type MegaItemSource = {
-  label?: string | null;
+  label?: LocalizedField;
   url?: string | null;
-  desc?: string | null;
+  desc?: LocalizedField;
   hidden?: boolean | null;
-  children?: { label?: string | null; url?: string | null }[] | null;
+  children?: { label?: LocalizedField; url?: string | null }[] | null;
 };
 type MegaColSource = {
-  heading?: string | null;
+  heading?: LocalizedField;
   headingHref?: string | null;
   hidden?: boolean | null;
   items?: MegaItemSource[] | null;
 };
 type NavItemSource = {
-  label?: string | null;
+  label?: LocalizedField;
   url?: string | null;
   openInNewTab?: boolean | null;
   doctors?: boolean | null;
@@ -375,9 +376,9 @@ type NavItemSource = {
 };
 export type HeaderSource =
   | {
-      branding?: { logoUrl?: string | null; logoAlt?: string | null } | null;
+      branding?: { logoUrl?: string | null; logoAlt?: LocalizedField } | null;
       navItems?: NavItemSource[] | null;
-      cta?: { label?: string | null; url?: string | null; styleVariant?: string | null } | null;
+      cta?: { label?: LocalizedField; url?: string | null; styleVariant?: string | null } | null;
     }
   | null
   | undefined;
@@ -386,34 +387,34 @@ const toTitleCase = (s: string) => s.replace(/\b\w/g, (c) => c.toUpperCase());
 
 /** Map a stored mega item → rendered item, dropping empty optional fields so
  *  the resolved object matches the hand-written defaults shape. */
-function resolveMegaItem(it: MegaItemSource): HeaderMegaItem {
+function resolveMegaItem(it: MegaItemSource, locale: Locale): HeaderMegaItem {
   const children = (it.children ?? [])
     .filter((c) => c.label)
-    .map((c) => ({ label: c.label as string, href: c.url ?? "" }));
+    .map((c) => ({ label: pickLocale(c.label, locale) ?? "", href: c.url ?? "" }));
   return {
-    label: it.label ?? "",
+    label: pickLocale(it.label, locale) ?? "",
     href: it.url ?? "",
-    ...(it.desc ? { desc: it.desc } : {}),
+    ...(it.desc ? { desc: pickLocale(it.desc, locale) } : {}),
     ...(children.length ? { children } : {}),
   };
 }
 
 /** Map a stored nav item → rendered nav item. */
-function resolveNavItem(n: NavItemSource): HeaderNavItem {
+function resolveNavItem(n: NavItemSource, locale: Locale): HeaderNavItem {
   if (n.doctors) {
     // Doctors panel is data-driven (src/lib/doctors.ts); only the flag travels.
-    return { label: n.label ?? "Doctors", doctors: true };
+    return { label: pickLocale(n.label, locale) ?? "Doctors", doctors: true };
   }
   // Hidden columns / links are dropped (editor toggled them off, not deleted).
   const mega = (n.columns ?? [])
     .filter((col) => !col.hidden)
     .map((col) => ({
-      heading: col.heading ?? "",
+      heading: pickLocale(col.heading, locale) ?? "",
       ...(col.headingHref ? { headingHref: col.headingHref } : {}),
-      items: (col.items ?? []).filter((it) => !it.hidden).map(resolveMegaItem),
+      items: (col.items ?? []).filter((it) => !it.hidden).map((it) => resolveMegaItem(it, locale)),
     }));
   return {
-    label: n.label ?? "",
+    label: pickLocale(n.label, locale) ?? "",
     ...(n.url ? { href: n.url } : {}),
     ...(n.openInNewTab ? { openInNewTab: true } : {}),
     ...(typeof n.megaCols === "number" ? { megaCols: n.megaCols } : {}),
@@ -585,19 +586,23 @@ export function resolveHeader(
   navDoctors: NavDoctorItem[] = [],
   navLocations: NavLocationItem[] = [],
   navLabels: NavLabelOverride[] = [],
+  locale: Locale = "en",
 ): HeaderData {
   const branding: HeaderBranding = {
     logoUrl: g?.branding?.logoUrl || HEADER_DEFAULTS.branding.logoUrl,
-    logoAlt: g?.branding?.logoAlt || HEADER_DEFAULTS.branding.logoAlt,
+    logoAlt: pickLocale(g?.branding?.logoAlt, locale) || HEADER_DEFAULTS.branding.logoAlt,
   };
 
   // Top-level items toggled "Hide from menu" are dropped before mapping.
-  const nav = g?.navItems?.length
-    ? g.navItems.filter((n) => !n.hidden).map(resolveNavItem)
-    : HEADER_DEFAULTS.nav;
+  // navSource is kept alongside `nav` (same order/length) so the mega-overlay
+  // matching below can key off the item's ENGLISH label — never the localized
+  // display label, which would silently break the string match for hi/gu.
+  const navSource = g?.navItems?.length ? g.navItems.filter((n) => !n.hidden) : null;
+  const nav = navSource ? navSource.map((n) => resolveNavItem(n, locale)) : HEADER_DEFAULTS.nav;
+  const navKey = (i: number) => (navSource ? pickLocale(navSource[i].label, "en") ?? "" : nav[i].label);
 
   const cta: HeaderCta = {
-    label: g?.cta?.label || HEADER_DEFAULTS.cta.label,
+    label: pickLocale(g?.cta?.label, locale) || HEADER_DEFAULTS.cta.label,
     href: g?.cta?.url || HEADER_DEFAULTS.cta.href,
     styleVariant: g?.cta?.styleVariant || HEADER_DEFAULTS.cta.styleVariant,
   };
@@ -619,17 +624,21 @@ export function resolveHeader(
   // Locations mega — replace hardcoded city/centre list with DB-driven one.
   const locationsMega = buildLocationsMega(navLocations);
 
-  const finalNav = nav.map((item) => {
-    if (item.label === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
-    if (item.label === "Maternity Services" && maternityMega) return { ...item, href: item.href || "/services/maternity-services", mega: maternityMega };
-    if (item.label === "Locations" && locationsMega) return { ...item, mega: locationsMega };
+  const finalNav = nav.map((item, i) => {
+    const key = navKey(i);
+    if (key === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
+    if (key === "Maternity Services" && maternityMega) return { ...item, href: item.href || "/services/maternity-services", mega: maternityMega };
+    if (key === "Locations" && locationsMega) return { ...item, mega: locationsMega };
     if (item.doctors && doctorMenu) return { ...item, doctorMenu };
-    if (item.label === "Resources" && item.mega) {
+    // Legacy typo-fix ("Blog" → "Blogs" seed data) — href-matched (stable
+    // across locales) and English-only: a translated hi/gu label from the
+    // CMS is never rewritten.
+    if (key === "Resources" && item.mega && locale === "en") {
       return {
         ...item,
         mega: item.mega.map((col) => ({
           ...col,
-          items: col.items.map((it) => it.label === "Blog" ? { ...it, label: "Blogs" } : it),
+          items: col.items.map((it) => it.href === destinationHref("blog") && it.label === "Blog" ? { ...it, label: "Blogs" } : it),
         })),
       };
     }
