@@ -26,7 +26,7 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const { eyebrow, heading, subtitle, items } = await loadTreatmentsHub();
+  const { eyebrow, heading, subtitle, items } = await loadTreatmentsHub("hi");
   const graph = [
     {
       "@type": "CollectionPage",

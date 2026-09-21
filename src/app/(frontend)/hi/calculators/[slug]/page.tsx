@@ -16,7 +16,7 @@ export async function generateStaticParams() {
 export async function generateMetadata({ params }: Props): Promise<Metadata> {
   const { slug } = await params;
   if (!isCalculatorSlug(slug)) return {};
-  const cms = await getCalculator(slug);
+  const cms = await getCalculator(slug, "hi");
   if (!cms) return {};
   const title       = cms.seo.metaTitle       ?? cms.title;
   const description = cms.seo.metaDescription ?? cms.subtitle;
@@ -38,7 +38,7 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
 export default async function Page({ params }: Props) {
   const { slug } = await params;
   if (!isCalculatorSlug(slug)) notFound();
-  const cms = await getCalculator(slug);
+  const cms = await getCalculator(slug, "hi");
   if (!cms) notFound();
   return (
     <>
