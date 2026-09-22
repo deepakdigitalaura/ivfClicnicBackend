@@ -518,19 +518,21 @@ export function BlogArticle({
                   src={heroUrl}
                   alt={hero?.alt ?? blog.title}
                   className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: `right ${blog.heroImagePosition?.split(" ")[1] ?? "center"}` }}
+                  style={{
+                    objectPosition: `${blog.heroTextRight ? "left" : "right"} ${blog.heroImagePosition?.split(" ")[1] ?? "center"}`,
+                  }}
                   loading="eager"
                 />
-                {/* directional gradient to make left area readable */}
+                {/* directional gradient to make the text side readable */}
                 <div
-                  className={`absolute inset-0 pointer-events-none bg-gradient-to-r to-transparent ${
+                  className={`absolute inset-0 pointer-events-none ${blog.heroTextRight ? "bg-gradient-to-l" : "bg-gradient-to-r"} to-transparent ${
                     blog.heroTextDark
                       ? "from-white/85 via-white/55"
                       : "from-black/70 via-black/40"
                   }`}
                 />
-                {/* title + category badge on the left */}
-                <div className="absolute inset-0 flex items-center">
+                {/* title + category badge, on whichever side the photo leaves empty */}
+                <div className={`absolute inset-0 flex items-center ${blog.heroTextRight ? "justify-end" : ""}`}>
                   <div className="px-7 md:px-10 max-w-[60%]">
                     {category?.title && (
                       <span

@@ -157,6 +157,7 @@ function toBlogDoc(b: SanityBlog): Blog {
     excerpt: b.excerpt ?? null,
     heroImage: makeMedia(b.heroImageUrl, b.heroImageAlt ?? ""),
     heroTextDark: b.heroTextDark ?? null,
+    heroTextRight: b.heroTextRight ?? null,
     heroImagePosition: b.heroImagePosition as Blog["heroImagePosition"] ?? null,
     content: safeJSON(b.contentRaw),
     author,

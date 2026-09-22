@@ -14,6 +14,7 @@ export default defineType({
     defineField({ name: "heroImageUrl", title: "Hero Image URL", type: "url" }),
     defineField({ name: "heroImageAlt", title: "Hero Image Alt", type: "string" }),
     defineField({ name: "heroTextDark", title: "Hero Text Dark", type: "boolean", initialValue: false }),
+    defineField({ name: "heroTextRight", title: "Hero Text On Right (use when the photo's subject/empty space is on the left)", type: "boolean", initialValue: false }),
     defineField({
       name: "heroImagePosition",
       title: "Hero Image Position",
