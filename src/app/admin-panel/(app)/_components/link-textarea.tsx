@@ -1,5 +1,6 @@
 "use client";
 import { useRef } from "react";
+import { isBrokenInternalLink } from "./check-link";
 
 /* =====================================================================
  * <LinkTextarea> — plain textarea + "Insert Link" button for the
@@ -26,13 +27,16 @@ export function LinkTextarea({
 }) {
   const ref = useRef<HTMLTextAreaElement>(null);
 
-  const insertLink = () => {
+  const insertLink = async () => {
     const el = ref.current;
     if (!el) return;
     const { selectionStart, selectionEnd } = el;
     const selected = value.slice(selectionStart, selectionEnd) || "link text";
     const url = window.prompt("Link URL (e.g. /treatments/ivf or https://...)");
     if (!url) return;
+    if (await isBrokenInternalLink(url)) {
+      if (!window.confirm(`"${url}" doesn't seem to be a real page on the site. Insert it anyway?`)) return;
+    }
     const tag = `<a href="${url}" ${LINK_STYLE}>${selected}</a>`;
     const next = value.slice(0, selectionStart) + tag + value.slice(selectionEnd);
     onChange(next);

@@ -96,7 +96,7 @@ function AboutAuthor({ author }: { author: Author }) {
             </span>
           </div>
         )}
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="text-xl font-semibold leading-tight text-[color:var(--plum)]">
             {author.name}
           </p>

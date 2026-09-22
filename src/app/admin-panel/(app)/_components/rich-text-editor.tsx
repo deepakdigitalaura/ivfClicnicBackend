@@ -19,6 +19,7 @@ import { $getSelection, $isRangeSelection, $createParagraphNode, $createTextNode
 import { BlockNode, $createBlockNode, $isBlockNode } from "./block-node";
 import { BlockForm, BLOCK_LABELS, emptyBlockFormData } from "./block-forms";
 import { BlockEditorContext, type EditPayload } from "./block-editor-context";
+import { isBrokenInternalLink } from "./check-link";
 
 /* =====================================================================
  * Rich-text editor for article bodies, authored entirely in the admin
@@ -60,9 +61,12 @@ function Toolbar({ onInsertBlock }: { onInsertBlock: (blockType: string) => void
   // Built by hand rather than via LinkPlugin/TOGGLE_LINK_COMMAND: those create
   // a stock LinkNode, which Lexical rejects now that "link" is registered to
   // PayloadLinkNode ("does not match registered node").
-  const applyLink = () => {
+  const applyLink = async () => {
     const url = window.prompt("Link URL");
     if (!url) return;
+    if (await isBrokenInternalLink(url)) {
+      if (!window.confirm(`"${url}" doesn't seem to be a real page on the site. Insert it anyway?`)) return;
+    }
     editor.update(() => {
       const selection = $getSelection();
       if (!$isRangeSelection(selection)) return;
