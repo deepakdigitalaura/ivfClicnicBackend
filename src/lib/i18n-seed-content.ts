@@ -604,3 +604,118 @@ export const aboutSeed = {
     },
   },
 };
+
+/* =====================================================================
+ * Header/Footer nav label translations (2026-09-22, AI-written — flag for
+ * sir's review before go-live, same as homepage/about content above).
+ * Keyed by the EXACT English label string from HEADER_DEFAULTS/
+ * FOOTER_DEFAULTS (src/lib/header.ts, footer.ts) — scripts/seed-i18n-
+ * nav-footer.mts looks each nav item up by its English label and leaves
+ * anything not in this map English (proper names: doctors, cities/centres,
+ * phone numbers, and acronyms kept as-is per sir's decision that only
+ * plain-language labels get translated, not medical acronyms).
+ * ===================================================================== */
+export const navLabelSeed: Record<string, { hi: string; gu: string }> = {
+  // Top-level nav + CTA
+  "About": { hi: "हमारे बारे में", gu: "અમારા વિશે" },
+  "Doctors": { hi: "डॉक्टर", gu: "ડોક્ટરો" },
+  "IVF Treatments": { hi: "IVF उपचार", gu: "IVF સારવાર" },
+  "Maternity Services": { hi: "मातृत्व सेवाएं", gu: "માતૃત્વ સેવાઓ" },
+  "Locations": { hi: "स्थान", gu: "સ્થળો" },
+  "Calculators": { hi: "कैलकुलेटर", gu: "કેલ્ક્યુલેટર" },
+  "Resources": { hi: "संसाधन", gu: "સંસાધનો" },
+  "Contact": { hi: "संपर्क करें", gu: "સંપર્ક કરો" },
+  "Book Appointment": { hi: "अपॉइंटमेंट बुक करें", gu: "એપોઇન્ટમેન્ટ બુક કરો" },
+
+  // About mega
+  "About Bavishi Fertility Institute": { hi: "बाविशी फर्टिलिटी इंस्टिट्यूट के बारे में", gu: "બાવિશી ફર્ટિલિટી ઇન્સ્ટિટ્યુટ વિશે" },
+  "Why Bavishi Fertility Institute": { hi: "बाविशी फर्टिलिटी इंस्टिट्यूट क्यों", gu: "બાવિશી ફર્ટિલિટી ઇન્સ્ટિટ્યુટ શા માટે" },
+  "Simple Treatment": { hi: "सरल उपचार", gu: "સરળ સારવાર" },
+  "Safe Treatment": { hi: "सुरक्षित उपचार", gu: "સલામત સારવાર" },
+  "Smart Treatment": { hi: "स्मार्ट उपचार", gu: "સ્માર્ટ સારવાર" },
+  "Successful Treatment": { hi: "सफल उपचार", gu: "સફળ સારવાર" },
+  "History": { hi: "इतिहास", gu: "ઇતિહાસ" },
+  "Our Doctors": { hi: "हमारे डॉक्टर", gu: "અમારા ડોક્ટરો" },
+  "Infrastructure": { hi: "इंफ्रास्ट्रक्चर", gu: "ઇન્ફ્રાસ્ટ્રક્ચર" },
+  "Suraksha Kavach Package": { hi: "सुरक्षा कवच पैकेज", gu: "સુરક્ષા કવચ પેકેજ" },
+  "Easy / Interest Free EMI": { hi: "आसान / ब्याज मुक्त EMI", gu: "સરળ / વ્યાજમુક્ત EMI" },
+
+  // IVF Treatments mega — column headings
+  "Advanced IVF Treatment": { hi: "एडवांस्ड IVF उपचार", gu: "એડવાન્સ્ડ IVF સારવાર" },
+  "Donor Services": { hi: "डोनर सेवाएं", gu: "ડોનર સેવાઓ" },
+  "Male Infertility": { hi: "पुरुष बांझपन", gu: "પુરુષ વંધ્યત્વ" },
+  "Female Infertility": { hi: "महिला बांझपन", gu: "સ્ત્રી વંધ્યત્વ" },
+  "Fertility Preservation": { hi: "फर्टिलिटी प्रिजर्वेशन", gu: "ફર્ટિલિટી પ્રિઝર્વેશન" },
+
+  // IVF Treatments mega — items
+  "IVF Failure": { hi: "IVF विफलता", gu: "IVF નિષ્ફળતા" },
+  "Preimplantation Genetic Testing (PGT)": { hi: "प्रीइम्प्लांटेशन जेनेटिक टेस्टिंग (PGT)", gu: "પ્રીઇમ્પ્લાન્ટેશન જિનેટિક ટેસ્ટિંગ (PGT)" },
+  "Spindle View ICSI": { hi: "स्पिंडल व्यू ICSI", gu: "સ્પિન્ડલ વ્યૂ ICSI" },
+  "Blastocyst Transfer": { hi: "ब्लास्टोसिस्ट ट्रांसफर", gu: "બ્લાસ્ટોસિસ્ટ ટ્રાન્સફર" },
+  "Laser Hatching": { hi: "लेजर हैचिंग", gu: "લેસર હેચિંગ" },
+  "Egg Donation": { hi: "एग डोनेशन", gu: "એગ ડોનેશન" },
+  "Sperm Donation": { hi: "स्पर्म डोनेशन", gu: "સ્પર્મ ડોનેશન" },
+  "Embryo Donation": { hi: "एम्ब्रियो डोनेशन", gu: "એમ્બ્રિયો ડોનેશન" },
+  "Surrogacy": { hi: "सरोगेसी", gu: "સરોગસી" },
+  "Low Sperm Count (Oligospermia)": { hi: "कम स्पर्म काउंट (ओलिगोस्पर्मिया)", gu: "ઓછી સ્પર્મ કાઉન્ટ (ઓલિગોસ્પર્મિયા)" },
+  "Low Sperm Motility (Asthenospermia)": { hi: "कम स्पर्म मोटिलिटी (एस्थेनोस्पर्मिया)", gu: "ઓછી સ્પર્મ મોટિલિટી (એસ્થેનોસ્પર્મિયા)" },
+  "Zero Sperm Count (Azoospermia)": { hi: "शून्य स्पर्म काउंट (एजूस्पर्मिया)", gu: "શૂન્ય સ્પર્મ કાઉન્ટ (એઝૂસ્પર્મિયા)" },
+  "Erectile Dysfunction": { hi: "इरेक्टाइल डिसफंक्शन", gu: "ઇરેક્ટાઇલ ડિસફંક્શન" },
+  "Conceive Naturally": { hi: "स्वाभाविक रूप से गर्भधारण", gu: "કુદરતી રીતે ગર્ભધારણ" },
+  "PRP Infertility": { hi: "PRP बांझपन उपचार", gu: "PRP વંધ્યત્વ સારવાર" },
+  "Poor Ovarian Reserve / Low Egg Count / Low AMH": { hi: "कम ओवेरियन रिजर्व / कम एग काउंट / कम AMH", gu: "ઓછું ઓવેરિયન રિઝર્વ / ઓછી એગ કાઉન્ટ / ઓછું AMH" },
+  "Ovarian Rejuvenation": { hi: "ओवेरियन रिजुवेनेशन", gu: "ઓવેરિયન રિજુવેનેશન" },
+  "Fibroid": { hi: "फाइब्रॉएड", gu: "ફાઇબ્રોઇડ" },
+  "Endometriosis": { hi: "एंडोमेट्रियोसिस", gu: "એન્ડોમેટ્રિઓસિસ" },
+  "Cryopreservation": { hi: "क्रायोप्रिजर्वेशन", gu: "ક્રાયોપ્રિઝર્વેશન" },
+  "Egg Freezing": { hi: "एग फ्रीजिंग", gu: "એગ ફ્રીઝિંગ" },
+
+  // Maternity Services
+  "3D/4D Sonography": { hi: "3D/4D सोनोग्राफी", gu: "3D/4D સોનોગ્રાફી" },
+  "Painless Delivery": { hi: "पेनलेस डिलीवरी", gu: "પેઇનલેસ ડિલિવરી" },
+  "Normal Delivery": { hi: "नॉर्मल डिलीवरी", gu: "નોર્મલ ડિલિવરી" },
+  "Fetal Medicine": { hi: "फीटल मेडिसिन", gu: "ફીટલ મેડિસિન" },
+  "High Risk Pregnancy Care": { hi: "हाई रिस्क प्रेगनेंसी केयर", gu: "હાઈ રિસ્ક પ્રેગ્નન્સી કેર" },
+  "Twin Pregnancy Care": { hi: "ट्विन प्रेगनेंसी केयर", gu: "ટ્વિન પ્રેગ્નન્સી કેર" },
+
+  // Calculators — headings + items (header + footer variants both included)
+  "Fertility & IVF": { hi: "फर्टिलिटी और IVF", gu: "ફર્ટિલિટી અને IVF" },
+  "Conception & Pregnancy": { hi: "गर्भधारण और प्रेगनेंसी", gu: "ગર્ભધારણ અને પ્રેગ્નન્સી" },
+  "IVF Success Rate Calculator": { hi: "IVF सक्सेस रेट कैलकुलेटर", gu: "IVF સક્સેસ રેટ કેલ્ક્યુલેટર" },
+  "IVF Cost Calculator": { hi: "IVF कॉस्ट कैलकुलेटर", gu: "IVF ખર્ચ કેલ્ક્યુલેટર" },
+  "AMH Level Interpreter": { hi: "AMH लेवल इंटरप्रेटर", gu: "AMH લેવલ ઇન્ટરપ્રેટર" },
+  "Sperm Analysis Calculator": { hi: "स्पर्म एनालिसिस कैलकुलेटर", gu: "સ્પર્મ એનાલિસિસ કેલ્ક્યુલેટર" },
+  "Ovulation Calculator": { hi: "ओव्यूलेशन कैलकुलेटर", gu: "ઓવ્યુલેશન કેલ્ક્યુલેટર" },
+  "Fertile Period Calculator": { hi: "फर्टाइल पीरियड कैलकुलेटर", gu: "ફર્ટાઇલ પિરિયડ કેલ્ક્યુલેટર" },
+  "Natural Pregnancy Calculator": { hi: "नेचुरल प्रेगनेंसी कैलकुलेटर", gu: "નેચરલ પ્રેગ્નન્સી કેલ્ક્યુલેટર" },
+  "Miscarriage Risk Calculator": { hi: "मिसकैरेज रिस्क कैलकुलेटर", gu: "મિસકેરેજ રિસ્ક કેલ્ક્યુલેટર" },
+  "IVF Success Rate": { hi: "IVF सक्सेस रेट", gu: "IVF સક્સેસ રેટ" },
+  "IVF Cost Estimate": { hi: "IVF कॉस्ट एस्टीमेट", gu: "IVF ખર્ચ અંદાજ" },
+  "AMH Interpreter": { hi: "AMH इंटरप्रेटर", gu: "AMH ઇન્ટરપ્રેટર" },
+  "Fertile Period": { hi: "फर्टाइल पीरियड", gu: "ફર્ટાઇલ પિરિયડ" },
+  "Semen Analysis": { hi: "सीमेन एनालिसिस", gu: "સીમેન એનાલિસિસ" },
+  "Natural Pregnancy": { hi: "नेचुरल प्रेगनेंसी", gu: "નેચરલ પ્રેગ્નન્સી" },
+  "Miscarriage Risk": { hi: "मिसकैरेज रिस्क", gu: "મિસકેરેજ રિસ્ક" },
+
+  // Resources
+  "Learn": { hi: "जानें", gu: "જાણો" },
+  "Blogs": { hi: "ब्लॉग", gu: "બ્લોગ" },
+  "Blog": { hi: "ब्लॉग", gu: "બ્લોગ" },
+  "Testimonial Videos": { hi: "टेस्टीमोनियल वीडियो", gu: "ટેસ્ટિમોનિયલ વીડિયો" },
+  "Education Videos": { hi: "एजुकेशन वीडियो", gu: "એજ્યુકેશન વીડિયો" },
+  "Educational Videos": { hi: "एजुकेशनल वीडियो", gu: "એજ્યુકેશનલ વીડિયો" },
+  "Camps": { hi: "कैंप", gu: "કેમ્પ" },
+  "Media & Press": { hi: "मीडिया और प्रेस", gu: "મીડિયા અને પ્રેસ" },
+  "Awards & Achievements": { hi: "पुरस्कार और उपलब्धियां", gu: "એવોર્ડ્સ અને સિદ્ધિઓ" },
+
+  // Footer-only
+  "All Doctors": { hi: "सभी डॉक्टर", gu: "બધા ડોક્ટરો" },
+  "Book Consultation": { hi: "कंसल्टेशन बुक करें", gu: "કન્સલ્ટેશન બુક કરો" },
+  "Our Story": { hi: "हमारी कहानी", gu: "અમારી વાર્તા" },
+  "Suraksha Kavach": { hi: "सुरक्षा कवच", gu: "સુરક્ષા કવચ" },
+  "Privacy Policy": { hi: "प्राइवेसी पॉलिसी", gu: "પ્રાઇવસી પોલિસી" },
+  "Terms of Service": { hi: "टर्म्स ऑफ सर्विस", gu: "સેવાની શરતો" },
+  "Refund Policy": { hi: "रिफंड पॉलिसी", gu: "રિફંડ પોલિસી" },
+  "Cookie Policy": { hi: "कुकी पॉलिसी", gu: "કુકી પોલિસી" },
+  "Sitemap": { hi: "साइटमैप", gu: "સાઇટમેપ" },
+};
