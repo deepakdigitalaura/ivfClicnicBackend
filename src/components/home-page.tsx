@@ -1,6 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
 import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -1843,6 +1844,7 @@ const inquiryLocations = [
 ];
 
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+  const router = useRouter();
   const contactIcons = [Phone, MessageCircle, Clock];
   const formAgg = getBrandReviews()?.aggregate;
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" });
@@ -1886,7 +1888,11 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
         setServerError(data?.error || "Something went wrong. Please call us on +91 97126 22288.");
         return;
       }
+      // A distinct URL is what makes the enquiry countable as a conversion in
+      // GA4 / Google Ads; the in-place success state stays as the fallback if
+      // navigation is blocked for any reason.
       setSubmitted(true);
+      router.push("/thank-you");
     } catch {
       setServerError("Network error. Please check your connection or call us on +91 97126 22288.");
     } finally {
