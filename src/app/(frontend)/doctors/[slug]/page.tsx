@@ -8,8 +8,9 @@ import { getDoctor, getDoctors, getResolvedCentresForLocationSlugs } from "@/lib
 import { breadcrumbSchema, abs } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
-/** ISR: re-render every hour so admin edits go live without a full redeploy. */
-export const revalidate = 3600;
+/** ISR: re-render every 2 min so admin edits go live without a full redeploy,
+ *  self-healing when the on-save revalidatePath() call silently fails. */
+export const revalidate = 120;
 
 /** Union of code-known + Sanity doctor slugs (getDoctors merges both). New
  *  admin-created doctors not in this set still render on-demand (dynamicParams). */
