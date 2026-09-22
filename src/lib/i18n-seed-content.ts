@@ -695,6 +695,16 @@ export const navLabelSeed: Record<string, { hi: string; gu: string }> = {
   "Fertile Period": { hi: "फर्टाइल पीरियड", gu: "ફર્ટાઇલ પિરિયડ" },
   "Semen Analysis": { hi: "सीमेन एनालिसिस", gu: "સીમેન એનાલિસિસ" },
   "Natural Pregnancy": { hi: "नेचुरल प्रेगनेंसी", gu: "નેચરલ પ્રેગ્નન્સી" },
+
+  // Calculators — descriptions (header mega menu)
+  "Estimate your personalised IVF success probability": { hi: "अपनी व्यक्तिगत IVF सफलता संभावना का अनुमान लगाएं", gu: "તમારી વ્યક્તિગત IVF સફળતાની સંભાવનાનો અંદાજ મેળવો" },
+  "Plan your treatment budget across cycle types": { hi: "विभिन्न साइकिल प्रकारों के लिए अपने उपचार बजट की योजना बनाएं", gu: "વિવિધ સાયકલ પ્રકારો માટે તમારા સારવાર બજેટનું આયોજન કરો" },
+  "Understand your ovarian reserve result": { hi: "अपने ओवेरियन रिजर्व परिणाम को समझें", gu: "તમારા ઓવેરિયન રિઝર્વ પરિણામને સમજો" },
+  "Interpret your semen analysis against WHO 2021": { hi: "WHO 2021 के अनुसार अपनी सीमेन एनालिसिस की व्याख्या करें", gu: "WHO 2021 મુજબ તમારા સીમેન એનાલિસિસનું અર્થઘટન કરો" },
+  "Find your fertile window and ovulation date": { hi: "अपनी फर्टाइल विंडो और ओव्यूलेशन तिथि जानें", gu: "તમારી ફર્ટાઇલ વિન્ડો અને ઓવ્યુલેશન તારીખ શોધો" },
+  "Track your fertile days and next period": { hi: "अपने फर्टाइल दिनों और अगले पीरियड को ट्रैक करें", gu: "તમારા ફર્ટાઇલ દિવસો અને આગામી પિરિયડને ટ્રેક કરો" },
+  "Estimate your natural conception probability": { hi: "अपनी स्वाभाविक गर्भधारण संभावना का अनुमान लगाएं", gu: "તમારી કુદરતી ગર્ભધારણની સંભાવનાનો અંદાજ મેળવો" },
+  "Assess your RPL risk profile": { hi: "अपनी RPL जोखिम प्रोफ़ाइल का आकलन करें", gu: "તમારી RPL જોખમ પ્રોફાઇલનું મૂલ્યાંકન કરો" },
   "Miscarriage Risk": { hi: "मिसकैरेज रिस्क", gu: "મિસકેરેજ રિસ્ક" },
 
   // Resources

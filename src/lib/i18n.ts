@@ -1,6 +1,22 @@
 export type Locale = "en" | "hi" | "gu";
 export type LocalizedField = string | { en?: string; hi?: string; gu?: string } | null | undefined;
 
+/** Routes that exist under /hi and /gu (see src/app/(frontend)/hi|gu). Keep in
+ *  sync with those directories — a route not listed here has no translated
+ *  page, so linking it under /hi or /gu would 404. */
+const LOCALIZED_ROUTE_ROOTS = ["/", "/about-bfi", "/contact", "/treatments", "/calculators"];
+
+/** Prefixes a nav href with /hi or /gu when a translated page exists for it,
+ *  leaving external links, hashes, and untranslated routes untouched. */
+export function localizeNavHref(href: string, locale: Locale): string {
+  if (locale === "en" || !href.startsWith("/") || href.startsWith("//")) return href;
+  const isLocalized = LOCALIZED_ROUTE_ROOTS.some(
+    (root) => href === root || href.startsWith(root === "/" ? "/#" : `${root}/`) || href.startsWith(`${root}#`),
+  );
+  if (!isLocalized) return href;
+  return href === "/" ? `/${locale}` : `/${locale}${href}`;
+}
+
 /** Reads a field that may be a plain string (not yet migrated to {en,hi,gu})
  *  or a locale object, falling back to English, then undefined. */
 export function pickLocale(field: LocalizedField, locale: Locale): string | undefined {

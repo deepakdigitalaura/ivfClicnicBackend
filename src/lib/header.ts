@@ -16,7 +16,7 @@
  * client <SiteHeader>.
  * ===================================================================== */
 import { destinationHref } from "@/lib/internal-links";
-import { pickLocale, type Locale, type LocalizedField } from "@/lib/i18n";
+import { pickLocale, localizeNavHref, type Locale, type LocalizedField } from "@/lib/i18n";
 
 /**
  * Lightweight treatment descriptor used to build the header mega menu and footer
@@ -390,10 +390,10 @@ const toTitleCase = (s: string) => s.replace(/\b\w/g, (c) => c.toUpperCase());
 function resolveMegaItem(it: MegaItemSource, locale: Locale): HeaderMegaItem {
   const children = (it.children ?? [])
     .filter((c) => c.label)
-    .map((c) => ({ label: pickLocale(c.label, locale) ?? "", href: c.url ?? "" }));
+    .map((c) => ({ label: pickLocale(c.label, locale) ?? "", href: localizeNavHref(c.url ?? "", locale) }));
   return {
     label: pickLocale(it.label, locale) ?? "",
-    href: it.url ?? "",
+    href: localizeNavHref(it.url ?? "", locale),
     ...(it.desc ? { desc: pickLocale(it.desc, locale) } : {}),
     ...(children.length ? { children } : {}),
   };
@@ -415,7 +415,7 @@ function resolveNavItem(n: NavItemSource, locale: Locale): HeaderNavItem {
     }));
   return {
     label: pickLocale(n.label, locale) ?? "",
-    ...(n.url ? { href: n.url } : {}),
+    ...(n.url ? { href: localizeNavHref(n.url, locale) } : {}),
     ...(n.openInNewTab ? { openInNewTab: true } : {}),
     ...(typeof n.megaCols === "number" ? { megaCols: n.megaCols } : {}),
     ...(mega.length ? { mega } : {}),
@@ -598,12 +598,14 @@ export function resolveHeader(
   // matching below can key off the item's ENGLISH label — never the localized
   // display label, which would silently break the string match for hi/gu.
   const navSource = g?.navItems?.length ? g.navItems.filter((n) => !n.hidden) : null;
-  const nav = navSource ? navSource.map((n) => resolveNavItem(n, locale)) : HEADER_DEFAULTS.nav;
+  const nav = navSource
+    ? navSource.map((n) => resolveNavItem(n, locale))
+    : HEADER_DEFAULTS.nav.map((n) => ({ ...n, ...(n.href ? { href: localizeNavHref(n.href, locale) } : {}) }));
   const navKey = (i: number) => (navSource ? pickLocale(navSource[i].label, "en") ?? "" : nav[i].label);
 
   const cta: HeaderCta = {
     label: pickLocale(g?.cta?.label, locale) || HEADER_DEFAULTS.cta.label,
-    href: g?.cta?.url || HEADER_DEFAULTS.cta.href,
+    href: localizeNavHref(g?.cta?.url || HEADER_DEFAULTS.cta.href, locale),
     styleVariant: g?.cta?.styleVariant || HEADER_DEFAULTS.cta.styleVariant,
   };
 

@@ -19,7 +19,7 @@ import {
 } from "@/lib/contact";
 import type { NavTreatmentItem, NavDoctorItem, NavLocationItem, NavLabelOverride } from "@/lib/header";
 import { sortNavLocations, applyNavLabelOverrides } from "@/lib/header";
-import { pickLocale, type Locale, type LocalizedField } from "@/lib/i18n";
+import { pickLocale, localizeNavHref, type Locale, type LocalizedField } from "@/lib/i18n";
 
 /** Footer heading for each navCategory value. */
 const FOOTER_CATEGORY_LABELS: Record<string, string> = {
@@ -308,7 +308,7 @@ function resolveLink(link: FooterLinkSource, contact: ContactValues, locale: Loc
   const href = resolved.href ?? link.url ?? undefined;
   return {
     label: pickLocale(link.label, locale) ?? "",
-    ...(href ? { href } : {}),
+    ...(href ? { href: link.external ? href : localizeNavHref(href, locale) } : {}),
     ...(link.external ? { external: true } : {}),
   };
 }
