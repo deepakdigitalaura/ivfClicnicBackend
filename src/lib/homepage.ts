@@ -829,7 +829,7 @@ export function resolveHomepage(src: HomepageSource, locale: Locale = "en"): Hom
       }
     : d.awards;
 
-  const events = src.events?.posters?.length
+  const events = src.events?.eyebrow || src.events?.heading?.lead
     ? {
         eyebrow: L(src.events.eyebrow) ?? d.events.eyebrow,
         heading: heading(src.events.heading, d.events.heading, locale),

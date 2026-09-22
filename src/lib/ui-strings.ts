@@ -23,6 +23,10 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
   "India's Trusted Fertility Experts · Since 1998": { hi: "भारत के विश्वसनीय फर्टिलिटी विशेषज्ञ · 1998 से", gu: "ભારતના વિશ્વસનીય ફર્ટિલિટી નિષ્ણાતો · 1998 થી" },
   "WhatsApp": { hi: "व्हाट्सऐप", gu: "વોટ્સએપ" },
   "24×7 Care": { hi: "24×7 देखभाल", gu: "24×7 સંભાળ" },
+  "Book Consultation": { hi: "कंसल्टेशन बुक करें", gu: "કન્સલ્ટેશન બુક કરો" },
+  "Check IVF Eligibility": { hi: "IVF पात्रता जांचें", gu: "IVF પાત્રતા ચકાસો" },
+  "WhatsApp Now": { hi: "व्हाट्सऐप करें", gu: "વોટ્સએપ કરો" },
+  "Call Now": { hi: "अभी कॉल करें", gu: "હમણાં કૉલ કરો" },
 };
 
 export function ui(key: string, locale: Locale): string {

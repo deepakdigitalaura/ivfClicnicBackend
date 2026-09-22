@@ -337,8 +337,8 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <PrimaryBtn icon={Calendar} href="#book">{hero.ctas[0]}</PrimaryBtn>
-            <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate">{hero.ctas[1]}</GhostBtn>
+            <PrimaryBtn icon={Calendar} href="#book"><T k={hero.ctas[0]} /></PrimaryBtn>
+            <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate"><T k={hero.ctas[1]} /></GhostBtn>
           </motion.div>
 
           {agg && (
@@ -2088,7 +2088,7 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
                     : "btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white";
                 return (
                   <Magnetic key={label} as="a" href={hrefs[i]} className={cls} {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-                    <Icon className="h-4 w-4" /> {label}
+                    <Icon className="h-4 w-4" /> <T k={label} />
                   </Magnetic>
                 );
               })}
