@@ -2,25 +2,34 @@
 import { useState, useRef, useEffect } from "react";
 import Image from "next/image";
 import { motion } from "framer-motion";
+import { usePathname, useRouter } from "next/navigation";
 import { Phone, MessageCircle, Calendar, Globe, ChevronDown, Menu, X, ArrowRight } from "lucide-react";
 import { useBodyLock } from "./conversion";
 import { doctorMenuData } from "@/lib/doctors";
 import { T } from "@/components/ui-strings-provider";
 import { useHeader } from "@/components/header-provider";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 import type { HeaderNavItem, HeaderMegaItem, DoctorMenuData } from "@/lib/header";
 
 // Hardcoded fallback — used only when the CMS has no doctors with navRole set yet.
 const DOCTOR_MENU_FALLBACK = doctorMenuData();
 
-const LANGS = [
+const LANGS: { code: Locale; label: string }[] = [
   { code: "en", label: "English" },
   { code: "hi", label: "हिन्दी" },
   { code: "gu", label: "ગુજરાતી" },
-  { code: "mr", label: "मराठी" },
 ];
 
-// Site only has English content today — switcher re-enables once translations ship.
-const LANGUAGE_SWITCHER_ENABLED = false;
+const LANGUAGE_SWITCHER_ENABLED = true;
+
+/** Given the current pathname, strips any /hi or /gu prefix and re-prefixes
+ *  for the target locale, reusing the same translated-route allowlist as nav
+ *  links so switching never lands on a 404. */
+function switchLocalePath(pathname: string, target: Locale): string {
+  const match = pathname.match(/^\/(hi|gu)(\/.*|$)/);
+  const bare = match ? match[2] || "/" : pathname;
+  return localizeNavHref(bare, target);
+}
 
 export function SiteHeader({
   logoSrc,
@@ -34,8 +43,10 @@ export function SiteHeader({
   const { branding, nav: NAV, cta } = useHeader();
   const finalLogoSrc = logoSrc ?? branding.logoUrl;
   const finalLogoAlt = logoAlt ?? branding.logoAlt;
+  const pathname = usePathname();
+  const router = useRouter();
+  const currentLocale: Locale = pathname.startsWith("/hi") ? "hi" : pathname.startsWith("/gu") ? "gu" : "en";
   const [hover, setHover] = useState<string | null>(null);
-  const [lang, setLang] = useState("en");
   const [langOpen, setLangOpen] = useState(false);
   const [mobile, setMobile] = useState(false);
   const closeTimer = useRef<number | null>(null);
@@ -86,7 +97,7 @@ export function SiteHeader({
                     className="flex items-center gap-1.5 text-white/80 hover:text-white"
                   >
                     <Globe className="h-3 w-3" />
-                    {LANGS.find((l) => l.code === lang)?.label}
+                    {LANGS.find((l) => l.code === currentLocale)?.label}
                     <ChevronDown className={`h-3 w-3 transition-transform ${langOpen ? "rotate-180" : ""}`} />
                   </button>
                   {langOpen && (
@@ -95,11 +106,11 @@ export function SiteHeader({
                         <button
                           key={l.code}
                           type="button"
-                          onClick={() => { setLang(l.code); setLangOpen(false); }}
-                          className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition-colors hover:bg-[color:var(--ivory)] ${lang === l.code ? "text-[color:var(--rose)] font-semibold" : "text-[color:var(--plum)]"}`}
+                          onClick={() => { setLangOpen(false); router.push(switchLocalePath(pathname, l.code)); }}
+                          className={`flex w-full items-center justify-between px-4 py-2 text-left text-sm transition-colors hover:bg-[color:var(--ivory)] ${currentLocale === l.code ? "text-[color:var(--rose)] font-semibold" : "text-[color:var(--plum)]"}`}
                         >
                           {l.label}
-                          {lang === l.code && <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--rose)]" />}
+                          {currentLocale === l.code && <span className="h-1.5 w-1.5 rounded-full bg-[color:var(--rose)]" />}
                         </button>
                       ))}
                     </div>
@@ -239,8 +250,8 @@ export function SiteHeader({
                     <button
                       key={l.code}
                       type="button"
-                      onClick={() => setLang(l.code)}
-                      className={`flex-1 rounded-full px-2 py-1.5 text-xs font-semibold transition ${lang === l.code ? "bg-white text-[color:var(--rose)] shadow-soft" : "text-[color:var(--plum)]/70"}`}
+                      onClick={() => { setMobile(false); router.push(switchLocalePath(pathname, l.code)); }}
+                      className={`flex-1 rounded-full px-2 py-1.5 text-xs font-semibold transition ${currentLocale === l.code ? "bg-white text-[color:var(--rose)] shadow-soft" : "text-[color:var(--plum)]/70"}`}
                     >
                       {l.label}
                     </button>
