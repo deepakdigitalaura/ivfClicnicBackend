@@ -29,6 +29,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import type { CalculatorCmsData } from "@/lib/calculators";
 import { Editable } from "@/components/editor/Editable";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 const BABY_SIZES: Record<number, { name: string; icon: LucideIcon; desc: string }> = {
   1: { name: "Early Development", icon: Microscope, desc: "Early development stage. Your body prepares for ovulation." },
@@ -118,7 +120,8 @@ type PregnancyResult = {
   extraDays: number;
 };
 
-export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+export function OvulationPregnancyCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
   const cmsTitle      = cms?.title     ?? "Ovulation Calculator";
   const cmsSubtitle   = cms?.subtitle  ?? "Use this free calculator to estimate your ovulation date, fertile window, pregnancy test date, next period, and baby progress through the full pregnancy.";
   const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides estimates based on average cycle patterns. Ovulation timing can vary. Consult a fertility specialist for personalised guidance.";
@@ -167,11 +170,11 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
 
   const calculateOvulation = () => {
     if (!lastPeriodDate) {
-      setOvulationError("Please enter the first day of your last menstrual period.");
+      setOvulationError(t("Please enter the first day of your last menstrual period."));
       return;
     }
     if (cycleLength < 20 || cycleLength > 42) {
-      setOvulationError("Please enter a cycle length between 20 and 42 days.");
+      setOvulationError(t("Please enter a cycle length between 20 and 42 days."));
       return;
     }
 
@@ -227,18 +230,18 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
 
     if (pregnancyMethod === "lmp") {
       if (!pregnancyLastPeriodDate) {
-        setPregnancyError("Please enter the first day of your last menstrual period.");
+        setPregnancyError(t("Please enter the first day of your last menstrual period."));
         return;
       }
       if (pregnancyCycleLength < 20 || pregnancyCycleLength > 42) {
-        setPregnancyError("Please enter a cycle length between 20 and 42 days.");
+        setPregnancyError(t("Please enter a cycle length between 20 and 42 days."));
         return;
       }
       lmp = new Date(pregnancyLastPeriodDate);
       dueDate = addDays(lmp, 280);
     } else {
       if (!dueDateInput) {
-        setPregnancyError("Please enter your estimated due date.");
+        setPregnancyError(t("Please enter your estimated due date."));
         return;
       }
       dueDate = new Date(dueDateInput);
@@ -291,7 +294,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       <div className="grid gap-6 sm:grid-cols-2">
         <div>
           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-            First day of last period
+            {t("First day of last period")}
           </label>
           <input
             type="date"
@@ -303,7 +306,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
         </div>
         <div>
           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-            Cycle length (days)
+            {t("Cycle length (days)")}
           </label>
           <input
             type="number"
@@ -322,7 +325,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       )}
       <div className="mt-9 flex justify-end border-t border-border/60 pt-7">
         <button type="button" onClick={calculateOvulation} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-          Calculate <ArrowRight className="h-4 w-4" />
+          {t("Calculate")} <ArrowRight className="h-4 w-4" />
         </button>
       </div>
     </div>
@@ -334,8 +337,8 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       <div>
         <div className="grid gap-4 sm:grid-cols-2">
           {[
-            { value: "lmp", label: "Last Period", description: "Calculate due date from your last menstrual period." },
-            { value: "dueDate", label: "Due Date", description: "Calculate your pregnancy progress from an estimated due date." },
+            { value: "lmp", label: t("Last Period"), description: t("Calculate due date from your last menstrual period.") },
+            { value: "dueDate", label: t("Due Date"), description: t("Calculate your pregnancy progress from an estimated due date.") },
           ].map((option) => (
             <button
               type="button"
@@ -364,7 +367,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
             <>
               <div>
                 <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-                  First day of last period
+                  {t("First day of last period")}
                 </label>
                 <input
                   type="date"
@@ -376,7 +379,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               </div>
               <div>
                 <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-                  Cycle length (days)
+                  {t("Cycle length (days)")}
                 </label>
                 <input
                   type="number"
@@ -391,7 +394,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
           ) : (
             <div className="sm:col-span-2">
               <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-                Estimated due date
+                {t("Estimated due date")}
               </label>
               <input
                 type="date"
@@ -412,7 +415,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
 
         <div className="mt-9 flex justify-end border-t border-border/60 pt-7">
           <button type="button" onClick={calculatePregnancy} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-            Calculate <ArrowRight className="h-4 w-4" />
+            {t("Calculate")} <ArrowRight className="h-4 w-4" />
           </button>
         </div>
       </div>
@@ -425,9 +428,9 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
 
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">{t("Calculators")}</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
@@ -441,7 +444,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Clinically Informed · Ovulation &amp; Pregnancy Tools
+              <Sparkles className="h-3.5 w-3.5" /> {t("Clinically Informed · Ovulation & Pregnancy Tools")}
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -462,7 +465,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
                 { icon: Lock, t: "No Data Stored" },
               ].map((badge) => (
                 <span key={badge.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
-                  <badge.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {badge.t}
+                  <badge.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(badge.t)}
                 </span>
               ))}
             </div>
@@ -478,7 +481,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               ].map((s) => (
                 <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
                   <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -489,9 +492,9 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       {/* How This Calculator Works */}
       <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
         <Reveal>
-          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("How This Calculator Works")}</h2>
           <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Based on well-established menstrual cycle science — quick, accurate, and private.
+            {t("Based on well-established menstrual cycle science — quick, accurate, and private.")}
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -504,8 +507,8 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
                   {step.n}
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(step.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(step.desc)}</p>
               </div>
             ))}
           </div>
@@ -515,17 +518,17 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       {/* Patient Testimonials */}
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What Our Patients Tell Us</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("What Our Patients Tell Us")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2">
             {[
               { quote: "I had been trying for over a year and always thought Day 14 was the magic day. The calculator showed me my cycle was 31 days — so I was missing my fertile window completely. That was the breakthrough.", color: "border-[color:var(--rose)]" },
               { quote: "I used it to figure out when to time intercourse after my IUI. Knowing I was in my fertile window gave us extra hope during that two-week wait. We got pregnant on our second IUI.", color: "border-emerald-500" },
               { quote: "My cycles are irregular — 26 days one month, 33 the next. Entering different lengths helped me understand how much my window was shifting. My doctor said tracking this was the first step to understanding my PCOS.", color: "border-blue-500" },
               { quote: "The 6-cycle table was a game changer. My husband travels for work and we could actually plan around his schedule for the next few months. It felt like we finally had control over something.", color: "border-amber-500" },
-            ].map((t, i) => (
-              <div key={i} className={`rounded-3xl border-l-4 ${t.color} border border-border/70 bg-card p-6 shadow-soft`}>
-                <p className="text-sm italic leading-relaxed text-[color:var(--plum)]/80">&ldquo;{t.quote}&rdquo;</p>
-                <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">— Patient at Bavishi Fertility Institute</p>
+            ].map((item, i) => (
+              <div key={i} className={`rounded-3xl border-l-4 ${item.color} border border-border/70 bg-card p-6 shadow-soft`}>
+                <p className="text-sm italic leading-relaxed text-[color:var(--plum)]/80">&ldquo;{t(item.quote)}&rdquo;</p>
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">{t("— Patient at Bavishi Fertility Institute")}</p>
               </div>
             ))}
           </div>
@@ -550,7 +553,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
                       : "border border-border bg-white text-[color:var(--plum)] hover:border-[color:var(--rose)]/40"
                   }`}
                 >
-                  {tab.label}
+                  {t(tab.label)}
                 </button>
               ))}
             </div>
@@ -575,7 +578,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What this calculator helps you do</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("What this calculator helps you do")}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 {
@@ -596,8 +599,8 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               ].map((item) => (
                 <div key={item.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                   <item.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{item.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{item.desc}</p>
+                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(item.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(item.desc)}</p>
                 </div>
               ))}
             </div>
@@ -621,7 +624,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
                 onClick={() => setOvulationResult(null)}
                 className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]"
               >
-                <RotateCcw className="h-3.5 w-3.5" /> Recalculate
+                <RotateCcw className="h-3.5 w-3.5" /> {t("Recalculate")}
               </button>
 
               <div className="grid gap-5 md:grid-cols-2">
@@ -635,7 +638,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
                   { label: "Next Period", value: fmt(ovulationResult.nextPeriodStart) },
                 ].map((item) => (
                   <div key={item.label} className="rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
-                    <div className="text-sm font-semibold text-muted-foreground">{item.label}</div>
+                    <div className="text-sm font-semibold text-muted-foreground">{t(item.label)}</div>
                     <div className="mt-3 text-xl font-semibold text-[color:var(--plum)]">{item.value}</div>
                   </div>
                 ))}
@@ -644,14 +647,14 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               <div className="mt-6 rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 p-6 shadow-soft">
                 <div className="flex flex-wrap items-center justify-between gap-3">
                   <div>
-                    <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">Current Cycle Phase</div>
-                    <div className="mt-2 text-2xl font-semibold text-[color:var(--plum)]">{PHASES[ovulationResult.phase].name}</div>
+                    <div className="text-xs uppercase tracking-[0.22em] text-muted-foreground">{t("Current Cycle Phase")}</div>
+                    <div className="mt-2 text-2xl font-semibold text-[color:var(--plum)]">{t(PHASES[ovulationResult.phase].name)}</div>
                   </div>
                   <span className={`${PHASES[ovulationResult.phase].color} inline-flex rounded-full px-4 py-2 text-xs font-semibold`}>
-                    Day {ovulationResult.dayOfCycle}
+                    {t("Day")} {ovulationResult.dayOfCycle}
                   </span>
                 </div>
-                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{PHASES[ovulationResult.phase].desc}</p>
+                <p className="mt-4 text-sm leading-relaxed text-muted-foreground">{t(PHASES[ovulationResult.phase].desc)}</p>
               </div>
 
               <div className="mt-7 overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft">
@@ -659,11 +662,11 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
                   <table className="w-full text-sm">
                     <thead className="bg-[color:var(--rose-soft)]/30 text-left text-xs uppercase tracking-[0.2em] text-muted-foreground">
                       <tr>
-                        <th className="px-4 py-3">Period #</th>
-                        <th className="px-4 py-3">Period Start</th>
-                        <th className="px-4 py-3">Fertile Window</th>
-                        <th className="px-4 py-3">Ovulation Date</th>
-                        <th className="px-4 py-3">Test Date</th>
+                        <th className="px-4 py-3">{t("Period #")}</th>
+                        <th className="px-4 py-3">{t("Period Start")}</th>
+                        <th className="px-4 py-3">{t("Fertile Window")}</th>
+                        <th className="px-4 py-3">{t("Ovulation Date")}</th>
+                        <th className="px-4 py-3">{t("Test Date")}</th>
                       </tr>
                     </thead>
                     <tbody>
@@ -682,7 +685,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               </div>
 
               <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-                * The results of this calculator are estimations only. Please consult your doctor for personal advice.
+                {t("* The results of this calculator are estimations only. Please consult your doctor for personal advice.")}
               </p>
             </motion.div>
           ) : null}
@@ -701,27 +704,27 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
                 onClick={() => setPregnancyResult(null)}
                 className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]"
               >
-                <RotateCcw className="h-3.5 w-3.5" /> Recalculate
+                <RotateCcw className="h-3.5 w-3.5" /> {t("Recalculate")}
               </button>
 
               <div className="rounded-[2rem] border border-[color:var(--rose)]/20 bg-gradient-to-b from-[color:var(--rose-soft)]/40 via-white to-white p-8 text-center shadow-lift md:p-12">
-                <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/70">Days until birth</div>
+                <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/70">{t("Days until birth")}</div>
                 <div className="mt-4 text-6xl font-black text-[color:var(--rose)]">{pregnancyResult.remainingDays}</div>
                 <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-                  Estimated due date is <strong className="text-[color:var(--plum)]">{fmt(pregnancyResult.dueDate)}</strong>. This timeline helps you follow pregnancy progress safely.
+                  {t("Estimated due date is")} <strong className="text-[color:var(--plum)]">{fmt(pregnancyResult.dueDate)}</strong>. {t("This timeline helps you follow pregnancy progress safely.")}
                 </p>
               </div>
 
               <div className="mt-7 grid gap-5 md:grid-cols-2">
                 <div className="rounded-2xl border border-border/70 bg-card p-6 text-center shadow-soft">
                   <pregnancyResult.babySize.icon className="mx-auto h-10 w-10 text-[color:var(--rose)]" />
-                  <div className="mt-4 text-sm uppercase tracking-[0.18em] text-muted-foreground">Baby Size</div>
-                  <div className="mt-2 text-xl font-semibold text-[color:var(--plum)]">{pregnancyResult.babySize.name}</div>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{pregnancyResult.babySize.desc}</p>
+                  <div className="mt-4 text-sm uppercase tracking-[0.18em] text-muted-foreground">{t("Baby Size")}</div>
+                  <div className="mt-2 text-xl font-semibold text-[color:var(--plum)]">{t(pregnancyResult.babySize.name)}</div>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(pregnancyResult.babySize.desc)}</p>
                 </div>
                 <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
                   <div className="flex items-center justify-between text-xs uppercase tracking-[0.15em] text-muted-foreground">
-                    <span>Trimester Progress</span>
+                    <span>{t("Trimester Progress")}</span>
                     <span>{pregnancyResult.progressPercent}%</span>
                   </div>
                   <div className="mt-4 flex h-3 overflow-hidden rounded-full bg-[color:var(--ivory)]">
@@ -740,15 +743,15 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               <div className="mt-7 rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 p-6 shadow-soft">
                 <div className="flex flex-col gap-4 md:flex-row md:items-center md:justify-between">
                   <div className="text-center md:text-left">
-                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Start Date</div>
+                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{t("Start Date")}</div>
                     <div className="mt-2 text-sm font-semibold text-[color:var(--plum)]">{fmt(pregnancyResult.lmp)}</div>
                   </div>
                   <div className="text-center">
-                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Pregnancy Age</div>
-                    <div className="mt-2 text-sm font-semibold text-[color:var(--plum)]">{pregnancyResult.weeks} weeks {pregnancyResult.extraDays} days</div>
+                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{t("Pregnancy Age")}</div>
+                    <div className="mt-2 text-sm font-semibold text-[color:var(--plum)]">{t("{weeks} weeks {days} days").replace("{weeks}", String(pregnancyResult.weeks)).replace("{days}", String(pregnancyResult.extraDays))}</div>
                   </div>
                   <div className="text-center md:text-right">
-                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">Due Date</div>
+                    <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{t("Due Date")}</div>
                     <div className="mt-2 text-sm font-semibold text-[color:var(--plum)]">{fmt(pregnancyResult.dueDate)}</div>
                   </div>
                 </div>
@@ -756,9 +759,9 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
 
               <div className="mt-7 grid gap-4 sm:grid-cols-3">
                 {[
-                  { label: "Week", value: `${pregnancyResult.currentWeek} of 40` },
-                  { label: "Progress", value: `${pregnancyResult.progressPercent}%` },
-                  { label: "Trimester", value: `Trimester ${pregnancyResult.currentTrimester}` },
+                  { label: t("Week"), value: t("{week} of 40").replace("{week}", String(pregnancyResult.currentWeek)) },
+                  { label: t("Progress"), value: `${pregnancyResult.progressPercent}%` },
+                  { label: t("Trimester"), value: t("Trimester {n}").replace("{n}", String(pregnancyResult.currentTrimester)) },
                 ].map((item) => (
                   <div key={item.label} className="rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
                     <div className="text-xs uppercase tracking-[0.18em] text-muted-foreground">{item.label}</div>
@@ -783,7 +786,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               </div>
 
               <p className="mt-5 text-sm leading-relaxed text-muted-foreground">
-                * The results of this calculator are estimations only. Please consult your doctor for personal advice.
+                {t("* The results of this calculator are estimations only. Please consult your doctor for personal advice.")}
               </p>
             </motion.div>
           ) : null}
@@ -796,18 +799,18 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Ready to feel confident?</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Get expert guidance after your ovulation and pregnancy estimates.</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{t("Ready to feel confident?")}</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">{t("Get expert guidance after your ovulation and pregnancy estimates.")}</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-                  Book a consultation with our fertility specialists to validate your cycle tracking, confirm your due date, or plan the next step.
+                  {t("Book a consultation with our fertility specialists to validate your cycle tracking, confirm your due date, or plan the next step.")}
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <Magnetic as="a" href="/contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Support
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Support")}
                 </Magnetic>
               </div>
             </div>
@@ -818,7 +821,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       {/* Who Should Use */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("Who Should Use This Calculator?")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {([
               { icon: Sprout, title: "Just started trying to conceive", desc: "Learn when your fertile window actually falls — most couples are surprised by the timing." },
@@ -831,8 +834,8 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
-                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{t(p.desc)}</p>
                 </div>
               </div>
             ))}
@@ -844,11 +847,11 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("About This Tool")}</h2>
             <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
             {cms?.faqs && cms.faqs.length > 0 && (
               <div className="mt-8 space-y-4">
-                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t("Frequently Asked Questions")}</h3>
                 <div className="space-y-3">
                   {cms.faqs.map((f, i) => (
                     <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
@@ -863,7 +866,7 @@ export function OvulationPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsD
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/calculators/ovulation" />
+      <CalculatorCrossLinks current="/calculators/ovulation" locale={locale} />
       <Locations />
       <Footer />
       <FloatingCTA />
