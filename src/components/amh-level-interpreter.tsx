@@ -577,7 +577,7 @@ export function AmhLevelInterpreterPage({ cms, locale = "en" }: { cms?: Calculat
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/calculators/amh-level" />
+      <CalculatorCrossLinks current="/calculators/amh-level" locale={locale} />
       <Locations />
       <Footer />
       <FloatingCTA />
