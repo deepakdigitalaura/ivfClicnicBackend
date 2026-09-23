@@ -40,7 +40,7 @@ export function CalculatorWidget({ slug, cms, locale = "en" }: { slug: string; c
     case "ivf-cost":          return <IvfCostCalculatorPage cms={cms} locale={locale} />;
     case "ovulation":         return <OvulationPregnancyCalculatorPage cms={cms} locale={locale} />;
     case "natural-pregnancy": return <NaturalPregnancyCalculatorPage cms={cms} locale={locale} />;
-    case "fertile-period":    return <FertilePeriodCalculatorPage cms={cms} />;
+    case "fertile-period":    return <FertilePeriodCalculatorPage cms={cms} locale={locale} />;
     case "amh-level":         return <AmhLevelInterpreterPage cms={cms} />;
     case "semen-analysis":    return <SemenAnalysisCalculatorPage cms={cms} />;
     case "miscarriage-risk":  return <MiscarriageRiskCalculatorPage cms={cms} />;
