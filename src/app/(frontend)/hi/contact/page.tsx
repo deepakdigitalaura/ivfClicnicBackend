@@ -53,7 +53,7 @@ export default async function Page() {
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <ContactPage hero={hero} faqs={faqs} cards={cards} sectionLabels={sectionLabels} directory={directory} />
+      <ContactPage hero={hero} faqs={faqs} cards={cards} sectionLabels={sectionLabels} directory={directory} locale="hi" />
     </>
   );
 }
