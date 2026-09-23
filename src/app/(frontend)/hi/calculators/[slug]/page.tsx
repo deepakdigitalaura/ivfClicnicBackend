@@ -44,7 +44,7 @@ export default async function Page({ params }: Props) {
     <>
       <JsonLd graph={calcGraph(cms)} />
       <PageSeoSchema path={`/calculators/${slug}`} />
-      <CalculatorWidget slug={slug} cms={cms} />
+      <CalculatorWidget slug={slug} cms={cms} locale="hi" />
     </>
   );
 }

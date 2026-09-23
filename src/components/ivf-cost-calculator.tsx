@@ -10,6 +10,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import type { CalculatorCmsData } from "@/lib/calculators";
 import { Editable } from "@/components/editor/Editable";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 /* ── cost data (ported from live ivfclinic.com inline JS) ── */
 const BASE_COSTS: Record<string, { base: [number, number]; label: string }> = {
@@ -53,7 +55,8 @@ function calc(type: string, cycles: number, addOns: string[]): Result {
   return { perCycleLo: lo, perCycleHi: hi, totalLo: lo * cycles, totalHi: hi * cycles, cycles, rows };
 }
 
-export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+export function IvfCostCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
   const cmsTitle      = cms?.title     ?? "IVF Cost Calculator";
   const cmsSubtitle   = cms?.subtitle  ?? "Get a realistic estimate of your IVF treatment costs — broken down by cycle type, add-ons, and number of cycles — so you can plan with confidence.";
   const cmsDisclaimer = cms?.disclaimer ?? "Cost estimates are indicative only. Actual costs depend on your personalised treatment plan. Consult our team for an exact quote.";
@@ -78,9 +81,9 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
 
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">{t("Calculators")}</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
@@ -95,7 +98,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Transparent Estimates · No Hidden Surprises
+              <Sparkles className="h-3.5 w-3.5" /> {t("Transparent Estimates · No Hidden Surprises")}
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -110,9 +113,9 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-              {[{ icon: Heart, t: "Free Tool" }, { icon: Clock, t: "Instant Results" }, { icon: Lock, t: "No Data Stored" }].map((b) => (
-                <span key={b.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
-                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {b.t}
+              {[{ icon: Heart, label: "Free Tool" }, { icon: Clock, label: "Instant Results" }, { icon: Lock, label: "No Data Stored" }].map((b) => (
+                <span key={b.label} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
+                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(b.label)}
                 </span>
               ))}
             </div>
@@ -127,7 +130,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
               ].map((s) => (
                 <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
                   <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -138,9 +141,9 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
       {/* How This Calculator Works */}
       <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
         <Reveal>
-          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("How This Calculator Works")}</h2>
           <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Transparent cost estimates based on Bavishi Fertility Institute pricing ranges.
+            {t("Transparent cost estimates based on Bavishi Fertility Institute pricing ranges.")}
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -153,8 +156,8 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
                   {step.n}
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(step.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(step.desc)}</p>
               </div>
             ))}
           </div>
@@ -165,8 +168,8 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
-            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Know Your Costs Upfront?</h2>
-            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Financial clarity removes one major stressor from your fertility journey.</p>
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("Why Know Your Costs Upfront?")}</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">{t("Financial clarity removes one major stressor from your fertility journey.")}</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
               {([
                 { icon: ClipboardList, title: "No Unexpected Bills", desc: "Know what to expect before you commit. Our estimates include medication ranges and common add-ons." },
@@ -178,8 +181,8 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
               ] as { icon: LucideIcon; title: string; desc: string }[]).map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{t(c.title)}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(c.desc)}</p>
                 </div>
               ))}
             </div>
@@ -194,31 +197,31 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
             <motion.div key="form" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <Reveal>
                 <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-lift md:p-10">
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Treatment Type</h2>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Treatment Type")}</h2>
 
                   <div className="mt-6 grid gap-6 sm:grid-cols-2">
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Type of IVF cycle</label>
+                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Type of IVF cycle")}</label>
                       <select value={type} onChange={(e) => setType(e.target.value)} className={selectClass}>
-                        <option value="standard">Standard IVF</option>
-                        <option value="icsi">IVF with ICSI</option>
-                        <option value="fet">Frozen Embryo Transfer (FET)</option>
-                        <option value="donor">Donor Egg IVF</option>
+                        <option value="standard">{t("Standard IVF")}</option>
+                        <option value="icsi">{t("IVF with ICSI")}</option>
+                        <option value="fet">{t("Frozen Embryo Transfer (FET)")}</option>
+                        <option value="donor">{t("Donor Egg IVF")}</option>
                       </select>
                     </div>
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Number of cycles</label>
+                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Number of cycles")}</label>
                       <select value={cycles} onChange={(e) => setCycles(Number(e.target.value))} className={selectClass}>
-                        <option value={1}>1 cycle</option>
-                        <option value={2}>2 cycles</option>
-                        <option value={3}>3 cycles</option>
-                        <option value={4}>4+ cycles (budget planning)</option>
+                        <option value={1}>{t("1 cycle")}</option>
+                        <option value={2}>{t("2 cycles")}</option>
+                        <option value={3}>{t("3 cycles")}</option>
+                        <option value={4}>{t("4+ cycles (budget planning)")}</option>
                       </select>
                     </div>
                   </div>
 
                   <hr className="my-7 border-border/60" />
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Add-Ons <span className="text-sm font-normal text-muted-foreground">(select all that apply)</span></h2>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Add-Ons")} <span className="text-sm font-normal text-muted-foreground">{t("(select all that apply)")}</span></h2>
 
                   <div className="mt-5 grid gap-3 sm:grid-cols-2">
                     {Object.entries(ADD_ONS).map(([key, info]) => (
@@ -235,7 +238,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
                           {addOns.includes(key) && "✓"}
                         </span>
                         <div>
-                          <div>{info.label}</div>
+                          <div>{t(info.label)}</div>
                           <div className="text-xs font-normal text-muted-foreground">{fmt(info.range[0])} – {fmt(info.range[1])}</div>
                         </div>
                       </label>
@@ -244,7 +247,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
 
                   <div className="mt-8 flex justify-end border-t border-border/60 pt-7">
                     <button type="button" onClick={() => setResult(calc(type, cycles, addOns))} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                      Calculate My IVF Cost <ArrowRight className="h-4 w-4" />
+                      {t("Calculate My IVF Cost")} <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -253,19 +256,21 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
           ) : (
             <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <button type="button" onClick={() => setResult(null)} className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]">
-                <RotateCcw className="h-3.5 w-3.5" /> Recalculate
+                <RotateCcw className="h-3.5 w-3.5" /> {t("Recalculate")}
               </button>
 
               <div className="rounded-[2rem] bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 p-8 text-center text-white md:p-10">
-                <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/70">Estimated Total Investment</div>
+                <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/70">{t("Estimated Total Investment")}</div>
                 <div className="mt-4 text-5xl font-black">{fmt(result.totalLo)} – {fmt(result.totalHi)}</div>
                 <div className="mt-3 text-sm text-white/75">
-                  For {result.cycles} cycle{result.cycles > 1 ? "s" : ""} including selected add-ons
+                  {t("For {cycles} cycle{s} including selected add-ons")
+                    .replace("{cycles}", String(result.cycles))
+                    .replace("{s}", result.cycles > 1 ? "s" : "")}
                 </div>
               </div>
 
               <div className="mt-6 rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
-                <h3 className="flex items-center gap-2 font-semibold text-[color:var(--plum)]"><Pill className="h-4 w-4 text-[color:var(--rose)]" /> Cost Breakdown (per cycle)</h3>
+                <h3 className="flex items-center gap-2 font-semibold text-[color:var(--plum)]"><Pill className="h-4 w-4 text-[color:var(--rose)]" /> {t("Cost Breakdown (per cycle)")}</h3>
                 <div className="mt-4 space-y-2">
                   {result.rows.map((row, i) => (
                     <div
@@ -276,7 +281,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
                           : "bg-[color:var(--ivory)] text-[color:var(--plum)]/80"
                       }`}
                     >
-                      <span>{row.label}</span>
+                      <span>{t(row.label)}</span>
                       <span>{fmt(row.lo)} – {fmt(row.hi)}</span>
                     </div>
                   ))}
@@ -292,14 +297,14 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
                 ] as { icon: LucideIcon; title: string; text: string }[]).map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
                     <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
+                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{t(c.title)}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(c.text)}</p>
                   </div>
                 ))}
               </div>
 
               <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                * Cost estimates are indicative ranges for planning purposes only. Actual costs depend on your individual protocol, medications, and clinic. Request a full itemised quote at your consultation.
+                {t("* Cost estimates are indicative ranges for planning purposes only. Actual costs depend on your individual protocol, medications, and clinic. Request a full itemised quote at your consultation.")}
               </p>
             </motion.div>
           )}
@@ -312,10 +317,10 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
           <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
             <div className="text-4xl text-white/30">&ldquo;</div>
             <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
-              Using the cost calculator helped us budget properly for two cycles from the start. We weren&apos;t blindsided by any numbers — and that made the whole process less stressful.
+              {t("Using the cost calculator helped us budget properly for two cycles from the start. We weren't blindsided by any numbers — and that made the whole process less stressful.")}
             </p>
             <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-              — Patient at Bavishi Fertility Institute
+              {t("— Patient at Bavishi Fertility Institute")}
             </div>
           </div>
         </Reveal>
@@ -324,7 +329,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
       {/* Who Should Use */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("Who Should Use This Calculator?")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {([
               { icon: Sprout, title: "Planning your first IVF cycle", desc: "Get a realistic cost estimate before your first consultation so there are no surprises." },
@@ -337,8 +342,8 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
-                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{t(p.desc)}</p>
                 </div>
               </div>
             ))}
@@ -350,7 +355,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What this calculator helps you do</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("What this calculator helps you do")}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 { icon: IndianRupee, title: "Budget Your Treatment", desc: "Get indicative cost ranges for different IVF cycle types and add-on procedures." },
@@ -359,8 +364,8 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
               ].map((i) => (
                 <div key={i.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                   <i.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{i.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.desc}</p>
+                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(i.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(i.desc)}</p>
                 </div>
               ))}
             </div>
@@ -375,18 +380,18 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Get a Precise Quote From Us</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Get an exact cost plan for your IVF treatment at Bavishi Fertility Institute.</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{t("Get a Precise Quote From Us")}</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">{t("Get an exact cost plan for your IVF treatment at Bavishi Fertility Institute.")}</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-                  Our team will provide a full itemised quote, discuss flexible payment options, and help you plan the most cost-effective path to your goal.
+                  {t("Our team will provide a full itemised quote, discuss flexible payment options, and help you plan the most cost-effective path to your goal.")}
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a href="/contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </a>
                 <a href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Support
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Support")}
                 </a>
               </div>
             </div>
@@ -398,11 +403,11 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("About This Calculator")}</h2>
             <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
             {cms?.faqs && cms.faqs.length > 0 && (
               <div className="mt-8 space-y-4">
-                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t("Frequently Asked Questions")}</h3>
                 <div className="space-y-3">
                   {cms.faqs.map((f, i) => (
                     <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
@@ -417,7 +422,7 @@ export function IvfCostCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/calculators/ivf-cost" />
+      <CalculatorCrossLinks current="/calculators/ivf-cost" locale={locale} />
       <Locations />
       <Footer />
       <FloatingCTA />

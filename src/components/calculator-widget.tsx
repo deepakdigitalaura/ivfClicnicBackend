@@ -1,5 +1,6 @@
 import { abs, ORG_ID, WEBSITE_ID, breadcrumbSchema } from "@/lib/seo";
 import type { CalculatorCmsData } from "@/lib/calculators";
+import type { Locale } from "@/lib/i18n";
 
 import { IvfSuccessRateCalculatorPage } from "@/components/ivf-success-rate-calculator";
 import { IvfCostCalculatorPage } from "@/components/ivf-cost-calculator";
@@ -33,10 +34,10 @@ export function calcGraph(cms: CalculatorCmsData) {
   ];
 }
 
-export function CalculatorWidget({ slug, cms }: { slug: string; cms: CalculatorCmsData }) {
+export function CalculatorWidget({ slug, cms, locale = "en" }: { slug: string; cms: CalculatorCmsData; locale?: Locale }) {
   switch (slug) {
     case "ivf-success-rate":  return <IvfSuccessRateCalculatorPage cms={cms} />;
-    case "ivf-cost":          return <IvfCostCalculatorPage cms={cms} />;
+    case "ivf-cost":          return <IvfCostCalculatorPage cms={cms} locale={locale} />;
     case "ovulation":         return <OvulationPregnancyCalculatorPage cms={cms} />;
     case "natural-pregnancy": return <NaturalPregnancyCalculatorPage cms={cms} />;
     case "fertile-period":    return <FertilePeriodCalculatorPage cms={cms} />;
