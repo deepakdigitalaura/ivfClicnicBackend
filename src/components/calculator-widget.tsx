@@ -36,7 +36,7 @@ export function calcGraph(cms: CalculatorCmsData) {
 
 export function CalculatorWidget({ slug, cms, locale = "en" }: { slug: string; cms: CalculatorCmsData; locale?: Locale }) {
   switch (slug) {
-    case "ivf-success-rate":  return <IvfSuccessRateCalculatorPage cms={cms} />;
+    case "ivf-success-rate":  return <IvfSuccessRateCalculatorPage cms={cms} locale={locale} />;
     case "ivf-cost":          return <IvfCostCalculatorPage cms={cms} locale={locale} />;
     case "ovulation":         return <OvulationPregnancyCalculatorPage cms={cms} />;
     case "natural-pregnancy": return <NaturalPregnancyCalculatorPage cms={cms} />;

@@ -14,6 +14,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import type { CalculatorCmsData } from "@/lib/calculators";
 import { Editable } from "@/components/editor/Editable";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 /* ── lookup tables (ported from live ivfclinic.com inline JS) ── */
 const AGE_BASE: Record<string, number> = { u30: 68, "30": 62, "35": 52, "38": 38, "41": 24, "43": 12 };
@@ -53,7 +55,7 @@ type Result = {
 };
 
 function calc(
-  age: string, diag: string, prev: string, prevPreg: string, embryo: string, eggs: string,
+  age: string, diag: string, prev: string, prevPreg: string, embryo: string, eggs: string, t: (s: string) => string,
 ): Result {
   const base = eggs === "donor" ? 65 : (AGE_BASE[age] ?? 0);
   const diagMod = eggs === "donor" && diag === "dim" ? 0 : (DIAG_MOD[diag] ?? 0);
@@ -66,23 +68,25 @@ function calc(
 
   const baseScore = eggs === "donor" ? 65 : (AGE_BASE[age] ?? 0);
   const diagColor = diagMod >= 0 ? "#5cb85c" : "#e74c3c";
+  const embryoLabel = embryo === "blastocyst" ? "Day 5 Blastocyst" : embryo === "cleavage" ? "Day 3 Cleavage" : "Not Known";
   const embryoMod = embryo === "blastocyst" ? "+10% boost" : embryo === "cleavage" ? "Day 3" : "Unknown";
   const prevColor = (PREV_MOD[prev] ?? 0) >= 0 ? "#5cb85c" : "#e74c3c";
 
   return {
     score, band, cumulative,
     factors: [
-      { label: "Age base rate", val: eggs === "donor" ? "65% (donor)" : `${baseScore}%`, color: baseScore >= 50 || eggs === "donor" ? "#5cb85c" : baseScore >= 35 ? "#f0ad4e" : "#e74c3c" },
-      { label: `Diagnosis: ${DIAG_LABELS[diag] ?? diag}`, val: (diagMod >= 0 ? "+" : "") + diagMod + "%", color: diagColor },
-      { label: `Embryo: ${embryo === "blastocyst" ? "Day 5 Blastocyst" : embryo === "cleavage" ? "Day 3 Cleavage" : "Not Known"}`, val: embryo === "blastocyst" ? "+10% boost" : embryoMod, color: "#9ca3af" },
-      { label: `Previous attempts: ${prev}`, val: (PREV_MOD[prev] ?? 0) + "%", color: prevColor },
-      { label: "Prior successful pregnancy", val: prevPreg === "yes" ? "+5%" : "0%", color: prevPreg === "yes" ? "#5cb85c" : "#9ca3af" },
-      { label: "Egg source", val: eggs === "donor" ? "Donor (65% base)" : "Own eggs", color: eggs === "donor" ? "#5cb85c" : "#9ca3af" },
+      { label: t("Age base rate"), val: eggs === "donor" ? t("65% (donor)") : `${baseScore}%`, color: baseScore >= 50 || eggs === "donor" ? "#5cb85c" : baseScore >= 35 ? "#f0ad4e" : "#e74c3c" },
+      { label: `${t("Diagnosis")}: ${t(DIAG_LABELS[diag] ?? diag)}`, val: (diagMod >= 0 ? "+" : "") + diagMod + "%", color: diagColor },
+      { label: `${t("Embryo")}: ${t(embryoLabel)}`, val: embryo === "blastocyst" ? t("+10% boost") : t(embryoMod), color: "#9ca3af" },
+      { label: `${t("Previous attempts")}: ${prev}`, val: (PREV_MOD[prev] ?? 0) + "%", color: prevColor },
+      { label: t("Prior successful pregnancy"), val: prevPreg === "yes" ? "+5%" : "0%", color: prevPreg === "yes" ? "#5cb85c" : "#9ca3af" },
+      { label: t("Egg source"), val: eggs === "donor" ? t("Donor (65% base)") : t("Own eggs"), color: eggs === "donor" ? "#5cb85c" : "#9ca3af" },
     ],
   };
 }
 
-export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
+export function IvfSuccessRateCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
   const cmsTitle     = cms?.title     ?? "IVF Success Rate Calculator";
   const cmsSubtitle  = cms?.subtitle  ?? "Estimate your personalised IVF success probability based on your age, diagnosis, treatment history, and embryo details.";
   const cmsDisclaimer= cms?.disclaimer ?? "This calculator is provided for planning and educational purposes only. It does not constitute medical advice and cannot replace a full fertility assessment by a specialist.";
@@ -117,9 +121,9 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
   );
 
   const handleCalc = () => {
-    if (!age || !diag) { setError("Please answer all required questions."); return; }
+    if (!age || !diag) { setError(t("Please answer all required questions.")); return; }
     setError("");
-    setResult(calc(age, diag, prev, prevPreg, embryo, eggs));
+    setResult(calc(age, diag, prev, prevPreg, embryo, eggs, t));
   };
 
   const WHY_CARDS: { icon: LucideIcon; title: string; desc: string }[] = [
@@ -153,9 +157,9 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
 
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">{t("Calculators")}</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
@@ -170,7 +174,7 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Evidence-Based · Clinically Informed
+              <Sparkles className="h-3.5 w-3.5" /> {t("Evidence-Based · Clinically Informed")}
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -185,9 +189,9 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-              {[{ icon: Heart, t: "Free Tool" }, { icon: Clock, t: "Instant Results" }, { icon: Lock, t: "No Data Stored" }].map((b) => (
-                <span key={b.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
-                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {b.t}
+              {[{ icon: Heart, label: "Free Tool" }, { icon: Clock, label: "Instant Results" }, { icon: Lock, label: "No Data Stored" }].map((b) => (
+                <span key={b.label} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
+                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(b.label)}
                 </span>
               ))}
             </div>
@@ -202,7 +206,7 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
               ].map((s) => (
                 <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
                   <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -213,9 +217,9 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
       {/* How This Calculator Works */}
       <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
         <Reveal>
-          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("How This Calculator Works")}</h2>
           <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Your success probability is calculated using the factors that matter most — step by step.
+            {t("Your success probability is calculated using the factors that matter most — step by step.")}
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -228,8 +232,8 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
                   {step.n}
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(step.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(step.desc)}</p>
               </div>
             ))}
           </div>
@@ -240,14 +244,14 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
-            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Know Your Success Rate?</h2>
-            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Understanding your odds helps you plan, stay motivated, and make the right decisions.</p>
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("Why Know Your Success Rate?")}</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">{t("Understanding your odds helps you plan, stay motivated, and make the right decisions.")}</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
               {WHY_CARDS.map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{t(c.title)}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(c.desc)}</p>
                 </div>
               ))}
             </div>
@@ -262,71 +266,66 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
             <motion.div key="form" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <Reveal>
                 <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-lift md:p-10">
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">About You</h2>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("About You")}</h2>
 
                   <div className="mt-6 grid gap-6 sm:grid-cols-2">
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Your Age Group <span className="text-[color:var(--rose)]">*</span></label>
+                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Your Age Group")} <span className="text-[color:var(--rose)]">*</span></label>
                       <div className="relative">
                         <select value={age} onChange={(e) => setAge(e.target.value)} className={selectClass}>
-                          <option value="">— Select age group —</option>
-                          <option value="u30">Under 30</option>
-                          <option value="30">30 – 34</option>
-                          <option value="35">35 – 37</option>
-                          <option value="38">38 – 40</option>
-                          <option value="41">41 – 42</option>
-                          <option value="43">43 or older</option>
+                          <option value="">{t("— Select age group —")}</option>
+                          <option value="u30">{t("Under 30")}</option>
+                          <option value="30">{t("30 – 34")}</option>
+                          <option value="35">{t("35 – 37")}</option>
+                          <option value="38">{t("38 – 40")}</option>
+                          <option value="41">{t("41 – 42")}</option>
+                          <option value="43">{t("43 or older")}</option>
                         </select>
                       </div>
                     </div>
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Primary Diagnosis <span className="text-[color:var(--rose)]">*</span></label>
+                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Primary Diagnosis")} <span className="text-[color:var(--rose)]">*</span></label>
                       <select value={diag} onChange={(e) => setDiag(e.target.value)} className={selectClass}>
-                        <option value="">— Select diagnosis —</option>
-                        <option value="unexplained">Unexplained infertility</option>
-                        <option value="pcos">PCOS / Ovulatory disorder</option>
-                        <option value="tubal">Tubal factor</option>
-                        <option value="male">Male factor</option>
-                        <option value="severe_male">Severe male factor (azoospermia)</option>
-                        <option value="endo">Endometriosis</option>
-                        <option value="dim">Diminished ovarian reserve</option>
-                        <option value="uterine">Uterine factor</option>
+                        <option value="">{t("— Select diagnosis —")}</option>
+                        {Object.entries(DIAG_LABELS).map(([key, label]) => (
+                          <option key={key} value={key}>{t(label)}</option>
+                        ))}
                       </select>
                     </div>
                   </div>
 
                   <hr className="my-7 border-border/60" />
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Treatment History</h2>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Treatment History")}</h2>
 
                   <div className="mt-5 space-y-5">
                     <div>
-                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Previous IVF Attempts</label>
+                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Previous IVF Attempts")}</label>
                       <div className="grid grid-cols-2 gap-3 sm:grid-cols-4">
-                        {[["0","First time"],["1","1 before"],["2","2 before"],["3","3+ before"]].map(([v,l]) => radioBtn("prev","prev-"+v,v,l,prev,setPrev))}
+                        {[["0","First time"],["1","1 before"],["2","2 before"],["3","3+ before"]].map(([v,l]) => radioBtn("prev","prev-"+v,v,t(l),prev,setPrev))}
                       </div>
                     </div>
                     <div>
-                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Previous Successful Pregnancy?</label>
+                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Previous Successful Pregnancy?")}</label>
                       <div className="grid grid-cols-2 gap-3">
-                        {[["yes","Yes"],["no","No"]].map(([v,l]) => radioBtn("prevPreg","pp-"+v,v,l,prevPreg,setPrevPreg))}
+                        {[["yes","Yes"],["no","No"]].map(([v,l]) => radioBtn("prevPreg","pp-"+v,v,t(l),prevPreg,setPrevPreg))}
                       </div>
                     </div>
                   </div>
 
                   <hr className="my-7 border-border/60" />
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Embryo Details</h2>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Embryo Details")}</h2>
 
                   <div className="mt-5 space-y-5">
                     <div>
-                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Embryo Transfer Type</label>
+                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Embryo Transfer Type")}</label>
                       <div className="grid gap-3 sm:grid-cols-3">
-                        {[["blastocyst","Day 5 Blastocyst"],["cleavage","Day 3 Cleavage"],["frozen","Not Known"]].map(([v,l]) => radioBtn("embryo","emb-"+v,v,l,embryo,setEmbryo))}
+                        {[["blastocyst","Day 5 Blastocyst"],["cleavage","Day 3 Cleavage"],["frozen","Not Known"]].map(([v,l]) => radioBtn("embryo","emb-"+v,v,t(l),embryo,setEmbryo))}
                       </div>
                     </div>
                     <div>
-                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Egg Source</label>
+                      <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Egg Source")}</label>
                       <div className="grid grid-cols-2 gap-3">
-                        {[["own","Own eggs"],["donor","Donor eggs"]].map(([v,l]) => radioBtn("eggs","eggs-"+v,v,l,eggs,setEggs))}
+                        {[["own","Own eggs"],["donor","Donor eggs"]].map(([v,l]) => radioBtn("eggs","eggs-"+v,v,t(l),eggs,setEggs))}
                       </div>
                     </div>
                   </div>
@@ -337,12 +336,12 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
 
                   <div className="mt-8 rounded-xl bg-amber-50 border-l-4 border-amber-400 px-4 py-3 text-xs font-semibold text-amber-900 flex items-center gap-2">
                     <AlertTriangle className="h-3.5 w-3.5 shrink-0 text-amber-600" />
-                    <span>If your AMH is below 0.5, endometrial thickness below 7mm, or you have severe adenomyosis, please consult a specialist directly.</span>
+                    <span>{t("If your AMH is below 0.5, endometrial thickness below 7mm, or you have severe adenomyosis, please consult a specialist directly.")}</span>
                   </div>
 
                   <div className="mt-8 flex justify-end border-t border-border/60 pt-7">
                     <button type="button" onClick={handleCalc} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                      Calculate My Success Rate <ArrowRight className="h-4 w-4" />
+                      {t("Calculate My Success Rate")} <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -351,22 +350,22 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
           ) : (
             <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <button type="button" onClick={() => setResult(null)} className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]">
-                <RotateCcw className="h-3.5 w-3.5" /> Recalculate
+                <RotateCcw className="h-3.5 w-3.5" /> {t("Recalculate")}
               </button>
 
               <div className={`rounded-[2rem] p-8 text-center text-white md:p-12 ${result.band === "high" ? "bg-emerald-600" : result.band === "moderate" ? "bg-amber-500" : "bg-red-500"}`}>
-                <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/80">Estimated Success Rate Per Cycle</div>
+                <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/80">{t("Estimated Success Rate Per Cycle")}</div>
                 <div className="mt-4 text-7xl font-black">{result.score}%</div>
-                <div className="mt-3 text-lg font-semibold">{BAND_LABEL[result.band]}</div>
-                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/80">{BAND_TEXT[result.band]}</p>
+                <div className="mt-3 text-lg font-semibold">{t(BAND_LABEL[result.band])}</div>
+                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/80">{t(BAND_TEXT[result.band])}</p>
                 <div className="mt-5 rounded-xl bg-white/10 px-4 py-2 text-sm font-semibold flex items-center justify-center gap-2">
-                  <TrendingUp className="h-4 w-4 shrink-0" /> Cumulative chance over 3 cycles: approximately {result.cumulative}%
+                  <TrendingUp className="h-4 w-4 shrink-0" /> {t("Cumulative chance over 3 cycles: approximately {pct}%").replace("{pct}", String(result.cumulative))}
                 </div>
               </div>
 
               <div className="mt-6 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  <span>Success probability</span><span>{result.score}%</span>
+                  <span>{t("Success probability")}</span><span>{result.score}%</span>
                 </div>
                 <div className="mt-3 h-3 overflow-hidden rounded-full bg-[color:var(--ivory)]">
                   <motion.div
@@ -378,12 +377,12 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
                   />
                 </div>
                 <div className="mt-2 flex justify-between text-[11px] text-muted-foreground">
-                  <span>0%</span><span>28% moderate</span><span>50% favourable</span><span>88%</span>
+                  <span>0%</span><span>{t("28% moderate")}</span><span>{t("50% favourable")}</span><span>88%</span>
                 </div>
               </div>
 
               <div className="mt-6 rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
-                <h3 className="font-semibold text-[color:var(--plum)]">How Your Score Was Calculated</h3>
+                <h3 className="font-semibold text-[color:var(--plum)]">{t("How Your Score Was Calculated")}</h3>
                 <div className="mt-4 space-y-3">
                   {result.factors.map((f) => (
                     <div key={f.label} className="flex items-center gap-3">
@@ -399,14 +398,14 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
                 {RESULT_CARDS.map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
                     <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
+                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{t(c.title)}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(c.text)}</p>
                   </div>
                 ))}
               </div>
 
               <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                * This tool is for educational purposes only and does not constitute medical advice. Success rates vary based on many clinical factors not captured here. Bavishi Fertility Institute accepts no liability for decisions made based solely on this calculator&apos;s output.
+                {t("* This tool is for educational purposes only and does not constitute medical advice. Success rates vary based on many clinical factors not captured here. Bavishi Fertility Institute accepts no liability for decisions made based solely on this calculator's output.")}
               </p>
             </motion.div>
           )}
@@ -419,10 +418,10 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
           <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
             <div className="text-4xl text-white/30">&ldquo;</div>
             <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
-              Knowing my actual success rate — not just a general number — helped me and my husband decide to go for a second cycle. That cycle gave us our child.
+              {t("Knowing my actual success rate — not just a general number — helped me and my husband decide to go for a second cycle. That cycle gave us our child.")}
             </p>
             <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-              — Patient at Bavishi Fertility Institute
+              {t("— Patient at Bavishi Fertility Institute")}
             </div>
           </div>
         </Reveal>
@@ -431,14 +430,14 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
       {/* Who Should Use */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("Who Should Use This Calculator?")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {WHO_CARDS.map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
-                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{t(p.desc)}</p>
                 </div>
               </div>
             ))}
@@ -450,7 +449,7 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">How This Calculator Works</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("How This Calculator Works")}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 { icon: TrendingUp, title: "Age-Based Baseline", desc: "Starts with your age group's published live-birth rate, adjusted for egg source." },
@@ -459,8 +458,8 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
               ].map((i) => (
                 <div key={i.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                   <i.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{i.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.desc}</p>
+                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(i.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(i.desc)}</p>
                 </div>
               ))}
             </div>
@@ -475,18 +474,18 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Know Your Real Chances</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Get a specialist review of your IVF success estimate.</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{t("Know Your Real Chances")}</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">{t("Get a specialist review of your IVF success estimate.")}</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-                  Our fertility specialists review your full profile, including factors this calculator cannot assess, to give you a truly personalised plan.
+                  {t("Our fertility specialists review your full profile, including factors this calculator cannot assess, to give you a truly personalised plan.")}
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a href="/contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </a>
                 <a href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Support
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Support")}
                 </a>
               </div>
             </div>
@@ -498,11 +497,11 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("About This Calculator")}</h2>
             <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
             {cms?.faqs && cms.faqs.length > 0 && (
               <div className="mt-8 space-y-4">
-                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t("Frequently Asked Questions")}</h3>
                 <div className="space-y-3">
                   {cms.faqs.map((f, i) => (
                     <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
@@ -517,7 +516,7 @@ export function IvfSuccessRateCalculatorPage({ cms }: { cms?: CalculatorCmsData 
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/calculators/ivf-success-rate" />
+      <CalculatorCrossLinks current="/calculators/ivf-success-rate" locale={locale} />
       <Locations />
       <Footer />
       <FloatingCTA />
