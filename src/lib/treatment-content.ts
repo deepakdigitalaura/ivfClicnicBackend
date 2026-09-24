@@ -28,6 +28,7 @@ import { iconKey, type IconName } from "@/lib/icon-map";
 import { treatmentBySlug, type Treatment, type Heading } from "@/lib/treatments";
 import { mediaUrl, type UploadValue } from "@/fields/image";
 import { testimonialsForTreatment, type VideoTestimonial } from "@/lib/video-testimonials";
+import { pickLocale, type Locale, type LocalizedField } from "@/lib/i18n";
 
 /* ---------- Resolved (serialisable) model — mirrors Treatment 1:1, with the
  * Lucide component fields replaced by icon NAMES. ---------- */
@@ -215,11 +216,16 @@ export function resolveTreatmentFromCode(slug: string): ResolvedTreatment | unde
  * CMS source shape (kept loose so it stays decoupled from the generated
  * payload-types, same convention as ServiceSource/FooterSource).
  * ===================================================================== */
-type HeadingSource = { lead?: string | null; em?: string | null } | null | undefined;
-type TextItem = { text?: string | null };
-type ValueItem = { value?: string | null };
+// NOTE: fields below are typed LocalizedField (string | {en,hi,gu} | null) for the
+// sections this pass localizes (hero/whatIs/benefits/whoNeedsIt/process/risks/faqs/cta)
+// so a Sanity doc can carry per-locale translations there. Sections outside this
+// pass's scope (types/timeline/video/technology/whyUs/success/cost/preparation/
+// labels/meta) stay plain strings — untranslated, English-only, per scope.
+type HeadingSource = { lead?: LocalizedField; em?: LocalizedField } | null | undefined;
+type TextItem = { text?: LocalizedField };
+type ValueItem = { value?: LocalizedField };
 type IconCardSource = { icon?: string | null; t?: string | null; d?: string | null };
-type StepSource = { icon?: string | null; n?: string | null; t?: string | null; d?: string | null };
+type StepSource = { icon?: string | null; n?: string | null; t?: LocalizedField; d?: LocalizedField };
 
 export type TreatmentSource =
   | {
@@ -237,18 +243,18 @@ export type TreatmentSource =
         howPerformed?: string | null; followup?: string | null;
       } | null;
       hero?: {
-        eyebrow?: string | null; h1?: string | null; h1Em?: string | null;
-        tagline?: string | null; badges?: { value?: string | null }[] | null;
+        eyebrow?: LocalizedField; h1?: LocalizedField; h1Em?: LocalizedField;
+        tagline?: LocalizedField; badges?: ValueItem[] | null;
         image?: string | null; imageAlt?: string | null; heroPhoto?: UploadValue;
       } | null;
       whatIs?: {
         heading?: HeadingSource; paragraphs?: TextItem[] | null;
-        aside?: { title?: string | null; body?: string | null } | null;
+        aside?: { title?: LocalizedField; body?: LocalizedField } | null;
       } | null;
-      benefits?: { heading?: HeadingSource; subtitle?: string | null; items?: ValueItem[] | null } | null;
+      benefits?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: ValueItem[] | null } | null;
       types?: { heading?: HeadingSource; subtitle?: string | null; items?: IconCardSource[] | null } | null;
-      whoNeedsIt?: { heading?: HeadingSource; subtitle?: string | null; items?: ValueItem[] | null } | null;
-      process?: { heading?: HeadingSource; subtitle?: string | null; steps?: StepSource[] | null; note?: string | null } | null;
+      whoNeedsIt?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: ValueItem[] | null } | null;
+      process?: { heading?: HeadingSource; subtitle?: LocalizedField; steps?: StepSource[] | null; note?: LocalizedField } | null;
       timeline?: {
         heading?: HeadingSource; subtitle?: string | null;
         items?: { day?: string | null; t?: string | null; d?: string | null }[] | null;
@@ -270,11 +276,11 @@ export type TreatmentSource =
         successFactors?: string | null; risks?: string | null; preparation?: string | null; patientStories?: string | null;
         specialists?: string | null; faq?: string | null; exploreMore?: string | null; blog?: string | null;
       } | null;
-      risks?: { heading?: HeadingSource; subtitle?: string | null; items?: { t?: string | null; d?: string | null; help?: string | null }[] | null } | null;
+      risks?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: { t?: LocalizedField; d?: LocalizedField; help?: LocalizedField }[] | null } | null;
       preparation?: { heading?: HeadingSource; subtitle?: string | null; items?: ValueItem[] | null } | null;
-      faqs?: { q?: string | null; a?: string | null }[] | null;
+      faqs?: { q?: LocalizedField; a?: LocalizedField }[] | null;
       related?: { slug?: string | null }[] | null;
-      cta?: { heading?: string | null; headingEm?: string | null; subtitle?: string | null } | null;
+      cta?: { heading?: LocalizedField; headingEm?: LocalizedField; subtitle?: LocalizedField } | null;
       /** CMS override for patient video testimonials. When present, replaces the
        *  code-owned defaults in TREATMENT_TESTIMONIALS so the editor can update
        *  individual YouTube IDs without touching the source file. */
@@ -295,29 +301,29 @@ export type TreatmentSource =
 // every single-field edit (the homepage "content vanishes on edit" bug). This
 // stays byte-identical on the public/seed path: a seeded heading carries both
 // parts, and an absent part resolves to the same default either way.
-const heading = (h: HeadingSource, def: Heading): Heading => ({
-  lead: h?.lead ?? def.lead,
-  em: h?.em ?? def.em,
+const heading = (h: HeadingSource, def: Heading, locale: Locale = "en"): Heading => ({
+  lead: pickLocale(h?.lead, locale) ?? def.lead,
+  em: pickLocale(h?.em, locale) ?? def.em,
 });
-const texts = (a: TextItem[] | null | undefined): string[] =>
-  (a ?? []).map((x) => x.text ?? "").filter(Boolean);
-const values = (a: ValueItem[] | null | undefined): string[] =>
-  (a ?? []).map((x) => x.value ?? "").filter(Boolean);
+const texts = (a: TextItem[] | null | undefined, locale: Locale = "en"): string[] =>
+  (a ?? []).map((x) => pickLocale(x.text, locale) ?? "").filter(Boolean);
+const values = (a: ValueItem[] | null | undefined, locale: Locale = "en"): string[] =>
+  (a ?? []).map((x) => pickLocale(x.value, locale) ?? "").filter(Boolean);
 const iconCards = (a: IconCardSource[] | null | undefined): ResolvedIconCard[] =>
   (a ?? []).map((x) => ({ icon: (x.icon ?? "Sparkles") as IconName, t: x.t ?? "", d: x.d ?? "" }));
-const procSteps = (a: StepSource[] | null | undefined): ResolvedStep[] =>
-  (a ?? []).map((s) => ({ icon: (s.icon ?? "Sparkles") as IconName, n: s.n ?? "", t: s.t ?? "", d: s.d ?? "" }));
+const procSteps = (a: StepSource[] | null | undefined, locale: Locale = "en"): ResolvedStep[] =>
+  (a ?? []).map((s) => ({ icon: (s.icon ?? "Sparkles") as IconName, n: s.n ?? "", t: pickLocale(s.t, locale) ?? "", d: pickLocale(s.d, locale) ?? "" }));
 
 /**
  * Map a `treatments` doc → ResolvedTreatment, falling back PER-SECTION to the
  * typed default for `slug` so an empty/partial CMS renders byte-identically.
  * Returns undefined for an unknown slug with no default (caller → notFound).
  */
-export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTreatment | undefined {
+export function resolveTreatment(slug: string, src: TreatmentSource, locale: Locale = "en"): ResolvedTreatment | undefined {
   const def = treatmentBySlug(slug);
   if (!src) return def ? toResolved(def) : undefined;
   if (!def) {
-    return resolvePureCMSTreatment(src);
+    return resolvePureCMSTreatment(src, locale);
   }
   const base = toResolved(def);
 
@@ -349,38 +355,38 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
     // ---- required sections ----
     hero: src.hero?.h1
       ? {
-          eyebrow: src.hero.eyebrow ?? base.hero.eyebrow,
-          h1: src.hero.h1,
-          h1Em: src.hero.h1Em ?? base.hero.h1Em,
-          tagline: src.hero.tagline ?? base.hero.tagline,
-          badges: src.hero.badges?.length ? values(src.hero.badges) : base.hero.badges,
+          eyebrow: pickLocale(src.hero.eyebrow, locale) ?? base.hero.eyebrow,
+          h1: pickLocale(src.hero.h1, locale) ?? base.hero.h1,
+          h1Em: pickLocale(src.hero.h1Em, locale) ?? base.hero.h1Em,
+          tagline: pickLocale(src.hero.tagline, locale) ?? base.hero.tagline,
+          badges: src.hero.badges?.length ? values(src.hero.badges, locale) : base.hero.badges,
           image: mediaUrl(src.hero.heroPhoto) ?? (src.hero.image || base.hero.image),
           imageAlt: src.hero.imageAlt ?? base.hero.imageAlt,
         }
       : base.hero,
     whatIs: src.whatIs?.paragraphs?.length
       ? {
-          heading: heading(src.whatIs.heading, base.whatIs.heading),
-          paragraphs: texts(src.whatIs.paragraphs),
+          heading: heading(src.whatIs.heading, base.whatIs.heading, locale),
+          paragraphs: texts(src.whatIs.paragraphs, locale),
           ...(src.whatIs.aside?.title
-            ? { aside: { title: src.whatIs.aside.title, body: src.whatIs.aside.body ?? "" } }
+            ? { aside: { title: pickLocale(src.whatIs.aside.title, locale) ?? "", body: pickLocale(src.whatIs.aside.body, locale) ?? "" } }
             : base.whatIs.aside
               ? { aside: base.whatIs.aside }
               : {}),
         }
       : base.whatIs,
     benefits: src.benefits?.items?.length
-      ? { heading: heading(src.benefits.heading, base.benefits.heading), ...(src.benefits.subtitle ? { subtitle: src.benefits.subtitle } : {}), items: values(src.benefits.items) }
+      ? { heading: heading(src.benefits.heading, base.benefits.heading, locale), ...(src.benefits.subtitle ? { subtitle: pickLocale(src.benefits.subtitle, locale) ?? "" } : {}), items: values(src.benefits.items, locale) }
       : base.benefits,
     whoNeedsIt: src.whoNeedsIt?.items?.length
-      ? { heading: heading(src.whoNeedsIt.heading, base.whoNeedsIt.heading), ...(src.whoNeedsIt.subtitle ? { subtitle: src.whoNeedsIt.subtitle } : {}), items: values(src.whoNeedsIt.items) }
+      ? { heading: heading(src.whoNeedsIt.heading, base.whoNeedsIt.heading, locale), ...(src.whoNeedsIt.subtitle ? { subtitle: pickLocale(src.whoNeedsIt.subtitle, locale) ?? "" } : {}), items: values(src.whoNeedsIt.items, locale) }
       : base.whoNeedsIt,
     process: src.process?.steps?.length
       ? {
-          heading: heading(src.process.heading, base.process.heading),
-          ...(src.process.subtitle ? { subtitle: src.process.subtitle } : {}),
-          steps: procSteps(src.process.steps),
-          ...(src.process.note ? { note: src.process.note } : {}),
+          heading: heading(src.process.heading, base.process.heading, locale),
+          ...(src.process.subtitle ? { subtitle: pickLocale(src.process.subtitle, locale) ?? "" } : {}),
+          steps: procSteps(src.process.steps, locale),
+          ...(src.process.note ? { note: pickLocale(src.process.note, locale) ?? "" } : {}),
         }
       : base.process,
     success: {
@@ -397,15 +403,15 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
     },
     risks: src.risks?.items?.length
       ? {
-          heading: heading(src.risks.heading, base.risks.heading),
-          ...(src.risks.subtitle ? { subtitle: src.risks.subtitle } : {}),
-          items: src.risks.items.map((r) => ({ t: r.t ?? "", d: r.d ?? "", help: r.help ?? "" })),
+          heading: heading(src.risks.heading, base.risks.heading, locale),
+          ...(src.risks.subtitle ? { subtitle: pickLocale(src.risks.subtitle, locale) ?? "" } : {}),
+          items: src.risks.items.map((r) => ({ t: pickLocale(r.t, locale) ?? "", d: pickLocale(r.d, locale) ?? "", help: pickLocale(r.help, locale) ?? "" })),
         }
       : base.risks,
-    faqs: src.faqs?.length ? src.faqs.map((f) => ({ q: f.q ?? "", a: f.a ?? "" })) : base.faqs,
+    faqs: src.faqs?.length ? src.faqs.map((f) => ({ q: pickLocale(f.q, locale) ?? "", a: pickLocale(f.a, locale) ?? "" })) : base.faqs,
     related: src.related?.length ? src.related.map((r) => r.slug ?? "").filter(Boolean) : base.related,
     cta: src.cta?.heading
-      ? { heading: src.cta.heading, headingEm: src.cta.headingEm ?? base.cta.headingEm, ...(src.cta.subtitle ? { subtitle: src.cta.subtitle } : {}) }
+      ? { heading: pickLocale(src.cta.heading, locale) ?? base.cta.heading, headingEm: pickLocale(src.cta.headingEm, locale) ?? base.cta.headingEm, ...(src.cta.subtitle ? { subtitle: pickLocale(src.cta.subtitle, locale) ?? "" } : {}) }
       : base.cta,
     patientStories: {
       heading: heading(src.patientStories?.heading, base.patientStories.heading),
@@ -499,7 +505,20 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
  * derived from the CMS doc's name/shortName so the page renders meaningfully
  * even when content sections are still empty.
  */
-export function resolvePureCMSTreatment(src: NonNullable<TreatmentSource>): ResolvedTreatment {
+type Plain<T> = T extends { en?: string; hi?: string; gu?: string } ? string : T extends (infer U)[] ? Plain<U>[] : T extends object ? { [K in keyof T]: Plain<T[K]> } : T;
+const isLocObj = (o: object) => Object.keys(o).length > 0 && Object.keys(o).every((k) => k === "en" || k === "hi" || k === "gu");
+// Collapse every {en,hi,gu} leaf to the picked-locale string (pure-CMS path has no code defaults to merge).
+function flat(x: unknown, locale: Locale): unknown {
+  if (Array.isArray(x)) return x.map((v) => flat(v, locale));
+  if (x && typeof x === "object") {
+    if (isLocObj(x)) return pickLocale(x as LocalizedField, locale) ?? "";
+    return Object.fromEntries(Object.entries(x).map(([k, v]) => [k, flat(v, locale)]));
+  }
+  return x;
+}
+
+export function resolvePureCMSTreatment(srcIn: NonNullable<TreatmentSource>, locale: Locale = "en"): ResolvedTreatment {
+  const src = flat(srcIn, locale) as Plain<NonNullable<TreatmentSource>>;
   const name = src.name ?? "Treatment";
   const short = src.shortName || name;
   const slug = src.slug ?? "";
@@ -635,37 +654,57 @@ export function materializeTreatmentSource(slug: string, src: TreatmentSource): 
     reviewerSlug: r.reviewerSlug,
     meta: { title: r.meta.title, description: r.meta.description, ogImage: r.meta.ogImage },
     procedure: { ...r.procedure },
+    // Translatable sections keep any RAW value already on the doc (string OR {en,hi,gu})
+    // and only fill blanks from the resolved English defaults — otherwise re-opening
+    // the editor would flatten saved hi/gu translations back to English.
     hero: {
       ...(s.hero ?? {}),
-      eyebrow: r.hero.eyebrow,
-      h1: r.hero.h1,
-      h1Em: r.hero.h1Em,
-      tagline: r.hero.tagline,
-      badges: r.hero.badges.map(v),
+      eyebrow: s.hero?.eyebrow ?? r.hero.eyebrow,
+      h1: s.hero?.h1 ?? r.hero.h1,
+      h1Em: s.hero?.h1Em ?? r.hero.h1Em,
+      tagline: s.hero?.tagline ?? r.hero.tagline,
+      badges: s.hero?.badges?.length ? s.hero.badges : r.hero.badges.map(v),
       image: r.hero.image,
       imageAlt: r.hero.imageAlt,
     },
     whatIs: {
       ...(s.whatIs ?? {}),
-      heading: r.whatIs.heading,
-      paragraphs: r.whatIs.paragraphs.map(tx),
-      ...(r.whatIs.aside ? { aside: { title: r.whatIs.aside.title, body: r.whatIs.aside.body } } : {}),
+      heading: { lead: s.whatIs?.heading?.lead ?? r.whatIs.heading.lead, em: s.whatIs?.heading?.em ?? r.whatIs.heading.em },
+      paragraphs: s.whatIs?.paragraphs?.length ? s.whatIs.paragraphs : r.whatIs.paragraphs.map(tx),
+      ...(s.whatIs?.aside?.title || r.whatIs.aside
+        ? { aside: { title: s.whatIs?.aside?.title ?? r.whatIs.aside?.title ?? "", body: s.whatIs?.aside?.body ?? r.whatIs.aside?.body ?? "" } }
+        : {}),
     },
-    benefits: { ...(s.benefits ?? {}), heading: r.benefits.heading, ...(r.benefits.subtitle ? { subtitle: r.benefits.subtitle } : {}), items: r.benefits.items.map(v) },
-    whoNeedsIt: { ...(s.whoNeedsIt ?? {}), heading: r.whoNeedsIt.heading, ...(r.whoNeedsIt.subtitle ? { subtitle: r.whoNeedsIt.subtitle } : {}), items: r.whoNeedsIt.items.map(v) },
+    benefits: {
+      ...(s.benefits ?? {}),
+      heading: { lead: s.benefits?.heading?.lead ?? r.benefits.heading.lead, em: s.benefits?.heading?.em ?? r.benefits.heading.em },
+      ...((s.benefits?.subtitle ?? r.benefits.subtitle) ? { subtitle: s.benefits?.subtitle ?? r.benefits.subtitle } : {}),
+      items: s.benefits?.items?.length ? s.benefits.items : r.benefits.items.map(v),
+    },
+    whoNeedsIt: {
+      ...(s.whoNeedsIt ?? {}),
+      heading: { lead: s.whoNeedsIt?.heading?.lead ?? r.whoNeedsIt.heading.lead, em: s.whoNeedsIt?.heading?.em ?? r.whoNeedsIt.heading.em },
+      ...((s.whoNeedsIt?.subtitle ?? r.whoNeedsIt.subtitle) ? { subtitle: s.whoNeedsIt?.subtitle ?? r.whoNeedsIt.subtitle } : {}),
+      items: s.whoNeedsIt?.items?.length ? s.whoNeedsIt.items : r.whoNeedsIt.items.map(v),
+    },
     process: {
       ...(s.process ?? {}),
-      heading: r.process.heading,
-      ...(r.process.subtitle ? { subtitle: r.process.subtitle } : {}),
-      steps: r.process.steps,
-      ...(r.process.note ? { note: r.process.note } : {}),
+      heading: { lead: s.process?.heading?.lead ?? r.process.heading.lead, em: s.process?.heading?.em ?? r.process.heading.em },
+      ...((s.process?.subtitle ?? r.process.subtitle) ? { subtitle: s.process?.subtitle ?? r.process.subtitle } : {}),
+      steps: s.process?.steps?.length ? s.process.steps : r.process.steps,
+      ...((s.process?.note ?? r.process.note) ? { note: s.process?.note ?? r.process.note } : {}),
     },
     success: { ...(s.success ?? {}), factors: r.success.factors.map(v), ...(r.success.note ? { note: r.success.note } : {}), heading: r.success.heading, description: r.success.description, callout: r.success.callout },
     cost: { ...(s.cost ?? {}), includes: r.cost.includes.map(v), heading: r.cost.heading, description: r.cost.description },
-    risks: { ...(s.risks ?? {}), heading: r.risks.heading, ...(r.risks.subtitle ? { subtitle: r.risks.subtitle } : {}), items: r.risks.items },
-    faqs: r.faqs,
+    risks: {
+      ...(s.risks ?? {}),
+      heading: { lead: s.risks?.heading?.lead ?? r.risks.heading.lead, em: s.risks?.heading?.em ?? r.risks.heading.em },
+      ...((s.risks?.subtitle ?? r.risks.subtitle) ? { subtitle: s.risks?.subtitle ?? r.risks.subtitle } : {}),
+      items: s.risks?.items?.length ? s.risks.items : r.risks.items,
+    },
+    faqs: s.faqs?.length ? s.faqs : r.faqs,
     related: r.related.map((slug) => ({ slug })),
-    cta: { ...(s.cta ?? {}), heading: r.cta.heading, headingEm: r.cta.headingEm, ...(r.cta.subtitle ? { subtitle: r.cta.subtitle } : {}) },
+    cta: { ...(s.cta ?? {}), heading: s.cta?.heading ?? r.cta.heading, headingEm: s.cta?.headingEm ?? r.cta.headingEm, ...((s.cta?.subtitle ?? r.cta.subtitle) ? { subtitle: s.cta?.subtitle ?? r.cta.subtitle } : {}) },
     ...(r.types ? { types: { ...(s.types ?? {}), heading: r.types.heading, ...(r.types.subtitle ? { subtitle: r.types.subtitle } : {}), items: r.types.items } } : {}),
     ...(r.timeline
       ? {

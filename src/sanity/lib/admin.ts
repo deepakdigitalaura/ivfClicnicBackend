@@ -2,6 +2,7 @@ import "server-only";
 import { createClient } from "next-sanity";
 import { revalidateTag } from "next/cache";
 import { projectId, dataset } from "./client";
+import type { LocalizedField } from "@/lib/i18n";
 import reviewSources from "@/data/reviews.sources.json";
 import type {
   RobotsConfig,
@@ -254,9 +255,9 @@ export async function deleteDoctor(id: string) {
 // resolver (treatment-content.ts) supports more (name, types, timeline, etc.)
 // but those aren't in the schema/Studio either, so they stay code-owned.
 
-type HeadingSrc = { lead?: string; em?: string };
-type ValueRow = { value?: string };
-type TextRow = { text?: string };
+type HeadingSrc = { lead?: LocalizedField; em?: LocalizedField };
+type ValueRow = { value?: LocalizedField };
+type TextRow = { text?: LocalizedField };
 
 export type AdminTreatment = {
   _id?: string;
@@ -265,28 +266,28 @@ export type AdminTreatment = {
   navCategory?: string;
   navOrder?: number;
   hero?: {
-    eyebrow?: string; h1?: string; h1Em?: string; tagline?: string;
+    eyebrow?: LocalizedField; h1?: LocalizedField; h1Em?: LocalizedField; tagline?: LocalizedField;
     badges?: ValueRow[]; image?: string; imageAlt?: string;
   };
   meta?: { title?: string; description?: string; ogImage?: string };
   whatIs?: {
     heading?: HeadingSrc;
     paragraphs?: TextRow[];
-    aside?: { title?: string; body?: string };
+    aside?: { title?: LocalizedField; body?: LocalizedField };
   };
-  benefits?: { heading?: HeadingSrc; subtitle?: string; items?: ValueRow[] };
-  whoNeedsIt?: { heading?: HeadingSrc; subtitle?: string; items?: ValueRow[] };
+  benefits?: { heading?: HeadingSrc; subtitle?: LocalizedField; items?: ValueRow[] };
+  whoNeedsIt?: { heading?: HeadingSrc; subtitle?: LocalizedField; items?: ValueRow[] };
   process?: {
-    heading?: HeadingSrc; subtitle?: string;
-    steps?: { icon?: string; n?: string; t?: string; d?: string }[];
-    note?: string;
+    heading?: HeadingSrc; subtitle?: LocalizedField;
+    steps?: { icon?: string; n?: string; t?: LocalizedField; d?: LocalizedField }[];
+    note?: LocalizedField;
   };
   risks?: {
-    heading?: HeadingSrc; subtitle?: string;
-    items?: { t?: string; d?: string; help?: string }[];
+    heading?: HeadingSrc; subtitle?: LocalizedField;
+    items?: { t?: LocalizedField; d?: LocalizedField; help?: LocalizedField }[];
   };
-  faqs?: { q?: string; a?: string }[];
-  cta?: { heading?: string; headingEm?: string; subtitle?: string };
+  faqs?: { q?: LocalizedField; a?: LocalizedField }[];
+  cta?: { heading?: LocalizedField; headingEm?: LocalizedField; subtitle?: LocalizedField };
 };
 
 const TREATMENT_TAG = "sanity-treatments";

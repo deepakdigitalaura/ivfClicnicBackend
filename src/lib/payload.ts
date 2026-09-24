@@ -409,9 +409,9 @@ function toTreatmentSource(d: SanityTreatment | null | undefined): TreatmentSour
   };
 }
 
-export const getTreatment = async (slug: string): Promise<ResolvedTreatment | undefined> => {
+export const getTreatment = async (slug: string, locale: Locale = "en"): Promise<ResolvedTreatment | undefined> => {
   const doc = await getSanityTreatment(slug);
-  return resolveTreatment(slug, toTreatmentSource(doc));
+  return resolveTreatment(slug, toTreatmentSource(doc), locale);
 };
 
 export const getTreatments = async (): Promise<ResolvedTreatment[]> => {

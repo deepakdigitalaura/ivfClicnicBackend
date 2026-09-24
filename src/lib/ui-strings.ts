@@ -51,6 +51,7 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
 
   // Contact page chrome
   "Home": { hi: "होम", gu: "હોમ" },
+  "Treatments": { hi: "उपचार", gu: "સારવાર" },
   "Contact Us": { hi: "संपर्क करें", gu: "અમારો સંપર્ક કરો" },
   "Call Us": { hi: "कॉल करें", gu: "કૉલ કરો" },
   "Chat with our team": { hi: "हमारी टीम से चैट करें", gu: "અમારી ટીમ સાથે ચેટ કરો" },

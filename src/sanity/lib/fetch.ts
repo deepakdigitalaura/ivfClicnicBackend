@@ -593,40 +593,40 @@ export type SanityTreatment = {
   navCategory?: string | null;
   navOrder?: number | null;
   hero?: {
-    eyebrow?: string | null; h1?: string | null; h1Em?: string | null;
-    tagline?: string | null; badges?: { value?: string | null }[] | null;
+    eyebrow?: LocalizedField; h1?: LocalizedField; h1Em?: LocalizedField;
+    tagline?: LocalizedField; badges?: { value?: LocalizedField }[] | null;
     image?: string | null; imageAlt?: string | null;
     heroPhoto?: { asset?: { url?: string | null } | null } | null;
   } | null;
   meta?: { title?: string | null; description?: string | null; ogImage?: string | null } | null;
   whatIs?: {
-    heading?: { lead?: string | null; em?: string | null } | null;
-    paragraphs?: { text?: string | null }[] | null;
-    aside?: { title?: string | null; body?: string | null } | null;
+    heading?: { lead?: LocalizedField; em?: LocalizedField } | null;
+    paragraphs?: { text?: LocalizedField }[] | null;
+    aside?: { title?: LocalizedField; body?: LocalizedField } | null;
   } | null;
   benefits?: {
-    heading?: { lead?: string | null; em?: string | null } | null;
-    subtitle?: string | null;
-    items?: { value?: string | null }[] | null;
+    heading?: { lead?: LocalizedField; em?: LocalizedField } | null;
+    subtitle?: LocalizedField;
+    items?: { value?: LocalizedField }[] | null;
   } | null;
   whoNeedsIt?: {
-    heading?: { lead?: string | null; em?: string | null } | null;
-    subtitle?: string | null;
-    items?: { value?: string | null }[] | null;
+    heading?: { lead?: LocalizedField; em?: LocalizedField } | null;
+    subtitle?: LocalizedField;
+    items?: { value?: LocalizedField }[] | null;
   } | null;
   process?: {
-    heading?: { lead?: string | null; em?: string | null } | null;
-    subtitle?: string | null;
-    steps?: { icon?: string | null; n?: string | null; t?: string | null; d?: string | null }[] | null;
-    note?: string | null;
+    heading?: { lead?: LocalizedField; em?: LocalizedField } | null;
+    subtitle?: LocalizedField;
+    steps?: { icon?: string | null; n?: string | null; t?: LocalizedField; d?: LocalizedField }[] | null;
+    note?: LocalizedField;
   } | null;
   risks?: {
-    heading?: { lead?: string | null; em?: string | null } | null;
-    subtitle?: string | null;
-    items?: { t?: string | null; d?: string | null; help?: string | null }[] | null;
+    heading?: { lead?: LocalizedField; em?: LocalizedField } | null;
+    subtitle?: LocalizedField;
+    items?: { t?: LocalizedField; d?: LocalizedField; help?: LocalizedField }[] | null;
   } | null;
-  faqs?: { q?: string | null; a?: string | null }[] | null;
-  cta?: { heading?: string | null; headingEm?: string | null; subtitle?: string | null } | null;
+  faqs?: { q?: LocalizedField; a?: LocalizedField }[] | null;
+  cta?: { heading?: LocalizedField; headingEm?: LocalizedField; subtitle?: LocalizedField } | null;
 };
 
 const TREATMENT_FIELDS = `

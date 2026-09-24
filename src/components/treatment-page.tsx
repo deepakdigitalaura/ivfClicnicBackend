@@ -22,6 +22,8 @@ import { resolveIcon, type IconName } from "@/lib/icon-map";
 import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
 import { doctorsForTreatment, doctorUrl, doctorBySlug } from "@/lib/doctors";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 import { blogsForTreatment, type BlogPost } from "@/lib/blogs";
 import { testimonialsForTreatment, type VideoTestimonial } from "@/lib/video-testimonials";
 import { destinationHref } from "@/lib/internal-links";
@@ -403,7 +405,7 @@ const SURROGACY_DOCTOR_SLUGS = new Set([
   "binal-shah", "suman-singh", "nilesh-jain", "priyanka-sinha", "surbhi-vegad",
 ]);
 
-export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[]; cmsBlogs?: BlogPost[] }) {
+export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs, locale = "en" }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[]; cmsBlogs?: BlogPost[]; locale?: Locale }) {
   const t = content ? toView(content) : slug ? treatmentBySlug(slug) : undefined;
   if (!t) return null;
   const reviewer = doctorBySlug(t.reviewerSlug);
@@ -482,9 +484,9 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={localizeNavHref("/", locale)} className="hover:text-[color:var(--rose)]">{ui("Home", locale)}</a>
           <span>/</span>
-          <a href="/treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
+          <a href={localizeNavHref("/treatments", locale)} className="hover:text-[color:var(--rose)]">{ui("Treatments", locale)}</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{t.breadcrumbName}</span>
         </nav>
