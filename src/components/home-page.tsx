@@ -1038,6 +1038,7 @@ export function Doctors({
   subtitle = "A family of fertility experts trusted by generations.",
   ctaLabel = "View All Doctors",
 }: { docs?: Doc[]; eyebrow?: React.ReactNode; title?: React.ReactNode; subtitle?: React.ReactNode; ctaLabel?: React.ReactNode } = {}) {
+  const tr = useT();
   return (
     <section id="doctors" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
@@ -1078,7 +1079,7 @@ export function Doctors({
                     <a href={`/doctors/${d.slug}`} className="transition-colors hover:text-[color:var(--rose)]">{d.n}</a>
                   ) : d.n}
                 </h3>
-                <p className="text-sm text-muted-foreground">{[d.deg, d.spec].filter(Boolean).join(" · ")}</p>
+                <p className="text-sm text-muted-foreground">{[d.deg, d.spec].filter(Boolean).map((x) => tr(x)).join(" · ")}</p>
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   <a
                     href={d.slug ? `/doctors/${d.slug}` : "/doctors"}

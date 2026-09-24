@@ -1221,6 +1221,22 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
   "Emergency 24x7": { hi: "इमरजेंसी 24x7", gu: "ઇમરજન્સી 24x7" },
   "am": { hi: "पूर्वाह्न", gu: "સવારે" },
   "pm": { hi: "अपराह्न", gu: "બપોરે" },
+  "Fertility & IVF": { hi: "फर्टिलिटी और IVF", gu: "ફર્ટિલિટી અને IVF" },
+  "Fertility, IVF & Gynaecological Laparoscopy": { hi: "फर्टिलिटी, IVF और स्त्री रोग लैप्रोस्कोपी", gu: "ફર્ટિલિટી, IVF અને સ્ત્રીરોગ લેપ્રોસ્કોપી" },
+  "Gynaecology, IVF & 3D Laparoscopy": { hi: "स्त्री रोग, IVF और 3D लैप्रोस्कोपी", gu: "સ્ત્રીરોગ, IVF અને 3D લેપ્રોસ્કોપી" },
+  "IVF & Andrology": { hi: "IVF और एंड्रोलॉजी", gu: "IVF અને એન્ડ્રોલોજી" },
+  "IVF & Laparoscopic Surgery": { hi: "IVF और लैप्रोस्कोपिक सर्जरी", gu: "IVF અને લેપ્રોસ્કોપિક સર્જરી" },
+  "Infertility & IVF": { hi: "इनफर्टिलिटी और IVF", gu: "ઇનફર્ટિલિટી અને IVF" },
+  "Infertility & Gynaecology": { hi: "इनफर्टिलिटी और स्त्री रोग", gu: "ઇનફર્ટિલિટી અને સ્ત્રીરોગ" },
+  "Infertility, IVF & Genetics": { hi: "इनफर्टिलिटी, IVF और जेनेटिक्स", gu: "ઇનફર્ટિલિટી, IVF અને જેનેટિક્સ" },
+  "Obstetrics & Gynaecology": { hi: "प्रसूति एवं स्त्री रोग", gu: "પ્રસૂતિ અને સ્ત્રીરોગ" },
+  "Obstetrics & IVF": { hi: "प्रसूति और IVF", gu: "પ્રસૂતિ અને IVF" },
+  "Obstetrics, Gynaecology & Fertility": { hi: "प्रसूति, स्त्री रोग और फर्टिलिटी", gu: "પ્રસૂતિ, સ્ત્રીરોગ અને ફર્ટિલિટી" },
+  "Obstetrics, Gynaecology & IVF": { hi: "प्रसूति, स्त्री रोग और IVF", gu: "પ્રસૂતિ, સ્ત્રીરોગ અને IVF" },
+  "Reproductive Medicine & IVF": { hi: "प्रजनन चिकित्सा और IVF", gu: "પ્રજનન ચિકિત્સા અને IVF" },
+  "Reproductive Medicine & Laparoscopic Surgery": { hi: "प्रजनन चिकित्सा और लैप्रोस्कोपिक सर्जरी", gu: "પ્રજનન ચિકિત્સા અને લેપ્રોસ્કોપિક સર્જરી" },
+  "M.D": { hi: "एम.डी", gu: "એમ.ડી" },
+  "M.S": { hi: "एम.एस", gu: "એમ.એસ" },
 };
 
 export function ui(key: string, locale: Locale): string {
