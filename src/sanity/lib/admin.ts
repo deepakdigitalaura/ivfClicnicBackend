@@ -976,12 +976,14 @@ export async function saveBlog(doc: AdminBlogMeta) {
     lastUpdatedAt: now,
     readMins: words ? Math.max(1, Math.round(words / 200)) : (rest.readMins ?? null),
   };
+  let savedId = _id;
   if (_id) {
     await writeClient.patch(_id).set(derived).commit();
   } else {
-    await writeClient.create({ _type: "blog", status: "draft", ...derived });
+    savedId = (await writeClient.create({ _type: "blog", status: "draft", ...derived }))._id;
   }
   revalidateTag(BLOG_TAG);
+  return savedId;
 }
 
 export async function deleteBlog(id: string) {
