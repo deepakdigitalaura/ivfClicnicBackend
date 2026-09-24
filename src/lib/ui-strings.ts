@@ -1204,6 +1204,23 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
   "Company": { hi: "कंपनी", gu: "કંપની" },
   "Book Now": { hi: "अभी बुक करें", gu: "હમણાં બુક કરો" },
   "Bavishi Fertility Centre. All rights reserved.": { hi: "Bavishi Fertility Centre. सर्वाधिकार सुरक्षित।", gu: "Bavishi Fertility Centre. સર્વાધિકાર સુરક્ષિત." },
+  "Thank you": { hi: "धन्यवाद", gu: "આભાર" },
+  "Your inquiry has been received. Our fertility counsellor will reach out to you shortly.": { hi: "आपकी पूछताछ प्राप्त हो गई है। हमारे फर्टिलिटी काउंसलर जल्द ही आपसे संपर्क करेंगे।", gu: "તમારી પૂછપરછ મળી ગઈ છે. અમારા ફર્ટિલિટી કાઉન્સેલર ટૂંક સમયમાં તમારો સંપર્ક કરશે." },
+  "Submit another inquiry": { hi: "एक और पूछताछ भेजें", gu: "બીજી પૂછપરછ મોકલો" },
+  "Book an Appointment": { hi: "अपॉइंटमेंट बुक करें", gu: "એપોઇન્ટમેન્ટ બુક કરો" },
+  "Start your": { hi: "अपनी", gu: "તમારી" },
+  "parenthood journey.": { hi: "पेरेंटहुड यात्रा शुरू करें।", gu: "પેરેન્ટહુડ યાત્રા શરૂ કરો." },
+  "Share a few details and our fertility counsellor will call you back — confidential, compassionate and personalised.": { hi: "कुछ जानकारी साझा करें और हमारे फर्टिलिटी काउंसलर आपको वापस कॉल करेंगे — गोपनीय, संवेदनशील और आपके अनुरूप।", gu: "થોડી વિગતો શેર કરો અને અમારા ફર્ટિલિટી કાઉન્સેલર તમને પાછો કૉલ કરશે — ગોપનીય, સંવેદનશીલ અને તમારા મુજબ." },
+  "Call us": { hi: "हमें कॉल करें", gu: "અમને કૉલ કરો" },
+  "Chat with our team 24×7": { hi: "हमारी टीम से 24×7 चैट करें", gu: "અમારી ટીમ સાથે 24×7 ચેટ કરો" },
+  "Response time": { hi: "जवाब का समय", gu: "જવાબનો સમય" },
+  "We typically respond within 30 minutes": { hi: "हम आम तौर पर 30 मिनट के भीतर जवाब देते हैं", gu: "અમે સામાન્ય રીતે 30 મિનિટમાં જવાબ આપીએ છીએ" },
+  "At a glance": { hi: "एक नज़र में", gu: "એક નજરમાં" },
+  "Mon–Sat": { hi: "सोम–शनि", gu: "સોમ–શનિ" },
+  "Tue, Thu & Sat": { hi: "मंगल, गुरु और शनि", gu: "મંગળ, ગુરુ અને શનિ" },
+  "Emergency 24x7": { hi: "इमरजेंसी 24x7", gu: "ઇમરજન્સી 24x7" },
+  "am": { hi: "पूर्वाह्न", gu: "સવારે" },
+  "pm": { hi: "अपराह्न", gu: "બપોરે" },
 };
 
 export function ui(key: string, locale: Locale): string {

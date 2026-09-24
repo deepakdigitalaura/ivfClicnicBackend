@@ -19,6 +19,10 @@ const ed = (path: string, value: string, rich = true) => (
 /* Icon-name -> component map. The CMS stores a name (string); the template
  * resolves it to a Lucide component. This is the serialisable-icon pattern
  * future collections (Treatments/Services) will reuse. */
+/** Translate the recurring tokens in an opening-hours line (times/digits stay as-is). */
+const hoursT = (h: string, t: (k: string) => string) =>
+  h.replace(/Mon–Sat|Tue, Thu & Sat|Emergency 24x7|[ap]m/g, (m) => t(m));
+
 const ICONS: Record<string, LucideIcon> = { Phone, MessageCircle, Mail, Clock, MapPin, Calendar };
 
 type Card = { icon: string; t: string; v: string; href?: string | null; note?: string | null };
@@ -164,7 +168,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
                 {c.hours && (
                   <div className="mt-2 inline-flex items-start gap-2 text-[12px] text-muted-foreground">
                     <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" />
-                    <span>{c.hours}</span>
+                    <span>{hoursT(c.hours, t)}</span>
                   </div>
                 )}
 

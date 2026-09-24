@@ -119,7 +119,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS, locale = "en", awards = HOMEP
           </div>
           <Reveal delay={0.1}>
             <aside className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 p-6">
-              <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">At a glance</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{t("At a glance")}</div>
               <dl className="mt-4 space-y-4">
                 {data.atAGlance.map(({ n, l }, i) => (
                   <div key={i} className="flex items-baseline gap-3 border-b border-border/50 pb-3 last:border-0 last:pb-0">

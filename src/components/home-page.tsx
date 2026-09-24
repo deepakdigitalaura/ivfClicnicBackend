@@ -1844,8 +1844,15 @@ const inquiryLocations = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
 
-export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+export function InquiryForm({ content: contentProp = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
   const tr = useT();
+  // Already-localized CMS text passes through tr() unchanged (no dictionary hit); English defaults get translated.
+  const content: HomepageData["inquiry"] = {
+    eyebrow: tr(contentProp.eyebrow),
+    heading: { lead: tr(contentProp.heading.lead), em: tr(contentProp.heading.em) },
+    subtitle: tr(contentProp.subtitle),
+    contacts: contentProp.contacts.map((x) => ({ h: tr(x.h), d: tr(x.d) })),
+  };
   const contactIcons = [Phone, MessageCircle, Clock];
   const formAgg = getBrandReviews()?.aggregate;
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" });
@@ -1936,16 +1943,16 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
                   <CheckCircle2 className="h-8 w-8" />
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">Thank you, {form.name.split(" ")[0]}!</h3>
+                <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">{tr("Thank you")}, {form.name.split(" ")[0]}!</h3>
                 <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                  Your inquiry has been received. Our fertility counsellor will reach out to you shortly.
+                  {tr("Your inquiry has been received. Our fertility counsellor will reach out to you shortly.")}
                 </p>
                 <button
                   type="button"
                   onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" }); }}
                   className="mt-6 text-sm font-semibold text-[color:var(--rose)] hover:underline"
                 >
-                  Submit another inquiry
+                  {tr("Submit another inquiry")}
                 </button>
               </div>
             ) : (
