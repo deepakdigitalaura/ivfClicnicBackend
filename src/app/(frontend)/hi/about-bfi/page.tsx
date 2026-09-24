@@ -52,7 +52,7 @@ export default async function Page() {
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <AboutPage data={data} />
+      <AboutPage data={data} locale="hi" />
     </>
   );
 }
