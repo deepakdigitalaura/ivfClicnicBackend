@@ -899,7 +899,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs, local
               </div>
               <h3 className="mt-3 text-2xl font-semibold text-[color:var(--plum)]">{ed("success.heading", successHeading)}</h3>
               <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                {editing ? ed("success.description", successDescription) : <>Every fertility journey is unique. <strong className="text-[color:var(--plum)]">{t.shortName} success rates</strong> depend on several medical and lifestyle factors.</>}
+                {editing ? ed("success.description", successDescription) : <>{ui("Every fertility journey is unique.", locale)} <strong className="text-[color:var(--plum)]">{t.shortName} {ui("success rates", locale)}</strong> {ui("depend on several medical and lifestyle factors.", locale)}</>}
               </p>
               <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ed("labels.successFactors", ui(labels.successFactors, locale))}</p>
               <ul className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
@@ -923,7 +923,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs, local
               </div>
               <h3 className="mt-3 text-2xl font-semibold text-[color:var(--plum)]">{ed("cost.heading", costHeading)}</h3>
               <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                {editing ? ed("cost.description", costDescription) : <>Know exactly what your <strong className="text-[color:var(--plum)]">{t.shortName} treatment cost</strong> includes before you begin.</>}
+                {editing ? ed("cost.description", costDescription) : <>{ui("Know exactly what your", locale)} <strong className="text-[color:var(--plum)]">{t.shortName} {ui("treatment cost", locale)}</strong> {ui("includes before you begin.", locale)}</>}
               </p>
               <ul className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {t.cost.includes.map((c, i) => (
