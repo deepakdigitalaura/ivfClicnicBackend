@@ -224,7 +224,7 @@ export function resolveTreatmentFromCode(slug: string): ResolvedTreatment | unde
 type HeadingSource = { lead?: LocalizedField; em?: LocalizedField } | null | undefined;
 type TextItem = { text?: LocalizedField };
 type ValueItem = { value?: LocalizedField };
-type IconCardSource = { icon?: string | null; t?: string | null; d?: string | null };
+type IconCardSource = { icon?: string | null; t?: LocalizedField; d?: LocalizedField };
 type StepSource = { icon?: string | null; n?: string | null; t?: LocalizedField; d?: LocalizedField };
 
 export type TreatmentSource =
@@ -252,24 +252,24 @@ export type TreatmentSource =
         aside?: { title?: LocalizedField; body?: LocalizedField } | null;
       } | null;
       benefits?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: ValueItem[] | null } | null;
-      types?: { heading?: HeadingSource; subtitle?: string | null; items?: IconCardSource[] | null } | null;
+      types?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: IconCardSource[] | null } | null;
       whoNeedsIt?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: ValueItem[] | null } | null;
       process?: { heading?: HeadingSource; subtitle?: LocalizedField; steps?: StepSource[] | null; note?: LocalizedField } | null;
       timeline?: {
-        heading?: HeadingSource; subtitle?: string | null;
-        items?: { day?: string | null; t?: string | null; d?: string | null }[] | null;
-        chips?: ValueItem[] | null; chipsNote?: string | null;
+        heading?: HeadingSource; subtitle?: LocalizedField;
+        items?: { day?: LocalizedField; t?: LocalizedField; d?: LocalizedField }[] | null;
+        chips?: ValueItem[] | null; chipsNote?: LocalizedField;
       } | null;
-      video?: { id?: string | null; title?: string | null; description?: string | null; eyebrow?: string | null; heading?: HeadingSource } | null;
-      technology?: { heading?: HeadingSource; eyebrow?: string | null; subtitle?: string | null; items?: IconCardSource[] | null } | null;
+      video?: { id?: string | null; title?: LocalizedField; description?: LocalizedField; eyebrow?: LocalizedField; heading?: HeadingSource } | null;
+      technology?: { heading?: HeadingSource; eyebrow?: LocalizedField; subtitle?: LocalizedField; items?: IconCardSource[] | null } | null;
       whyUs?: { heading?: HeadingSource; items?: IconCardSource[] | null } | null;
-      success?: { factors?: ValueItem[] | null; note?: string | null; heading?: string | null; description?: string | null; callout?: string | null } | null;
-      cost?: { includes?: ValueItem[] | null; heading?: string | null; description?: string | null } | null;
-      patientStories?: { heading?: HeadingSource; subtitle?: string | null } | null;
-      specialists?: { heading?: HeadingSource; subtitle?: string | null } | null;
+      success?: { factors?: ValueItem[] | null; note?: LocalizedField; heading?: LocalizedField; description?: LocalizedField; callout?: LocalizedField } | null;
+      cost?: { includes?: ValueItem[] | null; heading?: LocalizedField; description?: LocalizedField } | null;
+      patientStories?: { heading?: HeadingSource; subtitle?: LocalizedField } | null;
+      specialists?: { heading?: HeadingSource; subtitle?: LocalizedField } | null;
       faqsSection?: HeadingSource;
       relatedSection?: HeadingSource;
-      blogSection?: { heading?: HeadingSource; subtitle?: string | null } | null;
+      blogSection?: { heading?: HeadingSource; subtitle?: LocalizedField } | null;
       labels?: {
         whatIs?: string | null; benefits?: string | null; types?: string | null; whoNeedsIt?: string | null; process?: string | null;
         timeline?: string | null; whyUs?: string | null; successCard?: string | null; costCard?: string | null;
@@ -277,7 +277,7 @@ export type TreatmentSource =
         specialists?: string | null; faq?: string | null; exploreMore?: string | null; blog?: string | null;
       } | null;
       risks?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: { t?: LocalizedField; d?: LocalizedField; help?: LocalizedField }[] | null } | null;
-      preparation?: { heading?: HeadingSource; subtitle?: string | null; items?: ValueItem[] | null } | null;
+      preparation?: { heading?: HeadingSource; subtitle?: LocalizedField; items?: ValueItem[] | null } | null;
       faqs?: { q?: LocalizedField; a?: LocalizedField }[] | null;
       related?: { slug?: string | null }[] | null;
       cta?: { heading?: LocalizedField; headingEm?: LocalizedField; subtitle?: LocalizedField } | null;
@@ -309,8 +309,8 @@ const texts = (a: TextItem[] | null | undefined, locale: Locale = "en"): string[
   (a ?? []).map((x) => pickLocale(x.text, locale) ?? "").filter(Boolean);
 const values = (a: ValueItem[] | null | undefined, locale: Locale = "en"): string[] =>
   (a ?? []).map((x) => pickLocale(x.value, locale) ?? "").filter(Boolean);
-const iconCards = (a: IconCardSource[] | null | undefined): ResolvedIconCard[] =>
-  (a ?? []).map((x) => ({ icon: (x.icon ?? "Sparkles") as IconName, t: x.t ?? "", d: x.d ?? "" }));
+const iconCards = (a: IconCardSource[] | null | undefined, locale: Locale = "en"): ResolvedIconCard[] =>
+  (a ?? []).map((x) => ({ icon: (x.icon ?? "Sparkles") as IconName, t: pickLocale(x.t, locale) ?? "", d: pickLocale(x.d, locale) ?? "" }));
 const procSteps = (a: StepSource[] | null | undefined, locale: Locale = "en"): ResolvedStep[] =>
   (a ?? []).map((s) => ({ icon: (s.icon ?? "Sparkles") as IconName, n: s.n ?? "", t: pickLocale(s.t, locale) ?? "", d: pickLocale(s.d, locale) ?? "" }));
 
@@ -390,16 +390,16 @@ export function resolveTreatment(slug: string, src: TreatmentSource, locale: Loc
         }
       : base.process,
     success: {
-      factors: src.success?.factors?.length ? values(src.success.factors) : base.success.factors,
-      ...(src.success?.note || base.success.note ? { note: src.success?.note || base.success.note } : {}),
-      heading: src.success?.heading || base.success.heading,
-      description: src.success?.description || base.success.description,
-      callout: src.success?.callout || base.success.callout,
+      factors: src.success?.factors?.length ? values(src.success.factors, locale) : base.success.factors,
+      ...(src.success?.note || base.success.note ? { note: pickLocale(src.success?.note, locale) || base.success.note } : {}),
+      heading: pickLocale(src.success?.heading, locale) || base.success.heading,
+      description: pickLocale(src.success?.description, locale) || base.success.description,
+      callout: pickLocale(src.success?.callout, locale) || base.success.callout,
     },
     cost: {
-      includes: src.cost?.includes?.length ? values(src.cost.includes) : base.cost.includes,
-      heading: src.cost?.heading || base.cost.heading,
-      description: src.cost?.description || base.cost.description,
+      includes: src.cost?.includes?.length ? values(src.cost.includes, locale) : base.cost.includes,
+      heading: pickLocale(src.cost?.heading, locale) || base.cost.heading,
+      description: pickLocale(src.cost?.description, locale) || base.cost.description,
     },
     risks: src.risks?.items?.length
       ? {
@@ -414,18 +414,18 @@ export function resolveTreatment(slug: string, src: TreatmentSource, locale: Loc
       ? { heading: pickLocale(src.cta.heading, locale) ?? base.cta.heading, headingEm: pickLocale(src.cta.headingEm, locale) ?? base.cta.headingEm, ...(src.cta.subtitle ? { subtitle: pickLocale(src.cta.subtitle, locale) ?? "" } : {}) }
       : base.cta,
     patientStories: {
-      heading: heading(src.patientStories?.heading, base.patientStories.heading),
-      subtitle: src.patientStories?.subtitle || base.patientStories.subtitle,
+      heading: heading(src.patientStories?.heading, base.patientStories.heading, locale),
+      subtitle: pickLocale(src.patientStories?.subtitle, locale) || base.patientStories.subtitle,
     },
     specialists: {
-      heading: heading(src.specialists?.heading, base.specialists.heading),
-      subtitle: src.specialists?.subtitle || base.specialists.subtitle,
+      heading: heading(src.specialists?.heading, base.specialists.heading, locale),
+      subtitle: pickLocale(src.specialists?.subtitle, locale) || base.specialists.subtitle,
     },
-    faqsSection: heading(src.faqsSection, base.faqsSection),
-    relatedSection: heading(src.relatedSection, base.relatedSection),
+    faqsSection: heading(src.faqsSection, base.faqsSection, locale),
+    relatedSection: heading(src.relatedSection, base.relatedSection, locale),
     blogSection: {
-      heading: heading(src.blogSection?.heading, base.blogSection.heading),
-      subtitle: src.blogSection?.subtitle || base.blogSection.subtitle,
+      heading: heading(src.blogSection?.heading, base.blogSection.heading, locale),
+      subtitle: pickLocale(src.blogSection?.subtitle, locale) || base.blogSection.subtitle,
     },
     labels: {
       whatIs: src.labels?.whatIs || base.labels.whatIs,
@@ -452,20 +452,20 @@ export function resolveTreatment(slug: string, src: TreatmentSource, locale: Loc
     ...(src.types?.items?.length
       ? {
           types: {
-            heading: heading(src.types.heading, base.types?.heading ?? { lead: "" }),
-            ...(src.types.subtitle ? { subtitle: src.types.subtitle } : {}),
-            items: iconCards(src.types.items),
+            heading: heading(src.types.heading, base.types?.heading ?? { lead: "" }, locale),
+            ...(src.types.subtitle ? { subtitle: pickLocale(src.types.subtitle, locale) ?? "" } : {}),
+            items: iconCards(src.types.items, locale),
           },
         }
       : {}),
     ...(src.timeline?.items?.length
       ? {
           timeline: {
-            heading: heading(src.timeline.heading, base.timeline?.heading ?? { lead: "" }),
-            ...(src.timeline.subtitle ? { subtitle: src.timeline.subtitle } : {}),
-            items: src.timeline.items.map((i) => ({ day: i.day ?? "", t: i.t ?? "", d: i.d ?? "" })),
-            ...(src.timeline.chips?.length ? { chips: values(src.timeline.chips) } : {}),
-            ...(src.timeline.chipsNote ? { chipsNote: src.timeline.chipsNote } : {}),
+            heading: heading(src.timeline.heading, base.timeline?.heading ?? { lead: "" }, locale),
+            ...(src.timeline.subtitle ? { subtitle: pickLocale(src.timeline.subtitle, locale) ?? "" } : {}),
+            items: src.timeline.items.map((i) => ({ day: pickLocale(i.day, locale) ?? "", t: pickLocale(i.t, locale) ?? "", d: pickLocale(i.d, locale) ?? "" })),
+            ...(src.timeline.chips?.length ? { chips: values(src.timeline.chips, locale) } : {}),
+            ...(src.timeline.chipsNote ? { chipsNote: pickLocale(src.timeline.chipsNote, locale) ?? "" } : {}),
           },
         }
       : {}),
@@ -473,28 +473,28 @@ export function resolveTreatment(slug: string, src: TreatmentSource, locale: Loc
       ? {
           video: {
             id: src.video.id,
-            title: src.video.title ?? "",
-            description: src.video.description ?? "",
-            eyebrow: src.video.eyebrow ?? "",
-            heading: heading(src.video.heading, base.video?.heading ?? { lead: "" }),
+            title: pickLocale(src.video.title, locale) ?? "",
+            description: pickLocale(src.video.description, locale) ?? "",
+            eyebrow: pickLocale(src.video.eyebrow, locale) ?? "",
+            heading: heading(src.video.heading, base.video?.heading ?? { lead: "" }, locale),
           },
         }
       : {}),
     ...(src.technology?.items?.length
       ? {
           technology: {
-            heading: heading(src.technology.heading, base.technology?.heading ?? { lead: "" }),
-            ...(src.technology.eyebrow ? { eyebrow: src.technology.eyebrow } : {}),
-            ...(src.technology.subtitle ? { subtitle: src.technology.subtitle } : {}),
-            items: iconCards(src.technology.items),
+            heading: heading(src.technology.heading, base.technology?.heading ?? { lead: "" }, locale),
+            ...(src.technology.eyebrow ? { eyebrow: pickLocale(src.technology.eyebrow, locale) ?? "" } : {}),
+            ...(src.technology.subtitle ? { subtitle: pickLocale(src.technology.subtitle, locale) ?? "" } : {}),
+            items: iconCards(src.technology.items, locale),
           },
         }
       : {}),
     ...(src.whyUs?.items?.length
-      ? { whyUs: { heading: heading(src.whyUs.heading, base.whyUs?.heading ?? { lead: "" }), items: iconCards(src.whyUs.items) } }
+      ? { whyUs: { heading: heading(src.whyUs.heading, base.whyUs?.heading ?? { lead: "" }, locale), items: iconCards(src.whyUs.items, locale) } }
       : {}),
     ...(src.preparation?.items?.length
-      ? { preparation: { heading: heading(src.preparation.heading, base.preparation?.heading ?? { lead: "" }), ...(src.preparation.subtitle ? { subtitle: src.preparation.subtitle } : {}), items: values(src.preparation.items) } }
+      ? { preparation: { heading: heading(src.preparation.heading, base.preparation?.heading ?? { lead: "" }, locale), ...(src.preparation.subtitle ? { subtitle: pickLocale(src.preparation.subtitle, locale) ?? "" } : {}), items: values(src.preparation.items, locale) } }
       : {}),
   };
 }
