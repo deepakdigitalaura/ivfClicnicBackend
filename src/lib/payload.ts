@@ -406,6 +406,8 @@ function toTreatmentSource(d: SanityTreatment | null | undefined): TreatmentSour
     risks: d.risks ?? null,
     faqs: d.faqs ?? null,
     cta: d.cta ?? null,
+    ...(({ timeline, video, technology, whyUs, success, cost, preparation, patientStories, specialists, faqsSection, relatedSection, blogSection }) =>
+      ({ timeline, video, technology, whyUs, success, cost, preparation, patientStories, specialists, faqsSection, relatedSection, blogSection }) as Partial<NonNullable<TreatmentSource>>)(d),
   };
 }
 

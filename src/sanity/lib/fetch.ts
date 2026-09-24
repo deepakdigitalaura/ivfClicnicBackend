@@ -588,6 +588,9 @@ export const getSanityCMEBlogs = async () =>
 // ── Treatments ──
 
 export type SanityTreatment = {
+  /** Optional sections — shapes validated by resolveTreatment (TreatmentSource). */
+  timeline?: unknown; video?: unknown; technology?: unknown; whyUs?: unknown; success?: unknown; cost?: unknown;
+  preparation?: unknown; patientStories?: unknown; specialists?: unknown; faqsSection?: unknown; relatedSection?: unknown; blogSection?: unknown;
   slug?: string | null;
   href?: string | null;
   navCategory?: string | null;
@@ -639,6 +642,8 @@ const TREATMENT_FIELDS = `
   whoNeedsIt { heading, subtitle, items },
   process { heading, subtitle, steps, note },
   risks { heading, subtitle, items },
+  timeline, video, technology, whyUs, success, cost, preparation,
+  patientStories, specialists, faqsSection, relatedSection, blogSection,
   faqs, cta
 `;
 
