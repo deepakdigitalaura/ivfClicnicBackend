@@ -355,7 +355,7 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}
               </span>
-              <span>{agg.ratingValue.toFixed(1)} on Google · {agg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+              <span>{agg.ratingValue.toFixed(1)} <T k="on Google" /> · {agg.reviewCount.toLocaleString("en-IN")}+ <T k="reviews" /></span>
             </motion.a>
           )}
         </div>
@@ -611,8 +611,9 @@ const FEATURED_TREATMENT_TAGS: Record<string, string> = {
 
 export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
   const featured = content.items
-    .map((item, i) => ({ ...item, i }))
-    .filter(({ t }) => FEATURED_TREATMENT_TITLES.has(t));
+    // Key by the English default at the same index so translated titles still match.
+    .map((item, i) => ({ ...item, i, en: HOMEPAGE_DEFAULTS.treatments.items[i]?.t ?? item.t }))
+    .filter(({ en }) => FEATURED_TREATMENT_TITLES.has(en));
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
@@ -623,16 +624,16 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
         />
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
-        {featured.map(({ icon, t, d, i }) => (
+        {featured.map(({ icon, t, d, i, en }) => (
           <StaggerItem key={t}>
             <TreatmentCard
               icon={resolveIcon(icon)}
               title={t}
               desc={d}
-              href={TREATMENT_TITLE_HREFS[t]}
+              href={TREATMENT_TITLE_HREFS[en]}
               titleNode={ed(`treatments.items.${i}.t`, t)}
               descNode={ed(`treatments.items.${i}.d`, d)}
-              tag={FEATURED_TREATMENT_TAGS[t]}
+              tag={FEATURED_TREATMENT_TAGS[en] && <T k={FEATURED_TREATMENT_TAGS[en]} />}
             />
           </StaggerItem>
         ))}
@@ -1083,7 +1084,7 @@ export function Doctors({
                     href={d.slug ? `/doctors/${d.slug}` : "/doctors"}
                     className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full border border-[color:var(--plum)]/15 px-3 py-2 text-xs font-semibold text-[color:var(--plum)] transition-all duration-300 hover:border-[color:var(--plum)]/30 hover:bg-[color:var(--plum)]/5 active:scale-[0.97]"
                   >
-                    View Profile
+                    <T k="View Profile" />
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
                   </a>
                   <a
@@ -1091,7 +1092,7 @@ export function Doctors({
                     className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full bg-[color:var(--rose)] px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-[color:var(--rose)]/20 transition-all duration-300 hover:bg-[color:var(--rose)]/90 hover:shadow-md hover:shadow-[color:var(--rose)]/30 active:scale-[0.97]"
                   >
                     <Calendar className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:-translate-y-0.5" />
-                    Book Consultation
+                    <T k="Book Consultation" />
                   </a>
                 </div>
               </div>
@@ -1390,7 +1391,7 @@ function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["
             href="/press"
             className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
           >
-            View all press coverage
+            <T k="View all press coverage" />
           </a>
         </div>
       </Reveal>
@@ -1503,7 +1504,7 @@ export function Testimonials({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-lift"
               >
-                <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" /> Read our reviews on Google
+                <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" /> <T k="Read our reviews on Google" />
               </a>
             </div>
           </Reveal>
@@ -1521,7 +1522,7 @@ export function Testimonials({
             <Reveal delay={0.1}>
               <a href={listingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-full bg-white px-5 py-3 shadow-soft">
                 <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" />
-                <span className="text-sm font-semibold text-[color:var(--plum)]">{aggregate.ratingValue.toFixed(1)} on Google · {aggregate.reviewCount.toLocaleString()} reviews</span>
+                <span className="text-sm font-semibold text-[color:var(--plum)]">{aggregate.ratingValue.toFixed(1)} <T k="on Google" /> · {aggregate.reviewCount.toLocaleString()} <T k="reviews" /></span>
               </a>
             </Reveal>
           )}
@@ -1844,6 +1845,7 @@ const inquiryLocations = [
 ];
 
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+  const tr = useT();
   const contactIcons = [Phone, MessageCircle, Clock];
   const formAgg = getBrandReviews()?.aggregate;
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" });
@@ -1955,7 +1957,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                       <Star key={i} className="h-4 w-4 fill-current" />
                     ))}
                   </span>
-                  <span>{formAgg.ratingValue.toFixed(1)} on Google · {formAgg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+                  <span>{formAgg.ratingValue.toFixed(1)} <T k="on Google" /> · {formAgg.reviewCount.toLocaleString("en-IN")}+ <T k="reviews" /></span>
                 </div>
               )}
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
@@ -1991,15 +1993,15 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   <div>
                     <label htmlFor="if-treatment" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Treatment of Interest" /></label>
                     <select id="if-treatment" value={form.treatment} onChange={(e) => set("treatment", e.target.value)} className={`${fieldCls("treatment")} appearance-none`}>
-                      <option value="">Select an option</option>
-                      {inquiryTreatments.map((t) => <option key={t} value={t}>{t}</option>)}
+                      <option value="">{tr("Select an option")}</option>
+                      {inquiryTreatments.map((x) => <option key={x} value={x}>{tr(x)}</option>)}
                     </select>
                   </div>
                   <div>
                     <label htmlFor="if-location" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Preferred Centre" /></label>
                     <select id="if-location" value={form.location} onChange={(e) => set("location", e.target.value)} className={`${fieldCls("location")} appearance-none`}>
-                      <option value="">Select a centre</option>
-                      {inquiryLocations.map((l) => <option key={l} value={l}>{l}</option>)}
+                      <option value="">{tr("Select a centre")}</option>
+                      {inquiryLocations.map((x) => <option key={x} value={x}>{tr(x)}</option>)}
                     </select>
                   </div>
                 </div>
@@ -2025,7 +2027,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   <Send className="h-4 w-4" /> <T k={sending ? "Sending…" : "Request a Callback"} />
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
-                  Your details are kept strictly confidential. We never share your information.
+                  <T k="Your details are kept strictly confidential. We never share your information." />
                 </p>
               </form>
               </>
@@ -2158,7 +2160,7 @@ export function Footer() {
               onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_PREFERENCES_EVENT))}
               className="hover:text-[color:var(--rose)]"
             >
-              Cookie Settings
+              <T k="Cookie Settings" />
             </button>
           </div>
         </div>
