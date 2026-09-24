@@ -5,11 +5,14 @@ export type LocalizedField = string | { en?: string; hi?: string; gu?: string } 
  *  sync with those directories — a route not listed here has no translated
  *  page, so linking it under /hi or /gu would 404. */
 const LOCALIZED_ROUTE_ROOTS = ["/", "/about-bfi", "/contact", "/treatments", "/calculators"];
+// Category hubs live under /treatments/ but have no hi/gu route yet (would 404).
+const UNLOCALIZED_HUBS = ["/treatments/male-infertility", "/treatments/female-infertility", "/treatments/advanced-fertility-techniques"];
 
 /** Prefixes a nav href with /hi or /gu when a translated page exists for it,
  *  leaving external links, hashes, and untranslated routes untouched. */
 export function localizeNavHref(href: string, locale: Locale): string {
   if (locale === "en" || !href.startsWith("/") || href.startsWith("//")) return href;
+  if (UNLOCALIZED_HUBS.some((h) => href === h || href.startsWith(`${h}/`) || href.startsWith(`${h}#`))) return href;
   const isLocalized = LOCALIZED_ROUTE_ROOTS.some(
     (root) => href === root || href.startsWith(root === "/" ? "/#" : `${root}/`) || href.startsWith(`${root}#`),
   );
