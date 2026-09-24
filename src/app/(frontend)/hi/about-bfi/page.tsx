@@ -3,7 +3,7 @@ import { AboutPage } from "@/components/about-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
-import { getAbout, getGlobalSafe } from "@/lib/payload";
+import { getAbout, getGlobalSafe, getHomepage } from "@/lib/payload";
 import { ABOUT_DEFAULTS } from "@/lib/about";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
@@ -47,12 +47,12 @@ const graph = [
 ];
 
 export default async function Page() {
-  const data = await getAbout("hi");
+  const [data, homepage] = await Promise.all([getAbout("hi"), getHomepage("hi")]);
   return (
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <AboutPage data={data} locale="hi" />
+      <AboutPage data={data} locale="hi" awards={homepage.awards} />
     </>
   );
 }

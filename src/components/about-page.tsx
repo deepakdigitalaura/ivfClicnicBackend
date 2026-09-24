@@ -17,6 +17,7 @@ import { ABOUT_DEFAULTS, type AboutData } from "@/lib/about";
 import { resolveIcon } from "@/lib/icon-map";
 import { ui } from "@/lib/ui-strings";
 import type { Locale } from "@/lib/i18n";
+import { HOMEPAGE_DEFAULTS, type HomepageData } from "@/lib/homepage";
 
 /* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
  * inside /edit/about-bfi. `path` is the dot-path into the about-page global
@@ -32,7 +33,7 @@ const ed = (path: string, value: string, rich = true) => (
  * <strong> "Our Story"/"Patient First" prose, the decorative <SectionHead> <em>
  * titles, hero/CTA button hrefs+icons, the JSON-LD graph and the reused
  * <Doctors>/<AwardsCarousel> sections stay code-owned. */
-export function AboutPage({ data = ABOUT_DEFAULTS, locale = "en" }: { data?: AboutData; locale?: Locale } = {}) {
+export function AboutPage({ data = ABOUT_DEFAULTS, locale = "en", awards = HOMEPAGE_DEFAULTS.awards }: { data?: AboutData; locale?: Locale; awards?: HomepageData["awards"] } = {}) {
   const editing = !!useEdit()?.editMode;
   const t = (s: string) => ui(s, locale);
   // Reconstruct the hero <h1> as lead + accent <em> + tail from the headline +
@@ -275,7 +276,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS, locale = "en" }: { data?: Abo
       </div>
 
       {/* Awards (reused) */}
-      <AwardsCarousel />
+      <AwardsCarousel content={awards} />
 
       {/* Unique Achievements */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
