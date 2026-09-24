@@ -2112,6 +2112,7 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
 // structure / classes / hierarchy changed — only the data source.
 export function Footer() {
   const { groups, copyrightText, legal } = useFooter();
+  const tr = useT();
   return (
     <footer id="contact" className="border-t border-border bg-[color:var(--ivory)]">
       <div className="container-px mx-auto max-w-[1400px] pt-20 pb-24 md:pb-8">
@@ -2119,7 +2120,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {groups.map((c) => (
             <div key={c.h}>
-              <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[color:var(--plum)]">{c.h}</h4>
+              <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[color:var(--plum)]">{tr(c.h)}</h4>
               <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
                 {c.l.map((x) => (
                   <li key={x.label}>
@@ -2129,10 +2130,10 @@ export function Footer() {
                         {...(x.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                         className="capitalize transition-colors hover:text-[color:var(--rose)]"
                       >
-                        {x.label}
+                        {tr(x.label)}
                       </a>
                     ) : (
-                      <span className="capitalize cursor-default text-muted-foreground/70">{x.label}</span>
+                      <span className="capitalize cursor-default text-muted-foreground/70">{tr(x.label)}</span>
                     )}
                   </li>
                 ))}
@@ -2143,7 +2144,7 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} {copyrightText}</div>
+          <div>© {new Date().getFullYear()} {tr(copyrightText)}</div>
           <div className="flex flex-wrap items-center justify-center gap-5">
             {legal.map((x) => (
               <a

@@ -1201,6 +1201,9 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
   "Bhavnagar": { hi: "भावनगर", gu: "ભાવનગર" },
   "Anand": { hi: "आणंद", gu: "આણંદ" },
   "Varanasi": { hi: "वाराणसी", gu: "વારાણસી" },
+  "Company": { hi: "कंपनी", gu: "કંપની" },
+  "Book Now": { hi: "अभी बुक करें", gu: "હમણાં બુક કરો" },
+  "Bavishi Fertility Centre. All rights reserved.": { hi: "Bavishi Fertility Centre. सर्वाधिकार सुरक्षित।", gu: "Bavishi Fertility Centre. સર્વાધિકાર સુરક્ષિત." },
 };
 
 export function ui(key: string, locale: Locale): string {
