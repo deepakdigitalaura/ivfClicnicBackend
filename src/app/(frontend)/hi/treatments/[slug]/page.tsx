@@ -4,7 +4,7 @@ import { TreatmentPage } from "@/components/treatment-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { treatmentGraph } from "@/lib/treatments";
-import { getTreatment, getTreatments, getBlogsByTreatmentSlug } from "@/lib/payload";
+import { getTreatment, getTreatments, getBlogsByTreatmentSlug, getHomepage } from "@/lib/payload";
 import { toBlogPost } from "@/lib/blogs";
 import { withPageSeoOverride } from "@/lib/page-seo";
 import { localeAlternates, abs } from "@/lib/seo";
@@ -42,12 +42,13 @@ export default async function Page({ params }: Props) {
   const { slug } = await params;
   const t = await getTreatment(slug, LOCALE);
   if (!t) notFound();
-  const cmsBlogs = (await getBlogsByTreatmentSlug(slug)).map(toBlogPost);
+  const [blogRows, home] = await Promise.all([getBlogsByTreatmentSlug(slug), getHomepage(LOCALE)]);
+  const cmsBlogs = blogRows.map(toBlogPost);
   return (
     <>
       <JsonLd graph={treatmentGraph(t)} />
       <PageSeoSchema path={`/treatments/${slug}`} />
-      <TreatmentPage content={t} cmsBlogs={cmsBlogs} locale={LOCALE} />
+      <TreatmentPage content={t} cmsBlogs={cmsBlogs} locale={LOCALE} home={home} />
     </>
   );
 }
