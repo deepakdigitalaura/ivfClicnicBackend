@@ -2,6 +2,7 @@ import { cache as reactCache } from "react";
 import { unstable_cache } from "next/cache";
 import { getSanityCalculator } from "@/sanity/lib/fetch";
 import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 export type CalculatorFaq = { question: string; answer: string };
 
@@ -58,11 +59,14 @@ export const getCalculator = reactCache(
         const faqs = cms?.faqs?.length
           ? cms.faqs.map((f) => ({ question: f.question ?? "", answer: f.answer ?? "" }))
           : [];
+        // A real Sanity doc value is already locale-resolved by getSanityCalculator (pickLocale).
+        // The hardcoded CALCULATOR_DEFAULTS fallback is plain English, so it needs its own
+        // hi/gu lookup — that's the fix for calculator hero titles staying English.
         return {
           slug,
-          title: cms?.title || defaults?.title || slug,
-          subtitle: cms?.subtitle || defaults?.subtitle || "",
-          disclaimer: cms?.disclaimer || defaults?.disclaimer || "",
+          title: cms?.title || (defaults ? ui(defaults.title, locale) : slug),
+          subtitle: cms?.subtitle || (defaults ? ui(defaults.subtitle, locale) : ""),
+          disclaimer: cms?.disclaimer || (defaults?.disclaimer ? ui(defaults.disclaimer, locale) : ""),
           faqs,
           seo: {
             metaTitle: cms?.seo?.metaTitle ?? null,
