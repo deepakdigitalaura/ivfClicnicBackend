@@ -17,6 +17,7 @@
  * ===================================================================== */
 import { destinationHref } from "@/lib/internal-links";
 import { pickLocale, localizeNavHref, type Locale, type LocalizedField } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 /**
  * Lightweight treatment descriptor used to build the header mega menu and footer
@@ -611,13 +612,19 @@ export function resolveHeader(
 
   // Treatments mega — replace "IVF Treatments" columns with DB-driven ones,
   // then apply any CMS label/order overrides from Site Settings.
-  const treatmentMega = applyNavLabelOverrides(
+  const treatmentMegaEn = applyNavLabelOverrides(
     buildTreatmentMega(navTreatments),
     (col) => col.heading,
     (col, heading) => ({ ...col, heading }),
     HEADER_CATEGORY_LABELS,
     navLabels,
     "headerLabel",
+  );
+  // Default (non-CMS-overridden) category headings translate via UI_STRINGS;
+  // a CMS-supplied headerLabel override is admin content and stays as typed.
+  const defaultCategoryLabels = new Set(Object.values(HEADER_CATEGORY_LABELS));
+  const treatmentMega = treatmentMegaEn.map((col) =>
+    defaultCategoryLabels.has(col.heading) ? { ...col, heading: ui(col.heading, locale) } : col,
   );
   // Maternity mega — replace "Maternity Services" columns with DB-driven ones.
   const maternityMega = buildMaternityMega(navTreatments);

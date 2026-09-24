@@ -44,9 +44,9 @@ const STEP_LABELS: Record<StepN, string> = { 1: "Your Age", 2: "Your History", 3
 
 export function NaturalPregnancyCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle      = cms?.title     ?? "Natural Pregnancy Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Estimate your probability of natural pregnancy within the next 12 months, used by fertility specialists worldwide to guide treatment decisions.";
-  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides a statistical estimate only. If you have been trying to conceive for 12 months without success, consult a fertility specialist.";
+  const cmsTitle      = t(cms?.title     ?? "Natural Pregnancy Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Estimate your probability of natural pregnancy within the next 12 months, used by fertility specialists worldwide to guide treatment decisions.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "This calculator provides a statistical estimate only. If you have been trying to conceive for 12 months without success, consult a fertility specialist.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";

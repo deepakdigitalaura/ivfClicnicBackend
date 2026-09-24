@@ -57,9 +57,9 @@ function calc(type: string, cycles: number, addOns: string[]): Result {
 
 export function IvfCostCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle      = cms?.title     ?? "IVF Cost Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Get a realistic estimate of your IVF treatment costs — broken down by cycle type, add-ons, and number of cycles — so you can plan with confidence.";
-  const cmsDisclaimer = cms?.disclaimer ?? "Cost estimates are indicative only. Actual costs depend on your personalised treatment plan. Consult our team for an exact quote.";
+  const cmsTitle      = t(cms?.title     ?? "IVF Cost Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Get a realistic estimate of your IVF treatment costs — broken down by cycle type, add-ons, and number of cycles — so you can plan with confidence.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "Cost estimates are indicative only. Actual costs depend on your personalised treatment plan. Consult our team for an exact quote.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";

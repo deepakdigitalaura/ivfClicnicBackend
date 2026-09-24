@@ -115,9 +115,9 @@ function runCalc(fields: FieldState): Result {
 
 export function SemenAnalysisCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle      = cms?.title     ?? "Semen Analysis Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Enter your semen analysis report values and get an instant interpretation against WHO 2021 reference ranges, with derived metrics and personalised next steps.";
-  const cmsDisclaimer = cms?.disclaimer ?? "This tool compares your results to WHO 2021 reference values for educational purposes only. Always discuss your results with a fertility or andrology specialist.";
+  const cmsTitle      = t(cms?.title     ?? "Semen Analysis Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Enter your semen analysis report values and get an instant interpretation against WHO 2021 reference ranges, with derived metrics and personalised next steps.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "This tool compares your results to WHO 2021 reference values for educational purposes only. Always discuss your results with a fertility or andrology specialist.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";

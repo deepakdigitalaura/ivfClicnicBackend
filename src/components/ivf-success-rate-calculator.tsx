@@ -87,9 +87,9 @@ function calc(
 
 export function IvfSuccessRateCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle     = cms?.title     ?? "IVF Success Rate Calculator";
-  const cmsSubtitle  = cms?.subtitle  ?? "Estimate your personalised IVF success probability based on your age, diagnosis, treatment history, and embryo details.";
-  const cmsDisclaimer= cms?.disclaimer ?? "This calculator is provided for planning and educational purposes only. It does not constitute medical advice and cannot replace a full fertility assessment by a specialist.";
+  const cmsTitle     = t(cms?.title     ?? "IVF Success Rate Calculator");
+  const cmsSubtitle  = t(cms?.subtitle  ?? "Estimate your personalised IVF success probability based on your age, diagnosis, treatment history, and embryo details.");
+  const cmsDisclaimer= t(cms?.disclaimer ?? "This calculator is provided for planning and educational purposes only. It does not constitute medical advice and cannot replace a full fertility assessment by a specialist.");
   const titleWords   = cmsTitle.split(" ");
   const titleMain    = titleWords.slice(0, -1).join(" ");
   const titleEm      = titleWords.at(-1) ?? "";

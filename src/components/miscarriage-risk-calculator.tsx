@@ -122,9 +122,9 @@ function BandIconDisplay({ band }: { band: Band }) {
 
 export function MiscarriageRiskCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle      = cms?.title     ?? "Miscarriage Risk Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Understand your personal risk profile for recurrent pregnancy loss and get a clearer picture of your path forward with expert guidance.";
-  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides a statistical risk estimate. The risk of miscarriage is not a certainty. Please consult a specialist for personalised medical advice.";
+  const cmsTitle      = t(cms?.title     ?? "Miscarriage Risk Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Understand your personal risk profile for recurrent pregnancy loss and get a clearer picture of your path forward with expert guidance.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "This calculator provides a statistical risk estimate. The risk of miscarriage is not a certainty. Please consult a specialist for personalised medical advice.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";

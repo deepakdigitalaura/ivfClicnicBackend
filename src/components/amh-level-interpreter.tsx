@@ -156,9 +156,9 @@ type Result = {
 
 export function AmhLevelInterpreterPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle      = cms?.title     ?? "AMH Level Interpreter";
-  const cmsSubtitle   = cms?.subtitle  ?? "Understand what your Anti-Mullerian Hormone (AMH) result means for your ovarian reserve, IVF response, and fertility outlook — with age-specific context.";
-  const cmsDisclaimer = cms?.disclaimer ?? "AMH is one indicator of ovarian reserve and should be interpreted alongside other tests by a qualified fertility specialist. A low AMH does not mean you cannot conceive.";
+  const cmsTitle      = t(cms?.title     ?? "AMH Level Interpreter");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Understand what your Anti-Mullerian Hormone (AMH) result means for your ovarian reserve, IVF response, and fertility outlook — with age-specific context.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "AMH is one indicator of ovarian reserve and should be interpreted alongside other tests by a qualified fertility specialist. A low AMH does not mean you cannot conceive.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";

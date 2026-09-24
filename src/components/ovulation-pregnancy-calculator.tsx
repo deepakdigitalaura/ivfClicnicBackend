@@ -122,9 +122,9 @@ type PregnancyResult = {
 
 export function OvulationPregnancyCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle      = cms?.title     ?? "Ovulation Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Use this free calculator to estimate your ovulation date, fertile window, pregnancy test date, next period, and baby progress through the full pregnancy.";
-  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides estimates based on average cycle patterns. Ovulation timing can vary. Consult a fertility specialist for personalised guidance.";
+  const cmsTitle      = t(cms?.title     ?? "Ovulation Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Use this free calculator to estimate your ovulation date, fertile window, pregnancy test date, next period, and baby progress through the full pregnancy.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "This calculator provides estimates based on average cycle patterns. Ovulation timing can vary. Consult a fertility specialist for personalised guidance.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";

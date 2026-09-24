@@ -9,6 +9,7 @@ import { doctorMenuData } from "@/lib/doctors";
 import { T } from "@/components/ui-strings-provider";
 import { useHeader } from "@/components/header-provider";
 import { localizeNavHref, type Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 import type { HeaderNavItem, HeaderMegaItem, DoctorMenuData } from "@/lib/header";
 
 // Hardcoded fallback — used only when the CMS has no doctors with navRole set yet.
@@ -180,7 +181,7 @@ export function SiteHeader({
             onMouseLeave={scheduleClose}
           >
             {activeItem.doctors ? (
-              <DoctorsMegaPanel menu={activeItem.doctorMenu} />
+              <DoctorsMegaPanel menu={activeItem.doctorMenu} locale={currentLocale} />
             ) : (
             <div className="container-px mx-auto max-w-[1400px] py-10">
               <div className="grid gap-x-8 gap-y-7" style={{ gridTemplateColumns: `repeat(${activeItem.megaCols ?? activeItem.mega!.length}, minmax(0, 1fr))` }}>
@@ -262,7 +263,7 @@ export function SiteHeader({
 
             <nav className="px-2 pb-6">
               {NAV.map((item) => (
-                <MobileNavItem key={item.label} item={item} onNavigate={() => setMobile(false)} />
+                <MobileNavItem key={item.label} item={item} onNavigate={() => setMobile(false)} locale={currentLocale} />
               ))}
             </nav>
 
@@ -282,9 +283,9 @@ export function SiteHeader({
   );
 }
 
-function MobileNavItem({ item, onNavigate }: { item: HeaderNavItem; onNavigate: () => void }) {
+function MobileNavItem({ item, onNavigate, locale }: { item: HeaderNavItem; onNavigate: () => void; locale: Locale }) {
   const [open, setOpen] = useState(false);
-  if (item.doctors) return <MobileDoctorsItem onNavigate={onNavigate} menu={item.doctorMenu} />;
+  if (item.doctors) return <MobileDoctorsItem onNavigate={onNavigate} menu={item.doctorMenu} locale={locale} />;
   if (!item.mega) {
     return (
       <a
@@ -359,13 +360,13 @@ function MobileSubItem({ item, onNavigate }: { item: HeaderMegaItem; onNavigate:
 /* ---------- Doctors mega — compact, doctor-first (desktop) ----------
  * Section 1 features the senior promoters; Section 2 lists every other
  * specialist doctor-first with their city as a muted secondary label. */
-function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
+function DoctorsMegaPanel({ menu, locale }: { menu?: DoctorMenuData; locale: Locale }) {
   const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   return (
     <div className="container-px mx-auto max-w-[1400px] py-7">
       {/* Senior IVF Specialists */}
       <div className="flex items-center gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Promoter Doctors</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{ui("Promoter Doctors", locale)}</span>
         <span className="h-px flex-1 bg-border/60" />
       </div>
       <div className="mt-3 grid grid-cols-2 gap-2 lg:grid-cols-4">
@@ -379,7 +380,7 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
 
       {/* Senior IVF Specialists */}
       <div className="mt-6 flex items-center gap-3">
-        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Senior IVF Specialists</span>
+        <span className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{ui("Senior IVF Specialists", locale)}</span>
         <span className="h-px flex-1 bg-border/60" />
       </div>
       <div className="mt-3 grid grid-cols-2 gap-x-6 gap-y-0.5 lg:grid-cols-3">
@@ -393,16 +394,16 @@ function DoctorsMegaPanel({ menu }: { menu?: DoctorMenuData }) {
 
       {/* Browse */}
       <div className="mt-5 flex flex-wrap items-center gap-x-6 gap-y-2 border-t border-border/60 pt-4 text-sm">
-        <a href="/doctors" className="inline-flex items-center gap-1 font-semibold text-[color:var(--rose)] transition-opacity hover:opacity-70">All Doctors <ArrowRight className="h-3.5 w-3.5" /></a>
-        <a href="/locations" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">By Location</a>
-        <a href="/contact#book" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">Book Consultation</a>
+        <a href="/doctors" className="inline-flex items-center gap-1 font-semibold text-[color:var(--rose)] transition-opacity hover:opacity-70">{ui("All Doctors", locale)} <ArrowRight className="h-3.5 w-3.5" /></a>
+        <a href="/locations" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">{ui("By Location", locale)}</a>
+        <a href="/contact#book" className="font-medium text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">{ui("Book Consultation", locale)}</a>
       </div>
     </div>
   );
 }
 
 /* ---------- Doctors mega — compact, doctor-first (mobile) ---------- */
-function MobileDoctorsItem({ onNavigate, menu }: { onNavigate: () => void; menu?: DoctorMenuData }) {
+function MobileDoctorsItem({ onNavigate, menu, locale }: { onNavigate: () => void; menu?: DoctorMenuData; locale: Locale }) {
   const [open, setOpen] = useState(false);
   const { senior, specialists } = menu ?? DOCTOR_MENU_FALLBACK;
   const row = (d: { name: string; href: string; city: string }) => (
@@ -416,17 +417,17 @@ function MobileDoctorsItem({ onNavigate, menu }: { onNavigate: () => void; menu?
   return (
     <div>
       <button type="button" onClick={() => setOpen((v) => !v)} className="flex w-full items-center justify-between rounded-lg px-3 py-3 text-left text-sm font-semibold text-[color:var(--plum)] hover:bg-[color:var(--ivory)]">
-        Doctors
+        {ui("Doctors", locale)}
         <ChevronDown className={`h-4 w-4 transition-transform ${open ? "rotate-180" : ""}`} />
       </button>
       <div className="grid transition-[grid-template-rows] duration-200 ease-out" style={{ gridTemplateRows: open ? "1fr" : "0fr" }}>
         <div className="overflow-hidden">
           <div className="px-5 py-2">
-            <div className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">Promoter Doctors</div>
+            <div className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ui("Promoter Doctors", locale)}</div>
             <ul className="mt-1">{senior.map(row)}</ul>
-            <div className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">Senior IVF Specialists</div>
+            <div className="mt-3 text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ui("Senior IVF Specialists", locale)}</div>
             <ul className="mt-1">{specialists.map(row)}</ul>
-            <a href="/doctors" onClick={onNavigate} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">All Doctors <ArrowRight className="h-3.5 w-3.5" /></a>
+            <a href="/doctors" onClick={onNavigate} className="mt-3 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">{ui("All Doctors", locale)} <ArrowRight className="h-3.5 w-3.5" /></a>
           </div>
         </div>
       </div>

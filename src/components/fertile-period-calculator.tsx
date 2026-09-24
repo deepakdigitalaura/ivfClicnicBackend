@@ -50,9 +50,9 @@ function calc(lmpStr: string, cycleLength: number): Result {
 
 export function FertilePeriodCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
   const t = (s: string) => ui(s, locale);
-  const cmsTitle      = cms?.title     ?? "Fertile Period Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Discover your most fertile days, ovulation date, and next period — so you can plan your pregnancy journey with confidence.";
-  const cmsDisclaimer = cms?.disclaimer ?? "Fertile period estimates are based on average cycle patterns. This tool is for informational purposes only and is not a substitute for medical advice.";
+  const cmsTitle      = t(cms?.title     ?? "Fertile Period Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Discover your most fertile days, ovulation date, and next period — so you can plan your pregnancy journey with confidence.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "Fertile period estimates are based on average cycle patterns. This tool is for informational purposes only and is not a substitute for medical advice.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";
