@@ -1237,6 +1237,14 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
   "Reproductive Medicine & Laparoscopic Surgery": { hi: "प्रजनन चिकित्सा और लैप्रोस्कोपिक सर्जरी", gu: "પ્રજનન ચિકિત્સા અને લેપ્રોસ્કોપિક સર્જરી" },
   "M.D": { hi: "एम.डी", gu: "એમ.ડી" },
   "M.S": { hi: "एम.एस", gu: "એમ.એસ" },
+  "Paldi": { hi: "पालडी", gu: "પાલડી" },
+  "Sindhu Bhavan": { hi: "सिंधु भवन", gu: "સિંધુ ભવન" },
+  "Nikol": { hi: "निकोल", gu: "નિકોલ" },
+  "Ghatkopar": { hi: "घाटकोपर", gu: "ઘાટકોપર" },
+  "Thane": { hi: "ठाणे", gu: "થાણે" },
+  "Vile Parle": { hi: "विले पार्ले", gu: "વિલે પાર્લે" },
+  "Borivali": { hi: "बोरीवली", gu: "બોરીવલી" },
+  "Vashi": { hi: "वाशी", gu: "વાશી" },
 };
 
 export function ui(key: string, locale: Locale): string {

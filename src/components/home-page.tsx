@@ -1673,6 +1673,7 @@ function Blogs({
 /* ---------- Locations ---------- */
 
 export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { content?: HomepageData["locations"]; as?: "h1" | "h2" } = {}) {
+  const tr = useT();
   const cities = content.cities;
   // In the editor the whole card must NOT be a link — clicking the editable city
   // name would otherwise navigate away mid-edit. So while editing we render the
@@ -1701,20 +1702,20 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { conte
                 <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
                 <a href={cityUrl} className="mt-4 block">
                   <h3 className="text-xl font-semibold text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">
-                    <Editable path={`locations.cities.${i}.c`}>{c.c}</Editable>
+                    <Editable path={`locations.cities.${i}.c`}>{tr(c.c)}</Editable>
                   </h3>
                 </a>
                 {builtCentres.length > 1 ? (
                   <p className="mt-1 flex flex-wrap gap-x-1 text-xs text-muted-foreground">
                     {builtCentres.map((ct, ci) => (
                       <span key={ct.slug}>
-                        <a href={centreHref(ct)} className="hover:text-[color:var(--rose)] hover:underline transition-colors">{ct.name}</a>
+                        <a href={centreHref(ct)} className="hover:text-[color:var(--rose)] hover:underline transition-colors">{tr(ct.name)}</a>
                         {ci < builtCentres.length - 1 && <span className="mx-0.5">·</span>}
                       </span>
                     ))}
                   </p>
                 ) : c.centres && c.centres.length > 0 ? (
-                  <p className="mt-1 text-xs text-muted-foreground">{c.centres.join(" · ")}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{c.centres.map((x) => tr(x)).join(" · ")}</p>
                 ) : null}
                 <a href={cityUrl} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                   <T k="View Centre" /> <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
