@@ -589,7 +589,7 @@ export const getSanityCMEBlogs = async () =>
 
 export type SanityTreatment = {
   /** Optional sections — shapes validated by resolveTreatment (TreatmentSource). */
-  timeline?: unknown; video?: unknown; technology?: unknown; whyUs?: unknown; success?: unknown; cost?: unknown;
+  types?: unknown; timeline?: unknown; video?: unknown; technology?: unknown; whyUs?: unknown; success?: unknown; cost?: unknown;
   preparation?: unknown; patientStories?: unknown; specialists?: unknown; faqsSection?: unknown; relatedSection?: unknown; blogSection?: unknown;
   slug?: string | null;
   href?: string | null;
