@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SuccessBenchmarksPage } from "@/components/success-benchmarks-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 import { getSuccessBenchmarksPage } from "@/lib/payload";
 
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title,
     description,
-    alternates: { canonical: PATH },
+    alternates: localeAlternates(PATH),
     openGraph: { title: data.ogTitle || title, description: data.ogDescription || "30,000+ successful pregnancies with one of the highest success rates in India.", url: abs(PATH), type: "website" },
   });
 }

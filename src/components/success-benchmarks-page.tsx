@@ -13,11 +13,17 @@ import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { resolveIcon } from "@/lib/icon-map";
 import { SUCCESS_BENCHMARKS_DEFAULTS, type SuccessBenchmarksData } from "@/lib/success-benchmarks";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 
 /* ---------- Page ---------- */
 
-export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { data?: SuccessBenchmarksData } = {}) {
+export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS, locale = "en" }: { data?: SuccessBenchmarksData; locale?: Locale } = {}) {
+  const t = (s: string) => ui(s, locale);
   const { hero, stats: HERO_STATS, pillars: PILLARS, closingBadges: CLOSING_BADGES } = data;
+  const headline = t(hero.headline);
+  const headlineEm = t(hero.headlineEm);
+  const bookHref = localizeNavHref("/contact#book", locale);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -28,9 +34,9 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
           className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground"
           aria-label="Breadcrumb"
         >
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Success Benchmarks</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Success Benchmarks")}</span>
         </nav>
       </div>
 
@@ -52,23 +58,23 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
         <div className="container-px relative mx-auto max-w-[1400px] py-20 text-center lg:py-28">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-              <Award className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
+              <Award className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(hero.eyebrow)}
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-              {hero.headline.split(hero.headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
+              {headline.split(headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{headlineEm}</em>{headline.split(headlineEm)[1]}
             </h1>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-              {hero.paragraph}
+              {t(hero.paragraph)}
             </p>
           </Reveal>
           <Reveal delay={0.25}>
             <blockquote className="mt-8 mx-auto max-w-2xl rounded-2xl border border-[color:var(--plum)]/10 bg-white/50 px-8 py-6 backdrop-blur">
               <p className="text-[15px] leading-relaxed text-[color:var(--plum)]/70 italic text-pretty">
-                &ldquo;{hero.quote}&rdquo;
+                &ldquo;{t(hero.quote)}&rdquo;
               </p>
             </blockquote>
           </Reveal>
@@ -76,10 +82,10 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
             <div className="mt-8 flex flex-wrap justify-center gap-3">
               <Magnetic
                 as="a"
-                href="/contact#book"
+                href={bookHref}
                 className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
               >
-                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+                <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic
                 as="a"
@@ -88,7 +94,7 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                 rel="noopener noreferrer"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]"
               >
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
               </Magnetic>
             </div>
           </Reveal>
@@ -107,10 +113,10 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
               <StaggerItem key={i}>
                 <div className="text-center">
                   <div className="text-3xl font-semibold md:text-4xl lg:text-5xl">
-                    <Counter to={s.value} />{s.suffix}
+                    <Counter to={s.value} />{t(s.suffix)}
                   </div>
                   <div className="mt-2 text-xs font-medium uppercase tracking-wider text-white/80 sm:text-sm">
-                    {s.label}
+                    {t(s.label)}
                   </div>
                 </div>
               </StaggerItem>
@@ -124,14 +130,14 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="The Pillars of Our Success"
+            eyebrow={t("The Pillars of Our Success")}
             title={
               <>
-                What makes our success rate{" "}
-                <em className="font-display italic text-[color:var(--rose)]">one of the highest in the world.</em>
+                {t("What makes our success rate")}{" "}
+                <em className="font-display italic text-[color:var(--rose)]">{t("one of the highest in the world.")}</em>
               </>
             }
-            subtitle="Every successful pregnancy at Bavishi Fertility Institute is built on five unshakable pillars — technology, people, holistic care, live-birth focus, and accessible packages."
+            subtitle={t("Every successful pregnancy at Bavishi Fertility Institute is built on five unshakable pillars — technology, people, holistic care, live-birth focus, and accessible packages.")}
           />
           <Stagger className="mx-auto mt-14 grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
             {PILLARS.map((p, i) => {
@@ -142,13 +148,13 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                     <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{p.description}</p>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(p.description)}</p>
                     <ul className="mt-4 space-y-2">
                       {p.highlights.map((h, j) => (
                         <li key={j} className="flex items-start gap-2 text-[14px] text-muted-foreground">
                           <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                          <span>{h}</span>
+                          <span>{t(h)}</span>
                         </li>
                       ))}
                     </ul>
@@ -166,27 +172,18 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
           <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
               <Reveal>
-                <Eyebrow>World-Class Labs</Eyebrow>
+                <Eyebrow>{t("World-Class Labs")}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  Class 1000 Pure Air Labs —{" "}
-                  <em className="font-display italic text-[color:var(--rose)]">10x cleaner than European standards.</em>
+                  {t("Class 1000 Pure Air Labs —")}{" "}
+                  <em className="font-display italic text-[color:var(--rose)]">{t("10x cleaner than European standards.")}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
-                  <p>
-                    While the international benchmark for IVF labs is Class 10,000, every Bavishi Fertility
-                    Institute lab operates at Class 1,000 — an air purity standard that is ten times more
-                    stringent. This protects your embryos from volatile organic compounds, particulates,
-                    and temperature fluctuations at every critical moment.
-                  </p>
-                  <p>
-                    Combined with next-generation incubators, strict quality-control protocols,
-                    and a dedicated embryology team, our labs consistently deliver fertilisation and
-                    blastocyst rates that rank among the best in the country.
-                  </p>
+                  <p>{t("While the international benchmark for IVF labs is Class 10,000, every Bavishi Fertility Institute lab operates at Class 1,000 — an air purity standard that is ten times more stringent. This protects your embryos from volatile organic compounds, particulates, and temperature fluctuations at every critical moment.")}</p>
+                  <p>{t("Combined with next-generation incubators, strict quality-control protocols, and a dedicated embryology team, our labs consistently deliver fertilisation and blastocyst rates that rank among the best in the country.")}</p>
                 </div>
               </Reveal>
               <Reveal delay={0.2}>
@@ -201,7 +198,7 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                       <div className="grid h-9 w-9 shrink-0 place-items-center rounded-lg bg-[color:var(--rose-soft)]/40 text-[color:var(--rose)]">
                         <item.icon className="h-4.5 w-4.5" />
                       </div>
-                      <span className="text-sm font-medium text-[color:var(--plum)]">{item.label}</span>
+                      <span className="text-sm font-medium text-[color:var(--plum)]">{t(item.label)}</span>
                     </div>
                   ))}
                 </div>
@@ -212,7 +209,7 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                 <div className="relative overflow-hidden rounded-[2rem] shadow-lift">
                   <img
                     src="/assets/Locations/Thane.png"
-                    alt="Bavishi Fertility Institute Class 1000 IVF laboratory with advanced embryology equipment"
+                    alt={t("Bavishi Fertility Institute Class 1000 IVF laboratory with advanced embryology equipment")}
                     className="aspect-square w-full object-cover"
                   />
                 </div>
@@ -227,13 +224,13 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Beyond Pregnancy"
+            eyebrow={t("Beyond Pregnancy")}
             title={
               <>
-                Our goal is a <em className="font-display italic text-[color:var(--rose)]">healthy baby in your arms.</em>
+                {t("Our goal is a")} <em className="font-display italic text-[color:var(--rose)]">{t("healthy baby in your arms.")}</em>
               </>
             }
-            subtitle="A positive pregnancy test is a milestone, not the finish line. Our protocols, monitoring, and maternity partnerships are designed to carry you safely from embryo transfer to delivery and beyond."
+            subtitle={t("A positive pregnancy test is a milestone, not the finish line. Our protocols, monitoring, and maternity partnerships are designed to carry you safely from embryo transfer to delivery and beyond.")}
           />
           <Stagger className="mx-auto mt-12 grid max-w-4xl gap-6 sm:grid-cols-2">
             {[
@@ -263,8 +260,8 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                     <item.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{item.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{item.desc}</p>
+                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(item.title)}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(item.desc)}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -281,7 +278,7 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                 <div className="relative overflow-hidden rounded-[2rem] shadow-lift">
                   <img
                     src="/assets/unique-ivf-packages.png"
-                    alt="Happy couple after successful IVF treatment at Bavishi Fertility Institute"
+                    alt={t("Happy couple after successful IVF treatment at Bavishi Fertility Institute")}
                     className="aspect-[2/3] w-full object-cover"
                   />
                 </div>
@@ -289,19 +286,17 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
             </Reveal>
             <div>
               <Reveal>
-                <Eyebrow>Adaptive Excellence</Eyebrow>
+                <Eyebrow>{t("Adaptive Excellence")}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  Unique IVF packages{" "}
-                  <em className="font-display italic text-[color:var(--rose)]">for every family.</em>
+                  {t("Unique IVF packages")}{" "}
+                  <em className="font-display italic text-[color:var(--rose)]">{t("for every family.")}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
-                  <p>
-                    One standard of care. Several ways to reach it.
-                  </p>
+                  <p>{t("One standard of care. Several ways to reach it.")}</p>
                 </div>
               </Reveal>
               <Reveal delay={0.18}>
@@ -323,8 +318,8 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                     <div key={i} className="flex items-start gap-3">
                       <CheckCircle2 className="mt-1 h-5 w-5 shrink-0 text-[color:var(--rose)]" />
                       <div>
-                        <div className="font-semibold text-[color:var(--plum)]">{pkg.title}</div>
-                        <p className="mt-0.5 text-[15px] text-muted-foreground">{pkg.desc}</p>
+                        <div className="font-semibold text-[color:var(--plum)]">{t(pkg.title)}</div>
+                        <p className="mt-0.5 text-[15px] text-muted-foreground">{t(pkg.desc)}</p>
                       </div>
                     </div>
                   ))}
@@ -334,10 +329,10 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                 <div className="mt-8">
                   <Magnetic
                     as="a"
-                    href="/suraksha-kavach"
+                    href={localizeNavHref("/suraksha-kavach", locale)}
                     className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-[color:var(--plum)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"
                   >
-                    Learn About Suraksha Kavach <ArrowRight className="h-4 w-4" />
+                    {t("Learn About Suraksha Kavach")} <ArrowRight className="h-4 w-4" />
                   </Magnetic>
                 </div>
               </Reveal>
@@ -356,14 +351,13 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
           <div className="relative">
             <Reveal>
               <h2 className="mx-auto max-w-3xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-[2.75rem] text-balance">
-                We believe the hardest journey deserves{" "}
-                <em className="font-display italic text-[color:var(--rose-soft)]">the simplest path.</em>
+                {t("We believe the hardest journey deserves")}{" "}
+                <em className="font-display italic text-[color:var(--rose-soft)]">{t("the simplest path.")}</em>
               </h2>
             </Reveal>
             <Reveal delay={0.1}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-                We make your fertility treatment journey with us simple, safe, smart, and
-                successful. Your dream of parenthood becomes ours the moment you walk in.
+                {t("We make your fertility treatment journey with us simple, safe, smart, and successful. Your dream of parenthood becomes ours the moment you walk in.")}
               </p>
             </Reveal>
             <Reveal delay={0.18}>
@@ -372,7 +366,7 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                   const Icon = resolveIcon(item.icon);
                   return (
                     <div key={i} className="flex items-center gap-2 text-white/80">
-                      <Icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {item.text}
+                      <Icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {t(item.text)}
                     </div>
                   );
                 })}
@@ -382,10 +376,10 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
               <div className="mt-9 flex flex-wrap justify-center gap-3">
                 <Magnetic
                   as="a"
-                  href="/contact#book"
+                  href={bookHref}
                   className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
                 >
-                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic
                   as="a"
@@ -394,7 +388,7 @@ export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { 
                   rel="noopener noreferrer"
                   className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white"
                 >
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </Reveal>
