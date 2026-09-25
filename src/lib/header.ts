@@ -252,6 +252,7 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
           { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
           { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
+          { label: "Varicocele", href: "/treatments/varicocele" },
         ]},
         { heading: "Female Infertility", headingHref: "/treatments/female-infertility", items: [
           { label: "Conceive Naturally", href: "/conceive-naturally" },

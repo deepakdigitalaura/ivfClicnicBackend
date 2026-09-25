@@ -173,6 +173,7 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
       { label: "PESA / TESA / TESE / Micro TESE", href: "/surgical-sperm-retrieval" },
       { label: "Erectile Dysfunction", href: "/erectile-dysfunction" },
+      { label: "Varicocele", href: "/treatments/varicocele" },
     ]},
     { h: "Female Infertility", l: [
       { label: "Conceive Naturally", href: "/conceive-naturally" },
