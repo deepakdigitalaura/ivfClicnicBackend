@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { localizeNavHref } from "@/lib/i18n";
 
 // Sanity-managed redirects — fetched from CDN and cached briefly in-memory.
 // Existing treatment/calculator redirects are baked into next.config.mjs.
@@ -68,7 +69,12 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
 
   const rawPathname = request.nextUrl.pathname;
   const pathname = norm(rawPathname);
-  const rules = await loadSanityRules();
+  // Legacy WordPress redirect rules in Sanity (e.g. "/hi/why-bfi/" -> "/why-bfi")
+  // collide with the real translated pages under /hi and /gu — skip them for
+  // any path that has a real localized route (see LOCALIZED_ROUTE_ROOTS).
+  const enPath = pathname.replace(/^\/(hi|gu)(?=\/|$)/, "") || "/";
+  const isLocalizedPage = enPath !== pathname && localizeNavHref(enPath, "hi") !== enPath;
+  const rules = isLocalizedPage ? [] : await loadSanityRules();
 
   for (const rule of rules) {
     if (!rule.source || !rule.destination) continue;
