@@ -2,10 +2,12 @@
  *  src/lib/history.ts + JSX literals in src/components/history-page.tsx).
  *  Merged into UI_STRINGS. The timeline itself comes from getAbout(locale). */
 import { HISTORY_DEFAULTS as D } from "@/lib/history";
+import { HISTORY_MILESTONE_STRINGS } from "@/lib/history-milestone-strings";
 
 type S = Record<string, { hi: string; gu: string }>;
 
 export const HISTORY_STRINGS: S = {
+  ...HISTORY_MILESTONE_STRINGS,
   // ---- page chrome / SEO ----
   "History": { hi: "हमारा इतिहास", gu: "અમારો ઇતિહાસ" },
   "History of Bavishi Fertility Institute": { hi: "Bavishi Fertility Institute का इतिहास", gu: "Bavishi Fertility Institute નો ઇતિહાસ" },

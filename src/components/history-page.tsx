@@ -273,9 +273,9 @@ export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAUL
                 <StaggerItem key={i}>
                   <div className="relative">
                     <span className="absolute -left-[2.6rem] top-1 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--rose)] text-[10px] font-bold text-white ring-4 ring-white">●</span>
-                    <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{m.y}</div>
-                    <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{m.t}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: m.d }} />
+                    <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{t(m.y)}</div>
+                    <h3 className="mt-1 text-xl font-semibold text-[color:var(--plum)]">{t(m.t)}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: t(m.d) }} />
                   </div>
                 </StaggerItem>
               ))}
