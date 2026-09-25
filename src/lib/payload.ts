@@ -693,10 +693,29 @@ export const getHeader = async (): Promise<HeaderData> => {
  *  overlays. Converts string[] badge/feature lists to the {text}[] form the
  *  source expects; everything else passes through. Unknown/empty → resolver
  *  uses HOMEPAGE_DEFAULTS per-section (byte-identical). */
+/** Some globals (homepage, aboutPage) were migrated in Sanity to carry
+ *  `{ en, hi, gu }` localized-field objects instead of plain strings, as part
+ *  of the hi/gu i18n work — but this file's resolvers (used by the English-only
+ *  routes still live on this branch) expect plain strings. Recursively unwraps
+ *  any such leaf down to its `en` value so old resolvers keep working untouched
+ *  until the locale-aware routes/resolvers are merged. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function unwrapEnLocale(value: any): any {
+  if (Array.isArray(value)) return value.map(unwrapEnLocale);
+  if (value && typeof value === "object") {
+    const keys = Object.keys(value);
+    if (keys.length && keys.every((k) => k === "en" || k === "hi" || k === "gu")) {
+      return value.en ?? value.hi ?? value.gu ?? "";
+    }
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, unwrapEnLocale(v)]));
+  }
+  return value;
+}
+
 function mapHomepageSource(doc: Record<string, unknown> | null): HomepageSource {
   if (!doc) return null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const d = doc as any;
+  const d = unwrapEnLocale(doc) as any;
   const textRows = (a?: string[] | null) => (Array.isArray(a) ? a.filter(Boolean).map((text) => ({ text })) : undefined);
   return {
     ...d,
@@ -717,7 +736,8 @@ export const getHomepage = async (): Promise<HomepageData> => {
 };
 
 export const getAbout = async (): Promise<AboutData> => {
-  const doc = await getSanityAbout();
+  const rawDoc = await getSanityAbout();
+  const doc = rawDoc ? (unwrapEnLocale(rawDoc) as typeof rawDoc) : rawDoc;
   if (!doc) return resolveAbout(null);
   return resolveAbout({
     hero: doc.hero ?? null,
