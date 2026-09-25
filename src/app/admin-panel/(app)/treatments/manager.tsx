@@ -8,8 +8,8 @@ import { saveTreatmentAction, deleteTreatmentAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
 import { Repeater } from "../_components/repeater";
+import { LinkTextarea } from "../_components/link-textarea";
 
-type CodeTreatment = { slug: string; name: string; shortName: string; href: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
 
@@ -24,8 +24,6 @@ const NAV_CATEGORIES = [
   { value: "fertility-preservation", label: "Fertility Preservation" },
   { value: "maternity-services", label: "Maternity Services" },
 ];
-
-const HTML_HINT = "HTML allowed (e.g. <a href=\"/doctors/x\">name</a>) — matches the existing site copy.";
 
 type Tab = "hero" | "seo" | "whatIs" | "benefits" | "whoNeedsIt" | "process" | "risks" | "faqs" | "cta" | "nav";
 const TABS: { id: Tab; label: string }[] = [
@@ -48,13 +46,20 @@ const fromLinesV = (s: string) => s.split("\n").map((x) => x.trim()).filter(Bool
 const toLinesT = (a?: { text?: string }[]) => (a ?? []).map((x) => x.text ?? "").join("\n");
 const fromLinesT = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean).map((text) => ({ text }));
 
-function Field({ label, hint, value, textarea, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; onChange: (v: string) => void }) {
+// `noLink`: fields the public page renders through <Linkify> (phrase auto-link)
+// instead of raw HTML (hero.tagline), or that feed a <meta> tag (meta.description)
+// — an inserted <a> tag would show up as literal text/markup there, not a link.
+function Field({ label, hint, value, textarea, noLink, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; noLink?: boolean; onChange: (v: string) => void }) {
   return (
     <div className="admin-field">
       <label className="admin-label">{label}</label>
       {hint && <p className="admin-hint">{hint}</p>}
       {textarea ? (
-        <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={value} onChange={(e) => onChange(e.target.value)} />
+        noLink ? (
+          <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={value} onChange={(e) => onChange(e.target.value)} />
+        ) : (
+          <LinkTextarea value={value} onChange={onChange} minHeight={70} />
+        )
       ) : (
         <input className="admin-input" value={value} onChange={(e) => onChange(e.target.value)} />
       )}
@@ -72,14 +77,11 @@ function Field({ label, hint, value, textarea, onChange }: { label: string; hint
  * Page form. This guarantees a save never submits a half-empty section that
  * would blank out its untouched siblings on the live page.
  */
-export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminTreatment[]; codeTreatments: CodeTreatment[] }) {
+export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
   const [docs, setDocs] = useState<AdminTreatment[]>(initial);
   const [editing, setEditing] = useState<Doc | null>(null);
   const [tab, setTab] = useState<Tab>("hero");
   const { pending, toast, run } = useSave();
-
-  const savedSlugs = new Set(docs.map((d) => d.slug));
-  const overridableCode = codeTreatments.filter((c) => !savedSlugs.has(c.slug));
 
   const setIn = (path: string[], val: unknown) => {
     setEditing((prev) => {
@@ -144,7 +146,7 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
 
   const remove = (d: AdminTreatment) => {
     if (!d._id) return;
-    if (!confirm(`Delete this override for "${d.slug}"? The code default returns (if one exists), or the page 404s if it doesn't.`)) return;
+    if (!confirm(`Delete "${d.slug}"? This removes the page permanently — /treatments/${d.slug} will 404.`)) return;
     run(async () => {
       const res = await deleteTreatmentAction(d._id!);
       if (res.ok) setDocs(docs.filter((x) => x._id !== d._id));
@@ -181,7 +183,7 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
               <Field label="Eyebrow" value={get(["hero", "eyebrow"])} onChange={(v) => setIn(["hero", "eyebrow"], v)} />
               <Field label="Heading" value={get(["hero", "h1"])} onChange={(v) => setIn(["hero", "h1"], v)} />
               <Field label="Highlighted word" value={get(["hero", "h1Em"])} onChange={(v) => setIn(["hero", "h1Em"], v)} />
-              <Field label="Tagline" value={get(["hero", "tagline"])} onChange={(v) => setIn(["hero", "tagline"], v)} textarea />
+              <Field label="Tagline" value={get(["hero", "tagline"])} onChange={(v) => setIn(["hero", "tagline"], v)} textarea noLink />
               <div className="admin-field">
                 <label className="admin-label">Badges</label>
                 <p className="admin-hint">One per line.</p>
@@ -198,7 +200,9 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           {tab === "seo" && (
             <>
               <Field label="Page title" value={get(["meta", "title"])} onChange={(v) => setIn(["meta", "title"], v)} />
-              <Field label="Meta description" value={get(["meta", "description"])} onChange={(v) => setIn(["meta", "description"], v)} textarea />
+              <Field label="Meta description" value={get(["meta", "description"])} onChange={(v) => setIn(["meta", "description"], v)} textarea noLink />
+              <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Page title." value={get(["meta", "ogTitle"])} onChange={(v) => setIn(["meta", "ogTitle"], v)} />
+              <Field label="OG description" hint="Defaults to Meta description." value={get(["meta", "ogDescription"])} onChange={(v) => setIn(["meta", "ogDescription"], v)} textarea noLink />
               <Field label="OG image path" hint="Overrides the hero image for social sharing." value={get(["meta", "ogImage"])} onChange={(v) => setIn(["meta", "ogImage"], v)} />
             </>
           )}
@@ -211,11 +215,14 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
               </div>
               <div className="admin-field">
                 <label className="admin-label">Paragraphs</label>
-                <p className="admin-hint">One paragraph per line. {HTML_HINT}</p>
-                <textarea className="admin-textarea" style={{ minHeight: 100 }} value={toLinesT(editing.whatIs?.paragraphs)} onChange={(e) => setIn(["whatIs", "paragraphs"], fromLinesT(e.target.value))} />
+                <p className="admin-hint">One paragraph per line.</p>
+                <LinkTextarea value={toLinesT(editing.whatIs?.paragraphs)} onChange={(v) => setIn(["whatIs", "paragraphs"], fromLinesT(v))} minHeight={100} />
               </div>
               <Field label="Callout box title (optional)" value={get(["whatIs", "aside", "title"])} onChange={(v) => setIn(["whatIs", "aside", "title"], v)} />
-              <Field label="Callout box body" value={get(["whatIs", "aside", "body"])} onChange={(v) => setIn(["whatIs", "aside", "body"], v)} textarea />
+              <div className="admin-field">
+                <label className="admin-label">Callout box body</label>
+                <LinkTextarea value={get(["whatIs", "aside", "body"])} onChange={(v) => setIn(["whatIs", "aside", "body"], v)} minHeight={70} />
+              </div>
             </>
           )}
 
@@ -306,8 +313,8 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
                   renderItem={(row, i, update) => (
                     <div>
                       <input className="admin-input" placeholder="Risk title" value={row.t ?? ""} onChange={(e) => update({ t: e.target.value })} />
-                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder={`Description ${i + 1}`} value={row.d ?? ""} onChange={(e) => update({ d: e.target.value })} />
-                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder="How we help" value={row.help ?? ""} onChange={(e) => update({ help: e.target.value })} />
+                      <div style={{ marginTop: 6 }}><LinkTextarea value={row.d ?? ""} onChange={(v) => update({ d: v })} minHeight={50} /></div>
+                      <div style={{ marginTop: 6 }}><LinkTextarea value={row.help ?? ""} onChange={(v) => update({ help: v })} minHeight={50} /></div>
                     </div>
                   )}
                 />
@@ -380,13 +387,13 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div>
             <h2 className="admin-card-title" style={{ margin: 0 }}>Treatments</h2>
-            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} edited in admin · {codeTreatments.length} built-in</p>
+            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} treatments</p>
           </div>
           <button type="button" className="admin-btn" onClick={addNew}><Plus size={16} /> Add Treatment</button>
         </div>
 
         {docs.length === 0 ? (
-          <div className="admin-empty">No admin treatments yet. Add a new one, or override a built-in treatment below.</div>
+          <div className="admin-empty">No treatments yet. Add one to get started.</div>
         ) : (
           <div className="admin-divider-list">
             {docs.map((d) => (
@@ -407,24 +414,6 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           </div>
         )}
       </div>
-
-      {overridableCode.length > 0 && (
-        <div className="admin-card">
-          <h2 className="admin-card-title">Built-in Treatments</h2>
-          <p className="admin-card-desc">These come from the site code. Click Override to edit one in the admin (your changes win; the rest stays as-is).</p>
-          <div className="admin-divider-list">
-            {overridableCode.map((c) => (
-              <div key={c.slug} className="admin-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 0 }}>
-                <div>
-                  <div style={{ fontWeight: 600 }}>{c.name}</div>
-                  <div style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: 2 }}>{c.href}</div>
-                </div>
-                <button type="button" className="admin-btn-ghost" onClick={() => startEdit(c.slug, null)}><Pencil size={14} /> Override</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <Toast toast={toast} />
     </>
   );

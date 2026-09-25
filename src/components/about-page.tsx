@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import {
   ArrowRight, Calendar, MessageCircle, CheckCircle2, Building2,
   Target, Eye, FlaskConical, Cpu, Heart, RadioTower, GraduationCap,
@@ -85,11 +86,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
           <div className="lg:col-span-5">
             <Reveal delay={0.15}>
               <Float amplitude={8}>
-                <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
                   {editing ? (
                     <EditableImage path="hero.image" src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
                   ) : (
-                    <img src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
+                    <Image src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" fill priority sizes="(max-width: 1024px) 90vw, 40vw" className="object-cover" />
                   )}
                 </div>
               </Float>

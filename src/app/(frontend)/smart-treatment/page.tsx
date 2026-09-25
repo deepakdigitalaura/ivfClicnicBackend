@@ -4,19 +4,22 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getSmartTreatmentPage } from "@/lib/payload";
 
 const PATH = "/smart-treatment";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getSmartTreatmentPage();
+  const title = data.metaTitle || "Smart IVF Treatment — Intelligent Care, Optimal Results | Bavishi Fertility Institute";
+  const description = data.metaDescription ||
+    "Smart treatments and steady care at Bavishi Fertility Institute. Smart use of technology, smart monitoring, smart diagnosis, and calibrated cost package options.";
   return withPageSeoOverride(PATH, {
-    title:
-      "Smart IVF Treatment — Intelligent Care, Optimal Results | Bavishi Fertility Institute",
-    description:
-      "Smart treatments and steady care at Bavishi Fertility Institute. Smart use of technology, smart monitoring, smart diagnosis, and calibrated cost package options.",
+    title,
+    description,
     alternates: { canonical: PATH },
     openGraph: {
-      title: "Smart IVF Treatment | Bavishi Fertility Institute",
-      description:
+      title: data.ogTitle || title,
+      description: data.ogDescription ||
         "Smart treatments and steady care. Intelligent technology, monitoring, diagnosis, and affordable packages.",
       url: abs(PATH),
       type: "website",
@@ -39,12 +42,13 @@ const graph = [
   ]),
 ];
 
-export default function Page() {
+export default async function Page() {
+  const data = await getSmartTreatmentPage();
   return (
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <SmartTreatmentPage />
+      <SmartTreatmentPage data={data} />
     </>
   );
 }

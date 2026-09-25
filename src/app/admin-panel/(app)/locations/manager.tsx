@@ -16,21 +16,23 @@ type Doc = Record<string, any>;
 const EMPTY_CITY: Doc = { slug: "", built: true };
 const emptyCentre = (citySlug: string): Doc => ({ slug: "", citySlug, built: true });
 
-type CityTab = "main" | "contact" | "content" | "faqs";
+type CityTab = "main" | "contact" | "content" | "faqs" | "seo";
 const CITY_TABS: { id: CityTab; label: string }[] = [
   { id: "main", label: "Main" },
   { id: "contact", label: "Contact" },
   { id: "content", label: "Content" },
   { id: "faqs", label: "FAQs" },
+  { id: "seo", label: "SEO" },
 ];
 
-type CentreTab = "main" | "contact" | "content" | "facility" | "faqs";
+type CentreTab = "main" | "contact" | "content" | "facility" | "faqs" | "seo";
 const CENTRE_TABS: { id: CentreTab; label: string }[] = [
   { id: "main", label: "Main" },
   { id: "contact", label: "Contact & Hours" },
   { id: "content", label: "Content" },
   { id: "facility", label: "Facility" },
   { id: "faqs", label: "FAQs" },
+  { id: "seo", label: "SEO" },
 ];
 
 // Every array field in city/centre schemas wraps plain strings as [{value}]
@@ -147,6 +149,7 @@ export function LocationsManager({
       heroImage: full.heroImage, hero360Url: full.hero360Url,
       helpline: full.helpline, helplineLabel: full.helplineLabel, whatsapp: full.whatsapp,
       intro: full.intro, faqs: full.faqs, womensHealth: full.womensHealth,
+      metaTitle: full.metaTitle, metaDescription: full.metaDescription, ogTitle: full.ogTitle, ogDescription: full.ogDescription,
     });
     setIsNewCity(false);
     setCityTab("main");
@@ -163,6 +166,7 @@ export function LocationsManager({
       intro: full.intro, nearby: full.nearby, landmarks: full.landmarks, howToReach: full.howToReach, gallery: full.gallery,
       facilities: full.facilities, doctors: full.doctors, treatments: full.treatments, womensHealth: full.womensHealth,
       faqs: full.faqs,
+      metaTitle: full.metaTitle, metaDescription: full.metaDescription, ogTitle: full.ogTitle, ogDescription: full.ogDescription,
     });
     setIsNewCentre(false);
     setCentreTab("main");
@@ -300,6 +304,15 @@ export function LocationsManager({
 
           {cityTab === "faqs" && (
             <FaqsTab faqs={editingCity.faqs ?? []} onChange={(next) => setInCity(["faqs"], next)} />
+          )}
+
+          {cityTab === "seo" && (
+            <>
+              <Field label="Meta title" value={getCity(["metaTitle"])} onChange={(v) => setInCity(["metaTitle"], v)} />
+              <Field label="Meta description" value={getCity(["metaDescription"])} onChange={(v) => setInCity(["metaDescription"], v)} textarea />
+              <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Meta title." value={getCity(["ogTitle"])} onChange={(v) => setInCity(["ogTitle"], v)} />
+              <Field label="OG description" hint="Defaults to Meta description." value={getCity(["ogDescription"])} onChange={(v) => setInCity(["ogDescription"], v)} textarea />
+            </>
           )}
 
           <div className="admin-actions-bar">
@@ -462,6 +475,15 @@ export function LocationsManager({
 
           {centreTab === "faqs" && (
             <FaqsTab faqs={editingCentre.faqs ?? []} onChange={(next) => setInCentre(["faqs"], next)} />
+          )}
+
+          {centreTab === "seo" && (
+            <>
+              <Field label="Meta title" value={getCentre(["metaTitle"])} onChange={(v) => setInCentre(["metaTitle"], v)} />
+              <Field label="Meta description" value={getCentre(["metaDescription"])} onChange={(v) => setInCentre(["metaDescription"], v)} textarea />
+              <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Meta title." value={getCentre(["ogTitle"])} onChange={(v) => setInCentre(["ogTitle"], v)} />
+              <Field label="OG description" hint="Defaults to Meta description." value={getCentre(["ogDescription"])} onChange={(v) => setInCentre(["ogDescription"], v)} textarea />
+            </>
           )}
 
           <div className="admin-actions-bar">

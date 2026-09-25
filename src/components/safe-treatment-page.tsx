@@ -10,77 +10,13 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-
-/* ---------- Data ---------- */
-
-const SAFETY_FEATURES = [
-  {
-    icon: ShieldCheck,
-    title: "Genetic Safety",
-    description:
-      "Strict sample tracking using IVF-grade labels with a rigorous \"double-witness\" protocol — two professionals oversee every critical procedure including sperm freezing, sperm capacitation, oocyte recovery, insemination, micro-injection, embryo transfer, and cryopreservation.",
-  },
-  {
-    icon: Syringe,
-    title: "Infection Prevention",
-    description:
-      "Mandatory infection testing for every patient before treatment begins. Potentially infected samples are stored in separate, dedicated containers to eliminate any risk of cross-contamination.",
-  },
-  {
-    icon: HeartPulse,
-    title: "OHSS-Free Clinic",
-    description:
-      "Bavishi Fertility Institute is an OHSS-free clinic. Our signature prevention protocols have ensured zero severe OHSS cases in over a decade — a record we are deeply proud of.",
-  },
-  {
-    icon: Wind,
-    title: "Class 1000 IVF Labs",
-    description:
-      "Our labs maintain air quality ten times cleaner than European standards. HEPA-filtered laminar flow hoods, AI-integrated trigas incubators with smart alarm systems, and continuous temperature monitoring at 37°C.",
-  },
-  {
-    icon: Baby,
-    title: "Personalised Embryo Transfer",
-    description:
-      "Your ET is personalized not prescribed. Single embryo transfer, where it protects you best. A two-embryo transfer, where it's clinically sound and clearly understood. Every decision made with you, in full light.",
-  },
-  {
-    icon: Microscope,
-    title: "Clinical Safety",
-    description:
-      "National Accreditation Board for Hospitals, an apex organization to accredit, has strict criteria for infrastructure and protocols and SOPs for patient safety. Our centers are NABH accredited or under plan to get accreditation.",
-  },
-  {
-    icon: Lock,
-    title: "Patient Confidentiality",
-    description:
-      "Your medical records, treatment details, and personal information are fully protected with strict confidentiality protocols. Your privacy is non-negotiable.",
-  },
-];
-
-const STATS = [
-  { value: 10, suffix: "+ Years", label: "OHSS Free", sub: "zero severe cases in over a decade" },
-  { value: 1000, suffix: "", label: "Class 1000 (10X Clean Air) IVF Labs", sub: "ten times cleaner than EU standards" },
-  { value: 2, suffix: "x", label: "Double-Witness", sub: "two professionals at every step" },
-  { value: 100, suffix: "%", label: "Infection Screened", sub: "mandatory testing for every patient" },
-];
-
-const PROTOCOLS = [
-  "IVF-grade sample labelling and tracking",
-  "Double-witness protocol for all critical procedures",
-  "Mandatory pre-treatment infection screening",
-  "Separate storage for potentially infected samples",
-  "HEPA-filtered Class 1000 air quality in all labs",
-  "AI-integrated trigas incubators with smart alarms",
-  "Continuous 37°C temperature monitoring",
-  "Regular equipment maintenance and calibration",
-  "Elective personalized embryo transfer (ET) protocol",
-  "Strict patient data confidentiality measures",
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { SAFE_TREATMENT_DEFAULTS, type SafeTreatmentData } from "@/lib/safe-treatment";
 
 /* ---------- Page ---------- */
 
-export function SafeTreatmentPage() {
+export function SafeTreatmentPage({ data = SAFE_TREATMENT_DEFAULTS }: { data?: SafeTreatmentData } = {}) {
+  const { hero, features: SAFETY_FEATURES, stats: STATS, protocols: PROTOCOLS } = data;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -115,21 +51,20 @@ export function SafeTreatmentPage() {
         <div className="container-px relative mx-auto max-w-[1400px] py-20 text-center lg:py-28">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-              <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Safety First, Safety for All
+              <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-              Absolute safety for your{" "}
+              {hero.headline.split(hero.headlineEm)[0]}
               <em className="font-display italic text-[color:var(--rose)]">
-                fertility treatment.
-              </em>
+                {hero.headlineEm}
+              </em>{hero.headline.split(hero.headlineEm)[1]}
             </h1>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-              At Bavishi Fertility Institute, safety isn&#39;t a feature — it&#39;s the foundation of everything we do.
-              Double witnessing, 24x7 cloud monitoring of IVF labs, OHSS free protocol, Class 1000 labs and much more, every detail is engineered to protect you and your future child.
+              {hero.paragraph}
             </p>
           </Reveal>
           <Reveal delay={0.25}>
@@ -138,9 +73,9 @@ export function SafeTreatmentPage() {
                 <Shield className="h-7 w-7 text-[color:var(--rose)]" />
               </div>
               <div className="text-left">
-                <div className="text-xl font-semibold text-[color:var(--plum)]">Our Motto</div>
+                <div className="text-xl font-semibold text-[color:var(--plum)]">{hero.mottoLabel}</div>
                 <div className="text-sm text-[color:var(--plum)]/60">
-                  &ldquo;Safety First, Safety for All&rdquo; — the principle behind every procedure
+                  &ldquo;{hero.mottoText}&rdquo;
                 </div>
               </div>
             </div>
@@ -186,21 +121,24 @@ export function SafeTreatmentPage() {
             subtitle="Every element of your treatment at Bavishi Fertility Institute is governed by world-class safety protocols — because your well-being comes before everything else."
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {SAFETY_FEATURES.map((f, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <f.icon className="h-6 w-6" />
+            {SAFETY_FEATURES.map((f, i) => {
+              const Icon = resolveIcon(f.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">
+                      {f.title}
+                    </h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                      {f.description}
+                    </p>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">
-                    {f.title}
-                  </h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                    {f.description}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>

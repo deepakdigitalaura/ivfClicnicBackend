@@ -356,8 +356,7 @@ export function ServicePage({ slug, content }: { slug: string; content?: Resolve
               return (
                 <a key={slug} href={doctorUrl(doc.slug)} className="group flex flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                   <div className="relative aspect-[3/4] overflow-hidden bg-[color:var(--rose-soft)]/40">
-                    {/* eslint-disable-next-line @next/next/no-img-element */}
-                    <img src={doc.image} alt={`${doc.name} — ${doc.specialty}`} loading="lazy" className="h-full w-full object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
+                    <Image src={doc.image} alt={`${doc.name} — ${doc.specialty}`} fill sizes="(max-width: 640px) 100vw, 50vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
                     <div className="absolute inset-x-0 bottom-0 h-24 bg-gradient-to-t from-black/60 to-transparent" />
                     {doc.experienceLabel && <span className="absolute top-3 right-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--rose)] backdrop-blur">{doc.experienceLabel}</span>}
                   </div>

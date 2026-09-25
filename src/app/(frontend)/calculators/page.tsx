@@ -53,7 +53,7 @@ export default function Page() {
           </nav>
         </div>
 
-        <Calculators />
+        <Calculators as="h1" />
 
         <Footer />
         <FloatingCTA />

@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
 import {
-  ArrowRight, Calendar, MessageCircle, Shield, CheckCircle2,
-  Heart, Baby, RefreshCcw, Stethoscope, ChevronDown,
-  Clock, Users, Award, ShieldCheck,
+  ArrowRight, Calendar, MessageCircle, Shield,
+  Clock, Users, Award, ShieldCheck, ChevronDown, Heart,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal, Stagger, StaggerItem, Magnetic, Float, Counter } from "@/components/motion";
@@ -11,72 +10,8 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import { DEFAULT_FAQS } from "@/lib/suraksha-kavach-faqs";
-
-/* ---------- Data ---------- */
-
-const BENEFITS = [
-  {
-    icon: ShieldCheck,
-    title: "Financial Peace of Mind",
-    description: "Your investment is protected. The program covers multiple cycles, giving you the best possible chance of success.",
-  },
-  {
-    icon: RefreshCcw,
-    title: "Multiple IVF Cycles",
-    description: "The package covers multiple IVF/ICSI cycles, giving you the best possible chance of success without additional financial burden.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Comprehensive Treatment",
-    description: "Includes consultations, investigations, medications, procedures, embryology, and all lab work — no hidden costs, no surprises.",
-  },
-  {
-    icon: Baby,
-    title: "Dedicated to Your Dream",
-    description: "Our commitment is to support you through every step of your fertility journey — with expert care, advanced science, and unwavering dedication.",
-  },
-];
-
-const STEPS = [
-  {
-    step: "01",
-    title: "Initial Consultation",
-    description: "Meet our senior fertility specialist for a thorough evaluation. We assess your medical history, run diagnostics, and determine your eligibility for Suraksha Kavach.",
-  },
-  {
-    step: "02",
-    title: "Personalised Treatment Plan",
-    description: "Our team designs a customised IVF protocol tailored to your unique physiology. Every detail is planned — from medication dosage to embryo transfer strategy.",
-  },
-  {
-    step: "03",
-    title: "Enrol in Suraksha Kavach",
-    description: "Once eligible, you enrol in the program with complete transparency on what's included. One package, one price, complete peace of mind.",
-  },
-  {
-    step: "04",
-    title: "Treatment & Monitoring",
-    description: "Begin your IVF journey with priority care. Our team monitors every stage — stimulation, retrieval, fertilisation, and embryo development — with precision.",
-  },
-  {
-    step: "05",
-    title: "Embryo Transfer & Support",
-    description: "The best-quality embryos are transferred under ultrasound guidance. Post-transfer, you receive dedicated support through the crucial two-week wait and beyond.",
-  },
-  {
-    step: "06",
-    title: "A Baby Is Born",
-    description: "The program supports you through multiple cycles to maximise your chances. If additional cycles are needed, they're covered.",
-  },
-];
-
-const STATS = [
-  { value: 30000, suffix: "+", label: "Successful Pregnancies", sub: "across all Bavishi Fertility Institute centres" },
-  { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
-  { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
-  { value: 1998, suffix: "", label: "Est.", sub: "pioneering fertility care" },
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { SURAKSHA_KAVACH_DEFAULTS, type SurakshaKavachData } from "@/lib/suraksha-kavach";
 
 /* ---------- FAQ Accordion ---------- */
 
@@ -110,9 +45,9 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 
 /* ---------- Page ---------- */
 
-export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string; a: string }[] } = {}) {
+export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?: SurakshaKavachData } = {}) {
   const [openFaq, setOpenFaq] = useState(0);
-  const FAQS = faqsOverride && faqsOverride.length > 0 ? faqsOverride : DEFAULT_FAQS;
+  const { hero, story, benefits: BENEFITS, stats: STATS, steps: STEPS, faqs: FAQS } = data;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -146,18 +81,17 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
           <div>
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> India&#39;s Only IVF Protection Program
+                <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                No tall claims, <em className="font-display italic text-[color:var(--rose)]">but a solid promise.</em>
+                {hero.headline.split(hero.headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                Suraksha Kavach is a unique and only one-of-its-kind package in the entire world.
-                It covers multiple IVF cycles and offers complete financial protection — for you, or for someone you love.
+                {hero.paragraph}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
@@ -166,8 +100,8 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
                   <Award className="h-6 w-6 text-[color:var(--rose)]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-semibold text-[color:var(--plum)]">30,000+ Happy Families</div>
-                  <div className="text-sm text-[color:var(--plum)]/60">trusted Bavishi Fertility Institute for their parenthood journey</div>
+                  <div className="text-2xl font-semibold text-[color:var(--plum)]">{hero.badgeNumber}</div>
+                  <div className="text-sm text-[color:var(--plum)]/60">{hero.badgeLabel}</div>
                 </div>
               </div>
             </Reveal>
@@ -192,7 +126,7 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
                   className="relative overflow-hidden rounded-[2rem] bg-[color:var(--ivory)] shadow-lift"
                 >
                   <img
-                    src="/assets/hero-mother-baby.jpg"
+                    src={hero.image}
                     alt="Happy mother holding her newborn baby — the promise of Suraksha Kavach"
                     className="aspect-[4/5] w-full object-cover"
                   />
@@ -220,27 +154,16 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
             </Reveal>
             <div>
               <Reveal>
-                <Eyebrow>What is Suraksha Kavach?</Eyebrow>
+                <Eyebrow>{story.eyebrow}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  The world&#39;s only <em className="font-display italic text-[color:var(--rose)]">IVF protection program.</em>
+                  {story.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{story.heading.em}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
-                  <p>
-                    IVF is an emotional and financial journey. At Bavishi Fertility Institute, we believe no couple
-                    should have to choose between their dream of parenthood and financial security.
-                  </p>
-                  <p>
-                    Suraksha Kavach is our revolutionary protection program — the only one of its kind in the
-                    entire world. It covers <strong className="text-[color:var(--plum)]">multiple IVF cycles with complete financial protection</strong>.
-                  </p>
-                  <p>
-                    Backed by over 25 years of expertise and thousands of successful pregnancies,
-                    Suraksha Kavach is designed to give you the strongest possible chance of parenthood.
-                  </p>
+                  {story.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
                 </div>
               </Reveal>
             </div>
@@ -258,17 +181,20 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
             subtitle="Suraksha Kavach takes the financial uncertainty out of IVF — so you can focus entirely on what matters most."
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {BENEFITS.map((b, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <b.icon className="h-6 w-6" />
+            {BENEFITS.map((b, i) => {
+              const Icon = resolveIcon(b.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{b.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{b.description}</p>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{b.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{b.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>

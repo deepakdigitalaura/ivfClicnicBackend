@@ -25,61 +25,51 @@ import { doctorBySlug, reviewerNode, physicianSchema } from "@/lib/doctors";
 
 export type TreatmentRef = { slug: string; name: string; href: string };
 
-/** Treatment pages pulled from the site until their content is corrected.
- *  "embryo-donation": client flagged the current copy as non-compliant with
- *  India's ART Act (it implies pre-made donor embryos, which the Act does
- *  not permit — a full IVF cycle with separate egg + sperm donors is
- *  required instead). Remove from this set once the page is rewritten.
- *  "varicocele": client wants a full rewrite (currently surgery-first
- *  throughout — title, hero, benefits, process — but the client does not
- *  want to promote varicocele surgery; page should present surgery vs
- *  ART-IVF neutrally, with grades and a subclinical-needs-no-treatment
- *  note). Client explicitly said skip/hide it until that rewrite is done.
- *  "surrogacy": client flagged current copy as not legally/factually
- *  correct; hidden until content is corrected, then can be unhidden.
- *  Consumers (getTreatment/getTreatments, sitemap) must respect this. */
-export const HIDDEN_TREATMENT_SLUGS = new Set(["embryo-donation", "varicocele", "surrogacy"]);
+/** Treatment pages awaiting client sign-off on corrected copy.
+ *  embryo-donation, surrogacy (approved 2026-08-29) and varicocele
+ *  (approved 2026-09-25) are no longer unlisted. */
+export const UNLISTED_TREATMENT_SLUGS = new Set<string>([]);
 
 /** name + canonical href for every treatment we link to. */
 export const TREATMENTS_REGISTRY: Record<string, TreatmentRef> = {
-  ivf: { slug: "ivf", name: "IVF", href: "/what-is-ivf" },
-  icsi: { slug: "icsi", name: "ICSI", href: "/icsi-treatment-intracytoplasmic-sperm-injection" },
-  iui: { slug: "iui", name: "IUI", href: "/intra-uterine-insemination-iui" },
-  picsi: { slug: "picsi", name: "PICSI", href: "/physiological-intracytoplasmic-sperm-injection-picsi" },
-  imsi: { slug: "imsi", name: "IMSI", href: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi" },
-  macs: { slug: "macs", name: "MACS", href: "/magnetic-activated-cell-sorting-macs" },
-  "spindle-view-icsi": { slug: "spindle-view-icsi", name: "Spindle View ICSI", href: "/spindle-view-icsi" },
-  "blastocyst-transfer": { slug: "blastocyst-transfer", name: "Blastocyst Transfer", href: "/blastocyst-culture-blastocyst-transfer" },
-  "laser-hatching": { slug: "laser-hatching", name: "Laser Assisted Hatching", href: "/laser-assisted-hatching" },
-  "ivf-failure": { slug: "ivf-failure", name: "IVF Failure", href: "/ivf-failure" },
-  "ivf-evaluation": { slug: "ivf-evaluation", name: "IVF Evaluation", href: "/ivf-evaluation" },
-  "era-test": { slug: "era-test", name: "ERA Test", href: "/era-test" },
-  "egg-donation": { slug: "egg-donation", name: "Egg Donation", href: "/egg-donation" },
-  "sperm-donation": { slug: "sperm-donation", name: "Sperm Donation", href: "/sperm-donation" },
-  "embryo-donation": { slug: "embryo-donation", name: "Embryo Donation", href: "/embryo-donation" },
-  surrogacy: { slug: "surrogacy", name: "Surrogacy", href: "/surrogacy" },
-  pgt: { slug: "pgt", name: "PGT", href: "/pgt" },
+  ivf: { slug: "ivf", name: "IVF", href: "/treatments/ivf" },
+  icsi: { slug: "icsi", name: "ICSI", href: "/treatments/icsi" },
+  iui: { slug: "iui", name: "IUI", href: "/treatments/iui" },
+  picsi: { slug: "picsi", name: "PICSI", href: "/treatments/picsi" },
+  imsi: { slug: "imsi", name: "IMSI", href: "/treatments/imsi" },
+  macs: { slug: "macs", name: "MACS", href: "/treatments/macs" },
+  "spindle-view-icsi": { slug: "spindle-view-icsi", name: "Spindle View ICSI", href: "/treatments/spindle-view-icsi" },
+  "blastocyst-transfer": { slug: "blastocyst-transfer", name: "Blastocyst Transfer", href: "/treatments/blastocyst-transfer" },
+  "laser-hatching": { slug: "laser-hatching", name: "Laser Assisted Hatching", href: "/treatments/laser-hatching" },
+  "ivf-failure": { slug: "ivf-failure", name: "IVF Failure", href: "/treatments/ivf-failure" },
+  "ivf-evaluation": { slug: "ivf-evaluation", name: "IVF Evaluation", href: "/treatments/ivf-evaluation" },
+  "era-test": { slug: "era-test", name: "ERA Test", href: "/treatments/era-test" },
+  "egg-donation": { slug: "egg-donation", name: "Egg Donation", href: "/treatments/egg-donation" },
+  "sperm-donation": { slug: "sperm-donation", name: "Sperm Donation", href: "/treatments/sperm-donation" },
+  "embryo-donation": { slug: "embryo-donation", name: "Embryo Donation", href: "/treatments/embryo-donation" },
+  surrogacy: { slug: "surrogacy", name: "Surrogacy", href: "/treatments/surrogacy" },
+  pgt: { slug: "pgt", name: "PGT", href: "/treatments/pgt" },
   "male-infertility": { slug: "male-infertility", name: "Male Infertility", href: "/treatments/male-infertility" },
   "female-infertility": { slug: "female-infertility", name: "Female Infertility", href: "/treatments/female-infertility" },
   "fertility-preservation": { slug: "fertility-preservation", name: "Fertility Preservation", href: "/treatments/advanced-fertility-techniques" },
-  endometriosis: { slug: "endometriosis", name: "Endometriosis", href: "/endometriosis" },
-  azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/azoospermia" },
-  cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/cryopreservation" },
-  "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/egg-freezing" },
+  endometriosis: { slug: "endometriosis", name: "Endometriosis", href: "/treatments/endometriosis" },
+  azoospermia: { slug: "azoospermia", name: "Zero Sperm Count (Azoospermia)", href: "/treatments/azoospermia" },
+  cryopreservation: { slug: "cryopreservation", name: "Cryopreservation", href: "/treatments/cryopreservation" },
+  "egg-freezing": { slug: "egg-freezing", name: "Egg Freezing", href: "/treatments/egg-freezing" },
   "recurrent-miscarriage": { slug: "recurrent-miscarriage", name: "Recurrent Miscarriage", href: "/treatments" },
   // Male Infertility
-  oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
-  asthenospermia: { slug: "asthenospermia", name: "Low Sperm Motility (Asthenospermia)", href: "/asthenospermia" },
-  "surgical-sperm-retrieval": { slug: "surgical-sperm-retrieval", name: "Surgical Sperm Retrieval", href: "/surgical-sperm-retrieval" },
-  varicocele: { slug: "varicocele", name: "Varicocele", href: "/varicocele" },
-  "erectile-dysfunction": { slug: "erectile-dysfunction", name: "Erectile Dysfunction", href: "/erectile-dysfunction" },
+  oligospermia: { slug: "oligospermia", name: "Low Sperm Count (Oligospermia)", href: "/treatments/oligospermia" },
+  asthenospermia: { slug: "asthenospermia", name: "Low Sperm Motility (Asthenospermia)", href: "/treatments/asthenospermia" },
+  "surgical-sperm-retrieval": { slug: "surgical-sperm-retrieval", name: "Surgical Sperm Retrieval", href: "/treatments/surgical-sperm-retrieval" },
+  varicocele: { slug: "varicocele", name: "Varicocele", href: "/treatments/varicocele" },
+  "erectile-dysfunction": { slug: "erectile-dysfunction", name: "Erectile Dysfunction", href: "/treatments/erectile-dysfunction" },
   // Female Infertility
-  "conceive-naturally": { slug: "conceive-naturally", name: "Conceive Naturally", href: "/conceive-naturally" },
-  "prp-infertility": { slug: "prp-infertility", name: "PRP Infertility", href: "/prp-infertility" },
-  pcos: { slug: "pcos", name: "PMOS-PCOS", href: "/pcos" },
-  "ovarian-reserve": { slug: "ovarian-reserve", name: "Poor Ovarian Reserve / Low AMH", href: "/ovarian-reserve" },
-  "ovarian-rejuvenation": { slug: "ovarian-rejuvenation", name: "Ovarian Rejuvenation", href: "/ovarian-rejuvenation" },
-  fibroids: { slug: "fibroids", name: "Fibroids", href: "/fibroids" },
+  "conceive-naturally": { slug: "conceive-naturally", name: "Conceive Naturally", href: "/treatments/conceive-naturally" },
+  "prp-infertility": { slug: "prp-infertility", name: "PRP Infertility", href: "/treatments/prp-infertility" },
+  pcos: { slug: "pcos", name: "PMOS-PCOS", href: "/treatments/pcos" },
+  "ovarian-reserve": { slug: "ovarian-reserve", name: "Poor Ovarian Reserve / Low AMH", href: "/treatments/ovarian-reserve" },
+  "ovarian-rejuvenation": { slug: "ovarian-rejuvenation", name: "Ovarian Rejuvenation", href: "/treatments/ovarian-rejuvenation" },
+  fibroids: { slug: "fibroids", name: "Fibroids", href: "/treatments/fibroids" },
 };
 
 export const treatmentRef = (slug: string): TreatmentRef =>
@@ -153,7 +143,7 @@ export type Treatment = {
   shortName: string;
   alternateName?: string;
   breadcrumbName: string;
-  meta: { title: string; description: string; ogImage: string };
+  meta: { title: string; description: string; ogTitle?: string; ogDescription?: string; ogImage: string };
   /** schema.org MedicalProcedure fields. */
   procedure: {
     procedureType?: string;
@@ -190,7 +180,7 @@ export type Treatment = {
 
 export const ivf: Treatment = {
   slug: "ivf",
-  href: "/what-is-ivf",
+  href: "/treatments/ivf",
   name: "IVF Treatment",
   shortName: "IVF",
   alternateName: "Test Tube Baby",
@@ -471,7 +461,7 @@ const WHY_BAVISHI_CLASS1000_EMBRYOLOGY_AWARDED: IconCard[] = [
 
 export const ivfFailure: Treatment = {
   slug: "ivf-failure",
-  href: "/ivf-failure",
+  href: "/treatments/ivf-failure",
   name: "IVF Failure — Diagnosis & Treatment",
   shortName: "IVF Failure",
   breadcrumbName: "IVF Failure",
@@ -616,7 +606,7 @@ export const ivfFailure: Treatment = {
 
 export const iui: Treatment = {
   slug: "iui",
-  href: "/intra-uterine-insemination-iui",
+  href: "/treatments/iui",
   name: "IUI Treatment (Intrauterine Insemination)",
   shortName: "IUI",
   alternateName: "Artificial Insemination",
@@ -764,7 +754,7 @@ export const iui: Treatment = {
 
 export const icsi: Treatment = {
   slug: "icsi",
-  href: "/icsi-treatment-intracytoplasmic-sperm-injection",
+  href: "/treatments/icsi",
   name: "ICSI Treatment (Intracytoplasmic Sperm Injection)",
   shortName: "ICSI",
   alternateName: "Intracytoplasmic Sperm Injection",
@@ -924,7 +914,7 @@ export const icsi: Treatment = {
 
 export const picsi: Treatment = {
   slug: "picsi",
-  href: "/physiological-intracytoplasmic-sperm-injection-picsi",
+  href: "/treatments/picsi",
   name: "PICSI (Physiological Intracytoplasmic Sperm Injection)",
   shortName: "PICSI",
   alternateName: "Physiological ICSI",
@@ -1045,7 +1035,7 @@ export const picsi: Treatment = {
 
 export const imsi: Treatment = {
   slug: "imsi",
-  href: "/intracytoplasmic-morphologically-selected-sperm-injection-imsi",
+  href: "/treatments/imsi",
   name: "IMSI (Intracytoplasmic Morphologically Selected Sperm Injection)",
   shortName: "IMSI",
   alternateName: "Morphologically Selected Sperm Injection",
@@ -1166,7 +1156,7 @@ export const imsi: Treatment = {
 
 export const macs: Treatment = {
   slug: "macs",
-  href: "/magnetic-activated-cell-sorting-macs",
+  href: "/treatments/macs",
   name: "MACS (Magnetic-Activated Cell Sorting)",
   shortName: "MACS",
   alternateName: "Magnetic-Activated Cell Sorting",
@@ -1285,7 +1275,7 @@ export const macs: Treatment = {
 
 export const spindleViewIcsi: Treatment = {
   slug: "spindle-view-icsi",
-  href: "/spindle-view-icsi",
+  href: "/treatments/spindle-view-icsi",
   name: "Spindle View ICSI (Polscope)",
   shortName: "Spindle View ICSI",
   alternateName: "Polscope ICSI",
@@ -1405,7 +1395,7 @@ export const spindleViewIcsi: Treatment = {
 
 export const blastocystTransfer: Treatment = {
   slug: "blastocyst-transfer",
-  href: "/blastocyst-culture-blastocyst-transfer",
+  href: "/treatments/blastocyst-transfer",
   name: "Blastocyst Culture & Transfer",
   shortName: "Blastocyst Transfer",
   alternateName: "Blastocyst Culture",
@@ -1540,7 +1530,7 @@ export const blastocystTransfer: Treatment = {
 
 export const laserHatching: Treatment = {
   slug: "laser-hatching",
-  href: "/laser-assisted-hatching",
+  href: "/treatments/laser-hatching",
   name: "Laser-Assisted Hatching",
   shortName: "Laser Hatching",
   alternateName: "Assisted Hatching",
@@ -1672,7 +1662,7 @@ export const laserHatching: Treatment = {
 
 export const eggDonation: Treatment = {
   slug: "egg-donation",
-  href: "/egg-donation",
+  href: "/treatments/egg-donation",
   name: "Egg Donation Treatment",
   shortName: "Egg Donation",
   alternateName: "Oocyte Donation",
@@ -1836,7 +1826,7 @@ export const eggDonation: Treatment = {
 
 export const spermDonation: Treatment = {
   slug: "sperm-donation",
-  href: "/sperm-donation",
+  href: "/treatments/sperm-donation",
   name: "Sperm Donation Treatment",
   shortName: "Sperm Donation",
   alternateName: "Donor Sperm Treatment",
@@ -1986,7 +1976,7 @@ export const spermDonation: Treatment = {
 
 export const embryoDonation: Treatment = {
   slug: "embryo-donation",
-  href: "/embryo-donation",
+  href: "/treatments/embryo-donation",
   name: "Embryo Donation Treatment",
   shortName: "Embryo Donation",
   alternateName: "Donor Embryo Treatment",
@@ -2032,10 +2022,8 @@ export const embryoDonation: Treatment = {
     subtitle: "A single donor pathway when both eggs and sperm are needed.",
     items: [
       "A pathway to pregnancy when both eggs and sperm are needed.",
-      "Embryos created from young, screened, genetically tested donors.",
+      "Embryos created from young, screened donors.",
       "You carry and deliver the pregnancy yourself.",
-      "Often simpler and more affordable than two separate donor programmes.",
-      "Ready donor embryos mean minimal waiting.",
       "The entire treatment is kept completely confidential.",
     ],
   },
@@ -2047,7 +2035,7 @@ export const embryoDonation: Treatment = {
       "The woman has a healthy uterus and can carry a pregnancy but cannot produce viable eggs.",
       "Poor egg quality combined with severe male-factor infertility or azoospermia.",
       "Repeated IVF failures with own or single-donor gametes.",
-      "Couples who prefer a ready donor-embryo pathway.",
+      "Couples at high risk of genetic disease who are not willing for PGT or PGT is not possible.",
     ],
   },
   process: {
@@ -2055,7 +2043,7 @@ export const embryoDonation: Treatment = {
     subtitle: "A clear, supported pathway — much like a frozen embryo transfer.",
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Consultation & Counselling", d: "Your specialist confirms embryo donation is right for you and obtains informed consent from both partners." },
-      { icon: Sparkles, n: "02", t: "Embryo Selection & Matching", d: "A screened donor embryo is matched to you from embryos created with donor eggs and donor sperm." },
+      { icon: Sparkles, n: "02", t: "Sperm and egg donor recruitment", d: "Both sperm and egg donor are recruited as per match with both partners. Egg donor stimulation and egg collection is done. IVF – ICSI is done with donor sperm." },
       { icon: Activity, n: "03", t: "Uterine Preparation", d: "Your uterine lining is prepared with medication to create the ideal environment for implantation." },
       { icon: Baby, n: "04", t: "Embryo Transfer", d: "The selected donor embryo is transferred into your uterus in a simple, painless procedure." },
       { icon: HeartPulse, n: "05", t: "Pregnancy Test", d: "A Beta-HCG blood test about two weeks later confirms the outcome." },
@@ -2078,10 +2066,7 @@ export const embryoDonation: Treatment = {
     items: [
       { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
       { icon: FlaskConical, t: "Class 1000 IVF Labs", d: "Advanced embryology labs where donor embryos are cultured and transferred with precision." },
-      { icon: ShieldCheck, t: "Screened Donor Embryos", d: "Embryos from healthy, genetically tested and medically screened egg and sperm donors." },
-      { icon: Layers, t: "Ready Donor Pathway", d: "An established donor programme means donor embryos are generally available without long waits." },
       { icon: Eye, t: "Complete Confidentiality", d: "Your treatment and donor matching are handled with total privacy at every step." },
-      { icon: ListChecks, t: "Ethical & ART-Compliant", d: "Informed consent from both partners and full compliance with India's ART Act." },
     ],
   },
   success: {
@@ -2099,7 +2084,7 @@ export const embryoDonation: Treatment = {
     includes: [
       "Specialist consultation and counselling",
       "Informed-consent and documentation process",
-      "Donor-embryo selection and matching",
+      "Donor selection and matching",
       "Uterine-preparation medication",
       "Embryo transfer procedure",
       "Pregnancy test and follow-up",
@@ -2120,7 +2105,7 @@ export const embryoDonation: Treatment = {
     { q: "How is it different from egg or sperm donation?", a: "Egg or sperm donation replaces only one gamete; embryo donation uses donor eggs and donor sperm together." },
     { q: "Will the baby be genetically related to us?", a: "No. The baby will not inherit either partner's genes, but the mother carries and delivers the baby herself." },
     { q: "How are the donor embryos screened?", a: "They are created from young egg and sperm donors who pass full medical, genetic and psychological screening." },
-    { q: "Is there a waiting time?", a: "Bavishi Fertility Institute's established donor programme means donor embryos are generally available without long waits." },
+    { q: "Is there a waiting time?", a: "Bavishi Fertility Institute's established donor programme means embryo donation is generally available without long waits." },
     { q: "Does the procedure differ from normal IVF?", a: "No. The uterus is prepared, a donor embryo is transferred, and a pregnancy test follows — much like a frozen embryo transfer." },
     { q: "Is embryo donation legal in India?", a: "Yes. It requires informed consent from both partners and follows the ART Act." },
     { q: "What are the chances of success?", a: "Success depends on the recipient's uterine health and age, embryo quality and other factors. Outcomes are individual and cannot be guaranteed." },
@@ -2625,22 +2610,23 @@ export const varicocele = defineTreatment({
     h1: "Varicocele Treatment",
     h1Em: "& Microsurgery",
     tagline:
-      "A varicocele — enlarged veins in the scrotum — is one of the commonest and most correctable causes of male infertility. Microsurgery can improve sperm quality and natural fertility.",
-    badges: ["Microsurgical Repair", "Day-care Surgery", "Since 1998", "Fertility-focused"],
+      "A varicocele — enlarged veins in the scrotum — is one of the commonest and most correctable causes of male infertility. Microsurgery or IVF-ICSI can help fertility. Which of these two is more suitable for you depends on many factors.",
+    badges: ["Microsurgical Repair", "Microsurgery vs IVF-ICSI", "Since 1998", "Fertility-focused"],
     image: "/assets/conditions/varicocele.png",
     imageAlt: "Varicocele treatment and microsurgery at Bavishi Fertility Institute",
   },
   whatIs: {
     heading: { lead: "What is a", em: "Varicocele?" },
     paragraphs: [
-      "A varicocele is an enlargement of the veins within the scrotum, similar to a varicose vein in the leg. It is found in about 15% of all men and in up to 40% of men with infertility, and it can raise testicular temperature and impair sperm production.",
-      "Not every varicocele needs treatment. When it is linked to a low sperm count, poor motility, abnormal shape or testicular discomfort, microsurgical varicocelectomy can improve sperm quality and, in many couples, the chance of natural conception.",
+      "A varicocele is an enlargement of the veins within the scrotum, similar to a varicose vein in the leg. It happens when the valves that should direct blood back toward the heart weaken, letting blood pool and the veins swell. It is found in about 15% of all men and in up to 40% of men with infertility, and it can raise testicular temperature and impair sperm production.",
+      "Varicoceles are graded by how easily they can be felt. A Grade I (subclinical) varicocele is detected only on straining or on ultrasound and is not usually felt on examination. A Grade II (moderate) varicocele can be felt on examination without straining. A Grade III (large) varicocele is visibly swollen and easily palpable. Grade matters, but it is only one part of the picture — the decision to treat rests on the grade together with semen parameters, symptoms and fertility goals.",
+      "Not every varicocele needs treatment. A subclinical, symptomless varicocele with normal semen parameters is usually left alone and simply monitored. When treatment is appropriate, couples usually have two paths: microsurgical varicocelectomy to correct the underlying cause, or assisted reproduction such as IUI or IVF-ICSI to work around it directly. Both can lead to a pregnancy — the right one depends on the grade, current sperm parameters, the female partner's age and fertility, and how much time you have to try naturally.",
     ],
     aside: BFI_ASIDE,
   },
   benefits: {
     heading: { lead: "The advantages of", em: "varicocele repair" },
-    subtitle: "Correcting a significant varicocele addresses a treatable, underlying cause.",
+    subtitle: "Correcting a significant varicocele addresses the underlying cause — an alternative to going straight to IUI or IVF-ICSI.",
     items: [
       "Can improve sperm count, motility and morphology.",
       "May raise the chance of natural conception.",
@@ -2650,37 +2636,39 @@ export const varicocele = defineTreatment({
     ],
   },
   whoNeedsIt: {
-    heading: { lead: "Who may", em: "benefit" },
-    subtitle: "Treatment is considered when a varicocele is affecting fertility or comfort.",
+    heading: { lead: "When repair is", em: "considered" },
+    subtitle: "Not every varicocele needs treatment — a subclinical or symptomless varicocele with normal semen parameters is usually just monitored. Repair is typically considered when:",
     items: [
-      "A palpable varicocele with abnormal semen parameters.",
-      "Male infertility with no other clear cause.",
-      "Progressively worsening sperm quality on repeat tests.",
-      "Testicular pain or a feeling of heaviness.",
-      "Reduced testicular size on the affected side.",
+      "A Grade II or III varicocele is present with abnormal semen parameters.",
+      "Male infertility has no other clear cause.",
+      "Sperm quality is progressively worsening on repeat tests.",
+      "There is testicular pain, dragging discomfort or heaviness.",
+      "Testicular size is reduced on the affected side.",
     ],
   },
   process: {
-    heading: { lead: "How it", em: "is treated" },
-    subtitle: "Careful selection, then precise microsurgical correction.",
+    heading: { lead: "What to expect", em: "in evaluation & treatment" },
+    subtitle: "From diagnosis to choosing the right path for you.",
     steps: [
-      { icon: ClipboardCheck, n: "01", t: "Evaluation", d: "Examination plus scrotal Doppler ultrasound to confirm and grade the varicocele." },
-      { icon: Beaker, n: "02", t: "Semen Analysis", d: "Sperm parameters are measured to decide whether repair is likely to help." },
-      { icon: Target, n: "03", t: "Microsurgical Varicocelectomy", d: "The affected veins are tied off through a small incision under magnification." },
-      { icon: Leaf, n: "04", t: "Recovery", d: "A quick, day-care recovery with simple aftercare and minimal downtime." },
-      { icon: FlaskConical, n: "05", t: "Reassessment", d: "Repeat semen analysis at three months guides the next step if needed." },
+      { icon: ClipboardCheck, n: "01", t: "Examination", d: "Physical examination standing and lying down, including a straining (Valsalva) test to detect and grade the varicocele." },
+      { icon: ScanLine, n: "02", t: "Doppler Ultrasound", d: "Scrotal Doppler confirms the diagnosis, grades the varicocele and checks blood flow." },
+      { icon: Beaker, n: "03", t: "Semen Analysis", d: "Sperm parameters are measured to see whether — and how much — treatment could help." },
+      { icon: ListChecks, n: "04", t: "Choosing Your Path", d: "Grade, semen parameters, symptoms, the female partner's age and your timeline decide between observation, microsurgical repair, or IUI/IVF-ICSI." },
+      { icon: Target, n: "05", t: "Microsurgical Varicocelectomy", d: "If repair is chosen, the affected veins are tied off through a small incision under magnification, preserving the artery and lymphatics." },
+      { icon: Leaf, n: "06", t: "Recovery", d: "A quick, day-care recovery with simple aftercare — most men resume routine activity within days to two weeks." },
+      { icon: FlaskConical, n: "07", t: "Reassessment", d: "Repeat semen analysis at about three months; if parameters haven't improved enough, IUI or IVF-ICSI remains the fallback." },
     ],
-    note: "Microsurgery preserves the artery and lymphatics, lowering the risk of recurrence and complications.",
+    note: "A small, subclinical varicocele with normal semen parameters is usually monitored, not treated. Microsurgery preserves the artery and lymphatics, lowering recurrence risk — but when time matters, symptoms are absent, or parameters stay low, IUI or IVF-ICSI gives a direct route to pregnancy without waiting on repair to work.",
   },
   success: {
     factors: [
-      "Varicocele grade and whether it is one- or two-sided",
-      "Baseline sperm parameters",
-      "The female partner's age and fertility",
-      "Surgical technique — microsurgery gives the best results",
-      "Time allowed for sperm to recover after surgery",
+      "The varicocele grade and whether observation, repair or assisted reproduction is the better fit",
+      "Whether the varicocele is one- or two-sided",
+      "Baseline sperm parameters — repair helps more when parameters aren't severely low",
+      "The female partner's age and fertility — often the deciding factor toward IUI or IVF-ICSI",
+      "How much time you have before IVF-ICSI becomes the more time-efficient choice",
     ],
-    note: "Many men see improved sperm parameters after microsurgery, though results vary and a pregnancy cannot be guaranteed.",
+    note: "There's no universally 'better' option — microsurgery treats the underlying cause and may help future cycles too, while IUI or IVF-ICSI works around it directly. We give you an honest comparison for your specific case, not a one-size-fits-all recommendation.",
   },
   risks: {
     heading: { lead: "Risks &", em: "considerations" },
@@ -2691,17 +2679,19 @@ export const varicocele = defineTreatment({
     ],
   },
   faqs: [
-    { q: "Does every varicocele need surgery?", a: "No. Treatment is advised mainly when a varicocele is linked to abnormal semen parameters, infertility or pain. Small, symptomless varicoceles often need no treatment." },
-    { q: "Will surgery improve my fertility?", a: "Microsurgical repair improves sperm count, motility or morphology in many men and can raise the chance of natural conception, though results vary." },
+    { q: "Does every varicocele need surgery?", a: "No. A subclinical, symptomless varicocele with normal semen parameters is usually just monitored. Treatment is advised mainly when a Grade II or III varicocele is linked to abnormal semen parameters, infertility or pain." },
+    { q: "Should I choose microsurgery or go straight to IUI/IVF-ICSI?", a: "It depends on the varicocele grade, your current sperm parameters, symptoms, the female partner's age and fertility, and how much time you have. Repair treats the underlying cause and can help natural conception and future cycles; IUI/IVF-ICSI works around the problem directly and is often the faster route when the female partner's age is a factor. We'll give you a specific recommendation after evaluation." },
+    { q: "What happens if a varicocele is left untreated?", a: "An untreated varicocele is not life-threatening and may cause no problems at all, but in some men it can affect semen quality over time or, rarely, lead to some testicular shrinkage. It's worth discussing the risks and benefits of treatment versus monitoring with your specialist." },
     { q: "What is microsurgical varicocelectomy?", a: "A precise, microscope-assisted operation that ties off the enlarged veins while preserving the testicular artery and lymphatics, giving high success and low recurrence." },
-    { q: "How long is recovery?", a: "It is a day-care procedure. Most men return to routine activities within a few days, avoiding strenuous activity for a short period." },
-    { q: "When will I know if it worked?", a: "A repeat semen analysis at about three months — a full sperm-production cycle — shows the improvement." },
+    { q: "How long is recovery?", a: "It is a day-care procedure. Open surgery typically needs a couple of weeks' recovery, while minimally invasive techniques need about one to two weeks; most men avoid strenuous activity for a short period." },
+    { q: "When will I know if it worked?", a: "A repeat semen analysis at about three months — a full sperm-production cycle — shows the improvement; one year after surgery, further improvement is unlikely. If it hasn't helped enough, IUI or IVF-ICSI remains the fallback." },
+    { q: "Does a varicocele cause erectile dysfunction or affect growth?", a: "No — a varicocele does not typically cause erectile dysfunction, and it is unlikely to affect a teenager's physical growth or development. A teenage son found to have a varicocele should still be evaluated by a specialist, since treatment decisions depend on size, symptoms and any fertility concerns." },
   ],
   related: ["oligospermia", "asthenospermia", "azoospermia", "icsi", "ivf"],
   cta: {
     heading: "Diagnosed with a",
     headingEm: "varicocele?",
-    subtitle: "Find out whether microsurgical repair can improve your fertility — book a consultation with our andrology team.",
+    subtitle: "Find out whether microsurgical repair or IVF-ICSI is the better route for your fertility — book a consultation with our andrology team.",
   },
 });
 
@@ -4236,7 +4226,7 @@ export const surrogacy = defineTreatment({
   name: "Surrogacy Treatment",
   shortName: "Surrogacy",
   alternateName: "Gestational Surrogacy",
-  reviewerSlug: "falguni-bavishi",
+  reviewerSlug: "himanshu-bavishi",
   meta: {
     title: "Surrogacy Treatment — Gestational Surrogacy — Bavishi Fertility Institute",
     description:
@@ -4263,7 +4253,7 @@ export const surrogacy = defineTreatment({
   whatIs: {
     heading: { lead: "What is", em: "Surrogacy?" },
     paragraphs: [
-      "In gestational surrogacy, an embryo created through IVF — using the intended parents' or donor eggs and sperm — is carried by another woman, the gestational surrogate. She carries and delivers the baby but has no genetic relationship to the child.",
+      "In gestational surrogacy, an embryo created through IVF — using the intended parents' or donor eggs or donor sperm — is carried by another woman, the gestational surrogate. She carries and delivers the baby but has no genetic relationship to the child.",
       "Surrogacy is considered when a woman cannot carry a pregnancy herself — for example after hysterectomy, with a severe uterine problem, or where pregnancy would be medically dangerous. In India it is governed by the Surrogacy (Regulation) Act, and we support intended parents through the entire medical and legal process.",
     ],
     aside: BFI_ASIDE,
@@ -4275,7 +4265,7 @@ export const surrogacy = defineTreatment({
       "Parenthood when the uterus is absent or pregnancy is unsafe.",
       "A genetic link where the parents' own eggs/sperm are used.",
       "Care coordinated medically and legally under the Act.",
-      "Rigorous surrogate screening and support.",
+      "Support throughout the entire journey: legal work, IVF, pregnancy , delivery and beyond.",
       "Full antenatal care through to a safe delivery.",
     ],
   },
@@ -4295,8 +4285,8 @@ export const surrogacy = defineTreatment({
     subtitle: "A carefully coordinated medical and legal journey.",
     steps: [
       { icon: ClipboardCheck, n: "01", t: "Eligibility & Counselling", d: "We confirm medical need and eligibility under the Surrogacy Act, with counselling." },
-      { icon: ListChecks, n: "02", t: "Legal Process", d: "The required approvals, consents and documentation are completed." },
-      { icon: ShieldCheck, n: "03", t: "Surrogate Screening", d: "The gestational surrogate is medically and psychologically screened." },
+      { icon: ShieldCheck, n: "02", t: "Surrogate Fitness", d: "The gestational surrogate is evaluated for medical and psychological fitness to carry pregnancy." },
+      { icon: ListChecks, n: "03", t: "Legal Process", d: "The required approvals, consents and documentation are completed." },
       { icon: FlaskConical, n: "04", t: "IVF & Embryo Transfer", d: "An embryo from the parents' or donor gametes is transferred to the surrogate." },
       { icon: Baby, n: "05", t: "Pregnancy & Delivery", d: "Full antenatal care supports the surrogate through to a safe delivery." },
     ],
@@ -4307,7 +4297,7 @@ export const surrogacy = defineTreatment({
     items: [
       { icon: Award, t: "Trusted Since 1998", d: "30,000+ successful pregnancies and the National Fertility Award six times (2019–2026)." },
       { icon: ListChecks, t: "Ethical & Legally Compliant", d: "Every step follows India's Surrogacy (Regulation) Act, with full documentation and support." },
-      { icon: ShieldCheck, t: "Rigorous Surrogate Screening", d: "Surrogates are medically and psychologically screened before matching." },
+      { icon: ShieldCheck, t: "One Team From Start to Finish", d: "IVF, pregnancy care and delivery all steps handled by one team for seamless experience." },
     ],
   },
   success: {
@@ -4329,7 +4319,7 @@ export const surrogacy = defineTreatment({
     ],
   },
   faqs: [
-    { q: "What is gestational surrogacy?", a: "An embryo created by IVF from the intended parents' or donor eggs and sperm is carried by a surrogate, who has no genetic link to the baby she delivers." },
+    { q: "What is gestational surrogacy?", a: "An embryo created by IVF from the intended parents' or donor eggs or donor sperm is carried by a surrogate, who has no genetic link to the baby she delivers." },
     { q: "When is surrogacy needed?", a: "Mainly when a woman cannot safely carry a pregnancy — for example absence of the uterus, a severely damaged uterus, or a medical condition that makes pregnancy dangerous." },
     { q: "Is surrogacy legal in India?", a: "Yes, under the Surrogacy (Regulation) Act, which permits altruistic surrogacy with specific eligibility and legal requirements. We follow these fully." },
     { q: "Will the baby be genetically ours?", a: "If the intended parents' own eggs and sperm are used, yes. Donor eggs or sperm are used only where medically needed. The surrogate is never genetically related to the baby." },

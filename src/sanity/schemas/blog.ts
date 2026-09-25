@@ -14,6 +14,7 @@ export default defineType({
     defineField({ name: "heroImageUrl", title: "Hero Image URL", type: "url" }),
     defineField({ name: "heroImageAlt", title: "Hero Image Alt", type: "string" }),
     defineField({ name: "heroTextDark", title: "Hero Text Dark", type: "boolean", initialValue: false }),
+    defineField({ name: "heroTextRight", title: "Hero Text On Right (use when the photo's subject/empty space is on the left)", type: "boolean", initialValue: false }),
     defineField({
       name: "heroImagePosition",
       title: "Hero Image Position",
@@ -24,10 +25,12 @@ export default defineType({
         ),
       },
     }),
-    // Article body — stored as raw Lexical JSON; rendered by rich-text.tsx
+    // Article body — stored as raw Lexical JSON; authored via the admin
+    // panel's RichTextEditor, rendered by rich-text.tsx. Read-only here
+    // since hand-editing JSON in a plain text box is unsafe.
     defineField({
       name: "contentRaw",
-      title: "Article Body (raw JSON — do not edit manually)",
+      title: "Article Body (raw JSON — edit from /admin-panel/blogs, not here)",
       type: "text",
       readOnly: true,
     }),

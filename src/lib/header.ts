@@ -208,7 +208,7 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Simple Treatment", href: "/simple-treatment" },
           { label: "Safe Treatment", href: "/safe-treatment" },
           { label: "Smart Treatment", href: "/smart-treatment" },
-          { label: "Success Treatment", href: "/success-benchmarks" },
+          { label: "Successful Treatment", href: "/success-benchmarks" },
         ]},
         { heading: "", items: [
           { label: "History", href: "/history" },
@@ -243,6 +243,8 @@ export const HEADER_DEFAULTS: HeaderData = {
         { heading: "Donor Services", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Egg Donation", href: "/egg-donation" },
           { label: "Sperm Donation", href: "/sperm-donation" },
+          { label: "Embryo Donation", href: "/embryo-donation" },
+          { label: "Surrogacy", href: "/surrogacy" },
         ]},
         { heading: "Male Infertility", headingHref: "/treatments/male-infertility", items: [
           { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },

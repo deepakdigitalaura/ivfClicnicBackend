@@ -12,6 +12,7 @@ export default defineType({
     { name: "profile", title: "Profile & Bio" },
     { name: "credentials", title: "Credentials (EEAT)" },
     { name: "nav", title: "Navigation" },
+    { name: "seo", title: "SEO" },
   ],
   fields: [
     defineField({
@@ -64,6 +65,12 @@ export default defineType({
       group: "nav",
     }),
     defineField({ name: "navOrder", title: "Nav / List Order", type: "number", initialValue: 0, group: "nav" }),
+
+    // ── SEO ──
+    defineField({ name: "metaTitle", title: "Meta Title", type: "string", group: "seo" }),
+    defineField({ name: "metaDescription", title: "Meta Description", type: "text", rows: 3, group: "seo" }),
+    defineField({ name: "ogTitle", title: "OG Title", description: "Used when shared on Facebook/WhatsApp. Defaults to Meta Title.", type: "string", group: "seo" }),
+    defineField({ name: "ogDescription", title: "OG Description", description: "Defaults to Meta Description.", type: "text", rows: 3, group: "seo" }),
   ],
   preview: {
     select: { title: "name", subtitle: "specialty", media: "photo" },

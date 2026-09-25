@@ -14,7 +14,8 @@
     "lint": "next lint",
     "format": "prettier --write .",
     "seo:snapshot": "node scripts/seo/snapshot.mjs",
-    "seo:diff": "node scripts/seo/diff.mjs"
+    "seo:diff": "node scripts/seo/diff.mjs",
+    "seo:llms": "node scripts/generate-llms-txt.mjs"
   },
   "dependencies": {
     "@hookform/resolvers": "^5.2.2",

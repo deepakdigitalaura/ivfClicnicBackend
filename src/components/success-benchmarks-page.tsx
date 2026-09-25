@@ -11,87 +11,13 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-
-/* ---------- Data ---------- */
-
-const HERO_STATS = [
-  { value: 30000, suffix: "+", label: "Successful Pregnancies" },
-  { value: 25, suffix: "+", label: "Years of Excellence" },
-  { value: 100, suffix: "+", label: "Years Combined Experience" },
-  { value: 14, suffix: "", label: "Centres Across India" },
-];
-
-const PILLARS = [
-  {
-    icon: FlaskConical,
-    title: "Technology & Medicinal Science",
-    description:
-      "We invest in the latest equipment and maintain Class 1000 pure air labs — 10 times cleaner than European standards. ICSI is offered to most patients, and our protocols include Day 5 blastocyst transfers, PGS, laser-assisted hatching, pICSI, and IMSI when indicated — giving every embryo the best environment and every couple the best chance.",
-    highlights: [
-      "Class 1000 pure air IVF labs",
-      "ICSI for maximum fertilisation",
-      "Day 5 blastocyst culture & transfer",
-      "PGS, pICSI, IMSI & laser-assisted hatching",
-    ],
-  },
-  {
-    icon: Users,
-    title: "Humans Behind the Technology",
-    description:
-      "Technology alone doesn't create life — people do. Our team of internationally acclaimed fertility specialists has trained across India and abroad. They bring decades of clinical expertise, continuous knowledge upgradation, and an unwavering commitment to honest, sincere, and dedicated care.",
-    highlights: [
-      "Internationally acclaimed specialists",
-      "Trained in India and abroad",
-      "Continuous knowledge upgradation",
-      "Honest, sincere & dedicated",
-    ],
-  },
-  {
-    icon: Heart,
-    title: "Holistic Approach",
-    description:
-      "Success in IVF is not just about embryos and labs — it's about preparing the whole person. We conduct thorough pre-treatment evaluations to uncover every factor, prepare both body and mind for the journey ahead, and ensure mental preparedness for pregnancy and parenthood.",
-    highlights: [
-      "Thorough pre-treatment evaluation",
-      "Body and mind preparation",
-      "Mental preparedness for pregnancy",
-    ],
-  },
-  {
-    icon: Baby,
-    title: "Not Just Pregnancy — Successful Live Birth",
-    description:
-      "Our definition of success is not a positive test — it's a healthy baby in your arms. We follow strict protocols to prevent higher-order multiple pregnancies, provide continuous pregnancy guidance and meticulous monitoring, and partner with the best maternity services to see you through delivery.",
-    highlights: [
-      "Protocols to prevent higher-order multiples",
-      "Continuous pregnancy guidance",
-      "Meticulous monitoring throughout",
-      "Best maternity services partnership",
-    ],
-  },
-  {
-    icon: IndianRupee,
-    title: "Unique IVF Packages",
-    description:
-      "World-class fertility care should not be a privilege. We offer calibrated packages for every pocket — from our three-cycle package that maximises your chances over multiple attempts to the Suraksha Kavach Package that gives you complete financial peace of mind.",
-    highlights: [
-      "Calibrated packages for every budget",
-      "Three-cycle package for maximum chances",
-      "Suraksha Kavach — complete peace of mind",
-    ],
-  },
-];
-
-const CLOSING_BADGES = [
-  { icon: Target, text: "Simple" },
-  { icon: ShieldCheck, text: "Safe" },
-  { icon: Sparkles, text: "Smart" },
-  { icon: TrendingUp, text: "Successful" },
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { SUCCESS_BENCHMARKS_DEFAULTS, type SuccessBenchmarksData } from "@/lib/success-benchmarks";
 
 /* ---------- Page ---------- */
 
-export function SuccessBenchmarksPage() {
+export function SuccessBenchmarksPage({ data = SUCCESS_BENCHMARKS_DEFAULTS }: { data?: SuccessBenchmarksData } = {}) {
+  const { hero, stats: HERO_STATS, pillars: PILLARS, closingBadges: CLOSING_BADGES } = data;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -126,25 +52,23 @@ export function SuccessBenchmarksPage() {
         <div className="container-px relative mx-auto max-w-[1400px] py-20 text-center lg:py-28">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-              <Award className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Proven Track Record
+              <Award className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
             </span>
           </Reveal>
           <Reveal delay={0.1}>
             <h1 className="mx-auto mt-6 max-w-4xl text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-              Our numbers <em className="font-display italic text-[color:var(--rose)]">speak.</em>
+              {hero.headline.split(hero.headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
             </h1>
           </Reveal>
           <Reveal delay={0.18}>
             <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-              With over 30,000+ successful pregnancies and one of the highest success rates
-              across India and the world!
+              {hero.paragraph}
             </p>
           </Reveal>
           <Reveal delay={0.25}>
             <blockquote className="mt-8 mx-auto max-w-2xl rounded-2xl border border-[color:var(--plum)]/10 bg-white/50 px-8 py-6 backdrop-blur">
               <p className="text-[15px] leading-relaxed text-[color:var(--plum)]/70 italic text-pretty">
-                &ldquo;Success is not a random incident; it is years of learning, observing,
-                implementing best practices, and prudent use of technology and resources.&rdquo;
+                &ldquo;{hero.quote}&rdquo;
               </p>
             </blockquote>
           </Reveal>
@@ -210,25 +134,28 @@ export function SuccessBenchmarksPage() {
             subtitle="Every successful pregnancy at Bavishi Fertility Institute is built on five unshakable pillars — technology, people, holistic care, live-birth focus, and accessible packages."
           />
           <Stagger className="mx-auto mt-14 grid max-w-6xl gap-8 md:grid-cols-2 lg:grid-cols-3">
-            {PILLARS.map((p, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <p.icon className="h-6 w-6" />
+            {PILLARS.map((p, i) => {
+              const Icon = resolveIcon(p.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{p.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{p.description}</p>
+                    <ul className="mt-4 space-y-2">
+                      {p.highlights.map((h, j) => (
+                        <li key={j} className="flex items-start gap-2 text-[14px] text-muted-foreground">
+                          <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+                          <span>{h}</span>
+                        </li>
+                      ))}
+                    </ul>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{p.description}</p>
-                  <ul className="mt-4 space-y-2">
-                    {p.highlights.map((h, j) => (
-                      <li key={j} className="flex items-start gap-2 text-[14px] text-muted-foreground">
-                        <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                        <span>{h}</span>
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -441,11 +368,14 @@ export function SuccessBenchmarksPage() {
             </Reveal>
             <Reveal delay={0.18}>
               <div className="mt-8 flex flex-wrap justify-center gap-6 text-sm">
-                {CLOSING_BADGES.map((item, i) => (
-                  <div key={i} className="flex items-center gap-2 text-white/80">
-                    <item.icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {item.text}
-                  </div>
-                ))}
+                {CLOSING_BADGES.map((item, i) => {
+                  const Icon = resolveIcon(item.icon);
+                  return (
+                    <div key={i} className="flex items-center gap-2 text-white/80">
+                      <Icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {item.text}
+                    </div>
+                  );
+                })}
               </div>
             </Reveal>
             <Reveal delay={0.25}>

@@ -17,7 +17,7 @@ import { Linkify } from "@/components/linkify";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Heading, Treatment } from "@/lib/treatments";
-import { treatmentCardData, treatmentBySlug } from "@/lib/treatments";
+import { treatmentCardData, treatmentBySlug, UNLISTED_TREATMENT_SLUGS } from "@/lib/treatments";
 import { resolveIcon, type IconName } from "@/lib/icon-map";
 import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
@@ -398,11 +398,18 @@ function toView(c: ResolvedTreatment): Treatment {
  * Keeping lucide icon *components* out of the props (functions aren't
  * serializable) is why the CMS path passes names and re-resolves them in toView.
  * The route still builds JSON-LD + metadata server-side from the same data. */
+const SURROGACY_DOCTOR_SLUGS = new Set([
+  "himanshu-bavishi", "falguni-bavishi", "janki-bavishi", "parth-bavishi",
+  "binal-shah", "suman-singh", "nilesh-jain", "priyanka-sinha", "surbhi-vegad",
+]);
+
 export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[]; cmsBlogs?: BlogPost[] }) {
   const t = content ? toView(content) : slug ? treatmentBySlug(slug) : undefined;
   if (!t) return null;
   const reviewer = doctorBySlug(t.reviewerSlug);
-  const docs = doctorsForTreatment(t.slug);
+  const docs = t.slug === "surrogacy"
+    ? doctorsForTreatment(t.slug).filter((d) => SURROGACY_DOCTOR_SLUGS.has(d.slug))
+    : doctorsForTreatment(t.slug);
   // editTestimonials is provided by TreatmentEditor (from the draft); the public
   // site always uses the code-owned defaults so it remains byte-identical.
   const testimonials = editTestimonials ?? testimonialsForTreatment(t.slug);
@@ -935,7 +942,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* Suraksha Kavach — positioned right after cost, addressing cost fear
        *  and repeated-cycle anxiety exactly where patients are weighing the
        *  investment. Reuses the homepage's Suraksha section as-is. */}
-      <Suraksha />
+      {t.slug !== "surrogacy" && <Suraksha />}
 
       {/* Risks */}
       <section className={`${band()} py-8 md:py-14`}>
@@ -1079,7 +1086,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow={ed("labels.exploreMore", labels.exploreMore)} title={<H h={relatedSection} base="relatedSection" />} />
           <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-            {t.related.map((slug) => {
+            {t.related.filter((slug) => !UNLISTED_TREATMENT_SLUGS.has(slug)).map((slug) => {
               const c = treatmentCardData(slug);
               return (
                 <StaggerItem key={slug}>
@@ -1092,7 +1099,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       </section>
 
       {/* Related blogs — treatment-specific, data-driven (placeholders until published) */}
-      {blogs.length > 0 && (
+      {blogs.length > 0 && t.slug !== "surrogacy" && t.slug !== "embryo-donation" && t.slug !== "egg-donation" && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead

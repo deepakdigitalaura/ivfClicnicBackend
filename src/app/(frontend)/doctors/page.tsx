@@ -7,7 +7,7 @@ import { getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
-export const revalidate = 3600;
+export const revalidate = 120;
 
 const URL = "/doctors";
 

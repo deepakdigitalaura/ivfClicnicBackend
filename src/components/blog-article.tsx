@@ -87,7 +87,7 @@ function AboutAuthor({ author }: { author: Author }) {
           <img
             src={avatar.url}
             alt={avatar.alt ?? author.name}
-            className="h-20 w-20 shrink-0 rounded-full object-cover ring-4 ring-[color:var(--rose)]/15"
+            className="h-20 w-20 shrink-0 rounded-full object-cover object-top ring-4 ring-[color:var(--rose)]/15"
           />
         ) : (
           <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10">
@@ -96,7 +96,7 @@ function AboutAuthor({ author }: { author: Author }) {
             </span>
           </div>
         )}
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="text-xl font-semibold leading-tight text-[color:var(--plum)]">
             {author.name}
           </p>
@@ -158,7 +158,7 @@ function ReviewedByCard({ reviewer }: { reviewer: Author }) {
           <img
             src={avatar.url}
             alt={avatar.alt ?? reviewer.name}
-            className="h-16 w-16 shrink-0 rounded-full object-cover ring-4 ring-[color:var(--plum)]/15"
+            className="h-16 w-16 shrink-0 rounded-full object-cover object-top ring-4 ring-[color:var(--plum)]/15"
           />
         ) : (
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[color:var(--plum)]/10">
@@ -412,17 +412,24 @@ export function BlogArticle({
               {/* Author avatar + name */}
               {author && (() => {
                 const av = asObj<Media>(author.avatar ?? undefined);
+                const authorUrl = author.sameAs?.[0]?.url ? localizeUrl(author.sameAs[0].url) : null;
+                const NameTag = authorUrl ? "a" : "span";
                 return (
                   <span className="inline-flex items-center gap-2.5">
                     {av?.url && (
                       <img
                         src={av.url}
                         alt={author.name}
-                        className="h-9 w-9 rounded-full object-cover ring-2 ring-white/20"
+                        className="h-9 w-9 rounded-full object-cover object-top ring-2 ring-white/20"
                       />
                     )}
                     <span>
-                      <span className="font-semibold text-white">{author.name}</span>
+                      <NameTag
+                        {...(authorUrl ? { href: authorUrl } : {})}
+                        className="font-semibold text-white hover:underline"
+                      >
+                        {author.name}
+                      </NameTag>
                       {author.role && (
                         <span className="ml-1.5 text-white/45">· {author.role}</span>
                       )}
@@ -466,20 +473,27 @@ export function BlogArticle({
                   ))}
                 </span>
               )}
+            </div>
 
-              {reviewedBy && (
-                <span className="inline-flex items-center gap-1.5">
+            {reviewedBy && (() => {
+              const reviewerUrl = reviewedBy.sameAs?.[0]?.url ? localizeUrl(reviewedBy.sameAs[0].url) : null;
+              const ReviewerTag = reviewerUrl ? "a" : "span";
+              return (
+                <div className="mt-2 flex items-center gap-1.5 text-sm text-white/55">
                   <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--gold)]" />
                   <span>
                     Reviewed by{" "}
-                    <span className="font-medium text-white/80">
+                    <ReviewerTag
+                      {...(reviewerUrl ? { href: reviewerUrl } : {})}
+                      className="font-medium text-white/80 hover:underline"
+                    >
                       {reviewedBy.name}
                       {reviewedBy.credentials ? `, ${reviewedBy.credentials}` : ""}
-                    </span>
+                    </ReviewerTag>
                   </span>
-                </span>
-              )}
-            </div>
+                </div>
+              );
+            })()}
           </Reveal>
         </div>
       </section>
@@ -504,19 +518,21 @@ export function BlogArticle({
                   src={heroUrl}
                   alt={hero?.alt ?? blog.title}
                   className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: `right ${blog.heroImagePosition?.split(" ")[1] ?? "center"}` }}
+                  style={{
+                    objectPosition: `${blog.heroTextRight ? "left" : "right"} ${blog.heroImagePosition?.split(" ")[1] ?? "center"}`,
+                  }}
                   loading="eager"
                 />
-                {/* directional gradient to make left area readable */}
+                {/* directional gradient to make the text side readable */}
                 <div
-                  className={`absolute inset-0 pointer-events-none bg-gradient-to-r to-transparent ${
+                  className={`absolute inset-0 pointer-events-none ${blog.heroTextRight ? "bg-gradient-to-l" : "bg-gradient-to-r"} to-transparent ${
                     blog.heroTextDark
                       ? "from-white/85 via-white/55"
                       : "from-black/70 via-black/40"
                   }`}
                 />
-                {/* title + category badge on the left */}
-                <div className="absolute inset-0 flex items-center">
+                {/* title + category badge, on whichever side the photo leaves empty */}
+                <div className={`absolute inset-0 flex items-center ${blog.heroTextRight ? "justify-end" : ""}`}>
                   <div className="px-7 md:px-10 max-w-[60%]">
                     {category?.title && (
                       <span
