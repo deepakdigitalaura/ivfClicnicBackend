@@ -12,11 +12,17 @@ import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { resolveIcon } from "@/lib/icon-map";
 import { INFRASTRUCTURE_DEFAULTS, type InfrastructureData } from "@/lib/infrastructure";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 
 /* ---------- Page ---------- */
 
-export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: InfrastructureData } = {}) {
+export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS, locale = "en" }: { data?: InfrastructureData; locale?: Locale } = {}) {
+  const t = (s: string) => ui(s, locale);
   const { hero, stats: STATS, facilities: FACILITIES, techHighlights: TECH_HIGHLIGHTS } = data;
+  const headline = t(hero.headline);
+  const headlineEm = t(hero.headlineEm);
+  const bookHref = localizeNavHref("/contact#book", locale);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -24,9 +30,9 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Infrastructure</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Infrastructure")}</span>
         </nav>
       </div>
 
@@ -49,26 +55,26 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Building2 className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
+                <Building2 className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(hero.eyebrow)}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                {hero.headline.split(hero.headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
+                {headline.split(headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{headlineEm}</em>{headline.split(headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                {hero.paragraph}
+                {t(hero.paragraph)}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+                <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </Reveal>
@@ -90,8 +96,8 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
                   <div className="text-4xl font-semibold md:text-5xl">
                     <Counter to={s.value} />{s.suffix}
                   </div>
-                  <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/80">{s.label}</div>
-                  <div className="mt-1 text-xs text-white/50">{s.sub}</div>
+                  <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/80">{t(s.label)}</div>
+                  <div className="mt-1 text-xs text-white/50">{t(s.sub)}</div>
                 </div>
               </StaggerItem>
             ))}
@@ -104,9 +110,9 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Our Facilities"
-            title={<>Purpose-built centres for <em className="font-display italic text-[color:var(--rose)]">world-class fertility care.</em></>}
-            subtitle="Every Bavishi Fertility Institute centre is scientifically designed to deliver the highest standards of care — from the laboratory to the recovery room."
+            eyebrow={t("Our Facilities")}
+            title={<>{t("Purpose-built centres for ")}<em className="font-display italic text-[color:var(--rose)]">{t("world-class fertility care.")}</em></>}
+            subtitle={t("Every Bavishi Fertility Institute centre is scientifically designed to deliver the highest standards of care — from the laboratory to the recovery room.")}
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {FACILITIES.map((f, i) => {
@@ -117,8 +123,8 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
                     <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{f.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{f.description}</p>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(f.title)}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(f.description)}</p>
                   </div>
                 </StaggerItem>
               );
@@ -141,11 +147,9 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
                     <div className="grid h-14 w-14 place-items-center rounded-2xl bg-white/10">
                       <Users className="h-7 w-7 text-[color:var(--rose-soft)]" />
                     </div>
-                    <h3 className="text-2xl font-medium">Expert Team, Continuous Training</h3>
+                    <h3 className="text-2xl font-medium">{t("Expert Team, Continuous Training")}</h3>
                     <p className="text-white/70 leading-relaxed">
-                      Every centre is staffed by a <strong className="text-white">multidisciplinary team</strong> of
-                      consultants, counsellors, embryologists, and nurses &mdash; each trained and regularly
-                      upskilled to maintain the highest standards.
+                      {t("Every centre is staffed by a ")}<strong className="text-white">{t("multidisciplinary team")}</strong>{t(" of consultants, counsellors, embryologists, and nurses — each trained and regularly upskilled to maintain the highest standards.")}
                     </p>
                     <div className="space-y-3">
                       {[
@@ -156,7 +160,7 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
                       ].map((item, i) => (
                         <div key={i} className="flex items-start gap-3">
                           <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose-soft)] mt-0.5" />
-                          <span className="text-sm text-white/80">{item}</span>
+                          <span className="text-sm text-white/80">{t(item)}</span>
                         </div>
                       ))}
                     </div>
@@ -167,29 +171,18 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
 
             <div>
               <Reveal>
-                <Eyebrow>Our Team</Eyebrow>
+                <Eyebrow>{t("Our Team")}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  Skilled professionals, <em className="font-display italic text-[color:var(--rose)]">continuously trained.</em>
+                  {t("Skilled professionals, ")}<em className="font-display italic text-[color:var(--rose)]">{t("continuously trained.")}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
-                  <p>
-                    Infrastructure is only as good as the people who operate it. At Bavishi Fertility Institute,
-                    every team member &mdash; from senior consultants to nursing staff &mdash; undergoes regular
-                    training for skill enhancement and SOP upgrades.
-                  </p>
-                  <p>
-                    Our embryologists are internationally accredited. Our counsellors are trained to provide
-                    not just medical guidance, but genuine emotional support throughout your journey. And our
-                    nursing staff are specialists in fertility care, not generalists.
-                  </p>
-                  <p>
-                    This combination of world-class infrastructure and a deeply experienced, continuously
-                    trained team is what makes Bavishi Fertility Institute different.
-                  </p>
+                  <p>{t("Infrastructure is only as good as the people who operate it. At Bavishi Fertility Institute, every team member — from senior consultants to nursing staff — undergoes regular training for skill enhancement and SOP upgrades.")}</p>
+                  <p>{t("Our embryologists are internationally accredited. Our counsellors are trained to provide not just medical guidance, but genuine emotional support throughout your journey. And our nursing staff are specialists in fertility care, not generalists.")}</p>
+                  <p>{t("This combination of world-class infrastructure and a deeply experienced, continuously trained team is what makes Bavishi Fertility Institute different.")}</p>
                 </div>
               </Reveal>
             </div>
@@ -202,14 +195,14 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Technology"
-            title={<>Advanced systems that <em className="font-display italic text-[color:var(--rose)]">protect your embryos.</em></>}
-            subtitle="From HEPA-filtered clean rooms to AI-integrated incubators, every technology in our labs is chosen for one reason — to give your embryos the best possible chance."
+            eyebrow={t("Technology")}
+            title={<>{t("Advanced systems that ")}<em className="font-display italic text-[color:var(--rose)]">{t("protect your embryos.")}</em></>}
+            subtitle={t("From HEPA-filtered clean rooms to AI-integrated incubators, every technology in our labs is chosen for one reason — to give your embryos the best possible chance.")}
           />
           <div className="mx-auto mt-14 max-w-5xl">
             <Stagger className="space-y-5">
-              {TECH_HIGHLIGHTS.map((t, i) => {
-                const Icon = resolveIcon(t.icon);
+              {TECH_HIGHLIGHTS.map((h, i) => {
+                const Icon = resolveIcon(h.icon);
                 return (
                   <StaggerItem key={i}>
                     <div className="group flex gap-6 rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">
@@ -217,8 +210,8 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
                         <Icon className="h-6 w-6" />
                       </div>
                       <div>
-                        <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t.title}</h3>
-                        <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t.description}</p>
+                        <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t(h.title)}</h3>
+                        <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(h.description)}</p>
                       </div>
                     </div>
                   </StaggerItem>
@@ -235,31 +228,20 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
           <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
               <Reveal>
-                <Eyebrow>The Gold Standard</Eyebrow>
+                <Eyebrow>{t("The Gold Standard")}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  Why Class 1000 <em className="font-display italic text-[color:var(--rose)]">makes the difference.</em>
+                  {t("Why Class 1000 ")}<em className="font-display italic text-[color:var(--rose)]">{t("makes the difference.")}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
+                  <p>{t("Air quality in an IVF lab directly impacts embryo development. The international standard for IVF labs is Class 10,000 — meaning no more than 10,000 particles per cubic foot of air.")}</p>
                   <p>
-                    Air quality in an IVF lab directly impacts embryo development. The international
-                    standard for IVF labs is Class 10,000 &mdash; meaning no more than 10,000 particles
-                    per cubic foot of air.
+                    {t("Bavishi Fertility Institute labs are ")}<strong className="text-[color:var(--plum)]">{t("Class 1000")}</strong>{t(" — 10 times cleaner than required. Fewer airborne particles mean fewer volatile organic compounds that could harm embryo development. It is one of the most significant investments a fertility clinic can make, and one of the most impactful for outcomes.")}
                   </p>
-                  <p>
-                    Bavishi Fertility Institute labs are <strong className="text-[color:var(--plum)]">Class 1000</strong> &mdash;
-                    10 times cleaner than required. Fewer airborne particles mean fewer volatile organic
-                    compounds that could harm embryo development. It is one of the most significant
-                    investments a fertility clinic can make, and one of the most impactful for outcomes.
-                  </p>
-                  <p>
-                    Combined with HEPA-filtered laminar flow hoods, positive-pressure air systems, and
-                    strict contamination-control protocols, our labs provide the purest possible
-                    environment for your embryos to grow.
-                  </p>
+                  <p>{t("Combined with HEPA-filtered laminar flow hoods, positive-pressure air systems, and strict contamination-control protocols, our labs provide the purest possible environment for your embryos to grow.")}</p>
                 </div>
               </Reveal>
               <Reveal delay={0.18}>
@@ -272,7 +254,7 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
                   ].map((item, i) => (
                     <div key={i} className="flex items-start gap-3">
                       <CheckCircle2 className="h-5 w-5 shrink-0 text-[color:var(--rose)] mt-0.5" />
-                      <span className="text-[15px] text-muted-foreground">{item}</span>
+                      <span className="text-[15px] text-muted-foreground">{t(item)}</span>
                     </div>
                   ))}
                 </div>
@@ -295,16 +277,15 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
                         <Counter to={10} />x
                       </div>
                       <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/80">
-                        Superior Air Quality
+                        {t("Superior Air Quality")}
                       </div>
                       <div className="mt-1 text-xs text-white/50">
-                        Class 1000 vs international Class 10,000 standard
+                        {t("Class 1000 vs international Class 10,000 standard")}
                       </div>
                     </div>
                     <div className="rounded-xl border border-white/10 bg-white/5 px-5 py-4 text-left">
                       <p className="text-sm leading-relaxed text-white/70">
-                        The purest environment possible for embryo development &mdash; fewer particles, fewer
-                        volatile organic compounds, better outcomes.
+                        {t("The purest environment possible for embryo development — fewer particles, fewer volatile organic compounds, better outcomes.")}
                       </p>
                     </div>
                   </div>
@@ -330,23 +311,21 @@ export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: 
             </Reveal>
             <Reveal delay={0.1}>
               <h2 className="mx-auto max-w-3xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-[2.75rem] text-balance">
-                See our world-class facilities <em className="font-display italic text-[color:var(--rose-soft)]">for yourself.</em>
+                {t("See our world-class facilities ")}<em className="font-display italic text-[color:var(--rose-soft)]">{t("for yourself.")}</em>
               </h2>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-                Book a consultation and visit any of our 14 centres across India. See the
-                Class 1000 labs, meet the team, and experience the difference that world-class
-                infrastructure makes for your fertility journey.
+                {t("Book a consultation and visit any of our 14 centres across India. See the Class 1000 labs, meet the team, and experience the difference that world-class infrastructure makes for your fertility journey.")}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
               <div className="mt-9 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+                <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </Reveal>

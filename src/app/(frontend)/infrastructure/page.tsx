@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { InfrastructurePage } from "@/components/infrastructure-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 import { getInfrastructurePage } from "@/lib/payload";
 
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title,
     description,
-    alternates: { canonical: PATH },
+    alternates: localeAlternates(PATH),
     openGraph: { title: data.ogTitle || title, description: data.ogDescription || "Class 1000 IVF labs, advanced equipment, dedicated facilities — world-class fertility care.", url: abs(PATH), type: "website" },
   });
 }

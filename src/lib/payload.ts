@@ -758,7 +758,7 @@ export const getHistoryPage = async (locale: Locale = "en"): Promise<HistoryData
   return { ...data, legacy: about.legacy, milestones: about.milestones };
 };
 
-export const getInfrastructurePage = async (): Promise<InfrastructureData> => {
+export const getInfrastructurePage = async (_locale: Locale = "en"): Promise<InfrastructureData> => {
   const doc = await getSanityInfrastructurePage();
   return resolveInfrastructure(doc ?? null);
 };
