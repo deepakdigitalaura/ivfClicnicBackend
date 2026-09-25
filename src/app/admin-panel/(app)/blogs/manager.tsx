@@ -50,10 +50,11 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
     run(async () => {
       const res = await saveBlogAction(editing);
       if (res.ok) {
+        const saved = { ...editing, _id: editing._id ?? res._id };
         setItems((prev) => {
-          const i = prev.findIndex((x) => x._id && x._id === editing._id);
-          if (i >= 0) { const next = [...prev]; next[i] = { ...editing }; return next; }
-          return [{ ...editing }, ...prev];
+          const i = prev.findIndex((x) => x._id && x._id === saved._id);
+          if (i >= 0) { const next = [...prev]; next[i] = saved; return next; }
+          return [saved, ...prev];
         });
         setEditing(null);
       }

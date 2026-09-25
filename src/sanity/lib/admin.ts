@@ -706,12 +706,14 @@ export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
  *  Sanity Studio. New posts default to draft until someone publishes them. */
 export async function saveBlog(doc: AdminBlogMeta) {
   const { _id, ...rest } = doc;
+  let savedId = _id;
   if (_id) {
     await writeClient.patch(_id).set(rest).commit();
   } else {
-    await writeClient.create({ _type: "blog", status: "draft", ...rest });
+    savedId = (await writeClient.create({ _type: "blog", status: "draft", ...rest }))._id;
   }
   revalidateTag(BLOG_TAG);
+  return savedId;
 }
 
 export async function deleteBlog(id: string) {
