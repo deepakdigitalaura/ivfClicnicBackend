@@ -752,8 +752,8 @@ export const getCategoryHub = async (slug: HubSlug): Promise<CategoryHubData> =>
   return resolveCategoryHub(slug, doc ?? null);
 };
 
-export const getHistoryPage = async (): Promise<HistoryData & { legacy: AboutSectionHeading; milestones: Milestone[] }> => {
-  const [doc, about] = await Promise.all([getSanityHistoryPage(), getAbout()]);
+export const getHistoryPage = async (locale: Locale = "en"): Promise<HistoryData & { legacy: AboutSectionHeading; milestones: Milestone[] }> => {
+  const [doc, about] = await Promise.all([getSanityHistoryPage(), getAbout(locale)]);
   const data = resolveHistory(doc ?? null);
   return { ...data, legacy: about.legacy, milestones: about.milestones };
 };

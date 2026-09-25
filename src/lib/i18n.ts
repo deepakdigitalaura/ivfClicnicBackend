@@ -4,7 +4,7 @@ export type LocalizedField = string | { en?: string; hi?: string; gu?: string } 
 /** Routes that exist under /hi and /gu (see src/app/(frontend)/hi|gu). Keep in
  *  sync with those directories — a route not listed here has no translated
  *  page, so linking it under /hi or /gu would 404. */
-const LOCALIZED_ROUTE_ROOTS = ["/", "/about-bfi", "/why-bfi", "/simple-treatment", "/safe-treatment", "/smart-treatment", "/success-benchmarks", "/contact", "/treatments", "/calculators"];
+const LOCALIZED_ROUTE_ROOTS = ["/", "/about-bfi", "/why-bfi", "/simple-treatment", "/safe-treatment", "/smart-treatment", "/success-benchmarks", "/history", "/contact", "/treatments", "/calculators"];
 // Category hubs live under /treatments/ but have no hi/gu route yet (would 404).
 const UNLOCALIZED_HUBS = ["/treatments/male-infertility", "/treatments/female-infertility", "/treatments/advanced-fertility-techniques"];
 

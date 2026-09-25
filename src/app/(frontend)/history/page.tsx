@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { HistoryPage } from "@/components/history-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 import { getHistoryPage } from "@/lib/payload";
 
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title,
     description,
-    alternates: { canonical: PATH },
+    alternates: localeAlternates(PATH),
     openGraph: { title: data.ogTitle || title, description: data.ogDescription || "35+ years of landmark achievements in fertility care — from 1986 to present day.", url: abs(PATH), type: "website" },
   });
 }

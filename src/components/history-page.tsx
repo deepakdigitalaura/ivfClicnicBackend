@@ -13,6 +13,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { HISTORY_DEFAULTS, type HistoryData } from "@/lib/history";
 import type { AboutSectionHeading, Milestone } from "@/lib/about";
 import { ABOUT_DEFAULTS } from "@/lib/about";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 
 /* ---------- Timeline data ---------- */
 
@@ -170,8 +172,13 @@ const MILESTONES = [
 
 type HistoryPageProps = HistoryData & { legacy: AboutSectionHeading; milestones: Milestone[] };
 
-export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAULTS.legacy, milestones: ABOUT_DEFAULTS.milestones } }: { data?: HistoryPageProps } = {}) {
+export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAULTS.legacy, milestones: ABOUT_DEFAULTS.milestones }, locale = "en" }: { data?: HistoryPageProps; locale?: Locale } = {}) {
+  const t = (s: string) => ui(s, locale);
   const { hero, presentDay, legacy, milestones } = data;
+  const headline = t(hero.headline);
+  const headlineEm = t(hero.headlineEm);
+  const bookHref = localizeNavHref("/contact#book", locale);
+  const aboutHref = localizeNavHref("/about-bfi", locale);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -179,9 +186,9 @@ export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAUL
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">History</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("History")}</span>
         </nav>
       </div>
 
@@ -203,26 +210,26 @@ export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAUL
         <div className="container-px relative mx-auto max-w-[1400px] py-16 md:py-24 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <Eyebrow>{hero.eyebrow}</Eyebrow>
+              <Eyebrow>{t(hero.eyebrow)}</Eyebrow>
             </Reveal>
             <Reveal delay={0.08}>
               <h1 className="mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                {hero.headline.split(hero.headlineEm)[0]}
-                <em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
+                {headline.split(headlineEm)[0]}
+                <em className="font-display italic text-[color:var(--rose)]">{headlineEm}</em>{headline.split(headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-                {hero.paragraph}
+                {t(hero.paragraph)}
               </p>
             </Reveal>
             <Reveal delay={0.24}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href="/contact#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                <Magnetic as="a" href={bookHref} className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </Magnetic>
-                <Magnetic as="a" href="/about-bfi" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
-                  About BFI <ArrowRight className="h-4 w-4" />
+                <Magnetic as="a" href={aboutHref} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
+                  {t("About BFI")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
               </div>
             </Reveal>
@@ -240,11 +247,11 @@ export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAUL
                   <Trophy className="h-8 w-8" />
                 </div>
                 <div>
-                  <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Present Day</div>
+                  <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{t("Present Day")}</div>
                   <h2 className="mt-2 text-2xl font-medium text-[color:var(--plum)] md:text-3xl text-balance">
-                    {presentDay.heading}
+                    {t(presentDay.heading)}
                   </h2>
-                  <p className="mt-4 text-[17px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: presentDay.paragraph }} />
+                  <p className="mt-4 text-[17px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: t(presentDay.paragraph) }} />
                 </div>
               </div>
             </div>
@@ -257,7 +264,7 @@ export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAUL
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow={legacy.eyebrow}
+            eyebrow={t(legacy.eyebrow)}
             title={<>{legacy.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{legacy.heading.em}</em></>}
           />
           <div className="mx-auto mt-10 max-w-3xl">
@@ -353,22 +360,21 @@ export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAUL
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Be part of our <em className="font-display italic text-[color:var(--rose-soft)]">next chapter.</em>
+              {t("Be part of our")} <em className="font-display italic text-[color:var(--rose-soft)]">{t("next chapter.")}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              35+ years of trust, 30,000+ successful pregnancies, and counting. Book a consultation
-              to start your own family&apos;s story with Bavishi Fertility Institute.
+              {t("35+ years of trust, 30,000+ successful pregnancies, and counting. Book a consultation to start your own family's story with Bavishi Fertility Institute.")}
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+              <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
               </Magnetic>
             </div>
           </Reveal>
