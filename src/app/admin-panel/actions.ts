@@ -353,11 +353,10 @@ function revalidateBlogPages(slug?: string) {
   if (slug) revalidatePath(`/blogs/${slug}`);
 }
 
-export async function saveBlogAction(doc: AdminBlogMeta): Promise<SaveResult & { _id?: string }> {
-  let _id: string | undefined;
-  const r = await guard(async () => { _id = await saveBlog(doc); });
+export async function saveBlogAction(doc: AdminBlogMeta): Promise<SaveResult> {
+  const r = await guard(() => saveBlog(doc));
   revalidateBlogPages(doc.slug);
-  return { ...r, _id };
+  return r;
 }
 
 export async function deleteBlogAction(id: string, slug?: string): Promise<SaveResult> {
