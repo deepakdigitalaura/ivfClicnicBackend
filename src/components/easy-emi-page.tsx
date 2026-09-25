@@ -414,7 +414,7 @@ export function EasyEmiPage({ locale = "en" }: { locale?: Locale } = {}) {
             />
             <Reveal delay={0.15}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href={lh("/ivf-cost-calculator")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--plum)] px-7 py-4 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
+                <Magnetic as="a" href={lh("/calculators/ivf-cost")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--plum)] px-7 py-4 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
                   <Calculator className="h-4 w-4" /> {t("Open Cost Calculator")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href={lh("/contact#book")} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
