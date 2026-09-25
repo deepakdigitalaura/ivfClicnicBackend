@@ -1,4 +1,5 @@
 import type { Locale } from "@/lib/i18n";
+import { WHY_BFI_STRINGS } from "@/lib/why-bfi-strings";
 
 /** Hardcoded UI chrome strings (not CMS content). English is the key + fallback.
  *  hi/gu are AI-written — flag for review before go-live. */
@@ -1248,5 +1249,5 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
 };
 
 export function ui(key: string, locale: Locale): string {
-  return locale === "en" ? key : UI_STRINGS[key]?.[locale] ?? key;
+  return locale === "en" ? key : UI_STRINGS[key]?.[locale] ?? WHY_BFI_STRINGS[key]?.[locale] ?? key;
 }
