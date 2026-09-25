@@ -19,6 +19,7 @@ import {
 } from "@/lib/contact";
 import type { NavTreatmentItem, NavDoctorItem, NavLocationItem, NavLabelOverride } from "@/lib/header";
 import { sortNavLocations, applyNavLabelOverrides } from "@/lib/header";
+import { pickLocale, localizeNavHref, type Locale, type LocalizedField } from "@/lib/i18n";
 
 /** Footer heading for each navCategory value. */
 const FOOTER_CATEGORY_LABELS: Record<string, string> = {
@@ -186,6 +187,8 @@ export const FOOTER_DEFAULTS: FooterData = {
     { h: "Donor Services", l: [
       { label: "Egg Donation", href: "/egg-donation" },
       { label: "Sperm Donation", href: "/sperm-donation" },
+      { label: "Embryo Donation", href: "/embryo-donation" },
+      { label: "Surrogacy", href: "/surrogacy" },
     ]},
     { h: "Fertility Preservation", l: [
       { label: "Cryopreservation", href: "/cryopreservation" },
@@ -278,7 +281,7 @@ const DEFAULT_TREATMENT_ITEMS_BY_HREF: ReadonlyMap<string, { category: string; o
 /** The subset of the `footer` global this resolver reads (kept loose so it
  *  stays decoupled from the generated payload-types until they exist). */
 type FooterLinkSource = {
-  label?: string | null;
+  label?: LocalizedField;
   url?: string | null;
   external?: boolean | null;
   channel?: string | null;
@@ -286,24 +289,26 @@ type FooterLinkSource = {
 };
 export type FooterSource =
   | {
-      branding?: { logoUrl?: string | null; description?: string | null } | null;
-      navGroups?: { title?: string | null; hidden?: boolean | null; links?: FooterLinkSource[] | null }[] | null;
+      branding?: { logoUrl?: string | null; description?: LocalizedField } | null;
+      navGroups?: { title?: LocalizedField; hidden?: boolean | null; links?: FooterLinkSource[] | null }[] | null;
       social?: { platform?: string | null; url?: string | null }[] | null;
-      copyrightText?: string | null;
+      copyrightText?: LocalizedField;
       legalLinks?: FooterLinkSource[] | null;
     }
   | null
   | undefined;
 
 /** Resolve a stored link → rendered link. A `channel` resolves the href from
- *  Site Settings (no duplicated numbers); otherwise the stored url is used. */
-function resolveLink(link: FooterLinkSource, contact: ContactValues): FooterLink {
+ *  Site Settings (no duplicated numbers); otherwise the stored url is used.
+ *  Link labels are never matched against elsewhere in this file, so they're
+ *  localized directly (unlike group headings — see resolveFooter). */
+function resolveLink(link: FooterLinkSource, contact: ContactValues, locale: Locale): FooterLink {
   const channel = (link.channel ?? "none") as ContactChannel;
   const resolved = resolveCardChannel(channel, contact);
   const href = resolved.href ?? link.url ?? undefined;
   return {
-    label: link.label ?? "",
-    ...(href ? { href } : {}),
+    label: pickLocale(link.label, locale) ?? "",
+    ...(href ? { href: link.external ? href : localizeNavHref(href, locale) } : {}),
     ...(link.external ? { external: true } : {}),
   };
 }
@@ -323,22 +328,40 @@ export function resolveFooter(
   navDoctors: NavDoctorItem[] = [],
   navLocations: NavLocationItem[] = [],
   navLabels: NavLabelOverride[] = [],
+  locale: Locale = "en",
 ): FooterData {
   const branding =
     g?.branding && (g.branding.logoUrl || g.branding.description)
       ? {
           logoUrl: g.branding.logoUrl ?? undefined,
-          description: g.branding.description ?? undefined,
+          description: pickLocale(g.branding.description, locale) ?? undefined,
         }
       : undefined;
+
+  // Group HEADINGS drive identity matching all through this function
+  // (TREATMENT_HEADINGS, "Doctors", "Locations", applyNavLabelOverrides) —
+  // exactly like header.ts's mega-overlay matching. So headings are kept in
+  // ENGLISH throughout the whole computation below (unchanged from before
+  // this file supported locales) and only swapped to the localized display
+  // text in one pass at the very end, via groupTitleMap. Only per-LINK
+  // labels (never matched against) are localized inline via resolveLink.
+  const groupTitleMap = new Map<string, string>();
+  if (g?.navGroups?.length) {
+    for (const grp of g.navGroups) {
+      if (grp.hidden) continue;
+      const en = pickLocale(grp.title, "en") ?? "";
+      const loc = pickLocale(grp.title, locale) ?? en;
+      if (loc !== en) groupTitleMap.set(en, loc);
+    }
+  }
 
   // Base groups from CMS global or defaults (treatment groups included).
   const rawGroups: FooterGroup[] = g?.navGroups?.length
     ? g.navGroups
         .filter((grp) => !grp.hidden)
         .map((grp) => ({
-          h: grp.title ?? "",
-          l: (grp.links ?? []).filter((link) => !link.hidden).map((link) => resolveLink(link, contact)),
+          h: pickLocale(grp.title, "en") ?? "",
+          l: (grp.links ?? []).filter((link) => !link.hidden).map((link) => resolveLink(link, contact, locale)),
         }))
     : FOOTER_DEFAULTS.groups;
 
@@ -385,10 +408,12 @@ export function resolveFooter(
     : FOOTER_DEFAULTS.social;
 
   const legal = g?.legalLinks?.length
-    ? g.legalLinks.filter((link) => !link.hidden).map((link) => resolveLink(link, contact))
+    ? g.legalLinks.filter((link) => !link.hidden).map((link) => resolveLink(link, contact, locale))
     : FOOTER_DEFAULTS.legal;
 
   // Apply any CMS label/order overrides from Site Settings to the resolved groups.
+  // (navLabels overrides are plain English strings, not locale-aware — out of
+  // scope here — so an override always wins as-is, same as before locales existed.)
   groups = applyNavLabelOverrides(
     groups,
     (grp) => grp.h,
@@ -398,11 +423,15 @@ export function resolveFooter(
     "footerLabel",
   );
 
+  // Swap each group's English heading for its localized display text now
+  // that every identity match above is done.
+  groups = groups.map((grp) => ({ ...grp, h: groupTitleMap.get(grp.h) ?? grp.h }));
+
   return {
     ...(branding ? { branding } : {}),
     groups,
     social,
-    copyrightText: g?.copyrightText || FOOTER_DEFAULTS.copyrightText,
+    copyrightText: pickLocale(g?.copyrightText, locale) || FOOTER_DEFAULTS.copyrightText,
     legal,
   };
 }

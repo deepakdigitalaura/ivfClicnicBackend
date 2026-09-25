@@ -1,5 +1,7 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
+import Image from "next/image";
+import { T, useT } from "@/components/ui-strings-provider";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -142,15 +144,15 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 function SectionHeader({
-  eyebrow, title, subtitle, align = "left",
-}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center" }) {
+  eyebrow, title, subtitle, align = "left", as: Heading = "h2",
+}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center"; as?: "h1" | "h2" }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       {eyebrow && <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>}
       <Reveal delay={0.05}>
-        <h2 className="mt-4 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] text-balance">
+        <Heading className="mt-4 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] text-balance">
           {title}
-        </h2>
+        </Heading>
       </Reveal>
       {subtitle && (
         <Reveal delay={0.12}>
@@ -335,8 +337,8 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
             transition={{ duration: 0.8, delay: 1.1 }}
             className="mt-10 flex flex-wrap items-center gap-3"
           >
-            <PrimaryBtn icon={Calendar} href="#book">{hero.ctas[0]}</PrimaryBtn>
-            <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate">{hero.ctas[1]}</GhostBtn>
+            <PrimaryBtn icon={Calendar} href="#book"><T k={hero.ctas[0]} /></PrimaryBtn>
+            <GhostBtn icon={Sparkles} href="/calculators/ivf-success-rate"><T k={hero.ctas[1]} /></GhostBtn>
           </motion.div>
 
           {agg && (
@@ -353,7 +355,7 @@ function Hero({ hero = HOMEPAGE_DEFAULTS.hero }: { hero?: HeroContent } = {}) {
                   <Star key={i} className="h-4 w-4 fill-current" />
                 ))}
               </span>
-              <span>{agg.ratingValue.toFixed(1)} on Google · {agg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+              <span>{agg.ratingValue.toFixed(1)} <T k="on Google" /> · {agg.reviewCount.toLocaleString("en-IN")}+ <T k="reviews" /></span>
             </motion.a>
           )}
         </div>
@@ -504,7 +506,7 @@ export function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: S
                 {content.primaryCta.label} <ArrowRight className="h-4 w-4" />
               </Magnetic>
             </div>
-            <p className="mt-3 text-xs text-white/40">* Terms and conditions apply.</p>
+            <p className="mt-3 text-xs text-white/40"><T k="* Terms and conditions apply." /></p>
           </Reveal>
         </div>
 
@@ -559,7 +561,7 @@ export function TreatmentCard({
           <h3 className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</h3>
           <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{descNode ?? desc}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--rose)]">
-            Learn more <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+            <T k="Learn more" /> <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
           </span>
         </div>
       </div>
@@ -609,8 +611,9 @@ const FEATURED_TREATMENT_TAGS: Record<string, string> = {
 
 export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content?: HomepageData["treatments"] } = {}) {
   const featured = content.items
-    .map((item, i) => ({ ...item, i }))
-    .filter(({ t }) => FEATURED_TREATMENT_TITLES.has(t));
+    // Key by the English default at the same index so translated titles still match.
+    .map((item, i) => ({ ...item, i, en: HOMEPAGE_DEFAULTS.treatments.items[i]?.t ?? item.t }))
+    .filter(({ en }) => FEATURED_TREATMENT_TITLES.has(en));
   return (
     <section id="treatments" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <div className="flex flex-col items-start justify-between gap-8 md:flex-row md:items-end">
@@ -621,16 +624,16 @@ export function Treatments({ content = HOMEPAGE_DEFAULTS.treatments }: { content
         />
       </div>
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
-        {featured.map(({ icon, t, d, i }) => (
+        {featured.map(({ icon, t, d, i, en }) => (
           <StaggerItem key={t}>
             <TreatmentCard
               icon={resolveIcon(icon)}
               title={t}
               desc={d}
-              href={TREATMENT_TITLE_HREFS[t]}
+              href={TREATMENT_TITLE_HREFS[en]}
               titleNode={ed(`treatments.items.${i}.t`, t)}
               descNode={ed(`treatments.items.${i}.d`, d)}
-              tag={FEATURED_TREATMENT_TAGS[t]}
+              tag={FEATURED_TREATMENT_TAGS[en] && <T k={FEATURED_TREATMENT_TAGS[en]} />}
             />
           </StaggerItem>
         ))}
@@ -768,7 +771,7 @@ export function SuccessStories({
                     <LiteYouTube id={s.id!} title={`${s.n} — Patient Story`} className="aspect-[4/3]" />
                   )}
                   <div className="pointer-events-none absolute bottom-4 left-4 z-10 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[color:var(--plum)] shadow-soft backdrop-blur">
-                    {s.tag ?? "Patient Story"}
+                    {s.tag ?? <T k="Patient Story" />}
                   </div>
                 </div>
                 <div className="p-6">
@@ -1035,6 +1038,7 @@ export function Doctors({
   subtitle = "A family of fertility experts trusted by generations.",
   ctaLabel = "View All Doctors",
 }: { docs?: Doc[]; eyebrow?: React.ReactNode; title?: React.ReactNode; subtitle?: React.ReactNode; ctaLabel?: React.ReactNode } = {}) {
+  const tr = useT();
   return (
     <section id="doctors" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader eyebrow={eyebrow} title={title} subtitle={subtitle} />
@@ -1075,13 +1079,13 @@ export function Doctors({
                     <a href={`/doctors/${d.slug}`} className="transition-colors hover:text-[color:var(--rose)]">{d.n}</a>
                   ) : d.n}
                 </h3>
-                <p className="text-sm text-muted-foreground">{[d.deg, d.spec].filter(Boolean).join(" · ")}</p>
+                <p className="text-sm text-muted-foreground">{[d.deg, d.spec].filter(Boolean).map((x) => tr(x)).join(" · ")}</p>
                 <div className="mt-4 grid grid-cols-2 gap-2">
                   <a
                     href={d.slug ? `/doctors/${d.slug}` : "/doctors"}
                     className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full border border-[color:var(--plum)]/15 px-3 py-2 text-xs font-semibold text-[color:var(--plum)] transition-all duration-300 hover:border-[color:var(--plum)]/30 hover:bg-[color:var(--plum)]/5 active:scale-[0.97]"
                   >
-                    View Profile
+                    <T k="View Profile" />
                     <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/btn:translate-x-0.5" />
                   </a>
                   <a
@@ -1089,7 +1093,7 @@ export function Doctors({
                     className="group/btn inline-flex items-center justify-center gap-1.5 rounded-full bg-[color:var(--rose)] px-3 py-2 text-xs font-semibold text-white shadow-sm shadow-[color:var(--rose)]/20 transition-all duration-300 hover:bg-[color:var(--rose)]/90 hover:shadow-md hover:shadow-[color:var(--rose)]/30 active:scale-[0.97]"
                   >
                     <Calendar className="h-3.5 w-3.5 shrink-0 transition-transform duration-300 group-hover/btn:-translate-y-0.5" />
-                    Book Consultation
+                    <T k="Book Consultation" />
                   </a>
                 </div>
               </div>
@@ -1290,8 +1294,8 @@ const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
        * carousel stage below never has to clip the text off the bottom.
        * object-contain — most award photos are portrait trophy/certificate shots;
        * object-cover was cropping their tops off. */}
-      <div className="h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
-        <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-contain" />
+      <div className="relative h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
+        <Image src={a.img} alt={a.title} fill sizes="(max-width: 640px) 90vw, 300px" className="object-contain" />
       </div>
       <div className="border-t border-border/60 px-5 py-4 text-center">
         <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">{a.title}</h3>
@@ -1326,7 +1330,7 @@ export function AwardsCarousel({ content = HOMEPAGE_DEFAULTS.awards }: { content
               href="/awards"
               className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
             >
-              View all awards &amp; achievements
+              <T k="View all awards & achievements" />
             </a>
           </div>
         </Reveal>
@@ -1388,7 +1392,7 @@ function Media({ content = HOMEPAGE_DEFAULTS.media }: { content?: HomepageData["
             href="/press"
             className="inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
           >
-            View all press coverage
+            <T k="View all press coverage" />
           </a>
         </div>
       </Reveal>
@@ -1420,7 +1424,7 @@ function ReviewTestimonialCard({ r, verified }: { r: Review; verified: boolean }
         </div>
         <div>
           <div className="text-sm font-semibold text-[color:var(--plum)]">{r.author}</div>
-          <div className="text-xs text-muted-foreground">{verified ? "Google review" : "Patient review"}{r.relativeTime ? ` · ${r.relativeTime}` : ""}</div>
+          <div className="text-xs text-muted-foreground"><T k={verified ? "Google review" : "Patient review"} />{r.relativeTime ? ` · ${r.relativeTime}` : ""}</div>
         </div>
       </div>
     </blockquote>
@@ -1501,7 +1505,7 @@ export function Testimonials({
                 rel="noopener noreferrer"
                 className="inline-flex items-center gap-2.5 rounded-full bg-white px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] shadow-soft ring-1 ring-black/5 transition hover:-translate-y-0.5 hover:shadow-lift"
               >
-                <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" /> Read our reviews on Google
+                <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" /> <T k="Read our reviews on Google" />
               </a>
             </div>
           </Reveal>
@@ -1519,7 +1523,7 @@ export function Testimonials({
             <Reveal delay={0.1}>
               <a href={listingUrl} target="_blank" rel="noopener noreferrer" className="flex items-center gap-2 rounded-full bg-white px-5 py-3 shadow-soft">
                 <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" />
-                <span className="text-sm font-semibold text-[color:var(--plum)]">{aggregate.ratingValue.toFixed(1)} on Google · {aggregate.reviewCount.toLocaleString()} reviews</span>
+                <span className="text-sm font-semibold text-[color:var(--plum)]">{aggregate.ratingValue.toFixed(1)} <T k="on Google" /> · {aggregate.reviewCount.toLocaleString()} <T k="reviews" /></span>
               </a>
             </Reveal>
           )}
@@ -1611,7 +1615,7 @@ function Events({ content = HOMEPAGE_DEFAULTS.events }: { content?: HomepageData
       <Reveal delay={0.2}>
         <div className="mt-9 text-center">
           <Magnetic as="a" href="/camps" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-            View More Events <ArrowRight className="h-4 w-4" />
+            <T k="View More Events" /> <ArrowRight className="h-4 w-4" />
           </Magnetic>
         </div>
       </Reveal>
@@ -1668,7 +1672,8 @@ function Blogs({
 
 /* ---------- Locations ---------- */
 
-export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?: HomepageData["locations"] } = {}) {
+export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { content?: HomepageData["locations"]; as?: "h1" | "h2" } = {}) {
+  const tr = useT();
   const cities = content.cities;
   // In the editor the whole card must NOT be a link — clicking the editable city
   // name would otherwise navigate away mid-edit. So while editing we render the
@@ -1681,6 +1686,7 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
         eyebrow={ed("locations.eyebrow", content.eyebrow)}
         title={edTitle("locations", content.heading)}
         subtitle={ed("locations.subtitle", content.subtitle)}
+        as={as}
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
         {cities.map((c, i) => {
@@ -1696,23 +1702,23 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
                 <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
                 <a href={cityUrl} className="mt-4 block">
                   <h3 className="text-xl font-semibold text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">
-                    <Editable path={`locations.cities.${i}.c`}>{c.c}</Editable>
+                    <Editable path={`locations.cities.${i}.c`}>{tr(c.c)}</Editable>
                   </h3>
                 </a>
                 {builtCentres.length > 1 ? (
                   <p className="mt-1 flex flex-wrap gap-x-1 text-xs text-muted-foreground">
                     {builtCentres.map((ct, ci) => (
                       <span key={ct.slug}>
-                        <a href={centreHref(ct)} className="hover:text-[color:var(--rose)] hover:underline transition-colors">{ct.name}</a>
+                        <a href={centreHref(ct)} className="hover:text-[color:var(--rose)] hover:underline transition-colors">{tr(ct.name)}</a>
                         {ci < builtCentres.length - 1 && <span className="mx-0.5">·</span>}
                       </span>
                     ))}
                   </p>
                 ) : c.centres && c.centres.length > 0 ? (
-                  <p className="mt-1 text-xs text-muted-foreground">{c.centres.join(" · ")}</p>
+                  <p className="mt-1 text-xs text-muted-foreground">{c.centres.map((x) => tr(x)).join(" · ")}</p>
                 ) : null}
                 <a href={cityUrl} className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                  View Centre <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                  <T k="View Centre" /> <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
                 </a>
               </motion.div>
             </StaggerItem>
@@ -1789,7 +1795,7 @@ const CALCULATOR_HREFS: Record<string, string> = {
   "Semen Analysis Calculator": "/semen-analysis-calculator",
 };
 
-export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
+export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { content?: HomepageData["calculators"]; as?: "h1" | "h2" } = {}) {
   const calcs = content.items;
   return (
     <section id="tools" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
@@ -1797,6 +1803,7 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
         eyebrow={ed("calculators.eyebrow", content.eyebrow)}
         title={edTitle("calculators", content.heading)}
         subtitle={ed("calculators.subtitle", content.subtitle)}
+        as={as}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
         {calcs.map((c, i) => {
@@ -1812,7 +1819,7 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
               </Float>
               <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
               <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
-                Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
+                <T k="Use Calculator" /> <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </span>
             </motion.div>
           );
@@ -1839,7 +1846,15 @@ const inquiryLocations = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
 
-export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+export function InquiryForm({ content: contentProp = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+  const tr = useT();
+  // Already-localized CMS text passes through tr() unchanged (no dictionary hit); English defaults get translated.
+  const content: HomepageData["inquiry"] = {
+    eyebrow: tr(contentProp.eyebrow),
+    heading: { lead: tr(contentProp.heading.lead), em: tr(contentProp.heading.em) },
+    subtitle: tr(contentProp.subtitle),
+    contacts: contentProp.contacts.map((x) => ({ h: tr(x.h), d: tr(x.d) })),
+  };
   const contactIcons = [Phone, MessageCircle, Clock];
   const formAgg = getBrandReviews()?.aggregate;
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" });
@@ -1930,16 +1945,16 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 <div className="flex h-16 w-16 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
                   <CheckCircle2 className="h-8 w-8" />
                 </div>
-                <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">Thank you, {form.name.split(" ")[0]}!</h3>
+                <h3 className="mt-5 text-xl font-semibold text-[color:var(--plum)]">{tr("Thank you")}, {form.name.split(" ")[0]}!</h3>
                 <p className="mt-2 max-w-sm text-sm text-muted-foreground">
-                  Your inquiry has been received. Our fertility counsellor will reach out to you shortly.
+                  {tr("Your inquiry has been received. Our fertility counsellor will reach out to you shortly.")}
                 </p>
                 <button
                   type="button"
                   onClick={() => { setSubmitted(false); setServerError(""); setForm({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" }); }}
                   className="mt-6 text-sm font-semibold text-[color:var(--rose)] hover:underline"
                 >
-                  Submit another inquiry
+                  {tr("Submit another inquiry")}
                 </button>
               </div>
             ) : (
@@ -1951,13 +1966,13 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                       <Star key={i} className="h-4 w-4 fill-current" />
                     ))}
                   </span>
-                  <span>{formAgg.ratingValue.toFixed(1)} on Google · {formAgg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
+                  <span>{formAgg.ratingValue.toFixed(1)} <T k="on Google" /> · {formAgg.reviewCount.toLocaleString("en-IN")}+ <T k="reviews" /></span>
                 </div>
               )}
               <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Full Name *</label>
+                    <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Full Name *" /></label>
                     <div className="relative">
                       <User className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <input id="if-name" type="text" value={form.name} onChange={(e) => set("name", e.target.value)} placeholder="Your name" className={`${fieldCls("name")} pl-10`} />
@@ -1965,7 +1980,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                     {errors.name && <p className="mt-1 text-xs text-[color:var(--rose)]">{errors.name}</p>}
                   </div>
                   <div>
-                    <label htmlFor="if-phone" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Phone *</label>
+                    <label htmlFor="if-phone" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Phone *" /></label>
                     <div className="relative">
                       <Phone className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                       <input id="if-phone" type="tel" value={form.phone} onChange={(e) => set("phone", e.target.value)} placeholder="+91 00000 00000" className={`${fieldCls("phone")} pl-10`} />
@@ -1975,7 +1990,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 </div>
 
                 <div>
-                  <label htmlFor="if-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Email</label>
+                  <label htmlFor="if-email" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Email" /></label>
                   <div className="relative">
                     <Mail className="pointer-events-none absolute left-3.5 top-1/2 h-4 w-4 -translate-y-1/2 text-muted-foreground" />
                     <input id="if-email" type="email" value={form.email} onChange={(e) => set("email", e.target.value)} placeholder="you@example.com" className={`${fieldCls("email")} pl-10`} />
@@ -1985,23 +2000,23 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
 
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
-                    <label htmlFor="if-treatment" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Treatment of Interest</label>
+                    <label htmlFor="if-treatment" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Treatment of Interest" /></label>
                     <select id="if-treatment" value={form.treatment} onChange={(e) => set("treatment", e.target.value)} className={`${fieldCls("treatment")} appearance-none`}>
-                      <option value="">Select an option</option>
-                      {inquiryTreatments.map((t) => <option key={t} value={t}>{t}</option>)}
+                      <option value="">{tr("Select an option")}</option>
+                      {inquiryTreatments.map((x) => <option key={x} value={x}>{tr(x)}</option>)}
                     </select>
                   </div>
                   <div>
-                    <label htmlFor="if-location" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Preferred Centre</label>
+                    <label htmlFor="if-location" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Preferred Centre" /></label>
                     <select id="if-location" value={form.location} onChange={(e) => set("location", e.target.value)} className={`${fieldCls("location")} appearance-none`}>
-                      <option value="">Select a centre</option>
-                      {inquiryLocations.map((l) => <option key={l} value={l}>{l}</option>)}
+                      <option value="">{tr("Select a centre")}</option>
+                      {inquiryLocations.map((x) => <option key={x} value={x}>{tr(x)}</option>)}
                     </select>
                   </div>
                 </div>
 
                 <div>
-                  <label htmlFor="if-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Message</label>
+                  <label htmlFor="if-message" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70"><T k="Message" /></label>
                   <textarea id="if-message" rows={3} value={form.message} onChange={(e) => set("message", e.target.value)} placeholder="Tell us briefly how we can help…" className={`${fieldCls("message")} resize-none`} />
                 </div>
 
@@ -2018,10 +2033,10 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                 )}
 
                 <button type="submit" disabled={sending} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 disabled:cursor-not-allowed disabled:opacity-70">
-                  <Send className="h-4 w-4" /> {sending ? "Sending…" : "Request a Callback"}
+                  <Send className="h-4 w-4" /> <T k={sending ? "Sending…" : "Request a Callback"} />
                 </button>
                 <p className="text-center text-xs text-muted-foreground">
-                  Your details are kept strictly confidential. We never share your information.
+                  <T k="Your details are kept strictly confidential. We never share your information." />
                 </p>
               </form>
               </>
@@ -2084,7 +2099,7 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
                     : "btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white";
                 return (
                   <Magnetic key={label} as="a" href={hrefs[i]} className={cls} {...(isExternal ? { target: "_blank", rel: "noopener noreferrer" } : {})}>
-                    <Icon className="h-4 w-4" /> {label}
+                    <Icon className="h-4 w-4" /> <T k={label} />
                   </Magnetic>
                 );
               })}
@@ -2106,6 +2121,7 @@ function FinalCTA({ content = HOMEPAGE_DEFAULTS.finalCta }: { content?: FinalCta
 // structure / classes / hierarchy changed — only the data source.
 export function Footer() {
   const { groups, copyrightText, legal } = useFooter();
+  const tr = useT();
   return (
     <footer id="contact" className="border-t border-border bg-[color:var(--ivory)]">
       <div className="container-px mx-auto max-w-[1400px] pt-20 pb-24 md:pb-8">
@@ -2113,7 +2129,7 @@ export function Footer() {
         <div className="grid grid-cols-2 gap-x-8 gap-y-10 py-12 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6">
           {groups.map((c) => (
             <div key={c.h}>
-              <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[color:var(--plum)]">{c.h}</h4>
+              <h4 className="text-[13px] font-semibold uppercase tracking-wider text-[color:var(--plum)]">{tr(c.h)}</h4>
               <ul className="mt-4 space-y-2.5 text-sm text-muted-foreground">
                 {c.l.map((x) => (
                   <li key={x.label}>
@@ -2123,10 +2139,10 @@ export function Footer() {
                         {...(x.external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
                         className="capitalize transition-colors hover:text-[color:var(--rose)]"
                       >
-                        {x.label}
+                        {tr(x.label)}
                       </a>
                     ) : (
-                      <span className="capitalize cursor-default text-muted-foreground/70">{x.label}</span>
+                      <span className="capitalize cursor-default text-muted-foreground/70">{tr(x.label)}</span>
                     )}
                   </li>
                 ))}
@@ -2137,7 +2153,7 @@ export function Footer() {
 
         {/* Bottom */}
         <div className="mt-8 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 text-sm text-muted-foreground md:flex-row">
-          <div>© {new Date().getFullYear()} {copyrightText}</div>
+          <div>© {new Date().getFullYear()} {tr(copyrightText)}</div>
           <div className="flex flex-wrap items-center justify-center gap-5">
             {legal.map((x) => (
               <a
@@ -2154,7 +2170,7 @@ export function Footer() {
               onClick={() => window.dispatchEvent(new Event(OPEN_COOKIE_PREFERENCES_EVENT))}
               className="hover:text-[color:var(--rose)]"
             >
-              Cookie Settings
+              <T k="Cookie Settings" />
             </button>
           </div>
         </div>

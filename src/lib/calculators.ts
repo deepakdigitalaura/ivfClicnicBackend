@@ -1,5 +1,8 @@
 import { cache as reactCache } from "react";
 import { unstable_cache } from "next/cache";
+import { getSanityCalculator } from "@/sanity/lib/fetch";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 export type CalculatorFaq = { question: string; answer: string };
 
@@ -47,22 +50,35 @@ const CALCULATOR_DEFAULTS: Record<string, Pick<CalculatorCmsData, "title" | "sub
 };
 
 export const getCalculator = reactCache(
-  (slug: string): Promise<CalculatorCmsData | null> =>
+  (slug: string, locale: Locale = "en"): Promise<CalculatorCmsData | null> =>
     unstable_cache(
       async () => {
         if (!isCalculatorSlug(slug)) return null;
         const defaults = CALCULATOR_DEFAULTS[slug];
+        const cms = await getSanityCalculator(slug, locale);
+        const faqs = cms?.faqs?.length
+          ? cms.faqs.map((f) => ({ question: f.question ?? "", answer: f.answer ?? "" }))
+          : [];
+        // A real Sanity doc value is already locale-resolved by getSanityCalculator (pickLocale).
+        // The hardcoded CALCULATOR_DEFAULTS fallback is plain English, so it needs its own
+        // hi/gu lookup — that's the fix for calculator hero titles staying English.
         return {
           slug,
-          title: defaults?.title ?? slug,
-          subtitle: defaults?.subtitle ?? "",
-          disclaimer: defaults?.disclaimer ?? "",
-          faqs: [],
-          seo: { metaTitle: null, metaDescription: null, ogTitle: null, ogDescription: null, ogImage: null },
+          title: cms?.title || (defaults ? ui(defaults.title, locale) : slug),
+          subtitle: cms?.subtitle || (defaults ? ui(defaults.subtitle, locale) : ""),
+          disclaimer: cms?.disclaimer || (defaults?.disclaimer ? ui(defaults.disclaimer, locale) : ""),
+          faqs,
+          seo: {
+            metaTitle: cms?.seo?.metaTitle ?? null,
+            metaDescription: cms?.seo?.metaDescription ?? null,
+            ogTitle: cms?.seo?.ogTitle ?? null,
+            ogDescription: cms?.seo?.ogDescription ?? null,
+            ogImage: null,
+          },
         };
       },
-      ["calculator-by-slug", slug],
-      { revalidate: 86400 },
+      ["calculator-by-slug", slug, locale],
+      { revalidate: 86400, tags: [`calculator-${slug}`] },
     )(),
 );
 

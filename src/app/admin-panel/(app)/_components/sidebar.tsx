@@ -3,8 +3,9 @@ import Link from "next/link";
 import { usePathname } from "next/navigation";
 import {
   LayoutDashboard, Bot, Code2, CornerUpRight, Map, BarChart3,
-  FileText, ExternalLink, LogOut, Database, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, HelpCircle,
+  FileText, ExternalLink, LogOut, Inbox, Stethoscope, Star, Home, Settings, Video, BookOpen, Info, Syringe, HeartPulse, MapPin, MessageSquareQuote, Images, Newspaper, ShieldCheck, Building2, Sparkles, Award, LayoutGrid, Users,
 } from "lucide-react";
+import type { Role } from "@/lib/admin-auth";
 import { logoutAction } from "../../actions";
 
 const NAV = [
@@ -15,31 +16,47 @@ const NAV = [
 const CONTENT_NAV = [
   { href: "/admin-panel/homepage", label: "Homepage Editor", icon: Home },
   { href: "/admin-panel/about", label: "About Page", icon: Info },
+  { href: "/admin-panel/contact-info", label: "Contact Cards", icon: Inbox },
+  { href: "/admin-panel/history", label: "History", icon: BookOpen },
+  { href: "/admin-panel/infrastructure", label: "Infrastructure", icon: Building2 },
+  { href: "/admin-panel/why-bfi", label: "Why BFI", icon: Star },
+  { href: "/admin-panel/simple-treatment", label: "Simple Treatment", icon: Sparkles },
+  { href: "/admin-panel/safe-treatment", label: "Safe Treatment", icon: ShieldCheck },
+  { href: "/admin-panel/smart-treatment", label: "Smart Treatment", icon: BarChart3 },
+  { href: "/admin-panel/success-benchmarks", label: "Success Benchmarks", icon: Award },
+  { href: "/admin-panel/suraksha-kavach", label: "Suraksha Kavach", icon: ShieldCheck },
+  { href: "/admin-panel/treatments-hub", label: "Treatments Hub Page", icon: Syringe },
   { href: "/admin-panel/treatments", label: "Treatments", icon: Syringe },
   { href: "/admin-panel/services", label: "Maternity Services", icon: HeartPulse },
+  { href: "/admin-panel/calculators", label: "Calculators", icon: BarChart3 },
   { href: "/admin-panel/locations", label: "Locations", icon: MapPin },
   { href: "/admin-panel/doctors", label: "Doctors", icon: Stethoscope },
   { href: "/admin-panel/testimonials", label: "Testimonials", icon: Star },
   { href: "/admin-panel/camps", label: "Camp Posters", icon: Images },
-  { href: "/admin-panel/page-faqs", label: "Page FAQs", icon: HelpCircle },
+  { href: "/admin-panel/category-hubs", label: "Category Hub Pages", icon: LayoutGrid },
   { href: "/admin-panel/reviews", label: "Google Reviews", icon: MessageSquareQuote },
   { href: "/admin-panel/education-videos", label: "Education Videos", icon: Video },
+  { href: "/admin-panel/press", label: "Media & Press", icon: Newspaper },
   { href: "/admin-panel/blogs", label: "Blogs", icon: BookOpen },
+  { href: "/admin-panel/header-nav", label: "Header & Navigation", icon: Settings },
+  { href: "/admin-panel/footer-nav", label: "Footer", icon: Settings },
 ];
 
 const SEO_NAV = [
   { href: "/admin-panel/robots", label: "Robots.txt", icon: Bot },
-  { href: "/admin-panel/scripts", label: "Script Injection", icon: Code2 },
+  { href: "/admin-panel/scripts", label: "Add Script", icon: Code2 },
   { href: "/admin-panel/redirects", label: "Redirects", icon: CornerUpRight },
   { href: "/admin-panel/sitemap", label: "Sitemap", icon: Map },
   { href: "/admin-panel/schema", label: "Structured Data", icon: BarChart3 },
   { href: "/admin-panel/page-seo", label: "Page SEO", icon: FileText },
 ];
 
-export function Sidebar() {
+export function Sidebar({ role }: { role: Role }) {
   const pathname = usePathname();
+  const isSuperadmin = role === "superadmin";
   const isActive = (href: string, exact?: boolean) =>
     exact ? pathname === href : pathname === href || pathname.startsWith(href + "/");
+  const seoNav = isSuperadmin ? SEO_NAV : SEO_NAV.filter((item) => item.href !== "/admin-panel/scripts");
 
   return (
     <aside className="admin-sidebar">
@@ -63,7 +80,7 @@ export function Sidebar() {
         ))}
 
         <div className="admin-nav-section">SEO &amp; Technical</div>
-        {SEO_NAV.map(({ href, label, icon: Icon }) => (
+        {seoNav.map(({ href, label, icon: Icon }) => (
           <Link key={href} href={href} className={isActive(href) ? "active" : ""}>
             <Icon /> {label}
           </Link>
@@ -73,11 +90,13 @@ export function Sidebar() {
         <Link href="/admin-panel/site-settings" className={isActive("/admin-panel/site-settings") ? "active" : ""}>
           <Settings /> Site Settings
         </Link>
+        {isSuperadmin && (
+          <Link href="/admin-panel/users" className={isActive("/admin-panel/users") ? "active" : ""}>
+            <Users /> Team &amp; Access
+          </Link>
+        )}
 
         <div className="admin-nav-section">Advanced</div>
-        <Link href="/studio" target="_blank">
-          <Database /> Sanity Studio
-        </Link>
         <Link href="/" target="_blank" className="admin-live">
           <ExternalLink /> View Live Site
         </Link>

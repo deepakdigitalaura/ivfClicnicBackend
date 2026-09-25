@@ -2,17 +2,21 @@ import type { Metadata } from "next";
 import { SafeTreatmentPage } from "@/components/safe-treatment-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getSafeTreatmentPage } from "@/lib/payload";
 
 const PATH = "/safe-treatment";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getSafeTreatmentPage();
+  const title = data.metaTitle || "Safe IVF Treatment — Safety First, Safety for All | Bavishi Fertility Institute";
+  const description = data.metaDescription || "Bavishi Fertility Institute's motto: Safety First. OHSS-free clinic, Class 1000 labs, double-witness protocol. Your safety is our top priority.";
   return withPageSeoOverride(PATH, {
-    title: "Safe IVF Treatment — Safety First, Safety for All | Bavishi Fertility Institute",
-    description: "Bavishi Fertility Institute's motto: Safety First. OHSS-free clinic, Class 1000 labs, double-witness protocol. Your safety is our top priority.",
-    alternates: { canonical: PATH },
-    openGraph: { title: "Safe IVF Treatment | Bavishi Fertility Institute", description: "OHSS-free clinic, Class 1000 labs, double-witness protocol. Your safety is our top priority.", url: abs(PATH), type: "website" },
+    title,
+    description,
+    alternates: localeAlternates(PATH),
+    openGraph: { title: data.ogTitle || title, description: data.ogDescription || "OHSS-free clinic, Class 1000 labs, double-witness protocol. Your safety is our top priority.", url: abs(PATH), type: "website" },
   });
 }
 
@@ -21,6 +25,7 @@ const graph = [
   breadcrumbSchema([ { name: "Home", url: "/" }, { name: "Safe Treatment", url: PATH } ]),
 ];
 
-export default function Page() {
-  return (<><JsonLd graph={graph} /><PageSeoSchema path={PATH} /><SafeTreatmentPage /></>);
+export default async function Page() {
+  const data = await getSafeTreatmentPage();
+  return (<><JsonLd graph={graph} /><PageSeoSchema path={PATH} /><SafeTreatmentPage data={data} /></>);
 }

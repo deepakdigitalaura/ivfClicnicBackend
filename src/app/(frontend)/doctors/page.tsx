@@ -4,7 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { physicianSchema } from "@/lib/doctors";
 import { getDoctors } from "@/lib/payload";
-import { breadcrumbSchema, abs } from "@/lib/seo";
+import { breadcrumbSchema, abs, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
 export const revalidate = 3600;
@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
     title: "Our Fertility Specialists — Doctors at Bavishi Fertility Institute",
     description:
       "Meet the credentialed fertility specialists at Bavishi Fertility Institute — IVF, ICSI, andrology and reproductive surgery experts caring for families across India since 1998.",
-    alternates: { canonical: URL },
+    alternates: localeAlternates(URL),
     openGraph: {
       title: "Our Fertility Specialists — Bavishi Fertility Institute",
       description: "Credentialed IVF and fertility doctors across India. Meet our promoter doctors and specialists.",

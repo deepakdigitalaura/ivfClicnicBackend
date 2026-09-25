@@ -13,10 +13,12 @@ import { SectionHead } from "@/components/ivf-page";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Doctor } from "@/lib/doctors";
+import { ui } from "@/lib/ui-strings";
+import type { Locale } from "@/lib/i18n";
 import { DOCTORS, doctorUrl, CORE_DOCTOR_SLUGS } from "@/lib/doctors";
 import { treatmentCardData, treatmentRef } from "@/lib/treatments";
 import { WOMENS_HEALTH_SERVICES, serviceHref } from "@/lib/womens-health";
-import { centresForLocationSlugs, centreMapUrl, centreHref, cityBySlug } from "@/lib/locations";
+import { centreMapUrl, centreHref, cityBySlug, type Centre } from "@/lib/locations";
 import { testimonialsForDoctor, videosForDoctor } from "@/lib/video-testimonials";
 import { reviewsForDoctor } from "@/lib/doctor-reviews";
 
@@ -100,7 +102,7 @@ const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const em = (t: string) => `<em ${EM}>${t}</em>`;
 
 /* ---------- Shared centre contact card (per-centre "Where to meet" card) ---------- */
-function CentreCard({ c, d }: { c: ReturnType<typeof centresForLocationSlugs>[number]; d: Doctor }) {
+function CentreCard({ c, d }: { c: Centre; d: Doctor }) {
   return (
     <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 text-left shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift">
       <div className="flex items-start gap-3.5">
@@ -139,12 +141,11 @@ function CentreCard({ c, d }: { c: ReturnType<typeof centresForLocationSlugs>[nu
 }
 
 /* ---------- /doctors/[slug] — single profile ---------- */
-export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
+export function DoctorProfile({ doctor: d, centres }: { doctor: Doctor; centres: Centre[] }) {
   const editing = !!useEdit()?.editMode;
   const stories = testimonialsForDoctor(d.slug); // only when a video explicitly names this doctor
   const reviews = reviewsForDoctor(d.slug); // real written Google reviews (text) for this doctor
   const videos = videosForDoctor(d.slug); // doctor's own explainer videos (real ids only)
-  const centres = centresForLocationSlugs(d.locations); // full contact details for "Where to meet"
   const pl = d.profileLabels ?? {};
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -470,7 +471,11 @@ export function DoctorProfile({ doctor: d }: { doctor: Doctor }) {
 /* ---------- /doctors — index ---------- */
 /* `doctors` is supplied by the server route (CMS-resolved, in code order); the
  * DOCTORS default keeps the component reusable/standalone. */
-export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
+export function DoctorsIndex({ doctors = DOCTORS, locale = "en" }: { doctors?: Doctor[]; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
+  // "22+ yrs" -> "22+ वर्ष" / "22+ વર્ષ"
+  const yrs = (s: string) => (locale === "en" ? s : s.replace(/yrs?/, locale === "hi" ? "वर्ष" : "વર્ષ"));
+  const cred = (s: string) => t(s);
   // The four Bavishi family doctors lead, in their fixed order; every other
   // specialist follows alphabetically by name (not grouped by city).
   const sorted = [...doctors].sort((a, b) => {
@@ -485,33 +490,34 @@ export function DoctorsIndex({ doctors = DOCTORS }: { doctors?: Doctor[] }) {
 
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Doctors</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Doctors")}</span>
         </nav>
       </div>
 
       <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
         <SectionHead
           center
-          eyebrow="Our Fertility Specialists"
-          title={<>Meet our <em className="font-display italic text-[color:var(--rose)]">promoter doctors & specialists</em></>}
-          subtitle="A family of fertility experts trusted by generations — credentialed, experienced and committed to honest, compassionate care."
+          as="h1"
+          eyebrow={t("Our Fertility Specialists")}
+          title={<>{t("Meet our")} <em className="font-display italic text-[color:var(--rose)]">{t("promoter doctors & specialists")}</em></>}
+          subtitle={t("A family of fertility experts trusted by generations — credentialed, experienced and committed to honest, compassionate care.")}
         />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {sorted.map((d) => (
             <StaggerItem key={d.slug}>
               <a href={doctorUrl(d.slug)} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                 <div className="relative aspect-[3/4] overflow-hidden bg-[color:var(--rose-soft)]/40">
-                  <Image src={d.image} alt={`${d.name} — ${d.specialty}`} fill loading="lazy" sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
+                  <Image src={d.image} alt={`${d.name} — ${t(d.specialty)}`} fill loading="lazy" sizes="(max-width: 640px) 100vw, (max-width: 1280px) 33vw, 25vw" className="object-cover object-top transition-transform duration-700 group-hover:scale-[1.03]" />
                   <div className="absolute inset-x-0 bottom-0 h-32 bg-gradient-to-t from-black/60 to-transparent" />
-                  {d.experienceLabel && <span className="absolute top-3 right-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--rose)] backdrop-blur">{d.experienceLabel}</span>}
-                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[color:var(--plum)] backdrop-blur"><MapPin className="h-3 w-3" /> {d.cities[0]}</span>
+                  {d.experienceLabel && <span className="absolute top-3 right-3 rounded-full bg-white/90 px-3 py-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--rose)] backdrop-blur">{yrs(d.experienceLabel)}</span>}
+                  <span className="absolute bottom-3 left-3 inline-flex items-center gap-1 rounded-full bg-white/90 px-3 py-1 text-xs font-medium text-[color:var(--plum)] backdrop-blur"><MapPin className="h-3 w-3" /> {t(d.cities[0])}</span>
                 </div>
                 <div className="p-5">
                   <h2 className="text-lg font-semibold text-[color:var(--plum)] group-hover:text-[color:var(--rose)]">{d.name}</h2>
-                  <p className="text-sm text-muted-foreground">{[d.credentials, d.specialty].filter(Boolean).join(" · ")}</p>
-                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[color:var(--rose)]">View profile <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span>
+                  <p className="text-sm text-muted-foreground">{[cred(d.credentials), t(d.specialty)].filter(Boolean).join(" · ")}</p>
+                  <span className="mt-4 inline-flex items-center gap-1.5 text-xs font-semibold text-[color:var(--rose)]">{t("View profile")} <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-0.5" /></span>
                 </div>
               </a>
             </StaggerItem>

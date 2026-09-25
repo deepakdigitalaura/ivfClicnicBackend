@@ -5,6 +5,21 @@ const nextConfig = {
   reactStrictMode: true,
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
+  // Let middleware see the raw (trailing-slash) request instead of Next's own
+  // built-in slash-redirect firing first. Without this, an old URL requested
+  // with a trailing slash (e.g. "/old-page/") gets redirected to "/old-page"
+  // by Next itself BEFORE middleware ever runs — then middleware issues a
+  // SECOND redirect to the real destination, producing a two-hop chain
+  // instead of one direct 301. middleware.ts now owns the trailing-slash
+  // fallback for paths with no matching redirect rule, so behaviour for
+  // ordinary pages is unchanged — only the redirect-rule case collapses
+  // from two hops to one.
+  skipTrailingSlashRedirect: true,
+  // NOTE: cpus:1 + webpackMemoryOptimizations were set when the build ran
+  // directly on the RAM-constrained Cloudways server. The build now runs on
+  // GitHub Actions (ample RAM, see deploy.yml) and this restriction was
+  // producing broken shared-chunk references (chunks referenced in HTML that
+  // never got emitted to disk, crashing hydration) — removed.
 
   async redirects() {
     return [
@@ -60,10 +75,22 @@ const nextConfig = {
     ];
   },
 
-  // No remotePatterns needed — every next/image src on this site is a local
-  // /assets or /media path (no Sanity CDN image builder or external image
-  // host is used anywhere in the codebase).
-  images: {},
+  images: {
+    remotePatterns: [{ protocol: "https", hostname: "cdn.sanity.io" }],
+  },
+
+  async headers() {
+    return [
+      {
+        source: "/:path*",
+        headers: [
+          // Tells browsers to always use https for this domain from now on,
+          // even if someone types "http://" or an old link points at it.
+          { key: "Strict-Transport-Security", value: "max-age=63072000; includeSubDomains; preload" },
+        ],
+      },
+    ];
+  },
 };
 
 export default nextConfig;

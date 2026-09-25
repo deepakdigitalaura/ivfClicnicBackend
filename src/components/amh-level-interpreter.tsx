@@ -10,6 +10,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import type { CalculatorCmsData } from "@/lib/calculators";
 import { Editable } from "@/components/editor/Editable";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 /* ── AMH interpretation data (ported from live ivfclinic.com) ── */
 type AmhBand = "vl" | "l" | "n" | "h" | "vh";
@@ -121,32 +123,42 @@ function classifyBand(ngml: number): AmhBand {
   return "vh";
 }
 
-function ageComparison(ngml: number, ageGroup: string): { text: string; color: string } {
+type AgeCompStatus = "below" | "borderlineLow" | "above" | "borderlineHigh" | "normal";
+const AGE_COMP_LABEL: Record<AgeCompStatus, string> = {
+  below: "⬇ Below normal for age",
+  borderlineLow: "⚠ Borderline low for age",
+  above: "⬆ Above normal for age",
+  borderlineHigh: "⚠ Borderline high for age",
+  normal: "✓ Within normal range for age",
+};
+
+function ageComparison(ngml: number, ageGroup: string): { status: AgeCompStatus; label: string; min: number; max: number; color: string } {
   const ref = AGE_RANGES[ageGroup];
-  if (!ref) return { text: "", color: "#9ca3af" };
+  if (!ref) return { status: "normal", label: "", min: 0, max: 0, color: "#9ca3af" };
   const borderlineLoThreshold = ref.min * 1.1;
   const borderlineHiThreshold = ref.max * 0.9;
   if (ngml < ref.min)
-    return { text: `⬇ Below normal for age ${ref.label} (Normal: ${ref.min} – ${ref.max} ng/mL)`, color: "#c0392b" };
+    return { status: "below", label: ref.label, min: ref.min, max: ref.max, color: "#c0392b" };
   if (ngml <= borderlineLoThreshold)
-    return { text: `⚠ Borderline low for age ${ref.label} (Normal: ${ref.min} – ${ref.max} ng/mL)`, color: "#e67e22" };
+    return { status: "borderlineLow", label: ref.label, min: ref.min, max: ref.max, color: "#e67e22" };
   if (ngml > ref.max)
-    return { text: `⬆ Above normal for age ${ref.label} (Normal: ${ref.min} – ${ref.max} ng/mL)`, color: "#8e44ad" };
+    return { status: "above", label: ref.label, min: ref.min, max: ref.max, color: "#8e44ad" };
   if (ngml >= borderlineHiThreshold)
-    return { text: `⚠ Borderline high for age ${ref.label} (Normal: ${ref.min} – ${ref.max} ng/mL)`, color: "#0056b3" };
-  return { text: `✓ Within normal range for age ${ref.label} (Normal: ${ref.min} – ${ref.max} ng/mL)`, color: "#1e7e34" };
+    return { status: "borderlineHigh", label: ref.label, min: ref.min, max: ref.max, color: "#0056b3" };
+  return { status: "normal", label: ref.label, min: ref.min, max: ref.max, color: "#1e7e34" };
 }
 
 type Result = {
   band: AmhBand;
   ngml: number; pmol: number;
-  ageComp: { text: string; color: string };
+  ageComp: { status: AgeCompStatus; label: string; min: number; max: number; color: string };
 };
 
-export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
-  const cmsTitle      = cms?.title     ?? "AMH Level Interpreter";
-  const cmsSubtitle   = cms?.subtitle  ?? "Understand what your Anti-Mullerian Hormone (AMH) result means for your ovarian reserve, IVF response, and fertility outlook — with age-specific context.";
-  const cmsDisclaimer = cms?.disclaimer ?? "AMH is one indicator of ovarian reserve and should be interpreted alongside other tests by a qualified fertility specialist. A low AMH does not mean you cannot conceive.";
+export function AmhLevelInterpreterPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
+  const cmsTitle      = t(cms?.title     ?? "AMH Level Interpreter");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Understand what your Anti-Mullerian Hormone (AMH) result means for your ovarian reserve, IVF response, and fertility outlook — with age-specific context.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "AMH is one indicator of ovarian reserve and should be interpreted alongside other tests by a qualified fertility specialist. A low AMH does not mean you cannot conceive.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";
@@ -163,8 +175,8 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
 
   const handleCalc = () => {
     const raw = parseFloat(value);
-    if (isNaN(raw) || raw <= 0) { setError("Please enter a valid AMH value greater than 0."); return; }
-    if (!ageGroup) { setError("Please select your age group."); return; }
+    if (isNaN(raw) || raw <= 0) { setError(t("Please enter a valid AMH value greater than 0.")); return; }
+    if (!ageGroup) { setError(t("Please select your age group.")); return; }
     setError("");
     const ngml = unit === "pmol" ? raw / 7.14 : raw;
     const pmol = unit === "ngml" ? raw * 7.14 : raw;
@@ -177,9 +189,9 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
 
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">{t("Calculators")}</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
@@ -193,7 +205,7 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Ovarian Reserve · Fertility Hormone
+              <Sparkles className="h-3.5 w-3.5" /> {t("Ovarian Reserve · Fertility Hormone")}
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -208,9 +220,9 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-              {[{ icon: Heart, t: "Free Tool" }, { icon: Clock, t: "Instant Results" }, { icon: Lock, t: "No Data Stored" }].map((b) => (
-                <span key={b.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
-                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {b.t}
+              {[{ icon: Heart, label: "Free Tool" }, { icon: Clock, label: "Instant Results" }, { icon: Lock, label: "No Data Stored" }].map((b) => (
+                <span key={b.label} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
+                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(b.label)}
                 </span>
               ))}
             </div>
@@ -224,8 +236,8 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
                 { stat: "Age", label: "Always age-adjusted interpretation" },
               ].map((s) => (
                 <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
-                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat === "Age" ? t("Age") : s.stat}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -236,9 +248,9 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
       {/* How This Interpreter Works */}
       <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
         <Reveal>
-          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Interpreter Works</h2>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("How This Interpreter Works")}</h2>
           <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Your AMH result in context — not just a number, but what it means for your fertility.
+            {t("Your AMH result in context — not just a number, but what it means for your fertility.")}
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -251,8 +263,8 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
                   {step.n}
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(step.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(step.desc)}</p>
               </div>
             ))}
           </div>
@@ -263,18 +275,18 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
-            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">AMH Reference Ranges by Age</h2>
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("AMH Reference Ranges by Age")}</h2>
             <p className="mx-auto mt-3 max-w-xl text-center text-sm text-muted-foreground">
-              AMH levels decline naturally with age. Use this table to place your result in context.
+              {t("AMH levels decline naturally with age. Use this table to place your result in context.")}
             </p>
             <div className="mt-8 overflow-x-auto">
               <table className="w-full border-collapse text-sm">
                 <thead>
                   <tr className="border-b-2 border-[color:var(--rose)]/30">
-                    <th className="rounded-tl-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Age Group</th>
-                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Normal (ng/mL)</th>
-                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Normal (pmol/L)</th>
-                    <th className="rounded-tr-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Clinical Note</th>
+                    <th className="rounded-tl-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Age Group")}</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Normal (ng/mL)")}</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Normal (pmol/L)")}</th>
+                    <th className="rounded-tr-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Clinical Note")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -287,10 +299,10 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
                     { age: "45–50 years", ngml: "0.05 – 2.06", pmol: "0.3 – 14.7", note: "Very low reserve; donor egg may be discussed" },
                   ].map((row, i) => (
                     <tr key={row.age} className={i % 2 === 0 ? "bg-card" : "bg-[color:var(--ivory)]"}>
-                      <td className="px-5 py-3 font-semibold text-[color:var(--plum)]">{row.age}</td>
+                      <td className="px-5 py-3 font-semibold text-[color:var(--plum)]">{t(row.age)}</td>
                       <td className="px-5 py-3 font-mono text-[color:var(--plum)]/80">{row.ngml}</td>
                       <td className="px-5 py-3 font-mono text-[color:var(--plum)]/80">{row.pmol}</td>
-                      <td className="px-5 py-3 text-xs text-muted-foreground">{row.note}</td>
+                      <td className="px-5 py-3 text-xs text-muted-foreground">{t(row.note)}</td>
                     </tr>
                   ))}
                 </tbody>
@@ -305,8 +317,8 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
                 <div key={b.band} className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
                   <div className={`h-3 w-3 shrink-0 rounded-full ${b.color}`} />
                   <div>
-                    <div className="text-xs font-bold text-[color:var(--plum)]">{b.band} · {b.ngml}</div>
-                    <div className="mt-0.5 text-xs text-muted-foreground">{b.note}</div>
+                    <div className="text-xs font-bold text-[color:var(--plum)]">{t(b.band)} · {b.ngml}</div>
+                    <div className="mt-0.5 text-xs text-muted-foreground">{t(b.note)}</div>
                   </div>
                 </div>
               ))}
@@ -338,7 +350,7 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
                   <div className="grid gap-6 sm:grid-cols-2">
                     <div>
                       <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-                        Your AMH Value ({unit === "ngml" ? "ng/mL" : "pmol/L"}) <span className="text-[color:var(--rose)]">*</span>
+                        {t("Your AMH Value")} ({unit === "ngml" ? "ng/mL" : "pmol/L"}) <span className="text-[color:var(--rose)]">*</span>
                       </label>
                       <input
                         type="number"
@@ -350,19 +362,19 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
                         className={inputClass}
                       />
                       <p className="mt-1.5 text-xs text-muted-foreground">
-                        Normal range: {unit === "ngml" ? "1.5 – 3.5 ng/mL" : "7.1 – 25.0 pmol/L"}
+                        {t("Normal range:")} {unit === "ngml" ? "1.5 – 3.5 ng/mL" : "7.1 – 25.0 pmol/L"}
                       </p>
                     </div>
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Your age group <span className="text-[color:var(--rose)]">*</span></label>
+                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Your age group")} <span className="text-[color:var(--rose)]">*</span></label>
                       <select value={ageGroup} onChange={(e) => setAgeGroup(e.target.value)} className={selectClass}>
-                        <option value="">— Select age group —</option>
-                        <option value="20to24">20–24 years</option>
-                        <option value="25to29">25–29 years</option>
-                        <option value="30to34">30–34 years</option>
-                        <option value="35to39">35–39 years</option>
-                        <option value="40to44">40–44 years</option>
-                        <option value="45to50">45–50 years</option>
+                        <option value="">{t("— Select age group —")}</option>
+                        <option value="20to24">{t("20–24 years")}</option>
+                        <option value="25to29">{t("25–29 years")}</option>
+                        <option value="30to34">{t("30–34 years")}</option>
+                        <option value="35to39">{t("35–39 years")}</option>
+                        <option value="40to44">{t("40–44 years")}</option>
+                        <option value="45to50">{t("45–50 years")}</option>
                       </select>
                     </div>
                   </div>
@@ -373,7 +385,7 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
 
                   <div className="mt-8 flex justify-end border-t border-border/60 pt-7">
                     <button type="button" onClick={handleCalc} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                      Interpret My AMH Level <ArrowRight className="h-4 w-4" />
+                      {t("Interpret My AMH Level")} <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -382,13 +394,13 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
           ) : (
             <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <button type="button" onClick={() => setResult(null)} className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]">
-                <RotateCcw className="h-3.5 w-3.5" /> Re-interpret
+                <RotateCcw className="h-3.5 w-3.5" /> {t("Re-interpret")}
               </button>
 
               {/* Level banner */}
               <div className={`rounded-[2rem] p-8 text-center text-white md:p-10 ${AMH_BANDS[result.band].bgClass}`}>
-                <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/70">Your Result</div>
-                <div className="mt-3 text-3xl font-black">{AMH_BANDS[result.band].name}</div>
+                <div className="text-xs font-bold uppercase tracking-[0.15em] text-white/70">{t("Your Result")}</div>
+                <div className="mt-3 text-3xl font-black">{t(AMH_BANDS[result.band].name)}</div>
                 <div className="mt-2 text-lg font-semibold text-white/90">
                   {result.ngml.toFixed(2)} ng/mL &nbsp;|&nbsp; {result.pmol.toFixed(1)} pmol/L
                 </div>
@@ -397,21 +409,21 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
               {/* Absolute + age context */}
               <div className="mt-5 space-y-3">
                 <div className="rounded-xl bg-amber-50 border-l-4 border-amber-400 px-4 py-3 text-sm font-medium text-amber-900 flex items-center gap-2">
-                  <MapPin className="h-3.5 w-3.5 shrink-0" /><strong>Absolute level:</strong> {AMH_BANDS[result.band].name} — {result.ngml.toFixed(2)} ng/mL
+                  <MapPin className="h-3.5 w-3.5 shrink-0" /><strong>{t("Absolute level:")}</strong> {t(AMH_BANDS[result.band].name)} — {result.ngml.toFixed(2)} ng/mL
                 </div>
                 <div className="rounded-xl border-l-4 px-4 py-3 text-sm font-medium" style={{ borderColor: result.ageComp.color, color: result.ageComp.color, background: "#f9f9f9" }}>
-                  <strong>Age-wise comparison:</strong> {result.ageComp.text}
+                  <strong>{t("Age-wise comparison:")}</strong> {t(AGE_COMP_LABEL[result.ageComp.status])} {t(result.ageComp.label)} ({t("Normal:")} {result.ageComp.min} – {result.ageComp.max} ng/mL)
                 </div>
               </div>
 
               {/* Meaning */}
               <div className="mt-6 rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
-                <h3 className="font-semibold text-[color:var(--plum)]">What This Result Means For You</h3>
+                <h3 className="font-semibold text-[color:var(--plum)]">{t("What This Result Means For You")}</h3>
                 <ul className="mt-4 space-y-2">
                   {AMH_BANDS[result.band].meaning.map((m) => (
                     <li key={m} className="flex gap-2 text-sm leading-relaxed text-[color:var(--plum)]/80">
                       <span className="mt-0.5 h-2 w-2 shrink-0 rounded-full" style={{ background: AMH_BANDS[result.band].color }} />
-                      {m}
+                      {t(m)}
                     </li>
                   ))}
                 </ul>
@@ -422,13 +434,13 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
                 {AMH_BANDS[result.band].steps.map((s) => (
                   <div key={s.text} className="flex items-center gap-3 rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-4 shadow-soft">
                     <s.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
-                    <p className="text-sm font-medium text-[color:var(--plum)]">{s.text}</p>
+                    <p className="text-sm font-medium text-[color:var(--plum)]">{t(s.text)}</p>
                   </div>
                 ))}
               </div>
 
               <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                * AMH levels vary between laboratories. Always interpret results with your treating clinician alongside AFC scan and full hormonal panel.
+                {t("* AMH levels vary between laboratories. Always interpret results with your treating clinician alongside AFC scan and full hormonal panel.")}
               </p>
             </motion.div>
           )}
@@ -438,18 +450,18 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
       {/* Patient Testimonials */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What Our Patients Say About Knowing Their AMH</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("What Our Patients Say About Knowing Their AMH")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2">
             {[
               { quote: "My AMH came back as 0.3 ng/mL and I panicked. The interpreter helped me understand what 'very low' means at 38 — and that IVF was still possible. We started immediately and have our son now.", bg: "bg-red-600" },
               { quote: "I had no idea my AMH of 2.1 ng/mL was perfectly normal for my age. I was worried for nothing. The age-comparison feature calmed me down before my specialist appointment.", bg: "bg-emerald-600" },
               { quote: "High AMH of 8.7 helped explain why I had PCOS. Knowing before my consultation meant I could ask the right questions about OHSS risk and the gentler protocol they ended up using.", bg: "bg-blue-600" },
               { quote: "After two failed IUIs and an AMH of 0.9 ng/mL, this tool helped us understand why we needed to move to IVF quickly. That information changed our direction at the right time.", bg: "bg-orange-500" },
-            ].map((t, i) => (
+            ].map((q, i) => (
               <div key={i} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
-                <div className={`inline-block h-2 w-8 rounded-full ${t.bg}`} />
-                <p className="mt-3 text-sm italic leading-relaxed text-[color:var(--plum)]/80">&ldquo;{t.quote}&rdquo;</p>
-                <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">— Patient at Bavishi Fertility Institute</p>
+                <div className={`inline-block h-2 w-8 rounded-full ${q.bg}`} />
+                <p className="mt-3 text-sm italic leading-relaxed text-[color:var(--plum)]/80">&ldquo;{t(q.quote)}&rdquo;</p>
+                <p className="mt-3 text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground">{t("— Patient at Bavishi Fertility Institute")}</p>
               </div>
             ))}
           </div>
@@ -462,10 +474,10 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
           <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
             <div className="text-4xl text-white/30">&ldquo;</div>
             <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
-              AMH is one of the most powerful tools we have to personalise fertility care. A single number — interpreted in the right context — can completely change the treatment approach and lead to far better outcomes.
+              {t("AMH is one of the most powerful tools we have to personalise fertility care. A single number — interpreted in the right context — can completely change the treatment approach and lead to far better outcomes.")}
             </p>
             <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-              — Dr. Himanshu Bavishi, Bavishi Fertility Institute
+              {t("— Dr. Himanshu Bavishi, Bavishi Fertility Institute")}
             </div>
           </div>
         </Reveal>
@@ -474,7 +486,7 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
       {/* Who Should Use */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Interpreter?</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("Who Should Use This Interpreter?")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {([
               { icon: ClipboardList, title: "Just received your AMH result", desc: "Understand what your lab number means before or after your specialist appointment." },
@@ -487,8 +499,8 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
-                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{t(p.desc)}</p>
                 </div>
               </div>
             ))}
@@ -499,7 +511,7 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What is AMH?</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("What is AMH?")}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 { icon: Activity, title: "Ovarian Reserve Marker", desc: "AMH is produced by small follicles in the ovary and reflects your remaining egg supply." },
@@ -508,8 +520,8 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
               ].map((i) => (
                 <div key={i.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                   <i.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{i.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.desc}</p>
+                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(i.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(i.desc)}</p>
                 </div>
               ))}
             </div>
@@ -523,18 +535,18 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Want a full picture?</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Get an AMH interpretation alongside a full fertility workup.</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{t("Want a full picture?")}</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">{t("Get an AMH interpretation alongside a full fertility workup.")}</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-                  Our specialists review your AMH alongside AFC scan, FSH, LH, and full hormonal profile to give you an accurate, personalised fertility assessment.
+                  {t("Our specialists review your AMH alongside AFC scan, FSH, LH, and full hormonal profile to give you an accurate, personalised fertility assessment.")}
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a href="/contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </a>
                 <a href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Support
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Support")}
                 </a>
               </div>
             </div>
@@ -546,11 +558,11 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("About This Tool")}</h2>
             <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
             {cms?.faqs && cms.faqs.length > 0 && (
               <div className="mt-8 space-y-4">
-                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t("Frequently Asked Questions")}</h3>
                 <div className="space-y-3">
                   {cms.faqs.map((f, i) => (
                     <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
@@ -565,7 +577,7 @@ export function AmhLevelInterpreterPage({ cms }: { cms?: CalculatorCmsData }) {
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/calculators/amh-level" />
+      <CalculatorCrossLinks current="/calculators/amh-level" locale={locale} />
       <Locations />
       <Footer />
       <FloatingCTA />

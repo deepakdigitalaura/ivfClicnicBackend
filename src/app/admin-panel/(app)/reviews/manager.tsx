@@ -2,6 +2,7 @@
 import { useMemo, useState } from "react";
 import { RefreshCw, Trash2, Star, ChevronDown, ChevronUp, AlertTriangle, Download, Plus, X, Shuffle } from "lucide-react";
 import type { AdminGoogleReview, ManualReviewInput } from "@/sanity/lib/admin";
+import { centreLabel } from "@/lib/locations";
 import {
   refreshReviewsAction, backfillLegacyReviewsAction, poolBrandReviewsAction, createManualReviewAction, createManualReviewsAction,
   deleteReviewAction, type RefreshReviewsResult,
@@ -205,7 +206,7 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
             <label className="admin-label">Centre *</label>
             <select className="admin-input" required value={form.centreSlug} onChange={(e) => setForm((f) => ({ ...f, centreSlug: e.target.value }))}>
               <option value="" disabled>Select a centre…</option>
-              {allSlugs.map((slug) => <option key={slug} value={slug}>{slug}</option>)}
+              {allSlugs.map((slug) => <option key={slug} value={slug}>{centreLabel(slug)}</option>)}
             </select>
           </div>
 
@@ -305,7 +306,7 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
                   style={{ all: "unset", cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "space-between", width: "100%", padding: "14px 18px", boxSizing: "border-box" }}
                 >
                   <span style={{ display: "flex", alignItems: "center", gap: 10 }}>
-                    <strong style={{ fontSize: 14 }}>{slug}</strong>
+                    <strong style={{ fontSize: 14 }}>{centreLabel(slug)}</strong>
                     <span className="admin-badge">{list.length} stored</span>
                   </span>
                   {isOpen ? <ChevronUp size={16} /> : <ChevronDown size={16} />}
@@ -344,7 +345,7 @@ export function ReviewsManager({ initial, centres }: { initial: AdminGoogleRevie
         <div className="admin-card" style={{ marginTop: 18, padding: 16, display: "flex", gap: 10, alignItems: "flex-start" }}>
           <AlertTriangle size={16} style={{ color: "var(--destructive)", flexShrink: 0, marginTop: 2 }} />
           <div style={{ fontSize: 13, lineHeight: 1.5 }}>
-            <strong>{unconfigured.map((c) => c.centreSlug).join(", ")}</strong> {unconfigured.length === 1 ? "has" : "have"} no Google Place ID
+            <strong>{unconfigured.map((c) => centreLabel(c.centreSlug)).join(", ")}</strong> {unconfigured.length === 1 ? "has" : "have"} no Google Place ID
             configured, so {unconfigured.length === 1 ? "it" : "they"} show the &ldquo;Read reviews on Google&rdquo; link instead of review cards.
           </div>
         </div>

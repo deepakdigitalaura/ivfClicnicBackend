@@ -4,7 +4,7 @@ import { DoctorProfile } from "@/components/doctor-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { physicianSchema } from "@/lib/doctors";
-import { getDoctor, getDoctors } from "@/lib/payload";
+import { getDoctor, getDoctors, getResolvedCentresForLocationSlugs } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
@@ -24,14 +24,15 @@ export async function generateMetadata(
   const { slug } = await params;
   const d = await getDoctor(slug);
   if (!d) return {};
-  const title = `${d.name} — ${d.specialty} | Bavishi Fertility Institute`;
+  const title = d.metaTitle || `${d.name} — ${d.specialty} | Bavishi Fertility Institute`;
+  const description = d.metaDescription || d.shortBio;
   return withPageSeoOverride(`/doctors/${d.slug}`, {
     title,
-    description: d.shortBio,
+    description,
     alternates: { canonical: `/doctors/${d.slug}` },
     openGraph: {
-      title,
-      description: d.shortBio,
+      title: d.ogTitle || title,
+      description: d.ogDescription || description,
       url: abs(`/doctors/${d.slug}`),
       type: "profile",
       images: [d.image],
@@ -43,6 +44,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
   const { slug } = await params;
   const d = await getDoctor(slug);
   if (!d) notFound();
+  const centres = await getResolvedCentresForLocationSlugs(d.locations);
 
   const graph = [
     physicianSchema(d),
@@ -57,7 +59,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={`/doctors/${d.slug}`} />
-      <DoctorProfile doctor={d} />
+      <DoctorProfile doctor={d} centres={centres} />
     </>
   );
 }

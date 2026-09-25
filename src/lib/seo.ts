@@ -69,6 +69,21 @@ export const WEBSITE_ID = `${SITE.url}/#website`;
 export const abs = (path: string) =>
   path.startsWith("http") ? path : `${SITE.url}${path.startsWith("/") ? "" : "/"}${path}`;
 
+/** hreflang alternates for a page that exists at `path` (English), `/hi${path}`,
+ *  and `/gu${path}`. `path` is the English path ("/" or "/about-bfi" etc). */
+export const localeAlternates = (path: string) => {
+  const suffix = path === "/" ? "" : path;
+  return {
+    canonical: path,
+    languages: {
+      en: path,
+      hi: `/hi${suffix}`,
+      gu: `/gu${suffix}`,
+      "x-default": path,
+    },
+  };
+};
+
 type Json = Record<string, unknown>;
 
 /* ---------- Sitewide entities (emitted once, in the root layout) ----------

@@ -12,6 +12,8 @@ import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { useState } from "react";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 
 /* ---------- Data ---------- */
 
@@ -175,7 +177,9 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 
 /* ---------- Page ---------- */
 
-export function EasyEmiPage() {
+export function EasyEmiPage({ locale = "en" }: { locale?: Locale } = {}) {
+  const t = (s: string) => ui(s, locale);
+  const lh = (h: string) => localizeNavHref(h, locale);
   const [openFaq, setOpenFaq] = useState(0);
 
   return (
@@ -185,9 +189,9 @@ export function EasyEmiPage() {
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Easy / Interest Free EMI</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Easy / Interest Free EMI")}</span>
         </nav>
       </div>
 
@@ -210,27 +214,26 @@ export function EasyEmiPage() {
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-white/15 bg-white/5 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-white/80">
-                <Wallet className="h-3.5 w-3.5" /> Affordable Fertility Care
+                <Wallet className="h-3.5 w-3.5" /> {t("Affordable Fertility Care")}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] md:text-5xl lg:text-[3.5rem] text-balance">
-                Making IVF Affordable <em className="font-display italic text-[color:var(--rose-soft)]">for Every Family</em>
+                {t("Making IVF Affordable ")}<em className="font-display italic text-[color:var(--rose-soft)]">{t("for Every Family")}</em>
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/75 text-pretty">
-                Your dream of parenthood shouldn&#39;t be limited by finances. We offer smart payment
-                solutions to make world-class fertility treatment accessible to all.
+                {t("Your dream of parenthood shouldn't be limited by finances. We offer smart payment solutions to make world-class fertility treatment accessible to all.")}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+                <Magnetic as="a" href={lh("/contact#book")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </Reveal>
@@ -256,12 +259,10 @@ export function EasyEmiPage() {
                 </Float>
                 <div>
                   <h2 className="text-3xl font-medium leading-[1.1] md:text-4xl text-balance">
-                    0% Interest EMI <em className="font-display italic text-[color:var(--rose-soft)]">on IVF Treatment</em>
+                    {t("0% Interest EMI ")}<em className="font-display italic text-[color:var(--rose-soft)]">{t("on IVF Treatment")}</em>
                   </h2>
                   <p className="mt-4 max-w-2xl text-[17px] leading-relaxed text-white/70">
-                    Budget planning made easy. Easy EMI at 0% interest available for all patients at
-                    Bavishi Fertility Institute. No financial stress during your treatment journey — just
-                    focus on building your family.
+                    {t("Budget planning made easy. Easy EMI at 0% interest available for all patients at Bavishi Fertility Institute. No financial stress during your treatment journey — just focus on building your family.")}
                   </p>
                 </div>
               </div>
@@ -270,9 +271,9 @@ export function EasyEmiPage() {
 
           <SectionHead
             center
-            eyebrow="Zero Interest EMI"
-            title={<>Why 0% EMI makes <em className="font-display italic text-[color:var(--rose)]">your journey easier</em></>}
-            subtitle="Spread your IVF treatment cost over comfortable monthly instalments — without paying a single rupee in interest."
+            eyebrow={t("Zero Interest EMI")}
+            title={<>{t("Why 0% EMI makes ")}<em className="font-display italic text-[color:var(--rose)]">{t("your journey easier")}</em></>}
+            subtitle={t("Spread your IVF treatment cost over comfortable monthly instalments — without paying a single rupee in interest.")}
           />
 
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -282,8 +283,8 @@ export function EasyEmiPage() {
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                     <b.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{b.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{b.description}</p>
+                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(b.title)}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(b.description)}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -296,9 +297,9 @@ export function EasyEmiPage() {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Smart Payment Options"
-            title={<>Pay where and how <em className="font-display italic text-[color:var(--rose)]">you want</em></>}
-            subtitle="Digital payments, cards, net banking, or cash — we support every payment channel so you can pay the way that is most convenient for you."
+            eyebrow={t("Smart Payment Options")}
+            title={<>{t("Pay where and how ")}<em className="font-display italic text-[color:var(--rose)]">{t("you want")}</em></>}
+            subtitle={t("Digital payments, cards, net banking, or cash — we support every payment channel so you can pay the way that is most convenient for you.")}
           />
 
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
@@ -308,8 +309,8 @@ export function EasyEmiPage() {
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                     <p.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{p.description}</p>
+                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(p.description)}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -322,9 +323,9 @@ export function EasyEmiPage() {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Calibrated Packages"
-            title={<>Best treatment at <em className="font-display italic text-[color:var(--rose)]">optimal pricing</em></>}
-            subtitle="Economy of scale means we deliver the highest quality products and treatments at the most competitive cost — without ever compromising on care."
+            eyebrow={t("Calibrated Packages")}
+            title={<>{t("Best treatment at ")}<em className="font-display italic text-[color:var(--rose)]">{t("optimal pricing")}</em></>}
+            subtitle={t("Economy of scale means we deliver the highest quality products and treatments at the most competitive cost — without ever compromising on care.")}
           />
 
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-3">
@@ -334,8 +335,8 @@ export function EasyEmiPage() {
                   <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                     <v.icon className="h-6 w-6" />
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{v.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{v.description}</p>
+                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(v.title)}</h3>
+                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(v.description)}</p>
                 </div>
               </StaggerItem>
             ))}
@@ -348,9 +349,9 @@ export function EasyEmiPage() {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Smart Package Options"
-            title={<>Packages for <em className="font-display italic text-[color:var(--rose)]">every pocket</em></>}
-            subtitle="Multi-cycle packages at reduced costs. Choose a three-cycle package to triple your chances — and save significantly."
+            eyebrow={t("Smart Package Options")}
+            title={<>{t("Packages for ")}<em className="font-display italic text-[color:var(--rose)]">{t("every pocket")}</em></>}
+            subtitle={t("Multi-cycle packages at reduced costs. Choose a three-cycle package to triple your chances — and save significantly.")}
           />
 
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
@@ -365,27 +366,27 @@ export function EasyEmiPage() {
                 >
                   {pkg.highlight && (
                     <span className="absolute -top-3 left-1/2 -translate-x-1/2 rounded-full bg-[color:var(--rose)] px-4 py-1 text-xs font-semibold uppercase tracking-wider text-white shadow-soft">
-                      Best Value
+                      {t("Best Value")}
                     </span>
                   )}
-                  <h3 className="text-xl font-semibold text-[color:var(--plum)]">{pkg.title}</h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{pkg.description}</p>
+                  <h3 className="text-xl font-semibold text-[color:var(--plum)]">{t(pkg.title)}</h3>
+                  <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">{t(pkg.description)}</p>
                   <ul className="mt-5 space-y-2.5">
                     {pkg.features.map((f, fi) => (
                       <li key={fi} className="flex items-start gap-2.5 text-[15px] text-muted-foreground">
                         <CheckCircle2 className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                        {f}
+                        {t(f)}
                       </li>
                     ))}
                   </ul>
                   <div className="mt-6">
                     {pkg.href ? (
-                      <Magnetic as="a" href={pkg.href} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
-                        Learn More <ArrowRight className="h-4 w-4" />
+                      <Magnetic as="a" href={lh(pkg.href)} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
+                        {t("Learn More")} <ArrowRight className="h-4 w-4" />
                       </Magnetic>
                     ) : (
-                      <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
-                        <Calendar className="h-4 w-4" /> Enquire Now
+                      <Magnetic as="a" href={lh("/contact#book")} className="btn-luxury inline-flex w-full items-center justify-center gap-2 rounded-full bg-[color:var(--plum)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
+                        <Calendar className="h-4 w-4" /> {t("Enquire Now")}
                       </Magnetic>
                     )}
                   </div>
@@ -407,17 +408,17 @@ export function EasyEmiPage() {
             </Reveal>
             <SectionHead
               center
-              eyebrow="IVF Cost Calculator"
-              title={<>Estimate your <em className="font-display italic text-[color:var(--rose)]">treatment expenses</em></>}
-              subtitle="Use our expert IVF cost calculator to get a personalised estimate of your treatment expenses. Know what to expect before you begin."
+              eyebrow={t("IVF Cost Calculator")}
+              title={<>{t("Estimate your ")}<em className="font-display italic text-[color:var(--rose)]">{t("treatment expenses")}</em></>}
+              subtitle={t("Use our expert IVF cost calculator to get a personalised estimate of your treatment expenses. Know what to expect before you begin.")}
             />
             <Reveal delay={0.15}>
               <div className="mt-8 flex flex-wrap justify-center gap-3">
-                <Magnetic as="a" href="/ivf-cost-calculator" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--plum)] px-7 py-4 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
-                  <Calculator className="h-4 w-4" /> Open Cost Calculator <ArrowRight className="h-4 w-4" />
+                <Magnetic as="a" href={lh("/calculators/ivf-cost")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--plum)] px-7 py-4 text-sm font-semibold text-white shadow-soft transition-colors hover:bg-[color:var(--rose)]">
+                  <Calculator className="h-4 w-4" /> {t("Open Cost Calculator")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
-                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
-                  <MessageCircle className="h-4 w-4" /> Talk to Our Team
+                <Magnetic as="a" href={lh("/contact#book")} className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
+                  <MessageCircle className="h-4 w-4" /> {t("Talk to Our Team")}
                 </Magnetic>
               </div>
             </Reveal>
@@ -431,23 +432,21 @@ export function EasyEmiPage() {
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr]">
             <div>
               <SectionHead
-                eyebrow="Frequently Asked Questions"
-                title={<>Have questions? <em className="font-display italic text-[color:var(--rose)]">We have answers.</em></>}
+                eyebrow={t("Frequently Asked Questions")}
+                title={<>{t("Have questions? ")}<em className="font-display italic text-[color:var(--rose)]">{t("We have answers.")}</em></>}
               />
               <Reveal delay={0.15}>
                 <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
-                  We believe in complete transparency when it comes to finances. Here are the most common
-                  questions about our payment options and EMI plans. For anything else, our team is always
-                  ready to help.
+                  {t("We believe in complete transparency when it comes to finances. Here are the most common questions about our payment options and EMI plans. For anything else, our team is always ready to help.")}
                 </p>
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                    <Calendar className="h-4 w-4" /> Book Consultation
+                  <Magnetic as="a" href={lh("/contact#book")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                    <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                   </Magnetic>
                   <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)]">
-                    <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                    <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                   </Magnetic>
                 </div>
               </Reveal>
@@ -457,8 +456,8 @@ export function EasyEmiPage() {
                 {FAQS.map((faq, i) => (
                   <FaqItem
                     key={i}
-                    q={faq.q}
-                    a={faq.a}
+                    q={t(faq.q)}
+                    a={t(faq.a)}
                     open={openFaq === i}
                     onToggle={() => setOpenFaq(openFaq === i ? -1 : i)}
                   />
@@ -474,27 +473,26 @@ export function EasyEmiPage() {
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Don&#39;t let finances hold you back from <em className="font-display italic text-[color:var(--rose-soft)]">becoming a parent.</em>
+              {t("Don't let finances hold you back from ")}<em className="font-display italic text-[color:var(--rose-soft)]">{t("becoming a parent.")}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a consultation to discuss your treatment plan and explore the payment options that
-              work best for you. No obligation, no pressure — just honest, transparent guidance.
+              {t("Book a consultation to discuss your treatment plan and explore the payment options that work best for you. No obligation, no pressure — just honest, transparent guidance.")}
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+              <Magnetic as="a" href={lh("/contact#book")} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
               </Magnetic>
             </div>
           </Reveal>
           <Reveal delay={0.25}>
-            <p className="mt-4 text-xs text-white/40">* EMI eligibility subject to approval. Terms and conditions apply.</p>
+            <p className="mt-4 text-xs text-white/40">{t("* EMI eligibility subject to approval. Terms and conditions apply.")}</p>
           </Reveal>
         </div>
       </section>

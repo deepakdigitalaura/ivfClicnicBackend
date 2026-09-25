@@ -15,6 +15,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import type { CalculatorCmsData } from "@/lib/calculators";
 import { Editable } from "@/components/editor/Editable";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 type Band = "low" | "moderate" | "high" | "very-high";
 
@@ -118,10 +120,11 @@ function BandIconDisplay({ band }: { band: Band }) {
   return <Icon className="mx-auto h-8 w-8 text-white" />;
 }
 
-export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
-  const cmsTitle      = cms?.title     ?? "Miscarriage Risk Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Understand your personal risk profile for recurrent pregnancy loss and get a clearer picture of your path forward with expert guidance.";
-  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides a statistical risk estimate. The risk of miscarriage is not a certainty. Please consult a specialist for personalised medical advice.";
+export function MiscarriageRiskCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
+  const cmsTitle      = t(cms?.title     ?? "Miscarriage Risk Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Understand your personal risk profile for recurrent pregnancy loss and get a clearer picture of your path forward with expert guidance.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "This calculator provides a statistical risk estimate. The risk of miscarriage is not a certainty. Please consult a specialist for personalised medical advice.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";
@@ -154,7 +157,7 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
   );
 
   const handleCalc = () => {
-    if (!losses || !age || !livebirth) { setError("Please answer all required questions (marked *)."); return; }
+    if (!losses || !age || !livebirth) { setError(t("Please answer all required questions (marked *).")); return; }
     setError("");
     setResult(calc(losses, age, livebirth, aps, uterine, thyroid, partnerAge));
   };
@@ -165,9 +168,9 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
 
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">{t("Calculators")}</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
@@ -182,7 +185,7 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Recurrent Pregnancy Loss · Risk Assessment
+              <Sparkles className="h-3.5 w-3.5" /> {t("Recurrent Pregnancy Loss · Risk Assessment")}
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -197,9 +200,9 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-              {[{ icon: Heart, t: "Free Tool" }, { icon: Clock, t: "Instant Results" }, { icon: Lock, t: "No Data Stored" }].map((b) => (
-                <span key={b.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
-                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {b.t}
+              {[{ icon: Heart, label: "Free Tool" }, { icon: Clock, label: "Instant Results" }, { icon: Lock, label: "No Data Stored" }].map((b) => (
+                <span key={b.label} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
+                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(b.label)}
                 </span>
               ))}
             </div>
@@ -213,7 +216,7 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
               ].map((s) => (
                 <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
                   <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -224,9 +227,9 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
       {/* How This Calculator Works */}
       <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
         <Reveal>
-          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">How This Calculator Works</h2>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("How This Calculator Works")}</h2>
           <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Based on clinically established risk factors for recurrent pregnancy loss (RPL).
+            {t("Based on clinically established risk factors for recurrent pregnancy loss (RPL).")}
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 lg:grid-cols-4">
             {[
@@ -239,8 +242,8 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
                 <div className="flex h-10 w-10 items-center justify-center rounded-full bg-[color:var(--rose)] font-display text-lg font-bold text-white">
                   {step.n}
                 </div>
-                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{step.title}</h3>
-                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{step.desc}</p>
+                <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(step.title)}</h3>
+                <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(step.desc)}</p>
               </div>
             ))}
           </div>
@@ -251,14 +254,14 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
-            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">What This Calculator Does for You</h2>
-            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Turning uncertainty into understanding — step by step toward answers.</p>
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("What This Calculator Does for You")}</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">{t("Turning uncertainty into understanding — step by step toward answers.")}</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
               {WHAT_CARDS.map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{t(c.title)}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(c.desc)}</p>
                 </div>
               ))}
             </div>
@@ -273,49 +276,49 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
             <motion.div key="form" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <Reveal>
                 <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-lift md:p-10">
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Pregnancy History</h2>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Pregnancy History")}</h2>
 
                   <div className="mt-6 grid gap-6 sm:grid-cols-2">
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Number of miscarriages <span className="text-[color:var(--rose)]">*</span></label>
+                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Number of miscarriages")} <span className="text-[color:var(--rose)]">*</span></label>
                       <select value={losses} onChange={(e) => setLosses(e.target.value)} className={selectClass}>
-                        <option value="">— Select number —</option>
-                        <option value="2">2 miscarriages</option>
-                        <option value="3">3 miscarriages</option>
-                        <option value="4">4 or more miscarriages</option>
+                        <option value="">{t("— Select number —")}</option>
+                        <option value="2">{t("2 miscarriages")}</option>
+                        <option value="3">{t("3 miscarriages")}</option>
+                        <option value="4">{t("4 or more miscarriages")}</option>
                       </select>
                     </div>
                     <div>
-                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Your age group <span className="text-[color:var(--rose)]">*</span></label>
+                      <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Your age group")} <span className="text-[color:var(--rose)]">*</span></label>
                       <select value={age} onChange={(e) => setAge(e.target.value)} className={selectClass}>
-                        <option value="">— Select age group —</option>
-                        <option value="under30">Under 30</option>
+                        <option value="">{t("— Select age group —")}</option>
+                        <option value="under30">{t("Under 30")}</option>
                         <option value="30-34">30 – 34</option>
                         <option value="35-39">35 – 39</option>
-                        <option value="40plus">40 or older</option>
+                        <option value="40plus">{t("40 or older")}</option>
                       </select>
                     </div>
                   </div>
 
                   <div className="mt-6">
-                    <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Previous successful pregnancy (live birth)? <span className="text-[color:var(--rose)]">*</span></label>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Previous successful pregnancy (live birth)?")} <span className="text-[color:var(--rose)]">*</span></label>
                     <div className="grid grid-cols-2 gap-3">
-                      {[["yes","Yes"],["no","No"]].map(([v,l]) => radioBtn("livebirth",v,l,livebirth,setLivebirth))}
+                      {[["yes",t("Yes")],["no",t("No")]].map(([v,l]) => radioBtn("livebirth",v,l,livebirth,setLivebirth))}
                     </div>
                   </div>
 
                   <hr className="my-7 border-border/60" />
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Age Factors</h2>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Age Factors")}</h2>
                   <div className="mt-5">
-                    <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Partner&apos;s age</label>
+                    <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Partner's age")}</label>
                     <div className="grid grid-cols-3 gap-3">
-                      {[["under40","Under 40"],["40plus","40 or older"],["na","Not applicable"]].map(([v,l]) => radioBtn("partnerAge",v,l,partnerAge,setPartnerAge))}
+                      {[["under40",t("Under 40")],["40plus",t("40 or older")],["na",t("Not applicable")]].map(([v,l]) => radioBtn("partnerAge",v,l,partnerAge,setPartnerAge))}
                     </div>
                   </div>
 
                   <hr className="my-7 border-border/60" />
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Known Medical Conditions</h2>
-                  <p className="mt-1 text-sm text-muted-foreground">Leave as "No / Not tested" if you haven&apos;t been investigated yet.</p>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Known Medical Conditions")}</h2>
+                  <p className="mt-1 text-sm text-muted-foreground">{t('Leave as "No / Not tested" if you haven\'t been investigated yet.')}</p>
 
                   <div className="mt-5 space-y-5">
                     {[
@@ -324,9 +327,9 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
                       { name: "thyroid", label: "Thyroid disorder (hypothyroidism, hyperthyroidism, thyroid antibodies)?", current: thyroid, setter: setThyroid },
                     ].map((q) => (
                       <div key={q.name}>
-                        <label className="mb-3 block text-sm font-semibold text-[color:var(--plum)]">{q.label}</label>
+                        <label className="mb-3 block text-sm font-semibold text-[color:var(--plum)]">{t(q.label)}</label>
                         <div className="grid grid-cols-2 gap-3">
-                          {[["yes","Yes, diagnosed"],["no","No / Not tested"]].map(([v,l]) => radioBtn(q.name,v,l,q.current,q.setter))}
+                          {[["yes",t("Yes, diagnosed")],["no",t("No / Not tested")]].map(([v,l]) => radioBtn(q.name,v,l,q.current,q.setter))}
                         </div>
                       </div>
                     ))}
@@ -338,7 +341,7 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
 
                   <div className="mt-8 flex justify-end border-t border-border/60 pt-7">
                     <button type="button" onClick={handleCalc} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                      Calculate My Risk Level <ArrowRight className="h-4 w-4" />
+                      {t("Calculate My Risk Level")} <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -347,19 +350,19 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
           ) : (
             <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <button type="button" onClick={() => setResult(null)} className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]">
-                <RotateCcw className="h-3.5 w-3.5" /> Recalculate
+                <RotateCcw className="h-3.5 w-3.5" /> {t("Recalculate")}
               </button>
 
               <div className={`rounded-[2rem] p-8 text-center text-white md:p-10 ${BAND_META[result.band].bg}`}>
                 <BandIconDisplay band={result.band} />
-                <div className="mt-3 text-2xl font-bold">{BAND_META[result.band].label}</div>
-                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/85">{BAND_META[result.band].text}</p>
-                <div className="mt-5 rounded-xl bg-white/15 px-4 py-2 text-sm font-semibold">{BAND_META[result.band].prognosis}</div>
+                <div className="mt-3 text-2xl font-bold">{t(BAND_META[result.band].label)}</div>
+                <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-white/85">{t(BAND_META[result.band].text)}</p>
+                <div className="mt-5 rounded-xl bg-white/15 px-4 py-2 text-sm font-semibold">{t(BAND_META[result.band].prognosis)}</div>
               </div>
 
               <div className="mt-6 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <div className="flex items-center justify-between text-xs font-semibold uppercase tracking-wider text-muted-foreground">
-                  <span>Risk score</span><span>{result.score} / 100</span>
+                  <span>{t("Risk score")}</span><span>{result.score} / 100</span>
                 </div>
                 <div className="mt-3 h-3 overflow-hidden rounded-full bg-[color:var(--ivory)]">
                   <motion.div
@@ -371,7 +374,7 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
                   />
                 </div>
                 <div className="mt-2 flex justify-between text-[11px] text-muted-foreground">
-                  <span>0 – Low</span><span>30 – Moderate</span><span>55 – High</span><span>75 – Very High</span>
+                  <span>0 – {t("Low")}</span><span>30 – {t("Moderate")}</span><span>55 – {t("High")}</span><span>75 – {t("Very High")}</span>
                 </div>
               </div>
 
@@ -379,14 +382,14 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
                 {NEXT_STEPS[result.band].map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
                     <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
+                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{t(c.title)}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(c.text)}</p>
                   </div>
                 ))}
               </div>
 
               <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                * This tool provides a risk profile based on published RPL research. It is not a diagnosis. Please consult a specialist for a full investigation.
+                {t("* This tool provides a risk profile based on published RPL research. It is not a diagnosis. Please consult a specialist for a full investigation.")}
               </p>
             </motion.div>
           )}
@@ -399,10 +402,10 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
           <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
             <div className="text-4xl text-white/30">&ldquo;</div>
             <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
-              After my third loss I felt completely lost. Understanding my risk factors gave me the strength to get help — and today I&apos;m holding my baby girl.
+              {t("After my third loss I felt completely lost. Understanding my risk factors gave me the strength to get help — and today I'm holding my baby girl.")}
             </p>
             <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-              — Patient at Bavishi Fertility Institute
+              {t("— Patient at Bavishi Fertility Institute")}
             </div>
           </div>
         </Reveal>
@@ -411,14 +414,14 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
       {/* Who Should Use */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("Who Should Use This Calculator?")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {WHO_CARDS.map((p) => (
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
-                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{t(p.desc)}</p>
                 </div>
               </div>
             ))}
@@ -430,7 +433,7 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What this calculator helps you do</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("What this calculator helps you do")}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 { icon: ShieldCheck, title: "Profile Your Risk", desc: "Understand your individual risk level based on history, age, and medical factors." },
@@ -439,8 +442,8 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
               ].map((i) => (
                 <div key={i.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                   <i.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{i.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.desc}</p>
+                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(i.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(i.desc)}</p>
                 </div>
               ))}
             </div>
@@ -455,18 +458,18 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Ready to Get Real Answers?</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Speak to our recurrent pregnancy loss specialists.</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{t("Ready to Get Real Answers?")}</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">{t("Speak to our recurrent pregnancy loss specialists.")}</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-                  Our dedicated RPL team provides a thorough investigation, compassionate care, and a structured treatment plan to help you achieve a successful pregnancy.
+                  {t("Our dedicated RPL team provides a thorough investigation, compassionate care, and a structured treatment plan to help you achieve a successful pregnancy.")}
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a href="/contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </a>
                 <a href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Support
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Support")}
                 </a>
               </div>
             </div>
@@ -478,11 +481,11 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("About This Calculator")}</h2>
             <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
             {cms?.faqs && cms.faqs.length > 0 && (
               <div className="mt-8 space-y-4">
-                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t("Frequently Asked Questions")}</h3>
                 <div className="space-y-3">
                   {cms.faqs.map((f, i) => (
                     <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
@@ -497,7 +500,7 @@ export function MiscarriageRiskCalculatorPage({ cms }: { cms?: CalculatorCmsData
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/calculators/miscarriage-risk" />
+      <CalculatorCrossLinks current="/calculators/miscarriage-risk" locale={locale} />
       <Locations />
       <Footer />
       <FloatingCTA />

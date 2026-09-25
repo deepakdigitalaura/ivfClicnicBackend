@@ -5,8 +5,7 @@ import type { AdminDoctor } from "@/sanity/lib/admin";
 import { saveDoctorAction, deleteDoctorAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
-
-type CodeDoctor = { slug: string; name: string; specialty: string; image: string };
+import { LinkTextarea } from "../_components/link-textarea";
 
 const EMPTY: AdminDoctor = { slug: "", name: "", verified: false, navOrder: 0 };
 
@@ -14,13 +13,10 @@ const EMPTY: AdminDoctor = { slug: "", name: "", verified: false, navOrder: 0 };
 const toLines = (a?: string[]) => (a ?? []).join("\n");
 const fromLines = (v: string) => v.split("\n").map((s) => s.trim()).filter(Boolean);
 
-export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[]; codeDoctors: CodeDoctor[] }) {
+export function DoctorsManager({ initial }: { initial: AdminDoctor[] }) {
   const [docs, setDocs] = useState<AdminDoctor[]>(initial);
   const [editing, setEditing] = useState<AdminDoctor | null>(null);
   const { pending, toast, run } = useSave();
-
-  const savedSlugs = new Set(docs.map((d) => d.slug));
-  const overridableCode = codeDoctors.filter((c) => !savedSlugs.has(c.slug));
 
   const set = (patch: Partial<AdminDoctor>) => setEditing((p) => ({ ...(p ?? EMPTY), ...patch }));
 
@@ -43,15 +39,13 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
 
   const remove = (d: AdminDoctor) => {
     if (!d._id) return;
-    if (!confirm(`Delete ${d.name}? This removes the Sanity override (code default returns).`)) return;
+    if (!confirm(`Delete ${d.name}? This removes their profile permanently.`)) return;
     run(async () => {
       const res = await deleteDoctorAction(d._id!);
       if (res.ok) setDocs(docs.filter((x) => x._id !== d._id));
       return res;
     });
   };
-
-  const editCode = (c: CodeDoctor) => setEditing({ slug: c.slug, name: c.name, specialty: c.specialty, verified: false });
 
   if (editing) {
     return (
@@ -105,7 +99,7 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
           <div className="admin-field">
             <label className="admin-label">Bio paragraphs</label>
             <p className="admin-hint">One paragraph per line.</p>
-            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 90 }} value={toLines(editing.bio)} onChange={(e) => set({ bio: fromLines(e.target.value) })} />
+            <LinkTextarea value={toLines(editing.bio)} onChange={(v) => set({ bio: fromLines(v) })} minHeight={90} />
           </div>
 
           <div className="admin-row-grid">
@@ -157,6 +151,28 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
             </div>
           </div>
 
+          <details style={{ marginTop: 8 }}>
+            <summary style={{ cursor: "pointer", fontWeight: 600, fontSize: 14, marginBottom: 12 }}>SEO</summary>
+            <div className="admin-field">
+              <label className="admin-label">Meta title</label>
+              <input className="admin-input" value={editing.metaTitle ?? ""} onChange={(e) => set({ metaTitle: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Meta description</label>
+              <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.metaDescription ?? ""} onChange={(e) => set({ metaDescription: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">OG title</label>
+              <p className="admin-hint">Used when shared on Facebook/WhatsApp. Defaults to Meta title.</p>
+              <input className="admin-input" value={editing.ogTitle ?? ""} onChange={(e) => set({ ogTitle: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">OG description</label>
+              <p className="admin-hint">Defaults to Meta description.</p>
+              <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.ogDescription ?? ""} onChange={(e) => set({ ogDescription: e.target.value })} />
+            </div>
+          </details>
+
           <div className="admin-toggle-row" style={{ marginTop: 6 }}>
             <input type="checkbox" className="admin-toggle" checked={editing.verified ?? false} onChange={(e) => set({ verified: e.target.checked })} />
             <span style={{ fontSize: 13.5 }}>Verified (degrees & experience confirmed)</span>
@@ -182,13 +198,13 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div>
             <h2 className="admin-card-title" style={{ margin: 0 }}>Doctors</h2>
-            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} edited in admin · {codeDoctors.length} built-in</p>
+            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} doctors</p>
           </div>
           <button type="button" className="admin-btn" onClick={() => setEditing({ ...EMPTY })}><Plus size={16} /> Add Doctor</button>
         </div>
 
         {docs.length === 0 ? (
-          <div className="admin-empty">No admin doctors yet. Add a new one, or override a built-in doctor below.</div>
+          <div className="admin-empty">No doctors yet. Add one to get started.</div>
         ) : (
           <div className="admin-divider-list">
             {docs.map((d) => (
@@ -209,24 +225,6 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
           </div>
         )}
       </div>
-
-      {overridableCode.length > 0 && (
-        <div className="admin-card">
-          <h2 className="admin-card-title">Built-in Doctors</h2>
-          <p className="admin-card-desc">These come from the site code. Click Override to edit one in the admin (your changes win; the rest stays as-is).</p>
-          <div className="admin-divider-list">
-            {overridableCode.map((c) => (
-              <div key={c.slug} className="admin-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 0 }}>
-                <div>
-                  <div style={{ fontWeight: 600 }}>{c.name}</div>
-                  <div style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: 2 }}>/doctors/{c.slug} · {c.specialty}</div>
-                </div>
-                <button type="button" className="admin-btn-ghost" onClick={() => editCode(c)}><Pencil size={14} /> Override</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <Toast toast={toast} />
     </>
   );
