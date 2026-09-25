@@ -13,11 +13,17 @@ import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { resolveIcon } from "@/lib/icon-map";
 import { SMART_TREATMENT_DEFAULTS, type SmartTreatmentData } from "@/lib/smart-treatment";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 
 /* ---------- Page ---------- */
 
-export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?: SmartTreatmentData } = {}) {
+export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS, locale = "en" }: { data?: SmartTreatmentData; locale?: Locale } = {}) {
+  const t = (s: string) => ui(s, locale);
   const { hero, pillars: SMART_PILLARS, features: SMART_FEATURES, packages: COST_PACKAGES } = data;
+  const headline = t(hero.headline);
+  const headlineEm = t(hero.headlineEm);
+  const bookHref = localizeNavHref("/contact#book", locale);
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -28,9 +34,9 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
           className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground"
           aria-label="Breadcrumb"
         >
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Smart Treatment</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Smart Treatment")}</span>
         </nav>
       </div>
 
@@ -53,20 +59,20 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(hero.eyebrow)}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                {hero.headline.split(hero.headlineEm)[0]}{" "}
+                {headline.split(headlineEm)[0]}{" "}
                 <em className="font-display italic text-[color:var(--rose)]">
-                  {hero.headlineEm}
-                </em>{hero.headline.split(hero.headlineEm)[1]}
+                  {headlineEm}
+                </em>{headline.split(headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                {hero.paragraph}
+                {t(hero.paragraph)}
               </p>
             </Reveal>
 
@@ -81,7 +87,7 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                       className="flex items-center gap-2 rounded-full border border-[color:var(--plum)]/10 bg-white/60 px-4 py-2.5 text-sm text-[color:var(--plum)]/80 backdrop-blur"
                     >
                       <Icon className="h-4 w-4 text-[color:var(--rose)]" />
-                      {p.label}
+                      {t(p.label)}
                     </div>
                   );
                 })}
@@ -92,10 +98,10 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
               <div className="mt-9 flex flex-wrap justify-center gap-3">
                 <Magnetic
                   as="a"
-                  href="/contact#book"
+                  href={bookHref}
                   className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
                 >
-                  <Calendar className="h-4 w-4" /> Book Consultation{" "}
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}{" "}
                   <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic
@@ -105,7 +111,7 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                   rel="noopener noreferrer"
                   className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]"
                 >
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </Reveal>
@@ -118,20 +124,17 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
         <div className="container-px mx-auto max-w-[1400px]">
           <div className="mx-auto max-w-4xl text-center">
             <Reveal>
-              <Eyebrow>The Smart Approach</Eyebrow>
+              <Eyebrow>{t("The Smart Approach")}</Eyebrow>
             </Reveal>
             <Reveal delay={0.05}>
               <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl lg:text-[2.75rem] text-balance">
-                Why &ldquo;smart&rdquo; isn&#39;t just a{" "}
-                <em className="font-display italic text-[color:var(--rose)]">buzzword for us.</em>
+                {t("Why “smart” isn't just a")}{" "}
+                <em className="font-display italic text-[color:var(--rose)]">{t("buzzword for us.")}</em>
               </h2>
             </Reveal>
             <Reveal delay={0.12}>
               <p className="mx-auto mt-6 max-w-3xl text-lg leading-relaxed text-muted-foreground text-pretty">
-                Most fertility clinics offer treatment. We offer intelligent treatment — where every
-                decision is backed by data, every process is optimized for efficiency, and every
-                recommendation is tailored to your unique biology. From diagnosis to delivery, our
-                smart approach means fewer unnecessary procedures, lower costs, and higher success rates.
+                {t("Most fertility clinics offer treatment. We offer intelligent treatment — where every decision is backed by data, every process is optimized for efficiency, and every recommendation is tailored to your unique biology. From diagnosis to delivery, our smart approach means fewer unnecessary procedures, lower costs, and higher success rates.")}
               </p>
             </Reveal>
           </div>
@@ -143,16 +146,16 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Smart Care Pillars"
+            eyebrow={t("Smart Care Pillars")}
             title={
               <>
-                Eight pillars of{" "}
+                {t("Eight pillars of")}{" "}
                 <em className="font-display italic text-[color:var(--rose)]">
-                  intelligent fertility care.
+                  {t("intelligent fertility care.")}
                 </em>
               </>
             }
-            subtitle="Each pillar works together to create a treatment ecosystem that is efficient, affordable, and optimized for the best possible outcome."
+            subtitle={t("Each pillar works together to create a treatment ecosystem that is efficient, affordable, and optimized for the best possible outcome.")}
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-2">
             {SMART_FEATURES.map((f, i) => {
@@ -165,15 +168,15 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                         <Icon className="h-6 w-6" />
                       </div>
                       <div className="flex-1">
-                        <h3 className="text-lg font-semibold text-[color:var(--plum)]">{f.title}</h3>
+                        <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t(f.title)}</h3>
                         <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                          {f.description}
+                          {t(f.description)}
                         </p>
                         <ul className="mt-4 space-y-1.5">
                           {f.highlights.map((h, j) => (
                             <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
                               <CheckCircle2 className="h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                              {h}
+                              {t(h)}
                             </li>
                           ))}
                         </ul>
@@ -193,41 +196,32 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
           <div className="mx-auto grid max-w-5xl grid-cols-1 items-center gap-12 lg:grid-cols-2">
             <div>
               <Reveal>
-                <Eyebrow>Smart Diagnosis</Eyebrow>
+                <Eyebrow>{t("Smart Diagnosis")}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  Diagnosis first,{" "}
-                  <em className="font-display italic text-[color:var(--rose)]">treatment later.</em>
+                  {t("Diagnosis first,")}{" "}
+                  <em className="font-display italic text-[color:var(--rose)]">{t("treatment later.")}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
+                  <p>{t("At Bavishi Fertility Institute, we believe that the right diagnosis is the foundation of successful treatment. Before recommending any procedure, our specialists follow a systematic, step-by-step approach to identify the exact cause of infertility.")}</p>
                   <p>
-                    At Bavishi Fertility Institute, we believe that the right diagnosis is the foundation
-                    of successful treatment. Before recommending any procedure, our specialists follow
-                    a systematic, step-by-step approach to identify the exact cause of infertility.
+                    {t("We order only the tests that are pertinent to your case — no blanket panels, no unnecessary investigations. This means")}{" "}
+                    <strong className="text-[color:var(--plum)]">{t("less time waiting, lower costs, and a faster path to the right treatment.")}</strong>
                   </p>
-                  <p>
-                    We order only the tests that are pertinent to your case — no blanket panels, no
-                    unnecessary investigations. This means{" "}
-                    <strong className="text-[color:var(--plum)]">less time waiting, lower costs, and a
-                    faster path to the right treatment.</strong>
-                  </p>
-                  <p>
-                    Our predictive models assess your likelihood of success before treatment even begins,
-                    giving you honest guidance and realistic expectations from day one.
-                  </p>
+                  <p>{t("Our predictive models assess your likelihood of success before treatment even begins, giving you honest guidance and realistic expectations from day one.")}</p>
                 </div>
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="mt-8 flex flex-wrap gap-3">
                   <Magnetic
                     as="a"
-                    href="/contact#book"
+                    href={bookHref}
                     className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"
                   >
-                    <Calendar className="h-4 w-4" /> Get Your Diagnosis
+                    <Calendar className="h-4 w-4" /> {t("Get Your Diagnosis")}
                   </Magnetic>
                 </div>
               </Reveal>
@@ -247,7 +241,7 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                         <div className="grid h-10 w-10 shrink-0 place-items-center rounded-full bg-[color:var(--rose)] text-xs font-bold text-white">
                           {s.step}
                         </div>
-                        <p className="text-sm font-medium text-[color:var(--plum)]">{s.text}</p>
+                        <p className="text-sm font-medium text-[color:var(--plum)]">{t(s.text)}</p>
                       </div>
                     ))}
                   </div>
@@ -263,16 +257,16 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Calibrated Cost Packages"
+            eyebrow={t("Calibrated Cost Packages")}
             title={
               <>
-                World-class care,{" "}
+                {t("World-class care,")}{" "}
                 <em className="font-display italic text-[color:var(--rose)]">
-                  smartly priced.
+                  {t("smartly priced.")}
                 </em>
               </>
             }
-            subtitle="We believe the best fertility treatment should be accessible. Smart packages designed for every pocket — with no compromise on quality."
+            subtitle={t("We believe the best fertility treatment should be accessible. Smart packages designed for every pocket — with no compromise on quality.")}
           />
 
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2">
@@ -284,9 +278,9 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                     <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{pkg.title}</h3>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(pkg.title)}</h3>
                     <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                      {pkg.description}
+                      {t(pkg.description)}
                     </p>
                   </div>
                 </StaggerItem>
@@ -303,20 +297,18 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                 </div>
                 <div className="flex-1 text-center md:text-left">
                   <h3 className="text-xl font-semibold text-[color:var(--plum)]">
-                    Suraksha Kavach — India&#39;s Only IVF Protection Program
+                    {t("Suraksha Kavach — India's Only IVF Protection Program")}
                   </h3>
                   <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                    Our flagship IVF protection program covers multiple cycles,
-                    is fully transferable, and designed for complete financial peace of mind. Thousands of couples
-                    have trusted Suraksha Kavach for their parenthood journey.
+                    {t("Our flagship IVF protection program covers multiple cycles, is fully transferable, and designed for complete financial peace of mind. Thousands of couples have trusted Suraksha Kavach for their parenthood journey.")}
                   </p>
                 </div>
                 <Magnetic
                   as="a"
-                  href="/suraksha-kavach"
+                  href={localizeNavHref("/suraksha-kavach", locale)}
                   className="btn-luxury inline-flex shrink-0 items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft"
                 >
-                  Learn More <ArrowRight className="h-4 w-4" />
+                  {t("Learn More")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
               </div>
             </div>
@@ -340,17 +332,15 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
               </Reveal>
               <Reveal delay={0.1}>
                 <h2 className="mx-auto max-w-3xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-[2.75rem] text-balance">
-                  Smart treatment isn&#39;t about doing more —{" "}
+                  {t("Smart treatment isn't about doing more —")}{" "}
                   <em className="font-display italic text-[color:var(--rose-soft)]">
-                    it&#39;s about doing what&#39;s right.
+                    {t("it's about doing what's right.")}
                   </em>
                 </h2>
               </Reveal>
               <Reveal delay={0.18}>
                 <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-                  Every protocol, every test, and every decision at Bavishi Fertility Institute is guided by
-                  intelligence, experience, and a genuine commitment to your success. No unnecessary procedures.
-                  No inflated costs. Just the smartest path to parenthood.
+                  {t("Every protocol, every test, and every decision at Bavishi Fertility Institute is guided by intelligence, experience, and a genuine commitment to your success. No unnecessary procedures. No inflated costs. Just the smartest path to parenthood.")}
                 </p>
               </Reveal>
               <Reveal delay={0.25}>
@@ -362,7 +352,7 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                     { icon: IndianRupee, text: "Smart Pricing" },
                   ].map((item, i) => (
                     <div key={i} className="flex items-center gap-2 text-white/80">
-                      <item.icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {item.text}
+                      <item.icon className="h-4 w-4 text-[color:var(--rose-soft)]" /> {t(item.text)}
                     </div>
                   ))}
                 </div>
@@ -377,26 +367,25 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Ready to experience{" "}
+              {t("Ready to experience")}{" "}
               <em className="font-display italic text-[color:var(--rose-soft)]">
-                smarter fertility care?
+                {t("smarter fertility care?")}
               </em>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a consultation to see how our smart approach can give you the best chance of
-              success — with fewer procedures, lower costs, and a treatment plan tailored entirely to you.
+              {t("Book a consultation to see how our smart approach can give you the best chance of success — with fewer procedures, lower costs, and a treatment plan tailored entirely to you.")}
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic
                 as="a"
-                href="/contact#book"
+                href={bookHref}
                 className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow"
               >
-                <Calendar className="h-4 w-4" /> Book Consultation{" "}
+                <Calendar className="h-4 w-4" /> {t("Book Consultation")}{" "}
                 <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic
@@ -406,13 +395,13 @@ export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?:
                 rel="noopener noreferrer"
                 className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white"
               >
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
               </Magnetic>
             </div>
           </Reveal>
           <Reveal delay={0.25}>
             <p className="mt-4 text-xs text-white/40">
-              Book a consultation at any of our 14 centres across India.
+              {t("Book a consultation at any of our 14 centres across India.")}
             </p>
           </Reveal>
         </div>
