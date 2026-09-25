@@ -12,6 +12,8 @@ import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { resolveIcon } from "@/lib/icon-map";
 import { SURAKSHA_KAVACH_DEFAULTS, type SurakshaKavachData } from "@/lib/suraksha-kavach";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 
 /* ---------- FAQ Accordion ---------- */
 
@@ -45,9 +47,13 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 
 /* ---------- Page ---------- */
 
-export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?: SurakshaKavachData } = {}) {
+export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS, locale = "en" }: { data?: SurakshaKavachData; locale?: Locale } = {}) {
   const [openFaq, setOpenFaq] = useState(0);
   const { hero, story, benefits: BENEFITS, stats: STATS, steps: STEPS, faqs: FAQS } = data;
+  const t = (s: string) => ui(s, locale);
+  const bookHref = localizeNavHref("/contact#book", locale);
+  const headline = t(hero.headline);
+  const headlineEm = t(hero.headlineEm);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -56,9 +62,9 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Suraksha Kavach</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Suraksha Kavach")}</span>
         </nav>
       </div>
 
@@ -81,17 +87,17 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
           <div>
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
+                <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(hero.eyebrow)}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                {hero.headline.split(hero.headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
+                {headline.split(headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{headlineEm}</em>{headline.split(headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                {hero.paragraph}
+                {t(hero.paragraph)}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
@@ -100,18 +106,18 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
                   <Award className="h-6 w-6 text-[color:var(--rose)]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-semibold text-[color:var(--plum)]">{hero.badgeNumber}</div>
-                  <div className="text-sm text-[color:var(--plum)]/60">{hero.badgeLabel}</div>
+                  <div className="text-2xl font-semibold text-[color:var(--plum)]">{t(hero.badgeNumber)}</div>
+                  <div className="text-sm text-[color:var(--plum)]/60">{t(hero.badgeLabel)}</div>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={0.35}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+                <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </Reveal>
@@ -127,7 +133,7 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
                 >
                   <img
                     src={hero.image}
-                    alt="Happy mother holding her newborn baby — the promise of Suraksha Kavach"
+                    alt={t("Happy mother holding her newborn baby — the promise of Suraksha Kavach")}
                     className="aspect-[4/5] w-full object-cover"
                   />
                 </motion.div>
@@ -146,7 +152,7 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
                 <div className="relative overflow-hidden rounded-[2rem] shadow-lift">
                   <img
                     src="/assets/suraksha-shield.jpg"
-                    alt="Suraksha Kavach — your shield of protection on the fertility journey"
+                    alt={t("Suraksha Kavach — your shield of protection on the fertility journey")}
                     className="aspect-square w-full object-cover"
                   />
                 </div>
@@ -154,16 +160,16 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
             </Reveal>
             <div>
               <Reveal>
-                <Eyebrow>{story.eyebrow}</Eyebrow>
+                <Eyebrow>{t(story.eyebrow)}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  {story.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{story.heading.em}</em>
+                  {t(story.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{t(story.heading.em)}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
-                  {story.paragraphs.map((p, i) => <p key={i}>{p}</p>)}
+                  {story.paragraphs.map((p, i) => <p key={i}>{t(p)}</p>)}
                 </div>
               </Reveal>
             </div>
@@ -176,9 +182,9 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Why Suraksha Kavach"
-            title={<>Everything you need for <em className="font-display italic text-[color:var(--rose)]">a worry-free journey.</em></>}
-            subtitle="Suraksha Kavach takes the financial uncertainty out of IVF — so you can focus entirely on what matters most."
+            eyebrow={t("Why Suraksha Kavach")}
+            title={<>{t("Everything you need for ")}<em className="font-display italic text-[color:var(--rose)]">{t("a worry-free journey.")}</em></>}
+            subtitle={t("Suraksha Kavach takes the financial uncertainty out of IVF — so you can focus entirely on what matters most.")}
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
             {BENEFITS.map((b, i) => {
@@ -189,8 +195,8 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
                     <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
                       <Icon className="h-6 w-6" />
                     </div>
-                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{b.title}</h3>
-                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{b.description}</p>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(b.title)}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(b.description)}</p>
                   </div>
                 </StaggerItem>
               );
@@ -211,10 +217,10 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
               <StaggerItem key={i}>
                 <div className="text-center">
                   <div className="text-4xl font-semibold md:text-5xl">
-                    <Counter to={s.value} />{s.suffix}
+                    <Counter to={s.value} />{t(s.suffix)}
                   </div>
-                  <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/80">{s.label}</div>
-                  <div className="mt-1 text-xs text-white/50">{s.sub}</div>
+                  <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/80">{t(s.label)}</div>
+                  <div className="mt-1 text-xs text-white/50">{t(s.sub)}</div>
                 </div>
               </StaggerItem>
             ))}
@@ -227,9 +233,9 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="How It Works"
-            title={<>Your journey to parenthood, <em className="font-display italic text-[color:var(--rose)]">step by step.</em></>}
-            subtitle="From your first consultation to holding your baby — every step is planned, protected, and supported."
+            eyebrow={t("How It Works")}
+            title={<>{t("Your journey to parenthood, ")}<em className="font-display italic text-[color:var(--rose)]">{t("step by step.")}</em></>}
+            subtitle={t("From your first consultation to holding your baby — every step is planned, protected, and supported.")}
           />
           <div className="mx-auto mt-14 max-w-4xl">
             <Stagger className="relative space-y-0">
@@ -243,8 +249,8 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
                       {s.step}
                     </div>
                     <div className="pt-1">
-                      <h3 className="text-xl font-semibold text-[color:var(--plum)]">{s.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{s.description}</p>
+                      <h3 className="text-xl font-semibold text-[color:var(--plum)]">{t(s.title)}</h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(s.description)}</p>
                     </div>
                   </div>
                 </StaggerItem>
@@ -308,22 +314,21 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr]">
             <div>
               <SectionHead
-                eyebrow="Frequently Asked Questions"
-                title={<>Have questions? <em className="font-display italic text-[color:var(--rose)]">We have answers.</em></>}
+                eyebrow={t("Frequently Asked Questions")}
+                title={<>{t("Have questions? ")}<em className="font-display italic text-[color:var(--rose)]">{t("We have answers.")}</em></>}
               />
               <Reveal delay={0.15}>
                 <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
-                  We understand that choosing an IVF program is a big decision. Here are the most common questions
-                  couples ask about Suraksha Kavach. For anything else, our team is just a call away.
+                  {t("We understand that choosing an IVF program is a big decision. Here are the most common questions couples ask about Suraksha Kavach. For anything else, our team is just a call away.")}
                 </p>
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                    <Calendar className="h-4 w-4" /> Book Consultation
+                  <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                    <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                   </Magnetic>
                   <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)]">
-                    <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                    <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                   </Magnetic>
                 </div>
               </Reveal>
@@ -333,8 +338,8 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
                 {FAQS.map((faq, i) => (
                   <FaqItem
                     key={i}
-                    q={faq.q}
-                    a={faq.a}
+                    q={t(faq.q)}
+                    a={t(faq.a)}
                     open={openFaq === i}
                     onToggle={() => setOpenFaq(openFaq === i ? -1 : i)}
                   />
@@ -350,26 +355,26 @@ export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS }: { data?:
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Ready to start your journey <em className="font-display italic text-[color:var(--rose-soft)]">with complete peace of mind?</em>
+              {t("Ready to start your journey ")}<em className="font-display italic text-[color:var(--rose-soft)]">{t("with complete peace of mind?")}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a consultation to learn if Suraksha Kavach is right for you. No obligation, no pressure — just honest guidance from Bavishi Fertility Institute.
+              {t("Book a consultation to learn if Suraksha Kavach is right for you. No obligation, no pressure — just honest guidance from Bavishi Fertility Institute.")}
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+              <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
               </Magnetic>
             </div>
           </Reveal>
           <Reveal delay={0.25}>
-            <p className="mt-4 text-xs text-white/40">* Terms and conditions apply. Eligibility determined during consultation.</p>
+            <p className="mt-4 text-xs text-white/40">{t("* Terms and conditions apply. Eligibility determined during consultation.")}</p>
           </Reveal>
         </div>
       </section>

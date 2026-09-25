@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { SurakshaKavachPage } from "@/components/suraksha-kavach-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 import { getSurakshaKavach } from "@/lib/payload";
 
@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title,
     description,
-    alternates: { canonical: PATH },
+    alternates: localeAlternates(PATH),
     openGraph: {
       title: data.ogTitle || title,
       description: data.ogDescription ||

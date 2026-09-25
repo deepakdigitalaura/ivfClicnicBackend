@@ -6,6 +6,7 @@ import { SMART_TREATMENT_STRINGS } from "@/lib/smart-treatment-strings";
 import { SUCCESS_BENCHMARKS_STRINGS } from "@/lib/success-benchmarks-strings";
 import { HISTORY_STRINGS } from "@/lib/history-strings";
 import { INFRASTRUCTURE_STRINGS } from "@/lib/infrastructure-strings";
+import { SURAKSHA_KAVACH_STRINGS } from "@/lib/suraksha-kavach-strings";
 import { DOCTORS_STRINGS } from "@/lib/doctors-strings";
 
 /** Hardcoded UI chrome strings (not CMS content). English is the key + fallback.
@@ -1256,5 +1257,5 @@ export const UI_STRINGS: Record<string, { hi: string; gu: string }> = {
 };
 
 export function ui(key: string, locale: Locale): string {
-  return locale === "en" ? key : UI_STRINGS[key]?.[locale] ?? WHY_BFI_STRINGS[key]?.[locale] ?? SIMPLE_TREATMENT_STRINGS[key]?.[locale] ?? SAFE_TREATMENT_STRINGS[key]?.[locale] ?? SMART_TREATMENT_STRINGS[key]?.[locale] ?? SUCCESS_BENCHMARKS_STRINGS[key]?.[locale] ?? HISTORY_STRINGS[key]?.[locale] ?? DOCTORS_STRINGS[key]?.[locale] ?? INFRASTRUCTURE_STRINGS[key]?.[locale] ?? key;
+  return locale === "en" ? key : UI_STRINGS[key]?.[locale] ?? WHY_BFI_STRINGS[key]?.[locale] ?? SIMPLE_TREATMENT_STRINGS[key]?.[locale] ?? SAFE_TREATMENT_STRINGS[key]?.[locale] ?? SMART_TREATMENT_STRINGS[key]?.[locale] ?? SUCCESS_BENCHMARKS_STRINGS[key]?.[locale] ?? HISTORY_STRINGS[key]?.[locale] ?? DOCTORS_STRINGS[key]?.[locale] ?? INFRASTRUCTURE_STRINGS[key]?.[locale] ?? SURAKSHA_KAVACH_STRINGS[key]?.[locale] ?? key;
 }

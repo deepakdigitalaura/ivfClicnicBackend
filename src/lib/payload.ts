@@ -742,7 +742,7 @@ export const getAbout = async (locale: Locale = "en"): Promise<AboutData> => {
   } as AboutSource, locale);
 };
 
-export const getSurakshaKavach = async (): Promise<SurakshaKavachData> => {
+export const getSurakshaKavach = async (_locale: Locale = "en"): Promise<SurakshaKavachData> => {
   const doc = await getSanitySurakshaKavach();
   return resolveSurakshaKavach(doc ?? null);
 };
