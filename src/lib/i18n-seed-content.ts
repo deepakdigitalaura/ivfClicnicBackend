@@ -473,7 +473,7 @@ export const aboutSeed = {
       headline: "तकनीक और भरोसे की नींव पर खड़े — फर्टिलिटी केयर के 3 दशक से अधिक के उत्कृष्ट अनुभव",
       headlineItalic: "फर्टिलिटी केयर के 3 दशक से अधिक के उत्कृष्ट अनुभव",
       paragraph:
-        'बावीशी परिवार के प्रसिद्ध विशेषज्ञों — <a href="/doctors/himanshu-bavishi" style="color:var(--plum)">डॉ. हिमांशु बावीशी</a> और <a href="/doctors/falguni-bavishi" style="color:var(--plum)">डॉ. फाल्गुनी बावीशी</a> — द्वारा स्थापित और नेतृत्वित, सभी Bavishi Fertility Institute क्लीनिक एक सुखद और आधुनिक वातावरण में अत्यंत उच्च स्तर की देखभाल प्रदान करते हैं ताकि आपका उपचार <a href="/simple-treatment" style="color:var(--plum)">सरल</a>, <a href="/safe-treatment" style="color:var(--plum)">सुरक्षित</a>, <a href="/smart-treatment" style="color:var(--plum)">स्मार्ट</a> और <a href="/success-benchmarks" style="color:var(--plum)">सफल</a> बन सके।',
+        'बाविशी परिवार के जाने-माने विशेषज्ञों — <a href="/doctors/himanshu-bavishi" style="color:var(--plum)">डॉ. हिमांशु बाविशी</a> और <a href="/doctors/falguni-bavishi" style="color:var(--plum)">डॉ. फाल्गुनी बाविशी</a> — द्वारा स्थापित और संचालित, हमारे सभी सेंटर्स पर आपको एक बेहद खुशनुमा, आधुनिक और सुरक्षित माहौल मिलता है। यहाँ हर मरीज पर विशेष ध्यान दिया जाता है, ताकि आपका पूरा इलाज <a href="/simple-treatment" style="color:var(--plum)">सरल</a>, <a href="/safe-treatment" style="color:var(--plum)">सुरक्षित</a>, <a href="/smart-treatment" style="color:var(--plum)">स्मार्ट</a> और पूरी तरह <a href="/success-benchmarks" style="color:var(--plum)">सफल</a> हो सके।',
     },
     story: {
       eyebrow: "हमारी कहानी",
