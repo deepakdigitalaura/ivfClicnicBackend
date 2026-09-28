@@ -182,7 +182,7 @@ export const ABOUT_DEFAULTS: AboutData = {
   seo: {
     metaTitle: "About Bavishi Fertility Institute — 30+ Years of IVF Excellence in India",
     metaDescription:
-      "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, Bavishi Fertility Institute has guided 30,000+ families to parenthood across 14 centres. Discover our story, legacy and values.",
+      "Founded in 1998 by Dr. Himanshu & Dr. Falguni Bavishi, BFI has guided 30,000+ families to parenthood across 14 centres. Our story and values.",
     ogTitle: "About Bavishi Fertility Institute — India's Trusted IVF Legacy Since 1998",
     ogDescription:
       "30,000+ pregnancies. 14 centres across 8 cities. National Fertility Award 6× winner (2019–2026). The story of India's pioneering fertility institute.",

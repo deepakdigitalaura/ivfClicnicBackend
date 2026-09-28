@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(URL, {
     title: "Fertility Treatments — IVF, ICSI, IUI & More | Bavishi Fertility Institute",
     description:
-      "Explore every fertility treatment at Bavishi Fertility Institute — IVF, ICSI, IUI, male and female infertility care, donor programs, fertility preservation and maternity services.",
+      "Explore every fertility treatment at BFI — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation and maternity.",
     alternates: { canonical: URL },
     openGraph: {
       title: "Fertility Treatments — Bavishi Fertility Institute",

@@ -180,7 +180,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     meta: {
       title: "3D/4D Sonography in Ahmedabad — Bavishi Fertility & Birthing",
       description:
-        "Advanced 3D & 4D pregnancy ultrasound at Bavishi Fertility & Birthing — lifelike images of your baby, safe radiation-free imaging and expert fetal assessment. Book your scan.",
+        "Advanced 3D & 4D pregnancy ultrasound — lifelike images of your baby, safe radiation-free imaging and expert fetal assessment. Book your scan.",
     },
     breadcrumbName: "3D/4D Sonography",
     reviewerSlug: MATERNITY_REVIEWER,
@@ -276,7 +276,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     meta: {
       title: "Painless Delivery (Epidural) in Ahmedabad — Bavishi Fertility & Birthing",
       description:
-        "Painless normal delivery with epidural analgesia at Bavishi Fertility & Birthing — expert anaesthetists, continuous monitoring and calm, comfortable births. Book a consultation.",
+        "Painless normal delivery with epidural analgesia — expert anaesthetists, continuous monitoring and calm, comfortable births.",
     },
     breadcrumbName: "Painless Delivery",
     reviewerSlug: MATERNITY_REVIEWER,
@@ -364,7 +364,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     meta: {
       title: "Normal (Vaginal) Delivery in Ahmedabad — Bavishi Fertility & Birthing",
       description:
-        "Safe, natural normal delivery at Bavishi Fertility & Birthing — experienced obstetricians, watchful labour care and a calm birth environment with full emergency backup. Book a consultation.",
+        "Safe, natural normal delivery at Bavishi Fertility & Birthing — experienced obstetricians, watchful labour care and full emergency backup.",
     },
     breadcrumbName: "Normal Delivery",
     reviewerSlug: MATERNITY_REVIEWER,
@@ -453,7 +453,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     meta: {
       title: "Fetal Medicine Services in Ahmedabad — Bavishi Fertility & Birthing",
       description:
-        "Specialist fetal medicine at Bavishi Fertility & Birthing — anomaly scans, NT/Doppler, fetal growth monitoring and expert assessment of your baby's health before birth. Book a consultation.",
+        "Specialist fetal medicine — anomaly scans, NT/Doppler, fetal growth monitoring and expert assessment of your baby's health before birth.",
     },
     breadcrumbName: "Fetal Medicine",
     reviewerSlug: MATERNITY_REVIEWER,
@@ -541,7 +541,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     meta: {
       title: "High Risk Pregnancy Care in Ahmedabad — Bavishi Fertility & Birthing",
       description:
-        "Expert high-risk pregnancy care at Bavishi Fertility & Birthing — close monitoring and management of complications for mother and baby, with full emergency and newborn backup. Book a consultation.",
+        "Expert high-risk pregnancy care at Bavishi Fertility & Birthing — close monitoring of mother and baby, with full emergency and newborn backup.",
     },
     breadcrumbName: "High Risk Pregnancy Care",
     reviewerSlug: MATERNITY_REVIEWER,
@@ -629,7 +629,7 @@ export const SERVICE_CONTENT: Record<string, ServiceContent> = {
     meta: {
       title: "Twin & Multiple Pregnancy Care in Ahmedabad — Bavishi Fertility & Birthing",
       description:
-        "Specialist twin and multiple pregnancy care at Bavishi Fertility & Birthing — close monitoring, expert fetal assessment and safe delivery planning for mother and babies. Book a consultation.",
+        "Specialist twin and multiple pregnancy care — close monitoring, expert fetal assessment and safe delivery planning for mother and babies.",
     },
     breadcrumbName: "Twin Pregnancy Care",
     reviewerSlug: MATERNITY_REVIEWER,

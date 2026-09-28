@@ -188,7 +188,7 @@ export const ivf: Treatment = {
   meta: {
     title: "IVF Treatment (In Vitro Fertilization) — Bavishi Fertility Institute",
     description:
-      "What is IVF? Learn how In Vitro Fertilization works step by step, who needs it, success factors and costs. India's trusted IVF specialists since 1998 — 30,000+ pregnancies, Class 1000 labs.",
+      "What is IVF? How In Vitro Fertilization works step by step, who needs it, success factors and costs. India's trusted IVF specialists since 1998.",
     ogImage: "/assets/hero-mother-baby1.png",
   },
   procedure: {
@@ -468,7 +468,7 @@ export const ivfFailure: Treatment = {
   meta: {
     title: "IVF Failure — Causes & What to Do Next | Bavishi Fertility Institute",
     description:
-      "Why does IVF fail, and what happens next? A systematic, stage-by-stage analysis of a failed IVF cycle at Bavishi Fertility Institute — embryo, uterine and maternal factors investigated honestly.",
+      "Why does IVF fail, and what next? A stage-by-stage analysis of a failed cycle — embryo, uterine and maternal factors, investigated honestly.",
     ogImage: "/assets/hero-mother-baby1.png",
   },
   procedure: {
@@ -614,7 +614,7 @@ export const iui: Treatment = {
   meta: {
     title: "IUI Treatment (Intrauterine Insemination) — Bavishi Fertility Institute",
     description:
-      "What is IUI? Learn how intrauterine insemination works, who it suits, success rates and what to expect. A simple, less invasive fertility treatment at Bavishi Fertility Institute, trusted since 1998.",
+      "What is IUI? How intrauterine insemination works, who it suits, success rates and what to expect — a simpler, less invasive fertility treatment.",
     ogImage: "/assets/hero-mother-baby1.png",
   },
   procedure: {
@@ -762,7 +762,7 @@ export const icsi: Treatment = {
   meta: {
     title: "ICSI Treatment (Intracytoplasmic Sperm Injection) — Bavishi Fertility Institute",
     description:
-      "What is ICSI? Learn how a single sperm is injected into an egg to overcome male-factor infertility and fertilisation failure. Performed in Class 1000 labs at Bavishi Fertility Institute since 1998.",
+      "What is ICSI? How a single sperm is injected into an egg to overcome male-factor infertility and fertilisation failure. Class 1000 labs, since 1998.",
     ogImage: "/assets/ivf-icsi.png",
   },
   procedure: {
@@ -922,7 +922,7 @@ export const picsi: Treatment = {
   meta: {
     title: "PICSI Treatment (Physiological ICSI) — Bavishi Fertility Institute",
     description:
-      "What is PICSI? A physiological way to select mature sperm by hyaluronan binding, used in selected cases of high DNA fragmentation or repeated ICSI failure at Bavishi Fertility Institute.",
+      "What is PICSI? A physiological way to select mature sperm by hyaluronan binding, used in high DNA fragmentation or repeated ICSI failure.",
     ogImage: "/assets/ivf-icsi.png",
   },
   procedure: {
@@ -1164,7 +1164,7 @@ export const macs: Treatment = {
   meta: {
     title: "MACS Treatment (Magnetic-Activated Cell Sorting) — Bavishi Fertility Institute",
     description:
-      "What is MACS? A sperm-selection technique that separates apoptotic (damaged) sperm from healthy ones. An honest look at where it may help — and the evidence — at Bavishi Fertility Institute.",
+      "What is MACS? A sperm-selection technique separating damaged sperm from healthy ones — an honest look at where it helps, and the evidence.",
     ogImage: "/assets/ivf-icsi.png",
   },
   procedure: {
@@ -1283,7 +1283,7 @@ export const spindleViewIcsi: Treatment = {
   meta: {
     title: "Spindle View ICSI (Polscope) — Bavishi Fertility Institute",
     description:
-      "What is Spindle View ICSI? Using a Polscope to visualise the egg's meiotic spindle for better fertilisation and egg-quality assessment, in selected cases at Bavishi Fertility Institute.",
+      "What is Spindle View ICSI? A Polscope visualises the egg's meiotic spindle for better fertilisation and egg-quality assessment.",
     ogImage: "/assets/treatments/spindle-view-icsi-polscope-oocyte-comparison.png",
   },
   procedure: {
@@ -1403,7 +1403,7 @@ export const blastocystTransfer: Treatment = {
   meta: {
     title: "Blastocyst Culture & Transfer — Bavishi Fertility Institute",
     description:
-      "What is blastocyst culture? Growing embryos to day 5–6 helps select the strongest for transfer and supports single-embryo transfer. Performed in Class 1000 labs at Bavishi Fertility Institute.",
+      "What is blastocyst culture? Growing embryos to day 5–6 selects the strongest for transfer and supports single-embryo transfer. Class 1000 labs.",
     ogImage: "/assets/ivf-icsi.png",
   },
   procedure: {
@@ -1538,7 +1538,7 @@ export const laserHatching: Treatment = {
   meta: {
     title: "Laser-Assisted Hatching (LAH) — Bavishi Fertility Institute",
     description:
-      "What is laser-assisted hatching? An FDA-approved laser creates a small opening in the embryo's outer shell to support implantation, in selected IVF cases at Bavishi Fertility Institute.",
+      "What is laser-assisted hatching? An FDA-approved laser opens the embryo's outer shell to support implantation, in selected IVF cases.",
     ogImage: "/assets/ivf-icsi.png",
   },
   procedure: {
@@ -1670,7 +1670,7 @@ export const eggDonation: Treatment = {
   meta: {
     title: "Egg Donation Treatment (Oocyte Donation) — Bavishi Fertility Institute",
     description:
-      "What is egg donation? How oocyte donation works, who needs it, donor screening and success factors. Young screened donors, Class 1000 labs, India's trusted fertility specialists since 1998.",
+      "What is egg donation? How it works, who needs it, donor screening and success factors. Young screened donors and Class 1000 labs, since 1998.",
     ogImage: "/assets/donor services/Egg-donation.png",
   },
   procedure: {
@@ -1834,7 +1834,7 @@ export const spermDonation: Treatment = {
   meta: {
     title: "Donor Sperm Treatment (Sperm Donation) — Bavishi Fertility Institute",
     description:
-      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, donor screening and success factors. In-depth donor screening, no waiting, trusted since 1998.",
+      "What is sperm donation? How donor sperm is used in IUI and IVF–ICSI, who needs it, and how donors are screened. No waiting, trusted since 1998.",
     ogImage: "/assets/donor services/Sperm-dontation.png",
   },
   procedure: {
@@ -1984,7 +1984,7 @@ export const embryoDonation: Treatment = {
   meta: {
     title: "Embryo Donation Treatment (Donor Embryo) — Bavishi Fertility Institute",
     description:
-      "What is embryo donation? How donor-embryo treatment works when both eggs and sperm are needed, who needs it, donor screening and success factors. Trusted fertility specialists since 1998.",
+      "What is embryo donation? How donor-embryo treatment works when both eggs and sperm are needed, who needs it, and donor screening explained.",
     ogImage: "/assets/donor services/Embryo-dontation.png",
   },
   procedure: {
@@ -2167,7 +2167,7 @@ export const oligospermia = defineTreatment({
   meta: {
     title: "Low Sperm Count (Oligospermia) Treatment — Bavishi Fertility Institute",
     description:
-      "What causes a low sperm count (oligospermia), how it is diagnosed and treated — from lifestyle and medical therapy to IUI, IVF and ICSI. Expert male-fertility care since 1998.",
+      "What causes a low sperm count (oligospermia), how it's diagnosed and treated — from lifestyle and medical therapy to IUI, IVF and ICSI.",
     ogImage: "/assets/conditions/oligospermia.png",
   },
   procedure: {
@@ -2273,7 +2273,7 @@ export const asthenospermia = defineTreatment({
   meta: {
     title: "Low Sperm Motility (Asthenospermia) Treatment — Bavishi Fertility Institute",
     description:
-      "Asthenospermia (poor sperm motility) explained — causes, diagnosis and treatment, from correcting the cause to IUI, IVF and ICSI. Expert male-fertility care since 1998.",
+      "Asthenospermia (poor sperm motility) explained — causes, diagnosis and treatment, from correcting the cause to IUI, IVF and ICSI.",
     ogImage: "/assets/conditions/asthenospermia.png",
   },
   procedure: {
@@ -2377,7 +2377,7 @@ export const azoospermia = defineTreatment({
   meta: {
     title: "Azoospermia (Zero Sperm Count) Treatment — Bavishi Fertility Institute",
     description:
-      "Azoospermia — no sperm in the semen — explained. Obstructive vs non-obstructive types, surgical sperm retrieval (PESA/TESA/Micro-TESE) and ICSI. Expert care since 1998.",
+      "Azoospermia — no sperm in the semen — explained. Obstructive vs non-obstructive, surgical retrieval (PESA/TESA/Micro-TESE) and ICSI.",
     ogImage: "/assets/conditions/azoospermia.png",
   },
   procedure: {
@@ -2489,7 +2489,7 @@ export const surgicalSpermRetrieval = defineTreatment({
   meta: {
     title: "Surgical Sperm Retrieval — PESA, TESA, TESE & Micro-TESE — Bavishi Fertility Institute",
     description:
-      "Surgical sperm retrieval explained — PESA, TESA, TESE and microsurgical Micro-TESE for azoospermia, used with ICSI. Experienced andrology surgeons, trusted since 1998.",
+      "Surgical sperm retrieval explained — PESA, TESA, TESE and microsurgical Micro-TESE for azoospermia, used with ICSI. Experienced surgeons.",
     ogImage: "/assets/conditions/surgical-sperm-retrieval.png",
   },
   procedure: {
@@ -2595,7 +2595,7 @@ export const varicocele = defineTreatment({
   meta: {
     title: "Varicocele Treatment & Microsurgery — Bavishi Fertility Institute",
     description:
-      "Varicocele and male infertility — how enlarged scrotal veins affect sperm, when treatment helps, and microsurgical varicocelectomy. Expert andrology care since 1998.",
+      "Varicocele and male infertility — how enlarged scrotal veins affect sperm, when treatment helps, and microsurgical varicocelectomy.",
     ogImage: "/assets/conditions/varicocele.png",
   },
   procedure: {
@@ -2704,7 +2704,7 @@ export const erectileDysfunction = defineTreatment({
   meta: {
     title: "Erectile Dysfunction Treatment — Bavishi Fertility Institute",
     description:
-      "Erectile dysfunction and fertility — causes, evaluation and treatment options, plus how couples can still conceive through assisted reproduction. Confidential care since 1998.",
+      "Erectile dysfunction and fertility — causes, evaluation and treatment, plus how couples can still conceive through assisted reproduction.",
     ogImage: "/assets/conditions/erectile-dysfunction.png",
   },
   procedure: {
@@ -2812,7 +2812,7 @@ export const conceiveNaturally = defineTreatment({
   meta: {
     title: "Conceive Naturally — Natural Fertility Care — Bavishi Fertility Institute",
     description:
-      "Improve your chances of conceiving naturally — fertile-window timing, lifestyle, simple evaluation and ovulation support, before considering advanced treatment. Trusted since 1998.",
+      "Improve your chances of conceiving naturally — fertile-window timing, lifestyle, simple evaluation and ovulation support, before advanced treatment.",
     ogImage: "/assets/conditions/conceive-naturally.png",
   },
   procedure: {
@@ -2917,7 +2917,7 @@ export const prpInfertility = defineTreatment({
   meta: {
     title: "PRP (Platelet-Rich Plasma) Therapy in Infertility — Bavishi Fertility Institute",
     description:
-      "PRP therapy in fertility — ovarian PRP for ovarian rejuvenation and low ovarian reserve, endometrial PRP for thin lining or repeated implantation failure. How it works, who may benefit, since 1998.",
+      "PRP in fertility — ovarian PRP for low ovarian reserve, endometrial PRP for thin lining or repeated implantation failure. Who may benefit, honestly.",
     ogImage: "/assets/conditions/prp-infertility.png",
   },
   procedure: {
@@ -3045,7 +3045,7 @@ export const pcos = defineTreatment({
   meta: {
     title: "PMOS-PCOS (Polyendocrine Metabolic Ovarian Syndrome) Treatment & Fertility — Bavishi Fertility Institute",
     description:
-      "PMOS-PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. PMOS-PCOS is one of the most treatable causes of infertility. Since 1998.",
+      "PMOS-PCOS and fertility — symptoms, diagnosis and treatment, from lifestyle and ovulation induction to IUI and IVF. One of the most treatable causes.",
     ogImage: "/assets/conditions/pcos.png",
   },
   procedure: {
@@ -3163,7 +3163,7 @@ export const ovarianReserve = defineTreatment({
   meta: {
     title: "Poor Ovarian Reserve / Low AMH Treatment — Bavishi Fertility Institute",
     description:
-      "Low ovarian reserve and low AMH explained — what the numbers mean, how it is assessed, and tailored IVF protocols that make the most of the eggs you have. Trusted since 1998.",
+      "Low ovarian reserve and low AMH explained — what the numbers mean, how it's assessed, and IVF protocols that make the most of the eggs you have.",
     ogImage: "/assets/conditions/ovarian-reserve.png",
   },
   procedure: {
@@ -3289,7 +3289,7 @@ export const ovarianRejuvenation = defineTreatment({
   meta: {
     title: "Ovarian Rejuvenation Therapy — Bavishi Fertility Institute",
     description:
-      "Ovarian rejuvenation explained — an emerging option using ovarian PRP to support follicle activity in low reserve or early menopause. Who may benefit, honestly assessed. Since 1998.",
+      "Ovarian rejuvenation explained — ovarian PRP to support follicle activity in low reserve or early menopause. Who may benefit, honestly assessed.",
     ogImage: "/assets/conditions/ovarian-rejuvenation.png",
   },
   procedure: {
@@ -3400,7 +3400,7 @@ export const fibroids = defineTreatment({
   meta: {
     title: "Fibroids & Fertility — Uterine Fibroid Treatment — Bavishi Fertility Institute",
     description:
-      "Uterine fibroids and fertility — which fibroids affect conception, how they are diagnosed, and fertility-preserving treatment including minimally-invasive myomectomy. Since 1998.",
+      "Uterine fibroids and fertility — which fibroids affect conception, how they're diagnosed, and fertility-preserving minimally-invasive myomectomy.",
     ogImage: "/assets/conditions/fibroids.png",
   },
   procedure: {
@@ -3519,7 +3519,7 @@ export const endometriosis = defineTreatment({
   meta: {
     title: "Endometriosis & Fertility Treatment — Bavishi Fertility Institute",
     description:
-      "Endometriosis and infertility — symptoms, diagnosis and fertility-focused treatment, from laparoscopic surgery to IVF. Compassionate, expert reproductive care since 1998.",
+      "Endometriosis and infertility — symptoms, diagnosis and fertility-focused treatment, from laparoscopic surgery to IVF. Compassionate expert care.",
     ogImage: "/assets/conditions/endometriosis.png",
   },
   procedure: {
@@ -3643,7 +3643,7 @@ export const cryopreservation = defineTreatment({
   meta: {
     title: "Cryopreservation — Egg, Sperm & Embryo Freezing — Bavishi Fertility Institute",
     description:
-      "Cryopreservation explained — vitrification of eggs, sperm and embryos to preserve fertility for medical or personal reasons. Class 1000 labs, high survival rates, since 1998.",
+      "Cryopreservation explained — vitrification of eggs, sperm and embryos to preserve fertility. Class 1000 labs, high survival rates, since 1998.",
     ogImage: "/assets/treatments/fertility-preservation.png",
   },
   procedure: {
@@ -3783,7 +3783,7 @@ export const eggFreezing = defineTreatment({
   meta: {
     title: "Egg Freezing (Oocyte Cryopreservation) — Bavishi Fertility Institute",
     description:
-      "Egg freezing explained — preserving younger, healthier eggs for medical or personal reasons through vitrification. How it works, the best age, and success factors. Since 1998.",
+      "Egg freezing explained — preserving younger, healthier eggs through vitrification. How it works, the best age, and what affects success.",
     ogImage: "/assets/treatments/fertility-preservation.png",
   },
   procedure: {
@@ -3900,7 +3900,7 @@ export const ivfEvaluation = defineTreatment({
   meta: {
     title: "IVF Failure Evaluation — Why IVF Failed & What Next — Bavishi Fertility Institute",
     description:
-      "A thorough evaluation after failed IVF — analysing eggs, sperm, embryos, the uterus and implantation to find the real reason, and building a smarter next plan. Trusted since 1998.",
+      "A thorough evaluation after failed IVF — eggs, sperm, embryos, the uterus and implantation analysed to find the real reason and plan what comes next.",
     ogImage: "/assets/treatments/ivf-evaluation.png",
   },
   procedure: {
@@ -4005,7 +4005,7 @@ export const eraTest = defineTreatment({
   meta: {
     title: "ERA Test (Endometrial Receptivity Analysis) — Bavishi Fertility Institute",
     description:
-      "The ERA test explained — how endometrial receptivity analysis personalises embryo-transfer timing to find your window of implantation, especially after repeated failure. Since 1998.",
+      "The ERA test explained — how endometrial receptivity analysis personalises embryo-transfer timing, especially after repeated failure.",
     ogImage: "/assets/treatments/era-test.png",
   },
   procedure: {
@@ -4109,7 +4109,7 @@ export const pgt = defineTreatment({
   meta: {
     title: "Preimplantation Genetic Testing (PGT-A / PGT-M / PGT-SR) — Bavishi Fertility Institute",
     description:
-      "PGT explained — testing IVF embryos for chromosomal and genetic conditions before transfer, to improve success and reduce miscarriage. PGT-A, PGT-M and PGT-SR, since 1998.",
+      "PGT explained — testing IVF embryos for chromosomal and genetic conditions before transfer, to improve success and reduce miscarriage risk.",
     ogImage: "/assets/treatments/pgt.png",
   },
   procedure: {
@@ -4230,7 +4230,7 @@ export const surrogacy = defineTreatment({
   meta: {
     title: "Surrogacy Treatment — Gestational Surrogacy — Bavishi Fertility Institute",
     description:
-      "Gestational surrogacy explained — when it is needed, how the process works, and India's legal framework under the Surrogacy Act. Ethical, fully-supported care since 1998.",
+      "Gestational surrogacy explained — when it's needed, how the process works, and India's legal framework under the Surrogacy Act. Ethical care.",
     ogImage: "/assets/treatments/surrogacy.png",
   },
   procedure: {

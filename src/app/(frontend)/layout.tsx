@@ -21,7 +21,7 @@ export const metadata: Metadata = {
   // `default` only fires for the rare page that sets no title at all.
   title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
   description:
-    "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI, and personalised treatment plans by leading specialists.",
+    "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI by leading specialists.",
   openGraph: {
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
