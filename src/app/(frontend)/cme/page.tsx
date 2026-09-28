@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title: "CME — Continuing Medical Education | Bavishi Fertility Institute",
     description:
-      "Bavishi Fertility Institute is a FOGSI-recognised centre for fertility training. Explore our CME programmes, seminar reports, and knowledge-sharing events for medical professionals.",
+      "Bavishi Fertility Institute is a FOGSI-recognised centre for fertility training. CME programmes, seminar reports and knowledge-sharing events.",
     alternates: { canonical: PATH },
     openGraph: {
       title: "CME — Continuing Medical Education | Bavishi Fertility Institute",

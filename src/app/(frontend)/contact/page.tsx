@@ -23,7 +23,7 @@ const FALLBACK = {
   seo: {
     metaTitle: "Contact Bavishi Fertility Institute — Book an IVF Consultation",
     metaDescription:
-      "Contact Bavishi Fertility Institute — call +91 97126 22288, WhatsApp or email drbavishi@ivfclinic.com. Book a fertility consultation across 14 centres in 8 Indian cities.",
+      "Contact Bavishi Fertility Institute — call +91 97126 22288, WhatsApp or email us. Book a fertility consultation across 14 centres in 8 cities.",
     ogTitle: "Contact Bavishi Fertility Institute — Book an IVF Consultation",
     ogDescription:
       "Call, WhatsApp or message us to begin your fertility journey. 14 centres across 8 cities. Online consultations available.",

@@ -12,7 +12,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title: "Fertility Education Videos — IVF, PCOS, Male Infertility & More | Bavishi Fertility Institute",
     description:
-      "Watch expert fertility education videos from Bavishi Fertility Institute specialists. Topics include IVF, egg freezing, male infertility, embryo transfer, and more.",
+      "Expert fertility education videos from Bavishi specialists — IVF, egg freezing, male infertility, embryo transfer and more.",
     alternates: { canonical: PATH },
     openGraph: {
       title: "Fertility Education Videos — Bavishi Fertility Institute",

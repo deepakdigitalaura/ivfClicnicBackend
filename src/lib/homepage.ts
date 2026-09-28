@@ -507,7 +507,7 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
   seo: {
     metaTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts for 30+ Years",
     metaDescription:
-      "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI, IUI, and personalised treatment plans by leading specialists.",
+      "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI by leading specialists.",
     ogTitle: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     ogDescription:
       "30,000+ pregnancies. 30+ years of legacy. 14 centres. Personalised, transparent and compassionate fertility care.",
