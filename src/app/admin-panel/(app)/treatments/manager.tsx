@@ -8,8 +8,10 @@ import { saveTreatmentAction, deleteTreatmentAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
 import { Repeater } from "../_components/repeater";
+import { LinkTextarea } from "../_components/link-textarea";
+import { LocaleTabs } from "../_components/locale-tabs";
+import { getLocalized, setLocalized, type Locale, type LocalizedField } from "@/lib/i18n";
 
-type CodeTreatment = { slug: string; name: string; shortName: string; href: string };
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
 
@@ -24,8 +26,6 @@ const NAV_CATEGORIES = [
   { value: "fertility-preservation", label: "Fertility Preservation" },
   { value: "maternity-services", label: "Maternity Services" },
 ];
-
-const HTML_HINT = "HTML allowed (e.g. <a href=\"/doctors/x\">name</a>) — matches the existing site copy.";
 
 type Tab = "hero" | "seo" | "whatIs" | "benefits" | "whoNeedsIt" | "process" | "risks" | "faqs" | "cta" | "nav";
 const TABS: { id: Tab; label: string }[] = [
@@ -43,18 +43,30 @@ const TABS: { id: Tab; label: string }[] = [
 
 // Wrapped-array helpers — the schema stores string lists as [{value}] and
 // paragraph lists as [{text}] (see src/sanity/schemas/treatment.ts stringArr/textArr).
-const toLinesV = (a?: { value?: string }[]) => (a ?? []).map((x) => x.value ?? "").join("\n");
-const fromLinesV = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean).map((value) => ({ value }));
-const toLinesT = (a?: { text?: string }[]) => (a ?? []).map((x) => x.text ?? "").join("\n");
-const fromLinesT = (s: string) => s.split("\n").map((x) => x.trim()).filter(Boolean).map((text) => ({ text }));
+// Locale-aware: rows are matched to the existing items by index so editing the hi/gu tab
+// keeps each row's other-locale text (setLocalized upgrades string -> {en,hi,gu}).
+type Row = Record<string, LocalizedField>;
+const toLines = (key: "value" | "text", a: Row[] | undefined, locale: Locale) => (a ?? []).map((x) => getLocalized(x[key], locale)).join("\n");
+const fromLines = (key: "value" | "text", s: string, existing: Row[] | undefined, locale: Locale): Row[] => {
+  let lines = s.split("\n").map((x) => (locale === "en" ? x.trim() : x));
+  if (locale === "en") lines = lines.filter(Boolean);
+  return lines.map((l, i) => ({ [key]: setLocalized(existing?.[i]?.[key], locale, l) }));
+};
 
-function Field({ label, hint, value, textarea, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; onChange: (v: string) => void }) {
+// `noLink`: fields the public page renders through <Linkify> (phrase auto-link)
+// instead of raw HTML (hero.tagline), or that feed a <meta> tag (meta.description)
+// — an inserted <a> tag would show up as literal text/markup there, not a link.
+function Field({ label, hint, value, textarea, noLink, onChange }: { label: string; hint?: string; value: string; textarea?: boolean; noLink?: boolean; onChange: (v: string) => void }) {
   return (
     <div className="admin-field">
       <label className="admin-label">{label}</label>
       {hint && <p className="admin-hint">{hint}</p>}
       {textarea ? (
-        <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={value} onChange={(e) => onChange(e.target.value)} />
+        noLink ? (
+          <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={value} onChange={(e) => onChange(e.target.value)} />
+        ) : (
+          <LinkTextarea value={value} onChange={onChange} minHeight={70} />
+        )
       ) : (
         <input className="admin-input" value={value} onChange={(e) => onChange(e.target.value)} />
       )}
@@ -72,14 +84,12 @@ function Field({ label, hint, value, textarea, onChange }: { label: string; hint
  * Page form. This guarantees a save never submits a half-empty section that
  * would blank out its untouched siblings on the live page.
  */
-export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminTreatment[]; codeTreatments: CodeTreatment[] }) {
+export function TreatmentsManager({ initial }: { initial: AdminTreatment[] }) {
   const [docs, setDocs] = useState<AdminTreatment[]>(initial);
   const [editing, setEditing] = useState<Doc | null>(null);
   const [tab, setTab] = useState<Tab>("hero");
+  const [locale, setLocale] = useState<Locale>("en");
   const { pending, toast, run } = useSave();
-
-  const savedSlugs = new Set(docs.map((d) => d.slug));
-  const overridableCode = codeTreatments.filter((c) => !savedSlugs.has(c.slug));
 
   const setIn = (path: string[], val: unknown) => {
     setEditing((prev) => {
@@ -97,6 +107,17 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
     let cur: Doc | null = editing;
     for (const p of path) { cur = cur?.[p]; if (cur == null) return ""; }
     return typeof cur === "string" ? cur : "";
+  };
+  // Localized text field at a path (active locale tab).
+  const getL = (path: string[]): string => {
+    let cur: unknown = editing;
+    for (const p of path) { cur = (cur as Doc | null | undefined)?.[p]; if (cur == null) return ""; }
+    return getLocalized(cur as LocalizedField, locale);
+  };
+  const setL = (path: string[], val: string) => {
+    let cur: unknown = editing;
+    for (const p of path) cur = (cur as Doc | null | undefined)?.[p];
+    setIn(path, setLocalized(cur as LocalizedField, locale, val));
   };
 
   // Whitelisted to exactly the AdminTreatment/schema shape — materializeTreatmentSource()
@@ -144,7 +165,7 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
 
   const remove = (d: AdminTreatment) => {
     if (!d._id) return;
-    if (!confirm(`Delete this override for "${d.slug}"? The code default returns (if one exists), or the page 404s if it doesn't.`)) return;
+    if (!confirm(`Delete "${d.slug}"? This removes the page permanently — /treatments/${d.slug} will 404.`)) return;
     run(async () => {
       const res = await deleteTreatmentAction(d._id!);
       if (res.ok) setDocs(docs.filter((x) => x._id !== d._id));
@@ -153,7 +174,7 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
   };
 
   if (editing) {
-    const badges = (editing.hero?.badges ?? []) as { value?: string }[];
+    const badges = (editing.hero?.badges ?? []) as Row[];
     return (
       <form onSubmit={save}>
         <div className="admin-card">
@@ -170,6 +191,7 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
             </div>
           )}
 
+          {tab !== "nav" && tab !== "seo" && <LocaleTabs locale={locale} onChange={setLocale} />}
           <div style={{ display: "flex", gap: 8, marginBottom: 18, flexWrap: "wrap" }}>
             {TABS.map((t) => (
               <button key={t.id} type="button" onClick={() => setTab(t.id)} className={tab === t.id ? "admin-btn" : "admin-btn-ghost"} style={{ padding: "7px 14px", fontSize: 13 }}>{t.label}</button>
@@ -178,14 +200,14 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
 
           {tab === "hero" && (
             <>
-              <Field label="Eyebrow" value={get(["hero", "eyebrow"])} onChange={(v) => setIn(["hero", "eyebrow"], v)} />
-              <Field label="Heading" value={get(["hero", "h1"])} onChange={(v) => setIn(["hero", "h1"], v)} />
-              <Field label="Highlighted word" value={get(["hero", "h1Em"])} onChange={(v) => setIn(["hero", "h1Em"], v)} />
-              <Field label="Tagline" value={get(["hero", "tagline"])} onChange={(v) => setIn(["hero", "tagline"], v)} textarea />
+              <Field label="Eyebrow" value={getL(["hero", "eyebrow"])} onChange={(v) => setL(["hero", "eyebrow"], v)} />
+              <Field label="Heading" value={getL(["hero", "h1"])} onChange={(v) => setL(["hero", "h1"], v)} />
+              <Field label="Highlighted word" value={getL(["hero", "h1Em"])} onChange={(v) => setL(["hero", "h1Em"], v)} />
+              <Field label="Tagline" value={getL(["hero", "tagline"])} onChange={(v) => setL(["hero", "tagline"], v)} textarea noLink />
               <div className="admin-field">
                 <label className="admin-label">Badges</label>
                 <p className="admin-hint">One per line.</p>
-                <textarea className="admin-textarea" style={{ minHeight: 60 }} value={toLinesV(badges)} onChange={(e) => setIn(["hero", "badges"], fromLinesV(e.target.value))} />
+                <textarea className="admin-textarea" style={{ minHeight: 60 }} value={toLines("value", badges, locale)} onChange={(e) => setIn(["hero", "badges"], fromLines("value", e.target.value, badges, locale))} />
               </div>
               <div className="admin-field">
                 <label className="admin-label">Hero image</label>
@@ -198,7 +220,9 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           {tab === "seo" && (
             <>
               <Field label="Page title" value={get(["meta", "title"])} onChange={(v) => setIn(["meta", "title"], v)} />
-              <Field label="Meta description" value={get(["meta", "description"])} onChange={(v) => setIn(["meta", "description"], v)} textarea />
+              <Field label="Meta description" value={get(["meta", "description"])} onChange={(v) => setIn(["meta", "description"], v)} textarea noLink />
+              <Field label="OG title" hint="Used when shared on Facebook/WhatsApp. Defaults to Page title." value={get(["meta", "ogTitle"])} onChange={(v) => setIn(["meta", "ogTitle"], v)} />
+              <Field label="OG description" hint="Defaults to Meta description." value={get(["meta", "ogDescription"])} onChange={(v) => setIn(["meta", "ogDescription"], v)} textarea noLink />
               <Field label="OG image path" hint="Overrides the hero image for social sharing." value={get(["meta", "ogImage"])} onChange={(v) => setIn(["meta", "ogImage"], v)} />
             </>
           )}
@@ -206,30 +230,33 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           {tab === "whatIs" && (
             <>
               <div className="admin-row-grid">
-                <Field label="Heading" value={get(["whatIs", "heading", "lead"])} onChange={(v) => setIn(["whatIs", "heading", "lead"], v)} />
-                <Field label="Highlighted word" value={get(["whatIs", "heading", "em"])} onChange={(v) => setIn(["whatIs", "heading", "em"], v)} />
+                <Field label="Heading" value={getL(["whatIs", "heading", "lead"])} onChange={(v) => setL(["whatIs", "heading", "lead"], v)} />
+                <Field label="Highlighted word" value={getL(["whatIs", "heading", "em"])} onChange={(v) => setL(["whatIs", "heading", "em"], v)} />
               </div>
               <div className="admin-field">
                 <label className="admin-label">Paragraphs</label>
-                <p className="admin-hint">One paragraph per line. {HTML_HINT}</p>
-                <textarea className="admin-textarea" style={{ minHeight: 100 }} value={toLinesT(editing.whatIs?.paragraphs)} onChange={(e) => setIn(["whatIs", "paragraphs"], fromLinesT(e.target.value))} />
+                <p className="admin-hint">One paragraph per line.</p>
+                <LinkTextarea value={toLines("text", editing.whatIs?.paragraphs, locale)} onChange={(v) => setIn(["whatIs", "paragraphs"], fromLines("text", v, editing.whatIs?.paragraphs, locale))} minHeight={100} />
               </div>
-              <Field label="Callout box title (optional)" value={get(["whatIs", "aside", "title"])} onChange={(v) => setIn(["whatIs", "aside", "title"], v)} />
-              <Field label="Callout box body" value={get(["whatIs", "aside", "body"])} onChange={(v) => setIn(["whatIs", "aside", "body"], v)} textarea />
+              <Field label="Callout box title (optional)" value={getL(["whatIs", "aside", "title"])} onChange={(v) => setL(["whatIs", "aside", "title"], v)} />
+              <div className="admin-field">
+                <label className="admin-label">Callout box body</label>
+                <LinkTextarea value={getL(["whatIs", "aside", "body"])} onChange={(v) => setL(["whatIs", "aside", "body"], v)} minHeight={70} />
+              </div>
             </>
           )}
 
           {tab === "benefits" && (
             <>
               <div className="admin-row-grid">
-                <Field label="Heading" value={get(["benefits", "heading", "lead"])} onChange={(v) => setIn(["benefits", "heading", "lead"], v)} />
-                <Field label="Highlighted word" value={get(["benefits", "heading", "em"])} onChange={(v) => setIn(["benefits", "heading", "em"], v)} />
+                <Field label="Heading" value={getL(["benefits", "heading", "lead"])} onChange={(v) => setL(["benefits", "heading", "lead"], v)} />
+                <Field label="Highlighted word" value={getL(["benefits", "heading", "em"])} onChange={(v) => setL(["benefits", "heading", "em"], v)} />
               </div>
-              <Field label="Subtitle" value={get(["benefits", "subtitle"])} onChange={(v) => setIn(["benefits", "subtitle"], v)} textarea />
+              <Field label="Subtitle" value={getL(["benefits", "subtitle"])} onChange={(v) => setL(["benefits", "subtitle"], v)} textarea />
               <div className="admin-field">
                 <label className="admin-label">Benefit items</label>
                 <p className="admin-hint">One per line.</p>
-                <textarea className="admin-textarea" style={{ minHeight: 90 }} value={toLinesV(editing.benefits?.items)} onChange={(e) => setIn(["benefits", "items"], fromLinesV(e.target.value))} />
+                <textarea className="admin-textarea" style={{ minHeight: 90 }} value={toLines("value", editing.benefits?.items, locale)} onChange={(e) => setIn(["benefits", "items"], fromLines("value", e.target.value, editing.benefits?.items, locale))} />
               </div>
             </>
           )}
@@ -237,14 +264,14 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           {tab === "whoNeedsIt" && (
             <>
               <div className="admin-row-grid">
-                <Field label="Heading" value={get(["whoNeedsIt", "heading", "lead"])} onChange={(v) => setIn(["whoNeedsIt", "heading", "lead"], v)} />
-                <Field label="Highlighted word" value={get(["whoNeedsIt", "heading", "em"])} onChange={(v) => setIn(["whoNeedsIt", "heading", "em"], v)} />
+                <Field label="Heading" value={getL(["whoNeedsIt", "heading", "lead"])} onChange={(v) => setL(["whoNeedsIt", "heading", "lead"], v)} />
+                <Field label="Highlighted word" value={getL(["whoNeedsIt", "heading", "em"])} onChange={(v) => setL(["whoNeedsIt", "heading", "em"], v)} />
               </div>
-              <Field label="Subtitle" value={get(["whoNeedsIt", "subtitle"])} onChange={(v) => setIn(["whoNeedsIt", "subtitle"], v)} textarea />
+              <Field label="Subtitle" value={getL(["whoNeedsIt", "subtitle"])} onChange={(v) => setL(["whoNeedsIt", "subtitle"], v)} textarea />
               <div className="admin-field">
                 <label className="admin-label">Indications</label>
                 <p className="admin-hint">One per line.</p>
-                <textarea className="admin-textarea" style={{ minHeight: 90 }} value={toLinesV(editing.whoNeedsIt?.items)} onChange={(e) => setIn(["whoNeedsIt", "items"], fromLinesV(e.target.value))} />
+                <textarea className="admin-textarea" style={{ minHeight: 90 }} value={toLines("value", editing.whoNeedsIt?.items, locale)} onChange={(e) => setIn(["whoNeedsIt", "items"], fromLines("value", e.target.value, editing.whoNeedsIt?.items, locale))} />
               </div>
             </>
           )}
@@ -252,20 +279,20 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           {tab === "process" && (
             <>
               <div className="admin-row-grid">
-                <Field label="Heading" value={get(["process", "heading", "lead"])} onChange={(v) => setIn(["process", "heading", "lead"], v)} />
-                <Field label="Highlighted word" value={get(["process", "heading", "em"])} onChange={(v) => setIn(["process", "heading", "em"], v)} />
+                <Field label="Heading" value={getL(["process", "heading", "lead"])} onChange={(v) => setL(["process", "heading", "lead"], v)} />
+                <Field label="Highlighted word" value={getL(["process", "heading", "em"])} onChange={(v) => setL(["process", "heading", "em"], v)} />
               </div>
-              <Field label="Subtitle" value={get(["process", "subtitle"])} onChange={(v) => setIn(["process", "subtitle"], v)} textarea />
+              <Field label="Subtitle" value={getL(["process", "subtitle"])} onChange={(v) => setL(["process", "subtitle"], v)} textarea />
               <div className="admin-field" style={{ marginTop: 12 }}>
                 <label className="admin-label">Steps</label>
                 <Repeater
-                  items={(editing.process?.steps ?? []) as { icon?: string; n?: string; t?: string; d?: string }[]}
+                  items={(editing.process?.steps ?? []) as { icon?: string; n?: string; t?: LocalizedField; d?: LocalizedField }[]}
                   onChange={(next) => setIn(["process", "steps"], next)}
                   newItem={() => ({ icon: "Sparkles", n: "", t: "", d: "" })}
                   addLabel="+ Add step"
                   rowLabel={(i) => {
-                    const s = (editing.process?.steps ?? [])[i] as { t?: string } | undefined;
-                    return s?.t || `Step ${i + 1}`;
+                    const s = (editing.process?.steps ?? [])[i] as { t?: LocalizedField } | undefined;
+                    return getLocalized(s?.t, "en") || `Step ${i + 1}`;
                   }}
                   renderItem={(row, i, update) => (
                     <div>
@@ -275,39 +302,39 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
                         </select>
                         <input className="admin-input" placeholder="Step number (e.g. 01)" value={row.n ?? ""} onChange={(e) => update({ n: e.target.value })} />
                       </div>
-                      <input className="admin-input" style={{ marginTop: 6 }} placeholder="Title" value={row.t ?? ""} onChange={(e) => update({ t: e.target.value })} />
-                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder={`Description ${i + 1}`} value={row.d ?? ""} onChange={(e) => update({ d: e.target.value })} />
+                      <input className="admin-input" style={{ marginTop: 6 }} placeholder="Title" value={getLocalized(row.t, locale)} onChange={(e) => update({ t: setLocalized(row.t, locale, e.target.value) })} />
+                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder={`Description ${i + 1}`} value={getLocalized(row.d, locale)} onChange={(e) => update({ d: setLocalized(row.d, locale, e.target.value) })} />
                     </div>
                   )}
                 />
               </div>
-              <Field label="Closing note" value={get(["process", "note"])} onChange={(v) => setIn(["process", "note"], v)} textarea />
+              <Field label="Closing note" value={getL(["process", "note"])} onChange={(v) => setL(["process", "note"], v)} textarea />
             </>
           )}
 
           {tab === "risks" && (
             <>
               <div className="admin-row-grid">
-                <Field label="Heading" value={get(["risks", "heading", "lead"])} onChange={(v) => setIn(["risks", "heading", "lead"], v)} />
-                <Field label="Highlighted word" value={get(["risks", "heading", "em"])} onChange={(v) => setIn(["risks", "heading", "em"], v)} />
+                <Field label="Heading" value={getL(["risks", "heading", "lead"])} onChange={(v) => setL(["risks", "heading", "lead"], v)} />
+                <Field label="Highlighted word" value={getL(["risks", "heading", "em"])} onChange={(v) => setL(["risks", "heading", "em"], v)} />
               </div>
-              <Field label="Subtitle" value={get(["risks", "subtitle"])} onChange={(v) => setIn(["risks", "subtitle"], v)} textarea />
+              <Field label="Subtitle" value={getL(["risks", "subtitle"])} onChange={(v) => setL(["risks", "subtitle"], v)} textarea />
               <div className="admin-field" style={{ marginTop: 12 }}>
                 <label className="admin-label">Risk items</label>
                 <Repeater
-                  items={(editing.risks?.items ?? []) as { t?: string; d?: string; help?: string }[]}
+                  items={(editing.risks?.items ?? []) as { t?: LocalizedField; d?: LocalizedField; help?: LocalizedField }[]}
                   onChange={(next) => setIn(["risks", "items"], next)}
                   newItem={() => ({ t: "", d: "", help: "" })}
                   addLabel="+ Add risk"
                   rowLabel={(i) => {
-                    const r = (editing.risks?.items ?? [])[i] as { t?: string } | undefined;
-                    return r?.t || `Risk ${i + 1}`;
+                    const r = (editing.risks?.items ?? [])[i] as { t?: LocalizedField } | undefined;
+                    return getLocalized(r?.t, "en") || `Risk ${i + 1}`;
                   }}
                   renderItem={(row, i, update) => (
                     <div>
-                      <input className="admin-input" placeholder="Risk title" value={row.t ?? ""} onChange={(e) => update({ t: e.target.value })} />
-                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder={`Description ${i + 1}`} value={row.d ?? ""} onChange={(e) => update({ d: e.target.value })} />
-                      <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 50, marginTop: 6 }} placeholder="How we help" value={row.help ?? ""} onChange={(e) => update({ help: e.target.value })} />
+                      <input className="admin-input" placeholder="Risk title" value={getLocalized(row.t, locale)} onChange={(e) => update({ t: setLocalized(row.t, locale, e.target.value) })} />
+                      <div style={{ marginTop: 6 }}><LinkTextarea value={getLocalized(row.d, locale)} onChange={(v) => update({ d: setLocalized(row.d, locale, v) })} minHeight={50} /></div>
+                      <div style={{ marginTop: 6 }}><LinkTextarea value={getLocalized(row.help, locale)} onChange={(v) => update({ help: setLocalized(row.help, locale, v) })} minHeight={50} /></div>
                     </div>
                   )}
                 />
@@ -319,18 +346,18 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
             <div className="admin-field">
               <label className="admin-label">FAQs</label>
               <Repeater
-                items={(editing.faqs ?? []) as { q?: string; a?: string }[]}
+                items={(editing.faqs ?? []) as { q?: LocalizedField; a?: LocalizedField }[]}
                 onChange={(next) => setIn(["faqs"], next)}
                 newItem={() => ({ q: "", a: "" })}
                 addLabel="+ Add FAQ"
                 rowLabel={(i) => {
-                  const f = (editing.faqs ?? [])[i] as { q?: string } | undefined;
-                  return f?.q || `FAQ ${i + 1}`;
+                  const f = (editing.faqs ?? [])[i] as { q?: LocalizedField } | undefined;
+                  return getLocalized(f?.q, "en") || `FAQ ${i + 1}`;
                 }}
                 renderItem={(row, i, update) => (
                   <div>
-                    <input className="admin-input" placeholder={`Question ${i + 1}`} value={row.q ?? ""} onChange={(e) => update({ q: e.target.value })} />
-                    <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60, marginTop: 6 }} placeholder="Answer" value={row.a ?? ""} onChange={(e) => update({ a: e.target.value })} />
+                    <input className="admin-input" placeholder={`Question ${i + 1}`} value={getLocalized(row.q, locale)} onChange={(e) => update({ q: setLocalized(row.q, locale, e.target.value) })} />
+                    <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60, marginTop: 6 }} placeholder="Answer" value={getLocalized(row.a, locale)} onChange={(e) => update({ a: setLocalized(row.a, locale, e.target.value) })} />
                   </div>
                 )}
               />
@@ -339,9 +366,9 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
 
           {tab === "cta" && (
             <>
-              <Field label="Heading" value={get(["cta", "heading"])} onChange={(v) => setIn(["cta", "heading"], v)} />
-              <Field label="Highlighted word" value={get(["cta", "headingEm"])} onChange={(v) => setIn(["cta", "headingEm"], v)} />
-              <Field label="Subtitle" value={get(["cta", "subtitle"])} onChange={(v) => setIn(["cta", "subtitle"], v)} textarea />
+              <Field label="Heading" value={getL(["cta", "heading"])} onChange={(v) => setL(["cta", "heading"], v)} />
+              <Field label="Highlighted word" value={getL(["cta", "headingEm"])} onChange={(v) => setL(["cta", "headingEm"], v)} />
+              <Field label="Subtitle" value={getL(["cta", "subtitle"])} onChange={(v) => setL(["cta", "subtitle"], v)} textarea />
             </>
           )}
 
@@ -380,13 +407,13 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div>
             <h2 className="admin-card-title" style={{ margin: 0 }}>Treatments</h2>
-            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} edited in admin · {codeTreatments.length} built-in</p>
+            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} treatments</p>
           </div>
           <button type="button" className="admin-btn" onClick={addNew}><Plus size={16} /> Add Treatment</button>
         </div>
 
         {docs.length === 0 ? (
-          <div className="admin-empty">No admin treatments yet. Add a new one, or override a built-in treatment below.</div>
+          <div className="admin-empty">No treatments yet. Add one to get started.</div>
         ) : (
           <div className="admin-divider-list">
             {docs.map((d) => (
@@ -394,7 +421,7 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
                 <div style={{ display: "flex", alignItems: "center", gap: 12 }}>
                   <span className="admin-stat-icon" style={{ width: 38, height: 38, background: "var(--rose-soft)", color: "var(--rose)" }}><Syringe size={18} /></span>
                   <div>
-                    <div style={{ fontWeight: 600 }}>{d.hero?.h1 || d.slug}</div>
+                    <div style={{ fontWeight: 600 }}>{getLocalized(d.hero?.h1, "en") || d.slug}</div>
                     <div style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: 2 }}>{d.href || `/treatments/${d.slug}`}</div>
                   </div>
                 </div>
@@ -407,24 +434,6 @@ export function TreatmentsManager({ initial, codeTreatments }: { initial: AdminT
           </div>
         )}
       </div>
-
-      {overridableCode.length > 0 && (
-        <div className="admin-card">
-          <h2 className="admin-card-title">Built-in Treatments</h2>
-          <p className="admin-card-desc">These come from the site code. Click Override to edit one in the admin (your changes win; the rest stays as-is).</p>
-          <div className="admin-divider-list">
-            {overridableCode.map((c) => (
-              <div key={c.slug} className="admin-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 0 }}>
-                <div>
-                  <div style={{ fontWeight: 600 }}>{c.name}</div>
-                  <div style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: 2 }}>{c.href}</div>
-                </div>
-                <button type="button" className="admin-btn-ghost" onClick={() => startEdit(c.slug, null)}><Pencil size={14} /> Override</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <Toast toast={toast} />
     </>
   );

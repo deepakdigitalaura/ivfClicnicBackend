@@ -14,6 +14,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import type { CalculatorCmsData } from "@/lib/calculators";
 import { Editable } from "@/components/editor/Editable";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 /* ── WHO 2021 reference values ── */
 const WHO_REF = {
@@ -111,10 +113,11 @@ function runCalc(fields: FieldState): Result {
   return { band, params, conditions, totalCount, tmsc };
 }
 
-export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
-  const cmsTitle      = cms?.title     ?? "Semen Analysis Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Enter your semen analysis report values and get an instant interpretation against WHO 2021 reference ranges, with derived metrics and personalised next steps.";
-  const cmsDisclaimer = cms?.disclaimer ?? "This tool compares your results to WHO 2021 reference values for educational purposes only. Always discuss your results with a fertility or andrology specialist.";
+export function SemenAnalysisCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
+  const cmsTitle      = t(cms?.title     ?? "Semen Analysis Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Enter your semen analysis report values and get an instant interpretation against WHO 2021 reference ranges, with derived metrics and personalised next steps.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "This tool compares your results to WHO 2021 reference values for educational purposes only. Always discuss your results with a fertility or andrology specialist.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";
@@ -130,7 +133,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
 
   const handleCalc = () => {
     const hasAny = Object.values(fields).some((v) => v !== "");
-    if (!hasAny) { setError("Please enter at least one parameter value."); return; }
+    if (!hasAny) { setError(t("Please enter at least one parameter value.")); return; }
     setError("");
     setResult(runCalc(fields));
   };
@@ -150,9 +153,9 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
 
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">{t("Calculators")}</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
@@ -166,7 +169,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Sparkles className="h-3.5 w-3.5" /> Male Fertility · WHO 2021 Reference Values
+              <Sparkles className="h-3.5 w-3.5" /> {t("Male Fertility · WHO 2021 Reference Values")}
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -181,9 +184,9 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
           </Reveal>
           <Reveal delay={0.18}>
             <div className="mt-7 flex flex-wrap justify-center gap-2.5">
-              {[{ icon: Heart, t: "Free Tool" }, { icon: Clock, t: "Instant Results" }, { icon: Lock, t: "No Data Stored" }].map((b) => (
-                <span key={b.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
-                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {b.t}
+              {[{ icon: Heart, label: "Free Tool" }, { icon: Clock, label: "Instant Results" }, { icon: Lock, label: "No Data Stored" }].map((b) => (
+                <span key={b.label} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
+                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(b.label)}
                 </span>
               ))}
             </div>
@@ -198,7 +201,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
               ].map((s) => (
                 <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
                   <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -209,9 +212,9 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
       {/* Understanding Your Semen Analysis */}
       <section className="container-px mx-auto max-w-5xl py-10 md:py-14">
         <Reveal>
-          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Understanding Your Semen Analysis</h2>
+          <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("Understanding Your Semen Analysis")}</h2>
           <p className="mx-auto mt-3 max-w-xl text-center text-sm leading-relaxed text-muted-foreground">
-            Each parameter tells a different story about male fertility. Here&apos;s what each one means.
+            {t("Each parameter tells a different story about male fertility. Here's what each one means.")}
           </p>
           <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
             {[
@@ -224,8 +227,8 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
             ].map((c) => (
               <div key={c.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                 <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                <h3 className="mt-4 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
-                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                <h3 className="mt-4 text-sm font-semibold text-[color:var(--plum)]">{t(c.title)}</h3>
+                <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(c.desc)}</p>
               </div>
             ))}
           </div>
@@ -236,18 +239,18 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
-            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">WHO 2021 Reference Values at a Glance</h2>
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("WHO 2021 Reference Values at a Glance")}</h2>
             <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">
-              The 5th centile values from the WHO 2021 manual — the lowest normal values from fertile men.
+              {t("The 5th centile values from the WHO 2021 manual — the lowest normal values from fertile men.")}
             </p>
             <div className="mt-8 overflow-x-auto">
               <table className="w-full border-collapse text-sm">
                 <thead>
                   <tr>
-                    <th className="rounded-tl-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Parameter</th>
-                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Lower Reference Limit</th>
-                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Clinical Condition if Below</th>
-                    <th className="rounded-tr-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">Impact</th>
+                    <th className="rounded-tl-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Parameter")}</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Lower Reference Limit")}</th>
+                    <th className="bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Clinical Condition if Below")}</th>
+                    <th className="rounded-tr-xl bg-[color:var(--plum)] px-5 py-3 text-left text-xs font-bold uppercase tracking-wider text-white">{t("Impact")}</th>
                   </tr>
                 </thead>
                 <tbody>
@@ -263,16 +266,16 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
                     { param: "TMSC", ref: "≥ 9 M (IUI)", cond: "Poor IUI candidate if lower", impact: "Key metric for IUI suitability" },
                   ].map((row, i) => (
                     <tr key={row.param} className={i % 2 === 0 ? "bg-card" : "bg-[color:var(--ivory)]"}>
-                      <td className="px-5 py-3 font-semibold text-[color:var(--plum)]">{row.param}</td>
+                      <td className="px-5 py-3 font-semibold text-[color:var(--plum)]">{t(row.param)}</td>
                       <td className="px-5 py-3 font-mono text-sm text-[color:var(--plum)]/80">{row.ref}</td>
-                      <td className="px-5 py-3 text-xs text-orange-700 font-medium">{row.cond}</td>
-                      <td className="px-5 py-3 text-xs text-muted-foreground">{row.impact}</td>
+                      <td className="px-5 py-3 text-xs text-orange-700 font-medium">{t(row.cond)}</td>
+                      <td className="px-5 py-3 text-xs text-muted-foreground">{t(row.impact)}</td>
                     </tr>
                   ))}
                 </tbody>
               </table>
             </div>
-            <p className="mt-4 text-xs text-muted-foreground">Source: WHO Laboratory Manual for the Examination and Processing of Human Semen, 6th Edition (2021)</p>
+            <p className="mt-4 text-xs text-muted-foreground">{t("Source: WHO Laboratory Manual for the Examination and Processing of Human Semen, 6th Edition (2021)")}</p>
           </div>
         </Reveal>
       </section>
@@ -283,13 +286,13 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
             <motion.div key="form" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <Reveal>
                 <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-lift md:p-10">
-                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">Enter Your Semen Analysis Values</h2>
-                  <p className="mt-1 text-sm text-muted-foreground">Enter the values from your report. You may leave any field blank if not available.</p>
+                  <h2 className="text-xl font-semibold text-[color:var(--plum)]">{t("Enter Your Semen Analysis Values")}</h2>
+                  <p className="mt-1 text-sm text-muted-foreground">{t("Enter the values from your report. You may leave any field blank if not available.")}</p>
 
                   <div className="mt-6 grid gap-5 sm:grid-cols-2">
                     {FIELD_DEFS.map(({ key, label, unit, placeholder, who }) => (
                       <div key={key}>
-                        <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{label}</label>
+                        <label className="mb-1 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t(label)}</label>
                         <div className="relative">
                           <input
                             type="number"
@@ -302,14 +305,14 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
                           />
                           <span className="pointer-events-none absolute right-4 top-1/2 -translate-y-1/2 text-xs font-semibold text-muted-foreground">{unit}</span>
                         </div>
-                        <p className="mt-1 text-xs text-muted-foreground">WHO ref: {who}</p>
+                        <p className="mt-1 text-xs text-muted-foreground">{t("WHO ref:")} {who}</p>
                       </div>
                     ))}
                   </div>
 
                   <div className="mt-5 rounded-xl bg-[color:var(--ivory)] px-4 py-3 text-xs text-muted-foreground flex items-center gap-2">
                     <Lightbulb className="h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" />
-                    <span><strong>Total Count</strong> and <strong>TMSC</strong> are calculated automatically from Volume × Concentration.</span>
+                    <span><strong>{t("Total Count")}</strong> {t("and")} <strong>TMSC</strong> {t("are calculated automatically from Volume × Concentration.")}</span>
                   </div>
 
                   {error && (
@@ -318,7 +321,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
 
                   <div className="mt-8 flex justify-end border-t border-border/60 pt-7">
                     <button type="button" onClick={handleCalc} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                      Analyse My Results <ArrowRight className="h-4 w-4" />
+                      {t("Analyse My Results")} <ArrowRight className="h-4 w-4" />
                     </button>
                   </div>
                 </div>
@@ -327,16 +330,16 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
           ) : (
             <motion.div key="result" initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} exit={{ opacity: 0, y: -12 }} transition={{ duration: 0.25 }}>
               <button type="button" onClick={() => setResult(null)} className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]">
-                <RotateCcw className="h-3.5 w-3.5" /> Re-analyse
+                <RotateCcw className="h-3.5 w-3.5" /> {t("Re-analyse")}
               </button>
 
               {/* Overall banner */}
               <div className={`rounded-[2rem] p-7 text-center text-white ${BAND_META[result.band].bgClass}`}>
-                <div className="text-lg font-bold">{BAND_META[result.band].label}</div>
+                <div className="text-lg font-bold">{t(BAND_META[result.band].label)}</div>
                 {result.conditions.length > 0 && (
                   <div className="mt-3 flex flex-wrap justify-center gap-2">
                     {result.conditions.map((c) => (
-                      <span key={c} className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold">{c}</span>
+                      <span key={c} className="rounded-full bg-white/20 px-3 py-1 text-xs font-semibold">{t(c)}</span>
                     ))}
                   </div>
                 )}
@@ -344,7 +347,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
 
               {/* Parameter grid */}
               <div className="mt-6 rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
-                <h3 className="font-semibold text-[color:var(--plum)]">Parameter Analysis (WHO 2021)</h3>
+                <h3 className="font-semibold text-[color:var(--plum)]">{t("Parameter Analysis (WHO 2021)")}</h3>
                 <div className="mt-4 grid gap-3 sm:grid-cols-2">
                   {result.params.map((p) => (
                     <div
@@ -352,15 +355,15 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
                       className={`rounded-xl border-2 p-4 ${p.ok === true ? "border-emerald-200 bg-emerald-50" : p.ok === false ? "border-red-200 bg-red-50" : "border-border bg-[color:var(--ivory)]"}`}
                     >
                       <div className="flex items-center justify-between">
-                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{p.name}</span>
+                        <span className="text-xs font-bold uppercase tracking-wider text-muted-foreground">{t(p.name)}</span>
                         {p.ok !== null && (
                           <span className={`text-xs font-semibold ${p.ok ? "text-emerald-700" : "text-red-700"}`}>
-                            {p.ok ? "✓ Normal" : "✗ Below ref"}
+                            {p.ok ? t("✓ Normal") : t("✗ Below ref")}
                           </span>
                         )}
                       </div>
                       <div className="mt-2 text-2xl font-black text-[color:var(--plum)]">{p.val} <span className="text-sm font-normal text-muted-foreground">{p.unit}</span></div>
-                      <div className="mt-0.5 text-xs text-muted-foreground">Reference: {p.who}</div>
+                      <div className="mt-0.5 text-xs text-muted-foreground">{t("Reference:")} {p.who}</div>
                     </div>
                   ))}
                 </div>
@@ -371,14 +374,14 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
                 {NEXT_STEPS[result.band].map((c) => (
                   <div key={c.title} className="rounded-2xl border border-border/70 bg-[color:var(--ivory)] p-5 shadow-soft">
                     <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{c.title}</h4>
-                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{c.text}</p>
+                    <h4 className="mt-3 font-semibold text-[color:var(--plum)]">{t(c.title)}</h4>
+                    <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(c.text)}</p>
                   </div>
                 ))}
               </div>
 
               <p className="mt-5 text-xs leading-relaxed text-muted-foreground">
-                * This calculator uses WHO 2021 reference values. Interpretation should be combined with clinical examination and full reproductive history. Consult an andrologist or fertility specialist.
+                {t("* This calculator uses WHO 2021 reference values. Interpretation should be combined with clinical examination and full reproductive history. Consult an andrologist or fertility specialist.")}
               </p>
             </motion.div>
           )}
@@ -388,7 +391,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
       <section className="container-px mx-auto max-w-5xl py-8 md:py-12">
         <Reveal delay={0.05}>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">What this calculator analyses</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("What this calculator analyses")}</h2>
             <div className="mt-6 grid gap-4 md:grid-cols-3">
               {[
                 { icon: Microscope, title: "WHO 2021 Standards", desc: "Compares each parameter against the latest WHO reference values for fertile men." },
@@ -397,8 +400,8 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
               ].map((i) => (
                 <div key={i.title} className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft">
                   <i.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{i.title}</h3>
-                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{i.desc}</p>
+                  <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{t(i.title)}</h3>
+                  <p className="mt-2 text-sm leading-relaxed text-muted-foreground">{t(i.desc)}</p>
                 </div>
               ))}
             </div>
@@ -412,18 +415,18 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
             <div className="absolute inset-0 bg-[radial-gradient(circle_at_top_left,_rgba(255,255,255,0.18),_transparent_42%)]" />
             <div className="relative grid gap-8 lg:grid-cols-[1.4fr_0.8fr] lg:items-center">
               <div>
-                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">Get expert support</p>
-                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">Speak to our male fertility specialists about your results.</h2>
+                <p className="text-xs font-bold uppercase tracking-[0.18em] text-white/70">{t("Get expert support")}</p>
+                <h2 className="mt-4 text-3xl font-semibold leading-tight text-white">{t("Speak to our male fertility specialists about your results.")}</h2>
                 <p className="mt-4 max-w-xl text-sm leading-relaxed text-white/70">
-                  Our andrologists and fertility team can review your full semen analysis, investigate the cause, and recommend the most effective treatment pathway.
+                  {t("Our andrologists and fertility team can review your full semen analysis, investigate the cause, and recommend the most effective treatment pathway.")}
                 </p>
               </div>
               <div className="flex flex-wrap items-center justify-center gap-3">
                 <a href="/contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </a>
                 <a href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Support
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Support")}
                 </a>
               </div>
             </div>
@@ -437,10 +440,10 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
           <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
             <div className="text-4xl text-white/30">&ldquo;</div>
             <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
-              My semen report said &apos;abnormal&apos; and I didn&apos;t even know what OAT syndrome meant. Entering my numbers into this tool told me exactly which parameters were affected — and the next steps helped me ask the right questions at my andrologist appointment. We did ICSI and now have twins.
+              {t("My semen report said 'abnormal' and I didn't even know what OAT syndrome meant. Entering my numbers into this tool told me exactly which parameters were affected — and the next steps helped me ask the right questions at my andrologist appointment. We did ICSI and now have twins.")}
             </p>
             <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-              — Patient at Bavishi Fertility Institute
+              {t("— Patient at Bavishi Fertility Institute")}
             </div>
           </div>
         </Reveal>
@@ -449,7 +452,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
       {/* Who Should Use */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("Who Should Use This Calculator?")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {[
               { icon: ClipboardList, title: "Just received your semen report", desc: "Make sense of your results before — or as preparation for — your specialist appointment." },
@@ -462,8 +465,8 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
-                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{t(p.desc)}</p>
                 </div>
               </div>
             ))}
@@ -475,11 +478,11 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Tool</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("About This Tool")}</h2>
             <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
             {cms?.faqs && cms.faqs.length > 0 && (
               <div className="mt-8 space-y-4">
-                <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t("Frequently Asked Questions")}</h3>
                 <div className="space-y-3">
                   {cms.faqs.map((f, i) => (
                     <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
@@ -494,7 +497,7 @@ export function SemenAnalysisCalculatorPage({ cms }: { cms?: CalculatorCmsData }
         </Reveal>
       </section>
 
-      <CalculatorCrossLinks current="/calculators/semen-analysis" />
+      <CalculatorCrossLinks current="/calculators/semen-analysis" locale={locale} />
       <Locations />
       <Footer />
       <FloatingCTA />

@@ -7,6 +7,7 @@ import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
 import { CookieConsent } from "@/components/cookie-consent";
+import { PageviewTracker } from "@/components/pageview-tracker";
 import { ConsentScripts } from "@/components/consent-scripts";
 import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
 
@@ -87,6 +88,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <HeaderProvider value={header}>
           <FooterProvider value={footer}>{children}</FooterProvider>
         </HeaderProvider>
+        <PageviewTracker />
         <CookieConsent />
         <ConsentScripts scripts={gatedScripts} />
         {bodyScripts.map((s, i) => (

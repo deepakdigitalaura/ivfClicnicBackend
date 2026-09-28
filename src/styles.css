@@ -176,3 +176,10 @@
 @media (prefers-reduced-motion: reduce) {
   * { animation: none !important; transition-duration: .01ms !important; }
 }
+
+/* Hindi / Gujarati typography. Devanagari & Gujarati stack vowel marks above and
+   below the line, so the Latin-tuned tight leading (1.02–1.05) and negative
+   tracking clip them. Unlayered on purpose: beats Tailwind's leading-[..] utilities.
+   English (lang="en") is untouched. */
+:is([lang="hi"], [lang="gu"]) :is(h1, h2, h3, h4) { line-height: 1.32; letter-spacing: 0; }
+:is([lang="hi"], [lang="gu"]) .word-mask { padding-top: 0.3em; margin-top: -0.3em; }

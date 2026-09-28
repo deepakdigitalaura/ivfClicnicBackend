@@ -1,9 +1,8 @@
 "use client";
 import { useState } from "react";
 import {
-  ArrowRight, Calendar, MessageCircle, Shield, CheckCircle2,
-  Heart, Baby, RefreshCcw, Stethoscope, ChevronDown,
-  Clock, Users, Award, ShieldCheck,
+  ArrowRight, Calendar, MessageCircle, Shield,
+  Clock, Users, Award, ShieldCheck, ChevronDown, Heart,
 } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 import { Reveal, Stagger, StaggerItem, Magnetic, Float, Counter } from "@/components/motion";
@@ -11,72 +10,10 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import { DEFAULT_FAQS } from "@/lib/suraksha-kavach-faqs";
-
-/* ---------- Data ---------- */
-
-const BENEFITS = [
-  {
-    icon: ShieldCheck,
-    title: "Financial Peace of Mind",
-    description: "Your investment is protected. The program covers multiple cycles, giving you the best possible chance of success.",
-  },
-  {
-    icon: RefreshCcw,
-    title: "Multiple IVF Cycles",
-    description: "The package covers multiple IVF/ICSI cycles, giving you the best possible chance of success without additional financial burden.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Comprehensive Treatment",
-    description: "Includes consultations, investigations, medications, procedures, embryology, and all lab work — no hidden costs, no surprises.",
-  },
-  {
-    icon: Baby,
-    title: "Dedicated to Your Dream",
-    description: "Our commitment is to support you through every step of your fertility journey — with expert care, advanced science, and unwavering dedication.",
-  },
-];
-
-const STEPS = [
-  {
-    step: "01",
-    title: "Initial Consultation",
-    description: "Meet our senior fertility specialist for a thorough evaluation. We assess your medical history, run diagnostics, and determine your eligibility for Suraksha Kavach.",
-  },
-  {
-    step: "02",
-    title: "Personalised Treatment Plan",
-    description: "Our team designs a customised IVF protocol tailored to your unique physiology. Every detail is planned — from medication dosage to embryo transfer strategy.",
-  },
-  {
-    step: "03",
-    title: "Enrol in Suraksha Kavach",
-    description: "Once eligible, you enrol in the program with complete transparency on what's included. One package, one price, complete peace of mind.",
-  },
-  {
-    step: "04",
-    title: "Treatment & Monitoring",
-    description: "Begin your IVF journey with priority care. Our team monitors every stage — stimulation, retrieval, fertilisation, and embryo development — with precision.",
-  },
-  {
-    step: "05",
-    title: "Embryo Transfer & Support",
-    description: "The best-quality embryos are transferred under ultrasound guidance. Post-transfer, you receive dedicated support through the crucial two-week wait and beyond.",
-  },
-  {
-    step: "06",
-    title: "A Baby Is Born",
-    description: "The program supports you through multiple cycles to maximise your chances. If additional cycles are needed, they're covered.",
-  },
-];
-
-const STATS = [
-  { value: 30000, suffix: "+", label: "Successful Pregnancies", sub: "across all Bavishi Fertility Institute centres" },
-  { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
-  { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
-  { value: 1998, suffix: "", label: "Est.", sub: "pioneering fertility care" },
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { SURAKSHA_KAVACH_DEFAULTS, type SurakshaKavachData } from "@/lib/suraksha-kavach";
+import { ui } from "@/lib/ui-strings";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 
 /* ---------- FAQ Accordion ---------- */
 
@@ -110,9 +47,13 @@ function FaqItem({ q, a, open, onToggle }: { q: string; a: string; open: boolean
 
 /* ---------- Page ---------- */
 
-export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string; a: string }[] } = {}) {
+export function SurakshaKavachPage({ data = SURAKSHA_KAVACH_DEFAULTS, locale = "en" }: { data?: SurakshaKavachData; locale?: Locale } = {}) {
   const [openFaq, setOpenFaq] = useState(0);
-  const FAQS = faqsOverride && faqsOverride.length > 0 ? faqsOverride : DEFAULT_FAQS;
+  const { hero, story, benefits: BENEFITS, stats: STATS, steps: STEPS, faqs: FAQS } = data;
+  const t = (s: string) => ui(s, locale);
+  const bookHref = localizeNavHref("/contact#book", locale);
+  const headline = t(hero.headline);
+  const headlineEm = t(hero.headlineEm);
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -121,9 +62,9 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Suraksha Kavach</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Suraksha Kavach")}</span>
         </nav>
       </div>
 
@@ -146,18 +87,17 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
           <div>
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> India&#39;s Only IVF Protection Program
+                <Shield className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(hero.eyebrow)}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                No tall claims, <em className="font-display italic text-[color:var(--rose)]">but a solid promise.</em>
+                {headline.split(headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{headlineEm}</em>{headline.split(headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mt-6 max-w-xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                Suraksha Kavach is a unique and only one-of-its-kind package in the entire world.
-                It covers multiple IVF cycles and offers complete financial protection — for you, or for someone you love.
+                {t(hero.paragraph)}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
@@ -166,18 +106,18 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
                   <Award className="h-6 w-6 text-[color:var(--rose)]" />
                 </div>
                 <div>
-                  <div className="text-2xl font-semibold text-[color:var(--plum)]">30,000+ Happy Families</div>
-                  <div className="text-sm text-[color:var(--plum)]/60">trusted Bavishi Fertility Institute for their parenthood journey</div>
+                  <div className="text-2xl font-semibold text-[color:var(--plum)]">{t(hero.badgeNumber)}</div>
+                  <div className="text-sm text-[color:var(--plum)]/60">{t(hero.badgeLabel)}</div>
                 </div>
               </div>
             </Reveal>
             <Reveal delay={0.35}>
               <div className="mt-8 flex flex-wrap gap-3">
-                <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+                <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-7 py-4 text-sm font-semibold text-[color:var(--plum)]">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </Reveal>
@@ -192,8 +132,8 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
                   className="relative overflow-hidden rounded-[2rem] bg-[color:var(--ivory)] shadow-lift"
                 >
                   <img
-                    src="/assets/hero-mother-baby.jpg"
-                    alt="Happy mother holding her newborn baby — the promise of Suraksha Kavach"
+                    src={hero.image}
+                    alt={t("Happy mother holding her newborn baby — the promise of Suraksha Kavach")}
                     className="aspect-[4/5] w-full object-cover"
                   />
                 </motion.div>
@@ -212,7 +152,7 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
                 <div className="relative overflow-hidden rounded-[2rem] shadow-lift">
                   <img
                     src="/assets/suraksha-shield.jpg"
-                    alt="Suraksha Kavach — your shield of protection on the fertility journey"
+                    alt={t("Suraksha Kavach — your shield of protection on the fertility journey")}
                     className="aspect-square w-full object-cover"
                   />
                 </div>
@@ -220,27 +160,16 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
             </Reveal>
             <div>
               <Reveal>
-                <Eyebrow>What is Suraksha Kavach?</Eyebrow>
+                <Eyebrow>{t(story.eyebrow)}</Eyebrow>
               </Reveal>
               <Reveal delay={0.05}>
                 <h2 className="mt-4 text-3xl font-medium leading-[1.1] text-[color:var(--plum)] md:text-4xl text-balance">
-                  The world&#39;s only <em className="font-display italic text-[color:var(--rose)]">IVF protection program.</em>
+                  {t(story.heading.lead)} <em className="font-display italic text-[color:var(--rose)]">{t(story.heading.em)}</em>
                 </h2>
               </Reveal>
               <Reveal delay={0.12}>
                 <div className="mt-6 space-y-4 text-[17px] leading-relaxed text-muted-foreground">
-                  <p>
-                    IVF is an emotional and financial journey. At Bavishi Fertility Institute, we believe no couple
-                    should have to choose between their dream of parenthood and financial security.
-                  </p>
-                  <p>
-                    Suraksha Kavach is our revolutionary protection program — the only one of its kind in the
-                    entire world. It covers <strong className="text-[color:var(--plum)]">multiple IVF cycles with complete financial protection</strong>.
-                  </p>
-                  <p>
-                    Backed by over 25 years of expertise and thousands of successful pregnancies,
-                    Suraksha Kavach is designed to give you the strongest possible chance of parenthood.
-                  </p>
+                  {story.paragraphs.map((p, i) => <p key={i}>{t(p)}</p>)}
                 </div>
               </Reveal>
             </div>
@@ -253,22 +182,25 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Why Suraksha Kavach"
-            title={<>Everything you need for <em className="font-display italic text-[color:var(--rose)]">a worry-free journey.</em></>}
-            subtitle="Suraksha Kavach takes the financial uncertainty out of IVF — so you can focus entirely on what matters most."
+            eyebrow={t("Why Suraksha Kavach")}
+            title={<>{t("Everything you need for ")}<em className="font-display italic text-[color:var(--rose)]">{t("a worry-free journey.")}</em></>}
+            subtitle={t("Suraksha Kavach takes the financial uncertainty out of IVF — so you can focus entirely on what matters most.")}
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {BENEFITS.map((b, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <b.icon className="h-6 w-6" />
+            {BENEFITS.map((b, i) => {
+              const Icon = resolveIcon(b.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{t(b.title)}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(b.description)}</p>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{b.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{b.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -285,10 +217,10 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
               <StaggerItem key={i}>
                 <div className="text-center">
                   <div className="text-4xl font-semibold md:text-5xl">
-                    <Counter to={s.value} />{s.suffix}
+                    <Counter to={s.value} />{t(s.suffix)}
                   </div>
-                  <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/80">{s.label}</div>
-                  <div className="mt-1 text-xs text-white/50">{s.sub}</div>
+                  <div className="mt-2 text-sm font-medium uppercase tracking-wider text-white/80">{t(s.label)}</div>
+                  <div className="mt-1 text-xs text-white/50">{t(s.sub)}</div>
                 </div>
               </StaggerItem>
             ))}
@@ -301,9 +233,9 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="How It Works"
-            title={<>Your journey to parenthood, <em className="font-display italic text-[color:var(--rose)]">step by step.</em></>}
-            subtitle="From your first consultation to holding your baby — every step is planned, protected, and supported."
+            eyebrow={t("How It Works")}
+            title={<>{t("Your journey to parenthood, ")}<em className="font-display italic text-[color:var(--rose)]">{t("step by step.")}</em></>}
+            subtitle={t("From your first consultation to holding your baby — every step is planned, protected, and supported.")}
           />
           <div className="mx-auto mt-14 max-w-4xl">
             <Stagger className="relative space-y-0">
@@ -317,8 +249,8 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
                       {s.step}
                     </div>
                     <div className="pt-1">
-                      <h3 className="text-xl font-semibold text-[color:var(--plum)]">{s.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{s.description}</p>
+                      <h3 className="text-xl font-semibold text-[color:var(--plum)]">{t(s.title)}</h3>
+                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t(s.description)}</p>
                     </div>
                   </div>
                 </StaggerItem>
@@ -382,22 +314,21 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
           <div className="mx-auto grid max-w-5xl grid-cols-1 gap-12 lg:grid-cols-[1fr_1.2fr]">
             <div>
               <SectionHead
-                eyebrow="Frequently Asked Questions"
-                title={<>Have questions? <em className="font-display italic text-[color:var(--rose)]">We have answers.</em></>}
+                eyebrow={t("Frequently Asked Questions")}
+                title={<>{t("Have questions? ")}<em className="font-display italic text-[color:var(--rose)]">{t("We have answers.")}</em></>}
               />
               <Reveal delay={0.15}>
                 <p className="mt-5 text-[15px] leading-relaxed text-muted-foreground">
-                  We understand that choosing an IVF program is a big decision. Here are the most common questions
-                  couples ask about Suraksha Kavach. For anything else, our team is just a call away.
+                  {t("We understand that choosing an IVF program is a big decision. Here are the most common questions couples ask about Suraksha Kavach. For anything else, our team is just a call away.")}
                 </p>
               </Reveal>
               <Reveal delay={0.2}>
                 <div className="mt-8 flex flex-wrap gap-3">
-                  <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                    <Calendar className="h-4 w-4" /> Book Consultation
+                  <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
+                    <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                   </Magnetic>
                   <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)]">
-                    <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                    <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                   </Magnetic>
                 </div>
               </Reveal>
@@ -407,8 +338,8 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
                 {FAQS.map((faq, i) => (
                   <FaqItem
                     key={i}
-                    q={faq.q}
-                    a={faq.a}
+                    q={t(faq.q)}
+                    a={t(faq.a)}
                     open={openFaq === i}
                     onToggle={() => setOpenFaq(openFaq === i ? -1 : i)}
                   />
@@ -424,26 +355,26 @@ export function SurakshaKavachPage({ faqs: faqsOverride }: { faqs?: { q: string;
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Ready to start your journey <em className="font-display italic text-[color:var(--rose-soft)]">with complete peace of mind?</em>
+              {t("Ready to start your journey ")}<em className="font-display italic text-[color:var(--rose-soft)]">{t("with complete peace of mind?")}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.1}>
             <p className="mx-auto mt-6 max-w-xl text-lg text-white/70">
-              Book a consultation to learn if Suraksha Kavach is right for you. No obligation, no pressure — just honest guidance from Bavishi Fertility Institute.
+              {t("Book a consultation to learn if Suraksha Kavach is right for you. No obligation, no pressure — just honest guidance from Bavishi Fertility Institute.")}
             </p>
           </Reveal>
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="/contact#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Consultation <ArrowRight className="h-4 w-4" />
+              <Magnetic as="a" href={bookHref} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-4 text-sm font-semibold text-white shadow-glow">
+                <Calendar className="h-4 w-4" /> {t("Book Consultation")} <ArrowRight className="h-4 w-4" />
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-4 text-sm font-semibold text-white">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
               </Magnetic>
             </div>
           </Reveal>
           <Reveal delay={0.25}>
-            <p className="mt-4 text-xs text-white/40">* Terms and conditions apply. Eligibility determined during consultation.</p>
+            <p className="mt-4 text-xs text-white/40">{t("* Terms and conditions apply. Eligibility determined during consultation.")}</p>
           </Reveal>
         </div>
       </section>

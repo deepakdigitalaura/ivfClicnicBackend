@@ -1,25 +1,36 @@
 import { defineType, defineField } from "sanity";
 
+// Translatable field: {en,hi,gu}. Untranslated locales fall back to English on the site
+// (pickLocale). A legacy plain-string value still renders (Studio just shows it empty).
+const loc = (name: string, title: string, kind: "string" | "text" = "string", extra: Record<string, unknown> = {}) =>
+  defineField({
+    name, title, type: "object",
+    fields: (["en", "hi", "gu"] as const).map((l) =>
+      defineField({ name: l, title: l === "en" ? "English" : l === "hi" ? "Hindi" : "Gujarati", type: kind, ...(kind === "text" ? { rows: 3 } : {}) }),
+    ),
+    ...extra,
+  });
+
 const heading = (name: string, title: string) =>
   defineField({
     name, title, type: "object",
     options: { collapsible: true, collapsed: true },
     fields: [
-      defineField({ name: "lead", title: "Heading (plain)", type: "string" }),
-      defineField({ name: "em", title: "Highlighted word(s)", type: "string" }),
+      loc("lead", "Heading (plain)", "string"),
+      loc("em", "Highlighted word(s)", "string"),
     ],
   });
 
 const stringArr = (name: string, title: string, itemTitle: string, itemName = "value") =>
   defineField({
     name, title, type: "array",
-    of: [{ type: "object", fields: [defineField({ name: itemName, title: itemTitle, type: "string" })] }],
+    of: [{ type: "object", fields: [loc(itemName, itemTitle, "string")] }],
   });
 
 const textArr = (name: string, title: string, itemTitle: string) =>
   defineField({
     name, title, type: "array",
-    of: [{ type: "object", fields: [defineField({ name: "text", title: itemTitle, type: "text", rows: 2 })] }],
+    of: [{ type: "object", fields: [loc("text", itemTitle, "text")] }],
   });
 
 export default defineType({
@@ -52,10 +63,10 @@ export default defineType({
       group: "hero",
       options: { collapsible: false },
       fields: [
-        defineField({ name: "eyebrow", title: "Eyebrow Label (small text above heading)", type: "string" }),
-        defineField({ name: "h1", title: "Page Heading", type: "string" }),
-        defineField({ name: "h1Em", title: "Highlighted Word(s)", description: "Word(s) in the cursive accent style.", type: "string" }),
-        defineField({ name: "tagline", title: "Tagline / Sub-heading", type: "text", rows: 3 }),
+        loc("eyebrow", "Eyebrow Label (small text above heading)", "string"),
+        loc("h1", "Page Heading", "string"),
+        loc("h1Em", "Highlighted Word(s)", "string"),
+        loc("tagline", "Tagline / Sub-heading", "text"),
         stringArr("badges", "Badges", "Badge text"),
         defineField({ name: "image", title: "Hero Image Path", description: "e.g. /assets/treatments/fertility-preservation.png — leave blank to use the code default.", type: "string" }),
         defineField({ name: "heroPhoto", title: "Upload Hero Image", description: "Upload a new image — takes priority over the path field above.", type: "image", options: { hotspot: true } }),
@@ -73,6 +84,8 @@ export default defineType({
       fields: [
         defineField({ name: "title", title: "Page Title", type: "string" }),
         defineField({ name: "description", title: "Meta Description", type: "text", rows: 3 }),
+        defineField({ name: "ogTitle", title: "OG Title", description: "Used when shared on Facebook/WhatsApp. Defaults to Page Title.", type: "string" }),
+        defineField({ name: "ogDescription", title: "OG Description", description: "Defaults to Meta Description.", type: "text", rows: 3 }),
         defineField({ name: "ogImage", title: "OG Image Path", description: "Overrides the hero image for social sharing.", type: "string" }),
       ],
     }),
@@ -93,8 +106,8 @@ export default defineType({
           type: "object",
           options: { collapsible: true, collapsed: true },
           fields: [
-            defineField({ name: "title", type: "string", title: "Title" }),
-            defineField({ name: "body", type: "text", title: "Body", rows: 3 }),
+            loc("title", "Title", "string"),
+            loc("body", "Body", "text"),
           ],
         }),
       ],
@@ -109,7 +122,7 @@ export default defineType({
       options: { collapsible: true, collapsed: true },
       fields: [
         heading("heading", "Heading"),
-        defineField({ name: "subtitle", title: "Sub-heading", type: "text", rows: 2 }),
+        loc("subtitle", "Sub-heading", "text"),
         stringArr("items", "Benefit Items", "Benefit"),
       ],
     }),
@@ -123,7 +136,7 @@ export default defineType({
       options: { collapsible: true, collapsed: true },
       fields: [
         heading("heading", "Heading"),
-        defineField({ name: "subtitle", title: "Sub-heading", type: "text", rows: 2 }),
+        loc("subtitle", "Sub-heading", "text"),
         stringArr("items", "Indications", "Indication"),
       ],
     }),
@@ -137,7 +150,7 @@ export default defineType({
       options: { collapsible: true, collapsed: true },
       fields: [
         heading("heading", "Heading"),
-        defineField({ name: "subtitle", title: "Sub-heading", type: "text", rows: 2 }),
+        loc("subtitle", "Sub-heading", "text"),
         defineField({
           name: "steps",
           title: "Steps",
@@ -147,12 +160,12 @@ export default defineType({
             fields: [
               defineField({ name: "icon", title: "Icon Name (Lucide)", type: "string" }),
               defineField({ name: "n", title: "Step Number (e.g. 01)", type: "string" }),
-              defineField({ name: "t", title: "Title", type: "string" }),
-              defineField({ name: "d", title: "Description", type: "text", rows: 2 }),
+              loc("t", "Title", "string"),
+              loc("d", "Description", "text"),
             ],
           }],
         }),
-        defineField({ name: "note", title: "Closing Note", type: "text", rows: 2 }),
+        loc("note", "Closing Note", "text"),
       ],
     }),
 
@@ -165,7 +178,7 @@ export default defineType({
       options: { collapsible: true, collapsed: true },
       fields: [
         heading("heading", "Heading"),
-        defineField({ name: "subtitle", title: "Sub-heading", type: "text", rows: 2 }),
+        loc("subtitle", "Sub-heading", "text"),
         defineField({
           name: "items",
           title: "Risk Items",
@@ -173,9 +186,9 @@ export default defineType({
           of: [{
             type: "object",
             fields: [
-              defineField({ name: "t", title: "Risk Title", type: "string" }),
-              defineField({ name: "d", title: "Description", type: "text", rows: 2 }),
-              defineField({ name: "help", title: "How We Help", type: "text", rows: 2 }),
+              loc("t", "Risk Title", "string"),
+              loc("d", "Description", "text"),
+              loc("help", "How We Help", "text"),
             ],
           }],
         }),
@@ -191,8 +204,8 @@ export default defineType({
       of: [{
         type: "object",
         fields: [
-          defineField({ name: "q", title: "Question", type: "string" }),
-          defineField({ name: "a", title: "Answer", type: "text", rows: 3 }),
+          loc("q", "Question", "string"),
+          loc("a", "Answer", "text"),
         ],
       }],
     }),
@@ -205,9 +218,9 @@ export default defineType({
       group: "content",
       options: { collapsible: true, collapsed: true },
       fields: [
-        defineField({ name: "heading", title: "Heading", type: "string" }),
-        defineField({ name: "headingEm", title: "Highlighted Word(s)", type: "string" }),
-        defineField({ name: "subtitle", title: "Subtitle", type: "text", rows: 2 }),
+        loc("heading", "Heading", "string"),
+        loc("headingEm", "Highlighted Word(s)", "string"),
+        loc("subtitle", "Subtitle", "text"),
       ],
     }),
 
@@ -246,7 +259,7 @@ export default defineType({
     }),
   ],
   preview: {
-    select: { title: "slug", subtitle: "hero.h1" },
+    select: { title: "slug", subtitle: "hero.h1.en" },
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     prepare({ title, subtitle }: any) {
       return { title: subtitle || title, subtitle: `/${title}` };

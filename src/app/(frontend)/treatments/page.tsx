@@ -6,18 +6,16 @@ import { Footer } from "@/components/home-page";
 import { TreatmentsGrid } from "@/components/treatments-grid";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { SectionHead } from "@/components/ivf-page";
-import { HOMEPAGE_DEFAULTS } from "@/lib/homepage";
-import { breadcrumbSchema, abs } from "@/lib/seo";
+import { breadcrumbSchema, abs, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
-
-const URL = "/treatments";
+import { loadTreatmentsHub, PATH as URL } from "@/lib/treatments-hub-page-data";
 
 export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(URL, {
     title: "Fertility Treatments — IVF, ICSI, IUI & More | Bavishi Fertility Institute",
     description:
       "Explore every fertility treatment at Bavishi Fertility Institute — IVF, ICSI, IUI, male and female infertility care, donor programs, fertility preservation and maternity services.",
-    alternates: { canonical: URL },
+    alternates: localeAlternates(URL),
     openGraph: {
       title: "Fertility Treatments — Bavishi Fertility Institute",
       description: "Every treatment pathway available at Bavishi Fertility Institute, explained.",
@@ -27,8 +25,8 @@ export async function generateMetadata(): Promise<Metadata> {
   });
 }
 
-export default function Page() {
-  const { eyebrow, heading, subtitle, items } = HOMEPAGE_DEFAULTS.treatments;
+export default async function Page() {
+  const { eyebrow, heading, subtitle, items } = await loadTreatmentsHub();
   const graph = [
     {
       "@type": "CollectionPage",
@@ -60,6 +58,7 @@ export default function Page() {
         <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
           <SectionHead
             center
+            as="h1"
             eyebrow={eyebrow}
             title={<>{heading.lead} <em className="font-display italic text-[color:var(--rose)]">{heading.em}</em></>}
             subtitle={subtitle}

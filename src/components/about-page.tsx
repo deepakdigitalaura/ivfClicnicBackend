@@ -1,4 +1,5 @@
 "use client";
+import Image from "next/image";
 import {
   ArrowRight, Calendar, MessageCircle, CheckCircle2, Building2,
   Target, Eye, FlaskConical, Cpu, Heart, RadioTower, GraduationCap,
@@ -14,6 +15,9 @@ import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import { ABOUT_DEFAULTS, type AboutData } from "@/lib/about";
 import { resolveIcon } from "@/lib/icon-map";
+import { ui } from "@/lib/ui-strings";
+import type { Locale } from "@/lib/i18n";
+import { HOMEPAGE_DEFAULTS, type HomepageData } from "@/lib/homepage";
 
 /* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
  * inside /edit/about-bfi. `path` is the dot-path into the about-page global
@@ -29,8 +33,9 @@ const ed = (path: string, value: string, rich = true) => (
  * <strong> "Our Story"/"Patient First" prose, the decorative <SectionHead> <em>
  * titles, hero/CTA button hrefs+icons, the JSON-LD graph and the reused
  * <Doctors>/<AwardsCarousel> sections stay code-owned. */
-export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) {
+export function AboutPage({ data = ABOUT_DEFAULTS, locale = "en", awards = HOMEPAGE_DEFAULTS.awards }: { data?: AboutData; locale?: Locale; awards?: HomepageData["awards"] } = {}) {
   const editing = !!useEdit()?.editMode;
+  const t = (s: string) => ui(s, locale);
   // Reconstruct the hero <h1> as lead + accent <em> + tail from the headline +
   // italic phrase, so the markup stays byte-identical while the words are CMS-
   // editable (the italic phrase appears mid-headline).
@@ -42,9 +47,9 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">About Bavishi Fertility Institute</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("About Bavishi Fertility Institute")}</span>
         </nav>
       </div>
 
@@ -74,10 +79,10 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Magnetic as="a" href="/contact#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </Magnetic>
                 <Magnetic as="a" href="/what-is-ivf" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
-                  Explore IVF <ArrowRight className="h-4 w-4" />
+                  {t("Explore IVF")} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
               </div>
             </Reveal>
@@ -85,11 +90,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
           <div className="lg:col-span-5">
             <Reveal delay={0.15}>
               <Float amplitude={8}>
-                <div className="relative overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
+                <div className="relative aspect-[4/5] w-full overflow-hidden rounded-[2rem] bg-white shadow-lift ring-1 ring-black/5">
                   {editing ? (
                     <EditableImage path="hero.image" src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
                   ) : (
-                    <img src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" className="aspect-[4/5] w-full object-cover" />
+                    <Image src={data.hero.image} alt="The Bavishi family — founders and second-generation doctors of Bavishi Fertility Institute" fill priority sizes="(max-width: 1024px) 90vw, 40vw" className="object-cover" />
                   )}
                 </div>
               </Float>
@@ -114,7 +119,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
           </div>
           <Reveal delay={0.1}>
             <aside className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 p-6">
-              <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">At a glance</div>
+              <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">{t("At a glance")}</div>
               <dl className="mt-4 space-y-4">
                 {data.atAGlance.map(({ n, l }, i) => (
                   <div key={i} className="flex items-baseline gap-3 border-b border-border/50 pb-3 last:border-0 last:pb-0">
@@ -133,29 +138,29 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Mission · Vision · Values"
-            title={<>What drives everything <em className="font-display italic text-[color:var(--rose)]">we do</em></>}
+            eyebrow={t("Mission · Vision · Values")}
+            title={<>{t("What drives everything")} <em className="font-display italic text-[color:var(--rose)]">{t("we do")}</em></>}
           />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><Target className="h-6 w-6" /></div>
-                <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Mission</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Achieve excellence through knowledge, education, training, brainstorming, innovation, experimentation, analysis, and research. Provide customised, personalised, simple, effective and safe treatment to every couple. Create the best qualified, experienced and expert team of medical professionals, reproductive biologists, counsellors and support staff. Impart all the best <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">IVF treatments</a> in India under one roof — without any discrimination — and spread the benefits of the latest technology. An ideal blend of professional treatment and personalised care.</p>
+                <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">{t("Mission")}</h3>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{t("Achieve excellence through knowledge, education, training, brainstorming, innovation, experimentation, analysis, and research.")} {t("Provide customised, personalised, simple, effective and safe treatment to every couple.")} {t("Create the best qualified, experienced and expert team of medical professionals, reproductive biologists, counsellors and support staff.")} {t("Impart all the best")} <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">{t("IVF treatments")}</a> {t("in India under one roof — without any discrimination — and spread the benefits of the latest technology. An ideal blend of professional treatment and personalised care.")}</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/40 p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--plum)]/10 text-[color:var(--plum)] mb-5"><Eye className="h-6 w-6" /></div>
-                <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Vision</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Be a pioneer and leader as the most preferred fertility institute, and provide <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">IVF</a> &amp; ART treatment above international standards — with Indian heart and at India-friendly cost. The best IVF institute in India.</p>
+                <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">{t("Vision")}</h3>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{t("Be a pioneer and leader as the most preferred fertility institute, and provide")} <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">IVF</a> {t("& ART treatment above international standards — with Indian heart and at India-friendly cost. The best IVF institute in India.")}</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><Star className="h-6 w-6" /></div>
-                <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Values</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground"><strong className="text-[color:var(--plum)]"><a href="/simple-treatment" className="text-[color:var(--plum)]">Simple</a>, <a href="/safe-treatment" className="text-[color:var(--plum)]">Safe</a>, <a href="/smart-treatment" className="text-[color:var(--plum)]">Smart</a> and <a href="/success-benchmarks" className="text-[color:var(--plum)]">Successful</a>!</strong> At Bavishi Fertility Institute, we follow a Simple, Safe, Smart, and Successful approach, making fertility treatment accessible and effective. With world-class technology and compassionate care, we continue to redefine success in assisted reproduction, making your fertility journey as smooth as possible.</p>
+                <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">{t("Values")}</h3>
+                <p className="text-[15px] leading-relaxed text-muted-foreground"><strong className="text-[color:var(--plum)]"><a href="/simple-treatment" className="text-[color:var(--plum)]">{t("Simple")}</a>, <a href="/safe-treatment" className="text-[color:var(--plum)]">{t("Safe")}</a>, <a href="/smart-treatment" className="text-[color:var(--plum)]">{t("Smart")}</a> {t("and")} <a href="/success-benchmarks" className="text-[color:var(--plum)]">{t("Successful")}</a>!</strong> {t("At Bavishi Fertility Institute, we follow a Simple, Safe, Smart, and Successful approach, making fertility treatment accessible and effective. With world-class technology and compassionate care, we continue to redefine success in assisted reproduction, making your fertility journey as smooth as possible.")}</p>
               </div>
             </StaggerItem>
           </Stagger>
@@ -166,28 +171,28 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
         <SectionHead
           center
-          eyebrow="Infrastructure & Technology"
-          title={<>World-class labs and <em className="font-display italic text-[color:var(--rose)]">intelligent care</em></>}
+          eyebrow={t("Infrastructure & Technology")}
+          title={<>{t("World-class labs and")} <em className="font-display italic text-[color:var(--rose)]">{t("intelligent care")}</em></>}
         />
         <div className="mt-10 grid grid-cols-1 gap-6 lg:grid-cols-2">
           <Reveal>
             <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 p-8">
               <div className="flex items-center gap-3 mb-5">
                 <div className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><FlaskConical className="h-6 w-6" /></div>
-                <h3 className="text-xl font-semibold text-[color:var(--plum)]">Infrastructure</h3>
+                <h3 className="text-xl font-semibold text-[color:var(--plum)]">{t("Infrastructure")}</h3>
               </div>
-              <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">We have a highly automated and optimised environment. For the past 35+ years, we continue to research and innovate to ensure that treatments are done in the best possible environment.</p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">Our <strong className="text-[color:var(--plum)]">Class 1000 <a href="/what-is-ivf" style={{color: "var(--plum)"}}>IVF</a> labs</strong> — 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with Latest gen ICSI, <a href="/cryopreservation" className="text-[color:var(--plum)] underline">vitrification</a>, and advanced preimplantation genetic testing (PGT).</p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">{t("We have a highly automated and optimised environment. For the past 35+ years, we continue to research and innovate to ensure that treatments are done in the best possible environment.")}</p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground">{t("Our")} <strong className="text-[color:var(--plum)]">{t("Class 1000")} <a href="/what-is-ivf" style={{color: "var(--plum)"}}>IVF</a> {t("labs")}</strong> {t("— 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with Latest gen ICSI,")} <a href="/cryopreservation" className="text-[color:var(--plum)] underline">{t("vitrification")}</a>{t(", and advanced preimplantation genetic testing (PGT).")}</p>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
             <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-8">
               <div className="flex items-center gap-3 mb-5">
                 <div className="inline-flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><Cpu className="h-6 w-6" /></div>
-                <h3 className="text-xl font-semibold text-[color:var(--plum)]">Technology</h3>
+                <h3 className="text-xl font-semibold text-[color:var(--plum)]">{t("Technology")}</h3>
               </div>
-              <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">Bavishi Fertility Institute has changed the traditional medical system by deploying cutting-edge informational technologies such as <strong className="text-[color:var(--plum)]">big data, cloud computing, and artificial intelligence.</strong></p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">Through these technologies, we carefully suggest the treatment options and injections that are worth the extra cost for your individual case — making personalised care both data-driven and deeply human.</p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">{t("Bavishi Fertility Institute has changed the traditional medical system by deploying cutting-edge informational technologies such as")} <strong className="text-[color:var(--plum)]">{t("big data, cloud computing, and artificial intelligence.")}</strong></p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground">{t("Through these technologies, we carefully suggest the treatment options and injections that are worth the extra cost for your individual case — making personalised care both data-driven and deeply human.")}</p>
             </div>
           </Reveal>
         </div>
@@ -198,9 +203,9 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Comprehensive Fertility Care"
-            title={<>All treatments offered <em className="font-display italic text-[color:var(--rose)]">under one roof</em></>}
-            subtitle="Any problem — the best solution — under one roof = Bavishi Fertility Institute!"
+            eyebrow={t("Comprehensive Fertility Care")}
+            title={<>{t("All treatments offered")} <em className="font-display italic text-[color:var(--rose)]">{t("under one roof")}</em></>}
+            subtitle={t("Any problem — the best solution — under one roof = Bavishi Fertility Institute!")}
           />
           <Stagger className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {([
@@ -216,17 +221,17 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               { t: "Ovary Rejuvenation – PRP / Stem Cell", href: "/ovarian-rejuvenation" },
               { t: "Fibroids & Endometriosis", href: "/fibroids" },
               { t: "Semen Analysis & Banking", href: null },
-            ] as { t: string; href: string | null }[]).map(({ t, href }, i) => (
+            ] as { t: string; href: string | null }[]).map(({ t: label, href }, i) => (
               <StaggerItem key={i}>
                 {href ? (
                   <a href={href} className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft transition-all hover:-translate-y-0.5 hover:shadow-lift">
                     <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-[color:var(--rose)]" />
-                    <span className="text-[15px] font-medium text-[color:var(--plum)]">{t}</span>
+                    <span className="text-[15px] font-medium text-[color:var(--plum)]">{t(label)}</span>
                   </a>
                 ) : (
                   <div className="flex items-center gap-3 rounded-2xl border border-border/70 bg-card p-4 shadow-soft">
                     <CheckCircle2 className="h-5 w-5 flex-shrink-0 text-[color:var(--rose)]" />
-                    <span className="text-[15px] font-medium text-[color:var(--plum)]">{t}</span>
+                    <span className="text-[15px] font-medium text-[color:var(--plum)]">{t(label)}</span>
                   </div>
                 )}
               </StaggerItem>
@@ -271,15 +276,15 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       </div>
 
       {/* Awards (reused) */}
-      <AwardsCarousel />
+      <AwardsCarousel content={awards} />
 
       {/* Unique Achievements */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
         <SectionHead
           center
-          eyebrow="Unique Achievements"
-          title={<>Firsts that shaped <em className="font-display italic text-[color:var(--rose)]">Indian fertility care</em></>}
-          subtitle="Bavishi Fertility Institute has achieved landmark firsts in Indian reproductive medicine — honours that reflect the trust of thousands of families."
+          eyebrow={t("Unique Achievements")}
+          title={<>{t("Firsts that shaped")} <em className="font-display italic text-[color:var(--rose)]">{t("Indian fertility care")}</em></>}
+          subtitle={t("Bavishi Fertility Institute has achieved landmark firsts in Indian reproductive medicine — honours that reflect the trust of thousands of families.")}
         />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {([
@@ -289,15 +294,15 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
             { Icon: Heart, year: "2004", t: "First of Its Kind IVF Babies Meet", d: "A unique gathering of more than 100 IVF babies conceived at Bavishi Fertility Institute, Ahmedabad — a path-breaking effort to spread awareness at a time when IVF was surrounded by misconceptions and stigma." },
             { Icon: Award, year: "2014", t: "Founded INSTAR", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in <a href='/egg-donation' style='color:var(--plum);text-decoration:underline'>egg donation</a>, <a href='/sperm-donation' style='color:var(--plum);text-decoration:underline'>sperm donation</a> and surrogacy programmes across India." },
             { Icon: Newspaper, year: "2011–2018", t: "First TV Series & Unique Books", d: "India's first TV serial by a fertility institute — 'Devna Didhela, Mangine Lidhela' — featuring real-life stories of 26 successful couples, later published as a book sharing the stories of 222 IVF families." },
-          ] as { Icon: LucideIcon, year: string, t: string, d: string }[]).map(({ Icon, year, t, d }, i) => (
+          ] as { Icon: LucideIcon, year: string, t: string, d: string }[]).map(({ Icon, year, t: title, d }, i) => (
             <StaggerItem key={i}>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                 <div className="flex items-center justify-between mb-4">
                   <div className="inline-flex h-11 w-11 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><Icon className="h-5 w-5" /></div>
                   <span className="text-xs font-semibold text-[color:var(--rose)] bg-[color:var(--rose)]/10 px-3 py-1 rounded-full">{year}</span>
                 </div>
-                <h3 className="text-base font-semibold text-[color:var(--plum)] mb-2">{t}</h3>
-                <p className="text-[14px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: d }} />
+                <h3 className="text-base font-semibold text-[color:var(--plum)] mb-2">{t(title)}</h3>
+                <p className="text-[14px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: locale === "en" ? d : t(d) }} />
               </div>
             </StaggerItem>
           ))}
@@ -336,29 +341,29 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow="Community & Knowledge"
-            title={<>Beyond treatment — giving <em className="font-display italic text-[color:var(--rose)]">back to society</em></>}
+            eyebrow={t("Community & Knowledge")}
+            title={<>{t("Beyond treatment — giving")} <em className="font-display italic text-[color:var(--rose)]">{t("back to society")}</em></>}
           />
           <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-3">
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><Heart className="h-6 w-6" /></div>
-                <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">Social Activities — Divya Santan Parivar</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">One of its kind patient support group — <strong className="text-[color:var(--plum)]">Divya Santan Parivar</strong> — inspired and formed with the guidance from Bavishi Fertility Institute. This unique support group, formed by successful IVF-conceived patients, provides information, guidance, inspiration and solace to those on their fertility journey.</p>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">{t("Social Activities — Divya Santan Parivar")}</h3>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{t("One of its kind patient support group —")} <strong className="text-[color:var(--plum)]">Divya Santan Parivar</strong> {t("— inspired and formed with the guidance from Bavishi Fertility Institute. This unique support group, formed by successful IVF-conceived patients, provides information, guidance, inspiration and solace to those on their fertility journey.")}</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/40 p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><RadioTower className="h-6 w-6" /></div>
-                <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">Public Awareness Activities</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Knowledge is the key. We organised massive <strong className="text-[color:var(--plum)]">Jan Jagruti Abhiyan – Parivar Milan</strong> programmes to provide correct scientific guidance at the patient&apos;s own doorstep. We empower couples through books, TV talk shows, FB live, YouTube education sessions and <a href="/blogs" className="text-[color:var(--plum)] underline">blogs</a>.</p>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">{t("Public Awareness Activities")}</h3>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{t("Knowledge is the key. We organised massive")} <strong className="text-[color:var(--plum)]">Jan Jagruti Abhiyan – Parivar Milan</strong> {t("programmes to provide correct scientific guidance at the patient's own doorstep. We empower couples through books, TV talk shows, FB live, YouTube education sessions and")} <a href="/blogs" className="text-[color:var(--plum)] underline">{t("blogs")}</a>.</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><GraduationCap className="h-6 w-6" /></div>
-                <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">Training Programmes</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">We believe in sharing and spreading knowledge. Hundreds of clinicians and technicians are trained by Bavishi Fertility Institute. We actively collaborate with the <strong className="text-[color:var(--plum)]">Diamond Institute of the USA</strong> to train future professionals in advanced reproductive medicine.</p>
+                <h3 className="text-lg font-semibold text-[color:var(--plum)] mb-3">{t("Training Programmes")}</h3>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">{t("We believe in sharing and spreading knowledge. Hundreds of clinicians and technicians are trained by Bavishi Fertility Institute. We actively collaborate with the")} <strong className="text-[color:var(--plum)]">Diamond Institute of the USA</strong> {t("to train future professionals in advanced reproductive medicine.")}</p>
               </div>
             </StaggerItem>
           </Stagger>
@@ -368,16 +373,16 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
       {/* Bavishi in the News */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
         <SectionHead
-          eyebrow="Bavishi Fertility Institute in News"
-          title={<>Stories that <em className="font-display italic text-[color:var(--rose)]">inspire hope</em></>}
+          eyebrow={t("Bavishi Fertility Institute in News")}
+          title={<>{t("Stories that")} <em className="font-display italic text-[color:var(--rose)]">{t("inspire hope")}</em></>}
         />
         <Reveal delay={0.1}>
           <div className="mt-8 rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-8 md:p-10">
             <div className="flex items-start gap-5">
               <div className="hidden sm:flex h-12 w-12 flex-shrink-0 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><Newspaper className="h-6 w-6" /></div>
               <div>
-                <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)] mb-3">Surrogacy Stays Within The Great Gujarati Family</div>
-                <p className="text-[16px] leading-relaxed text-muted-foreground">GK Mawani and his wife Rama celebrated their son Jay&apos;s first birthday in <a href="/locations/surat" className="text-[color:var(--plum)] underline">Surat</a> (2009). Also present at the party was Chetna (26), who gave birth to Jay. Chetna is the wife of Mawani&apos;s nephew. Rama hadn&apos;t been able to conceive in her 16-year marriage, so Chetna agreed to carry her uncle&apos;s child as a surrogate mother — made possible by Bavishi Fertility Institute&apos;s expertise in surrogacy and compassionate care.</p>
+                <div className="text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)] mb-3">{t("Surrogacy Stays Within The Great Gujarati Family")}</div>
+                <p className="text-[16px] leading-relaxed text-muted-foreground">{t("GK Mawani and his wife Rama celebrated their son Jay's first birthday in")} <a href="/locations/surat" className="text-[color:var(--plum)] underline">{t("Surat")}</a> {t("(2009). Also present at the party was Chetna (26), who gave birth to Jay. Chetna is the wife of Mawani's nephew. Rama hadn't been able to conceive in her 16-year marriage, so Chetna agreed to carry her uncle's child as a surrogate mother — made possible by Bavishi Fertility Institute's expertise in surrogacy and compassionate care.")}</p>
               </div>
             </div>
           </div>

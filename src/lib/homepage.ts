@@ -25,6 +25,7 @@
  * ===================================================================== */
 import { destinationHref } from "@/lib/internal-links";
 import type { IconName } from "@/lib/icon-map";
+import { pickLocale, type Locale, type LocalizedField } from "@/lib/i18n";
 
 /* ---------- Resolved (serialisable) model ---------- */
 
@@ -519,128 +520,128 @@ export const HOMEPAGE_DEFAULTS: HomepageData = {
  * CMS source shape (kept loose so it stays decoupled from the generated
  * payload-types, same convention as FooterSource / ServiceSource).
  * ===================================================================== */
-type HeadingSource = { lead?: string | null; em?: string | null } | null | undefined;
-type TextItem = { text?: string | null };
-type PointSource = { h?: string | null; d?: string | null };
+type HeadingSource = { lead?: LocalizedField; em?: LocalizedField } | null | undefined;
+type TextItem = { text?: LocalizedField };
+type PointSource = { h?: LocalizedField; d?: LocalizedField };
 
 export type HomepageSource =
   | {
       layout?: { section?: string | null; visible?: boolean | null }[] | null;
       hero?: {
-        eyebrow?: string | null;
-        headline?: string | null;
-        headlineItalic?: string | null;
-        paragraph?: string | null;
+        eyebrow?: LocalizedField;
+        headline?: LocalizedField;
+        headlineItalic?: LocalizedField;
+        paragraph?: LocalizedField;
         badges?: TextItem[] | null;
-        floatingBadge?: string | null;
+        floatingBadge?: LocalizedField;
         image?: string | null;
       } | null;
-      stats?: { value?: string | null; label?: string | null }[] | null;
+      stats?: { value?: string | null; label?: LocalizedField }[] | null;
       whyBavishi?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
-        cards?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+        subtitle?: LocalizedField;
+        cards?: { icon?: string | null; t?: LocalizedField; d?: LocalizedField }[] | null;
       } | null;
       whyChoose?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
+        subtitle?: LocalizedField;
         blocks?: {
           icon?: string | null; alt?: string | null;
-          title?: string | null; subtitle?: string | null;
+          title?: LocalizedField; subtitle?: LocalizedField;
           points?: PointSource[] | null;
         }[] | null;
       } | null;
       suraksha?: {
-        badge?: string | null;
+        badge?: LocalizedField;
         heading?: HeadingSource;
-        paragraph?: string | null;
+        paragraph?: LocalizedField;
         features?: TextItem[] | null;
-        primaryCta?: { label?: string | null; href?: string | null } | null;
-        secondaryCta?: { label?: string | null; href?: string | null } | null;
+        primaryCta?: { label?: LocalizedField; href?: string | null } | null;
+        secondaryCta?: { label?: LocalizedField; href?: string | null } | null;
         image?: string | null;
-        imageAlt?: string | null;
+        imageAlt?: LocalizedField;
       } | null;
       about?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
-        stats?: { k?: string | null; v?: string | null }[] | null;
-        primaryCta?: string | null;
-        secondaryCta?: string | null;
-        sinceValue?: string | null;
-        sinceLabel?: string | null;
+        subtitle?: LocalizedField;
+        stats?: { k?: LocalizedField; v?: LocalizedField }[] | null;
+        primaryCta?: LocalizedField;
+        secondaryCta?: LocalizedField;
+        sinceValue?: LocalizedField;
+        sinceLabel?: LocalizedField;
         image?: string | null;
-        imageAlt?: string | null;
+        imageAlt?: LocalizedField;
       } | null;
       awards?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
-        items?: { img?: string | null; title?: string | null; desc?: string | null }[] | null;
+        subtitle?: LocalizedField;
+        items?: { img?: string | null; title?: LocalizedField; desc?: LocalizedField }[] | null;
       } | null;
       events?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
         posters?: { src?: string | null; alt?: string | null }[] | null;
       } | null;
       videos?: {
-        stories?: { id?: string | null; n?: string | null; q?: string | null; r?: number | null }[] | null;
-        edu?: { id?: string | null; t?: string | null; d?: string | null }[] | null;
-        resources?: { id?: string | null; c?: string | null; t?: string | null; date?: string | null }[] | null;
+        stories?: { id?: string | null; n?: LocalizedField; q?: LocalizedField; r?: number | null }[] | null;
+        edu?: { id?: string | null; t?: LocalizedField; d?: LocalizedField }[] | null;
+        resources?: { id?: string | null; c?: string | null; t?: LocalizedField; date?: LocalizedField }[] | null;
       } | null;
       faq?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        items?: { q?: string | null; a?: string | null }[] | null;
+        items?: { q?: LocalizedField; a?: LocalizedField }[] | null;
       } | null;
       finalCta?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        paragraph?: string | null;
-        stats?: { v?: number | null; s?: string | null; l?: string | null }[] | null;
+        paragraph?: LocalizedField;
+        stats?: { v?: number | null; s?: string | null; l?: LocalizedField }[] | null;
       } | null;
       treatments?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
-        ctaLabel?: string | null;
-        items?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+        subtitle?: LocalizedField;
+        ctaLabel?: LocalizedField;
+        items?: { icon?: string | null; t?: LocalizedField; d?: LocalizedField }[] | null;
       } | null;
-      successStories?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
-      videoHub?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
-      doctors?: { eyebrow?: string | null; heading?: HeadingSource; subtitle?: string | null; ctaLabel?: string | null } | null;
-      blogs?: { eyebrow?: string | null; heading?: HeadingSource; ctaLabel?: string | null } | null;
-      testimonials?: { eyebrow?: string | null; heading?: HeadingSource } | null;
+      successStories?: { eyebrow?: LocalizedField; heading?: HeadingSource; subtitle?: LocalizedField; ctaLabel?: LocalizedField } | null;
+      videoHub?: { eyebrow?: LocalizedField; heading?: HeadingSource; subtitle?: LocalizedField; ctaLabel?: LocalizedField } | null;
+      doctors?: { eyebrow?: LocalizedField; heading?: HeadingSource; subtitle?: LocalizedField; ctaLabel?: LocalizedField } | null;
+      blogs?: { eyebrow?: LocalizedField; heading?: HeadingSource; ctaLabel?: LocalizedField } | null;
+      testimonials?: { eyebrow?: LocalizedField; heading?: HeadingSource } | null;
       media?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
         logos?: { src?: string | null; alt?: string | null }[] | null;
       } | null;
       inquiry?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
-        contacts?: { h?: string | null; d?: string | null }[] | null;
+        subtitle?: LocalizedField;
+        contacts?: { h?: LocalizedField; d?: LocalizedField }[] | null;
       } | null;
       locations?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
+        subtitle?: LocalizedField;
         cities?: { c?: string | null; n?: number | null; s?: string | null }[] | null;
       } | null;
       calculators?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
-        items?: { name?: string | null }[] | null;
+        subtitle?: LocalizedField;
+        items?: { name?: LocalizedField }[] | null;
       } | null;
       seo?: {
-        metaTitle?: string | null;
-        metaDescription?: string | null;
-        ogTitle?: string | null;
-        ogDescription?: string | null;
+        metaTitle?: LocalizedField;
+        metaDescription?: LocalizedField;
+        ogTitle?: LocalizedField;
+        ogDescription?: LocalizedField;
         ogImage?: unknown;
       } | null;
     }
@@ -655,12 +656,12 @@ export type HomepageSource =
 // — editing the lead silently wiped the <em> on screen (and vice-versa lost an
 // em-only edit). Per-field fallback keeps the untouched part intact. `??` only
 // substitutes null/undefined, so an explicitly-cleared "" is still respected.
-const heading = (h: HeadingSource, def: Heading): Heading => ({
-  lead: h?.lead ?? def.lead,
-  em: h?.em ?? def.em,
+const heading = (h: HeadingSource, def: Heading, locale: Locale): Heading => ({
+  lead: pickLocale(h?.lead, locale) ?? def.lead,
+  em: pickLocale(h?.em, locale) ?? def.em,
 });
-const texts = (a: TextItem[] | null | undefined): string[] =>
-  (a ?? []).filter((x) => x != null).map((x) => x.text ?? "").filter(Boolean);
+const texts = (a: TextItem[] | null | undefined, locale: Locale): string[] =>
+  (a ?? []).filter((x) => x != null).map((x) => pickLocale(x.text, locale) ?? "").filter(Boolean);
 
 /** Merge a CMS list over its typed default list BY INDEX.
  *
@@ -698,9 +699,10 @@ function mergeList<S, R>(
  * is taken from the CMS only when its content is actually present (non-empty
  * array / set heading); otherwise the typed default is used verbatim.
  */
-export function resolveHomepage(src: HomepageSource): HomepageData {
+export function resolveHomepage(src: HomepageSource, locale: Locale = "en"): HomepageData {
   const d = HOMEPAGE_DEFAULTS;
   if (!src) return d;
+  const L = (f: LocalizedField) => pickLocale(f, locale);
 
   // Resolve the section layout: take the editor's order/visibility for known
   // sections, then append any section the editor never touched (so nothing
@@ -720,58 +722,58 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
 
   const hero: HeroContent = src.hero?.headline
     ? {
-        eyebrow: src.hero.eyebrow ?? d.hero.eyebrow,
-        headline: src.hero.headline,
-        headlineItalic: src.hero.headlineItalic ?? d.hero.headlineItalic,
-        paragraph: src.hero.paragraph ?? d.hero.paragraph,
-        badges: src.hero.badges?.length ? texts(src.hero.badges) : d.hero.badges,
+        eyebrow: L(src.hero.eyebrow) ?? d.hero.eyebrow,
+        headline: L(src.hero.headline) ?? d.hero.headline,
+        headlineItalic: L(src.hero.headlineItalic) ?? d.hero.headlineItalic,
+        paragraph: L(src.hero.paragraph) ?? d.hero.paragraph,
+        badges: src.hero.badges?.length ? texts(src.hero.badges, locale) : d.hero.badges,
         // Button labels are code-owned (their links + icons live in the
         // component), so they always come from defaults — not admin-editable.
         ctas: d.hero.ctas,
-        floatingBadge: src.hero.floatingBadge ?? d.hero.floatingBadge,
+        floatingBadge: L(src.hero.floatingBadge) ?? d.hero.floatingBadge,
         image: src.hero.image || d.hero.image,
       }
     : d.hero;
 
   const stats: StatItem[] = mergeList(src.stats, d.stats, (s, def) => ({
     value: s?.value ?? def?.value ?? "",
-    l: s?.label ?? def?.l ?? "",
+    l: L(s?.label) ?? def?.l ?? "",
   }));
 
   const accolades: AccoladeItem[] = mergeList(
     (src as any).accolades, d.accolades,
     (a: any, def: AccoladeItem | undefined) => ({
-      text: a?.text ?? def?.text ?? "",
-      source: a?.source ?? def?.source ?? "",
+      text: L(a?.text) ?? def?.text ?? "",
+      source: L(a?.source) ?? def?.source ?? "",
     }),
   );
 
   const whyBavishi = src.whyBavishi?.cards?.length
     ? {
-        eyebrow: src.whyBavishi.eyebrow ?? d.whyBavishi.eyebrow,
-        heading: heading(src.whyBavishi.heading, d.whyBavishi.heading),
-        subtitle: src.whyBavishi.subtitle ?? d.whyBavishi.subtitle,
+        eyebrow: L(src.whyBavishi.eyebrow) ?? d.whyBavishi.eyebrow,
+        heading: heading(src.whyBavishi.heading, d.whyBavishi.heading, locale),
+        subtitle: L(src.whyBavishi.subtitle) ?? d.whyBavishi.subtitle,
         cards: mergeList(src.whyBavishi.cards, d.whyBavishi.cards, (c, def) => ({
           icon: (c?.icon ?? def?.icon ?? "Sparkles") as IconName,
-          t: c?.t ?? def?.t ?? "",
-          d: c?.d ?? def?.d ?? "",
+          t: L(c?.t) ?? def?.t ?? "",
+          d: L(c?.d) ?? def?.d ?? "",
         })),
       }
     : d.whyBavishi;
 
   const whyChoose = src.whyChoose?.blocks?.length
     ? {
-        eyebrow: src.whyChoose.eyebrow ?? d.whyChoose.eyebrow,
-        heading: heading(src.whyChoose.heading, d.whyChoose.heading),
-        subtitle: src.whyChoose.subtitle ?? d.whyChoose.subtitle,
+        eyebrow: L(src.whyChoose.eyebrow) ?? d.whyChoose.eyebrow,
+        heading: heading(src.whyChoose.heading, d.whyChoose.heading, locale),
+        subtitle: L(src.whyChoose.subtitle) ?? d.whyChoose.subtitle,
         blocks: mergeList(src.whyChoose.blocks, d.whyChoose.blocks, (b, def) => ({
           icon: b?.icon ?? def?.icon ?? "",
           alt: b?.alt ?? def?.alt ?? "",
-          title: b?.title ?? def?.title ?? "",
-          subtitle: b?.subtitle ?? def?.subtitle ?? "",
+          title: L(b?.title) ?? def?.title ?? "",
+          subtitle: L(b?.subtitle) ?? def?.subtitle ?? "",
           points: mergeList(b?.points, def?.points ?? [], (p, dp) => ({
-            h: p?.h ?? dp?.h ?? "",
-            d: p?.d ?? dp?.d ?? "",
+            h: L(p?.h) ?? dp?.h ?? "",
+            d: L(p?.d) ?? dp?.d ?? "",
           })),
         })),
       }
@@ -779,58 +781,58 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
 
   const suraksha: SurakshaContent = src.suraksha?.heading?.lead
     ? {
-        badge: src.suraksha.badge ?? d.suraksha.badge,
-        heading: heading(src.suraksha.heading, d.suraksha.heading),
-        paragraph: src.suraksha.paragraph ?? d.suraksha.paragraph,
-        features: src.suraksha.features?.length ? texts(src.suraksha.features) : d.suraksha.features,
+        badge: L(src.suraksha.badge) ?? d.suraksha.badge,
+        heading: heading(src.suraksha.heading, d.suraksha.heading, locale),
+        paragraph: L(src.suraksha.paragraph) ?? d.suraksha.paragraph,
+        features: src.suraksha.features?.length ? texts(src.suraksha.features, locale) : d.suraksha.features,
         primaryCta: {
-          label: src.suraksha.primaryCta?.label || d.suraksha.primaryCta.label,
+          label: L(src.suraksha.primaryCta?.label) || d.suraksha.primaryCta.label,
           href: src.suraksha.primaryCta?.href || d.suraksha.primaryCta.href,
         },
         secondaryCta: {
-          label: src.suraksha.secondaryCta?.label || d.suraksha.secondaryCta.label,
+          label: L(src.suraksha.secondaryCta?.label) || d.suraksha.secondaryCta.label,
           href: src.suraksha.secondaryCta?.href || d.suraksha.secondaryCta.href,
         },
         image: src.suraksha.image || d.suraksha.image,
-        imageAlt: src.suraksha.imageAlt ?? d.suraksha.imageAlt,
+        imageAlt: L(src.suraksha.imageAlt) ?? d.suraksha.imageAlt,
       }
     : d.suraksha;
 
   const about: HomeAboutContent = src.about?.heading?.lead
     ? {
-        eyebrow: src.about.eyebrow ?? d.about.eyebrow,
-        heading: heading(src.about.heading, d.about.heading),
-        subtitle: src.about.subtitle ?? d.about.subtitle,
+        eyebrow: L(src.about.eyebrow) ?? d.about.eyebrow,
+        heading: heading(src.about.heading, d.about.heading, locale),
+        subtitle: L(src.about.subtitle) ?? d.about.subtitle,
         stats: mergeList(src.about.stats, d.about.stats, (s, def) => ({
-          k: s?.k ?? def?.k ?? "",
-          v: s?.v ?? def?.v ?? "",
+          k: L(s?.k) ?? def?.k ?? "",
+          v: L(s?.v) ?? def?.v ?? "",
         })),
-        primaryCta: src.about.primaryCta || d.about.primaryCta,
-        secondaryCta: src.about.secondaryCta || d.about.secondaryCta,
-        sinceValue: src.about.sinceValue ?? d.about.sinceValue,
-        sinceLabel: src.about.sinceLabel ?? d.about.sinceLabel,
+        primaryCta: L(src.about.primaryCta) || d.about.primaryCta,
+        secondaryCta: L(src.about.secondaryCta) || d.about.secondaryCta,
+        sinceValue: L(src.about.sinceValue) ?? d.about.sinceValue,
+        sinceLabel: L(src.about.sinceLabel) ?? d.about.sinceLabel,
         image: src.about.image || d.about.image,
-        imageAlt: src.about.imageAlt ?? d.about.imageAlt,
+        imageAlt: L(src.about.imageAlt) ?? d.about.imageAlt,
       }
     : d.about;
 
   const awards = src.awards?.items?.length
     ? {
-        eyebrow: src.awards.eyebrow ?? d.awards.eyebrow,
-        heading: heading(src.awards.heading, d.awards.heading),
-        subtitle: src.awards.subtitle ?? d.awards.subtitle,
+        eyebrow: L(src.awards.eyebrow) ?? d.awards.eyebrow,
+        heading: heading(src.awards.heading, d.awards.heading, locale),
+        subtitle: L(src.awards.subtitle) ?? d.awards.subtitle,
         items: mergeList(src.awards.items, d.awards.items, (a, def) => ({
           img: a?.img ?? def?.img ?? "",
-          title: a?.title ?? def?.title ?? "",
-          desc: a?.desc ?? def?.desc ?? "",
+          title: L(a?.title) ?? def?.title ?? "",
+          desc: L(a?.desc) ?? def?.desc ?? "",
         })),
       }
     : d.awards;
 
-  const events = src.events?.posters?.length
+  const events = src.events?.eyebrow || src.events?.heading?.lead
     ? {
-        eyebrow: src.events.eyebrow ?? d.events.eyebrow,
-        heading: heading(src.events.heading, d.events.heading),
+        eyebrow: L(src.events.eyebrow) ?? d.events.eyebrow,
+        heading: heading(src.events.heading, d.events.heading, locale),
         posters: mergeList(src.events.posters, d.events.posters, (p, def) => ({
           src: p?.src ?? def?.src ?? "",
           alt: p?.alt ?? def?.alt ?? "",
@@ -841,43 +843,43 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
   const videos = {
     stories: mergeList(src.videos?.stories, d.videos.stories, (s, def) => ({
       id: s?.id ?? def?.id ?? "",
-      n: s?.n ?? def?.n ?? "",
-      q: s?.q ?? def?.q ?? "",
+      n: L(s?.n) ?? def?.n ?? "",
+      q: L(s?.q) ?? def?.q ?? "",
       r: s?.r ?? def?.r ?? 5,
     })),
     edu: mergeList(src.videos?.edu, d.videos.edu, (v, def) => ({
       id: v?.id ?? def?.id ?? "",
-      t: v?.t ?? def?.t ?? "",
-      d: v?.d ?? def?.d ?? "",
+      t: L(v?.t) ?? def?.t ?? "",
+      d: L(v?.d) ?? def?.d ?? "",
     })),
     resources: mergeList(src.videos?.resources, d.videos.resources, (v, def) => ({
       id: v?.id ?? def?.id ?? "",
-      c: v?.c ?? def?.c ?? "",
-      t: v?.t ?? def?.t ?? "",
-      date: v?.date ?? def?.date ?? "",
+      c: L(v?.c) ?? def?.c ?? "",
+      t: L(v?.t) ?? def?.t ?? "",
+      date: L(v?.date) ?? def?.date ?? "",
     })),
   };
 
   const faq = src.faq?.items?.length
     ? {
-        eyebrow: src.faq.eyebrow ?? d.faq.eyebrow,
-        heading: heading(src.faq.heading, d.faq.heading),
+        eyebrow: L(src.faq.eyebrow) ?? d.faq.eyebrow,
+        heading: heading(src.faq.heading, d.faq.heading, locale),
         items: mergeList(src.faq.items, d.faq.items, (f, def) => ({
-          q: f?.q ?? def?.q ?? "",
-          a: f?.a ?? def?.a ?? "",
+          q: L(f?.q) ?? def?.q ?? "",
+          a: L(f?.a) ?? def?.a ?? "",
         })),
       }
     : d.faq;
 
   const finalCta: FinalCtaContent = src.finalCta?.heading?.lead
     ? {
-        eyebrow: src.finalCta.eyebrow ?? d.finalCta.eyebrow,
-        heading: heading(src.finalCta.heading, d.finalCta.heading),
-        paragraph: src.finalCta.paragraph ?? d.finalCta.paragraph,
+        eyebrow: L(src.finalCta.eyebrow) ?? d.finalCta.eyebrow,
+        heading: heading(src.finalCta.heading, d.finalCta.heading, locale),
+        paragraph: L(src.finalCta.paragraph) ?? d.finalCta.paragraph,
         stats: mergeList(src.finalCta.stats, d.finalCta.stats, (s, def) => ({
           v: s?.v ?? def?.v ?? 0,
           s: s?.s ?? def?.s ?? "",
-          l: s?.l ?? def?.l ?? "",
+          l: L(s?.l) ?? def?.l ?? "",
         })),
         // Button labels are code-owned — always from defaults, not admin-editable.
         ctas: d.finalCta.ctas,
@@ -885,67 +887,67 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     : d.finalCta;
 
   const treatments = {
-    eyebrow: src.treatments?.eyebrow ?? d.treatments.eyebrow,
-    heading: heading(src.treatments?.heading, d.treatments.heading),
-    subtitle: src.treatments?.subtitle ?? d.treatments.subtitle,
-    ctaLabel: src.treatments?.ctaLabel || d.treatments.ctaLabel,
+    eyebrow: L(src.treatments?.eyebrow) ?? d.treatments.eyebrow,
+    heading: heading(src.treatments?.heading, d.treatments.heading, locale),
+    subtitle: L(src.treatments?.subtitle) ?? d.treatments.subtitle,
+    ctaLabel: L(src.treatments?.ctaLabel) || d.treatments.ctaLabel,
     items: mergeList(src.treatments?.items, d.treatments.items, (x, def) => ({
       icon: (x?.icon ?? def?.icon ?? "Sparkles") as IconName,
-      t: x?.t ?? def?.t ?? "",
-      d: x?.d ?? def?.d ?? "",
+      t: L(x?.t) ?? def?.t ?? "",
+      d: L(x?.d) ?? def?.d ?? "",
     })),
   };
 
   // Header-only sections: resolve each field against the default (no "is present"
   // gate — the header text is independent of any item array).
   const successStories = {
-    eyebrow: src.successStories?.eyebrow ?? d.successStories.eyebrow,
-    heading: heading(src.successStories?.heading, d.successStories.heading),
-    subtitle: src.successStories?.subtitle ?? d.successStories.subtitle,
-    ctaLabel: src.successStories?.ctaLabel || d.successStories.ctaLabel,
+    eyebrow: L(src.successStories?.eyebrow) ?? d.successStories.eyebrow,
+    heading: heading(src.successStories?.heading, d.successStories.heading, locale),
+    subtitle: L(src.successStories?.subtitle) ?? d.successStories.subtitle,
+    ctaLabel: L(src.successStories?.ctaLabel) || d.successStories.ctaLabel,
   };
   const videoHub = {
-    eyebrow: src.videoHub?.eyebrow ?? d.videoHub.eyebrow,
-    heading: heading(src.videoHub?.heading, d.videoHub.heading),
-    subtitle: src.videoHub?.subtitle ?? d.videoHub.subtitle,
-    ctaLabel: src.videoHub?.ctaLabel || d.videoHub.ctaLabel,
+    eyebrow: L(src.videoHub?.eyebrow) ?? d.videoHub.eyebrow,
+    heading: heading(src.videoHub?.heading, d.videoHub.heading, locale),
+    subtitle: L(src.videoHub?.subtitle) ?? d.videoHub.subtitle,
+    ctaLabel: L(src.videoHub?.ctaLabel) || d.videoHub.ctaLabel,
   };
   const doctors = {
-    eyebrow: src.doctors?.eyebrow ?? d.doctors.eyebrow,
-    heading: heading(src.doctors?.heading, d.doctors.heading),
-    subtitle: src.doctors?.subtitle ?? d.doctors.subtitle,
-    ctaLabel: src.doctors?.ctaLabel || d.doctors.ctaLabel,
+    eyebrow: L(src.doctors?.eyebrow) ?? d.doctors.eyebrow,
+    heading: heading(src.doctors?.heading, d.doctors.heading, locale),
+    subtitle: L(src.doctors?.subtitle) ?? d.doctors.subtitle,
+    ctaLabel: L(src.doctors?.ctaLabel) || d.doctors.ctaLabel,
   };
   const blogs = {
-    eyebrow: src.blogs?.eyebrow ?? d.blogs.eyebrow,
-    heading: heading(src.blogs?.heading, d.blogs.heading),
-    ctaLabel: src.blogs?.ctaLabel || d.blogs.ctaLabel,
+    eyebrow: L(src.blogs?.eyebrow) ?? d.blogs.eyebrow,
+    heading: heading(src.blogs?.heading, d.blogs.heading, locale),
+    ctaLabel: L(src.blogs?.ctaLabel) || d.blogs.ctaLabel,
   };
   const testimonials = {
-    eyebrow: src.testimonials?.eyebrow ?? d.testimonials.eyebrow,
-    heading: heading(src.testimonials?.heading, d.testimonials.heading),
+    eyebrow: L(src.testimonials?.eyebrow) ?? d.testimonials.eyebrow,
+    heading: heading(src.testimonials?.heading, d.testimonials.heading, locale),
   };
   const media = {
-    eyebrow: src.media?.eyebrow ?? d.media.eyebrow,
-    heading: heading(src.media?.heading, d.media.heading),
+    eyebrow: L(src.media?.eyebrow) ?? d.media.eyebrow,
+    heading: heading(src.media?.heading, d.media.heading, locale),
     logos: mergeList(src.media?.logos, d.media.logos, (l, def) => ({
       src: l?.src ?? def?.src ?? "",
       alt: l?.alt ?? def?.alt ?? "",
     })),
   };
   const inquiry = {
-    eyebrow: src.inquiry?.eyebrow ?? d.inquiry.eyebrow,
-    heading: heading(src.inquiry?.heading, d.inquiry.heading),
-    subtitle: src.inquiry?.subtitle ?? d.inquiry.subtitle,
+    eyebrow: L(src.inquiry?.eyebrow) ?? d.inquiry.eyebrow,
+    heading: heading(src.inquiry?.heading, d.inquiry.heading, locale),
+    subtitle: L(src.inquiry?.subtitle) ?? d.inquiry.subtitle,
     contacts: mergeList(src.inquiry?.contacts, d.inquiry.contacts, (c, def) => ({
-      h: c?.h ?? def?.h ?? "",
-      d: c?.d ?? def?.d ?? "",
+      h: L(c?.h) ?? def?.h ?? "",
+      d: L(c?.d) ?? def?.d ?? "",
     })),
   };
   const locations = {
-    eyebrow: src.locations?.eyebrow ?? d.locations.eyebrow,
-    heading: heading(src.locations?.heading, d.locations.heading),
-    subtitle: src.locations?.subtitle ?? d.locations.subtitle,
+    eyebrow: L(src.locations?.eyebrow) ?? d.locations.eyebrow,
+    heading: heading(src.locations?.heading, d.locations.heading, locale),
+    subtitle: L(src.locations?.subtitle) ?? d.locations.subtitle,
     cities: mergeList(src.locations?.cities, d.locations.cities, (x, def) => ({
       c: x?.c ?? def?.c ?? "",
       n: x?.n ?? def?.n ?? 1,
@@ -954,19 +956,19 @@ export function resolveHomepage(src: HomepageSource): HomepageData {
     })),
   };
   const calculators = {
-    eyebrow: src.calculators?.eyebrow ?? d.calculators.eyebrow,
-    heading: heading(src.calculators?.heading, d.calculators.heading),
-    subtitle: src.calculators?.subtitle ?? d.calculators.subtitle,
-    items: mergeList(src.calculators?.items, d.calculators.items, (x, def) => (x?.name ?? def ?? "") || null),
+    eyebrow: L(src.calculators?.eyebrow) ?? d.calculators.eyebrow,
+    heading: heading(src.calculators?.heading, d.calculators.heading, locale),
+    subtitle: L(src.calculators?.subtitle) ?? d.calculators.subtitle,
+    items: mergeList(src.calculators?.items, d.calculators.items, (x, def) => (L(x?.name) ?? def ?? "") || null),
   };
 
   // SEO meta is consumed by generateMetadata() (a server context); the ogImage
   // upload relation is resolved there, so it is intentionally NOT shaped here.
   const seo: HomepageSeo = {
-    metaTitle: src.seo?.metaTitle || d.seo.metaTitle,
-    metaDescription: src.seo?.metaDescription || d.seo.metaDescription,
-    ogTitle: src.seo?.ogTitle || d.seo.ogTitle,
-    ogDescription: src.seo?.ogDescription || d.seo.ogDescription,
+    metaTitle: L(src.seo?.metaTitle) || d.seo.metaTitle,
+    metaDescription: L(src.seo?.metaDescription) || d.seo.metaDescription,
+    ogTitle: L(src.seo?.ogTitle) || d.seo.ogTitle,
+    ogDescription: L(src.seo?.ogDescription) || d.seo.ogDescription,
     ogImage: d.seo.ogImage,
   };
 

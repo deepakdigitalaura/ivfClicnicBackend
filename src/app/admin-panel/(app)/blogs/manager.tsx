@@ -9,6 +9,7 @@ const BLOG_HERO_IMAGE_POSITIONS = [
   "right top", "center top", "center bottom",
 ] as const;
 import { ImageUpload } from "../_components/image-upload";
+import { RichTextEditor } from "../_components/rich-text-editor";
 import { useSave, Toast } from "../_components/save-kit";
 
 type Tab = "published" | "drafts";
@@ -27,7 +28,9 @@ const HERO_POSITION_LABELS: Record<string, string> = {
   "center bottom": "Bottom",
 };
 
-export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
+type DoctorOption = { slug: string; name: string; role: string; credentials: string; avatarUrl: string };
+
+export function BlogsManager({ initial, doctors }: { initial: AdminBlogMeta[]; doctors: DoctorOption[] }) {
   const [items, setItems] = useState(initial);
   const [search, setSearch] = useState("");
   const [tab, setTab] = useState<Tab>("published");
@@ -101,9 +104,9 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
           </div>
 
           <p className="admin-hint" style={{ marginBottom: 14 }}>
-            This sets the title, summary &amp; metadata only. The article body, FAQs and SEO fields
-            are written in <a href="/studio" target="_blank" style={{ color: "var(--rose)" }}>Sanity Studio</a> —
-            new posts save as a draft so you can finish the body there before publishing.
+            Title, summary, author bio, reviewer, on-page SEO and article body are all set here. FAQs
+            still go through <a href="/studio" target="_blank" style={{ color: "var(--rose)" }}>Sanity Studio</a>.
+            New posts save as a draft until you publish them.
           </p>
 
           <div className="admin-row-grid">
@@ -147,13 +150,88 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
             </div>
             <div className="admin-field">
               <label className="admin-label">Author Name</label>
-              <input className="admin-input" value={editing.authorName ?? ""} onChange={(e) => set({ authorName: e.target.value })} />
+              <select
+                className="admin-input"
+                style={{ marginBottom: 6 }}
+                value=""
+                onChange={(e) => {
+                  const d = doctors.find((x) => x.slug === e.target.value);
+                  if (!d) return;
+                  set({ authorName: d.name, authorSlug: d.slug, authorRole: d.role, authorCredentials: d.credentials, authorAvatarUrl: d.avatarUrl });
+                }}
+              >
+                <option value="">Pick a doctor (links name to their profile) — or type below</option>
+                {doctors.map((d) => <option key={d.slug} value={d.slug}>{d.name}</option>)}
+              </select>
+              <input className="admin-input" value={editing.authorName ?? ""} onChange={(e) => set({ authorName: e.target.value, authorSlug: null })} />
+            </div>
+          </div>
+
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Author Role</label>
+              <input className="admin-input" placeholder="e.g. Fertility Specialist" value={editing.authorRole ?? ""} onChange={(e) => set({ authorRole: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Author Credentials</label>
+              <input className="admin-input" placeholder="e.g. MD, FRCOG" value={editing.authorCredentials ?? ""} onChange={(e) => set({ authorCredentials: e.target.value })} />
+            </div>
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Author Photo</label>
+            <ImageUpload value={editing.authorAvatarUrl ?? ""} onChange={(url) => set({ authorAvatarUrl: url })} label="author photo" />
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Author Bio</label>
+            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 70 }} value={editing.authorBioText ?? ""} onChange={(e) => set({ authorBioText: e.target.value })} />
+          </div>
+
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Medically Reviewed By</label>
+              <select
+                className="admin-input"
+                style={{ marginBottom: 6 }}
+                value=""
+                onChange={(e) => {
+                  const d = doctors.find((x) => x.slug === e.target.value);
+                  if (!d) return;
+                  set({ reviewerName: d.name, reviewerSlug: d.slug, reviewerRole: d.role, reviewerCredentials: d.credentials, reviewerAvatarUrl: d.avatarUrl });
+                }}
+              >
+                <option value="">Pick a doctor (links name to their profile) — or type below</option>
+                {doctors.map((d) => <option key={d.slug} value={d.slug}>{d.name}</option>)}
+              </select>
+              <input className="admin-input" placeholder="Reviewing doctor's name" value={editing.reviewerName ?? ""} onChange={(e) => set({ reviewerName: e.target.value, reviewerSlug: null })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Reviewer Role</label>
+              <input className="admin-input" placeholder="e.g. IVF Consultant" value={editing.reviewerRole ?? ""} onChange={(e) => set({ reviewerRole: e.target.value })} />
+            </div>
+          </div>
+
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Reviewer Credentials</label>
+              <input className="admin-input" placeholder="e.g. MD, DGO" value={editing.reviewerCredentials ?? ""} onChange={(e) => set({ reviewerCredentials: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Reviewer Photo</label>
+              <ImageUpload value={editing.reviewerAvatarUrl ?? ""} onChange={(url) => set({ reviewerAvatarUrl: url })} label="reviewer photo" />
             </div>
           </div>
 
           <div className="admin-field">
             <label className="admin-label">Hero Image</label>
             <ImageUpload value={editing.heroImageUrl ?? ""} onChange={(url) => set({ heroImageUrl: url })} label="hero image" />
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Hero Image Alt Text</label>
+            <p className="admin-hint">Describes the image for screen readers and Google. Required for accessibility/SEO.</p>
+            <input className="admin-input" value={editing.heroImageAlt ?? ""} onChange={(e) => set({ heroImageAlt: e.target.value })} />
           </div>
 
           <div className="admin-field">
@@ -168,6 +246,40 @@ export function BlogsManager({ initial }: { initial: AdminBlogMeta[] }) {
                 <option key={pos} value={pos}>{HERO_POSITION_LABELS[pos]}</option>
               ))}
             </select>
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">SEO Meta Title</label>
+            <p className="admin-hint">Shown in Google search results. Defaults to the post title if left blank.</p>
+            <input className="admin-input" value={editing.seoMetaTitle ?? ""} onChange={(e) => set({ seoMetaTitle: e.target.value })} />
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">SEO Meta Description</label>
+            <p className="admin-hint">Shown in Google search results. Defaults to the excerpt if left blank.</p>
+            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.seoMetaDescription ?? ""} onChange={(e) => set({ seoMetaDescription: e.target.value })} />
+          </div>
+
+          <div className="admin-row-grid">
+            <div className="admin-field">
+              <label className="admin-label">Social Share Title</label>
+              <p className="admin-hint">Used when shared on Facebook/WhatsApp. Defaults to SEO title.</p>
+              <input className="admin-input" value={editing.seoOgTitle ?? ""} onChange={(e) => set({ seoOgTitle: e.target.value })} />
+            </div>
+            <div className="admin-field">
+              <label className="admin-label">Social Share Image</label>
+              <ImageUpload value={editing.seoOgImageUrl ?? ""} onChange={(url) => set({ seoOgImageUrl: url })} label="social share image" />
+            </div>
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Social Share Description</label>
+            <textarea className="admin-textarea" style={{ fontFamily: "inherit", minHeight: 60 }} value={editing.seoOgDescription ?? ""} onChange={(e) => set({ seoOgDescription: e.target.value })} />
+          </div>
+
+          <div className="admin-field">
+            <label className="admin-label">Article Body</label>
+            <RichTextEditor value={editing.contentRaw} onChange={(json) => set({ contentRaw: json })} />
           </div>
 
           <div className="admin-actions-bar">

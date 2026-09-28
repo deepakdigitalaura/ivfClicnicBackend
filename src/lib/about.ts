@@ -29,6 +29,7 @@
  * client <AboutPage> (its in-browser default content).
  * ===================================================================== */
 import type { IconName } from "@/lib/icon-map";
+import { pickLocale, type Locale, type LocalizedField } from "@/lib/i18n";
 
 /* ---------- Resolved (serialisable) model ---------- */
 
@@ -194,53 +195,53 @@ export const ABOUT_DEFAULTS: AboutData = {
  * CMS source shape (kept loose so it stays decoupled from the generated
  * payload-types, same convention as HomepageSource / ServiceSource).
  * ===================================================================== */
-type HeadingSource = { lead?: string | null; em?: string | null } | null | undefined;
-type StatSource = { value?: string | null; label?: string | null };
+type HeadingSource = { lead?: LocalizedField; em?: LocalizedField } | null | undefined;
+type StatSource = { value?: string | null; label?: LocalizedField };
 
 export type AboutSource =
   | {
       hero?: {
-        eyebrow?: string | null;
-        headline?: string | null;
-        headlineItalic?: string | null;
-        paragraph?: string | null;
+        eyebrow?: LocalizedField;
+        headline?: LocalizedField;
+        headlineItalic?: LocalizedField;
+        paragraph?: LocalizedField;
         image?: string | null;
       } | null;
       story?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        paragraphs?: { value?: string | null }[] | null;
+        paragraphs?: { value?: LocalizedField }[] | null;
       } | null;
       atAGlance?: StatSource[] | null;
-      legacy?: { eyebrow?: string | null; heading?: HeadingSource } | null;
-      milestones?: { y?: string | null; t?: string | null; d?: string | null }[] | null;
-      trust?: { eyebrow?: string | null; heading?: HeadingSource } | null;
-      trustPillars?: { icon?: string | null; t?: string | null; d?: string | null }[] | null;
+      legacy?: { eyebrow?: LocalizedField; heading?: HeadingSource } | null;
+      milestones?: { y?: string | null; t?: LocalizedField; d?: LocalizedField }[] | null;
+      trust?: { eyebrow?: LocalizedField; heading?: HeadingSource } | null;
+      trustPillars?: { icon?: string | null; t?: LocalizedField; d?: LocalizedField }[] | null;
       patientFirst?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        paragraphs?: { value?: string | null }[] | null;
+        paragraphs?: { value?: LocalizedField }[] | null;
       } | null;
       patientStats?: StatSource[] | null;
       meetSpecialists?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
+        subtitle?: LocalizedField;
       } | null;
       network?: {
-        eyebrow?: string | null;
+        eyebrow?: LocalizedField;
         heading?: HeadingSource;
-        subtitle?: string | null;
-        cities?: { c?: string | null; n?: string | null }[] | null;
+        subtitle?: LocalizedField;
+        cities?: { c?: string | null; n?: LocalizedField }[] | null;
       } | null;
       finalCta?: {
         heading?: HeadingSource;
       } | null;
       seo?: {
-        metaTitle?: string | null;
-        metaDescription?: string | null;
-        ogTitle?: string | null;
-        ogDescription?: string | null;
+        metaTitle?: LocalizedField;
+        metaDescription?: LocalizedField;
+        ogTitle?: LocalizedField;
+        ogDescription?: LocalizedField;
         ogImage?: unknown;
       } | null;
     }
@@ -248,10 +249,10 @@ export type AboutSource =
   | undefined;
 
 /* ---------- Small helpers (mirror src/lib/homepage.ts) ---------- */
-const heading = (h: HeadingSource, def: AboutHeading): AboutHeading =>
-  h?.lead ? { lead: h.lead, em: h.em ?? "" } : def;
-const stats = (a: StatSource[] | null | undefined): StatTuple[] =>
-  (a ?? []).map((s) => ({ n: s.value ?? "", l: s.label ?? "" }));
+const heading = (h: HeadingSource, def: AboutHeading, locale: Locale): AboutHeading =>
+  pickLocale(h?.lead, locale) ? { lead: pickLocale(h?.lead, locale)!, em: pickLocale(h?.em, locale) ?? "" } : def;
+const stats = (a: StatSource[] | null | undefined, locale: Locale): StatTuple[] =>
+  (a ?? []).map((s) => ({ n: s.value ?? "", l: pickLocale(s.label, locale) ?? "" }));
 
 /**
  * Map the `about-page` global → AboutData, falling back PER-SECTION to
@@ -261,80 +262,81 @@ const stats = (a: StatSource[] | null | undefined): StatTuple[] =>
  * consumed by generateMetadata() (a server context) where the ogImage upload
  * relation is resolved, so ogImage here always carries the default string.
  */
-export function resolveAbout(src: AboutSource): AboutData {
+export function resolveAbout(src: AboutSource, locale: Locale = "en"): AboutData {
   const d = ABOUT_DEFAULTS;
   if (!src) return d;
+  const L = (f: LocalizedField) => pickLocale(f, locale);
 
   const hero: AboutHero = src.hero?.headline
     ? {
-        eyebrow: src.hero.eyebrow ?? d.hero.eyebrow,
-        headline: src.hero.headline,
-        headlineItalic: src.hero.headlineItalic ?? d.hero.headlineItalic,
-        paragraph: src.hero.paragraph ?? d.hero.paragraph,
+        eyebrow: L(src.hero.eyebrow) ?? d.hero.eyebrow,
+        headline: L(src.hero.headline) ?? d.hero.headline,
+        headlineItalic: L(src.hero.headlineItalic) ?? d.hero.headlineItalic,
+        paragraph: L(src.hero.paragraph) ?? d.hero.paragraph,
         image: src.hero.image || d.hero.image,
       }
     : { ...d.hero, image: src.hero?.image || d.hero.image };
 
   const story: AboutTextSection = src.story?.heading?.lead
     ? {
-        eyebrow: src.story.eyebrow ?? d.story.eyebrow,
-        heading: heading(src.story.heading, d.story.heading),
-        paragraphs: src.story.paragraphs?.length ? src.story.paragraphs.map((p) => p.value ?? "") : d.story.paragraphs,
+        eyebrow: L(src.story.eyebrow) ?? d.story.eyebrow,
+        heading: heading(src.story.heading, d.story.heading, locale),
+        paragraphs: src.story.paragraphs?.length ? src.story.paragraphs.map((p) => L(p.value) ?? "") : d.story.paragraphs,
       }
     : d.story;
 
-  const atAGlance = src.atAGlance?.length ? stats(src.atAGlance) : d.atAGlance;
+  const atAGlance = src.atAGlance?.length ? stats(src.atAGlance, locale) : d.atAGlance;
   const legacy: AboutSectionHeading = src.legacy?.heading?.lead
-    ? { eyebrow: src.legacy.eyebrow ?? d.legacy.eyebrow, heading: heading(src.legacy.heading, d.legacy.heading) }
+    ? { eyebrow: L(src.legacy.eyebrow) ?? d.legacy.eyebrow, heading: heading(src.legacy.heading, d.legacy.heading, locale) }
     : d.legacy;
   const milestones = src.milestones?.length
-    ? src.milestones.map((m) => ({ y: m.y ?? "", t: m.t ?? "", d: m.d ?? "" }))
+    ? src.milestones.map((m) => ({ y: m.y ?? "", t: L(m.t) ?? "", d: L(m.d) ?? "" }))
     : d.milestones;
   const trust: AboutSectionHeading = src.trust?.heading?.lead
-    ? { eyebrow: src.trust.eyebrow ?? d.trust.eyebrow, heading: heading(src.trust.heading, d.trust.heading) }
+    ? { eyebrow: L(src.trust.eyebrow) ?? d.trust.eyebrow, heading: heading(src.trust.heading, d.trust.heading, locale) }
     : d.trust;
   const trustPillars = src.trustPillars?.length
-    ? src.trustPillars.map((p) => ({ icon: (p.icon ?? "Sparkles") as IconName, t: p.t ?? "", d: p.d ?? "" }))
+    ? src.trustPillars.map((p) => ({ icon: (p.icon ?? "Sparkles") as IconName, t: L(p.t) ?? "", d: L(p.d) ?? "" }))
     : d.trustPillars;
   const patientFirst: AboutTextSection = src.patientFirst?.heading?.lead
     ? {
-        eyebrow: src.patientFirst.eyebrow ?? d.patientFirst.eyebrow,
-        heading: heading(src.patientFirst.heading, d.patientFirst.heading),
-        paragraphs: src.patientFirst.paragraphs?.length ? src.patientFirst.paragraphs.map((p) => p.value ?? "") : d.patientFirst.paragraphs,
+        eyebrow: L(src.patientFirst.eyebrow) ?? d.patientFirst.eyebrow,
+        heading: heading(src.patientFirst.heading, d.patientFirst.heading, locale),
+        paragraphs: src.patientFirst.paragraphs?.length ? src.patientFirst.paragraphs.map((p) => L(p.value) ?? "") : d.patientFirst.paragraphs,
       }
     : d.patientFirst;
-  const patientStats = src.patientStats?.length ? stats(src.patientStats) : d.patientStats;
+  const patientStats = src.patientStats?.length ? stats(src.patientStats, locale) : d.patientStats;
 
   const meetSpecialists: AboutSectionHeading & { subtitle: string } = src.meetSpecialists?.heading?.lead
     ? {
-        eyebrow: src.meetSpecialists.eyebrow ?? d.meetSpecialists.eyebrow,
-        heading: heading(src.meetSpecialists.heading, d.meetSpecialists.heading),
-        subtitle: src.meetSpecialists.subtitle ?? d.meetSpecialists.subtitle,
+        eyebrow: L(src.meetSpecialists.eyebrow) ?? d.meetSpecialists.eyebrow,
+        heading: heading(src.meetSpecialists.heading, d.meetSpecialists.heading, locale),
+        subtitle: L(src.meetSpecialists.subtitle) ?? d.meetSpecialists.subtitle,
       }
     : d.meetSpecialists;
 
   const network = src.network?.cities?.length
     ? {
-        eyebrow: src.network.eyebrow ?? d.network.eyebrow,
-        heading: heading(src.network.heading, d.network.heading),
-        subtitle: src.network.subtitle ?? d.network.subtitle,
-        cities: src.network.cities.map((c) => ({ c: c.c ?? "", n: c.n ?? "" })),
+        eyebrow: L(src.network.eyebrow) ?? d.network.eyebrow,
+        heading: heading(src.network.heading, d.network.heading, locale),
+        subtitle: L(src.network.subtitle) ?? d.network.subtitle,
+        cities: src.network.cities.map((c) => ({ c: c.c ?? "", n: L(c.n) ?? "" })),
       }
-    : { ...d.network, eyebrow: src.network?.eyebrow ?? d.network.eyebrow };
+    : { ...d.network, eyebrow: L(src.network?.eyebrow) ?? d.network.eyebrow };
 
   const finalCta = src.finalCta?.heading?.lead
     ? {
-        heading: heading(src.finalCta.heading, d.finalCta.heading),
+        heading: heading(src.finalCta.heading, d.finalCta.heading, locale),
         // Button labels are code-owned — always from defaults, not admin-editable.
         ctas: d.finalCta.ctas,
       }
     : d.finalCta;
 
   const seo: AboutSeo = {
-    metaTitle: src.seo?.metaTitle || d.seo.metaTitle,
-    metaDescription: src.seo?.metaDescription || d.seo.metaDescription,
-    ogTitle: src.seo?.ogTitle || d.seo.ogTitle,
-    ogDescription: src.seo?.ogDescription || d.seo.ogDescription,
+    metaTitle: L(src.seo?.metaTitle) || d.seo.metaTitle,
+    metaDescription: L(src.seo?.metaDescription) || d.seo.metaDescription,
+    ogTitle: L(src.seo?.ogTitle) || d.seo.ogTitle,
+    ogDescription: L(src.seo?.ogDescription) || d.seo.ogDescription,
     ogImage: d.seo.ogImage,
   };
 

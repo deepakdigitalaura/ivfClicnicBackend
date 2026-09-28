@@ -1,5 +1,6 @@
 "use client";
 import { useState, useEffect } from "react";
+import { T, useT } from "@/components/ui-strings-provider";
 import { motion, useScroll, useSpring } from "framer-motion";
 import { Phone, MessageCircle, Calendar, ArrowUp } from "lucide-react";
 
@@ -49,6 +50,7 @@ const ctaActions = [
 ];
 
 export function FloatingCTA() {
+  const t = useT();
   return (
     <div className="fixed right-0 top-1/2 z-40 hidden -translate-y-1/2 flex-col items-end gap-3 pr-3 md:flex">
       {ctaActions.map(({ href, label, Icon, bg, external }) => (
@@ -56,12 +58,12 @@ export function FloatingCTA() {
           key={label}
           href={href}
           {...(external ? { target: "_blank", rel: "noopener noreferrer" } : {})}
-          aria-label={label}
+          aria-label={t(label)}
           className={`group flex items-center overflow-hidden rounded-full ${bg} text-white shadow-lift outline-none ring-1 ring-white/15 transition-[filter] duration-300 hover:brightness-110 focus-visible:ring-2 focus-visible:ring-white/80`}
         >
           {/* Label — collapsed to zero width until hover/focus (tooltip-style reveal) */}
           <span className="max-w-0 overflow-hidden whitespace-nowrap text-sm font-semibold opacity-0 transition-[max-width,opacity,padding] duration-300 ease-out group-hover:max-w-[12rem] group-hover:pl-5 group-hover:opacity-100 group-focus-visible:max-w-[12rem] group-focus-visible:pl-5 group-focus-visible:opacity-100">
-            {label}
+            {t(label)}
           </span>
           {/* Icon — pinned to the right edge as the constant, recognisable anchor */}
           <span className="grid h-12 w-12 shrink-0 place-items-center">
@@ -79,13 +81,13 @@ export function MobileBottomBar() {
     <div className="fixed inset-x-0 bottom-0 z-40 border-t border-border/70 bg-white/95 backdrop-blur-xl shadow-[0_-4px_20px_-8px_rgba(46,24,75,0.15)] md:hidden">
       <div className="grid grid-cols-3 divide-x divide-border/60">
         <a href="tel:+919712622288" className="flex flex-col items-center gap-1 py-3 text-[11px] font-semibold text-[color:var(--plum)] active:bg-[color:var(--ivory)]">
-          <Phone className="h-5 w-5 text-[color:var(--rose)]" /> Call
+          <Phone className="h-5 w-5 text-[color:var(--rose)]" /> <T k="Call" />
         </a>
         <a href="https://wa.me/919712522289" className="flex flex-col items-center gap-1 py-3 text-[11px] font-semibold text-[color:var(--plum)] active:bg-[color:var(--ivory)]">
-          <MessageCircle className="h-5 w-5 text-[#25D366]" /> WhatsApp
+          <MessageCircle className="h-5 w-5 text-[#25D366]" /> <T k="WhatsApp" />
         </a>
         <a href="/contact#book" className="flex flex-col items-center gap-1 bg-[color:var(--rose)] py-3 text-[11px] font-semibold text-white active:brightness-110">
-          <Calendar className="h-5 w-5" /> Book Now
+          <Calendar className="h-5 w-5" /> <T k="Book Now" />
         </a>
       </div>
       <div className="h-[env(safe-area-inset-bottom)]" />

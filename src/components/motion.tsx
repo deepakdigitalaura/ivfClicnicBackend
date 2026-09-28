@@ -129,7 +129,7 @@ export function WordReveal({
       {words.map((w, i) => {
         const isAccent = italicWord && w.toLowerCase().includes(italicWord.toLowerCase());
         return (
-          <span key={i} className="inline-block overflow-hidden align-bottom pr-[0.25em] pb-[0.2em] -mb-[0.2em]">
+          <span key={i} className="word-mask inline-block overflow-hidden align-bottom pr-[0.25em] pb-[0.2em] -mb-[0.2em]">
             <motion.span
               variants={{
                 hidden: { y: "125%", opacity: 0 },

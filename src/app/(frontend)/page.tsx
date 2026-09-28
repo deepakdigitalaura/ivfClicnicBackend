@@ -6,6 +6,7 @@ import { faqSchema } from "@/lib/seo";
 import { getHomepage, getGlobalSafe, getTestimonials } from "@/lib/payload";
 import { HOMEPAGE_DEFAULTS } from "@/lib/homepage";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { localeAlternates } from "@/lib/seo";
 
 const HERO_IMG = "/assets/hero-mother-baby1.png";
 
@@ -24,7 +25,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride("/", {
     title: home?.seo?.metaTitle || d.metaTitle,
     description: home?.seo?.metaDescription || d.metaDescription,
-    alternates: { canonical: "/" },
+    alternates: localeAlternates("/"),
     openGraph: {
       title: home?.seo?.ogTitle || d.ogTitle,
       description: home?.seo?.ogDescription || d.ogDescription,

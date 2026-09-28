@@ -16,6 +16,8 @@
  * client <SiteHeader>.
  * ===================================================================== */
 import { destinationHref } from "@/lib/internal-links";
+import { pickLocale, localizeNavHref, type Locale, type LocalizedField } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 /**
  * Lightweight treatment descriptor used to build the header mega menu and footer
@@ -208,7 +210,7 @@ export const HEADER_DEFAULTS: HeaderData = {
           { label: "Simple Treatment", href: "/simple-treatment" },
           { label: "Safe Treatment", href: "/safe-treatment" },
           { label: "Smart Treatment", href: "/smart-treatment" },
-          { label: "Success Treatment", href: "/success-benchmarks" },
+          { label: "Successful Treatment", href: "/success-benchmarks" },
         ]},
         { heading: "", items: [
           { label: "History", href: "/history" },
@@ -243,6 +245,8 @@ export const HEADER_DEFAULTS: HeaderData = {
         { heading: "Donor Services", headingHref: "/treatments/advanced-fertility-techniques", items: [
           { label: "Egg Donation", href: "/egg-donation" },
           { label: "Sperm Donation", href: "/sperm-donation" },
+          { label: "Embryo Donation", href: "/embryo-donation" },
+          { label: "Surrogacy", href: "/surrogacy" },
         ]},
         { heading: "Male Infertility", headingHref: "/treatments/male-infertility", items: [
           { label: "Low Sperm Count (Oligospermia)", href: "/oligospermia" },
@@ -312,16 +316,16 @@ export const HEADER_DEFAULTS: HeaderData = {
       href: "/calculators",
       mega: [
         { heading: "Fertility & IVF", items: [
-          { label: "IVF Success Rate Calculator", href: "/ivf-success-rate-calculator", desc: "Estimate your personalised IVF success probability" },
-          { label: "IVF Cost Calculator", href: "/ivf-cost-calculator", desc: "Plan your treatment budget across cycle types" },
-          { label: "AMH Level Interpreter", href: "/amh-level-interpreter", desc: "Understand your ovarian reserve result" },
-          { label: "Sperm Analysis Calculator", href: "/semen-analysis-calculator", desc: "Interpret your semen analysis against WHO 2021" },
+          { label: "IVF Success Rate Calculator", href: "/calculators/ivf-success-rate", desc: "Estimate your personalised IVF success probability" },
+          { label: "IVF Cost Calculator", href: "/calculators/ivf-cost", desc: "Plan your treatment budget across cycle types" },
+          { label: "AMH Level Interpreter", href: "/calculators/amh-level", desc: "Understand your ovarian reserve result" },
+          { label: "Sperm Analysis Calculator", href: "/calculators/semen-analysis", desc: "Interpret your semen analysis against WHO 2021" },
         ]},
         { heading: "Conception & Pregnancy", items: [
-          { label: "Ovulation Calculator", href: "/ovulation-calculator", desc: "Find your fertile window and ovulation date" },
-          { label: "Fertile Period Calculator", href: "/fertile-period-calculator", desc: "Track your fertile days and next period" },
-          { label: "Natural Pregnancy Calculator", href: "/natural-pregnancy-calculator", desc: "Estimate your natural conception probability" },
-          { label: "Miscarriage Risk Calculator", href: "/risk-of-repeat-miscarriage-calculator", desc: "Assess your RPL risk profile" },
+          { label: "Ovulation Calculator", href: "/calculators/ovulation", desc: "Find your fertile window and ovulation date" },
+          { label: "Fertile Period Calculator", href: "/calculators/fertile-period", desc: "Track your fertile days and next period" },
+          { label: "Natural Pregnancy Calculator", href: "/calculators/natural-pregnancy", desc: "Estimate your natural conception probability" },
+          { label: "Miscarriage Risk Calculator", href: "/calculators/miscarriage-risk", desc: "Assess your RPL risk profile" },
         ]},
       ],
     },
@@ -350,20 +354,20 @@ export const HEADER_DEFAULTS: HeaderData = {
 /* The subset of the `header` global this resolver reads (kept loose so it stays
  * decoupled from the generated payload-types). */
 type MegaItemSource = {
-  label?: string | null;
+  label?: LocalizedField;
   url?: string | null;
-  desc?: string | null;
+  desc?: LocalizedField;
   hidden?: boolean | null;
-  children?: { label?: string | null; url?: string | null }[] | null;
+  children?: { label?: LocalizedField; url?: string | null }[] | null;
 };
 type MegaColSource = {
-  heading?: string | null;
+  heading?: LocalizedField;
   headingHref?: string | null;
   hidden?: boolean | null;
   items?: MegaItemSource[] | null;
 };
 type NavItemSource = {
-  label?: string | null;
+  label?: LocalizedField;
   url?: string | null;
   openInNewTab?: boolean | null;
   doctors?: boolean | null;
@@ -373,9 +377,9 @@ type NavItemSource = {
 };
 export type HeaderSource =
   | {
-      branding?: { logoUrl?: string | null; logoAlt?: string | null } | null;
+      branding?: { logoUrl?: string | null; logoAlt?: LocalizedField } | null;
       navItems?: NavItemSource[] | null;
-      cta?: { label?: string | null; url?: string | null; styleVariant?: string | null } | null;
+      cta?: { label?: LocalizedField; url?: string | null; styleVariant?: string | null } | null;
     }
   | null
   | undefined;
@@ -384,35 +388,35 @@ const toTitleCase = (s: string) => s.replace(/\b\w/g, (c) => c.toUpperCase());
 
 /** Map a stored mega item → rendered item, dropping empty optional fields so
  *  the resolved object matches the hand-written defaults shape. */
-function resolveMegaItem(it: MegaItemSource): HeaderMegaItem {
+function resolveMegaItem(it: MegaItemSource, locale: Locale): HeaderMegaItem {
   const children = (it.children ?? [])
     .filter((c) => c.label)
-    .map((c) => ({ label: c.label as string, href: c.url ?? "" }));
+    .map((c) => ({ label: pickLocale(c.label, locale) ?? "", href: localizeNavHref(c.url ?? "", locale) }));
   return {
-    label: it.label ?? "",
-    href: it.url ?? "",
-    ...(it.desc ? { desc: it.desc } : {}),
+    label: pickLocale(it.label, locale) ?? "",
+    href: localizeNavHref(it.url ?? "", locale),
+    ...(it.desc ? { desc: pickLocale(it.desc, locale) } : {}),
     ...(children.length ? { children } : {}),
   };
 }
 
 /** Map a stored nav item → rendered nav item. */
-function resolveNavItem(n: NavItemSource): HeaderNavItem {
+function resolveNavItem(n: NavItemSource, locale: Locale): HeaderNavItem {
   if (n.doctors) {
     // Doctors panel is data-driven (src/lib/doctors.ts); only the flag travels.
-    return { label: n.label ?? "Doctors", doctors: true };
+    return { label: pickLocale(n.label, locale) ?? "Doctors", doctors: true };
   }
   // Hidden columns / links are dropped (editor toggled them off, not deleted).
   const mega = (n.columns ?? [])
     .filter((col) => !col.hidden)
     .map((col) => ({
-      heading: col.heading ?? "",
+      heading: pickLocale(col.heading, locale) ?? "",
       ...(col.headingHref ? { headingHref: col.headingHref } : {}),
-      items: (col.items ?? []).filter((it) => !it.hidden).map(resolveMegaItem),
+      items: (col.items ?? []).filter((it) => !it.hidden).map((it) => resolveMegaItem(it, locale)),
     }));
   return {
-    label: n.label ?? "",
-    ...(n.url ? { href: n.url } : {}),
+    label: pickLocale(n.label, locale) ?? "",
+    ...(n.url ? { href: localizeNavHref(n.url, locale) } : {}),
     ...(n.openInNewTab ? { openInNewTab: true } : {}),
     ...(typeof n.megaCols === "number" ? { megaCols: n.megaCols } : {}),
     ...(mega.length ? { mega } : {}),
@@ -583,32 +587,44 @@ export function resolveHeader(
   navDoctors: NavDoctorItem[] = [],
   navLocations: NavLocationItem[] = [],
   navLabels: NavLabelOverride[] = [],
+  locale: Locale = "en",
 ): HeaderData {
   const branding: HeaderBranding = {
     logoUrl: g?.branding?.logoUrl || HEADER_DEFAULTS.branding.logoUrl,
-    logoAlt: g?.branding?.logoAlt || HEADER_DEFAULTS.branding.logoAlt,
+    logoAlt: pickLocale(g?.branding?.logoAlt, locale) || HEADER_DEFAULTS.branding.logoAlt,
   };
 
   // Top-level items toggled "Hide from menu" are dropped before mapping.
-  const nav = g?.navItems?.length
-    ? g.navItems.filter((n) => !n.hidden).map(resolveNavItem)
-    : HEADER_DEFAULTS.nav;
+  // navSource is kept alongside `nav` (same order/length) so the mega-overlay
+  // matching below can key off the item's ENGLISH label — never the localized
+  // display label, which would silently break the string match for hi/gu.
+  const navSource = g?.navItems?.length ? g.navItems.filter((n) => !n.hidden) : null;
+  const nav = navSource
+    ? navSource.map((n) => resolveNavItem(n, locale))
+    : HEADER_DEFAULTS.nav.map((n) => ({ ...n, ...(n.href ? { href: localizeNavHref(n.href, locale) } : {}) }));
+  const navKey = (i: number) => (navSource ? pickLocale(navSource[i].label, "en") ?? "" : nav[i].label);
 
   const cta: HeaderCta = {
-    label: g?.cta?.label || HEADER_DEFAULTS.cta.label,
-    href: g?.cta?.url || HEADER_DEFAULTS.cta.href,
+    label: pickLocale(g?.cta?.label, locale) || HEADER_DEFAULTS.cta.label,
+    href: localizeNavHref(g?.cta?.url || HEADER_DEFAULTS.cta.href, locale),
     styleVariant: g?.cta?.styleVariant || HEADER_DEFAULTS.cta.styleVariant,
   };
 
   // Treatments mega — replace "IVF Treatments" columns with DB-driven ones,
   // then apply any CMS label/order overrides from Site Settings.
-  const treatmentMega = applyNavLabelOverrides(
+  const treatmentMegaEn = applyNavLabelOverrides(
     buildTreatmentMega(navTreatments),
     (col) => col.heading,
     (col, heading) => ({ ...col, heading }),
     HEADER_CATEGORY_LABELS,
     navLabels,
     "headerLabel",
+  );
+  // Default (non-CMS-overridden) category headings translate via UI_STRINGS;
+  // a CMS-supplied headerLabel override is admin content and stays as typed.
+  const defaultCategoryLabels = new Set(Object.values(HEADER_CATEGORY_LABELS));
+  const treatmentMega = treatmentMegaEn.map((col) =>
+    defaultCategoryLabels.has(col.heading) ? { ...col, heading: ui(col.heading, locale) } : col,
   );
   // Maternity mega — replace "Maternity Services" columns with DB-driven ones.
   const maternityMega = buildMaternityMega(navTreatments);
@@ -617,17 +633,21 @@ export function resolveHeader(
   // Locations mega — replace hardcoded city/centre list with DB-driven one.
   const locationsMega = buildLocationsMega(navLocations);
 
-  const finalNav = nav.map((item) => {
-    if (item.label === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
-    if (item.label === "Maternity Services" && maternityMega) return { ...item, href: item.href || "/services/maternity-services", mega: maternityMega };
-    if (item.label === "Locations" && locationsMega) return { ...item, mega: locationsMega };
+  const finalNav = nav.map((item, i) => {
+    const key = navKey(i);
+    if (key === "IVF Treatments" && treatmentMega) return { ...item, mega: treatmentMega };
+    if (key === "Maternity Services" && maternityMega) return { ...item, href: item.href || "/services/maternity-services", mega: maternityMega };
+    if (key === "Locations" && locationsMega) return { ...item, mega: locationsMega };
     if (item.doctors && doctorMenu) return { ...item, doctorMenu };
-    if (item.label === "Resources" && item.mega) {
+    // Legacy typo-fix ("Blog" → "Blogs" seed data) — href-matched (stable
+    // across locales) and English-only: a translated hi/gu label from the
+    // CMS is never rewritten.
+    if (key === "Resources" && item.mega && locale === "en") {
       return {
         ...item,
         mega: item.mega.map((col) => ({
           ...col,
-          items: col.items.map((it) => it.label === "Blog" ? { ...it, label: "Blogs" } : it),
+          items: col.items.map((it) => it.href === destinationHref("blog") && it.label === "Blog" ? { ...it, label: "Blogs" } : it),
         })),
       };
     }

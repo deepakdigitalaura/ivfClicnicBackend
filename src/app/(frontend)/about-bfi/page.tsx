@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import { AboutPage } from "@/components/about-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { getAbout, getGlobalSafe } from "@/lib/payload";
 import { ABOUT_DEFAULTS } from "@/lib/about";
 import { withPageSeoOverride } from "@/lib/page-seo";
@@ -23,7 +23,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(PATH, {
     title: about?.seo?.metaTitle || d.metaTitle,
     description: about?.seo?.metaDescription || d.metaDescription,
-    alternates: { canonical: PATH },
+    alternates: localeAlternates(PATH),
     openGraph: {
       title: about?.seo?.ogTitle || d.ogTitle,
       description: about?.seo?.ogDescription || d.ogDescription,

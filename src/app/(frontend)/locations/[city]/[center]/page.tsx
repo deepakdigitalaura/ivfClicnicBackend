@@ -38,13 +38,13 @@ export async function generateMetadata(
   if (!c || !c.built || !await cityIsMultiCentre(city)) return {};
   const cityName = cityBySlug(city)?.name ?? c.citySlug;
   const place = cityName && cityName !== c.area ? `${c.area}, ${cityName}` : c.area;
-  const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-  const description = `${c.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${c.address}. Book a consultation.`;
+  const title = c.metaTitle || `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
+  const description = c.metaDescription || `${c.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${c.address}. Book a consultation.`;
   return withPageSeoOverride(`/locations/${c.citySlug}/${c.slug}`, {
     title,
     description,
     alternates: { canonical: `/locations/${c.citySlug}/${c.slug}` },
-    openGraph: { title, description, url: abs(`/locations/${c.citySlug}/${c.slug}`), type: "website", images: [c.image] },
+    openGraph: { title: c.ogTitle || title, description: c.ogDescription || description, url: abs(`/locations/${c.citySlug}/${c.slug}`), type: "website", images: [c.image] },
   });
 }
 

@@ -61,24 +61,24 @@ export async function generateMetadata(
     const centre = await getCentre(city, soleCentreSlug);
     if (!centre) return {};
     const place = c.name && c.name !== centre.area ? `${centre.area}, ${c.name}` : centre.area;
-    const title = `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-    const description = `${centre.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${centre.address}. Book a consultation.`;
+    const title = c.metaTitle || `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
+    const description = c.metaDescription || `${centre.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${centre.address}. Book a consultation.`;
     return withPageSeoOverride(`/locations/${c.slug}`, {
       title,
       description,
       alternates: { canonical: `/locations/${c.slug}` },
-      openGraph: { title, description, url: abs(`/locations/${c.slug}`), type: "website", images: [centre.image] },
+      openGraph: { title: c.ogTitle || title, description: c.ogDescription || description, url: abs(`/locations/${c.slug}`), type: "website", images: [centre.image] },
     });
   }
 
   const count = centresForCity(c.slug).length || (await getPublishedCentresForCity(c.slug)).length;
-  const title = `Best IVF Centre in ${c.name} — Bavishi Fertility Institute`;
-  const description = `Looking for the best IVF centre in ${c.name}? Bavishi Fertility Institute offers IVF, ICSI & IUI across ${count} ${count === 1 ? "centre" : "centres"} with Class 1000 labs and senior doctors since 1998.`;
+  const title = c.metaTitle || `Best IVF Centre in ${c.name} — Bavishi Fertility Institute`;
+  const description = c.metaDescription || `Looking for the best IVF centre in ${c.name}? Bavishi Fertility Institute offers IVF, ICSI & IUI across ${count} ${count === 1 ? "centre" : "centres"} with Class 1000 labs and senior doctors since 1998.`;
   return withPageSeoOverride(`/locations/${c.slug}`, {
     title,
     description,
     alternates: { canonical: `/locations/${c.slug}` },
-    openGraph: { title, description, url: abs(`/locations/${c.slug}`), type: "website", images: [c.heroImage] },
+    openGraph: { title: c.ogTitle || title, description: c.ogDescription || description, url: abs(`/locations/${c.slug}`), type: "website", images: [c.heroImage] },
   });
 }
 

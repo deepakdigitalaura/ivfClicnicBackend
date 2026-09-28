@@ -2,21 +2,24 @@ import type { Metadata } from "next";
 import { SimpleTreatmentPage } from "@/components/simple-treatment-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getSimpleTreatmentPage } from "@/lib/payload";
 
 const PATH = "/simple-treatment";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getSimpleTreatmentPage();
+  const title = data.metaTitle || "Simple IVF Treatment — Easy to Understand, Plan & Undergo | Bavishi Fertility Institute";
+  const description = data.metaDescription ||
+    "At Bavishi Fertility Institute, we make complex IVF treatment simple — simple to understand, simple to plan, and simple to undergo. Minimum injections, fewer visits, maximum comfort.";
   return withPageSeoOverride(PATH, {
-    title:
-      "Simple IVF Treatment — Easy to Understand, Plan & Undergo | Bavishi Fertility Institute",
-    description:
-      "At Bavishi Fertility Institute, we make complex IVF treatment simple — simple to understand, simple to plan, and simple to undergo. Minimum injections, fewer visits, maximum comfort.",
-    alternates: { canonical: PATH },
+    title,
+    description,
+    alternates: localeAlternates(PATH),
     openGraph: {
-      title: "Simple IVF Treatment | Bavishi Fertility Institute",
-      description:
+      title: data.ogTitle || title,
+      description: data.ogDescription ||
         "We make complex IVF treatment simple — minimum injections, fewer visits, maximum comfort.",
       url: abs(PATH),
       type: "website",
@@ -39,12 +42,13 @@ const graph = [
   ]),
 ];
 
-export default function Page() {
+export default async function Page() {
+  const data = await getSimpleTreatmentPage();
   return (
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <SimpleTreatmentPage />
+      <SimpleTreatmentPage data={data} />
     </>
   );
 }

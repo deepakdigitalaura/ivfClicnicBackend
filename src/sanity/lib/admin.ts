@@ -2,6 +2,7 @@ import "server-only";
 import { createClient } from "next-sanity";
 import { revalidateTag } from "next/cache";
 import { projectId, dataset } from "./client";
+import type { LocalizedField } from "@/lib/i18n";
 import reviewSources from "@/data/reviews.sources.json";
 import type {
   RobotsConfig,
@@ -11,7 +12,6 @@ import type {
   SitemapConfig,
   SchemaOrgConfig,
   PageSeo,
-  PageFaqsConfig,
 } from "./fetch";
 
 export const hasSanity = () => Boolean(projectId && process.env.SANITY_API_TOKEN);
@@ -74,7 +74,6 @@ export const IDS = {
   redirects: "redirectsConfig",
   sitemap: "sitemapConfig",
   schema: "schemaOrgConfig",
-  pageFaqs: "pageFaqsConfig",
 } as const;
 
 // ── Robots ──
@@ -91,11 +90,6 @@ export const saveScripts = (data: ScriptsConfig) =>
 export const readCamps = () => readSingleton<CampsConfig>(IDS.camps);
 export const saveCamps = (data: CampsConfig) =>
   saveSingleton(IDS.camps, "campsConfig", data as Record<string, unknown>, "sanity-camps");
-
-// ── Page FAQs ──
-export const readPageFaqs = () => readSingleton<PageFaqsConfig>(IDS.pageFaqs);
-export const savePageFaqs = (data: PageFaqsConfig) =>
-  saveSingleton(IDS.pageFaqs, "pageFaqsConfig", data as Record<string, unknown>, "sanity-page-faqs");
 
 // ── Redirects ──
 export const readRedirects = () => readSingleton<RedirectsConfig>(IDS.redirects);
@@ -207,6 +201,10 @@ export type AdminDoctor = {
   visitsAllCentres?: boolean;
   navRole?: "senior-specialist" | "specialist";
   navOrder?: number;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 const DOCTOR_TAG = "sanity-doctors";
@@ -219,7 +217,7 @@ export async function readAdminDoctors(): Promise<AdminDoctor[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "doctor"] | order(navOrder asc, name asc){ _id, slug, name, credentials, specialty, role, imageUrl, "photoUrl": photo.asset->url, experienceLabel, experienceYears, cities, treatments, locations, shortBio, bio, knowsAbout, alumniOf, memberOf, awards, training, publications, languages, sameAs, verified, visitsAllCentres, navRole, navOrder }`,
+      `*[_type == "doctor"] | order(navOrder asc, name asc){ _id, slug, name, credentials, specialty, role, imageUrl, "photoUrl": photo.asset->url, experienceLabel, experienceYears, cities, treatments, locations, shortBio, bio, knowsAbout, alumniOf, memberOf, awards, training, publications, languages, sameAs, verified, visitsAllCentres, navRole, navOrder, metaTitle, metaDescription, ogTitle, ogDescription }`,
     );
   } catch {
     return [];
@@ -257,9 +255,9 @@ export async function deleteDoctor(id: string) {
 // resolver (treatment-content.ts) supports more (name, types, timeline, etc.)
 // but those aren't in the schema/Studio either, so they stay code-owned.
 
-type HeadingSrc = { lead?: string; em?: string };
-type ValueRow = { value?: string };
-type TextRow = { text?: string };
+type HeadingSrc = { lead?: LocalizedField; em?: LocalizedField };
+type ValueRow = { value?: LocalizedField };
+type TextRow = { text?: LocalizedField };
 
 export type AdminTreatment = {
   _id?: string;
@@ -268,28 +266,28 @@ export type AdminTreatment = {
   navCategory?: string;
   navOrder?: number;
   hero?: {
-    eyebrow?: string; h1?: string; h1Em?: string; tagline?: string;
+    eyebrow?: LocalizedField; h1?: LocalizedField; h1Em?: LocalizedField; tagline?: LocalizedField;
     badges?: ValueRow[]; image?: string; imageAlt?: string;
   };
   meta?: { title?: string; description?: string; ogImage?: string };
   whatIs?: {
     heading?: HeadingSrc;
     paragraphs?: TextRow[];
-    aside?: { title?: string; body?: string };
+    aside?: { title?: LocalizedField; body?: LocalizedField };
   };
-  benefits?: { heading?: HeadingSrc; subtitle?: string; items?: ValueRow[] };
-  whoNeedsIt?: { heading?: HeadingSrc; subtitle?: string; items?: ValueRow[] };
+  benefits?: { heading?: HeadingSrc; subtitle?: LocalizedField; items?: ValueRow[] };
+  whoNeedsIt?: { heading?: HeadingSrc; subtitle?: LocalizedField; items?: ValueRow[] };
   process?: {
-    heading?: HeadingSrc; subtitle?: string;
-    steps?: { icon?: string; n?: string; t?: string; d?: string }[];
-    note?: string;
+    heading?: HeadingSrc; subtitle?: LocalizedField;
+    steps?: { icon?: string; n?: string; t?: LocalizedField; d?: LocalizedField }[];
+    note?: LocalizedField;
   };
   risks?: {
-    heading?: HeadingSrc; subtitle?: string;
-    items?: { t?: string; d?: string; help?: string }[];
+    heading?: HeadingSrc; subtitle?: LocalizedField;
+    items?: { t?: LocalizedField; d?: LocalizedField; help?: LocalizedField }[];
   };
-  faqs?: { q?: string; a?: string }[];
-  cta?: { heading?: string; headingEm?: string; subtitle?: string };
+  faqs?: { q?: LocalizedField; a?: LocalizedField }[];
+  cta?: { heading?: LocalizedField; headingEm?: LocalizedField; subtitle?: LocalizedField };
 };
 
 const TREATMENT_TAG = "sanity-treatments";
@@ -431,6 +429,10 @@ export type AdminCity = {
   intro?: ValueRow[];
   faqs?: { q?: string; a?: string }[];
   womensHealth?: ValueRow[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export type AdminCentre = {
@@ -464,6 +466,10 @@ export type AdminCentre = {
   treatments?: ValueRow[];
   womensHealth?: ValueRow[];
   faqs?: { q?: string; a?: string }[];
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 // Reuses the "sanity-locations" tag already wired into getSanityCities/
@@ -473,7 +479,8 @@ const LOCATION_TAG = "sanity-locations";
 
 const CITY_FIELDS_ADMIN = `
   _id, slug, name, region, country, built, heroImage, hero360Url,
-  helpline, helplineLabel, whatsapp, intro, faqs, womensHealth
+  helpline, helplineLabel, whatsapp, intro, faqs, womensHealth,
+  metaTitle, metaDescription, ogTitle, ogDescription
 `;
 
 export async function readAdminCities(): Promise<AdminCity[]> {
@@ -501,7 +508,7 @@ const CENTRE_FIELDS_ADMIN = `
   _id, slug, citySlug, name, fullName, area, isHeadOffice, built, image, hero360Url,
   address, pin, phone, phoneLabel, hours, opening, geo, mapQuery, reviewsKey, sameAs,
   intro, nearby, landmarks, howToReach, gallery, facilities, doctors, treatments,
-  womensHealth, faqs
+  womensHealth, faqs, metaTitle, metaDescription, ogTitle, ogDescription
 `;
 
 export async function readAdminCentres(): Promise<AdminCentre[]> {
@@ -588,6 +595,272 @@ export async function saveAbout(data: AdminAbout) {
   revalidateTag("sanity-about");
 }
 
+// ── Contact Info (singleton — the Contact page's card list) ──
+
+export type AdminContactInfo = Record<string, unknown>;
+
+export async function readContactInfo(): Promise<AdminContactInfo | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("contactInfo")) as AdminContactInfo | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveContactInfo(data: AdminContactInfo) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "contactInfo", _type: "contactInfo", ...rest });
+  revalidateTag("sanity-contact-info");
+}
+
+// ── Treatments Hub (singleton — the /treatments hub page's heading copy) ──
+
+export type AdminTreatmentsHub = Record<string, unknown>;
+
+export async function readTreatmentsHub(): Promise<AdminTreatmentsHub | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("treatmentsHub")) as AdminTreatmentsHub | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveTreatmentsHub(data: AdminTreatmentsHub) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "treatmentsHub", _type: "treatmentsHub", ...rest });
+  revalidateTag("sanity-treatments-hub");
+}
+
+// ── Calculators (one doc per slug) ──
+
+export type AdminCalculator = Record<string, unknown>;
+
+const calculatorDocId = (slug: string) => `calculator-${slug}`;
+
+export async function readCalculator(slug: string): Promise<AdminCalculator | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument(calculatorDocId(slug))) as AdminCalculator | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveCalculator(slug: string, data: AdminCalculator) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: calculatorDocId(slug), _type: "calculator", slug, ...rest });
+  revalidateTag(`calculator-${slug}`);
+}
+
+// ── Header nav (singleton) ──
+
+export type AdminHeaderNav = Record<string, unknown>;
+
+export async function readHeaderNav(): Promise<AdminHeaderNav | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("header")) as AdminHeaderNav | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveHeaderNav(data: AdminHeaderNav) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "header", _type: "header", ...rest });
+  revalidateTag("sanity-header-nav");
+}
+
+// ── Footer nav (singleton) ──
+
+export type AdminFooterNav = Record<string, unknown>;
+
+export async function readFooterNav(): Promise<AdminFooterNav | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("footer")) as AdminFooterNav | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveFooterNav(data: AdminFooterNav) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "footer", _type: "footer", ...rest });
+  revalidateTag("sanity-footer-nav");
+}
+
+export type AdminSurakshaKavach = Record<string, unknown>;
+
+export async function readSurakshaKavach(): Promise<AdminSurakshaKavach | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("surakshaKavach")) as AdminSurakshaKavach | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSurakshaKavach(data: AdminSurakshaKavach) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "surakshaKavach", _type: "surakshaKavach", ...rest });
+  revalidateTag("sanity-suraksha-kavach");
+}
+
+export type AdminHistoryPage = Record<string, unknown>;
+
+export async function readHistoryPage(): Promise<AdminHistoryPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("historyPage")) as AdminHistoryPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveHistoryPage(data: AdminHistoryPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "historyPage", _type: "historyPage", ...rest });
+  revalidateTag("sanity-history-page");
+}
+
+export type AdminInfrastructurePage = Record<string, unknown>;
+
+export async function readInfrastructurePage(): Promise<AdminInfrastructurePage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("infrastructurePage")) as AdminInfrastructurePage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveInfrastructurePage(data: AdminInfrastructurePage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "infrastructurePage", _type: "infrastructurePage", ...rest });
+  revalidateTag("sanity-infrastructure-page");
+}
+
+export type AdminWhyBfiPage = Record<string, unknown>;
+
+export async function readWhyBfiPage(): Promise<AdminWhyBfiPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("whyBfiPage")) as AdminWhyBfiPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveWhyBfiPage(data: AdminWhyBfiPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "whyBfiPage", _type: "whyBfiPage", ...rest });
+  revalidateTag("sanity-why-bfi-page");
+}
+
+export type AdminSimpleTreatmentPage = Record<string, unknown>;
+
+export async function readSimpleTreatmentPage(): Promise<AdminSimpleTreatmentPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("simpleTreatmentPage")) as AdminSimpleTreatmentPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSimpleTreatmentPage(data: AdminSimpleTreatmentPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "simpleTreatmentPage", _type: "simpleTreatmentPage", ...rest });
+  revalidateTag("sanity-simple-treatment-page");
+}
+
+export type AdminSafeTreatmentPage = Record<string, unknown>;
+
+export async function readSafeTreatmentPage(): Promise<AdminSafeTreatmentPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("safeTreatmentPage")) as AdminSafeTreatmentPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSafeTreatmentPage(data: AdminSafeTreatmentPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "safeTreatmentPage", _type: "safeTreatmentPage", ...rest });
+  revalidateTag("sanity-safe-treatment-page");
+}
+
+export type AdminSmartTreatmentPage = Record<string, unknown>;
+
+export async function readSmartTreatmentPage(): Promise<AdminSmartTreatmentPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("smartTreatmentPage")) as AdminSmartTreatmentPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSmartTreatmentPage(data: AdminSmartTreatmentPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "smartTreatmentPage", _type: "smartTreatmentPage", ...rest });
+  revalidateTag("sanity-smart-treatment-page");
+}
+
+export type AdminSuccessBenchmarksPage = Record<string, unknown>;
+
+export async function readSuccessBenchmarksPage(): Promise<AdminSuccessBenchmarksPage | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument("successBenchmarksPage")) as AdminSuccessBenchmarksPage | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveSuccessBenchmarksPage(data: AdminSuccessBenchmarksPage) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: "successBenchmarksPage", _type: "successBenchmarksPage", ...rest });
+  revalidateTag("sanity-success-benchmarks-page");
+}
+
+// ── Category hub pages (4 docs, one per slug) ──
+
+export type AdminCategoryHub = Record<string, unknown>;
+
+export async function readCategoryHub(slug: string): Promise<AdminCategoryHub | null> {
+  if (!hasSanity()) return null;
+  try {
+    return (await writeClient.getDocument(`categoryHubPage.${slug}`)) as AdminCategoryHub | null;
+  } catch {
+    return null;
+  }
+}
+
+export async function saveCategoryHub(slug: string, data: AdminCategoryHub) {
+  const { _id, _type, _rev, _createdAt, _updatedAt, ...rest } = data as Record<string, unknown>;
+  void _id; void _type; void _rev; void _createdAt; void _updatedAt;
+  await writeClient.createOrReplace({ _id: `categoryHubPage.${slug}`, _type: "categoryHubPage", slug, ...rest });
+  revalidateTag(`sanity-category-hub-${slug}`);
+}
+
 // ── Testimonials ──
 
 export type AdminTestimonial = {
@@ -669,6 +942,59 @@ export async function deleteEducationVideo(id: string) {
   revalidateTag(EDU_VIDEO_TAG);
 }
 
+// ── Press ──
+
+export type AdminPress = {
+  _id?: string;
+  slug?: string;
+  headline?: string;
+  headlineOriginal?: string;
+  standfirst?: string;
+  publication?: string;
+  edition?: string;
+  date?: string;
+  byline?: string;
+  language?: "English" | "Gujarati";
+  summary?: string;
+  bodyText?: string[];
+  doctorsQuoted?: string[];
+  image?: string;
+  thumb?: string;
+  width?: number;
+  height?: number;
+  order?: number;
+  published?: boolean;
+};
+
+const PRESS_TAG = "sanity-press";
+
+export async function readAdminPress(): Promise<AdminPress[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "press"] | order(order asc){ _id, "slug": slug.current, headline, headlineOriginal, standfirst, publication, edition, date, byline, language, summary, bodyText, doctorsQuoted, image, thumb, width, height, order, published }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function savePress(doc: AdminPress) {
+  const { _id, slug, ...rest } = doc;
+  const body = { ...rest, slug: { _type: "slug", current: slug } };
+  if (_id) {
+    await writeClient.createOrReplace({ _id, _type: "press", ...body });
+  } else {
+    await writeClient.create({ _type: "press", ...body });
+  }
+  revalidateTag(PRESS_TAG);
+}
+
+export async function deletePress(id: string) {
+  await writeClient.delete(id);
+  revalidateTag(PRESS_TAG);
+}
+
 // ── Blogs ──
 
 const BLOG_TAG = "sanity-blogs";
@@ -682,34 +1008,81 @@ export type AdminBlogMeta = {
   categoryTitle?: string | null;
   categorySlug?: string | null;
   authorName?: string | null;
+  authorSlug?: string | null;
+  authorRole?: string | null;
+  authorCredentials?: string | null;
+  authorAvatarUrl?: string | null;
+  authorBioText?: string | null;
+  reviewerName?: string | null;
+  reviewerSlug?: string | null;
+  reviewerRole?: string | null;
+  reviewerCredentials?: string | null;
+  reviewerAvatarUrl?: string | null;
   heroImageUrl?: string | null;
   heroImageAlt?: string | null;
   heroImagePosition?: string | null;
   status?: string | null;
   publishedAt?: string | null;
   lastUpdatedAt?: string | null;
+  readMins?: number | null;
+  contentRaw?: string | null;
+  seoMetaTitle?: string | null;
+  seoMetaDescription?: string | null;
+  seoOgTitle?: string | null;
+  seoOgDescription?: string | null;
+  seoOgImageUrl?: string | null;
 };
 
 export async function readAdminBlogs(): Promise<AdminBlogMeta[]> {
   if (!hasSanity()) return [];
   try {
     return await writeClient.fetch(
-      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt }`,
+      `*[_type == "blog"] | order(publishedAt desc){ _id, pgId, title, slug, excerpt, categoryTitle, categorySlug, authorName, authorSlug, authorRole, authorCredentials, authorAvatarUrl, authorBioText, reviewerName, reviewerSlug, reviewerRole, reviewerCredentials, reviewerAvatarUrl, heroImageUrl, heroImageAlt, heroImagePosition, status, publishedAt, lastUpdatedAt, readMins, contentRaw, seoMetaTitle, seoMetaDescription, seoOgTitle, seoOgDescription, seoOgImageUrl }`,
     );
   } catch {
     return [];
   }
 }
 
-/** Quick-add / meta-edit from the admin panel. Article body (contentRaw) and
- *  SEO/FAQs are intentionally left untouched here — those still go through
- *  Sanity Studio. New posts default to draft until someone publishes them. */
+/** Word count from Lexical JSON (contentRaw): walk every node, sum "text" fields. */
+function wordCount(contentRaw: string | null | undefined): number {
+  if (!contentRaw) return 0;
+  let text = "";
+  const walk = (node: unknown): void => {
+    if (!node || typeof node !== "object") return;
+    const n = node as { text?: string; children?: unknown[] };
+    if (typeof n.text === "string") text += " " + n.text;
+    if (Array.isArray(n.children)) n.children.forEach(walk);
+  };
+  try {
+    walk(JSON.parse(contentRaw).root);
+  } catch {
+    return 0;
+  }
+  return text.trim() ? text.trim().split(/\s+/).length : 0;
+}
+
+/** Quick-add / meta-edit from the admin panel, including the article body
+ *  (contentRaw — Lexical JSON authored via the RichTextEditor component).
+ *  FAQs and SEO fields still go through Sanity Studio. New posts default
+ *  to draft until someone publishes them.
+ *  publishedAt/lastUpdatedAt/readMins have no admin form fields — they're
+ *  derived here so every saved post shows a byline date + read time without
+ *  the editor having to enter them manually. */
 export async function saveBlog(doc: AdminBlogMeta) {
   const { _id, ...rest } = doc;
+  const now = new Date().toISOString();
+  const words = wordCount(doc.contentRaw);
+  const derived = {
+    ...rest,
+    publishedAt: rest.publishedAt || now,
+    lastUpdatedAt: now,
+    readMins: words ? Math.max(1, Math.round(words / 200)) : (rest.readMins ?? null),
+  };
   if (_id) {
-    await writeClient.patch(_id).set(rest).commit();
+    await writeClient.patch(_id).set(derived).commit();
   } else {
-    await writeClient.create({ _type: "blog", status: "draft", ...rest });
+    await writeClient.create({ _type: "blog", status: "draft", ...derived });
   }
   revalidateTag(BLOG_TAG);
 }
@@ -1084,4 +1457,39 @@ export async function getDashboardStats() {
   } catch {
     return empty;
   }
+}
+
+// ── Admin Users (Team & Access / RBAC) ──
+// Password hashes are only ever read via this write-capable client — never
+// exposed through the public/anonymous read API.
+
+export type AdminUser = {
+  _id?: string;
+  email: string;
+  passwordHash: string;
+  role: "superadmin" | "seo";
+  createdAt?: string;
+};
+
+export async function readAdminUsers(): Promise<AdminUser[]> {
+  if (!hasSanity()) return [];
+  try {
+    return await writeClient.fetch(
+      `*[_type == "adminUser"] | order(createdAt asc){ _id, email, passwordHash, role, createdAt }`,
+    );
+  } catch {
+    return [];
+  }
+}
+
+export async function saveAdminUser(doc: AdminUser) {
+  const { _id, ...rest } = doc;
+  const id = _id || `adminUser-${doc.email.trim().toLowerCase().replace(/[^a-z0-9]+/g, "-")}`;
+  await writeClient.createOrReplace({ _id: id, _type: "adminUser", ...rest });
+  revalidateTag("sanity-admin-users");
+}
+
+export async function deleteAdminUser(id: string) {
+  await writeClient.delete(id);
+  revalidateTag("sanity-admin-users");
 }

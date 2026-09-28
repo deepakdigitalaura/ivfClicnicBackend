@@ -2,20 +2,22 @@ import type { Metadata } from "next";
 import { FemaleInfertilityHub } from "./hub";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { withPageSeoOverride } from "@/lib/page-seo";
-import { getPageFaqs } from "@/sanity/lib/fetch";
+import { getCategoryHub } from "@/lib/payload";
 
 const PATH = "/treatments/female-infertility";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getCategoryHub("female-infertility");
+  const title = data.metaTitle || "Female Infertility Treatments — Personalised Pathways to Motherhood";
+  const description = data.metaDescription ||
+    "Specialised treatment for PCOS, endometriosis, low ovarian reserve, fibroids, and more. Personalised fertility pathways by Bavishi Fertility Institute's expert gynaecologists.";
   return withPageSeoOverride(PATH, {
-    title: "Female Infertility Treatments — Personalised Pathways to Motherhood",
-    description:
-      "Specialised treatment for PCOS, endometriosis, low ovarian reserve, fibroids, and more. Personalised fertility pathways by Bavishi Fertility Institute's expert gynaecologists.",
+    title,
+    description,
     alternates: { canonical: PATH },
     openGraph: {
-      title: "Female Infertility Treatments — Bavishi Fertility Institute",
-      description:
-        "Specialised treatment for PCOS, endometriosis, low ovarian reserve, fibroids, and more.",
+      title: data.ogTitle || title,
+      description: data.ogDescription || description,
       url: PATH,
       type: "website",
     },
@@ -23,11 +25,11 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const faqs = await getPageFaqs("female-infertility");
+  const data = await getCategoryHub("female-infertility");
   return (
     <>
       <PageSeoSchema path={PATH} />
-      <FemaleInfertilityHub faqs={faqs ?? undefined} />
+      <FemaleInfertilityHub data={data} />
     </>
   );
 }

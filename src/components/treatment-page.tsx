@@ -17,11 +17,14 @@ import { Linkify } from "@/components/linkify";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Heading, Treatment } from "@/lib/treatments";
-import { treatmentCardData, treatmentBySlug } from "@/lib/treatments";
+import { treatmentCardData, treatmentBySlug, UNLISTED_TREATMENT_SLUGS } from "@/lib/treatments";
 import { resolveIcon, type IconName } from "@/lib/icon-map";
 import type { ResolvedTreatment } from "@/lib/treatment-content";
 import type { Doctor } from "@/lib/doctors";
 import { doctorsForTreatment, doctorUrl, doctorBySlug } from "@/lib/doctors";
+import { ui } from "@/lib/ui-strings";
+import type { HomepageData } from "@/lib/homepage";
+import { localizeNavHref, type Locale } from "@/lib/i18n";
 import { blogsForTreatment, type BlogPost } from "@/lib/blogs";
 import { testimonialsForTreatment, type VideoTestimonial } from "@/lib/video-testimonials";
 import { destinationHref } from "@/lib/internal-links";
@@ -398,11 +401,18 @@ function toView(c: ResolvedTreatment): Treatment {
  * Keeping lucide icon *components* out of the props (functions aren't
  * serializable) is why the CMS path passes names and re-resolves them in toView.
  * The route still builds JSON-LD + metadata server-side from the same data. */
-export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[]; cmsBlogs?: BlogPost[] }) {
+const SURROGACY_DOCTOR_SLUGS = new Set([
+  "himanshu-bavishi", "falguni-bavishi", "janki-bavishi", "parth-bavishi",
+  "binal-shah", "suman-singh", "nilesh-jain", "priyanka-sinha", "surbhi-vegad",
+]);
+
+export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs, locale = "en", home }: { slug?: string; content?: ResolvedTreatment; editTestimonials?: VideoTestimonial[]; cmsBlogs?: BlogPost[]; locale?: Locale; home?: HomepageData }) {
   const t = content ? toView(content) : slug ? treatmentBySlug(slug) : undefined;
   if (!t) return null;
   const reviewer = doctorBySlug(t.reviewerSlug);
-  const docs = doctorsForTreatment(t.slug);
+  const docs = t.slug === "surrogacy"
+    ? doctorsForTreatment(t.slug).filter((d) => SURROGACY_DOCTOR_SLUGS.has(d.slug))
+    : doctorsForTreatment(t.slug);
   // editTestimonials is provided by TreatmentEditor (from the draft); the public
   // site always uses the code-owned defaults so it remains byte-identical.
   const testimonials = editTestimonials ?? testimonialsForTreatment(t.slug);
@@ -475,9 +485,9 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={localizeNavHref("/", locale)} className="hover:text-[color:var(--rose)]">{ui("Home", locale)}</a>
           <span>/</span>
-          <a href="/treatments" className="hover:text-[color:var(--rose)]">Treatments</a>
+          <a href={localizeNavHref("/treatments", locale)} className="hover:text-[color:var(--rose)]">{ui("Treatments", locale)}</a>
           <span>/</span>
           <span className="font-medium text-[color:var(--plum)]">{t.breadcrumbName}</span>
         </nav>
@@ -533,10 +543,10 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
             <Reveal delay={0.2}>
               <div className="mt-8 flex flex-wrap gap-3">
                 <Magnetic as="a" href="#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {ui("Book Consultation", locale)}
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
-                  <MessageCircle className="h-4 w-4 text-[#25D366]" /> Chat on WhatsApp
+                  <MessageCircle className="h-4 w-4 text-[#25D366]" /> {ui("Chat on WhatsApp", locale)}
                 </Magnetic>
               </div>
             </Reveal>
@@ -573,7 +583,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto grid max-w-[1400px] gap-12 lg:grid-cols-[1fr_360px] lg:gap-16">
           <div>
-            <SectionHead eyebrow={ed("labels.whatIs", labels.whatIs)} title={<H h={t.whatIs.heading} base="whatIs.heading" />} />
+            <SectionHead eyebrow={ed("labels.whatIs", ui(labels.whatIs, locale))} title={<H h={t.whatIs.heading} base="whatIs.heading" />} />
             <div className="mt-6 space-y-5 text-[17px] leading-relaxed text-muted-foreground">
               {t.whatIs.paragraphs.length > 0 && (
                 <Reveal><p>{ed("whatIs.paragraphs.0.text", t.whatIs.paragraphs[0])}</p></Reveal>
@@ -600,7 +610,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                       aria-expanded={whatIsExpanded}
                       className="inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)] transition-colors hover:text-[color:var(--rose)]/80"
                     >
-                      {whatIsExpanded ? "Show less" : "Read more"}
+                      {ui(whatIsExpanded ? "Show less" : "Read more", locale)}
                       <ChevronDown className={`h-4 w-4 transition-transform duration-300 ${whatIsExpanded ? "rotate-180" : ""}`} />
                     </button>
                   )}
@@ -628,7 +638,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
        *  relevance before reading benefits/technique details. */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow={ed("labels.whoNeedsIt", labels.whoNeedsIt)} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
+          <SectionHead eyebrow={ed("labels.whoNeedsIt", ui(labels.whoNeedsIt, locale))} title={<H h={t.whoNeedsIt.heading} base="whoNeedsIt.heading" />} subtitle={t.whoNeedsIt.subtitle && ed("whoNeedsIt.subtitle", t.whoNeedsIt.subtitle)} />
           <Stagger
             className={`mt-9 grid grid-cols-1 gap-4 ${
               t.whoNeedsIt.items.length === 1
@@ -658,7 +668,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* 4. Benefits */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow={ed("labels.benefits", labels.benefits)} title={<H h={t.benefits.heading} base="benefits.heading" />} subtitle={t.benefits.subtitle && ed("benefits.subtitle", t.benefits.subtitle)} />
+          <SectionHead center eyebrow={ed("labels.benefits", ui(labels.benefits, locale))} title={<H h={t.benefits.heading} base="benefits.heading" />} subtitle={t.benefits.subtitle && ed("benefits.subtitle", t.benefits.subtitle)} />
           <Stagger
             className={`mt-9 grid grid-cols-1 gap-4 ${
               t.benefits.items.length === 1
@@ -684,7 +694,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {t.types && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow={ed("labels.types", labels.types)} title={<H h={t.types.heading} base="types.heading" />} subtitle={t.types.subtitle && ed("types.subtitle", t.types.subtitle)} />
+          <SectionHead center eyebrow={ed("labels.types", ui(labels.types, locale))} title={<H h={t.types.heading} base="types.heading" />} subtitle={t.types.subtitle && ed("types.subtitle", t.types.subtitle)} />
           <Stagger
             className={`mt-10 grid grid-cols-1 gap-6 ${
               t.types.items.length === 1
@@ -707,7 +717,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                     <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{ed(`types.items.${i}.d`, x.d)}</p>
                     {x.href && (
                       <span className="mt-4 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
-                        Learn more <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
+                        {ui("Learn more", locale)} <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-0.5" />
                       </span>
                     )}
                   </Card>
@@ -722,7 +732,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* 5. Process */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-        <SectionHead center eyebrow={ed("labels.process", labels.process)} title={<H h={t.process.heading} base="process.heading" />} subtitle={t.process.subtitle && ed("process.subtitle", t.process.subtitle)} />
+        <SectionHead center eyebrow={ed("labels.process", ui(labels.process, locale))} title={<H h={t.process.heading} base="process.heading" />} subtitle={t.process.subtitle && ed("process.subtitle", t.process.subtitle)} />
         <Stagger
           className={`mt-10 grid grid-cols-1 gap-6 ${
             t.process.steps.length === 1
@@ -759,7 +769,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {t.timeline && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow={ed("labels.timeline", labels.timeline)} title={<H h={t.timeline.heading} base="timeline.heading" />} subtitle={t.timeline.subtitle && ed("timeline.subtitle", t.timeline.subtitle)} />
+            <SectionHead center eyebrow={ed("labels.timeline", ui(labels.timeline, locale))} title={<H h={t.timeline.heading} base="timeline.heading" />} subtitle={t.timeline.subtitle && ed("timeline.subtitle", t.timeline.subtitle)} />
             <Stagger
               className={`mt-10 grid grid-cols-1 gap-5 ${
                 t.timeline.items.length === 1
@@ -825,7 +835,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {t.technology && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow={ed("technology.eyebrow", t.technology.eyebrow ?? "Technology & Laboratory")} title={<H h={t.technology.heading} base="technology.heading" />} subtitle={t.technology.subtitle && ed("technology.subtitle", t.technology.subtitle)} />
+            <SectionHead center eyebrow={ed("technology.eyebrow", t.technology.eyebrow ?? ui("Technology & Laboratory", locale))} title={<H h={t.technology.heading} base="technology.heading" />} subtitle={t.technology.subtitle && ed("technology.subtitle", t.technology.subtitle)} />
             <Stagger
               className={`mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 ${
                 t.technology.items.length === 1
@@ -855,7 +865,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {t.whyUs && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-            <SectionHead center eyebrow={ed("labels.whyUs", labels.whyUs)} title={<H h={t.whyUs.heading} base="whyUs.heading" />} />
+            <SectionHead center eyebrow={ed("labels.whyUs", ui(labels.whyUs, locale))} title={<H h={t.whyUs.heading} base="whyUs.heading" />} />
             <Stagger
               className={`mt-10 grid grid-cols-1 gap-6 sm:grid-cols-2 ${
                 t.whyUs.items.length === 1
@@ -885,13 +895,13 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           <Reveal>
             <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-8 shadow-soft">
               <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">
-                <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" /> {ed("labels.successCard", labels.successCard)}
+                <Star className="h-4 w-4 fill-[color:var(--gold)] text-[color:var(--gold)]" /> {ed("labels.successCard", ui(labels.successCard, locale))}
               </div>
               <h3 className="mt-3 text-2xl font-semibold text-[color:var(--plum)]">{ed("success.heading", successHeading)}</h3>
               <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                {editing ? ed("success.description", successDescription) : <>Every fertility journey is unique. <strong className="text-[color:var(--plum)]">{t.shortName} success rates</strong> depend on several medical and lifestyle factors.</>}
+                {editing ? ed("success.description", successDescription) : <>{ui("Every fertility journey is unique.", locale)} <strong className="text-[color:var(--plum)]">{t.shortName} {ui("success rates", locale)}</strong> {ui("depend on several medical and lifestyle factors.", locale)}</>}
               </p>
-              <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ed("labels.successFactors", labels.successFactors)}</p>
+              <p className="mt-5 text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{ed("labels.successFactors", ui(labels.successFactors, locale))}</p>
               <ul className="mt-3 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {t.success.factors.map((f, i) => (
                   <li key={i} className="flex items-center gap-2 text-[14px] text-[color:var(--plum)]/90">
@@ -909,11 +919,11 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           <Reveal delay={0.08}>
             <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-8 shadow-soft">
               <div className="inline-flex items-center gap-2 text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">
-                <ShieldCheck className="h-4 w-4" /> {ed("labels.costCard", labels.costCard)}
+                <ShieldCheck className="h-4 w-4" /> {ed("labels.costCard", ui(labels.costCard, locale))}
               </div>
               <h3 className="mt-3 text-2xl font-semibold text-[color:var(--plum)]">{ed("cost.heading", costHeading)}</h3>
               <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                {editing ? ed("cost.description", costDescription) : <>Know exactly what your <strong className="text-[color:var(--plum)]">{t.shortName} treatment cost</strong> includes before you begin.</>}
+                {editing ? ed("cost.description", costDescription) : <>{ui("Know exactly what your", locale)} <strong className="text-[color:var(--plum)]">{t.shortName} {ui("treatment cost", locale)}</strong> {ui("includes before you begin.", locale)}</>}
               </p>
               <ul className="mt-5 grid grid-cols-1 gap-2.5 sm:grid-cols-2">
                 {t.cost.includes.map((c, i) => (
@@ -924,7 +934,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
               </ul>
               <div className="mt-auto pt-6">
                 <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-5 py-3 text-sm font-semibold text-white shadow-soft">
-                  Get a personalised estimate <ArrowRight className="h-4 w-4" />
+                  {ui("Get a personalised estimate", locale)} <ArrowRight className="h-4 w-4" />
                 </Magnetic>
               </div>
             </div>
@@ -935,12 +945,12 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* Suraksha Kavach — positioned right after cost, addressing cost fear
        *  and repeated-cycle anxiety exactly where patients are weighing the
        *  investment. Reuses the homepage's Suraksha section as-is. */}
-      <Suraksha />
+      {t.slug !== "surrogacy" && <Suraksha content={home?.suraksha} />}
 
       {/* Risks */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow={ed("labels.risks", labels.risks)} title={<H h={t.risks.heading} base="risks.heading" />} subtitle={t.risks.subtitle && ed("risks.subtitle", t.risks.subtitle)} />
+          <SectionHead center eyebrow={ed("labels.risks", ui(labels.risks, locale))} title={<H h={t.risks.heading} base="risks.heading" />} subtitle={t.risks.subtitle && ed("risks.subtitle", t.risks.subtitle)} />
           <Stagger
             className={`mt-10 grid grid-cols-1 gap-6 ${
               t.risks.items.length === 1
@@ -957,7 +967,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                   <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted-foreground">{ed(`risks.items.${i}.d`, r.d)}</p>
                   <div className="mt-4 flex items-start gap-2 rounded-2xl bg-[color:var(--rose-soft)]/40 p-3.5 text-[13px] leading-relaxed text-[color:var(--plum)]/90">
                     <ShieldCheck className="mt-0.5 h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                    <span><strong className="font-semibold text-[color:var(--plum)]">How We Help:</strong> {ed(`risks.items.${i}.help`, r.help)}</span>
+                    <span><strong className="font-semibold text-[color:var(--plum)]">{ui("How We Help:", locale)}</strong> {ed(`risks.items.${i}.help`, r.help)}</span>
                   </div>
                 </div>
               </StaggerItem>
@@ -970,7 +980,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {t.preparation && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow={ed("labels.preparation", labels.preparation)} title={<H h={t.preparation.heading} base="preparation.heading" />} subtitle={t.preparation.subtitle && ed("preparation.subtitle", t.preparation.subtitle)} />
+          <SectionHead center eyebrow={ed("labels.preparation", ui(labels.preparation, locale))} title={<H h={t.preparation.heading} base="preparation.heading" />} subtitle={t.preparation.subtitle && ed("preparation.subtitle", t.preparation.subtitle)} />
           <Stagger
             className={`mt-9 grid grid-cols-1 gap-4 ${
               t.preparation.items.length === 1
@@ -999,14 +1009,14 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           <div className="container-px mx-auto max-w-[1400px]">
             <SectionHead
               center
-              eyebrow={ed("labels.specialists", labels.specialists)}
+              eyebrow={ed("labels.specialists", ui(labels.specialists, locale))}
               title={<H h={specialists.heading} base="specialists.heading" />}
               subtitle={ed("specialists.subtitle", specialists.subtitle)}
             />
             <DoctorCarousel docs={docs} label={`${t.shortName} specialists`} />
             <div className="mt-8 text-center">
-              <a href="/doctors" className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)] hover:text-[color:var(--rose)]">
-                <Stethoscope className="h-4 w-4" /> View all fertility specialists <ArrowRight className="h-4 w-4" />
+              <a href={localizeNavHref("/doctors", locale)} className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)] hover:text-[color:var(--rose)]">
+                <Stethoscope className="h-4 w-4" /> {ui("View all fertility specialists", locale)} <ArrowRight className="h-4 w-4" />
               </a>
             </div>
           </div>
@@ -1016,7 +1026,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       {/* 11. FAQ */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-3xl">
-          <SectionHead center eyebrow={ed("labels.faq", labels.faq)} title={<H h={faqsSection} base="faqsSection" />} />
+          <SectionHead center eyebrow={ed("labels.faq", ui(labels.faq, locale))} title={<H h={faqsSection} base="faqsSection" />} />
           <div className="mt-9 space-y-3">
             {t.faqs.map((f, i) => (
               <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={editing ? ed(`faqs.${i}.a`, f.a, false) : <Linkify text={f.a} />} />
@@ -1036,7 +1046,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           <div className="container-px mx-auto max-w-[1400px]">
             <SectionHead
               center
-              eyebrow={ed("labels.patientStories", labels.patientStories)}
+              eyebrow={ed("labels.patientStories", ui(labels.patientStories, locale))}
               title={<H h={patientStories.heading} base="patientStories.heading" />}
               subtitle={ed("patientStories.subtitle", patientStories.subtitle)}
             />
@@ -1072,14 +1082,14 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       )}
 
       {/* Our network — locations (reused) */}
-      <div className={band()}><Locations /></div>
+      <div className={band()}><Locations content={home?.locations} /></div>
 
       {/* Related treatments — REAL internal links */}
       <section className={`${band()} py-8 md:py-14`}>
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow={ed("labels.exploreMore", labels.exploreMore)} title={<H h={relatedSection} base="relatedSection" />} />
+          <SectionHead center eyebrow={ed("labels.exploreMore", ui(labels.exploreMore, locale))} title={<H h={relatedSection} base="relatedSection" />} />
           <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
-            {t.related.map((slug) => {
+            {t.related.filter((slug) => !UNLISTED_TREATMENT_SLUGS.has(slug)).map((slug) => {
               const c = treatmentCardData(slug);
               return (
                 <StaggerItem key={slug}>
@@ -1092,12 +1102,12 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       </section>
 
       {/* Related blogs — treatment-specific, data-driven (placeholders until published) */}
-      {blogs.length > 0 && (
+      {blogs.length > 0 && t.slug !== "surrogacy" && t.slug !== "embryo-donation" && t.slug !== "egg-donation" && (
         <section className={`${band()} py-8 md:py-14`}>
           <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow={ed("labels.blog", labels.blog)}
+            eyebrow={ed("labels.blog", ui(labels.blog, locale))}
             title={<H h={blogSection.heading} base="blogSection.heading" />}
             subtitle={ed("blogSection.subtitle", blogSection.subtitle)}
           />
@@ -1116,7 +1126,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                     </span>
                     {!b.published && (
                       <span className="rounded-full bg-[color:var(--plum)]/5 px-2.5 py-1 text-[10px] font-semibold uppercase tracking-wider text-[color:var(--plum)]/50">
-                        Coming soon
+                        {ui("Coming soon", locale)}
                       </span>
                     )}
                   </div>
@@ -1126,7 +1136,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
                   <p className="mt-2 flex-1 text-[15px] leading-relaxed text-muted-foreground">{b.excerpt}</p>
                   {b.published && (
                     <span className="mt-5 inline-flex items-center gap-1.5 text-sm font-semibold text-[color:var(--rose)]">
-                      Read article
+                      {ui("Read article", locale)}
                       <ArrowRight className="h-4 w-4 transition-transform duration-300 group-hover:translate-x-0.5" />
                     </span>
                   )}
@@ -1137,7 +1147,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           </Stagger>
           <div className="mt-8 text-center">
             <a href={destinationHref("blog")} className="inline-flex items-center gap-2 text-sm font-semibold text-[color:var(--plum)] hover:text-[color:var(--rose)]">
-              <BookOpen className="h-4 w-4" /> Explore all fertility articles <ArrowRight className="h-4 w-4" />
+              <BookOpen className="h-4 w-4" /> {ui("Explore all fertility articles", locale)} <ArrowRight className="h-4 w-4" />
             </a>
           </div>
           </div>
@@ -1145,7 +1155,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
       )}
 
       {/* Free calculators (reused) */}
-      <div className={band()}><Calculators /></div>
+      <div className={band()}><Calculators content={home?.calculators} /></div>
 
       {/* 12. CTA */}
       <section className={`${band()} py-8 md:py-14`}>
@@ -1164,13 +1174,13 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
           <Reveal delay={0.2}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
               <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow">
-                <Calendar className="h-4 w-4" /> Book Consultation
+                <Calendar className="h-4 w-4" /> {ui("Book Consultation", locale)}
               </Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
                 <Phone className="h-4 w-4" /> +91 97126 22288
               </Magnetic>
               <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white">
-                <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                <MessageCircle className="h-4 w-4" /> {ui("WhatsApp Us", locale)}
               </Magnetic>
             </div>
           </Reveal>
@@ -1178,7 +1188,7 @@ export function TreatmentPage({ slug, content, editTestimonials, cmsBlogs }: { s
         </div>
       </section>
 
-      <InquiryForm />
+      <InquiryForm content={home?.inquiry} />
       <Footer />
       <FloatingCTA />
       <ScrollToTop />

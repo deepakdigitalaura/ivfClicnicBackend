@@ -7,6 +7,8 @@ import {
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
 import { saveHomepageAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
+import { LocaleTabs } from "../_components/locale-tabs";
+import { getLocalized, setLocalized, type Locale } from "@/lib/i18n";
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 type Doc = Record<string, any>;
@@ -81,6 +83,7 @@ function Field({ label, fieldPath, value, placeholder, onChange, textarea }: { l
 
 export function HomepageEditor({ initial, defaults }: { initial: Doc | null; defaults: HomepageData }) {
   const [doc, setDoc] = useState<Doc>(initial ?? {});
+  const [locale, setLocale] = useState<Locale>("en");
   const [device, setDevice] = useState<"desktop" | "tablet" | "mobile">("desktop");
   const [open, setOpen] = useState<Set<PanelId>>(new Set(["hero"]));
   const [iframeKey, setIframeKey] = useState(0);
@@ -100,9 +103,9 @@ export function HomepageEditor({ initial, defaults }: { initial: Doc | null; def
 
   // Push the live resolved preview whenever the draft changes.
   useEffect(() => {
-    const data = resolveHomepage(mapClientSource(doc));
+    const data = resolveHomepage(mapClientSource(doc), locale);
     postToPreview({ type: "bfi-preview-data", data });
-  }, [doc, postToPreview]);
+  }, [doc, locale, postToPreview]);
 
   // Receive click-to-select from the preview + the ready handshake.
   useEffect(() => {
@@ -111,7 +114,7 @@ export function HomepageEditor({ initial, defaults }: { initial: Doc | null; def
       const msg = e.data;
       if (!msg || typeof msg !== "object") return;
       if (msg.type === "bfi-preview-ready") {
-        postToPreview({ type: "bfi-preview-data", data: resolveHomepage(mapClientSource(doc)) });
+        postToPreview({ type: "bfi-preview-data", data: resolveHomepage(mapClientSource(doc), locale) });
       } else if (msg.type === "bfi-mark-select" && typeof msg.path === "string") {
         selectField(msg.path);
       }
@@ -119,7 +122,7 @@ export function HomepageEditor({ initial, defaults }: { initial: Doc | null; def
     window.addEventListener("message", onMsg);
     return () => window.removeEventListener("message", onMsg);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [doc, postToPreview]);
+  }, [doc, locale, postToPreview]);
 
   const selectField = useCallback((path: string) => {
     const panel = panelForPath(path);
@@ -161,11 +164,28 @@ export function HomepageEditor({ initial, defaults }: { initial: Doc | null; def
     for (const p of pathArr) { cur = cur?.[p]; if (cur == null) return ""; }
     return typeof cur === "string" ? cur : "";
   };
+  /** Localized text field: reads/writes the active locale, preserving siblings. */
+  const getL = (pathArr: string[]): string => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let cur: any = doc;
+    for (const p of pathArr) { cur = cur?.[p]; if (cur == null) break; }
+    return getLocalized(cur, locale);
+  };
+  const setInL = (pathArr: string[], val: string) => {
+    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    let cur: any = doc;
+    for (const p of pathArr) { cur = cur?.[p]; if (cur == null) break; }
+    setIn(pathArr, setLocalized(cur, locale, val));
+  };
 
-  const heroBadges = (doc.hero?.badges ?? []) as string[];
-  const stats = (doc.stats ?? []) as { value?: string; label?: string }[];
-  const faqItems = (doc.faq?.items ?? []) as { q?: string; a?: string }[];
-  const surakshaFeatures = (doc.suraksha?.features ?? []) as string[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const heroBadges = (doc.hero?.badges ?? []) as any[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const stats = (doc.stats ?? []) as { value?: string; label?: any }[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const faqItems = (doc.faq?.items ?? []) as { q?: any; a?: any }[];
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const surakshaFeatures = (doc.suraksha?.features ?? []) as any[];
 
   const save = () => run(async () => {
     const res = await saveHomepageAction(doc);
@@ -197,20 +217,21 @@ export function HomepageEditor({ initial, defaults }: { initial: Doc | null; def
         {/* Left — content forms */}
         <aside className="admin-editor-forms">
           <p className="admin-editor-hint">Click any highlighted element in the preview → its field opens here. Or edit below.</p>
+          <LocaleTabs locale={locale} onChange={setLocale} />
 
           <Panel id="hero" title="🎯 Hero / Top Banner" open={isOpen("hero")} onToggle={() => togglePanel("hero")}>
-            <Field label="Eyebrow" fieldPath="hero.eyebrow" value={get(["hero", "eyebrow"])} placeholder={defaults.hero.eyebrow} onChange={(v) => setIn(["hero", "eyebrow"], v)} />
-            <Field label="Headline" fieldPath="hero.headline" value={get(["hero", "headline"])} placeholder={defaults.hero.headline} onChange={(v) => setIn(["hero", "headline"], v)} textarea />
-            <Field label="Highlighted word" fieldPath="hero.headlineItalic" value={get(["hero", "headlineItalic"])} placeholder={defaults.hero.headlineItalic} onChange={(v) => setIn(["hero", "headlineItalic"], v)} />
-            <Field label="Paragraph" fieldPath="hero.paragraph" value={get(["hero", "paragraph"])} placeholder={defaults.hero.paragraph} onChange={(v) => setIn(["hero", "paragraph"], v)} textarea />
+            <Field label="Eyebrow" fieldPath="hero.eyebrow" value={getL(["hero", "eyebrow"])} placeholder={defaults.hero.eyebrow} onChange={(v) => setInL(["hero", "eyebrow"], v)} />
+            <Field label="Headline" fieldPath="hero.headline" value={getL(["hero", "headline"])} placeholder={defaults.hero.headline} onChange={(v) => setInL(["hero", "headline"], v)} textarea />
+            <Field label="Highlighted word" fieldPath="hero.headlineItalic" value={getL(["hero", "headlineItalic"])} placeholder={defaults.hero.headlineItalic} onChange={(v) => setInL(["hero", "headlineItalic"], v)} />
+            <Field label="Paragraph" fieldPath="hero.paragraph" value={getL(["hero", "paragraph"])} placeholder={defaults.hero.paragraph} onChange={(v) => setInL(["hero", "paragraph"], v)} textarea />
             <label className="admin-label">Badges</label>
             {(heroBadges.length ? heroBadges : defaults.hero.badges).map((b, i) => (
-              <input key={i} className="admin-input" data-fieldpath={`hero.badges.${i}`} style={{ marginBottom: 6 }} value={heroBadges[i] ?? ""} placeholder={defaults.hero.badges[i] ?? b} onChange={(e) => {
+              <input key={i} className="admin-input" data-fieldpath={`hero.badges.${i}`} style={{ marginBottom: 6 }} value={getLocalized(heroBadges[i], locale)} placeholder={typeof b === "string" ? b : defaults.hero.badges[i]} onChange={(e) => {
                 const arr = heroBadges.length ? [...heroBadges] : [...defaults.hero.badges];
-                arr[i] = e.target.value; setIn(["hero", "badges"], arr);
+                arr[i] = setLocalized(arr[i], locale, e.target.value); setIn(["hero", "badges"], arr);
               }} />
             ))}
-            <Field label="Floating award chip" fieldPath="hero.floatingBadge" value={get(["hero", "floatingBadge"])} placeholder={defaults.hero.floatingBadge} onChange={(v) => setIn(["hero", "floatingBadge"], v)} />
+            <Field label="Floating award chip" fieldPath="hero.floatingBadge" value={getL(["hero", "floatingBadge"])} placeholder={defaults.hero.floatingBadge} onChange={(v) => setInL(["hero", "floatingBadge"], v)} />
             <Field label="Hero image URL" fieldPath="hero.image" value={get(["hero", "image"])} placeholder={defaults.hero.image} onChange={(v) => setIn(["hero", "image"], v)} />
           </Panel>
 
@@ -221,9 +242,9 @@ export function HomepageEditor({ initial, defaults }: { initial: Doc | null; def
                   const base = stats.length ? [...stats] : defaults.stats.map((s) => ({ value: s.value, label: s.l }));
                   base[i] = { ...base[i], value: v }; setIn(["stats"], base);
                 }} />
-                <Field label={`Label ${i + 1}`} fieldPath={`stats.${i}.label`} value={stats[i]?.label ?? ""} placeholder={defaults.stats[i]?.l} onChange={(v) => {
+                <Field label={`Label ${i + 1}`} fieldPath={`stats.${i}.label`} value={getLocalized(stats[i]?.label, locale)} placeholder={defaults.stats[i]?.l} onChange={(v) => {
                   const base = stats.length ? [...stats] : defaults.stats.map((s) => ({ value: s.value, label: s.l }));
-                  base[i] = { ...base[i], label: v }; setIn(["stats"], base);
+                  base[i] = { ...base[i], label: setLocalized(base[i]?.label, locale, v) }; setIn(["stats"], base);
                 }} />
               </div>
             ))}
@@ -236,57 +257,57 @@ export function HomepageEditor({ initial, defaults }: { initial: Doc | null; def
               return (
                 <div key={key} data-fieldpath={`${key}.eyebrow`} style={{ borderTop: "1px solid var(--border)", paddingTop: 12, marginTop: 12 }}>
                   <div style={{ fontWeight: 600, fontSize: 13, color: "var(--plum)", marginBottom: 8 }}>{label}</div>
-                  <Field label="Eyebrow" fieldPath={`${key}.eyebrow`} value={get([key, "eyebrow"])} placeholder={def.eyebrow} onChange={(v) => setIn([key, "eyebrow"], v)} />
+                  <Field label="Eyebrow" fieldPath={`${key}.eyebrow`} value={getL([key, "eyebrow"])} placeholder={def.eyebrow} onChange={(v) => setInL([key, "eyebrow"], v)} />
                   <div className="admin-row-grid">
-                    <Field label="Heading" fieldPath={`${key}.heading.lead`} value={get([key, "heading", "lead"])} placeholder={def.heading?.lead} onChange={(v) => setIn([key, "heading", "lead"], v)} />
-                    <Field label="Highlighted word" fieldPath={`${key}.heading.em`} value={get([key, "heading", "em"])} placeholder={def.heading?.em} onChange={(v) => setIn([key, "heading", "em"], v)} />
+                    <Field label="Heading" fieldPath={`${key}.heading.lead`} value={getL([key, "heading", "lead"])} placeholder={def.heading?.lead} onChange={(v) => setInL([key, "heading", "lead"], v)} />
+                    <Field label="Highlighted word" fieldPath={`${key}.heading.em`} value={getL([key, "heading", "em"])} placeholder={def.heading?.em} onChange={(v) => setInL([key, "heading", "em"], v)} />
                   </div>
-                  {subtitle && <Field label="Subtitle" fieldPath={`${key}.subtitle`} value={get([key, "subtitle"])} placeholder={def.subtitle} onChange={(v) => setIn([key, "subtitle"], v)} textarea />}
+                  {subtitle && <Field label="Subtitle" fieldPath={`${key}.subtitle`} value={getL([key, "subtitle"])} placeholder={def.subtitle} onChange={(v) => setInL([key, "subtitle"], v)} textarea />}
                 </div>
               );
             })}
           </Panel>
 
           <Panel id="suraksha" title="🛡️ Suraksha Kavach" open={isOpen("suraksha")} onToggle={() => togglePanel("suraksha")}>
-            <Field label="Badge" fieldPath="suraksha.badge" value={get(["suraksha", "badge"])} placeholder={defaults.suraksha.badge} onChange={(v) => setIn(["suraksha", "badge"], v)} />
+            <Field label="Badge" fieldPath="suraksha.badge" value={getL(["suraksha", "badge"])} placeholder={defaults.suraksha.badge} onChange={(v) => setInL(["suraksha", "badge"], v)} />
             <div className="admin-row-grid">
-              <Field label="Heading" fieldPath="suraksha.heading.lead" value={get(["suraksha", "heading", "lead"])} placeholder={defaults.suraksha.heading.lead} onChange={(v) => setIn(["suraksha", "heading", "lead"], v)} />
-              <Field label="Highlighted word" fieldPath="suraksha.heading.em" value={get(["suraksha", "heading", "em"])} placeholder={defaults.suraksha.heading.em} onChange={(v) => setIn(["suraksha", "heading", "em"], v)} />
+              <Field label="Heading" fieldPath="suraksha.heading.lead" value={getL(["suraksha", "heading", "lead"])} placeholder={defaults.suraksha.heading.lead} onChange={(v) => setInL(["suraksha", "heading", "lead"], v)} />
+              <Field label="Highlighted word" fieldPath="suraksha.heading.em" value={getL(["suraksha", "heading", "em"])} placeholder={defaults.suraksha.heading.em} onChange={(v) => setInL(["suraksha", "heading", "em"], v)} />
             </div>
-            <Field label="Paragraph" fieldPath="suraksha.paragraph" value={get(["suraksha", "paragraph"])} placeholder={defaults.suraksha.paragraph} onChange={(v) => setIn(["suraksha", "paragraph"], v)} textarea />
+            <Field label="Paragraph" fieldPath="suraksha.paragraph" value={getL(["suraksha", "paragraph"])} placeholder={defaults.suraksha.paragraph} onChange={(v) => setInL(["suraksha", "paragraph"], v)} textarea />
             <label className="admin-label">Features</label>
             {(surakshaFeatures.length ? surakshaFeatures : defaults.suraksha.features).map((f, i) => (
-              <input key={i} className="admin-input" data-fieldpath={`suraksha.features.${i}`} style={{ marginBottom: 6 }} value={surakshaFeatures[i] ?? ""} placeholder={defaults.suraksha.features[i] ?? f} onChange={(e) => {
+              <input key={i} className="admin-input" data-fieldpath={`suraksha.features.${i}`} style={{ marginBottom: 6 }} value={getLocalized(surakshaFeatures[i], locale)} placeholder={typeof f === "string" ? f : defaults.suraksha.features[i]} onChange={(e) => {
                 const arr = surakshaFeatures.length ? [...surakshaFeatures] : [...defaults.suraksha.features];
-                arr[i] = e.target.value; setIn(["suraksha", "features"], arr);
+                arr[i] = setLocalized(arr[i], locale, e.target.value); setIn(["suraksha", "features"], arr);
               }} />
             ))}
           </Panel>
 
           <Panel id="finalCta" title="🎬 Closing CTA" open={isOpen("finalCta")} onToggle={() => togglePanel("finalCta")}>
-            <Field label="Eyebrow" fieldPath="finalCta.eyebrow" value={get(["finalCta", "eyebrow"])} placeholder={defaults.finalCta.eyebrow} onChange={(v) => setIn(["finalCta", "eyebrow"], v)} />
+            <Field label="Eyebrow" fieldPath="finalCta.eyebrow" value={getL(["finalCta", "eyebrow"])} placeholder={defaults.finalCta.eyebrow} onChange={(v) => setInL(["finalCta", "eyebrow"], v)} />
             <div className="admin-row-grid">
-              <Field label="Heading" fieldPath="finalCta.heading.lead" value={get(["finalCta", "heading", "lead"])} placeholder={defaults.finalCta.heading.lead} onChange={(v) => setIn(["finalCta", "heading", "lead"], v)} />
-              <Field label="Highlighted word" fieldPath="finalCta.heading.em" value={get(["finalCta", "heading", "em"])} placeholder={defaults.finalCta.heading.em} onChange={(v) => setIn(["finalCta", "heading", "em"], v)} />
+              <Field label="Heading" fieldPath="finalCta.heading.lead" value={getL(["finalCta", "heading", "lead"])} placeholder={defaults.finalCta.heading.lead} onChange={(v) => setInL(["finalCta", "heading", "lead"], v)} />
+              <Field label="Highlighted word" fieldPath="finalCta.heading.em" value={getL(["finalCta", "heading", "em"])} placeholder={defaults.finalCta.heading.em} onChange={(v) => setInL(["finalCta", "heading", "em"], v)} />
             </div>
-            <Field label="Paragraph" fieldPath="finalCta.paragraph" value={get(["finalCta", "paragraph"])} placeholder={defaults.finalCta.paragraph} onChange={(v) => setIn(["finalCta", "paragraph"], v)} textarea />
+            <Field label="Paragraph" fieldPath="finalCta.paragraph" value={getL(["finalCta", "paragraph"])} placeholder={defaults.finalCta.paragraph} onChange={(v) => setInL(["finalCta", "paragraph"], v)} textarea />
           </Panel>
 
           <Panel id="faq" title="❓ FAQ" open={isOpen("faq")} onToggle={() => togglePanel("faq")}>
-            <Field label="Eyebrow" fieldPath="faq.eyebrow" value={get(["faq", "eyebrow"])} placeholder={defaults.faq.eyebrow} onChange={(v) => setIn(["faq", "eyebrow"], v)} />
+            <Field label="Eyebrow" fieldPath="faq.eyebrow" value={getL(["faq", "eyebrow"])} placeholder={defaults.faq.eyebrow} onChange={(v) => setInL(["faq", "eyebrow"], v)} />
             <div className="admin-row-grid">
-              <Field label="Heading" fieldPath="faq.heading.lead" value={get(["faq", "heading", "lead"])} placeholder={defaults.faq.heading.lead} onChange={(v) => setIn(["faq", "heading", "lead"], v)} />
-              <Field label="Highlighted word" fieldPath="faq.heading.em" value={get(["faq", "heading", "em"])} placeholder={defaults.faq.heading.em} onChange={(v) => setIn(["faq", "heading", "em"], v)} />
+              <Field label="Heading" fieldPath="faq.heading.lead" value={getL(["faq", "heading", "lead"])} placeholder={defaults.faq.heading.lead} onChange={(v) => setInL(["faq", "heading", "lead"], v)} />
+              <Field label="Highlighted word" fieldPath="faq.heading.em" value={getL(["faq", "heading", "em"])} placeholder={defaults.faq.heading.em} onChange={(v) => setInL(["faq", "heading", "em"], v)} />
             </div>
             {(faqItems.length ? faqItems : defaults.faq.items).map((_, i) => (
               <div key={i} style={{ borderTop: "1px solid var(--border)", paddingTop: 10, marginTop: 10 }}>
-                <Field label={`Q${i + 1}`} fieldPath={`faq.items.${i}.q`} value={faqItems[i]?.q ?? ""} placeholder={defaults.faq.items[i]?.q} onChange={(v) => {
+                <Field label={`Q${i + 1}`} fieldPath={`faq.items.${i}.q`} value={getLocalized(faqItems[i]?.q, locale)} placeholder={defaults.faq.items[i]?.q} onChange={(v) => {
                   const base = faqItems.length ? [...faqItems] : defaults.faq.items.map((x) => ({ q: x.q, a: x.a }));
-                  base[i] = { ...base[i], q: v }; setIn(["faq", "items"], base);
+                  base[i] = { ...base[i], q: setLocalized(base[i]?.q, locale, v) }; setIn(["faq", "items"], base);
                 }} />
-                <Field label="Answer" fieldPath={`faq.items.${i}.a`} value={faqItems[i]?.a ?? ""} placeholder={defaults.faq.items[i]?.a} onChange={(v) => {
+                <Field label="Answer" fieldPath={`faq.items.${i}.a`} value={getLocalized(faqItems[i]?.a, locale)} placeholder={defaults.faq.items[i]?.a} onChange={(v) => {
                   const base = faqItems.length ? [...faqItems] : defaults.faq.items.map((x) => ({ q: x.q, a: x.a }));
-                  base[i] = { ...base[i], a: v }; setIn(["faq", "items"], base);
+                  base[i] = { ...base[i], a: setLocalized(base[i]?.a, locale, v) }; setIn(["faq", "items"], base);
                 }} textarea />
               </div>
             ))}

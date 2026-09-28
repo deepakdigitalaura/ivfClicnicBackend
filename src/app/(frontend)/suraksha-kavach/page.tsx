@@ -2,22 +2,24 @@ import type { Metadata } from "next";
 import { SurakshaKavachPage } from "@/components/suraksha-kavach-page";
 import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
-import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
+import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID, localeAlternates } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
-import { getPageFaqs } from "@/sanity/lib/fetch";
-import { DEFAULT_FAQS } from "@/lib/suraksha-kavach-faqs";
+import { getSurakshaKavach } from "@/lib/payload";
 
 const PATH = "/suraksha-kavach";
 
 export async function generateMetadata(): Promise<Metadata> {
+  const data = await getSurakshaKavach();
+  const title = data.metaTitle || "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute";
+  const description = data.metaDescription ||
+    "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind — only at Bavishi Fertility Institute.";
   return withPageSeoOverride(PATH, {
-    title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
-    description:
-      "Suraksha Kavach — India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind — only at Bavishi Fertility Institute.",
-    alternates: { canonical: PATH },
+    title,
+    description,
+    alternates: localeAlternates(PATH),
     openGraph: {
-      title: "Suraksha Kavach — India's Only IVF Protection Program | Bavishi Fertility Institute",
-      description:
+      title: data.ogTitle || title,
+      description: data.ogDescription ||
         "India's only IVF protection program. Multiple IVF cycles covered. Complete financial peace of mind at Bavishi Fertility Institute.",
       url: abs(PATH),
       type: "website",
@@ -47,12 +49,12 @@ function buildGraph(faqs: { q: string; a: string }[]) {
 }
 
 export default async function Page() {
-  const faqs = (await getPageFaqs("suraksha-kavach")) ?? DEFAULT_FAQS;
+  const data = await getSurakshaKavach();
   return (
     <>
-      <JsonLd graph={buildGraph(faqs)} />
+      <JsonLd graph={buildGraph(data.faqs)} />
       <PageSeoSchema path={PATH} />
-      <SurakshaKavachPage faqs={faqs} />
+      <SurakshaKavachPage data={data} />
     </>
   );
 }

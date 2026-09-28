@@ -1,5 +1,6 @@
 import { NextResponse } from "next/server";
 import type { NextRequest } from "next/server";
+import { localizeNavHref } from "@/lib/i18n";
 
 // Sanity-managed redirects — fetched from CDN and cached briefly in-memory.
 // Existing treatment/calculator redirects are baked into next.config.mjs.
@@ -41,16 +42,47 @@ async function loadSanityRules(): Promise<SanityRule[]> {
 const norm = (p: string) => (p.length > 1 && p.endsWith("/") ? p.slice(0, -1) : p);
 
 export async function middleware(request: NextRequest): Promise<NextResponse> {
-  const pathname = norm(request.nextUrl.pathname);
-  const rules = await loadSanityRules();
+  const host = request.headers.get("x-forwarded-host") ?? request.headers.get("host");
+  const proto = request.headers.get("x-forwarded-proto");
+  // ponytail: proto === "http" force-redirect is disabled — on this
+  // Cloudways Nginx->Varnish->Node chain, Varnish does not reliably forward
+  // X-Forwarded-Proto: https through to Node, so every already-https request
+  // was seen as "http" here and redirected to itself forever (outage
+  // 2026-09-11). Re-enable only once Varnish's VCL is confirmed to forward
+  // the header, or replace with a check that doesn't loop when the header
+  // is simply wrong on this stack.
+  if (host === "www.ivfclinic.com") {
+    // Build the destination from scratch with a hardcoded public origin —
+    // do NOT clone request.nextUrl and just swap the hostname. Behind the
+    // Cloudways reverse proxy, request.nextUrl's protocol/port reflect what
+    // the app itself was reached on internally (confirmed live: redirects
+    // were pointing at "http://ivfclinic.com:3000", the container's internal
+    // dev port, completely unreachable publicly) rather than the public
+    // "https://ivfclinic.com" visitors actually use. Only the path and query
+    // string come from the request; the origin is always the real one.
+    // Same fix also covers plain-http requests (x-forwarded-proto: http) —
+    // ivfclinic.com was serving full pages over http:// with no redirect
+    // and no HSTS header.
+    const url = new URL(request.nextUrl.pathname + request.nextUrl.search, "https://ivfclinic.com");
+    return NextResponse.redirect(url, 301);
+  }
+
+  const rawPathname = request.nextUrl.pathname;
+  const pathname = norm(rawPathname);
+  // Legacy WordPress redirect rules in Sanity (e.g. "/hi/why-bfi/" -> "/why-bfi")
+  // collide with the real translated pages under /hi and /gu — skip them for
+  // any path that has a real localized route (see LOCALIZED_ROUTE_ROOTS).
+  const enPath = pathname.replace(/^\/(hi|gu)(?=\/|$)/, "") || "/";
+  const isLocalizedPage = enPath !== pathname && localizeNavHref(enPath, "hi") !== enPath;
+  const rules = isLocalizedPage ? [] : await loadSanityRules();
 
   for (const rule of rules) {
     if (!rule.source || !rule.destination) continue;
     if (norm(rule.source) !== pathname) continue;
     // A rule whose destination normalizes to the same path as its source
-    // (e.g. "/x/" -> "/x") is a self-redirect once trailing slashes are
-    // normalized on both sides above — Next's own trailing-slash handling
-    // already covers that case, so skip it here instead of looping forever.
+    // (e.g. "/x/" -> "/x") would just redirect a page to itself once
+    // trailing slashes are normalized on both sides above — skip it rather
+    // than issuing a pointless (and potentially looping) redirect.
     if (!/^https?:\/\//i.test(rule.destination) && norm(rule.destination) === pathname) continue;
 
     if (/^https?:\/\//i.test(rule.destination)) {
@@ -61,6 +93,19 @@ export async function middleware(request: NextRequest): Promise<NextResponse> {
     return NextResponse.redirect(url, { status: rule.permanent ? 301 : 302 });
   }
 
+  // No redirect rule matched. We used to 308 a trailing-slash request (e.g.
+  // "/some-real-page/") to its slash-less form here — but the hosting layer
+  // in front of this app has its own trailing-slash handling that conflicts
+  // with that redirect, turning it into a self-redirect loop
+  // ("/x/" -> "/x/" -> "/x/" ...), which made the slash form of every page
+  // unreachable. Since we don't control that layer, we no longer redirect
+  // for this case: both "/some-real-page" and "/some-real-page/" now render
+  // the same page directly (Next's router already resolves either form to
+  // the same route). The page's own <link rel="canonical"> tag (already
+  // present sitewide, pointing at the slash-less form) tells search engines
+  // which URL is authoritative, so this doesn't reintroduce a duplicate-
+  // content problem — it just stops depending on a redirect that was being
+  // broken outside this app.
   const res = NextResponse.next();
   res.headers.set("x-pathname", pathname);
   return res;

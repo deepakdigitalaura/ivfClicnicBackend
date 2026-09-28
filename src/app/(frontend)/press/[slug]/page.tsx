@@ -5,17 +5,20 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
-import { PRESS_CLIPPINGS, pressClippingBySlug, pressHref } from "@/lib/press";
+import { pressHref } from "@/lib/press";
+import { getPressClippings } from "@/lib/press-sanity";
 
 export async function generateStaticParams() {
-  return PRESS_CLIPPINGS.map((c) => ({ slug: c.slug }));
+  const clippings = await getPressClippings();
+  return clippings.map((c) => ({ slug: c.slug }));
 }
 
 export async function generateMetadata(
   { params }: { params: Promise<{ slug: string }> },
 ): Promise<Metadata> {
   const { slug } = await params;
-  const c = pressClippingBySlug(slug);
+  const clippings = await getPressClippings();
+  const c = clippings.find((x) => x.slug === slug);
   if (!c) return {};
 
   const title = `${c.headline} — ${c.publication} | Bavishi Fertility Institute`;
@@ -35,7 +38,8 @@ export async function generateMetadata(
 
 export default async function Page({ params }: { params: Promise<{ slug: string }> }) {
   const { slug } = await params;
-  const clipping = pressClippingBySlug(slug);
+  const clippings = await getPressClippings();
+  const clipping = clippings.find((c) => c.slug === slug);
   if (!clipping) notFound();
 
   const graph = [
@@ -59,7 +63,7 @@ export default async function Page({ params }: { params: Promise<{ slug: string 
     ]),
   ];
 
-  const others = PRESS_CLIPPINGS.filter((c) => c.slug !== clipping.slug);
+  const others = clippings.filter((c) => c.slug !== clipping.slug);
 
   return (
     <>

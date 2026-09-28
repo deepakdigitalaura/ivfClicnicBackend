@@ -15,6 +15,8 @@ import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversi
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import type { CalculatorCmsData } from "@/lib/calculators";
 import { Editable } from "@/components/editor/Editable";
+import type { Locale } from "@/lib/i18n";
+import { ui } from "@/lib/ui-strings";
 
 /* ────────────────────────────────────────────────────────────────────────
  * Hunault et al. (2004), Erasmus University Medical Centre, Rotterdam —
@@ -40,10 +42,11 @@ type StepN = 1 | 2 | 3;
 
 const STEP_LABELS: Record<StepN, string> = { 1: "Your Age", 2: "Your History", 3: "Sperm & Referral" };
 
-export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsData }) {
-  const cmsTitle      = cms?.title     ?? "Natural Pregnancy Calculator";
-  const cmsSubtitle   = cms?.subtitle  ?? "Estimate your probability of natural pregnancy within the next 12 months, used by fertility specialists worldwide to guide treatment decisions.";
-  const cmsDisclaimer = cms?.disclaimer ?? "This calculator provides a statistical estimate only. If you have been trying to conceive for 12 months without success, consult a fertility specialist.";
+export function NaturalPregnancyCalculatorPage({ cms, locale = "en" }: { cms?: CalculatorCmsData; locale?: Locale }) {
+  const t = (s: string) => ui(s, locale);
+  const cmsTitle      = t(cms?.title     ?? "Natural Pregnancy Calculator");
+  const cmsSubtitle   = t(cms?.subtitle  ?? "Estimate your probability of natural pregnancy within the next 12 months, used by fertility specialists worldwide to guide treatment decisions.");
+  const cmsDisclaimer = t(cms?.disclaimer ?? "This calculator provides a statistical estimate only. If you have been trying to conceive for 12 months without success, consult a fertility specialist.");
   const titleWords    = cmsTitle.split(" ");
   const titleMain     = titleWords.slice(0, -1).join(" ");
   const titleEm       = titleWords.at(-1) ?? "";
@@ -105,9 +108,9 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href="/" className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <a href="/calculators" className="hover:text-[color:var(--rose)]">Calculators</a>
+          <a href="/calculators" className="hover:text-[color:var(--rose)]">{t("Calculators")}</a>
           <span>/</span>
           <Editable path="title" as="span" className="font-medium text-[color:var(--plum)]" rich={false}>{cmsTitle}</Editable>
         </nav>
@@ -122,7 +125,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
         <div className="container-px relative mx-auto max-w-3xl py-14 text-center md:py-20">
           <Reveal>
             <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--rose)]/30 bg-white/70 px-4 py-1.5 text-xs font-semibold text-[color:var(--rose)] backdrop-blur">
-              <Microscope className="h-3.5 w-3.5" /> Clinically Validated · Natural Pregnancy Calculator
+              <Microscope className="h-3.5 w-3.5" /> {t("Clinically Validated · Natural Pregnancy Calculator")}
             </span>
           </Reveal>
           <Reveal delay={0.06}>
@@ -143,7 +146,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                 { icon: Lock, t: "No data stored" },
               ].map((b) => (
                 <span key={b.t} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-xs font-semibold text-[color:var(--plum)] shadow-soft">
-                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {b.t}
+                  <b.icon className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {t(b.t)}
                 </span>
               ))}
             </div>
@@ -158,7 +161,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
               ].map((s) => (
                 <div key={s.stat} className="rounded-2xl border border-[color:var(--rose)]/20 bg-white/80 px-5 py-3 text-center shadow-soft backdrop-blur">
                   <div className="font-display text-xl font-bold text-[color:var(--rose)]">{s.stat}</div>
-                  <div className="mt-0.5 text-xs text-muted-foreground">{s.label}</div>
+                  <div className="mt-0.5 text-xs text-muted-foreground">{t(s.label)}</div>
                 </div>
               ))}
             </div>
@@ -170,12 +173,9 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
       <section className="container-px mx-auto max-w-[1000px] py-8 md:py-12">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-7 md:p-10">
-            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">How Does This Natural Pregnancy Calculator Work?</h2>
+            <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("How Does This Natural Pregnancy Calculator Work?")}</h2>
             <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-              Developed at Erasmus University Medical Centre, Rotterdam (2004), this calculator uses five clinical factors
-              to calculate the likelihood of spontaneous pregnancy leading to a live birth — without fertility treatment.
-              At Bavishi Fertility Institute, specialists use this score to decide between expectant management, IUI, or
-              direct IVF.
+              {t("Developed at Erasmus University Medical Centre, Rotterdam (2004), this calculator uses five clinical factors to calculate the likelihood of spontaneous pregnancy leading to a live birth — without fertility treatment. At Bavishi Fertility Institute, specialists use this score to decide between expectant management, IUI, or direct IVF.")}
             </p>
             <div className="mt-7 grid grid-cols-1 gap-4 sm:grid-cols-3">
               {[
@@ -186,7 +186,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                 <div key={b.t} className="rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
                   <b.icon className="mx-auto h-6 w-6 text-[color:var(--rose)]" />
                   <div className="mt-2 font-display text-xl font-bold text-[color:var(--rose)]">{b.n}</div>
-                  <div className="mt-1 text-xs text-muted-foreground">{b.t}</div>
+                  <div className="mt-1 text-xs text-muted-foreground">{t(b.t)}</div>
                 </div>
               ))}
             </div>
@@ -212,7 +212,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                         {n < step ? <CheckCircle2 className="h-5 w-5" /> : n}
                       </div>
                       <div className={`mt-2 text-[11px] font-semibold ${n < step ? "text-emerald-600" : n === step ? "text-[color:var(--rose)]" : "text-muted-foreground/60"}`}>
-                        {STEP_LABELS[n]}
+                        {t(STEP_LABELS[n])}
                       </div>
                     </div>
                     {i < 2 && <div className={`mb-5 h-0.5 flex-1 transition-colors ${n < step ? "bg-emerald-500" : "bg-border"}`} />}
@@ -230,13 +230,13 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                 >
                   {step === 1 && (
                     <div>
-                      <h3 className="font-display text-xl font-semibold text-[color:var(--plum)]">Step 1 — Your Age &amp; Duration</h3>
-                      <p className="mt-1.5 text-sm text-muted-foreground">These are the two strongest predictors in this natural pregnancy calculator.</p>
+                      <h3 className="font-display text-xl font-semibold text-[color:var(--plum)]">{t("Step 1 — Your Age & Duration")}</h3>
+                      <p className="mt-1.5 text-sm text-muted-foreground">{t("These are the two strongest predictors in this natural pregnancy calculator.")}</p>
 
                       <div className="mt-8 space-y-6">
                         <div>
                           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-                            Female Age <span className="font-medium text-muted-foreground/70">(enter age in years)</span>
+                            {t("Female Age")} <span className="font-medium text-muted-foreground/70">{t("(enter age in years)")}</span>
                           </label>
                           <input
                             type="number" min={18} max={50} placeholder="e.g. 32" value={age}
@@ -246,7 +246,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                         </div>
                         <div>
                           <label className="mb-2 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">
-                            How long have you been trying to conceive? <span className="font-medium text-muted-foreground/70">(in years — e.g. 1.5 for 18 months)</span>
+                            {t("How long have you been trying to conceive?")} <span className="font-medium text-muted-foreground/70">{t("(in years — e.g. 1.5 for 18 months)")}</span>
                           </label>
                           <input
                             type="number" min={0} max={20} step={0.5} placeholder="e.g. 2" value={duration}
@@ -256,11 +256,11 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                         </div>
                       </div>
 
-                      {error && <p role="alert" className="mt-5 rounded-xl bg-[color:var(--rose)]/10 px-4 py-3 text-sm text-[color:var(--rose)]">{error}</p>}
+                      {error && <p role="alert" className="mt-5 rounded-xl bg-[color:var(--rose)]/10 px-4 py-3 text-sm text-[color:var(--rose)]">{t(error)}</p>}
 
                       <div className="mt-9 flex justify-end border-t border-border/60 pt-7">
                         <button type="button" onClick={() => goNext(1)} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                          Continue <ArrowRight className="h-4 w-4" />
+                          {t("Continue")} <ArrowRight className="h-4 w-4" />
                         </button>
                       </div>
                     </div>
@@ -268,8 +268,8 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
 
                   {step === 2 && (
                     <div>
-                      <h3 className="font-display text-xl font-semibold text-[color:var(--plum)]">Step 2 — Pregnancy History</h3>
-                      <p className="mt-1.5 text-sm text-muted-foreground">Has there been any previous pregnancy — even a miscarriage or chemical pregnancy?</p>
+                      <h3 className="font-display text-xl font-semibold text-[color:var(--plum)]">{t("Step 2 — Pregnancy History")}</h3>
+                      <p className="mt-1.5 text-sm text-muted-foreground">{t("Has there been any previous pregnancy — even a miscarriage or chemical pregnancy?")}</p>
 
                       <div className="mt-8 grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                         {[
@@ -283,18 +283,18 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                             }`}
                           >
                             <opt.icon className="mb-1 h-6 w-6 text-[color:var(--rose)]" />
-                            <span className="font-display text-sm font-semibold text-[color:var(--plum)]">{opt.t}</span>
-                            <span className="text-xs text-muted-foreground">{opt.d}</span>
+                            <span className="font-display text-sm font-semibold text-[color:var(--plum)]">{t(opt.t)}</span>
+                            <span className="text-xs text-muted-foreground">{t(opt.d)}</span>
                           </button>
                         ))}
                       </div>
 
                       <div className="mt-9 flex items-center justify-between border-t border-border/60 pt-7">
                         <button type="button" onClick={() => goBack(2)} className="inline-flex items-center gap-2 rounded-full border-2 border-border px-6 py-3 text-sm font-semibold text-muted-foreground transition hover:border-[color:var(--plum)]/30 hover:text-[color:var(--plum)]">
-                          <ArrowLeft className="h-4 w-4" /> Back
+                          <ArrowLeft className="h-4 w-4" /> {t("Back")}
                         </button>
                         <button type="button" onClick={() => goNext(2)} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                          Continue <ArrowRight className="h-4 w-4" />
+                          {t("Continue")} <ArrowRight className="h-4 w-4" />
                         </button>
                       </div>
                     </div>
@@ -302,14 +302,14 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
 
                   {step === 3 && (
                     <div>
-                      <h3 className="font-display text-xl font-semibold text-[color:var(--plum)]">Step 3 — Sperm &amp; Referral</h3>
-                      <p className="mt-1.5 text-sm text-muted-foreground">Last two inputs — then your result is ready.</p>
+                      <h3 className="font-display text-xl font-semibold text-[color:var(--plum)]">{t("Step 3 — Sperm & Referral")}</h3>
+                      <p className="mt-1.5 text-sm text-muted-foreground">{t("Last two inputs — then your result is ready.")}</p>
 
                       <div className="mt-8">
                         <div className="mb-3 flex items-center justify-between">
                           <div>
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Sperm Motility</label>
-                            <span className="text-xs text-muted-foreground/80">% of sperm that are moving — from semen analysis report</span>
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Sperm Motility")}</label>
+                            <span className="text-xs text-muted-foreground/80">{t("% of sperm that are moving — from semen analysis report")}</span>
                           </div>
                           <div className="font-display text-3xl font-bold text-[color:var(--rose)]">
                             {motility}<span className="text-base font-semibold text-muted-foreground/60"> %</span>
@@ -327,7 +327,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                       </div>
 
                       <div className="mt-9">
-                        <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Who referred you to a fertility clinic?</label>
+                        <label className="mb-3 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">{t("Who referred you to a fertility clinic?")}</label>
                         <div className="grid grid-cols-1 gap-3.5 sm:grid-cols-2">
                           {[
                             { v: "1" as const, icon: HomeIcon, t: "GP / Family Doctor", d: "Referred by your general physician" },
@@ -340,8 +340,8 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                               }`}
                             >
                               <opt.icon className="mb-1 h-6 w-6 text-[color:var(--rose)]" />
-                              <span className="font-display text-sm font-semibold text-[color:var(--plum)]">{opt.t}</span>
-                              <span className="text-xs text-muted-foreground">{opt.d}</span>
+                              <span className="font-display text-sm font-semibold text-[color:var(--plum)]">{t(opt.t)}</span>
+                              <span className="text-xs text-muted-foreground">{t(opt.d)}</span>
                             </button>
                           ))}
                         </div>
@@ -349,10 +349,10 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
 
                       <div className="mt-9 flex items-center justify-between border-t border-border/60 pt-7">
                         <button type="button" onClick={() => goBack(3)} className="inline-flex items-center gap-2 rounded-full border-2 border-border px-6 py-3 text-sm font-semibold text-muted-foreground transition hover:border-[color:var(--plum)]/30 hover:text-[color:var(--plum)]">
-                          <ArrowLeft className="h-4 w-4" /> Back
+                          <ArrowLeft className="h-4 w-4" /> {t("Back")}
                         </button>
                         <button type="button" onClick={calculate} className="btn-luxury inline-flex items-center gap-2 rounded-full bg-gradient-to-br from-emerald-500 to-emerald-600 px-7 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                          <Microscope className="h-4 w-4" /> Calculate My Score
+                          <Microscope className="h-4 w-4" /> {t("Calculate My Score")}
                         </button>
                       </div>
                     </div>
@@ -364,16 +364,15 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
         ) : (
           <motion.div initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.35 }}>
             <button type="button" onClick={reset} className="mb-5 inline-flex items-center gap-2 rounded-full border-2 border-border px-5 py-2.5 text-xs font-semibold text-muted-foreground transition hover:border-[color:var(--rose)] hover:text-[color:var(--rose)]">
-              <RotateCcw className="h-3.5 w-3.5" /> Recalculate
+              <RotateCcw className="h-3.5 w-3.5" /> {t("Recalculate")}
             </button>
 
             {/* Result hero */}
             <div className="rounded-[2rem] border border-[color:var(--rose)]/20 bg-gradient-to-b from-[color:var(--rose-soft)]/40 via-white to-white p-8 text-center shadow-lift md:p-12">
-              <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/70">Your 12-Month Natural Pregnancy Probability</div>
+              <div className="text-xs font-bold uppercase tracking-[0.15em] text-muted-foreground/70">{t("Your 12-Month Natural Pregnancy Probability")}</div>
               <div className="mt-4 font-display text-6xl font-black text-[color:var(--rose)] md:text-7xl">{prob}%</div>
               <p className="mx-auto mt-3 max-w-md text-sm leading-relaxed text-muted-foreground">
-                Estimated probability of <strong className="text-[color:var(--plum)]">natural pregnancy leading to a live birth</strong> within
-                the next 12 months, based on your profile.
+                {t("Estimated probability of")} <strong className="text-[color:var(--plum)]">{t("natural pregnancy leading to a live birth")}</strong> {t("within the next 12 months, based on your profile.")}
               </p>
 
               {/* Gauge */}
@@ -387,7 +386,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                   />
                 </div>
                 <div className="mt-2.5 flex justify-between text-[11px] font-bold text-muted-foreground/60">
-                  <span>Very Low</span><span>Low</span><span>Moderate</span><span>Good</span><span>High</span>
+                  <span>{t("Very Low")}</span><span>{t("Low")}</span><span>{t("Moderate")}</span><span>{t("Good")}</span><span>{t("High")}</span>
                 </div>
               </div>
 
@@ -396,22 +395,22 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                 {[
                   { n: `${prob}%`, l: "Your Pregnancy Score" },
                   { n: `${100 - prob}%`, l: "Chance of Not Conceiving Naturally" },
-                  { n: recommendation, l: "Typical Recommendation" },
+                  { n: t(recommendation), l: "Typical Recommendation" },
                 ].map((d) => (
                   <div key={d.l} className="rounded-2xl border border-border/70 bg-card p-5 text-center shadow-soft">
                     <div className="font-display text-xl font-bold text-[color:var(--plum)]">{d.n}</div>
-                    <div className="mt-1 text-[11px] font-semibold text-muted-foreground/70">{d.l}</div>
+                    <div className="mt-1 text-[11px] font-semibold text-muted-foreground/70">{t(d.l)}</div>
                   </div>
                 ))}
               </div>
             </div>
 
             {/* Interpretation */}
-            <InterpretationBlock prob={prob} />
+            <InterpretationBlock prob={prob} t={t} />
 
             {/* Score guide */}
             <div className="mt-7 rounded-3xl border border-border/70 bg-card p-7 shadow-soft md:p-9">
-              <h3 className="font-display text-lg font-semibold text-[color:var(--plum)]">Understanding Your Natural Pregnancy Score</h3>
+              <h3 className="font-display text-lg font-semibold text-[color:var(--plum)]">{t("Understanding Your Natural Pregnancy Score")}</h3>
               <Stagger className="mt-5 divide-y divide-border/60">
                 {[
                   { pill: "≥ 40%", cls: "bg-emerald-100 text-emerald-700", t: "Expectant Management — Try Naturally", d: "A good chance of natural conception. Most guidelines recommend a further 6–12 months of well-timed intercourse before starting treatment." },
@@ -422,8 +421,8 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
                     <div className="flex flex-col gap-3 py-4 sm:flex-row sm:items-start sm:gap-5">
                       <span className={`inline-flex shrink-0 items-center justify-center rounded-full px-4 py-1.5 font-display text-xs font-bold ${row.cls}`}>{row.pill}</span>
                       <div>
-                        <h5 className="font-display text-sm font-semibold text-[color:var(--plum)]">{row.t}</h5>
-                        <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{row.d}</p>
+                        <h5 className="font-display text-sm font-semibold text-[color:var(--plum)]">{t(row.t)}</h5>
+                        <p className="mt-1 text-[13px] leading-relaxed text-muted-foreground">{t(row.d)}</p>
                       </div>
                     </div>
                   </StaggerItem>
@@ -433,18 +432,17 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
 
             {/* CTA */}
             <div className="relative mt-7 overflow-hidden rounded-3xl gradient-dark noise px-7 py-12 text-center text-white md:px-12 md:py-14">
-              <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/55">Next Step</p>
-              <h3 className="mx-auto mt-3 max-w-md font-display text-2xl font-bold leading-snug">Speak with a Specialist at Bavishi Fertility Institute</h3>
+              <p className="text-xs font-bold uppercase tracking-[0.15em] text-white/55">{t("Next Step")}</p>
+              <h3 className="mx-auto mt-3 max-w-md font-display text-2xl font-bold leading-snug">{t("Speak with a Specialist at Bavishi Fertility Institute")}</h3>
               <p className="mx-auto mt-3 max-w-lg text-sm leading-relaxed text-white/65">
-                Our fertility specialists use your natural pregnancy probability score alongside complete investigations —
-                AMH, semen analysis, uterine scan — to create a personalised treatment plan. First consultation is free.
+                {t("Our fertility specialists use your natural pregnancy probability score alongside complete investigations — AMH, semen analysis, uterine scan — to create a personalised treatment plan. First consultation is free.")}
               </p>
               <div className="mt-7 flex flex-wrap justify-center gap-3">
                 <Magnetic as="a" href="/contact" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-7 py-3.5 text-sm font-semibold text-white shadow-glow">
-                  <Calendar className="h-4 w-4" /> Book Consultation
+                  <Calendar className="h-4 w-4" /> {t("Book Consultation")}
                 </Magnetic>
                 <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-7 py-3.5 text-sm font-semibold text-white">
-                  <MessageCircle className="h-4 w-4" /> WhatsApp Us
+                  <MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}
                 </Magnetic>
               </div>
             </div>
@@ -455,11 +453,11 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
       {/* About / Disclaimer */}
       <section className="container-px mx-auto max-w-5xl py-4 md:py-8">
         <div className="rounded-3xl border border-border/70 bg-card p-7 md:p-10">
-          <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">About This Calculator</h2>
+          <h2 className="text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("About This Calculator")}</h2>
           <Editable path="disclaimer" as="p" className="mt-5 text-[15px] leading-relaxed text-muted-foreground whitespace-pre-line" rich={false}>{cmsDisclaimer}</Editable>
           {cms?.faqs && cms.faqs.length > 0 && (
             <div className="mt-8 space-y-4">
-              <h3 className="text-lg font-semibold text-[color:var(--plum)]">Frequently Asked Questions</h3>
+              <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t("Frequently Asked Questions")}</h3>
               <div className="space-y-3">
                 {cms.faqs.map((f, i) => (
                   <details key={i} className="group rounded-2xl border border-border/60 bg-white/70 px-5 py-4 open:pb-4">
@@ -477,8 +475,8 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
           <div className="rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/20 p-7 md:p-10">
-            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">Why Patients Use This Calculator</h2>
-            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">Built for patients who need real numbers — not just hope.</p>
+            <h2 className="text-center text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">{t("Why Patients Use This Calculator")}</h2>
+            <p className="mx-auto mt-3 max-w-lg text-center text-sm text-muted-foreground">{t("Built for patients who need real numbers — not just hope.")}</p>
             <div className="mt-8 grid gap-5 sm:grid-cols-2 md:grid-cols-3">
               {([
                 { icon: Target, title: "Know Where You Stand — Right Now", desc: "Stop guessing. Your natural pregnancy probability is calculated instantly based on validated clinical data." },
@@ -490,8 +488,8 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
               ] as { icon: LucideIcon; title: string; desc: string }[]).map((c) => (
                 <div key={c.title} className="rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                   <c.icon className="h-6 w-6 text-[color:var(--rose)]" />
-                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{c.title}</h3>
-                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{c.desc}</p>
+                  <h3 className="mt-3 text-sm font-semibold text-[color:var(--plum)]">{t(c.title)}</h3>
+                  <p className="mt-2 text-xs leading-relaxed text-muted-foreground">{t(c.desc)}</p>
                 </div>
               ))}
             </div>
@@ -505,10 +503,10 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
           <div className="rounded-3xl bg-gradient-to-br from-[color:var(--plum)] to-[color:var(--plum)]/80 px-8 py-10 text-center text-white md:px-14">
             <div className="text-4xl text-white/30">&ldquo;</div>
             <p className="mx-auto mt-2 max-w-xl text-base leading-relaxed italic text-white/90 md:text-lg">
-              Before using this calculator, we had been trying for 2 years with no direction. Seeing our score was the push we needed to book a consultation. Three months later, we were pregnant through IUI.
+              {t("Before using this calculator, we had been trying for 2 years with no direction. Seeing our score was the push we needed to book a consultation. Three months later, we were pregnant through IUI.")}
             </p>
             <div className="mt-5 text-xs font-bold uppercase tracking-[0.18em] text-white/50">
-              — Patient at Bavishi Fertility Institute
+              — {t("Patient at Bavishi Fertility Institute")}
             </div>
           </div>
         </Reveal>
@@ -517,7 +515,7 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
       {/* Who Should Use */}
       <section className="container-px mx-auto max-w-5xl py-6 md:py-10">
         <Reveal>
-          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">Who Should Use This Calculator?</h2>
+          <h2 className="text-center text-xl font-semibold text-[color:var(--plum)] md:text-2xl">{t("Who Should Use This Calculator?")}</h2>
           <div className="mt-7 grid gap-4 sm:grid-cols-2 md:grid-cols-3">
             {([
               { icon: Users, title: "Couples trying 6+ months", desc: "If you've been trying for 6 months or more without success, it's time to understand your probability." },
@@ -530,8 +528,8 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
               <div key={p.title} className="flex items-start gap-4 rounded-2xl border border-border/70 bg-card p-5 shadow-soft">
                 <p.icon className="h-6 w-6 shrink-0 text-[color:var(--rose)]" />
                 <div>
-                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{p.title}</h3>
-                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{p.desc}</p>
+                  <h3 className="text-sm font-semibold text-[color:var(--plum)]">{t(p.title)}</h3>
+                  <p className="mt-1.5 text-xs leading-relaxed text-muted-foreground">{t(p.desc)}</p>
                 </div>
               </div>
             ))}
@@ -551,17 +549,15 @@ export function NaturalPregnancyCalculatorPage({ cms }: { cms?: CalculatorCmsDat
   );
 }
 
-function InterpretationBlock({ prob }: { prob: number }) {
+function InterpretationBlock({ prob, t }: { prob: number; t: (s: string) => string }) {
   if (prob >= 50) {
     return (
       <div className="mt-7 rounded-3xl border border-emerald-200 bg-emerald-50 p-7 md:p-9">
         <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-[color:var(--plum)]">
-          <CheckCircle2 className="h-5 w-5 text-emerald-600" /> Good Prognosis — Natural Conception is Realistic
+          <CheckCircle2 className="h-5 w-5 text-emerald-600" /> {t("Good Prognosis — Natural Conception is Realistic")}
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Your score of <strong className="text-[color:var(--plum)]">{prob}%</strong> is encouraging. Based on clinical
-          data, there is a meaningful chance of natural pregnancy within 12 months. Most guidelines suggest continuing to
-          try naturally for the recommended period before starting treatment.
+          {t("Your score of")} <strong className="text-[color:var(--plum)]">{prob}%</strong> {t("is encouraging. Based on clinical data, there is a meaningful chance of natural pregnancy within 12 months. Most guidelines suggest continuing to try naturally for the recommended period before starting treatment.")}
         </p>
         <ul className="mt-4 space-y-2.5 text-sm text-[color:var(--plum)]/90">
           {[
@@ -571,7 +567,7 @@ function InterpretationBlock({ prob }: { prob: number }) {
             "Age is a key factor — if you are over 35, do not wait the full 12 months before seeking guidance",
           ].map((li) => (
             <li key={li} className="flex gap-2.5 border-b border-emerald-100 pb-2.5 last:border-0">
-              <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" /> {li}
+              <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-emerald-600" /> {t(li)}
             </li>
           ))}
         </ul>
@@ -582,12 +578,10 @@ function InterpretationBlock({ prob }: { prob: number }) {
     return (
       <div className="mt-7 rounded-3xl border border-amber-200 bg-amber-50 p-7 md:p-9">
         <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-[color:var(--plum)]">
-          <Zap className="h-5 w-5 text-amber-600" /> Moderate Prognosis — IUI Is Often the First Step
+          <Zap className="h-5 w-5 text-amber-600" /> {t("Moderate Prognosis — IUI Is Often the First Step")}
         </h3>
         <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-          Your score of <strong className="text-[color:var(--plum)]">{prob}%</strong> indicates a reduced but not
-          negligible chance of natural conception. Intrauterine Insemination (IUI) is typically recommended at this score
-          level — it improves pregnancy rates significantly with minimal intervention.
+          {t("Your score of")} <strong className="text-[color:var(--plum)]">{prob}%</strong> {t("indicates a reduced but not negligible chance of natural conception. Intrauterine Insemination (IUI) is typically recommended at this score level — it improves pregnancy rates significantly with minimal intervention.")}
         </p>
         <ul className="mt-4 space-y-2.5 text-sm text-[color:var(--plum)]/90">
           {[
@@ -597,7 +591,7 @@ function InterpretationBlock({ prob }: { prob: number }) {
             "Your specialist will personalise the recommendation after full investigations",
           ].map((li) => (
             <li key={li} className="flex gap-2.5 border-b border-amber-100 pb-2.5 last:border-0">
-              <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" /> {li}
+              <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-amber-600" /> {t(li)}
             </li>
           ))}
         </ul>
@@ -607,12 +601,10 @@ function InterpretationBlock({ prob }: { prob: number }) {
   return (
     <div className="mt-7 rounded-3xl border border-blue-200 bg-blue-50 p-7 md:p-9">
       <h3 className="flex items-center gap-2 font-display text-lg font-semibold text-[color:var(--plum)]">
-        <HeartPulse className="h-5 w-5 text-blue-600" /> Low Prognosis — IVF is Strongly Recommended
+        <HeartPulse className="h-5 w-5 text-blue-600" /> {t("Low Prognosis — IVF is Strongly Recommended")}
       </h3>
       <p className="mt-3 text-sm leading-relaxed text-muted-foreground">
-        Your score of <strong className="text-[color:var(--plum)]">{prob}%</strong> suggests that natural conception
-        within 12 months is unlikely. This does <strong className="text-[color:var(--plum)]">not</strong> mean you cannot
-        have a baby — it means that waiting is unlikely to help, and proceeding to IVF gives you the best chance.
+        {t("Your score of")} <strong className="text-[color:var(--plum)]">{prob}%</strong> {t("suggests that natural conception within 12 months is unlikely. This does")} <strong className="text-[color:var(--plum)]">{t("not")}</strong> {t("mean you cannot have a baby — it means that waiting is unlikely to help, and proceeding to IVF gives you the best chance.")}
       </p>
       <ul className="mt-4 space-y-2.5 text-sm text-[color:var(--plum)]/90">
         {[
@@ -622,7 +614,7 @@ function InterpretationBlock({ prob }: { prob: number }) {
           "Book a consultation to get a complete individualised assessment and treatment plan",
         ].map((li) => (
           <li key={li} className="flex gap-2.5 border-b border-blue-100 pb-2.5 last:border-0">
-            <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" /> {li}
+            <ArrowRight className="mt-0.5 h-4 w-4 shrink-0 text-blue-600" /> {t(li)}
           </li>
         ))}
       </ul>

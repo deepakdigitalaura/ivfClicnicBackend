@@ -29,7 +29,7 @@ export function DoctorEditor({
             <EditorToolbar pageLabel={`Doctor: ${draft.name || slug}`} backUrl={`/doctors/${slug}`} />
             <FloatingToolbar />
             <div className="bfi-edit-canvas">
-              {resolved && <DoctorProfile doctor={resolved} />}
+              {resolved && <DoctorProfile doctor={resolved} centres={[]} />}
             </div>
           </div>
         );

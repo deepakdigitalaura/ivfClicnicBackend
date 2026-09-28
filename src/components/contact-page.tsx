@@ -6,6 +6,8 @@ import { InquiryForm, Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { Editable } from "@/components/editor/Editable";
+import { ui } from "@/lib/ui-strings";
+import type { Locale } from "@/lib/i18n";
 
 /* `<Editable>` is inert on the public site (byte-identical) and click-to-edit
  * inside /edit/contact. `path` is the dot-path into the contact `pages` doc
@@ -17,6 +19,10 @@ const ed = (path: string, value: string, rich = true) => (
 /* Icon-name -> component map. The CMS stores a name (string); the template
  * resolves it to a Lucide component. This is the serialisable-icon pattern
  * future collections (Treatments/Services) will reuse. */
+/** Translate the recurring tokens in an opening-hours line (times/digits stay as-is). */
+const hoursT = (h: string, t: (k: string) => string) =>
+  h.replace(/Mon–Sat|Tue, Thu & Sat|Emergency 24x7|[ap]m/g, (m) => t(m));
+
 const ICONS: Record<string, LucideIcon> = { Phone, MessageCircle, Mail, Clock, MapPin, Calendar };
 
 type Card = { icon: string; t: string; v: string; href?: string | null; note?: string | null };
@@ -72,9 +78,10 @@ export const DEFAULT_FAQS: Faq[] = [
 
 export type ContactSectionLabels = { networkEyebrow?: string | null; networkSubtitle?: string | null; faqEyebrow?: string | null };
 
-export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propDirectory }: { hero?: Hero; faqs?: Faq[]; cards?: Card[]; sectionLabels?: ContactSectionLabels; directory?: Centre[] } = {}) {
+export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propDirectory, locale = "en" }: { hero?: Hero; faqs?: Faq[]; cards?: Card[]; sectionLabels?: ContactSectionLabels; directory?: Centre[]; locale?: Locale } = {}) {
+  const t = (s: string) => ui(s, locale);
   const h = { ...DEFAULT_HERO, ...(hero ?? {}) };
-  const faqList = faqs?.length ? faqs : DEFAULT_FAQS;
+  const faqList = (faqs?.length ? faqs : DEFAULT_FAQS).map((f) => ({ q: t(f.q), a: t(f.a) }));
   const cardList = cards?.length ? cards : DEFAULT_CARDS;
   const sl = sectionLabels ?? {};
   const centreList = propDirectory?.length ? propDirectory : directory;
@@ -85,9 +92,9 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
       {/* Breadcrumb */}
       <div className="border-b border-border/60 bg-[color:var(--ivory)]">
         <nav className="container-px mx-auto flex max-w-[1400px] items-center gap-2 py-3 text-xs text-muted-foreground" aria-label="Breadcrumb">
-          <a href="/" className="hover:text-[color:var(--rose)]">Home</a>
+          <a href={locale === "en" ? "/" : `/${locale}`} className="hover:text-[color:var(--rose)]">{t("Home")}</a>
           <span>/</span>
-          <span className="font-medium text-[color:var(--plum)]">Contact Us</span>
+          <span className="font-medium text-[color:var(--plum)]">{t("Contact Us")}</span>
         </nav>
       </div>
 
@@ -98,15 +105,15 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
           <div className="absolute -bottom-40 -left-24 h-[26rem] w-[26rem] rounded-full bg-[color:var(--plum)]/15 blur-3xl" />
         </div>
         <div className="container-px mx-auto max-w-[1400px] py-16 text-center md:py-20">
-          <Reveal><div className="flex justify-center"><Eyebrow>{ed("hero.eyebrow", h.eyebrow ?? "")}</Eyebrow></div></Reveal>
+          <Reveal><div className="flex justify-center"><Eyebrow>{ed("hero.eyebrow", t(h.eyebrow ?? ""))}</Eyebrow></div></Reveal>
           <Reveal delay={0.05}>
             <h1 className="mx-auto mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] lg:whitespace-nowrap xl:text-[3.5rem]">
-              {ed("hero.lead", h.lead ?? "")} <em className="font-display italic text-[color:var(--rose)]">{ed("hero.em", h.em ?? "")}</em>
+              {ed("hero.lead", t(h.lead ?? ""))} <em className="font-display italic text-[color:var(--rose)]">{ed("hero.em", h.em ?? "")}</em>
             </h1>
           </Reveal>
           <Reveal delay={0.12}>
             <p className="mx-auto mt-6 max-w-xl text-lg leading-relaxed text-muted-foreground text-pretty">
-              {ed("hero.subtitle", h.subtitle ?? "")}
+              {ed("hero.subtitle", t(h.subtitle ?? ""))}
             </p>
           </Reveal>
         </div>
@@ -120,9 +127,9 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
             const inner = (
               <div className="flex h-full flex-col items-start rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
                 <div className="inline-flex h-11 w-11 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-[color:var(--rose)]"><Icon className="h-5 w-5" /></div>
-                <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{c.t}</div>
+                <div className="mt-4 text-xs font-semibold uppercase tracking-wider text-[color:var(--rose)]">{t(c.t)}</div>
                 <div className="mt-1 text-base font-semibold text-[color:var(--plum)]">{c.v}</div>
-                <div className="mt-1 text-sm text-muted-foreground">{c.note}</div>
+                <div className="mt-1 text-sm text-muted-foreground">{c.note ? t(c.note) : c.note}</div>
               </div>
             );
             return (
@@ -139,7 +146,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
 
       {/* Locations directory */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
-        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", sl.networkEyebrow || "Our Network")} title={<>Find a Bavishi Fertility Institute <em className="font-display italic text-[color:var(--rose)]">near you</em></>} subtitle={ed("sectionLabels.networkSubtitle", sl.networkSubtitle || "14 fertility centres across 8 Indian cities — world-class care, close to home. Phone & WhatsApp support is available 24×7; centre visiting hours are listed below.")} />
+        <SectionHead center eyebrow={ed("sectionLabels.networkEyebrow", t(sl.networkEyebrow || "Our Network"))} title={<>{t("Find a Bavishi Fertility Institute")} <em className="font-display italic text-[color:var(--rose)]">{t("near you")}</em></>} subtitle={ed("sectionLabels.networkSubtitle", t(sl.networkSubtitle || "14 fertility centres across 8 Indian cities — world-class care, close to home. Phone & WhatsApp support is available 24×7; centre visiting hours are listed below."))} />
 
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
           {centreList.map((c) => (
@@ -161,16 +168,16 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
                 {c.hours && (
                   <div className="mt-2 inline-flex items-start gap-2 text-[12px] text-muted-foreground">
                     <Clock className="mt-0.5 h-3.5 w-3.5 shrink-0 text-[color:var(--rose)]" />
-                    <span>{c.hours}</span>
+                    <span>{hoursT(c.hours, t)}</span>
                   </div>
                 )}
 
                 <div className="mt-auto flex flex-nowrap items-center gap-1.5 border-t border-border/60 pt-4">
                   <a href={`tel:+${c.phone}`} className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full bg-[color:var(--rose)] px-2.5 py-1.5 text-[11px] font-semibold text-white transition hover:brightness-110">
-                    <Phone className="h-3 w-3" /> Call
+                    <Phone className="h-3 w-3" /> {t("Call")}
                   </a>
                   <a href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent("Bavishi Fertility Institute " + c.name.replace(" — ", " "))}`} target="_blank" rel="noopener noreferrer" className="inline-flex shrink-0 items-center gap-1 whitespace-nowrap rounded-full border border-[color:var(--plum)]/15 px-2.5 py-1.5 text-[11px] font-semibold text-[color:var(--plum)] transition hover:bg-[color:var(--plum)]/5">
-                    <Navigation className="h-3 w-3" /> Directions
+                    <Navigation className="h-3 w-3" /> {t("Directions")}
                   </a>
                 </div>
               </article>
@@ -182,15 +189,15 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
         <Reveal delay={0.1}>
           <div className="mt-9 flex flex-col items-center justify-between gap-6 rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/30 px-8 py-8 text-center md:flex-row md:text-left">
             <div>
-              <h3 className="text-xl font-semibold text-[color:var(--plum)]">Need help choosing the right centre?</h3>
-              <p className="mt-1.5 text-sm text-muted-foreground">Our counsellors will guide you to the Bavishi Fertility Institute centre nearest you.</p>
+              <h3 className="text-xl font-semibold text-[color:var(--plum)]">{t("Need help choosing the right centre?")}</h3>
+              <p className="mt-1.5 text-sm text-muted-foreground">{t("Our counsellors will guide you to the Bavishi Fertility Institute centre nearest you.")}</p>
             </div>
             <div className="flex flex-wrap justify-center gap-3">
               <a href="tel:+919712622288" className="inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:brightness-110">
-                <Phone className="h-4 w-4" /> Call Us
+                <Phone className="h-4 w-4" /> {t("Call Us")}
               </a>
               <a href="#book" className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white px-6 py-3 text-sm font-semibold text-[color:var(--plum)] transition hover:border-[color:var(--rose)]/40">
-                <Calendar className="h-4 w-4" /> Book Consultation
+                <Calendar className="h-4 w-4" /> {t("Book Consultation")}
               </a>
             </div>
           </div>
@@ -200,7 +207,7 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
       {/* FAQ */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-3xl">
-          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={<>Getting in touch — <em className="font-display italic text-[color:var(--rose)]">answered</em></>} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", t(sl.faqEyebrow || "FAQ"))} title={<>{t("Getting in touch —")} <em className="font-display italic text-[color:var(--rose)]">{t("answered")}</em></>} />
           <div className="mt-9 space-y-3">
             {faqList.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.question`, f.q, false)} a={ed(`faqs.${i}.answer`, f.a, false)} />)}
           </div>
@@ -212,14 +219,14 @@ export function ContactPage({ hero, faqs, cards, sectionLabels, directory: propD
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              Your journey to parenthood starts with <em className="font-display italic text-[color:var(--rose-soft)]">one message.</em>
+              {t("Your journey to parenthood starts with")} <em className="font-display italic text-[color:var(--rose-soft)]">{t("one message.")}</em>
             </h2>
           </Reveal>
           <Reveal delay={0.15}>
             <div className="mt-9 flex flex-wrap justify-center gap-3">
-              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> Book Consultation</Magnetic>
+              <Magnetic as="a" href="#book" className="btn-luxury inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-glow"><Calendar className="h-4 w-4" /> {t("Book Consultation")}</Magnetic>
               <Magnetic as="a" href="tel:+919712622288" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><Phone className="h-4 w-4" /> +91 97126 22288</Magnetic>
-              <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> WhatsApp Us</Magnetic>
+              <Magnetic as="a" href="https://wa.me/919712522289" target="_blank" rel="noopener noreferrer" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-white/20 bg-white/5 px-6 py-3.5 text-sm font-semibold text-white"><MessageCircle className="h-4 w-4" /> {t("WhatsApp Us")}</Magnetic>
             </div>
           </Reveal>
         </div>

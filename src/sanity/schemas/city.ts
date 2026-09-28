@@ -28,6 +28,7 @@ export default defineType({
     { name: "contact", title: "Contact" },
     { name: "content", title: "Content" },
     { name: "faqs", title: "FAQs" },
+    { name: "seo", title: "SEO" },
   ],
   fields: [
     // ── Identity ──
@@ -64,6 +65,12 @@ export default defineType({
     valueArr("intro", "Intro Paragraphs", "Paragraph"),
     faq,
     valueArr("womensHealth", "Women's Health Services", "Service Name"),
+
+    // ── SEO ──
+    defineField({ name: "metaTitle", title: "Meta Title", type: "string", group: "seo" }),
+    defineField({ name: "metaDescription", title: "Meta Description", type: "text", rows: 3, group: "seo" }),
+    defineField({ name: "ogTitle", title: "OG Title", description: "Used when shared on Facebook/WhatsApp. Defaults to Meta Title.", type: "string", group: "seo" }),
+    defineField({ name: "ogDescription", title: "OG Description", description: "Defaults to Meta Description.", type: "text", rows: 3, group: "seo" }),
   ],
   preview: {
     select: { title: "name", subtitle: "slug" },
