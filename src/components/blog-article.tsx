@@ -13,9 +13,11 @@ import {
   ChevronRight,
   ChevronDown,
   MapPin,
+  Stethoscope,
 } from "lucide-react";
 import { format } from "date-fns";
 import { Reveal, Magnetic, Stagger, StaggerItem } from "@/components/motion";
+import { parentTopicFor } from "@/lib/blog-parent-topic";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
@@ -219,6 +221,47 @@ function FaqSection({ faqs }: { faqs: { question: string; answer: string }[] }) 
 }
 
 /* ── Keep Reading ────────────────────────────────────────────── */
+/**
+ * One link from the article back to the treatment it belongs to.
+ *
+ * The blog carries most of the site's organic traffic while the treatment
+ * pages carry very little, and until now nothing led a reader from one to the
+ * other. The category the post already has decides the destination, so no post
+ * needs tagging by hand; categories with no sensible parent render nothing.
+ */
+function ParentTopicLink({ categorySlug }: { categorySlug?: string | null }) {
+  const topic = parentTopicFor(categorySlug);
+  if (!topic) return null;
+  return (
+    <section className="border-t border-border/60 bg-card py-10">
+      <div className="container-px mx-auto max-w-[1400px]">
+        <Reveal>
+          <a
+            href={topic.href}
+            className="group flex flex-col gap-3 rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-6 transition-colors hover:border-[color:var(--rose)]/50 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+          >
+            <div className="flex items-start gap-3">
+              <Stethoscope className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--rose)]" />
+              <div>
+                <span className="block text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">
+                  Treatment this article relates to
+                </span>
+                <span className="mt-1 block font-display text-xl font-medium leading-tight text-[color:var(--plum)]">
+                  {topic.label}
+                </span>
+                <span className="mt-1 block text-sm text-muted-foreground">{topic.blurb}</span>
+              </div>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-[color:var(--plum)] px-5 py-2.5 text-sm font-medium text-white transition-transform group-hover:translate-x-0.5 sm:self-auto">
+              Read more <ChevronRight className="h-4 w-4" />
+            </span>
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function KeepReading({ posts }: { posts: BlogPost[] }) {
   if (!posts.length) return null;
   return (
@@ -647,6 +690,7 @@ export function BlogArticle({
       {/* ════════════════════════════════════════
           POST-CONTENT SECTIONS (full width)
       ════════════════════════════════════════ */}
+      <ParentTopicLink categorySlug={category?.slug} />
       <KeepReading posts={relatedBlogs} />
       <BlogCta />
 
