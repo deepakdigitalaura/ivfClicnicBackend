@@ -412,24 +412,65 @@ export const getSanityBlogsByLocationSlug = async (locationSlug: string) =>
     { slug: locationSlug },
   )) ?? [];
 
+/**
+ * Pick a window of the candidate list using the current slug as the offset.
+ *
+ * Taking `[0...3]` of a date-ordered list meant every post in a category linked
+ * to the same three newest posts — 69 IVF posts all pointed at the same 3, so
+ * ~72 posts site-wide collected every "Keep Reading" link and ~220 received
+ * none. That is what left 239 pages on 3 or fewer internal links.
+ *
+ * Offsetting by a hash of the slug spreads the links across the whole category
+ * instead. It stays deterministic, so a given post always shows the same picks
+ * and the pages remain cacheable.
+ */
+const relatedWindow = <T,>(items: T[], seed: string, limit: number): T[] => {
+  if (items.length <= limit) return items;
+  let h = 0;
+  for (let i = 0; i < seed.length; i++) h = (h * 31 + seed.charCodeAt(i)) >>> 0;
+  const start = h % items.length;
+  // wrap around the end so posts near the tail still get a full set
+  return Array.from({ length: limit }, (_, i) => items[(start + i) % items.length]);
+};
+
 export const getSanityRelatedBlogs = async (currentSlug: string, categorySlug: string | null) => {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
   try {
-    if (categorySlug) {
-      return (
-        (await client.fetch<SanityBlog[]>(
-          `*[_type == "blog" && status != "draft" && slug != $currentSlug && categorySlug == $categorySlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
-          { currentSlug, categorySlug },
-          SANITY_CACHE,
-        )) ?? []
-      );
-    }
-    return (
-      (await client.fetch<SanityBlog[]>(
-        `*[_type == "blog" && status != "draft" && slug != $currentSlug] | order(publishedAt desc)[0...3]{ ${BLOG_FIELDS} }`,
-        { currentSlug },
+    // Two steps on purpose. BLOG_FIELDS includes contentRaw — the whole article
+    // body — so pulling a 69-post category just to choose three would drag the
+    // entire category's content over the wire on every blog render. Step one
+    // asks for slugs only; step two fetches full fields for exactly the three
+    // we picked, which is the same payload this function returned before.
+    const filter = categorySlug
+      ? `_type == "blog" && status != "draft" && slug != $currentSlug && categorySlug == $categorySlug`
+      : `_type == "blog" && status != "draft" && slug != $currentSlug`;
+    const params = categorySlug ? { currentSlug, categorySlug } : { currentSlug };
+
+    const candidates =
+      (await client.fetch<{ slug: string }[]>(
+        `*[${filter}] | order(publishedAt desc){ slug }`,
+        params,
         SANITY_CACHE,
-      )) ?? []
+      )) ?? [];
+
+    const picked = relatedWindow(candidates, currentSlug, 3)
+      .map((c) => c.slug)
+      .filter(Boolean);
+    if (!picked.length) return [];
+
+    const docs =
+      (await client.fetch<SanityBlog[]>(
+        // repeat the draft filter: picked is already clean, but if a draft ever
+        // shared a slug with a published post this would otherwise surface it
+        `*[_type == "blog" && status != "draft" && slug in $picked]{ ${BLOG_FIELDS} }`,
+        { picked },
+        SANITY_CACHE,
+      )) ?? [];
+
+    // `slug in $picked` loses the order we chose, so restore it.
+    const order = new Map(picked.map((s, i) => [s, i]));
+    return [...docs].sort(
+      (a, b) => (order.get(a.slug ?? "") ?? 0) - (order.get(b.slug ?? "") ?? 0),
     );
   } catch {
     return [];
