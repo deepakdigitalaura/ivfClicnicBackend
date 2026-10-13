@@ -301,6 +301,8 @@ export type SanityBlog = {
   excerpt?: string | null;
   heroImageUrl?: string | null;
   heroImageAlt?: string | null;
+  cardImageUrl?: string | null;
+  cardImageAlt?: string | null;
   heroTextDark?: boolean | null;
   heroTextRight?: boolean | null;
   heroImagePosition?: string | null;
@@ -335,6 +337,7 @@ export type SanityBlog = {
 const BLOG_FIELDS = `
   _id, pgId, title, slug, excerpt,
   heroImageUrl, heroImageAlt, heroTextDark, heroTextRight, heroImagePosition,
+  cardImageUrl, cardImageAlt,
   contentRaw,
   authorSlug, authorName, authorRole, authorCredentials, authorAvatarUrl, authorBioText,
   reviewerSlug, reviewerName, reviewerRole, reviewerCredentials, reviewerAvatarUrl,

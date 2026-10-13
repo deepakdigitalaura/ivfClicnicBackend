@@ -305,7 +305,8 @@ export function BlogHub({
             {posts.map((p) => {
               const cat = asObj<Category>(p.category ?? undefined);
               const author = asObj<Author>(p.author);
-              const hero = asObj<Media>(p.heroImage ?? undefined);
+              // the designed thumbnail when one is set, else the hero image
+              const hero = asObj<Media>(p.cardImage ?? p.heroImage ?? undefined);
               return (
                 <StaggerItem key={p.id} className="h-full">
                   <a href={`/blogs/${p.slug}`} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
