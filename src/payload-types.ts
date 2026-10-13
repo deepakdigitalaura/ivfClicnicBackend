@@ -410,6 +410,7 @@ export interface Blog {
    */
   excerpt?: string | null;
   heroImage?: (number | null) | Media;
+  cardImage?: (number | null) | Media;
   heroTextDark?: boolean | null;
   heroTextRight?: boolean | null;
   heroImagePosition?: ('center center' | 'right center' | 'left center' | 'right top' | 'center top' | 'center bottom') | null;
