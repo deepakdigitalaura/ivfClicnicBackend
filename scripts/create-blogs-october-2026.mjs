@@ -1,36 +1,50 @@
+#!/usr/bin/env node
 /* =====================================================================
- * Create the six October 2026 blog posts approved on the staging site.
+ * Seed the six October 2026 blog posts approved on the staging site.
  *
  * Content was written and signed off at bfi-blog.vercel.app, including the
- * client's September feedback round. It is reproduced here verbatim in the
- * Lexical shape the live site stores, so nothing has to be retyped in the
- * admin panel.
+ * client's September feedback round, and is reproduced here in the Lexical
+ * shape the live site stores.
  *
- * Hero images ship with this PR at public/blog-media/oct-2026/<slug>.webp,
- * re-encoded from the supplied 1.8 MB PNGs to roughly 110 KB each.
+ * Runs from `prebuild`, so merging to main is the whole deploy step -- the
+ * workflow pulls the production .env (which carries SANITY_API_TOKEN) before
+ * building, exactly as seed-manual-reviews.mjs relies on.
  *
- * Idempotent: createOrReplace on a deterministic _id, so a second run updates
- * rather than duplicating.
+ * createIfNotExists against a deterministic _id: seeds once, then a no-op.
+ * That matters because prebuild runs on EVERY deploy -- createOrReplace would
+ * silently revert any edit later made in the admin panel.
  *
- * Run:
- *   npx tsx --env-file=.env.local --tsconfig tsconfig.json \\
- *     scripts/create-blogs-october-2026.mts [--dry-run]
+ * Remove the prebuild wiring in package.json once the posts are confirmed
+ * live, the same way seed-manual-reviews.mjs is meant to be retired.
+ *
+ * Manual run:  node scripts/create-blogs-october-2026.mjs [--dry-run]
  * ===================================================================== */
 import { createClient } from "next-sanity";
+import { readFileSync, existsSync } from "node:fs";
+import { fileURLToPath } from "node:url";
+import { dirname, join } from "node:path";
 
+const __dirname = dirname(fileURLToPath(import.meta.url));
+const ROOT = join(__dirname, "..");
 const DRY = process.argv.includes("--dry-run");
+const log = (...a) => console.log("[create-blogs-oct-2026]", ...a);
 
-/* Built on first use rather than at import, so --dry-run can verify the
- * content without any credentials present. */
-let _client: ReturnType<typeof createClient> | null = null;
-const sanity = () =>
-  (_client ??= createClient({
-    projectId: process.env.NEXT_PUBLIC_SANITY_PROJECT_ID!,
-    dataset: process.env.NEXT_PUBLIC_SANITY_DATASET!,
-    apiVersion: "2024-01-01",
-    useCdn: false,
-    token: process.env.SANITY_API_TOKEN!,
-  }));
+function loadEnvLocal() {
+  const envPath = join(ROOT, ".env.local");
+  if (!existsSync(envPath)) return;
+  try {
+    for (const raw of readFileSync(envPath, "utf8").split("\n")) {
+      const line = raw.trim();
+      const m = /^\s*([A-Z0-9_]+)\s*=\s*(.*)\s*$/.exec(line);
+      if (m && !process.env[m[1]]) process.env[m[1]] = m[2].replace(/^["']|["']$/g, "");
+    }
+  } catch { /* ignore */ }
+}
+loadEnvLocal();
+
+const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID;
+const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production";
+const token = process.env.SANITY_API_TOKEN;
 
 const DOCS = [
   {
@@ -6114,32 +6128,38 @@ const DOCS = [
       }
     }
   }
-] as const;
+];
 
 async function main() {
   for (const doc of DOCS) {
-    const blocks = doc.contentRaw.root.children.filter((n: any) => n.type === "block").length;
-    console.log(
-      `${DRY ? "[dry-run] " : ""}${doc.slug}\n` +
-        `    title   ${doc.title}\n` +
-        `    cat     ${doc.categorySlug} | ${doc.readMins} min | ${doc.faqs.length} FAQs\n` +
-        `    body    ${doc.contentRaw.root.children.length} nodes (${blocks} graphical blocks)\n` +
-        `    hero    ${doc.heroImageUrl}`,
-    );
-    if (!DRY) {
-      await sanity().createOrReplace(doc as any);
-      console.log("    -> written");
-    }
+    const blocks = doc.contentRaw.root.children.filter((n) => n.type === "block").length;
+    log(`${doc.slug} — ${doc.contentRaw.root.children.length} nodes (${blocks} blocks), ${doc.faqs.length} FAQs`);
   }
-  console.log(
-    DRY
-      ? `\n[dry-run] ${DOCS.length} posts prepared, nothing written.`
-      : `\n${DOCS.length} posts written. They appear on /blogs immediately ` +
-        `(ISR revalidates within 60s).`,
-  );
+
+  if (DRY) {
+    log(`[dry-run] ${DOCS.length} posts prepared, nothing written.`);
+    return;
+  }
+
+  // Not an error: local builds have no write token, and this script is only
+  // meant to do its work on the deployed build.
+  if (!projectId || !token) {
+    log("no Sanity write token in this environment — skipping (expected outside deploy).");
+    return;
+  }
+
+  const client = createClient({ projectId, dataset, apiVersion: "2024-01-01", useCdn: false, token });
+  let seeded = 0;
+  for (const doc of DOCS) {
+    const res = await client.createIfNotExists(doc);
+    const isNew = res?._createdAt === res?._updatedAt;
+    if (isNew) seeded += 1;
+    log(`${doc.slug} -> ${isNew ? "seeded" : "already present, left untouched"}`);
+  }
+  log(`done: ${seeded} new, ${DOCS.length - seeded} already existed.`);
 }
 
 main().catch((e) => {
-  console.error(e);
+  console.error("[create-blogs-oct-2026]", e);
   process.exit(1);
 });
