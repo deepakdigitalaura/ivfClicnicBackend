@@ -4,14 +4,14 @@ import type { LucideIcon } from "lucide-react";
 import { Reveal } from "@/components/motion";
 
 const ALL_CALCULATORS: { title: string; href: string; icon: LucideIcon }[] = [
-  { title: "IVF Success Rate Calculator", href: "/ivf-success-rate-calculator", icon: TrendingUp },
-  { title: "Fertile Period Calculator", href: "/fertile-period-calculator", icon: Flower2 },
-  { title: "Risk of Repeat Miscarriage Calculator", href: "/risk-of-repeat-miscarriage-calculator", icon: ShieldCheck },
-  { title: "Natural Pregnancy Calculator", href: "/natural-pregnancy-calculator", icon: Sprout },
-  { title: "IVF Cost Calculator", href: "/ivf-cost-calculator", icon: Wallet },
-  { title: "AMH Level Interpreter", href: "/amh-level-interpreter", icon: Microscope },
-  { title: "Ovulation Calculator", href: "/ovulation-calculator", icon: Calendar },
-  { title: "Semen Analysis Calculator", href: "/semen-analysis-calculator", icon: Dna },
+  { title: "IVF Success Rate Calculator", href: "/calculators/ivf-success-rate", icon: TrendingUp },
+  { title: "Fertile Period Calculator", href: "/calculators/fertile-period", icon: Flower2 },
+  { title: "Risk of Repeat Miscarriage Calculator", href: "/calculators/miscarriage-risk", icon: ShieldCheck },
+  { title: "Natural Pregnancy Calculator", href: "/calculators/natural-pregnancy", icon: Sprout },
+  { title: "IVF Cost Calculator", href: "/calculators/ivf-cost", icon: Wallet },
+  { title: "AMH Level Interpreter", href: "/calculators/amh-level", icon: Microscope },
+  { title: "Ovulation Calculator", href: "/calculators/ovulation", icon: Calendar },
+  { title: "Semen Analysis Calculator", href: "/calculators/semen-analysis", icon: Dna },
 ];
 
 export function CalculatorCrossLinks({ current }: { current?: string }) {

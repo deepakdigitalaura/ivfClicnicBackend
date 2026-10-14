@@ -3207,7 +3207,7 @@ export const ovarianReserve = defineTreatment({
     subtitle: "Additional approaches discussed alongside standard stimulation — used selectively, based on your case.",
     items: [
       { icon: Layers, t: "Duostim (Dual Stimulation)", d: "Two stimulation-and-retrieval cycles in the same menstrual month — one follicular-phase, one luteal-phase — to collect more eggs in less time for a very low reserve." },
-      { icon: Droplets, t: "Ovarian Rejuvenation (PRP)", d: "Platelet-rich plasma injected into the ovaries in selected cases, aiming to support follicle activity and egg quality ahead of stimulation.", href: "/ovarian-rejuvenation" },
+      { icon: Droplets, t: "Ovarian Rejuvenation (PRP)", d: "Platelet-rich plasma injected into the ovaries in selected cases, aiming to support follicle activity and egg quality ahead of stimulation.", href: "/treatments/ovarian-rejuvenation" },
       { icon: Snowflake, t: "Embryo Accumulation", d: "Eggs or embryos from successive gentle cycles are frozen and pooled to build a usable number, when required." },
     ],
   },
