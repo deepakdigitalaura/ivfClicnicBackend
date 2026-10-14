@@ -65,36 +65,129 @@ const token = process.env.SANITY_API_TOKEN;
 /* Retired address -> current address. Each destination was fetched live and
  * returned 200 with no redirect of its own. */
 const MAP = {
-  "/asthenospermia": "/treatments/asthenospermia",
-  "/azoospermia": "/treatments/azoospermia",
+  "/10-foods-to-improve-female-egg-quality": "/blogs/10-foods-to-improve-female-egg-quality",
+  "/3d-4d-sonography-services-in-ahmedabad": "/services/3d-4d-sonography",
+  "/ahmedabad": "/locations/ahmedabad",
   "/best-ivf-doctors": "/doctors",
-  "/blastocyst-culture-blastocyst-transfer": "/treatments/blastocyst-transfer",
-  "/cryopreservation": "/treatments/cryopreservation",
-  "/egg-donation": "/treatments/egg-donation",
-  "/egg-freezing": "/treatments/egg-freezing",
-  "/embryo-donation": "/treatments/embryo-donation",
-  "/endometriosis": "/treatments/endometriosis",
-  "/erectile-dysfunction": "/treatments/erectile-dysfunction",
-  "/fibroids": "/treatments/fibroids",
-  "/icsi-treatment-intracytoplasmic-sperm-injection": "/treatments/icsi",
-  "/intra-uterine-insemination-iui": "/treatments/iui",
-  "/intracytoplasmic-morphologically-selected-sperm-injection-imsi": "/treatments/imsi",
-  "/ivf-failure": "/treatments/ivf-failure",
-  "/laser-assisted-hatching": "/treatments/laser-hatching",
-  "/magnetic-activated-cell-sorting-macs": "/treatments/macs",
+  "/best-ivf-doctors/dr-binal-shah": "/doctors/binal-shah",
+  "/best-ivf-doctors/dr-deep-gajiwala": "/doctors/deep-gajiwala",
+  "/best-ivf-doctors/dr-deepali-pandya": "/doctors/deepali-pandya",
+  "/best-ivf-doctors/dr-falguni-bavishi": "/doctors/falguni-bavishi",
+  "/best-ivf-doctors/dr-himanshu-bavishi": "/doctors/himanshu-bavishi",
+  "/best-ivf-doctors/dr-janki-bavishi": "/doctors/janki-bavishi",
+  "/best-ivf-doctors/dr-jaydeep-patel": "/doctors/jaydeep-patel",
+  "/best-ivf-doctors/dr-nilesh-jain": "/doctors/nilesh-jain",
+  "/best-ivf-doctors/dr-parth-bavishi": "/doctors/parth-bavishi",
+  "/best-ivf-doctors/dr-surbhi-vegad": "/doctors/surbhi-vegad",
+  "/bhavnagar": "/locations/bhavnagar",
+  "/bhuj": "/locations/bhuj",
+  "/blog/are-ivf-babies-healthy-as-naturally-conceived": "/blogs/are-ivf-babies-healthy-as-naturally-conceived",
+  "/blog/ectopic-pregnancy": "/blogs/ectopic-pregnancy",
+  "/blog/factors-to-consider-right-clinic-for-ivf-journey": "/blogs/factors-to-consider-right-clinic-for-ivf-journey",
+  "/blog/ivf-failure-treatment-is-possible": "/blogs/ivf-failure-treatment-is-possible",
+  "/blog/miscarriages-during-ivf-signs-causes-prevention": "/blogs/miscarriages-during-ivf-signs-causes-prevention-hope",
+  "/blog/ovarian-hyperstimulation-syndrome": "/blogs/ovarian-hyperstimulation-syndrome",
+  "/category/ivf-failure": "/treatments/ivf-failure",
+  "/counselling": "/treatments",
+  "/delhi": "/locations",
+  "/does-stress-affect-ivf-success": "/blogs/does-stress-affect-ivf-success",
+  "/dr-himanshu-bavishi": "/doctors/himanshu-bavishi",
+  "/embryo-transfer-procedure-for-in-vitro-fertilization-ivf": "/blogs/embryo-transfer-procedure-for-in-vitro-fertilization-ivf",
+  "/endometrial-lining-remedies-for-abnormal-thickness": "/blogs/endometrial-lining-remedies-for-abnormal-thickness",
+  "/endoscopy-operations": "/treatments/female-infertility",
+  "/era-test": "/treatments/era-test",
+  "/female-infertility": "/treatments/female-infertility",
+  "/fertility-assessment": "/treatments/ivf-evaluation",
+  "/fertility-evaluation": "/treatments/ivf-evaluation",
+  "/fertility-preservation": "/treatments/egg-freezing",
+  "/fetal-medicine-services-in-ahmedabad": "/services/fetal-medicine",
+  "/high-risk-pregnancy-care-in-ahmedabad": "/services/high-risk-pregnancy-care",
+  "/how-age-affects-fertility-myths-vs-facts": "/blogs/how-age-affects-fertility-myths-vs-facts",
+  "/how-conception-occur": "/treatments/conceive-naturally",
+  "/how-does-follicle-count-affect-ivf-success-rates": "/blogs/how-does-follicle-count-affect-ivf-success-rates",
+  "/how-does-letrozole-help-with-ovulation-and-pregnancy": "/blogs/how-does-letrozole-help-with-ovulation-and-pregnancy",
+  "/how-does-the-climate-and-lifestyle-in-ahmedabad-affect-fertility": "/blogs/how-does-the-climate-and-lifestyle-in-ahmedabad-affect-fertility",
+  "/how-does-the-number-of-eggs-affect-ivf-success-rate": "/blogs/how-does-the-number-of-eggs-affect-ivf-success-rate",
+  "/how-letrozole-works-a-comprehensive-guide-to-boosting-ovulation-for-fertility": "/blogs/how-letrozole-works-a-comprehensive-guide-to-boosting-ovulation-for-fertility",
+  "/how-pre-implantation-genetic-testing-boosts-ivf-success": "/blogs/how-pre-implantation-genetic-testing-boosts-ivf-success",
+  "/how-to-improve-ovulation-naturally-when-you-have-pcos": "/blogs/how-to-improve-ovulation-naturally-when-you-have-pcos",
+  "/impact-of-age-repeated-ivf-cycles-on-pregnancy": "/blogs/impact-of-age-repeated-ivf-cycles-on-pregnancy",
+  "/indian-celebrities-who-improved-fertility-through-yoga": "/blogs/indian-celebrities-who-improved-fertility-through-yoga",
+  "/infrastructure": "/about-bfi",
+  "/innovative-treatments-for-low-amh": "/blogs/innovative-treatments-for-low-amh",
+  "/international-patients": "/contact",
+  "/iui-success-rate-what-to-expect-after-iui-treatment": "/blogs/iui-success-rate-what-to-expect-after-iui-treatment",
+  "/ivf-and-career-balancing-work-and-fertility-treatments": "/blogs/ivf-and-career-balancing-work-and-fertility-treatments",
+  "/ivf-for-single-women-in-india-navigating-new-art-law": "/blogs/ivf-for-single-women-in-india-navigating-new-art-law",
+  "/ivf-pregnancy-week-by-week-symptoms-and-safety": "/blogs/ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "/lifestyle-changes-that-boost-fertility-in-pcos-women": "/blogs/lifestyle-changes-that-boost-fertility-in-pcos-women",
+  "/lifestyle-changes-to-boost-ivf-success-and-increase-your-chances-of-a-healthy-pregnancy": "/blogs/lifestyle-changes-to-boost-ivf-success-and-increase-your-chances-of-a-healthy-pregnancy",
+  "/male-infertility": "/treatments/male-infertility",
+  "/male-infertility-signs-causes-prevention-diagnosis-treatment": "/blogs/male-infertility-signs-causes-treatment",
+  "/male-infertility-treatment-options-in-ahmedabad-what-you-should-know": "/blogs/male-infertility-treatment-options-in-ahmedabad-what-you-should-know",
+  "/maternity-services": "/services/normal-delivery",
+  "/mumbai": "/locations/mumbai",
+  "/natural-conception-with-low-amh-levels": "/blogs/natural-conception-with-low-amh-levels",
   "/normal-delivery-services-in-ahmedabad": "/services/normal-delivery",
-  "/oligospermia": "/treatments/oligospermia",
-  "/ovarian-rejuvenation": "/treatments/ovarian-rejuvenation",
-  "/ovarian-reserve": "/treatments/ovarian-reserve",
-  "/pcos": "/treatments/pcos",
-  "/physiological-intracytoplasmic-sperm-injection-picsi": "/treatments/picsi",
-  "/sperm-donation": "/treatments/sperm-donation",
-  "/spindle-view-icsi": "/treatments/spindle-view-icsi",
-  "/varicocele": "/treatments/varicocele",
-  "/what-is-ivf": "/treatments/ivf",
+  "/our-team": "/doctors",
+  "/our-treatments": "/treatments",
+  "/ovarian-cysts-symptoms-causes-treatment-diagnosis": "/blogs/ovarian-cysts-symptoms-causes-treatment-diagnosis",
+  "/pre-implantation-genetic-testing-pgt": "/treatments/pgt",
+  "/pregnancy-care": "/services/high-risk-pregnancy-care",
+  "/pregnancy-complications": "/blogs/pregnancy-complications",
+  "/prp-platelet-rich-plasma-therapy-in-infertility": "/treatments/prp-infertility",
+  "/questions-to-ask-ivf-specialist-at-1st-visit": "/blogs/questions-to-ask-ivf-specialist-at-1st-visit",
+  "/semen-analysis-calculator": "/calculators/semen-analysis",
+  "/step-by-step-process-of-embryo-freezing-in-an-ivf-cycle": "/blogs/step-by-step-process-of-embryo-freezing-in-an-ivf-cycle",
+  "/stories-from-indian-celebrities-of-egg-freezing": "/blogs/stories-from-indian-celebrities-of-egg-freezing",
+  "/surat": "/locations/surat",
+  "/surrogacy": "/treatments/surrogacy",
+  "/the-dfi-test-a-crucial-diagnostic-tool-for-male-infertility": "/blogs/the-dfi-test-a-crucial-diagnostic-tool-for-male-infertility",
+  "/the-role-of-endometrial-receptivity-in-ivf-success": "/blogs/the-role-of-endometrial-receptivity-in-ivf-success",
+  "/the-thyroid-connection-understanding-its-role-in-female-fertility-health": "/blogs/the-thyroid-connection-understanding-its-role-in-female-fertility-health",
+  "/tips-for-getting-pregnant-faster-with-pcos-a-step-by-step-guide": "/blogs/12-tips-for-getting-pregnant-faster-with-pcos-a-step-by-step-guide",
+  "/top-10-reasons-to-consider-egg-freezing": "/blogs/top-10-reasons-to-consider-egg-freezing",
+  "/twin-and-multiple-pregnancies-after-ivf-risks-and-care": "/blogs/twin-and-multiple-pregnancies-after-ivf-risks-and-care",
+  "/twin-pregnancy-care-in-ahmedabad": "/services/twin-pregnancy-care",
+  "/understanding-frozen-embryo-transfer-fet-in-ivf": "/blogs/understanding-frozen-embryo-transfer-fet-in-ivf",
+  "/understanding-male-fertility-azoospermia-vs-oligospermia": "/blogs/understanding-male-fertility-azoospermia-vs-oligospermia",
+  "/understanding-reality-behind-ivf-success-rates": "/blogs/understanding-reality-behind-ivf-success-rates",
+  "/understanding-the-reasons-for-ivf-failure": "/blogs/understanding-the-reasons-for-ivf-failure",
+  "/understanding-the-success-rate-of-ivf-treatment": "/blogs/understanding-the-success-rate-of-ivf-treatment",
+  "/vadodara": "/locations/vadodara",
+  "/what-happens-after-embryo-transfer-day-by-day": "/blogs/what-happens-after-embryo-transfer-day-by-day",
+  "/what-to-expect-during-each-stage-of-ivf": "/blogs/what-to-expect-during-each-stage-of-ivf",
+  "/when-to-take-a-pregnancy-test-after-iui-timing-and-accuracy-explained": "/blogs/when-to-take-a-pregnancy-test-after-iui-timing-and-accuracy-explained",
 };
 
+/* Seven retired addresses are deliberately NOT in the map above. Their target
+ * no longer exists, so the site redirects them to a generic page -- the home
+ * page or the blog index. Rewriting the article to point there would bake a
+ * dead end into the copy permanently and invisibly, where today at least the
+ * redirect table records the intent. They want a content decision instead:
+ *
+ *   /testimonials                      -> home page   (3 links)
+ *   /do-and-dont-for-fertility         -> home page   (2 links)
+ *   /smart                             -> home page   (2 links)
+ *   /ivf-after-35-navigating-...       -> /blogs      (2 links)
+ *   /key-questions-to-discuss-...      -> /blogs      (2 links)
+ *   /a-quick-guide-on-the-ivf-...      -> /blogs      (1 link)
+ *   /how-nutrition-impacts-...         -> /blogs      (1 link)
+ *
+ * Either republish the article, point it at the nearest real page, or drop the
+ * link from the sentence. Until then the redirect keeps them working. */
+
 const ORIGIN = "https://ivfclinic.com";
+
+/* The byline and reviewer line are built from these slugs, so a stale one
+ * sends every article's author link through a redirect -- 288 and 287 posts
+ * respectively, which made them the two most-linked stale URLs on the site.
+ * These are the slugs the admin panel itself writes when a doctor is picked
+ * from the list, and both targets were fetched live and answer 200. */
+const AUTHOR_SLUGS = {
+  "parth-bavishi-author": "parth-bavishi",
+  "dr-himanshu-bavishi": "himanshu-bavishi",
+};
 
 /* Resolve one href. Returns null when it should be left alone. Handles the
  * absolute form and a trailing slash, and preserves any query or fragment. */
@@ -160,19 +253,45 @@ async function main() {
   });
 
   const posts = await client.fetch(
-    `*[_type == "blog" && status != "draft"]{ _id, slug, contentRaw }`,
+    `*[_type == "blog" && status != "draft"]{ _id, slug, contentRaw, authorSlug, reviewerSlug }`,
   );
   log(`${posts.length} published posts to check`);
 
   let changedPosts = 0;
   let changedLinks = 0;
+  let changedBylines = 0;
   const tally = new Map();
 
   for (const post of posts) {
-    if (typeof post.contentRaw !== "string") continue;
+    // The byline slugs live on the document, not in the body, so they are
+    // handled separately -- and a post can need one, the other, or both.
+    const patch = {};
+    const author = AUTHOR_SLUGS[post.authorSlug];
+    if (author) patch.authorSlug = author;
+    const reviewer = AUTHOR_SLUGS[post.reviewerSlug];
+    if (reviewer) patch.reviewerSlug = reviewer;
+
+    if (typeof post.contentRaw !== "string") {
+      if (Object.keys(patch).length) {
+        changedBylines += 1;
+        if (!DRY) await client.patch(post._id).set(patch).commit();
+        log(`${post.slug} -> byline slug`);
+      }
+      continue;
+    }
 
     // Cheap pre-filter: skip the parse unless an old address is in there.
-    if (!Object.keys(MAP).some((old) => post.contentRaw.includes(`"${old}`))) continue;
+    const mightHaveLinks = Object.keys(MAP).some((old) =>
+      post.contentRaw.includes(`"${old}`) || post.contentRaw.includes(`${ORIGIN}${old}`),
+    );
+    if (!mightHaveLinks) {
+      if (Object.keys(patch).length) {
+        changedBylines += 1;
+        if (!DRY) await client.patch(post._id).set(patch).commit();
+        log(`${post.slug} -> byline slug`);
+      }
+      continue;
+    }
 
     let doc;
     try {
@@ -184,21 +303,25 @@ async function main() {
 
     const changes = [];
     rewrite(doc, changes);
-    if (!changes.length) continue;
+    if (!changes.length && !Object.keys(patch).length) continue;
+    if (Object.keys(patch).length) changedBylines += 1;
 
     for (const [from] of changes) {
       tally.set(from, (tally.get(from) ?? 0) + 1);
     }
-    changedPosts += 1;
-    changedLinks += changes.length;
+    if (changes.length) {
+      changedPosts += 1;
+      changedLinks += changes.length;
+      patch.contentRaw = JSON.stringify(doc);
+    }
 
     if (!DRY) {
-      await client
-        .patch(post._id)
-        .set({ contentRaw: JSON.stringify(doc) })
-        .commit({ autoGenerateArrayKeys: false });
+      await client.patch(post._id).set(patch).commit({ autoGenerateArrayKeys: false });
     }
-    log(`${post.slug} -> ${changes.length} link${changes.length === 1 ? "" : "s"}`);
+    log(
+      `${post.slug} -> ${changes.length} link${changes.length === 1 ? "" : "s"}` +
+        (patch.authorSlug || patch.reviewerSlug ? " + byline slug" : ""),
+    );
   }
 
   log("");
@@ -208,8 +331,10 @@ async function main() {
   log("");
   log(
     DRY
-      ? `[dry-run] would change ${changedLinks} links across ${changedPosts} posts.`
-      : `${changedLinks} links corrected across ${changedPosts} posts.`,
+      ? `[dry-run] would change ${changedLinks} links across ${changedPosts} posts, ` +
+        `and ${changedBylines} byline slugs.`
+      : `${changedLinks} links corrected across ${changedPosts} posts, ` +
+        `and ${changedBylines} byline slugs.`,
   );
 }
 
