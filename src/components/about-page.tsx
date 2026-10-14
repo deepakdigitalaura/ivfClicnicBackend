@@ -77,7 +77,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
                 <Magnetic as="a" href="/contact#book" className="btn-luxury group inline-flex items-center gap-2 rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft">
                   <Calendar className="h-4 w-4" /> Book Consultation
                 </Magnetic>
-                <Magnetic as="a" href="/what-is-ivf" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
+                <Magnetic as="a" href="/treatments/ivf" className="btn-luxury inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/70 px-6 py-3.5 text-sm font-semibold text-[color:var(--plum)] backdrop-blur transition-all hover:bg-white">
                   Explore IVF <ArrowRight className="h-4 w-4" />
                 </Magnetic>
               </div>
@@ -142,14 +142,14 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)] mb-5"><Target className="h-6 w-6" /></div>
                 <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Mission</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Achieve excellence through knowledge, education, training, brainstorming, innovation, experimentation, analysis, and research. Provide customised, personalised, simple, effective and safe treatment to every couple. Create the best qualified, experienced and expert team of medical professionals, reproductive biologists, counsellors and support staff. Impart all the best <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">IVF treatments</a> in India under one roof — without any discrimination — and spread the benefits of the latest technology. An ideal blend of professional treatment and personalised care.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">Achieve excellence through knowledge, education, training, brainstorming, innovation, experimentation, analysis, and research. Provide customised, personalised, simple, effective and safe treatment to every couple. Create the best qualified, experienced and expert team of medical professionals, reproductive biologists, counsellors and support staff. Impart all the best <a href="/treatments/ivf" className="text-[color:var(--plum)] underline">IVF treatments</a> in India under one roof — without any discrimination — and spread the benefits of the latest technology. An ideal blend of professional treatment and personalised care.</p>
               </div>
             </StaggerItem>
             <StaggerItem>
               <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/40 p-7 shadow-soft">
                 <div className="inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-[color:var(--plum)]/10 text-[color:var(--plum)] mb-5"><Eye className="h-6 w-6" /></div>
                 <h3 className="text-xl font-semibold text-[color:var(--plum)] mb-3">Vision</h3>
-                <p className="text-[15px] leading-relaxed text-muted-foreground">Be a pioneer and leader as the most preferred fertility institute, and provide <a href="/what-is-ivf" className="text-[color:var(--plum)] underline">IVF</a> &amp; ART treatment above international standards — with Indian heart and at India-friendly cost. The best IVF institute in India.</p>
+                <p className="text-[15px] leading-relaxed text-muted-foreground">Be a pioneer and leader as the most preferred fertility institute, and provide <a href="/treatments/ivf" className="text-[color:var(--plum)] underline">IVF</a> &amp; ART treatment above international standards — with Indian heart and at India-friendly cost. The best IVF institute in India.</p>
               </div>
             </StaggerItem>
             <StaggerItem>
@@ -178,7 +178,7 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
                 <h3 className="text-xl font-semibold text-[color:var(--plum)]">Infrastructure</h3>
               </div>
               <p className="text-[15px] leading-relaxed text-muted-foreground mb-4">We have a highly automated and optimised environment. For the past 35+ years, we continue to research and innovate to ensure that treatments are done in the best possible environment.</p>
-              <p className="text-[15px] leading-relaxed text-muted-foreground">Our <strong className="text-[color:var(--plum)]">Class 1000 <a href="/what-is-ivf" style={{color: "var(--plum)"}}>IVF</a> labs</strong> — 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with Latest gen ICSI, <a href="/cryopreservation" className="text-[color:var(--plum)] underline">vitrification</a>, and advanced preimplantation genetic testing (PGT).</p>
+              <p className="text-[15px] leading-relaxed text-muted-foreground">Our <strong className="text-[color:var(--plum)]">Class 1000 <a href="/treatments/ivf" style={{color: "var(--plum)"}}>IVF</a> labs</strong> — 10× cleaner than the international standard — provide the best IVF lab embryo culture environment. Every lab is equipped with Latest gen ICSI, <a href="/treatments/cryopreservation" className="text-[color:var(--plum)] underline">vitrification</a>, and advanced preimplantation genetic testing (PGT).</p>
             </div>
           </Reveal>
           <Reveal delay={0.1}>
@@ -206,16 +206,16 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
           <Stagger className="mt-10 grid grid-cols-1 gap-3 sm:grid-cols-2 lg:grid-cols-3">
             {([
               { t: "Male & Female Infertility", href: "/treatments/male-infertility" },
-              { t: "IVF – ICSI – ART", href: "/what-is-ivf" },
+              { t: "IVF – ICSI – ART", href: "/treatments/ivf" },
               { t: "Advanced fertilization techniques", href: "/treatments/advanced-fertility-techniques" },
-              { t: "Egg Donation", href: "/egg-donation" },
+              { t: "Egg Donation", href: "/treatments/egg-donation" },
               { t: "Surrogacy", href: null },
-              { t: "Fertility Preservation – Egg / Embryo Freezing", href: "/cryopreservation" },
+              { t: "Fertility Preservation – Egg / Embryo Freezing", href: "/treatments/cryopreservation" },
               { t: "Preimplantation Genetic Testing (PGT)", href: null },
-              { t: "IUI (Intrauterine Insemination)", href: "/intra-uterine-insemination-iui" },
+              { t: "IUI (Intrauterine Insemination)", href: "/treatments/iui" },
               { t: "Laparoscopy / Hysteroscopy", href: null },
-              { t: "Ovary Rejuvenation – PRP / Stem Cell", href: "/ovarian-rejuvenation" },
-              { t: "Fibroids & Endometriosis", href: "/fibroids" },
+              { t: "Ovary Rejuvenation – PRP / Stem Cell", href: "/treatments/ovarian-rejuvenation" },
+              { t: "Fibroids & Endometriosis", href: "/treatments/fibroids" },
               { t: "Semen Analysis & Banking", href: null },
             ] as { t: string; href: string | null }[]).map(({ t, href }, i) => (
               <StaggerItem key={i}>
@@ -284,11 +284,11 @@ export function AboutPage({ data = ABOUT_DEFAULTS }: { data?: AboutData } = {}) 
         />
         <Stagger className="mt-10 grid grid-cols-1 gap-6 md:grid-cols-2 lg:grid-cols-3">
           {([
-            { Icon: Trophy, year: "2009", t: "India's First — Vitrified Frozen Oocyte Baby", d: "Bavishi Fertility Institute achieved the first live birth in India with a vitrified frozen egg — a landmark milestone that reshaped Indian reproductive medicine and opened a new era of <a href='/cryopreservation' style='color:var(--plum);text-decoration:underline'>fertility preservation</a>." },
+            { Icon: Trophy, year: "2009", t: "India's First — Vitrified Frozen Oocyte Baby", d: "Bavishi Fertility Institute achieved the first live birth in India with a vitrified frozen egg — a landmark milestone that reshaped Indian reproductive medicine and opened a new era of <a href='/treatments/cryopreservation' style='color:var(--plum);text-decoration:underline'>fertility preservation</a>." },
             { Icon: Globe, year: "2009", t: "First European Surrogacy in India", d: "First surrogacy for a European couple — a testament to the institute's world-class capabilities, ethical standards, and international trust built over decades." },
             { Icon: Star, year: "2017", t: "First IMA Award", d: "First IVF specialist to receive the prestigious 'Excellence in the Field of Medicine' award from the Indian Medical Association (IMA)." },
             { Icon: Heart, year: "2004", t: "First of Its Kind IVF Babies Meet", d: "A unique gathering of more than 100 IVF babies conceived at Bavishi Fertility Institute, Ahmedabad — a path-breaking effort to spread awareness at a time when IVF was surrounded by misconceptions and stigma." },
-            { Icon: Award, year: "2014", t: "Founded INSTAR", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in <a href='/egg-donation' style='color:var(--plum);text-decoration:underline'>egg donation</a>, <a href='/sperm-donation' style='color:var(--plum);text-decoration:underline'>sperm donation</a> and surrogacy programmes across India." },
+            { Icon: Award, year: "2014", t: "Founded INSTAR", d: "Founded INSTAR (Indian Society of Third Party Assisted Reproduction) — advancing ethical standards in <a href='/treatments/egg-donation' style='color:var(--plum);text-decoration:underline'>egg donation</a>, <a href='/treatments/sperm-donation' style='color:var(--plum);text-decoration:underline'>sperm donation</a> and surrogacy programmes across India." },
             { Icon: Newspaper, year: "2011–2018", t: "First TV Series & Unique Books", d: "India's first TV serial by a fertility institute — 'Devna Didhela, Mangine Lidhela' — featuring real-life stories of 26 successful couples, later published as a book sharing the stories of 222 IVF families." },
           ] as { Icon: LucideIcon, year: string, t: string, d: string }[]).map(({ Icon, year, t, d }, i) => (
             <StaggerItem key={i}>
