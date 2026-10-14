@@ -4,7 +4,7 @@
   "type": "module",
   "scripts": {
     "dev": "next dev --turbopack",
-    "prebuild": "node scripts/sync-reviews.mjs && node scripts/seed-manual-reviews.mjs && node scripts/create-blogs-october-2026.mjs",
+    "prebuild": "node scripts/sync-reviews.mjs && node scripts/seed-manual-reviews.mjs && node scripts/create-blogs-october-2026.mjs && node scripts/fix-blog-internal-links.mjs",
     "sync-reviews": "node scripts/sync-reviews.mjs",
     "resolve-place-ids": "node scripts/resolve-place-ids.mjs",
     "audit:gmb-hours": "node scripts/audit-gmb-hours.mjs",
