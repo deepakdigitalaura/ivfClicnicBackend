@@ -3,8 +3,7 @@ import { MaternityServicesHub } from "./hub";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { withPageSeoOverride } from "@/lib/page-seo";
 import { WOMENS_HEALTH_SERVICES } from "@/lib/womens-health";
-import { getService, getPublishedServiceSlugs } from "@/lib/payload";
-import { getPageFaqs } from "@/sanity/lib/fetch";
+import { getService, getPublishedServiceSlugs, getCategoryHub } from "@/lib/payload";
 
 const PATH = "/services/maternity-services";
 
@@ -50,14 +49,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default async function Page() {
-  const [extraCards, faqs] = await Promise.all([
+  const [extraCards, data] = await Promise.all([
     getExtraServiceCards(),
-    getPageFaqs("maternity-services"),
+    getCategoryHub("maternity-services"),
   ]);
   return (
     <>
       <PageSeoSchema path={PATH} />
-      <MaternityServicesHub extraCards={extraCards} faqs={faqs ?? undefined} />
+      <MaternityServicesHub data={data} extraCards={extraCards} />
     </>
   );
 }

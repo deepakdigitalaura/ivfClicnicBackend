@@ -11,139 +11,13 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-
-/* ---------- Data ---------- */
-
-const SMART_FEATURES = [
-  {
-    icon: Cpu,
-    title: "Smart Use of Technology",
-    description:
-      "All technology under one roof — advanced IVF labs, ultrasound suites, operation theatres, and diagnostic centres. We carefully suggest only the treatment options worth the extra cost for your individual case, never unnecessary add-ons.",
-    highlights: [
-      "State-of-the-art IVF laboratory",
-      "Integrated diagnostic centre",
-      "Cost-effective technology recommendations",
-    ],
-  },
-  {
-    icon: Activity,
-    title: "Smart Monitoring",
-    description:
-      "We monitor all clinical and IVF lab KPIs — fertilization rate, embryo formation rate, embryo quality index, and more. Early problem detection before it affects your outcomes gives us the advantage of course-correcting in real time.",
-    highlights: [
-      "Real-time lab KPI tracking",
-      "Fertilization & embryo quality index",
-      "Early anomaly detection",
-    ],
-  },
-  {
-    icon: Target,
-    title: "Smart Treatment Selection",
-    description:
-      "Correct and smart choice of treatment is the first step to your success. Our team has a unique ability to predict IVF success at the start of treatment and again at embryo transfer — giving you clarity and confidence at every stage.",
-    highlights: [
-      "Predictive success modelling",
-      "Personalized protocol selection",
-      "Evidence-based decision making",
-    ],
-  },
-  {
-    icon: Brain,
-    title: "Smart Use of Latest Techniques",
-    description:
-      "We harness big data, cloud computing, and artificial intelligence to refine treatment protocols. IoT technology powers our smart fertility clinic — from incubator monitoring to environmental control in the embryology lab.",
-    highlights: [
-      "AI-assisted embryo selection",
-      "Cloud-based data analytics",
-      "IoT-enabled lab environment",
-    ],
-  },
-  {
-    icon: MapPin,
-    title: "Patient Convenience",
-    description:
-      "Your treatment is managed at your local town or city. You visit the centre only for key procedures — no unnecessary trips. We stay flexible with your schedule so that fertility treatment fits into your life, not the other way around.",
-    highlights: [
-      "Local treatment management",
-      "Visit only for procedures",
-      "Flexible scheduling",
-    ],
-  },
-  {
-    icon: ClipboardList,
-    title: "Canny Blueprint of Timeline",
-    description:
-      "Our team walks the extra mile to streamline your journey. Reports and prescriptions are prepared in advance. Complete notes for future planning ensure you always know the next step — no surprises, no confusion.",
-    highlights: [
-      "Advance report preparation",
-      "Streamlined prescriptions",
-      "Clear future planning notes",
-    ],
-  },
-  {
-    icon: Stethoscope,
-    title: "Smart Diagnosis",
-    description:
-      "Diagnosis first, treatment later. We follow a step-by-step approach to identify the exact cause of infertility. Only pertinent tests are ordered — no blanket panels, no unnecessary investigations, no wasted time or money.",
-    highlights: [
-      "Systematic cause identification",
-      "Only pertinent tests ordered",
-      "Evidence-based diagnostics",
-    ],
-  },
-  {
-    icon: Building2,
-    title: "Patient-Centric Architecture",
-    description:
-      "Every department in our centres is designed to be patient-centric. Consultations, labs, scans, and procedures are all under one roof — no transferring from one end of the building to another, no navigating a maze of corridors.",
-    highlights: [
-      "All departments under one roof",
-      "Seamless patient flow",
-      "Comfort-first clinic design",
-    ],
-  },
-];
-
-const COST_PACKAGES = [
-  {
-    icon: IndianRupee,
-    title: "Best Treatment at Optimal Pricing",
-    description:
-      "Economy of scale across 14 centres means you receive world-class treatment at a fraction of the cost charged by standalone clinics. Smart packages for every pocket.",
-  },
-  {
-    icon: Heart,
-    title: "Three-Cycle Packages",
-    description:
-      "Our multi-cycle packages maximise your chances of success while reducing per-cycle cost. A structured plan that gives you the best shot at parenthood.",
-  },
-  {
-    icon: Shield,
-    title: "Suraksha Kavach Package",
-    description:
-      "India's only IVF protection program. It promises at least one healthy baby — and if medical circumstances prevent your success, the package is fully transferable to a loved one.",
-  },
-  {
-    icon: CreditCard,
-    title: "Easy EMI at 0% Interest",
-    description:
-      "Digital payment options, secure online portals, and 0% interest EMI available — because financial barriers should never stand between you and parenthood.",
-  },
-];
-
-const SMART_PILLARS = [
-  { icon: Cpu, label: "Smart Technology" },
-  { icon: BarChart3, label: "Smart Monitoring" },
-  { icon: Target, label: "Smart Selection" },
-  { icon: Brain, label: "AI & Big Data" },
-  { icon: Cloud, label: "Cloud Computing" },
-  { icon: Wifi, label: "IoT Enabled" },
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { SMART_TREATMENT_DEFAULTS, type SmartTreatmentData } from "@/lib/smart-treatment";
 
 /* ---------- Page ---------- */
 
-export function SmartTreatmentPage() {
+export function SmartTreatmentPage({ data = SMART_TREATMENT_DEFAULTS }: { data?: SmartTreatmentData } = {}) {
+  const { hero, pillars: SMART_PILLARS, features: SMART_FEATURES, packages: COST_PACKAGES } = data;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -179,37 +53,38 @@ export function SmartTreatmentPage() {
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Intelligent Fertility Care
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                Smart Treatments and Steady Care{" "}
+                {hero.headline.split(hero.headlineEm)[0]}{" "}
                 <em className="font-display italic text-[color:var(--rose)]">
-                  Meets the Goal.
-                </em>
+                  {hero.headlineEm}
+                </em>{hero.headline.split(hero.headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                The most important decision of your life — having a child and starting a family — calls for
-                a personalized smart strategy. At Bavishi Fertility Institute, every step is intelligent,
-                every choice is data-driven, and every outcome is optimized for your success.
+                {hero.paragraph}
               </p>
             </Reveal>
 
             {/* Smart pillars row */}
             <Reveal delay={0.25}>
               <div className="mt-10 flex flex-wrap justify-center gap-4">
-                {SMART_PILLARS.map((p, i) => (
-                  <div
-                    key={i}
-                    className="flex items-center gap-2 rounded-full border border-[color:var(--plum)]/10 bg-white/60 px-4 py-2.5 text-sm text-[color:var(--plum)]/80 backdrop-blur"
-                  >
-                    <p.icon className="h-4 w-4 text-[color:var(--rose)]" />
-                    {p.label}
-                  </div>
-                ))}
+                {SMART_PILLARS.map((p, i) => {
+                  const Icon = resolveIcon(p.icon);
+                  return (
+                    <div
+                      key={i}
+                      className="flex items-center gap-2 rounded-full border border-[color:var(--plum)]/10 bg-white/60 px-4 py-2.5 text-sm text-[color:var(--plum)]/80 backdrop-blur"
+                    >
+                      <Icon className="h-4 w-4 text-[color:var(--rose)]" />
+                      {p.label}
+                    </div>
+                  );
+                })}
               </div>
             </Reveal>
 
@@ -280,31 +155,34 @@ export function SmartTreatmentPage() {
             subtitle="Each pillar works together to create a treatment ecosystem that is efficient, affordable, and optimized for the best possible outcome."
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-2">
-            {SMART_FEATURES.map((f, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="flex items-start gap-5">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                      <f.icon className="h-6 w-6" />
-                    </div>
-                    <div className="flex-1">
-                      <h3 className="text-lg font-semibold text-[color:var(--plum)]">{f.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                        {f.description}
-                      </p>
-                      <ul className="mt-4 space-y-1.5">
-                        {f.highlights.map((h, j) => (
-                          <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
-                            <CheckCircle2 className="h-4 w-4 shrink-0 text-[color:var(--rose)]" />
-                            {h}
-                          </li>
-                        ))}
-                      </ul>
+            {SMART_FEATURES.map((f, i) => {
+              const Icon = resolveIcon(f.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="flex items-start gap-5">
+                      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div className="flex-1">
+                        <h3 className="text-lg font-semibold text-[color:var(--plum)]">{f.title}</h3>
+                        <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                          {f.description}
+                        </p>
+                        <ul className="mt-4 space-y-1.5">
+                          {f.highlights.map((h, j) => (
+                            <li key={j} className="flex items-center gap-2 text-sm text-muted-foreground">
+                              <CheckCircle2 className="h-4 w-4 shrink-0 text-[color:var(--rose)]" />
+                              {h}
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
                     </div>
                   </div>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -398,19 +276,22 @@ export function SmartTreatmentPage() {
           />
 
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2">
-            {COST_PACKAGES.map((pkg, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <pkg.icon className="h-6 w-6" />
+            {COST_PACKAGES.map((pkg, i) => {
+              const Icon = resolveIcon(pkg.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{pkg.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                      {pkg.description}
+                    </p>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{pkg.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                    {pkg.description}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
 
           {/* Special Suraksha Kavach callout */}

@@ -23,6 +23,13 @@ import {
   // ---- Treatments surface (Wave 4.4) ----
   FlaskConical, Filter, Magnet, Layers, Zap, Egg, Droplets, Snowflake,
   Dna, Beaker, Target, Leaf, ListChecks, ClipboardCheck, Syringe, Award,
+  // ---- Suraksha Kavach surface ----
+  RefreshCcw,
+  // ---- About-family pages surface ----
+  Building2, Trophy, MapPin, BookOpen, Handshake, Heart, Wind,
+  Thermometer, Database, CheckCircle2, Lightbulb, Scale, HandHeart,
+  ThumbsUp, HeartHandshake, Quote, Shield, Star, Monitor, Lock,
+  Cpu, IndianRupee, CreditCard, Cloud, Wifi, BarChart3, TrendingUp,
 } from "lucide-react";
 
 /** Name → Lucide component. Keys are the curated `select` options stored in
@@ -35,6 +42,13 @@ export const ICON_MAP = {
   // ---- Treatments surface (Wave 4.4) ----
   FlaskConical, Filter, Magnet, Layers, Zap, Egg, Droplets, Snowflake,
   Dna, Beaker, Target, Leaf, ListChecks, ClipboardCheck, Syringe, Award,
+  // ---- Suraksha Kavach surface ----
+  RefreshCcw,
+  // ---- About-family pages surface ----
+  Building2, Trophy, MapPin, BookOpen, Handshake, Heart, Wind,
+  Thermometer, Database, CheckCircle2, Lightbulb, Scale, HandHeart,
+  ThumbsUp, HeartHandshake, Quote, Shield, Star, Monitor, Lock,
+  Cpu, IndianRupee, CreditCard, Cloud, Wifi, BarChart3, TrendingUp,
 } as const satisfies Record<string, LucideIcon>;
 
 export type IconName = keyof typeof ICON_MAP;
@@ -75,6 +89,34 @@ const ICON_LABEL_MAP: Record<IconName, string> = {
   ClipboardCheck:"Clipboard / Done",
   Syringe:       "Syringe / Injection",
   Award:         "Award / Trophy",
+  RefreshCcw:    "Refresh / Repeat",
+  Building2:     "Building",
+  Trophy:        "Trophy",
+  MapPin:        "Map Pin / Location",
+  BookOpen:      "Book",
+  Handshake:     "Handshake",
+  Heart:         "Heart",
+  Wind:          "Wind / Air",
+  Thermometer:   "Thermometer",
+  Database:      "Database",
+  CheckCircle2:  "Checkmark",
+  Lightbulb:     "Lightbulb / Idea",
+  Scale:         "Scale / Balance",
+  HandHeart:     "Hand & Heart / Care",
+  ThumbsUp:      "Thumbs Up",
+  HeartHandshake:"Heart & Handshake",
+  Quote:         "Quote",
+  Shield:        "Shield",
+  Star:          "Star",
+  Monitor:       "Monitor / Screen",
+  Lock:          "Lock / Confidentiality",
+  Cpu:           "CPU / Technology",
+  IndianRupee:   "Rupee / Pricing",
+  CreditCard:    "Credit Card / Payment",
+  Cloud:         "Cloud Computing",
+  Wifi:          "WiFi / IoT",
+  BarChart3:     "Bar Chart",
+  TrendingUp:    "Trending Up / Growth",
 };
 
 /** Human-labeled `{label, value}` pairs for Payload `select` icon fields.

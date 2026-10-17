@@ -6,21 +6,16 @@ import { saveDoctorAction, deleteDoctorAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 import { ImageUpload } from "../_components/image-upload";
 
-type CodeDoctor = { slug: string; name: string; specialty: string; image: string };
-
 const EMPTY: AdminDoctor = { slug: "", name: "", verified: false, navOrder: 0 };
 
 // Comma/line helpers for the array fields.
 const toLines = (a?: string[]) => (a ?? []).join("\n");
 const fromLines = (v: string) => v.split("\n").map((s) => s.trim()).filter(Boolean);
 
-export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[]; codeDoctors: CodeDoctor[] }) {
+export function DoctorsManager({ initial }: { initial: AdminDoctor[] }) {
   const [docs, setDocs] = useState<AdminDoctor[]>(initial);
   const [editing, setEditing] = useState<AdminDoctor | null>(null);
   const { pending, toast, run } = useSave();
-
-  const savedSlugs = new Set(docs.map((d) => d.slug));
-  const overridableCode = codeDoctors.filter((c) => !savedSlugs.has(c.slug));
 
   const set = (patch: Partial<AdminDoctor>) => setEditing((p) => ({ ...(p ?? EMPTY), ...patch }));
 
@@ -43,15 +38,13 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
 
   const remove = (d: AdminDoctor) => {
     if (!d._id) return;
-    if (!confirm(`Delete ${d.name}? This removes the Sanity override (code default returns).`)) return;
+    if (!confirm(`Delete ${d.name}? This removes their profile permanently.`)) return;
     run(async () => {
       const res = await deleteDoctorAction(d._id!);
       if (res.ok) setDocs(docs.filter((x) => x._id !== d._id));
       return res;
     });
   };
-
-  const editCode = (c: CodeDoctor) => setEditing({ slug: c.slug, name: c.name, specialty: c.specialty, verified: false });
 
   if (editing) {
     return (
@@ -182,13 +175,13 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
         <div style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 16 }}>
           <div>
             <h2 className="admin-card-title" style={{ margin: 0 }}>Doctors</h2>
-            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} edited in admin · {codeDoctors.length} built-in</p>
+            <p className="admin-card-desc" style={{ margin: "4px 0 0" }}>{docs.length} doctors</p>
           </div>
           <button type="button" className="admin-btn" onClick={() => setEditing({ ...EMPTY })}><Plus size={16} /> Add Doctor</button>
         </div>
 
         {docs.length === 0 ? (
-          <div className="admin-empty">No admin doctors yet. Add a new one, or override a built-in doctor below.</div>
+          <div className="admin-empty">No doctors yet. Add one to get started.</div>
         ) : (
           <div className="admin-divider-list">
             {docs.map((d) => (
@@ -209,24 +202,6 @@ export function DoctorsManager({ initial, codeDoctors }: { initial: AdminDoctor[
           </div>
         )}
       </div>
-
-      {overridableCode.length > 0 && (
-        <div className="admin-card">
-          <h2 className="admin-card-title">Built-in Doctors</h2>
-          <p className="admin-card-desc">These come from the site code. Click Override to edit one in the admin (your changes win; the rest stays as-is).</p>
-          <div className="admin-divider-list">
-            {overridableCode.map((c) => (
-              <div key={c.slug} className="admin-row" style={{ display: "flex", justifyContent: "space-between", alignItems: "center", marginBottom: 0 }}>
-                <div>
-                  <div style={{ fontWeight: 600 }}>{c.name}</div>
-                  <div style={{ fontSize: 12.5, color: "var(--muted-foreground)", marginTop: 2 }}>/doctors/{c.slug} · {c.specialty}</div>
-                </div>
-                <button type="button" className="admin-btn-ghost" onClick={() => editCode(c)}><Pencil size={14} /> Override</button>
-              </div>
-            ))}
-          </div>
-        </div>
-      )}
       <Toast toast={toast} />
     </>
   );

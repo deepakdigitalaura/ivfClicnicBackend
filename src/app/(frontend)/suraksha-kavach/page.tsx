@@ -4,8 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, faqSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
-import { getPageFaqs } from "@/sanity/lib/fetch";
-import { DEFAULT_FAQS } from "@/lib/suraksha-kavach-faqs";
+import { getSurakshaKavach } from "@/lib/payload";
 
 const PATH = "/suraksha-kavach";
 
@@ -47,12 +46,12 @@ function buildGraph(faqs: { q: string; a: string }[]) {
 }
 
 export default async function Page() {
-  const faqs = (await getPageFaqs("suraksha-kavach")) ?? DEFAULT_FAQS;
+  const data = await getSurakshaKavach();
   return (
     <>
-      <JsonLd graph={buildGraph(faqs)} />
+      <JsonLd graph={buildGraph(data.faqs)} />
       <PageSeoSchema path={PATH} />
-      <SurakshaKavachPage faqs={faqs} />
+      <SurakshaKavachPage data={data} />
     </>
   );
 }

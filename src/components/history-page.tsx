@@ -10,6 +10,8 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
+import { HISTORY_DEFAULTS, type HistoryData } from "@/lib/history";
+import type { AboutSectionHeading, Milestone } from "@/lib/about";
 import { ABOUT_DEFAULTS } from "@/lib/about";
 
 /* ---------- Timeline data ---------- */
@@ -166,7 +168,10 @@ const MILESTONES = [
 
 /* ---------- Page ---------- */
 
-export function HistoryPage() {
+type HistoryPageProps = HistoryData & { legacy: AboutSectionHeading; milestones: Milestone[] };
+
+export function HistoryPage({ data = { ...HISTORY_DEFAULTS, legacy: ABOUT_DEFAULTS.legacy, milestones: ABOUT_DEFAULTS.milestones } }: { data?: HistoryPageProps } = {}) {
+  const { hero, presentDay, legacy, milestones } = data;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -198,18 +203,17 @@ export function HistoryPage() {
         <div className="container-px relative mx-auto max-w-[1400px] py-16 md:py-24 lg:py-28">
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
-              <Eyebrow>Our History</Eyebrow>
+              <Eyebrow>{hero.eyebrow}</Eyebrow>
             </Reveal>
             <Reveal delay={0.08}>
               <h1 className="mt-5 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                From Humble Beginnings to{" "}
-                <em className="font-display italic text-[color:var(--rose)]">Best in India</em>
+                {hero.headline.split(hero.headlineEm)[0]}
+                <em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.16}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-muted-foreground text-pretty">
-                From 1986 to the present day, here are some of the landmark achievements
-                we&apos;ve made over the years.
+                {hero.paragraph}
               </p>
             </Reveal>
             <Reveal delay={0.24}>
@@ -238,14 +242,9 @@ export function HistoryPage() {
                 <div>
                   <div className="text-xs font-semibold uppercase tracking-[0.15em] text-[color:var(--rose)]">Present Day</div>
                   <h2 className="mt-2 text-2xl font-medium text-[color:var(--plum)] md:text-3xl text-balance">
-                    India&apos;s No. 1 Fertility Institute
+                    {presentDay.heading}
                   </h2>
-                  <p className="mt-4 text-[17px] leading-relaxed text-muted-foreground">
-                    Today, Bavishi Fertility Institute has achieved <strong className="text-[color:var(--plum)]">30,000+ successful pregnancies</strong> across
-                    14 centres in 8 cities. Our commitment remains the same as day one: excellence in service
-                    quality, cutting-edge reproductive technology, and unconditional patient support at every
-                    step of the journey.
-                  </p>
+                  <p className="mt-4 text-[17px] leading-relaxed text-muted-foreground" dangerouslySetInnerHTML={{ __html: presentDay.paragraph }} />
                 </div>
               </div>
             </div>
@@ -258,12 +257,12 @@ export function HistoryPage() {
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead
             center
-            eyebrow={ABOUT_DEFAULTS.legacy.eyebrow}
-            title={<>{ABOUT_DEFAULTS.legacy.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{ABOUT_DEFAULTS.legacy.heading.em}</em></>}
+            eyebrow={legacy.eyebrow}
+            title={<>{legacy.heading.lead} <em className="font-display italic text-[color:var(--rose)]">{legacy.heading.em}</em></>}
           />
           <div className="mx-auto mt-10 max-w-3xl">
             <Stagger className="relative space-y-8 border-l-2 border-[color:var(--rose)]/20 pl-8">
-              {ABOUT_DEFAULTS.milestones.map((m, i) => (
+              {milestones.map((m, i) => (
                 <StaggerItem key={i}>
                   <div className="relative">
                     <span className="absolute -left-[2.6rem] top-1 grid h-6 w-6 place-items-center rounded-full bg-[color:var(--rose)] text-[10px] font-bold text-white ring-4 ring-white">●</span>

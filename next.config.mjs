@@ -5,6 +5,11 @@ const nextConfig = {
   reactStrictMode: true,
   typescript: { ignoreBuildErrors: true },
   eslint: { ignoreDuringBuilds: true },
+  // Production server has only ~3.8GB RAM shared with mysql/security scanning/
+  // varnish, with little swap headroom — cap webpack build parallelism to 1
+  // worker so peak build memory stays low enough to avoid the OS OOM-killing
+  // the build (ponytail: single worker, revisit if the server gets more RAM).
+  experimental: { cpus: 1, webpackMemoryOptimizations: true },
 
   async redirects() {
     return [

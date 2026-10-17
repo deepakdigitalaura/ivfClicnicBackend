@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getWhyBfiPage } from "@/lib/payload";
 
 const PATH = "/why-bfi";
 
@@ -40,12 +41,13 @@ const graph = [
   ]),
 ];
 
-export default function Page() {
+export default async function Page() {
+  const data = await getWhyBfiPage();
   return (
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <WhyBfiPage />
+      <WhyBfiPage data={data} />
     </>
   );
 }

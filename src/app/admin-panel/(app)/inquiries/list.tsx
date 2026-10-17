@@ -1,9 +1,30 @@
 "use client";
 import { useState, useMemo } from "react";
-import { Mail, Phone, Trash2, Clock } from "lucide-react";
+import { Mail, Phone, Trash2, Clock, Download } from "lucide-react";
 import type { Inquiry } from "@/sanity/lib/admin";
 import { setInquiryStatusAction, deleteInquiryAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
+
+const CSV_COLUMNS: (keyof Inquiry)[] = ["createdAt", "name", "phone", "email", "treatment", "location", "status", "source", "message"];
+
+function csvCell(value: unknown): string {
+  const s = String(value ?? "");
+  return /[",\n]/.test(s) ? `"${s.replace(/"/g, '""')}"` : s;
+}
+
+function downloadCsv(rows: Inquiry[]) {
+  const lines = [
+    CSV_COLUMNS.join(","),
+    ...rows.map((r) => CSV_COLUMNS.map((c) => csvCell(r[c])).join(",")),
+  ];
+  const blob = new Blob([lines.join("\n")], { type: "text/csv;charset=utf-8;" });
+  const url = URL.createObjectURL(blob);
+  const a = document.createElement("a");
+  a.href = url;
+  a.download = `inquiries-${new Date().toISOString().slice(0, 10)}.csv`;
+  a.click();
+  URL.revokeObjectURL(url);
+}
 
 type Filter = "all" | "new" | "contacted" | "closed";
 const STATUSES: Inquiry["status"][] = ["new", "contacted", "closed"];
@@ -23,6 +44,9 @@ function fmt(iso?: string) {
 export function InquiriesList({ initial }: { initial: Inquiry[] }) {
   const [items, setItems] = useState<Inquiry[]>(initial);
   const [filter, setFilter] = useState<Filter>("all");
+  const [dateFrom, setDateFrom] = useState("");
+  const [dateTo, setDateTo] = useState("");
+  const [location, setLocation] = useState("all");
   const { toast, run } = useSave();
 
   const counts = useMemo(() => ({
@@ -32,7 +56,18 @@ export function InquiriesList({ initial }: { initial: Inquiry[] }) {
     closed: items.filter((i) => i.status === "closed").length,
   }), [items]);
 
-  const filtered = filter === "all" ? items : items.filter((i) => (i.status ?? "new") === filter);
+  const locations = useMemo(
+    () => Array.from(new Set(items.map((i) => i.location).filter((v): v is string => !!v))).sort(),
+    [items],
+  );
+
+  const filtered = useMemo(() => items.filter((i) => {
+    if (filter !== "all" && (i.status ?? "new") !== filter) return false;
+    if (location !== "all" && i.location !== location) return false;
+    if (dateFrom && (!i.createdAt || i.createdAt.slice(0, 10) < dateFrom)) return false;
+    if (dateTo && (!i.createdAt || i.createdAt.slice(0, 10) > dateTo)) return false;
+    return true;
+  }), [items, filter, location, dateFrom, dateTo]);
 
   const changeStatus = (id: string, status: Inquiry["status"]) => {
     setItems(items.map((i) => (i._id === id ? { ...i, status } : i)));
@@ -47,7 +82,7 @@ export function InquiriesList({ initial }: { initial: Inquiry[] }) {
 
   return (
     <>
-      <div style={{ display: "flex", gap: 8, marginBottom: 20, flexWrap: "wrap" }}>
+      <div style={{ display: "flex", gap: 8, marginBottom: 14, flexWrap: "wrap" }}>
         {(["all", "new", "contacted", "closed"] as Filter[]).map((f) => (
           <button key={f} type="button" onClick={() => setFilter(f)}
             className={filter === f ? "admin-btn" : "admin-btn-ghost"}
@@ -55,6 +90,20 @@ export function InquiriesList({ initial }: { initial: Inquiry[] }) {
             {f} ({counts[f]})
           </button>
         ))}
+      </div>
+
+      <div style={{ display: "flex", gap: 10, marginBottom: 20, flexWrap: "wrap", alignItems: "center" }}>
+        <input type="date" className="admin-input" style={{ width: 150 }} value={dateFrom} onChange={(e) => setDateFrom(e.target.value)} title="From date" />
+        <span style={{ color: "var(--muted-foreground)", fontSize: 13 }}>to</span>
+        <input type="date" className="admin-input" style={{ width: 150 }} value={dateTo} onChange={(e) => setDateTo(e.target.value)} title="To date" />
+        <select className="admin-input" style={{ width: 180 }} value={location} onChange={(e) => setLocation(e.target.value)}>
+          <option value="all">All centres</option>
+          {locations.map((l) => <option key={l} value={l}>{l}</option>)}
+        </select>
+        <div style={{ flex: 1 }} />
+        <button type="button" className="admin-btn-ghost" disabled={filtered.length === 0} onClick={() => downloadCsv(filtered)}>
+          <Download size={16} /> Export {filtered.length} to CSV
+        </button>
       </div>
 
       {filtered.length === 0 ? (

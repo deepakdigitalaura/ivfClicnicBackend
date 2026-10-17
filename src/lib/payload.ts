@@ -15,8 +15,18 @@ import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
-import { getSanityHomepage, getCampsConfig } from "@/sanity/lib/fetch";
+import { getSanityHomepage, getCampsConfig, getSanitySurakshaKavach, getSanityHistoryPage, getSanityInfrastructurePage, getSanityWhyBfiPage, getSanitySimpleTreatmentPage, getSanitySafeTreatmentPage, getSanitySmartTreatmentPage, getSanitySuccessBenchmarksPage, getSanityCategoryHub } from "@/sanity/lib/fetch";
+import { resolveCategoryHub, type HubSlug, type CategoryHubData } from "@/lib/category-hub";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
+import { resolveSurakshaKavach, type SurakshaKavachData } from "@/lib/suraksha-kavach";
+import { resolveHistory, type HistoryData } from "@/lib/history";
+import { resolveInfrastructure, type InfrastructureData } from "@/lib/infrastructure";
+import { resolveWhyBfi, type WhyBfiData } from "@/lib/why-bfi";
+import { resolveSimpleTreatment, type SimpleTreatmentData } from "@/lib/simple-treatment";
+import { resolveSafeTreatment, type SafeTreatmentData } from "@/lib/safe-treatment";
+import { resolveSmartTreatment, type SmartTreatmentData } from "@/lib/smart-treatment";
+import { resolveSuccessBenchmarks, type SuccessBenchmarksData } from "@/lib/success-benchmarks";
+import type { AboutSectionHeading, Milestone } from "@/lib/about";
 import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
@@ -682,6 +692,52 @@ export const getAbout = async (): Promise<AboutData> => {
     finalCta: doc.finalCta ?? null,
     seo: doc.seo ?? null,
   } as AboutSource);
+};
+
+export const getSurakshaKavach = async (): Promise<SurakshaKavachData> => {
+  const doc = await getSanitySurakshaKavach();
+  return resolveSurakshaKavach(doc ?? null);
+};
+
+export const getCategoryHub = async (slug: HubSlug): Promise<CategoryHubData> => {
+  const doc = await getSanityCategoryHub(slug);
+  return resolveCategoryHub(slug, doc ?? null);
+};
+
+export const getHistoryPage = async (): Promise<HistoryData & { legacy: AboutSectionHeading; milestones: Milestone[] }> => {
+  const [doc, about] = await Promise.all([getSanityHistoryPage(), getAbout()]);
+  const data = resolveHistory(doc ?? null);
+  return { ...data, legacy: about.legacy, milestones: about.milestones };
+};
+
+export const getInfrastructurePage = async (): Promise<InfrastructureData> => {
+  const doc = await getSanityInfrastructurePage();
+  return resolveInfrastructure(doc ?? null);
+};
+
+export const getWhyBfiPage = async (): Promise<WhyBfiData> => {
+  const doc = await getSanityWhyBfiPage();
+  return resolveWhyBfi(doc ?? null);
+};
+
+export const getSimpleTreatmentPage = async (): Promise<SimpleTreatmentData> => {
+  const doc = await getSanitySimpleTreatmentPage();
+  return resolveSimpleTreatment(doc ?? null);
+};
+
+export const getSafeTreatmentPage = async (): Promise<SafeTreatmentData> => {
+  const doc = await getSanitySafeTreatmentPage();
+  return resolveSafeTreatment(doc ?? null);
+};
+
+export const getSmartTreatmentPage = async (): Promise<SmartTreatmentData> => {
+  const doc = await getSanitySmartTreatmentPage();
+  return resolveSmartTreatment(doc ?? null);
+};
+
+export const getSuccessBenchmarksPage = async (): Promise<SuccessBenchmarksData> => {
+  const doc = await getSanitySuccessBenchmarksPage();
+  return resolveSuccessBenchmarks(doc ?? null);
 };
 
 /** Text testimonials (no YouTube ID) for the homepage "Patient review" cards. */

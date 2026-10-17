@@ -1,7 +1,7 @@
 import Link from "next/link";
 import {
   CornerUpRight, FileText, Code2, BarChart3, Bot, Map,
-  Plus, ExternalLink, Database, Inbox,
+  Plus, ExternalLink, Inbox,
 } from "lucide-react";
 import { getDashboardStats, hasSanity } from "@/sanity/lib/admin";
 
@@ -13,7 +13,6 @@ export default async function Dashboard() {
 
   const cards = [
     { num: stats.newInquiries, label: "New Inquiries", icon: Inbox, bg: "#dcfce7", fg: "#166534" },
-    { num: stats.pageSeo, label: "Page SEO Entries", icon: FileText, bg: "var(--rose-soft)", fg: "var(--rose)" },
     { num: stats.redirects, label: "Redirects", icon: CornerUpRight, bg: "#ede9fe", fg: "var(--plum)" },
     { num: stats.headScripts + stats.bodyScripts, label: "Scripts Injected", icon: Code2, bg: "#fef3c7", fg: "#b45309" },
   ];
@@ -69,9 +68,8 @@ export default async function Dashboard() {
 
       <div className="admin-card">
         <h2 className="admin-card-title">More</h2>
-        <p className="admin-card-desc">Power tools and your live site.</p>
+        <p className="admin-card-desc">Your live site.</p>
         <div className="admin-quick">
-          <Link href="/studio" target="_blank"><Database /> Open Sanity Studio</Link>
           <Link href="/" target="_blank"><ExternalLink /> View Live Site</Link>
         </div>
       </div>

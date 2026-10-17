@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getSimpleTreatmentPage } from "@/lib/payload";
 
 const PATH = "/simple-treatment";
 
@@ -39,12 +40,13 @@ const graph = [
   ]),
 ];
 
-export default function Page() {
+export default async function Page() {
+  const data = await getSimpleTreatmentPage();
   return (
     <>
       <JsonLd graph={graph} />
       <PageSeoSchema path={PATH} />
-      <SimpleTreatmentPage />
+      <SimpleTreatmentPage data={data} />
     </>
   );
 }

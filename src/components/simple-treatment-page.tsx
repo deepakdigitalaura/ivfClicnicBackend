@@ -10,98 +10,13 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-
-/* ---------- Data ---------- */
-
-const STEPS = [
-  {
-    step: "01",
-    icon: ClipboardCheck,
-    title: "Pre-treatment Evaluation",
-    description:
-      "Highly individualized, personalized, minimalistic. You are involved in the decision process — we explain every option, every outcome, so you make informed choices about your own body.",
-    highlights: [
-      "Personalized assessment",
-      "Minimalistic approach",
-      "You decide, we guide",
-    ],
-  },
-  {
-    step: "02",
-    icon: Syringe,
-    title: "Simple Treatment",
-    description:
-      "Focuses on maximizing your comfort by reducing injections and hospital visits to the bare minimum. Only essential injections for optimum response. Oral and vaginal drugs preferred. Self-injection encouraged. Sonography at your hometown.",
-    highlights: [
-      "Minimum injections & dosage",
-      "Oral/vaginal drugs preferred",
-      "Sonography at hometown",
-    ],
-  },
-  {
-    step: "03",
-    icon: Egg,
-    title: "Ovum Pickup",
-    description:
-      "Very light and short anaesthesia — you are comfortable throughout. Discharged in just 2 hours. We use the most comfortable OT position and minimize nil-by-mouth time so you can eat sooner.",
-    highlights: [
-      "Light, short anaesthesia",
-      "Discharged in 2 hours",
-      "Minimum fasting time",
-    ],
-  },
-  {
-    step: "04",
-    icon: Sparkles,
-    title: "Embryo Transfer",
-    description:
-      "Our signature 'Zero Error' technique makes this simple, painless, and easy. After the procedure, you enjoy a brief relaxation session — and can leave and start work after just a few hours.",
-    highlights: [
-      "Signature 'Zero Error' technique",
-      "Simple, painless, easy",
-      "Back to work in hours",
-    ],
-  },
-  {
-    step: "05",
-    icon: HeartHandshake,
-    title: "Post Embryo Transfer",
-    description:
-      "NO REST required. We actively encourage you to maintain your routine lifestyle and work. Only minimum required medicines are prescribed. A simple blood pregnancy test can be done at home.",
-    highlights: [
-      "No bed rest needed",
-      "Routine lifestyle encouraged",
-      "Pregnancy test at home",
-    ],
-  },
-];
-
-const PHILOSOPHY = [
-  {
-    icon: Activity,
-    title: "Minimum Injections",
-    description: "Only essential injections for optimum response — your comfort is our priority.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Fewer Hospital Visits",
-    description: "Sonography at your hometown. Reduced travel, reduced stress.",
-  },
-  {
-    icon: CheckCircle2,
-    title: "Zero Error Technique",
-    description: "Our signature embryo transfer technique — simple, painless, precise.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Maximum Comfort",
-    description: "No unnecessary rest. Return to your routine. Live your life normally.",
-  },
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { SIMPLE_TREATMENT_DEFAULTS, type SimpleTreatmentData } from "@/lib/simple-treatment";
 
 /* ---------- Page ---------- */
 
-export function SimpleTreatmentPage() {
+export function SimpleTreatmentPage({ data = SIMPLE_TREATMENT_DEFAULTS }: { data?: SimpleTreatmentData } = {}) {
+  const { hero, philosophy: PHILOSOPHY, steps: STEPS, quote, pillars } = data;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -137,21 +52,20 @@ export function SimpleTreatmentPage() {
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> Simple by Design
+                <Sparkles className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                Most Complex things can be made{" "}
+                {hero.headline.split(hero.headlineEm)[0]}
                 <em className="font-display italic text-[color:var(--rose)]">
-                  Simple with Science &amp; Care.
-                </em>
+                  {hero.headlineEm}
+                </em>{hero.headline.split(hero.headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                At Bavishi Fertility Institute, with 100+ years combined IVF experience,
-                we have made the most complex IVF treatment <strong className="text-[color:var(--plum)]">SIMPLE</strong>.
+                {hero.paragraph}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
@@ -196,21 +110,24 @@ export function SimpleTreatmentPage() {
             subtitle="We strip away the unnecessary — fewer injections, fewer visits, less stress. What remains is a treatment designed around your comfort and confidence."
           />
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-6 sm:grid-cols-2 lg:grid-cols-4">
-            {PHILOSOPHY.map((p, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <p.icon className="h-6 w-6" />
+            {PHILOSOPHY.map((p, i) => {
+              const Icon = resolveIcon(p.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">
+                      {p.title}
+                    </h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
+                      {p.description}
+                    </p>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">
-                    {p.title}
-                  </h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">
-                    {p.description}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -236,41 +153,44 @@ export function SimpleTreatmentPage() {
               {/* Vertical connecting line */}
               <div className="absolute left-[1.65rem] top-4 bottom-4 w-px bg-gradient-to-b from-[color:var(--rose)] via-[color:var(--rose)]/40 to-transparent lg:left-[1.85rem]" />
 
-              {STEPS.map((s, i) => (
-                <StaggerItem key={i}>
-                  <div className="relative flex gap-6 pb-12 last:pb-0 lg:gap-8">
-                    {/* Numbered circle */}
-                    <div className="relative z-10 grid h-[3.3rem] w-[3.3rem] shrink-0 place-items-center rounded-full bg-[color:var(--rose)] text-sm font-bold text-white shadow-soft ring-4 ring-[color:var(--ivory)] lg:h-[3.7rem] lg:w-[3.7rem]">
-                      {s.step}
-                    </div>
-                    {/* Content card */}
-                    <div className="flex-1 rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift lg:p-7">
-                      <div className="flex items-center gap-3">
-                        <div className="grid h-10 w-10 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)]">
-                          <s.icon className="h-5 w-5" />
+              {STEPS.map((s, i) => {
+                const Icon = resolveIcon(s.icon);
+                return (
+                  <StaggerItem key={i}>
+                    <div className="relative flex gap-6 pb-12 last:pb-0 lg:gap-8">
+                      {/* Numbered circle */}
+                      <div className="relative z-10 grid h-[3.3rem] w-[3.3rem] shrink-0 place-items-center rounded-full bg-[color:var(--rose)] text-sm font-bold text-white shadow-soft ring-4 ring-[color:var(--ivory)] lg:h-[3.7rem] lg:w-[3.7rem]">
+                        {s.step}
+                      </div>
+                      {/* Content card */}
+                      <div className="flex-1 rounded-2xl border border-border/70 bg-card p-6 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift lg:p-7">
+                        <div className="flex items-center gap-3">
+                          <div className="grid h-10 w-10 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)]">
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <h3 className="text-xl font-semibold text-[color:var(--plum)]">
+                            {s.title}
+                          </h3>
                         </div>
-                        <h3 className="text-xl font-semibold text-[color:var(--plum)]">
-                          {s.title}
-                        </h3>
-                      </div>
-                      <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                        {s.description}
-                      </p>
-                      <div className="mt-4 flex flex-wrap gap-2">
-                        {s.highlights.map((h, j) => (
-                          <span
-                            key={j}
-                            className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose-soft)]/30 px-3 py-1 text-xs font-medium text-[color:var(--plum)]"
-                          >
-                            <CheckCircle2 className="h-3 w-3 text-[color:var(--rose)]" />
-                            {h}
-                          </span>
-                        ))}
+                        <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+                          {s.description}
+                        </p>
+                        <div className="mt-4 flex flex-wrap gap-2">
+                          {s.highlights.map((h, j) => (
+                            <span
+                              key={j}
+                              className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose-soft)]/30 px-3 py-1 text-xs font-medium text-[color:var(--plum)]"
+                            >
+                              <CheckCircle2 className="h-3 w-3 text-[color:var(--rose)]" />
+                              {h}
+                            </span>
+                          ))}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                </StaggerItem>
-              ))}
+                  </StaggerItem>
+                );
+              })}
             </Stagger>
           </div>
         </div>
@@ -293,16 +213,13 @@ export function SimpleTreatmentPage() {
               <Reveal delay={0.1}>
                 <blockquote className="mx-auto max-w-3xl text-2xl font-medium leading-snug md:text-3xl lg:text-[2.25rem] text-balance italic">
                   <span className="font-display text-[color:var(--rose-soft)]">&ldquo;</span>
-                  We believe the hardest journey deserves the simplest path. Decades of expertise &
-                  the most advanced reproductive technology, brought together to make your IVF Simple
+                  {quote.quote}
                   <span className="font-display text-[color:var(--rose-soft)]">&rdquo;</span>
                 </blockquote>
               </Reveal>
               <Reveal delay={0.18}>
                 <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-white/70">
-                  With over 100 years of combined IVF experience, our specialists have refined every
-                  protocol to deliver maximum results with minimum complexity. Simple is not a
-                  compromise — it is the result of deep expertise.
+                  {quote.paragraph}
                 </p>
               </Reveal>
               <Reveal delay={0.25}>
@@ -340,40 +257,24 @@ export function SimpleTreatmentPage() {
             }
           />
           <Stagger className="mx-auto mt-12 grid max-w-5xl gap-8 md:grid-cols-3">
-            {[
-              {
-                title: "Simple to Understand",
-                description:
-                  "We explain every step in plain language. No jargon, no confusion. You know exactly what is happening, why it is happening, and what comes next.",
-                icon: ClipboardCheck,
-              },
-              {
-                title: "Simple to Plan",
-                description:
-                  "Fewer hospital visits, hometown sonography, self-injection guidance. We fit the treatment around your life — not the other way around.",
-                icon: Calendar,
-              },
-              {
-                title: "Simple to Undergo",
-                description:
-                  "Minimum injections, light anaesthesia, no bed rest. Our Zero Error technique makes embryo transfer painless. You can return to work the same day.",
-                icon: Sparkles,
-              },
-            ].map((pillar, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift text-center">
-                  <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <pillar.icon className="h-7 w-7" />
+            {pillars.map((pillar, i) => {
+              const Icon = resolveIcon(pillar.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-8 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift text-center">
+                    <div className="mx-auto grid h-14 w-14 place-items-center rounded-2xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-7 w-7" />
+                    </div>
+                    <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]">
+                      {pillar.title}
+                    </h3>
+                    <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
+                      {pillar.description}
+                    </p>
                   </div>
-                  <h3 className="mt-6 text-xl font-semibold text-[color:var(--plum)]">
-                    {pillar.title}
-                  </h3>
-                  <p className="mt-3 text-[15px] leading-relaxed text-muted-foreground">
-                    {pillar.description}
-                  </p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>

@@ -4,6 +4,7 @@ import { JsonLd } from "@/components/json-ld";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { breadcrumbSchema, abs, ORG_ID, WEBSITE_ID } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { getSuccessBenchmarksPage } from "@/lib/payload";
 
 const PATH = "/success-benchmarks";
 
@@ -21,6 +22,7 @@ const graph = [
   breadcrumbSchema([ { name: "Home", url: "/" }, { name: "Success Benchmarks", url: PATH } ]),
 ];
 
-export default function Page() {
-  return (<><JsonLd graph={graph} /><PageSeoSchema path={PATH} /><SuccessBenchmarksPage /></>);
+export default async function Page() {
+  const data = await getSuccessBenchmarksPage();
+  return (<><JsonLd graph={graph} /><PageSeoSchema path={PATH} /><SuccessBenchmarksPage data={data} /></>);
 }
