@@ -436,6 +436,154 @@ const relatedWindow = <T,>(items: T[], seed: string, limit: number): T[] => {
   return Array.from({ length: limit }, (_, i) => items[(start + i) % items.length]);
 };
 
+/**
+ * Fourteen articles earn real traffic on two inbound internal links each --
+ * sperm cramps alone takes 672 visits a month. The hash window above spreads
+ * links evenly, which is right in general but leaves those fourteen on roughly
+ * three; they need more if they are to hold and improve their positions.
+ *
+ * Reserving a "Keep Reading" slot for them wholesale was the obvious fix and
+ * the wrong one: simulated against the live data, the single boosted page in
+ * the 75-post IVF category collected 74 inbound links, while the page whose
+ * category holds nothing else collected none.
+ *
+ * So the pairing is decided up front instead, balanced, and recorded here.
+ * Each of the fourteen gets exactly nine named sources, no article feeds more
+ * than one of them, and sources come from the same category first and a
+ * related one only when the category cannot supply enough. The full list, with
+ * the reason for each pairing, is in October 2026/inbound-link-plan.csv.
+ *
+ * To retire this once the pages recover: empty the map. Nothing else changes.
+ */
+const INBOUND_BOOST: Record<string, string> = {
+  "10-signs-you-should-see-fertility-specialist-and-when-not-to-wait": "10-foods-to-improve-female-egg-quality",
+  "asthenospermia-understanding-the-condition-and-exploring-assisted-reproductive-technologies-art-options": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "azoospermia-can-you-have-a-baby-with-zero-sperm-count": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "best-types-of-exercise-to-support-your-ivf-journey": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "blastocyst-transfer-in-special-situations-pcos-poor-responders-recurrent-ivf-failure-endometriosis-uterine-factors": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "blighted-ovum-symptoms-causes-and-more": "era-test-explained-does-it-really-improve-egg-quality",
+  "blocked-fallopian-tubes-diagnosis-treatment": "10-foods-to-improve-female-egg-quality",
+  "boosting-implantation-success-the-power-of-embryo-glue": "10-foods-to-improve-female-egg-quality",
+  "boosting-male-fertility-tips-to-improve-sperm-quality": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "boosting-your-ivf-success-a-comprehensive-guide-for-couples": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "breaking-free-from-varicocele-pain-3-innovative-ways-to-find-relief": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "building-families-with-hope-the-power-of-assisted-reproductive-technology": "era-test-explained-does-it-really-improve-egg-quality",
+  "can-natural-cycle-ivf-reduce-the-risk-of-ovarian-hyperstimulation": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "can-varicocele-be-treated-without-surgery-exploring-your-options": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "common-risks-in-twin-pregnancy-and-how-do-doctors-manage-them": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "complete-pregnancy-diet-chart-by-trimester-what-to-eat-in-the-first-second-third-trimester": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "cracking-opens-the-possibilities-how-laser-assisted-hatching-is-changing-the-game-for-ivf-patients": "what-happens-after-embryo-transfer-day-by-day",
+  "decoding-your-semen-analysis-report-a-simple-guide": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "diabetes-and-fertility": "10-foods-to-improve-female-egg-quality",
+  "diabetes-obesity-and-ivf-success": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "does-male-age-affect-ivf-success": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "donor-egg-ivf-who-its-for-and-how-donors-are-screened": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "egg-quality-vs-egg-quantity-what-really-matters": "what-happens-after-embryo-transfer-day-by-day",
+  "embracing-positivity-activities-to-nurture-your-journey-to-motherhood-after-embryo-transfer": "10-foods-to-improve-female-egg-quality",
+  "embryo-glue-a-game-changer-in-ivf-success-rates": "10-foods-to-improve-female-egg-quality",
+  "endometrial-lining-remedies-for-abnormal-thickness": "era-test-explained-does-it-really-improve-egg-quality",
+  "endometrial-scratching-before-ivf-evidence-benefits-and-risks": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "essential-tests-for-male-infertility-what-to-expect": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "fertility-ovulation-facts-to-help-you-get-pregnant": "era-test-explained-does-it-really-improve-egg-quality",
+  "food-for-better-egg-quality-how-sugar-affects-your-eggs": "10-foods-to-improve-female-egg-quality",
+  "foods-to-avoid-during-pregnancy-and-why": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "from-ivf-to-motherhood-the-journey-of-hope-and-happiness": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "frozen-vs-fresh-embryo-transfer-which-is-better": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "genetic-testing-before-and-during-pregnancy-a-comprehensive-guide": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "high-risk-pregnancy-a-guide-to-lifestyle-diet-and-rest-tips": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "high-risk-pregnancy-due-to-diabetes-bp-thyroid-disorders": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "how-do-male-fertility-supplements-impact-ivf-results": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "how-do-thyroid-disorders-affect-fertility-in-women": "what-happens-after-embryo-transfer-day-by-day",
+  "how-does-age-impact-the-success-rate-of-iui-procedures": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "how-long-do-you-have-to-wait-to-try-again-after-a-miscarriage": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "how-long-does-it-take-to-improve-sperm-quality-a-12-week-plan-for-men": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "how-long-should-you-see-a-gynecologist-after-delivery": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "how-male-infertility-affects-ivf-treatment": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "how-many-embryos-should-be-transferred-risks-of-multiple-pregnancy-explained": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "how-many-times-can-a-person-undergo-ivf-procedure": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "how-much-weight-can-a-baby-gain-in-a-week-in-the-womb": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "how-to-choose-the-right-treatment-after-45": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "how-to-improve-male-infertility": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "how-to-improve-your-chances-of-iui-success-naturally": "reasons-for-iui-failure-symptoms-and-causes",
+  "how-to-prepare-for-your-first-iui-cycle-tips-and-advice": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "how-to-protect-your-mental-health-during-ivf-and-fertility-treatments": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "importance-of-folic-acid-before-and-during-pregnancy": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "imsi-technique-for-ivf-advanced-sperm-selection-for-better-success": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "insurance-and-fertility-treatment-india": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "is-iui-painful-everything-you-need-to-know": "reasons-for-iui-failure-symptoms-and-causes",
+  "is-natural-cycle-ivf-better-for-women-with-poor-ovarian-reserve": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "iui-for-unexplained-infertility": "reasons-for-iui-failure-symptoms-and-causes",
+  "iui-process-explained-what-to-expect-at-every-step": "reasons-for-iui-failure-symptoms-and-causes",
+  "iui-success-rate-what-to-expect-after-iui-treatment": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "iui-treatment-with-fertility-medicines-what-patients-should-know": "reasons-for-iui-failure-symptoms-and-causes",
+  "iui-vs-ivf-a-breakdown-of-the-procedures-and-what-to-expect": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "ivf-after-age-40-realistic-success-rates-and-treatment-strategies": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "ivf-for-women-with-thyroid-disorders-what-patients-should-know": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "ivf-india-vs-abroad-cost-comparison": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "ivf-medication-side-effects": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "ivf-second-opinion-when-to-get-one-what-records-to-bring-and-what-to-ask-after-a-failed-cycle": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "ivf-stimulation-protocols-a-comprehensive-guide": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "life-after-iui-precautions-lifestyle-tips-and-what-to-expect": "reasons-for-iui-failure-symptoms-and-causes",
+  "lifestyle-diet-rest-tips-for-high-risk-pregnancy": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "low-sperm-count-after-40-is-age-related-decline-something-you-can-fix": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "male-infertility-signs-causes-treatment": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "minimal-stimulation-ivf-who-its-right-for": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "minimum-sperm-count-for-iui-how-much-motile-sperm-do-you-need-for-it-to-work": "reasons-for-iui-failure-symptoms-and-causes",
+  "natural-iui-vs-medicated-iui-which-is-more-effective": "reasons-for-iui-failure-symptoms-and-causes",
+  "normal-delivery-tips-to-increase-your-chances-of-a-natural-birth": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "oncofertility-preserving-fertility-before-cancer-treatment": "what-happens-after-embryo-transfer-day-by-day",
+  "ovarian-follicles-the-tiny-heroes-of-fertility": "era-test-explained-does-it-really-improve-egg-quality",
+  "ovarian-rejuvenation-for-restoring-fertility-a-new-ray-of-hope": "era-test-explained-does-it-really-improve-egg-quality",
+  "parenting-after-ivf-unique-challenges-and-rewards": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "personalized-ivf-the-future-of-fertility-treatment": "what-happens-after-embryo-transfer-day-by-day",
+  "picsi-imsi-macs-spindle-view-icsi-compared": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "postpartum-mental-health-recognizing-baby-blues-and-postpartum-depression": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "preserving-hope-ivf-and-fertility-preservation-for-cancer-patients": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "rebuilding-families-fertility-treatment-options-for-cancer-survivors": "10-foods-to-improve-female-egg-quality",
+  "recurrent-implantation-failure-what-to-do-next": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "recurrent-miscarriage-why-does-it-keep-happening-and-what-can-you-do": "10-foods-to-improve-female-egg-quality",
+  "risks-and-benefits-of-laser-assisted-hatching-in-ivf": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "second-baby-after-45-why-is-it-a-completely-different-journey-than-your-first": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "secondary-infertility-why-getting-pregnant-again-can-be-hard": "what-happens-after-embryo-transfer-day-by-day",
+  "step-by-step-process-of-an-iui-procedure-what-to-expect": "reasons-for-iui-failure-symptoms-and-causes",
+  "superfoods-for-male-fertility-what-fertility-specialists-recommend": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "teratozoospermia-uncovering-the-causes-symptoms-and-solutions": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "tese-vs-pesa-vs-testicular-biopsy": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "the-connection-between-quality-sleep-and-ivf-success-a-hormonal-perspective": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "the-dfi-test-a-crucial-diagnostic-tool-for-male-infertility": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "the-emotional-rollercoaster-of-ivf-why-mental-health-support-is-essential": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "the-journey-to-blastocyst-stage-and-implantation-understanding-your-chances-and-how-bavishi-fertility-institutes-can-help": "what-happens-after-embryo-transfer-day-by-day",
+  "the-match-system-revolutionizing-ivf-with-unparalleled-accuracy-and-safety": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "the-miracle-of-bonding-connecting-with-your-baby-before-birth": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "the-postpartum-journey-how-long-does-it-take-to-heal-after-giving-birth": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "the-role-of-endometrial-receptivity-in-ivf-success": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "the-role-of-nutrition-in-boosting-ivf-success": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "the-thyroid-connection-understanding-its-role-in-female-fertility-health": "era-test-explained-does-it-really-improve-egg-quality",
+  "the-ultimate-guide-to-diet-in-lactation-nourishing-your-body-and-baby": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "the-unseen-struggle-understanding-male-infertility": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "thyroid-disorders-in-early-pregnancy": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "trying-to-conceive-after-40-what-you-need-to-know": "what-happens-after-embryo-transfer-day-by-day",
+  "twin-and-multiple-pregnancies-after-ivf-risks-and-care": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "twin-pregnancy-delivery-options-normal-delivery-vs-c-section": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "twin-pregnancy-understanding-common-risks-and-how-doctors-manage-them": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "understanding-endometrial-thickness-a-key-factor-in-female-fertility": "era-test-explained-does-it-really-improve-egg-quality",
+  "understanding-male-fertility-azoospermia-vs-oligospermia": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "understanding-sperm-dna-fragmentation-causes-treatment-and-ivf-options": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "understanding-thin-endometrium-causes-impact-and-treatment-options": "era-test-explained-does-it-really-improve-egg-quality",
+  "understanding-varicocele-how-serious-is-the-diagnosis": "understanding-hypospermia-signs-symptoms-and-treatment-options",
+  "unexplained-infertility-when-tests-are-normal-but-you-still-cant-conceive": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "what-is-the-max-number-of-eggs-that-you-can-retrieve-in-an-ivf-cycle": "necrozoospermia-symptoms-causes-and-treatment-options",
+  "what-to-eat-during-pregnancy-a-week-by-week-nutrition-plan": "how-long-does-it-take-for-the-uterus-to-go-back-to-normal-after-birth",
+  "when-can-you-start-exercising-after-delivery": "vegetarian-diet-chart-for-pregnant-lady-protein-rich-indian-meal-plan",
+  "when-is-macs-most-useful-indications-ideal-candidates-limitations": "10-foods-that-will-increase-sperm-count-and-5-foods-to-avoid",
+  "when-male-infertility-is-the-real-issue-why-you-need-a-doctor-who-treats-both-partners": "iui-side-effects-on-the-body-and-emotions-a-complete-guide",
+  "when-should-you-get-3d-4d-ultrasound-during-pregnancy": "ivf-pregnancy-week-by-week-symptoms-and-safety",
+  "when-to-consider-sperm-dna-fragmentation-testing-in-low-sperm-count-cases": "understanding-sperm-cramps-symptoms-causes-diagnosis-treatment",
+  "when-to-take-a-pregnancy-test-after-iui-timing-and-accuracy-explained": "the-essential-dos-and-donts-after-iui-treatment-a-complete-guide",
+  "who-should-consider-a-blastocyst-transfer-in-ivf": "post-embryo-transfer-timeline-what-happens-after-3-5-7-and-9-days",
+  "why-do-some-embryos-not-implant-even-if-they-look-healthy": "what-happens-after-embryo-transfer-day-by-day",
+};
+
 export const getSanityRelatedBlogs = async (currentSlug: string, categorySlug: string | null) => {
   if (!process.env.NEXT_PUBLIC_SANITY_PROJECT_ID) return [];
   try {
@@ -456,9 +604,19 @@ export const getSanityRelatedBlogs = async (currentSlug: string, categorySlug: s
         SANITY_CACHE,
       )) ?? [];
 
-    const picked = relatedWindow(candidates, currentSlug, 3)
+    // The assigned under-linked page is ADDED to the usual three rather than
+    // replacing one of them. Taking a slot instead would have pushed fifteen
+    // other articles down to no inbound links at all, which is the problem
+    // this whole exercise exists to fix. Four cards lay out 2x2; see
+    // KeepReading in blog-article.tsx.
+    const forced = INBOUND_BOOST[currentSlug];
+    const window = relatedWindow(candidates, currentSlug, 3)
       .map((c) => c.slug)
       .filter(Boolean);
+    const picked =
+      forced && !window.includes(forced) && forced !== currentSlug
+        ? [...window, forced]
+        : window;
     if (!picked.length) return [];
 
     const docs =
