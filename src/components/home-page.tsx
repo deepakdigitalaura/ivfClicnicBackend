@@ -1843,6 +1843,28 @@ const inquiryLocations = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
 
+// reCAPTCHA v2 ("I'm not a robot" checkbox). Widget is hidden while the site key
+// is unset; the /inquiry route likewise skips verification without its secret.
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+type Grecaptcha = {
+  ready: (cb: () => void) => void;
+  render: (el: HTMLElement, opts: Record<string, unknown>) => number;
+  reset: (id?: number) => void;
+};
+let recaptchaLoad: Promise<Grecaptcha> | null = null;
+/** Inject Google's script once per page, on demand (keeps it off first paint). */
+const loadRecaptcha = () =>
+  (recaptchaLoad ??= new Promise<Grecaptcha>((resolve) => {
+    const s = document.createElement("script");
+    s.src = "https://www.google.com/recaptcha/api.js?render=explicit";
+    s.async = true;
+    s.onload = () => {
+      const g = (window as unknown as { grecaptcha: Grecaptcha }).grecaptcha;
+      g.ready(() => resolve(g));
+    };
+    document.head.appendChild(s);
+  }));
+
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
   const router = useRouter();
   const contactIcons = [Phone, MessageCircle, Clock];
@@ -1854,6 +1876,31 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
   const [serverError, setServerError] = useState("");
   // Honeypot — kept off-screen; real users never fill it, bots usually do.
   const [company, setCompany] = useState("");
+  // reCAPTCHA: script loads on first interaction with the form.
+  const [captchaWanted, setCaptchaWanted] = useState(false);
+  const [captcha, setCaptcha] = useState("");
+  const captchaRef = useRef<HTMLDivElement>(null);
+  const captchaId = useRef<number | null>(null);
+
+  useEffect(() => {
+    const el = captchaRef.current;
+    if (!RECAPTCHA_SITE_KEY || !captchaWanted || submitted || !el) return;
+    let live = true;
+    loadRecaptcha().then((g) => {
+      if (!live || el.hasChildNodes()) return;
+      captchaId.current = g.render(el, {
+        sitekey: RECAPTCHA_SITE_KEY,
+        callback: (t: string) => { setCaptcha(t); setErrors((e) => ({ ...e, captcha: "" })); },
+        "expired-callback": () => setCaptcha(""),
+      });
+    });
+    return () => { live = false; };
+  }, [captchaWanted, submitted]);
+
+  const resetCaptcha = () => {
+    setCaptcha("");
+    if (captchaId.current !== null) loadRecaptcha().then((g) => g.reset(captchaId.current!));
+  };
 
   const set = (k: string, v: string) => {
     setForm((f) => ({ ...f, [k]: v }));
@@ -1868,6 +1915,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
     if (!form.name.trim()) next.name = "Please enter your name";
     if (!/^[+\d][\d\s-]{7,}$/.test(form.phone.trim())) next.phone = "Enter a valid phone number";
     if (form.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) next.email = "Enter a valid email";
+    if (RECAPTCHA_SITE_KEY && !captcha) next.captcha = "Please tick \"I'm not a robot\"";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
@@ -1880,20 +1928,24 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
         body: JSON.stringify({
           ...form,
           company,
+          captcha,
           source: typeof window !== "undefined" ? window.location.pathname : "",
         }),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
         setServerError(data?.error || "Something went wrong. Please call us on +91 97126 22288.");
+        resetCaptcha(); // tokens are single-use
         return;
       }
       // A distinct URL is what makes the enquiry countable as a conversion in
       // GA4 / Google Ads; the in-place success state stays as the fallback if
       // navigation is blocked for any reason.
+      setCaptcha("");
       setSubmitted(true);
       router.push("/thank-you");
     } catch {
+      resetCaptcha();
       setServerError("Network error. Please check your connection or call us on +91 97126 22288.");
     } finally {
       setSending(false);
@@ -1963,7 +2015,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   <span>{formAgg.ratingValue.toFixed(1)} on Google · {formAgg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
                 </div>
               )}
-              <form onSubmit={handleSubmit} noValidate className="space-y-4">
+              <form onSubmit={handleSubmit} onFocusCapture={() => setCaptchaWanted(true)} noValidate className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Full Name *</label>
@@ -2019,6 +2071,14 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   <label htmlFor="if-company">Company</label>
                   <input id="if-company" type="text" tabIndex={-1} autoComplete="off" value={company} onChange={(e) => setCompany(e.target.value)} />
                 </div>
+
+                {RECAPTCHA_SITE_KEY && (
+                  <div>
+                    {/* min-h reserves the widget's 78px so it doesn't shift the layout when it loads */}
+                    <div ref={captchaRef} className="min-h-[78px]" />
+                    {errors.captcha && <p className="mt-1 text-xs text-[color:var(--rose)]">{errors.captcha}</p>}
+                  </div>
+                )}
 
                 {serverError && (
                   <p role="alert" className="rounded-xl bg-[color:var(--rose)]/10 px-4 py-3 text-center text-sm text-[color:var(--rose)]">
