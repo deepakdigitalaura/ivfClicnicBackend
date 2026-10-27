@@ -1876,26 +1876,30 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
   const [serverError, setServerError] = useState("");
   // Honeypot — kept off-screen; real users never fill it, bots usually do.
   const [company, setCompany] = useState("");
-  // reCAPTCHA: script loads on first interaction with the form.
-  const [captchaWanted, setCaptchaWanted] = useState(false);
+  // reCAPTCHA: script loads when the form nears the viewport (off first paint).
   const [captcha, setCaptcha] = useState("");
   const captchaRef = useRef<HTMLDivElement>(null);
   const captchaId = useRef<number | null>(null);
 
   useEffect(() => {
     const el = captchaRef.current;
-    if (!RECAPTCHA_SITE_KEY || !captchaWanted || submitted || !el) return;
+    if (!RECAPTCHA_SITE_KEY || submitted || !el) return;
     let live = true;
-    loadRecaptcha().then((g) => {
-      if (!live || el.hasChildNodes()) return;
-      captchaId.current = g.render(el, {
-        sitekey: RECAPTCHA_SITE_KEY,
-        callback: (t: string) => { setCaptcha(t); setErrors((e) => ({ ...e, captcha: "" })); },
-        "expired-callback": () => setCaptcha(""),
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      loadRecaptcha().then((g) => {
+        if (!live || el.hasChildNodes()) return;
+        captchaId.current = g.render(el, {
+          sitekey: RECAPTCHA_SITE_KEY,
+          callback: (t: string) => { setCaptcha(t); setErrors((e) => ({ ...e, captcha: "" })); },
+          "expired-callback": () => setCaptcha(""),
+        });
       });
-    });
-    return () => { live = false; };
-  }, [captchaWanted, submitted]);
+    }, { rootMargin: "300px" });
+    io.observe(el);
+    return () => { live = false; io.disconnect(); };
+  }, [submitted]);
 
   const resetCaptcha = () => {
     setCaptcha("");
@@ -2015,7 +2019,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   <span>{formAgg.ratingValue.toFixed(1)} on Google · {formAgg.reviewCount.toLocaleString("en-IN")}+ reviews</span>
                 </div>
               )}
-              <form onSubmit={handleSubmit} onFocusCapture={() => setCaptchaWanted(true)} noValidate className="space-y-4">
+              <form onSubmit={handleSubmit} noValidate className="space-y-4">
                 <div className="grid gap-4 sm:grid-cols-2">
                   <div>
                     <label htmlFor="if-name" className="mb-1.5 block text-xs font-semibold uppercase tracking-wider text-[color:var(--plum)]/70">Full Name *</label>
