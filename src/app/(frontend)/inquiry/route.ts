@@ -18,6 +18,40 @@ import { createInquiry } from "@/sanity/lib/admin";
 const phoneOk = (v: string) => /^[+\d][\d\s-]{7,}$/.test(v);
 const emailOk = (v: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
 
+/** Numbers the clinic flagged for repeated junk inquiries. They get the normal
+ *  success response, but nothing is stored or emailed. Matched on last 10 digits
+ *  so "+91 73760 16497" and "7376016497" both hit. */
+const BLOCKED_PHONES = new Set([
+  "7376016497", // Amita
+  "7348127412", // Binod
+  "9598883238", // Akanksha Upadhyay
+  "8529139058", // Pragya
+  "7997680639", // Rani
+  "9328695560", // Meshva
+  "9074253011", // Priyanshi
+  "7999118214", // Surbhi
+  "9993738778", // Simer
+]);
+const phoneBlocked = (v: string) => BLOCKED_PHONES.has(v.replace(/\D/g, "").slice(-10));
+
+/** Verify a reCAPTCHA v2 checkbox token with Google. Skipped (passes) until
+ *  RECAPTCHA_SECRET_KEY is set, so deploying before the keys doesn't kill the form. */
+async function captchaOk(token: string): Promise<boolean> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) return true;
+  if (!token) return false;
+  try {
+    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      body: new URLSearchParams({ secret, response: token }),
+    });
+    return ((await res.json()) as { success?: boolean }).success === true;
+  } catch (err) {
+    console.error("[inquiry] reCAPTCHA verify failed:", err);
+    return false;
+  }
+}
+
 /** Trim + cap an incoming string field (defends against oversized payloads). */
 const clean = (v: unknown, max = 2000): string =>
   (typeof v === "string" ? v : "").trim().slice(0, max);
@@ -127,6 +161,12 @@ export async function POST(req: NextRequest) {
     return NextResponse.json({ error: "Please enter a valid phone number." }, { status: 422 });
   if (email && !emailOk(email))
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 422 });
+
+  // Blocked number → pretend it worked, write nothing.
+  if (phoneBlocked(phone)) return NextResponse.json({ ok: true });
+
+  if (!(await captchaOk(clean(body.captcha, 4000))))
+    return NextResponse.json({ error: "Please tick \"I'm not a robot\" and try again." }, { status: 422 });
 
   // Store the lead in Sanity (best-effort).
   let stored = false;
