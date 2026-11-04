@@ -5,7 +5,7 @@ import type { Inquiry } from "@/sanity/lib/admin";
 import { setInquiryStatusAction, deleteInquiryAction } from "../../actions";
 import { useSave, Toast } from "../_components/save-kit";
 
-const CSV_COLUMNS: (keyof Inquiry)[] = ["createdAt", "name", "phone", "email", "treatment", "location", "status", "source", "message"];
+const CSV_COLUMNS: (keyof Inquiry)[] = ["createdAt", "name", "phone", "email", "treatment", "location", "status", "source", "channelLabel", "channelDetail", "utmCampaign", "gclid", "firstTouchLabel", "message"];
 
 function csvCell(value: unknown): string {
   const s = String(value ?? "");
@@ -27,6 +27,8 @@ function downloadCsv(rows: Inquiry[]) {
 }
 
 type Filter = "all" | "new" | "contacted" | "closed";
+import { CHANNEL_STYLE, type Channel } from "@/lib/attribution";
+
 const STATUSES: Inquiry["status"][] = ["new", "contacted", "closed"];
 
 const badgeStyle: Record<string, { bg: string; fg: string }> = {
@@ -127,6 +129,28 @@ export function InquiriesList({ initial }: { initial: Inquiry[] }) {
                       <span style={{ display: "inline-flex", gap: 5, alignItems: "center" }}><Clock size={13} /> {fmt(q.createdAt)}</span>
                     </div>
                     <div style={{ display: "flex", gap: 8, flexWrap: "wrap", marginBottom: q.message ? 10 : 0 }}>
+                      {q.channelLabel && (
+                        <span
+                          className="admin-badge"
+                          title={[
+                            q.channelDetail && `Source: ${q.channelDetail}`,
+                            q.landingPage && `Landed on: ${q.landingPage}`,
+                            q.utmCampaign && `Campaign: ${q.utmCampaign}`,
+                            q.referrer && `Referrer: ${q.referrer}`,
+                            q.firstTouchLabel &&
+                              q.firstTouchLabel !== q.channelLabel &&
+                              `First found us via: ${q.firstTouchLabel}`,
+                          ]
+                            .filter(Boolean)
+                            .join(" · ")}
+                          style={{
+                            background: (CHANNEL_STYLE[q.channel as Channel] ?? CHANNEL_STYLE.direct).bg,
+                            color: (CHANNEL_STYLE[q.channel as Channel] ?? CHANNEL_STYLE.direct).fg,
+                          }}
+                        >
+                          {q.channelLabel}
+                        </span>
+                      )}
                       {q.treatment && <span className="admin-badge" style={{ background: "var(--rose-soft)", color: "var(--rose)" }}>{q.treatment}</span>}
                       {q.location && <span className="admin-badge" style={{ background: "#ede9fe", color: "var(--plum)" }}>{q.location}</span>}
                       {q.source && <span className="admin-badge admin-badge-off">from {q.source}</span>}

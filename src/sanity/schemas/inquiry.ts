@@ -12,6 +12,20 @@ export default defineType({
     defineField({ name: "location", title: "Preferred Centre", type: "string" }),
     defineField({ name: "message", title: "Message", type: "text" }),
     defineField({ name: "source", title: "Source Page", type: "string" }),
+
+    // Where the visit came from, captured on the landing page. See
+    // src/lib/attribution.ts for how a channel is decided.
+    defineField({ name: "channel", title: "Lead Channel", type: "string" }),
+    defineField({ name: "channelLabel", title: "Channel Label", type: "string" }),
+    defineField({ name: "channelDetail", title: "Channel Detail", type: "string" }),
+    defineField({ name: "referrer", title: "Referrer URL", type: "string" }),
+    defineField({ name: "landingPage", title: "Landing Page", type: "string" }),
+    defineField({ name: "utmSource", title: "UTM Source", type: "string" }),
+    defineField({ name: "utmMedium", title: "UTM Medium", type: "string" }),
+    defineField({ name: "utmCampaign", title: "UTM Campaign", type: "string" }),
+    defineField({ name: "gclid", title: "Google Ads Click ID", type: "string" }),
+    defineField({ name: "firstTouchChannel", title: "First Touch Channel", type: "string" }),
+    defineField({ name: "firstTouchLabel", title: "First Touch Label", type: "string" }),
     defineField({
       name: "status",
       title: "Status",
