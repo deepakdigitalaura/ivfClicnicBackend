@@ -1,5 +1,6 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
+import { readAttribution } from "@/components/attribution-capture";
 import Image from "next/image";
 import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
@@ -1934,6 +1935,9 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
           company,
           captcha,
           source: typeof window !== "undefined" ? window.location.pathname : "",
+          // Where this visit came from, captured on the landing page.
+          attribution: readAttribution().lastTouch ?? undefined,
+          firstTouch: readAttribution().firstTouch ?? undefined,
         }),
       });
       if (!res.ok) {

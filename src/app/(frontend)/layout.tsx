@@ -9,6 +9,7 @@ import { HeaderProvider } from "@/components/header-provider";
 import { CookieConsent } from "@/components/cookie-consent";
 import { PageviewTracker } from "@/components/pageview-tracker";
 import { ConsentScripts } from "@/components/consent-scripts";
+import { AttributionCapture } from "@/components/attribution-capture";
 import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -90,6 +91,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         </HeaderProvider>
         <PageviewTracker />
         <CookieConsent />
+        <AttributionCapture />
         <ConsentScripts scripts={gatedScripts} />
         {bodyScripts.map((s, i) => (
           <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />

@@ -143,6 +143,18 @@ export type Inquiry = {
   source?: string;
   status?: "new" | "contacted" | "closed";
   createdAt?: string;
+  /* attribution, written by the /inquiry route */
+  channel?: string;
+  channelLabel?: string;
+  channelDetail?: string;
+  referrer?: string;
+  landingPage?: string;
+  utmSource?: string;
+  utmMedium?: string;
+  utmCampaign?: string;
+  gclid?: string;
+  firstTouchChannel?: string;
+  firstTouchLabel?: string;
 };
 
 /** Public lead intake — called by the /inquiry route. Best-effort; never throws
