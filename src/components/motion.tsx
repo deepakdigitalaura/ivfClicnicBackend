@@ -138,6 +138,8 @@ export function WordReveal({
               className={`inline-block ${isAccent ? accentClass : ""}`}
             >
               {w}
+              {/* real space so the headline reads as words, not one long token */}
+              {i < words.length - 1 ? " " : ""}
             </motion.span>
           </span>
         );
