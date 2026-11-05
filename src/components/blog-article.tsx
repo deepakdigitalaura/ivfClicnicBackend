@@ -14,10 +14,12 @@ import {
   ChevronDown,
   MapPin,
   Stethoscope,
+  Calculator,
 } from "lucide-react";
 import { format } from "date-fns";
 import { Reveal, Magnetic, Stagger, StaggerItem } from "@/components/motion";
 import { parentTopicFor } from "@/lib/blog-parent-topic";
+import { calculatorForBlog } from "@/lib/blog-calculator";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
@@ -254,6 +256,47 @@ function ParentTopicLink({ categorySlug }: { categorySlug?: string | null }) {
             </div>
             <span className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-[color:var(--plum)] px-5 py-2.5 text-sm font-medium text-white transition-transform group-hover:translate-x-0.5 sm:self-auto">
               Read more <ChevronRight className="h-4 w-4" />
+            </span>
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
+/* A reader who has finished the article is otherwise offered nothing to do
+ * but read another article. The calculators convert several times better than
+ * any blog page, so offer the one that fits this post. Renders nothing when no
+ * calculator genuinely fits — see src/lib/blog-calculator.ts. */
+function CalculatorCta({ title, category }: { title?: string | null; category?: string | null }) {
+  const calc = calculatorForBlog(title, category);
+  if (!calc) return null;
+  return (
+    <section className="border-t border-border/60 py-12">
+      <div className="container-px mx-auto max-w-[1400px]">
+        <Reveal>
+          <a
+            href={`/calculators/${calc.slug}`}
+            className="group flex flex-col gap-5 rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-500 hover:-translate-y-1 hover:shadow-lift sm:flex-row sm:items-center sm:justify-between"
+          >
+            <div className="flex items-start gap-4">
+              <span className="flex h-12 w-12 shrink-0 items-center justify-center rounded-2xl bg-[color:var(--rose)]/10 text-[color:var(--rose)]">
+                <Calculator className="h-5 w-5" />
+              </span>
+              <div>
+                <span className="text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">
+                  Free tool
+                </span>
+                <h2 className="mt-1 text-xl font-medium leading-snug text-[color:var(--plum)]">
+                  {calc.title}
+                </h2>
+                <p className="mt-1.5 text-[15px] leading-relaxed text-muted-foreground">
+                  {calc.blurb}
+                </p>
+              </div>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-1.5 rounded-full bg-[color:var(--plum)] px-5 py-2.5 text-sm font-semibold text-white transition-colors group-hover:bg-[color:var(--rose)]">
+              Try it <ChevronRight className="h-4 w-4" />
             </span>
           </a>
         </Reveal>
@@ -695,6 +738,7 @@ export function BlogArticle({
           POST-CONTENT SECTIONS (full width)
       ════════════════════════════════════════ */}
       <ParentTopicLink categorySlug={category?.slug} />
+      <CalculatorCta title={blog.title} category={category?.title} />
       <KeepReading posts={relatedBlogs} />
       <BlogCta />
 
