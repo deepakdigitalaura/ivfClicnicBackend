@@ -107,6 +107,26 @@ export function aggregateRatingSchema(agg?: AggregateRating): Record<string, unk
   };
 }
 
+/** Weighted mean of several verified aggregates, for a page that covers more
+ * than one centre (a city hub). Weighting by reviewCount keeps a branch with
+ * 58 ratings from pulling the city average as hard as one with 2,064.
+ *
+ * Returns null unless at least one input is REAL Google data, so a city page
+ * can never invent a rating out of illustrative fallback reviews. */
+export function combineAggregates(
+  items: (ReviewData | null | undefined)[],
+): AggregateRating | null {
+  const aggs = items
+    .filter(isVerified)
+    .map((d) => d.aggregate)
+    .filter((a): a is AggregateRating => a !== undefined && a.reviewCount > 0);
+  if (!aggs.length) return null;
+  const reviewCount = aggs.reduce((n, a) => n + a.reviewCount, 0);
+  if (!reviewCount) return null;
+  const mean = aggs.reduce((sum, a) => sum + a.ratingValue * a.reviewCount, 0) / reviewCount;
+  return { ratingValue: Math.round(mean * 10) / 10, reviewCount };
+}
+
 export function reviewSchema(r: Review): Record<string, unknown> {
   return {
     "@type": "Review",

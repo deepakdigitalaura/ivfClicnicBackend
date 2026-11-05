@@ -16,7 +16,14 @@
 import { ORG_ID, WEBSITE_ID, abs, breadcrumbSchema, faqSchema } from "@/lib/seo";
 import { doctorBySlug, physicianSchema, doctorUrl } from "@/lib/doctors";
 import { treatmentRef } from "@/lib/treatments";
-import { getReviews, reviewNodes } from "@/lib/reviews";
+import {
+  getReviews,
+  reviewNodes,
+  isVerified,
+  combineAggregates,
+  aggregateRatingSchema,
+  type AggregateRating,
+} from "@/lib/reviews";
 
 export type FAQ = { q: string; a: string };
 
@@ -1248,7 +1255,10 @@ export type CityGraphInput = Pick<City, "slug" | "name" | "faqs">;
 /** Enriched MedicalClinic + LocalBusiness for one centre, bound to #organization.
  *  Includes geo, openingHoursSpecification, hasMap, image, telephone, areaServed,
  *  availableService, and verified review nodes (only when real data exists). */
-export function centerClinicSchema(c: CentreGraphInput): Record<string, unknown> {
+export function centerClinicSchema(
+  c: CentreGraphInput,
+  opts: { reviews?: boolean } = {},
+): Record<string, unknown> {
   const pageUrl = c.built ? centreHref(c) : cityUrl(c.citySlug);
   const cityName = cityBySlug(c.citySlug)?.name ?? "";
   const region = cityBySlug(c.citySlug)?.region ?? "Gujarat";
@@ -1287,7 +1297,11 @@ export function centerClinicSchema(c: CentreGraphInput): Record<string, unknown>
       const sameAs = [...(c.sameAs ?? []), ...(reviews?.mapsUrl ? [reviews.mapsUrl] : [])];
       return sameAs.length ? { sameAs: Array.from(new Set(sameAs)) } : {};
     })(),
-    ...reviewNodes(reviews), // aggregateRating + review[] only when verified
+    // aggregateRating + review[] only when verified AND when this page is
+    // allowed to carry them. A city hub listing several rated centres
+    // suppresses them here and emits one city-level rating instead, because
+    // Google rejects a page that declares more than one. See cityGraph().
+    ...(opts.reviews === false ? {} : reviewNodes(reviews)),
   };
 }
 
@@ -1320,9 +1334,57 @@ export function centerGraph(c: CentreGraphInput): Record<string, unknown>[] {
   ];
 }
 
+/** The single rated node on a city page that covers several rated centres.
+ *  It stands for the whole city presence, so its url is the city page — that
+ *  is what lets Google attach the star rating to THIS page instead of to a
+ *  branch page. The branches are linked through subOrganization and keep
+ *  their own rating on their own page. */
+function cityClinicSchema(
+  city: CityGraphInput,
+  aggregate: AggregateRating,
+): Record<string, unknown> {
+  const centres = centresForCity(city.slug);
+  const primary = centres.find((c) => c.isHeadOffice) ?? centres[0];
+  const url = abs(cityUrl(city.slug));
+  const info = cityBySlug(city.slug);
+  return {
+    "@type": ["MedicalClinic", "LocalBusiness"],
+    "@id": `${url}#clinic`,
+    name: `Bavishi Fertility Institute — ${city.name}`,
+    url,
+    ...(primary?.image ? { image: abs(primary.image) } : {}),
+    ...(primary?.phone ? { telephone: `+${primary.phone}` } : {}),
+    parentOrganization: { "@id": ORG_ID },
+    address: {
+      "@type": "PostalAddress",
+      addressLocality: city.name,
+      addressRegion: info?.region ?? "Gujarat",
+      ...(primary?.pin ? { postalCode: primary.pin } : {}),
+      addressCountry: info?.country ?? "IN",
+    },
+    medicalSpecialty: ["Fertility", "ReproductiveMedicine", "Gynecology"],
+    subOrganization: centres
+      .filter((c) => c.built)
+      .map((c) => ({ "@id": `${abs(centreHref(c))}#clinic-${c.slug}` })),
+    aggregateRating: aggregateRatingSchema(aggregate),
+  };
+}
+
 /** Full @graph for a city hub page. */
 export function cityGraph(city: CityGraphInput): Record<string, unknown>[] {
   const url = abs(cityUrl(city.slug));
+  const centres = centresForCity(city.slug);
+  const centreReviews = centres.map((c) => getReviews(c.reviewsKey ?? c.slug));
+
+  // Google allows ONE review subject per page. A city with several rated
+  // centres used to emit one aggregateRating each, and Google rejected all of
+  // them ("Review has multiple aggregate ratings"), so no stars showed at all.
+  // When that happens the per-centre ratings are suppressed here — they still
+  // appear on each centre's own page — and one combined city rating is
+  // published instead. A city with a single rated centre is left untouched.
+  const cityAggregate =
+    centreReviews.filter(isVerified).length > 1 ? combineAggregates(centreReviews) : null;
+
   return [
     {
       "@type": "MedicalWebPage",
@@ -1331,7 +1393,8 @@ export function cityGraph(city: CityGraphInput): Record<string, unknown>[] {
       name: `Best IVF Centre in ${city.name} — Bavishi Fertility Institute`,
       isPartOf: { "@id": WEBSITE_ID },
     },
-    ...centresForCity(city.slug).map((c) => centerClinicSchema(c)),
+    ...(cityAggregate ? [cityClinicSchema(city, cityAggregate)] : []),
+    ...centres.map((c) => centerClinicSchema(c, { reviews: !cityAggregate })),
     breadcrumbSchema([
       { name: "Home", url: "/" },
       { name: "Locations", url: "/locations" },
