@@ -168,6 +168,7 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Laser Hatching", href: "/treatments/laser-hatching" },
     ]},
     { h: "Male Infertility", l: [
+      { label: "Male Infertility Treatment", href: "/treatments/male-infertility" },
       { label: "Low Sperm Count (Oligospermia)", href: "/treatments/oligospermia" },
       { label: "Low Sperm Motility (Asthenospermia)", href: "/treatments/asthenospermia" },
       { label: "Zero Sperm Count (Azoospermia)", href: "/treatments/azoospermia" },
@@ -176,6 +177,7 @@ export const FOOTER_DEFAULTS: FooterData = {
       { label: "Varicocele", href: "/treatments/varicocele" },
     ]},
     { h: "Female Infertility", l: [
+      { label: "Female Infertility Treatment", href: "/treatments/female-infertility" },
       { label: "Conceive Naturally", href: "/treatments/conceive-naturally" },
       { label: "PRP Infertility", href: "/treatments/prp-infertility" },
       { label: "PMOS-PCOS", href: "/treatments/pcos" },
