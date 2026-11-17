@@ -10,6 +10,7 @@ import {
   GoogleReviews, CentreGallery, ContactInfo, CentreMap,
   LocalHighlights, HowToReach, Facilities, TreatmentsOffered, AvailableServicesSection,
 } from "@/components/location-sections";
+import { ReadingCarousel } from "@/components/reading-carousel";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Centre } from "@/lib/locations";
@@ -209,7 +210,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       <LocalHighlights centre={centre} />
       <HowToReach centre={centre} />
       <Facilities items={centre.facilities} area={centre.area} labels={sl} />
-      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={centre.area} labels={sl} /></div>
+      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={centre.area} labels={sl} city={sameAsCity ? undefined : cityName} /></div>
 
       {/* Women's health & maternity services available at this centre (blush
           band: sits between the white Treatments section and ivory Doctors). */}
@@ -266,6 +267,18 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
           <div className="mt-10"><CentreMap query={centre.mapQuery} title={`${centre.fullName} — map`} /></div>
         </div>
       </section>
+
+      {/* Reading — Ahmedabad's own articles plus the Gujarat CME write-ups.
+       *  Only the Ahmedabad centres have a curated list; other cities fall
+       *  through and render nothing. */}
+      {centre.citySlug === "ahmedabad" ? (
+        <ReadingCarousel
+          tone="white"
+          eyebrow="Reading"
+          title={<>More on fertility treatment in <em className="font-display italic text-[color:var(--rose)]">{cityName}</em></>}
+          subtitle={`Articles from the ${cityName} team on cost, success rates and choosing a centre, plus the CME programmes our doctors run across Gujarat.`}
+        />
+      ) : null}
 
       <ContactInfo centres={[centre]} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(centre.area + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
 

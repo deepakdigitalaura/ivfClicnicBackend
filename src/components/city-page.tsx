@@ -17,6 +17,7 @@ import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
 import { testimonialsForCity } from "@/lib/video-testimonials";
 import { blogsForLocation, type BlogPost } from "@/lib/blogs";
+import { ReadingCarousel } from "@/components/reading-carousel";
 
 const trust = [
   { icon: Award, t: "Trusted since 1998", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for over three decades." },
@@ -172,7 +173,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
       {/* City-wide treatments — real internal links (blush band so it separates
           the white Centres section above from the ivory Doctors section below) */}
       {treatments.length > 0 && (
-        <div className="bg-[color:var(--rose-soft)]/40"><TreatmentsOffered slugs={treatments} area={city.name} labels={sl} /></div>
+        <div className="bg-[color:var(--rose-soft)]/40"><TreatmentsOffered slugs={treatments} area={city.name} labels={sl} city={city.name} /></div>
       )}
 
       {/* Women's health & maternity services across the city's centres (white
@@ -184,6 +185,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
           tone="white"
           serviceLabel={city.slug === "ahmedabad" ? "Maternity services" : undefined}
           labels={sl}
+          city={city.name}
         />
       ) : null}
 
@@ -257,7 +259,17 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
       )}
 
       {/* Related Articles — location-specific, data-driven (placeholders until published) */}
-      {blogs.length > 0 && (
+      {/* Ahmedabad has fifteen articles of its own plus the Gujarat CME
+       *  write-ups, which is more than a three-card grid can carry — it gets
+       *  the curated carousel instead. Every other city keeps the grid fed by
+       *  getBlogsByLocationSlug. */}
+      {city.slug === "ahmedabad" ? (
+        <ReadingCarousel
+          eyebrow="Blog"
+          title={<>{city.name} <em className="font-display italic text-[color:var(--rose)]">Articles &amp; Guides</em></>}
+          subtitle={`Fertility guidance written for patients in ${city.name}, plus the CME programmes our doctors run across Gujarat.`}
+        />
+      ) : blogs.length > 0 && (
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
           <SectionHead
             center

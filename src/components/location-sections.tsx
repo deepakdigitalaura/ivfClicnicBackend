@@ -608,7 +608,17 @@ export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: Loca
 /* ---------- Treatments offered at this centre (real internal links) ----------
  * Reuses the homepage <TreatmentCard> so centre pages share the exact same
  * card design (icon, name, description, "Learn more" link). */
-export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; area: string; labels?: LocationSectionLabels }) {
+export function TreatmentsOffered({ slugs, area, labels, city }: {
+  slugs: string[];
+  area: string;
+  labels?: LocationSectionLabels;
+  /** City name for the card titles ("IVF in Ahmedabad"). The treatment pages
+   *  themselves stay city-neutral — they are shared across every centre — so
+   *  the city belongs on the card, which is where the location page is doing
+   *  the work. Omitted when the area already is the city, to avoid "IVF in
+   *  Bhuj" rendering on a page whose heading already says Bhuj twice. */
+  city?: string;
+}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <SectionHead center eyebrow={lab("sectionLabels.treatmentsEyebrow", labels?.treatmentsEyebrow, "Treatments offered")} title={lab("sectionLabels.treatmentsTitle", labels?.treatmentsTitle, `Fertility treatments at ${em(area + " centre")}`)} />
@@ -617,7 +627,12 @@ export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; ar
           const c = treatmentCardData(slug);
           return (
             <StaggerItem key={slug}>
-              <TreatmentCard icon={c.icon} title={c.name} desc={c.desc} href={c.href} />
+              <TreatmentCard
+                icon={c.icon}
+                title={city ? `${c.name} in ${city}` : c.name}
+                desc={c.desc}
+                href={c.href}
+              />
             </StaggerItem>
           );
         })}
