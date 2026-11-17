@@ -642,12 +642,18 @@ export function AvailableServicesSection({
   tone = "tint",
   serviceLabel = "Women's health services",
   labels,
+  city,
 }: {
   location: string;
   services: WomensHealthService[];
   tone?: "plain" | "tint" | "white";
   serviceLabel?: string;
   labels?: LocationSectionLabels;
+  /** City name, on a sub-location page whose area is not the city itself.
+   *  Maternity is offered in Ahmedabad only, so naming the city on the card
+   *  is accurate rather than decorative, and it is how these services are
+   *  actually searched ("painless delivery in Ahmedabad"). */
+  city?: string;
 }) {
   if (!services.length) return null;
   const bg = tone === "tint" ? "bg-[color:var(--rose-soft)]/40 " : tone === "white" ? "bg-white " : "";
@@ -661,12 +667,21 @@ export function AvailableServicesSection({
           center
           eyebrow={lab("sectionLabels.womensHealthEyebrow", labels?.womensHealthEyebrow, "Women's Health & Maternity")}
           title={lab("sectionLabels.womensHealthTitle", labels?.womensHealthTitle, `${serviceLabel} available at ${em(location)}`)}
-          subtitle={`Access advanced maternity, fetal medicine and pregnancy care services at our ${location} centre.`}
+          subtitle={
+            city
+              ? `Access advanced maternity, fetal medicine and pregnancy care in ${city} at our ${location} centre.`
+              : `Access advanced maternity, fetal medicine and pregnancy care services at our ${location} centre.`
+          }
         />
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
           {services.map((s) => (
             <StaggerItem key={s.key}>
-              <TreatmentCard icon={s.icon} title={s.name} desc={s.desc} href={serviceHref(s)} />
+              <TreatmentCard
+                icon={s.icon}
+                title={city ? `${s.name} in ${city}` : s.name}
+                desc={s.desc}
+                href={serviceHref(s)}
+              />
             </StaggerItem>
           ))}
         </Stagger>
