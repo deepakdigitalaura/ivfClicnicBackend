@@ -206,7 +206,10 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
           title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `Words from ${em(city.name + " families")}`)}
           subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
           showCta={false}
-          stories={cityStories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
+          // Same rule the centre pages already use: past three stories a grid
+          // becomes a wall, so it scrolls instead. Ahmedabad now has thirty.
+          carousel={cityStories.length > 3}
+          stories={cityStories.map((v) => ({ id: v.youTubeId, src: v.videoSrc, n: v.name, q: v.quote, r: 5 }))}
         />
       )}
 
