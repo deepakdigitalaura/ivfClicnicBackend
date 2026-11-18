@@ -79,15 +79,24 @@ export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
    * `location` is set only where the video itself names the place, so the
    * "never inferred" rule above still holds; the rest are Gujarat families
    * telling their story in Gujarati, which is why they sit in this pool. */
+  /* EXCLUDED ON PURPOSE — do not re-add to this pool:
+   *  - 5jlLhlqoqGo "अहमदाबाद शहर में एक IVF ट्रीटमेंट साइकिल का खर्च..." is a
+   *    doctor-led COST EXPLAINER, not a patient story. It was rendering under
+   *    a "Patient Story" label in "Words from Ahmedabad families", which is
+   *    simply untrue. It still lives in the /testimonial-videos catalogue.
+   *  - zBtb86IPaH8 "Ep 16 | Part-2" is the second half of the same family's
+   *    story as "Ep 15 | Part-1" (CwqJJ8EoxpU) and carries a BYTE-IDENTICAL
+   *    YouTube thumbnail (verified: same md5, perceptual distance 0), so the
+   *    two cards read as the same video twice. Part-1 is kept.
+   * All 31 thumbnails in this pool were perceptually hashed; that was the only
+   * duplicate pair. Nearest non-duplicate pair sits at distance 50/256. */
   ahmedabad: [
     { name: "Sheetal Jaydeep Vachanani", location: "Ahmedabad", quote: "Our fertility treatment in Ahmedabad with Bavishi Fertility Institute gave us our happiest moment.", youTubeId: "HZeK3QG2MDc" },
-    { name: "अहमदाबाद शहर में एक IVF ट्रीटमेंट साइकिल का खर्च कितना हो तो वो वाजिब कह सकते है।", location: "Ahmedabad", quote: "An honest look at what a fair IVF treatment cycle should cost in Ahmedabad.", youTubeId: "5jlLhlqoqGo" },
     { name: "Testimonial by Chetan bhai from Ahmedabad for IVF By Bavishi Fertility Institute", location: "Ahmedabad", quote: "A heartfelt journey shared with Bavishi Fertility Institute.", youTubeId: "wA91XZ15CZI" },
     { name: "IVF Success | 7 વર્ષ સુધી સંતાન ના હતું, BFI માં 1st Cycle માં સફળતા મળી | સાંભળો તેમનો Review", quote: "After 7 years of marriage, this family found success in their very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "DCWuox7cZ6Q" },
     { name: "માત્ર 1 IVF Cycle માં જ સંતાન સુખ પામ્યા ભીખીબેન અને બાબુભાઈ ના અદભૂત અનુભવ સાંભળો!", quote: "In just one IVF cycle, Bhikhiben and Babubhai experienced the joy of parenthood at Bavishi Fertility Institute.", youTubeId: "kt9GROuYlGA" },
     { name: "લગ્ન ના 35 વર્ષ પછી સંતાન પ્રાપ્તિ: શારદાબેન અને જીતુભાઈ નો વિશેષ અનુભવ", quote: "After 35 years of marriage, Bavishi Fertility Institute helped Sharadaben and Jitubhai welcome their child.", youTubeId: "R0uaWxFsquc" },
     { name: "દેવના દીધેલા માગીને લીધેલા | Ep 17 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "vjpc4lLvnt8" },
-    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 16 | Part-2 True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "zBtb86IPaH8" },
     { name: "દેવના દીધેલા માગીને લીધેલા | Ep 15 | Part-1 True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "CwqJJ8EoxpU" },
     { name: "દેવના દીધેલા માગીને લીધેલા | Ep 14 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "vgw0s6Vz_WU" },
     { name: "દેવના દીધેલા માગીને લીધેલા | Ep 13 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "hwyKJITCgFk" },
