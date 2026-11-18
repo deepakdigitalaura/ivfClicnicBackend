@@ -11,6 +11,8 @@ import {
   LocalHighlights, HowToReach, Facilities, TreatmentsOffered, AvailableServicesSection,
 } from "@/components/location-sections";
 import { ReadingCarousel } from "@/components/reading-carousel";
+import { LocalAwards, LocalPress } from "@/components/location-credibility";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Centre } from "@/lib/locations";
@@ -280,6 +282,16 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         />
       ) : null}
 
+      {/* Awards and press — same Gujarat / Ahmedabad-edition subsets the
+          city hub shows, so a visitor who lands straight on a centre page
+          sees the same proof without having to go up a level. */}
+      {centre.citySlug === "ahmedabad" && (
+        <>
+          <LocalAwards city={cityName} />
+          <LocalPress city={cityName} />
+        </>
+      )}
+
       <ContactInfo centres={[centre]} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(centre.area + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
 
       {/* FAQ */}
@@ -291,6 +303,12 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
           </div>
         </div>
       </section>
+
+      {/* Fertility calculators — eight tools that already exist on the site.
+          After the FAQ for the same reason as on the city hub: both answer
+          "what do I do next", and it is the page's strongest internal-link
+          block. */}
+      <CalculatorCrossLinks />
 
       {/* CTA */}
       <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">

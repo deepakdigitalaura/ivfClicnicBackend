@@ -1306,7 +1306,7 @@ const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
 
 // Only this inner component holds the rotating state, so slide changes never
 // re-render the section header or CTA — just the transform-animated cards.
-function AwardsStage({ items }: { items: AwardItem[] }) {
+export function AwardsStage({ items }: { items: AwardItem[] }) {
   return <CarouselStage items={items} renderCard={(a) => <AwardCard a={a} />} dotLabel="award" />;
 }
 
@@ -1364,7 +1364,7 @@ const PressCard = memo(function PressCard({ c }: { c: PressClipping }) {
   );
 });
 
-function PressStage({ items }: { items: PressClipping[] }) {
+export function PressStage({ items }: { items: PressClipping[] }) {
   return (
     <CarouselStage
       items={items}
