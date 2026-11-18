@@ -10,10 +10,11 @@ import {
   GoogleReviews, CentreGallery, ContactInfo, CentreMap,
   LocalHighlights, HowToReach, Facilities, TreatmentsOffered, AvailableServicesSection,
 } from "@/components/location-sections";
+import { ReadingCarousel } from "@/components/reading-carousel";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { Centre } from "@/lib/locations";
-import { cityBySlug, doctorSlugsForCity, cityHasOwnPage } from "@/lib/locations";
+import { cityBySlug, doctorSlugsForCity, cityHasOwnPage, centresForCity, centreHref, cityHref } from "@/lib/locations";
 import type { ResolvedCentre } from "@/lib/location-content";
 import { womensHealthServices } from "@/lib/womens-health";
 import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
@@ -56,6 +57,11 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
   // Anand) — avoid rendering "Bhuj, Bhuj". Multi-centre cities never collide.
   const cityName = city?.name;
   const sameAsCity = !!cityName && cityName === centre.area;
+  // Other built centres in the same city, plus the city hub URL. Both are
+  // null/empty for a single-centre city, which hides the section.
+  const centresInCity = centresForCity(centre.citySlug).filter((c) => c.built);
+  const siblingCentres = centresInCity.filter((c) => c.slug !== centre.slug);
+  const cityHub = cityHref(centre.citySlug);
   const areaCity = sameAsCity ? centre.area : `${centre.area}${cityName ? `, ${cityName}` : ""}`;
 
   return (
@@ -157,10 +163,54 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         </div>
       </section>
 
+      {/* Sibling centres + the city hub.
+       *  A centre page previously linked back to its city only through the
+       *  breadcrumb, which is easy to miss and carries almost no anchor
+       *  weight. This band names the other centres in the same city and
+       *  links the city hub explicitly, which is the page most of the
+       *  city-level queries should land on. */}
+      {siblingCentres.length > 0 && cityHub ? (
+        <section className="container-px mx-auto max-w-[1400px] py-8 md:py-12">
+          <div className="rounded-3xl border border-border/70 bg-card p-6 shadow-soft md:p-9">
+            <Eyebrow>Our {city?.name} centres</Eyebrow>
+            <h2 className="mt-3 text-2xl font-medium leading-tight text-[color:var(--plum)] md:text-3xl">
+              {centre.area} is one of {centresInCity.length} Bavishi Fertility Institute centres in{" "}
+              <em className="font-display italic text-[color:var(--rose)]">{city?.name}</em>
+            </h2>
+            <p className="mt-3 max-w-3xl text-[15.5px] leading-relaxed text-muted-foreground">
+              All of them run the same protocols and the same laboratory standards, so choose on
+              travel time — a treatment cycle needs several monitoring visits. See every centre on
+              the{" "}
+              <a href={cityHub} className="font-medium text-[color:var(--rose)] underline underline-offset-2">
+                {city?.name} page
+              </a>
+              .
+            </p>
+            <div className="mt-6 flex flex-wrap gap-3">
+              {siblingCentres.map((s) => (
+                <a
+                  key={s.slug}
+                  href={centreHref(s)}
+                  className="rounded-full border border-border/70 bg-white px-5 py-2.5 text-sm font-medium text-[color:var(--plum)] shadow-soft transition-all hover:-translate-y-0.5 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
+                >
+                  {s.area}, {city?.name}
+                </a>
+              ))}
+              <a
+                href={cityHub}
+                className="rounded-full bg-[color:var(--rose)] px-5 py-2.5 text-sm font-medium text-white shadow-soft transition-all hover:-translate-y-0.5"
+              >
+                All {city?.name} centres
+              </a>
+            </div>
+          </div>
+        </section>
+      ) : null}
+
       <LocalHighlights centre={centre} />
       <HowToReach centre={centre} />
       <Facilities items={centre.facilities} area={centre.area} labels={sl} />
-      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={centre.area} labels={sl} /></div>
+      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={centre.area} labels={sl} city={sameAsCity ? undefined : cityName} /></div>
 
       {/* Women's health & maternity services available at this centre (blush
           band: sits between the white Treatments section and ivory Doctors). */}
@@ -170,6 +220,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
           services={womensHealthServices(centre.womensHealth)}
           tone="tint"
           labels={sl}
+          city={sameAsCity ? undefined : cityName}
         />
       ) : null}
 
@@ -216,6 +267,18 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
           <div className="mt-10"><CentreMap query={centre.mapQuery} title={`${centre.fullName} — map`} /></div>
         </div>
       </section>
+
+      {/* Reading — Ahmedabad's own articles plus the Gujarat CME write-ups.
+       *  Only the Ahmedabad centres have a curated list; other cities fall
+       *  through and render nothing. */}
+      {centre.citySlug === "ahmedabad" ? (
+        <ReadingCarousel
+          tone="white"
+          eyebrow="Reading"
+          title={<>More on fertility treatment in <em className="font-display italic text-[color:var(--rose)]">{cityName}</em></>}
+          subtitle={`Articles from the ${cityName} team on cost, success rates and choosing a centre, plus the CME programmes our doctors run across Gujarat.`}
+        />
+      ) : null}
 
       <ContactInfo centres={[centre]} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(centre.area + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
 

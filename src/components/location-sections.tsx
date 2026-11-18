@@ -608,7 +608,17 @@ export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: Loca
 /* ---------- Treatments offered at this centre (real internal links) ----------
  * Reuses the homepage <TreatmentCard> so centre pages share the exact same
  * card design (icon, name, description, "Learn more" link). */
-export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; area: string; labels?: LocationSectionLabels }) {
+export function TreatmentsOffered({ slugs, area, labels, city }: {
+  slugs: string[];
+  area: string;
+  labels?: LocationSectionLabels;
+  /** City name for the card titles ("IVF in Ahmedabad"). The treatment pages
+   *  themselves stay city-neutral — they are shared across every centre — so
+   *  the city belongs on the card, which is where the location page is doing
+   *  the work. Omitted when the area already is the city, to avoid "IVF in
+   *  Bhuj" rendering on a page whose heading already says Bhuj twice. */
+  city?: string;
+}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <SectionHead center eyebrow={lab("sectionLabels.treatmentsEyebrow", labels?.treatmentsEyebrow, "Treatments offered")} title={lab("sectionLabels.treatmentsTitle", labels?.treatmentsTitle, `Fertility treatments at ${em(area + " centre")}`)} />
@@ -617,7 +627,12 @@ export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; ar
           const c = treatmentCardData(slug);
           return (
             <StaggerItem key={slug}>
-              <TreatmentCard icon={c.icon} title={c.name} desc={c.desc} href={c.href} />
+              <TreatmentCard
+                icon={c.icon}
+                title={city ? `${c.name} in ${city}` : c.name}
+                desc={c.desc}
+                href={c.href}
+              />
             </StaggerItem>
           );
         })}
@@ -642,12 +657,18 @@ export function AvailableServicesSection({
   tone = "tint",
   serviceLabel = "Women's health services",
   labels,
+  city,
 }: {
   location: string;
   services: WomensHealthService[];
   tone?: "plain" | "tint" | "white";
   serviceLabel?: string;
   labels?: LocationSectionLabels;
+  /** City name, on a sub-location page whose area is not the city itself.
+   *  Maternity is offered in Ahmedabad only, so naming the city on the card
+   *  is accurate rather than decorative, and it is how these services are
+   *  actually searched ("painless delivery in Ahmedabad"). */
+  city?: string;
 }) {
   if (!services.length) return null;
   const bg = tone === "tint" ? "bg-[color:var(--rose-soft)]/40 " : tone === "white" ? "bg-white " : "";
@@ -661,12 +682,21 @@ export function AvailableServicesSection({
           center
           eyebrow={lab("sectionLabels.womensHealthEyebrow", labels?.womensHealthEyebrow, "Women's Health & Maternity")}
           title={lab("sectionLabels.womensHealthTitle", labels?.womensHealthTitle, `${serviceLabel} available at ${em(location)}`)}
-          subtitle={`Access advanced maternity, fetal medicine and pregnancy care services at our ${location} centre.`}
+          subtitle={
+            city
+              ? `Access advanced maternity, fetal medicine and pregnancy care in ${city} at our ${location} centre.`
+              : `Access advanced maternity, fetal medicine and pregnancy care services at our ${location} centre.`
+          }
         />
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
           {services.map((s) => (
             <StaggerItem key={s.key}>
-              <TreatmentCard icon={s.icon} title={s.name} desc={s.desc} href={serviceHref(s)} />
+              <TreatmentCard
+                icon={s.icon}
+                title={city ? `${s.name} in ${city}` : s.name}
+                desc={s.desc}
+                href={serviceHref(s)}
+              />
             </StaggerItem>
           ))}
         </Stagger>

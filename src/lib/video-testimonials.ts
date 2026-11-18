@@ -75,8 +75,42 @@ export const TREATMENT_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
  * Only videos whose city is explicitly stated belong here.
  * ------------------------------------------------------------------- */
 export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
+  /* Gujarat patient stories, taken from the /testimonial-videos catalogue.
+   * `location` is set only where the video itself names the place, so the
+   * "never inferred" rule above still holds; the rest are Gujarat families
+   * telling their story in Gujarati, which is why they sit in this pool. */
   ahmedabad: [
     { name: "Sheetal Jaydeep Vachanani", location: "Ahmedabad", quote: "Our fertility treatment in Ahmedabad with Bavishi Fertility Institute gave us our happiest moment.", youTubeId: "HZeK3QG2MDc" },
+    { name: "अहमदाबाद शहर में एक IVF ट्रीटमेंट साइकिल का खर्च कितना हो तो वो वाजिब कह सकते है।", location: "Ahmedabad", quote: "An honest look at what a fair IVF treatment cycle should cost in Ahmedabad.", youTubeId: "5jlLhlqoqGo" },
+    { name: "Testimonial by Chetan bhai from Ahmedabad for IVF By Bavishi Fertility Institute", location: "Ahmedabad", quote: "A heartfelt journey shared with Bavishi Fertility Institute.", youTubeId: "wA91XZ15CZI" },
+    { name: "IVF Success | 7 વર્ષ સુધી સંતાન ના હતું, BFI માં 1st Cycle માં સફળતા મળી | સાંભળો તેમનો Review", quote: "After 7 years of marriage, this family found success in their very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "DCWuox7cZ6Q" },
+    { name: "માત્ર 1 IVF Cycle માં જ સંતાન સુખ પામ્યા ભીખીબેન અને બાબુભાઈ ના અદભૂત અનુભવ સાંભળો!", quote: "In just one IVF cycle, Bhikhiben and Babubhai experienced the joy of parenthood at Bavishi Fertility Institute.", youTubeId: "kt9GROuYlGA" },
+    { name: "લગ્ન ના 35 વર્ષ પછી સંતાન પ્રાપ્તિ: શારદાબેન અને જીતુભાઈ નો વિશેષ અનુભવ", quote: "After 35 years of marriage, Bavishi Fertility Institute helped Sharadaben and Jitubhai welcome their child.", youTubeId: "R0uaWxFsquc" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 17 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "vjpc4lLvnt8" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 16 | Part-2 True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "zBtb86IPaH8" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 15 | Part-1 True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "CwqJJ8EoxpU" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 14 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "vgw0s6Vz_WU" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 13 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "hwyKJITCgFk" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 12 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "e7dYx1Lg96I" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 11 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "epeD4FMj52w" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 10 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "a_jMimXquMs" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 9 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "7MPhnbEztlE" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 8 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "9dNfzSvBmx0" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 7 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "8M6ieor3Cz0" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 6 | True Stories of Beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "OpjKLK3m--4" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 5 | True Stories of Infertility | Bavishi Fertility Institute", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "tQkygsrdQqo" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 4 | HD | Bavishi Fertility Institute", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "IjmT08Ugw-g" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 3 | HD | Bavishi Fertility Institute", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "5JtRcctsqz0" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 2 | HD | Bavishi Fertility Institute", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "O4MS-DOdLPc" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 1 | HD | Bavishi Fertility Institute", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "_gO-OlmoTmI" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 26 | સંતાનપ્રાપ્તિ ના સંઘર્ષ અને સફળતાની સત્ય કથાઓ", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "Nin53vofIIQ" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 25 | સંતાનપ્રાપ્તિ ના સંઘર્ષ અને સફળતાની સત્ય કથાઓ", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "8UMLy_yFlQ8" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 24 | સંતાનપ્રાપ્તિ ના સંઘર્ષ અને સફળતાની સત્ય કથાઓ", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "YuyDY8vJxlw" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 23 | સંતાનપ્રાપ્તિ ના સંઘર્ષ અને સફળતાની સત્ય કથાઓ", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "uFHp3GYuaKE" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 22 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "TXqDm3jGK9w" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 21 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "Oa1wi2dmI9U" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 20 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "rkmJHlf5myc" },
+    { name: "દેવના દીધેલા માગીને લીધેલા | Ep 19 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "KvE6PeYRL68" },
   ],
   // mumbai / surat / vadodara: city-tagged videos exist but their YouTube IDs
   // were not in the current channel export — add here once collected.
@@ -212,7 +246,7 @@ export function testimonialsForTreatment(treatmentSlug: string, max = 3): VideoT
 }
 
 /** Real testimonials for a city page (max 3). Empty → hide the section. */
-export function testimonialsForCity(citySlug: string, max = 3): VideoTestimonial[] {
+export function testimonialsForCity(citySlug: string, max = 30): VideoTestimonial[] {
   return (CITY_TESTIMONIALS[citySlug] ?? []).slice(0, max);
 }
 
@@ -226,12 +260,18 @@ export function testimonialsForDoctor(doctorSlug: string, max = 12): VideoTestim
  *  consult at that specific centre (Doctor.locations — branch-level, not
  *  city-level), deduped. Falls back to the city-wide pool only when none of
  *  those doctors have a testimonial on file. Empty → hide the section. */
-export function testimonialsForCentre(centreSlug: string, citySlug: string, max = 12): VideoTestimonial[] {
+export function testimonialsForCentre(centreSlug: string, citySlug: string, max = 30): VideoTestimonial[] {
   const centreDoctorSlugs = doctorsForLocation(centreSlug).map((d) => d.slug);
   const fromDoctors = centreDoctorSlugs.flatMap((slug) => DOCTOR_TESTIMONIALS[slug] ?? []);
   const deduped = fromDoctors.filter((v, i, arr) =>
     arr.findIndex((o) => (o.youTubeId ?? o.videoSrc) === (v.youTubeId ?? v.videoSrc)) === i
   );
-  const pool = deduped.length > 0 ? deduped : CITY_TESTIMONIALS[citySlug] ?? [];
+  // Doctor-named stories first, then the rest of the city's pool. Previously
+  // the city pool was a fallback used only when a centre's doctors had no
+  // videos at all, so an Ahmedabad centre never showed the city's own stories.
+  const city = CITY_TESTIMONIALS[citySlug] ?? [];
+  const pool = [...deduped, ...city].filter((v, i, arr) =>
+    arr.findIndex((o) => (o.youTubeId ?? o.videoSrc) === (v.youTubeId ?? v.videoSrc)) === i
+  );
   return pool.slice(0, max);
 }
