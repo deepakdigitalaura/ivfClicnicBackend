@@ -3,7 +3,7 @@
 import { useCallback, useEffect, useRef, useState } from "react";
 import { ArrowRight, ChevronLeft, ChevronRight } from "lucide-react";
 import { SectionHead } from "@/components/ivf-page";
-import { ahmedabadReading, type ReadingItem } from "@/lib/ahmedabad-reading";
+import { type ReadingItem } from "@/lib/location-reading";
 
 /* Reading carousel for the Ahmedabad city and centre pages.
  *
@@ -24,13 +24,13 @@ export function ReadingCarousel({
   subtitle,
   tone = "plain",
 }: {
-  items?: ReadingItem[];
+  items: ReadingItem[];
   eyebrow?: string;
   title?: React.ReactNode;
   subtitle?: string;
   tone?: "plain" | "tint" | "white";
 }) {
-  const posts = items ?? ahmedabadReading();
+  const posts = items;
   const trackRef = useRef<HTMLDivElement>(null);
   const [page, setPage] = useState(0);
   const [pages, setPages] = useState(1);
