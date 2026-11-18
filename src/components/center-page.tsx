@@ -12,6 +12,7 @@ import {
 } from "@/components/location-sections";
 import { ReadingCarousel } from "@/components/reading-carousel";
 import { LocalAwards, LocalPress } from "@/components/location-credibility";
+import { readingForCity } from "@/lib/location-reading";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
@@ -64,7 +65,17 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
   const centresInCity = centresForCity(centre.citySlug).filter((c) => c.built);
   const siblingCentres = centresInCity.filter((c) => c.slug !== centre.slug);
   const cityHub = cityHref(centre.citySlug);
-  const areaCity = sameAsCity ? centre.area : `${centre.area}${cityName ? `, ${cityName}` : ""}`;
+  const centreReading = readingForCity(centre.citySlug);
+  /* A city with a single built centre has no /locations/<city>/<centre>
+   * route — the centre is served at the city path, so this page IS that
+   * city's page. Heading after the street-level area buries the word people
+   * actually search: /locations/surat read "Best IVF Centre in Lal Darwaja,
+   * Surat" and named twelve more sections after Lal Darwaja, which outnumbered
+   * "Surat" on the page 36 to 31. The address, landmarks and directions below
+   * still carry the real locality, so nothing is hidden. */
+  const collapsedCity = !!cityName && !cityHasOwnPage(centre.citySlug);
+  const headingArea = collapsedCity ? cityName! : centre.area;
+  const areaCity = sameAsCity || collapsedCity ? headingArea : `${centre.area}${cityName ? `, ${cityName}` : ""}`;
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -158,7 +169,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       {/* Overview */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `About the ${centre.area} centre`)} title={ed("sectionLabels.overviewTitle", sl.overviewTitle || `Fertility care in ${em(centre.area)}${city?.name && !sameAsCity ? `, ${city.name}` : ""}`)} />
+          <SectionHead eyebrow={ed("sectionLabels.overviewEyebrow", sl.overviewEyebrow || `About the ${headingArea} centre`)} title={ed("sectionLabels.overviewTitle", sl.overviewTitle || `Fertility care in ${em(headingArea)}${city?.name && !sameAsCity && !collapsedCity ? `, ${city.name}` : ""}`)} />
           <div className="mt-6 max-w-3xl space-y-5 text-[17px] leading-relaxed text-muted-foreground">
             <Reveal><p>{ed("intro", centre.intro)}</p></Reveal>
           </div>
@@ -209,10 +220,10 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         </section>
       ) : null}
 
-      <LocalHighlights centre={centre} />
-      <HowToReach centre={centre} />
-      <Facilities items={centre.facilities} area={centre.area} labels={sl} />
-      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={centre.area} labels={sl} city={sameAsCity ? undefined : cityName} /></div>
+      <LocalHighlights centre={centre} areaLabel={headingArea} />
+      <HowToReach centre={centre} areaLabel={headingArea} />
+      <Facilities items={centre.facilities} area={headingArea} labels={sl} />
+      <div className="bg-white"><TreatmentsOffered slugs={centre.treatments} area={headingArea} labels={sl} city={sameAsCity ? undefined : cityName} /></div>
 
       {/* Women's health & maternity services available at this centre (blush
           band: sits between the white Treatments section and ivory Doctors). */}
@@ -229,9 +240,9 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       {docs.length > 0 && (
         <Doctors
           docs={docs}
-          eyebrow={ed("sectionLabels.doctorsEyebrow", sl.doctorsEyebrow || `Doctors at ${centre.area}`)}
-          title={ed("sectionLabels.doctorsTitle", sl.doctorsTitle || `Meet the doctors at ${em(centre.area + " center")}`)}
-          subtitle={ed("sectionLabels.doctorsSubtitle", sl.doctorsSubtitle || `Our fertility specialists who consult at the ${centre.area} centre.`)}
+          eyebrow={ed("sectionLabels.doctorsEyebrow", sl.doctorsEyebrow || `Doctors at ${headingArea}`)}
+          title={ed("sectionLabels.doctorsTitle", sl.doctorsTitle || `Meet the doctors at ${em(headingArea + " centre")}`)}
+          subtitle={ed("sectionLabels.doctorsSubtitle", sl.doctorsSubtitle || `Our fertility specialists who consult at the ${headingArea} centre.`)}
         />
       )}
 
@@ -239,7 +250,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         <SuccessStories
           tone="tint"
           eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")}
-          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `${em(centre.area)} success stories`)}
+          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `${em(headingArea)} success stories`)}
           subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
           showCta={false}
           carousel={centreStories.length > 3}
@@ -253,19 +264,19 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
           data={reviews}
           reviewsKey={centre.reviewsKey ?? centre.slug}
           profileUrl={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(centre.mapQuery)}`}
-          title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${centre.area} patients ${em("on Google")}`)}
-          subtitle={`Read verified reviews from families treated at our ${centre.area} centre.`}
+          title={ed("sectionLabels.reviewsTitle", sl.reviewsTitle || `${headingArea} patients ${em("on Google")}`)}
+          subtitle={`Read verified reviews from families treated at our ${headingArea} centre.`}
         />
       </div>
 
       <VideoHub />
 
-      <CentreGallery images={centre.gallery} tone="white" title={ed("sectionLabels.galleryTitle", sl.galleryTitle || `Inside our ${em(centre.area + " centre")}`)} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A look at our facilities and lab.")} />
+      <CentreGallery images={centre.gallery} tone="white" title={ed("sectionLabels.galleryTitle", sl.galleryTitle || `Inside our ${em(headingArea + " centre")}`)} subtitle={ed("sectionLabels.gallerySubtitle", sl.gallerySubtitle || "A look at our facilities and lab.")} />
 
       {/* Map */}
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
-          <SectionHead center eyebrow={ed("sectionLabels.mapEyebrow", sl.mapEyebrow || "How to reach")} title={ed("sectionLabels.mapTitle", sl.mapTitle || `Find the ${em(centre.area + " centre")}`)} subtitle={centre.address} />
+          <SectionHead center eyebrow={ed("sectionLabels.mapEyebrow", sl.mapEyebrow || "How to reach")} title={ed("sectionLabels.mapTitle", sl.mapTitle || `Find the ${em(headingArea + " centre")}`)} subtitle={centre.address} />
           <div className="mt-10"><CentreMap query={centre.mapQuery} title={`${centre.fullName} — map`} /></div>
         </div>
       </section>
@@ -273,31 +284,32 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       {/* Reading — Ahmedabad's own articles plus the Gujarat CME write-ups.
        *  Only the Ahmedabad centres have a curated list; other cities fall
        *  through and render nothing. */}
-      {centre.citySlug === "ahmedabad" ? (
+      {centreReading.length > 0 && (
         <ReadingCarousel
+          items={centreReading}
           tone="white"
           eyebrow="Reading"
           title={<>More on fertility treatment in <em className="font-display italic text-[color:var(--rose)]">{cityName}</em></>}
-          subtitle={`Articles from the ${cityName} team on cost, success rates and choosing a centre, plus the CME programmes our doctors run across Gujarat.`}
+          subtitle={`Fertility guidance for patients in ${cityName}, plus the CME programmes and recognitions our doctors earn across Gujarat.`}
         />
-      ) : null}
+      )}
 
       {/* Awards and press — same Gujarat / Ahmedabad-edition subsets the
           city hub shows, so a visitor who lands straight on a centre page
           sees the same proof without having to go up a level. */}
-      {centre.citySlug === "ahmedabad" && (
+      {city?.region === "Gujarat" && cityName && (
         <>
           <LocalAwards city={cityName} />
           <LocalPress city={cityName} />
         </>
       )}
 
-      <ContactInfo centres={[centre]} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(centre.area + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
+      <ContactInfo centres={[centre]} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(headingArea + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
 
       {/* FAQ */}
       <section className="container-px mx-auto max-w-3xl px-0 py-8 md:py-14">
         <div className="container-px">
-          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={ed("sectionLabels.faqTitle", sl.faqTitle || `${centre.area} — ${em("your questions answered")}`)} />
+          <SectionHead center eyebrow={ed("sectionLabels.faqEyebrow", sl.faqEyebrow || "FAQ")} title={ed("sectionLabels.faqTitle", sl.faqTitle || `${headingArea} — ${em("your questions answered")}`)} />
           <div className="mt-9 space-y-3">
             {centre.faqs.map((f, i) => <Faq key={i} q={ed(`faqs.${i}.q`, f.q, false)} a={ed(`faqs.${i}.a`, f.a, false)} />)}
           </div>
@@ -315,7 +327,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         <div className="relative overflow-hidden rounded-[2.5rem] gradient-dark px-8 py-16 text-center text-white noise md:px-16 md:py-20">
           <Reveal>
             <h2 className="mx-auto max-w-2xl text-3xl font-medium leading-[1.1] md:text-4xl lg:text-5xl text-balance">
-              {ed("sectionLabels.ctaTitle", sl.ctaTitle || `Start your journey at our ${em(centre.area, true)} centre.`)}
+              {ed("sectionLabels.ctaTitle", sl.ctaTitle || `Start your journey at our ${em(headingArea, true)} centre.`)}
             </h2>
           </Reveal>
           <Reveal delay={0.15}>

@@ -3,7 +3,7 @@
 import { AwardsStage, PressStage } from "@/components/home-page";
 import { SectionHead } from "@/components/ivf-page";
 import { Reveal } from "@/components/motion";
-import { GUJARAT_AWARDS, AHMEDABAD_PRESS } from "@/lib/ahmedabad-credibility";
+import { GUJARAT_AWARDS, pressForCity } from "@/lib/gujarat-credibility";
 
 /* Awards and press sections for the Ahmedabad city and centre pages.
  *
@@ -54,7 +54,8 @@ export function LocalAwards({ city }: { city: string }) {
 }
 
 export function LocalPress({ city }: { city: string }) {
-  if (AHMEDABAD_PRESS.length === 0) return null;
+  const { items, label, publications } = pressForCity(city);
+  if (items.length === 0) return null;
   return (
     <section className="py-10 md:py-16">
       <div className="container-px mx-auto max-w-[1400px]">
@@ -65,13 +66,13 @@ export function LocalPress({ city }: { city: string }) {
             <>
               Our work in the{" "}
               <em className="font-display italic text-[color:var(--rose)]">
-                {city} press
+                {label} press
               </em>
             </>
           }
-          subtitle={`Reported in The Times of India, ${city} edition.`}
+          subtitle={`Reported in ${publications}.`}
         />
-        <PressStage items={AHMEDABAD_PRESS} />
+        <PressStage items={items} />
         <MoreLink href="/press" label="Read all coverage" />
       </div>
     </section>

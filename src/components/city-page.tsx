@@ -18,6 +18,7 @@ import { getReviews } from "@/lib/reviews";
 import { testimonialsForCity } from "@/lib/video-testimonials";
 import { blogsForLocation, type BlogPost } from "@/lib/blogs";
 import { ReadingCarousel } from "@/components/reading-carousel";
+import { readingForCity } from "@/lib/location-reading";
 import { LocalAwards, LocalPress } from "@/components/location-credibility";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
@@ -53,7 +54,8 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
     .map(toDoctorCard);
   const treatments = treatmentSlugsForCity(city.slug);
   const reviews = getReviews(city.slug); // optional city-level review source (null → CTA)
-  const cityStories = testimonialsForCity(city.slug); // only cities with an explicitly-stated testimonial
+  const cityStories = testimonialsForCity(city.slug);
+  const cityReading = readingForCity(city.slug); // only cities with an explicitly-stated testimonial
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -260,7 +262,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
           and Ahmedabad-edition subsets. Other cities would be shown
           recognition earned somewhere they can't place, so they keep the
           page they have. */}
-      {city.slug === "ahmedabad" && (
+      {city.region === "Gujarat" && (
         <>
           <LocalAwards city={city.name} />
           <LocalPress city={city.name} />
@@ -293,8 +295,9 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
        *  write-ups, which is more than a three-card grid can carry — it gets
        *  the curated carousel instead. Every other city keeps the grid fed by
        *  getBlogsByLocationSlug. */}
-      {city.slug === "ahmedabad" ? (
+      {cityReading.length > 0 ? (
         <ReadingCarousel
+          items={cityReading}
           eyebrow="Blog"
           title={<>{city.name} <em className="font-display italic text-[color:var(--rose)]">Articles &amp; Guides</em></>}
           subtitle={`Fertility guidance written for patients in ${city.name}, plus the CME programmes our doctors run across Gujarat.`}

@@ -570,8 +570,11 @@ const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const em = (t: string) => `<em ${EM}>${t}</em>`;
 
 /* ---------- Local highlights: landmarks + areas served (local intent) ---------- */
-export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?: LocationSectionLabels } }) {
+export function LocalHighlights({ centre, areaLabel }: { centre: Centre & { sectionLabels?: LocationSectionLabels }; areaLabel?: string }) {
   const sl = centre.sectionLabels ?? {};
+  // Single-centre cities are served at the city path, so their headings name
+  // the city; the chips below still list the real neighbourhoods.
+  const area = areaLabel ?? centre.area;
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -586,7 +589,7 @@ export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?:
           </ul>
         </div>
         <div>
-          <SectionHead eyebrow={lab("sectionLabels.areasEyebrow", sl.areasEyebrow, "Areas served")} title={lab("sectionLabels.areasTitle", sl.areasTitle, `Patients we serve in ${em(centre.area)} & nearby`)} />
+          <SectionHead eyebrow={lab("sectionLabels.areasEyebrow", sl.areasEyebrow, "Areas served")} title={lab("sectionLabels.areasTitle", sl.areasTitle, `Patients we serve in ${em(area)} & nearby`)} />
           <div className="mt-6 flex flex-wrap gap-2">
             {centre.nearby.map((n, i) => (
               <span key={i} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-[color:var(--plum)] shadow-soft">
@@ -601,11 +604,11 @@ export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?:
 }
 
 /* ---------- How to reach (transit / directions — visible local content) ---------- */
-export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: LocationSectionLabels } }) {
+export function HowToReach({ centre, areaLabel }: { centre: Centre & { sectionLabels?: LocationSectionLabels }; areaLabel?: string }) {
   return (
     <section className="bg-white py-8 md:py-14">
       <div className="container-px mx-auto max-w-[1400px]">
-        <SectionHead center eyebrow={lab("sectionLabels.reachEyebrow", centre.sectionLabels?.reachEyebrow, "How to reach")} title={lab("sectionLabels.reachTitle", centre.sectionLabels?.reachTitle, `Getting to our ${em(centre.area + " centre")}`)} subtitle={centre.address} />
+        <SectionHead center eyebrow={lab("sectionLabels.reachEyebrow", centre.sectionLabels?.reachEyebrow, "How to reach")} title={lab("sectionLabels.reachTitle", centre.sectionLabels?.reachTitle, `Getting to our ${em((areaLabel ?? centre.area) + " centre")}`)} subtitle={centre.address} />
         <Stagger className="mt-9 grid grid-cols-1 gap-4 md:grid-cols-3">
           {centre.howToReach.map((h, i) => (
             <StaggerItem key={i}>

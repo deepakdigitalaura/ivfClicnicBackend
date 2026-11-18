@@ -653,7 +653,7 @@ export const CENTRES: Centre[] = [
     opening: { opens: "10:00", closes: "19:00" },
     mapQuery: "Bavishi Fertility Institute Lal Darwaja Surat",
     image: "/assets/Locations/Surat.png",
-    nearby: ["Lal Darwaja", "Station Road", "Athwa", "Adajan", "Vesu", "Piplod", "Citylight", "Ghod Dod Road", "Varachha", "Katargam", "Udhna", "Rander", "Pal"],
+    nearby: ["Lal Darwaja", "Station Road", "Sangrampura", "Athwa", "Adajan", "Vesu", "Piplod", "Citylight", "Ghod Dod Road", "Varachha", "Katargam", "Udhna", "Rander", "Pal"],
     landmarks: [
       "At Param Doctor House, Lal Darwaja Station Road",
       "Near Surat railway station",
@@ -679,6 +679,12 @@ export const CENTRES: Centre[] = [
       { q: "What are the timings at the Surat centre?", a: "The Surat centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 98795 72247 to book." },
       { q: "Which areas does the Surat centre serve?", a: "Lal Darwaja, Athwa, Adajan, Vesu, Piplod, Citylight, Ghod Dod Road, Varachha and families across South Gujarat." },
       { q: "What treatments are available in Surat?", a: "The full range — IVF, ICSI, IUI, male and female infertility care, fertility preservation and PGT — backed by advanced laboratories and experienced specialists." },
+      { q: "Who is the best IVF doctor in Surat?", a: "Dr. Deep Gajiwala consults at the Surat centre, supported by the institute's senior promoter doctors and the same protocols used at every Bavishi Fertility Institute branch. Rather than name a single best IVF specialist, judge the consultation: your reports are explained to you in full, including when treatment is unlikely to help." },
+      { q: "Is Bavishi Fertility Institute a test tube baby centre in Surat?", a: "Yes. Test tube baby is the everyday name for IVF. The Surat centre has its own Class 1000 embryology and IVF laboratory on site, so the embryology is done here rather than samples being sent to another city." },
+      { q: "Is there an IVF centre near Vesu, Adajan or Sangrampura?", a: "Yes. The centre is on Lal Darwaja Station Road, beside Surat railway station, which keeps it a short drive from Sangrampura, Athwa, Ghod Dod Road, Adajan, Vesu, Piplod, Citylight, Varachha, Katargam, Udhna, Rander and Pal." },
+      { q: "Do you offer IUI treatment in Surat?", a: "Yes, IUI is offered at the Surat centre alongside IVF and ICSI. For many couples IUI is the first step before IVF is considered; which one suits you depends on your test results, and the andrology and semen-analysis lab needed for that work is in the same building." },
+      { q: "Is egg freezing available in Surat?", a: "Yes. Egg freezing and other fertility preservation options are available at the Surat centre, using the on-site embryology lab. Women choose it both for medical reasons, such as before cancer treatment, and to keep the option of a later pregnancy open." },
+      { q: "What makes Bavishi one of the best fertility hospitals in Surat?", a: "Everything is in one place: the embryology and IVF lab, andrology and semen analysis, diagnostics and sonography, a day-care operation theatre, counselling and a pharmacy are all in the same building, so you are not sent between an infertility clinic and a hospital at each step. The institute has been recognised as the Most Trusted Fertility Chain Hospital in Gujarat and as IVF Chain of the Year (West) at the ET Healthworld National Fertility Awards." },
     ],
     sameAs: [],
     intro:

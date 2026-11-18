@@ -74,25 +74,20 @@ export const TREATMENT_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
  * CITY PAGES — keyed by city slug (see src/lib/locations.ts).
  * Only videos whose city is explicitly stated belong here.
  * ------------------------------------------------------------------- */
-export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
-  /* Gujarat patient stories, taken from the /testimonial-videos catalogue.
-   * `location` is set only where the video itself names the place, so the
-   * "never inferred" rule above still holds; the rest are Gujarat families
-   * telling their story in Gujarati, which is why they sit in this pool. */
-  /* EXCLUDED ON PURPOSE — do not re-add to this pool:
-   *  - 5jlLhlqoqGo "अहमदाबाद शहर में एक IVF ट्रीटमेंट साइकिल का खर्च..." is a
-   *    doctor-led COST EXPLAINER, not a patient story. It was rendering under
-   *    a "Patient Story" label in "Words from Ahmedabad families", which is
-   *    simply untrue. It still lives in the /testimonial-videos catalogue.
-   *  - zBtb86IPaH8 "Ep 16 | Part-2" is the second half of the same family's
-   *    story as "Ep 15 | Part-1" (CwqJJ8EoxpU) and carries a BYTE-IDENTICAL
-   *    YouTube thumbnail (verified: same md5, perceptual distance 0), so the
-   *    two cards read as the same video twice. Part-1 is kept.
-   * All 31 thumbnails in this pool were perceptually hashed; that was the only
-   * duplicate pair. Nearest non-duplicate pair sits at distance 50/256. */
-  ahmedabad: [
-    { name: "Sheetal Jaydeep Vachanani", location: "Ahmedabad", quote: "Our fertility treatment in Ahmedabad with Bavishi Fertility Institute gave us our happiest moment.", youTubeId: "HZeK3QG2MDc" },
-    { name: "Testimonial by Chetan bhai from Ahmedabad for IVF By Bavishi Fertility Institute", location: "Ahmedabad", quote: "A heartfelt journey shared with Bavishi Fertility Institute.", youTubeId: "wA91XZ15CZI" },
+/* ---------------------------------------------------------------------
+ * GUJARAT PATIENT STORIES — shared by the Gujarat city pools.
+ * ---------------------------------------------------------------------
+ * Real families from the /testimonial-videos catalogue, telling their
+ * story in Gujarati. None of them names a city, so none is tagged with
+ * one — the `location` field stays empty, and the "never inferred" rule
+ * in this file's header still holds.
+ *
+ * They sit in a shared list rather than inside one city because that is
+ * what they are: Gujarat families, equally relevant to a reader in
+ * Ahmedabad or in Surat. A city that has its own named stories lists
+ * those first and then draws on this pool.
+ * ------------------------------------------------------------------- */
+const GUJARAT_STORIES: VideoTestimonial[] = [
     { name: "IVF Success | 7 વર્ષ સુધી સંતાન ના હતું, BFI માં 1st Cycle માં સફળતા મળી | સાંભળો તેમનો Review", quote: "After 7 years of marriage, this family found success in their very first IVF cycle at Bavishi Fertility Institute.", youTubeId: "DCWuox7cZ6Q" },
     { name: "માત્ર 1 IVF Cycle માં જ સંતાન સુખ પામ્યા ભીખીબેન અને બાબુભાઈ ના અદભૂત અનુભવ સાંભળો!", quote: "In just one IVF cycle, Bhikhiben and Babubhai experienced the joy of parenthood at Bavishi Fertility Institute.", youTubeId: "kt9GROuYlGA" },
     { name: "લગ્ન ના 35 વર્ષ પછી સંતાન પ્રાપ્તિ: શારદાબેન અને જીતુભાઈ નો વિશેષ અનુભવ", quote: "After 35 years of marriage, Bavishi Fertility Institute helped Sharadaben and Jitubhai welcome their child.", youTubeId: "R0uaWxFsquc" },
@@ -120,9 +115,37 @@ export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
     { name: "દેવના દીધેલા માગીને લીધેલા | Ep 21 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "Oa1wi2dmI9U" },
     { name: "દેવના દીધેલા માગીને લીધેલા | Ep 20 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "rkmJHlf5myc" },
     { name: "દેવના દીધેલા માગીને લીધેલા | Ep 19 | True Story of beating Infertility with Bavishi IVF", quote: "A true story of struggle and triumph on the path to parenthood, shared in our patient stories series.", youTubeId: "KvE6PeYRL68" },
+];
+
+export const CITY_TESTIMONIALS: Record<string, VideoTestimonial[]> = {
+  /* EXCLUDED ON PURPOSE — do not re-add to this pool:
+   *  - 5jlLhlqoqGo "अहमदाबाद शहर में एक IVF ट्रीटमेंट साइकिल का खर्च..." is a
+   *    doctor-led COST EXPLAINER, not a patient story. It was rendering under
+   *    a "Patient Story" label in "Words from Ahmedabad families", which is
+   *    simply untrue. It still lives in the /testimonial-videos catalogue.
+   *  - zBtb86IPaH8 "Ep 16 | Part-2" is the second half of the same family's
+   *    story as "Ep 15 | Part-1" (CwqJJ8EoxpU) and carries a BYTE-IDENTICAL
+   *    YouTube thumbnail (verified: same md5, perceptual distance 0), so the
+   *    two cards read as the same video twice. Part-1 is kept.
+   * All 31 thumbnails in this pool were perceptually hashed; that was the only
+   * duplicate pair. Nearest non-duplicate pair sits at distance 50/256. */
+  /* Two videos name Ahmedabad on screen; the rest of the city's pool is the
+   * shared Gujarat list above. */
+  ahmedabad: [
+    { name: "Sheetal Jaydeep Vachanani", location: "Ahmedabad", quote: "Our fertility treatment in Ahmedabad with Bavishi Fertility Institute gave us our happiest moment.", youTubeId: "HZeK3QG2MDc" },
+    { name: "Testimonial by Chetan bhai from Ahmedabad for IVF By Bavishi Fertility Institute", location: "Ahmedabad", quote: "A heartfelt journey shared with Bavishi Fertility Institute.", youTubeId: "wA91XZ15CZI" },
+    ...GUJARAT_STORIES,
   ],
-  // mumbai / surat / vadodara: city-tagged videos exist but their YouTube IDs
-  // were not in the current channel export — add here once collected.
+
+  /* Surat has no city-named video of its own yet, so it draws entirely on
+   * the shared Gujarat stories — the same families an Ahmedabad visitor
+   * sees. Previously this city rendered only the two videos that came from
+   * its doctors' own lists. */
+  surat: [...GUJARAT_STORIES],
+  // mumbai / vadodara: city-tagged videos exist but their YouTube IDs were
+  // not in the current channel export — add here once collected. Vadodara
+  // could draw on GUJARAT_STORIES too; left alone because nobody has asked
+  // for it and it is not in the current brief.
 };
 
 /* ---------------------------------------------------------------------
