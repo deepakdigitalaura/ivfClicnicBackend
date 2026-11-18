@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
+import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, MultiCentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { City } from "@/lib/locations";
@@ -18,6 +18,8 @@ import { getReviews } from "@/lib/reviews";
 import { testimonialsForCity } from "@/lib/video-testimonials";
 import { blogsForLocation, type BlogPost } from "@/lib/blogs";
 import { ReadingCarousel } from "@/components/reading-carousel";
+import { LocalAwards, LocalPress } from "@/components/location-credibility";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 const trust = [
   { icon: Award, t: "Trusted since 1998", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for over three decades." },
@@ -161,11 +163,20 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
                 </StaggerItem>
               ))}
             </Stagger>
-            {city.slug !== "ahmedabad" && (
-              <div className="mt-10">
+            {/* A single Google place query can only drop one pin, which is
+                why Ahmedabad — three centres spread right across the city —
+                was previously excluded from the map entirely. MultiCentreMap
+                plots every centre from its own coordinates, so a visitor can
+                see which one is actually nearest to them. The condition is
+                self-scoping: only Ahmedabad's centres carry `geo` today, so
+                every other city keeps the Google embed it has now. */}
+            <div className="mt-10">
+              {centres.filter((c) => c.geo).length > 1 ? (
+                <MultiCentreMap centres={centres} title={`Bavishi Fertility Institute ${city.name} — all centres on the map`} />
+              ) : (
                 <CentreMap query={`Bavishi Fertility Institute ${city.name}`} title={`Bavishi Fertility Institute ${city.name} — centres on Google Maps`} />
-              </div>
-            )}
+              )}
+            </div>
           </div>
         </section>
       )}
@@ -203,7 +214,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
         <SuccessStories
           tone="tint"
           eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")}
-          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `Words from ${em(city.name + " families")}`)}
+          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `Why families call us the ${em("best IVF centre in " + city.name)}`)}
           subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
           showCta={false}
           // Same rule the centre pages already use: past three stories a grid
@@ -245,6 +256,17 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
         </Stagger>
       </section>
 
+      {/* Awards and press — Ahmedabad only, because these are the Gujarat
+          and Ahmedabad-edition subsets. Other cities would be shown
+          recognition earned somewhere they can't place, so they keep the
+          page they have. */}
+      {city.slug === "ahmedabad" && (
+        <>
+          <LocalAwards city={city.name} />
+          <LocalPress city={city.name} />
+        </>
+      )}
+
       {centres.length > 0 && (
         <ContactInfo centres={centres} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
       )}
@@ -260,6 +282,11 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
           </div>
         </section>
       )}
+
+      {/* Fertility calculators — eight real tools that already exist on the
+          site. Placed after the FAQ because both answer "what do I do next";
+          it is also the strongest internal-linking block on the page. */}
+      <CalculatorCrossLinks />
 
       {/* Related Articles — location-specific, data-driven (placeholders until published) */}
       {/* Ahmedabad has fifteen articles of its own plus the Gujarat CME

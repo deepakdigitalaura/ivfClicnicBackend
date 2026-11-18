@@ -404,6 +404,7 @@ export function CentreMap({ query, title }: { query: string; title: string }) {
 /* ---------- Multi-marker map (Leaflet + OpenStreetMap, no API key) ---------- */
 export function MultiCentreMap({ centres, title }: { centres: Centre[]; title: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const points = centres.filter((c) => c.geo).map((c) => ({ c, lat: c.geo!.lat, lng: c.geo!.lng }));
@@ -459,6 +460,7 @@ export function MultiCentreMap({ centres, title }: { centres: Centre[]; title: s
 
       if (latlngs.length === 1) map.setView(latlngs[0], 14);
       else map.fitBounds(latlngs, { padding: [50, 50] });
+      setReady(true);
     });
 
     return () => {
@@ -467,13 +469,27 @@ export function MultiCentreMap({ centres, title }: { centres: Centre[]; title: s
     };
   }, [centres]);
 
+  /* Leaflet is fetched from a CDN at runtime, so the tiles can fail to arrive
+   * on a blocked or very slow connection. Without this the visitor would be
+   * left looking at an empty 380px box; instead they get the same Google
+   * Maps link the centre cards use, which the map covers once it loads. */
   return (
     <Reveal delay={0.1}>
-      <div
-        ref={ref}
-        title={title}
-        className="relative z-0 h-[380px] w-full overflow-hidden rounded-3xl border border-border/70 shadow-soft"
-      />
+      <div className="relative h-[380px] w-full overflow-hidden rounded-3xl border border-border/70 shadow-soft">
+        {!ready && (
+          <a
+            href={`https://maps.google.com/maps?q=${encodeURIComponent(title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 z-0 flex flex-col items-center justify-center gap-2 bg-[color:var(--rose-soft)]/30 px-6 text-center"
+          >
+            <MapPin className="h-6 w-6 text-[color:var(--rose)]" />
+            <span className="text-sm font-semibold text-[color:var(--plum)]">{title}</span>
+            <span className="text-xs text-muted-foreground">Open in Google Maps</span>
+          </a>
+        )}
+        <div ref={ref} title={title} className="relative z-[1] h-full w-full" />
+      </div>
     </Reveal>
   );
 }
