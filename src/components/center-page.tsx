@@ -7,7 +7,7 @@ import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } fr
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import {
-  GoogleReviews, CentreGallery, ContactInfo,
+  GoogleReviews, CentreGallery, ContactInfo, CentreMap,
   LocalHighlights, HowToReach, Facilities, TreatmentsOffered, AvailableServicesSection,
 } from "@/components/location-sections";
 import { ReadingCarousel } from "@/components/reading-carousel";
@@ -68,6 +68,12 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
   const siblingCentres = centresInCity.filter((c) => c.slug !== centre.slug);
   const cityHub = cityHref(centre.citySlug);
   const centreReading = readingForCity(centre.citySlug);
+  /* Ahmedabad is held at the layout it had before 19 Nov, by request: the
+   * combined centres map rather than per-centre map cards, and no About BFI
+   * band (the page already carries "Your trusted fertility partner in …"
+   * and "Why choose Bavishi Fertility Institute in …", which say much the
+   * same). Every other city keeps the newer treatment. */
+  const heldAtPreviousLayout = centre.citySlug === "ahmedabad";
   /* A city with a single built centre has no /locations/<city>/<centre>
    * route — the centre is served at the city path, so this page IS that
    * city's page. Heading after the street-level area buries the word people
@@ -282,7 +288,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
           {/* Same card-on-map treatment the city hub uses, so a visitor
               who lands straight on a centre page gets the address,
               rating and directions without hunting for them. */}
-          <div className="mt-10"><CentreLocationMaps centres={[centre]} /></div>
+          <div className="mt-10">{heldAtPreviousLayout ? <CentreMap query={centre.mapQuery} title={`${centre.fullName} — map`} /> : <CentreLocationMaps centres={[centre]} />}</div>
         </div>
       </section>
 
@@ -302,7 +308,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       {/* Awards and press — same Gujarat / Ahmedabad-edition subsets the
           city hub shows, so a visitor who lands straight on a centre page
           sees the same proof without having to go up a level. */}
-      {cityName && <AboutBfiSection city={cityName} />}
+      {cityName && !heldAtPreviousLayout && <AboutBfiSection city={cityName} />}
 
       {city?.region === "Gujarat" && cityName && (
         <>
