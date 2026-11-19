@@ -7,12 +7,14 @@ import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } fr
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import {
-  GoogleReviews, CentreGallery, ContactInfo, CentreMap,
+  GoogleReviews, CentreGallery, ContactInfo,
   LocalHighlights, HowToReach, Facilities, TreatmentsOffered, AvailableServicesSection,
 } from "@/components/location-sections";
 import { ReadingCarousel } from "@/components/reading-carousel";
 import { LocalAwards, LocalPress } from "@/components/location-credibility";
 import { readingForCity } from "@/lib/location-reading";
+import { CentreLocationMaps } from "@/components/centre-location-maps";
+import { AboutBfiSection } from "@/components/about-bfi-section";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
@@ -277,7 +279,10 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       <section className="bg-[color:var(--rose-soft)]/40 py-8 md:py-14">
         <div className="container-px mx-auto max-w-[1400px]">
           <SectionHead center eyebrow={ed("sectionLabels.mapEyebrow", sl.mapEyebrow || "How to reach")} title={ed("sectionLabels.mapTitle", sl.mapTitle || `Find the ${em(headingArea + " centre")}`)} subtitle={centre.address} />
-          <div className="mt-10"><CentreMap query={centre.mapQuery} title={`${centre.fullName} — map`} /></div>
+          {/* Same card-on-map treatment the city hub uses, so a visitor
+              who lands straight on a centre page gets the address,
+              rating and directions without hunting for them. */}
+          <div className="mt-10"><CentreLocationMaps centres={[centre]} /></div>
         </div>
       </section>
 
@@ -297,6 +302,8 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
       {/* Awards and press — same Gujarat / Ahmedabad-edition subsets the
           city hub shows, so a visitor who lands straight on a centre page
           sees the same proof without having to go up a level. */}
+      {cityName && <AboutBfiSection city={cityName} />}
+
       {city?.region === "Gujarat" && cityName && (
         <>
           <LocalAwards city={cityName} />

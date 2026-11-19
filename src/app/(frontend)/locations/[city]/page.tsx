@@ -60,9 +60,17 @@ export async function generateMetadata(
     if (!soleCentreSlug) return {};
     const centre = await getCentre(city, soleCentreSlug);
     if (!centre) return {};
-    const place = c.name && c.name !== centre.area ? `${centre.area}, ${c.name}` : centre.area;
+    /* This route IS the city's page: a single-centre city is served at the
+     * city path with no locality segment. So the title names the city people
+     * actually search for, not the street-level area — "Best IVF Centre in
+     * Surat", not "... in Lal Darwaja, Surat". The address is still on the
+     * page itself, in the hero, the directions block and the FAQ.
+     *
+     * NOTE: a pageSeo document in the CMS overrides both of these. Surat has
+     * one, so changing this default alone will not change that page. */
+    const place = c.name || centre.area;
     const title = c.metaTitle || `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-    const description = c.metaDescription || `${centre.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${centre.address}. Book a consultation.`;
+    const description = c.metaDescription || `Looking for the best IVF centre in ${place}? Bavishi Fertility Institute offers IVF, ICSI and IUI with senior doctors since 1998 and an on-site Class 1000 embryology lab.`;
     return withPageSeoOverride(`/locations/${c.slug}`, {
       title,
       description,
