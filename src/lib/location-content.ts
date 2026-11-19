@@ -116,6 +116,15 @@ export function centreToResolved(c: Centre): ResolvedCentre {
     intro: c.intro,
     gallery: c.gallery.map((g) => ({ src: g.src, alt: g.alt })),
     ...(c.womensHealth ? { womensHealth: [...c.womensHealth] } : {}),
+    /* Per-page SEO set in code. These four were declared on the Centre/City
+     * types and on the CMS side of the resolver, but were never copied out of
+     * the code object here -- so a metaTitle or metaDescription written in
+     * src/lib/locations.ts was silently dropped and the page fell back to the
+     * generated default. */
+    ...(c.metaTitle ? { metaTitle: c.metaTitle } : {}),
+    ...(c.metaDescription ? { metaDescription: c.metaDescription } : {}),
+    ...(c.ogTitle ? { ogTitle: c.ogTitle } : {}),
+    ...(c.ogDescription ? { ogDescription: c.ogDescription } : {}),
     built: c.built,
   };
 }
@@ -134,6 +143,15 @@ export function cityToResolved(c: City): ResolvedCity {
     intro: [...c.intro],
     faqs: c.faqs.map((f) => ({ q: f.q, a: f.a })),
     ...(c.womensHealth ? { womensHealth: [...c.womensHealth] } : {}),
+    /* Per-page SEO set in code. These four were declared on the Centre/City
+     * types and on the CMS side of the resolver, but were never copied out of
+     * the code object here -- so a metaTitle or metaDescription written in
+     * src/lib/locations.ts was silently dropped and the page fell back to the
+     * generated default. */
+    ...(c.metaTitle ? { metaTitle: c.metaTitle } : {}),
+    ...(c.metaDescription ? { metaDescription: c.metaDescription } : {}),
+    ...(c.ogTitle ? { ogTitle: c.ogTitle } : {}),
+    ...(c.ogDescription ? { ogDescription: c.ogDescription } : {}),
     built: c.built,
   };
 }
