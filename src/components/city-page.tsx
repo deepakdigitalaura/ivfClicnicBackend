@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, MultiCentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
+import { GoogleReviews, CentreGallery, ContactInfo, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { City } from "@/lib/locations";
@@ -19,6 +19,8 @@ import { testimonialsForCity } from "@/lib/video-testimonials";
 import { blogsForLocation, type BlogPost } from "@/lib/blogs";
 import { ReadingCarousel } from "@/components/reading-carousel";
 import { readingForCity } from "@/lib/location-reading";
+import { CentreLocationMaps } from "@/components/centre-location-maps";
+import { AboutBfiSection } from "@/components/about-bfi-section";
 import { LocalAwards, LocalPress } from "@/components/location-credibility";
 import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
@@ -165,19 +167,15 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
                 </StaggerItem>
               ))}
             </Stagger>
-            {/* A single Google place query can only drop one pin, which is
-                why Ahmedabad — three centres spread right across the city —
-                was previously excluded from the map entirely. MultiCentreMap
-                plots every centre from its own coordinates, so a visitor can
-                see which one is actually nearest to them. The condition is
-                self-scoping: only Ahmedabad's centres carry `geo` today, so
-                every other city keeps the Google embed it has now. */}
+            {/* Ahmedabad was previously excluded from the map altogether,
+                because a single Google place query can only drop one pin and
+                the city has three centres. One map per centre, each carrying
+                that centre's own card — address, Google rating, directions —
+                answers both "where are they" and "which one do I go to",
+                which a shared map with identical pins cannot. Cities with a
+                single centre get the same card, just one of it. */}
             <div className="mt-10">
-              {centres.filter((c) => c.geo).length > 1 ? (
-                <MultiCentreMap centres={centres} title={`Bavishi Fertility Institute ${city.name} — all centres on the map`} />
-              ) : (
-                <CentreMap query={`Bavishi Fertility Institute ${city.name}`} title={`Bavishi Fertility Institute ${city.name} — centres on Google Maps`} />
-              )}
+              <CentreLocationMaps centres={centres} />
             </div>
           </div>
         </section>
@@ -262,6 +260,8 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
           and Ahmedabad-edition subsets. Other cities would be shown
           recognition earned somewhere they can't place, so they keep the
           page they have. */}
+      <AboutBfiSection city={city.name} />
+
       {city.region === "Gujarat" && (
         <>
           <LocalAwards city={city.name} />

@@ -74,14 +74,32 @@ export const LOCATION_READING: ReadingItem[] = [
   { slug: "dr-parth-bavishi-wins-bharat-excellence-award-for-ivf", title: "Dr. Parth Bavishi Wins Bharat Excellence Award for IVF", blurb: "Dr. Parth Bavishi was honored with the esteemed Bharat Excellence Award for his exceptional contributions to the field of Infertility and IVF.", tag: "Awards", scope: "gujarat" },
 ];
 
-const forScope = (city: "ahmedabad" | "surat", max: number) =>
-  LOCATION_READING.filter((p) => p.scope === city || p.scope === "gujarat").slice(0, max);
+const pick = (order: ReadingItem["scope"][], max: number) => {
+  const rows = order.flatMap((sc) => LOCATION_READING.filter((p) => p.scope === sc));
+  /* Award announcements are proof rather than reading, and the page already
+   * has an awards carousel of its own, so they trail the articles instead of
+   * sitting between them. */
+  const articles = rows.filter((p) => p.tag !== "Awards");
+  const awards = rows.filter((p) => p.tag === "Awards");
+  return [...articles, ...awards].slice(0, max);
+};
 
 /** Ahmedabad's own posts first, then the shared Gujarat write-ups. */
-export const ahmedabadReading = (max = 60): ReadingItem[] => forScope("ahmedabad", max);
+export const ahmedabadReading = (max = 60): ReadingItem[] =>
+  pick(["ahmedabad", "gujarat"], max);
 
-/** Surat's own post first, then the shared Gujarat write-ups. */
-export const suratReading = (max = 60): ReadingItem[] => forScope("surat", max);
+/* Surat has exactly one post of its own, and the shared Gujarat list is
+ * almost entirely CME and award announcements — useful proof, but not the
+ * reading a patient wants. The Ahmedabad city guides (cost, success rates,
+ * how to choose a clinic, male infertility options) are the only
+ * patient-facing Gujarat articles that exist, so Surat shows them too.
+ *
+ * They keep their "Ahmedabad" tag on the card: the titles name that city and
+ * pretending otherwise would mislead the reader. They sit after the Gujarat
+ * write-ups rather than leading, so the top of a Surat page stays Surat and
+ * Gujarat-neutral. */
+export const suratReading = (max = 60): ReadingItem[] =>
+  pick(["surat", "gujarat", "ahmedabad"], max);
 
 /** The list for a location page, or [] for a city with nothing scoped to it
  *  (which hides the carousel rather than showing another city's articles). */
