@@ -143,6 +143,8 @@ const mumbaiGallery = (area: string): { src: string; alt: string }[] => [
 export const CENTRES: Centre[] = [
   {
     slug: "paldi",
+    metaTitle: "Best IVF Centre in Paldi, Ahmedabad — Bavishi Fertility",
+    metaDescription: "IVF, ICSI and IUI at our Paldi, Ahmedabad centre — the institute's head office and flagship Class 1000 lab, with senior doctors since 1998.",
     citySlug: "ahmedabad",
     name: "Paldi",
     fullName: "Bavishi Fertility Institute — Paldi, Ahmedabad",
@@ -221,6 +223,8 @@ export const CENTRES: Centre[] = [
   },
   {
     slug: "sindhu-bhavan-road",
+    metaTitle: "Best IVF Centre in Bodakdev & Sindhu Bhavan Road",
+    metaDescription: "IVF, ICSI and IUI at our Sindhu Bhavan Road centre in Bodakdev — serving Thaltej, Satellite, Vastrapur and Bopal, with senior doctors since 1998.",
     citySlug: "ahmedabad",
     name: "Sindhu Bhavan Road",
     fullName: "Bavishi Fertility Institute — Sindhu Bhavan Road, Ahmedabad",
@@ -272,6 +276,8 @@ export const CENTRES: Centre[] = [
   },
   {
     slug: "nikol",
+    metaTitle: "Best IVF Centre in Nikol, Ahmedabad — Bavishi Fertility",
+    metaDescription: "IVF, ICSI and IUI at our Nikol centre near Amar Jawan Circle — serving Nikol, Naroda, Vastral and Bapunagar, with senior doctors since 1998.",
     citySlug: "ahmedabad",
     name: "Nikol",
     fullName: "Bavishi Fertility Institute — Nikol, Ahmedabad",
@@ -919,6 +925,7 @@ export const CENTRES: Centre[] = [
 export const CITIES: City[] = [
   {
     slug: "ahmedabad",
+    metaDescription: "Looking for the best IVF centre in Ahmedabad? IVF, ICSI and IUI across 3 centres — Paldi, Sindhu Bhavan Road and Nikol — with senior doctors since 1998.",
     name: "Ahmedabad",
     region: "Gujarat",
     country: "IN",

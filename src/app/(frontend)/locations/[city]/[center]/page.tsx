@@ -38,8 +38,16 @@ export async function generateMetadata(
   if (!c || !c.built || !await cityIsMultiCentre(city)) return {};
   const cityName = cityBySlug(city)?.name ?? c.citySlug;
   const place = cityName && cityName !== c.area ? `${c.area}, ${cityName}` : c.area;
-  const title = c.metaTitle || `Best IVF Centre in ${place} — Bavishi Fertility Institute`;
-  const description = c.metaDescription || `${c.fullName} — IVF, ICSI & IUI with senior doctors since 1998. ${c.address}. Book a consultation.`;
+  /* Titles are capped near 60 characters by Google and descriptions near
+   * 155. `place` is already "Area, City", so the longer brand suffix used
+   * on city pages pushed every centre title past the cut; the short form
+   * keeps it inside. The description previously inlined c.address, which
+   * put every centre page between 190 and 240 characters and spent the
+   * whole snippet on a postal address the reader did not search for.
+   * Centres that need locality keywords of their own set metaDescription
+   * in src/lib/locations.ts. */
+  const title = c.metaTitle || `Best IVF Centre in ${place} — Bavishi Fertility`;
+  const description = c.metaDescription || `IVF, ICSI and IUI at our ${place} centre, with senior doctors since 1998 and Class 1000 lab standards. Book a consultation.`;
   return withPageSeoOverride(`/locations/${c.citySlug}/${c.slug}`, {
     title,
     description,
