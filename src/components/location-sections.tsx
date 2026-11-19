@@ -500,11 +500,16 @@ export function ContactInfo({
   eyebrow = "Contact Information",
   title,
   subtitle,
+  withMap = false,
 }: {
   centres: Centre[];
   eyebrow?: string;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
+  /** Show a map on top of each card. Off by default: it is currently only
+   *  wanted on the Ahmedabad pages, and the caller decides, so turning it on
+   *  elsewhere later needs no change to this component. */
+  withMap?: boolean;
 }) {
   const single = centres.length === 1;
   return (
@@ -519,7 +524,32 @@ export function ContactInfo({
         <Stagger className={`mt-9 grid grid-cols-1 gap-6 ${single ? "max-w-2xl mx-auto" : "md:grid-cols-3"}`}>
           {centres.map((c) => (
             <StaggerItem key={c.slug}>
-              <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+              <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+                {/* A map on top of each card: the address, hours and phone sit
+                    right under the place they describe, so a visitor can see
+                    where the centre is without leaving the section. */}
+                {withMap && (
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${c.fullName} on Google Maps`}
+                  className="group/map relative block h-[200px] w-full overflow-hidden border-b border-border/60"
+                >
+                  <iframe
+                    title={`${c.fullName} — map`}
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(c.mapQuery)}&output=embed`}
+                    className="pointer-events-none h-full w-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                  <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-[color:var(--plum)] shadow-md ring-1 ring-black/5 transition group-hover/map:text-[color:var(--rose)]">
+                    <Navigation className="h-3 w-3" /> Open in Maps
+                  </span>
+                </a>
+                )}
+
+                <div className="flex flex-1 flex-col p-7">
                 <div className="flex items-center gap-2">
                   <h3 className="text-xl font-semibold text-[color:var(--plum)]">{c.name}, {cityBySlug(c.citySlug)?.name}</h3>
                   {c.isHeadOffice && (
@@ -546,6 +576,7 @@ export function ContactInfo({
                   <a href="#book" className="inline-flex items-center gap-1.5 rounded-full bg-[color:var(--rose)] px-4 py-2 text-xs font-semibold text-white transition hover:brightness-110">
                     <Calendar className="h-3.5 w-3.5" /> Book
                   </a>
+                </div>
                 </div>
               </div>
             </StaggerItem>

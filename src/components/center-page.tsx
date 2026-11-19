@@ -317,7 +317,7 @@ export function CenterPage({ centre, stats }: { centre: Centre | ResolvedCentre;
         </>
       )}
 
-      <ContactInfo centres={[centre]} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(headingArea + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
+      <ContactInfo centres={[centre]} withMap={centre.citySlug === "ahmedabad"} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact the ${em(headingArea + " centre")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — we're here to help.")} />
 
       {/* FAQ */}
       <section className="container-px mx-auto max-w-3xl px-0 py-8 md:py-14">
