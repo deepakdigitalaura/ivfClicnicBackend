@@ -84,9 +84,12 @@ const pick = (order: ReadingItem["scope"][], max: number) => {
   return [...articles, ...awards].slice(0, max);
 };
 
-/** Ahmedabad's own posts first, then the shared Gujarat write-ups. */
+/** Ahmedabad's own posts first, then the shared Gujarat write-ups.
+ *  Held at its previous order by request: unlike Surat's, this list keeps
+ *  the award write-ups in catalogue position rather than moving them to
+ *  the end. */
 export const ahmedabadReading = (max = 60): ReadingItem[] =>
-  pick(["ahmedabad", "gujarat"], max);
+  LOCATION_READING.filter((p) => p.scope === "ahmedabad" || p.scope === "gujarat").slice(0, max);
 
 /* Surat has exactly one post of its own, and the shared Gujarat list is
  * almost entirely CME and award announcements — useful proof, but not the
