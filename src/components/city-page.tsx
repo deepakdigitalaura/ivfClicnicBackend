@@ -284,7 +284,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
       )}
 
       {centres.length > 0 && (
-        <ContactInfo centres={centres} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
+        <ContactInfo centres={centres} withMap={city.slug === "ahmedabad"} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
       )}
 
       {/* FAQ */}
