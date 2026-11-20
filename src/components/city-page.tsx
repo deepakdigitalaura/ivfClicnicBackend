@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, MultiCentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
+import { GoogleReviews, CentreGallery, ContactInfo, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { City } from "@/lib/locations";
@@ -56,14 +56,14 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
     .map(toDoctorCard);
   const treatments = treatmentSlugsForCity(city.slug);
   const reviews = getReviews(city.slug); // optional city-level review source (null → CTA)
-  const cityStories = testimonialsForCity(city.slug);
+  const cityStories = testimonialsForCity(city.slug); // only cities with an explicitly-stated testimonial
   const cityReading = readingForCity(city.slug);
-  /* Ahmedabad is held at the layout it had before 19 Nov, by request: the
-   * combined centres map rather than per-centre map cards, and no About BFI
-   * band (the page already carries "Your trusted fertility partner in …"
-   * and "Why choose Bavishi Fertility Institute in …", which say much the
-   * same). Every other city keeps the newer treatment. */
-  const heldAtPreviousLayout = city.slug === "ahmedabad"; // only cities with an explicitly-stated testimonial
+  /* Ahmedabad is held apart from the newer location layout, by request: no
+   * map in the overview (each centre carries its own inside the Contact
+   * section instead) and no About BFI band, since the page already runs
+   * "Your trusted fertility partner in …" and "Why choose Bavishi Fertility
+   * Institute in …", which say much the same. Other cities are unaffected. */
+  const heldAtPreviousLayout = city.slug === "ahmedabad";
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -173,24 +173,15 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
                 </StaggerItem>
               ))}
             </Stagger>
-            {/* Ahmedabad was previously excluded from the map altogether,
-                because a single Google place query can only drop one pin and
-                the city has three centres. One map per centre, each carrying
-                that centre's own card — address, Google rating, directions —
-                answers both "where are they" and "which one do I go to",
-                which a shared map with identical pins cannot. Cities with a
-                single centre get the same card, just one of it. */}
-            <div className="mt-10">
-              {heldAtPreviousLayout ? (
-                centres.filter((c) => c.geo).length > 1 ? (
-                  <MultiCentreMap centres={centres} title={`Bavishi Fertility Institute ${city.name} — all centres on the map`} />
-                ) : (
-                  <CentreMap query={`Bavishi Fertility Institute ${city.name}`} title={`Bavishi Fertility Institute ${city.name} — centres on Google Maps`} />
-                )
-              ) : (
+            {/* No map here on Ahmedabad: each of its three centres now carries
+                its own map inside the Contact section further down, so a
+                combined map of the same three pins only repeats it. Other
+                cities keep the map they have. */}
+            {!heldAtPreviousLayout && (
+              <div className="mt-10">
                 <CentreLocationMaps centres={centres} />
-              )}
-            </div>
+              </div>
+            )}
           </div>
         </section>
       )}
