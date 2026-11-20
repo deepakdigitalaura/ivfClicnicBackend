@@ -92,10 +92,12 @@ jobs:
           LOCAL_SUM=$(md5sum deploy-package.tar.gz | cut -d' ' -f1)
           echo "local md5 $LOCAL_SUM ($(stat -c%s deploy-package.tar.gz) bytes)"
 
+          # Every ssh here is `|| true`: the step runs under `bash -e`, so an
+          # unguarded blip would kill the job instead of taking the retry.
           for i in 1 2 3; do
-            ssh $SSH_OPTS "$REMOTE" "rm -f $DEST"
+            ssh $SSH_OPTS "$REMOTE" "rm -f $DEST" || true
             cat deploy-package.tar.gz | ssh $SSH_OPTS "$REMOTE" "cat > $DEST" || true
-            REMOTE_SUM=$(ssh $SSH_OPTS "$REMOTE" "md5sum $DEST 2>/dev/null | cut -d' ' -f1")
+            REMOTE_SUM=$(ssh $SSH_OPTS "$REMOTE" "md5sum $DEST 2>/dev/null | cut -d' ' -f1" || true)
             if [ "$LOCAL_SUM" = "$REMOTE_SUM" ]; then
               echo "upload verified on attempt $i"
               exit 0
