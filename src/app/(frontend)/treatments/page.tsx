@@ -16,7 +16,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(URL, {
     title: "Fertility Treatments — IVF, ICSI, IUI & More | Bavishi Fertility Institute",
     description:
-      "Explore every fertility treatment at Bavishi Fertility Institute — IVF, ICSI, IUI, male and female infertility care, donor programs, fertility preservation and maternity services.",
+      "Explore every fertility treatment at BFI — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation and maternity.",
     alternates: { canonical: URL },
     openGraph: {
       title: "Fertility Treatments — Bavishi Fertility Institute",
@@ -60,6 +60,7 @@ export default function Page() {
         <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
           <SectionHead
             center
+            as="h1"
             eyebrow={eyebrow}
             title={<>{heading.lead} <em className="font-display italic text-[color:var(--rose)]">{heading.em}</em></>}
             subtitle={subtitle}

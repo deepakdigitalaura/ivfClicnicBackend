@@ -103,7 +103,7 @@ export function AuthorSidebarCard({ author }: { author: Author | null }) {
           <img
             src={avatar.url}
             alt={avatar.alt ?? author.name}
-            className="h-14 w-14 shrink-0 rounded-full object-cover ring-2 ring-[color:var(--rose)]/20"
+            className="h-14 w-14 shrink-0 rounded-full object-cover object-top ring-2 ring-[color:var(--rose)]/20"
           />
         ) : (
           <div className="flex h-14 w-14 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10">

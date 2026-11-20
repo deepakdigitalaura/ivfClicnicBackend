@@ -12,153 +12,13 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-
-/* ---------- Data ---------- */
-
-const STATS = [
-  { value: 30000, suffix: "+", label: "Successful Pregnancies", sub: "and counting" },
-  { value: 25, suffix: "+", label: "Years of Trust", sub: "pioneering IVF since 1998" },
-  { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
-  { value: 1998, suffix: "", label: "Est.", sub: "pioneering fertility care" },
-];
-
-const REASONS = [
-  {
-    icon: Award,
-    title: "Pioneers Since 1998",
-    description:
-      "Working in women’s health since 1990 and pioneering ART/IVF in India since 1998, in collaboration with the Diamond Institute, USA. Ranked No. 1 fertility clinic in All India.",
-  },
-  {
-    icon: Baby,
-    title: "30,000+ Successful Pregnancies",
-    description:
-      "Over 30,000 happy families and counting. Thousands of couples who entrusted us with their dream have welcomed healthy babies through our proven protocols.",
-  },
-  {
-    icon: Lightbulb,
-    title: "Path-Breaking Innovations",
-    description:
-      "India’s first live birth with frozen eggs, first international surrogacy, first Suraksha Kavach program — we don’t follow trends, we set them.",
-  },
-  {
-    icon: Sparkles,
-    title: "Personalization & Customization",
-    description:
-      "One size doesn’t fit all. Every protocol is highly customised to your unique physiology. We offer 365-day, 24/7 service because fertility doesn’t follow a calendar.",
-  },
-  {
-    icon: Shield,
-    title: "Ethics — Your Eggs, Your Sperm",
-    description:
-      "Fully dedicated to ethical practice. Your eggs and your sperm are guaranteed — we follow a strict code of Availability, Adequacy, Affordability, and Adaptability.",
-  },
-  {
-    icon: Building2,
-    title: "All Under One Roof",
-    description:
-      "A true one-stop clinic: surgeries, IUI, IVF, ICSI, laser-assisted hatching, PGT, donor services, surrogacy, and counselling — everything you need, in one place.",
-  },
-  {
-    icon: Stethoscope,
-    title: "Expert Team",
-    description:
-      "Experienced infertility gynaecologists, internationally accredited embryologists, and competent midwives — a multidisciplinary team dedicated to your success.",
-  },
-  {
-    icon: Eye,
-    title: "Honest & Transparent",
-    description:
-      "We discuss pros and cons openly, share realistic success expectations, and are completely transparent about costs — no hidden charges, no surprises.",
-  },
-  {
-    icon: HeartHandshake,
-    title: "Counselling & Hand-Holding",
-    description:
-      "Thorough counselling at every step. Emotional support, psychological guidance, and a compassionate team that holds your hand through the entire journey.",
-  },
-  {
-    icon: FlaskConical,
-    title: "Class 1000 IVF Labs",
-    description:
-      "Our labs maintain 10× superior air quality to the international Class 10,000 standard — protecting your embryos with the purest environment possible.",
-  },
-  {
-    icon: Heart,
-    title: "OHSS-Free Clinic",
-    description:
-      "Zero cases of severe Ovarian Hyperstimulation Syndrome for over 10 years. Our protocols are designed for safety as much as success.",
-  },
-  {
-    icon: Scale,
-    title: "Value-Based Services",
-    description:
-      "High-quality treatment at affordable prices. Economy of scale across 14 centres means we offer a range of packages without compromising on care.",
-  },
-];
-
-const JOURNEY = [
-  {
-    era: "1990 – 2001",
-    eraLabel: "Foundations",
-    entries: [
-      { year: "1990", icon: Building2, items: ["Established our women’s health & gynaecology hospital — the foundation Bavishi Fertility Institute would grow from."] },
-      { year: "1998", icon: FlaskConical, items: ["Pioneered ART/IVF in India, launching our test-tube baby clinic in collaboration with the Diamond Institute, USA."] },
-    ],
-  },
-  {
-    era: "2002 – 2013",
-    eraLabel: "Pioneering & Growth",
-    entries: [
-      { year: "2002", icon: Microscope, items: ["Introduced Preimplantation Genetic Diagnosis (PGD) in India."] },
-      { year: "2004", icon: Users, items: ["Hosted the “Test Tube Baby Reunion – 2004,” bringing together IVF families from across the country."] },
-      { year: "2005", icon: Building2, items: ["Opened a large, fully-equipped, state-of-the-art fertility institute."] },
-      { year: "2006", icon: Star, items: ["Established the Endoscopy Excellence Institute.", "Launched India’s first international surrogacy program."] },
-      { year: "2007", icon: HeartHandshake, items: ["Launched Santan Semen Bank, our dedicated sperm bank."] },
-      { year: "2008", icon: MapPin, items: ["Expanded with new offices in Mumbai and Surat."] },
-      { year: "2009", icon: Baby, items: ["India’s first baby born from vitrified (frozen) eggs — a landmark first for Indian fertility medicine."] },
-      { year: "2010", icon: MapPin, items: ["Began operations in Mumbai (Bavishi Fertility Institute) and Delhi (Bavishi Bhagat Fertility Institute).", "Launched Suraksha Kavach — the world’s only IVF protection program."] },
-      { year: "2011", icon: BookOpen, items: ["Founded the “Divya Santan” organisation and published “Devna Didhela, Mangine Lidhela,” chronicling the journeys of 111 IVF families."] },
-      { year: "2012", icon: BookOpen, items: ["Published “Vighnahod,” addressing the real struggles and solutions faced by childless couples."] },
-      { year: "2013", icon: HandHeart, items: ["Launched the “Jan Jagruti Abhiyan” awareness campaign and “Parivar Milan” initiative to support childless couples; translated both books into Hindi."] },
-    ],
-  },
-  {
-    era: "2014 – 2020",
-    eraLabel: "National Recognition",
-    entries: [
-      { year: "2014", icon: Microscope, items: ["Founded the Indian Society for Third-Party Assisted Reproduction (INSTAR).", "Introduced PGT (Preimplantation Genetic Testing) across all centres."] },
-      { year: "2015", icon: Trophy, items: ["Named a “Power Brand” by IVF India (India Today Group)."] },
-      { year: "2016", icon: MapPin, items: ["Established Bavishi Pratiksha Fertility Institute in Kolkata."] },
-      { year: "2017", icon: Award, items: ["Won the “Excellence in IVF” award from My FM.", "Received the “Rose of Paracelsus” award from the European Medical Association.", "Published “Aapnu Adbhut Sarjan” (Gujarati) and “Your Miracle in Making” (English) for expectant mothers."] },
-      { year: "2018", icon: Award, items: ["Opened in Surat.", "“Devna Didhela Mangine Lidhela” adapted into a TV serial.", "Awarded “Best IVF Clinic Chain in India” by Midday.", "Achieved 30,000+ successful pregnancies milestone."] },
-      { year: "2019", icon: Trophy, items: ["Awarded “Best IVF Chain in India – West” by The Economic Times.", "Opened in Vadodara."] },
-      { year: "2020", icon: Star, items: ["Ranked the #1 fertility clinic in All India by the Times of India National Survey.", "Ranked #1 in West India for the 5th consecutive year running (2016–2020).", "Opened in Bhuj."] },
-    ],
-  },
-  {
-    era: "2021 – 2025",
-    eraLabel: "Innovation & Expansion",
-    entries: [
-      { year: "2021", icon: HeartHandshake, items: ["Achieved 3 successful bone-marrow transplants for thalassemia major using PGD-HLA donor-sibling matching — among only a handful of such cases worldwide."] },
-      { year: "2022", icon: MapPin, items: ["Opened a new clinic on Sindhu Bhavan Road, Bodakdev, Ahmedabad.", "Expanded to 14 centres across 8 cities in India."] },
-      { year: "2023", icon: Sparkles, items: ["Celebrated 25 years of Bavishi Fertility Institute."] },
-      { year: "2024", icon: Trophy, items: ["Won “IVF/Fertility Chain of the Year – West” for the fourth time."] },
-      { year: "2025", icon: MapPin, items: ["Opened a new centre in Nikol, Ahmedabad."] },
-    ],
-  },
-];
-
-const ETHICS = [
-  { icon: CheckCircle2, title: "Availability", description: "365/24/7 service. Your fertility journey doesn’t follow office hours — neither do we." },
-  { icon: CheckCircle2, title: "Adequacy", description: "Complete, thorough care from diagnosis to delivery. No shortcuts, no half-measures." },
-  { icon: CheckCircle2, title: "Affordability", description: "World-class IVF treatment at honest prices. Multiple package options to suit every budget." },
-  { icon: CheckCircle2, title: "Adaptability", description: "Every protocol, every plan, every decision is adapted to your unique medical and personal needs." },
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { WHY_BFI_DEFAULTS, type WhyBfiData } from "@/lib/why-bfi";
 
 /* ---------- Page ---------- */
 
-export function WhyBfiPage() {
+export function WhyBfiPage({ data = WHY_BFI_DEFAULTS }: { data?: WhyBfiData } = {}) {
+  const { hero, stats: STATS, reasons: REASONS, journey: JOURNEY, ethics: ETHICS } = data;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -191,21 +51,21 @@ export function WhyBfiPage() {
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Star className="h-3.5 w-3.5 text-[color:var(--rose)]" /> India&#39;s No. 1 Fertility Clinic
+                <Star className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                Why Choose <em className="font-display italic text-[color:var(--rose)]">Bavishi Fertility Institute?</em>
+                {hero.headline.split(hero.headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <blockquote className="mt-8 rounded-2xl border border-[color:var(--plum)]/10 bg-white/50 px-8 py-6 backdrop-blur">
                 <p className="text-lg leading-relaxed text-[color:var(--plum)]/80 italic text-pretty">
-                  &#34;The right treatment at the right time at the right place in the right numbers can almost always bring success.&#34;
+                  &#34;{hero.quote}&#34;
                 </p>
                 <footer className="mt-3 text-sm font-medium text-[color:var(--rose)]">
-                  &mdash; Bavishi Fertility Institute
+                  &mdash; {hero.quoteFooter}
                 </footer>
               </blockquote>
             </Reveal>
@@ -256,17 +116,20 @@ export function WhyBfiPage() {
             subtitle="For over 25 years, Bavishi Fertility Institute has been India&#39;s most trusted name in fertility care. Here&#39;s what sets us apart."
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {REASONS.map((r, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <r.icon className="h-6 w-6" />
+            {REASONS.map((r, i) => {
+              const Icon = resolveIcon(r.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{r.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{r.description}</p>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{r.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{r.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -296,23 +159,26 @@ export function WhyBfiPage() {
                   {/* Vertical line */}
                   <div className="absolute left-[1.65rem] top-4 bottom-4 w-px bg-gradient-to-b from-[color:var(--rose)] via-[color:var(--rose)]/40 to-transparent lg:left-[1.85rem]" />
 
-                  {era.entries.map((f, i) => (
-                    <StaggerItem key={i}>
-                      <div className="relative flex gap-6 pb-10 last:pb-0 lg:gap-8">
-                        <div className="relative z-10 grid h-[3.3rem] w-[3.3rem] shrink-0 place-items-center rounded-full bg-[color:var(--rose)] text-white shadow-soft ring-4 ring-[color:var(--ivory)] lg:h-[3.7rem] lg:w-[3.7rem]">
-                          <f.icon className="h-5 w-5" />
-                        </div>
-                        <div className="pt-1">
-                          <div className="text-sm font-bold uppercase tracking-wide text-[color:var(--rose)]">{f.year}</div>
-                          <div className="mt-1.5 space-y-1.5">
-                            {f.items.map((item, ii) => (
-                              <p key={ii} className="text-[16px] leading-relaxed text-[color:var(--plum)] font-medium">{item}</p>
-                            ))}
+                  {era.entries.map((f, i) => {
+                    const Icon = resolveIcon(f.icon);
+                    return (
+                      <StaggerItem key={i}>
+                        <div className="relative flex gap-6 pb-10 last:pb-0 lg:gap-8">
+                          <div className="relative z-10 grid h-[3.3rem] w-[3.3rem] shrink-0 place-items-center rounded-full bg-[color:var(--rose)] text-white shadow-soft ring-4 ring-[color:var(--ivory)] lg:h-[3.7rem] lg:w-[3.7rem]">
+                            <Icon className="h-5 w-5" />
+                          </div>
+                          <div className="pt-1">
+                            <div className="text-sm font-bold uppercase tracking-wide text-[color:var(--rose)]">{f.year}</div>
+                            <div className="mt-1.5 space-y-1.5">
+                              {f.items.map((item, ii) => (
+                                <p key={ii} className="text-[16px] leading-relaxed text-[color:var(--plum)] font-medium">{item}</p>
+                              ))}
+                            </div>
                           </div>
                         </div>
-                      </div>
-                    </StaggerItem>
-                  ))}
+                      </StaggerItem>
+                    );
+                  })}
                 </Stagger>
               </div>
             ))}
@@ -355,17 +221,20 @@ export function WhyBfiPage() {
 
             <Reveal delay={0.1}>
               <Stagger className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-                {ETHICS.map((e, i) => (
-                  <StaggerItem key={i}>
-                    <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
-                      <div className="grid h-10 w-10 place-items-center rounded-lg bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)]">
-                        <e.icon className="h-5 w-5" />
+                {ETHICS.map((e, i) => {
+                  const Icon = resolveIcon(e.icon);
+                  return (
+                    <StaggerItem key={i}>
+                      <div className="rounded-2xl border border-border/70 bg-card p-6 shadow-soft">
+                        <div className="grid h-10 w-10 place-items-center rounded-lg bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)]">
+                          <Icon className="h-5 w-5" />
+                        </div>
+                        <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{e.title}</h3>
+                        <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{e.description}</p>
                       </div>
-                      <h3 className="mt-4 text-base font-semibold text-[color:var(--plum)]">{e.title}</h3>
-                      <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{e.description}</p>
-                    </div>
-                  </StaggerItem>
-                ))}
+                    </StaggerItem>
+                  );
+                })}
               </Stagger>
             </Reveal>
           </div>

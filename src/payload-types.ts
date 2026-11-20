@@ -410,7 +410,9 @@ export interface Blog {
    */
   excerpt?: string | null;
   heroImage?: (number | null) | Media;
+  cardImage?: (number | null) | Media;
   heroTextDark?: boolean | null;
+  heroTextRight?: boolean | null;
   heroImagePosition?: ('center center' | 'right center' | 'left center' | 'right top' | 'center top' | 'center bottom') | null;
   content?: {
     root: {
@@ -2559,6 +2561,7 @@ export interface BlogsSelect<T extends boolean = true> {
   excerpt?: T;
   heroImage?: T;
   heroTextDark?: T;
+  heroTextRight?: T;
   content?: T;
   author?: T;
   reviewedBy?: T;

@@ -73,6 +73,8 @@ export default defineType({
       fields: [
         defineField({ name: "title", title: "Page Title", type: "string" }),
         defineField({ name: "description", title: "Meta Description", type: "text", rows: 3 }),
+        defineField({ name: "ogTitle", title: "OG Title", description: "Used when shared on Facebook/WhatsApp. Defaults to Page Title.", type: "string" }),
+        defineField({ name: "ogDescription", title: "OG Description", description: "Defaults to Meta Description.", type: "text", rows: 3 }),
         defineField({ name: "ogImage", title: "OG Image Path", description: "Overrides the hero image for social sharing.", type: "string" }),
       ],
     }),

@@ -35,8 +35,8 @@ export async function generateMetadata(
     description: content.meta.description,
     ...(reg ? { alternates: { canonical: reg.href } } : {}),
     openGraph: {
-      title: content.meta.title,
-      description: content.meta.description,
+      title: content.meta.ogTitle || content.meta.title,
+      description: content.meta.ogDescription || content.meta.description,
       ...(reg ? { url: abs(reg.href) } : {}),
       type: "article",
       images: content.hero.image ? [content.hero.image] : [],

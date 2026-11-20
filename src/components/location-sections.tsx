@@ -404,6 +404,7 @@ export function CentreMap({ query, title }: { query: string; title: string }) {
 /* ---------- Multi-marker map (Leaflet + OpenStreetMap, no API key) ---------- */
 export function MultiCentreMap({ centres, title }: { centres: Centre[]; title: string }) {
   const ref = useRef<HTMLDivElement>(null);
+  const [ready, setReady] = useState(false);
 
   useEffect(() => {
     const points = centres.filter((c) => c.geo).map((c) => ({ c, lat: c.geo!.lat, lng: c.geo!.lng }));
@@ -459,6 +460,7 @@ export function MultiCentreMap({ centres, title }: { centres: Centre[]; title: s
 
       if (latlngs.length === 1) map.setView(latlngs[0], 14);
       else map.fitBounds(latlngs, { padding: [50, 50] });
+      setReady(true);
     });
 
     return () => {
@@ -467,13 +469,27 @@ export function MultiCentreMap({ centres, title }: { centres: Centre[]; title: s
     };
   }, [centres]);
 
+  /* Leaflet is fetched from a CDN at runtime, so the tiles can fail to arrive
+   * on a blocked or very slow connection. Without this the visitor would be
+   * left looking at an empty 380px box; instead they get the same Google
+   * Maps link the centre cards use, which the map covers once it loads. */
   return (
     <Reveal delay={0.1}>
-      <div
-        ref={ref}
-        title={title}
-        className="relative z-0 h-[380px] w-full overflow-hidden rounded-3xl border border-border/70 shadow-soft"
-      />
+      <div className="relative h-[380px] w-full overflow-hidden rounded-3xl border border-border/70 shadow-soft">
+        {!ready && (
+          <a
+            href={`https://maps.google.com/maps?q=${encodeURIComponent(title)}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="absolute inset-0 z-0 flex flex-col items-center justify-center gap-2 bg-[color:var(--rose-soft)]/30 px-6 text-center"
+          >
+            <MapPin className="h-6 w-6 text-[color:var(--rose)]" />
+            <span className="text-sm font-semibold text-[color:var(--plum)]">{title}</span>
+            <span className="text-xs text-muted-foreground">Open in Google Maps</span>
+          </a>
+        )}
+        <div ref={ref} title={title} className="relative z-[1] h-full w-full" />
+      </div>
     </Reveal>
   );
 }
@@ -484,11 +500,16 @@ export function ContactInfo({
   eyebrow = "Contact Information",
   title,
   subtitle,
+  withMap = false,
 }: {
   centres: Centre[];
   eyebrow?: string;
   title?: React.ReactNode;
   subtitle?: React.ReactNode;
+  /** Show a map on top of each card. Off by default: it is currently only
+   *  wanted on the Ahmedabad pages, and the caller decides, so turning it on
+   *  elsewhere later needs no change to this component. */
+  withMap?: boolean;
 }) {
   const single = centres.length === 1;
   return (
@@ -503,7 +524,32 @@ export function ContactInfo({
         <Stagger className={`mt-9 grid grid-cols-1 gap-6 ${single ? "max-w-2xl mx-auto" : "md:grid-cols-3"}`}>
           {centres.map((c) => (
             <StaggerItem key={c.slug}>
-              <div className="flex h-full flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+              <div className="flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">
+                {/* A map on top of each card: the address, hours and phone sit
+                    right under the place they describe, so a visitor can see
+                    where the centre is without leaving the section. */}
+                {withMap && (
+                <a
+                  href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(c.mapQuery)}`}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  aria-label={`${c.fullName} on Google Maps`}
+                  className="group/map relative block h-[200px] w-full overflow-hidden border-b border-border/60"
+                >
+                  <iframe
+                    title={`${c.fullName} — map`}
+                    src={`https://maps.google.com/maps?q=${encodeURIComponent(c.mapQuery)}&output=embed`}
+                    className="pointer-events-none h-full w-full border-0"
+                    loading="lazy"
+                    referrerPolicy="no-referrer-when-downgrade"
+                  />
+                  <span className="absolute bottom-3 right-3 inline-flex items-center gap-1.5 rounded-full bg-white/95 px-3 py-1.5 text-[11px] font-semibold text-[color:var(--plum)] shadow-md ring-1 ring-black/5 transition group-hover/map:text-[color:var(--rose)]">
+                    <Navigation className="h-3 w-3" /> Open in Maps
+                  </span>
+                </a>
+                )}
+
+                <div className="flex flex-1 flex-col p-7">
                 <div className="flex items-center gap-2">
                   <h3 className="text-xl font-semibold text-[color:var(--plum)]">{c.name}, {cityBySlug(c.citySlug)?.name}</h3>
                   {c.isHeadOffice && (
@@ -531,6 +577,7 @@ export function ContactInfo({
                     <Calendar className="h-3.5 w-3.5" /> Book
                   </a>
                 </div>
+                </div>
               </div>
             </StaggerItem>
           ))}
@@ -554,8 +601,11 @@ const EM = 'class="font-display italic text-[color:var(--rose)]"';
 const em = (t: string) => `<em ${EM}>${t}</em>`;
 
 /* ---------- Local highlights: landmarks + areas served (local intent) ---------- */
-export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?: LocationSectionLabels } }) {
+export function LocalHighlights({ centre, areaLabel }: { centre: Centre & { sectionLabels?: LocationSectionLabels }; areaLabel?: string }) {
   const sl = centre.sectionLabels ?? {};
+  // Single-centre cities are served at the city path, so their headings name
+  // the city; the chips below still list the real neighbourhoods.
+  const area = areaLabel ?? centre.area;
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <div className="grid gap-10 lg:grid-cols-2 lg:gap-16">
@@ -570,7 +620,7 @@ export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?:
           </ul>
         </div>
         <div>
-          <SectionHead eyebrow={lab("sectionLabels.areasEyebrow", sl.areasEyebrow, "Areas served")} title={lab("sectionLabels.areasTitle", sl.areasTitle, `Patients we serve in ${em(centre.area)} & nearby`)} />
+          <SectionHead eyebrow={lab("sectionLabels.areasEyebrow", sl.areasEyebrow, "Areas served")} title={lab("sectionLabels.areasTitle", sl.areasTitle, `Patients we serve in ${em(area)} & nearby`)} />
           <div className="mt-6 flex flex-wrap gap-2">
             {centre.nearby.map((n, i) => (
               <span key={i} className="inline-flex items-center gap-1.5 rounded-full border border-border/70 bg-card px-4 py-2 text-sm font-medium text-[color:var(--plum)] shadow-soft">
@@ -585,11 +635,11 @@ export function LocalHighlights({ centre }: { centre: Centre & { sectionLabels?:
 }
 
 /* ---------- How to reach (transit / directions — visible local content) ---------- */
-export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: LocationSectionLabels } }) {
+export function HowToReach({ centre, areaLabel }: { centre: Centre & { sectionLabels?: LocationSectionLabels }; areaLabel?: string }) {
   return (
     <section className="bg-white py-8 md:py-14">
       <div className="container-px mx-auto max-w-[1400px]">
-        <SectionHead center eyebrow={lab("sectionLabels.reachEyebrow", centre.sectionLabels?.reachEyebrow, "How to reach")} title={lab("sectionLabels.reachTitle", centre.sectionLabels?.reachTitle, `Getting to our ${em(centre.area + " centre")}`)} subtitle={centre.address} />
+        <SectionHead center eyebrow={lab("sectionLabels.reachEyebrow", centre.sectionLabels?.reachEyebrow, "How to reach")} title={lab("sectionLabels.reachTitle", centre.sectionLabels?.reachTitle, `Getting to our ${em((areaLabel ?? centre.area) + " centre")}`)} subtitle={centre.address} />
         <Stagger className="mt-9 grid grid-cols-1 gap-4 md:grid-cols-3">
           {centre.howToReach.map((h, i) => (
             <StaggerItem key={i}>
@@ -608,7 +658,17 @@ export function HowToReach({ centre }: { centre: Centre & { sectionLabels?: Loca
 /* ---------- Treatments offered at this centre (real internal links) ----------
  * Reuses the homepage <TreatmentCard> so centre pages share the exact same
  * card design (icon, name, description, "Learn more" link). */
-export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; area: string; labels?: LocationSectionLabels }) {
+export function TreatmentsOffered({ slugs, area, labels, city }: {
+  slugs: string[];
+  area: string;
+  labels?: LocationSectionLabels;
+  /** City name for the card titles ("IVF in Ahmedabad"). The treatment pages
+   *  themselves stay city-neutral — they are shared across every centre — so
+   *  the city belongs on the card, which is where the location page is doing
+   *  the work. Omitted when the area already is the city, to avoid "IVF in
+   *  Bhuj" rendering on a page whose heading already says Bhuj twice. */
+  city?: string;
+}) {
   return (
     <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
       <SectionHead center eyebrow={lab("sectionLabels.treatmentsEyebrow", labels?.treatmentsEyebrow, "Treatments offered")} title={lab("sectionLabels.treatmentsTitle", labels?.treatmentsTitle, `Fertility treatments at ${em(area + " centre")}`)} />
@@ -617,7 +677,12 @@ export function TreatmentsOffered({ slugs, area, labels }: { slugs: string[]; ar
           const c = treatmentCardData(slug);
           return (
             <StaggerItem key={slug}>
-              <TreatmentCard icon={c.icon} title={c.name} desc={c.desc} href={c.href} />
+              <TreatmentCard
+                icon={c.icon}
+                title={city ? `${c.name} in ${city}` : c.name}
+                desc={c.desc}
+                href={c.href}
+              />
             </StaggerItem>
           );
         })}
@@ -642,12 +707,18 @@ export function AvailableServicesSection({
   tone = "tint",
   serviceLabel = "Women's health services",
   labels,
+  city,
 }: {
   location: string;
   services: WomensHealthService[];
   tone?: "plain" | "tint" | "white";
   serviceLabel?: string;
   labels?: LocationSectionLabels;
+  /** City name, on a sub-location page whose area is not the city itself.
+   *  Maternity is offered in Ahmedabad only, so naming the city on the card
+   *  is accurate rather than decorative, and it is how these services are
+   *  actually searched ("painless delivery in Ahmedabad"). */
+  city?: string;
 }) {
   if (!services.length) return null;
   const bg = tone === "tint" ? "bg-[color:var(--rose-soft)]/40 " : tone === "white" ? "bg-white " : "";
@@ -661,12 +732,21 @@ export function AvailableServicesSection({
           center
           eyebrow={lab("sectionLabels.womensHealthEyebrow", labels?.womensHealthEyebrow, "Women's Health & Maternity")}
           title={lab("sectionLabels.womensHealthTitle", labels?.womensHealthTitle, `${serviceLabel} available at ${em(location)}`)}
-          subtitle={`Access advanced maternity, fetal medicine and pregnancy care services at our ${location} centre.`}
+          subtitle={
+            city
+              ? `Access advanced maternity, fetal medicine and pregnancy care in ${city} at our ${location} centre.`
+              : `Access advanced maternity, fetal medicine and pregnancy care services at our ${location} centre.`
+          }
         />
         <Stagger className="mt-9 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
           {services.map((s) => (
             <StaggerItem key={s.key}>
-              <TreatmentCard icon={s.icon} title={s.name} desc={s.desc} href={serviceHref(s)} />
+              <TreatmentCard
+                icon={s.icon}
+                title={city ? `${s.name} in ${city}` : s.name}
+                desc={s.desc}
+                href={serviceHref(s)}
+              />
             </StaggerItem>
           ))}
         </Stagger>

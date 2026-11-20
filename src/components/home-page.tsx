@@ -1,5 +1,8 @@
 "use client";
 import React, { useState, useEffect, useRef, useMemo, memo, Fragment } from "react";
+import { readAttribution } from "@/components/attribution-capture";
+import Image from "next/image";
+import { useRouter } from "next/navigation";
 import { motion, AnimatePresence } from "framer-motion";
 import {
   Phone, MessageCircle, Calendar, PlayCircle, Shield, Sparkles, HeartPulse,
@@ -142,15 +145,15 @@ function Eyebrow({ children }: { children: React.ReactNode }) {
 }
 
 function SectionHeader({
-  eyebrow, title, subtitle, align = "left",
-}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center" }) {
+  eyebrow, title, subtitle, align = "left", as: Heading = "h2",
+}: { eyebrow?: React.ReactNode; title: React.ReactNode; subtitle?: React.ReactNode; align?: "left" | "center"; as?: "h1" | "h2" }) {
   return (
     <div className={align === "center" ? "mx-auto max-w-3xl text-center" : "max-w-3xl"}>
       {eyebrow && <Reveal><Eyebrow>{eyebrow}</Eyebrow></Reveal>}
       <Reveal delay={0.05}>
-        <h2 className="mt-4 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] text-balance">
+        <Heading className="mt-4 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.25rem] text-balance">
           {title}
-        </h2>
+        </Heading>
       </Reveal>
       {subtitle && (
         <Reveal delay={0.12}>
@@ -1290,8 +1293,8 @@ const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
        * carousel stage below never has to clip the text off the bottom.
        * object-contain — most award photos are portrait trophy/certificate shots;
        * object-cover was cropping their tops off. */}
-      <div className="h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
-        <img src={a.img} alt={a.title} loading="lazy" className="h-full w-full object-contain" />
+      <div className="relative h-[170px] w-full overflow-hidden bg-white sm:h-[190px] md:h-[210px]">
+        <Image src={a.img} alt={a.title} fill sizes="(max-width: 640px) 90vw, 300px" className="object-contain" />
       </div>
       <div className="border-t border-border/60 px-5 py-4 text-center">
         <h3 className="text-base font-semibold leading-snug text-[color:var(--plum)] md:text-lg">{a.title}</h3>
@@ -1303,7 +1306,7 @@ const AwardCard = memo(function AwardCard({ a }: { a: AwardItem }) {
 
 // Only this inner component holds the rotating state, so slide changes never
 // re-render the section header or CTA — just the transform-animated cards.
-function AwardsStage({ items }: { items: AwardItem[] }) {
+export function AwardsStage({ items }: { items: AwardItem[] }) {
   return <CarouselStage items={items} renderCard={(a) => <AwardCard a={a} />} dotLabel="award" />;
 }
 
@@ -1361,7 +1364,7 @@ const PressCard = memo(function PressCard({ c }: { c: PressClipping }) {
   );
 });
 
-function PressStage({ items }: { items: PressClipping[] }) {
+export function PressStage({ items }: { items: PressClipping[] }) {
   return (
     <CarouselStage
       items={items}
@@ -1668,7 +1671,7 @@ function Blogs({
 
 /* ---------- Locations ---------- */
 
-export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?: HomepageData["locations"] } = {}) {
+export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { content?: HomepageData["locations"]; as?: "h1" | "h2" } = {}) {
   const cities = content.cities;
   // In the editor the whole card must NOT be a link — clicking the editable city
   // name would otherwise navigate away mid-edit. So while editing we render the
@@ -1681,6 +1684,7 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations }: { content?:
         eyebrow={ed("locations.eyebrow", content.eyebrow)}
         title={edTitle("locations", content.heading)}
         subtitle={ed("locations.subtitle", content.subtitle)}
+        as={as}
       />
       <Stagger className="mt-10 grid grid-cols-2 gap-4 sm:grid-cols-3 lg:grid-cols-4" stagger={0.05}>
         {cities.map((c, i) => {
@@ -1789,7 +1793,7 @@ const CALCULATOR_HREFS: Record<string, string> = {
   "Semen Analysis Calculator": "/semen-analysis-calculator",
 };
 
-export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { content?: HomepageData["calculators"] } = {}) {
+export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { content?: HomepageData["calculators"]; as?: "h1" | "h2" } = {}) {
   const calcs = content.items;
   return (
     <section id="tools" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
@@ -1797,6 +1801,7 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators }: { conte
         eyebrow={ed("calculators.eyebrow", content.eyebrow)}
         title={edTitle("calculators", content.heading)}
         subtitle={ed("calculators.subtitle", content.subtitle)}
+        as={as}
       />
       <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-4" stagger={0.05}>
         {calcs.map((c, i) => {
@@ -1839,7 +1844,30 @@ const inquiryLocations = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
 
+// reCAPTCHA v2 ("I'm not a robot" checkbox). Widget is hidden while the site key
+// is unset; the /inquiry route likewise skips verification without its secret.
+const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
+type Grecaptcha = {
+  ready: (cb: () => void) => void;
+  render: (el: HTMLElement, opts: Record<string, unknown>) => number;
+  reset: (id?: number) => void;
+};
+let recaptchaLoad: Promise<Grecaptcha> | null = null;
+/** Inject Google's script once per page, on demand (keeps it off first paint). */
+const loadRecaptcha = () =>
+  (recaptchaLoad ??= new Promise<Grecaptcha>((resolve) => {
+    const s = document.createElement("script");
+    s.src = "https://www.google.com/recaptcha/api.js?render=explicit";
+    s.async = true;
+    s.onload = () => {
+      const g = (window as unknown as { grecaptcha: Grecaptcha }).grecaptcha;
+      g.ready(() => resolve(g));
+    };
+    document.head.appendChild(s);
+  }));
+
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
+  const router = useRouter();
   const contactIcons = [Phone, MessageCircle, Clock];
   const formAgg = getBrandReviews()?.aggregate;
   const [form, setForm] = useState({ name: "", phone: "", email: "", treatment: "", location: "Ahmedabad", message: "" });
@@ -1849,6 +1877,35 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
   const [serverError, setServerError] = useState("");
   // Honeypot — kept off-screen; real users never fill it, bots usually do.
   const [company, setCompany] = useState("");
+  // reCAPTCHA: script loads when the form nears the viewport (off first paint).
+  const [captcha, setCaptcha] = useState("");
+  const captchaRef = useRef<HTMLDivElement>(null);
+  const captchaId = useRef<number | null>(null);
+
+  useEffect(() => {
+    const el = captchaRef.current;
+    if (!RECAPTCHA_SITE_KEY || submitted || !el) return;
+    let live = true;
+    const io = new IntersectionObserver(([entry]) => {
+      if (!entry.isIntersecting) return;
+      io.disconnect();
+      loadRecaptcha().then((g) => {
+        if (!live || el.hasChildNodes()) return;
+        captchaId.current = g.render(el, {
+          sitekey: RECAPTCHA_SITE_KEY,
+          callback: (t: string) => { setCaptcha(t); setErrors((e) => ({ ...e, captcha: "" })); },
+          "expired-callback": () => setCaptcha(""),
+        });
+      });
+    }, { rootMargin: "300px" });
+    io.observe(el);
+    return () => { live = false; io.disconnect(); };
+  }, [submitted]);
+
+  const resetCaptcha = () => {
+    setCaptcha("");
+    if (captchaId.current !== null) loadRecaptcha().then((g) => g.reset(captchaId.current!));
+  };
 
   const set = (k: string, v: string) => {
     setForm((f) => ({ ...f, [k]: v }));
@@ -1863,6 +1920,7 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
     if (!form.name.trim()) next.name = "Please enter your name";
     if (!/^[+\d][\d\s-]{7,}$/.test(form.phone.trim())) next.phone = "Enter a valid phone number";
     if (form.email && !/^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(form.email.trim())) next.email = "Enter a valid email";
+    if (RECAPTCHA_SITE_KEY && !captcha) next.captcha = "Please tick \"I'm not a robot\"";
     setErrors(next);
     if (Object.keys(next).length > 0) return;
 
@@ -1875,16 +1933,27 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
         body: JSON.stringify({
           ...form,
           company,
+          captcha,
           source: typeof window !== "undefined" ? window.location.pathname : "",
+          // Where this visit came from, captured on the landing page.
+          attribution: readAttribution().lastTouch ?? undefined,
+          firstTouch: readAttribution().firstTouch ?? undefined,
         }),
       });
       if (!res.ok) {
         const data = (await res.json().catch(() => null)) as { error?: string } | null;
         setServerError(data?.error || "Something went wrong. Please call us on +91 97126 22288.");
+        resetCaptcha(); // tokens are single-use
         return;
       }
+      // A distinct URL is what makes the enquiry countable as a conversion in
+      // GA4 / Google Ads; the in-place success state stays as the fallback if
+      // navigation is blocked for any reason.
+      setCaptcha("");
       setSubmitted(true);
+      router.push("/thank-you");
     } catch {
+      resetCaptcha();
       setServerError("Network error. Please check your connection or call us on +91 97126 22288.");
     } finally {
       setSending(false);
@@ -2010,6 +2079,14 @@ export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?:
                   <label htmlFor="if-company">Company</label>
                   <input id="if-company" type="text" tabIndex={-1} autoComplete="off" value={company} onChange={(e) => setCompany(e.target.value)} />
                 </div>
+
+                {RECAPTCHA_SITE_KEY && (
+                  <div>
+                    {/* min-h reserves the widget's 78px so it doesn't shift the layout when it loads */}
+                    <div ref={captchaRef} className="min-h-[78px]" />
+                    {errors.captcha && <p className="mt-1 text-xs text-[color:var(--rose)]">{errors.captcha}</p>}
+                  </div>
+                )}
 
                 {serverError && (
                   <p role="alert" className="rounded-xl bg-[color:var(--rose)]/10 px-4 py-3 text-center text-sm text-[color:var(--rose)]">

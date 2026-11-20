@@ -13,6 +13,7 @@ export type AwardEntry = { img?: string; title: string; desc: string };
 export type GalleryPhoto = { src: string; alt: string };
 
 export const PRESS_AWARDS: AwardEntry[] = [
+  { img: "/assets/awards/global-times-most-trusted-mumbai-2026.jpg", title: "Most Trusted Fertility & IVF Clinic in Mumbai", desc: "Global Times Awards · For Excellence & Leadership in Healthcare, Mumbai (24 October 2026)" },
   { img: "/assets/awards/most-trusted-fertility-chain-gujarat.png", title: "Bavishi Fertility Institute", desc: "Most Trusted Fertility Chain Hospital in Gujarat" },
   { img: "/assets/awards/ivf-chain-of-the-year.png", title: "IVF Chain of the Year – West", desc: "ET Healthworld National Fertility Awards · 6× winner (2019–2026)" },
   { img: "/assets/awards/patient-centric-award.png", title: "Patient Centric Hospital in Reproductive Health", desc: "IHW Patient First Awards 2024 (Bronze)" },

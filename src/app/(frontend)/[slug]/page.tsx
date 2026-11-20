@@ -16,7 +16,10 @@ const KNOWN_SLUGS = new Set([
   "sitemap",
 ]);
 
-export const revalidate = 21600;
+/** Short window so CMS edits self-heal even when the admin save's
+ *  revalidatePath() doesn't land on this PM2/disk fetch-cache deploy
+ *  (see memory fetch-cache-revalidate-bug-pending-fix). */
+export const revalidate = 300;
 
 export async function generateStaticParams() {
   try {

@@ -12,6 +12,11 @@ type Props = {
   params: Promise<{ slug: string }>;
 };
 
+/** Short window so CMS edits self-heal even when the admin save's
+ *  revalidatePath() doesn't land on this PM2/disk fetch-cache deploy
+ *  (see memory fetch-cache-revalidate-bug-pending-fix). */
+export const revalidate = 300;
+
 export async function generateStaticParams() {
   const treatments = await getTreatments();
   return treatments.map((t) => ({ slug: t.slug }));
@@ -30,8 +35,8 @@ export async function generateMetadata({ params }: Props): Promise<Metadata> {
     description: t.meta.description,
     alternates: { canonical: canonicalPath },
     openGraph: {
-      title: t.meta.title,
-      description: t.meta.description,
+      title: t.meta.ogTitle || t.meta.title,
+      description: t.meta.ogDescription || t.meta.description,
       url: canonicalPath,
       type: "article",
       images: [t.meta.ogImage],

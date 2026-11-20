@@ -18,6 +18,40 @@ import { createInquiry } from "@/sanity/lib/admin";
 const phoneOk = (v: string) => /^[+\d][\d\s-]{7,}$/.test(v);
 const emailOk = (v: string) => /^[^@\s]+@[^@\s]+\.[^@\s]+$/.test(v);
 
+/** Numbers the clinic flagged for repeated junk inquiries. They get the normal
+ *  success response, but nothing is stored or emailed. Matched on last 10 digits
+ *  so "+91 73760 16497" and "7376016497" both hit. */
+const BLOCKED_PHONES = new Set([
+  "7376016497", // Amita
+  "7348127412", // Binod
+  "9598883238", // Akanksha Upadhyay
+  "8529139058", // Pragya
+  "7997680639", // Rani
+  "9328695560", // Meshva
+  "9074253011", // Priyanshi
+  "7999118214", // Surbhi
+  "9993738778", // Simer
+]);
+const phoneBlocked = (v: string) => BLOCKED_PHONES.has(v.replace(/\D/g, "").slice(-10));
+
+/** Verify a reCAPTCHA v2 checkbox token with Google. Skipped (passes) until
+ *  RECAPTCHA_SECRET_KEY is set, so deploying before the keys doesn't kill the form. */
+async function captchaOk(token: string): Promise<boolean> {
+  const secret = process.env.RECAPTCHA_SECRET_KEY;
+  if (!secret) return true;
+  if (!token) return false;
+  try {
+    const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+      method: "POST",
+      body: new URLSearchParams({ secret, response: token }),
+    });
+    return ((await res.json()) as { success?: boolean }).success === true;
+  } catch (err) {
+    console.error("[inquiry] reCAPTCHA verify failed:", err);
+    return false;
+  }
+}
+
 /** Trim + cap an incoming string field (defends against oversized payloads). */
 const clean = (v: unknown, max = 2000): string =>
   (typeof v === "string" ? v : "").trim().slice(0, max);
@@ -30,6 +64,9 @@ function buildEmailHtml(fields: {
   location: string;
   message: string;
   source: string;
+  channelLabel?: string;
+  landingPage?: string;
+  utmCampaign?: string;
 }) {
   const row = (label: string, value: string) =>
     value
@@ -56,6 +93,9 @@ function buildEmailHtml(fields: {
             ${row("Preferred Centre", fields.location)}
             ${row("Message", fields.message.replace(/\n/g, "<br/>"))}
             ${row("Source page", fields.source)}
+            ${row("Came from", fields.channelLabel ?? "")}
+            ${row("Landed on", fields.landingPage ?? "")}
+            ${row("Campaign", fields.utmCampaign ?? "")}
           </table>
         </td></tr>
         <tr><td style="background:#f9f9f9;padding:16px 32px;font-size:13px;color:#888;border-top:1px solid #eee">
@@ -76,6 +116,9 @@ async function sendNotificationEmail(fields: {
   location: string;
   message: string;
   source: string;
+  channelLabel?: string;
+  landingPage?: string;
+  utmCampaign?: string;
 }) {
   const user = process.env.SMTP_USER;
   const pass = process.env.SMTP_PASS;
@@ -121,12 +164,35 @@ export async function POST(req: NextRequest) {
   const message = clean(body.message);
   const source = clean(body.source, 200);
 
+  /* Attribution, captured on the landing page by <AttributionCapture>. All
+   * best-effort: an older cached page, a blocked storage API or a bot posting
+   * directly will simply send nothing, and the lead is still stored. */
+  const attr = (body.attribution ?? {}) as Record<string, unknown>;
+  const first = (body.firstTouch ?? {}) as Record<string, unknown>;
+  const channel = clean(attr.channel, 40);
+  const channelLabel = clean(attr.label, 120);
+  const channelDetail = clean(attr.detail, 120);
+  const referrer = clean(attr.referrer, 500);
+  const landingPage = clean(attr.landingPage, 300);
+  const utmSource = clean(attr.utmSource, 120);
+  const utmMedium = clean(attr.utmMedium, 120);
+  const utmCampaign = clean(attr.utmCampaign, 200);
+  const gclid = clean(attr.gclid, 200);
+  const firstTouchChannel = clean(first.channel, 40);
+  const firstTouchLabel = clean(first.label, 120);
+
   if (!name)
     return NextResponse.json({ error: "Please enter your name." }, { status: 422 });
   if (!phoneOk(phone))
     return NextResponse.json({ error: "Please enter a valid phone number." }, { status: 422 });
   if (email && !emailOk(email))
     return NextResponse.json({ error: "Please enter a valid email address." }, { status: 422 });
+
+  // Blocked number → pretend it worked, write nothing.
+  if (phoneBlocked(phone)) return NextResponse.json({ ok: true });
+
+  if (!(await captchaOk(clean(body.captcha, 4000))))
+    return NextResponse.json({ error: "Please tick \"I'm not a robot\" and try again." }, { status: 422 });
 
   // Store the lead in Sanity (best-effort).
   let stored = false;
@@ -139,6 +205,17 @@ export async function POST(req: NextRequest) {
       location: location || undefined,
       message: message || undefined,
       source: source || undefined,
+      channel: channel || undefined,
+      channelLabel: channelLabel || undefined,
+      channelDetail: channelDetail || undefined,
+      referrer: referrer || undefined,
+      landingPage: landingPage || undefined,
+      utmSource: utmSource || undefined,
+      utmMedium: utmMedium || undefined,
+      utmCampaign: utmCampaign || undefined,
+      gclid: gclid || undefined,
+      firstTouchChannel: firstTouchChannel || undefined,
+      firstTouchLabel: firstTouchLabel || undefined,
       status: "new",
       createdAt: new Date().toISOString(),
     });
@@ -150,7 +227,7 @@ export async function POST(req: NextRequest) {
   // Email the clinic (best-effort). Independent of storage so a lead is never lost.
   let emailed = false;
   try {
-    await sendNotificationEmail({ name, phone, email, treatment, location, message, source });
+    await sendNotificationEmail({ name, phone, email, treatment, location, message, source, channelLabel, landingPage, utmCampaign });
     emailed = true;
   } catch (err) {
     console.error("[inquiry] email notification failed:", err);

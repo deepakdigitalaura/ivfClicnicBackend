@@ -41,7 +41,7 @@ export type ResolvedTreatment = {
   shortName: string;
   alternateName?: string;
   breadcrumbName: string;
-  meta: { title: string; description: string; ogImage: string };
+  meta: { title: string; description: string; ogTitle?: string; ogDescription?: string; ogImage: string };
   procedure: { procedureType?: string; bodyLocation?: string; howPerformed?: string; followup?: string };
   lastReviewed: string;
   reviewerSlug: string;
@@ -86,7 +86,7 @@ export function toResolved(t: Treatment): ResolvedTreatment {
     shortName: t.shortName,
     ...(t.alternateName ? { alternateName: t.alternateName } : {}),
     breadcrumbName: t.breadcrumbName,
-    meta: { title: t.meta.title, description: t.meta.description, ogImage: t.meta.ogImage },
+    meta: { title: t.meta.title, description: t.meta.description, ogTitle: t.meta.ogTitle, ogDescription: t.meta.ogDescription, ogImage: t.meta.ogImage },
     procedure: {
       ...(t.procedure.procedureType ? { procedureType: t.procedure.procedureType } : {}),
       ...(t.procedure.bodyLocation ? { bodyLocation: t.procedure.bodyLocation } : {}),
@@ -231,7 +231,7 @@ export type TreatmentSource =
       breadcrumbName?: string | null;
       lastReviewed?: string | null;
       reviewerSlug?: string | null;
-      meta?: { title?: string | null; description?: string | null; ogImage?: string | null } | null;
+      meta?: { title?: string | null; description?: string | null; ogTitle?: string | null; ogDescription?: string | null; ogImage?: string | null } | null;
       procedure?: {
         procedureType?: string | null; bodyLocation?: string | null;
         howPerformed?: string | null; followup?: string | null;
@@ -333,6 +333,8 @@ export function resolveTreatment(slug: string, src: TreatmentSource): ResolvedTr
     meta: {
       title: src.meta?.title || base.meta.title,
       description: src.meta?.description || base.meta.description,
+      ogTitle: src.meta?.ogTitle || base.meta.ogTitle,
+      ogDescription: src.meta?.ogDescription || base.meta.ogDescription,
       ogImage: src.meta?.ogImage || base.meta.ogImage,
     },
     procedure: {
@@ -513,6 +515,8 @@ export function resolvePureCMSTreatment(src: NonNullable<TreatmentSource>): Reso
     meta: {
       title: src.meta?.title || `${name} — Bavishi Fertility Institute`,
       description: src.meta?.description || `Learn about ${name} treatment at Bavishi Fertility Institute.`,
+      ogTitle: src.meta?.ogTitle || "",
+      ogDescription: src.meta?.ogDescription || "",
       ogImage: src.meta?.ogImage || "",
     },
     procedure: {

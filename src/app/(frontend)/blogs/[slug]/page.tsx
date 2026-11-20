@@ -14,9 +14,12 @@ const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";
 const asObj = <T,>(v: T | number | null | undefined): T | null =>
   v && typeof v === "object" ? (v as T) : null;
 
-/** ISR: re-fetch from DB every 6 hours so enrichment / CMS edits go live
- *  without a full redeploy. Pages are still edge-cached between refreshes. */
-export const revalidate = 21600;
+/** ISR: re-fetch from DB every 5 minutes so CMS edits go live even when
+ *  the on-demand revalidatePath() call from the admin save doesn't land
+ *  (PM2/disk fetch-cache on this self-hosted deploy doesn't always honor
+ *  it — see memory fetch-cache-revalidate-bug-pending-fix). A short
+ *  time-based window makes staleness self-heal regardless. */
+export const revalidate = 300;
 
 /** Pre-render every published blog at build (static). New slugs render on
  *  demand (dynamicParams default) and are cached + tag-revalidated. */

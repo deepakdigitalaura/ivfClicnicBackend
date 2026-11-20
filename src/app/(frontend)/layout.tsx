@@ -7,7 +7,9 @@ import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
 import { CookieConsent } from "@/components/cookie-consent";
+import { PageviewTracker } from "@/components/pageview-tracker";
 import { ConsentScripts } from "@/components/consent-scripts";
+import { AttributionCapture } from "@/components/attribution-capture";
 import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
 
 const OG_IMAGE = "/assets/hero-mother-baby1.png";
@@ -20,7 +22,7 @@ export const metadata: Metadata = {
   // `default` only fires for the rare page that sets no title at all.
   title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
   description:
-    "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI, and personalised treatment plans by leading specialists.",
+    "Premium fertility care across 14 centres in India. 30,000+ successful pregnancies, advanced IVF, ICSI and IUI by leading specialists.",
   openGraph: {
     title: "Bavishi Fertility Centre — India's Trusted IVF Experts",
     description:
@@ -87,7 +89,9 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <HeaderProvider value={header}>
           <FooterProvider value={footer}>{children}</FooterProvider>
         </HeaderProvider>
+        <PageviewTracker />
         <CookieConsent />
+        <AttributionCapture />
         <ConsentScripts scripts={gatedScripts} />
         {bodyScripts.map((s, i) => (
           <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />

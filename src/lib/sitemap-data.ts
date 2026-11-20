@@ -1,10 +1,11 @@
 import type { MetadataRoute } from "next";
 import { SITE } from "@/lib/seo";
-import { TREATMENTS_REGISTRY, HIDDEN_TREATMENT_SLUGS } from "@/lib/treatments";
+import { TREATMENTS_REGISTRY } from "@/lib/treatments";
 import { DOCTORS } from "@/lib/doctors";
 import { CITIES, CENTRES, cityHref, centreHref } from "@/lib/locations";
 import { SERVICE_CONTENT } from "@/lib/womens-health";
-import { PRESS_CLIPPINGS, pressHref } from "@/lib/press";
+import { pressHref } from "@/lib/press";
+import { getPressClippings } from "@/lib/press-sanity";
 import { CALCULATOR_SLUGS } from "@/lib/calculators";
 import { getSitemapConfig, getSanityPublishedBlogSlugs } from "@/sanity/lib/fetch";
 
@@ -20,12 +21,16 @@ export async function getSitemapEntries(): Promise<MetadataRoute.Sitemap> {
   const paths = new Set<string>(STATIC_PATHS);
 
   for (const ref of Object.values(TREATMENTS_REGISTRY)) {
-    if (HIDDEN_TREATMENT_SLUGS.has(ref.slug)) continue;
     if (ref.href.startsWith("/") && !ref.href.includes("#")) paths.add(ref.href);
   }
   for (const slug of Object.keys(SERVICE_CONTENT)) paths.add(`/services/${slug}`);
   for (const d of DOCTORS) paths.add(`/doctors/${d.slug}`);
-  for (const c of PRESS_CLIPPINGS) paths.add(pressHref(c.slug));
+  try {
+    const pressClippings = await getPressClippings();
+    for (const c of pressClippings) paths.add(pressHref(c.slug));
+  } catch {
+    // Sanity unreachable — sitemap just omits press articles for this run.
+  }
   for (const slug of CALCULATOR_SLUGS) paths.add(`/calculators/${slug}`);
   for (const c of CITIES) {
     if (c.built) {

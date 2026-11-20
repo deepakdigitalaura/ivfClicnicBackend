@@ -15,8 +15,18 @@ import { resolveContactValues } from "@/lib/contact";
 import { resolveFooter, type FooterData, type FooterSource } from "@/lib/footer";
 import { resolveHeader, type HeaderData, type HeaderSource, type NavTreatmentItem, type NavDoctorItem, type NavLocationItem } from "@/lib/header";
 import { resolveHomepage, type HomepageData, type HomepageSource } from "@/lib/homepage";
-import { getSanityHomepage, getCampsConfig } from "@/sanity/lib/fetch";
+import { getSanityHomepage, getCampsConfig, getSanitySurakshaKavach, getSanityHistoryPage, getSanityInfrastructurePage, getSanityWhyBfiPage, getSanitySimpleTreatmentPage, getSanitySafeTreatmentPage, getSanitySmartTreatmentPage, getSanitySuccessBenchmarksPage, getSanityCategoryHub } from "@/sanity/lib/fetch";
+import { resolveCategoryHub, type HubSlug, type CategoryHubData } from "@/lib/category-hub";
 import { resolveAbout, type AboutData, type AboutSource } from "@/lib/about";
+import { resolveSurakshaKavach, type SurakshaKavachData } from "@/lib/suraksha-kavach";
+import { resolveHistory, type HistoryData } from "@/lib/history";
+import { resolveInfrastructure, type InfrastructureData } from "@/lib/infrastructure";
+import { resolveWhyBfi, type WhyBfiData } from "@/lib/why-bfi";
+import { resolveSimpleTreatment, type SimpleTreatmentData } from "@/lib/simple-treatment";
+import { resolveSafeTreatment, type SafeTreatmentData } from "@/lib/safe-treatment";
+import { resolveSmartTreatment, type SmartTreatmentData } from "@/lib/smart-treatment";
+import { resolveSuccessBenchmarks, type SuccessBenchmarksData } from "@/lib/success-benchmarks";
+import type { AboutSectionHeading, Milestone } from "@/lib/about";
 import { resolveTestimonials } from "@/lib/testimonials";
 import type { Review } from "@/lib/reviews";
 import { resolveService, type ResolvedService } from "@/lib/services";
@@ -52,8 +62,9 @@ import {
 } from "@/sanity/lib/fetch";
 import type { ContactSource } from "@/lib/contact";
 import { resolveTreatment, type ResolvedTreatment, type TreatmentSource } from "@/lib/treatment-content";
-import { TREATMENTS, treatmentBySlug, HIDDEN_TREATMENT_SLUGS } from "@/lib/treatments";
+import { TREATMENTS, treatmentBySlug, UNLISTED_TREATMENT_SLUGS } from "@/lib/treatments";
 import { resolveCity, resolveCentre, type ResolvedCity, type ResolvedCentre, type CitySource, type CentreSource } from "@/lib/location-content";
+import { CENTRES } from "@/lib/locations";
 import { type ServiceSource } from "@/lib/services";
 import { getLegalPage, LEGAL_PAGE_SLUGS } from "@/lib/legal-pages";
 
@@ -108,7 +119,7 @@ function makeAuthor(
     credentials: credentials ?? null,
     avatar: makeMedia(avatarUrl, name),
     bio: bio ?? null,
-    sameAs: null,
+    sameAs: slug ? [{ url: doctorUrl(slug) }] : null,
     updatedAt: "",
     createdAt: "",
   };
@@ -145,7 +156,12 @@ function toBlogDoc(b: SanityBlog): Blog {
     slug: b.slug ?? "",
     excerpt: b.excerpt ?? null,
     heroImage: makeMedia(b.heroImageUrl, b.heroImageAlt ?? ""),
+    // Only the /blogs grid uses this; it falls back to the hero so every
+    // existing post keeps the single image it already has.
+    cardImage: makeMedia(b.cardImageUrl ?? b.heroImageUrl,
+                         b.cardImageAlt ?? b.heroImageAlt ?? ""),
     heroTextDark: b.heroTextDark ?? null,
+    heroTextRight: b.heroTextRight ?? null,
     heroImagePosition: b.heroImagePosition as Blog["heroImagePosition"] ?? null,
     content: safeJSON(b.contentRaw),
     author,
@@ -278,7 +294,7 @@ function toServiceSource(d: Awaited<ReturnType<typeof getSanityService>>): Servi
         ? { url: d.hero.heroPhoto.asset.url }
         : undefined,
     } : null,
-    seo: d.seo ? { metaTitle: d.seo.metaTitle ?? null, metaDescription: d.seo.metaDescription ?? null } : null,
+    seo: d.seo ? { metaTitle: d.seo.metaTitle ?? null, metaDescription: d.seo.metaDescription ?? null, ogTitle: d.seo.ogTitle ?? null, ogDescription: d.seo.ogDescription ?? null } : null,
     overview: d.overview ?? null,
     benefits: d.benefits ?? null,
     whoFor: d.whoFor ?? null,
@@ -329,6 +345,10 @@ function toDoctorSource(d: SanityDoctor): DoctorSource {
     visitsAllCentres: d.visitsAllCentres ?? null,
     navRole: d.navRole ?? null,
     navOrder: d.navOrder ?? null,
+    metaTitle: d.metaTitle ?? null,
+    metaDescription: d.metaDescription ?? null,
+    ogTitle: d.ogTitle ?? null,
+    ogDescription: d.ogDescription ?? null,
   };
 }
 
@@ -394,7 +414,6 @@ function toTreatmentSource(d: SanityTreatment | null | undefined): TreatmentSour
 }
 
 export const getTreatment = async (slug: string): Promise<ResolvedTreatment | undefined> => {
-  if (HIDDEN_TREATMENT_SLUGS.has(slug)) return undefined;
   const doc = await getSanityTreatment(slug);
   return resolveTreatment(slug, toTreatmentSource(doc));
 };
@@ -403,7 +422,7 @@ export const getTreatments = async (): Promise<ResolvedTreatment[]> => {
   const docs = await getSanityTreatments();
   const bySlug = new Map(docs.filter((d) => d.slug).map((d) => [d.slug as string, d]));
   return TREATMENTS
-    .filter((t) => !HIDDEN_TREATMENT_SLUGS.has(t.slug))
+    .filter((t) => !UNLISTED_TREATMENT_SLUGS.has(t.slug))
     .map((t) => resolveTreatment(t.slug, toTreatmentSource(bySlug.get(t.slug) ?? null)))
     .filter((t): t is ResolvedTreatment => !!t);
 };
@@ -426,6 +445,10 @@ function toCitySource(d: Awaited<ReturnType<typeof getSanityCity>>): CitySource 
     intro: d.intro ?? null,
     faqs: d.faqs ?? null,
     womensHealth: d.womensHealth ?? null,
+    metaTitle: d.metaTitle ?? null,
+    metaDescription: d.metaDescription ?? null,
+    ogTitle: d.ogTitle ?? null,
+    ogDescription: d.ogDescription ?? null,
   };
 }
 
@@ -461,6 +484,10 @@ function toCentreSource(d: SanityCentreDoc | null | undefined): CentreSource {
     intro: d.intro ?? null,
     gallery: d.gallery ?? null,
     womensHealth: d.womensHealth ?? null,
+    metaTitle: d.metaTitle ?? null,
+    metaDescription: d.metaDescription ?? null,
+    ogTitle: d.ogTitle ?? null,
+    ogDescription: d.ogDescription ?? null,
   };
 }
 
@@ -472,6 +499,35 @@ export const getCity = async (slug: string): Promise<ResolvedCity | undefined> =
 export const getCentre = async (citySlug: string, slug: string): Promise<ResolvedCentre | undefined> => {
   const doc = await getSanityCentre(citySlug, slug);
   return resolveCentre(citySlug, slug, toCentreSource(doc));
+};
+
+/** Every built centre, admin-override applied — used by the Contact page directory
+ * so it never falls back to a hardcoded list that drifts from what's saved in /admin-panel. */
+export const getAllResolvedCentres = async (): Promise<ResolvedCentre[]> => {
+  const resolved = await Promise.all(
+    CENTRES.filter((c) => c.built).map((c) => getCentre(c.citySlug, c.slug)),
+  );
+  return resolved.filter((c): c is ResolvedCentre => !!c);
+};
+
+/** Same slug-resolution rules as centresForLocationSlugs() in @/lib/locations
+ * (centre slug direct, city slug → head office / first built centre, deduped,
+ * order-preserving) but returns admin-override-applied centres — used on the
+ * doctor profile page's "Where to meet" cards. */
+export const getResolvedCentresForLocationSlugs = async (slugs: string[]): Promise<ResolvedCentre[]> => {
+  const all = await getAllResolvedCentres();
+  const out: ResolvedCentre[] = [];
+  const seen = new Set<string>();
+  const push = (c?: ResolvedCentre) => {
+    if (c && !seen.has(c.slug)) { seen.add(c.slug); out.push(c); }
+  };
+  for (const slug of slugs) {
+    const centre = all.find((c) => c.slug === slug);
+    if (centre) { push(centre); continue; }
+    const inCity = all.filter((c) => c.citySlug === slug);
+    push(inCity.find((c) => c.isHeadOffice) ?? inCity[0]);
+  }
+  return out;
 };
 
 export const getPublishedCitySlugs = async (): Promise<string[]> => {
@@ -641,10 +697,29 @@ export const getHeader = async (): Promise<HeaderData> => {
  *  overlays. Converts string[] badge/feature lists to the {text}[] form the
  *  source expects; everything else passes through. Unknown/empty → resolver
  *  uses HOMEPAGE_DEFAULTS per-section (byte-identical). */
+/** Some globals (homepage, aboutPage) were migrated in Sanity to carry
+ *  `{ en, hi, gu }` localized-field objects instead of plain strings, as part
+ *  of the hi/gu i18n work — but this file's resolvers (used by the English-only
+ *  routes still live on this branch) expect plain strings. Recursively unwraps
+ *  any such leaf down to its `en` value so old resolvers keep working untouched
+ *  until the locale-aware routes/resolvers are merged. */
+// eslint-disable-next-line @typescript-eslint/no-explicit-any
+function unwrapEnLocale(value: any): any {
+  if (Array.isArray(value)) return value.map(unwrapEnLocale);
+  if (value && typeof value === "object") {
+    const keys = Object.keys(value);
+    if (keys.length && keys.every((k) => k === "en" || k === "hi" || k === "gu")) {
+      return value.en ?? value.hi ?? value.gu ?? "";
+    }
+    return Object.fromEntries(Object.entries(value).map(([k, v]) => [k, unwrapEnLocale(v)]));
+  }
+  return value;
+}
+
 function mapHomepageSource(doc: Record<string, unknown> | null): HomepageSource {
   if (!doc) return null;
   // eslint-disable-next-line @typescript-eslint/no-explicit-any
-  const d = doc as any;
+  const d = unwrapEnLocale(doc) as any;
   const textRows = (a?: string[] | null) => (Array.isArray(a) ? a.filter(Boolean).map((text) => ({ text })) : undefined);
   return {
     ...d,
@@ -665,7 +740,8 @@ export const getHomepage = async (): Promise<HomepageData> => {
 };
 
 export const getAbout = async (): Promise<AboutData> => {
-  const doc = await getSanityAbout();
+  const rawDoc = await getSanityAbout();
+  const doc = rawDoc ? (unwrapEnLocale(rawDoc) as typeof rawDoc) : rawDoc;
   if (!doc) return resolveAbout(null);
   return resolveAbout({
     hero: doc.hero ?? null,
@@ -682,6 +758,52 @@ export const getAbout = async (): Promise<AboutData> => {
     finalCta: doc.finalCta ?? null,
     seo: doc.seo ?? null,
   } as AboutSource);
+};
+
+export const getSurakshaKavach = async (): Promise<SurakshaKavachData> => {
+  const doc = await getSanitySurakshaKavach();
+  return resolveSurakshaKavach(doc ?? null);
+};
+
+export const getCategoryHub = async (slug: HubSlug): Promise<CategoryHubData> => {
+  const doc = await getSanityCategoryHub(slug);
+  return resolveCategoryHub(slug, doc ?? null);
+};
+
+export const getHistoryPage = async (): Promise<HistoryData & { legacy: AboutSectionHeading; milestones: Milestone[] }> => {
+  const [doc, about] = await Promise.all([getSanityHistoryPage(), getAbout()]);
+  const data = resolveHistory(doc ?? null);
+  return { ...data, legacy: about.legacy, milestones: about.milestones };
+};
+
+export const getInfrastructurePage = async (): Promise<InfrastructureData> => {
+  const doc = await getSanityInfrastructurePage();
+  return resolveInfrastructure(doc ?? null);
+};
+
+export const getWhyBfiPage = async (): Promise<WhyBfiData> => {
+  const doc = await getSanityWhyBfiPage();
+  return resolveWhyBfi(doc ?? null);
+};
+
+export const getSimpleTreatmentPage = async (): Promise<SimpleTreatmentData> => {
+  const doc = await getSanitySimpleTreatmentPage();
+  return resolveSimpleTreatment(doc ?? null);
+};
+
+export const getSafeTreatmentPage = async (): Promise<SafeTreatmentData> => {
+  const doc = await getSanitySafeTreatmentPage();
+  return resolveSafeTreatment(doc ?? null);
+};
+
+export const getSmartTreatmentPage = async (): Promise<SmartTreatmentData> => {
+  const doc = await getSanitySmartTreatmentPage();
+  return resolveSmartTreatment(doc ?? null);
+};
+
+export const getSuccessBenchmarksPage = async (): Promise<SuccessBenchmarksData> => {
+  const doc = await getSanitySuccessBenchmarksPage();
+  return resolveSuccessBenchmarks(doc ?? null);
 };
 
 /** Text testimonials (no YouTube ID) for the homepage "Patient review" cards. */

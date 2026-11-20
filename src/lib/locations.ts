@@ -55,6 +55,10 @@ export type Centre = {
    *  omit/empty to hide the section. */
   womensHealth?: string[];
   built: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 export type City = {
@@ -75,6 +79,10 @@ export type City = {
    *  available across this city's centres. Drives <AvailableServicesSection>. */
   womensHealth?: string[];
   built: boolean;
+  metaTitle?: string;
+  metaDescription?: string;
+  ogTitle?: string;
+  ogDescription?: string;
 };
 
 /* ---------- URLs ---------- */
@@ -135,6 +143,8 @@ const mumbaiGallery = (area: string): { src: string; alt: string }[] => [
 export const CENTRES: Centre[] = [
   {
     slug: "paldi",
+    metaTitle: "Best IVF Centre in Paldi, Ahmedabad — Bavishi Fertility",
+    metaDescription: "IVF, ICSI and IUI at our Paldi, Ahmedabad centre — the institute's head office and flagship Class 1000 lab, with senior doctors since 1998.",
     citySlug: "ahmedabad",
     name: "Paldi",
     fullName: "Bavishi Fertility Institute — Paldi, Ahmedabad",
@@ -174,6 +184,9 @@ export const CENTRES: Centre[] = [
     treatments: ["ivf", "icsi", "iui", "male-infertility", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Paldi IVF centre?", a: "It is at Paldi Cross Roads — opposite Manjulal Municipal Garden, next to Adani CNG & Orion Complex, Paldi, Ahmedabad – 380007. This is Bavishi Fertility Institute's head office and flagship lab, established in 1998." },
+      { q: "Is Bavishi hospital Paldi the same as Bavishi Fertility Institute?", a: "Yes. Bavishi hospital Paldi, Bavishi fertility clinic Paldi and Bavishi Fertility Institute Paldi all refer to the same centre at Paldi Cross Roads. It is the institute's head office and flagship IVF laboratory in Ahmedabad, and has operated from this address since 1998." },
+      { q: "Is there an IVF centre in Paldi, Ahmedabad?", a: "Yes. The Paldi centre is a complete IVF centre in Paldi, Ahmedabad: consultation, diagnostics, the Class 1000 embryology laboratory and the day-care operation theatre are all on site. It is the flagship of three Bavishi Fertility Institute centres in Ahmedabad, alongside Sindhu Bhavan Road and Nikol." },
+      { q: "Is there a gynecologist in Paldi, Ahmedabad at this centre?", a: "Yes. Beyond fertility treatment the Paldi centre offers obstetrics and gynaecology, and the full range of maternity services in Ahmedabad — 3D/4D sonography, fetal medicine, high-risk pregnancy care, painless delivery, normal delivery and twin pregnancy care." },
       { q: "What are the timings at the Paldi centre?", a: "The Paldi centre is open Monday to Saturday, 9:00 am to 7:00 pm. Appointments are recommended; call +91 97126 22288 to book." },
       { q: "Which areas does the Paldi centre serve?", a: "Paldi conveniently serves patients from Paldi, Vasna, Ambawadi, Ellisbridge, Vejalpur and Maninagar, as well as families travelling from across Ahmedabad and Gujarat." },
       { q: "What facilities are available at Paldi?", a: "A Class 1000 embryology & IVF lab, andrology lab, in-house diagnostics and sonography, a day-care operation theatre, counselling and nutrition suites, and an on-site pharmacy — everything under one roof." },
@@ -210,6 +223,8 @@ export const CENTRES: Centre[] = [
   },
   {
     slug: "sindhu-bhavan-road",
+    metaTitle: "Best IVF Centre in Bodakdev & Sindhu Bhavan Road",
+    metaDescription: "IVF, ICSI and IUI at our Sindhu Bhavan Road centre in Bodakdev — serving Thaltej, Satellite, Vastrapur and Bopal, with senior doctors since 1998.",
     citySlug: "ahmedabad",
     name: "Sindhu Bhavan Road",
     fullName: "Bavishi Fertility Institute — Sindhu Bhavan Road, Ahmedabad",
@@ -247,8 +262,10 @@ export const CENTRES: Centre[] = [
     treatments: ["ivf", "icsi", "iui", "female-infertility", "fertility-preservation"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Sindhu Bhavan Road centre?", a: "At SF-213, Stellar, Sindhu Bhavan Marg, near Pakvan Cross Roads, Bodakdev, Ahmedabad – 380059 — minutes from S.G. Highway." },
+      { q: "Is there an IVF centre on Sindhu Bhavan Road, Ahmedabad?", a: "Yes. This is a full IVF centre in Ahmedabad on Sindhu Bhavan Marg, and the closest of our three city centres if you are in Bodakdev, Thaltej, Shilaj, Science City, Bopal or South Bopal. It runs the same protocols as the Paldi and Nikol centres." },
+      { q: "Is there a gynecologist at the Sindhu Bhavan Road centre?", a: "Yes. Alongside IVF and IUI the centre offers obstetrics and gynaecology, and the full range of maternity services in Ahmedabad — 3D/4D sonography, fetal medicine, high-risk pregnancy care, painless delivery and twin pregnancy care." },
       { q: "What are the timings at the Sindhu Bhavan Road centre?", a: "Monday to Saturday, 10:30 am to 7:00 pm. Appointments are recommended." },
-      { q: "Which areas does this centre serve?", a: "Bodakdev, Thaltej, Sindhu Bhavan Road, the S.G. Highway corridor, Science City and Shilaj." },
+      { q: "Which areas does this centre serve?", a: "Bodakdev, Thaltej, Sindhu Bhavan Road, the S.G. Highway corridor, Science City, Shilaj, Bopal and South Bopal." },
     ],
     sameAs: [],
     intro:
@@ -259,6 +276,8 @@ export const CENTRES: Centre[] = [
   },
   {
     slug: "nikol",
+    metaTitle: "Best IVF Centre in Nikol, Ahmedabad — Bavishi Fertility",
+    metaDescription: "IVF, ICSI and IUI at our Nikol centre near Amar Jawan Circle — serving Nikol, Naroda, Vastral and Bapunagar, with senior doctors since 1998.",
     citySlug: "ahmedabad",
     name: "Nikol",
     fullName: "Bavishi Fertility Institute — Nikol, Ahmedabad",
@@ -292,16 +311,20 @@ export const CENTRES: Centre[] = [
       "Comfortable waiting area",
       "Easy parking access",
     ],
-    doctors: ["parth-bavishi", "janki-bavishi"],
+    doctors: ["jaydeep-patel", "parth-bavishi", "janki-bavishi"],
     treatments: ["ivf", "iui", "male-infertility"],
     faqs: [
       { q: "Where is the Bavishi Fertility Institute Nikol centre?", a: "At Hill Town Plaza, 501, near Amar Jawan Circle, Nikol, Ahmedabad – 380049, serving east Ahmedabad." },
+      { q: "Is there an IVF centre in Nikol?", a: "Yes. Bavishi Fertility Institute runs a full IVF centre in Nikol at Hill Town Plaza, near Amar Jawan Circle. It works as an IVF hospital in Nikol in the way that matters practically — consultation, diagnostics, the embryology lab and the operation theatre are on the same floor, so IVF treatment in Nikol does not mean travelling across Ahmedabad for each step." },
+      { q: "Who is the IVF doctor in Nikol at Bavishi Fertility Institute?", a: "Dr. Jaydeep Patel (MBBS, DGO) is the IVF specialist at the Nikol centre, with 10+ years of experience in PCOS infertility, male factor, poor endometrium and high-risk pregnancy management. Dr. Parth Bavishi and Dr. Janki Bavishi also consult here." },
+      { q: "Which is the best IVF centre in Nikol, Ahmedabad?", a: "Judge any IVF clinic in Nikol on four things: whether the embryology lab is on site, whether the protocol is matched to your own AMH and semen analysis, whether the quote is itemised in writing including medication, and whether the centre tells you at what point it would change approach. The Nikol centre is part of a network that has practised in Ahmedabad since 1998." },
       { q: "What are the timings at the Nikol centre?", a: "Monday to Saturday, 10:00 am to 7:00 pm. Call +91 92271 14040 to book." },
       { q: "Which areas does the Nikol centre serve?", a: "Nikol, Naroda, Vastral, Odhav, New India Colony and Kathwada in east Ahmedabad." },
+      { q: "Is there a gynecologist in Nikol, Ahmedabad at this centre?", a: "Yes. Alongside fertility treatment the Nikol centre offers obstetrics and gynaecology, and the full range of maternity services in Ahmedabad is available across our centres — 3D/4D sonography, fetal medicine, high-risk pregnancy care, painless delivery and twin pregnancy care." },
     ],
     sameAs: [],
     intro:
-      "The Nikol centre extends Bavishi Fertility Institute's trusted fertility care to east Ahmedabad. Located at Hill Town Plaza near Amar Jawan Circle, it makes expert IVF, IUI and infertility evaluation easily accessible for families across Nikol, Naroda and the surrounding neighbourhoods.",
+      "The Nikol centre extends Bavishi Fertility Institute's trusted fertility care to east Ahmedabad. As an IVF centre in Nikol it offers the full pathway \— IVF, IUI and infertility evaluation \— at Hill Town Plaza near Amar Jawan Circle, so families across Nikol, Naroda, Vastral and Odhav can begin IVF treatment in Nikol without travelling across Ahmedabad. It is one of three Bavishi Fertility Institute centres in Ahmedabad, running the same protocols and the same laboratory standards as Paldi and Sindhu Bhavan Road.",
     gallery: [
       { src: "/assets/centres/nikol-reception.webp", alt: "Bavishi Fertility Institute Nikol — reception desk" },
       { src: "/assets/centres/nikol-waiting-lounge-1.webp", alt: "Bavishi Fertility Institute Nikol — patient waiting lounge" },
@@ -636,7 +659,7 @@ export const CENTRES: Centre[] = [
     opening: { opens: "10:00", closes: "19:00" },
     mapQuery: "Bavishi Fertility Institute Lal Darwaja Surat",
     image: "/assets/Locations/Surat.png",
-    nearby: ["Lal Darwaja", "Station Road", "Athwa", "Adajan", "Vesu", "Piplod", "Citylight", "Ghod Dod Road", "Varachha", "Katargam", "Udhna", "Rander", "Pal"],
+    nearby: ["Lal Darwaja", "Station Road", "Sangrampura", "Athwa", "Adajan", "Vesu", "Piplod", "Citylight", "Ghod Dod Road", "Varachha", "Katargam", "Udhna", "Rander", "Pal"],
     landmarks: [
       "At Param Doctor House, Lal Darwaja Station Road",
       "Near Surat railway station",
@@ -662,6 +685,12 @@ export const CENTRES: Centre[] = [
       { q: "What are the timings at the Surat centre?", a: "The Surat centre is open Monday to Saturday, 10:00 am to 7:00 pm. Call +91 98795 72247 to book." },
       { q: "Which areas does the Surat centre serve?", a: "Lal Darwaja, Athwa, Adajan, Vesu, Piplod, Citylight, Ghod Dod Road, Varachha and families across South Gujarat." },
       { q: "What treatments are available in Surat?", a: "The full range — IVF, ICSI, IUI, male and female infertility care, fertility preservation and PGT — backed by advanced laboratories and experienced specialists." },
+      { q: "Who is the best IVF doctor in Surat?", a: "Dr. Deep Gajiwala consults at the Surat centre, supported by the institute's senior promoter doctors and the same protocols used at every Bavishi Fertility Institute branch. Rather than name a single best IVF specialist, judge the consultation: your reports are explained to you in full, including when treatment is unlikely to help." },
+      { q: "Is Bavishi Fertility Institute a test tube baby centre in Surat?", a: "Yes. Test tube baby is the everyday name for IVF. The Surat centre has its own Class 1000 embryology and IVF laboratory on site, so the embryology is done here rather than samples being sent to another city." },
+      { q: "Is there an IVF centre near Vesu, Adajan or Sangrampura?", a: "Yes. The centre is on Lal Darwaja Station Road, beside Surat railway station, which keeps it a short drive from Sangrampura, Athwa, Ghod Dod Road, Adajan, Vesu, Piplod, Citylight, Varachha, Katargam, Udhna, Rander and Pal." },
+      { q: "Do you offer IUI treatment in Surat?", a: "Yes, IUI is offered at the Surat centre alongside IVF and ICSI. For many couples IUI is the first step before IVF is considered; which one suits you depends on your test results, and the andrology and semen-analysis lab needed for that work is in the same building." },
+      { q: "Is egg freezing available in Surat?", a: "Yes. Egg freezing and other fertility preservation options are available at the Surat centre, using the on-site embryology lab. Women choose it both for medical reasons, such as before cancer treatment, and to keep the option of a later pregnancy open." },
+      { q: "What makes Bavishi one of the best fertility hospitals in Surat?", a: "Everything is in one place: the embryology and IVF lab, andrology and semen analysis, diagnostics and sonography, a day-care operation theatre, counselling and a pharmacy are all in the same building, so you are not sent between an infertility clinic and a hospital at each step. The institute has been recognised as the Most Trusted Fertility Chain Hospital in Gujarat and as IVF Chain of the Year (West) at the ET Healthworld National Fertility Awards." },
     ],
     sameAs: [],
     intro:
@@ -896,6 +925,7 @@ export const CENTRES: Centre[] = [
 export const CITIES: City[] = [
   {
     slug: "ahmedabad",
+    metaDescription: "Looking for the best IVF centre in Ahmedabad? IVF, ICSI and IUI across 3 centres — Paldi, Sindhu Bhavan Road and Nikol — with senior doctors since 1998.",
     name: "Ahmedabad",
     region: "Gujarat",
     country: "IN",
@@ -915,6 +945,12 @@ export const CITIES: City[] = [
       { q: "What are the consultation timings in Ahmedabad?", a: "Paldi is open Mon–Sat, 9:00 am–7:00 pm; Sindhu Bhavan Road Mon–Sat, 10:30 am–7:00 pm; and Nikol Mon–Sat, 10:00 am–7:00 pm. Appointments are recommended." },
       { q: "What fertility treatments are available in Ahmedabad?", a: "The full range — IVF, ICSI, IUI, male and female infertility care, donor programmes, fertility preservation, maternity services and gynaecology — all under one roof." },
       { q: "Do you offer IVF cost EMI and Suraksha Kavach in Ahmedabad?", a: "Yes. All Ahmedabad centres offer transparent pricing with no hidden costs, easy / interest-free EMI options and the Suraksha Kavach protection package." },
+      { q: "Who is the best IVF doctor in Ahmedabad?", a: "The right IVF doctor is the one whose experience fits your diagnosis, so we would rather name our team than claim a single best. Dr. Himanshu Bavishi, Dr. Falguni Bavishi, Dr. Parth Bavishi and Dr. Janki Bavishi consult across our Ahmedabad centres, with Dr. Jaydeep Patel at Nikol. You are seen by senior promoter doctors, not by a rotating junior team." },
+      { q: "Is Bavishi Fertility Institute a test tube baby centre in Ahmedabad?", a: "Yes. Test tube baby is the everyday name for IVF, and it is the treatment our Ahmedabad centres have offered since 1998. Embryology is carried out in the institute's own Class 1000 laboratory rather than being sent elsewhere." },
+      { q: "Which areas of Ahmedabad do your IVF centres cover?", a: "Paldi is closest for Vasna, Ambawadi, Ellisbridge, Navrangpura, Maninagar and Sabarmati. Sindhu Bhavan Road covers Bodakdev, Thaltej, Satellite, Vastrapur, Bopal and S.G. Highway. Nikol serves Naroda, Vastral, Odhav, Bapunagar and CTM. All three follow the same protocols, so choose whichever is easiest to reach." },
+      { q: "Do you offer IUI treatment in Ahmedabad?", a: "Yes, IUI is available at all three Ahmedabad centres. For many couples it is the first step before IVF is considered; whether it suits you depends on your test results, which we go through with you at the first consultation." },
+      { q: "Is egg freezing available in Ahmedabad?", a: "Yes. Egg freezing and other fertility preservation options are offered at our Ahmedabad centres using vitrification. Women choose it both for medical reasons, such as before cancer treatment, and to keep the option of a later pregnancy open." },
+      { q: "What makes Bavishi one of the best fertility hospitals in Gujarat?", a: "Continuity of care with senior doctors, and everything in one place — diagnostics, andrology, surgery, the embryology lab and maternity care under one roof, so you are not sent between an infertility clinic and a hospital. The institute has been recognised as the Most Trusted Fertility Chain Hospital in Gujarat and as IVF Chain of the Year (West) at the ET Healthworld National Fertility Awards." },
     ],
     womensHealth: AHMEDABAD_WOMENS_HEALTH,
     built: true,
@@ -1086,6 +1122,19 @@ export const cityBySlug = (slug: string) => CITIES.find((c) => c.slug === slug);
 export const centreBySlug = (citySlug: string, slug: string) =>
   CENTRES.find((c) => c.citySlug === citySlug && c.slug === slug);
 export const centresForCity = (citySlug: string) => CENTRES.filter((c) => c.citySlug === citySlug);
+export const centreBySlugAny = (slug: string) => CENTRES.find((c) => c.slug === slug);
+
+/** "Ghatkopar, Mumbai" for a bare centre slug, falling back to a
+ *  capitalized slug (e.g. "Some-Slug" → "Some Slug") for slugs that
+ *  aren't (yet) in CENTRES — admin lists show slugs before they're wired up. */
+export const centreLabel = (slug: string): string => {
+  const centre = centreBySlugAny(slug);
+  if (centre) {
+    const city = cityBySlug(centre.citySlug);
+    return city ? `${centre.name}, ${city.name}` : centre.name;
+  }
+  return slug.split("-").map((w) => w.charAt(0).toUpperCase() + w.slice(1)).join(" ");
+};
 
 /* ---------------------------------------------------------------------
  * Single-centre cities collapse onto their one centre page.

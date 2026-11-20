@@ -116,6 +116,15 @@ export function centreToResolved(c: Centre): ResolvedCentre {
     intro: c.intro,
     gallery: c.gallery.map((g) => ({ src: g.src, alt: g.alt })),
     ...(c.womensHealth ? { womensHealth: [...c.womensHealth] } : {}),
+    /* Per-page SEO set in code. These four were declared on the Centre/City
+     * types and on the CMS side of the resolver, but were never copied out of
+     * the code object here -- so a metaTitle or metaDescription written in
+     * src/lib/locations.ts was silently dropped and the page fell back to the
+     * generated default. */
+    ...(c.metaTitle ? { metaTitle: c.metaTitle } : {}),
+    ...(c.metaDescription ? { metaDescription: c.metaDescription } : {}),
+    ...(c.ogTitle ? { ogTitle: c.ogTitle } : {}),
+    ...(c.ogDescription ? { ogDescription: c.ogDescription } : {}),
     built: c.built,
   };
 }
@@ -134,6 +143,15 @@ export function cityToResolved(c: City): ResolvedCity {
     intro: [...c.intro],
     faqs: c.faqs.map((f) => ({ q: f.q, a: f.a })),
     ...(c.womensHealth ? { womensHealth: [...c.womensHealth] } : {}),
+    /* Per-page SEO set in code. These four were declared on the Centre/City
+     * types and on the CMS side of the resolver, but were never copied out of
+     * the code object here -- so a metaTitle or metaDescription written in
+     * src/lib/locations.ts was silently dropped and the page fell back to the
+     * generated default. */
+    ...(c.metaTitle ? { metaTitle: c.metaTitle } : {}),
+    ...(c.metaDescription ? { metaDescription: c.metaDescription } : {}),
+    ...(c.ogTitle ? { ogTitle: c.ogTitle } : {}),
+    ...(c.ogDescription ? { ogDescription: c.ogDescription } : {}),
     built: c.built,
   };
 }
@@ -235,6 +253,10 @@ export type CentreSource =
       womensHealth?: ValueItem[] | null;
       built?: boolean | null;
       sectionLabels?: SectionLabelsSource;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -255,6 +277,10 @@ export type CitySource =
       womensHealth?: ValueItem[] | null;
       built?: boolean | null;
       sectionLabels?: SectionLabelsSource;
+      metaTitle?: string | null;
+      metaDescription?: string | null;
+      ogTitle?: string | null;
+      ogDescription?: string | null;
     }
   | null
   | undefined;
@@ -315,6 +341,10 @@ export function resolveCentre(citySlug: string, slug: string, src: CentreSource)
       // Published in admin = live, unless explicitly hidden via built: false
       built: src.built !== false,
       sectionLabels: toSectionLabels(src.sectionLabels),
+      ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+      ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+      ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+      ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
     };
   }
   const base = centreToResolved(def);
@@ -345,6 +375,10 @@ export function resolveCentre(citySlug: string, slug: string, src: CentreSource)
     ...(src.hero360Url ? { hero360Url: src.hero360Url } : {}),
     ...(src.sameAs?.length ? { sameAs: values(src.sameAs) } : {}),
     sectionLabels: toSectionLabels(src.sectionLabels),
+    ...(src.metaTitle || base.metaTitle ? { metaTitle: src.metaTitle || base.metaTitle } : {}),
+    ...(src.metaDescription || base.metaDescription ? { metaDescription: src.metaDescription || base.metaDescription } : {}),
+    ...(src.ogTitle || base.ogTitle ? { ogTitle: src.ogTitle || base.ogTitle } : {}),
+    ...(src.ogDescription || base.ogDescription ? { ogDescription: src.ogDescription || base.ogDescription } : {}),
   };
 }
 
@@ -372,6 +406,10 @@ export function resolveCity(slug: string, src: CitySource): ResolvedCity | undef
       ...(src.womensHealth?.length ? { womensHealth: values(src.womensHealth) } : {}),
       built: src.built !== false,
       sectionLabels: toSectionLabels(src.sectionLabels),
+      ...(src.metaTitle ? { metaTitle: src.metaTitle } : {}),
+      ...(src.metaDescription ? { metaDescription: src.metaDescription } : {}),
+      ...(src.ogTitle ? { ogTitle: src.ogTitle } : {}),
+      ...(src.ogDescription ? { ogDescription: src.ogDescription } : {}),
     };
   }
   const base = cityToResolved(def);
@@ -392,6 +430,10 @@ export function resolveCity(slug: string, src: CitySource): ResolvedCity | undef
     faqs: src.faqs?.length ? toFaqs(src.faqs) : base.faqs,
     ...(src.hero360Url ? { hero360Url: src.hero360Url } : {}),
     sectionLabels: toSectionLabels(src.sectionLabels),
+    ...(src.metaTitle || base.metaTitle ? { metaTitle: src.metaTitle || base.metaTitle } : {}),
+    ...(src.metaDescription || base.metaDescription ? { metaDescription: src.metaDescription || base.metaDescription } : {}),
+    ...(src.ogTitle || base.ogTitle ? { ogTitle: src.ogTitle || base.ogTitle } : {}),
+    ...(src.ogDescription || base.ogDescription ? { ogDescription: src.ogDescription || base.ogDescription } : {}),
   };
 }
 
@@ -422,6 +464,10 @@ export function materializeCitySource(slug: string, src: CitySource): NonNullabl
     ...(r.womensHealth ? { womensHealth: r.womensHealth.map(v) } : {}),
     built: r.built,
     sectionLabels: toSectionLabels(s.sectionLabels),
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }
 
@@ -466,5 +512,9 @@ export function materializeCentreSource(citySlug: string, slug: string, src: Cen
     ...(r.womensHealth ? { womensHealth: r.womensHealth.map(v) } : {}),
     built: r.built,
     sectionLabels: toSectionLabels(s.sectionLabels),
+    metaTitle: r.metaTitle ?? "",
+    metaDescription: r.metaDescription ?? "",
+    ogTitle: r.ogTitle ?? "",
+    ogDescription: r.ogDescription ?? "",
   };
 }

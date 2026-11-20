@@ -69,7 +69,12 @@ function BlogCardThumbnail({
         alt={hero.alt ?? title}
         loading="lazy"
         style={{ objectPosition: imagePosition ?? "center center" }}
-        className="h-full w-full object-cover brightness-125 contrast-105 saturate-[1.3] transition-transform duration-700 group-hover:scale-105"
+      /* brightness-125 used to sit here. Measured against the thumbnails
+       * actually in use it pushed 61% of a typical card to pure white and
+       * cut the detail in the light areas by about two thirds — most
+       * heroes already average 200+ brightness, so the lift had nothing
+       * left to lift. Removed; a touch of saturation is all that helps. */
+        className="h-full w-full object-cover saturate-[1.05] transition-transform duration-700 group-hover:scale-105"
       />
     );
   }
@@ -300,7 +305,8 @@ export function BlogHub({
             {posts.map((p) => {
               const cat = asObj<Category>(p.category ?? undefined);
               const author = asObj<Author>(p.author);
-              const hero = asObj<Media>(p.heroImage ?? undefined);
+              // the designed thumbnail when one is set, else the hero image
+              const hero = asObj<Media>(p.cardImage ?? p.heroImage ?? undefined);
               return (
                 <StaggerItem key={p.id} className="h-full">
                   <a href={`/blogs/${p.slug}`} className="group flex h-full flex-col overflow-hidden rounded-3xl border border-border/70 bg-card shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift">

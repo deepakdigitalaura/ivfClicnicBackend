@@ -13,9 +13,11 @@ import {
   ChevronRight,
   ChevronDown,
   MapPin,
+  Stethoscope,
 } from "lucide-react";
 import { format } from "date-fns";
 import { Reveal, Magnetic, Stagger, StaggerItem } from "@/components/motion";
+import { parentTopicFor } from "@/lib/blog-parent-topic";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
@@ -87,7 +89,7 @@ function AboutAuthor({ author }: { author: Author }) {
           <img
             src={avatar.url}
             alt={avatar.alt ?? author.name}
-            className="h-20 w-20 shrink-0 rounded-full object-cover ring-4 ring-[color:var(--rose)]/15"
+            className="h-20 w-20 shrink-0 rounded-full object-cover object-top ring-4 ring-[color:var(--rose)]/15"
           />
         ) : (
           <div className="flex h-20 w-20 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10">
@@ -96,7 +98,7 @@ function AboutAuthor({ author }: { author: Author }) {
             </span>
           </div>
         )}
-        <div>
+        <div className="min-w-0 flex-1">
           <p className="text-xl font-semibold leading-tight text-[color:var(--plum)]">
             {author.name}
           </p>
@@ -158,7 +160,7 @@ function ReviewedByCard({ reviewer }: { reviewer: Author }) {
           <img
             src={avatar.url}
             alt={avatar.alt ?? reviewer.name}
-            className="h-16 w-16 shrink-0 rounded-full object-cover ring-4 ring-[color:var(--plum)]/15"
+            className="h-16 w-16 shrink-0 rounded-full object-cover object-top ring-4 ring-[color:var(--plum)]/15"
           />
         ) : (
           <div className="flex h-16 w-16 shrink-0 items-center justify-center rounded-full bg-[color:var(--plum)]/10">
@@ -219,6 +221,47 @@ function FaqSection({ faqs }: { faqs: { question: string; answer: string }[] }) 
 }
 
 /* ── Keep Reading ────────────────────────────────────────────── */
+/**
+ * One link from the article back to the treatment it belongs to.
+ *
+ * The blog carries most of the site's organic traffic while the treatment
+ * pages carry very little, and until now nothing led a reader from one to the
+ * other. The category the post already has decides the destination, so no post
+ * needs tagging by hand; categories with no sensible parent render nothing.
+ */
+function ParentTopicLink({ categorySlug }: { categorySlug?: string | null }) {
+  const topic = parentTopicFor(categorySlug);
+  if (!topic) return null;
+  return (
+    <section className="border-t border-border/60 bg-card py-10">
+      <div className="container-px mx-auto max-w-[1400px]">
+        <Reveal>
+          <a
+            href={topic.href}
+            className="group flex flex-col gap-3 rounded-3xl border border-border/70 bg-[color:var(--rose-soft)]/25 p-6 transition-colors hover:border-[color:var(--rose)]/50 sm:flex-row sm:items-center sm:justify-between sm:gap-6"
+          >
+            <div className="flex items-start gap-3">
+              <Stethoscope className="mt-0.5 h-5 w-5 shrink-0 text-[color:var(--rose)]" />
+              <div>
+                <span className="block text-[11px] font-semibold uppercase tracking-wider text-[color:var(--rose)]">
+                  Treatment this article relates to
+                </span>
+                <span className="mt-1 block font-display text-xl font-medium leading-tight text-[color:var(--plum)]">
+                  {topic.label}
+                </span>
+                <span className="mt-1 block text-sm text-muted-foreground">{topic.blurb}</span>
+              </div>
+            </div>
+            <span className="inline-flex shrink-0 items-center gap-1.5 self-start rounded-full bg-[color:var(--plum)] px-5 py-2.5 text-sm font-medium text-white transition-transform group-hover:translate-x-0.5 sm:self-auto">
+              Read more <ChevronRight className="h-4 w-4" />
+            </span>
+          </a>
+        </Reveal>
+      </div>
+    </section>
+  );
+}
+
 function KeepReading({ posts }: { posts: BlogPost[] }) {
   if (!posts.length) return null;
   return (
@@ -229,7 +272,11 @@ function KeepReading({ posts }: { posts: BlogPost[] }) {
             Keep Reading
           </h2>
         </Reveal>
-        <Stagger className="mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
+        <Stagger
+          className={`mt-8 grid grid-cols-1 gap-6 sm:grid-cols-2 ${
+            posts.length === 4 ? "lg:grid-cols-2" : "lg:grid-cols-3"
+          }`}
+        >
           {posts.map((p) => (
             <StaggerItem key={p.slug}>
               <a
@@ -412,17 +459,24 @@ export function BlogArticle({
               {/* Author avatar + name */}
               {author && (() => {
                 const av = asObj<Media>(author.avatar ?? undefined);
+                const authorUrl = author.sameAs?.[0]?.url ? localizeUrl(author.sameAs[0].url) : null;
+                const NameTag = authorUrl ? "a" : "span";
                 return (
                   <span className="inline-flex items-center gap-2.5">
                     {av?.url && (
                       <img
                         src={av.url}
                         alt={author.name}
-                        className="h-9 w-9 rounded-full object-cover ring-2 ring-white/20"
+                        className="h-9 w-9 rounded-full object-cover object-top ring-2 ring-white/20"
                       />
                     )}
                     <span>
-                      <span className="font-semibold text-white">{author.name}</span>
+                      <NameTag
+                        {...(authorUrl ? { href: authorUrl } : {})}
+                        className="font-semibold text-white hover:underline"
+                      >
+                        {author.name}
+                      </NameTag>
                       {author.role && (
                         <span className="ml-1.5 text-white/45">· {author.role}</span>
                       )}
@@ -466,20 +520,27 @@ export function BlogArticle({
                   ))}
                 </span>
               )}
+            </div>
 
-              {reviewedBy && (
-                <span className="inline-flex items-center gap-1.5">
+            {reviewedBy && (() => {
+              const reviewerUrl = reviewedBy.sameAs?.[0]?.url ? localizeUrl(reviewedBy.sameAs[0].url) : null;
+              const ReviewerTag = reviewerUrl ? "a" : "span";
+              return (
+                <div className="mt-2 flex items-center gap-1.5 text-sm text-white/55">
                   <ShieldCheck className="h-3.5 w-3.5 text-[color:var(--gold)]" />
                   <span>
                     Reviewed by{" "}
-                    <span className="font-medium text-white/80">
+                    <ReviewerTag
+                      {...(reviewerUrl ? { href: reviewerUrl } : {})}
+                      className="font-medium text-white/80 hover:underline"
+                    >
                       {reviewedBy.name}
                       {reviewedBy.credentials ? `, ${reviewedBy.credentials}` : ""}
-                    </span>
+                    </ReviewerTag>
                   </span>
-                </span>
-              )}
-            </div>
+                </div>
+              );
+            })()}
           </Reveal>
         </div>
       </section>
@@ -504,19 +565,21 @@ export function BlogArticle({
                   src={heroUrl}
                   alt={hero?.alt ?? blog.title}
                   className="absolute inset-0 h-full w-full object-cover"
-                  style={{ objectPosition: `right ${blog.heroImagePosition?.split(" ")[1] ?? "center"}` }}
+                  style={{
+                    objectPosition: `${blog.heroTextRight ? "left" : "right"} ${blog.heroImagePosition?.split(" ")[1] ?? "center"}`,
+                  }}
                   loading="eager"
                 />
-                {/* directional gradient to make left area readable */}
+                {/* directional gradient to make the text side readable */}
                 <div
-                  className={`absolute inset-0 pointer-events-none bg-gradient-to-r to-transparent ${
+                  className={`absolute inset-0 pointer-events-none ${blog.heroTextRight ? "bg-gradient-to-l" : "bg-gradient-to-r"} to-transparent ${
                     blog.heroTextDark
                       ? "from-white/85 via-white/55"
                       : "from-black/70 via-black/40"
                   }`}
                 />
-                {/* title + category badge on the left */}
-                <div className="absolute inset-0 flex items-center">
+                {/* title + category badge, on whichever side the photo leaves empty */}
+                <div className={`absolute inset-0 flex items-center ${blog.heroTextRight ? "justify-end" : ""}`}>
                   <div className="px-7 md:px-10 max-w-[60%]">
                     {category?.title && (
                       <span
@@ -631,6 +694,7 @@ export function BlogArticle({
       {/* ════════════════════════════════════════
           POST-CONTENT SECTIONS (full width)
       ════════════════════════════════════════ */}
+      <ParentTopicLink categorySlug={category?.slug} />
       <KeepReading posts={relatedBlogs} />
       <BlogCta />
 

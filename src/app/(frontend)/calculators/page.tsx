@@ -13,7 +13,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(URL, {
     title: "Fertility Calculators — Free Tools by Our Experts | Bavishi Fertility Institute",
     description:
-      "Free, science-backed fertility calculators — IVF success rate, IVF cost, ovulation, fertile period, AMH level, semen analysis, natural pregnancy and miscarriage risk.",
+      "Free, science-backed fertility calculators — IVF success rate, IVF cost, ovulation, fertile period, AMH, semen analysis and miscarriage risk.",
     alternates: { canonical: URL },
     openGraph: {
       title: "Fertility Calculators — Bavishi Fertility Institute",
@@ -53,7 +53,7 @@ export default function Page() {
           </nav>
         </div>
 
-        <Calculators />
+        <Calculators as="h1" />
 
         <Footer />
         <FloatingCTA />

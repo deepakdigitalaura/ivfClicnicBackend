@@ -6,7 +6,7 @@ import { SiteHeader } from "@/components/site-header";
 import { Doctors, SuccessStories, VideoHub, StatsStrip, Footer, InquiryForm } from "@/components/home-page";
 import { SectionHead, Eyebrow, Faq } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
+import { GoogleReviews, CentreGallery, ContactInfo, CentreMap, MultiCentreMap, TreatmentsOffered, AvailableServicesSection } from "@/components/location-sections";
 import { Editable, EditableImage } from "@/components/editor/Editable";
 import { useEdit } from "@/components/editor/edit-context";
 import type { City } from "@/lib/locations";
@@ -17,6 +17,12 @@ import { doctorBySlug, toDoctorCard } from "@/lib/doctors";
 import { getReviews } from "@/lib/reviews";
 import { testimonialsForCity } from "@/lib/video-testimonials";
 import { blogsForLocation, type BlogPost } from "@/lib/blogs";
+import { ReadingCarousel } from "@/components/reading-carousel";
+import { readingForCity } from "@/lib/location-reading";
+import { CentreLocationMaps } from "@/components/centre-location-maps";
+import { AboutBfiSection } from "@/components/about-bfi-section";
+import { LocalAwards, LocalPress } from "@/components/location-credibility";
+import { CalculatorCrossLinks } from "@/components/calculator-cross-links";
 
 const trust = [
   { icon: Award, t: "Trusted since 1998", d: "Bavishi Fertility Institute has been a pioneer of IVF in India for over three decades." },
@@ -50,7 +56,14 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
     .map(toDoctorCard);
   const treatments = treatmentSlugsForCity(city.slug);
   const reviews = getReviews(city.slug); // optional city-level review source (null → CTA)
-  const cityStories = testimonialsForCity(city.slug); // only cities with an explicitly-stated testimonial
+  const cityStories = testimonialsForCity(city.slug);
+  const cityReading = readingForCity(city.slug);
+  /* Ahmedabad is held at the layout it had before 19 Nov, by request: the
+   * combined centres map rather than per-centre map cards, and no About BFI
+   * band (the page already carries "Your trusted fertility partner in …"
+   * and "Why choose Bavishi Fertility Institute in …", which say much the
+   * same). Every other city keeps the newer treatment. */
+  const heldAtPreviousLayout = city.slug === "ahmedabad"; // only cities with an explicitly-stated testimonial
 
   return (
     <div className="min-h-screen bg-background text-foreground">
@@ -160,11 +173,24 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
                 </StaggerItem>
               ))}
             </Stagger>
-            {city.slug !== "ahmedabad" && (
-              <div className="mt-10">
-                <CentreMap query={`Bavishi Fertility Institute ${city.name}`} title={`Bavishi Fertility Institute ${city.name} — centres on Google Maps`} />
-              </div>
-            )}
+            {/* Ahmedabad was previously excluded from the map altogether,
+                because a single Google place query can only drop one pin and
+                the city has three centres. One map per centre, each carrying
+                that centre's own card — address, Google rating, directions —
+                answers both "where are they" and "which one do I go to",
+                which a shared map with identical pins cannot. Cities with a
+                single centre get the same card, just one of it. */}
+            <div className="mt-10">
+              {heldAtPreviousLayout ? (
+                centres.filter((c) => c.geo).length > 1 ? (
+                  <MultiCentreMap centres={centres} title={`Bavishi Fertility Institute ${city.name} — all centres on the map`} />
+                ) : (
+                  <CentreMap query={`Bavishi Fertility Institute ${city.name}`} title={`Bavishi Fertility Institute ${city.name} — centres on Google Maps`} />
+                )
+              ) : (
+                <CentreLocationMaps centres={centres} />
+              )}
+            </div>
           </div>
         </section>
       )}
@@ -172,7 +198,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
       {/* City-wide treatments — real internal links (blush band so it separates
           the white Centres section above from the ivory Doctors section below) */}
       {treatments.length > 0 && (
-        <div className="bg-[color:var(--rose-soft)]/40"><TreatmentsOffered slugs={treatments} area={city.name} labels={sl} /></div>
+        <div className="bg-[color:var(--rose-soft)]/40"><TreatmentsOffered slugs={treatments} area={city.name} labels={sl} city={city.name} /></div>
       )}
 
       {/* Women's health & maternity services across the city's centres (white
@@ -184,6 +210,7 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
           tone="white"
           serviceLabel={city.slug === "ahmedabad" ? "Maternity services" : undefined}
           labels={sl}
+          city={city.name}
         />
       ) : null}
 
@@ -201,10 +228,13 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
         <SuccessStories
           tone="tint"
           eyebrow={ed("sectionLabels.testimonialsEyebrow", sl.testimonialsEyebrow || "Testimonials")}
-          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `Words from ${em(city.name + " families")}`)}
+          title={ed("sectionLabels.testimonialsTitle", sl.testimonialsTitle || `Why families call us the ${em("best IVF centre in " + city.name)}`)}
           subtitle={ed("sectionLabels.testimonialsSubtitle", sl.testimonialsSubtitle || "Watch real families share their parenthood journeys with Bavishi Fertility Institute.")}
           showCta={false}
-          stories={cityStories.map((v) => ({ id: v.youTubeId, n: v.name, q: v.quote, r: 5 }))}
+          // Same rule the centre pages already use: past three stories a grid
+          // becomes a wall, so it scrolls instead. Ahmedabad now has thirty.
+          carousel={cityStories.length > 3}
+          stories={cityStories.map((v) => ({ id: v.youTubeId, src: v.videoSrc, n: v.name, q: v.quote, r: 5 }))}
         />
       )}
 
@@ -240,8 +270,21 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
         </Stagger>
       </section>
 
+      {/* Awards and press — Ahmedabad only, because these are the Gujarat
+          and Ahmedabad-edition subsets. Other cities would be shown
+          recognition earned somewhere they can't place, so they keep the
+          page they have. */}
+      {!heldAtPreviousLayout && <AboutBfiSection city={city.name} />}
+
+      {city.region === "Gujarat" && (
+        <>
+          <LocalAwards city={city.name} />
+          <LocalPress city={city.name} />
+        </>
+      )}
+
       {centres.length > 0 && (
-        <ContactInfo centres={centres} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
+        <ContactInfo centres={centres} withMap={city.slug === "ahmedabad"} title={ed("sectionLabels.contactTitle", sl.contactTitle || `Contact our ${em(city.name + " centres")}`)} subtitle={ed("sectionLabels.contactSubtitle", sl.contactSubtitle || "Call, WhatsApp or visit — whichever is easiest for you.")} />
       )}
 
       {/* FAQ */}
@@ -256,8 +299,24 @@ export function CityPage({ city, cmsBlogs, stats }: { city: City | ResolvedCity;
         </section>
       )}
 
+      {/* Fertility calculators — eight real tools that already exist on the
+          site. Placed after the FAQ because both answer "what do I do next";
+          it is also the strongest internal-linking block on the page. */}
+      <CalculatorCrossLinks />
+
       {/* Related Articles — location-specific, data-driven (placeholders until published) */}
-      {blogs.length > 0 && (
+      {/* Ahmedabad has fifteen articles of its own plus the Gujarat CME
+       *  write-ups, which is more than a three-card grid can carry — it gets
+       *  the curated carousel instead. Every other city keeps the grid fed by
+       *  getBlogsByLocationSlug. */}
+      {cityReading.length > 0 ? (
+        <ReadingCarousel
+          items={cityReading}
+          eyebrow="Blog"
+          title={<>{city.name} <em className="font-display italic text-[color:var(--rose)]">Articles &amp; Guides</em></>}
+          subtitle={`Fertility guidance written for patients in ${city.name}, plus the CME programmes our doctors run across Gujarat.`}
+        />
+      ) : blogs.length > 0 && (
         <section className="container-px mx-auto max-w-[1400px] py-8 md:py-14">
           <SectionHead
             center

@@ -60,14 +60,14 @@ export const SITE_DESTINATIONS: Record<string, SiteDestination> = {
   "surgical-sperm-retrieval": {
     key: "surgical-sperm-retrieval",
     label: "Surgical Sperm Retrieval",
-    href: "/surgical-sperm-retrieval",
+    href: "/treatments/surgical-sperm-retrieval",
     published: true,
     aliases: ["Micro-TESE", "surgical sperm retrieval", "PESA", "TESA"],
   },
   "ovarian-rejuvenation": {
     key: "ovarian-rejuvenation",
     label: "Ovarian Rejuvenation",
-    href: "/ovarian-rejuvenation",
+    href: "/treatments/ovarian-rejuvenation",
     published: true,
     aliases: ["ovarian rejuvenation"],
   },

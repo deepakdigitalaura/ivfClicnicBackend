@@ -53,7 +53,7 @@ export default function Page() {
           </nav>
         </div>
 
-        <Locations />
+        <Locations as="h1" />
 
         <Footer />
         <FloatingCTA />

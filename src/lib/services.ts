@@ -35,7 +35,7 @@ export type ResolvedService = {
   slug: string;
   schemaType: "MedicalProcedure" | "MedicalTest" | "MedicalTherapy";
   shortName: string;
-  meta: { title: string; description: string };
+  meta: { title: string; description: string; ogTitle?: string; ogDescription?: string };
   breadcrumbName: string;
   reviewerSlug: string;
   lastReviewed: string;
@@ -89,7 +89,7 @@ export function toResolved(def: ServiceContent): ResolvedService {
     slug: def.slug,
     schemaType: def.schemaType,
     shortName: def.shortName,
-    meta: { title: def.meta.title, description: def.meta.description },
+    meta: { title: def.meta.title, description: def.meta.description, ogTitle: def.meta.ogTitle, ogDescription: def.meta.ogDescription },
     breadcrumbName: def.breadcrumbName,
     reviewerSlug: def.reviewerSlug,
     lastReviewed: def.lastReviewed,
@@ -137,7 +137,7 @@ export type ServiceSource =
       breadcrumbName?: string | null;
       reviewerSlug?: string | null;
       lastReviewed?: string | null;
-      seo?: { metaTitle?: string | null; metaDescription?: string | null } | null;
+      seo?: { metaTitle?: string | null; metaDescription?: string | null; ogTitle?: string | null; ogDescription?: string | null } | null;
       hero?: {
         eyebrow?: string | null; h1?: string | null; h1Em?: string | null;
         tagline?: string | null; badges?: { badge?: string | null }[] | null;
@@ -187,6 +187,8 @@ export function resolveService(slug: string, src: ServiceSource): ResolvedServic
       meta: {
         title: src.seo?.metaTitle || `${name} — Bavishi Fertility Centre`,
         description: src.seo?.metaDescription || `Learn about ${name} at Bavishi Fertility Centre.`,
+        ogTitle: src.seo?.ogTitle || "",
+        ogDescription: src.seo?.ogDescription || "",
       },
       breadcrumbName: src.breadcrumbName || name,
       reviewerSlug: src.reviewerSlug || "",
@@ -258,6 +260,8 @@ export function resolveService(slug: string, src: ServiceSource): ResolvedServic
     meta: {
       title: src.seo?.metaTitle || base.meta.title,
       description: src.seo?.metaDescription || base.meta.description,
+      ogTitle: src.seo?.ogTitle || base.meta.ogTitle,
+      ogDescription: src.seo?.ogDescription || base.meta.ogDescription,
     },
     hero: src.hero?.h1
       ? {
@@ -342,7 +346,7 @@ export function materializeServiceSource(slug: string, src: ServiceSource): NonN
     breadcrumbName: r.breadcrumbName,
     reviewerSlug: r.reviewerSlug,
     lastReviewed: r.lastReviewed,
-    seo: { metaTitle: r.meta.title, metaDescription: r.meta.description },
+    seo: { metaTitle: r.meta.title, metaDescription: r.meta.description, ogTitle: r.meta.ogTitle, ogDescription: r.meta.ogDescription },
     hero: {
       ...(s.hero ?? {}),
       eyebrow: r.hero.eyebrow,

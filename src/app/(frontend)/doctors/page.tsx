@@ -7,7 +7,7 @@ import { getDoctors } from "@/lib/payload";
 import { breadcrumbSchema, abs } from "@/lib/seo";
 import { withPageSeoOverride } from "@/lib/page-seo";
 
-export const revalidate = 3600;
+export const revalidate = 120;
 
 const URL = "/doctors";
 
@@ -15,7 +15,7 @@ export async function generateMetadata(): Promise<Metadata> {
   return withPageSeoOverride(URL, {
     title: "Our Fertility Specialists — Doctors at Bavishi Fertility Institute",
     description:
-      "Meet the credentialed fertility specialists at Bavishi Fertility Institute — IVF, ICSI, andrology and reproductive surgery experts caring for families across India since 1998.",
+      "Meet the credentialed fertility specialists at Bavishi Fertility Institute — IVF, ICSI, andrology and reproductive surgery experts since 1998.",
     alternates: { canonical: URL },
     openGraph: {
       title: "Our Fertility Specialists — Bavishi Fertility Institute",

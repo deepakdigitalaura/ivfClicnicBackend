@@ -10,86 +10,13 @@ import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
-
-/* ---------- Data ---------- */
-
-const FACILITIES = [
-  {
-    icon: Wind,
-    title: "Class 1000 IVF Labs",
-    description:
-      "Our IVF laboratories maintain air purity that is 10 times superior to the international Class 10,000 standard. This ultra-clean environment is the purest possible setting for embryo development — protecting your embryos at every moment.",
-  },
-  {
-    icon: FlaskConical,
-    title: "Dedicated IVF Lab Complex",
-    description:
-      "Separate IVF lab, andrology lab, and cryology lab — each purpose-built for its specialised function. Complete lab infrastructure under one roof means no compromise at any stage of the process.",
-  },
-  {
-    icon: Microscope,
-    title: "Advanced Equipment",
-    description:
-      "Cutting-edge 3D/4D sonography, advanced endoscopy suites, and next-generation IVF laboratory equipment. At Bavishi Fertility Institute, every piece of technology is the best available — because your embryos deserve nothing less.",
-  },
-  {
-    icon: Building2,
-    title: "Separate Operating Theatres",
-    description:
-      "Dedicated IVF operating theatres and separate endoscopy operating theatres for specialised procedures. Purpose-built spaces ensure the highest standards of sterility and procedural efficiency.",
-  },
-  {
-    icon: Users,
-    title: "Patient Comfort Areas",
-    description:
-      "Multiple private consulting rooms, dedicated counselling rooms, and comfortable waiting and recovery areas. Every space is designed for privacy, dignity, and your emotional wellbeing.",
-  },
-  {
-    icon: Monitor,
-    title: "Self-Sufficient Centres",
-    description:
-      "Every Bavishi Fertility Institute centre is a standalone facility equipped to handle even the most advanced cases. No need for external referrals — everything you need is available in one place.",
-  },
-];
-
-const TECH_HIGHLIGHTS = [
-  {
-    icon: Wind,
-    title: "HEPA-Filtered Laminar Flow Hoods",
-    description: "Ultra-clean workstations that remove 99.97% of airborne particles, creating a sterile environment for embryo handling and preparation.",
-  },
-  {
-    icon: Thermometer,
-    title: "AI-Integrated Trigas Incubators",
-    description: "Smart incubators with AI monitoring and alarm systems that precisely regulate oxygen, CO₂, and nitrogen levels — mimicking the natural environment of the womb.",
-  },
-  {
-    icon: ShieldCheck,
-    title: "Temperature Monitoring Systems",
-    description: "Continuous, automated temperature monitoring across all laboratories and storage areas. Any deviation triggers immediate alerts to protect your embryos 24/7.",
-  },
-  {
-    icon: Database,
-    title: "International-Standard Data Management",
-    description: "Patient data management systems built to international benchmarks — ensuring accuracy, security, and seamless coordination across all departments.",
-  },
-  {
-    icon: Eye,
-    title: "Double-Witnessing Protocols",
-    description: "Every critical step — from egg retrieval to embryo transfer — is verified by two independent professionals. A rigorous safety protocol that eliminates the possibility of error.",
-  },
-];
-
-const STATS = [
-  { value: 14, suffix: "", label: "Centres", sub: "across 8 cities in India" },
-  { value: 10, suffix: "x", label: "Superior Air Quality", sub: "Class 1000 vs Class 10,000" },
-  { value: 25, suffix: "+", label: "Years of Excellence", sub: "pioneering IVF since 1998" },
-  { value: 30000, suffix: "+", label: "Successful Pregnancies", sub: "across all centres" },
-];
+import { resolveIcon } from "@/lib/icon-map";
+import { INFRASTRUCTURE_DEFAULTS, type InfrastructureData } from "@/lib/infrastructure";
 
 /* ---------- Page ---------- */
 
-export function InfrastructurePage() {
+export function InfrastructurePage({ data = INFRASTRUCTURE_DEFAULTS }: { data?: InfrastructureData } = {}) {
+  const { hero, stats: STATS, facilities: FACILITIES, techHighlights: TECH_HIGHLIGHTS } = data;
   return (
     <div className="min-h-screen bg-background text-foreground">
       <SiteHeader />
@@ -122,19 +49,17 @@ export function InfrastructurePage() {
           <div className="mx-auto max-w-3xl text-center">
             <Reveal>
               <span className="inline-flex items-center gap-2 rounded-full border border-[color:var(--plum)]/15 bg-white/60 px-4 py-2 text-xs font-medium uppercase tracking-[0.18em] text-[color:var(--plum)]">
-                <Building2 className="h-3.5 w-3.5 text-[color:var(--rose)]" /> World-Class Facilities
+                <Building2 className="h-3.5 w-3.5 text-[color:var(--rose)]" /> {hero.eyebrow}
               </span>
             </Reveal>
             <Reveal delay={0.1}>
               <h1 className="mt-6 text-4xl font-medium leading-[1.05] text-[color:var(--plum)] md:text-5xl lg:text-[3.5rem] text-balance">
-                World-Class IVF Lab <em className="font-display italic text-[color:var(--rose)]">&amp; Infrastructure</em>
+                {hero.headline.split(hero.headlineEm)[0]}<em className="font-display italic text-[color:var(--rose)]">{hero.headlineEm}</em>{hero.headline.split(hero.headlineEm)[1]}
               </h1>
             </Reveal>
             <Reveal delay={0.18}>
               <p className="mx-auto mt-6 max-w-2xl text-lg leading-relaxed text-[color:var(--plum)]/70 text-pretty">
-                Scientifically designed and aesthetically decorated centres combining functional
-                proficiency with privacy and comfort &mdash; everything your fertility journey demands,
-                all under one roof.
+                {hero.paragraph}
               </p>
             </Reveal>
             <Reveal delay={0.25}>
@@ -184,17 +109,20 @@ export function InfrastructurePage() {
             subtitle="Every Bavishi Fertility Institute centre is scientifically designed to deliver the highest standards of care — from the laboratory to the recovery room."
           />
           <Stagger className="mx-auto mt-12 grid max-w-6xl gap-6 sm:grid-cols-2 lg:grid-cols-3">
-            {FACILITIES.map((f, i) => (
-              <StaggerItem key={i}>
-                <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
-                  <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                    <f.icon className="h-6 w-6" />
+            {FACILITIES.map((f, i) => {
+              const Icon = resolveIcon(f.icon);
+              return (
+                <StaggerItem key={i}>
+                  <div className="group h-full rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1 hover:shadow-lift">
+                    <div className="grid h-12 w-12 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                      <Icon className="h-6 w-6" />
+                    </div>
+                    <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{f.title}</h3>
+                    <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{f.description}</p>
                   </div>
-                  <h3 className="mt-5 text-lg font-semibold text-[color:var(--plum)]">{f.title}</h3>
-                  <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{f.description}</p>
-                </div>
-              </StaggerItem>
-            ))}
+                </StaggerItem>
+              );
+            })}
           </Stagger>
         </div>
       </section>
@@ -280,19 +208,22 @@ export function InfrastructurePage() {
           />
           <div className="mx-auto mt-14 max-w-5xl">
             <Stagger className="space-y-5">
-              {TECH_HIGHLIGHTS.map((t, i) => (
-                <StaggerItem key={i}>
-                  <div className="group flex gap-6 rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">
-                    <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
-                      <t.icon className="h-6 w-6" />
+              {TECH_HIGHLIGHTS.map((t, i) => {
+                const Icon = resolveIcon(t.icon);
+                return (
+                  <StaggerItem key={i}>
+                    <div className="group flex gap-6 rounded-2xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-0.5 hover:shadow-lift">
+                      <div className="grid h-12 w-12 shrink-0 place-items-center rounded-xl bg-[color:var(--rose-soft)]/50 text-[color:var(--rose)] transition-colors group-hover:bg-[color:var(--rose)] group-hover:text-white">
+                        <Icon className="h-6 w-6" />
+                      </div>
+                      <div>
+                        <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t.title}</h3>
+                        <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t.description}</p>
+                      </div>
                     </div>
-                    <div>
-                      <h3 className="text-lg font-semibold text-[color:var(--plum)]">{t.title}</h3>
-                      <p className="mt-2 text-[15px] leading-relaxed text-muted-foreground">{t.description}</p>
-                    </div>
-                  </div>
-                </StaggerItem>
-              ))}
+                  </StaggerItem>
+                );
+              })}
             </Stagger>
           </div>
         </div>
