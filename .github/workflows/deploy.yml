@@ -27,6 +27,7 @@ jobs:
             echo "ssh-keyscan attempt $i failed, retrying..."
             sleep 5
           done
+          [ -s ~/.ssh/known_hosts ] || { echo "ssh-keyscan produced nothing after 3 attempts"; exit 1; }
 
       # Production env vars (Sanity project/token, admin creds, SMTP, etc.)
       # live only in the server's .env, never in this repo — pull it down so
@@ -59,6 +60,13 @@ jobs:
       # node_modules files (a prior attempt took over an hour and was still
       # crawling) — piping a single tar through the plain SSH exec channel
       # (not SFTP) avoids that overhead entirely.
+      #
+      # NOTE: ~950MB of this tarball is public/ (blog + asset images), which
+      # makes the upload step take ~30 minutes. That length is what lets the
+      # stream truncate. public/ is tracked in git and the apply step already
+      # runs `git reset --hard origin/main`, so it could be dropped here —
+      # but /home/master/apply-build.sh on the server expects it in the
+      # tarball, so both have to change together.
       - name: Package build
         run: |
           rm -rf deploy-package
@@ -70,20 +78,33 @@ jobs:
           cp -r public deploy-package/public
           cp .env deploy-package/.env
           tar -C deploy-package -czf deploy-package.tar.gz .
+          echo "tarball size: $(du -h deploy-package.tar.gz | cut -f1)"
 
+      # A truncated upload used to sail through as success and only surface
+      # on the server as `tar: Unexpected EOF in archive`, failing the deploy
+      # after the slow transfer had already been paid for. Verify the bytes
+      # that landed actually match, and retry the upload if they don't.
       - name: Upload build to server (staging path)
         run: |
-          SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30"
+          SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 -o ServerAliveInterval=15 -o ServerAliveCountMax=8"
           REMOTE="${{ secrets.CLOUDWAYS_USER }}@${{ secrets.CLOUDWAYS_HOST }}"
-          ssh $SSH_OPTS "$REMOTE" "rm -rf applications/execjqbwvu/private_html/.deploy-incoming.tar.gz"
-          # Retry tarball upload up to 3 times — large file over SSH can time out
+          DEST="applications/execjqbwvu/private_html/.deploy-incoming.tar.gz"
+          LOCAL_SUM=$(md5sum deploy-package.tar.gz | cut -d' ' -f1)
+          echo "local md5 $LOCAL_SUM ($(stat -c%s deploy-package.tar.gz) bytes)"
+
           for i in 1 2 3; do
-            cat deploy-package.tar.gz | ssh $SSH_OPTS "$REMOTE" \
-              "cat > applications/execjqbwvu/private_html/.deploy-incoming.tar.gz" \
-              && break
-            echo "Upload attempt $i failed, retrying in 15s..."
+            ssh $SSH_OPTS "$REMOTE" "rm -f $DEST"
+            cat deploy-package.tar.gz | ssh $SSH_OPTS "$REMOTE" "cat > $DEST" || true
+            REMOTE_SUM=$(ssh $SSH_OPTS "$REMOTE" "md5sum $DEST 2>/dev/null | cut -d' ' -f1")
+            if [ "$LOCAL_SUM" = "$REMOTE_SUM" ]; then
+              echo "upload verified on attempt $i"
+              exit 0
+            fi
+            echo "attempt $i: checksum mismatch (remote '$REMOTE_SUM'), retrying in 15s..."
             sleep 15
           done
+          echo "upload failed integrity check after 3 attempts — not touching the live site"
+          exit 1
 
       - name: Apply build + restart (via SSH)
         uses: appleboy/ssh-action@v1.0.3
