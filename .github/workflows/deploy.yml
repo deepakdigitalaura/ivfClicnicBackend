@@ -7,6 +7,8 @@ on:
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+    # Retry once on transient SSH/network failures (Cloudways hiccups)
+    timeout-minutes: 45
     steps:
       - uses: actions/checkout@v4
 
@@ -19,13 +21,27 @@ jobs:
           mkdir -p ~/.ssh
           echo "${{ secrets.CLOUDWAYS_SSH_KEY }}" > ~/.ssh/deploy_key
           chmod 600 ~/.ssh/deploy_key
-          ssh-keyscan -H ${{ secrets.CLOUDWAYS_HOST }} >> ~/.ssh/known_hosts
+          # Retry ssh-keyscan up to 3 times — Cloudways SSH is occasionally slow to respond
+          for i in 1 2 3; do
+            ssh-keyscan -H -T 15 ${{ secrets.CLOUDWAYS_HOST }} >> ~/.ssh/known_hosts && break
+            echo "ssh-keyscan attempt $i failed, retrying..."
+            sleep 5
+          done
 
       # Production env vars (Sanity project/token, admin creds, SMTP, etc.)
       # live only in the server's .env, never in this repo — pull it down so
       # the build baked here matches what the server would have produced.
       - name: Fetch production .env
-        run: scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no ${{ secrets.CLOUDWAYS_USER }}@${{ secrets.CLOUDWAYS_HOST }}:applications/execjqbwvu/private_html/.env .env
+        # Retry up to 3 times for transient Cloudways connectivity blips
+        run: |
+          for i in 1 2 3; do
+            scp -i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30 \
+              ${{ secrets.CLOUDWAYS_USER }}@${{ secrets.CLOUDWAYS_HOST }}:applications/execjqbwvu/private_html/.env .env \
+              && break
+            echo "SCP attempt $i failed, retrying in 10s..."
+            sleep 10
+          done
+          [ -f .env ] || { echo "Failed to fetch .env after 3 attempts"; exit 1; }
 
       - name: Install dependencies
         run: npm ci
@@ -57,10 +73,17 @@ jobs:
 
       - name: Upload build to server (staging path)
         run: |
-          SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no"
+          SSH_OPTS="-i ~/.ssh/deploy_key -o StrictHostKeyChecking=no -o ConnectTimeout=30"
           REMOTE="${{ secrets.CLOUDWAYS_USER }}@${{ secrets.CLOUDWAYS_HOST }}"
           ssh $SSH_OPTS "$REMOTE" "rm -rf applications/execjqbwvu/private_html/.deploy-incoming.tar.gz"
-          cat deploy-package.tar.gz | ssh $SSH_OPTS "$REMOTE" "cat > applications/execjqbwvu/private_html/.deploy-incoming.tar.gz"
+          # Retry tarball upload up to 3 times — large file over SSH can time out
+          for i in 1 2 3; do
+            cat deploy-package.tar.gz | ssh $SSH_OPTS "$REMOTE" \
+              "cat > applications/execjqbwvu/private_html/.deploy-incoming.tar.gz" \
+              && break
+            echo "Upload attempt $i failed, retrying in 15s..."
+            sleep 15
+          done
 
       - name: Apply build + restart (via SSH)
         uses: appleboy/ssh-action@v1.0.3
