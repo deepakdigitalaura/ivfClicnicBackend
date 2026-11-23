@@ -22,6 +22,7 @@ import {
   Counter, Marquee, ScrollRotate, LiftCard, Float, GradientField,
 } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
+import { linkifyReview } from "@/lib/review-links";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import type { Review, ReviewData, AggregateRating } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
@@ -841,7 +842,7 @@ function ReviewCard({ r, onOpen }: { r: ReviewItem; onOpen: () => void }) {
       <Quote className="h-7 w-7 shrink-0 text-[color:var(--rose)]/25" aria-hidden />
       {r.rating ? <div className="mt-2 shrink-0"><ReviewStars n={r.rating} /></div> : null}
       <p ref={pRef} className="mt-3 line-clamp-6 text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">
-        {r.text}
+        {linkifyReview(r.text)}
       </p>
       {clamped && (
         <button type="button" onClick={onOpen} className="mt-1.5 shrink-0 self-start text-sm font-semibold text-[color:var(--rose)] hover:underline">
@@ -1416,7 +1417,7 @@ function ReviewTestimonialCard({ r, verified }: { r: Review; verified: boolean }
           {Array.from({ length: Math.round(r.rating) }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
         </div>
       </div>
-      <p className="mt-4 line-clamp-6 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty">"{r.text}"</p>
+      <p className="mt-4 line-clamp-6 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty">&ldquo;{linkifyReview(r.text)}&rdquo;</p>
       <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-sm font-semibold text-[color:var(--rose)]">
           {r.author.charAt(0)}

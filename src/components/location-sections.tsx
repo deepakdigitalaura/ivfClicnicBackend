@@ -3,6 +3,7 @@ import { useRef, useEffect, useState } from "react";
 import { motion, AnimatePresence, useMotionValue, useAnimationFrame, animate, wrap } from "framer-motion";
 import { Star, MapPin, Phone, Clock, Calendar, MessageCircle, Navigation, CheckCircle2, Quote, ChevronLeft, ChevronRight, Landmark, Route } from "lucide-react";
 import { Reveal, Stagger, StaggerItem } from "@/components/motion";
+import { linkifyReview } from "@/lib/review-links";
 import { SectionHead } from "@/components/ivf-page";
 import { TreatmentCard } from "@/components/home-page";
 import { Editable } from "@/components/editor/Editable";
@@ -35,8 +36,12 @@ function ReviewCard({ rv, verified }: { rv: Review; verified: boolean }) {
           {Array.from({ length: Math.round(rv.rating) }).map((_, s) => <Star key={s} className="h-4 w-4 fill-current" />)}
         </div>
       </div>
-      <p className="mt-4 line-clamp-6 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty">
-        "{rv.text}"
+      {/* Reviews run from one line to a thousand characters. line-clamp cut
+          the long ones off mid-sentence, so the card now scrolls instead:
+          every card keeps the same height, and a reader who wants the whole
+          story can scroll it inside the card without the page jumping. */}
+      <p className="scroll-thin mt-4 max-h-[11rem] flex-1 overflow-y-auto pr-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty">
+        &ldquo;{linkifyReview(rv.text)}&rdquo;
       </p>
       <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-sm font-semibold text-[color:var(--rose)]">

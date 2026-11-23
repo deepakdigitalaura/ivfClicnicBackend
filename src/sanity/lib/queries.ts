@@ -13,7 +13,7 @@ export const ALL_PAGE_SEO_QUERY = `*[_type == "pageSeo"]{pagePath, pageName, met
 // regardless of the reviews' own (older) publish dates.
 export const REVIEWS_BY_KEY_QUERY = `{
   "meta": *[_type == "reviewMeta" && centreSlug == $key][0]{ratingValue, reviewCount, mapsUrl},
-  "reviews": *[_type == "googleReview" && centreSlug == $key] | order(fetchedAt desc, publishedAt desc)[0...24]{
+  "reviews": *[_type == "googleReview" && centreSlug == $key] | order(fetchedAt desc, publishedAt desc)[0...60]{
     author, rating, text, "publishedAtISO": publishedAt, relativeTime, profilePhoto, manual
   }
 }`;
