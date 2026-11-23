@@ -113,15 +113,35 @@ export type SanityReviewData = {
   }[];
 };
 
+/* Which centres a page draws its review cards from.
+ *
+ * A city's centres share a catchment and a reputation, and a reader on the
+ * Paldi page is choosing between Bavishi centres, not between cities. So the
+ * Ahmedabad hub and its three centre pages all show the same pooled set
+ * rather than 64 / 39 / 23 separate ones -- and the hub, which had no
+ * reviews of its own at all, stops falling back to illustrative placeholders.
+ *
+ * The rating badge above the cards still comes from the page's own listing,
+ * so no centre borrows another's score. A key that isn't listed here reads
+ * only its own reviews, which is what every other city does today. */
+const AHMEDABAD_CENTRES = ["paldi", "nikol", "sindhu-bhavan-road"];
+const REVIEW_POOLS: Record<string, string[]> = {
+  ahmedabad: AHMEDABAD_CENTRES,
+  paldi: AHMEDABAD_CENTRES,
+  nikol: AHMEDABAD_CENTRES,
+  "sindhu-bhavan-road": AHMEDABAD_CENTRES,
+};
+
 /** Public/cached read of the accumulated Google reviews for one key. Busted
  *  by the admin "Refresh Reviews" button and by manual deletes (both call
  *  revalidateTag("sanity-reviews")). null → caller falls back to whatever
  *  build-time data it already has. */
 export const getSanityReviews = async (key: string): Promise<SanityReviewData | null> => {
+  const keys = REVIEW_POOLS[key] ?? [key];
   const data = await sanityFetch<{
     meta: { ratingValue?: number; reviewCount?: number; mapsUrl?: string } | null;
     reviews: (Omit<SanityReviewData["reviews"][number], "verified"> & { manual?: boolean })[];
-  }>(REVIEWS_BY_KEY_QUERY, { key });
+  }>(REVIEWS_BY_KEY_QUERY, { key, keys });
   if (!data) return null;
   return {
     aggregate: data.meta?.reviewCount
