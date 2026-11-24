@@ -28,6 +28,24 @@ export function GoogleG({ className = "h-5 w-5" }: { className?: string }) {
 
 /* ---------- Single review card (Google badge only for verified data) ---------- */
 function ReviewCard({ rv, verified }: { rv: Review; verified: boolean }) {
+  /* Reviews run from one line to a thousand characters. Clamped, a long one
+   * ends mid-sentence with no way to read the rest; scrolling inside the card
+   * was worse. So it clamps, and offers to open in place -- and the button is
+   * only rendered when the text is actually cut off, measured rather than
+   * guessed from a character count, which varies with the card's width. */
+  const textRef = useRef<HTMLParagraphElement>(null);
+  const [clamped, setClamped] = useState(false);
+  const [expanded, setExpanded] = useState(false);
+
+  useEffect(() => {
+    const el = textRef.current;
+    if (!el || expanded) return;
+    const check = () => setClamped(el.scrollHeight > el.clientHeight + 2);
+    check();
+    window.addEventListener("resize", check);
+    return () => window.removeEventListener("resize", check);
+  }, [rv.text, expanded]);
+
   return (
     <blockquote className="flex h-full min-h-[300px] flex-col rounded-3xl border border-border/70 bg-card p-7 shadow-soft transition-all duration-300 hover:-translate-y-1.5 hover:shadow-lift md:p-8">
       <div className="flex items-center justify-between">
@@ -36,13 +54,21 @@ function ReviewCard({ rv, verified }: { rv: Review; verified: boolean }) {
           {Array.from({ length: Math.round(rv.rating) }).map((_, s) => <Star key={s} className="h-4 w-4 fill-current" />)}
         </div>
       </div>
-      {/* Reviews run from one line to a thousand characters. line-clamp cut
-          the long ones off mid-sentence, so the card now scrolls instead:
-          every card keeps the same height, and a reader who wants the whole
-          story can scroll it inside the card without the page jumping. */}
-      <p className="scroll-thin mt-4 max-h-[11rem] flex-1 overflow-y-auto pr-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty">
+      <p
+        ref={textRef}
+        className={`mt-4 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty ${expanded ? "" : "line-clamp-6"}`}
+      >
         &ldquo;{linkifyReview(rv.text)}&rdquo;
       </p>
+      {(clamped || expanded) && (
+        <button
+          type="button"
+          onClick={() => setExpanded((v) => !v)}
+          className="mt-1.5 shrink-0 self-start text-sm font-semibold text-[color:var(--rose)] hover:underline"
+        >
+          {expanded ? "Read less" : "Read more"}
+        </button>
+      )}
       <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-sm font-semibold text-[color:var(--rose)]">
           {rv.author.charAt(0)}
