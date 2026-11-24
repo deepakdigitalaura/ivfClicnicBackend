@@ -6,6 +6,7 @@ import { siteGraph } from "@/lib/seo";
 import { getSiteIdentity, getFooter, getHeader } from "@/lib/payload";
 import { FooterProvider } from "@/components/footer-provider";
 import { HeaderProvider } from "@/components/header-provider";
+import { LeadPopup } from "@/components/lead-popup";
 import { CookieConsent } from "@/components/cookie-consent";
 import { PageviewTracker } from "@/components/pageview-tracker";
 import { ConsentScripts } from "@/components/consent-scripts";
@@ -92,6 +93,7 @@ export default async function RootLayout({ children }: { children: React.ReactNo
         <PageviewTracker />
         <CookieConsent />
         <AttributionCapture />
+        <LeadPopup />
         <ConsentScripts scripts={gatedScripts} />
         {bodyScripts.map((s, i) => (
           <script key={i} dangerouslySetInnerHTML={{ __html: s.code! }} />

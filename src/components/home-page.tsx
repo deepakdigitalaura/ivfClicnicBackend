@@ -1837,13 +1837,17 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { c
 
 /* ---------- Inquiry Form ---------- */
 
-const inquiryTreatments = [
+/* Exported so the appointment pop-up offers exactly the same choices as this
+ * form. One list, so the two can never drift apart. */
+export const INQUIRY_TREATMENTS = [
   "IVF / ICSI", "IUI", "Male Infertility", "Female Infertility",
   "Donor Services", "Fertility Preservation", "Maternity Services", "Not sure yet",
 ];
-const inquiryLocations = [
+export const INQUIRY_LOCATIONS = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
+const inquiryTreatments = INQUIRY_TREATMENTS;
+const inquiryLocations = INQUIRY_LOCATIONS;
 
 // reCAPTCHA v2 ("I'm not a robot" checkbox). Widget is hidden while the site key
 // is unset; the /inquiry route likewise skips verification without its secret.
