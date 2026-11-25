@@ -67,7 +67,7 @@ export function AboutBfiSection({ city }: { city: string }) {
               the Year (West) at the ET Healthworld National Fertility Awards.
             </p>
             <a
-              href="/about"
+              href="/about-bfi"
               className="mt-6 inline-flex items-center gap-2 rounded-full border border-border/70 bg-card px-6 py-3 text-sm font-semibold text-[color:var(--plum)] shadow-soft transition-colors duration-300 hover:border-[color:var(--rose)]/40 hover:text-[color:var(--rose)]"
             >
               More about Bavishi Fertility Institute

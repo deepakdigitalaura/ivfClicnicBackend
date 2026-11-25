@@ -24,6 +24,10 @@ const nextConfig = {
   async redirects() {
     return [
       // Treatment pages
+      /* The WordPress site served /about as a 301 to /about-bfi. The redirect
+       * did not come across in the migration, so any old link or bookmark to
+       * /about has been landing on a 404 since launch. */
+      { source: "/about",                                                            destination: "/about-bfi",                          permanent: true },
       { source: "/asthenospermia",                                                    destination: "/treatments/asthenospermia",           permanent: true },
       { source: "/azoospermia",                                                       destination: "/treatments/azoospermia",              permanent: true },
       { source: "/blastocyst-culture-blastocyst-transfer",                            destination: "/treatments/blastocyst-transfer",      permanent: true },
