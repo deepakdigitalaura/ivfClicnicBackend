@@ -227,11 +227,26 @@ export const getBlogsByLocationSlug = async (locationSlug: string, _limit = 3): 
   return docs.slice(0, _limit).map(toBlogDoc);
 };
 
+/**
+ * `limit` is 4, not 3, and that is the whole point.
+ *
+ * getSanityRelatedBlogs() returns the usual three related posts and then
+ * APPENDS a fourth: the INBOUND_BOOST pick, a deliberately under-linked page
+ * that earns traffic but sits on about three inbound links. Appending rather
+ * than replacing was chosen there on purpose, so that boosting one page does
+ * not strip a link from another.
+ *
+ * Slicing back to three here silently undid all of that. The boost is always
+ * last, so the slice always threw away exactly the link it was added to
+ * create -- all 126 pairings across 14 target pages, rendering nothing. The
+ * cap stays (the array is never longer than four) but it no longer cuts the
+ * one element that matters.
+ */
 export const getRelatedBlogs = async (
   slug: string,
   _treatmentSlugs: string[],
   categoryId: number | string | null,
-  limit = 3,
+  limit = 4,
 ): Promise<Blog[]> => {
   const categorySlug = categoryId != null ? String(categoryId) : null;
   const docs = await getSanityRelatedBlogs(slug, categorySlug);
