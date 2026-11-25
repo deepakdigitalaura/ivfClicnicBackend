@@ -47,6 +47,7 @@ import {
   type AccoladeItem,
   type Heading,
 } from "@/lib/homepage";
+import { loadRecaptcha } from "@/lib/recaptcha";
 
 /* ---------- Inline-edit header helpers ----------
  * Build an inline-editable eyebrow / {lead,em} heading / subtitle / CTA for a
@@ -1852,25 +1853,6 @@ const inquiryLocations = INQUIRY_LOCATIONS;
 // reCAPTCHA v2 ("I'm not a robot" checkbox). Widget is hidden while the site key
 // is unset; the /inquiry route likewise skips verification without its secret.
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-type Grecaptcha = {
-  ready: (cb: () => void) => void;
-  render: (el: HTMLElement, opts: Record<string, unknown>) => number;
-  reset: (id?: number) => void;
-};
-let recaptchaLoad: Promise<Grecaptcha> | null = null;
-/** Inject Google's script once per page, on demand (keeps it off first paint). */
-const loadRecaptcha = () =>
-  (recaptchaLoad ??= new Promise<Grecaptcha>((resolve) => {
-    const s = document.createElement("script");
-    s.src = "https://www.google.com/recaptcha/api.js?render=explicit";
-    s.async = true;
-    s.onload = () => {
-      const g = (window as unknown as { grecaptcha: Grecaptcha }).grecaptcha;
-      g.ready(() => resolve(g));
-    };
-    document.head.appendChild(s);
-  }));
-
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
   const router = useRouter();
   const contactIcons = [Phone, MessageCircle, Clock];

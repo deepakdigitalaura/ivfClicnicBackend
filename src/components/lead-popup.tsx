@@ -4,6 +4,7 @@ import { useCallback, useEffect, useRef, useState } from "react";
 import { usePathname } from "next/navigation";
 import { X } from "lucide-react";
 import { INQUIRY_TREATMENTS, INQUIRY_LOCATIONS } from "@/components/home-page";
+import { loadRecaptcha } from "@/lib/recaptcha";
 
 /* =====================================================================
  * Appointment pop-up.
@@ -39,30 +40,6 @@ const KEY_SNOOZE = "bfi.popup.snoozeUntil";
 const SKIP = [/^\/admin-panel/, /^\/contact/, /^\/book/, /^\/inquiry/, /^\/edit\//, /^\/preview/];
 
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-
-type Grecaptcha = {
-  render: (el: HTMLElement, opts: Record<string, unknown>) => number;
-  reset: (id?: number) => void;
-};
-declare global {
-  interface Window { grecaptcha?: Grecaptcha }
-}
-
-function loadRecaptcha(): Promise<Grecaptcha> {
-  return new Promise((resolve) => {
-    if (window.grecaptcha) return resolve(window.grecaptcha);
-    const existing = document.querySelector<HTMLScriptElement>("script[data-recaptcha]");
-    const done = () => window.grecaptcha && resolve(window.grecaptcha);
-    if (existing) return existing.addEventListener("load", done);
-    const s = document.createElement("script");
-    s.src = "https://www.google.com/recaptcha/api.js?render=explicit";
-    s.async = true;
-    s.defer = true;
-    s.setAttribute("data-recaptcha", "");
-    s.onload = done;
-    document.head.appendChild(s);
-  });
-}
 
 const read = (k: string) => { try { return localStorage.getItem(k); } catch { return null; } };
 const write = (k: string, v: string) => { try { localStorage.setItem(k, v); } catch { /* private mode */ } };
@@ -182,7 +159,7 @@ export function LeadPopup() {
       write(KEY_DONE, "1");
     } catch {
       setServerError("Could not send that just now. Please call +91 97126 22288 — we are happy to help.");
-      if (captchaId.current !== null) window.grecaptcha?.reset(captchaId.current);
+      if (captchaId.current !== null) loadRecaptcha().then((g) => g.reset(captchaId.current!));
       setCaptcha("");
     } finally {
       setSending(false);
@@ -192,7 +169,7 @@ export function LeadPopup() {
   if (!open) return null;
 
   const field = (k: string) =>
-    `w-full rounded-xl border bg-white px-4 py-3 text-[15px] text-[color:var(--plum)] outline-none transition placeholder:text-muted-foreground/70 focus:ring-2 focus:ring-[color:var(--rose)]/30 ${
+    `w-full rounded-xl border bg-white px-4 py-2.5 text-[15px] text-[color:var(--plum)] outline-none transition placeholder:text-muted-foreground/70 focus:ring-2 focus:ring-[color:var(--rose)]/30 ${
       errors[k] ? "border-red-400" : "border-border/70"
     }`;
 
@@ -206,7 +183,7 @@ export function LeadPopup() {
         role="dialog"
         aria-modal="true"
         aria-labelledby="lead-popup-title"
-        className="relative max-h-[90vh] w-full max-w-lg overflow-y-auto rounded-3xl bg-white p-6 shadow-lift md:p-8"
+        className="relative max-h-[calc(100dvh-1.5rem)] w-full max-w-lg overflow-y-auto overscroll-contain rounded-3xl bg-white p-5 shadow-lift md:p-7"
       >
         <button
           type="button"
@@ -236,18 +213,18 @@ export function LeadPopup() {
           </div>
         ) : (
           <>
-            <h2 id="lead-popup-title" className="pr-10 text-xl font-semibold leading-snug text-[color:var(--plum)] md:text-2xl">
+            <h2 id="lead-popup-title" className="pr-10 text-lg font-semibold leading-snug text-[color:var(--plum)] md:text-xl">
               Facing fertility issues?{" "}
               <em className="font-display italic text-[color:var(--rose)]">Book an appointment today</em>
             </h2>
-            <p className="mt-2 text-sm leading-relaxed text-muted-foreground">
+            <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">
               Leave your number and our team will call you back. No obligation.
             </p>
 
-            <form onSubmit={submit} className="mt-5 space-y-4" noValidate>
-              <div className="grid gap-4 sm:grid-cols-2">
+            <form onSubmit={submit} className="mt-4 space-y-3" noValidate>
+              <div className="grid gap-3 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="lp-name" className="mb-1.5 block text-sm font-medium text-[color:var(--plum)]">
+                  <label htmlFor="lp-name" className="mb-1 block text-sm font-medium text-[color:var(--plum)]">
                     Name <span className="text-[color:var(--rose)]">*</span>
                   </label>
                   <input
@@ -262,7 +239,7 @@ export function LeadPopup() {
                   {errors.name && <p className="mt-1 text-xs text-red-500">{errors.name}</p>}
                 </div>
                 <div>
-                  <label htmlFor="lp-phone" className="mb-1.5 block text-sm font-medium text-[color:var(--plum)]">
+                  <label htmlFor="lp-phone" className="mb-1 block text-sm font-medium text-[color:var(--plum)]">
                     Phone number <span className="text-[color:var(--rose)]">*</span>
                   </label>
                   <input
@@ -278,9 +255,9 @@ export function LeadPopup() {
                 </div>
               </div>
 
-              <div className="grid gap-4 sm:grid-cols-2">
+              <div className="grid gap-3 sm:grid-cols-2">
                 <div>
-                  <label htmlFor="lp-treatment" className="mb-1.5 block text-sm font-medium text-[color:var(--plum)]">
+                  <label htmlFor="lp-treatment" className="mb-1 block text-sm font-medium text-[color:var(--plum)]">
                     What can we help with?
                   </label>
                   <select
@@ -294,7 +271,7 @@ export function LeadPopup() {
                   </select>
                 </div>
                 <div>
-                  <label htmlFor="lp-location" className="mb-1.5 block text-sm font-medium text-[color:var(--plum)]">
+                  <label htmlFor="lp-location" className="mb-1 block text-sm font-medium text-[color:var(--plum)]">
                     Nearest centre
                   </label>
                   <select
@@ -310,12 +287,12 @@ export function LeadPopup() {
               </div>
 
               <div>
-                <label htmlFor="lp-message" className="mb-1.5 block text-sm font-medium text-[color:var(--plum)]">
+                <label htmlFor="lp-message" className="mb-1 block text-sm font-medium text-[color:var(--plum)]">
                   Message <span className="font-normal text-muted-foreground">(optional)</span>
                 </label>
                 <textarea
                   id="lp-message"
-                  rows={2}
+                  rows={1}
                   value={form.message}
                   onChange={(e) => set("message", e.target.value)}
                   placeholder="Anything you would like us to know"
@@ -347,7 +324,7 @@ export function LeadPopup() {
               <button
                 type="submit"
                 disabled={sending}
-                className="w-full rounded-full bg-[color:var(--rose)] px-6 py-3.5 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 disabled:opacity-60"
+                className="w-full rounded-full bg-[color:var(--rose)] px-6 py-3 text-sm font-semibold text-white shadow-soft transition hover:brightness-110 disabled:opacity-60"
               >
                 {sending ? "Sending…" : "Book my appointment"}
               </button>
