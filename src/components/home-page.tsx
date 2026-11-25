@@ -22,6 +22,7 @@ import {
   Counter, Marquee, ScrollRotate, LiftCard, Float, GradientField,
 } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
+import { linkifyReview } from "@/lib/review-links";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import type { Review, ReviewData, AggregateRating } from "@/lib/reviews";
 import { getBrandReviews, BRAND_LISTING_URL } from "@/lib/reviews";
@@ -46,6 +47,7 @@ import {
   type AccoladeItem,
   type Heading,
 } from "@/lib/homepage";
+import { loadRecaptcha } from "@/lib/recaptcha";
 
 /* ---------- Inline-edit header helpers ----------
  * Build an inline-editable eyebrow / {lead,em} heading / subtitle / CTA for a
@@ -841,7 +843,7 @@ function ReviewCard({ r, onOpen }: { r: ReviewItem; onOpen: () => void }) {
       <Quote className="h-7 w-7 shrink-0 text-[color:var(--rose)]/25" aria-hidden />
       {r.rating ? <div className="mt-2 shrink-0"><ReviewStars n={r.rating} /></div> : null}
       <p ref={pRef} className="mt-3 line-clamp-6 text-[15px] leading-relaxed text-[color:var(--plum)]/85 text-pretty">
-        {r.text}
+        {linkifyReview(r.text)}
       </p>
       {clamped && (
         <button type="button" onClick={onOpen} className="mt-1.5 shrink-0 self-start text-sm font-semibold text-[color:var(--rose)] hover:underline">
@@ -1416,7 +1418,7 @@ function ReviewTestimonialCard({ r, verified }: { r: Review; verified: boolean }
           {Array.from({ length: Math.round(r.rating) }).map((_, i) => <Star key={i} className="h-4 w-4 fill-current" />)}
         </div>
       </div>
-      <p className="mt-4 line-clamp-6 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty">"{r.text}"</p>
+      <p className="mt-4 line-clamp-6 flex-1 text-[15px] leading-relaxed text-[color:var(--plum)]/90 text-pretty">&ldquo;{linkifyReview(r.text)}&rdquo;</p>
       <div className="mt-5 flex items-center gap-3 border-t border-border/60 pt-4">
         <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-full bg-[color:var(--rose)]/10 text-sm font-semibold text-[color:var(--rose)]">
           {r.author.charAt(0)}
@@ -1836,36 +1838,21 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { c
 
 /* ---------- Inquiry Form ---------- */
 
-const inquiryTreatments = [
+/* Exported so the appointment pop-up offers exactly the same choices as this
+ * form. One list, so the two can never drift apart. */
+export const INQUIRY_TREATMENTS = [
   "IVF / ICSI", "IUI", "Male Infertility", "Female Infertility",
   "Donor Services", "Fertility Preservation", "Maternity Services", "Not sure yet",
 ];
-const inquiryLocations = [
+export const INQUIRY_LOCATIONS = [
   "Ahmedabad", "Mumbai", "Surat", "Vadodara", "Bhuj", "Bhavnagar", "Anand", "Varanasi",
 ];
+const inquiryTreatments = INQUIRY_TREATMENTS;
+const inquiryLocations = INQUIRY_LOCATIONS;
 
 // reCAPTCHA v2 ("I'm not a robot" checkbox). Widget is hidden while the site key
 // is unset; the /inquiry route likewise skips verification without its secret.
 const RECAPTCHA_SITE_KEY = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY;
-type Grecaptcha = {
-  ready: (cb: () => void) => void;
-  render: (el: HTMLElement, opts: Record<string, unknown>) => number;
-  reset: (id?: number) => void;
-};
-let recaptchaLoad: Promise<Grecaptcha> | null = null;
-/** Inject Google's script once per page, on demand (keeps it off first paint). */
-const loadRecaptcha = () =>
-  (recaptchaLoad ??= new Promise<Grecaptcha>((resolve) => {
-    const s = document.createElement("script");
-    s.src = "https://www.google.com/recaptcha/api.js?render=explicit";
-    s.async = true;
-    s.onload = () => {
-      const g = (window as unknown as { grecaptcha: Grecaptcha }).grecaptcha;
-      g.ready(() => resolve(g));
-    };
-    document.head.appendChild(s);
-  }));
-
 export function InquiryForm({ content = HOMEPAGE_DEFAULTS.inquiry }: { content?: HomepageData["inquiry"] } = {}) {
   const router = useRouter();
   const contactIcons = [Phone, MessageCircle, Clock];
