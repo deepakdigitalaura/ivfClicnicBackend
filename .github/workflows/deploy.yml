@@ -61,12 +61,11 @@ jobs:
       # crawling) — piping a single tar through the plain SSH exec channel
       # (not SFTP) avoids that overhead entirely.
       #
-      # NOTE: ~950MB of this tarball is public/ (blog + asset images), which
-      # makes the upload step take ~30 minutes. That length is what lets the
-      # stream truncate. public/ is tracked in git and the apply step already
-      # runs `git reset --hard origin/main`, so it could be dropped here —
-      # but /home/master/apply-build.sh on the server expects it in the
-      # tarball, so both have to change together.
+      # public/ is deliberately NOT in this tarball: ~950MB of blog/asset
+      # images made every deploy a ~1.2GB / ~30min transfer that regularly
+      # truncated mid-stream. It is tracked in git and the apply step runs
+      # `git reset --hard origin/main` before deploy/apply-build.sh, which
+      # copies public/ in from that checkout. Tarball is now ~250MB.
       - name: Package build
         run: |
           rm -rf deploy-package
@@ -75,7 +74,6 @@ jobs:
           rm -rf deploy-package/.next/static
           cp -r .next/static deploy-package/.next/static
           rm -rf deploy-package/public
-          cp -r public deploy-package/public
           cp .env deploy-package/.env
           tar -C deploy-package -czf deploy-package.tar.gz .
           echo "tarball size: $(du -h deploy-package.tar.gz | cut -f1)"
@@ -119,4 +117,7 @@ jobs:
             cd /home/1259033.cloudwaysapps.com/execjqbwvu/private_html
             git fetch origin main
             git reset --hard origin/main
-            /home/master/apply-build.sh
+            # Run the script from the checkout, not /home/master — that way
+            # the packaging step above and the apply logic always move
+            # together in one commit, and a code rollback rolls it back too.
+            bash deploy/apply-build.sh
