@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { FemaleInfertilityHub } from "./hub";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbSchema } from "@/lib/seo";
 import { getCategoryHub } from "@/lib/payload";
 
 const PATH = "/treatments/female-infertility";
@@ -28,6 +30,13 @@ export default async function Page() {
   const data = await getCategoryHub("female-infertility");
   return (
     <>
+      {/* Every other treatment and service page carries a breadcrumb through
+          treatmentGraph(); these hubs are hand-built routes and were missed. */}
+      <JsonLd graph={[breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Treatments", url: "/treatments" },
+          { name: "Female Infertility", url: "/treatments/female-infertility" },
+      ])]} />
       <PageSeoSchema path={PATH} />
       <FemaleInfertilityHub data={data} />
     </>

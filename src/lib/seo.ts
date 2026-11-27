@@ -198,3 +198,9 @@ export function aggregateRatingSchema(
     worstRating: 1,
   };
 }
+
+/** The share image used when a page does not set its own. Next.js REPLACES the
+ *  parent `openGraph` object rather than merging it, so any page that declares
+ *  `openGraph` without `images` silently loses the one set in the root layout —
+ *  which is how 13 pages ended up sharing as a bare link. */
+export const DEFAULT_OG_IMAGE = "/assets/hero-mother-baby1.png";

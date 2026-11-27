@@ -28,7 +28,14 @@ export async function generateMetadata(): Promise<Metadata> {
 }
 
 export default function Page() {
-  const { eyebrow, heading, subtitle, items } = HOMEPAGE_DEFAULTS.treatments;
+  const { eyebrow, subtitle, items } = HOMEPAGE_DEFAULTS.treatments;
+  /* The homepage section and this page share HOMEPAGE_DEFAULTS.treatments, but they
+     are not the same job. On the homepage "Fertility care, complete and considered"
+     is a mood line among many sections and that is fine. Here it is the page's h1,
+     and it names nothing a patient searches for: over 90 days this page took 286
+     impressions, 0 clicks, at position 32.9. So the hub gets its own heading that
+     says what the page is. The homepage keeps the original wording. */
+  const heading = { lead: "Fertility and IVF Treatments", em: "in India" };
   const graph = [
     {
       "@type": "CollectionPage",
