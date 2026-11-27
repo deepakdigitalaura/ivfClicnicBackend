@@ -5,6 +5,7 @@ import { Reveal, Stagger, StaggerItem } from "@/components/motion";
 import { SiteHeader } from "@/components/site-header";
 import { Footer } from "@/components/home-page";
 import { SectionHead, Eyebrow } from "@/components/ivf-page";
+import { sanityImg, sanityImgSrcSet } from "@/lib/sanity-image";
 import { FloatingCTA, MobileBottomBar, ScrollToTop } from "@/components/conversion";
 import { RichText } from "@/components/rich-text";
 import type { DefaultTypedEditorState } from "@payloadcms/richtext-lexical";
@@ -54,7 +55,7 @@ function BlogCardThumbnail({
           aria-label={hero.alt ?? title}
           className="h-full w-full transition-transform duration-700 group-hover:scale-105"
           style={{
-            backgroundImage: `url(${hero.url})`,
+            backgroundImage: `url(${sanityImg(hero.url, 800)})`,
             backgroundSize: "200% auto",
             backgroundPosition: "right center",
             filter: "brightness(1.25) contrast(1.05) saturate(1.3)",
@@ -65,7 +66,9 @@ function BlogCardThumbnail({
 
     return (
       <img
-        src={hero.url}
+        src={sanityImg(hero.url, 800)}
+        srcSet={sanityImgSrcSet(hero.url, 800)}
+        sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 33vw"
         alt={hero.alt ?? title}
         loading="lazy"
         style={{ objectPosition: imagePosition ?? "center center" }}
@@ -321,7 +324,9 @@ export function BlogHub({
                     </div>
                     <div className="flex flex-1 flex-col p-6">
                       {cat && <span className="inline-block w-fit rounded-full bg-[color:var(--rose)]/10 px-2.5 py-1 text-xs font-semibold text-[color:var(--rose)]">{cat.title}</span>}
-                      <h3 className="mt-3 text-xl font-semibold leading-snug text-[color:var(--plum)] text-pretty">{p.title}</h3>
+                      {/* On /blogs each article card is a section of the page, so the
+                          title is an h2. BlogHub renders only on /blogs. */}
+                      <h2 className="mt-3 text-xl font-semibold leading-snug text-[color:var(--plum)] text-pretty">{p.title}</h2>
                       {p.excerpt && <p className="mt-2 flex-1 text-sm leading-relaxed text-muted-foreground">{p.excerpt}</p>}
                       <div className="mt-4 flex flex-wrap items-center gap-x-4 gap-y-1 text-xs text-muted-foreground">
                         {author && <span className="font-medium text-[color:var(--plum)]">{author.name}</span>}

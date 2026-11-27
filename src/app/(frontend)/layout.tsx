@@ -13,7 +13,7 @@ import { ConsentScripts } from "@/components/consent-scripts";
 import { AttributionCapture } from "@/components/attribution-capture";
 import { getScriptsConfig, getSchemaOrgConfig } from "@/sanity/lib/fetch";
 
-const OG_IMAGE = "/assets/hero-mother-baby1.png";
+import { DEFAULT_OG_IMAGE as OG_IMAGE } from "@/lib/seo";
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://ivfclinic.com"),

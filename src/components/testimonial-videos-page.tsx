@@ -192,6 +192,13 @@ export function TestimonialVideosPage({ videos }: { videos?: TestimonialVideo[] 
 
         {/* Video Grid */}
         <section className="container-px mx-auto max-w-[1400px] py-12 md:py-16">
+          {/* The other hub pages fix their outline by promoting the card titles,
+              because those cards have titles. These do not -- a testimonial card is
+              a video, a quote and a name, with no heading of its own -- so this page
+              needs a real section heading instead. */}
+          <h2 className="mb-6 text-2xl font-semibold text-[color:var(--plum)] md:text-3xl">
+            IVF success stories from our patients
+          </h2>
           <AnimatePresence mode="wait">
             <motion.div
               key={page}

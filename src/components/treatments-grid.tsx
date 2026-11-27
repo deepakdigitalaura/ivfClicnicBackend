@@ -11,7 +11,7 @@ export function TreatmentsGrid({ items }: { items: { icon: IconName; t: string; 
     <Stagger className="mt-10 grid grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3" stagger={0.05}>
       {items.map(({ icon, t, d }) => (
         <StaggerItem key={t}>
-          <TreatmentCard icon={resolveIcon(icon)} title={t} desc={d} href={TREATMENT_TITLE_HREFS[t]} />
+          <TreatmentCard icon={resolveIcon(icon)} title={t} desc={d} href={TREATMENT_TITLE_HREFS[t]} headingAs="h2" />
         </StaggerItem>
       ))}
     </Stagger>

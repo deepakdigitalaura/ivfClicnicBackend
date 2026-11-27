@@ -2,6 +2,8 @@ import type { Metadata } from "next";
 import { MaternityServicesHub } from "./hub";
 import { PageSeoSchema } from "@/components/page-seo-schema";
 import { withPageSeoOverride } from "@/lib/page-seo";
+import { JsonLd } from "@/components/json-ld";
+import { breadcrumbSchema } from "@/lib/seo";
 import { WOMENS_HEALTH_SERVICES } from "@/lib/womens-health";
 import { getService, getPublishedServiceSlugs, getCategoryHub } from "@/lib/payload";
 
@@ -57,6 +59,12 @@ export default async function Page() {
   ]);
   return (
     <>
+      {/* Every other treatment and service page carries a breadcrumb through
+          treatmentGraph(); these hubs are hand-built routes and were missed. */}
+      <JsonLd graph={[breadcrumbSchema([
+          { name: "Home", url: "/" },
+          { name: "Maternity Services", url: "/services/maternity-services" },
+      ])]} />
       <PageSeoSchema path={PATH} />
       <MaternityServicesHub data={data} extraCards={extraCards} />
     </>

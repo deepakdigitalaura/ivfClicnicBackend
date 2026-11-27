@@ -542,8 +542,13 @@ export function Suraksha({ content = HOMEPAGE_DEFAULTS.suraksha }: { content?: S
  * card becomes a link (and "Learn more" stays a span to keep valid HTML);
  * without `href` it renders exactly as the original homepage card. */
 export function TreatmentCard({
-  icon: Icon, title, desc, href, titleNode, descNode, tag,
-}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode; tag?: React.ReactNode }) {
+  icon: Icon, title, desc, href, titleNode, descNode, tag, headingAs,
+}: { icon: LucideIcon; title: string; desc: string; href?: string; titleNode?: React.ReactNode; descNode?: React.ReactNode; tag?: React.ReactNode;
+     /* On /treatments these cards ARE the page's sections, so they carry h2
+        there. On the home page the section already has its own h2, so they
+        stay h3 and the outline keeps its shape. */
+     headingAs?: "h2" | "h3" }) {
+  const CardHeading = headingAs ?? "h3";
   const body = (
     <motion.div
       whileHover={{ y: -6 }}
@@ -561,7 +566,7 @@ export function TreatmentCard({
               {tag}
             </span>
           )}
-          <h3 className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</h3>
+          <CardHeading className="text-lg font-semibold text-[color:var(--plum)]">{titleNode ?? title}</CardHeading>
           <p className="mt-1.5 text-sm leading-relaxed text-muted-foreground">{descNode ?? desc}</p>
           <span className="mt-3 inline-flex items-center gap-1 text-sm font-medium text-[color:var(--rose)]">
             Learn more <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
@@ -1675,6 +1680,8 @@ function Blogs({
 
 export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { content?: HomepageData["locations"]; as?: "h1" | "h2" } = {}) {
   const cities = content.cities;
+  /* as="h1" is passed only by /locations, the dedicated hub page. */
+  const CityHeading = as === "h1" ? "h2" : "h3";
   // In the editor the whole card must NOT be a link — clicking the editable city
   // name would otherwise navigate away mid-edit. So while editing we render the
   // card as a <div> and make only "View Centre" the actual link. The public site
@@ -1701,9 +1708,16 @@ export function Locations({ content = HOMEPAGE_DEFAULTS.locations, as }: { conte
               >
                 <MapPin className="h-5 w-5 text-[color:var(--rose)] transition-transform duration-500 group-hover:-translate-y-1 group-hover:scale-110" />
                 <a href={cityUrl} className="mt-4 block">
-                  <h3 className="text-xl font-semibold text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">
+                  {/* On /locations these cards are the page's sections, so the
+                      city name is an h2 there. On the home page the Locations
+                      section already has its own h2, so it stays an h3. The text
+                      is the city name in both places: the centres are not IVF-only
+                      (maternity, delivery and fetal medicine run from them too), so
+                      labelling each one "IVF Centre" would be both narrower and
+                      less accurate than what is actually offered there. */}
+                  <CityHeading className="text-xl font-semibold text-[color:var(--plum)] transition-colors hover:text-[color:var(--rose)]">
                     <Editable path={`locations.cities.${i}.c`}>{c.c}</Editable>
-                  </h3>
+                  </CityHeading>
                 </a>
                 {builtCentres.length > 1 ? (
                   <p className="mt-1 flex flex-wrap gap-x-1 text-xs text-muted-foreground">
@@ -1797,6 +1811,8 @@ const CALCULATOR_HREFS: Record<string, string> = {
 
 export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { content?: HomepageData["calculators"]; as?: "h1" | "h2" } = {}) {
   const calcs = content.items;
+  /* Same reasoning as Locations: h2 on /calculators, h3 on the home page. */
+  const CalcHeading = as === "h1" ? "h2" : "h3";
   return (
     <section id="tools" className="container-px mx-auto max-w-[1400px] py-10 md:py-16">
       <SectionHeader
@@ -1812,13 +1828,17 @@ export function Calculators({ content = HOMEPAGE_DEFAULTS.calculators, as }: { c
             <motion.div
               whileHover={{ y: -6 }}
               transition={{ duration: 0.4 }}
-              className="group h-full rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
+              /* A flex column with the link pushed down by mt-auto. The card was a
+                 plain block before, so "Use Calculator" sat straight under a title
+                 that runs to one, two or three lines, and the links across a row
+                 landed on different baselines. */
+              className="group flex h-full flex-col rounded-3xl border border-border/70 bg-card p-6 shadow-soft transition-shadow duration-500 hover:shadow-lift"
             >
-              <Float amplitude={4} className="inline-flex h-11 w-11 items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
+              <Float amplitude={4} className="inline-flex h-11 w-11 shrink-0 self-start items-center justify-center rounded-xl bg-[color:var(--rose-soft)] text-[color:var(--rose)]">
                 <Calculator className="h-5 w-5" />
               </Float>
-              <h3 className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></h3>
-              <span className="mt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
+              <CalcHeading className="mt-5 text-base font-semibold leading-snug text-[color:var(--plum)] text-pretty"><Editable path={`calculators.items.${i}.name`}>{c}</Editable></CalcHeading>
+              <span className="mt-auto pt-5 inline-flex items-center gap-1 text-sm font-semibold text-[color:var(--rose)]">
                 Use Calculator <ArrowRight className="h-4 w-4 transition-transform duration-500 group-hover:translate-x-1" />
               </span>
             </motion.div>
